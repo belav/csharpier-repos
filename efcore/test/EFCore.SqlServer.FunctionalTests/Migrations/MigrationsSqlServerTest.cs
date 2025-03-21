@@ -15,9 +15,13 @@ using Microsoft.EntityFrameworkCore.SqlServer.Scaffolding.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
-public class MigrationsSqlServerTest : MigrationsTestBase<MigrationsSqlServerTest.MigrationsSqlServerFixture>
+public class MigrationsSqlServerTest
+    : MigrationsTestBase<MigrationsSqlServerTest.MigrationsSqlServerFixture>
 {
-    public MigrationsSqlServerTest(MigrationsSqlServerFixture fixture, ITestOutputHelper testOutputHelper)
+    public MigrationsSqlServerTest(
+        MigrationsSqlServerFixture fixture,
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
@@ -35,7 +39,8 @@ CREATE TABLE [People] (
     [Name] nvarchar(max) NULL,
     CONSTRAINT [PK_People] PRIMARY KEY ([Id])
 );
-""");
+"""
+        );
     }
 
     public override async Task Create_table_all_settings()
@@ -66,7 +71,8 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', N'dbo2', '
             //
             """
 CREATE INDEX [IX_People_EmployerId] ON [dbo2].[People] ([EmployerId]);
-""");
+"""
+        );
     }
 
     public override async Task Create_table_no_key()
@@ -78,7 +84,8 @@ CREATE INDEX [IX_People_EmployerId] ON [dbo2].[People] ([EmployerId]);
 CREATE TABLE [Anonymous] (
     [SomeColumn] int NOT NULL
 );
-""");
+"""
+        );
     }
 
     public override async Task Create_table_with_comments()
@@ -99,7 +106,8 @@ SET @description = N'Table comment';
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People';
 SET @description = N'Column comment';
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Name';
-""");
+"""
+        );
     }
 
     public override async Task Create_table_with_multiline_comments()
@@ -120,7 +128,8 @@ SET @description = CONCAT(N'This is a multi-line', NCHAR(13), NCHAR(10), N'table
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People';
 SET @description = CONCAT(N'This is a multi-line', NCHAR(10), N'column comment.', NCHAR(10), N'More information can', NCHAR(10), N'be found in the docs.');
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Name';
-""");
+"""
+        );
     }
 
     public override async Task Create_table_with_computed_column(bool? stored)
@@ -138,7 +147,8 @@ CREATE TABLE [People] (
     [Y] int NOT NULL,
     CONSTRAINT [PK_People] PRIMARY KEY ([Id])
 );
-""");
+"""
+        );
     }
 
     public override async Task Create_table_with_json_column()
@@ -155,7 +165,8 @@ CREATE TABLE [Entity] (
     [OwnedRequiredReference] nvarchar(max) NOT NULL,
     CONSTRAINT [PK_Entity] PRIMARY KEY ([Id])
 );
-""");
+"""
+        );
     }
 
     public override async Task Create_table_with_json_column_explicit_json_column_names()
@@ -171,7 +182,8 @@ CREATE TABLE [Entity] (
     [json_reference] nvarchar(max) NULL,
     CONSTRAINT [PK_Entity] PRIMARY KEY ([Id])
 );
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -185,14 +197,16 @@ CREATE TABLE [Entity] (
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns, c => c.Name == "SomeProperty");
                 Assert.True((bool?)column[SqlServerAnnotationNames.Sparse]);
-            });
+            }
+        );
 
         AssertSql(
             """
 CREATE TABLE [People] (
     [SomeProperty] nvarchar(max) SPARSE NULL
 );
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -200,21 +214,28 @@ CREATE TABLE [People] (
     {
         await Test(
             _ => { },
-            builder => builder.UseIdentityColumns()
-                .Entity("People").Property<int>("IdentityColumn").HasConversion<short>().ValueGeneratedOnAdd(),
+            builder =>
+                builder
+                    .UseIdentityColumns()
+                    .Entity("People")
+                    .Property<int>("IdentityColumn")
+                    .HasConversion<short>()
+                    .ValueGeneratedOnAdd(),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns, c => c.Name == "IdentityColumn");
                 Assert.Equal(ValueGenerated.OnAdd, column.ValueGenerated);
-            });
+            }
+        );
 
         AssertSql(
             """
 CREATE TABLE [People] (
     [IdentityColumn] smallint NOT NULL IDENTITY
 );
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -223,17 +244,23 @@ CREATE TABLE [People] (
     {
         await Test(
             _ => { },
-            builder => builder.UseIdentityColumns().Entity(
-                "People", b =>
-                {
-                    b.ToTable(tb => tb.IsMemoryOptimized());
-                    b.Property<int>("Id");
-                }),
+            builder =>
+                builder
+                    .UseIdentityColumns()
+                    .Entity(
+                        "People",
+                        b =>
+                        {
+                            b.ToTable(tb => tb.IsMemoryOptimized());
+                            b.Property<int>("Id");
+                        }
+                    ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.True((bool)table[SqlServerAnnotationNames.MemoryOptimized]!);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -280,7 +307,8 @@ CREATE TABLE [People] (
     [Id] int NOT NULL IDENTITY,
     CONSTRAINT [PK_People] PRIMARY KEY NONCLUSTERED ([Id])
 ) WITH (MEMORY_OPTIMIZED = ON);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -289,17 +317,23 @@ CREATE TABLE [People] (
     {
         await Test(
             _ => { },
-            builder => builder.UseIdentityColumns().Entity(
-                "People", b =>
-                {
-                    b.ToTable("Customers", tb => tb.IsMemoryOptimized().IsTemporal());
-                    b.Property<int>("Id");
-                }),
+            builder =>
+                builder
+                    .UseIdentityColumns()
+                    .Entity(
+                        "People",
+                        b =>
+                        {
+                            b.ToTable("Customers", tb => tb.IsMemoryOptimized().IsTemporal());
+                            b.Property<int>("Id");
+                        }
+                    ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.True((bool)table[SqlServerAnnotationNames.MemoryOptimized]!);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -353,7 +387,8 @@ EXEC(N'CREATE TABLE [Customers] (
     SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[CustomersHistory]),
     MEMORY_OPTIMIZED = ON
 )');
-""");
+"""
+        );
     }
 
     public override async Task Drop_table()
@@ -363,7 +398,8 @@ EXEC(N'CREATE TABLE [Customers] (
         AssertSql(
             """
 DROP TABLE [People];
-""");
+"""
+        );
     }
 
     public override async Task Alter_table_add_comment()
@@ -377,7 +413,8 @@ SET @defaultSchema = SCHEMA_NAME();
 DECLARE @description AS sql_variant;
 SET @description = N'Table comment';
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People';
-""");
+"""
+        );
     }
 
     public override async Task Alter_table_add_comment_non_default_schema()
@@ -389,7 +426,8 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
 DECLARE @description AS sql_variant;
 SET @description = N'Table comment';
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', N'SomeOtherSchema', 'TABLE', N'People';
-""");
+"""
+        );
     }
 
     public override async Task Alter_table_change_comment()
@@ -404,7 +442,8 @@ DECLARE @description AS sql_variant;
 EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'People';
 SET @description = N'Table comment2';
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People';
-""");
+"""
+        );
     }
 
     public override async Task Alter_table_remove_comment()
@@ -417,7 +456,8 @@ DECLARE @defaultSchema AS sysname;
 SET @defaultSchema = SCHEMA_NAME();
 DECLARE @description AS sql_variant;
 EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'People';
-""");
+"""
+        );
     }
 
     public override async Task Rename_table()
@@ -435,7 +475,8 @@ EXEC sp_rename N'[People]', N'Persons';
             //
             """
 ALTER TABLE [Persons] ADD CONSTRAINT [PK_Persons] PRIMARY KEY ([Id]);
-""");
+"""
+        );
     }
 
     public override async Task Rename_table_with_primary_key()
@@ -453,7 +494,8 @@ EXEC sp_rename N'[People]', N'Persons';
             //
             """
 ALTER TABLE [Persons] ADD CONSTRAINT [PK_Persons] PRIMARY KEY ([Id]);
-""");
+"""
+        );
     }
 
     public override async Task Rename_table_with_json_column()
@@ -471,7 +513,8 @@ EXEC sp_rename N'[Entities]', N'NewEntities';
             //
             """
 ALTER TABLE [NewEntities] ADD CONSTRAINT [PK_NewEntities] PRIMARY KEY ([Id]);
-""");
+"""
+        );
     }
 
     public override async Task Move_table()
@@ -485,30 +528,34 @@ IF SCHEMA_ID(N'TestTableSchema') IS NULL EXEC(N'CREATE SCHEMA [TestTableSchema];
             //
             """
 ALTER SCHEMA [TestTableSchema] TRANSFER [TestTable];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Move_table_into_default_schema()
     {
         await Test(
-            builder => builder.Entity("TestTable")
-                .ToTable("TestTable", "TestTableSchema")
-                .Property<int>("Id"),
-            builder => builder.Entity("TestTable")
-                .Property<int>("Id"),
+            builder =>
+                builder
+                    .Entity("TestTable")
+                    .ToTable("TestTable", "TestTableSchema")
+                    .Property<int>("Id"),
+            builder => builder.Entity("TestTable").Property<int>("Id"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("dbo", table.Schema);
                 Assert.Equal("TestTable", table.Name);
-            });
+            }
+        );
 
         AssertSql(
             """
 DECLARE @defaultSchema sysname = SCHEMA_NAME();
 EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestTableSchema].[TestTable];');
-""");
+"""
+        );
     }
 
     public override async Task Create_schema()
@@ -525,7 +572,8 @@ CREATE TABLE [SomeOtherSchema].[People] (
     [Id] int NOT NULL IDENTITY,
     CONSTRAINT [PK_People] PRIMARY KEY ([Id])
 );
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -533,10 +581,9 @@ CREATE TABLE [SomeOtherSchema].[People] (
     {
         await Test(
             builder => { },
-            builder => builder.Entity("People")
-                .ToTable("People", "dbo")
-                .Property<int>("Id"),
-            model => Assert.Equal("dbo", Assert.Single(model.Tables).Schema));
+            builder => builder.Entity("People").ToTable("People", "dbo").Property<int>("Id"),
+            model => Assert.Equal("dbo", Assert.Single(model.Tables).Schema)
+        );
 
         AssertSql(
             """
@@ -544,7 +591,8 @@ CREATE TABLE [dbo].[People] (
     [Id] int NOT NULL IDENTITY,
     CONSTRAINT [PK_People] PRIMARY KEY ([Id])
 );
-""");
+"""
+        );
     }
 
     public override async Task Add_column_with_defaultValue_string()
@@ -554,7 +602,8 @@ CREATE TABLE [dbo].[People] (
         AssertSql(
             """
 ALTER TABLE [People] ADD [Name] nvarchar(max) NOT NULL DEFAULT N'John Doe';
-""");
+"""
+        );
     }
 
     public override async Task Add_column_with_defaultValue_datetime()
@@ -564,7 +613,8 @@ ALTER TABLE [People] ADD [Name] nvarchar(max) NOT NULL DEFAULT N'John Doe';
         AssertSql(
             """
 ALTER TABLE [People] ADD [Birthday] datetime2 NOT NULL DEFAULT '2015-04-12T17:05:00.0000000';
-""");
+"""
+        );
     }
 
     [ConditionalTheory]
@@ -577,25 +627,35 @@ ALTER TABLE [People] ADD [Birthday] datetime2 NOT NULL DEFAULT '2015-04-12T17:05
     [InlineData(6, ".123456", 1234567)]
     [InlineData(7, ".1234567", 1234567)]
     [InlineData(7, ".1200000", 1200000)] //should this really output trailing zeros?
-    public async Task Add_column_with_defaultValue_datetime_with_explicit_precision(int precision, string fractionalSeconds, int ticksToAdd)
+    public async Task Add_column_with_defaultValue_datetime_with_explicit_precision(
+        int precision,
+        string fractionalSeconds,
+        int ticksToAdd
+    )
     {
         await Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<DateTime>("Birthday").HasPrecision(precision)
-                .HasDefaultValue(new DateTime(2015, 4, 12, 17, 5, 0).AddTicks(ticksToAdd)),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<DateTime>("Birthday")
+                    .HasPrecision(precision)
+                    .HasDefaultValue(new DateTime(2015, 4, 12, 17, 5, 0).AddTicks(ticksToAdd)),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal(2, table.Columns.Count);
                 var birthdayColumn = Assert.Single(table.Columns, c => c.Name == "Birthday");
                 Assert.False(birthdayColumn.IsNullable);
-            });
+            }
+        );
 
         AssertSql(
             $"""
 ALTER TABLE [People] ADD [Birthday] datetime2({precision}) NOT NULL DEFAULT '2015-04-12T17:05:00{fractionalSeconds}';
-""");
+"""
+        );
     }
 
     [ConditionalTheory]
@@ -611,25 +671,37 @@ ALTER TABLE [People] ADD [Birthday] datetime2({precision}) NOT NULL DEFAULT '201
     public async Task Add_column_with_defaultValue_datetimeoffset_with_explicit_precision(
         int precision,
         string fractionalSeconds,
-        int ticksToAdd)
+        int ticksToAdd
+    )
     {
         await Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<DateTimeOffset>("Birthday").HasPrecision(precision)
-                .HasDefaultValue(new DateTimeOffset(new DateTime(2015, 4, 12, 17, 5, 0).AddTicks(ticksToAdd), TimeSpan.FromHours(10))),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<DateTimeOffset>("Birthday")
+                    .HasPrecision(precision)
+                    .HasDefaultValue(
+                        new DateTimeOffset(
+                            new DateTime(2015, 4, 12, 17, 5, 0).AddTicks(ticksToAdd),
+                            TimeSpan.FromHours(10)
+                        )
+                    ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal(2, table.Columns.Count);
                 var birthdayColumn = Assert.Single(table.Columns, c => c.Name == "Birthday");
                 Assert.False(birthdayColumn.IsNullable);
-            });
+            }
+        );
 
         AssertSql(
             $"""
 ALTER TABLE [People] ADD [Birthday] datetimeoffset({precision}) NOT NULL DEFAULT '2015-04-12T17:05:00{fractionalSeconds}+10:00';
-""");
+"""
+        );
     }
 
     [ConditionalTheory]
@@ -642,26 +714,39 @@ ALTER TABLE [People] ADD [Birthday] datetimeoffset({precision}) NOT NULL DEFAULT
     [InlineData(6, ".123456", 1234567)]
     [InlineData(7, ".1234567", 1234567)]
     [InlineData(7, ".12", 1200000)]
-    public async Task Add_column_with_defaultValue_time_with_explicit_precision(int precision, string fractionalSeconds, int ticksToAdd)
+    public async Task Add_column_with_defaultValue_time_with_explicit_precision(
+        int precision,
+        string fractionalSeconds,
+        int ticksToAdd
+    )
     {
         await Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<TimeSpan>("Age").HasPrecision(precision)
-                .HasDefaultValue(
-                    TimeSpan.Parse("12:34:56", CultureInfo.InvariantCulture).Add(TimeSpan.FromTicks(ticksToAdd))),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<TimeSpan>("Age")
+                    .HasPrecision(precision)
+                    .HasDefaultValue(
+                        TimeSpan
+                            .Parse("12:34:56", CultureInfo.InvariantCulture)
+                            .Add(TimeSpan.FromTicks(ticksToAdd))
+                    ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal(2, table.Columns.Count);
                 var birthdayColumn = Assert.Single(table.Columns, c => c.Name == "Age");
                 Assert.False(birthdayColumn.IsNullable);
-            });
+            }
+        );
 
         AssertSql(
             $"""
 ALTER TABLE [People] ADD [Age] time({precision}) NOT NULL DEFAULT '12:34:56{fractionalSeconds}';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -670,20 +755,25 @@ ALTER TABLE [People] ADD [Age] time({precision}) NOT NULL DEFAULT '12:34:56{frac
         await Test(
             builder => builder.Entity("People").Property<string>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<DateTime>("Birthday")
-                .HasColumnType("datetime")
-                .HasDefaultValue(new DateTime(2019, 1, 1)),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<DateTime>("Birthday")
+                    .HasColumnType("datetime")
+                    .HasDefaultValue(new DateTime(2019, 1, 1)),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns, c => c.Name == "Birthday");
                 Assert.Contains("2019", column.DefaultValueSql);
-            });
+            }
+        );
 
         AssertSql(
             """
 ALTER TABLE [People] ADD [Birthday] datetime NOT NULL DEFAULT '2019-01-01T00:00:00.000';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -692,20 +782,25 @@ ALTER TABLE [People] ADD [Birthday] datetime NOT NULL DEFAULT '2019-01-01T00:00:
         await Test(
             builder => builder.Entity("People").Property<string>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<DateTime>("Birthday")
-                .HasColumnType("smalldatetime")
-                .HasDefaultValue(new DateTime(2019, 1, 1)),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<DateTime>("Birthday")
+                    .HasColumnType("smalldatetime")
+                    .HasDefaultValue(new DateTime(2019, 1, 1)),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns, c => c.Name == "Birthday");
                 Assert.Contains("2019", column.DefaultValueSql);
-            });
+            }
+        );
 
         AssertSql(
             """
 ALTER TABLE [People] ADD [Birthday] smalldatetime NOT NULL DEFAULT '2019-01-01T00:00:00';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -721,12 +816,14 @@ ALTER TABLE [People] ADD [Birthday] smalldatetime NOT NULL DEFAULT '2019-01-01T0
                 var column = Assert.Single(table.Columns, c => c.Name == "RowVersion");
                 Assert.Equal("rowversion", column.StoreType);
                 Assert.True(column.IsRowVersion());
-            });
+            }
+        );
 
         AssertSql(
             """
 ALTER TABLE [People] ADD [RowVersion] rowversion NULL;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -735,21 +832,26 @@ ALTER TABLE [People] ADD [RowVersion] rowversion NULL;
         await Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<ulong>("RowVersion")
-                .IsRowVersion()
-                .HasConversion<byte[]>(),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<ulong>("RowVersion")
+                    .IsRowVersion()
+                    .HasConversion<byte[]>(),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns, c => c.Name == "RowVersion");
                 Assert.Equal("rowversion", column.StoreType);
                 Assert.True(column.IsRowVersion());
-            });
+            }
+        );
 
         AssertSql(
             """
 ALTER TABLE [People] ADD [RowVersion] rowversion NOT NULL;
-""");
+"""
+        );
     }
 
     public override async Task Add_column_with_defaultValueSql()
@@ -759,7 +861,8 @@ ALTER TABLE [People] ADD [RowVersion] rowversion NOT NULL;
         AssertSql(
             """
 ALTER TABLE [People] ADD [Sum] int NOT NULL DEFAULT (1 + 2);
-""");
+"""
+        );
     }
 
     public override async Task Add_json_columns_to_existing_table()
@@ -777,7 +880,8 @@ ALTER TABLE [Entity] ADD [OwnedReference] nvarchar(max) NULL;
             //
             """
 ALTER TABLE [Entity] ADD [OwnedRequiredReference] nvarchar(max) NOT NULL DEFAULT N'{}';
-""");
+"""
+        );
     }
 
     public override async Task Add_column_with_computedSql(bool? stored)
@@ -789,7 +893,8 @@ ALTER TABLE [Entity] ADD [OwnedRequiredReference] nvarchar(max) NOT NULL DEFAULT
         AssertSql(
             $"""
 ALTER TABLE [People] ADD [Sum] AS [X] + [Y]{computedColumnTypeSql};
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -798,7 +903,11 @@ ALTER TABLE [People] ADD [Sum] AS [X] + [Y]{computedColumnTypeSql};
         await Test(
             builder => builder.Entity("People").Property<int>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<int>("IdPlusOne").HasComputedColumnSql("[Id] + 1"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<int>("IdPlusOne")
+                    .HasComputedColumnSql("[Id] + 1"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -806,12 +915,14 @@ ALTER TABLE [People] ADD [Sum] AS [X] + [Y]{computedColumnTypeSql};
                 var column = Assert.Single(table.Columns, c => c.Name == "IdPlusOne");
                 Assert.Equal("([Id]+(1))", column.ComputedColumnSql);
             },
-            migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent);
+            migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent
+        );
 
         AssertSql(
             """
 EXEC(N'ALTER TABLE [People] ADD [IdPlusOne] AS [Id] + 1');
-""");
+"""
+        );
     }
 
     public override async Task Add_column_with_required()
@@ -821,7 +932,8 @@ EXEC(N'ALTER TABLE [People] ADD [IdPlusOne] AS [Id] + 1');
         AssertSql(
             """
 ALTER TABLE [People] ADD [Name] nvarchar(max) NOT NULL DEFAULT N'';
-""");
+"""
+        );
     }
 
     public override async Task Add_column_with_ansi()
@@ -831,7 +943,8 @@ ALTER TABLE [People] ADD [Name] nvarchar(max) NOT NULL DEFAULT N'';
         AssertSql(
             """
 ALTER TABLE [People] ADD [Name] varchar(max) NULL;
-""");
+"""
+        );
     }
 
     public override async Task Add_column_with_max_length()
@@ -841,7 +954,8 @@ ALTER TABLE [People] ADD [Name] varchar(max) NULL;
         AssertSql(
             """
 ALTER TABLE [People] ADD [Name] nvarchar(30) NULL;
-""");
+"""
+        );
     }
 
     public override async Task Add_column_with_max_length_on_derived()
@@ -858,7 +972,8 @@ ALTER TABLE [People] ADD [Name] nvarchar(30) NULL;
         AssertSql(
             """
 ALTER TABLE [People] ADD [Name] nchar(100) NULL;
-""");
+"""
+        );
     }
 
     public override async Task Add_column_with_comment()
@@ -873,7 +988,8 @@ SET @defaultSchema = SCHEMA_NAME();
 DECLARE @description AS sql_variant;
 SET @description = N'My comment';
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'FullName';
-""");
+"""
+        );
     }
 
     public override async Task Add_column_with_collation()
@@ -883,7 +999,8 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
         AssertSql(
             """
 ALTER TABLE [People] ADD [Name] nvarchar(max) COLLATE German_PhoneBook_CI_AS NULL;
-""");
+"""
+        );
     }
 
     public override async Task Add_column_computed_with_collation(bool stored)
@@ -893,7 +1010,8 @@ ALTER TABLE [People] ADD [Name] nvarchar(max) COLLATE German_PhoneBook_CI_AS NUL
         AssertSql(
             stored
                 ? """ALTER TABLE [People] ADD [Name] AS 'hello' COLLATE German_PhoneBook_CI_AS PERSISTED;"""
-                : """ALTER TABLE [People] ADD [Name] AS 'hello' COLLATE German_PhoneBook_CI_AS;""");
+                : """ALTER TABLE [People] ADD [Name] AS 'hello' COLLATE German_PhoneBook_CI_AS;"""
+        );
     }
 
     public override async Task Add_column_shared()
@@ -914,7 +1032,8 @@ ALTER TABLE [People] ADD [DriverLicense] int NOT NULL DEFAULT 0;
             //
             """
 ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 0);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -929,12 +1048,14 @@ ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 0);
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns, c => c.Name == "IdentityColumn");
                 Assert.Equal(ValueGenerated.OnAdd, column.ValueGenerated);
-            });
+            }
+        );
 
         AssertSql(
             """
 ALTER TABLE [People] ADD [IdentityColumn] int NOT NULL IDENTITY;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -943,7 +1064,8 @@ ALTER TABLE [People] ADD [IdentityColumn] int NOT NULL IDENTITY;
         await Test(
             builder => builder.Entity("People").Property<string>("Id"),
             builder => { },
-            builder => builder.Entity("People").Property<int>("IdentityColumn").UseIdentityColumn(100, 5),
+            builder =>
+                builder.Entity("People").Property<int>("IdentityColumn").UseIdentityColumn(100, 5),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -952,12 +1074,14 @@ ALTER TABLE [People] ADD [IdentityColumn] int NOT NULL IDENTITY;
                 // TODO: Do we not reverse-engineer identity facets?
                 // Assert.Equal(100, column[SqlServerAnnotationNames.IdentitySeed]);
                 // Assert.Equal(5, column[SqlServerAnnotationNames.IdentityIncrement]);
-            });
+            }
+        );
 
         AssertSql(
             """
 ALTER TABLE [People] ADD [IdentityColumn] int NOT NULL IDENTITY(100, 5);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -973,10 +1097,13 @@ ALTER TABLE [People] ADD [IdentityColumn] int NOT NULL IDENTITY(100, 5);
             builder => { },
             builder =>
             {
-                builder.Entity("Animal")
-                    .Property<int>("IdentityColumn");
-                builder.Entity("Cat").ToTable("Cats", tb => tb.Property("IdentityColumn").UseIdentityColumn(1, 2));
-                builder.Entity("Dog").ToTable("Dogs", tb => tb.Property("IdentityColumn").UseIdentityColumn(2, 2));
+                builder.Entity("Animal").Property<int>("IdentityColumn");
+                builder
+                    .Entity("Cat")
+                    .ToTable("Cats", tb => tb.Property("IdentityColumn").UseIdentityColumn(1, 2));
+                builder
+                    .Entity("Dog")
+                    .ToTable("Dogs", tb => tb.Property("IdentityColumn").UseIdentityColumn(2, 2));
             },
             model =>
             {
@@ -1005,8 +1132,10 @@ ALTER TABLE [People] ADD [IdentityColumn] int NOT NULL IDENTITY(100, 5);
                         // TODO: Do we not reverse-engineer identity facets?
                         // Assert.Equal(100, column[SqlServerAnnotationNames.IdentitySeed]);
                         // Assert.Equal(5, column[SqlServerAnnotationNames.IdentityIncrement]);
-                    });
-            });
+                    }
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -1019,7 +1148,8 @@ ALTER TABLE [Cats] ADD [IdentityColumn] int NOT NULL IDENTITY(1, 2);
             //
             """
 ALTER TABLE [Animal] ADD [IdentityColumn] int NOT NULL DEFAULT 0;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -1036,7 +1166,8 @@ ALTER TABLE [Animal] ADD [IdentityColumn] int NOT NULL DEFAULT 0;
 
                 // Note: #29863 tracks recognizing sequence columns as such
                 Assert.Equal("(NEXT VALUE FOR [PeopleSequence])", column.DefaultValueSql);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -1045,7 +1176,8 @@ CREATE SEQUENCE [PeopleSequence] START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXV
             //
             """
 ALTER TABLE [People] ADD [SequenceColumn] int NOT NULL DEFAULT (NEXT VALUE FOR [PeopleSequence]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -1058,7 +1190,8 @@ ALTER TABLE [People] ADD [SequenceColumn] int NOT NULL DEFAULT (NEXT VALUE FOR [
             _ =>
             {
                 // Reverse-engineering of hilo columns isn't supported
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -1067,7 +1200,8 @@ CREATE SEQUENCE [EntityFrameworkHiLoSequence] START WITH 1 INCREMENT BY 10 NO MI
             //
             """
 ALTER TABLE [People] ADD [SequenceColumn] int NOT NULL DEFAULT 0;
-""");
+"""
+        );
     }
 
     public override async Task Alter_column_change_type()
@@ -1083,7 +1217,8 @@ INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [
 WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeColumn');
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] ALTER COLUMN [SomeColumn] bigint NOT NULL;
-""");
+"""
+        );
     }
 
     public override async Task Alter_column_make_required()
@@ -1101,7 +1236,8 @@ IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + ']
 UPDATE [People] SET [SomeColumn] = N'' WHERE [SomeColumn] IS NULL;
 ALTER TABLE [People] ALTER COLUMN [SomeColumn] nvarchar(max) NOT NULL;
 ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeColumn];
-""");
+"""
+        );
     }
 
     public override async Task Alter_column_make_required_with_null_data()
@@ -1119,7 +1255,8 @@ IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + ']
 UPDATE [People] SET [SomeColumn] = N'' WHERE [SomeColumn] IS NULL;
 ALTER TABLE [People] ALTER COLUMN [SomeColumn] nvarchar(max) NOT NULL;
 ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeColumn];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -1140,7 +1277,8 @@ UPDATE [People] SET [SomeColumn] = N'' WHERE [SomeColumn] IS NULL;
 ALTER TABLE [People] ALTER COLUMN [SomeColumn] nvarchar(450) NOT NULL;
 ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeColumn];
 CREATE INDEX [IX_People_SomeColumn] ON [People] ([SomeColumn]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -1161,7 +1299,8 @@ UPDATE [People] SET [FirstName] = N'' WHERE [FirstName] IS NULL;
 ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NOT NULL;
 ALTER TABLE [People] ADD DEFAULT N'' FOR [FirstName];
 CREATE INDEX [IX_People_FirstName_LastName] ON [People] ([FirstName], [LastName]);
-""");
+"""
+        );
     }
 
     public override async Task Alter_column_make_computed(bool? stored)
@@ -1180,7 +1319,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Sum');
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] DROP COLUMN [Sum];
 ALTER TABLE [People] ADD [Sum] AS [X] + [Y]{computedColumnTypeSql};
-""");
+"""
+        );
     }
 
     public override async Task Alter_column_change_computed()
@@ -1197,7 +1337,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Sum');
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] DROP COLUMN [Sum];
 ALTER TABLE [People] ADD [Sum] AS [X] - [Y];
-""");
+"""
+        );
     }
 
     public override async Task Alter_column_change_computed_recreates_indexes()
@@ -1219,7 +1360,8 @@ ALTER TABLE [People] ADD [Sum] AS [X] - [Y];
             //
             """
 CREATE INDEX [IX_People_Sum] ON [People] ([Sum]);
-""");
+"""
+        );
     }
 
     public override async Task Alter_column_change_computed_type()
@@ -1236,7 +1378,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Sum');
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] DROP COLUMN [Sum];
 ALTER TABLE [People] ADD [Sum] AS [X] + [Y] PERSISTED;
-""");
+"""
+        );
     }
 
     public override async Task Alter_column_make_non_computed()
@@ -1253,7 +1396,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Sum');
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] DROP COLUMN [Sum];
 ALTER TABLE [People] ADD [Sum] int NOT NULL;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -1268,7 +1412,8 @@ SET @defaultSchema = SCHEMA_NAME();
 DECLARE @description AS sql_variant;
 SET @description = N'Some comment';
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Id';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -1283,7 +1428,8 @@ SET @defaultSchema = SCHEMA_NAME();
 DECLARE @description AS sql_variant;
 SET @description = N'Some comment';
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'SomeColumn';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -1299,7 +1445,8 @@ DECLARE @description AS sql_variant;
 EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Id';
 SET @description = N'Some comment2';
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Id';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -1313,7 +1460,8 @@ DECLARE @defaultSchema AS sysname;
 SET @defaultSchema = SCHEMA_NAME();
 DECLARE @description AS sql_variant;
 EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Id';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -1330,27 +1478,32 @@ INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [
 WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(max) COLLATE German_PhoneBook_CI_AS NULL;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Alter_column_set_collation_with_index()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<string>("Name");
-                    e.HasIndex("Name");
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<string>("Name");
+                        e.HasIndex("Name");
+                    }
+                ),
             builder => { },
-            builder => builder.Entity("People").Property<string>("Name")
-                .UseCollation(NonDefaultCollation),
+            builder =>
+                builder.Entity("People").Property<string>("Name").UseCollation(NonDefaultCollation),
             model =>
             {
                 var nameColumn = Assert.Single(Assert.Single(model.Tables).Columns);
                 Assert.Equal(NonDefaultCollation, nameColumn.Collation);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -1363,7 +1516,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name')
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) COLLATE German_PhoneBook_CI_AS NULL;
 CREATE INDEX [IX_People_Name] ON [People] ([Name]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -1380,7 +1534,8 @@ INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [
 WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(max) NULL;
-""");
+"""
+        );
     }
 
     public override async Task Convert_json_entities_to_regular_owned()
@@ -1425,7 +1580,7 @@ CREATE TABLE [Entity_NestedCollection] (
     CONSTRAINT [FK_Entity_NestedCollection_Entity_OwnedEntityId] FOREIGN KEY ([OwnedEntityId]) REFERENCES [Entity] ([Id]) ON DELETE CASCADE
 );
 """,
-//
+            //
             """
 CREATE TABLE [Entity_OwnedCollection] (
     [EntityId] int NOT NULL,
@@ -1446,7 +1601,8 @@ CREATE TABLE [Entity_OwnedCollection_NestedCollection2] (
     CONSTRAINT [PK_Entity_OwnedCollection_NestedCollection2] PRIMARY KEY ([Owned2EntityId], [Owned2Id], [Id]),
     CONSTRAINT [FK_Entity_OwnedCollection_NestedCollection2_Entity_OwnedCollection_Owned2EntityId_Owned2Id] FOREIGN KEY ([Owned2EntityId], [Owned2Id]) REFERENCES [Entity_OwnedCollection] ([EntityId], [Id]) ON DELETE CASCADE
 );
-""");
+"""
+        );
     }
 
     public override async Task Convert_regular_owned_entities_to_json()
@@ -1492,7 +1648,8 @@ ALTER TABLE [Entity] ADD [OwnedCollection] nvarchar(max) NULL;
             //
             """
 ALTER TABLE [Entity] ADD [OwnedReference] nvarchar(max) NULL;
-""");
+"""
+        );
     }
 
     public override async Task Convert_string_column_to_a_json_column_containing_reference()
@@ -1517,7 +1674,8 @@ IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var0 + ']
 UPDATE [Entity] SET [Name] = N'{}' WHERE [Name] IS NULL;
 ALTER TABLE [Entity] ALTER COLUMN [Name] nvarchar(max) NOT NULL;
 ALTER TABLE [Entity] ADD DEFAULT N'{}' FOR [Name];
-""");
+"""
+        );
     }
 
     public override async Task Convert_string_column_to_a_json_column_containing_collection()
@@ -1531,14 +1689,17 @@ ALTER TABLE [Entity] ADD DEFAULT N'{}' FOR [Name];
     public virtual async Task Alter_column_make_required_with_index_with_included_properties()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("SomeColumn");
-                    e.Property<string>("SomeOtherColumn");
-                    e.HasIndex("SomeColumn").IncludeProperties("SomeOtherColumn");
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("SomeColumn");
+                        e.Property<string>("SomeOtherColumn");
+                        e.HasIndex("SomeColumn").IncludeProperties("SomeOtherColumn");
+                    }
+                ),
             builder => { },
             builder => builder.Entity("People").Property<string>("SomeColumn").IsRequired(),
             model =>
@@ -1549,9 +1710,11 @@ ALTER TABLE [Entity] ADD DEFAULT N'{}' FOR [Name];
                 var index = Assert.Single(table.Indexes);
                 Assert.Equal(1, index.Columns.Count);
                 Assert.Contains(table.Columns.Single(c => c.Name == "SomeColumn"), index.Columns);
-                var includedColumns = (IReadOnlyList<string>?)index[SqlServerAnnotationNames.Include];
+                var includedColumns = (IReadOnlyList<string>?)
+                    index[SqlServerAnnotationNames.Include];
                 Assert.Null(includedColumns);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -1566,7 +1729,8 @@ UPDATE [People] SET [SomeColumn] = N'' WHERE [SomeColumn] IS NULL;
 ALTER TABLE [People] ALTER COLUMN [SomeColumn] nvarchar(450) NOT NULL;
 ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeColumn];
 CREATE INDEX [IX_People_SomeColumn] ON [People] ([SomeColumn]) INCLUDE ([SomeOtherColumn]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -1574,15 +1738,18 @@ CREATE INDEX [IX_People_SomeColumn] ON [People] ([SomeColumn]) INCLUDE ([SomeOth
     public virtual async Task Alter_column_memoryOptimized_with_index()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.ToTable(tb => tb.IsMemoryOptimized());
-                    e.Property<int>("Id");
-                    e.Property<string>("Name");
-                    e.HasKey("Id").IsClustered(false);
-                    e.HasIndex("Name").IsClustered(false);
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.ToTable(tb => tb.IsMemoryOptimized());
+                        e.Property<int>("Id");
+                        e.Property<string>("Name");
+                        e.HasKey("Id").IsClustered(false);
+                        e.HasIndex("Name").IsClustered(false);
+                    }
+                ),
             builder => { },
             builder => builder.Entity("People").Property<string>("Name").HasMaxLength(30),
             model =>
@@ -1590,7 +1757,8 @@ CREATE INDEX [IX_People_SomeColumn] ON [People] ([SomeColumn]) INCLUDE ([SomeOth
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns, c => c.Name == "Name");
                 Assert.Equal("nvarchar(30)", column.StoreType);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -1603,20 +1771,24 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name')
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(30) NULL;
 ALTER TABLE [People] ADD INDEX [IX_People_Name] NONCLUSTERED ([Name]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Alter_column_with_index_no_narrowing()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("Name");
-                    e.HasIndex("Name");
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("Name");
+                        e.HasIndex("Name");
+                    }
+                ),
             builder => builder.Entity("People").Property<string>("Name").IsRequired(),
             builder => builder.Entity("People").Property<string>("Name").IsRequired(false),
             model =>
@@ -1624,7 +1796,8 @@ ALTER TABLE [People] ADD INDEX [IX_People_Name] NONCLUSTERED ([Name]);
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns, c => c.Name == "Name");
                 Assert.True(column.IsNullable);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -1635,22 +1808,26 @@ INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [
 WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Alter_column_with_index_included_column()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("Name");
-                    e.Property<string>("FirstName");
-                    e.Property<string>("LastName");
-                    e.HasIndex("FirstName", "LastName").IncludeProperties("Name");
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("Name");
+                        e.Property<string>("FirstName");
+                        e.Property<string>("LastName");
+                        e.HasIndex("FirstName", "LastName").IncludeProperties("Name");
+                    }
+                ),
             builder => { },
             builder => builder.Entity("People").Property<string>("Name").HasMaxLength(30),
             model =>
@@ -1660,9 +1837,11 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
                 Assert.Equal(2, index.Columns.Count);
                 Assert.Contains(table.Columns.Single(c => c.Name == "FirstName"), index.Columns);
                 Assert.Contains(table.Columns.Single(c => c.Name == "LastName"), index.Columns);
-                var includedColumns = (IReadOnlyList<string>?)index[SqlServerAnnotationNames.Include];
+                var includedColumns = (IReadOnlyList<string>?)
+                    index[SqlServerAnnotationNames.Include];
                 Assert.Null(includedColumns);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -1675,7 +1854,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name')
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(30) NULL;
 CREATE INDEX [IX_People_FirstName_LastName] ON [People] ([FirstName], [LastName]) INCLUDE ([Name]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -1683,7 +1863,8 @@ CREATE INDEX [IX_People_FirstName_LastName] ON [People] ([FirstName], [LastName]
     {
         var ex = await TestThrows<InvalidOperationException>(
             builder => builder.Entity("People").Property<int>("SomeColumn"),
-            builder => builder.Entity("People").Property<int>("SomeColumn").UseIdentityColumn());
+            builder => builder.Entity("People").Property<int>("SomeColumn").UseIdentityColumn()
+        );
 
         Assert.Equal(SqlServerStrings.AlterIdentityColumn, ex.Message);
     }
@@ -1693,7 +1874,8 @@ CREATE INDEX [IX_People_FirstName_LastName] ON [People] ([FirstName], [LastName]
     {
         var ex = await TestThrows<InvalidOperationException>(
             builder => builder.Entity("People").Property<int>("SomeColumn").UseIdentityColumn(),
-            builder => builder.Entity("People").Property<int>("SomeColumn"));
+            builder => builder.Entity("People").Property<int>("SomeColumn")
+        );
 
         Assert.Equal(SqlServerStrings.AlterIdentityColumn, ex.Message);
     }
@@ -1702,25 +1884,32 @@ CREATE INDEX [IX_People_FirstName_LastName] ON [People] ([FirstName], [LastName]
     public virtual async Task Alter_column_change_type_with_identity()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<string>("Id");
-                    e.Property<int>("IdentityColumn").UseIdentityColumn();
-                }),
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<string>("Id");
-                    e.Property<long>("IdentityColumn").UseIdentityColumn();
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<string>("Id");
+                        e.Property<int>("IdentityColumn").UseIdentityColumn();
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<string>("Id");
+                        e.Property<long>("IdentityColumn").UseIdentityColumn();
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 var column = Assert.Single(table.Columns, c => c.Name == "IdentityColumn");
                 Assert.Equal("bigint", column.StoreType);
                 Assert.Equal(ValueGenerated.OnAdd, column.ValueGenerated);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -1731,7 +1920,8 @@ INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [
 WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'IdentityColumn');
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] ALTER COLUMN [IdentityColumn] bigint NOT NULL;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -1740,13 +1930,13 @@ ALTER TABLE [People] ALTER COLUMN [IdentityColumn] bigint NOT NULL;
         await Test(
             builder => builder.Entity("People").Property<string>("Name"),
             builder => { },
-            builder => builder.Entity("People").Property<string>("Name")
-                .HasDefaultValue("Doe"),
+            builder => builder.Entity("People").Property<string>("Name").HasDefaultValue("Doe"),
             model =>
             {
                 var nameColumn = Assert.Single(Assert.Single(model.Tables).Columns);
                 Assert.Equal("(N'Doe')", nameColumn.DefaultValueSql);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -1757,7 +1947,8 @@ INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [
 WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name');
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] ADD DEFAULT N'Doe' FOR [Name];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -1766,14 +1957,14 @@ ALTER TABLE [People] ADD DEFAULT N'Doe' FOR [Name];
         await Test(
             builder => builder.Entity("People").Property<string>("Name").HasDefaultValue("Doe"),
             builder => { },
-            builder => builder.Entity("People").Property<string>("Name")
-                .HasComment("Some comment"),
+            builder => builder.Entity("People").Property<string>("Name").HasComment("Some comment"),
             model =>
             {
                 var nameColumn = Assert.Single(Assert.Single(model.Tables).Columns);
                 Assert.Equal("(N'Doe')", nameColumn.DefaultValueSql);
                 Assert.Equal("Some comment", nameColumn.Comment);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -1782,7 +1973,8 @@ SET @defaultSchema = SCHEMA_NAME();
 DECLARE @description AS sql_variant;
 SET @description = N'Some comment';
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'People', 'COLUMN', N'Name';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -1791,13 +1983,13 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
         await Test(
             builder => builder.Entity("People").Property<string>("SomeProperty"),
             builder => { },
-            builder => builder.Entity("People").Property<string>("SomeProperty")
-                .IsSparse(),
+            builder => builder.Entity("People").Property<string>("SomeProperty").IsSparse(),
             model =>
             {
                 var column = Assert.Single(Assert.Single(model.Tables).Columns);
                 Assert.True((bool?)column[SqlServerAnnotationNames.Sparse]);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -1808,7 +2000,8 @@ INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [
 WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeProperty');
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] ALTER COLUMN [SomeProperty] nvarchar(max) SPARSE NULL;
-""");
+"""
+        );
     }
 
     public override async Task Drop_column()
@@ -1824,7 +2017,8 @@ INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [
 WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeColumn');
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] DROP COLUMN [SomeColumn];
-""");
+"""
+        );
     }
 
     public override async Task Drop_column_primary_key()
@@ -1844,7 +2038,8 @@ INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [
 WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Id');
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] DROP COLUMN [Id];
-""");
+"""
+        );
     }
 
     public override async Task Drop_column_computed_and_non_computed_with_dependency()
@@ -1870,7 +2065,8 @@ INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [
 WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'X');
 IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var1 + '];');
 ALTER TABLE [People] DROP COLUMN [X];
-""");
+"""
+        );
     }
 
     public override async Task Drop_json_columns_from_existing_table()
@@ -1896,7 +2092,8 @@ INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [
 WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Entity]') AND [c].[name] = N'OwnedReference');
 IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Entity] DROP CONSTRAINT [' + @var1 + '];');
 ALTER TABLE [Entity] DROP COLUMN [OwnedReference];
-""");
+"""
+        );
     }
 
     public override async Task Rename_column()
@@ -1906,7 +2103,8 @@ ALTER TABLE [Entity] DROP COLUMN [OwnedReference];
         AssertSql(
             """
 EXEC sp_rename N'[People].[SomeColumn]', N'SomeOtherColumn', N'COLUMN';
-""");
+"""
+        );
     }
 
     public override async Task Rename_json_column()
@@ -1920,7 +2118,8 @@ EXEC sp_rename N'[Entity].[json_reference]', N'new_json_reference', N'COLUMN';
             //
             """
 EXEC sp_rename N'[Entity].[json_collection]', N'new_json_collection', N'COLUMN';
-""");
+"""
+        );
     }
 
     public override async Task Create_index()
@@ -1940,7 +2139,8 @@ ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NULL;
             //
             """
 CREATE INDEX [IX_People_FirstName] ON [People] ([FirstName]);
-""");
+"""
+        );
     }
 
     public override async Task Create_index_unique()
@@ -1970,7 +2170,8 @@ ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NULL;
             //
             """
 CREATE UNIQUE INDEX [IX_People_FirstName_LastName] ON [People] ([FirstName], [LastName]) WHERE [FirstName] IS NOT NULL AND [LastName] IS NOT NULL;
-""");
+"""
+        );
     }
 
     public override async Task Create_index_descending()
@@ -1980,7 +2181,8 @@ CREATE UNIQUE INDEX [IX_People_FirstName_LastName] ON [People] ([FirstName], [La
         AssertSql(
             """
 CREATE INDEX [IX_People_X] ON [People] ([X] DESC);
-""");
+"""
+        );
     }
 
     public override async Task Create_index_descending_mixed()
@@ -1990,7 +2192,8 @@ CREATE INDEX [IX_People_X] ON [People] ([X] DESC);
         AssertSql(
             """
 CREATE INDEX [IX_People_X_Y_Z] ON [People] ([X], [Y] DESC, [Z]);
-""");
+"""
+        );
     }
 
     public override async Task Alter_index_make_unique()
@@ -2004,7 +2207,8 @@ DROP INDEX [IX_People_X] ON [People];
             //
             """
 CREATE UNIQUE INDEX [IX_People_X] ON [People] ([X]);
-""");
+"""
+        );
     }
 
     public override async Task Alter_index_change_sort_order()
@@ -2018,7 +2222,8 @@ DROP INDEX [IX_People_X_Y_Z] ON [People];
             //
             """
 CREATE INDEX [IX_People_X_Y_Z] ON [People] ([X], [Y] DESC, [Z]);
-""");
+"""
+        );
     }
 
     public override async Task Create_index_with_filter()
@@ -2038,29 +2243,37 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
             //
             """
 CREATE INDEX [IX_People_Name] ON [People] ([Name]) WHERE [Name] IS NOT NULL;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task CreateIndex_generates_exec_when_filter_and_idempotent()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("Name");
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("Name");
+                    }
+                ),
             builder => { },
             builder => builder.Entity("People").HasIndex("Name").HasFilter("[Name] IS NOT NULL"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 var index = Assert.Single(table.Indexes);
-                Assert.Same(table.Columns.Single(c => c.Name == "Name"), Assert.Single(index.Columns));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Name"),
+                    Assert.Single(index.Columns)
+                );
                 Assert.Contains("Name", index.Filter);
             },
-            migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent);
+            migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent
+        );
 
         AssertSql(
             """
@@ -2075,7 +2288,8 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
             //
             """
 EXEC(N'CREATE INDEX [IX_People_Name] ON [People] ([Name]) WHERE [Name] IS NOT NULL');
-""");
+"""
+        );
     }
 
     public override async Task Create_unique_index_with_filter()
@@ -2095,7 +2309,8 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
             //
             """
 CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) WHERE [Name] IS NOT NULL AND [Name] <> '';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -2111,7 +2326,8 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) WHERE [Name] IS NOT NU
                 var index = Assert.Single(table.Indexes);
                 Assert.True((bool?)index[SqlServerAnnotationNames.Clustered]);
                 Assert.False(index.IsUnique);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -2126,7 +2342,8 @@ ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NULL;
             //
             """
 CREATE CLUSTERED INDEX [IX_People_FirstName] ON [People] ([FirstName]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -2135,16 +2352,15 @@ CREATE CLUSTERED INDEX [IX_People_FirstName] ON [People] ([FirstName]);
         await Test(
             builder => builder.Entity("People").Property<string>("FirstName"),
             builder => { },
-            builder => builder.Entity("People").HasIndex("FirstName")
-                .IsUnique()
-                .IsClustered(),
+            builder => builder.Entity("People").HasIndex("FirstName").IsUnique().IsClustered(),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 var index = Assert.Single(table.Indexes);
                 Assert.True((bool?)index[SqlServerAnnotationNames.Clustered]);
                 Assert.True(index.IsUnique);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -2159,33 +2375,42 @@ ALTER TABLE [People] ALTER COLUMN [FirstName] nvarchar(450) NULL;
             //
             """
 CREATE UNIQUE CLUSTERED INDEX [IX_People_FirstName] ON [People] ([FirstName]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Create_index_with_include()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("FirstName");
-                    e.Property<string>("LastName");
-                    e.Property<string>("Name");
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("FirstName");
+                        e.Property<string>("LastName");
+                        e.Property<string>("Name");
+                    }
+                ),
             builder => { },
-            builder => builder.Entity("People").HasIndex("Name")
-                .IncludeProperties("FirstName", "LastName"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .HasIndex("Name")
+                    .IncludeProperties("FirstName", "LastName"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 var index = Assert.Single(table.Indexes);
                 Assert.Equal(1, index.Columns.Count);
                 Assert.Contains(table.Columns.Single(c => c.Name == "Name"), index.Columns);
-                var includedColumns = (IReadOnlyList<string>?)index[SqlServerAnnotationNames.Include];
+                var includedColumns = (IReadOnlyList<string>?)
+                    index[SqlServerAnnotationNames.Include];
                 Assert.Null(includedColumns);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -2200,25 +2425,32 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
             //
             """
 CREATE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Create_index_with_include_and_filter()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("FirstName");
-                    e.Property<string>("LastName");
-                    e.Property<string>("Name");
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("FirstName");
+                        e.Property<string>("LastName");
+                        e.Property<string>("Name");
+                    }
+                ),
             builder => { },
-            builder => builder.Entity("People").HasIndex("Name")
-                .IncludeProperties("FirstName", "LastName")
-                .HasFilter("[Name] IS NOT NULL"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .HasIndex("Name")
+                    .IncludeProperties("FirstName", "LastName")
+                    .HasFilter("[Name] IS NOT NULL"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -2226,9 +2458,11 @@ CREATE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastNa
                 Assert.Equal("([Name] IS NOT NULL)", index.Filter);
                 Assert.Equal(1, index.Columns.Count);
                 Assert.Contains(table.Columns.Single(c => c.Name == "Name"), index.Columns);
-                var includedColumns = (IReadOnlyList<string>?)index[SqlServerAnnotationNames.Include];
+                var includedColumns = (IReadOnlyList<string>?)
+                    index[SqlServerAnnotationNames.Include];
                 Assert.Null(includedColumns);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -2243,25 +2477,32 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
             //
             """
 CREATE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WHERE [Name] IS NOT NULL;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Create_index_unique_with_include()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("FirstName");
-                    e.Property<string>("LastName");
-                    e.Property<string>("Name").IsRequired();
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("FirstName");
+                        e.Property<string>("LastName");
+                        e.Property<string>("Name").IsRequired();
+                    }
+                ),
             builder => { },
-            builder => builder.Entity("People").HasIndex("Name")
-                .IsUnique()
-                .IncludeProperties("FirstName", "LastName"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .HasIndex("Name")
+                    .IsUnique()
+                    .IncludeProperties("FirstName", "LastName"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -2269,9 +2510,11 @@ CREATE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastNa
                 Assert.True(index.IsUnique);
                 Assert.Equal(1, index.Columns.Count);
                 Assert.Contains(table.Columns.Single(c => c.Name == "Name"), index.Columns);
-                var includedColumns = (IReadOnlyList<string>?)index[SqlServerAnnotationNames.Include];
+                var includedColumns = (IReadOnlyList<string>?)
+                    index[SqlServerAnnotationNames.Include];
                 Assert.Null(includedColumns);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -2286,26 +2529,33 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
             //
             """
 CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Create_index_unique_with_include_and_filter()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("FirstName");
-                    e.Property<string>("LastName");
-                    e.Property<string>("Name").IsRequired();
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("FirstName");
+                        e.Property<string>("LastName");
+                        e.Property<string>("Name").IsRequired();
+                    }
+                ),
             builder => { },
-            builder => builder.Entity("People").HasIndex("Name")
-                .IsUnique()
-                .IncludeProperties("FirstName", "LastName")
-                .HasFilter("[Name] IS NOT NULL"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .HasIndex("Name")
+                    .IsUnique()
+                    .IncludeProperties("FirstName", "LastName")
+                    .HasFilter("[Name] IS NOT NULL"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -2314,9 +2564,11 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], 
                 Assert.Equal("([Name] IS NOT NULL)", index.Filter);
                 Assert.Equal(1, index.Columns.Count);
                 Assert.Contains(table.Columns.Single(c => c.Name == "Name"), index.Columns);
-                var includedColumns = (IReadOnlyList<string>?)index[SqlServerAnnotationNames.Include];
+                var includedColumns = (IReadOnlyList<string>?)
+                    index[SqlServerAnnotationNames.Include];
                 Assert.Null(includedColumns);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -2331,28 +2583,37 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
             //
             """
 CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WHERE [Name] IS NOT NULL;
-""");
+"""
+        );
     }
 
-    [ConditionalFact(Skip = "#19668, Online index operations can only be performed in Enterprise edition of SQL Server")]
+    [ConditionalFact(
+        Skip = "#19668, Online index operations can only be performed in Enterprise edition of SQL Server"
+    )]
     [SqlServerCondition(SqlServerCondition.SupportsOnlineIndexes)]
     public virtual async Task Create_index_unique_with_include_and_filter_online()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("FirstName");
-                    e.Property<string>("LastName");
-                    e.Property<string>("Name").IsRequired();
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("FirstName");
+                        e.Property<string>("LastName");
+                        e.Property<string>("Name").IsRequired();
+                    }
+                ),
             builder => { },
-            builder => builder.Entity("People").HasIndex("Name")
-                .IsUnique()
-                .IncludeProperties("FirstName", "LastName")
-                .HasFilter("[Name] IS NOT NULL")
-                .IsCreatedOnline(),
+            builder =>
+                builder
+                    .Entity("People")
+                    .HasIndex("Name")
+                    .IsUnique()
+                    .IncludeProperties("FirstName", "LastName")
+                    .HasFilter("[Name] IS NOT NULL")
+                    .IsCreatedOnline(),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -2361,10 +2622,12 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], 
                 Assert.Equal("([Name] IS NOT NULL)", index.Filter);
                 Assert.Equal(1, index.Columns.Count);
                 Assert.Contains(table.Columns.Single(c => c.Name == "Name"), index.Columns);
-                var includedColumns = (IReadOnlyList<string>?)index[SqlServerAnnotationNames.Include];
+                var includedColumns = (IReadOnlyList<string>?)
+                    index[SqlServerAnnotationNames.Include];
                 Assert.Null(includedColumns);
                 // TODO: Online index not scaffolded?
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -2379,29 +2642,38 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
             //
             """
 CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WHERE [Name] IS NOT NULL WITH (ONLINE = ON);
-""");
+"""
+        );
     }
 
-    [ConditionalFact(Skip = "#19668, Online index operations can only be performed in Enterprise edition of SQL Server")]
+    [ConditionalFact(
+        Skip = "#19668, Online index operations can only be performed in Enterprise edition of SQL Server"
+    )]
     [SqlServerCondition(SqlServerCondition.SupportsOnlineIndexes)]
     public virtual async Task Create_index_unique_with_include_filter_online_and_fillfactor()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("FirstName");
-                    e.Property<string>("LastName");
-                    e.Property<string>("Name").IsRequired();
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("FirstName");
+                        e.Property<string>("LastName");
+                        e.Property<string>("Name").IsRequired();
+                    }
+                ),
             builder => { },
-            builder => builder.Entity("People").HasIndex("Name")
-                .IsUnique()
-                .IncludeProperties("FirstName", "LastName")
-                .HasFilter("[Name] IS NOT NULL")
-                .IsCreatedOnline()
-                .HasFillFactor(90),
+            builder =>
+                builder
+                    .Entity("People")
+                    .HasIndex("Name")
+                    .IsUnique()
+                    .IncludeProperties("FirstName", "LastName")
+                    .HasFilter("[Name] IS NOT NULL")
+                    .IsCreatedOnline()
+                    .HasFillFactor(90),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -2410,10 +2682,12 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], 
                 Assert.Equal("([Name] IS NOT NULL)", index.Filter);
                 Assert.Equal(1, index.Columns.Count);
                 Assert.Contains(table.Columns.Single(c => c.Name == "Name"), index.Columns);
-                var includedColumns = (IReadOnlyList<string>?)index[SqlServerAnnotationNames.Include];
+                var includedColumns = (IReadOnlyList<string>?)
+                    index[SqlServerAnnotationNames.Include];
                 Assert.Null(includedColumns);
                 // TODO: Online index not scaffolded?
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -2428,27 +2702,34 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
             //
             """
 CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WHERE [Name] IS NOT NULL WITH (FILLFACTOR = 90, ONLINE = ON);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Create_index_unique_with_include_filter_and_fillfactor()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("FirstName");
-                    e.Property<string>("LastName");
-                    e.Property<string>("Name").IsRequired();
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("FirstName");
+                        e.Property<string>("LastName");
+                        e.Property<string>("Name").IsRequired();
+                    }
+                ),
             builder => { },
-            builder => builder.Entity("People").HasIndex("Name")
-                .IsUnique()
-                .IncludeProperties("FirstName", "LastName")
-                .HasFilter("[Name] IS NOT NULL")
-                .HasFillFactor(90),
+            builder =>
+                builder
+                    .Entity("People")
+                    .HasIndex("Name")
+                    .IsUnique()
+                    .IncludeProperties("FirstName", "LastName")
+                    .HasFilter("[Name] IS NOT NULL")
+                    .HasFillFactor(90),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -2457,10 +2738,12 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], 
                 Assert.Equal("([Name] IS NOT NULL)", index.Filter);
                 Assert.Equal(1, index.Columns.Count);
                 Assert.Contains(table.Columns.Single(c => c.Name == "Name"), index.Columns);
-                var includedColumns = (IReadOnlyList<string>?)index[SqlServerAnnotationNames.Include];
+                var includedColumns = (IReadOnlyList<string>?)
+                    index[SqlServerAnnotationNames.Include];
                 Assert.Null(includedColumns);
                 // TODO: Online index not scaffolded?
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -2475,27 +2758,34 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
             //
             """
 CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WHERE [Name] IS NOT NULL WITH (FILLFACTOR = 90);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Create_index_unique_with_include_fillfactor_and_sortintempdb()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("FirstName");
-                    e.Property<string>("LastName");
-                    e.Property<string>("Name").IsRequired();
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("FirstName");
+                        e.Property<string>("LastName");
+                        e.Property<string>("Name").IsRequired();
+                    }
+                ),
             builder => { },
-            builder => builder.Entity("People").HasIndex("Name")
-                .IsUnique()
-                .IncludeProperties("FirstName", "LastName")
-                .HasFillFactor(75)
-                .SortInTempDb(),
+            builder =>
+                builder
+                    .Entity("People")
+                    .HasIndex("Name")
+                    .IsUnique()
+                    .IncludeProperties("FirstName", "LastName")
+                    .HasFillFactor(75)
+                    .SortInTempDb(),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -2504,11 +2794,13 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], 
                 Assert.Null(index.Filter);
                 Assert.Equal(1, index.Columns.Count);
                 Assert.Contains(table.Columns.Single(c => c.Name == "Name"), index.Columns);
-                var includedColumns = (IReadOnlyList<string>?)index[SqlServerAnnotationNames.Include];
+                var includedColumns = (IReadOnlyList<string>?)
+                    index[SqlServerAnnotationNames.Include];
                 Assert.Null(includedColumns);
                 Assert.Equal(75, index[SqlServerAnnotationNames.FillFactor]);
                 Assert.Null(index[SqlServerAnnotationNames.SortInTempDb]);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -2520,10 +2812,11 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name')
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
 """,
-//
+            //
             """
 CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WITH (FILLFACTOR = 75, SORT_IN_TEMPDB = ON);
-""");
+"""
+        );
     }
 
     [ConditionalTheory]
@@ -2532,23 +2825,30 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], 
     [InlineData(DataCompressionType.Page, "PAGE")]
     public virtual async Task Create_index_unique_with_include_sortintempdb_and_datacompression(
         DataCompressionType dataCompression,
-        string dataCompressionSql)
+        string dataCompressionSql
+    )
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("FirstName");
-                    e.Property<string>("LastName");
-                    e.Property<string>("Name").IsRequired();
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("FirstName");
+                        e.Property<string>("LastName");
+                        e.Property<string>("Name").IsRequired();
+                    }
+                ),
             builder => { },
-            builder => builder.Entity("People").HasIndex("Name")
-                .IsUnique()
-                .IncludeProperties("FirstName", "LastName")
-                .SortInTempDb()
-                .UseDataCompression(dataCompression),
+            builder =>
+                builder
+                    .Entity("People")
+                    .HasIndex("Name")
+                    .IsUnique()
+                    .IncludeProperties("FirstName", "LastName")
+                    .SortInTempDb()
+                    .UseDataCompression(dataCompression),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -2557,11 +2857,13 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], 
                 Assert.Null(index.Filter);
                 Assert.Equal(1, index.Columns.Count);
                 Assert.Contains(table.Columns.Single(c => c.Name == "Name"), index.Columns);
-                var includedColumns = (IReadOnlyList<string>?)index[SqlServerAnnotationNames.Include];
+                var includedColumns = (IReadOnlyList<string>?)
+                    index[SqlServerAnnotationNames.Include];
                 Assert.Null(includedColumns);
                 Assert.Null(index[SqlServerAnnotationNames.SortInTempDb]);
                 Assert.Null(index[SqlServerAnnotationNames.DataCompression]);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -2573,10 +2875,11 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'Name')
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NOT NULL;
 """,
-//
+            //
             $"""
 CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], [LastName]) WITH (SORT_IN_TEMPDB = ON, DATA_COMPRESSION = {dataCompressionSql});
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -2584,23 +2887,30 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [People] ([Name]) INCLUDE ([FirstName], 
     public virtual async Task Create_index_memoryOptimized_unique_nullable()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("Name");
-                    e.ToTable(tb => tb.IsMemoryOptimized());
-                    e.HasKey("Id").IsClustered(false);
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("Name");
+                        e.ToTable(tb => tb.IsMemoryOptimized());
+                        e.HasKey("Id").IsClustered(false);
+                    }
+                ),
             builder => { },
             builder => builder.Entity("People").HasIndex("Name").IsUnique(),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 var index = Assert.Single(table.Indexes);
-                Assert.Same(table.Columns.Single(c => c.Name == "Name"), Assert.Single(index.Columns));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Name"),
+                    Assert.Single(index.Columns)
+                );
                 Assert.False(index.IsUnique);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -2615,7 +2925,8 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
             //
             """
 ALTER TABLE [People] ADD INDEX [IX_People_Name] NONCLUSTERED ([Name]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -2623,24 +2934,36 @@ ALTER TABLE [People] ADD INDEX [IX_People_Name] NONCLUSTERED ([Name]);
     public virtual async Task Create_index_memoryOptimized_unique_nullable_with_filter()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("Name");
-                    e.ToTable(tb => tb.IsMemoryOptimized());
-                    e.HasKey("Id").IsClustered(false);
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("Name");
+                        e.ToTable(tb => tb.IsMemoryOptimized());
+                        e.HasKey("Id").IsClustered(false);
+                    }
+                ),
             builder => { },
-            builder => builder.Entity("People").HasIndex("Name").IsUnique().HasFilter("[Name] IS NOT NULL AND <> ''"),
+            builder =>
+                builder
+                    .Entity("People")
+                    .HasIndex("Name")
+                    .IsUnique()
+                    .HasFilter("[Name] IS NOT NULL AND <> ''"),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 var index = Assert.Single(table.Indexes);
-                Assert.Same(table.Columns.Single(c => c.Name == "Name"), Assert.Single(index.Columns));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Name"),
+                    Assert.Single(index.Columns)
+                );
                 Assert.False(index.IsUnique);
                 Assert.Null(index.Filter);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -2655,7 +2978,8 @@ ALTER TABLE [People] ALTER COLUMN [Name] nvarchar(450) NULL;
             //
             """
 ALTER TABLE [People] ADD INDEX [IX_People_Name] NONCLUSTERED ([Name]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -2663,28 +2987,36 @@ ALTER TABLE [People] ADD INDEX [IX_People_Name] NONCLUSTERED ([Name]);
     public virtual async Task Create_index_memoryOptimized_unique_nonclustered_not_nullable()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<string>("Name").IsRequired();
-                    e.ToTable(tb => tb.IsMemoryOptimized());
-                    e.ToTable(tb => tb.IsMemoryOptimized());
-                    e.HasKey("Name").IsClustered(false);
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<string>("Name").IsRequired();
+                        e.ToTable(tb => tb.IsMemoryOptimized());
+                        e.ToTable(tb => tb.IsMemoryOptimized());
+                        e.HasKey("Name").IsClustered(false);
+                    }
+                ),
             builder => { },
             builder => builder.Entity("People").HasIndex("Name").IsUnique().IsClustered(false),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 var index = Assert.Single(table.Indexes);
-                Assert.Same(table.Columns.Single(c => c.Name == "Name"), Assert.Single(index.Columns));
+                Assert.Same(
+                    table.Columns.Single(c => c.Name == "Name"),
+                    Assert.Single(index.Columns)
+                );
                 Assert.True(index.IsUnique);
-            });
+            }
+        );
 
         AssertSql(
             """
 ALTER TABLE [People] ADD INDEX [IX_People_Name] UNIQUE NONCLUSTERED ([Name]);
-""");
+"""
+        );
     }
 
     public override async Task Drop_index()
@@ -2694,7 +3026,8 @@ ALTER TABLE [People] ADD INDEX [IX_People_Name] UNIQUE NONCLUSTERED ([Name]);
         AssertSql(
             """
 DROP INDEX [IX_People_SomeField] ON [People];
-""");
+"""
+        );
     }
 
     public override async Task Rename_index()
@@ -2704,12 +3037,15 @@ DROP INDEX [IX_People_SomeField] ON [People];
         AssertSql(
             """
 EXEC sp_rename N'[People].[Foo]', N'foo', N'INDEX';
-""");
+"""
+        );
     }
 
     public override async Task Add_primary_key_int()
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => base.Add_primary_key_int());
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Add_primary_key_int()
+        );
 
         Assert.Equal(SqlServerStrings.AlterIdentityColumn, exception.Message);
     }
@@ -2731,7 +3067,8 @@ ALTER TABLE [People] ALTER COLUMN [SomeField] nvarchar(450) NOT NULL;
             //
             """
 ALTER TABLE [People] ADD CONSTRAINT [PK_People] PRIMARY KEY ([SomeField]);
-""");
+"""
+        );
     }
 
     public override async Task Add_primary_key_with_name()
@@ -2753,7 +3090,8 @@ ALTER TABLE [People] ADD DEFAULT N'' FOR [SomeField];
             //
             """
 ALTER TABLE [People] ADD CONSTRAINT [PK_Foo] PRIMARY KEY ([SomeField]);
-""");
+"""
+        );
     }
 
     public override async Task Add_primary_key_composite_with_name()
@@ -2763,14 +3101,20 @@ ALTER TABLE [People] ADD CONSTRAINT [PK_Foo] PRIMARY KEY ([SomeField]);
         AssertSql(
             """
 ALTER TABLE [People] ADD CONSTRAINT [PK_Foo] PRIMARY KEY ([SomeField1], [SomeField2]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Add_primary_key_nonclustered()
     {
         await Test(
-            builder => builder.Entity("People").Property<string>("SomeField").IsRequired().HasMaxLength(450),
+            builder =>
+                builder
+                    .Entity("People")
+                    .Property<string>("SomeField")
+                    .IsRequired()
+                    .HasMaxLength(450),
             builder => { },
             builder => builder.Entity("People").HasKey("SomeField").IsClustered(false),
             model =>
@@ -2779,17 +3123,21 @@ ALTER TABLE [People] ADD CONSTRAINT [PK_Foo] PRIMARY KEY ([SomeField1], [SomeFie
                 var primaryKey = table.PrimaryKey;
                 Assert.NotNull(primaryKey);
                 Assert.False((bool?)primaryKey![SqlServerAnnotationNames.Clustered]);
-            });
+            }
+        );
 
         AssertSql(
             """
 ALTER TABLE [People] ADD CONSTRAINT [PK_People] PRIMARY KEY NONCLUSTERED ([SomeField]);
-""");
+"""
+        );
     }
 
     public override async Task Drop_primary_key_int()
     {
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => base.Drop_primary_key_int());
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            base.Drop_primary_key_int()
+        );
 
         Assert.Equal(SqlServerStrings.AlterIdentityColumn, exception.Message);
     }
@@ -2811,7 +3159,8 @@ INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [
 WHERE ([d].[parent_object_id] = OBJECT_ID(N'[People]') AND [c].[name] = N'SomeField');
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [People] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [People] ALTER COLUMN [SomeField] nvarchar(max) NOT NULL;
-""");
+"""
+        );
     }
 
     public override async Task Add_foreign_key()
@@ -2825,7 +3174,8 @@ CREATE INDEX [IX_Orders_CustomerId] ON [Orders] ([CustomerId]);
             //
             """
 ALTER TABLE [Orders] ADD CONSTRAINT [FK_Orders_Customers_CustomerId] FOREIGN KEY ([CustomerId]) REFERENCES [Customers] ([Id]) ON DELETE CASCADE;
-""");
+"""
+        );
     }
 
     public override async Task Add_foreign_key_with_name()
@@ -2844,7 +3194,8 @@ CREATE INDEX [IX_Orders_CustomerId] ON [Orders] ([CustomerId]);
             //
             """
 ALTER TABLE [Orders] ADD CONSTRAINT [FK_Foo] FOREIGN KEY ([CustomerId]) REFERENCES [Customers] ([Id]) ON DELETE CASCADE;
-""");
+"""
+        );
     }
 
     public override async Task Drop_foreign_key()
@@ -2858,7 +3209,8 @@ ALTER TABLE [Orders] DROP CONSTRAINT [FK_Orders_Customers_CustomerId];
             //
             """
 DROP INDEX [IX_Orders_CustomerId] ON [Orders];
-""");
+"""
+        );
     }
 
     public override async Task Add_unique_constraint()
@@ -2868,7 +3220,8 @@ DROP INDEX [IX_Orders_CustomerId] ON [Orders];
         AssertSql(
             """
 ALTER TABLE [People] ADD CONSTRAINT [AK_People_AlternateKeyColumn] UNIQUE ([AlternateKeyColumn]);
-""");
+"""
+        );
     }
 
     public override async Task Add_unique_constraint_composite_with_name()
@@ -2878,7 +3231,8 @@ ALTER TABLE [People] ADD CONSTRAINT [AK_People_AlternateKeyColumn] UNIQUE ([Alte
         AssertSql(
             """
 ALTER TABLE [People] ADD CONSTRAINT [AK_Foo] UNIQUE ([AlternateKeyColumn1], [AlternateKeyColumn2]);
-""");
+"""
+        );
     }
 
     public override async Task Drop_unique_constraint()
@@ -2888,7 +3242,8 @@ ALTER TABLE [People] ADD CONSTRAINT [AK_Foo] UNIQUE ([AlternateKeyColumn1], [Alt
         AssertSql(
             """
 ALTER TABLE [People] DROP CONSTRAINT [AK_People_AlternateKeyColumn];
-""");
+"""
+        );
     }
 
     public override async Task Add_check_constraint_with_name()
@@ -2898,31 +3253,40 @@ ALTER TABLE [People] DROP CONSTRAINT [AK_People_AlternateKeyColumn];
         AssertSql(
             """
 ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 0);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Add_check_constraint_generates_exec_when_idempotent()
     {
         await Test(
-            builder => builder.Entity(
-                "People", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<int>("DriverLicense");
-                }),
+            builder =>
+                builder.Entity(
+                    "People",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<int>("DriverLicense");
+                    }
+                ),
             builder => { },
-            builder => builder.Entity("People").ToTable(tb => tb.HasCheckConstraint("CK_People_Foo", "[DriverLicense] > 0")),
+            builder =>
+                builder
+                    .Entity("People")
+                    .ToTable(tb => tb.HasCheckConstraint("CK_People_Foo", "[DriverLicense] > 0")),
             model =>
             {
                 // TODO: no scaffolding support for check constraints, https://github.com/aspnet/EntityFrameworkCore/issues/15408
             },
-            migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent);
+            migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent
+        );
 
         AssertSql(
             """
 EXEC(N'ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 0)');
-""");
+"""
+        );
     }
 
     public override async Task Alter_check_constraint()
@@ -2936,7 +3300,8 @@ ALTER TABLE [People] DROP CONSTRAINT [CK_People_Foo];
             //
             """
 ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 1);
-""");
+"""
+        );
     }
 
     public override async Task Drop_check_constraint()
@@ -2946,7 +3311,8 @@ ALTER TABLE [People] ADD CONSTRAINT [CK_People_Foo] CHECK ([DriverLicense] > 1);
         AssertSql(
             """
 ALTER TABLE [People] DROP CONSTRAINT [CK_People_Foo];
-""");
+"""
+        );
     }
 
     public override async Task Create_sequence()
@@ -2956,7 +3322,8 @@ ALTER TABLE [People] DROP CONSTRAINT [CK_People_Foo];
         AssertSql(
             """
 CREATE SEQUENCE [TestSequence] AS int START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -2969,11 +3336,13 @@ CREATE SEQUENCE [TestSequence] AS int START WITH 1 INCREMENT BY 1 NO MINVALUE NO
             {
                 var sequence = Assert.Single(model.Sequences);
                 Assert.Equal("TestSequence", sequence.Name);
-            });
+            }
+        );
         AssertSql(
             """
 CREATE SEQUENCE [TestSequence] AS tinyint START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -2986,12 +3355,14 @@ CREATE SEQUENCE [TestSequence] AS tinyint START WITH 1 INCREMENT BY 1 NO MINVALU
             {
                 var sequence = Assert.Single(model.Sequences);
                 Assert.Equal("TestSequence", sequence.Name);
-            });
+            }
+        );
 
         AssertSql(
             """
 CREATE SEQUENCE [TestSequence] AS decimal START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
-""");
+"""
+        );
     }
 
     public override async Task Create_sequence_long()
@@ -3001,7 +3372,8 @@ CREATE SEQUENCE [TestSequence] AS decimal START WITH 1 INCREMENT BY 1 NO MINVALU
         AssertSql(
             """
 CREATE SEQUENCE [TestSequence] START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
-""");
+"""
+        );
     }
 
     public override async Task Create_sequence_short()
@@ -3011,7 +3383,8 @@ CREATE SEQUENCE [TestSequence] START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVAL
         AssertSql(
             """
 CREATE SEQUENCE [TestSequence] AS smallint START WITH 1 INCREMENT BY 1 NO MINVALUE NO MAXVALUE NO CYCLE;
-""");
+"""
+        );
     }
 
     public override async Task Create_sequence_all_settings()
@@ -3025,7 +3398,8 @@ IF SCHEMA_ID(N'dbo2') IS NULL EXEC(N'CREATE SCHEMA [dbo2];');
             //
             """
 CREATE SEQUENCE [dbo2].[TestSequence] START WITH 3 INCREMENT BY 2 MINVALUE 2 MAXVALUE 916 CYCLE;
-""");
+"""
+        );
     }
 
     public override async Task Alter_sequence_all_settings()
@@ -3039,7 +3413,8 @@ ALTER SEQUENCE [foo] INCREMENT BY 2 MINVALUE -5 MAXVALUE 10 CYCLE;
             //
             """
 ALTER SEQUENCE [foo] RESTART WITH -3;
-""");
+"""
+        );
     }
 
     public override async Task Alter_sequence_increment_by()
@@ -3049,15 +3424,15 @@ ALTER SEQUENCE [foo] RESTART WITH -3;
         AssertSql(
             """
 ALTER SEQUENCE [foo] INCREMENT BY 2 NO MINVALUE NO MAXVALUE NO CYCLE;
-""");
+"""
+        );
     }
 
     public override async Task Alter_sequence_restart_with()
     {
         await base.Alter_sequence_restart_with();
 
-        AssertSql(
-            @"ALTER SEQUENCE [foo] RESTART WITH 3;");
+        AssertSql(@"ALTER SEQUENCE [foo] RESTART WITH 3;");
     }
 
     public override async Task Drop_sequence()
@@ -3067,7 +3442,8 @@ ALTER SEQUENCE [foo] INCREMENT BY 2 NO MINVALUE NO MAXVALUE NO CYCLE;
         AssertSql(
             """
 DROP SEQUENCE [TestSequence];
-""");
+"""
+        );
     }
 
     public override async Task Rename_sequence()
@@ -3077,7 +3453,8 @@ DROP SEQUENCE [TestSequence];
         AssertSql(
             """
 EXEC sp_rename N'[TestSequence]', N'testsequence';
-""");
+"""
+        );
     }
 
     public override async Task Move_sequence()
@@ -3091,7 +3468,8 @@ IF SCHEMA_ID(N'TestSequenceSchema') IS NULL EXEC(N'CREATE SCHEMA [TestSequenceSc
             //
             """
 ALTER SCHEMA [TestSequenceSchema] TRANSFER [TestSequence];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -3105,13 +3483,15 @@ ALTER SCHEMA [TestSequenceSchema] TRANSFER [TestSequence];
                 var sequence = Assert.Single(model.Sequences);
                 Assert.Equal("dbo", sequence.Schema);
                 Assert.Equal("TestSequence", sequence.Name);
-            });
+            }
+        );
 
         AssertSql(
             """
 DECLARE @defaultSchema sysname = SCHEMA_NAME();
 EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestSequenceSchema].[TestSequence];');
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -3123,13 +3503,17 @@ EXEC(N'ALTER SCHEMA [' + @defaultSchema + N'] TRANSFER [TestSequenceSchema].[Tes
             builder =>
             {
                 builder.HasSequence<int>("TestSequence");
-                builder.Entity("People").Property<int>("SeqProp").HasDefaultValueSql("NEXT VALUE FOR TestSequence");
+                builder
+                    .Entity("People")
+                    .Property<int>("SeqProp")
+                    .HasDefaultValueSql("NEXT VALUE FOR TestSequence");
             },
             model =>
             {
                 var sequence = Assert.Single(model.Sequences);
                 Assert.Equal("TestSequence", sequence.Name);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -3138,7 +3522,8 @@ CREATE SEQUENCE [TestSequence] AS int START WITH 1 INCREMENT BY 1 NO MINVALUE NO
             //
             """
 ALTER TABLE [People] ADD [SeqProp] int NOT NULL DEFAULT (NEXT VALUE FOR TestSequence);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -3149,10 +3534,14 @@ ALTER TABLE [People] ADD [SeqProp] int NOT NULL DEFAULT (NEXT VALUE FOR TestSequ
             builder =>
             {
                 builder.HasSequence<int>("TestSequence");
-                builder.Entity("People").Property<int>("SeqProp").HasDefaultValueSql("NEXT VALUE FOR TestSequence");
+                builder
+                    .Entity("People")
+                    .Property<int>("SeqProp")
+                    .HasDefaultValueSql("NEXT VALUE FOR TestSequence");
             },
             builder => { },
-            model => Assert.Empty(model.Sequences));
+            model => Assert.Empty(model.Sequences)
+        );
 
         AssertSql(
             """
@@ -3167,7 +3556,8 @@ ALTER TABLE [People] DROP COLUMN [SeqProp];
             //
             """
 DROP SEQUENCE [TestSequence];
-""");
+"""
+        );
     }
 
     public override async Task InsertDataOperation()
@@ -3186,7 +3576,8 @@ VALUES (1, N'Daenerys Targaryen'),
 (5, NULL);
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name') AND [object_id] = OBJECT_ID(N'[Person]'))
     SET IDENTITY_INSERT [Person] OFF;
-""");
+"""
+        );
     }
 
     public override async Task DeleteDataOperation_simple_key()
@@ -3199,7 +3590,8 @@ IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name
 DELETE FROM [Person]
 WHERE [Id] = 2;
 SELECT @@ROWCOUNT;
-""");
+"""
+        );
     }
 
     public override async Task DeleteDataOperation_composite_key()
@@ -3212,7 +3604,8 @@ SELECT @@ROWCOUNT;
 DELETE FROM [Person]
 WHERE [AnotherId] = 12 AND [Id] = 2;
 SELECT @@ROWCOUNT;
-""");
+"""
+        );
     }
 
     public override async Task UpdateDataOperation_simple_key()
@@ -3225,7 +3618,8 @@ SELECT @@ROWCOUNT;
 UPDATE [Person] SET [Name] = N'Another John Snow'
 WHERE [Id] = 2;
 SELECT @@ROWCOUNT;
-""");
+"""
+        );
     }
 
     public override async Task UpdateDataOperation_composite_key()
@@ -3238,7 +3632,8 @@ SELECT @@ROWCOUNT;
 UPDATE [Person] SET [Name] = N'Another John Snow'
 WHERE [AnotherId] = 11 AND [Id] = 2;
 SELECT @@ROWCOUNT;
-""");
+"""
+        );
     }
 
     public override async Task UpdateDataOperation_multiple_columns()
@@ -3251,30 +3646,38 @@ SELECT @@ROWCOUNT;
 UPDATE [Person] SET [Age] = 21, [Name] = N'Another John Snow'
 WHERE [Id] = 2;
 SELECT @@ROWCOUNT;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task InsertDataOperation_generates_exec_when_idempotent()
     {
         await Test(
-            builder => builder.Entity(
-                "Person", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("Name");
-                    e.HasKey("Id");
-                }),
+            builder =>
+                builder.Entity(
+                    "Person",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("Name");
+                        e.HasKey("Id");
+                    }
+                ),
             builder => { },
-            builder => builder.Entity("Person")
-                .HasData(
-                    new Person { Id = 1, Name = "Daenerys Targaryen" },
-                    new Person { Id = 2, Name = "John Snow" },
-                    new Person { Id = 3, Name = "Arya Stark" },
-                    new Person { Id = 4, Name = "Harry Strickland" },
-                    new Person { Id = 5, Name = null }),
+            builder =>
+                builder
+                    .Entity("Person")
+                    .HasData(
+                        new Person { Id = 1, Name = "Daenerys Targaryen" },
+                        new Person { Id = 2, Name = "John Snow" },
+                        new Person { Id = 3, Name = "Arya Stark" },
+                        new Person { Id = 4, Name = "Harry Strickland" },
+                        new Person { Id = 5, Name = null }
+                    ),
             model => { },
-            migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent);
+            migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent
+        );
 
         AssertSql(
             """
@@ -3288,57 +3691,69 @@ VALUES (1, N''Daenerys Targaryen''),
 (5, NULL)');
 IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name') AND [object_id] = OBJECT_ID(N'[Person]'))
     SET IDENTITY_INSERT [Person] OFF;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task DeleteDataOperation_generates_exec_when_idempotent()
     {
         await Test(
-            builder => builder.Entity(
-                "Person", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("Name");
-                    e.HasKey("Id");
-                    e.HasData(new Person { Id = 1, Name = "Daenerys Targaryen" });
-                }),
+            builder =>
+                builder.Entity(
+                    "Person",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("Name");
+                        e.HasKey("Id");
+                        e.HasData(new Person { Id = 1, Name = "Daenerys Targaryen" });
+                    }
+                ),
             builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }),
             builder => { },
             model => { },
-            migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent);
+            migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent
+        );
 
         AssertSql(
             """
 EXEC(N'DELETE FROM [Person]
 WHERE [Id] = 2;
 SELECT @@ROWCOUNT');
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task UpdateDataOperation_generates_exec_when_idempotent()
     {
         await Test(
-            builder => builder.Entity(
-                "Person", e =>
-                {
-                    e.Property<int>("Id");
-                    e.Property<string>("Name");
-                    e.HasKey("Id");
-                    e.HasData(new Person { Id = 1, Name = "Daenerys Targaryen" });
-                }),
+            builder =>
+                builder.Entity(
+                    "Person",
+                    e =>
+                    {
+                        e.Property<int>("Id");
+                        e.Property<string>("Name");
+                        e.HasKey("Id");
+                        e.HasData(new Person { Id = 1, Name = "Daenerys Targaryen" });
+                    }
+                ),
             builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "John Snow" }),
-            builder => builder.Entity("Person").HasData(new Person { Id = 2, Name = "Another John Snow" }),
+            builder =>
+                builder.Entity("Person").HasData(new Person { Id = 2, Name = "Another John Snow" }),
             model => { },
-            migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent);
+            migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent
+        );
 
         AssertSql(
             """
 EXEC(N'UPDATE [Person] SET [Name] = N''Another John Snow''
 WHERE [Id] = 2;
 SELECT @@ROWCOUNT');
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -3346,40 +3761,55 @@ SELECT @@ROWCOUNT');
     {
         await Test(
             builder => { },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("SystemTimeStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("SystemTimeEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("SystemTimeStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("SystemTimeEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.HasPeriodStart("SystemTimeStart");
                                 ttb.HasPeriodEnd("SystemTimeEnd");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("CustomerHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("SystemTimeStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("SystemTimeEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal(
+                    "CustomerHistory",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "SystemTimeStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "SystemTimeEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -3392,7 +3822,8 @@ EXEC(N'CREATE TABLE [Customer] (
     CONSTRAINT [PK_Customer] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[CustomerHistory]))');
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -3400,40 +3831,52 @@ EXEC(N'CREATE TABLE [Customer] (
     {
         await Test(
             builder => { },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("SystemTimeStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("SystemTimeEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("SystemTimeStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("SystemTimeEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.HasPeriodStart("SystemTimeStart").HasColumnName("Start");
                                 ttb.HasPeriodEnd("SystemTimeEnd").HasColumnName("End");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("CustomerHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "CustomerHistory",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -3446,7 +3889,8 @@ EXEC(N'CREATE TABLE [Customer] (
     CONSTRAINT [PK_Customer] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([Start], [End])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[CustomerHistory]))');
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -3454,41 +3898,56 @@ EXEC(N'CREATE TABLE [Customer] (
     {
         await Test(
             builder => { },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("SystemTimeStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("SystemTimeEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("SystemTimeStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("SystemTimeEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("SystemTimeStart");
                                 ttb.HasPeriodEnd("SystemTimeEnd");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("SystemTimeStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("SystemTimeEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "SystemTimeStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "SystemTimeEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -3501,7 +3960,8 @@ EXEC(N'CREATE TABLE [Customer] (
     CONSTRAINT [PK_Customer] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[HistoryTable]))');
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -3509,41 +3969,59 @@ EXEC(N'CREATE TABLE [Customer] (
     {
         await Test(
             builder => { },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("SystemTimeStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("SystemTimeEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("SystemTimeStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("SystemTimeEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "Customers", "mySchema", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.HasPeriodStart("SystemTimeStart");
-                                ttb.HasPeriodEnd("SystemTimeEnd");
-                            }));
-                }),
+                        e.ToTable(
+                            "Customers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.HasPeriodStart("SystemTimeStart");
+                                    ttb.HasPeriodEnd("SystemTimeEnd");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal("mySchema", table.Schema);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("CustomersHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("SystemTimeStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("SystemTimeEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal(
+                    "CustomersHistory",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "SystemTimeStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "SystemTimeEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -3559,7 +4037,8 @@ CREATE TABLE [mySchema].[Customers] (
     CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[CustomersHistory]));
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -3571,7 +4050,8 @@ CREATE TABLE [mySchema].[Customers] (
             {
                 builder.HasDefaultSchema("myDefaultSchema");
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -3580,13 +4060,16 @@ CREATE TABLE [mySchema].[Customers] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
             },
             model =>
             {
@@ -3594,18 +4077,30 @@ CREATE TABLE [mySchema].[Customers] (
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal("myDefaultSchema", table.Schema);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("CustomersHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("SystemTimeStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("SystemTimeEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal(
+                    "CustomersHistory",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "SystemTimeStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "SystemTimeEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -3621,7 +4116,8 @@ CREATE TABLE [myDefaultSchema].[Customers] (
     CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myDefaultSchema].[CustomersHistory]));
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -3633,7 +4129,8 @@ CREATE TABLE [myDefaultSchema].[Customers] (
             {
                 builder.HasDefaultSchema("myDefaultSchema");
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -3642,13 +4139,17 @@ CREATE TABLE [myDefaultSchema].[Customers] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", "mySchema", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
             },
             model =>
             {
@@ -3656,18 +4157,30 @@ CREATE TABLE [myDefaultSchema].[Customers] (
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal("mySchema", table.Schema);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("CustomersHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("SystemTimeStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("SystemTimeEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal(
+                    "CustomersHistory",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "SystemTimeStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "SystemTimeEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -3683,7 +4196,8 @@ CREATE TABLE [mySchema].[Customers] (
     CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[CustomersHistory]));
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -3695,7 +4209,8 @@ CREATE TABLE [mySchema].[Customers] (
             {
                 builder.HasDefaultSchema("myDefaultSchema");
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -3704,13 +4219,16 @@ CREATE TABLE [mySchema].[Customers] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
             },
             model =>
             {
@@ -3718,19 +4236,34 @@ CREATE TABLE [mySchema].[Customers] (
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal("myDefaultSchema", table.Schema);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("CustomersHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("myDefaultSchema", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
-                Assert.Equal("SystemTimeStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("SystemTimeEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal(
+                    "CustomersHistory",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "myDefaultSchema",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
+                Assert.Equal(
+                    "SystemTimeStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "SystemTimeEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -3746,7 +4279,8 @@ CREATE TABLE [myDefaultSchema].[Customers] (
     CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myDefaultSchema].[CustomersHistory]));
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -3757,7 +4291,8 @@ CREATE TABLE [myDefaultSchema].[Customers] (
             builder =>
             {
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -3766,13 +4301,16 @@ CREATE TABLE [myDefaultSchema].[Customers] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
 
                 builder.Entity("Customer", e => e.ToTable("Customers", "mySchema1"));
                 builder.Entity("Customer", e => e.ToTable("Customers"));
@@ -3784,19 +4322,34 @@ CREATE TABLE [myDefaultSchema].[Customers] (
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal("myDefaultSchema", table.Schema);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("CustomersHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("myDefaultSchema", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
-                Assert.Equal("SystemTimeStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("SystemTimeEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal(
+                    "CustomersHistory",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "myDefaultSchema",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
+                Assert.Equal(
+                    "SystemTimeStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "SystemTimeEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -3812,19 +4365,20 @@ CREATE TABLE [myDefaultSchema].[Customers] (
     CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myDefaultSchema].[CustomersHistory]));
-""");
+"""
+        );
     }
 
     [ConditionalFact]
-    public virtual async Task
-        Create_temporal_table_with_default_model_schema_specified_after_entity_definition_and_history_table_schema_specified_explicitly()
+    public virtual async Task Create_temporal_table_with_default_model_schema_specified_after_entity_definition_and_history_table_schema_specified_explicitly()
     {
         await Test(
             builder => { },
             builder =>
             {
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -3833,14 +4387,17 @@ CREATE TABLE [myDefaultSchema].[Customers] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.UseHistoryTable("History", "myHistorySchema");
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
 
                 builder.Entity("Customer", e => e.ToTable("Customers", "mySchema1"));
                 builder.Entity("Customer", e => e.ToTable("Customers"));
@@ -3853,18 +4410,30 @@ CREATE TABLE [myDefaultSchema].[Customers] (
                 Assert.Equal("myDefaultSchema", table.Schema);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
                 Assert.Equal("History", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("myHistorySchema", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
-                Assert.Equal("SystemTimeStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("SystemTimeEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal(
+                    "myHistorySchema",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
+                Assert.Equal(
+                    "SystemTimeStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "SystemTimeEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -3884,7 +4453,8 @@ CREATE TABLE [myDefaultSchema].[Customers] (
     CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myHistorySchema].[History]));
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -3896,7 +4466,8 @@ CREATE TABLE [myDefaultSchema].[Customers] (
             {
                 builder.HasDefaultSchema("myFakeSchema");
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -3905,13 +4476,16 @@ CREATE TABLE [myDefaultSchema].[Customers] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
 
                 builder.HasDefaultSchema("myDefaultSchema");
             },
@@ -3921,19 +4495,34 @@ CREATE TABLE [myDefaultSchema].[Customers] (
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal("myDefaultSchema", table.Schema);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("CustomersHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("myDefaultSchema", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
-                Assert.Equal("SystemTimeStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("SystemTimeEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal(
+                    "CustomersHistory",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "myDefaultSchema",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
+                Assert.Equal(
+                    "SystemTimeStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "SystemTimeEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -3949,12 +4538,12 @@ CREATE TABLE [myDefaultSchema].[Customers] (
     CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myDefaultSchema].[CustomersHistory]));
-""");
+"""
+        );
     }
 
     [ConditionalFact]
-    public virtual async Task
-        Create_temporal_table_with_default_schema_for_model_changed_and_explicit_history_table_schema_not_provided()
+    public virtual async Task Create_temporal_table_with_default_schema_for_model_changed_and_explicit_history_table_schema_not_provided()
     {
         await Test(
             builder => { },
@@ -3962,7 +4551,8 @@ CREATE TABLE [myDefaultSchema].[Customers] (
             {
                 builder.HasDefaultSchema("myDefaultSchema");
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -3971,33 +4561,51 @@ CREATE TABLE [myDefaultSchema].[Customers] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.UseHistoryTable("HistoryTable");
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
             },
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("myDefaultSchema", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
-                Assert.Equal("SystemTimeStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("SystemTimeEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "myDefaultSchema",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
+                Assert.Equal(
+                    "SystemTimeStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "SystemTimeEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -4013,7 +4621,8 @@ CREATE TABLE [myDefaultSchema].[Customers] (
     CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myDefaultSchema].[HistoryTable]));
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -4025,7 +4634,8 @@ CREATE TABLE [myDefaultSchema].[Customers] (
             {
                 builder.HasDefaultSchema("myDefaultSchema");
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -4034,33 +4644,51 @@ CREATE TABLE [myDefaultSchema].[Customers] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.UseHistoryTable("HistoryTable", "historySchema");
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
             },
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("historySchema", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
-                Assert.Equal("SystemTimeStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("SystemTimeEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "historySchema",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
+                Assert.Equal(
+                    "SystemTimeStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "SystemTimeEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -4080,7 +4708,8 @@ CREATE TABLE [myDefaultSchema].[Customers] (
     CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [historySchema].[HistoryTable]));
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -4091,7 +4720,8 @@ CREATE TABLE [myDefaultSchema].[Customers] (
             builder =>
             {
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -4100,33 +4730,51 @@ CREATE TABLE [myDefaultSchema].[Customers] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.UseHistoryTable("HistoryTable", "historySchema");
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
             },
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("historySchema", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
-                Assert.Equal("SystemTimeStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("SystemTimeEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "historySchema",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
+                Assert.Equal(
+                    "SystemTimeStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "SystemTimeEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -4142,35 +4790,40 @@ CREATE TABLE [Customers] (
     CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [historySchema].[HistoryTable]));
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Drop_temporal_table_default_history_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.HasPeriodStart("Start").HasColumnName("PeriodStart");
                                 ttb.HasPeriodEnd("End").HasColumnName("PeriodEnd");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             builder => { },
             model =>
             {
                 Assert.Empty(model.Tables);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -4183,36 +4836,41 @@ DROP TABLE [Customer];
             //
             """
 DROP TABLE [CustomerHistory];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Drop_temporal_table_custom_history_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start").HasColumnName("PeriodStart");
                                 ttb.HasPeriodEnd("End").HasColumnName("PeriodEnd");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             builder => { },
             model =>
             {
                 Assert.Empty(model.Tables);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -4225,36 +4883,41 @@ DROP TABLE [Customer];
             //
             """
 DROP TABLE [HistoryTable];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Drop_temporal_table_custom_history_table_and_history_table_schema()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable", "historySchema");
                                 ttb.HasPeriodStart("Start").HasColumnName("PeriodStart");
                                 ttb.HasPeriodEnd("End").HasColumnName("PeriodEnd");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             builder => { },
             model =>
             {
                 Assert.Empty(model.Tables);
-            });
+            }
+        );
 
         AssertSql(
             """
@@ -4267,58 +4930,77 @@ DROP TABLE [Customer];
             //
             """
 DROP TABLE [historySchema].[HistoryTable];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Rename_temporal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable("Customers");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable("RenamedCustomers");
-                }),
+                            })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable("Customers");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable("RenamedCustomers");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("RenamedCustomers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -4340,63 +5022,82 @@ ALTER TABLE [RenamedCustomers] ADD CONSTRAINT [PK_RenamedCustomers] PRIMARY KEY 
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Rename_temporal_table_rename_and_modify_column_in_same_migration()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<decimal>("Discount");
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<decimal>("Discount");
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<DateTime>("DoB");
-                    e.ToTable("Customers");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<decimal>("Discount").HasComment("for VIP only");
-                    e.Property<DateTime>("DateOfBirth");
-                    e.ToTable("RenamedCustomers");
-                }),
+                            })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<DateTime>("DoB");
+                        e.ToTable("Customers");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<decimal>("Discount").HasComment("for VIP only");
+                        e.Property<DateTime>("DateOfBirth");
+                        e.ToTable("RenamedCustomers");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("RenamedCustomers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Discount", c.Name),
                     c => Assert.Equal("DateOfBirth", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -4442,58 +5143,77 @@ ALTER TABLE [RenamedCustomers] ADD CONSTRAINT [PK_RenamedCustomers] PRIMARY KEY 
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Rename_temporal_table_with_custom_history_table_schema()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable", "historySchema");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable("Customers");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable("RenamedCustomers");
-                }),
+                            })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable("Customers");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable("RenamedCustomers");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("RenamedCustomers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -4514,55 +5234,77 @@ ALTER TABLE [RenamedCustomers] ADD CONSTRAINT [PK_RenamedCustomers] PRIMARY KEY 
             //
             """
 ALTER TABLE [RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [historySchema].[HistoryTable]))
-""");
+"""
+        );
     }
 
     public virtual async Task Rename_temporal_table_schema_when_history_table_doesnt_have_its_schema_specified()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "Customers", "mySchema", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                        e.ToTable(
+                            "Customers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             builder => { },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable("Customers", "mySchema2");
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable("Customers", "mySchema2");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal("mySchema2", table.Schema);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("mySchema2", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "mySchema2",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -4583,56 +5325,78 @@ ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[HistoryTable];
             //
             """
 ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[HistoryTable]))
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Rename_temporal_table_schema_when_history_table_has_its_schema_specified()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "Customers", "mySchema", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable", "myHistorySchema");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                        e.ToTable(
+                            "Customers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable", "myHistorySchema");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             builder => { },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable("Customers", "mySchema2");
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable("Customers", "mySchema2");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal("mySchema2", table.Schema);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("myHistorySchema", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "myHistorySchema",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -4649,65 +5413,93 @@ ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[Customers];
             //
             """
 ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myHistorySchema].[HistoryTable]))
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Rename_temporal_table_schema_and_history_table_name_when_history_table_doesnt_have_its_schema_specified()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        "Customers", "mySchema", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        "Customers", "mySchema2", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable2");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(
+                            "Customers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(
+                            "Customers",
+                            "mySchema2",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable2");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal("mySchema2", table.Schema);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable2", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("mySchema2", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
+                Assert.Equal(
+                    "HistoryTable2",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "mySchema2",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -4729,68 +5521,93 @@ ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[HistoryTable2];
             //
             """
 ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[HistoryTable2]))
-""");
+"""
+        );
     }
 
     [ConditionalFact]
-    public virtual async Task
-        Rename_temporal_table_schema_and_history_table_name_when_history_table_doesnt_have_its_schema_specified_convention_with_default_global_schema22()
+    public virtual async Task Rename_temporal_table_schema_and_history_table_name_when_history_table_doesnt_have_its_schema_specified_convention_with_default_global_schema22()
     {
         await Test(
             builder =>
             {
                 builder.HasDefaultSchema("defaultSchema");
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id");
                         e.Property<string>("Name");
                         e.HasKey("Id");
-                    });
+                    }
+                );
             },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        "Customers", "mySchema2", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable2");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(
+                            "Customers",
+                            "mySchema2",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable2");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal("mySchema2", table.Schema);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable2", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("mySchema2", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
+                Assert.Equal(
+                    "HistoryTable2",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "mySchema2",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -4812,70 +5629,96 @@ ALTER SCHEMA [mySchema2] TRANSFER [defaultSchema].[HistoryTable2];
             //
             """
 ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[HistoryTable2]))
-""");
+"""
+        );
     }
 
     [ConditionalFact]
-    public virtual async Task
-        Rename_temporal_table_schema_and_history_table_name_when_history_table_doesnt_have_its_schema_specified_convention_with_default_global_schema_and_table_schema_corrected()
+    public virtual async Task Rename_temporal_table_schema_and_history_table_name_when_history_table_doesnt_have_its_schema_specified_convention_with_default_global_schema_and_table_schema_corrected()
     {
         await Test(
             builder =>
             {
                 builder.HasDefaultSchema("defaultSchema");
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id");
                         e.Property<string>("Name");
                         e.HasKey("Id");
-                    });
+                    }
+                );
             },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        "Customers", "mySchema", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(
+                            "Customers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
 
-                    e.ToTable("Customers", "modifiedSchema");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        "Customers", "mySchema2", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable2");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                        e.ToTable("Customers", "modifiedSchema");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(
+                            "Customers",
+                            "mySchema2",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable2");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal("mySchema2", table.Schema);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable2", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("mySchema2", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
+                Assert.Equal(
+                    "HistoryTable2",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "mySchema2",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -4897,68 +5740,94 @@ ALTER SCHEMA [mySchema2] TRANSFER [modifiedSchema].[HistoryTable2];
             //
             """
 ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[HistoryTable2]))
-""");
+"""
+        );
     }
 
     [ConditionalFact]
-    public virtual async Task
-        Rename_temporal_table_schema_when_history_table_doesnt_have_its_schema_specified_convention_with_default_global_schema_and_table_name_corrected()
+    public virtual async Task Rename_temporal_table_schema_when_history_table_doesnt_have_its_schema_specified_convention_with_default_global_schema_and_table_name_corrected()
     {
         await Test(
             builder =>
             {
                 builder.HasDefaultSchema("defaultSchema");
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id");
                         e.Property<string>("Name");
                         e.HasKey("Id");
-                    });
+                    }
+                );
             },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        "MockCustomers", "mySchema", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(
+                            "MockCustomers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
 
-                    e.ToTable("Customers", "mySchema");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        "Customers", "mySchema2", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                        e.ToTable("Customers", "mySchema");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(
+                            "Customers",
+                            "mySchema2",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal("mySchema2", table.Schema);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("CustomersHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("mySchema2", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
+                Assert.Equal(
+                    "CustomersHistory",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "mySchema2",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -4979,125 +5848,174 @@ ALTER SCHEMA [mySchema2] TRANSFER [mySchema].[CustomersHistory];
             //
             """
 ALTER TABLE [mySchema2].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[CustomersHistory]))
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Rename_history_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("RenamedHistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("RenamedHistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("RenamedHistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "RenamedHistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
 EXEC sp_rename N'[HistoryTable]', N'RenamedHistoryTable';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Change_history_table_schema()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable", "historySchema");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable", "modifiedHistorySchema");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable", "historySchema");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable", "modifiedHistorySchema");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("modifiedHistorySchema", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "modifiedHistorySchema",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -5106,67 +6024,95 @@ IF SCHEMA_ID(N'modifiedHistorySchema') IS NULL EXEC(N'CREATE SCHEMA [modifiedHis
             //
             """
 ALTER SCHEMA [modifiedHistorySchema] TRANSFER [historySchema].[HistoryTable];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Rename_temporal_table_history_table_and_their_schemas()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        "Customers", "schema", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable", "historySchema");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(
+                            "Customers",
+                            "schema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable", "historySchema");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
 
-                    e.ToTable("Customers");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        "RenamedCustomers", "newSchema", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("RenamedHistoryTable", "newHistorySchema");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                        e.ToTable("Customers");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(
+                            "RenamedCustomers",
+                            "newSchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("RenamedHistoryTable", "newHistorySchema");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("RenamedCustomers", table.Name);
                 Assert.Equal("newSchema", table.Schema);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("RenamedHistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("newHistorySchema", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
+                Assert.Equal(
+                    "RenamedHistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "newHistorySchema",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -5201,55 +6147,68 @@ ALTER TABLE [newSchema].[RenamedCustomers] ADD CONSTRAINT [PK_RenamedCustomers] 
             //
             """
 ALTER TABLE [newSchema].[RenamedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [newHistorySchema].[RenamedHistoryTable]))
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Remove_columns_from_temporal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                }),
             builder =>
-            {
-            },
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                    }
+                ),
+            builder => { },
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
-                Assert.Collection(
-                    table.Columns,
-                    c => Assert.Equal("Id", c.Name));
+                Assert.Collection(table.Columns, c => Assert.Equal("Id", c.Name));
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -5299,55 +6258,68 @@ ALTER TABLE [HistoryTable] DROP COLUMN [Number];
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Remove_columns_from_temporal_table_with_history_table_schema()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable", "myHistorySchema");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                }),
             builder =>
-            {
-            },
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable", "myHistorySchema");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                    }
+                ),
+            builder => { },
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
-                Assert.Collection(
-                    table.Columns,
-                    c => Assert.Equal("Id", c.Name));
+                Assert.Collection(table.Columns, c => Assert.Equal("Id", c.Name));
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -5396,55 +6368,69 @@ ALTER TABLE [myHistorySchema].[HistoryTable] DROP COLUMN [Number];
             //
             """
 ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myHistorySchema].[HistoryTable]))
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Remove_columns_from_temporal_table_with_table_schema()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-
-                    e.ToTable(
-                        "Customers", "mySchema", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                }),
             builder =>
-            {
-            },
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+
+                        e.ToTable(
+                            "Customers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                    }
+                ),
+            builder => { },
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
-                Assert.Collection(
-                    table.Columns,
-                    c => Assert.Equal("Id", c.Name));
+                Assert.Collection(table.Columns, c => Assert.Equal("Id", c.Name));
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -5493,7 +6479,8 @@ ALTER TABLE [mySchema].[HistoryTable] DROP COLUMN [Number];
             //
             """
 ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[HistoryTable]))
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -5504,7 +6491,8 @@ ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = 
             {
                 builder.HasDefaultSchema("myDefaultSchema");
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
@@ -5512,40 +6500,51 @@ ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = 
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", "mySchema", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.UseHistoryTable("HistoryTable");
                                     ttb.HasPeriodStart("Start");
                                     ttb.HasPeriodEnd("End");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
             },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                }),
             builder =>
-            {
-            },
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                    }
+                ),
+            builder => { },
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
-                Assert.Collection(
-                    table.Columns,
-                    c => Assert.Equal("Id", c.Name));
+                Assert.Collection(table.Columns, c => Assert.Equal("Id", c.Name));
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -5594,7 +6593,8 @@ ALTER TABLE [mySchema].[HistoryTable] DROP COLUMN [Number];
             //
             """
 ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[HistoryTable]))
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -5605,7 +6605,8 @@ ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = 
             {
                 builder.HasDefaultSchema("myDefaultSchema");
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
@@ -5613,40 +6614,51 @@ ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = 
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", "mySchema", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.UseHistoryTable("HistoryTable", "myHistorySchema");
                                     ttb.HasPeriodStart("Start");
                                     ttb.HasPeriodEnd("End");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
             },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                }),
             builder =>
-            {
-            },
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                    }
+                ),
+            builder => { },
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
-                Assert.Collection(
-                    table.Columns,
-                    c => Assert.Equal("Id", c.Name));
+                Assert.Collection(table.Columns, c => Assert.Equal("Id", c.Name));
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -5695,55 +6707,73 @@ ALTER TABLE [myHistorySchema].[HistoryTable] DROP COLUMN [Number];
             //
             """
 ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myHistorySchema].[HistoryTable]))
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Add_columns_to_temporal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             builder => { },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("Number", c.Name));
+                    c => Assert.Equal("Number", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -5752,41 +6782,47 @@ ALTER TABLE [Customers] ADD [Name] nvarchar(max) NULL;
             //
             """
 ALTER TABLE [Customers] ADD [Number] int NOT NULL DEFAULT 0;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
-    public virtual async Task
-        Convert_temporal_table_with_default_column_mappings_and_custom_history_table_to_normal_table_keep_period_columns()
+    public virtual async Task Convert_temporal_table_with_default_column_mappings_and_custom_history_table_to_normal_table_keep_period_columns()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("PeriodStart");
                                 ttb.HasPeriodEnd("PeriodEnd");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart");
-                    e.Property<DateTime>("PeriodEnd");
-                    e.HasKey("Id");
-                }),
+                            })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart");
+                        e.Property<DateTime>("PeriodEnd");
+                        e.HasKey("Id");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -5799,11 +6835,14 @@ ALTER TABLE [Customers] ADD [Number] int NOT NULL DEFAULT 0;
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
                     c => Assert.Equal("PeriodEnd", c.Name),
-                    c => Assert.Equal("PeriodStart", c.Name));
+                    c => Assert.Equal("PeriodStart", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -5816,37 +6855,44 @@ ALTER TABLE [Customer] DROP PERIOD FOR SYSTEM_TIME
             //
             """
 DROP TABLE [HistoryTable];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Convert_temporal_table_with_default_column_mappings_and_default_history_table_to_normal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.HasPeriodStart("PeriodStart");
                                 ttb.HasPeriodEnd("PeriodEnd");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.HasKey("Id");
-                }),
+                            })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.HasKey("Id");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -5857,11 +6903,14 @@ DROP TABLE [HistoryTable];
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -5894,39 +6943,45 @@ ALTER TABLE [Customer] DROP COLUMN [PeriodStart];
             //
             """
 DROP TABLE [CustomerHistory];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
-    public virtual async Task
-        Convert_temporal_table_with_default_column_mappings_and_custom_history_table_to_normal_table_remove_period_columns()
+    public virtual async Task Convert_temporal_table_with_default_column_mappings_and_custom_history_table_to_normal_table_remove_period_columns()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("PeriodStart");
                                 ttb.HasPeriodEnd("PeriodEnd");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.HasKey("Id");
-                }),
+                            })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.HasKey("Id");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -5936,11 +6991,14 @@ DROP TABLE [CustomerHistory];
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -5973,40 +7031,47 @@ ALTER TABLE [Customer] DROP COLUMN [PeriodStart];
             //
             """
 DROP TABLE [HistoryTable];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Convert_temporal_table_with_explicit_history_table_schema_to_normal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable", "historySchema");
                                 ttb.HasPeriodStart("PeriodStart");
                                 ttb.HasPeriodEnd("PeriodEnd");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart");
-                    e.Property<DateTime>("PeriodEnd");
-                    e.HasKey("Id");
-                }),
+                            })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart");
+                        e.Property<DateTime>("PeriodEnd");
+                        e.HasKey("Id");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -6019,11 +7084,14 @@ DROP TABLE [HistoryTable];
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
                     c => Assert.Equal("PeriodEnd", c.Name),
-                    c => Assert.Equal("PeriodStart", c.Name));
+                    c => Assert.Equal("PeriodStart", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -6036,41 +7104,51 @@ ALTER TABLE [Customer] DROP PERIOD FOR SYSTEM_TIME
             //
             """
 DROP TABLE [historySchema].[HistoryTable];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Convert_temporal_table_with_explicit_schemas_same_schema_for_table_and_history_to_normal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "Customer", "mySchema", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable", "mySchema");
-                                ttb.HasPeriodStart("PeriodStart");
-                                ttb.HasPeriodEnd("PeriodEnd");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable("Customer", "mySchema");
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart");
-                    e.Property<DateTime>("PeriodEnd");
-                    e.HasKey("Id");
-                }),
+                        e.ToTable(
+                            "Customer",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable", "mySchema");
+                                    ttb.HasPeriodStart("PeriodStart");
+                                    ttb.HasPeriodEnd("PeriodEnd");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable("Customer", "mySchema");
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart");
+                        e.Property<DateTime>("PeriodEnd");
+                        e.HasKey("Id");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -6083,11 +7161,14 @@ DROP TABLE [historySchema].[HistoryTable];
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
                     c => Assert.Equal("PeriodEnd", c.Name),
-                    c => Assert.Equal("PeriodStart", c.Name));
+                    c => Assert.Equal("PeriodStart", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -6100,7 +7181,8 @@ ALTER TABLE [mySchema].[Customer] DROP PERIOD FOR SYSTEM_TIME
             //
             """
 DROP TABLE [mySchema].[HistoryTable];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -6108,34 +7190,42 @@ DROP TABLE [mySchema].[HistoryTable];
     {
         await Test(
             builder => builder.HasDefaultSchema("myDefaultSchema"),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "Customer", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("PeriodStart");
-                                ttb.HasPeriodEnd("PeriodEnd");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable("Customer");
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart");
-                    e.Property<DateTime>("PeriodEnd");
-                    e.HasKey("Id");
-                }),
+                        e.ToTable(
+                            "Customer",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("PeriodStart");
+                                    ttb.HasPeriodEnd("PeriodEnd");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable("Customer");
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart");
+                        e.Property<DateTime>("PeriodEnd");
+                        e.HasKey("Id");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -6148,11 +7238,14 @@ DROP TABLE [mySchema].[HistoryTable];
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
                     c => Assert.Equal("PeriodEnd", c.Name),
-                    c => Assert.Equal("PeriodStart", c.Name));
+                    c => Assert.Equal("PeriodStart", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -6165,7 +7258,8 @@ ALTER TABLE [myDefaultSchema].[Customer] DROP PERIOD FOR SYSTEM_TIME
             //
             """
 DROP TABLE [myDefaultSchema].[HistoryTable];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -6173,34 +7267,42 @@ DROP TABLE [myDefaultSchema].[HistoryTable];
     {
         await Test(
             builder => builder.HasDefaultSchema("myDefaultSchema"),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "Customer", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable", "mySchema");
-                                ttb.HasPeriodStart("PeriodStart");
-                                ttb.HasPeriodEnd("PeriodEnd");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable("Customer");
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart");
-                    e.Property<DateTime>("PeriodEnd");
-                    e.HasKey("Id");
-                }),
+                        e.ToTable(
+                            "Customer",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable", "mySchema");
+                                    ttb.HasPeriodStart("PeriodStart");
+                                    ttb.HasPeriodEnd("PeriodEnd");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable("Customer");
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart");
+                        e.Property<DateTime>("PeriodEnd");
+                        e.HasKey("Id");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -6213,11 +7315,14 @@ DROP TABLE [myDefaultSchema].[HistoryTable];
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
                     c => Assert.Equal("PeriodEnd", c.Name),
-                    c => Assert.Equal("PeriodStart", c.Name));
+                    c => Assert.Equal("PeriodStart", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -6230,48 +7335,63 @@ ALTER TABLE [myDefaultSchema].[Customer] DROP PERIOD FOR SYSTEM_TIME
             //
             """
 DROP TABLE [mySchema].[HistoryTable];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Convert_normal_table_to_temporal_table_with_minimal_configuration()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.HasKey("Id");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.ToTable(tb => tb.IsTemporal());
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.HasKey("Id");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.ToTable(tb => tb.IsTemporal());
 
-                    e.Metadata[SqlServerAnnotationNames.TemporalPeriodStartPropertyName] = "PeriodStart";
-                    e.Metadata[SqlServerAnnotationNames.TemporalPeriodEndPropertyName] = "PeriodEnd";
-                }),
+                        e.Metadata[SqlServerAnnotationNames.TemporalPeriodStartPropertyName] =
+                            "PeriodStart";
+                        e.Metadata[SqlServerAnnotationNames.TemporalPeriodEndPropertyName] =
+                            "PeriodEnd";
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("CustomerHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "CustomerHistory",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -6297,49 +7417,64 @@ ALTER TABLE [Customer] ALTER COLUMN [PeriodEnd] ADD HIDDEN
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[CustomerHistory]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Convert_normal_table_to_temporal_generates_exec_when_idempotent()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.HasKey("Id");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.ToTable(tb => tb.IsTemporal());
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.HasKey("Id");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.ToTable(tb => tb.IsTemporal());
 
-                    e.Metadata[SqlServerAnnotationNames.TemporalPeriodStartPropertyName] = "PeriodStart";
-                    e.Metadata[SqlServerAnnotationNames.TemporalPeriodEndPropertyName] = "PeriodEnd";
-                }),
+                        e.Metadata[SqlServerAnnotationNames.TemporalPeriodStartPropertyName] =
+                            "PeriodStart";
+                        e.Metadata[SqlServerAnnotationNames.TemporalPeriodEndPropertyName] =
+                            "PeriodEnd";
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("CustomerHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "CustomerHistory",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
             },
-            migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent);
+            migrationsSqlGenerationOptions: MigrationsSqlGenerationOptions.Idempotent
+        );
 
         AssertSql(
             """
@@ -6365,55 +7500,67 @@ ALTER TABLE [Customer] ALTER COLUMN [PeriodEnd] ADD HIDDEN
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[CustomerHistory]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
-    public virtual async Task
-        Convert_normal_table_with_period_columns_to_temporal_table_default_column_mappings_and_default_history_table()
+    public virtual async Task Convert_normal_table_with_period_columns_to_temporal_table_default_column_mappings_and_default_history_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start");
-                    e.Property<DateTime>("End");
-                    e.HasKey("Id");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start");
+                        e.Property<DateTime>("End");
+                        e.HasKey("Id");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("CustomerHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "CustomerHistory",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -6431,58 +7578,73 @@ ALTER TABLE [Customer] ALTER COLUMN [End] ADD HIDDEN
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[CustomerHistory]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
-    public virtual async Task
-        Convert_normal_table_with_period_columns_to_temporal_table_default_column_mappings_and_specified_history_table()
+    public virtual async Task Convert_normal_table_with_period_columns_to_temporal_table_default_column_mappings_and_specified_history_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start");
-                    e.Property<DateTime>("End");
-                    e.HasKey("Id");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start");
+                        e.Property<DateTime>("End");
+                        e.HasKey("Id");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -6500,54 +7662,67 @@ ALTER TABLE [Customer] ALTER COLUMN [End] ADD HIDDEN
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Convert_normal_table_to_temporal_table_default_column_mappings_and_default_history_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.HasKey("Id");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.HasKey("Id");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
                 Assert.NotNull(table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -6573,56 +7748,71 @@ ALTER TABLE [Customer] ALTER COLUMN [End] ADD HIDDEN
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[CustomerHistory]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
-    public virtual async Task
-        Convert_normal_table_without_period_columns_to_temporal_table_default_column_mappings_and_specified_history_table()
+    public virtual async Task Convert_normal_table_without_period_columns_to_temporal_table_default_column_mappings_and_specified_history_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.HasKey("Id");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.HasKey("Id");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -6648,66 +7838,85 @@ ALTER TABLE [Customer] ALTER COLUMN [End] ADD HIDDEN
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Rename_period_properties_of_temporal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("ModifiedStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("ModifiedEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+                            })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("ModifiedStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("ModifiedEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("ModifiedStart");
                                 ttb.HasPeriodEnd("ModifiedEnd");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("ModifiedStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("ModifiedEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "ModifiedStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "ModifiedEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -6716,63 +7925,85 @@ EXEC sp_rename N'[Customer].[Start]', N'ModifiedStart', N'COLUMN';
             //
             """
 EXEC sp_rename N'[Customer].[End]', N'ModifiedEnd', N'COLUMN';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Rename_period_columns_of_temporal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                            })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start").HasColumnName("ModifiedStart");
                                 ttb.HasPeriodEnd("End").HasColumnName("ModifiedEnd");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("ModifiedStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("ModifiedEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "ModifiedStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "ModifiedEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -6781,49 +8012,69 @@ EXEC sp_rename N'[Customer].[Start]', N'ModifiedStart', N'COLUMN';
             //
             """
 EXEC sp_rename N'[Customer].[End]', N'ModifiedEnd', N'COLUMN';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Alter_period_column_of_temporal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             builder => { },
-            builder => builder.Entity("Customer").Property<DateTime>("End").HasComment("My comment").ValueGeneratedOnAddOrUpdate(),
+            builder =>
+                builder
+                    .Entity("Customer")
+                    .Property<DateTime>("End")
+                    .HasComment("My comment")
+                    .ValueGeneratedOnAddOrUpdate(),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -6832,125 +8083,164 @@ SET @defaultSchema = SCHEMA_NAME();
 DECLARE @description AS sql_variant;
 SET @description = N'My comment';
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customers', 'COLUMN', N'End';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Rename_regular_columns_of_temporal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("FullName");
-                }),
+                            })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("FullName");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("FullName", c.Name));
+                    c => Assert.Equal("FullName", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
 EXEC sp_rename N'[Customer].[Name]', N'FullName', N'COLUMN';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Convert_regular_column_of_temporal_table_from_nullable_to_non_nullable()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
+                            })
+                        );
 
-                    // adding data to make sure default for null value can be applied correctly
-                    e.HasData(
-                        new { Id = 1, IsVip = (bool?)true },
-                        new { Id = 2, IsVip = (bool?)false },
-                        new { Id = 3, IsVip = (bool?)null });
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<bool?>("IsVip");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<bool>("IsVip");
-                }),
+                        // adding data to make sure default for null value can be applied correctly
+                        e.HasData(
+                            new { Id = 1, IsVip = (bool?)true },
+                            new { Id = 2, IsVip = (bool?)false },
+                            new { Id = 3, IsVip = (bool?)null }
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<bool?>("IsVip");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<bool>("IsVip");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("IsVip", c.Name));
+                    c => Assert.Equal("IsVip", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
 """,
-                //
-                """
+            //
+            """
 DECLARE @var0 sysname;
 SELECT @var0 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -6961,8 +8251,8 @@ UPDATE [Customer] SET [IsVip] = CAST(0 AS bit) WHERE [IsVip] IS NULL;
 ALTER TABLE [Customer] ALTER COLUMN [IsVip] bit NOT NULL;
 ALTER TABLE [Customer] ADD DEFAULT CAST(0 AS bit) FOR [IsVip];
 """,
-                //
-                """
+            //
+            """
 DECLARE @var1 sysname;
 SELECT @var1 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -6973,11 +8263,12 @@ UPDATE [HistoryTable] SET [IsVip] = CAST(0 AS bit) WHERE [IsVip] IS NULL;
 ALTER TABLE [HistoryTable] ALTER COLUMN [IsVip] bit NOT NULL;
 ALTER TABLE [HistoryTable] ADD DEFAULT CAST(0 AS bit) FOR [IsVip];
 """,
-                //
-                """
+            //
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -6986,45 +8277,58 @@ EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + 
         await Test(
             builder => { },
             builder => { },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.Property<int>("Number");
-                    e.Property<int?>("NumberPlusFive").HasComputedColumnSql("Number + 5 PERSISTED");
-                    e.HasKey("Id");
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.Property<int>("Number");
+                        e.Property<int?>("NumberPlusFive")
+                            .HasComputedColumnSql("Number + 5 PERSISTED");
+                        e.HasKey("Id");
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Number", c.Name),
-                    c => Assert.Equal("NumberPlusFive", c.Name));
+                    c => Assert.Equal("NumberPlusFive", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'CREATE TABLE [Customer] (
     [Id] int NOT NULL IDENTITY,
@@ -7035,187 +8339,232 @@ EXEC(N'CREATE TABLE [Customer] (
     CONSTRAINT [PK_Customer] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([Start], [End])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + N'].[HistoryTable]))');
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Add_nullable_computed_column_to_temporal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             builder => { },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("IdPlusFive", c.Name));
+                    c => Assert.Equal("IdPlusFive", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customer] ADD [IdPlusFive] AS Id + 5 PERSISTED;
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [HistoryTable] ADD [IdPlusFive] int NULL;
 """,
-                //
-                """
+            //
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Add_non_nullable_computed_column_to_temporal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             builder => { },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Five").HasComputedColumnSql("5 PERSISTED");
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Five").HasComputedColumnSql("5 PERSISTED");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Five", c.Name));
+                    c => Assert.Equal("Five", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customer] ADD [Five] AS 5 PERSISTED;
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [HistoryTable] ADD [Five] int NOT NULL DEFAULT 0;
 """,
-                //
-                """
+            //
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Remove_computed_column_from_temporal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
-                }),
+                            })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
+                    }
+                ),
             builder => { },
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
-                Assert.Collection(
-                    table.Columns,
-                    c => Assert.Equal("Id", c.Name));
+                Assert.Collection(table.Columns, c => Assert.Equal("Id", c.Name));
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
 """,
-                //
-                """
+            //
+            """
 DECLARE @var0 sysname;
 SELECT @var0 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -7224,8 +8573,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'IdPl
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [Customer] DROP COLUMN [IdPlusFive];
 """,
-                //
-                """
+            //
+            """
 DECLARE @var1 sysname;
 SELECT @var1 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -7234,178 +8583,235 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'
 IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
 ALTER TABLE [HistoryTable] DROP COLUMN [IdPlusFive];
 """,
-                //
-                """
+            //
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Alter_computed_column_sql_on_temporal_table()
     {
-        var message = (await Assert.ThrowsAsync<NotSupportedException>(() => Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+        var message = (
+            await Assert.ThrowsAsync<NotSupportedException>(() =>
+                Test(
+                    builder =>
+                        builder.Entity(
+                            "Customer",
+                            e =>
                             {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 10 PERSISTED");
-                }),
-            model =>
-            {
-                var table = Assert.Single(model.Tables);
-                Assert.Equal("Customer", table.Name);
-                Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                                e.Property<int>("Id").ValueGeneratedOnAdd();
+                                e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                                e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                                e.HasKey("Id");
 
-                Assert.Collection(
-                    table.Columns,
-                    c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("IdPlusFive", c.Name));
-                Assert.Same(
-                    table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            }))).Message;
+                                e.ToTable(tb =>
+                                    tb.IsTemporal(ttb =>
+                                    {
+                                        ttb.UseHistoryTable("HistoryTable");
+                                        ttb.HasPeriodStart("Start");
+                                        ttb.HasPeriodEnd("End");
+                                    })
+                                );
+                            }
+                        ),
+                    builder =>
+                        builder.Entity(
+                            "Customer",
+                            e =>
+                            {
+                                e.Property<int?>("IdPlusFive")
+                                    .HasComputedColumnSql("Id + 5 PERSISTED");
+                            }
+                        ),
+                    builder =>
+                        builder.Entity(
+                            "Customer",
+                            e =>
+                            {
+                                e.Property<int?>("IdPlusFive")
+                                    .HasComputedColumnSql("Id + 10 PERSISTED");
+                            }
+                        ),
+                    model =>
+                    {
+                        var table = Assert.Single(model.Tables);
+                        Assert.Equal("Customer", table.Name);
+                        Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
+                        Assert.Equal(
+                            "HistoryTable",
+                            table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                        );
+                        Assert.Equal(
+                            "Start",
+                            table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                        );
+                        Assert.Equal(
+                            "End",
+                            table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                        );
+
+                        Assert.Collection(
+                            table.Columns,
+                            c => Assert.Equal("Id", c.Name),
+                            c => Assert.Equal("IdPlusFive", c.Name)
+                        );
+                        Assert.Same(
+                            table.Columns.Single(c => c.Name == "Id"),
+                            Assert.Single(table.PrimaryKey!.Columns)
+                        );
+                    }
+                )
+            )
+        ).Message;
 
         Assert.Equal(
-            SqlServerStrings.TemporalMigrationModifyingComputedColumnNotSupported("IdPlusFive", "Customer"),
-            message);
+            SqlServerStrings.TemporalMigrationModifyingComputedColumnNotSupported(
+                "IdPlusFive",
+                "Customer"
+            ),
+            message
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Add_column_on_temporal_table_with_computed_column()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Number");
-                }),
+                            })
+                        );
+                    }
+                ),
+            builder => builder.Entity("Customer", e => { }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Number");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("IdPlusFive", c.Name),
-                    c => Assert.Equal("Number", c.Name));
+                    c => Assert.Equal("Number", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customer] ADD [Number] int NOT NULL DEFAULT 0;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Remove_column_on_temporal_table_with_computed_column()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Number");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                }),
+                            })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Number");
+                    }
+                ),
+            builder => builder.Entity("Customer", e => { }),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("IdPlusFive", c.Name));
+                    c => Assert.Equal("IdPlusFive", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
 """,
-                //
-                """
+            //
+            """
 DECLARE @var0 sysname;
 SELECT @var0 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -7414,8 +8820,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'Numb
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [Customer] DROP COLUMN [Number];
 """,
-                //
-                """
+            //
+            """
 DECLARE @var1 sysname;
 SELECT @var1 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -7424,274 +8830,351 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'
 IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
 ALTER TABLE [HistoryTable] DROP COLUMN [Number];
 """,
-                //
-                """
+            //
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Rename_column_on_temporal_table_with_computed_column()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<int?>("IdPlusFive").HasComputedColumnSql("Id + 5 PERSISTED");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Number");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("RenamedNumber");
-                }),
+                            })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Number");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("RenamedNumber");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("IdPlusFive", c.Name),
-                    c => Assert.Equal("RenamedNumber", c.Name));
+                    c => Assert.Equal("RenamedNumber", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 EXEC sp_rename N'[Customer].[Number]', N'RenamedNumber', N'COLUMN';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Add_sparse_column_to_temporal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             builder => { },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int?>("MyColumn").IsSparse();
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int?>("MyColumn").IsSparse();
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("MyColumn", c.Name));
+                    c => Assert.Equal("MyColumn", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
 """,
-                //
-                """
+            //
+            """
 IF EXISTS (SELECT 1 FROM [sys].[tables] [t] INNER JOIN [sys].[partitions] [p] ON [t].[object_id] = [p].[object_id] WHERE [t].[name] = 'HistoryTable' AND data_compression <> 0)
 EXEC(N'ALTER TABLE [HistoryTable] REBUILD PARTITION = ALL WITH (DATA_COMPRESSION = NONE);');
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customer] ADD [MyColumn] int SPARSE NULL;
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [HistoryTable] ADD [MyColumn] int SPARSE NULL;
 """,
-                //
-                """
+            //
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Add_sparse_column_to_temporal_table_with_custom_schemas()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.ToTable("Customers", "mySchema",
-                        tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable", "myHistorySchema");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.ToTable(
+                            "Customers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable", "myHistorySchema");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             builder => { },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int?>("MyColumn").IsSparse();
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int?>("MyColumn").IsSparse();
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal("mySchema", table.Schema);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("myHistorySchema", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "myHistorySchema",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("MyColumn", c.Name));
+                    c => Assert.Equal("MyColumn", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = OFF)
 """,
-                //
-                """
+            //
+            """
 IF EXISTS (SELECT 1 FROM [sys].[tables] [t] INNER JOIN [sys].[partitions] [p] ON [t].[object_id] = [p].[object_id] WHERE [t].[name] = 'HistoryTable' AND [t].[schema_id] = schema_id('myHistorySchema') AND data_compression <> 0)
 EXEC(N'ALTER TABLE [myHistorySchema].[HistoryTable] REBUILD PARTITION = ALL WITH (DATA_COMPRESSION = NONE);');
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [mySchema].[Customers] ADD [MyColumn] int SPARSE NULL;
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [myHistorySchema].[HistoryTable] ADD [MyColumn] int SPARSE NULL;
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [mySchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myHistorySchema].[HistoryTable]))
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Convert_regular_column_of_temporal_table_to_sparse()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                    e.HasData(
-                        new { MyColumn = 1 },
-                        new { MyColumn = 2 },
-                        new { MyColumn = (int?)null },
-                        new { MyColumn = (int?)null });
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int?>("MyColumn");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int?>("MyColumn").IsSparse();
-                }),
+                            })
+                        );
+                        e.HasData(
+                            new { MyColumn = 1 },
+                            new { MyColumn = 2 },
+                            new { MyColumn = (int?)null },
+                            new { MyColumn = (int?)null }
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int?>("MyColumn");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int?>("MyColumn").IsSparse();
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("MyColumn", c.Name));
+                    c => Assert.Equal("MyColumn", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = OFF)
 """,
-                //
-                """
+            //
+            """
 IF EXISTS (SELECT 1 FROM [sys].[tables] [t] INNER JOIN [sys].[partitions] [p] ON [t].[object_id] = [p].[object_id] WHERE [t].[name] = 'HistoryTable' AND data_compression <> 0)
 EXEC(N'ALTER TABLE [HistoryTable] REBUILD PARTITION = ALL WITH (DATA_COMPRESSION = NONE);');
 """,
-                //
-                """
+            //
+            """
 DECLARE @var0 sysname;
 SELECT @var0 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -7700,8 +9183,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'MyCo
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [Customer] ALTER COLUMN [MyColumn] int SPARSE NULL;
 """,
-                //
-                """
+            //
+            """
 DECLARE @var1 sysname;
 SELECT @var1 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -7710,69 +9193,89 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'
 IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var1 + '];');
 ALTER TABLE [HistoryTable] ALTER COLUMN [MyColumn] int SPARSE NULL;
 """,
-                //
-                """
+            //
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Convert_sparse_column_of_temporal_table_to_regular()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                    e.HasData(
-                        new { MyColumn = 1 },
-                        new { MyColumn = 2 },
-                        new { MyColumn = (int?)null },
-                        new { MyColumn = (int?)null });
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int?>("MyColumn").IsSparse();
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int?>("MyColumn");
-                }),
+                            })
+                        );
+                        e.HasData(
+                            new { MyColumn = 1 },
+                            new { MyColumn = 2 },
+                            new { MyColumn = (int?)null },
+                            new { MyColumn = (int?)null }
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int?>("MyColumn").IsSparse();
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int?>("MyColumn");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("MyColumn", c.Name));
+                    c => Assert.Equal("MyColumn", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 DECLARE @var0 sysname;
 SELECT @var0 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -7780,88 +9283,110 @@ INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [
 WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customer]') AND [c].[name] = N'MyColumn');
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customer] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [Customer] ALTER COLUMN [MyColumn] int NULL;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Convert_regular_table_with_sparse_column_to_temporal()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
-                    e.Property<int?>("MyColumn").IsSparse();
-                    e.HasData(
-                        new { MyColumn = 1 },
-                        new { MyColumn = 2 },
-                        new { MyColumn = (int?)null },
-                        new { MyColumn = (int?)null });
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.ToTable("Customers");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.ToTable(
-                        "Customers",
-                        tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<int?>("MyColumn").IsSparse();
+                        e.HasData(
+                            new { MyColumn = 1 },
+                            new { MyColumn = 2 },
+                            new { MyColumn = (int?)null },
+                            new { MyColumn = (int?)null }
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.ToTable("Customers");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.NotNull(table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("MyColumn", c.Name));
+                    c => Assert.Equal("MyColumn", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customers] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ALTER COLUMN [Start] ADD HIDDEN
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ALTER COLUMN [End] ADD HIDDEN
 """,
-                //
-                """
+            //
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -7869,41 +9394,53 @@ EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' +
     {
         await Test(
             builder => { },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name").HasComment("Column comment");
-                    e.Property<DateTime>("SystemTimeStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("SystemTimeEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name").HasComment("Column comment");
+                        e.Property<DateTime>("SystemTimeStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("SystemTimeEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                                ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                                 {
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
                                 })
-                            .HasComment("Table comment"));
-                }),
+                                .HasComment("Table comment")
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
                 Assert.NotNull(table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("SystemTimeStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("SystemTimeEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal(
+                    "SystemTimeStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "SystemTimeEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -7923,56 +9460,72 @@ SET @description = N'Table comment';
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customer';
 SET @description = N'Column comment';
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customer', 'COLUMN', N'Name';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Convert_normal_table_to_temporal_while_also_adding_comments_and_index()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.HasKey("Id");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name").HasComment("Column comment");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.HasIndex("Name");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.HasKey("Id");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name").HasComment("Column comment");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.HasIndex("Name");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.UseHistoryTable("HistoryTable");
                                 ttb.HasPeriodStart("Start");
                                 ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                            })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -8017,59 +9570,78 @@ ALTER TABLE [Customer] ALTER COLUMN [End] ADD HIDDEN
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customer] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public async Task Alter_comments_for_temporal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("SystemTimeStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("SystemTimeEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("SystemTimeStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("SystemTimeEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        tb => tb.IsTemporal(
-                            ttb =>
+                        e.ToTable(tb =>
+                            tb.IsTemporal(ttb =>
                             {
                                 ttb.HasPeriodStart("SystemTimeStart");
                                 ttb.HasPeriodEnd("SystemTimeEnd");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name").HasComment("Column comment");
-                    e.ToTable(tb => tb.HasComment("Table comment"));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name").HasComment("Modified column comment");
-                    e.ToTable(tb => tb.HasComment("Modified table comment"));
-                }),
+                            })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name").HasComment("Column comment");
+                        e.ToTable(tb => tb.HasComment("Table comment"));
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name").HasComment("Modified column comment");
+                        e.ToTable(tb => tb.HasComment("Modified table comment"));
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customer", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
                 Assert.NotNull(table[SqlServerAnnotationNames.TemporalHistoryTableName]);
-                Assert.Equal("SystemTimeStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("SystemTimeEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
+                Assert.Equal(
+                    "SystemTimeStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "SystemTimeEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -8088,58 +9660,76 @@ DECLARE @description AS sql_variant;
 EXEC sp_dropextendedproperty 'MS_Description', 'SCHEMA', @defaultSchema, 'TABLE', N'Customer', 'COLUMN', N'Name';
 SET @description = N'Modified column comment';
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customer', 'COLUMN', N'Name';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Add_index_to_temporal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             builder => { },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.HasIndex("Name");
-                    e.HasIndex("Number").IsUnique();
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.HasIndex("Name");
+                        e.HasIndex("Number").IsUnique();
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
                 Assert.Equal(2, table.Indexes.Count);
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("Number", c.Name));
+                    c => Assert.Equal("Number", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -8158,47 +9748,62 @@ CREATE INDEX [IX_Customers_Name] ON [Customers] ([Name]);
             //
             """
 CREATE UNIQUE INDEX [IX_Customers_Number] ON [Customers] ([Number]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Add_index_on_period_column_to_temporal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             builder => { },
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.HasIndex("Start");
-                    e.HasIndex("End", "Name");
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.HasIndex("Start");
+                        e.HasIndex("End", "Name");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 // TODO: issue #26008 - we don't reverse engineer indexes on period columns since the columns are not added to the database model
                 //Assert.Equal(2, table.Indexes.Count);
@@ -8207,11 +9812,14 @@ CREATE UNIQUE INDEX [IX_Customers_Number] ON [Customers] ([Number]);
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("Number", c.Name));
+                    c => Assert.Equal("Number", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -8230,7 +9838,8 @@ CREATE INDEX [IX_Customers_End_Name] ON [Customers] ([End], [Name]);
             //
             """
 CREATE INDEX [IX_Customers_Start] ON [Customers] ([Start]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -8241,7 +9850,8 @@ CREATE INDEX [IX_Customers_Start] ON [Customers] ([Start]);
             builder =>
             {
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -8250,21 +9860,29 @@ CREATE INDEX [IX_Customers_Start] ON [Customers] ([Start]);
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", "mySchema", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
                                     ttb.UseHistoryTable("MyHistoryTable", "mySchema2");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
             },
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("mySchema", table.Schema);
-                Assert.Equal("mySchema2", table[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
-            });
+                Assert.Equal(
+                    "mySchema2",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -8284,7 +9902,8 @@ CREATE TABLE [mySchema].[Customers] (
     CONSTRAINT [PK_Customers] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[MyHistoryTable]));
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -8295,7 +9914,8 @@ CREATE TABLE [mySchema].[Customers] (
             builder =>
             {
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -8304,16 +9924,21 @@ CREATE TABLE [mySchema].[Customers] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", "mySchema", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
 
                 builder.Entity(
-                    "Order", e =>
+                    "Order",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -8322,20 +9947,30 @@ CREATE TABLE [mySchema].[Customers] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Orders", "mySchema", tb => tb.IsTemporal(
-                                ttb =>
+                            "Orders",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
             },
             model =>
             {
                 Assert.Equal(2, model.Tables.Count);
                 Assert.True(model.Tables.All(x => x.Schema == "mySchema"));
-                Assert.True(model.Tables.All(x => x[SqlServerAnnotationNames.TemporalHistoryTableSchema] as string == "mySchema"));
-            });
+                Assert.True(
+                    model.Tables.All(x =>
+                        x[SqlServerAnnotationNames.TemporalHistoryTableSchema] as string
+                        == "mySchema"
+                    )
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -8362,7 +9997,8 @@ CREATE TABLE [mySchema].[Orders] (
     CONSTRAINT [PK_Orders] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema].[OrdersHistory]));
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -8373,7 +10009,8 @@ CREATE TABLE [mySchema].[Orders] (
             builder =>
             {
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -8382,17 +10019,22 @@ CREATE TABLE [mySchema].[Orders] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", "mySchema", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
                                     ttb.UseHistoryTable("CustomersHistoryTable", "mySchema2");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
 
                 builder.Entity(
-                    "Order", e =>
+                    "Order",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -8401,21 +10043,31 @@ CREATE TABLE [mySchema].[Orders] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Orders", "mySchema", tb => tb.IsTemporal(
-                                ttb =>
+                            "Orders",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
                                     ttb.UseHistoryTable("OrdersHistoryTable", "mySchema2");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
             },
             model =>
             {
                 Assert.Equal(2, model.Tables.Count);
                 Assert.True(model.Tables.All(x => x.Schema == "mySchema"));
-                Assert.True(model.Tables.All(x => x[SqlServerAnnotationNames.TemporalHistoryTableSchema] as string == "mySchema2"));
-            });
+                Assert.True(
+                    model.Tables.All(x =>
+                        x[SqlServerAnnotationNames.TemporalHistoryTableSchema] as string
+                        == "mySchema2"
+                    )
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -8446,7 +10098,8 @@ CREATE TABLE [mySchema].[Orders] (
     CONSTRAINT [PK_Orders] PRIMARY KEY ([Id]),
     PERIOD FOR SYSTEM_TIME([SystemTimeStart], [SystemTimeEnd])
 ) WITH (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [mySchema2].[OrdersHistoryTable]));
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -8456,7 +10109,8 @@ CREATE TABLE [mySchema].[Orders] (
             builder =>
             {
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -8465,17 +10119,22 @@ CREATE TABLE [mySchema].[Orders] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", "mySchema", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
                                     ttb.UseHistoryTable("CustomersHistoryTable", "mySchema2");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
 
                 builder.Entity(
-                    "Order", e =>
+                    "Order",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -8484,19 +10143,24 @@ CREATE TABLE [mySchema].[Orders] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Orders", "mySchema2", tb => tb.IsTemporal(
-                                ttb =>
+                            "Orders",
+                            "mySchema2",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
                                     ttb.UseHistoryTable("OrdersHistoryTable", "mySchema2");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
             },
             builder =>
             {
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -8505,17 +10169,22 @@ CREATE TABLE [mySchema].[Orders] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Customers", "mySchema", tb => tb.IsTemporal(
-                                ttb =>
+                            "Customers",
+                            "mySchema",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
                                     ttb.UseHistoryTable("CustomersHistoryTable", "mySchema2");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
 
                 builder.Entity(
-                    "Order", e =>
+                    "Order",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.Property<string>("Name");
@@ -8524,26 +10193,37 @@ CREATE TABLE [mySchema].[Orders] (
                         e.HasKey("Id");
 
                         e.ToTable(
-                            "Orders", "mySchema2", tb => tb.IsTemporal(
-                                ttb =>
+                            "Orders",
+                            "mySchema2",
+                            tb =>
+                                tb.IsTemporal(ttb =>
                                 {
                                     ttb.HasPeriodStart("SystemTimeStart");
                                     ttb.HasPeriodEnd("SystemTimeEnd");
                                     ttb.UseHistoryTable("OrdersHistoryTable", "mySchema");
-                                }));
-                    });
+                                })
+                        );
+                    }
+                );
             },
             model =>
             {
                 Assert.Equal(2, model.Tables.Count);
                 var customers = model.Tables.First(t => t.Name == "Customers");
                 Assert.Equal("mySchema", customers.Schema);
-                Assert.Equal("mySchema2", customers[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
+                Assert.Equal(
+                    "mySchema2",
+                    customers[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
 
                 var orders = model.Tables.First(t => t.Name == "Orders");
                 Assert.Equal("mySchema2", orders.Schema);
-                Assert.Equal("mySchema", orders[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
-            });
+                Assert.Equal(
+                    "mySchema",
+                    orders[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
+            }
+        );
 
         // TODO: we could avoid creating the schema if we peek into the model
         AssertSql(
@@ -8553,7 +10233,8 @@ IF SCHEMA_ID(N'mySchema') IS NULL EXEC(N'CREATE SCHEMA [mySchema];');
             //
             """
 ALTER SCHEMA [mySchema] TRANSFER [mySchema2].[OrdersHistoryTable];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
@@ -8564,28 +10245,29 @@ ALTER SCHEMA [mySchema] TRANSFER [mySchema2].[OrdersHistoryTable];
             {
                 builder.HasDefaultSchema("myDefaultSchema");
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id");
                         e.Property<string>("Name");
 
-                        e.ToTable(
-                            "Customers", tb => tb.IsTemporal());
-                    });
+                        e.ToTable("Customers", tb => tb.IsTemporal());
+                    }
+                );
             },
-            builder =>
-            {
-            },
-            builder =>
-            {
-            },
+            builder => { },
+            builder => { },
             model =>
             {
                 Assert.Equal(1, model.Tables.Count);
                 var customers = model.Tables.First(t => t.Name == "Customers");
                 Assert.Equal("myDefaultSchema", customers.Schema);
-                Assert.Equal("myDefaultSchema", customers[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
-            });
+                Assert.Equal(
+                    "myDefaultSchema",
+                    customers[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
+            }
+        );
 
         AssertSql();
     }
@@ -8597,14 +10279,15 @@ ALTER SCHEMA [mySchema] TRANSFER [mySchema2].[OrdersHistoryTable];
             builder =>
             {
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id");
                         e.Property<string>("Name");
 
-                        e.ToTable(
-                            "Customers", tb => tb.IsTemporal());
-                    });
+                        e.ToTable("Customers", tb => tb.IsTemporal());
+                    }
+                );
             },
             builder =>
             {
@@ -8619,8 +10302,12 @@ ALTER SCHEMA [mySchema] TRANSFER [mySchema2].[OrdersHistoryTable];
                 Assert.Equal(1, model.Tables.Count);
                 var customers = model.Tables.First(t => t.Name == "Customers");
                 Assert.Equal("myModifiedDefaultSchema", customers.Schema);
-                Assert.Equal("myModifiedDefaultSchema", customers[SqlServerAnnotationNames.TemporalHistoryTableSchema]);
-            });
+                Assert.Equal(
+                    "myModifiedDefaultSchema",
+                    customers[SqlServerAnnotationNames.TemporalHistoryTableSchema]
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -8641,61 +10328,82 @@ ALTER SCHEMA [myModifiedDefaultSchema] TRANSFER [myDefaultSchema].[CustomersHist
             //
             """
 ALTER TABLE [myModifiedDefaultSchema].[Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [myModifiedDefaultSchema].[CustomersHistory]))
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_table_rename_and_delete_columns_in_one_migration()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.Property<DateTime>("Dob");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("FullName");
-                    e.Property<DateTime>("DateOfBirth");
-                }),
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.Property<DateTime>("Dob");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("FullName");
+                        e.Property<DateTime>("DateOfBirth");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("DateOfBirth", c.Name),
-                    c => Assert.Equal("FullName", c.Name));
+                    c => Assert.Equal("FullName", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -8741,69 +10449,89 @@ EXEC sp_rename N'[HistoryTable].[Dob]', N'DateOfBirth', N'COLUMN';
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_table_rename_and_delete_columns_and_also_rename_table_in_one_migration()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
 
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("FullName");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("FullName");
 
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "ModifiedCustomers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                        e.ToTable(
+                            "ModifiedCustomers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("ModifiedCustomers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("FullName", c.Name));
+                    c => Assert.Equal("FullName", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -8853,69 +10581,89 @@ ALTER TABLE [ModifiedCustomers] ADD CONSTRAINT [PK_ModifiedCustomers] PRIMARY KE
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [ModifiedCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_table_rename_and_delete_columns_and_also_rename_history_table_in_one_migration()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
 
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("FullName");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("FullName");
 
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("ModifiedHistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("ModifiedHistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("ModifiedHistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "ModifiedHistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("FullName", c.Name));
+                    c => Assert.Equal("FullName", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -8957,60 +10705,81 @@ EXEC sp_rename N'[HistoryTable]', N'ModifiedHistoryTable';
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[ModifiedHistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_table_delete_column_and_add_another_column_in_one_migration()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("DateOfBirth");
-                }),
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("DateOfBirth");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("DateOfBirth", c.Name));
+                    c => Assert.Equal("DateOfBirth", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -9048,61 +10817,82 @@ ALTER TABLE [HistoryTable] ADD [DateOfBirth] datetime2 NOT NULL DEFAULT '0001-01
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_table_delete_column_and_alter_another_column_in_one_migration()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
 
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.Property<DateTime>("DateOfBirth");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<string>("Name").HasComment("My comment");
-                    e.Property<DateTime>("DateOfBirth");
-                }),
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.Property<DateTime>("DateOfBirth");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<string>("Name").HasComment("My comment");
+                        e.Property<DateTime>("DateOfBirth");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("DateOfBirth", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -9148,64 +10938,86 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_table_rename_and_alter_period_column_in_one_migration()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").HasComment("My comment").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start").HasColumnName("ModifiedStart");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End")
+                            .HasComment("My comment")
+                            .ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start").HasColumnName("ModifiedStart");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("ModifiedStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "ModifiedStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -9218,65 +11030,87 @@ SET @defaultSchema = SCHEMA_NAME();
 DECLARE @description AS sql_variant;
 SET @description = N'My comment';
 EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSchema, 'TABLE', N'Customers', 'COLUMN', N'End';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_table_delete_column_rename_and_alter_period_column_in_one_migration()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("DateOfBirth");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").HasComment("My comment").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start").HasColumnName("ModifiedStart");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("DateOfBirth");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End")
+                            .HasComment("My comment")
+                            .ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start").HasColumnName("ModifiedStart");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("ModifiedStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "ModifiedStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
             """
@@ -9330,57 +11164,78 @@ EXEC sp_addextendedproperty 'MS_Description', @description, 'SCHEMA', @defaultSc
             """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Convert_from_temporal_table_with_minimal_configuration_to_explicit_one_noop()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.ToTable("Customers", tb => tb.IsTemporal());
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("CustomersHistory");
-                                ttb.HasPeriodStart("PeriodStart");
-                                ttb.HasPeriodEnd("PeriodEnd");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.ToTable("Customers", tb => tb.IsTemporal());
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("CustomersHistory");
+                                    ttb.HasPeriodStart("PeriodStart");
+                                    ttb.HasPeriodEnd("PeriodEnd");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("PeriodStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("PeriodEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("CustomersHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "PeriodStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "PeriodEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
+                Assert.Equal(
+                    "CustomersHistory",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql();
     }
@@ -9389,50 +11244,70 @@ EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' +
     public virtual async Task Convert_from_temporal_table_with_explicit_configuration_to_minimal_one_noop()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("CustomersHistory");
-                                ttb.HasPeriodStart("PeriodStart");
-                                ttb.HasPeriodEnd("PeriodEnd");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.ToTable("Customers", tb => tb.IsTemporal());
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("CustomersHistory");
+                                    ttb.HasPeriodStart("PeriodStart");
+                                    ttb.HasPeriodEnd("PeriodEnd");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.ToTable("Customers", tb => tb.IsTemporal());
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("PeriodStart", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("PeriodEnd", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("CustomersHistory", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "PeriodStart",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "PeriodEnd",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
+                Assert.Equal(
+                    "CustomersHistory",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql();
     }
@@ -9441,261 +11316,337 @@ EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' +
     public virtual async Task Convert_from_temporal_table_with_minimal_configuration_to_explicit_one()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.ToTable("Customers", tb => tb.IsTemporal());
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.ToTable("Customers", tb => tb.IsTemporal());
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 EXEC sp_rename N'[Customers].[PeriodStart]', N'Start', N'COLUMN';
 """,
-                //
-                """
+            //
+            """
 EXEC sp_rename N'[Customers].[PeriodEnd]', N'End', N'COLUMN';
 """,
-                //
-                """
+            //
+            """
 EXEC sp_rename N'[CustomersHistory]', N'HistoryTable';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Change_names_of_period_columns_in_temporal_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("PeriodStart");
-                                ttb.HasPeriodEnd("PeriodEnd");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<string>("Name");
-                    e.Property<DateTime>("ValidFrom").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("ValidTo").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("ValidFrom");
-                                ttb.HasPeriodEnd("ValidTo");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("PeriodStart").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("PeriodEnd").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("PeriodStart");
+                                    ttb.HasPeriodEnd("PeriodEnd");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<string>("Name");
+                        e.Property<DateTime>("ValidFrom").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("ValidTo").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("ValidFrom");
+                                    ttb.HasPeriodEnd("ValidTo");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("ValidFrom", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
-                Assert.Equal("ValidTo", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "ValidFrom",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
+                Assert.Equal(
+                    "ValidTo",
+                    table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]
+                );
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 EXEC sp_rename N'[Customers].[PeriodStart]', N'ValidFrom', N'COLUMN';
 """,
-                //
-                """
+            //
+            """
 EXEC sp_rename N'[Customers].[PeriodEnd]', N'ValidTo', N'COLUMN';
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_multiop_convert_to_temporal_and_add_new_column()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.ToTable("Customers");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.ToTable("Customers");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("Number", c.Name));
+                    c => Assert.Equal("Number", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customers] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ADD [Number] int NOT NULL DEFAULT 0;
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ALTER COLUMN [Start] ADD HIDDEN
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ALTER COLUMN [End] ADD HIDDEN
 """,
-                //
-                """
+            //
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_multiop_convert_to_temporal_and_remove_existing_column()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.ToTable("Customers");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.ToTable("Customers");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 DECLARE @var0 sysname;
 SELECT @var0 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -9704,145 +11655,171 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Num
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [Customers] DROP COLUMN [Number];
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ALTER COLUMN [Start] ADD HIDDEN
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ALTER COLUMN [End] ADD HIDDEN
 """,
-                //
-                """
+            //
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_multiop_convert_to_temporal_and_rename_column()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.ToTable("Customers");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.Property<int>("NewNumber");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.ToTable("Customers");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("NewNumber");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("Customers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("NewNumber", c.Name));
+                    c => Assert.Equal("NewNumber", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 EXEC sp_rename N'[Customers].[Number]', N'NewNumber', N'COLUMN';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ALTER COLUMN [Start] ADD HIDDEN
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ALTER COLUMN [End] ADD HIDDEN
 """,
-                //
-                """
+            //
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_multiop_convert_from_temporal_and_add_new_column()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.Property<string>("Name");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                        ttb =>
-                        {
-                            ttb.UseHistoryTable("HistoryTable");
-                            ttb.HasPeriodStart("Start");
-                            ttb.HasPeriodEnd("End");
-                        }));
-
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.ToTable("Customers");
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.Property<string>("Name");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.ToTable("Customers");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -9852,22 +11829,25 @@ EXEC(N'ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' +
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("Number", c.Name));
+                    c => Assert.Equal("Number", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] DROP PERIOD FOR SYSTEM_TIME
 """,
-                //
-                """
+            //
+            """
 DECLARE @var0 sysname;
 SELECT @var0 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -9876,8 +11856,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'End
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [Customers] DROP COLUMN [End];
 """,
-                //
-                """
+            //
+            """
 DECLARE @var1 sysname;
 SELECT @var1 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -9886,46 +11866,55 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Sta
 IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var1 + '];');
 ALTER TABLE [Customers] DROP COLUMN [Start];
 """,
-                //
-                """
+            //
+            """
 DROP TABLE [HistoryTable];
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] ADD [Number] int NOT NULL DEFAULT 0;
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_multiop_convert_from_temporal_and_remove_existing_column()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.ToTable("Customers");
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.ToTable("Customers");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -9934,22 +11923,25 @@ ALTER TABLE [Customers] ADD [Number] int NOT NULL DEFAULT 0;
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] DROP PERIOD FOR SYSTEM_TIME
 """,
-                //
-                """
+            //
+            """
 DECLARE @var0 sysname;
 SELECT @var0 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -9958,8 +11950,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'End
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [Customers] DROP COLUMN [End];
 """,
-                //
-                """
+            //
+            """
 DECLARE @var1 sysname;
 SELECT @var1 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -9968,8 +11960,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Num
 IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var1 + '];');
 ALTER TABLE [Customers] DROP COLUMN [Number];
 """,
-                //
-                """
+            //
+            """
 DECLARE @var2 sysname;
 SELECT @var2 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -9978,8 +11970,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[HistoryTable]') AND [c].[name] = N'
 IF @var2 IS NOT NULL EXEC(N'ALTER TABLE [HistoryTable] DROP CONSTRAINT [' + @var2 + '];');
 ALTER TABLE [HistoryTable] DROP COLUMN [Number];
 """,
-                //
-                """
+            //
+            """
 DECLARE @var3 sysname;
 SELECT @var3 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -9988,43 +11980,52 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Sta
 IF @var3 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var3 + '];');
 ALTER TABLE [Customers] DROP COLUMN [Start];
 """,
-                //
-                """
+            //
+            """
 DROP TABLE [HistoryTable];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_multiop_convert_from_temporal_and_rename_column()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.Property<int>("NewNumber");
-                    e.ToTable("Customers");
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("NewNumber");
+                        e.ToTable("Customers");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -10034,22 +12035,25 @@ DROP TABLE [HistoryTable];
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("NewNumber", c.Name));
+                    c => Assert.Equal("NewNumber", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] DROP PERIOD FOR SYSTEM_TIME
 """,
-                //
-                """
+            //
+            """
 DECLARE @var0 sysname;
 SELECT @var0 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -10058,8 +12062,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'End
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [Customers] DROP COLUMN [End];
 """,
-                //
-                """
+            //
+            """
 DECLARE @var1 sysname;
 SELECT @var1 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -10068,162 +12072,198 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Sta
 IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var1 + '];');
 ALTER TABLE [Customers] DROP COLUMN [Start];
 """,
-                //
-                """
+            //
+            """
 EXEC sp_rename N'[Customers].[Number]', N'NewNumber', N'COLUMN';
 """,
-                //
-                """
+            //
+            """
 DROP TABLE [HistoryTable];
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_multiop_convert_to_temporal_rename_table_and_add_new_column()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.ToTable("Customers");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.ToTable(
-                        "NewCustomers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.ToTable("Customers");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.ToTable(
+                            "NewCustomers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("NewCustomers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("Number", c.Name));
+                    c => Assert.Equal("Number", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
 """,
-                //
-                """
+            //
+            """
 EXEC sp_rename N'[Customers]', N'NewCustomers';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD [Number] int NOT NULL DEFAULT 0;
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD CONSTRAINT [PK_NewCustomers] PRIMARY KEY ([Id]);
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ALTER COLUMN [Start] ADD HIDDEN
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ALTER COLUMN [End] ADD HIDDEN
 """,
-                //
-                """
+            //
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [NewCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_multiop_convert_to_temporal_rename_table_and_remove_existing_column()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.ToTable("Customers");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.ToTable(
-                        "NewCustomers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.ToTable("Customers");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.ToTable(
+                            "NewCustomers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("NewCustomers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
-                    c => Assert.Equal("Name", c.Name));
+                    c => Assert.Equal("Name", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
 """,
-                //
-                """
+            //
+            """
 DECLARE @var0 sysname;
 SELECT @var0 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -10232,164 +12272,191 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Num
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [Customers] DROP COLUMN [Number];
 """,
-                //
-                """
+            //
+            """
 EXEC sp_rename N'[Customers]', N'NewCustomers';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD CONSTRAINT [PK_NewCustomers] PRIMARY KEY ([Id]);
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ALTER COLUMN [Start] ADD HIDDEN
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ALTER COLUMN [End] ADD HIDDEN
 """,
-                //
-                """
+            //
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [NewCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_multiop_convert_to_temporal_rename_table_and_rename_column()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.ToTable("Customers");
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.Property<int>("NewNumber");
-                    e.ToTable(
-                        "NewCustomers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.ToTable("Customers");
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("NewNumber");
+                        e.ToTable(
+                            "NewCustomers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("NewCustomers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("HistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "HistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("NewNumber", c.Name));
+                    c => Assert.Equal("NewNumber", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
 """,
-                //
-                """
+            //
+            """
 EXEC sp_rename N'[Customers]', N'NewCustomers';
 """,
-                //
-                """
+            //
+            """
 EXEC sp_rename N'[NewCustomers].[Number]', N'NewNumber', N'COLUMN';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD [End] datetime2 NOT NULL DEFAULT '9999-12-31T23:59:59.9999999';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD [Start] datetime2 NOT NULL DEFAULT '0001-01-01T00:00:00.0000000';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD CONSTRAINT [PK_NewCustomers] PRIMARY KEY ([Id]);
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD PERIOD FOR SYSTEM_TIME ([Start], [End])
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ALTER COLUMN [Start] ADD HIDDEN
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ALTER COLUMN [End] ADD HIDDEN
 """,
-                //
-                """
+            //
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [NewCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[HistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_multiop_convert_from_temporal_rename_table_and_add_new_column()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.ToTable("NewCustomers");
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.ToTable("NewCustomers");
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
@@ -10399,26 +12466,29 @@ EXEC(N'ALTER TABLE [NewCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("Number", c.Name));
+                    c => Assert.Equal("Number", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] DROP PERIOD FOR SYSTEM_TIME
 """,
-                //
-                """
+            //
+            """
 DECLARE @var0 sysname;
 SELECT @var0 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -10427,8 +12497,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'End
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [Customers] DROP COLUMN [End];
 """,
-                //
-                """
+            //
+            """
 DECLARE @var1 sysname;
 SELECT @var1 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -10437,158 +12507,188 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Sta
 IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var1 + '];');
 ALTER TABLE [Customers] DROP COLUMN [Start];
 """,
-                //
-                """
+            //
+            """
 EXEC sp_rename N'[Customers]', N'NewCustomers';
 """,
-                //
-                """
+            //
+            """
 DROP TABLE [HistoryTable];
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD [Number] int NOT NULL DEFAULT 0;
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD CONSTRAINT [PK_NewCustomers] PRIMARY KEY ([Id]);
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_multiop_rename_table_rename_history_table_and_add_new_column()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.ToTable(
-                        "NewCustomers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("NewHistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.ToTable(
+                            "NewCustomers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("NewHistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             model =>
             {
                 var table = Assert.Single(model.Tables);
                 Assert.Equal("NewCustomers", table.Name);
                 Assert.Equal(true, table[SqlServerAnnotationNames.IsTemporal]);
-                Assert.Equal("Start", table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]);
+                Assert.Equal(
+                    "Start",
+                    table[SqlServerAnnotationNames.TemporalPeriodStartPropertyName]
+                );
                 Assert.Equal("End", table[SqlServerAnnotationNames.TemporalPeriodEndPropertyName]);
-                Assert.Equal("NewHistoryTable", table[SqlServerAnnotationNames.TemporalHistoryTableName]);
+                Assert.Equal(
+                    "NewHistoryTable",
+                    table[SqlServerAnnotationNames.TemporalHistoryTableName]
+                );
 
                 Assert.Collection(
                     table.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("Number", c.Name));
+                    c => Assert.Equal("Number", c.Name)
+                );
                 Assert.Same(
                     table.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(table.PrimaryKey!.Columns));
-            });
+                    Assert.Single(table.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] DROP CONSTRAINT [PK_Customers];
 """,
-                //
-                """
+            //
+            """
 EXEC sp_rename N'[Customers]', N'NewCustomers';
 """,
-                //
-                """
+            //
+            """
 EXEC sp_rename N'[HistoryTable]', N'NewHistoryTable';
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD [Number] int NOT NULL DEFAULT 0;
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewHistoryTable] ADD [Number] int NOT NULL DEFAULT 0;
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [NewCustomers] ADD CONSTRAINT [PK_NewCustomers] PRIMARY KEY ([Id]);
 """,
-                //
-                """
+            //
+            """
 DECLARE @historyTableSchema sysname = SCHEMA_NAME()
 EXEC(N'ALTER TABLE [NewCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [' + @historyTableSchema + '].[NewHistoryTable]))')
-""");
+"""
+        );
     }
 
     [ConditionalFact]
     public virtual async Task Temporal_multiop_convert_from_temporal_create_another_table_with_same_name_as_history_table()
     {
         await Test(
-            builder => builder.Entity(
-                "Customer", e =>
-                {
-                    e.Property<int>("Id").ValueGeneratedOnAdd();
-                    e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
-                    e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
-                    e.HasKey("Id");
-                    e.Property<string>("Name");
-                    e.Property<int>("Number");
-                    e.ToTable(
-                        "Customers", tb => tb.IsTemporal(
-                            ttb =>
-                            {
-                                ttb.UseHistoryTable("HistoryTable");
-                                ttb.HasPeriodStart("Start");
-                                ttb.HasPeriodEnd("End");
-                            }));
-                }),
+            builder =>
+                builder.Entity(
+                    "Customer",
+                    e =>
+                    {
+                        e.Property<int>("Id").ValueGeneratedOnAdd();
+                        e.Property<DateTime>("Start").ValueGeneratedOnAddOrUpdate();
+                        e.Property<DateTime>("End").ValueGeneratedOnAddOrUpdate();
+                        e.HasKey("Id");
+                        e.Property<string>("Name");
+                        e.Property<int>("Number");
+                        e.ToTable(
+                            "Customers",
+                            tb =>
+                                tb.IsTemporal(ttb =>
+                                {
+                                    ttb.UseHistoryTable("HistoryTable");
+                                    ttb.HasPeriodStart("Start");
+                                    ttb.HasPeriodEnd("End");
+                                })
+                        );
+                    }
+                ),
             builder =>
             {
                 builder.Entity(
-                    "Customer", e =>
+                    "Customer",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.HasKey("Id");
                         e.Property<string>("Name");
                         e.Property<int>("Number");
                         e.ToTable("Customers");
-                    });
+                    }
+                );
 
                 builder.Entity(
-                    "History", e =>
+                    "History",
+                    e =>
                     {
                         e.Property<int>("Id").ValueGeneratedOnAdd();
                         e.HasKey("Id");
                         e.Property<string>("Name");
                         e.Property<int>("Number");
                         e.ToTable("HistoryTable");
-                    });
+                    }
+                );
             },
             model =>
             {
@@ -10599,32 +12699,36 @@ EXEC(N'ALTER TABLE [NewCustomers] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [
                     customersTable.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("Number", c.Name));
+                    c => Assert.Equal("Number", c.Name)
+                );
                 Assert.Same(
                     customersTable.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(customersTable.PrimaryKey!.Columns));
+                    Assert.Single(customersTable.PrimaryKey!.Columns)
+                );
 
                 Assert.Collection(
                     historyTable.Columns,
                     c => Assert.Equal("Id", c.Name),
                     c => Assert.Equal("Name", c.Name),
-                    c => Assert.Equal("Number", c.Name));
+                    c => Assert.Equal("Number", c.Name)
+                );
                 Assert.Same(
                     historyTable.Columns.Single(c => c.Name == "Id"),
-                    Assert.Single(historyTable.PrimaryKey!.Columns));
-
-            });
+                    Assert.Single(historyTable.PrimaryKey!.Columns)
+                );
+            }
+        );
 
         AssertSql(
-"""
+            """
 ALTER TABLE [Customers] SET (SYSTEM_VERSIONING = OFF)
 """,
-                //
-                """
+            //
+            """
 ALTER TABLE [Customers] DROP PERIOD FOR SYSTEM_TIME
 """,
-                //
-                """
+            //
+            """
 DECLARE @var0 sysname;
 SELECT @var0 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -10633,8 +12737,8 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'End
 IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var0 + '];');
 ALTER TABLE [Customers] DROP COLUMN [End];
 """,
-                //
-                """
+            //
+            """
 DECLARE @var1 sysname;
 SELECT @var1 = [d].[name]
 FROM [sys].[default_constraints] [d]
@@ -10643,25 +12747,27 @@ WHERE ([d].[parent_object_id] = OBJECT_ID(N'[Customers]') AND [c].[name] = N'Sta
 IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [Customers] DROP CONSTRAINT [' + @var1 + '];');
 ALTER TABLE [Customers] DROP COLUMN [Start];
 """,
-                //
-                """
+            //
+            """
 DROP TABLE [HistoryTable];
 """,
-                //
-                """
+            //
+            """
 CREATE TABLE [HistoryTable] (
     [Id] int NOT NULL IDENTITY,
     [Name] nvarchar(max) NULL,
     [Number] int NOT NULL,
     CONSTRAINT [PK_HistoryTable] PRIMARY KEY ([Id])
 );
-""");
+"""
+        );
     }
 
-    protected override string NonDefaultCollation
-        => _nonDefaultCollation ??= GetDatabaseCollation() == "German_PhoneBook_CI_AS"
-            ? "French_CI_AS"
-            : "German_PhoneBook_CI_AS";
+    protected override string NonDefaultCollation =>
+        _nonDefaultCollation ??=
+            GetDatabaseCollation() == "German_PhoneBook_CI_AS"
+                ? "French_CI_AS"
+                : "German_PhoneBook_CI_AS";
 
     private string? _nonDefaultCollation;
 
@@ -10671,29 +12777,25 @@ CREATE TABLE [HistoryTable] (
         var connection = ctx.Database.GetDbConnection();
         using var command = connection.CreateCommand();
 
-        command.CommandText = $@"
+        command.CommandText =
+            $@"
 SELECT collation_name
 FROM sys.databases
 WHERE name = '{connection.Database}';";
 
-        return command.ExecuteScalar() is string collation
-            ? collation
-            : null;
+        return command.ExecuteScalar() is string collation ? collation : null;
     }
 
     public class MigrationsSqlServerFixture : MigrationsFixtureBase
     {
-        protected override string StoreName
-            => nameof(MigrationsSqlServerTest);
+        protected override string StoreName => nameof(MigrationsSqlServerTest);
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-        public override RelationalTestHelpers TestHelpers
-            => SqlServerTestHelpers.Instance;
+        public override RelationalTestHelpers TestHelpers => SqlServerTestHelpers.Instance;
 
-        protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-            => base.AddServices(serviceCollection)
+        protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
+            base.AddServices(serviceCollection)
                 .AddScoped<IDatabaseModelFactory, SqlServerDatabaseModelFactory>();
     }
 }

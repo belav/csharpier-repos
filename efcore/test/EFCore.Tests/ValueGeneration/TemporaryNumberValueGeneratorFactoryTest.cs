@@ -22,24 +22,56 @@ public class TemporaryNumberValueGeneratorFactoryTest
 
         Assert.Equal(int.MinValue + 1001, CreateAndUseFactory(entityType.FindProperty("Id")));
         Assert.Equal(long.MinValue + 1001, CreateAndUseFactory(entityType.FindProperty("Long")));
-        Assert.Equal((short)(short.MinValue + 101), CreateAndUseFactory(entityType.FindProperty("Short")));
+        Assert.Equal(
+            (short)(short.MinValue + 101),
+            CreateAndUseFactory(entityType.FindProperty("Short"))
+        );
         Assert.Equal((byte)255, CreateAndUseFactory(entityType.FindProperty("Byte")));
-        Assert.Equal(int.MinValue + 1001, CreateAndUseFactory(entityType.FindProperty("NullableInt")));
-        Assert.Equal(long.MinValue + 1001, CreateAndUseFactory(entityType.FindProperty("NullableLong")));
-        Assert.Equal((short)(short.MinValue + 101), CreateAndUseFactory(entityType.FindProperty("NullableShort")));
+        Assert.Equal(
+            int.MinValue + 1001,
+            CreateAndUseFactory(entityType.FindProperty("NullableInt"))
+        );
+        Assert.Equal(
+            long.MinValue + 1001,
+            CreateAndUseFactory(entityType.FindProperty("NullableLong"))
+        );
+        Assert.Equal(
+            (short)(short.MinValue + 101),
+            CreateAndUseFactory(entityType.FindProperty("NullableShort"))
+        );
         Assert.Equal((byte)255, CreateAndUseFactory(entityType.FindProperty("NullableByte")));
-        Assert.Equal(unchecked((uint)(int.MinValue + 1001)), CreateAndUseFactory(entityType.FindProperty("UInt")));
-        Assert.Equal(unchecked((ulong)(long.MinValue + 1001)), CreateAndUseFactory(entityType.FindProperty("ULong")));
-        Assert.Equal(unchecked((ushort)(short.MinValue + 101)), CreateAndUseFactory(entityType.FindProperty("UShort")));
+        Assert.Equal(
+            unchecked((uint)(int.MinValue + 1001)),
+            CreateAndUseFactory(entityType.FindProperty("UInt"))
+        );
+        Assert.Equal(
+            unchecked((ulong)(long.MinValue + 1001)),
+            CreateAndUseFactory(entityType.FindProperty("ULong"))
+        );
+        Assert.Equal(
+            unchecked((ushort)(short.MinValue + 101)),
+            CreateAndUseFactory(entityType.FindProperty("UShort"))
+        );
         Assert.Equal((sbyte)-127, CreateAndUseFactory(entityType.FindProperty("SByte")));
-        Assert.Equal(unchecked((uint)(int.MinValue + 1001)), CreateAndUseFactory(entityType.FindProperty("NullableUInt")));
-        Assert.Equal(unchecked((ulong)(long.MinValue + 1001)), CreateAndUseFactory(entityType.FindProperty("NullableULong")));
-        Assert.Equal(unchecked((ushort)(short.MinValue + 101)), CreateAndUseFactory(entityType.FindProperty("NullableUShort")));
+        Assert.Equal(
+            unchecked((uint)(int.MinValue + 1001)),
+            CreateAndUseFactory(entityType.FindProperty("NullableUInt"))
+        );
+        Assert.Equal(
+            unchecked((ulong)(long.MinValue + 1001)),
+            CreateAndUseFactory(entityType.FindProperty("NullableULong"))
+        );
+        Assert.Equal(
+            unchecked((ushort)(short.MinValue + 101)),
+            CreateAndUseFactory(entityType.FindProperty("NullableUShort"))
+        );
         Assert.Equal((sbyte)-127, CreateAndUseFactory(entityType.FindProperty("NullableSByte")));
     }
 
-    private static object CreateAndUseFactory(IProperty property)
-        => new TemporaryNumberValueGeneratorFactory().Create(property, property.DeclaringType).Next(null);
+    private static object CreateAndUseFactory(IProperty property) =>
+        new TemporaryNumberValueGeneratorFactory()
+            .Create(property, property.DeclaringType)
+            .Next(null);
 
     [ConditionalFact]
     public void Throws_for_non_integer_property()
@@ -48,8 +80,17 @@ public class TemporaryNumberValueGeneratorFactoryTest
         var property = entityType.FindProperty("BadCheese");
 
         Assert.Equal(
-            CoreStrings.InvalidValueGeneratorFactoryProperty(nameof(TemporaryNumberValueGeneratorFactory), "BadCheese", "AnEntity"),
-            Assert.Throws<ArgumentException>(() => new TemporaryNumberValueGeneratorFactory().Create(property, entityType)).Message);
+            CoreStrings.InvalidValueGeneratorFactoryProperty(
+                nameof(TemporaryNumberValueGeneratorFactory),
+                "BadCheese",
+                "AnEntity"
+            ),
+            Assert
+                .Throws<ArgumentException>(() =>
+                    new TemporaryNumberValueGeneratorFactory().Create(property, entityType)
+                )
+                .Message
+        );
     }
 
     private class AnEntity

@@ -13,9 +13,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-[RequiresUnreferencedCode("Raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code.")]
+[RequiresUnreferencedCode(
+    "Raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code."
+)]
 [RequiresDynamicCode("Requires calling MakeGenericType on the property descriptor's type")]
-public class SortableBindingList<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T> : BindingList<T>
+public class SortableBindingList<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T>
+    : BindingList<T>
 {
     private bool _isSorted;
     private ListSortDirection _sortDirection;
@@ -27,11 +30,11 @@ public class SortableBindingList<[DynamicallyAccessedMembers(DynamicallyAccessed
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    [RequiresUnreferencedCode("Raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code.")]
+    [RequiresUnreferencedCode(
+        "Raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code."
+    )]
     public SortableBindingList(List<T> list)
-        : base(list)
-    {
-    }
+        : base(list) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,18 +42,22 @@ public class SortableBindingList<[DynamicallyAccessedMembers(DynamicallyAccessed
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    [RequiresUnreferencedCode("Requires accessing property 'Default' on the property descriptor's type")]
+    [RequiresUnreferencedCode(
+        "Requires accessing property 'Default' on the property descriptor's type"
+    )]
     [RequiresDynamicCode("Requires calling MakeGenericType on the property descriptor's type")]
     [UnconditionalSuppressMessage(
         "ReflectionAnalysis",
         "IL2046",
-        Justification =
-            "This method is an override, and the base method isn't annotated with RequiresUnreferencedCode. "
-            + "The entire type is marked with RequiresUnreferencedCode.")]
+        Justification = "This method is an override, and the base method isn't annotated with RequiresUnreferencedCode. "
+            + "The entire type is marked with RequiresUnreferencedCode."
+    )]
     [SuppressMessage(
-        "AOT", "IL3051:'RequiresDynamicCodeAttribute' annotations must match across all interface implementations or overrides.",
+        "AOT",
+        "IL3051:'RequiresDynamicCodeAttribute' annotations must match across all interface implementations or overrides.",
         Justification = "This method is an override, and the base method isn't annotated with RequiresDynamicCode. "
-            + "The entire type is marked with RequiresDynamicCode.")]
+            + "The entire type is marked with RequiresDynamicCode."
+    )]
     protected override void ApplySortCore(PropertyDescriptor prop, ListSortDirection direction)
     {
         if (PropertyComparer.CanSort(prop.PropertyType))
@@ -81,8 +88,7 @@ public class SortableBindingList<[DynamicallyAccessedMembers(DynamicallyAccessed
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override bool IsSortedCore
-        => _isSorted;
+    protected override bool IsSortedCore => _isSorted;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -90,8 +96,7 @@ public class SortableBindingList<[DynamicallyAccessedMembers(DynamicallyAccessed
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override ListSortDirection SortDirectionCore
-        => _sortDirection;
+    protected override ListSortDirection SortDirectionCore => _sortDirection;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -99,8 +104,7 @@ public class SortableBindingList<[DynamicallyAccessedMembers(DynamicallyAccessed
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override PropertyDescriptor? SortPropertyCore
-        => _sortProperty;
+    protected override PropertyDescriptor? SortPropertyCore => _sortProperty;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -108,8 +112,7 @@ public class SortableBindingList<[DynamicallyAccessedMembers(DynamicallyAccessed
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override bool SupportsSortingCore
-        => true;
+    protected override bool SupportsSortingCore => true;
 
     private sealed class PropertyComparer : Comparer<T>
     {
@@ -117,7 +120,9 @@ public class SortableBindingList<[DynamicallyAccessedMembers(DynamicallyAccessed
         private readonly ListSortDirection _direction;
         private readonly PropertyDescriptor _prop;
 
-        [RequiresUnreferencedCode("Requires accessing property 'Default' on the property descriptor's type")]
+        [RequiresUnreferencedCode(
+            "Requires accessing property 'Default' on the property descriptor's type"
+        )]
         [RequiresDynamicCode("Requires calling MakeGenericType on the property descriptor's type")]
         public PropertyComparer(PropertyDescriptor prop, ListSortDirection direction)
         {
@@ -129,7 +134,10 @@ public class SortableBindingList<[DynamicallyAccessedMembers(DynamicallyAccessed
             _prop = prop;
             _direction = direction;
 
-            var property = typeof(Comparer<>).MakeGenericType(prop.PropertyType).GetTypeInfo().GetDeclaredProperty("Default")!;
+            var property = typeof(Comparer<>)
+                .MakeGenericType(prop.PropertyType)
+                .GetTypeInfo()
+                .GetDeclaredProperty("Default")!;
             _comparer = (IComparer)property.GetValue(null, null)!;
         }
 
@@ -153,8 +161,10 @@ public class SortableBindingList<[DynamicallyAccessedMembers(DynamicallyAccessed
                 : _comparer.Compare(rightValue, leftValue);
         }
 
-        public static bool CanSort([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type)
-            => type.GetInterface("IComparable") != null
-                || (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>));
+        public static bool CanSort(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type type
+        ) =>
+            type.GetInterface("IComparable") != null
+            || (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>));
     }
 }

@@ -32,9 +32,7 @@ public class RuntimeAnnotatableBase : IAnnotatable
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public RuntimeAnnotatableBase()
-    {
-    }
+    public RuntimeAnnotatableBase() { }
 
     /// <summary>
     ///     Adds an annotation to this object. Throws if an annotation with the specified name already exists.
@@ -66,7 +64,10 @@ public class RuntimeAnnotatableBase : IAnnotatable
     {
         foreach (var annotation in annotations)
         {
-            SetAnnotation(annotation.Name, (annotation as Annotation) ?? CreateAnnotation(annotation.Name, annotation.Value));
+            SetAnnotation(
+                annotation.Name,
+                (annotation as Annotation) ?? CreateAnnotation(annotation.Name, annotation.Value)
+            );
         }
     }
 
@@ -91,8 +92,7 @@ public class RuntimeAnnotatableBase : IAnnotatable
     public virtual void SetAnnotation(string name, object? value)
     {
         var oldAnnotation = FindAnnotation(name);
-        if (oldAnnotation != null
-            && Equals(oldAnnotation.Value, value))
+        if (oldAnnotation != null && Equals(oldAnnotation.Value, value))
         {
             return;
         }
@@ -100,9 +100,7 @@ public class RuntimeAnnotatableBase : IAnnotatable
         SetAnnotation(name, CreateAnnotation(name, value));
     }
 
-    private Annotation? SetAnnotation(
-        string name,
-        Annotation annotation)
+    private Annotation? SetAnnotation(string name, Annotation annotation)
     {
         _annotations[name] = annotation;
 
@@ -120,9 +118,7 @@ public class RuntimeAnnotatableBase : IAnnotatable
     {
         Check.NotEmpty(name, nameof(name));
 
-        return _annotations.TryGetValue(name, out var annotation)
-                ? annotation
-                : null;
+        return _annotations.TryGetValue(name, out var annotation) ? annotation : null;
     }
 
     /// <summary>
@@ -137,7 +133,9 @@ public class RuntimeAnnotatableBase : IAnnotatable
         var annotation = FindAnnotation(annotationName);
         if (annotation == null)
         {
-            throw new InvalidOperationException(CoreStrings.AnnotationNotFound(annotationName, ToString()));
+            throw new InvalidOperationException(
+                CoreStrings.AnnotationNotFound(annotationName, ToString())
+            );
         }
 
         return annotation;
@@ -159,15 +157,14 @@ public class RuntimeAnnotatableBase : IAnnotatable
     /// <param name="name">The key of the annotation.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The newly created annotation.</returns>
-    protected virtual Annotation CreateAnnotation(string name, object? value)
-        => new(name, value);
+    protected virtual Annotation CreateAnnotation(string name, object? value) => new(name, value);
 
     /// <summary>
     ///     Gets all runtime annotations on the current object.
     /// </summary>
-    public virtual IEnumerable<Annotation> GetRuntimeAnnotations()
-        => _runtimeAnnotations?.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => p.Value)
-            ?? Enumerable.Empty<Annotation>();
+    public virtual IEnumerable<Annotation> GetRuntimeAnnotations() =>
+        _runtimeAnnotations?.OrderBy(p => p.Key, StringComparer.Ordinal).Select(p => p.Value)
+        ?? Enumerable.Empty<Annotation>();
 
     /// <summary>
     ///     Adds a runtime annotation to this object. Throws if an annotation with the specified name already exists.
@@ -190,10 +187,12 @@ public class RuntimeAnnotatableBase : IAnnotatable
     /// <param name="name">The key of the annotation to be added.</param>
     /// <param name="annotation">The annotation to be added.</param>
     /// <returns>The added annotation.</returns>
-    protected virtual Annotation AddRuntimeAnnotation(string name, Annotation annotation)
-        => GetOrCreateRuntimeAnnotations().TryAdd(name, annotation)
+    protected virtual Annotation AddRuntimeAnnotation(string name, Annotation annotation) =>
+        GetOrCreateRuntimeAnnotations().TryAdd(name, annotation)
             ? annotation
-            : throw new InvalidOperationException(CoreStrings.DuplicateAnnotation(name, ToString()));
+            : throw new InvalidOperationException(
+                CoreStrings.DuplicateAnnotation(name, ToString())
+            );
 
     /// <summary>
     ///     Adds runtime annotations to this object.
@@ -215,7 +214,10 @@ public class RuntimeAnnotatableBase : IAnnotatable
     {
         foreach (var annotation in annotations)
         {
-            AddRuntimeAnnotation(annotation.Key, CreateRuntimeAnnotation(annotation.Key, annotation.Value));
+            AddRuntimeAnnotation(
+                annotation.Key,
+                CreateRuntimeAnnotation(annotation.Key, annotation.Value)
+            );
         }
     }
 
@@ -225,13 +227,17 @@ public class RuntimeAnnotatableBase : IAnnotatable
     /// </summary>
     /// <param name="name">The key of the annotation to be added.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
-    public virtual Annotation SetRuntimeAnnotation(string name, object? value)
-        => GetOrCreateRuntimeAnnotations().AddOrUpdate(
-            name,
-            static (n, a) => a.Annotatable.CreateRuntimeAnnotation(n, a.Value),
-            static (n, oldAnnotation, a) =>
-                !Equals(oldAnnotation.Value, a.Value) ? a.Annotatable.CreateRuntimeAnnotation(n, a.Value) : oldAnnotation,
-            (Value: value, Annotatable: this));
+    public virtual Annotation SetRuntimeAnnotation(string name, object? value) =>
+        GetOrCreateRuntimeAnnotations()
+            .AddOrUpdate(
+                name,
+                static (n, a) => a.Annotatable.CreateRuntimeAnnotation(n, a.Value),
+                static (n, oldAnnotation, a) =>
+                    !Equals(oldAnnotation.Value, a.Value)
+                        ? a.Annotatable.CreateRuntimeAnnotation(n, a.Value)
+                        : oldAnnotation,
+                (Value: value, Annotatable: this)
+            );
 
     /// <summary>
     ///     Sets the runtime annotation stored under the given key. Overwrites the existing annotation if an
@@ -244,7 +250,8 @@ public class RuntimeAnnotatableBase : IAnnotatable
     protected virtual Annotation SetRuntimeAnnotation(
         string name,
         Annotation annotation,
-        Annotation? oldAnnotation)
+        Annotation? oldAnnotation
+    )
     {
         GetOrCreateRuntimeAnnotations()[name] = annotation;
 
@@ -264,11 +271,17 @@ public class RuntimeAnnotatableBase : IAnnotatable
     public virtual TValue GetOrAddRuntimeAnnotationValue<TValue, TArg>(
         string name,
         Func<TArg?, TValue> valueFactory,
-        TArg? factoryArgument)
-        => (TValue)GetOrCreateRuntimeAnnotations().GetOrAdd(
-            name,
-            static (n, t) => t.Annotatable.CreateRuntimeAnnotation(n, t.CreateValue(t.Argument)),
-            (CreateValue: valueFactory, Argument: factoryArgument, Annotatable: this)).Value!;
+        TArg? factoryArgument
+    ) =>
+        (TValue)
+            GetOrCreateRuntimeAnnotations()
+                .GetOrAdd(
+                    name,
+                    static (n, t) =>
+                        t.Annotatable.CreateRuntimeAnnotation(n, t.CreateValue(t.Argument)),
+                    (CreateValue: valueFactory, Argument: factoryArgument, Annotatable: this)
+                )
+                .Value!;
 
     /// <summary>
     ///     Gets the runtime annotation with the given name, returning <see langword="null" /> if it does not exist.
@@ -281,11 +294,9 @@ public class RuntimeAnnotatableBase : IAnnotatable
     {
         Check.NotEmpty(name, nameof(name));
 
-        return _runtimeAnnotations == null
-            ? null
-            : _runtimeAnnotations.TryGetValue(name, out var annotation)
-                ? annotation
-                : null;
+        return _runtimeAnnotations == null ? null
+            : _runtimeAnnotations.TryGetValue(name, out var annotation) ? annotation
+            : null;
     }
 
     /// <summary>
@@ -313,12 +324,15 @@ public class RuntimeAnnotatableBase : IAnnotatable
     /// <param name="name">The key of the annotation.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The newly created annotation.</returns>
-    protected virtual Annotation CreateRuntimeAnnotation(string name, object? value)
-        => new(name, value);
+    protected virtual Annotation CreateRuntimeAnnotation(string name, object? value) =>
+        new(name, value);
 
-    private ConcurrentDictionary<string, Annotation> GetOrCreateRuntimeAnnotations()
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _runtimeAnnotations, (object?)null, static _ => new ConcurrentDictionary<string, Annotation>());
+    private ConcurrentDictionary<string, Annotation> GetOrCreateRuntimeAnnotations() =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _runtimeAnnotations,
+            (object?)null,
+            static _ => new ConcurrentDictionary<string, Annotation>()
+        );
 
     /// <inheritdoc />
     object? IReadOnlyAnnotatable.this[string name]
@@ -329,32 +343,28 @@ public class RuntimeAnnotatableBase : IAnnotatable
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IAnnotation> IReadOnlyAnnotatable.GetAnnotations()
-        => _annotations.Values.OrderBy(a => a.Name, StringComparer.Ordinal);
+    IEnumerable<IAnnotation> IReadOnlyAnnotatable.GetAnnotations() =>
+        _annotations.Values.OrderBy(a => a.Name, StringComparer.Ordinal);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IAnnotation? IReadOnlyAnnotatable.FindAnnotation(string name)
-        => FindAnnotation(name);
+    IAnnotation? IReadOnlyAnnotatable.FindAnnotation(string name) => FindAnnotation(name);
 
     /// <inheritdoc />
-    IEnumerable<IAnnotation> IAnnotatable.GetRuntimeAnnotations()
-        => GetRuntimeAnnotations();
+    IEnumerable<IAnnotation> IAnnotatable.GetRuntimeAnnotations() => GetRuntimeAnnotations();
 
     /// <inheritdoc />
-    IAnnotation? IAnnotatable.FindRuntimeAnnotation(string name)
-        => FindRuntimeAnnotation(name);
+    IAnnotation? IAnnotatable.FindRuntimeAnnotation(string name) => FindRuntimeAnnotation(name);
 
     /// <inheritdoc />
-    IAnnotation IAnnotatable.AddRuntimeAnnotation(string name, object? value)
-        => AddRuntimeAnnotation(name, value);
+    IAnnotation IAnnotatable.AddRuntimeAnnotation(string name, object? value) =>
+        AddRuntimeAnnotation(name, value);
 
     /// <inheritdoc />
-    IAnnotation? IAnnotatable.RemoveRuntimeAnnotation(string name)
-        => RemoveRuntimeAnnotation(name);
+    IAnnotation? IAnnotatable.RemoveRuntimeAnnotation(string name) => RemoveRuntimeAnnotation(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IAnnotation IAnnotatable.SetRuntimeAnnotation(string name, object? value)
-        => SetRuntimeAnnotation(name, value);
+    IAnnotation IAnnotatable.SetRuntimeAnnotation(string name, object? value) =>
+        SetRuntimeAnnotation(name, value);
 }

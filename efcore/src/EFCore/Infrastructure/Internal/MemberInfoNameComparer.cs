@@ -20,9 +20,7 @@ public sealed class MemberInfoNameComparer : IComparer<MemberInfo>
     /// </summary>
     public static readonly MemberInfoNameComparer Instance = new();
 
-    private MemberInfoNameComparer()
-    {
-    }
+    private MemberInfoNameComparer() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

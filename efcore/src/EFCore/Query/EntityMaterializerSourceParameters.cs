@@ -14,4 +14,5 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public readonly record struct EntityMaterializerSourceParameters(
     ITypeBase StructuralType,
     string InstanceName,
-    QueryTrackingBehavior? QueryTrackingBehavior);
+    QueryTrackingBehavior? QueryTrackingBehavior
+);

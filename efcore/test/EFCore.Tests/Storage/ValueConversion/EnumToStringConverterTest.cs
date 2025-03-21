@@ -5,8 +5,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 public class EnumToStringConverterTest
 {
-    private static readonly ValueConverter<Beatles, string> _enumToString
-        = new EnumToStringConverter<Beatles>();
+    private static readonly ValueConverter<Beatles, string> _enumToString =
+        new EnumToStringConverter<Beatles>();
 
     [ConditionalFact]
     public void Can_convert_enums_to_strings()
@@ -55,7 +55,8 @@ public class EnumToStringConverterTest
 
         Assert.Equal(
             CoreStrings.CannotConvertEnumValue("Jon", "Beatles"),
-            Assert.Throws<InvalidOperationException>(() => converter("Jon")).Message);
+            Assert.Throws<InvalidOperationException>(() => converter("Jon")).Message
+        );
     }
 
     [ConditionalFact]
@@ -80,6 +81,6 @@ public class EnumToStringConverterTest
         John = 7,
         Paul = 4,
         George = 1,
-        Ringo = -1
+        Ringo = -1,
     }
 }

@@ -13,7 +13,10 @@ internal static class Check
 {
     [ContractAnnotation("value:null => halt")]
     [return: NotNull]
-    public static T NotNull<T>([NoEnumeration] [AllowNull] [NotNull] T value, [InvokerParameterName] string parameterName)
+    public static T NotNull<T>(
+        [NoEnumeration] [AllowNull] [NotNull] T value,
+        [InvokerParameterName] string parameterName
+    )
     {
         if (value is null)
         {
@@ -28,7 +31,8 @@ internal static class Check
     [ContractAnnotation("value:null => halt")]
     public static IReadOnlyList<T> NotEmpty<T>(
         [NotNull] IReadOnlyList<T>? value,
-        [InvokerParameterName] string parameterName)
+        [InvokerParameterName] string parameterName
+    )
     {
         NotNull(value, parameterName);
 
@@ -36,14 +40,19 @@ internal static class Check
         {
             NotEmpty(parameterName, nameof(parameterName));
 
-            throw new ArgumentException(AbstractionsStrings.CollectionArgumentIsEmpty(parameterName));
+            throw new ArgumentException(
+                AbstractionsStrings.CollectionArgumentIsEmpty(parameterName)
+            );
         }
 
         return value;
     }
 
     [ContractAnnotation("value:null => halt")]
-    public static string NotEmpty([NotNull] string? value, [InvokerParameterName] string parameterName)
+    public static string NotEmpty(
+        [NotNull] string? value,
+        [InvokerParameterName] string parameterName
+    )
     {
         if (value is null)
         {
@@ -62,7 +71,10 @@ internal static class Check
         return value;
     }
 
-    public static string? NullButNotEmpty(string? value, [InvokerParameterName] string parameterName)
+    public static string? NullButNotEmpty(
+        string? value,
+        [InvokerParameterName] string parameterName
+    )
     {
         if (value is not null && value.Length == 0)
         {
@@ -76,7 +88,8 @@ internal static class Check
 
     public static IReadOnlyList<T> HasNoNulls<T>(
         [NotNull] IReadOnlyList<T>? value,
-        [InvokerParameterName] string parameterName)
+        [InvokerParameterName] string parameterName
+    )
         where T : class
     {
         NotNull(value, parameterName);
@@ -93,7 +106,8 @@ internal static class Check
 
     public static IReadOnlyList<string> HasNoEmptyElements(
         [NotNull] IReadOnlyList<string>? value,
-        [InvokerParameterName] string parameterName)
+        [InvokerParameterName] string parameterName
+    )
     {
         NotNull(value, parameterName);
 
@@ -101,7 +115,9 @@ internal static class Check
         {
             NotEmpty(parameterName, nameof(parameterName));
 
-            throw new ArgumentException(AbstractionsStrings.CollectionArgumentHasEmptyElements(parameterName));
+            throw new ArgumentException(
+                AbstractionsStrings.CollectionArgumentHasEmptyElements(parameterName)
+            );
         }
 
         return value;
@@ -118,6 +134,6 @@ internal static class Check
 
     [Conditional("DEBUG")]
     [DoesNotReturn]
-    public static void DebugFail(string message)
-        => throw new UnreachableException($"Check.DebugFail failed: {message}");
+    public static void DebugFail(string message) =>
+        throw new UnreachableException($"Check.DebugFail failed: {message}");
 }

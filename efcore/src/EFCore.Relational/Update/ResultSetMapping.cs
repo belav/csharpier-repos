@@ -53,5 +53,5 @@ public enum ResultSetMapping
     /// <summary>
     ///     The command has output parameters.
     /// </summary>
-    HasOutputParameters = 32
+    HasOutputParameters = 32,
 }

@@ -18,8 +18,8 @@ public class SqliteModificationCommandFactory : IModificationCommandFactory
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual IModificationCommand CreateModificationCommand(
-        in ModificationCommandParameters modificationCommandParameters)
-        => new SqliteModificationCommand(modificationCommandParameters);
+        in ModificationCommandParameters modificationCommandParameters
+    ) => new SqliteModificationCommand(modificationCommandParameters);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -28,6 +28,6 @@ public class SqliteModificationCommandFactory : IModificationCommandFactory
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual INonTrackedModificationCommand CreateNonTrackedModificationCommand(
-        in NonTrackedModificationCommandParameters modificationCommandParameters)
-        => new SqliteModificationCommand(modificationCommandParameters);
+        in NonTrackedModificationCommandParameters modificationCommandParameters
+    ) => new SqliteModificationCommand(modificationCommandParameters);
 }

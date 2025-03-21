@@ -43,7 +43,10 @@ public class ConventionSetBuilderTests
         conventionSet.Add(new TestConvention());
 
         Assert.Contains(conventionSet.ModelFinalizingConventions, c => c is TestConvention);
-        Assert.DoesNotContain(conventionSet.ModelInitializedConventions, c => c is DerivedTestConvention);
+        Assert.DoesNotContain(
+            conventionSet.ModelInitializedConventions,
+            c => c is DerivedTestConvention
+        );
 
         conventionSet.Replace<TestConvention>(new DerivedTestConvention());
 
@@ -59,25 +62,22 @@ public class ConventionSetBuilderTests
     {
         public void ProcessModelFinalizing(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
-        {
-        }
+            IConventionContext<IConventionModelBuilder> context
+        ) { }
     }
 
     protected class DerivedTestConvention : TestConvention, IModelInitializedConvention
     {
         public void ProcessModelInitialized(
             IConventionModelBuilder modelBuilder,
-            IConventionContext<IConventionModelBuilder> context)
-        {
-        }
+            IConventionContext<IConventionModelBuilder> context
+        ) { }
     }
 
-    protected virtual ConventionSet GetConventionSet()
-        => InMemoryConventionSetBuilder.Build();
+    protected virtual ConventionSet GetConventionSet() => InMemoryConventionSetBuilder.Build();
 
-    protected virtual ModelBuilder GetModelBuilder()
-        => InMemoryConventionSetBuilder.CreateModelBuilder();
+    protected virtual ModelBuilder GetModelBuilder() =>
+        InMemoryConventionSetBuilder.CreateModelBuilder();
 
     [Table("ProductTable")]
     protected class Product

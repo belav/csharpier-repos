@@ -23,8 +23,9 @@ public class CompositeKeyEndToEndTest
                 {
                     Id1 = ticks,
                     Id2 = ticks + 1,
-                    Name = "Rainbow Dash"
-                });
+                    Name = "Rainbow Dash",
+                }
+            );
             await context.SaveChangesAsync();
         }
 
@@ -67,8 +68,7 @@ public class CompositeKeyEndToEndTest
 
         using (var context = new BronieContext(serviceProvider))
         {
-            var added = (await context.AddAsync(
-                new Unicorn { Id2 = id2, Name = "Rarity" })).Entity;
+            var added = (await context.AddAsync(new Unicorn { Id2 = id2, Name = "Rarity" })).Entity;
 
             Assert.True(added.Id1 > 0);
             Assert.NotEqual(Guid.Empty, added.Id3);
@@ -81,12 +81,17 @@ public class CompositeKeyEndToEndTest
 
         using (var context = new BronieContext(serviceProvider))
         {
-            Assert.Equal(1, context.Unicorns.Count(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3)));
+            Assert.Equal(
+                1,
+                context.Unicorns.Count(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3))
+            );
         }
 
         using (var context = new BronieContext(serviceProvider))
         {
-            var unicorn = context.Unicorns.Single(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3));
+            var unicorn = context.Unicorns.Single(e =>
+                (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3)
+            );
 
             unicorn.Name = "Bad Hair Day";
 
@@ -95,7 +100,9 @@ public class CompositeKeyEndToEndTest
 
         using (var context = new BronieContext(serviceProvider))
         {
-            var unicorn = context.Unicorns.Single(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3));
+            var unicorn = context.Unicorns.Single(e =>
+                (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3)
+            );
 
             Assert.Equal("Bad Hair Day", unicorn.Name);
 
@@ -106,7 +113,10 @@ public class CompositeKeyEndToEndTest
 
         using (var context = new BronieContext(serviceProvider))
         {
-            Assert.Equal(0, context.Unicorns.Count(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3)));
+            Assert.Equal(
+                0,
+                context.Unicorns.Count(e => (e.Id1 == id1) && (e.Id2 == id2) && (e.Id3 == id3))
+            );
         }
     }
 
@@ -121,12 +131,15 @@ public class CompositeKeyEndToEndTest
 
         using (var context = new BronieContext(serviceProvider))
         {
-            var pony1 = (await context.AddAsync(
-                new EarthPony { Id2 = 7, Name = "Apple Jack 1" })).Entity;
-            var pony2 = (await context.AddAsync(
-                new EarthPony { Id2 = 7, Name = "Apple Jack 2" })).Entity;
-            var pony3 = (await context.AddAsync(
-                new EarthPony { Id2 = 7, Name = "Apple Jack 3" })).Entity;
+            var pony1 = (
+                await context.AddAsync(new EarthPony { Id2 = 7, Name = "Apple Jack 1" })
+            ).Entity;
+            var pony2 = (
+                await context.AddAsync(new EarthPony { Id2 = 7, Name = "Apple Jack 2" })
+            ).Entity;
+            var pony3 = (
+                await context.AddAsync(new EarthPony { Id2 = 7, Name = "Apple Jack 3" })
+            ).Entity;
 
             await context.SaveChangesAsync();
 
@@ -180,45 +193,41 @@ public class CompositeKeyEndToEndTest
 
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<Pegasus> Pegasuses { get; set; }
+
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<Unicorn> Unicorns { get; set; }
+
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<EarthPony> EarthPonies { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseInMemoryDatabase(nameof(BronieContext)).UseInternalServiceProvider(_serviceProvider);
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
+                .UseInMemoryDatabase(nameof(BronieContext))
+                .UseInternalServiceProvider(_serviceProvider);
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Pegasus>().HasKey(
-                e => new { e.Id1, e.Id2 });
-            modelBuilder
-                .Entity<Pegasus>(
-                    b =>
-                    {
-                        b.HasKey(
-                            e => new { e.Id1, e.Id2 });
-                        b.Property(e => e.Id1).ValueGeneratedOnAdd();
-                        b.Property(e => e.Id2).ValueGeneratedOnAdd();
-                    });
+            modelBuilder.Entity<Pegasus>().HasKey(e => new { e.Id1, e.Id2 });
+            modelBuilder.Entity<Pegasus>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+                b.Property(e => e.Id1).ValueGeneratedOnAdd();
+                b.Property(e => e.Id2).ValueGeneratedOnAdd();
+            });
 
-            modelBuilder.Entity<Unicorn>(
-                b =>
-                {
-                    b.Property(e => e.Id1).ValueGeneratedOnAdd();
-                    b.Property(e => e.Id3).ValueGeneratedOnAdd();
-                });
+            modelBuilder.Entity<Unicorn>(b =>
+            {
+                b.Property(e => e.Id1).ValueGeneratedOnAdd();
+                b.Property(e => e.Id3).ValueGeneratedOnAdd();
+            });
 
-            modelBuilder.Entity<EarthPony>().HasKey(
-                e => new { e.Id1, e.Id2 });
-            modelBuilder.Entity<EarthPony>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.Id1, e.Id2 });
-                    b.Property(e => e.Id1).ValueGeneratedOnAdd();
-                    b.Property(e => e.Id2).ValueGeneratedOnAdd();
-                });
+            modelBuilder.Entity<EarthPony>().HasKey(e => new { e.Id1, e.Id2 });
+            modelBuilder.Entity<EarthPony>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+                b.Property(e => e.Id1).ValueGeneratedOnAdd();
+                b.Property(e => e.Id2).ValueGeneratedOnAdd();
+            });
         }
     }
 

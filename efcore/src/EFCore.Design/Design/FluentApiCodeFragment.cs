@@ -43,8 +43,7 @@ public class FluentApiCodeFragment : IMethodCallCodeFragment
     /// <value>The type arguments.</value>
     public virtual IList<string> TypeArguments { get; set; } = new List<string>();
 
-    IEnumerable<string> IMethodCallCodeFragment.TypeArguments
-        => TypeArguments;
+    IEnumerable<string> IMethodCallCodeFragment.TypeArguments => TypeArguments;
 
     /// <summary>
     ///     Gets the method call's arguments.
@@ -52,8 +51,7 @@ public class FluentApiCodeFragment : IMethodCallCodeFragment
     /// <value>The method call's arguments.</value>
     public virtual IList<object?> Arguments { get; set; } = new List<object?>();
 
-    IEnumerable<object?> IMethodCallCodeFragment.Arguments
-        => Arguments;
+    IEnumerable<object?> IMethodCallCodeFragment.Arguments => Arguments;
 
     /// <summary>
     ///     Gets or sets a value indicating whether this method call has an equivalent data annotation.
@@ -67,8 +65,7 @@ public class FluentApiCodeFragment : IMethodCallCodeFragment
     /// <value>The next method call.</value>
     public virtual FluentApiCodeFragment? ChainedCall { get; set; }
 
-    IMethodCallCodeFragment? IMethodCallCodeFragment.ChainedCall
-        => ChainedCall;
+    IMethodCallCodeFragment? IMethodCallCodeFragment.ChainedCall => ChainedCall;
 
     /// <summary>
     ///     Creates a new fluent API method call from an existing method call.
@@ -76,15 +73,15 @@ public class FluentApiCodeFragment : IMethodCallCodeFragment
     /// <param name="call">The existing method call.</param>
     /// <returns>The new fluent API method call.</returns>
     [return: NotNullIfNotNull("call")]
-    public static FluentApiCodeFragment? From(MethodCallCodeFragment? call)
-        => call is null
+    public static FluentApiCodeFragment? From(MethodCallCodeFragment? call) =>
+        call is null
             ? null
             : new FluentApiCodeFragment(call.Method)
             {
                 Namespace = call.Namespace,
                 DeclaringType = call.DeclaringType,
                 Arguments = call.Arguments.ToList(),
-                ChainedCall = From(call.ChainedCall)
+                ChainedCall = From(call.ChainedCall),
             };
 
     /// <summary>
@@ -119,16 +116,22 @@ public class FluentApiCodeFragment : IMethodCallCodeFragment
                 yield return current.Namespace;
             }
 
-            foreach (var argumentNamespace in current.Arguments
-                         .Where(a => a is not null and not NestedClosureCodeFragment and not PropertyAccessorCodeFragment)
-                         .SelectMany(a => a!.GetType().GetNamespaces()))
+            foreach (
+                var argumentNamespace in current
+                    .Arguments.Where(a =>
+                        a
+                            is not null
+                                and not NestedClosureCodeFragment
+                                and not PropertyAccessorCodeFragment
+                    )
+                    .SelectMany(a => a!.GetType().GetNamespaces())
+            )
             {
                 yield return argumentNamespace;
             }
 
             current = current.ChainedCall;
-        }
-        while (current is not null);
+        } while (current is not null);
     }
 
     /// <summary>
@@ -151,14 +154,13 @@ public class FluentApiCodeFragment : IMethodCallCodeFragment
                     DeclaringType = currentLink.DeclaringType,
                     TypeArguments = currentLink.TypeArguments,
                     Arguments = currentLink.Arguments,
-                    IsHandledByDataAnnotations = currentLink.IsHandledByDataAnnotations
+                    IsHandledByDataAnnotations = currentLink.IsHandledByDataAnnotations,
                 };
                 newRoot = newRoot?.Chain(unchained) ?? unchained;
             }
 
             currentLink = currentLink.ChainedCall;
-        }
-        while (currentLink is not null);
+        } while (currentLink is not null);
 
         return newRoot;
     }

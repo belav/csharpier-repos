@@ -27,7 +27,7 @@ public class SqlServerTimeOnlyTypeMapping : TimeOnlyTypeMapping
         @"'{0:HH\:mm\:ss\.FFFF}'",
         @"'{0:HH\:mm\:ss\.FFFFF}'",
         @"'{0:HH\:mm\:ss\.FFFFFF}'",
-        @"'{0:HH\:mm\:ss\.FFFFFFF}'"
+        @"'{0:HH\:mm\:ss\.FFFFFFF}'",
     };
 
     /// <summary>
@@ -38,15 +38,21 @@ public class SqlServerTimeOnlyTypeMapping : TimeOnlyTypeMapping
     /// </summary>
     public static new SqlServerTimeOnlyTypeMapping Default { get; } = new("time");
 
-    internal SqlServerTimeOnlyTypeMapping(string storeType, StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision)
+    internal SqlServerTimeOnlyTypeMapping(
+        string storeType,
+        StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision
+    )
         : base(
             new RelationalTypeMappingParameters(
-                new CoreTypeMappingParameters(typeof(TimeOnly), jsonValueReaderWriter: JsonTimeOnlyReaderWriter.Instance),
+                new CoreTypeMappingParameters(
+                    typeof(TimeOnly),
+                    jsonValueReaderWriter: JsonTimeOnlyReaderWriter.Instance
+                ),
                 storeType,
                 storeTypePostfix,
-                System.Data.DbType.Time))
-    {
-    }
+                System.Data.DbType.Time
+            )
+        ) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -55,9 +61,7 @@ public class SqlServerTimeOnlyTypeMapping : TimeOnlyTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqlServerTimeOnlyTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -65,8 +69,8 @@ public class SqlServerTimeOnlyTypeMapping : TimeOnlyTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqlServerTimeOnlyTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqlServerTimeOnlyTypeMapping(parameters);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -95,8 +99,8 @@ public class SqlServerTimeOnlyTypeMapping : TimeOnlyTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override string SqlLiteralFormatString
-        => _timeFormats[Precision is >= 0 and <= 7 ? Precision.Value : 7];
+    protected override string SqlLiteralFormatString =>
+        _timeFormats[Precision is >= 0 and <= 7 ? Precision.Value : 7];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -104,8 +108,8 @@ public class SqlServerTimeOnlyTypeMapping : TimeOnlyTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override string GenerateNonNullSqlLiteral(object value)
-        => ((TimeOnly)value).Ticks % 10000000 == 0 // Handle trailing decimal separator when no fractional seconds
+    protected override string GenerateNonNullSqlLiteral(object value) =>
+        ((TimeOnly)value).Ticks % 10000000 == 0 // Handle trailing decimal separator when no fractional seconds
             ? string.Format(CultureInfo.InvariantCulture, _timeFormats[0], value)
             : string.Format(CultureInfo.InvariantCulture, SqlLiteralFormatString, value);
 }

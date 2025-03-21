@@ -8,9 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Initialization;
 
 public class InitializationSqliteTests : InitializationTests
 {
-    protected override AdventureWorksContextBase CreateContext()
-        => AdventureWorksSqliteFixture.CreateContext();
+    protected override AdventureWorksContextBase CreateContext() =>
+        AdventureWorksSqliteFixture.CreateContext();
 
-    protected override ConventionSet CreateConventionSet()
-        => SqliteConventionSetBuilder.Build();
+    protected override ConventionSet CreateConventionSet() => SqliteConventionSetBuilder.Build();
 }

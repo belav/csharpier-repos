@@ -15,15 +15,15 @@ public sealed class JsonByteReaderWriter : JsonValueReaderWriter<byte>
     /// </summary>
     public static JsonByteReaderWriter Instance { get; } = new();
 
-    private JsonByteReaderWriter()
-    {
-    }
+    private JsonByteReaderWriter() { }
 
     /// <inheritdoc />
-    public override byte FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => manager.CurrentReader.GetByte();
+    public override byte FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => manager.CurrentReader.GetByte();
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, byte value)
-        => writer.WriteNumberValue(value);
+    public override void ToJsonTyped(Utf8JsonWriter writer, byte value) =>
+        writer.WriteNumberValue(value);
 }

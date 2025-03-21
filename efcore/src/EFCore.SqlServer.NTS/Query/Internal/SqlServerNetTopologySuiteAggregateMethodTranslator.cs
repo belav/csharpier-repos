@@ -17,17 +17,27 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 /// </summary>
 public class SqlServerNetTopologySuiteAggregateMethodTranslator : IAggregateMethodCallTranslator
 {
-    private static readonly MethodInfo GeometryCombineMethod
-        = typeof(GeometryCombiner).GetRuntimeMethod(nameof(GeometryCombiner.Combine), new[] { typeof(IEnumerable<Geometry>) })!;
+    private static readonly MethodInfo GeometryCombineMethod =
+        typeof(GeometryCombiner).GetRuntimeMethod(
+            nameof(GeometryCombiner.Combine),
+            new[] { typeof(IEnumerable<Geometry>) }
+        )!;
 
-    private static readonly MethodInfo ConvexHullMethod
-        = typeof(ConvexHull).GetRuntimeMethod(nameof(ConvexHull.Create), new[] { typeof(IEnumerable<Geometry>) })!;
+    private static readonly MethodInfo ConvexHullMethod = typeof(ConvexHull).GetRuntimeMethod(
+        nameof(ConvexHull.Create),
+        new[] { typeof(IEnumerable<Geometry>) }
+    )!;
 
-    private static readonly MethodInfo UnionMethod
-        = typeof(UnaryUnionOp).GetRuntimeMethod(nameof(UnaryUnionOp.Union), new[] { typeof(IEnumerable<Geometry>) })!;
+    private static readonly MethodInfo UnionMethod = typeof(UnaryUnionOp).GetRuntimeMethod(
+        nameof(UnaryUnionOp.Union),
+        new[] { typeof(IEnumerable<Geometry>) }
+    )!;
 
-    private static readonly MethodInfo EnvelopeCombineMethod
-        = typeof(EnvelopeCombiner).GetRuntimeMethod(nameof(EnvelopeCombiner.CombineAsGeometry), new[] { typeof(IEnumerable<Geometry>) })!;
+    private static readonly MethodInfo EnvelopeCombineMethod =
+        typeof(EnvelopeCombiner).GetRuntimeMethod(
+            nameof(EnvelopeCombiner.CombineAsGeometry),
+            new[] { typeof(IEnumerable<Geometry>) }
+        )!;
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
     private readonly IRelationalTypeMappingSource _typeMappingSource;
@@ -40,7 +50,8 @@ public class SqlServerNetTopologySuiteAggregateMethodTranslator : IAggregateMeth
     /// </summary>
     public SqlServerNetTopologySuiteAggregateMethodTranslator(
         ISqlExpressionFactory sqlExpressionFactory,
-        IRelationalTypeMappingSource typeMappingSource)
+        IRelationalTypeMappingSource typeMappingSource
+    )
     {
         _sqlExpressionFactory = sqlExpressionFactory;
         _typeMappingSource = typeMappingSource;
@@ -56,7 +67,8 @@ public class SqlServerNetTopologySuiteAggregateMethodTranslator : IAggregateMeth
         MethodInfo method,
         EnumerableExpression source,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         // Docs: https://docs.microsoft.com/sql/t-sql/spatial-geometry/static-aggregate-geometry-methods
 
@@ -70,15 +82,12 @@ public class SqlServerNetTopologySuiteAggregateMethodTranslator : IAggregateMeth
             return null;
         }
 
-        var functionName = method == GeometryCombineMethod
-            ? "CollectionAggregate"
-            : method == UnionMethod
-                ? "UnionAggregate"
-                : method == ConvexHullMethod
-                    ? "ConvexHullAggregate"
-                    : method == EnvelopeCombineMethod
-                        ? "EnvelopeAggregate"
-                        : null;
+        var functionName =
+            method == GeometryCombineMethod ? "CollectionAggregate"
+            : method == UnionMethod ? "UnionAggregate"
+            : method == ConvexHullMethod ? "ConvexHullAggregate"
+            : method == EnvelopeCombineMethod ? "EnvelopeAggregate"
+            : null;
 
         if (functionName is null)
         {
@@ -89,7 +98,8 @@ public class SqlServerNetTopologySuiteAggregateMethodTranslator : IAggregateMeth
         {
             sqlExpression = _sqlExpressionFactory.Case(
                 new List<CaseWhenClause> { new(source.Predicate, sqlExpression) },
-                elseResult: null);
+                elseResult: null
+            );
         }
 
         if (source.IsDistinct)
@@ -103,6 +113,7 @@ public class SqlServerNetTopologySuiteAggregateMethodTranslator : IAggregateMeth
             nullable: true,
             argumentsPropagateNullability: new[] { false },
             method.ReturnType,
-            _typeMappingSource.FindMapping(method.ReturnType, typeMapping.StoreType));
+            _typeMappingSource.FindMapping(method.ReturnType, typeMapping.StoreType)
+        );
     }
 }

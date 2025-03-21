@@ -5,46 +5,46 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-public abstract class QueryExpressionInterceptionSqlServerTestBase : QueryExpressionInterceptionTestBase
+public abstract class QueryExpressionInterceptionSqlServerTestBase
+    : QueryExpressionInterceptionTestBase
 {
     protected QueryExpressionInterceptionSqlServerTestBase(InterceptionSqlServerFixtureBase fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public abstract class InterceptionSqlServerFixtureBase : InterceptionFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
         protected override IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<IInterceptor> injectedInterceptors)
-            => base.InjectInterceptors(serviceCollection.AddEntityFrameworkSqlServer(), injectedInterceptors);
+            IEnumerable<IInterceptor> injectedInterceptors
+        ) =>
+            base.InjectInterceptors(
+                serviceCollection.AddEntityFrameworkSqlServer(),
+                injectedInterceptors
+            );
 
         public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
         {
-            new SqlServerDbContextOptionsBuilder(base.AddOptions(builder))
-                .ExecutionStrategy(d => new SqlServerExecutionStrategy(d));
+            new SqlServerDbContextOptionsBuilder(base.AddOptions(builder)).ExecutionStrategy(
+                d => new SqlServerExecutionStrategy(d)
+            );
             return builder;
         }
     }
 
     public class QueryExpressionInterceptionSqlServerTest
-        : QueryExpressionInterceptionSqlServerTestBase, IClassFixture<QueryExpressionInterceptionSqlServerTest.InterceptionSqlServerFixture>
+        : QueryExpressionInterceptionSqlServerTestBase,
+            IClassFixture<QueryExpressionInterceptionSqlServerTest.InterceptionSqlServerFixture>
     {
         public QueryExpressionInterceptionSqlServerTest(InterceptionSqlServerFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {
-            protected override string StoreName
-                => "QueryExpressionInterception";
+            protected override string StoreName => "QueryExpressionInterception";
 
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => false;
+            protected override bool ShouldSubscribeToDiagnosticListener => false;
         }
     }
 
@@ -52,18 +52,16 @@ public abstract class QueryExpressionInterceptionSqlServerTestBase : QueryExpres
         : QueryExpressionInterceptionSqlServerTestBase,
             IClassFixture<QueryExpressionInterceptionWithDiagnosticsSqlServerTest.InterceptionSqlServerFixture>
     {
-        public QueryExpressionInterceptionWithDiagnosticsSqlServerTest(InterceptionSqlServerFixture fixture)
-            : base(fixture)
-        {
-        }
+        public QueryExpressionInterceptionWithDiagnosticsSqlServerTest(
+            InterceptionSqlServerFixture fixture
+        )
+            : base(fixture) { }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {
-            protected override string StoreName
-                => "QueryExpressionInterceptionWithDiagnostics";
+            protected override string StoreName => "QueryExpressionInterceptionWithDiagnostics";
 
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => true;
+            protected override bool ShouldSubscribeToDiagnosticListener => true;
         }
     }
 }

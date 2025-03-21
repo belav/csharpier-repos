@@ -22,8 +22,8 @@ public static class DbContextActivator
     public static DbContext CreateInstance(
         Type contextType,
         Assembly? startupAssembly = null,
-        IOperationReportHandler? reportHandler = null)
-        => CreateInstance(contextType, startupAssembly, reportHandler, null);
+        IOperationReportHandler? reportHandler = null
+    ) => CreateInstance(contextType, startupAssembly, reportHandler, null);
 
     /// <summary>
     ///     Creates an instance of the specified <see cref="DbContext" /> type using the standard design-time
@@ -39,21 +39,22 @@ public static class DbContextActivator
         Type contextType,
         Assembly? startupAssembly,
         IOperationReportHandler? reportHandler,
-        string[]? args)
+        string[]? args
+    )
     {
         Check.NotNull(contextType, nameof(contextType));
 
         EF.IsDesignTime = true;
 
         return new DbContextOperations(
-                new OperationReporter(reportHandler),
-                contextType.Assembly,
-                startupAssembly ?? contextType.Assembly,
-                projectDir: "",
-                rootNamespace: null,
-                language: "C#",
-                nullable: false,
-                args: args ?? Array.Empty<string>())
-            .CreateContext(contextType.FullName!);
+            new OperationReporter(reportHandler),
+            contextType.Assembly,
+            startupAssembly ?? contextType.Assembly,
+            projectDir: "",
+            rootNamespace: null,
+            language: "C#",
+            nullable: false,
+            args: args ?? Array.Empty<string>()
+        ).CreateContext(contextType.FullName!);
     }
 }

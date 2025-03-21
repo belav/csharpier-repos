@@ -3,14 +3,13 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class TPTGearsOfWarQueryRelationalTestBase<TFixture> : GearsOfWarQueryRelationalTestBase<TFixture>
+public abstract class TPTGearsOfWarQueryRelationalTestBase<TFixture>
+    : GearsOfWarQueryRelationalTestBase<TFixture>
     where TFixture : TPTGearsOfWarQueryRelationalFixture, new()
 {
     protected TPTGearsOfWarQueryRelationalTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    public override Task Project_discriminator_columns(bool async)
-        => AssertUnableToTranslateEFProperty(() => base.Project_discriminator_columns(async));
+    public override Task Project_discriminator_columns(bool async) =>
+        AssertUnableToTranslateEFProperty(() => base.Project_discriminator_columns(async));
 }

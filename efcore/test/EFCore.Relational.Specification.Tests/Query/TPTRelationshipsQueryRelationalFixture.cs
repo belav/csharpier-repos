@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class TPTRelationshipsQueryRelationalFixture : InheritanceRelationshipsQueryRelationalFixture
+public abstract class TPTRelationshipsQueryRelationalFixture
+    : InheritanceRelationshipsQueryRelationalFixture
 {
-    protected override string StoreName
-        => "TPTRelationships";
+    protected override string StoreName => "TPTRelationships";
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {

@@ -20,8 +20,8 @@ public static class SqlitePropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The SRID to use when creating a column for this property.</returns>
-    public static int? GetSrid(this IReadOnlyProperty property)
-        => (int?)property[SqliteAnnotationNames.Srid];
+    public static int? GetSrid(this IReadOnlyProperty property) =>
+        (int?)property[SqliteAnnotationNames.Srid];
 
     /// <summary>
     ///     Returns the SRID to use when creating a column for this property.
@@ -31,7 +31,8 @@ public static class SqlitePropertyExtensions
     /// <returns>The SRID to use when creating a column for this property.</returns>
     public static int? GetSrid(
         this IReadOnlyProperty property,
-        in StoreObjectIdentifier storeObject)
+        in StoreObjectIdentifier storeObject
+    )
     {
         var annotation = property.FindAnnotation(SqliteAnnotationNames.Srid);
         if (annotation != null)
@@ -47,8 +48,8 @@ public static class SqlitePropertyExtensions
     /// </summary>
     /// <param name="property">The property.</param>
     /// <param name="value">The SRID.</param>
-    public static void SetSrid(this IMutableProperty property, int? value)
-        => property.SetOrRemoveAnnotation(SqliteAnnotationNames.Srid, value);
+    public static void SetSrid(this IMutableProperty property, int? value) =>
+        property.SetOrRemoveAnnotation(SqliteAnnotationNames.Srid, value);
 
     /// <summary>
     ///     Sets the SRID to use when creating a column for this property.
@@ -56,14 +57,22 @@ public static class SqlitePropertyExtensions
     /// <param name="property">The property.</param>
     /// <param name="value">The SRID.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
-    public static int? SetSrid(this IConventionProperty property, int? value, bool fromDataAnnotation = false)
-        => (int?)property.SetOrRemoveAnnotation(SqliteAnnotationNames.Srid, value, fromDataAnnotation)?.Value;
+    public static int? SetSrid(
+        this IConventionProperty property,
+        int? value,
+        bool fromDataAnnotation = false
+    ) =>
+        (int?)
+            property
+                .SetOrRemoveAnnotation(SqliteAnnotationNames.Srid, value, fromDataAnnotation)
+                ?.Value;
 
     /// <summary>
     ///     Gets the <see cref="ConfigurationSource" /> for the column SRID.
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the column SRID.</returns>
-    public static ConfigurationSource? GetSridConfigurationSource(this IConventionProperty property)
-        => property.FindAnnotation(SqliteAnnotationNames.Srid)?.GetConfigurationSource();
+    public static ConfigurationSource? GetSridConfigurationSource(
+        this IConventionProperty property
+    ) => property.FindAnnotation(SqliteAnnotationNames.Srid)?.GetConfigurationSource();
 }

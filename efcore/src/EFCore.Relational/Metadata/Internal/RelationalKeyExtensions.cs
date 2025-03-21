@@ -23,12 +23,12 @@ public static class RelationalKeyExtensions
         this IReadOnlyKey key,
         IReadOnlyKey duplicateKey,
         in StoreObjectIdentifier storeObject,
-        bool shouldThrow)
+        bool shouldThrow
+    )
     {
         var columnNames = key.Properties.GetColumnNames(storeObject);
         var duplicateColumnNames = duplicateKey.Properties.GetColumnNames(storeObject);
-        if (columnNames == null
-            || duplicateColumnNames == null)
+        if (columnNames == null || duplicateColumnNames == null)
         {
             if (shouldThrow)
             {
@@ -40,7 +40,9 @@ public static class RelationalKeyExtensions
                         duplicateKey.DeclaringEntityType.DisplayName(),
                         key.GetName(storeObject),
                         key.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                        duplicateKey.DeclaringEntityType.GetSchemaQualifiedTableName()));
+                        duplicateKey.DeclaringEntityType.GetSchemaQualifiedTableName()
+                    )
+                );
             }
 
             return false;
@@ -59,7 +61,9 @@ public static class RelationalKeyExtensions
                         key.DeclaringEntityType.GetSchemaQualifiedTableName(),
                         key.GetName(storeObject),
                         key.Properties.FormatColumns(storeObject),
-                        duplicateKey.Properties.FormatColumns(storeObject)));
+                        duplicateKey.Properties.FormatColumns(storeObject)
+                    )
+                );
             }
 
             return false;
@@ -77,7 +81,8 @@ public static class RelationalKeyExtensions
     public static string? GetName(
         this IReadOnlyKey key,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? logger
+    )
     {
         if (storeObject.StoreObjectType != StoreObjectType.Table)
         {
@@ -96,7 +101,10 @@ public static class RelationalKeyExtensions
 
         foreach (var containingType in declaringType.GetDerivedTypesInclusive())
         {
-            if (StoreObjectIdentifier.Create(containingType, storeObject.StoreObjectType) == storeObject)
+            if (
+                StoreObjectIdentifier.Create(containingType, storeObject.StoreObjectType)
+                == storeObject
+            )
             {
                 return defaultName != null
                     ? (string?)key[RelationalAnnotationNames.Name] ?? defaultName
@@ -116,10 +124,13 @@ public static class RelationalKeyExtensions
     public static string? GetDefaultName(
         this IReadOnlyKey key,
         in StoreObjectIdentifier storeObject,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? logger)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? logger
+    )
     {
-        if (storeObject.StoreObjectType != StoreObjectType.Table
-            || key.DeclaringEntityType.IsMappedToJson())
+        if (
+            storeObject.StoreObjectType != StoreObjectType.Table
+            || key.DeclaringEntityType.IsMappedToJson()
+        )
         {
             return null;
         }
@@ -137,7 +148,8 @@ public static class RelationalKeyExtensions
             // Using a hashset is detrimental to the perf when there are no cycles
             for (var i = 0; i < RelationalEntityTypeExtensions.MaxEntityTypesSharingTable; i++)
             {
-                var linkingFk = rootKey!.DeclaringEntityType.FindRowInternalForeignKeys(storeObject)
+                var linkingFk = rootKey!
+                    .DeclaringEntityType.FindRowInternalForeignKeys(storeObject)
                     .FirstOrDefault();
                 if (linkingFk == null)
                 {
@@ -147,8 +159,7 @@ public static class RelationalKeyExtensions
                 rootKey = linkingFk.PrincipalEntityType.FindPrimaryKey();
             }
 
-            if (rootKey != null
-                && rootKey != key)
+            if (rootKey != null && rootKey != key)
             {
                 return rootKey.GetName(storeObject);
             }
@@ -163,16 +174,25 @@ public static class RelationalKeyExtensions
                 if (logger != null)
                 {
                     var table = storeObject;
-                    if (key.DeclaringEntityType.GetMappingFragments(StoreObjectType.Table)
-                        .Any(t => t.StoreObject != table && key.Properties.GetColumnNames(t.StoreObject) != null))
+                    if (
+                        key
+                            .DeclaringEntityType.GetMappingFragments(StoreObjectType.Table)
+                            .Any(t =>
+                                t.StoreObject != table
+                                && key.Properties.GetColumnNames(t.StoreObject) != null
+                            )
+                    )
                     {
                         return null;
                     }
 
-                    if (key.DeclaringEntityType.GetMappingStrategy() != RelationalAnnotationNames.TphMappingStrategy
+                    if (
+                        key.DeclaringEntityType.GetMappingStrategy()
+                            != RelationalAnnotationNames.TphMappingStrategy
                         && key.DeclaringEntityType.GetDerivedTypes()
                             .Select(e => StoreObjectIdentifier.Create(e, StoreObjectType.Table))
-                            .Any(t => t != null && key.Properties.GetColumnNames(t.Value) != null))
+                            .Any(t => t != null && key.Properties.GetColumnNames(t.Value) != null)
+                    )
                     {
                         return null;
                     }
@@ -190,13 +210,14 @@ public static class RelationalKeyExtensions
             for (var i = 0; i < RelationalEntityTypeExtensions.MaxEntityTypesSharingTable; i++)
             {
                 IReadOnlyKey? linkedKey = null;
-                foreach (var otherKey in rootKey.DeclaringEntityType
-                             .FindRowInternalForeignKeys(storeObject)
-                             .SelectMany(fk => fk.PrincipalEntityType.GetKeys()))
+                foreach (
+                    var otherKey in rootKey
+                        .DeclaringEntityType.FindRowInternalForeignKeys(storeObject)
+                        .SelectMany(fk => fk.PrincipalEntityType.GetKeys())
+                )
                 {
                     var otherColumnNames = otherKey.Properties.GetColumnNames(storeObject);
-                    if ((otherColumnNames != null)
-                        && otherColumnNames.SequenceEqual(columnNames))
+                    if ((otherColumnNames != null) && otherColumnNames.SequenceEqual(columnNames))
                     {
                         linkedKey = otherKey;
                         break;

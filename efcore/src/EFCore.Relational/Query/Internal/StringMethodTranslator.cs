@@ -13,18 +13,25 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal;
 /// </summary>
 public class StringMethodTranslator : IMethodCallTranslator
 {
-    private static readonly MethodInfo IsNullOrEmptyMethodInfo
-        = typeof(string).GetRuntimeMethod(nameof(string.IsNullOrEmpty), new[] { typeof(string) })!;
+    private static readonly MethodInfo IsNullOrEmptyMethodInfo = typeof(string).GetRuntimeMethod(
+        nameof(string.IsNullOrEmpty),
+        new[] { typeof(string) }
+    )!;
 
-    private static readonly MethodInfo ConcatMethodInfoTwoArgs
-        = typeof(string).GetRuntimeMethod(nameof(string.Concat), new[] { typeof(string), typeof(string) })!;
+    private static readonly MethodInfo ConcatMethodInfoTwoArgs = typeof(string).GetRuntimeMethod(
+        nameof(string.Concat),
+        new[] { typeof(string), typeof(string) }
+    )!;
 
-    private static readonly MethodInfo ConcatMethodInfoThreeArgs
-        = typeof(string).GetRuntimeMethod(nameof(string.Concat), new[] { typeof(string), typeof(string), typeof(string) })!;
+    private static readonly MethodInfo ConcatMethodInfoThreeArgs = typeof(string).GetRuntimeMethod(
+        nameof(string.Concat),
+        new[] { typeof(string), typeof(string), typeof(string) }
+    )!;
 
-    private static readonly MethodInfo ConcatMethodInfoFourArgs
-        = typeof(string).GetRuntimeMethod(
-            nameof(string.Concat), new[] { typeof(string), typeof(string), typeof(string), typeof(string) })!;
+    private static readonly MethodInfo ConcatMethodInfoFourArgs = typeof(string).GetRuntimeMethod(
+        nameof(string.Concat),
+        new[] { typeof(string), typeof(string), typeof(string), typeof(string) }
+    )!;
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -49,7 +56,8 @@ public class StringMethodTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (Equals(method, IsNullOrEmptyMethodInfo))
         {
@@ -57,25 +65,21 @@ public class StringMethodTranslator : IMethodCallTranslator
 
             return _sqlExpressionFactory.OrElse(
                 _sqlExpressionFactory.IsNull(argument),
-                _sqlExpressionFactory.Equal(
-                    argument,
-                    _sqlExpressionFactory.Constant(string.Empty)));
+                _sqlExpressionFactory.Equal(argument, _sqlExpressionFactory.Constant(string.Empty))
+            );
         }
 
         if (Equals(method, ConcatMethodInfoTwoArgs))
         {
-            return _sqlExpressionFactory.Add(
-                arguments[0],
-                arguments[1]);
+            return _sqlExpressionFactory.Add(arguments[0], arguments[1]);
         }
 
         if (Equals(method, ConcatMethodInfoThreeArgs))
         {
             return _sqlExpressionFactory.Add(
                 arguments[0],
-                _sqlExpressionFactory.Add(
-                    arguments[1],
-                    arguments[2]));
+                _sqlExpressionFactory.Add(arguments[1], arguments[2])
+            );
         }
 
         if (Equals(method, ConcatMethodInfoFourArgs))
@@ -84,9 +88,9 @@ public class StringMethodTranslator : IMethodCallTranslator
                 arguments[0],
                 _sqlExpressionFactory.Add(
                     arguments[1],
-                    _sqlExpressionFactory.Add(
-                        arguments[2],
-                        arguments[3])));
+                    _sqlExpressionFactory.Add(arguments[2], arguments[3])
+                )
+            );
         }
 
         return null;

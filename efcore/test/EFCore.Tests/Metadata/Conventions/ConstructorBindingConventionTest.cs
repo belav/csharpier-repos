@@ -26,9 +26,7 @@ public class ConstructorBindingConventionTest
         Assert.Empty(constructorBinding.ParameterBindings);
     }
 
-    private class BlogParameterless : Blog
-    {
-    }
+    private class BlogParameterless : Blog { }
 
     [ConditionalFact]
     public void Binds_to_parameterless_constructor_if_no_services()
@@ -46,21 +44,13 @@ public class ConstructorBindingConventionTest
 
     private class BlogSeveralNoServices : Blog
     {
-        public BlogSeveralNoServices()
-        {
-        }
+        public BlogSeveralNoServices() { }
 
-        public BlogSeveralNoServices(string title, int id)
-        {
-        }
+        public BlogSeveralNoServices(string title, int id) { }
 
-        public BlogSeveralNoServices(string title, Guid? shadow, int id)
-        {
-        }
+        public BlogSeveralNoServices(string title, Guid? shadow, int id) { }
 
-        public BlogSeveralNoServices(string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        public BlogSeveralNoServices(string title, Guid? shadow, bool dummy, int id) { }
     }
 
     [ConditionalFact]
@@ -85,17 +75,11 @@ public class ConstructorBindingConventionTest
 
     private class BlogSeveral : Blog
     {
-        public BlogSeveral(string title, int id)
-        {
-        }
+        public BlogSeveral(string title, int id) { }
 
-        public BlogSeveral(string title, Guid? shadow, int id)
-        {
-        }
+        public BlogSeveral(string title, Guid? shadow, int id) { }
 
-        public BlogSeveral(string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        public BlogSeveral(string title, Guid? shadow, bool dummy, int id) { }
     }
 
     [ConditionalFact]
@@ -116,37 +100,22 @@ public class ConstructorBindingConventionTest
 
     private class BlogOneService : Blog
     {
-        public BlogOneService()
-        {
-        }
+        public BlogOneService() { }
 
-        public BlogOneService(string title, int id)
-        {
-        }
+        public BlogOneService(string title, int id) { }
 
-        public BlogOneService(string title, Guid? shadow, int id)
-        {
-        }
+        public BlogOneService(string title, Guid? shadow, int id) { }
 
-        public BlogOneService(string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        public BlogOneService(string title, Guid? shadow, bool dummy, int id) { }
 
-        public BlogOneService(ILazyLoader loader)
-        {
-        }
+        public BlogOneService(ILazyLoader loader) { }
 
-        public BlogOneService(ILazyLoader loader, string title, int id)
-        {
-        }
+        public BlogOneService(ILazyLoader loader, string title, int id) { }
 
-        public BlogOneService(ILazyLoader loader, string title, Guid? shadow, int id)
-        {
-        }
+        public BlogOneService(ILazyLoader loader, string title, Guid? shadow, int id) { }
 
         public BlogOneService(ILazyLoader loader, string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        { }
     }
 
     [ConditionalFact]
@@ -172,33 +141,25 @@ public class ConstructorBindingConventionTest
 
     private class BlogSeveralOneService : Blog
     {
-        public BlogSeveralOneService()
-        {
-        }
+        public BlogSeveralOneService() { }
 
-        public BlogSeveralOneService(string title, int id)
-        {
-        }
+        public BlogSeveralOneService(string title, int id) { }
 
-        public BlogSeveralOneService(string title, Guid? shadow, int id)
-        {
-        }
+        public BlogSeveralOneService(string title, Guid? shadow, int id) { }
 
-        public BlogSeveralOneService(string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        public BlogSeveralOneService(string title, Guid? shadow, bool dummy, int id) { }
 
-        public BlogSeveralOneService(ILazyLoader loader, string title, int id)
-        {
-        }
+        public BlogSeveralOneService(ILazyLoader loader, string title, int id) { }
 
-        public BlogSeveralOneService(ILazyLoader loader, string title, Guid? shadow, int id)
-        {
-        }
+        public BlogSeveralOneService(ILazyLoader loader, string title, Guid? shadow, int id) { }
 
-        public BlogSeveralOneService(ILazyLoader loader, string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        public BlogSeveralOneService(
+            ILazyLoader loader,
+            string title,
+            Guid? shadow,
+            bool dummy,
+            int id
+        ) { }
     }
 
     [ConditionalFact]
@@ -220,69 +181,52 @@ public class ConstructorBindingConventionTest
 
     private class BlogTwoServices : Blog
     {
-        public BlogTwoServices()
-        {
-        }
+        public BlogTwoServices() { }
 
-        public BlogTwoServices(string title, int id)
-        {
-        }
+        public BlogTwoServices(string title, int id) { }
 
-        public BlogTwoServices(string title, Guid? shadow, int id)
-        {
-        }
+        public BlogTwoServices(string title, Guid? shadow, int id) { }
 
-        public BlogTwoServices(string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        public BlogTwoServices(string title, Guid? shadow, bool dummy, int id) { }
 
-        public BlogTwoServices(ILazyLoader loader)
-        {
-        }
+        public BlogTwoServices(ILazyLoader loader) { }
 
-        public BlogTwoServices(ILazyLoader loader, string title, int id)
-        {
-        }
+        public BlogTwoServices(ILazyLoader loader, string title, int id) { }
 
-        public BlogTwoServices(ILazyLoader loader, string title, Guid? shadow, int id)
-        {
-        }
+        public BlogTwoServices(ILazyLoader loader, string title, Guid? shadow, int id) { }
 
         public BlogTwoServices(ILazyLoader loader, string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        { }
 
-        public BlogTwoServices(DbContext context)
-        {
-        }
+        public BlogTwoServices(DbContext context) { }
 
-        public BlogTwoServices(DbContext context, string title, int id)
-        {
-        }
+        public BlogTwoServices(DbContext context, string title, int id) { }
 
-        public BlogTwoServices(DbContext context, string title, Guid? shadow, int id)
-        {
-        }
+        public BlogTwoServices(DbContext context, string title, Guid? shadow, int id) { }
 
         public BlogTwoServices(DbContext context, string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        { }
 
-        public BlogTwoServices(DbContext context, ILazyLoader loader)
-        {
-        }
+        public BlogTwoServices(DbContext context, ILazyLoader loader) { }
 
-        public BlogTwoServices(DbContext context, ILazyLoader loader, string title, int id)
-        {
-        }
+        public BlogTwoServices(DbContext context, ILazyLoader loader, string title, int id) { }
 
-        public BlogTwoServices(DbContext context, ILazyLoader loader, string title, Guid? shadow, int id)
-        {
-        }
+        public BlogTwoServices(
+            DbContext context,
+            ILazyLoader loader,
+            string title,
+            Guid? shadow,
+            int id
+        ) { }
 
-        public BlogTwoServices(DbContext context, ILazyLoader loader, string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        public BlogTwoServices(
+            DbContext context,
+            ILazyLoader loader,
+            string title,
+            Guid? shadow,
+            bool dummy,
+            int id
+        ) { }
     }
 
     [ConditionalFact]
@@ -309,80 +253,82 @@ public class ConstructorBindingConventionTest
 
     private class BlogSeveralTwoServices : Blog
     {
-        public BlogSeveralTwoServices()
-        {
-        }
+        public BlogSeveralTwoServices() { }
 
-        public BlogSeveralTwoServices(string title, int id)
-        {
-        }
+        public BlogSeveralTwoServices(string title, int id) { }
 
-        public BlogSeveralTwoServices(string title, Guid? shadow, int id)
-        {
-        }
+        public BlogSeveralTwoServices(string title, Guid? shadow, int id) { }
 
-        public BlogSeveralTwoServices(string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        public BlogSeveralTwoServices(string title, Guid? shadow, bool dummy, int id) { }
 
-        public BlogSeveralTwoServices(ILazyLoader loader, string title, int id)
-        {
-        }
+        public BlogSeveralTwoServices(ILazyLoader loader, string title, int id) { }
 
-        public BlogSeveralTwoServices(ILazyLoader loader, string title, Guid? shadow, int id)
-        {
-        }
+        public BlogSeveralTwoServices(ILazyLoader loader, string title, Guid? shadow, int id) { }
 
-        public BlogSeveralTwoServices(ILazyLoader loader, string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        public BlogSeveralTwoServices(
+            ILazyLoader loader,
+            string title,
+            Guid? shadow,
+            bool dummy,
+            int id
+        ) { }
 
-        public BlogSeveralTwoServices(DbContext context, string title, int id)
-        {
-        }
+        public BlogSeveralTwoServices(DbContext context, string title, int id) { }
 
-        public BlogSeveralTwoServices(DbContext context, string title, Guid? shadow, int id)
-        {
-        }
+        public BlogSeveralTwoServices(DbContext context, string title, Guid? shadow, int id) { }
 
-        public BlogSeveralTwoServices(DbContext context, string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        public BlogSeveralTwoServices(
+            DbContext context,
+            string title,
+            Guid? shadow,
+            bool dummy,
+            int id
+        ) { }
 
         public BlogSeveralTwoServices(DbContext context, ILazyLoader loader, string title, int id)
-        {
-        }
+        { }
 
-        public BlogSeveralTwoServices(DbContext context, ILazyLoader loader, string title, Guid? shadow, int id)
-        {
-        }
+        public BlogSeveralTwoServices(
+            DbContext context,
+            ILazyLoader loader,
+            string title,
+            Guid? shadow,
+            int id
+        ) { }
 
-        public BlogSeveralTwoServices(DbContext context, ILazyLoader loader, string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        public BlogSeveralTwoServices(
+            DbContext context,
+            ILazyLoader loader,
+            string title,
+            Guid? shadow,
+            bool dummy,
+            int id
+        ) { }
     }
 
     [ConditionalFact]
-    public void Throws_if_two_constructors_with_same_number_of_parameters_could_be_used()
-        => Assert.Equal(
+    public void Throws_if_two_constructors_with_same_number_of_parameters_could_be_used() =>
+        Assert.Equal(
             CoreStrings.ConstructorConflict(
                 "BlogConflict(string, int)",
-                "BlogConflict(string, Guid?)"),
-            Assert.Throws<InvalidOperationException>(
-                () => GetBinding<BlogConflict>()).Message);
+                "BlogConflict(string, Guid?)"
+            ),
+            Assert.Throws<InvalidOperationException>(() => GetBinding<BlogConflict>()).Message
+        );
 
     [ConditionalFact]
     public void Does_not_throw_if_explicit_binding_has_been_set()
     {
-        var constructorBinding = GetBinding<BlogConflict>(
-            e => ((EntityType)e).ConstructorBinding = new ConstructorBinding(
-                typeof(BlogConflict).GetConstructor(
-                    new[] { typeof(string), typeof(int) }),
+        var constructorBinding = GetBinding<BlogConflict>(e =>
+            ((EntityType)e).ConstructorBinding = new ConstructorBinding(
+                typeof(BlogConflict).GetConstructor(new[] { typeof(string), typeof(int) }),
                 new[]
                 {
                     new PropertyParameterBinding((IProperty)e.FindProperty(nameof(Blog.Title))),
-                    new PropertyParameterBinding((IProperty)e.FindProperty(nameof(Blog.Id)))
-                }));
+                    new PropertyParameterBinding((IProperty)e.FindProperty(nameof(Blog.Id))),
+                }
+            )
+        );
 
         Assert.NotNull(constructorBinding);
 
@@ -401,17 +347,11 @@ public class ConstructorBindingConventionTest
 
     private class BlogConflict : Blog
     {
-        public BlogConflict(string title, int id)
-        {
-        }
+        public BlogConflict(string title, int id) { }
 
-        public BlogConflict(string title, Guid? shadow)
-        {
-        }
+        public BlogConflict(string title, Guid? shadow) { }
 
-        public BlogConflict(string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        public BlogConflict(string title, Guid? shadow, bool dummy, int id) { }
     }
 
     [ConditionalFact]
@@ -463,10 +403,10 @@ public class ConstructorBindingConventionTest
             // ReSharper disable once InconsistentNaming
             string FooBaar5,
             // ReSharper disable once InconsistentNaming
-            string FooBaar6)
+            string FooBaar6
+        )
 #pragma warning restore IDE1006 // Naming Styles
-        {
-        }
+        { }
     }
 
     [ConditionalFact]
@@ -491,9 +431,7 @@ public class ConstructorBindingConventionTest
 
     private class BlogWeirdScience : Blog
     {
-        public BlogWeirdScience(string content, int follows)
-        {
-        }
+        public BlogWeirdScience(string content, int follows) { }
     }
 
     [ConditionalFact]
@@ -522,9 +460,7 @@ public class ConstructorBindingConventionTest
 
     private class BlogWithContext : Blog
     {
-        public BlogWithContext(int id, DbContext context)
-        {
-        }
+        public BlogWithContext(int id, DbContext context) { }
     }
 
     [ConditionalFact]
@@ -549,9 +485,7 @@ public class ConstructorBindingConventionTest
 
     private class BlogWithTypedContext : Blog
     {
-        public BlogWithTypedContext(TypedContext context)
-        {
-        }
+        public BlogWithTypedContext(TypedContext context) { }
     }
 
     [ConditionalFact]
@@ -571,14 +505,15 @@ public class ConstructorBindingConventionTest
 
         Assert.IsType<DependencyInjectionParameterBinding>(bindings[0]);
         Assert.Empty(bindings[0].ConsumedProperties);
-        Assert.Same(typeof(ILazyLoader), ((DependencyInjectionParameterBinding)bindings[0]).ServiceType);
+        Assert.Same(
+            typeof(ILazyLoader),
+            ((DependencyInjectionParameterBinding)bindings[0]).ServiceType
+        );
     }
 
     private class BlogWithLazyLoader : Blog
     {
-        public BlogWithLazyLoader(ILazyLoader loader)
-        {
-        }
+        public BlogWithLazyLoader(ILazyLoader loader) { }
     }
 
     [ConditionalFact]
@@ -598,14 +533,15 @@ public class ConstructorBindingConventionTest
 
         Assert.IsType<DependencyInjectionMethodParameterBinding>(bindings[0]);
         Assert.Empty(bindings[0].ConsumedProperties);
-        Assert.Same(typeof(ILazyLoader), ((DependencyInjectionMethodParameterBinding)bindings[0]).ServiceType);
+        Assert.Same(
+            typeof(ILazyLoader),
+            ((DependencyInjectionMethodParameterBinding)bindings[0]).ServiceType
+        );
     }
 
     private class BlogWithLazyLoaderMethod : Blog
     {
-        public BlogWithLazyLoaderMethod(Action<object, string> lazyLoader)
-        {
-        }
+        public BlogWithLazyLoaderMethod(Action<object, string> lazyLoader) { }
     }
 
     [ConditionalFact]
@@ -629,9 +565,7 @@ public class ConstructorBindingConventionTest
 
     private class BlogWithEntityType : Blog
     {
-        public BlogWithEntityType(IEntityType entityType)
-        {
-        }
+        public BlogWithEntityType(IEntityType entityType) { }
     }
 
     [ConditionalFact]
@@ -650,18 +584,12 @@ public class ConstructorBindingConventionTest
 
     private class BlogWithOtherMethod : Blog
     {
-        public BlogWithOtherMethod()
-        {
-        }
+        public BlogWithOtherMethod() { }
 
-        public BlogWithOtherMethod(Action<object, string> loader)
-        {
-        }
+        public BlogWithOtherMethod(Action<object, string> loader) { }
     }
 
-    private class TypedContext : DbContext
-    {
-    }
+    private class TypedContext : DbContext { }
 
     [ConditionalFact]
     public void Throws_if_no_usable_constructor()
@@ -669,56 +597,64 @@ public class ConstructorBindingConventionTest
         var constructors = new[]
         {
             "    " + CoreStrings.ConstructorBindingFailed("did", "BlogNone(string title, int did)"),
-            "    " + CoreStrings.ConstructorBindingFailed("notTitle", "BlogNone(string notTitle, Guid? shadow, int id)"),
-            "    " + CoreStrings.ConstructorBindingFailed("dummy", "BlogNone(string title, Guid? shadow, bool dummy, int id)"),
             "    "
-            + CoreStrings.ConstructorBindingFailed(
-                "dummy', 'description",
-                "BlogNone(string title, Guid? shadow, bool dummy, int id, string description)")
+                + CoreStrings.ConstructorBindingFailed(
+                    "notTitle",
+                    "BlogNone(string notTitle, Guid? shadow, int id)"
+                ),
+            "    "
+                + CoreStrings.ConstructorBindingFailed(
+                    "dummy",
+                    "BlogNone(string title, Guid? shadow, bool dummy, int id)"
+                ),
+            "    "
+                + CoreStrings.ConstructorBindingFailed(
+                    "dummy', 'description",
+                    "BlogNone(string title, Guid? shadow, bool dummy, int id, string description)"
+                ),
         };
 
         Assert.Equal(
             CoreStrings.ConstructorNotFound(
                 nameof(BlogNone),
-                Environment.NewLine + string.Join(Environment.NewLine, constructors) + Environment.NewLine),
-            Assert.Throws<InvalidOperationException>(() => GetBinding<BlogNone>()).Message);
+                Environment.NewLine
+                    + string.Join(Environment.NewLine, constructors)
+                    + Environment.NewLine
+            ),
+            Assert.Throws<InvalidOperationException>(() => GetBinding<BlogNone>()).Message
+        );
     }
 
     private class BlogNone : Blog
     {
-        public BlogNone(string title, int did)
-        {
-        }
+        public BlogNone(string title, int did) { }
 
-        public BlogNone(string notTitle, Guid? shadow, int id)
-        {
-        }
+        public BlogNone(string notTitle, Guid? shadow, int id) { }
 
-        public BlogNone(string title, Guid? shadow, bool dummy, int id)
-        {
-        }
+        public BlogNone(string title, Guid? shadow, bool dummy, int id) { }
 
-        public BlogNone(string title, Guid? shadow, bool dummy, int id, string description)
-        {
-        }
+        public BlogNone(string title, Guid? shadow, bool dummy, int id, string description) { }
     }
 
     [ConditionalFact]
-    public void Throws_if_no_usable_constructor_due_to_bad_type()
-        => Assert.Equal(
+    public void Throws_if_no_usable_constructor_due_to_bad_type() =>
+        Assert.Equal(
             CoreStrings.ConstructorNotFound(
                 nameof(BlogBadType),
                 Environment.NewLine
-                + "    "
-                + CoreStrings.ConstructorBindingFailed("shadow", "BlogBadType(Guid shadow, int id)")
-                + Environment.NewLine),
-            Assert.Throws<InvalidOperationException>(() => GetBinding<BlogBadType>()).Message);
+                    + "    "
+                    + CoreStrings.ConstructorBindingFailed(
+                        "shadow",
+                        "BlogBadType(Guid shadow, int id)"
+                    )
+                    + Environment.NewLine
+            ),
+            Assert.Throws<InvalidOperationException>(() => GetBinding<BlogBadType>()).Message
+        );
 
     private class BlogBadType : Blog
     {
-        public BlogBadType(Guid shadow, int id)
-        {
-        }
+        public BlogBadType(Guid shadow, int id) { }
     }
 
     [ConditionalFact]
@@ -727,13 +663,14 @@ public class ConstructorBindingConventionTest
         using var context = new NoFieldContext();
         Assert.Equal(
             CoreStrings.NoBackingFieldLazyLoading("NoFieldRelated", "NoField"),
-            Assert.Throws<InvalidOperationException>(() => context.Model).Message);
+            Assert.Throws<InvalidOperationException>(() => context.Model).Message
+        );
     }
 
     private class NoFieldContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(Guid.NewGuid().ToString());
 
@@ -791,8 +728,10 @@ public class ConstructorBindingConventionTest
         return (ConstructorBinding)((EntityType)entityType).ConstructorBinding;
     }
 
-    private ProviderConventionSetBuilderDependencies CreateDependencies()
-        => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+    private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+        InMemoryTestHelpers
+            .Instance.CreateContextServices()
+            .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
     private abstract class Blog
     {

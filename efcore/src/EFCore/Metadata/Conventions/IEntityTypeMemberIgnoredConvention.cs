@@ -20,5 +20,6 @@ public interface IEntityTypeMemberIgnoredConvention : IConvention
     void ProcessEntityTypeMemberIgnored(
         IConventionEntityTypeBuilder entityTypeBuilder,
         string name,
-        IConventionContext<string> context);
+        IConventionContext<string> context
+    );
 }

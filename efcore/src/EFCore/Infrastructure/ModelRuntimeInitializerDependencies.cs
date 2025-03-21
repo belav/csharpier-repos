@@ -47,7 +47,8 @@ public sealed record ModelRuntimeInitializerDependencies
     [EntityFrameworkInternal]
     public ModelRuntimeInitializerDependencies(
         RuntimeModelDependencies runtimeModelDependencies,
-        IModelValidator modelValidator)
+        IModelValidator modelValidator
+    )
     {
         ModelDependencies = runtimeModelDependencies;
         ModelValidator = modelValidator;

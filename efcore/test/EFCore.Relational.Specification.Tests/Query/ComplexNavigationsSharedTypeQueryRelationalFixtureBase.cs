@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class ComplexNavigationsSharedTypeQueryRelationalFixtureBase : ComplexNavigationsSharedTypeQueryFixtureBase
+public abstract class ComplexNavigationsSharedTypeQueryRelationalFixtureBase
+    : ComplexNavigationsSharedTypeQueryFixtureBase
 {
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {
@@ -17,11 +17,12 @@ public abstract class ComplexNavigationsSharedTypeQueryRelationalFixtureBase : C
         modelBuilder.Entity<Level1>(eb => eb.ToTable(nameof(Level1)));
     }
 
-    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-        => base.AddOptions(builder).ConfigureWarnings(
-                c => c
-                    .Log(CoreEventId.DistinctAfterOrderByWithoutRowLimitingOperatorWarning)
-                    .Log(CoreEventId.FirstWithoutOrderByAndFilterWarning))
+    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+        base.AddOptions(builder)
+            .ConfigureWarnings(c =>
+                c.Log(CoreEventId.DistinctAfterOrderByWithoutRowLimitingOperatorWarning)
+                    .Log(CoreEventId.FirstWithoutOrderByAndFilterWarning)
+            )
             .EnableDetailedErrors();
 
     protected override void Configure(OwnedNavigationBuilder<Level1, Level2> l2)

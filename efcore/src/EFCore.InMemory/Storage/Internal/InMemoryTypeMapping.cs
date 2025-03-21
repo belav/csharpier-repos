@@ -31,21 +31,20 @@ public class InMemoryTypeMapping : CoreTypeMapping
         Type clrType,
         ValueComparer? comparer = null,
         ValueComparer? keyComparer = null,
-        JsonValueReaderWriter? jsonValueReaderWriter = null)
+        JsonValueReaderWriter? jsonValueReaderWriter = null
+    )
         : base(
             new CoreTypeMappingParameters(
                 clrType,
                 converter: null,
                 comparer,
                 keyComparer,
-                jsonValueReaderWriter: jsonValueReaderWriter))
-    {
-    }
+                jsonValueReaderWriter: jsonValueReaderWriter
+            )
+        ) { }
 
     private InMemoryTypeMapping(CoreTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,9 +57,17 @@ public class InMemoryTypeMapping : CoreTypeMapping
         ValueComparer? comparer = null,
         ValueComparer? keyComparer = null,
         CoreTypeMapping? elementMapping = null,
-        JsonValueReaderWriter? jsonValueReaderWriter = null)
-        => new InMemoryTypeMapping(
-            Parameters.WithComposedConverter(converter, comparer, keyComparer, elementMapping, jsonValueReaderWriter));
+        JsonValueReaderWriter? jsonValueReaderWriter = null
+    ) =>
+        new InMemoryTypeMapping(
+            Parameters.WithComposedConverter(
+                converter,
+                comparer,
+                keyComparer,
+                elementMapping,
+                jsonValueReaderWriter
+            )
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -68,6 +75,6 @@ public class InMemoryTypeMapping : CoreTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override CoreTypeMapping Clone(CoreTypeMappingParameters parameters)
-        => new InMemoryTypeMapping(parameters);
+    protected override CoreTypeMapping Clone(CoreTypeMappingParameters parameters) =>
+        new InMemoryTypeMapping(parameters);
 }

@@ -26,13 +26,29 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTracking, false)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTracking, false)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Unchanged, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        true
+    )]
+    [InlineData(
+        EntityState.Unchanged,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
-    [InlineData(EntityState.Modified, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
+    [InlineData(
+        EntityState.Modified,
+        QueryTrackingBehavior.NoTrackingWithIdentityResolution,
+        false
+    )]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, true)]
     [InlineData(EntityState.Deleted, QueryTrackingBehavior.NoTrackingWithIdentityResolution, false)]
-    public virtual async Task Load_collection(EntityState state, QueryTrackingBehavior queryTrackingBehavior, bool async)
+    public virtual async Task Load_collection(
+        EntityState state,
+        QueryTrackingBehavior queryTrackingBehavior,
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
@@ -135,21 +151,24 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
             SelfSkipPayloadRight = new List<EntityOne> { new() { Id = 7780 } },
             BranchSkip = new List<EntityBranch> { new() { Id = 7781 } },
             ThreeSkipPayloadFull = new List<EntityThree> { new() { Id = 7782 } },
-            ThreeSkipPayloadFullShared = new List<EntityThree> { new() { Id = 7783 } }
+            ThreeSkipPayloadFullShared = new List<EntityThree> { new() { Id = 7783 } },
         };
 
         context.Attach(left);
 
         if (state != EntityState.Unchanged)
         {
-            foreach (var child in left.TwoSkip.Cast<object>()
-                         .Concat(left.TwoSkipShared)
-                         .Concat(left.SelfSkipPayloadLeft)
-                         .Concat(left.SelfSkipPayloadRight)
-                         .Concat(left.BranchSkip)
-                         .Concat(left.ThreeSkipPayloadFull)
-                         .Concat(left.TwoSkipShared)
-                         .Concat(left.ThreeSkipPayloadFullShared))
+            foreach (
+                var child in left
+                    .TwoSkip.Cast<object>()
+                    .Concat(left.TwoSkipShared)
+                    .Concat(left.SelfSkipPayloadLeft)
+                    .Concat(left.SelfSkipPayloadRight)
+                    .Concat(left.BranchSkip)
+                    .Concat(left.ThreeSkipPayloadFull)
+                    .Concat(left.TwoSkipShared)
+                    .Concat(left.ThreeSkipPayloadFullShared)
+            )
             {
                 context.Entry(child).State = state;
             }
@@ -177,7 +196,10 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
     {
         using var context = Fixture.CreateContext();
 
-        var left = context.Set<EntityOne>().Include(e => e.ThreeSkipPayloadFull).Single(e => e.Id == 3);
+        var left = context
+            .Set<EntityOne>()
+            .Include(e => e.ThreeSkipPayloadFull)
+            .Single(e => e.Id == 3);
 
         ClearLog();
 
@@ -220,7 +242,10 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_collection_using_Query_already_loaded(EntityState state, bool async)
+    public virtual async Task Load_collection_using_Query_already_loaded(
+        EntityState state,
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
@@ -393,7 +418,10 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_collection_using_Query_not_found_untyped(EntityState state, bool async)
+    public virtual async Task Load_collection_using_Query_not_found_untyped(
+        EntityState state,
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
@@ -434,13 +462,20 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
     [InlineData(EntityState.Modified, false, CascadeTiming.OnSaveChanges)]
     [InlineData(EntityState.Deleted, true, CascadeTiming.OnSaveChanges)]
     [InlineData(EntityState.Deleted, false, CascadeTiming.OnSaveChanges)]
-    public virtual async Task Load_collection_already_loaded_untyped(EntityState state, bool async, CascadeTiming deleteOrphansTiming)
+    public virtual async Task Load_collection_already_loaded_untyped(
+        EntityState state,
+        bool async,
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = Fixture.CreateContext();
 
         context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming;
 
-        var left = context.Set<EntityOne>().Include(e => e.ThreeSkipPayloadFull).Single(e => e.Id == 3);
+        var left = context
+            .Set<EntityOne>()
+            .Include(e => e.ThreeSkipPayloadFull)
+            .Single(e => e.Id == 3);
 
         ClearLog();
 
@@ -462,7 +497,9 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
         Assert.True(navigationEntry.IsLoaded);
         foreach (var entityTwo in left.ThreeSkipPayloadFull)
         {
-            Assert.False(context.Entry((object)entityTwo).Collection("OneSkipPayloadFull").IsLoaded);
+            Assert.False(
+                context.Entry((object)entityTwo).Collection("OneSkipPayloadFull").IsLoaded
+            );
         }
 
         RecordLog();
@@ -492,7 +529,8 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
     public virtual async Task Load_collection_using_Query_already_loaded_untyped(
         EntityState state,
         bool async,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         using var context = Fixture.CreateContext();
 
@@ -586,7 +624,10 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
     [InlineData(EntityState.Modified, false)]
     [InlineData(EntityState.Deleted, true)]
     [InlineData(EntityState.Deleted, false)]
-    public virtual async Task Load_collection_using_Query_composite_key(EntityState state, bool async)
+    public virtual async Task Load_collection_using_Query_composite_key(
+        EntityState state,
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
@@ -630,11 +671,17 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
     [InlineData(false, QueryTrackingBehavior.NoTracking)]
     [InlineData(false, QueryTrackingBehavior.TrackAll)]
     [InlineData(false, QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    public virtual async Task Load_collection_for_detached_throws(bool async, QueryTrackingBehavior queryTrackingBehavior)
+    public virtual async Task Load_collection_for_detached_throws(
+        bool async,
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = Fixture.CreateContext();
 
-        var left = context.Set<EntityOne>().AsTracking(queryTrackingBehavior).Single(e => e.Id == 3);
+        var left = context
+            .Set<EntityOne>()
+            .AsTracking(queryTrackingBehavior)
+            .Single(e => e.Id == 3);
 
         var collectionEntry = context.Entry(left).Collection(e => e.TwoSkip);
 
@@ -657,11 +704,16 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
     [InlineData(QueryTrackingBehavior.NoTracking)]
     [InlineData(QueryTrackingBehavior.TrackAll)]
     [InlineData(QueryTrackingBehavior.NoTrackingWithIdentityResolution)]
-    public virtual void Query_collection_for_detached_throws(QueryTrackingBehavior queryTrackingBehavior)
+    public virtual void Query_collection_for_detached_throws(
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         using var context = Fixture.CreateContext();
 
-        var left = context.Set<EntityOne>().AsTracking(queryTrackingBehavior).Single(e => e.Id == 3);
+        var left = context
+            .Set<EntityOne>()
+            .AsTracking(queryTrackingBehavior)
+            .Single(e => e.Id == 3);
 
         var collectionEntry = context.Entry(left).Collection(e => e.TwoSkip);
 
@@ -737,9 +789,7 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
         Assert.False(collectionEntry.IsLoaded);
 
         var queryable = collectionEntry.Query().Include(e => e.OneSkipShared);
-        var children = async
-            ? await queryable.ToListAsync()
-            : queryable.ToList();
+        var children = async ? await queryable.ToListAsync() : queryable.ToList();
 
         Assert.False(collectionEntry.IsLoaded);
         foreach (var entityTwo in left.TwoSkipShared)
@@ -762,7 +812,9 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public virtual async Task Load_collection_using_Query_with_Include_for_same_collection(bool async)
+    public virtual async Task Load_collection_using_Query_with_Include_for_same_collection(
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
@@ -774,10 +826,11 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
 
         Assert.False(collectionEntry.IsLoaded);
 
-        var queryable = collectionEntry.Query().Include(e => e.OneSkipShared).ThenInclude(e => e.TwoSkipShared);
-        var children = async
-            ? await queryable.ToListAsync()
-            : queryable.ToList();
+        var queryable = collectionEntry
+            .Query()
+            .Include(e => e.OneSkipShared)
+            .ThenInclude(e => e.TwoSkipShared);
+        var children = async ? await queryable.ToListAsync() : queryable.ToList();
 
         Assert.True(collectionEntry.IsLoaded);
         foreach (var entityTwo in left.TwoSkipShared)
@@ -813,8 +866,14 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
         Assert.False(collectionEntry.IsLoaded);
 
         var children = async
-            ? await collectionEntry.Query().Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11)).ToListAsync()
-            : collectionEntry.Query().Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11)).ToList();
+            ? await collectionEntry
+                .Query()
+                .Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11))
+                .ToListAsync()
+            : collectionEntry
+                .Query()
+                .Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11))
+                .ToList();
 
         Assert.False(collectionEntry.IsLoaded);
         foreach (var entityTwo in left.TwoSkipShared)
@@ -849,7 +908,9 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public virtual async Task Load_collection_using_Query_with_filtered_Include_and_projection(bool async)
+    public virtual async Task Load_collection_using_Query_with_filtered_Include_and_projection(
+        bool async
+    )
     {
         using var context = Fixture.CreateContext();
 
@@ -865,18 +926,15 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
             .Query()
             .Include(e => e.ThreeSkipFull.Where(e => e.Id == 13 || e.Id == 11))
             .OrderBy(e => e.Id)
-            .Select(
-                e => new
-                {
-                    e.Id,
-                    e.Name,
-                    Count1 = e.OneSkipShared.Count,
-                    Count3 = e.ThreeSkipFull.Count
-                });
+            .Select(e => new
+            {
+                e.Id,
+                e.Name,
+                Count1 = e.OneSkipShared.Count,
+                Count3 = e.ThreeSkipFull.Count,
+            });
 
-        var projected = async
-            ? await queryable.ToListAsync()
-            : queryable.ToList();
+        var projected = async ? await queryable.ToListAsync() : queryable.ToList();
 
         RecordLog();
         Assert.False(collectionEntry.IsLoaded);
@@ -916,14 +974,12 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
 
         Assert.False(collectionEntry.IsLoaded);
 
-        var queryable = from t in collectionEntry.Query()
-                        join s in context.Set<EntityOne>().SelectMany(e => e.TwoSkipShared)
-                            on t.Id equals s.Id
-                        select new { t, s };
+        var queryable =
+            from t in collectionEntry.Query()
+            join s in context.Set<EntityOne>().SelectMany(e => e.TwoSkipShared) on t.Id equals s.Id
+            select new { t, s };
 
-        var projected = async
-            ? await queryable.ToListAsync()
-            : queryable.ToList();
+        var projected = async ? await queryable.ToListAsync() : queryable.ToList();
 
         Assert.False(collectionEntry.IsLoaded);
 
@@ -967,7 +1023,9 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
     {
         using var context = Fixture.CreateContext();
 
-        var queryable = context.EntityOnes.Include(e => e.TwoSkip.Where(e => e.Id == 1 || e.Id == 2));
+        var queryable = context.EntityOnes.Include(e =>
+            e.TwoSkip.Where(e => e.Id == 1 || e.Id == 2)
+        );
         var left = async
             ? await queryable.SingleAsync(e => e.Id == 1)
             : queryable.Single(e => e.Id == 1);
@@ -982,25 +1040,19 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
         }
     }
 
-    protected virtual void ClearLog()
-    {
-    }
+    protected virtual void ClearLog() { }
 
-    protected virtual void RecordLog()
-    {
-    }
+    protected virtual void RecordLog() { }
 
     protected TFixture Fixture { get; }
 
     public abstract class ManyToManyFieldsLoadFixtureBase : ManyToManyFieldsQueryFixtureBase
     {
-        protected override string StoreName
-            => "ManyToManyFieldsLoadTest";
+        protected override string StoreName => "ManyToManyFieldsLoadTest";
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).ConfigureWarnings(
-                    c => c
-                        .Log(CoreEventId.ShadowForeignKeyPropertyCreated))
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(c => c.Log(CoreEventId.ShadowForeignKeyPropertyCreated))
                 .EnableDetailedErrors();
     }
 }

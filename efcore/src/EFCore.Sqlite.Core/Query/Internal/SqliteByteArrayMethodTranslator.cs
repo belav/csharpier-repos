@@ -36,22 +36,30 @@ public class SqliteByteArrayMethodTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
-        if (method.IsGenericMethod
+        if (
+            method.IsGenericMethod
             && method.GetGenericMethodDefinition().Equals(EnumerableMethods.Contains)
-            && arguments[0].Type == typeof(byte[]))
+            && arguments[0].Type == typeof(byte[])
+        )
         {
             var source = arguments[0];
 
             var value = arguments[1] is SqlConstantExpression constantValue
-                ? (SqlExpression)_sqlExpressionFactory.Constant(new[] { (byte)constantValue.Value! }, source.TypeMapping)
+                ? (SqlExpression)
+                    _sqlExpressionFactory.Constant(
+                        new[] { (byte)constantValue.Value! },
+                        source.TypeMapping
+                    )
                 : _sqlExpressionFactory.Function(
                     "char",
                     new[] { arguments[1] },
                     nullable: false,
                     argumentsPropagateNullability: new[] { false },
-                    typeof(string));
+                    typeof(string)
+                );
 
             return _sqlExpressionFactory.GreaterThan(
                 _sqlExpressionFactory.Function(
@@ -59,8 +67,10 @@ public class SqliteByteArrayMethodTranslator : IMethodCallTranslator
                     new[] { source, value },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, true },
-                    typeof(int)),
-                _sqlExpressionFactory.Constant(0));
+                    typeof(int)
+                ),
+                _sqlExpressionFactory.Constant(0)
+            );
         }
 
         // See issue#16428

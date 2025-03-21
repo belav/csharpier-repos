@@ -12,9 +12,9 @@ namespace Microsoft.EntityFrameworkCore.Storage.Json;
 /// </summary>
 /// <typeparam name="TModel">The model type.</typeparam>
 /// <typeparam name="TProvider">The provider type.</typeparam>
-public class JsonConvertedValueReaderWriter<TModel, TProvider> :
-    JsonValueReaderWriter<TModel>,
-    IJsonConvertedValueReaderWriter
+public class JsonConvertedValueReaderWriter<TModel, TProvider>
+    : JsonValueReaderWriter<TModel>,
+        IJsonConvertedValueReaderWriter
 {
     private readonly JsonValueReaderWriter<TProvider> _providerReaderWriter;
     private readonly ValueConverter _converter;
@@ -26,23 +26,29 @@ public class JsonConvertedValueReaderWriter<TModel, TProvider> :
     /// <param name="converter">The value converter.</param>
     public JsonConvertedValueReaderWriter(
         JsonValueReaderWriter<TProvider> providerReaderWriter,
-        ValueConverter converter)
+        ValueConverter converter
+    )
     {
         _providerReaderWriter = providerReaderWriter;
         _converter = converter;
     }
 
     /// <inheritdoc />
-    public override TModel FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => (TModel)_converter.ConvertFromProvider(_providerReaderWriter.FromJsonTyped(ref manager, existingObject))!;
+    public override TModel FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) =>
+        (TModel)
+            _converter.ConvertFromProvider(
+                _providerReaderWriter.FromJsonTyped(ref manager, existingObject)
+            )!;
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, TModel value)
-        => _providerReaderWriter.ToJson(writer, (TProvider)_converter.ConvertToProvider(value)!);
+    public override void ToJsonTyped(Utf8JsonWriter writer, TModel value) =>
+        _providerReaderWriter.ToJson(writer, (TProvider)_converter.ConvertToProvider(value)!);
 
-    JsonValueReaderWriter ICompositeJsonValueReaderWriter.InnerReaderWriter
-        => _providerReaderWriter;
+    JsonValueReaderWriter ICompositeJsonValueReaderWriter.InnerReaderWriter =>
+        _providerReaderWriter;
 
-    ValueConverter IJsonConvertedValueReaderWriter.Converter
-        => _converter;
+    ValueConverter IJsonConvertedValueReaderWriter.Converter => _converter;
 }

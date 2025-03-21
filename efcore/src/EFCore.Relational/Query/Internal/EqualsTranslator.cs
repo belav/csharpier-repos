@@ -36,34 +36,42 @@ public class EqualsTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         SqlExpression? left = null;
         SqlExpression? right = null;
 
-        if (method.Name == nameof(object.Equals)
-            && instance != null
-            && arguments.Count == 1)
+        if (method.Name == nameof(object.Equals) && instance != null && arguments.Count == 1)
         {
             left = instance;
             right = arguments[0];
         }
-        else if (instance == null
-                 && method.Name == nameof(object.Equals)
-                 && arguments.Count == 2)
+        else if (instance == null && method.Name == nameof(object.Equals) && arguments.Count == 2)
         {
             left = arguments[0];
             right = arguments[1];
         }
 
-        if (left != null
-            && right != null)
+        if (left != null && right != null)
         {
-            if (left.Type == right.Type
-                || (right.Type == typeof(object)
-                    && right is SqlParameterExpression or SqlConstantExpression or ColumnExpression { TypeMapping: null })
-                || (left.Type == typeof(object)
-                    && left is SqlParameterExpression or SqlConstantExpression or ColumnExpression { TypeMapping: null }))
+            if (
+                left.Type == right.Type
+                || (
+                    right.Type == typeof(object)
+                    && right
+                        is SqlParameterExpression
+                            or SqlConstantExpression
+                            or ColumnExpression { TypeMapping: null }
+                )
+                || (
+                    left.Type == typeof(object)
+                    && left
+                        is SqlParameterExpression
+                            or SqlConstantExpression
+                            or ColumnExpression { TypeMapping: null }
+                )
+            )
             {
                 return _sqlExpressionFactory.Equal(left, right);
             }

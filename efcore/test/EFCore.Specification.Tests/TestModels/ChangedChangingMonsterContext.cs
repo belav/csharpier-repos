@@ -11,39 +11,68 @@ using System.Runtime.CompilerServices;
 // ReSharper disable ConvertToAutoProperty
 namespace Microsoft.EntityFrameworkCore.TestModels;
 
-public class ChangedChangingMonsterContext : MonsterContext<
-    ChangedChangingMonsterContext.Customer, ChangedChangingMonsterContext.Barcode, ChangedChangingMonsterContext.IncorrectScan,
-    ChangedChangingMonsterContext.BarcodeDetail, ChangedChangingMonsterContext.Complaint, ChangedChangingMonsterContext.Resolution,
-    ChangedChangingMonsterContext.Login, ChangedChangingMonsterContext.SuspiciousActivity, ChangedChangingMonsterContext.SmartCard,
-    ChangedChangingMonsterContext.RsaToken, ChangedChangingMonsterContext.PasswordReset, ChangedChangingMonsterContext.PageView,
-    ChangedChangingMonsterContext.LastLogin, ChangedChangingMonsterContext.Message, ChangedChangingMonsterContext.AnOrder,
-    ChangedChangingMonsterContext.OrderNote, ChangedChangingMonsterContext.OrderQualityCheck, ChangedChangingMonsterContext.OrderLine,
-    ChangedChangingMonsterContext.Product, ChangedChangingMonsterContext.ProductDetail, ChangedChangingMonsterContext.ProductReview,
-    ChangedChangingMonsterContext.ProductPhoto, ChangedChangingMonsterContext.ProductWebFeature, ChangedChangingMonsterContext.Supplier,
-    ChangedChangingMonsterContext.SupplierLogo, ChangedChangingMonsterContext.SupplierInfo, ChangedChangingMonsterContext.CustomerInfo,
-    ChangedChangingMonsterContext.Computer, ChangedChangingMonsterContext.ComputerDetail, ChangedChangingMonsterContext.Driver,
-    ChangedChangingMonsterContext.License, ChangedChangingMonsterContext.ConcurrencyInfo, ChangedChangingMonsterContext.AuditInfo,
-    ChangedChangingMonsterContext.ContactDetails, ChangedChangingMonsterContext.Dimensions, ChangedChangingMonsterContext.Phone,
-    ChangedChangingMonsterContext.BackOrderLine, ChangedChangingMonsterContext.DiscontinuedProduct,
-    ChangedChangingMonsterContext.ProductPageView>
+public class ChangedChangingMonsterContext
+    : MonsterContext<
+        ChangedChangingMonsterContext.Customer,
+        ChangedChangingMonsterContext.Barcode,
+        ChangedChangingMonsterContext.IncorrectScan,
+        ChangedChangingMonsterContext.BarcodeDetail,
+        ChangedChangingMonsterContext.Complaint,
+        ChangedChangingMonsterContext.Resolution,
+        ChangedChangingMonsterContext.Login,
+        ChangedChangingMonsterContext.SuspiciousActivity,
+        ChangedChangingMonsterContext.SmartCard,
+        ChangedChangingMonsterContext.RsaToken,
+        ChangedChangingMonsterContext.PasswordReset,
+        ChangedChangingMonsterContext.PageView,
+        ChangedChangingMonsterContext.LastLogin,
+        ChangedChangingMonsterContext.Message,
+        ChangedChangingMonsterContext.AnOrder,
+        ChangedChangingMonsterContext.OrderNote,
+        ChangedChangingMonsterContext.OrderQualityCheck,
+        ChangedChangingMonsterContext.OrderLine,
+        ChangedChangingMonsterContext.Product,
+        ChangedChangingMonsterContext.ProductDetail,
+        ChangedChangingMonsterContext.ProductReview,
+        ChangedChangingMonsterContext.ProductPhoto,
+        ChangedChangingMonsterContext.ProductWebFeature,
+        ChangedChangingMonsterContext.Supplier,
+        ChangedChangingMonsterContext.SupplierLogo,
+        ChangedChangingMonsterContext.SupplierInfo,
+        ChangedChangingMonsterContext.CustomerInfo,
+        ChangedChangingMonsterContext.Computer,
+        ChangedChangingMonsterContext.ComputerDetail,
+        ChangedChangingMonsterContext.Driver,
+        ChangedChangingMonsterContext.License,
+        ChangedChangingMonsterContext.ConcurrencyInfo,
+        ChangedChangingMonsterContext.AuditInfo,
+        ChangedChangingMonsterContext.ContactDetails,
+        ChangedChangingMonsterContext.Dimensions,
+        ChangedChangingMonsterContext.Phone,
+        ChangedChangingMonsterContext.BackOrderLine,
+        ChangedChangingMonsterContext.DiscontinuedProduct,
+        ChangedChangingMonsterContext.ProductPageView
+    >
 {
     public ChangedChangingMonsterContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public class NotificationEntity : INotifyPropertyChanged, INotifyPropertyChanging
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public event PropertyChangingEventHandler PropertyChanging;
 
-        private void NotifyChanged(string propertyName)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        private void NotifyChanged(string propertyName) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        private void NotifyChanging(string propertyName)
-            => PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
+        private void NotifyChanging(string propertyName) =>
+            PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
 
-        protected void SetWithNotify<T>(T value, ref T field, [CallerMemberName] string propertyName = "")
+        protected void SetWithNotify<T>(
+            T value,
+            ref T field,
+            [CallerMemberName] string propertyName = ""
+        )
         {
             if (!StructuralComparisons.StructuralEqualityComparer.Equals(field, value))
             {
@@ -54,9 +83,7 @@ public class ChangedChangingMonsterContext : MonsterContext<
         }
     }
 
-    public class BackOrderLine2 : BackOrderLine
-    {
-    }
+    public class BackOrderLine2 : BackOrderLine { }
 
     public class BackOrderLine : OrderLine, IBackOrderLine
     {
@@ -115,8 +142,8 @@ public class ChangedChangingMonsterContext : MonsterContext<
         private ICollection<IIncorrectScan> _badScans;
         private IBarcodeDetail _detail;
 
-        public void InitializeCollections()
-            => BadScans ??= new ObservableCollection<IIncorrectScan>();
+        public void InitializeCollections() =>
+            BadScans ??= new ObservableCollection<IIncorrectScan>();
 
         public byte[] Code
         {
@@ -1103,8 +1130,8 @@ public class ChangedChangingMonsterContext : MonsterContext<
         private byte[] _photo;
         private ICollection<IProductWebFeature> _features;
 
-        public void InitializeCollections()
-            => Features ??= new ObservableCollection<IProductWebFeature>();
+        public void InitializeCollections() =>
+            Features ??= new ObservableCollection<IProductWebFeature>();
 
         public int ProductId
         {
@@ -1139,8 +1166,8 @@ public class ChangedChangingMonsterContext : MonsterContext<
         private IProduct _product;
         private ICollection<IProductWebFeature> _features;
 
-        public void InitializeCollections()
-            => Features ??= new ObservableCollection<IProductWebFeature>();
+        public void InitializeCollections() =>
+            Features ??= new ObservableCollection<IProductWebFeature>();
 
         public int ProductId
         {

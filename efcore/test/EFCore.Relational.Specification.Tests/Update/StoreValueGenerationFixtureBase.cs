@@ -7,20 +7,22 @@ namespace Microsoft.EntityFrameworkCore.Update;
 
 #nullable enable
 
-public abstract class StoreValueGenerationFixtureBase : SharedStoreFixtureBase<StoreValueGenerationContext>
+public abstract class StoreValueGenerationFixtureBase
+    : SharedStoreFixtureBase<StoreValueGenerationContext>
 {
-    protected override string StoreName
-        => "StoreValueGenerationTest";
+    protected override string StoreName => "StoreValueGenerationTest";
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {
         var sqlGenerationHelper = context.GetService<ISqlGenerationHelper>();
 
-        foreach (var name in new[]
-                 {
-                     nameof(StoreValueGenerationContext.WithNoDatabaseGenerated),
-                     nameof(StoreValueGenerationContext.WithNoDatabaseGenerated2)
-                 })
+        foreach (
+            var name in new[]
+            {
+                nameof(StoreValueGenerationContext.WithNoDatabaseGenerated),
+                nameof(StoreValueGenerationContext.WithNoDatabaseGenerated2),
+            }
+        )
         {
             modelBuilder
                 .SharedTypeEntity<StoreValueGenerationData>(name)
@@ -28,23 +30,30 @@ public abstract class StoreValueGenerationFixtureBase : SharedStoreFixtureBase<S
                 .ValueGeneratedNever();
         }
 
-        foreach (var name in new[]
-                 {
-                     nameof(StoreValueGenerationContext.WithSomeDatabaseGenerated),
-                     nameof(StoreValueGenerationContext.WithSomeDatabaseGenerated2)
-                 })
+        foreach (
+            var name in new[]
+            {
+                nameof(StoreValueGenerationContext.WithSomeDatabaseGenerated),
+                nameof(StoreValueGenerationContext.WithSomeDatabaseGenerated2),
+            }
+        )
         {
             modelBuilder
                 .SharedTypeEntity<StoreValueGenerationData>(name)
                 .Property(w => w.Data1)
-                .HasComputedColumnSql(sqlGenerationHelper.DelimitIdentifier(nameof(StoreValueGenerationData.Data2)) + " + 1");
+                .HasComputedColumnSql(
+                    sqlGenerationHelper.DelimitIdentifier(nameof(StoreValueGenerationData.Data2))
+                        + " + 1"
+                );
         }
 
-        foreach (var name in new[]
-                 {
-                     nameof(StoreValueGenerationContext.WithAllDatabaseGenerated),
-                     nameof(StoreValueGenerationContext.WithAllDatabaseGenerated2)
-                 })
+        foreach (
+            var name in new[]
+            {
+                nameof(StoreValueGenerationContext.WithAllDatabaseGenerated),
+                nameof(StoreValueGenerationContext.WithAllDatabaseGenerated2),
+            }
+        )
         {
             modelBuilder
                 .SharedTypeEntity<StoreValueGenerationData>(name)
@@ -60,36 +69,52 @@ public abstract class StoreValueGenerationFixtureBase : SharedStoreFixtureBase<S
 
     protected override void Seed(StoreValueGenerationContext context)
     {
-        context.WithSomeDatabaseGenerated.AddRange(new StoreValueGenerationData { Data2 = 1 }, new StoreValueGenerationData { Data2 = 2 });
-        context.WithSomeDatabaseGenerated2.AddRange(new StoreValueGenerationData { Data2 = 1 }, new StoreValueGenerationData { Data2 = 2 });
+        context.WithSomeDatabaseGenerated.AddRange(
+            new StoreValueGenerationData { Data2 = 1 },
+            new StoreValueGenerationData { Data2 = 2 }
+        );
+        context.WithSomeDatabaseGenerated2.AddRange(
+            new StoreValueGenerationData { Data2 = 1 },
+            new StoreValueGenerationData { Data2 = 2 }
+        );
 
         context.WithNoDatabaseGenerated.AddRange(
             new StoreValueGenerationData
             {
                 Id = 1,
                 Data1 = 10,
-                Data2 = 20
-            }, new StoreValueGenerationData
+                Data2 = 20,
+            },
+            new StoreValueGenerationData
             {
                 Id = 2,
                 Data1 = 11,
-                Data2 = 21
-            });
+                Data2 = 21,
+            }
+        );
         context.WithNoDatabaseGenerated2.AddRange(
             new StoreValueGenerationData
             {
                 Id = 1,
                 Data1 = 10,
-                Data2 = 20
-            }, new StoreValueGenerationData
+                Data2 = 20,
+            },
+            new StoreValueGenerationData
             {
                 Id = 2,
                 Data1 = 11,
-                Data2 = 21
-            });
+                Data2 = 21,
+            }
+        );
 
-        context.WithAllDatabaseGenerated.AddRange(new StoreValueGenerationData(), new StoreValueGenerationData());
-        context.WithAllDatabaseGenerated2.AddRange(new StoreValueGenerationData(), new StoreValueGenerationData());
+        context.WithAllDatabaseGenerated.AddRange(
+            new StoreValueGenerationData(),
+            new StoreValueGenerationData()
+        );
+        context.WithAllDatabaseGenerated2.AddRange(
+            new StoreValueGenerationData(),
+            new StoreValueGenerationData()
+        );
 
         context.SaveChanges();
     }
@@ -116,10 +141,9 @@ public abstract class StoreValueGenerationFixtureBase : SharedStoreFixtureBase<S
         context.SaveChanges();
     }
 
-    protected override bool ShouldLogCategory(string logCategory)
-        => logCategory == DbLoggerCategory.Database.Transaction.Name
-            || logCategory == DbLoggerCategory.Database.Command.Name;
+    protected override bool ShouldLogCategory(string logCategory) =>
+        logCategory == DbLoggerCategory.Database.Transaction.Name
+        || logCategory == DbLoggerCategory.Database.Command.Name;
 
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 }

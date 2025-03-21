@@ -23,7 +23,8 @@ public class InMemoryValueGeneratorSelector : ValueGeneratorSelector
     /// </summary>
     public InMemoryValueGeneratorSelector(
         ValueGeneratorSelectorDependencies dependencies,
-        IInMemoryDatabase inMemoryDatabase)
+        IInMemoryDatabase inMemoryDatabase
+    )
         : base(dependencies)
     {
         _inMemoryStore = inMemoryDatabase.Store;
@@ -35,12 +36,12 @@ public class InMemoryValueGeneratorSelector : ValueGeneratorSelector
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override ValueGenerator Select(IProperty property, ITypeBase typeBase)
-        => property.GetValueGeneratorFactory() == null
-            && property.ClrType.IsInteger()
-            && property.ClrType.UnwrapNullableType() != typeof(char)
-                ? GetOrCreate(property)
-                : base.Select(property, typeBase);
+    public override ValueGenerator Select(IProperty property, ITypeBase typeBase) =>
+        property.GetValueGeneratorFactory() == null
+        && property.ClrType.IsInteger()
+        && property.ClrType.UnwrapNullableType() != typeof(char)
+            ? GetOrCreate(property)
+            : base.Select(property, typeBase);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,7 +59,11 @@ public class InMemoryValueGeneratorSelector : ValueGeneratorSelector
 
         throw new ArgumentException(
             CoreStrings.InvalidValueGeneratorFactoryProperty(
-                "InMemoryIntegerValueGeneratorFactory", property.Name, property.DeclaringType.DisplayName()));
+                "InMemoryIntegerValueGeneratorFactory",
+                property.Name,
+                property.DeclaringType.DisplayName()
+            )
+        );
     }
 
     private bool FindGenerator(IProperty property, Type type, out ValueGenerator? valueGenerator)
@@ -116,8 +121,13 @@ public class InMemoryValueGeneratorSelector : ValueGeneratorSelector
     }
 
     /// <inheritdoc />
-    protected override ValueGenerator? FindForType(IProperty property, ITypeBase typeBase, Type clrType)
-        => property.ValueGenerated != ValueGenerated.Never && FindGenerator(property, clrType, out var valueGenerator)
+    protected override ValueGenerator? FindForType(
+        IProperty property,
+        ITypeBase typeBase,
+        Type clrType
+    ) =>
+        property.ValueGenerated != ValueGenerated.Never
+        && FindGenerator(property, clrType, out var valueGenerator)
             ? valueGenerator!
             : base.FindForType(property, typeBase, clrType);
 }

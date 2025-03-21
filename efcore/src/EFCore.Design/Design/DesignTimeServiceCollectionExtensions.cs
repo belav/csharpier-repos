@@ -29,44 +29,76 @@ public static class DesignTimeServiceCollectionExtensions
     public static IServiceCollection AddEntityFrameworkDesignTimeServices(
         this IServiceCollection services,
         IOperationReporter? reporter = null,
-        Func<IServiceProvider>? applicationServiceProviderAccessor = null)
+        Func<IServiceProvider>? applicationServiceProviderAccessor = null
+    )
     {
         reporter ??= new OperationReporter(handler: null);
 
-        new EntityFrameworkRelationalDesignServicesBuilder(services)
-            .TryAddProviderSpecificServices(
-                services => services
-                    .TryAddSingleton<CSharpMigrationOperationGeneratorDependencies, CSharpMigrationOperationGeneratorDependencies>()
-                    .TryAddSingleton<CSharpMigrationsGeneratorDependencies, CSharpMigrationsGeneratorDependencies>()
-                    .TryAddSingleton<CSharpSnapshotGeneratorDependencies, CSharpSnapshotGeneratorDependencies>()
+        new EntityFrameworkRelationalDesignServicesBuilder(services).TryAddProviderSpecificServices(
+            services =>
+                services
+                    .TryAddSingleton<
+                        CSharpMigrationOperationGeneratorDependencies,
+                        CSharpMigrationOperationGeneratorDependencies
+                    >()
+                    .TryAddSingleton<
+                        CSharpMigrationsGeneratorDependencies,
+                        CSharpMigrationsGeneratorDependencies
+                    >()
+                    .TryAddSingleton<
+                        CSharpSnapshotGeneratorDependencies,
+                        CSharpSnapshotGeneratorDependencies
+                    >()
                     .TryAddSingleton<ICandidateNamingService, CandidateNamingService>()
                     .TryAddSingleton<ICSharpHelper, CSharpHelper>()
-                    .TryAddSingleton<ICSharpMigrationOperationGenerator, CSharpMigrationOperationGenerator>()
+                    .TryAddSingleton<
+                        ICSharpMigrationOperationGenerator,
+                        CSharpMigrationOperationGenerator
+                    >()
                     .TryAddSingleton<ICSharpSnapshotGenerator, CSharpSnapshotGenerator>()
                     .TryAddSingleton<ICSharpUtilities, CSharpUtilities>()
                     .TryAddSingleton(reporter)
                     .TryAddSingleton<IMigrationsCodeGenerator, CSharpMigrationsGenerator>()
-                    .TryAddSingleton<IMigrationsCodeGeneratorSelector, MigrationsCodeGeneratorSelector>()
+                    .TryAddSingleton<
+                        IMigrationsCodeGeneratorSelector,
+                        MigrationsCodeGeneratorSelector
+                    >()
                     .TryAddSingletonEnumerable<IModelCodeGenerator, TextTemplatingModelGenerator>()
                     .TryAddSingletonEnumerable<IModelCodeGenerator, CSharpModelGenerator>()
                     .TryAddSingleton<IModelCodeGeneratorSelector, ModelCodeGeneratorSelector>()
                     .TryAddSingleton<ICompiledModelCodeGenerator, CSharpRuntimeModelCodeGenerator>()
-                    .TryAddSingleton<ICompiledModelCodeGeneratorSelector, CompiledModelCodeGeneratorSelector>()
+                    .TryAddSingleton<
+                        ICompiledModelCodeGeneratorSelector,
+                        CompiledModelCodeGeneratorSelector
+                    >()
                     .TryAddSingleton<ICompiledModelScaffolder, CompiledModelScaffolder>()
                     .TryAddSingleton<IDesignTimeConnectionStringResolver>(
-                        new DesignTimeConnectionStringResolver(applicationServiceProviderAccessor))
+                        new DesignTimeConnectionStringResolver(applicationServiceProviderAccessor)
+                    )
                     .TryAddSingleton<IPluralizer, HumanizerPluralizer>()
                     .TryAddSingleton<IScaffoldingModelFactory, RelationalScaffoldingModelFactory>()
                     .TryAddSingleton<IScaffoldingTypeMapper, ScaffoldingTypeMapper>()
-                    .TryAddSingleton<MigrationsCodeGeneratorDependencies, MigrationsCodeGeneratorDependencies>()
-                    .TryAddSingleton<ModelCodeGeneratorDependencies, ModelCodeGeneratorDependencies>()
+                    .TryAddSingleton<
+                        MigrationsCodeGeneratorDependencies,
+                        MigrationsCodeGeneratorDependencies
+                    >()
+                    .TryAddSingleton<
+                        ModelCodeGeneratorDependencies,
+                        ModelCodeGeneratorDependencies
+                    >()
                     .TryAddScoped<IReverseEngineerScaffolder, ReverseEngineerScaffolder>()
-                    .TryAddScoped<MigrationsScaffolderDependencies, MigrationsScaffolderDependencies>()
+                    .TryAddScoped<
+                        MigrationsScaffolderDependencies,
+                        MigrationsScaffolderDependencies
+                    >()
                     .TryAddScoped<IMigrationsScaffolder, MigrationsScaffolder>()
-                    .TryAddScoped<ISnapshotModelProcessor, SnapshotModelProcessor>());
+                    .TryAddScoped<ISnapshotModelProcessor, SnapshotModelProcessor>()
+        );
 
         var loggerFactory = new LoggerFactory(
-            new[] { new OperationLoggerProvider(reporter) }, new LoggerFilterOptions { MinLevel = LogLevel.Debug });
+            new[] { new OperationLoggerProvider(reporter) },
+            new LoggerFilterOptions { MinLevel = LogLevel.Debug }
+        );
         services.AddScoped<ILoggerFactory>(_ => loggerFactory);
 
         return services;
@@ -83,7 +115,8 @@ public static class DesignTimeServiceCollectionExtensions
     /// <returns>The <paramref name="services" />. This enables chaining additional method calls.</returns>
     public static IServiceCollection AddDbContextDesignTimeServices(
         this IServiceCollection services,
-        DbContext context)
+        DbContext context
+    )
     {
         new EntityFrameworkRelationalServicesBuilder(services)
             .TryAdd(context.GetService<IDatabaseProvider>())

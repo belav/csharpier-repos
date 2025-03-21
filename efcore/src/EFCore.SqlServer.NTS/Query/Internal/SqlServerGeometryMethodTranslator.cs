@@ -15,39 +15,143 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 /// </summary>
 public class SqlServerGeometryMethodTranslator : IMethodCallTranslator
 {
-    private static readonly IDictionary<MethodInfo, string> MethodToFunctionName = new Dictionary<MethodInfo, string>
+    private static readonly IDictionary<MethodInfo, string> MethodToFunctionName = new Dictionary<
+        MethodInfo,
+        string
+    >
     {
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.AsBinary), Type.EmptyTypes)!, "STAsBinary" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.AsText), Type.EmptyTypes)!, "AsTextZM" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Buffer), new[] { typeof(double) })!, "STBuffer" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Contains), new[] { typeof(Geometry) })!, "STContains" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.ConvexHull), Type.EmptyTypes)!, "STConvexHull" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Difference), new[] { typeof(Geometry) })!, "STDifference" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Disjoint), new[] { typeof(Geometry) })!, "STDisjoint" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Distance), new[] { typeof(Geometry) })!, "STDistance" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.EqualsTopologically), new[] { typeof(Geometry) })!, "STEquals" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Intersection), new[] { typeof(Geometry) })!, "STIntersection" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Intersects), new[] { typeof(Geometry) })!, "STIntersects" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Overlaps), new[] { typeof(Geometry) })!, "STOverlaps" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.SymmetricDifference), new[] { typeof(Geometry) })!, "STSymDifference" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.ToBinary), Type.EmptyTypes)!, "STAsBinary" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.ToText), Type.EmptyTypes)!, "AsTextZM" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Union), new[] { typeof(Geometry) })!, "STUnion" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Within), new[] { typeof(Geometry) })!, "STWithin" }
+        {
+            typeof(Geometry).GetRuntimeMethod(nameof(Geometry.AsBinary), Type.EmptyTypes)!,
+            "STAsBinary"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(nameof(Geometry.AsText), Type.EmptyTypes)!,
+            "AsTextZM"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Buffer), new[] { typeof(double) })!,
+            "STBuffer"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(
+                nameof(Geometry.Contains),
+                new[] { typeof(Geometry) }
+            )!,
+            "STContains"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(nameof(Geometry.ConvexHull), Type.EmptyTypes)!,
+            "STConvexHull"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(
+                nameof(Geometry.Difference),
+                new[] { typeof(Geometry) }
+            )!,
+            "STDifference"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(
+                nameof(Geometry.Disjoint),
+                new[] { typeof(Geometry) }
+            )!,
+            "STDisjoint"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(
+                nameof(Geometry.Distance),
+                new[] { typeof(Geometry) }
+            )!,
+            "STDistance"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(
+                nameof(Geometry.EqualsTopologically),
+                new[] { typeof(Geometry) }
+            )!,
+            "STEquals"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(
+                nameof(Geometry.Intersection),
+                new[] { typeof(Geometry) }
+            )!,
+            "STIntersection"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(
+                nameof(Geometry.Intersects),
+                new[] { typeof(Geometry) }
+            )!,
+            "STIntersects"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(
+                nameof(Geometry.Overlaps),
+                new[] { typeof(Geometry) }
+            )!,
+            "STOverlaps"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(
+                nameof(Geometry.SymmetricDifference),
+                new[] { typeof(Geometry) }
+            )!,
+            "STSymDifference"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(nameof(Geometry.ToBinary), Type.EmptyTypes)!,
+            "STAsBinary"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(nameof(Geometry.ToText), Type.EmptyTypes)!,
+            "AsTextZM"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Union), new[] { typeof(Geometry) })!,
+            "STUnion"
+        },
+        {
+            typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Within), new[] { typeof(Geometry) })!,
+            "STWithin"
+        },
     };
 
-    private static readonly IDictionary<MethodInfo, string> GeometryMethodToFunctionName = new Dictionary<MethodInfo, string>
-    {
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Crosses), new[] { typeof(Geometry) })!, "STCrosses" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Relate), new[] { typeof(Geometry), typeof(string) })!, "STRelate" },
-        { typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Touches), new[] { typeof(Geometry) })!, "STTouches" }
-    };
+    private static readonly IDictionary<MethodInfo, string> GeometryMethodToFunctionName =
+        new Dictionary<MethodInfo, string>
+        {
+            {
+                typeof(Geometry).GetRuntimeMethod(
+                    nameof(Geometry.Crosses),
+                    new[] { typeof(Geometry) }
+                )!,
+                "STCrosses"
+            },
+            {
+                typeof(Geometry).GetRuntimeMethod(
+                    nameof(Geometry.Relate),
+                    new[] { typeof(Geometry), typeof(string) }
+                )!,
+                "STRelate"
+            },
+            {
+                typeof(Geometry).GetRuntimeMethod(
+                    nameof(Geometry.Touches),
+                    new[] { typeof(Geometry) }
+                )!,
+                "STTouches"
+            },
+        };
 
     private static readonly MethodInfo GetGeometryN = typeof(Geometry).GetRuntimeMethod(
-        nameof(Geometry.GetGeometryN), new[] { typeof(int) })!;
+        nameof(Geometry.GetGeometryN),
+        new[] { typeof(int) }
+    )!;
 
     private static readonly MethodInfo IsWithinDistance = typeof(Geometry).GetRuntimeMethod(
-        nameof(Geometry.IsWithinDistance), new[] { typeof(Geometry), typeof(double) })!;
+        nameof(Geometry.IsWithinDistance),
+        new[] { typeof(Geometry), typeof(double) }
+    )!;
 
     private readonly IRelationalTypeMappingSource _typeMappingSource;
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -60,7 +164,8 @@ public class SqlServerGeometryMethodTranslator : IMethodCallTranslator
     /// </summary>
     public SqlServerGeometryMethodTranslator(
         IRelationalTypeMappingSource typeMappingSource,
-        ISqlExpressionFactory sqlExpressionFactory)
+        ISqlExpressionFactory sqlExpressionFactory
+    )
     {
         _typeMappingSource = typeMappingSource;
         _sqlExpressionFactory = sqlExpressionFactory;
@@ -76,13 +181,14 @@ public class SqlServerGeometryMethodTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
-        if (typeof(Geometry).IsAssignableFrom(method.DeclaringType)
-            && instance != null)
+        if (typeof(Geometry).IsAssignableFrom(method.DeclaringType) && instance != null)
         {
             var geometryExpressions = new[] { instance }.Concat(
-                arguments.Where(e => typeof(Geometry).IsAssignableFrom(e.Type)));
+                arguments.Where(e => typeof(Geometry).IsAssignableFrom(e.Type))
+            );
             var typeMapping = ExpressionExtensions.InferTypeMapping(geometryExpressions.ToArray());
 
             if (typeMapping is null)
@@ -92,13 +198,24 @@ public class SqlServerGeometryMethodTranslator : IMethodCallTranslator
             }
 
             var storeType = typeMapping.StoreType;
-            var isGeography = string.Equals(storeType, "geography", StringComparison.OrdinalIgnoreCase);
+            var isGeography = string.Equals(
+                storeType,
+                "geography",
+                StringComparison.OrdinalIgnoreCase
+            );
 
-            if (MethodToFunctionName.TryGetValue(method, out var functionName)
-                || (!isGeography && GeometryMethodToFunctionName.TryGetValue(method, out functionName)))
+            if (
+                MethodToFunctionName.TryGetValue(method, out var functionName)
+                || (
+                    !isGeography
+                    && GeometryMethodToFunctionName.TryGetValue(method, out functionName)
+                )
+            )
             {
                 instance = _sqlExpressionFactory.ApplyTypeMapping(
-                    instance, _typeMappingSource.FindMapping(instance.Type, storeType));
+                    instance,
+                    _typeMappingSource.FindMapping(instance.Type, storeType)
+                );
 
                 var typeMappedArguments = new List<SqlExpression>();
                 foreach (var argument in arguments)
@@ -108,7 +225,9 @@ public class SqlServerGeometryMethodTranslator : IMethodCallTranslator
                             argument,
                             typeof(Geometry).IsAssignableFrom(argument.Type)
                                 ? _typeMappingSource.FindMapping(argument.Type, storeType)
-                                : _typeMappingSource.FindMapping(argument.Type)));
+                                : _typeMappingSource.FindMapping(argument.Type)
+                        )
+                    );
                 }
 
                 var resultTypeMapping = typeof(Geometry).IsAssignableFrom(method.ReturnType)
@@ -117,11 +236,10 @@ public class SqlServerGeometryMethodTranslator : IMethodCallTranslator
 
                 var finalArguments = Simplify(typeMappedArguments, isGeography);
 
-                var argumentsPropagateNullability = functionName == "STBuffer"
-                    ? new[] { false }
-                    : functionName == "STRelate"
-                        ? new[] { true, false }
-                        : finalArguments.Select(_ => true).ToArray();
+                var argumentsPropagateNullability =
+                    functionName == "STBuffer" ? new[] { false }
+                    : functionName == "STRelate" ? new[] { true, false }
+                    : finalArguments.Select(_ => true).ToArray();
 
                 return _sqlExpressionFactory.Function(
                     instance,
@@ -131,7 +249,8 @@ public class SqlServerGeometryMethodTranslator : IMethodCallTranslator
                     instancePropagatesNullability: true,
                     argumentsPropagateNullability,
                     method.ReturnType,
-                    resultTypeMapping);
+                    resultTypeMapping
+                );
             }
 
             if (Equals(method, GetGeometryN))
@@ -141,21 +260,22 @@ public class SqlServerGeometryMethodTranslator : IMethodCallTranslator
                     "STGeometryN",
                     new[]
                     {
-                        _sqlExpressionFactory.Add(
-                            arguments[0],
-                            _sqlExpressionFactory.Constant(1))
+                        _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1)),
                     },
                     nullable: true,
                     instancePropagatesNullability: true,
                     argumentsPropagateNullability: new[] { false },
                     method.ReturnType,
-                    _typeMappingSource.FindMapping(method.ReturnType, storeType));
+                    _typeMappingSource.FindMapping(method.ReturnType, storeType)
+                );
             }
 
             if (Equals(method, IsWithinDistance))
             {
                 instance = _sqlExpressionFactory.ApplyTypeMapping(
-                    instance, _typeMappingSource.FindMapping(instance.Type, storeType));
+                    instance,
+                    _typeMappingSource.FindMapping(instance.Type, storeType)
+                );
 
                 var typeMappedArguments = new List<SqlExpression>();
                 foreach (var argument in arguments)
@@ -165,7 +285,9 @@ public class SqlServerGeometryMethodTranslator : IMethodCallTranslator
                             argument,
                             typeof(Geometry).IsAssignableFrom(argument.Type)
                                 ? _typeMappingSource.FindMapping(argument.Type, storeType)
-                                : _typeMappingSource.FindMapping(argument.Type)));
+                                : _typeMappingSource.FindMapping(argument.Type)
+                        )
+                    );
                 }
 
                 var finalArguments = Simplify(new[] { typeMappedArguments[0] }, isGeography);
@@ -178,20 +300,27 @@ public class SqlServerGeometryMethodTranslator : IMethodCallTranslator
                         nullable: true,
                         instancePropagatesNullability: true,
                         argumentsPropagateNullability: finalArguments.Select(_ => true),
-                        typeof(double)),
-                    typeMappedArguments[1]);
+                        typeof(double)
+                    ),
+                    typeMappedArguments[1]
+                );
             }
         }
 
         return null;
     }
 
-    private IEnumerable<SqlExpression> Simplify(IEnumerable<SqlExpression> arguments, bool isGeography)
+    private IEnumerable<SqlExpression> Simplify(
+        IEnumerable<SqlExpression> arguments,
+        bool isGeography
+    )
     {
         foreach (var argument in arguments)
         {
-            if (argument is SqlConstantExpression { Value: Geometry geometry }
-                && geometry.SRID == (isGeography ? 4326 : 0))
+            if (
+                argument is SqlConstantExpression { Value: Geometry geometry }
+                && geometry.SRID == (isGeography ? 4326 : 0)
+            )
             {
                 yield return _sqlExpressionFactory.Fragment("'" + geometry.AsText() + "'");
                 continue;

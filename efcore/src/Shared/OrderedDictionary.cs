@@ -11,7 +11,7 @@ namespace Microsoft.EntityFrameworkCore.Utilities
     {
         None = 0,
         OverwriteExisting = 1,
-        ThrowOnExisting = 2
+        ThrowOnExisting = 2,
     }
 
     /// <summary>
@@ -21,7 +21,11 @@ namespace Microsoft.EntityFrameworkCore.Utilities
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
     [DebuggerTypeProxy(typeof(IDictionaryDebugView<,>))]
     [DebuggerDisplay("Count = {Count}")]
-    internal sealed partial class OrderedDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>, IList<KeyValuePair<TKey, TValue>>, IReadOnlyList<KeyValuePair<TKey, TValue>>
+    internal sealed partial class OrderedDictionary<TKey, TValue>
+        : IDictionary<TKey, TValue>,
+            IReadOnlyDictionary<TKey, TValue>,
+            IList<KeyValuePair<TKey, TValue>>,
+            IReadOnlyList<KeyValuePair<TKey, TValue>>
     {
         private struct Entry
         {
@@ -36,12 +40,15 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         // The first add will cause a resize replacing these with real arrays of three elements.
         // Arrays are wrapped in a class to avoid being duplicated for each <TKey, TValue>
         private static readonly Entry[] InitialEntries = new Entry[1];
+
         // 1-based index into _entries; 0 means empty
         private int[] _buckets = HashHelpers.SizeOneIntArray;
+
         // remains contiguous and maintains order
         private Entry[] _entries = InitialEntries;
         private int _count;
         private int _version;
+
         // is null when comparer is EqualityComparer<TKey>.Default so that the GetHashCode method is used explicitly on the object
         private readonly IEqualityComparer<TKey>? _comparer;
         private KeyCollection? _keys;
@@ -116,9 +123,7 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         /// Initializes a new instance of the <see cref="OrderedDictionary{TKey, TValue}" /> class that is empty, has the default initial capacity, and uses the default equality comparer for the key type.
         /// </summary>
         public OrderedDictionary()
-            : this(0, null)
-        {
-        }
+            : this(0, null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderedDictionary{TKey, TValue}" /> class that is empty, has the specified initial capacity, and uses the default equality comparer for the key type.
@@ -126,18 +131,14 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         /// <param name="capacity">The initial number of elements that the <see cref="OrderedDictionary{TKey, TValue}" /> can contain.</param>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="capacity" /> is less than 0.</exception>
         public OrderedDictionary(int capacity)
-            : this(capacity, null)
-        {
-        }
+            : this(capacity, null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderedDictionary{TKey, TValue}" /> class that is empty, has the default initial capacity, and uses the specified <see cref="IEqualityComparer{T}" />.
         /// </summary>
         /// <param name="comparer">The <see cref="IEqualityComparer{T}" /> implementation to use when comparing keys, or null to use the default <see cref="EqualityComparer{T}" /> for the type of the key.</param>
         public OrderedDictionary(IEqualityComparer<TKey> comparer)
-            : this(0, comparer)
-        {
-        }
+            : this(0, comparer) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderedDictionary{TKey, TValue}" /> class that is empty, has the specified initial capacity, and uses the specified <see cref="IEqualityComparer{T}" />.
@@ -169,9 +170,7 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         /// <exception cref="ArgumentNullException"><paramref name="collection" /> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="collection" /> contains one or more duplicate keys.</exception>
         public OrderedDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection)
-            : this(collection, null)
-        {
-        }
+            : this(collection, null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderedDictionary{TKey, TValue}" /> class that contains elements copied from the specified <see cref="IEnumerable{T}" /> and uses the specified <see cref="IEqualityComparer{TKey}" />.
@@ -180,7 +179,10 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         /// <param name="comparer">The <see cref="IEqualityComparer{TKey}" /> implementation to use when comparing keys, or null to use the default <see cref="EqualityComparer{TKey}" /> for the type of the key.</param>
         /// <exception cref="ArgumentNullException"><paramref name="collection" /> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="collection" /> contains one or more duplicate keys.</exception>
-        public OrderedDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection, IEqualityComparer<TKey>? comparer)
+        public OrderedDictionary(
+            IEnumerable<KeyValuePair<TKey, TValue>> collection,
+            IEqualityComparer<TKey>? comparer
+        )
             : this((collection as ICollection<KeyValuePair<TKey, TValue>>)?.Count ?? 0, comparer)
         {
             ArgumentNullException.ThrowIfNull(collection);
@@ -198,7 +200,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         /// <param name="value">The value of the element to add. The value can be null for reference types.</param>
         /// <exception cref="ArgumentNullException"><paramref name="key" /> is null.</exception>
         /// <exception cref="ArgumentException">An element with the same key already exists in the <see cref="OrderedDictionary{TKey, TValue}" />.</exception>
-        public void Add(TKey key, TValue value) => TryInsert(null, key, value, InsertionBehavior.ThrowOnExisting);
+        public void Add(TKey key, TValue value) =>
+            TryInsert(null, key, value, InsertionBehavior.ThrowOnExisting);
 
         /// <summary>
         /// Removes all keys and values from the <see cref="OrderedDictionary{TKey, TValue}" />.
@@ -311,8 +314,7 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         /// </summary>
         /// <param name="key">The key of the element to insert.</param>
         /// <param name="value">The value of the element to insert.</param>
-        public void Insert(TKey key, TValue value)
-            => Insert(key, value, Comparer<TKey>.Default);
+        public void Insert(TKey key, TValue value) => Insert(key, value, Comparer<TKey>.Default);
 
         /// <summary>
         /// Inserts the element in this sorted dictionary to the corresponding index using the default comparer.
@@ -407,7 +409,11 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(fromIndex, Count);
             ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(toIndex, Count);
             ArgumentOutOfRangeException.ThrowIfNegative(count);
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(fromIndex + count, Count, nameof(fromIndex));
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                fromIndex + count,
+                Count,
+                nameof(fromIndex)
+            );
             ArgumentOutOfRangeException.ThrowIfGreaterThan(toIndex + count, Count, nameof(toIndex));
 
             if (fromIndex == toIndex || count == 0)
@@ -535,7 +541,8 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         /// <param name="value">The value of the element to add. The value can be null for reference types.</param>
         /// <returns>true if the element was added to the <see cref="OrderedDictionary{TKey, TValue}" />; false if the <see cref="OrderedDictionary{TKey, TValue}" /> already contained an element with the specified key.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="key" /> is null.</exception>
-        public bool TryAdd(TKey key, TValue value) => TryInsert(null, key, value, InsertionBehavior.None);
+        public bool TryAdd(TKey key, TValue value) =>
+            TryInsert(null, key, value, InsertionBehavior.None);
 
         /// <summary>
         /// Gets the value associated with the specified key as an O(1) operation.
@@ -576,7 +583,12 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                 if (foundIndex < 0)
                 {
                     RemoveEntryFromBucket(index);
-                    var entry = new Entry { HashCode = hashCode, Key = key, Value = value.Value };
+                    var entry = new Entry
+                    {
+                        HashCode = hashCode,
+                        Key = key,
+                        Value = value.Value,
+                    };
                     AddEntryToBucket(ref entry, index, _buckets);
                     _entries[index] = entry;
                     ++_version;
@@ -591,12 +603,15 @@ namespace Microsoft.EntityFrameworkCore.Utilities
                 // key already exists in dictionary but not at the specified index thus throw exception as this method shouldn't affect the indices of other entries
                 else
                 {
-                    throw new ArgumentException($"Key {key} already exists in dictionary but not at the specified index {index}");
+                    throw new ArgumentException(
+                        $"Key {key} already exists in dictionary but not at the specified index {index}"
+                    );
                 }
             }
         }
 
-        KeyValuePair<TKey, TValue> IReadOnlyList<KeyValuePair<TKey, TValue>>.this[int index] => ((IList<KeyValuePair<TKey, TValue>>)this)[index];
+        KeyValuePair<TKey, TValue> IReadOnlyList<KeyValuePair<TKey, TValue>>.this[int index] =>
+            ((IList<KeyValuePair<TKey, TValue>>)this)[index];
 
         ICollection<TKey> IDictionary<TKey, TValue>.Keys => Keys;
 
@@ -608,15 +623,23 @@ namespace Microsoft.EntityFrameworkCore.Utilities
 
         bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly => false;
 
-        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() => GetEnumerator();
+        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<
+            KeyValuePair<TKey, TValue>
+        >.GetEnumerator() => GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item) => Add(item.Key, item.Value);
+        void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item) =>
+            Add(item.Key, item.Value);
 
-        bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item) => TryGetValue(item.Key, out var value) && EqualityComparer<TValue>.Default.Equals(value, item.Value);
+        bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item) =>
+            TryGetValue(item.Key, out var value)
+            && EqualityComparer<TValue>.Default.Equals(value, item.Value);
 
-        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
+        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(
+            KeyValuePair<TKey, TValue>[] array,
+            int arrayIndex
+        )
         {
             ArgumentNullException.ThrowIfNull(array);
             ArgumentOutOfRangeException.ThrowIfGreaterThan(arrayIndex, array.Length);
@@ -634,7 +657,10 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item)
         {
             var index = IndexOf(item.Key);
-            if (index >= 0 && EqualityComparer<TValue>.Default.Equals(_entries[index].Value, item.Value))
+            if (
+                index >= 0
+                && EqualityComparer<TValue>.Default.Equals(_entries[index].Value, item.Value)
+            )
             {
                 RemoveAt(index);
                 return true;
@@ -645,14 +671,18 @@ namespace Microsoft.EntityFrameworkCore.Utilities
         int IList<KeyValuePair<TKey, TValue>>.IndexOf(KeyValuePair<TKey, TValue> item)
         {
             var index = IndexOf(item.Key);
-            if (index >= 0 && !EqualityComparer<TValue>.Default.Equals(_entries[index].Value, item.Value))
+            if (
+                index >= 0
+                && !EqualityComparer<TValue>.Default.Equals(_entries[index].Value, item.Value)
+            )
             {
                 index = -1;
             }
             return index;
         }
 
-        void IList<KeyValuePair<TKey, TValue>>.Insert(int index, KeyValuePair<TKey, TValue> item) => Insert(index, item.Key, item.Value);
+        void IList<KeyValuePair<TKey, TValue>>.Insert(int index, KeyValuePair<TKey, TValue> item) =>
+            Insert(index, item.Key, item.Value);
         #endregion
 
         private Entry[] Resize(int newSize)
@@ -859,9 +889,7 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             /// <summary>
             /// Releases all resources used by the <see cref="OrderedDictionary{TKey, TValue}.Enumerator" />.
             /// </summary>
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             /// <summary>
             /// Advances the enumerator to the next element of the <see cref="OrderedDictionary{TKey, TValue}" />.
@@ -872,7 +900,9 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             {
                 if (_version != _orderedDictionary._version)
                 {
-                    throw new InvalidOperationException("The dictionary has been modified during enumeration");
+                    throw new InvalidOperationException(
+                        "The dictionary has been modified during enumeration"
+                    );
                 }
 
                 if (_index < _orderedDictionary.Count)
@@ -890,7 +920,9 @@ namespace Microsoft.EntityFrameworkCore.Utilities
             {
                 if (_version != _orderedDictionary._version)
                 {
-                    throw new InvalidOperationException("The dictionary has been modified during enumeration");
+                    throw new InvalidOperationException(
+                        "The dictionary has been modified during enumeration"
+                    );
                 }
 
                 _index = 0;

@@ -20,8 +20,7 @@ public class MigrationCommandListBuilder
     ///     Creates a new instance of the builder.
     /// </summary>
     /// <param name="dependencies">Dependencies needed for SQL generations.</param>
-    public MigrationCommandListBuilder(
-        MigrationsSqlGeneratorDependencies dependencies)
+    public MigrationCommandListBuilder(MigrationsSqlGeneratorDependencies dependencies)
     {
         Dependencies = dependencies;
         _commandBuilder = dependencies.CommandBuilderFactory.Create();
@@ -36,8 +35,7 @@ public class MigrationCommandListBuilder
     ///     Gets the list of built commands.
     /// </summary>
     /// <returns>The <see cref="MigrationCommand" />s that have been built.</returns>
-    public virtual IReadOnlyList<MigrationCommand> GetCommandList()
-        => _commands;
+    public virtual IReadOnlyList<MigrationCommand> GetCommandList() => _commands;
 
     /// <summary>
     ///     Ends the building of the current command and adds it to the list of built commands.
@@ -56,7 +54,9 @@ public class MigrationCommandListBuilder
                     _commandBuilder.Build(),
                     Dependencies.CurrentContext.Context,
                     Dependencies.Logger,
-                    suppressTransaction));
+                    suppressTransaction
+                )
+            );
 
             _commandBuilder = Dependencies.CommandBuilderFactory.Create();
         }
@@ -118,8 +118,7 @@ public class MigrationCommandListBuilder
     ///     block is disposed will be indented one level more than the current level.
     /// </summary>
     /// <returns>The object to dispose to indicate that the indentation should go back up a level.</returns>
-    public virtual IDisposable Indent()
-        => _commandBuilder.Indent();
+    public virtual IDisposable Indent() => _commandBuilder.Indent();
 
     /// <summary>
     ///     Increases the current indentation by one level.

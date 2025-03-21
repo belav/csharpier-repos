@@ -7,13 +7,14 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.AdventureWorks;
 
 public static class AdventureWorksSqliteFixture
 {
-    private static readonly string _baseDirectory
-        = Path.GetDirectoryName(typeof(AdventureWorksSqliteFixture).Assembly.Location);
+    private static readonly string _baseDirectory = Path.GetDirectoryName(
+        typeof(AdventureWorksSqliteFixture).Assembly.Location
+    );
 
-    private static readonly string _connectionString
-        = $"Data Source={Path.Combine(_baseDirectory, "AdventureWorks2014.db")}";
+    private static readonly string _connectionString =
+        $"Data Source={Path.Combine(_baseDirectory, "AdventureWorks2014.db")}";
 
     // This method is called from timed code, be careful when changing it
-    public static AdventureWorksContextBase CreateContext()
-        => new AdventureWorksSqliteContext(_connectionString);
+    public static AdventureWorksContextBase CreateContext() =>
+        new AdventureWorksSqliteContext(_connectionString);
 }
