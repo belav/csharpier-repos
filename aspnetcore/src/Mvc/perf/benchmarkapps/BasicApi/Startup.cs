@@ -20,7 +20,6 @@ using Npgsql;
 using System.Linq;
 #endif
 
-
 namespace BasicApi
 {
     public class Startup

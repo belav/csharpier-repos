@@ -10,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Components.Routing;
 #endif
 
-
 namespace Microsoft.AspNetCore.Routing;
 
 internal static class ParameterPolicyActivator
