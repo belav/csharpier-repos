@@ -456,55 +456,38 @@ public class Tests
 
     [DllImport("libtest")]
     public static extern int mono_test_marshal_safearray_in_byref_3dim_vt_bstr(
-        [
-            In,
-            MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)
-        ] ref Array array
+        [In, MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)]
+            ref Array array
     );
 
     [DllImport("libtest")]
     public static extern int mono_test_marshal_safearray_in_out_byref_1dim_empty(
-        [
-            In,
-            Out,
-            MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)
-        ] ref Array array
+        [In, Out, MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)]
+            ref Array array
     );
 
     [DllImport("libtest")]
     public static extern int mono_test_marshal_safearray_in_out_byref_3dim_vt_bstr(
-        [
-            In,
-            Out,
-            MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)
-        ] ref Array array
+        [In, Out, MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)]
+            ref Array array
     );
 
     [DllImport("libtest")]
     public static extern int mono_test_marshal_safearray_in_out_byref_1dim_vt_i4(
-        [
-            In,
-            Out,
-            MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)
-        ] ref Array array
+        [In, Out, MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)]
+            ref Array array
     );
 
     [DllImport("libtest")]
     public static extern int mono_test_marshal_safearray_in_out_byval_1dim_vt_i4(
-        [
-            In,
-            Out,
-            MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)
-        ] Array array
+        [In, Out, MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)]
+            Array array
     );
 
     [DllImport("libtest")]
     public static extern int mono_test_marshal_safearray_in_out_byval_3dim_vt_bstr(
-        [
-            In,
-            Out,
-            MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)
-        ] Array array
+        [In, Out, MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)]
+            Array array
     );
 
     [DllImport("libtest")]
@@ -1333,10 +1316,8 @@ public class Tests
             MethodCodeType = MethodCodeType.Runtime
         )]
         void ArrayIn(
-            [
-                In,
-                MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)
-            ] object[] array
+            [In, MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)]
+                object[] array
         );
 
         [MethodImplAttribute(
@@ -1487,10 +1468,8 @@ public class Tests
             MethodCodeType = MethodCodeType.Runtime
         )]
         int ArrayIn(
-            [
-                In,
-                MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)
-            ] object[] array
+            [In, MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)]
+                object[] array
         );
 
         [MethodImplAttribute(
@@ -1621,10 +1600,8 @@ public class Tests
             MethodCodeType = MethodCodeType.Runtime
         )]
         public extern virtual void ArrayIn(
-            [
-                In,
-                MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)
-            ] object[] array
+            [In, MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)]
+                object[] array
         );
 
         [MethodImplAttribute(

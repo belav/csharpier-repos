@@ -50,7 +50,8 @@ namespace System.Reflection.Metadata
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .NonPublicMethods
-            )] System.Type handlerType
+            )]
+                System.Type handlerType
         ) { }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(

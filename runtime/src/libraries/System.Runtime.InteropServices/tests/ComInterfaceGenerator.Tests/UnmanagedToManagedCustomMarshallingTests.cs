@@ -48,9 +48,8 @@ namespace ComInterfaceGenerator.Tests
 
                 [VirtualMethodIndex(2, ImplicitThisParameter = true)]
                 void ExchangeData(
-                    [MarshalUsing(
-                        typeof(IntWrapperMarshallerToIntWithFreeCounts)
-                    )] ref IntWrapper data
+                    [MarshalUsing(typeof(IntWrapperMarshallerToIntWithFreeCounts))]
+                        ref IntWrapper data
                 );
 
                 [VirtualMethodIndex(3, ImplicitThisParameter = true)]

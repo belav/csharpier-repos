@@ -141,7 +141,8 @@ namespace System.Reflection.Emit
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
-            )] System.Type excType
+            )]
+                System.Type excType
         ) { }
 
         public abstract void UsingNamespace(string usingNamespace);

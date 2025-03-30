@@ -86,7 +86,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
         [Kept]
         private static void TestDataFlowWithAnnotation(
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                Type type
         )
         {
             var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Static);

@@ -1739,9 +1739,8 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 public AttributeWithRequirementsOnParameters() { }
 
                 public AttributeWithRequirementsOnParameters(
-                    [DynamicallyAccessedMembers(
-                        DynamicallyAccessedMemberTypes.PublicFields
-                    )] Type type
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+                        Type type
                 ) { }
 
                 public int PropertyWithRequires

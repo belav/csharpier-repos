@@ -17,9 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceMatching
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     internal class CSharpEmbeddedLanguageBraceMatcher(
-        [ImportMany] IEnumerable<
-            Lazy<IEmbeddedLanguageBraceMatcher, EmbeddedLanguageMetadata>
-        > services
+        [ImportMany]
+            IEnumerable<Lazy<IEmbeddedLanguageBraceMatcher, EmbeddedLanguageMetadata>> services
     )
         : AbstractEmbeddedLanguageBraceMatcher(
             LanguageNames.CSharp,

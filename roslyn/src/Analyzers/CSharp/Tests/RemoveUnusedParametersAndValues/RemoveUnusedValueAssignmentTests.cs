@@ -2775,10 +2775,8 @@ class Q
         [Theory]
         [CombinatorialData]
         public async Task DeclarationPatternInSwitchCase_WithOnlyWriteReference_PreferUnusedLocal(
-            [CombinatorialValues(
-                LanguageVersion.CSharp8,
-                LanguageVersion.CSharp9
-            )] LanguageVersion languageVersion
+            [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
+                LanguageVersion languageVersion
         )
         {
             await TestMissingInRegularAndScriptAsync(
@@ -2804,10 +2802,8 @@ class Q
         [Theory]
         [CombinatorialData]
         public async Task DeclarationPatternInSwitchCase_WithOnlyWriteReference_TypePattern(
-            [CombinatorialValues(
-                CodeFixTestBehaviors.None,
-                CodeFixTestBehaviors.FixOne
-            )] CodeFixTestBehaviors testBehaviors
+            [CombinatorialValues(CodeFixTestBehaviors.None, CodeFixTestBehaviors.FixOne)]
+                CodeFixTestBehaviors testBehaviors
         )
         {
             var source =
@@ -3025,10 +3021,8 @@ class Q
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/32271")]
         [CombinatorialData]
         public async Task DeclarationPatternInRecursivePattern_WithNoReference_PreferUnusedLocal(
-            [CombinatorialValues(
-                LanguageVersion.CSharp8,
-                LanguageVersion.CSharp9
-            )] LanguageVersion languageVersion
+            [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
+                LanguageVersion languageVersion
         )
         {
             await TestMissingInRegularAndScriptAsync(
@@ -3047,10 +3041,8 @@ class Q
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/32271")]
         [CombinatorialData]
         public async Task DeclarationPatternInRecursivePattern_WithNoReference_TypePattern(
-            [CombinatorialValues(
-                CodeFixTestBehaviors.None,
-                CodeFixTestBehaviors.FixOne
-            )] CodeFixTestBehaviors testBehaviors
+            [CombinatorialValues(CodeFixTestBehaviors.None, CodeFixTestBehaviors.FixOne)]
+                CodeFixTestBehaviors testBehaviors
         )
         {
             var source =
@@ -3141,10 +3133,8 @@ class Q
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/32271")]
         [CombinatorialData]
         public async Task DeclarationPatternInRecursivePattern_WithOnlyWriteReference_PreferUnusedLocal(
-            [CombinatorialValues(
-                LanguageVersion.CSharp8,
-                LanguageVersion.CSharp9
-            )] LanguageVersion languageVersion
+            [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
+                LanguageVersion languageVersion
         )
         {
             await TestMissingInRegularAndScriptAsync(
@@ -3169,10 +3159,8 @@ class Q
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/32271")]
         [CombinatorialData]
         public async Task DeclarationPatternInRecursivePattern_WithOnlyWriteReference_TypePattern(
-            [CombinatorialValues(
-                CodeFixTestBehaviors.None,
-                CodeFixTestBehaviors.FixOne
-            )] CodeFixTestBehaviors testBehaviors
+            [CombinatorialValues(CodeFixTestBehaviors.None, CodeFixTestBehaviors.FixOne)]
+                CodeFixTestBehaviors testBehaviors
         )
         {
             var source =
@@ -8440,10 +8428,8 @@ class C
         [Theory, WorkItem(32856, "https://github.com/dotnet/roslyn/issues/33312")]
         [CombinatorialData]
         public async Task DeclarationPatternInSwitchCase_WithTrivia_PreferUnusedLocal(
-            [CombinatorialValues(
-                LanguageVersion.CSharp8,
-                LanguageVersion.CSharp9
-            )] LanguageVersion languageVersion
+            [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
+                LanguageVersion languageVersion
         )
         {
             await TestMissingInRegularAndScriptAsync(
@@ -8468,10 +8454,8 @@ class C
         [Theory, WorkItem(32856, "https://github.com/dotnet/roslyn/issues/33312")]
         [CombinatorialData]
         public async Task DeclarationPatternInSwitchCase_WithTrivia_TypePattern(
-            [CombinatorialValues(
-                CodeFixTestBehaviors.None,
-                CodeFixTestBehaviors.FixOne
-            )] CodeFixTestBehaviors testBehaviors
+            [CombinatorialValues(CodeFixTestBehaviors.None, CodeFixTestBehaviors.FixOne)]
+                CodeFixTestBehaviors testBehaviors
         )
         {
             var source =
@@ -9105,10 +9089,8 @@ public class Test
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/38640")]
         [CombinatorialData]
         public async Task DeclarationPatternInSwitchExpressionArm_UnusedLocal_PreferUnusedLocal(
-            [CombinatorialValues(
-                LanguageVersion.CSharp8,
-                LanguageVersion.CSharp9
-            )] LanguageVersion languageVersion
+            [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
+                LanguageVersion languageVersion
         )
         {
             await TestDiagnosticMissingAsync(
@@ -9217,10 +9199,8 @@ public class Test
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/40499")]
         [CombinatorialData]
         public async Task UnusedVarLocalDefinedInPropertySubPattern_PreferDiscard(
-            [CombinatorialValues(
-                LanguageVersion.CSharp8,
-                LanguageVersion.CSharp9
-            )] LanguageVersion languageVersion
+            [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
+                LanguageVersion languageVersion
         )
         {
             await TestInRegularAndScriptAsync(
@@ -9248,10 +9228,8 @@ public class Test
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/40499")]
         [CombinatorialData]
         public async Task UnusedLocalDefinedInPropertySubPattern_PreferUnusedLocal(
-            [CombinatorialValues(
-                LanguageVersion.CSharp8,
-                LanguageVersion.CSharp9
-            )] LanguageVersion languageVersion
+            [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
+                LanguageVersion languageVersion
         )
         {
             await TestDiagnosticMissingAsync(

@@ -19,9 +19,8 @@ namespace System.Reflection
         }
 
         public static ConstructorInfo[] GetConstructors(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicConstructors
-            )] this Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                this Type type
         )
         {
             ArgumentNullException.ThrowIfNull(type);
@@ -51,7 +50,8 @@ namespace System.Reflection
                     | DynamicallyAccessedMemberTypes.PublicProperties
                     | DynamicallyAccessedMemberTypes.PublicConstructors
                     | DynamicallyAccessedMemberTypes.PublicNestedTypes
-            )] this Type type
+            )]
+                this Type type
         )
         {
             ArgumentNullException.ThrowIfNull(type);
@@ -210,7 +210,8 @@ namespace System.Reflection
                     | DynamicallyAccessedMemberTypes.PublicProperties
                     | DynamicallyAccessedMemberTypes.PublicConstructors
                     | DynamicallyAccessedMemberTypes.PublicNestedTypes
-            )] this Type type
+            )]
+                this Type type
         )
         {
             ArgumentNullException.ThrowIfNull(type);
@@ -267,9 +268,8 @@ namespace System.Reflection
         }
 
         public static MethodInfo[] GetMethods(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicMethods
-            )] this Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                this Type type
         )
         {
             ArgumentNullException.ThrowIfNull(type);
@@ -321,9 +321,8 @@ namespace System.Reflection
         }
 
         public static PropertyInfo[] GetProperties(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicProperties
-            )] this Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                this Type type
         )
         {
             ArgumentNullException.ThrowIfNull(type);

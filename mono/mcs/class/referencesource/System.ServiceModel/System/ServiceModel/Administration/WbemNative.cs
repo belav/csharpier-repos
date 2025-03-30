@@ -723,8 +723,7 @@ namespace System.ServiceModel.Administration
                 [In] Int32 lObjectCount,
                 //[In][MarshalAs(UnmanagedType.Interface)]  ref
                 [In]
-                [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)]
-                    IWbemClassObject[] apObjArray
+                [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0)] IWbemClassObject[] apObjArray
             );
 
             [PreserveSig]

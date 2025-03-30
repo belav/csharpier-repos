@@ -140,7 +140,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     | DynamicallyAccessedMemberTypes.PublicFields
                     | DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.PublicProperties
-            )] Type type
+            )]
+                Type type
         ) { }
 
         [Kept]
@@ -151,7 +152,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     | DynamicallyAccessedMemberTypes.PublicFields
                     | DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.PublicProperties
-            )] string typeName
+            )]
+                string typeName
         ) { }
 
         [Kept]

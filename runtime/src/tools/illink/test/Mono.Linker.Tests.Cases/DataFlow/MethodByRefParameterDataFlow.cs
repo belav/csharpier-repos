@@ -176,9 +176,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         static void TestPassingRefParameter(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicMethods
-            )] ref Type typeWithMethods
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                ref Type typeWithMethods
         )
         {
             TryGetAnnotatedValue(ref typeWithMethods);
@@ -187,9 +186,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [ExpectedWarning("IL2067", "typeWithMethods", nameof(TryGetAnnotatedValue))]
         [ExpectedWarning("IL2067", "typeWithMethods", nameof(TryGetAnnotatedValue))]
         static void TestPassingRefParameter_Mismatch(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicFields
-            )] ref Type typeWithMethods
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+                ref Type typeWithMethods
         )
         {
             TryGetAnnotatedValue(ref typeWithMethods);
@@ -217,9 +215,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         static bool TryGetAnnotatedValue(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicMethods
-            )] ref Type typeWithMethods
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                ref Type typeWithMethods
         )
         {
             typeWithMethods = null;
@@ -227,9 +224,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         static bool TryGetAnnotatedValueOut(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicMethods
-            )] out Type typeWithMethods
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                out Type typeWithMethods
         )
         {
             typeWithMethods = null;
@@ -443,9 +439,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 InnerMethodWithDam(ref GetTypeRefWithMethodsAndFields());
 
                 void InnerMethodWithDam(
-                    [DynamicallyAccessedMembers(
-                        DynamicallyAccessedMemberTypes.PublicMethods
-                    )] ref Type typeWithMethods
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                        ref Type typeWithMethods
                 ) { }
             }
 

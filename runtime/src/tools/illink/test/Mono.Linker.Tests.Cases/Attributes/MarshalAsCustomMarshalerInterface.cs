@@ -32,7 +32,8 @@ namespace Mono.Linker.Tests.Cases.Attributes
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalType = "Mono.Linker.Tests.Cases.Attributes.CustomMarhaler1"
-            )] object o
+            )]
+                object o
         );
     }
 

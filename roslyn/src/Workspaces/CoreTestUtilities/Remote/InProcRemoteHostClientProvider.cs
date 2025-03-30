@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
             public Factory(
-                [ImportMany] IEnumerable<
+                [ImportMany]
+                    IEnumerable<
                     Lazy<
                         IRemoteServiceCallbackDispatcher,
                         RemoteServiceCallbackDispatcherRegistry.ExportMetadata

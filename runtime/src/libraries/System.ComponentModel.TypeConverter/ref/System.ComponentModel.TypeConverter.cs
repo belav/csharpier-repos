@@ -192,7 +192,8 @@ namespace System.ComponentModel
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicParameterlessConstructor
-            )] System.Type attributeType
+            )]
+                System.Type attributeType
         ]
         {
             get { throw null; }
@@ -244,7 +245,8 @@ namespace System.ComponentModel
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicParameterlessConstructor
-            )] System.Type attributeType
+            )]
+                System.Type attributeType
         )
         {
             throw null;
@@ -290,7 +292,8 @@ namespace System.ComponentModel
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicProperties
-            )] string typeName
+            )]
+                string typeName
         ) { }
 
         public AttributeProviderAttribute(
@@ -330,7 +333,8 @@ namespace System.ComponentModel
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicProperties
-            )] System.Type type
+            )]
+                System.Type type
         ) { }
 
         public string? PropertyName
@@ -1493,7 +1497,8 @@ namespace System.ComponentModel
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicParameterlessConstructor
-            )] System.Type type
+            )]
+                System.Type type
         ) { }
 
         protected virtual System.Collections.IComparer Comparer
@@ -2095,13 +2100,15 @@ namespace System.ComponentModel
         public InstallerTypeAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
-            )] string? typeName
+            )]
+                string? typeName
         ) { }
 
         public InstallerTypeAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
-            )] System.Type installerType
+            )]
+                System.Type installerType
         ) { }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -2368,7 +2375,8 @@ namespace System.ComponentModel
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
-            )] string? typeName
+            )]
+                string? typeName
         ) { }
 
         public LicenseProviderAttribute(
@@ -2378,7 +2386,8 @@ namespace System.ComponentModel
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
-            )] System.Type type
+            )]
+                System.Type type
         ) { }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -3608,7 +3617,8 @@ namespace System.ComponentModel
         protected object? CreateInstance(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
-            )] System.Type type
+            )]
+                System.Type type
         )
         {
             throw null;
@@ -3689,7 +3699,8 @@ namespace System.ComponentModel
         protected System.Type? GetTypeFromName(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
-            )] string? typeName
+            )]
+                string? typeName
         )
         {
             throw null;
@@ -3907,7 +3918,8 @@ namespace System.ComponentModel
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
-            )] string tabClassName
+            )]
+                string tabClassName
         ) { }
 
         public PropertyTabAttribute(
@@ -3943,9 +3955,8 @@ namespace System.ComponentModel
         }
 
         public bool Equals(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
-                true
-            )] System.ComponentModel.PropertyTabAttribute? other
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                System.ComponentModel.PropertyTabAttribute? other
         )
         {
             throw null;
@@ -4359,13 +4370,15 @@ namespace System.ComponentModel
         public ToolboxItemAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
-            )] string toolboxItemTypeName
+            )]
+                string toolboxItemTypeName
         ) { }
 
         public ToolboxItemAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
-            )] System.Type toolboxItemType
+            )]
+                System.Type toolboxItemType
         ) { }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -4877,7 +4890,8 @@ namespace System.ComponentModel
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicParameterlessConstructor
-            )] System.Type objectType
+            )]
+                System.Type objectType
         )
         {
             throw null;
@@ -4923,7 +4937,8 @@ namespace System.ComponentModel
         public System.ComponentModel.ICustomTypeDescriptor? GetTypeDescriptor(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )] System.Type objectType
+            )]
+                System.Type objectType
         )
         {
             throw null;
@@ -5178,7 +5193,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.AttributeCollection GetAttributes(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )] System.Type componentType
+            )]
+                System.Type componentType
         )
         {
             throw null;
@@ -5206,7 +5222,8 @@ namespace System.ComponentModel
         public static string? GetClassName(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )] System.Type componentType
+            )]
+                System.Type componentType
         )
         {
             throw null;
@@ -5259,7 +5276,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.TypeConverter GetConverter(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )] System.Type type
+            )]
+                System.Type type
         )
         {
             throw null;
@@ -5293,7 +5311,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.EventDescriptor? GetDefaultEvent(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )] System.Type componentType
+            )]
+                System.Type componentType
         )
         {
             throw null;
@@ -5327,7 +5346,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.PropertyDescriptor? GetDefaultProperty(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )] System.Type componentType
+            )]
+                System.Type componentType
         )
         {
             throw null;
@@ -5421,7 +5441,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.EventDescriptorCollection GetEvents(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )] System.Type componentType
+            )]
+                System.Type componentType
         )
         {
             throw null;
@@ -5502,7 +5523,8 @@ namespace System.ComponentModel
         public static System.ComponentModel.PropertyDescriptorCollection GetProperties(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )] System.Type componentType
+            )]
+                System.Type componentType
         )
         {
             throw null;
@@ -5568,7 +5590,8 @@ namespace System.ComponentModel
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicParameterlessConstructor
-            )] System.Type type
+            )]
+                System.Type type
         )
         {
             throw null;
@@ -6705,7 +6728,8 @@ namespace System.ComponentModel.Design
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
-            )] string name
+            )]
+                string name
         );
 
         [return: System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(

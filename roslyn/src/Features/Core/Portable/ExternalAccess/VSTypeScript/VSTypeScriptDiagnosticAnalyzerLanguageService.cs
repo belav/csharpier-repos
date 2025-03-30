@@ -18,9 +18,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     internal sealed class VSTypeScriptDiagnosticAnalyzerLanguageService(
-        [Import(
-            AllowDefault = true
-        )] IVSTypeScriptDiagnosticAnalyzerImplementation? implementation = null
+        [Import(AllowDefault = true)]
+            IVSTypeScriptDiagnosticAnalyzerImplementation? implementation = null
     ) : ILanguageService
     {
         internal readonly IVSTypeScriptDiagnosticAnalyzerImplementation? Implementation =

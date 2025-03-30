@@ -376,7 +376,8 @@ namespace PInvokeTests
                 MarshalAs(
                     40 /* UnmanagedType.AsAny */
                 )
-            ] object o
+            ]
+                object o
         );
 
         [DllImport("PInvokeNative", CallingConvention = CallingConvention.StdCall)]

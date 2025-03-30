@@ -3437,7 +3437,8 @@ namespace System.Linq.Expressions
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicConstructors
-            )] System.Type type
+            )]
+                System.Type type
         )
         {
             throw null;

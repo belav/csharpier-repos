@@ -250,13 +250,15 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         public static void RequirePublicFields(
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+                Type type
         ) { }
 
         [Kept]
         public static void RequirePublicMethods(
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                Type type
         ) { }
     }
 }

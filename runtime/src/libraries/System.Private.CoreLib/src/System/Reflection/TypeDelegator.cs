@@ -291,7 +291,8 @@ namespace System.Reflection
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicMethods
-            )] Type interfaceType
+            )]
+                Type interfaceType
         ) => typeImpl.GetInterfaceMap(interfaceType);
     }
 }

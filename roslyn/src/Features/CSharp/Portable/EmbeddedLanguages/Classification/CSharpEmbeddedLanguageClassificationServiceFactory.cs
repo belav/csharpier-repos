@@ -20,9 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     internal class CSharpEmbeddedLanguageClassificationService(
-        [ImportMany] IEnumerable<
-            Lazy<IEmbeddedLanguageClassifier, EmbeddedLanguageMetadata>
-        > classifiers
+        [ImportMany]
+            IEnumerable<Lazy<IEmbeddedLanguageClassifier, EmbeddedLanguageMetadata>> classifiers
     )
         : AbstractEmbeddedLanguageClassificationService(
             LanguageNames.CSharp,

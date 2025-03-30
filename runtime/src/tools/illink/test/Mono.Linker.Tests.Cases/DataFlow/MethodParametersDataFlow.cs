@@ -65,7 +65,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         private static void PublicParameterlessConstructorParameter(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )] Type sourceType
+            )]
+                Type sourceType
         )
         {
             sourceType.RequiresPublicParameterlessConstructor();
@@ -80,9 +81,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DataFlowTypeExtensions.RequiresNonPublicConstructors)
         )]
         private static void PublicConstructorsParameter(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicConstructors
-            )] Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type type
         )
         {
             type.RequiresPublicParameterlessConstructor();
@@ -103,9 +103,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DataFlowTypeExtensions.RequiresPublicConstructors)
         )]
         private static void NonPublicConstructorsParameter(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.NonPublicConstructors
-            )] Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+                Type type
         )
         {
             type.RequiresPublicParameterlessConstructor();
@@ -122,7 +121,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         private void InstanceMethod(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )] Type type
+            )]
+                Type type
         )
         {
             type.RequiresPublicParameterlessConstructor();
@@ -137,9 +137,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             nameof(ReturnThingsWithPublicParameterlessConstructor)
         )]
         private void WriteToParameterOnInstanceMethod(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.NonPublicConstructors
-            )] Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+                Type type
         )
         {
             type = ReturnThingsWithPublicParameterlessConstructor();
@@ -153,9 +152,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             nameof(ReturnThingsWithPublicParameterlessConstructor)
         )]
         private static void WriteToParameterOnStaticMethod(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.NonPublicConstructors
-            )] Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+                Type type
         )
         {
             type = ReturnThingsWithPublicParameterlessConstructor();
@@ -287,7 +285,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         private void AnnotatedValueToUnAnnotatedParameter(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )] Type type
+            )]
+                Type type
         )
         {
             type.RequiresNone();
@@ -312,9 +311,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         {
             [ExpectedWarning("IL2067", nameof(DataFlowTypeExtensions.RequiresPublicConstructors))]
             public InstanceCtor(
-                [DynamicallyAccessedMembers(
-                    DynamicallyAccessedMemberTypes.NonPublicConstructors
-                )] Type type
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+                    Type type
             )
             {
                 type.RequiresNonPublicConstructors();
@@ -364,8 +362,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [ExpectedWarning("IL2072", nameof(GetUnknownType), "parameter")]
             [ExpectedWarning("IL2072", nameof(GetTypeWithPublicConstructors), "parameter")]
             static void TestNullCoalesce(
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type parameter =
-                    null
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                    Type parameter = null
             )
             {
                 parameter = GetUnknownType() ?? GetTypeWithPublicConstructors();
@@ -373,8 +371,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [ExpectedWarning("IL2072", nameof(GetUnknownType), "parameter")]
             static void TestNullCoalescingAssignment(
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type parameter =
-                    null
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                    Type parameter = null
             )
             {
                 parameter ??= GetUnknownType();
@@ -383,8 +381,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [ExpectedWarning("IL2072", nameof(GetUnknownType), "parameter")]
             [ExpectedWarning("IL2072", nameof(GetTypeWithPublicConstructors), "parameter")]
             static void TestNullCoalescingAssignmentComplex(
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type parameter =
-                    null
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                    Type parameter = null
             )
             {
                 parameter ??= (GetUnknownType() ?? GetTypeWithPublicConstructors());

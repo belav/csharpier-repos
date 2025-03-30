@@ -146,9 +146,8 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     /// <param name="valueGeneratorType">A type that inherits from <see cref="ValueGenerator" />.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public new virtual PrimitiveCollectionBuilder<TProperty> HasValueGenerator(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-        )] Type? valueGeneratorType
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? valueGeneratorType
     ) => (PrimitiveCollectionBuilder<TProperty>)base.HasValueGenerator(valueGeneratorType);
 
     /// <summary>
@@ -210,9 +209,8 @@ public class PrimitiveCollectionBuilder<TProperty> : PrimitiveCollectionBuilder
     /// <param name="valueGeneratorFactoryType">A type that inherits from <see cref="ValueGeneratorFactory" />.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public new virtual PrimitiveCollectionBuilder<TProperty> HasValueGeneratorFactory(
-        [DynamicallyAccessedMembers(
-            ValueGeneratorFactory.DynamicallyAccessedMemberTypes
-        )] Type? valueGeneratorFactoryType
+        [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)]
+            Type? valueGeneratorFactoryType
     ) =>
         (PrimitiveCollectionBuilder<TProperty>)
             base.HasValueGeneratorFactory(valueGeneratorFactoryType);

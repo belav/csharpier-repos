@@ -33,7 +33,8 @@ namespace System.Text.Json.Serialization
         public JsonConverterAttribute(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )] Type converterType
+            )]
+                Type converterType
         )
         {
             ConverterType = converterType;

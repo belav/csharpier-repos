@@ -74,7 +74,8 @@ internal sealed class SlimWebHostBuilder : WebHostBuilderBase, ISupportsStartup
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicConstructors
                 | DynamicallyAccessedMemberTypes.PublicMethods
-        )] Type startupType
+        )]
+            Type startupType
     )
     {
         throw new NotSupportedException();

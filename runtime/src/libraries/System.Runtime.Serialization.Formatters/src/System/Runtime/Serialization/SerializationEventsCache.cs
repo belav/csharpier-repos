@@ -29,8 +29,7 @@ namespace System.Runtime.Serialization
         private List<MethodInfo>? GetMethodsWithAttribute(
             Type attribute,
             // currently the only way to preserve base, non-public methods is to use All
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-                Type? t
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type? t
         )
         {
             List<MethodInfo>? mi = null;

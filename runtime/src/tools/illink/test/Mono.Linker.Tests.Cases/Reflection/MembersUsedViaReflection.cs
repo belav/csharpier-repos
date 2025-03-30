@@ -80,7 +80,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
                     | DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.PublicProperties
                     | DynamicallyAccessedMemberTypes.PublicNestedTypes
-            )] Type type
+            )]
+                Type type
         )
         {
             var properties = type.GetMembers(BindingFlags.Public | BindingFlags.Static);

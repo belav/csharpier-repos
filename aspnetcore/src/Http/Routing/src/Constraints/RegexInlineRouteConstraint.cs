@@ -26,7 +26,8 @@ internal class RegexInlineRouteConstraint : RegexRouteConstraint
         [StringSyntax(
             StringSyntaxAttribute.Regex,
             RegexOptions.CultureInvariant | RegexOptions.IgnoreCase
-        )] string regexPattern
+        )]
+            string regexPattern
     )
         : base(regexPattern) { }
 }

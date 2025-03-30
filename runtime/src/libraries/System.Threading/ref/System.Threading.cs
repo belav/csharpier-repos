@@ -1617,9 +1617,8 @@ namespace System.Threading
 
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("location")]
         public static T Read<T>(
-            [System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute(
-                "location"
-            )] ref readonly T location
+            [System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("location")]
+                ref readonly T location
         )
             where T : class?
         {

@@ -46,7 +46,8 @@ namespace System.Runtime.Serialization
         public static Func<object> GetMakeNewInstanceFunc(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )] Type type
+            )]
+                Type type
         )
         {
             Func<object> make = s_make.MakeGenericMethod(type).CreateDelegate<Func<object>>();

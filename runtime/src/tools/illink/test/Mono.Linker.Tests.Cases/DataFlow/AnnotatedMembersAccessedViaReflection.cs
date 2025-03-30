@@ -221,9 +221,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             class AttributeWithConstructorWithAnnotation : Attribute
             {
                 public AttributeWithConstructorWithAnnotation(
-                    [DynamicallyAccessedMembers(
-                        DynamicallyAccessedMemberTypes.PublicMethods
-                    )] Type type
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                        Type type
                 ) { }
             }
 
@@ -311,9 +310,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             {
                 var _ = new Action<Type>(
                     (
-                        [DynamicallyAccessedMembers(
-                            DynamicallyAccessedMemberTypes.PublicMethods
-                        )] Type type
+                        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                            Type type
                     ) => { }
                 );
             }
@@ -324,9 +322,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 var _ = new Action<Type>(LocalMethod);
 
                 void LocalMethod(
-                    [DynamicallyAccessedMembers(
-                        DynamicallyAccessedMemberTypes.PublicMethods
-                    )] Type type
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                        Type type
                 ) { }
             }
 
@@ -363,9 +360,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             interface IWithAnnotatedMethod
             {
                 public void AnnotatedMethod(
-                    [DynamicallyAccessedMembers(
-                        DynamicallyAccessedMemberTypes.PublicConstructors
-                    )] Type type
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                        Type type
                 );
             }
 
@@ -968,9 +964,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             class GenericWithAnnotatedMethod<T>
             {
                 public static void AnnotatedMethod(
-                    [DynamicallyAccessedMembers(
-                        DynamicallyAccessedMemberTypes.PublicMethods
-                    )] Type type
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                        Type type
                 ) { }
             }
 
@@ -1117,9 +1112,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             {
                 var d = new UnannotatedDelegate(
                     (
-                        [DynamicallyAccessedMembers(
-                            DynamicallyAccessedMemberTypes.PublicMethods
-                        )] Type t
+                        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                            Type t
                     ) => { }
                 );
                 d(typeof(int));
@@ -1132,9 +1126,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 d(typeof(int));
 
                 void LocalMethod(
-                    [DynamicallyAccessedMembers(
-                        DynamicallyAccessedMemberTypes.PublicMethods
-                    )] Type type
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                        Type type
                 ) { }
             }
 

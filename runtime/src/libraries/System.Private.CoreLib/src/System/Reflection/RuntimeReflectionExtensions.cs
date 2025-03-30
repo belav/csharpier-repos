@@ -18,7 +18,8 @@ namespace System.Reflection
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicFields
                     | DynamicallyAccessedMemberTypes.NonPublicFields
-            )] this Type type
+            )]
+                this Type type
         )
         {
             ArgumentNullException.ThrowIfNull(type);
@@ -30,7 +31,8 @@ namespace System.Reflection
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicMethods
-            )] this Type type
+            )]
+                this Type type
         )
         {
             ArgumentNullException.ThrowIfNull(type);
@@ -42,7 +44,8 @@ namespace System.Reflection
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicProperties
                     | DynamicallyAccessedMemberTypes.NonPublicProperties
-            )] this Type type
+            )]
+                this Type type
         )
         {
             ArgumentNullException.ThrowIfNull(type);
@@ -54,7 +57,8 @@ namespace System.Reflection
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicEvents
                     | DynamicallyAccessedMemberTypes.NonPublicEvents
-            )] this Type type
+            )]
+                this Type type
         )
         {
             ArgumentNullException.ThrowIfNull(type);

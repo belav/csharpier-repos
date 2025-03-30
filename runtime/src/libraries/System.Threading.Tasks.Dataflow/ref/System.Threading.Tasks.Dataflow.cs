@@ -145,9 +145,8 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         public bool TryReceiveAll(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
-                true
-            )] out System.Collections.Generic.IList<T[]>? items
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                out System.Collections.Generic.IList<T[]>? items
         )
         {
             throw null;
@@ -272,9 +271,8 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         public bool TryReceiveAll(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
-                true
-            )] out System.Collections.Generic.IList<System.Tuple<
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                out System.Collections.Generic.IList<System.Tuple<
                 System.Collections.Generic.IList<T1>,
                 System.Collections.Generic.IList<T2>
             >>? items
@@ -418,9 +416,8 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         public bool TryReceiveAll(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
-                true
-            )] out System.Collections.Generic.IList<System.Tuple<
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                out System.Collections.Generic.IList<System.Tuple<
                 System.Collections.Generic.IList<T1>,
                 System.Collections.Generic.IList<T2>,
                 System.Collections.Generic.IList<T3>
@@ -463,9 +460,8 @@ namespace System.Threading.Tasks.Dataflow
         void System.Threading.Tasks.Dataflow.IDataflowBlock.Fault(System.Exception exception) { }
 
         bool System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T>.TryReceiveAll(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
-                true
-            )] out System.Collections.Generic.IList<T>? items
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                out System.Collections.Generic.IList<T>? items
         )
         {
             throw null;
@@ -597,9 +593,8 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         public bool TryReceiveAll(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
-                true
-            )] out System.Collections.Generic.IList<T>? items
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                out System.Collections.Generic.IList<T>? items
         )
         {
             throw null;
@@ -1000,9 +995,8 @@ namespace System.Threading.Tasks.Dataflow
             [System.Diagnostics.CodeAnalysis.MaybeNullWhen(false)] out TOutput item
         );
         bool TryReceiveAll(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
-                true
-            )] out System.Collections.Generic.IList<TOutput>? items
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                out System.Collections.Generic.IList<TOutput>? items
         );
     }
 
@@ -1119,9 +1113,8 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         public bool TryReceiveAll(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
-                true
-            )] out System.Collections.Generic.IList<System.Tuple<T1, T2>>? items
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                out System.Collections.Generic.IList<System.Tuple<T1, T2>>? items
         )
         {
             throw null;
@@ -1217,9 +1210,8 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         public bool TryReceiveAll(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
-                true
-            )] out System.Collections.Generic.IList<System.Tuple<T1, T2, T3>>? items
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                out System.Collections.Generic.IList<System.Tuple<T1, T2, T3>>? items
         )
         {
             throw null;
@@ -1319,9 +1311,8 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         public bool TryReceiveAll(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
-                true
-            )] out System.Collections.Generic.IList<TOutput>? items
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                out System.Collections.Generic.IList<TOutput>? items
         )
         {
             throw null;
@@ -1430,9 +1421,8 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         public bool TryReceiveAll(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
-                true
-            )] out System.Collections.Generic.IList<TOutput>? items
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                out System.Collections.Generic.IList<TOutput>? items
         )
         {
             throw null;
@@ -1471,9 +1461,8 @@ namespace System.Threading.Tasks.Dataflow
         void System.Threading.Tasks.Dataflow.IDataflowBlock.Fault(System.Exception exception) { }
 
         bool System.Threading.Tasks.Dataflow.IReceivableSourceBlock<T>.TryReceiveAll(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
-                true
-            )] out System.Collections.Generic.IList<T>? items
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                out System.Collections.Generic.IList<T>? items
         )
         {
             throw null;

@@ -32484,7 +32484,8 @@ class
                 ">=",
                 "==",
                 "!="
-            )] string op
+            )]
+                string op
         )
         {
             var source1 =
@@ -32804,7 +32805,8 @@ class C2 : I1<C2>
                 ">=",
                 "==",
                 "!="
-            )] string op
+            )]
+                string op
         )
         {
             var source1 =

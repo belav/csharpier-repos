@@ -1820,7 +1820,8 @@ namespace System.Reflection.Emit
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicMethods
-            )] Type interfaceType
+            )]
+                Type interfaceType
         )
         {
             if (created == null)

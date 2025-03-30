@@ -180,7 +180,8 @@ namespace System.Reflection
         public static System.Reflection.ConstructorInfo[] GetConstructors(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
-            )] this System.Type type
+            )]
+                this System.Type type
         )
         {
             throw null;
@@ -218,7 +219,8 @@ namespace System.Reflection
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicProperties
-            )] this System.Type type
+            )]
+                this System.Type type
         )
         {
             throw null;
@@ -251,7 +253,8 @@ namespace System.Reflection
         public static System.Reflection.EventInfo[] GetEvents(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicEvents
-            )] this System.Type type
+            )]
+                this System.Type type
         )
         {
             throw null;
@@ -296,7 +299,8 @@ namespace System.Reflection
         public static System.Reflection.FieldInfo[] GetFields(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicFields
-            )] this System.Type type
+            )]
+                this System.Type type
         )
         {
             throw null;
@@ -322,7 +326,8 @@ namespace System.Reflection
         public static System.Type[] GetInterfaces(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.Interfaces
-            )] this System.Type type
+            )]
+                this System.Type type
         )
         {
             throw null;
@@ -380,7 +385,8 @@ namespace System.Reflection
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicProperties
-            )] this System.Type type
+            )]
+                this System.Type type
         )
         {
             throw null;
@@ -436,7 +442,8 @@ namespace System.Reflection
         public static System.Reflection.MethodInfo[] GetMethods(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
-            )] this System.Type type
+            )]
+                this System.Type type
         )
         {
             throw null;
@@ -490,7 +497,8 @@ namespace System.Reflection
         public static System.Reflection.PropertyInfo[] GetProperties(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicProperties
-            )] this System.Type type
+            )]
+                this System.Type type
         )
         {
             throw null;

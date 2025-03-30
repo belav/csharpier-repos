@@ -13,9 +13,8 @@ namespace Mono.Linker.Tests.Cases.Expectations.Helpers
         ) { }
 
         public static void RequiresPublicConstructors(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicConstructors
-            )] this Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                this Type type
         ) { }
 
         public static void RequiresPublicEvents(
@@ -27,63 +26,55 @@ namespace Mono.Linker.Tests.Cases.Expectations.Helpers
         ) { }
 
         public static void RequiresPublicMethods(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicMethods
-            )] this Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                this Type type
         ) { }
 
         public static void RequiresPublicNestedTypes(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicNestedTypes
-            )] this Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes)]
+                this Type type
         ) { }
 
         public static void RequiresPublicParameterlessConstructor(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )] this Type type
+            )]
+                this Type type
         ) { }
 
         public static void RequiresPublicProperties(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicProperties
-            )] this Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                this Type type
         ) { }
 
         public static void RequiresNonPublicEvents(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.NonPublicEvents
-            )] this Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicEvents)]
+                this Type type
         ) { }
 
         public static void RequiresNonPublicFields(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.NonPublicFields
-            )] this Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicFields)]
+                this Type type
         ) { }
 
         public static void RequiresNonPublicMethods(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.NonPublicMethods
-            )] this Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)]
+                this Type type
         ) { }
 
         public static void RequiresNonPublicNestedTypes(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.NonPublicNestedTypes
-            )] this Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
+                this Type type
         ) { }
 
         public static void RequiresNonPublicConstructors(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.NonPublicConstructors
-            )] this Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+                this Type type
         ) { }
 
         public static void RequiresNonPublicProperties(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.NonPublicProperties
-            )] this Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicProperties)]
+                this Type type
         ) { }
 
         public static void RequiresInterfaces(

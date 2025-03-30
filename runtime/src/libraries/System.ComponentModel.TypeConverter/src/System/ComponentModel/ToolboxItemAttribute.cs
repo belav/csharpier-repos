@@ -51,9 +51,8 @@ namespace System.ComponentModel
         /// Initializes a new instance of ToolboxItemAttribute and specifies the name of the type.
         /// </summary>
         public ToolboxItemAttribute(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicConstructors
-            )] string toolboxItemTypeName
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                string toolboxItemTypeName
         )
         {
             ArgumentNullException.ThrowIfNull(toolboxItemTypeName);
@@ -65,9 +64,8 @@ namespace System.ComponentModel
         /// Initializes a new instance of ToolboxItemAttribute and specifies the type of the toolbox item.
         /// </summary>
         public ToolboxItemAttribute(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicConstructors
-            )] Type toolboxItemType
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type toolboxItemType
         )
         {
             ArgumentNullException.ThrowIfNull(toolboxItemType);

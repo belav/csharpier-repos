@@ -52,7 +52,8 @@ namespace System.Data.Common
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicProperties
                     | DynamicallyAccessedMemberTypes.PublicFields
-            )] Type type
+            )]
+                Type type
         ) => s_typeToNull.GetOrAdd(type, GetStaticNullForUdtTypeCore);
 
         [UnconditionalSuppressMessage(

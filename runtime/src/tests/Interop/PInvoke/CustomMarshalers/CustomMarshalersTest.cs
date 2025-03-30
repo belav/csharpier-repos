@@ -16,7 +16,8 @@ namespace PInvokeTests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalType = "System.Runtime.InteropServices.CustomMarshalers.TypeToTypeInfoMarshaler"
-            )] Type type
+            )]
+                Type type
         );
 
         [DllImport(nameof(CustomMarshalersNative))]
@@ -24,7 +25,8 @@ namespace PInvokeTests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalType = "System.Runtime.InteropServices.CustomMarshalers.ExpandoToDispatchExMarshaler"
-            )] IReflect expando
+            )]
+                IReflect expando
         );
     }
 

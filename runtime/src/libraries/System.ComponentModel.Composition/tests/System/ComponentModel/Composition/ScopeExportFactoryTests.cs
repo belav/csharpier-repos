@@ -568,7 +568,8 @@ namespace System.ComponentModel.Composition
                 [ImportAttribute(
                     RequiredCreationPolicy = CreationPolicy.NonShared,
                     Source = ImportSource.NonLocal
-                )] ClassXXXX xxxx
+                )]
+                    ClassXXXX xxxx
             )
             {
                 this.xxxx = xxxx;

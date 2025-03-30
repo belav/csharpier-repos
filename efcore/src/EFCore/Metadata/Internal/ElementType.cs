@@ -970,9 +970,8 @@ public class ElementType
     /// </summary>
     [DebuggerStepThrough]
     void IMutableElementType.SetValueConverter(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-        )] Type? converterType
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? converterType
     ) => SetValueConverter(converterType, ConfigurationSource.Explicit);
 
     /// <summary>
@@ -1052,9 +1051,8 @@ public class ElementType
     /// </summary>
     [DebuggerStepThrough]
     void IMutableElementType.SetValueComparer(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-        )] Type? comparerType
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? comparerType
     ) => SetValueComparer(comparerType, ConfigurationSource.Explicit);
 
     /// <summary>

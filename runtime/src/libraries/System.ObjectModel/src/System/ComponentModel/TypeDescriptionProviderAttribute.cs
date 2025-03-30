@@ -14,7 +14,8 @@ namespace System.ComponentModel
         public TypeDescriptionProviderAttribute(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )] string typeName
+            )]
+                string typeName
         )
         {
             ArgumentNullException.ThrowIfNull(typeName);
@@ -28,7 +29,8 @@ namespace System.ComponentModel
         public TypeDescriptionProviderAttribute(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )] Type type
+            )]
+                Type type
         )
         {
             ArgumentNullException.ThrowIfNull(type);

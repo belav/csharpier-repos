@@ -400,13 +400,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Theory]
         [CombinatorialData]
         public async Task TestNotAfterNestedStatic(
-            [CombinatorialValues(
-                "class",
-                "struct",
-                "record",
-                "record struct",
-                "record class"
-            )] string declarationKind
+            [CombinatorialValues("class", "struct", "record", "record struct", "record class")]
+                string declarationKind
         )
         {
             await VerifyAbsenceAsync(
@@ -453,7 +448,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 "record struct",
                 "record class",
                 "interface"
-            )] string declarationKind
+            )]
+                string declarationKind
         )
         {
             await VerifyAbsenceAsync(
@@ -475,7 +471,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 "record struct",
                 "record class",
                 "interface"
-            )] string declarationKind
+            )]
+                string declarationKind
         )
         {
             await VerifyAbsenceAsync(
@@ -497,7 +494,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 "record struct",
                 "record class",
                 "interface"
-            )] string declarationKind
+            )]
+                string declarationKind
         )
         {
             await VerifyAbsenceAsync(

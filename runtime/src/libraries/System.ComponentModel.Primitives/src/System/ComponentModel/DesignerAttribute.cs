@@ -24,7 +24,8 @@ namespace System.ComponentModel
         public DesignerAttribute(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )] string designerTypeName
+            )]
+                string designerTypeName
         )
         {
             ArgumentNullException.ThrowIfNull(designerTypeName);
@@ -41,7 +42,8 @@ namespace System.ComponentModel
         public DesignerAttribute(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )] Type designerType
+            )]
+                Type designerType
         )
         {
             ArgumentNullException.ThrowIfNull(designerType);

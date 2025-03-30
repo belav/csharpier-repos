@@ -44,9 +44,8 @@ public sealed class OutputCachePolicyBuilder
     /// </summary>
     /// <param name="policyType">The type of policy to add</param>
     public OutputCachePolicyBuilder AddPolicy(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicConstructors
-        )] Type policyType
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            Type policyType
     )
     {
         return AddPolicy(new TypedPolicy(policyType));

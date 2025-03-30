@@ -204,10 +204,8 @@ namespace Microsoft.CodeAnalysis.Collections
         /// <param name="existingMap">The map to test.</param>
         /// <returns>true if the map is fully populated.</returns>
         private static bool IsNotFullyPopulatedMap(
-            [NotNullWhen(returnValue: false)] IDictionary<
-                TKey,
-                ImmutableArray<TElement>
-            >? existingMap
+            [NotNullWhen(returnValue: false)]
+                IDictionary<TKey, ImmutableArray<TElement>>? existingMap
         )
         {
             return existingMap == null

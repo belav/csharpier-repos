@@ -221,9 +221,8 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <param name="valueGeneratorType">A type that inherits from <see cref="ValueGenerator" />.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual PropertyBuilder HasValueGenerator(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-        )] Type? valueGeneratorType
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? valueGeneratorType
     )
     {
         Builder.HasValueGenerator(valueGeneratorType, ConfigurationSource.Explicit);
@@ -322,9 +321,8 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <param name="valueGeneratorFactoryType">A type that inherits from <see cref="ValueGeneratorFactory" />.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual PropertyBuilder HasValueGeneratorFactory(
-        [DynamicallyAccessedMembers(
-            ValueGeneratorFactory.DynamicallyAccessedMemberTypes
-        )] Type? valueGeneratorFactoryType
+        [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)]
+            Type? valueGeneratorFactoryType
     )
     {
         Builder.HasValueGeneratorFactory(valueGeneratorFactoryType, ConfigurationSource.Explicit);
@@ -482,9 +480,8 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <param name="conversionType">The type to convert to and from or a type that inherits from <see cref="ValueConverter" />.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual PropertyBuilder HasConversion(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-        )] Type? conversionType
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? conversionType
     )
     {
         if (typeof(ValueConverter).IsAssignableFrom(conversionType))

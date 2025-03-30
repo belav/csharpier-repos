@@ -440,13 +440,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Theory]
         [CombinatorialData]
         public async Task TestNotAfterNestedAbstract(
-            [CombinatorialValues(
-                "class",
-                "struct",
-                "record",
-                "record struct",
-                "record class"
-            )] string declarationKind
+            [CombinatorialValues("class", "struct", "record", "record struct", "record class")]
+                string declarationKind
         )
         {
             await VerifyAbsenceAsync(
@@ -472,13 +467,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Theory]
         [CombinatorialData]
         public async Task TestNotAfterNestedVirtual(
-            [CombinatorialValues(
-                "class",
-                "struct",
-                "record",
-                "record struct",
-                "record class"
-            )] string declarationKind
+            [CombinatorialValues("class", "struct", "record", "record struct", "record class")]
+                string declarationKind
         )
         {
             await VerifyAbsenceAsync(
@@ -511,7 +501,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 "record struct",
                 "record class",
                 "interface"
-            )] string declarationKind
+            )]
+                string declarationKind
         )
         {
             await VerifyAbsenceAsync(
@@ -533,7 +524,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 "record struct",
                 "record class",
                 "interface"
-            )] string declarationKind
+            )]
+                string declarationKind
         )
         {
             await VerifyAbsenceAsync(
@@ -548,13 +540,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Theory]
         [CombinatorialData]
         public async Task TestNotAfterNestedSealed(
-            [CombinatorialValues(
-                "class",
-                "struct",
-                "record",
-                "record struct",
-                "record class"
-            )] string declarationKind
+            [CombinatorialValues("class", "struct", "record", "record struct", "record class")]
+                string declarationKind
         )
         {
             await VerifyAbsenceAsync(

@@ -60,9 +60,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [Kept]
             public KeepsPublicConstructorAttribute(
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                [DynamicallyAccessedMembers(
-                    DynamicallyAccessedMemberTypes.PublicConstructors
-                )] Type type
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                    Type type
             ) { }
         }
 
@@ -73,9 +72,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [Kept]
             public KeepsPublicMethodsAttribute(
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                [DynamicallyAccessedMembers(
-                    DynamicallyAccessedMemberTypes.PublicMethods
-                )] string type
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                    string type
             ) { }
         }
 
@@ -103,9 +101,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [Kept]
             public KeepsPublicPropertiesAttribute(
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                [DynamicallyAccessedMembers(
-                    DynamicallyAccessedMemberTypes.PublicProperties
-                )] Type type
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                    Type type
             ) { }
         }
 
@@ -161,7 +158,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 [Kept]
                 public KeepsAllAttribute(
                     [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                        Type type
                 ) { }
             }
 

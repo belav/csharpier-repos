@@ -96,7 +96,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                )] Type type
+                )]
+                    Type type
             )
             {
                 var constructor = type.GetConstructor(new Type[] { });
@@ -109,7 +110,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                )] Type type
+                )]
+                    Type type
             )
             {
                 var constructor = type.GetConstructor(new Type[] { typeof(int) });
@@ -290,7 +292,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
                 )]
-                [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
+                [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+                    Type type
             )
             {
                 var constructor = type.GetConstructor(BindingFlags.Public, new Type[] { });
@@ -302,7 +305,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
                 )]
-                [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
+                [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+                    Type type
             )
             {
                 var constructor = type.GetConstructor(

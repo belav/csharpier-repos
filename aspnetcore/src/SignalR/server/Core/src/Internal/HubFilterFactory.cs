@@ -14,9 +14,8 @@ internal sealed class HubFilterFactory : IHubFilter
     private readonly Type _filterType;
 
     public HubFilterFactory(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicConstructors
-        )] Type filterType
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            Type filterType
     )
     {
         _objectFactory = ActivatorUtilities.CreateFactory(filterType, Array.Empty<Type>());

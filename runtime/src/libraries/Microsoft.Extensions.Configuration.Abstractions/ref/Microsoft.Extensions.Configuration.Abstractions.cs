@@ -70,9 +70,8 @@ namespace Microsoft.Extensions.Configuration
         }
 
         public static bool Exists(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
-                true
-            )] this Microsoft.Extensions.Configuration.IConfigurationSection? section
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                this Microsoft.Extensions.Configuration.IConfigurationSection? section
         )
         {
             throw null;

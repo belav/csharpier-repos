@@ -172,29 +172,20 @@ class SafeArrayNative
 
     [DllImport(nameof(SafeArrayNative), PreserveSig = false, EntryPoint = "ReverseStrings")]
     public static extern void ReverseStringsAnsi(
-        [
-            MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_LPSTR),
-            In,
-            Out
-        ] string[] strings
+        [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_LPSTR), In, Out]
+            string[] strings
     );
 
     [DllImport(nameof(SafeArrayNative), PreserveSig = false, EntryPoint = "ReverseStrings")]
     public static extern void ReverseStringsUnicode(
-        [
-            MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_LPWSTR),
-            In,
-            Out
-        ] string[] strings
+        [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_LPWSTR), In, Out]
+            string[] strings
     );
 
     [DllImport(nameof(SafeArrayNative), PreserveSig = false, EntryPoint = "ReverseStrings")]
     public static extern void ReverseStringsBSTR(
-        [
-            MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR),
-            In,
-            Out
-        ] string[] strings
+        [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR), In, Out]
+            string[] strings
     );
 
     [DllImport(nameof(SafeArrayNative), PreserveSig = false, EntryPoint = "VerifyInterfaceArray")]

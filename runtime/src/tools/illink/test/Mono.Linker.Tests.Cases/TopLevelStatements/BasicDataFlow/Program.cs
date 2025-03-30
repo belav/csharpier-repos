@@ -17,7 +17,8 @@ static Type GetNone() => null;
 [Kept]
 static void RequirePublicFields(
     [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] Type t
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+        Type t
 ) { }
 
 class TopLevelClass
@@ -32,6 +33,7 @@ class TopLevelClass
     [Kept]
     static void RequirePublicFields(
         [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)] Type t
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+            Type t
     ) { }
 }

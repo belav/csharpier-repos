@@ -241,9 +241,8 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             class AttributeWhichMarksPublicMethods : Attribute
             {
                 public AttributeWhichMarksPublicMethods(
-                    [DynamicallyAccessedMembers(
-                        DynamicallyAccessedMemberTypes.PublicMethods
-                    )] Type type
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                        Type type
                 ) { }
             }
 

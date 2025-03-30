@@ -112,7 +112,8 @@ namespace System.Runtime.Serialization
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicFields
                     | DynamicallyAccessedMemberTypes.NonPublicFields
-            )] Type type
+            )]
+                Type type
         )
         {
             // Get the list of all fields
@@ -249,7 +250,8 @@ namespace System.Runtime.Serialization
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicConstructors
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
-            )] Type type
+            )]
+                Type type
         ) => RuntimeHelpers.GetUninitializedObject(type);
 
         internal static void SerializationSetValue(MemberInfo fi, object? target, object? value)

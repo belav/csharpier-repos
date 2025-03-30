@@ -71,8 +71,7 @@ namespace System.ComponentModel
             // Using PublicParameterlessConstructor to preserve the type. See https://github.com/mono/linker/issues/1878
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )]
-                string tabClassName,
+            )] string tabClassName,
             PropertyTabScope tabScope
         )
         {

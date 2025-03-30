@@ -43,9 +43,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public static void TestAssignEventMismatchingAnnotations()
             {
                 TypeEvent = (
-                    [DynamicallyAccessedMembers(
-                        DynamicallyAccessedMemberTypes.PublicMethods
-                    )] Type t
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                        Type t
                 ) => throw new Exception();
             }
 

@@ -144,9 +144,8 @@ namespace System.Runtime.Serialization.DataContracts
             [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
             internal XmlDataContractCriticalHelper(
-                [DynamicallyAccessedMembers(
-                    ClassDataContract.DataContractPreserveMemberTypes
-                )] Type type
+                [DynamicallyAccessedMembers(ClassDataContract.DataContractPreserveMemberTypes)]
+                    Type type
             )
                 : base(type)
             {

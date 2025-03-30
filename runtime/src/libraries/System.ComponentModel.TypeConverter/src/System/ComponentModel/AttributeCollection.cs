@@ -131,7 +131,8 @@ namespace System.ComponentModel
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
                     | DynamicallyAccessedMemberTypes.PublicFields
-            )] Type attributeType
+            )]
+                Type attributeType
         ]
         {
             get
@@ -252,7 +253,8 @@ namespace System.ComponentModel
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
                     | DynamicallyAccessedMemberTypes.PublicFields
-            )] Type attributeType
+            )]
+                Type attributeType
         )
         {
             ArgumentNullException.ThrowIfNull(attributeType);

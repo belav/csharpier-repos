@@ -8452,9 +8452,8 @@ namespace System.Xml.XPath
         ) { }
 
         public virtual bool IsDescendant(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
-                true
-            )] System.Xml.XPath.XPathNavigator? nav
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
+                System.Xml.XPath.XPathNavigator? nav
         )
         {
             throw null;

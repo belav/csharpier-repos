@@ -576,9 +576,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             }
 
             public void TestPropertyWithIndexerWithMatchingAnnotations(
-                [DynamicallyAccessedMembers(
-                    DynamicallyAccessedMemberTypes.PublicConstructors
-                )] Type myType
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                    Type myType
             )
             {
                 var propclass = new PropertyWithIndexer();
@@ -646,7 +645,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     [DynamicallyAccessedMembersAttribute(
                         DynamicallyAccessedMemberTypes.PublicProperties
                             | DynamicallyAccessedMemberTypes.NonPublicProperties
-                    )] Type type
+                    )]
+                        Type type
                 ) { }
             }
 
@@ -1056,9 +1056,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 class DamOnIndexOnly
                 {
                     int this[
-                        [DynamicallyAccessedMembers(
-                            DynamicallyAccessedMemberTypes.PublicFields
-                        )] Type idx
+                        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+                            Type idx
                     ]
                     {
                         get => throw new NotImplementedException();
@@ -1083,9 +1082,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     }
 
                     static void ParamDoesMeetRequirements(
-                        [DynamicallyAccessedMembers(
-                            DynamicallyAccessedMemberTypes.PublicFields
-                        )] Type t
+                        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+                            Type t
                     )
                     {
                         var x = new IndexWithTypeWithDam();
@@ -1139,9 +1137,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
                 [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 Type this[
-                    [DynamicallyAccessedMembers(
-                        DynamicallyAccessedMemberTypes.PublicFields
-                    )] Type idx
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+                        Type idx
                 ]
                 {
                     get => throw new NotImplementedException();

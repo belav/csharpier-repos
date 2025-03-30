@@ -18,9 +18,8 @@ namespace System.Diagnostics
         private Type? _target;
 
         public DebuggerVisualizerAttribute(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.All
-            )] string visualizerTypeName
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                string visualizerTypeName
         )
         {
             VisualizerTypeName = visualizerTypeName;

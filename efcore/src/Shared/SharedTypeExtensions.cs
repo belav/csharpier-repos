@@ -416,9 +416,8 @@ internal static class SharedTypeExtensions
     };
 
     public static object? GetDefaultValue(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-        )] this Type type
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            this Type type
     )
     {
         if (!type.IsValueType)

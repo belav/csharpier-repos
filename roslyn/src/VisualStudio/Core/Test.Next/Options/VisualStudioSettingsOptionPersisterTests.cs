@@ -256,7 +256,8 @@ public class VisualStudioSettingsOptionPersisterTests
             typeof(ImmutableArray<int>),
             typeof(ImmutableArray<long>),
             typeof(ImmutableArray<string>)
-        )] Type optionType
+        )]
+            Type optionType
     )
     {
         var (optionValue, storageValue) = GetSomeOptionValue(optionType);

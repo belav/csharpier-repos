@@ -33,9 +33,8 @@ namespace System.ComponentModel
         /// is bound to.
         /// </summary>
         public TypeConverterAttribute(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicConstructors
-            )] Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type type
         )
         {
             ArgumentNullException.ThrowIfNull(type);
@@ -49,9 +48,8 @@ namespace System.ComponentModel
         /// is bound to.
         /// </summary>
         public TypeConverterAttribute(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicConstructors
-            )] string typeName
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                string typeName
         )
         {
             ArgumentNullException.ThrowIfNull(typeName);

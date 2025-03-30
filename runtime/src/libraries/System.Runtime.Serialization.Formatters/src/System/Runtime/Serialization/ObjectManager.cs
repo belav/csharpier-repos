@@ -964,7 +964,8 @@ namespace System.Runtime.Serialization
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicConstructors
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
-            )] Type t
+            )]
+                Type t
         )
         {
             foreach (

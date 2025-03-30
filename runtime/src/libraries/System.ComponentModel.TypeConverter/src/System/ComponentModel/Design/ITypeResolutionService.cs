@@ -30,7 +30,8 @@ namespace System.ComponentModel.Design
         Type? GetType(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )] string name
+            )]
+                string name
         );
 
         /// <summary>

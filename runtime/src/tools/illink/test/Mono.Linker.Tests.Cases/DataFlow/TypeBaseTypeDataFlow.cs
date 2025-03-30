@@ -68,9 +68,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 ProducedBy = Tool.Analyzer
             )]
             static void TestAllPropagated(
-                [DynamicallyAccessedMembers(
-                    DynamicallyAccessedMemberTypes.All
-                )] TestSystemTypeBase derivedType
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
+                    TestSystemTypeBase derivedType
             )
             {
                 derivedType.BaseType.RequiresAll();
@@ -92,9 +91,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DataFlowTypeExtensions.RequiresPublicConstructors)
         )]
         static void TestPublicConstructorsAreNotPropagated(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicConstructors
-            )] Type derivedType
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresPublicConstructors();
@@ -113,9 +111,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DataFlowTypeExtensions.RequiresNonPublicEvents)
         )]
         static void TestPublicEventsPropagated(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicEvents
-            )] Type derivedType
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresPublicEvents();
@@ -140,9 +137,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DataFlowTypeExtensions.RequiresNonPublicFields)
         )]
         static void TestPublicFieldsPropagated(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicFields
-            )] Type derivedType
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresPublicFields();
@@ -167,9 +163,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DataFlowTypeExtensions.RequiresNonPublicMethods)
         )]
         static void TestPublicMethodsPropagated(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicMethods
-            )] Type derivedType
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresPublicMethods();
@@ -188,9 +183,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DataFlowTypeExtensions.RequiresPublicNestedTypes)
         )]
         static void TestPublicNestedTypesAreNotPropagated(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicNestedTypes
-            )] Type derivedType
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes)]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresPublicNestedTypes();
@@ -205,7 +199,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         static void TestPublicParameterlessConstructorIsNotPropagated(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )] Type derivedType
+            )]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresPublicParameterlessConstructor();
@@ -224,9 +219,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DataFlowTypeExtensions.RequiresNonPublicProperties)
         )]
         static void TestPublicPropertiesPropagated(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicProperties
-            )] Type derivedType
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresPublicProperties();
@@ -245,9 +239,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DataFlowTypeExtensions.RequiresNonPublicConstructors)
         )]
         static void TestNonPublicConstructorsAreNotPropagated(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.NonPublicConstructors
-            )] Type derivedType
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresNonPublicConstructors();
@@ -260,9 +253,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DataFlowTypeExtensions.RequiresNonPublicEvents)
         )]
         static void TestNonPublicEventsAreNotPropagated(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.NonPublicEvents
-            )] Type derivedType
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicEvents)]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresNonPublicEvents();
@@ -275,9 +267,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DataFlowTypeExtensions.RequiresNonPublicFields)
         )]
         static void TestNonPublicFieldsAreNotPropagated(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.NonPublicFields
-            )] Type derivedType
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicFields)]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresNonPublicFields();
@@ -290,9 +281,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DataFlowTypeExtensions.RequiresNonPublicMethods)
         )]
         static void TestNonPublicMethodsAreNotPropagated(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.NonPublicMethods
-            )] Type derivedType
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresNonPublicMethods();
@@ -305,9 +295,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DataFlowTypeExtensions.RequiresNonPublicNestedTypes)
         )]
         static void TestNonPublicNestedTypesAreNotPropagated(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.NonPublicNestedTypes
-            )] Type derivedType
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresNonPublicNestedTypes();
@@ -320,9 +309,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DataFlowTypeExtensions.RequiresNonPublicProperties)
         )]
         static void TestNonPublicPropertiesAreNotPropagated(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.NonPublicProperties
-            )] Type derivedType
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicProperties)]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresNonPublicProperties();
@@ -339,7 +327,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.PublicProperties
-            )] Type derivedType
+            )]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresPublicMethods();
@@ -362,7 +351,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.NonPublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicProperties
-            )] Type derivedType
+            )]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresNonPublicMethods();
@@ -379,7 +369,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.NonPublicMethods
                     | DynamicallyAccessedMemberTypes.PublicProperties
-            )] Type derivedType
+            )]
+                Type derivedType
         )
         {
             derivedType.BaseType.RequiresNonPublicMethods();

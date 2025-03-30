@@ -18,9 +18,8 @@ namespace System.ComponentModel
         /// Initializes a new instance of the System.Windows.Forms.ComponentModel.InstallerTypeAttribute class.
         /// </summary>
         public InstallerTypeAttribute(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicConstructors
-            )] Type installerType
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type installerType
         )
         {
             ArgumentNullException.ThrowIfNull(installerType);
@@ -29,9 +28,8 @@ namespace System.ComponentModel
         }
 
         public InstallerTypeAttribute(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicConstructors
-            )] string? typeName
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                string? typeName
         )
         {
             _typeName = typeName;

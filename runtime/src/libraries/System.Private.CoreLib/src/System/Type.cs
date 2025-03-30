@@ -894,7 +894,8 @@ namespace System
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicMethods
-            )] Type interfaceType
+            )]
+                Type interfaceType
         ) => throw new NotSupportedException(SR.NotSupported_SubclassOverride);
 
         public virtual bool IsInstanceOfType([NotNullWhen(true)] object? o) =>

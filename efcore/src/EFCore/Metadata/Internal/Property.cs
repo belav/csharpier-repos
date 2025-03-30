@@ -2058,9 +2058,8 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
     /// </summary>
     [DebuggerStepThrough]
     void IMutableProperty.SetValueGeneratorFactory(
-        [DynamicallyAccessedMembers(
-            ValueGeneratorFactory.DynamicallyAccessedMemberTypes
-        )] Type? valueGeneratorFactory
+        [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)]
+            Type? valueGeneratorFactory
     ) => SetValueGeneratorFactory(valueGeneratorFactory, ConfigurationSource.Explicit);
 
     /// <summary>
@@ -2114,9 +2113,8 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
     /// </summary>
     [DebuggerStepThrough]
     void IMutableProperty.SetValueConverter(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-        )] Type? converterType
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? converterType
     ) => SetValueConverter(converterType, ConfigurationSource.Explicit);
 
     /// <summary>
@@ -2202,9 +2200,8 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
     /// </summary>
     [DebuggerStepThrough]
     void IMutableProperty.SetValueComparer(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-        )] Type? comparerType
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? comparerType
     ) => SetValueComparer(comparerType, ConfigurationSource.Explicit);
 
     /// <summary>
@@ -2278,9 +2275,8 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
     /// </summary>
     [DebuggerStepThrough]
     void IMutableProperty.SetProviderValueComparer(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-        )] Type? comparerType
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? comparerType
     ) => SetProviderValueComparer(comparerType, ConfigurationSource.Explicit);
 
     /// <summary>

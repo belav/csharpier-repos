@@ -1100,9 +1100,8 @@ namespace System.Runtime.Serialization.DataContracts
             }
 
             internal DataContractCriticalHelper(
-                [DynamicallyAccessedMembers(
-                    ClassDataContract.DataContractPreserveMemberTypes
-                )] Type type
+                [DynamicallyAccessedMembers(ClassDataContract.DataContractPreserveMemberTypes)]
+                    Type type
             )
             {
                 _underlyingType = type;

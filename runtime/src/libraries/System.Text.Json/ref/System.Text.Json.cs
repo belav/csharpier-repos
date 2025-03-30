@@ -3778,7 +3778,8 @@ namespace System.Text.Json.Serialization
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
-            )] System.Type converterType
+            )]
+                System.Type converterType
         ) { }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(

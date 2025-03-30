@@ -506,7 +506,8 @@ namespace System.Reflection.Tests
                 MyAttribute_AllowMultiple_P("multiple2"),
                 MyAttribute_Single_Inherited_P("single"),
                 MyAttribute_AllowMultiple_Inherited_P("multiple")
-            ] int param
+            ]
+                int param
         ) { }
 
         [return: MyAttribute_Single_Inherited_P("single")]

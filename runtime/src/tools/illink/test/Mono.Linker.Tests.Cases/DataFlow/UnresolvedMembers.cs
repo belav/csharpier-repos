@@ -81,7 +81,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [Kept]
             public AttributeWithRequirements(
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type type
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                    Type type
             ) { }
 
             [Kept]
@@ -168,7 +169,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         static void RequirePublicMethods(
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type t
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                Type t
         ) { }
     }
 }

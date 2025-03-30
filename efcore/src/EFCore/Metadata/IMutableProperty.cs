@@ -205,9 +205,8 @@ public interface IMutableProperty : IReadOnlyProperty, IMutablePropertyBase
     ///     clear any previously set factory.
     /// </param>
     void SetValueGeneratorFactory(
-        [DynamicallyAccessedMembers(
-            ValueGeneratorFactory.DynamicallyAccessedMemberTypes
-        )] Type? valueGeneratorFactory
+        [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)]
+            Type? valueGeneratorFactory
     );
 
     /// <summary>
@@ -223,9 +222,8 @@ public interface IMutableProperty : IReadOnlyProperty, IMutablePropertyBase
     ///     A type that derives from <see cref="ValueConverter" />, or <see langword="null" /> to remove any previously set converter.
     /// </param>
     void SetValueConverter(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-        )] Type? converterType
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? converterType
     );
 
     /// <summary>
@@ -253,9 +251,8 @@ public interface IMutableProperty : IReadOnlyProperty, IMutablePropertyBase
     ///     A type that derives from <see cref="ValueComparer" />, or <see langword="null" /> to remove any previously set comparer.
     /// </param>
     void SetValueComparer(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-        )] Type? comparerType
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? comparerType
     );
 
     /// <summary>
@@ -271,9 +268,8 @@ public interface IMutableProperty : IReadOnlyProperty, IMutablePropertyBase
     ///     A type that derives from <see cref="ValueComparer" />, or <see langword="null" /> to remove any previously set comparer.
     /// </param>
     void SetProviderValueComparer(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-        )] Type? comparerType
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? comparerType
     );
 
     /// <summary>

@@ -129,7 +129,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+                Type type
         )
         {
             Activator.CreateInstance(type);
@@ -183,7 +184,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+                Type type
         )
         {
             // Only default ctor is available from the parameter, so only the first one should work
@@ -227,7 +229,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
         [Kept]
         private static void FromParameterWithNonPublicConstructors(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+                Type type
         )
         {
             // Only the explicitly non-public call will work
@@ -257,7 +260,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
         [Kept]
         private static void FromParameterWithPublicConstructors(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
+                Type type
         )
         {
             // Only public ctors and default ctor are required, so only those cases should work
@@ -786,7 +790,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
                 ),
                 KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))
-            ] Type type
+            ]
+                Type type
         )
         {
             Activator.CreateInstance(
@@ -811,7 +816,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
                 ),
                 KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))
-            ] Type type
+            ]
+                Type type
         )
         {
             Activator.CreateInstance(
@@ -832,7 +838,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
                         | DynamicallyAccessedMemberTypes.NonPublicConstructors
                 ),
                 KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))
-            ] Type type
+            ]
+                Type type
         )
         {
             Activator.CreateInstance(type, nonPublic: true);

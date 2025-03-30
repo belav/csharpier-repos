@@ -127,7 +127,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [ExpectedWarning("IL2114", nameof(AnnotatedAll), nameof(DAMMethod))]
             public void DAMMethod(
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type t
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                    Type t
             ) { }
         }
 
@@ -180,7 +181,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [ExpectedWarning("IL2114", nameof(AnnotatedPublicMethods), nameof(DAMMethod))]
             public void DAMMethod(
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type t
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                    Type t
             ) { }
 
             [Kept]
@@ -195,7 +197,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [ExpectedWarning("IL2114", nameof(AnnotatedPublicMethods), nameof(DAMVirtualMethod))]
             public virtual void DAMVirtualMethod(
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type type
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                    Type type
             ) { }
 
             [Kept]
@@ -1035,9 +1038,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             static void LambdaWithDAM()
             {
                 Action<Type> a = (
-                    [DynamicallyAccessedMembers(
-                        DynamicallyAccessedMemberTypes.PublicMethods
-                    )] Type type
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                        Type type
                 ) =>
                 {
                     type.GetMethods();
@@ -1052,9 +1054,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
                 LocalFunctionWithDAMInner(typeof(string));
 
                 static void LocalFunctionWithDAMInner(
-                    [DynamicallyAccessedMembers(
-                        DynamicallyAccessedMemberTypes.PublicMethods
-                    )] Type type
+                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
+                        Type type
                 )
                 {
                     type.GetMethods();

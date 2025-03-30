@@ -123,9 +123,8 @@ namespace Mono.Linker.Tests.Cases.LinkAttributes
         [TestRemoveAttribute]
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         private string methodWithCustomAttribute(
-            [DynamicallyAccessedMembers(
-                DynamicallyAccessedMemberTypes.PublicConstructors
-            )] string parameterWithCustomAttribute
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                string parameterWithCustomAttribute
         )
         {
             return null;

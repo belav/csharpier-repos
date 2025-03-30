@@ -132,7 +132,8 @@ internal sealed class PropertyHelper
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicProperties
                 | DynamicallyAccessedMemberTypes.NonPublicProperties
-        )] Type type
+        )]
+            Type type
     )
     {
         return GetProperties(type, PropertiesCache);
@@ -157,7 +158,8 @@ internal sealed class PropertyHelper
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicProperties
                 | DynamicallyAccessedMemberTypes.NonPublicProperties
-        )] Type type
+        )]
+            Type type
     )
     {
         return GetVisibleProperties(type, PropertiesCache, VisiblePropertiesCache);

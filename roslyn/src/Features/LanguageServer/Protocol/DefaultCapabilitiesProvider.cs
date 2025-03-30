@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public ExperimentalCapabilitiesProvider(
-            [ImportMany] IEnumerable<
+            [ImportMany]
+                IEnumerable<
                 Lazy<CompletionProvider, CompletionProviderMetadata>
             > completionProviders
         )

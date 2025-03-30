@@ -4379,13 +4379,8 @@ class C
         [Theory]
         [CombinatorialData]
         public void AttributesOnPrimaryConstructor_01(
-            [CombinatorialValues(
-                "class",
-                "struct",
-                "record",
-                "record class",
-                "record struct"
-            )] string declaration
+            [CombinatorialValues("class", "struct", "record", "record class", "record struct")]
+                string declaration
         )
         {
             string source =
@@ -4456,7 +4451,8 @@ public class A : System.Attribute
                 "record C();",
                 "record class C();",
                 "record struct C();"
-            )] string declaration
+            )]
+                string declaration
         )
         {
             string source =
@@ -4586,7 +4582,8 @@ enum E();
                 "record struct C;",
                 "interface C;",
                 "enum C;"
-            )] string declaration
+            )]
+                string declaration
         )
         {
             string source =
@@ -4633,7 +4630,8 @@ public class A : System.Attribute
                 "record C();",
                 "record class C();",
                 "record struct C();"
-            )] string declaration
+            )]
+                string declaration
         )
         {
             string source =
@@ -4665,7 +4663,8 @@ public class A : System.Attribute
                 "record C();",
                 "record class C();",
                 "record struct C();"
-            )] string declaration
+            )]
+                string declaration
         )
         {
             string source =
@@ -4691,13 +4690,8 @@ public class A : System.Attribute
         [Theory]
         [CombinatorialData]
         public void AttributesOnPrimaryConstructor_08(
-            [CombinatorialValues(
-                "class",
-                "struct",
-                "record",
-                "record class",
-                "record struct"
-            )] string declaration
+            [CombinatorialValues("class", "struct", "record", "record class", "record struct")]
+                string declaration
         )
         {
             string source =
@@ -4768,13 +4762,8 @@ partial "
         [Theory]
         [CombinatorialData]
         public void AttributesOnPrimaryConstructor_09(
-            [CombinatorialValues(
-                "class",
-                "struct",
-                "record",
-                "record class",
-                "record struct"
-            )] string declaration
+            [CombinatorialValues("class", "struct", "record", "record class", "record struct")]
+                string declaration
         )
         {
             string source =
@@ -4891,7 +4880,8 @@ class C(int someParam)
                 "record C();",
                 "record class C();",
                 "record struct C();"
-            )] string declaration
+            )]
+                string declaration
         )
         {
             string source =
@@ -4919,13 +4909,8 @@ _ = new C();
         [Theory]
         [CombinatorialData]
         public void AttributesOnPrimaryConstructor_12(
-            [CombinatorialValues(
-                "class",
-                "struct",
-                "record",
-                "record class",
-                "record struct"
-            )] string declaration
+            [CombinatorialValues("class", "struct", "record", "record class", "record struct")]
+                string declaration
         )
         {
             string source =
@@ -4960,13 +4945,8 @@ partial "
         [Theory]
         [CombinatorialData]
         public void AttributesOnPrimaryConstructor_13(
-            [CombinatorialValues(
-                "class",
-                "struct",
-                "record",
-                "record class",
-                "record struct"
-            )] string declaration
+            [CombinatorialValues("class", "struct", "record", "record class", "record struct")]
+                string declaration
         )
         {
             string source =
@@ -5005,7 +4985,8 @@ partial "
                 "record C();",
                 "record class C();",
                 "record struct C();"
-            )] string declaration
+            )]
+                string declaration
         )
         {
             string source =
@@ -5040,7 +5021,8 @@ _ = new C();
                 "record C();",
                 "record class C();",
                 "record struct C();"
-            )] string declaration
+            )]
+                string declaration
         )
         {
             string source =
@@ -15275,7 +15257,8 @@ class Program
                 @"static string Red { get; } = ""Red"";",
                 @"static event System.Func<string> Red = () => ""Red"";",
                 @"static string Red = ""Red"";"
-            )] string member
+            )]
+                string member
         )
         {
             var source =
@@ -15424,7 +15407,8 @@ class Program
                 @"string Red { get; } = ""Red"";",
                 @"event System.Func<string> Red = () => ""Red"";",
                 @"string Red = ""Red"";"
-            )] string member
+            )]
+                string member
         )
         {
             var source =
@@ -16931,7 +16915,8 @@ class Program
                 @"static string Red { get; } = ""Red"";",
                 @"static event System.Func<string> Red = () => ""Red"";",
                 @"static string Red = ""Red"";"
-            )] string member
+            )]
+                string member
         )
         {
             var source =

@@ -3202,10 +3202,8 @@ namespace Mono.Unix.Native
 
         [DllImport(LIBC, SetLastError = true)]
         public static extern IntPtr opendir(
-            [MarshalAs(
-                UnmanagedType.CustomMarshaler,
-                MarshalTypeRef = typeof(FileNameMarshaler)
-            )] string name
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(FileNameMarshaler))]
+                string name
         );
 
         [DllImport(LIBC, SetLastError = true)]
@@ -5050,10 +5048,8 @@ namespace Mono.Unix.Native
 
         [DllImport(LIBC, SetLastError = true)]
         public static extern int chdir(
-            [MarshalAs(
-                UnmanagedType.CustomMarshaler,
-                MarshalTypeRef = typeof(FileNameMarshaler)
-            )] string path
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(FileNameMarshaler))]
+                string path
         );
 
         [DllImport(LIBC, SetLastError = true)]
@@ -5384,18 +5380,14 @@ namespace Mono.Unix.Native
 
         [DllImport(LIBC, SetLastError = true)]
         public static extern int unlink(
-            [MarshalAs(
-                UnmanagedType.CustomMarshaler,
-                MarshalTypeRef = typeof(FileNameMarshaler)
-            )] string pathname
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(FileNameMarshaler))]
+                string pathname
         );
 
         [DllImport(LIBC, SetLastError = true)]
         public static extern int rmdir(
-            [MarshalAs(
-                UnmanagedType.CustomMarshaler,
-                MarshalTypeRef = typeof(FileNameMarshaler)
-            )] string pathname
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(FileNameMarshaler))]
+                string pathname
         );
 
         // tcgetpgrp(3)
@@ -5485,20 +5477,16 @@ namespace Mono.Unix.Native
         // Revoke doesn't appear to be POSIX.  Include it?
         [DllImport(LIBC, SetLastError = true)]
         public static extern int revoke(
-            [MarshalAs(
-                UnmanagedType.CustomMarshaler,
-                MarshalTypeRef = typeof(FileNameMarshaler)
-            )] string file
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(FileNameMarshaler))]
+                string file
         );
 
         // TODO: profil?  It's not POSIX.
 
         [DllImport(LIBC, SetLastError = true)]
         public static extern int acct(
-            [MarshalAs(
-                UnmanagedType.CustomMarshaler,
-                MarshalTypeRef = typeof(FileNameMarshaler)
-            )] string filename
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(FileNameMarshaler))]
+                string filename
         );
 
         [DllImport(LIBC, SetLastError = true, EntryPoint = "getusershell")]
@@ -5550,10 +5538,8 @@ namespace Mono.Unix.Native
 
         [DllImport(LIBC, SetLastError = true)]
         public static extern int chroot(
-            [MarshalAs(
-                UnmanagedType.CustomMarshaler,
-                MarshalTypeRef = typeof(FileNameMarshaler)
-            )] string path
+            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(FileNameMarshaler))]
+                string path
         );
 
         // skipping getpass(3) as the man page states:

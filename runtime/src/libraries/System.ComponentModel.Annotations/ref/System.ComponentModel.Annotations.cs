@@ -706,7 +706,8 @@ namespace System.ComponentModel.DataAnnotations
         public MetadataTypeAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )] System.Type metadataClassType
+            )]
+                System.Type metadataClassType
         ) { }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(

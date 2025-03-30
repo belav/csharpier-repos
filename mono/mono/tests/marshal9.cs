@@ -308,7 +308,8 @@ public class Tests
             UnmanagedType.CustomMarshaler,
             MarshalTypeRef = typeof(Marshal1),
             MarshalCookie = "5"
-        )] object o
+        )]
+            object o
     );
 
     [DllImport("libtest")]
@@ -552,7 +553,8 @@ public class Tests
             UnmanagedType.CustomMarshaler,
             MarshalTypeRef = typeof(Marshal6),
             MarshalCookie = "5"
-        )] out object o
+        )]
+            out object o
     );
 
     [DllImport("libtest")]

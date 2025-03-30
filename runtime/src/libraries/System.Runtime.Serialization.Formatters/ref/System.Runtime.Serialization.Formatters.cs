@@ -200,7 +200,8 @@ namespace System.Runtime.Serialization
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicConstructors
-            )] System.Type type
+            )]
+                System.Type type
         )
         {
             throw null;
@@ -209,7 +210,8 @@ namespace System.Runtime.Serialization
         public static System.Reflection.MemberInfo[] GetSerializableMembers(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )] System.Type type
+            )]
+                System.Type type
         )
         {
             throw null;
@@ -252,7 +254,8 @@ namespace System.Runtime.Serialization
                         .CodeAnalysis
                         .DynamicallyAccessedMemberTypes
                         .PublicConstructors
-            )] System.Type type
+            )]
+                System.Type type
         )
         {
             throw null;

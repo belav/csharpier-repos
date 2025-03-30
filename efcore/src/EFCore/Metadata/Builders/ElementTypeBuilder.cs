@@ -150,9 +150,8 @@ public class ElementTypeBuilder : IInfrastructure<IConventionElementTypeBuilder>
     /// <param name="conversionType">The type to convert to and from or a type that inherits from <see cref="ValueConverter" />.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual ElementTypeBuilder HasConversion(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-        )] Type? conversionType
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type? conversionType
     )
     {
         if (typeof(ValueConverter).IsAssignableFrom(conversionType))

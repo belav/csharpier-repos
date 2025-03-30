@@ -16,9 +16,8 @@ public sealed class HostingStartupAttribute : Attribute
     /// </summary>
     /// <param name="hostingStartupType">A type that implements <see cref="IHostingStartup"/>.</param>
     public HostingStartupAttribute(
-        [DynamicallyAccessedMembers(
-            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-        )] Type hostingStartupType
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+            Type hostingStartupType
     )
     {
         ArgumentNullException.ThrowIfNull(hostingStartupType);

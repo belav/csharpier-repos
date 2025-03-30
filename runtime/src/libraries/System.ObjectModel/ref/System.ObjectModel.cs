@@ -344,13 +344,15 @@ namespace System.ComponentModel
         public TypeConverterAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
-            )] string typeName
+            )]
+                string typeName
         ) { }
 
         public TypeConverterAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
-            )] System.Type type
+            )]
+                System.Type type
         ) { }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -382,7 +384,8 @@ namespace System.ComponentModel
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
-            )] string typeName
+            )]
+                string typeName
         ) { }
 
         public TypeDescriptionProviderAttribute(
@@ -392,7 +395,8 @@ namespace System.ComponentModel
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
-            )] System.Type type
+            )]
+                System.Type type
         ) { }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -450,13 +454,15 @@ namespace System.Windows.Markup
         public ValueSerializerAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
-            )] string valueSerializerTypeName
+            )]
+                string valueSerializerTypeName
         ) { }
 
         public ValueSerializerAttribute(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
-            )] System.Type valueSerializerType
+            )]
+                System.Type valueSerializerType
         ) { }
 
         [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(

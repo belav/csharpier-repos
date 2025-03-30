@@ -273,7 +273,8 @@ namespace System.Reflection.Emit
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicMethods
-            )] Type interfaceType
+            )]
+                Type interfaceType
         )
         {
             return m_typeBuilder.GetInterfaceMap(interfaceType);
