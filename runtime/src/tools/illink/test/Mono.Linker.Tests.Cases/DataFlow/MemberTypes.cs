@@ -60,8 +60,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -133,8 +132,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         private static void RequirePublicConstructors(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -186,8 +184,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         private static void RequireNonPublicConstructors(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -235,8 +232,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 DynamicallyAccessedMemberTypes.PublicConstructors
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
             )]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -284,8 +280,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         private static void RequirePublicMethods(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -502,8 +497,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         private static void RequireNonPublicMethods(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -701,8 +695,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicMethods
             )]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -1018,8 +1011,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         private static void RequirePublicFields(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -1113,8 +1105,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         private static void RequireNonPublicFields(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicFields)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -1237,8 +1228,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 DynamicallyAccessedMemberTypes.PublicFields
                     | DynamicallyAccessedMemberTypes.NonPublicFields
             )]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -1373,8 +1363,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         private static void RequirePublicNestedTypes(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -1423,8 +1412,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         private static void RequireNonPublicNestedTypes(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -1476,8 +1464,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 DynamicallyAccessedMemberTypes.PublicNestedTypes
                     | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
             )]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -1536,8 +1523,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         private static void RequirePublicProperties(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -1708,8 +1694,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         private static void RequireNonPublicProperties(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicProperties)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -1840,8 +1825,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 DynamicallyAccessedMemberTypes.PublicProperties
                     | DynamicallyAccessedMemberTypes.NonPublicProperties
             )]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -2069,8 +2053,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         private static void RequirePublicEvents(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -2145,8 +2128,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         private static void RequireNonPublicEvents(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicEvents)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -2217,8 +2199,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 DynamicallyAccessedMemberTypes.PublicEvents
                     | DynamicallyAccessedMemberTypes.NonPublicEvents
             )]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -2326,8 +2307,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         private static void RequireInterfaces(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]
@@ -2407,8 +2387,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         private static void RequireAll(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                Type type
+            [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))] Type type
         ) { }
 
         [Kept]

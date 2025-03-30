@@ -792,8 +792,10 @@ namespace Mono.Unix.Native
 
         [DllImport(LIBC, CallingConvention = CallingConvention.Cdecl, SetLastError = true)]
         public static extern int remove(
-            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(FileNameMarshaler))]
-                string filename
+            [MarshalAs(
+                UnmanagedType.CustomMarshaler,
+                MarshalTypeRef = typeof(FileNameMarshaler)
+            )] string filename
         );
 
         [DllImport(LIBC, CallingConvention = CallingConvention.Cdecl, SetLastError = true)]

@@ -27,8 +27,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     internal sealed class CodeRefactoringService(
-        [ImportMany]
-            IEnumerable<Lazy<CodeRefactoringProvider, CodeChangeProviderMetadata>> providers
+        [ImportMany] IEnumerable<
+            Lazy<CodeRefactoringProvider, CodeChangeProviderMetadata>
+        > providers
     ) : ICodeRefactoringService
     {
         private readonly Lazy<

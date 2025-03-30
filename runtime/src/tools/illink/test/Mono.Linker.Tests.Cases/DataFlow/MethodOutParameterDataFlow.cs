@@ -107,8 +107,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         static void TestPassingOutParameter(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                out Type typeWithMethods
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+            )] out Type typeWithMethods
         )
         {
             TryGetAnnotatedValue(out typeWithMethods);
@@ -116,8 +117,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
         [ExpectedWarning("IL2067", "typeWithFields", nameof(TryGetAnnotatedValue))]
         static void TestPassingOutParameter_Mismatch(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
-                out Type typeWithFields
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicFields
+            )] out Type typeWithFields
         )
         {
             TryGetAnnotatedValue(out typeWithFields);
@@ -145,8 +147,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         }
 
         static bool TryGetAnnotatedValue(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                out Type typeWithMethods
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+            )] out Type typeWithMethods
         )
         {
             typeWithMethods = null;

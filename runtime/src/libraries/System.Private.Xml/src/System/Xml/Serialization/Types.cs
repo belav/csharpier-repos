@@ -1946,8 +1946,7 @@ namespace System.Xml.Serialization
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicConstructors
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
-            )]
-                Type type
+            )] Type type
         )
         {
             ConstructorInfo? ctor = type.GetConstructor(

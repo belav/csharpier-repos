@@ -605,8 +605,7 @@ namespace System.Runtime.InteropServices.Tests
                 [MarshalAs(
                     UnmanagedType.CustomMarshaler,
                     MarshalType = "System.Runtime.InteropServices.CustomMarshalers.TypeToTypeInfoMarshaler"
-                )]
-                    out Type ppTypeInfo
+                )] out Type ppTypeInfo
             )
             {
                 throw new NotImplementedException();
@@ -712,8 +711,7 @@ namespace System.Runtime.InteropServices.Tests
                 [MarshalAs(
                     UnmanagedType.CustomMarshaler,
                     MarshalType = "System.Runtime.InteropServices.CustomMarshalers.TypeToTypeInfoMarshaler"
-                )]
-                    out Type ppTypeInfo
+                )] out Type ppTypeInfo
             );
 
             [MethodImpl(MethodImplOptions.InternalCall)]

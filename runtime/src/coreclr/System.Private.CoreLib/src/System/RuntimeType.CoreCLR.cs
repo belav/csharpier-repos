@@ -3301,8 +3301,7 @@ namespace System
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicMethods
-            )]
-                Type interfaceType
+            )] Type interfaceType
         )
         {
             if (IsGenericParameter)

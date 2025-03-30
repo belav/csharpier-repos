@@ -75,8 +75,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             nameof(DataFlowTypeExtensions.RequiresPublicMethods)
         )]
         static void TestUnsupportedPatterns(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                Type typeWithMethods
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+            )] Type typeWithMethods
         )
         {
             Type.GetTypeFromHandle(typeWithMethods.TypeHandle).RequiresPublicMethods();

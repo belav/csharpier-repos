@@ -40,8 +40,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
         [ExpectedWarning("IL2072", nameof(DataFlowTypeExtensions.RequiresAll))]
         static void TestOnNonAllAnnotatedParameter(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicNestedTypes)]
-                Type parentType
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicNestedTypes
+            )] Type parentType
         )
         {
             var nestedType = parentType.GetNestedType(nameof(TestType.NestedType));

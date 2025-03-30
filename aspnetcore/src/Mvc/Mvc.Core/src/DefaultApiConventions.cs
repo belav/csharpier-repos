@@ -22,8 +22,7 @@ public static class DefaultApiConventions
     [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
     public static void Get(
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Suffix)]
-        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object id
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)] object id
     ) { }
 
     /// <summary>
@@ -36,8 +35,7 @@ public static class DefaultApiConventions
     [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
     public static void Find(
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Suffix)]
-        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object id
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)] object id
     ) { }
     #endregion
 
@@ -52,8 +50,7 @@ public static class DefaultApiConventions
     [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
     public static void Post(
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
-        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object model
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)] object model
     ) { }
 
     /// <summary>
@@ -66,8 +63,7 @@ public static class DefaultApiConventions
     [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
     public static void Create(
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Any)]
-        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object model
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)] object model
     ) { }
     #endregion
 
@@ -142,8 +138,7 @@ public static class DefaultApiConventions
     [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Prefix)]
     public static void Delete(
         [ApiConventionNameMatch(ApiConventionNameMatchBehavior.Suffix)]
-        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)]
-            object id
+        [ApiConventionTypeMatch(ApiConventionTypeMatchBehavior.Any)] object id
     ) { }
     #endregion
 }

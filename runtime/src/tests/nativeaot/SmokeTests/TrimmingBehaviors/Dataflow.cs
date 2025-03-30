@@ -181,8 +181,9 @@ class Dataflow
         class RequiresNonPublicMethods : Attribute
         {
             public RequiresNonPublicMethods(
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)]
-                    Type needed
+                [DynamicallyAccessedMembers(
+                    DynamicallyAccessedMemberTypes.NonPublicMethods
+                )] Type needed
             ) { }
 
             [DynamicallyAccessedMembers(

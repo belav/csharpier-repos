@@ -340,8 +340,7 @@ namespace System.Runtime.Serialization.DataContracts
                 DynamicallyAccessedMemberTypes.PublicConstructors
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
                     | DynamicallyAccessedMemberTypes.Interfaces
-            )]
-                Type type
+            )] Type type
         )
         {
             if (type.IsArray)
@@ -1334,8 +1333,7 @@ namespace System.Runtime.Serialization.DataContracts
                     DynamicallyAccessedMemberTypes.PublicConstructors
                         | DynamicallyAccessedMemberTypes.NonPublicConstructors
                         | DynamicallyAccessedMemberTypes.Interfaces
-                )]
-                    Type type
+                )] Type type
             )
             {
 #pragma warning disable SYSLIB0050 // Type.IsSerializable is obsolete

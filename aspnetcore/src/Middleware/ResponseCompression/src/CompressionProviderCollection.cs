@@ -34,8 +34,9 @@ public class CompressionProviderCollection : Collection<ICompressionProvider>
     /// Provider instances will be created using an <see cref="IServiceProvider" />.
     /// </remarks>
     public void Add(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-            Type providerType
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+        )] Type providerType
     )
     {
         ArgumentNullException.ThrowIfNull(providerType);

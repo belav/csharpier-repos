@@ -735,7 +735,6 @@ public class ValueConverterSelector : IValueConverterSelector
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicProperties
                 | DynamicallyAccessedMemberTypes.NonPublicProperties
-        )]
-            Type converterTypeInfo
+        )] Type converterTypeInfo
     ) => (ValueConverterInfo)converterTypeInfo.GetAnyProperty("DefaultInfo")!.GetValue(null)!;
 }

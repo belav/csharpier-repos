@@ -1658,8 +1658,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             class AnnotatedString
             {
                 static void MethodWithAnnotatedParameter(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        string typeName
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] string typeName
                 ) { }
 
                 // Analyzer: https://github.com/dotnet/runtime/issues/95118

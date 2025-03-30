@@ -543,8 +543,7 @@ namespace System.Text.RegularExpressions
         public Regex(
             [System.Diagnostics.CodeAnalysis.StringSyntax(
                 System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Regex
-            )]
-                string pattern
+            )] string pattern
         ) { }
 
         public Regex(
@@ -1247,8 +1246,7 @@ namespace System.Text.RegularExpressions
         public GeneratedRegexAttribute(
             [System.Diagnostics.CodeAnalysis.StringSyntax(
                 System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Regex
-            )]
-                string pattern
+            )] string pattern
         ) { }
 
         public GeneratedRegexAttribute(

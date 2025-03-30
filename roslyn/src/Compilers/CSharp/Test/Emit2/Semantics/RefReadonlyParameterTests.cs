@@ -4535,8 +4535,7 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
             LanguageVersion.CSharp11,
             LanguageVersion.CSharp12,
             LanguageVersion.Preview
-        )]
-            LanguageVersion languageVersion
+        )] LanguageVersion languageVersion
     )
     {
         var source1 = """

@@ -1319,8 +1319,7 @@ namespace System.Runtime.Serialization
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicConstructors
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
-            )]
-                Type type
+            )] Type type
         )
         {
             return RuntimeHelpers.GetUninitializedObject(type);

@@ -99,8 +99,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         static void TestTypeNameFromParameter(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )]
-                string typeName
+            )] string typeName
         )
         {
             Type.GetType(typeName).RequiresPublicConstructors();

@@ -75,8 +75,9 @@ namespace Mono.Linker.Tests.Cases.Reflection
         [Kept]
         private static void TestDataFlowWithAnnotation(
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-                Type type
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+            )] Type type
         )
         {
             var constructors = type.GetConstructors(BindingFlags.Public | BindingFlags.Static);

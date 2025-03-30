@@ -187,8 +187,9 @@ namespace System.ComponentModel
         /// Creates an instance of the specified type.
         /// </summary>
         protected object? CreateInstance(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-                Type type
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+            )] Type type
         )
         {
             Type[] typeArgs = new Type[] { typeof(Type) };
@@ -374,8 +375,9 @@ namespace System.ComponentModel
         )]
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         protected Type? GetTypeFromName(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-                string? typeName
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+            )] string? typeName
         )
         {
             if (string.IsNullOrEmpty(typeName))

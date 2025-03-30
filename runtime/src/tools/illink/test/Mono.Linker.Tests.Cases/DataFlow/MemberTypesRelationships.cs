@@ -63,8 +63,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         static void TestPublicParameterlessConstructor(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )]
-                Type type
+            )] Type type
         )
         {
             type.RequiresPublicParameterlessConstructor();
@@ -97,8 +96,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DynamicallyAccessedMemberTypes.All)
         )]
         static void TestPublicConstructors(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-                Type type
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+            )] Type type
         )
         {
             type.RequiresPublicParameterlessConstructor();
@@ -138,8 +138,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DynamicallyAccessedMemberTypes.All)
         )]
         static void TestNonPublicConstructors(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-                Type type
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )] Type type
         )
         {
             type.RequiresPublicParameterlessConstructor(); // Warns
@@ -334,8 +335,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DynamicallyAccessedMemberTypes.All)
         )]
         static void TestNonPublicNestedTypes(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicNestedTypes)]
-                Type type
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.NonPublicNestedTypes
+            )] Type type
         )
         {
             type.RequiresPublicNestedTypes(); // Warns
@@ -399,8 +401,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 + nameof(DynamicallyAccessedMemberTypes.All)
         )]
         static void TestNonPublicProperties(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicProperties)]
-                Type type
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.NonPublicProperties
+            )] Type type
         )
         {
             type.RequiresPublicProperties(); // Warns
@@ -532,8 +535,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.NonPublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicFields
-            )]
-                Type type
+            )] Type type
         ) { }
 
         static void RequiresSomePublic(
@@ -542,8 +544,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     | DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
                     | DynamicallyAccessedMemberTypes.NonPublicNestedTypes
                     | DynamicallyAccessedMemberTypes.PublicMethods
-            )]
-                Type type
+            )] Type type
         ) { }
 
         [ExpectedWarning(
@@ -571,8 +572,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.PublicFields
                     | DynamicallyAccessedMemberTypes.PublicConstructors
-            )]
-                Type type
+            )] Type type
         )
         {
             RequiresMultiplePrivates(type);

@@ -72,8 +72,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 CompilerGeneratedCode = true
             )]
             static IEnumerable<int> UseParameterBeforeYieldReturn(
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                    Type publicMethodsType = null
+                [DynamicallyAccessedMembers(
+                    DynamicallyAccessedMemberTypes.PublicMethods
+                )] Type publicMethodsType = null
             )
             {
                 publicMethodsType.RequiresAll();
@@ -101,8 +102,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 CompilerGeneratedCode = true
             )]
             static IEnumerable<int> FlowParameterAcrossYieldReturn(
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                    Type publicMethodsType = null
+                [DynamicallyAccessedMembers(
+                    DynamicallyAccessedMemberTypes.PublicMethods
+                )] Type publicMethodsType = null
             )
             {
                 yield return 0;
@@ -322,8 +324,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 CompilerGeneratedCode = true
             )]
             static async void FlowParameterAcrossAwait(
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                    Type publicMethodsType = null
+                [DynamicallyAccessedMembers(
+                    DynamicallyAccessedMemberTypes.PublicMethods
+                )] Type publicMethodsType = null
             )
             {
                 await MethodAsync();
@@ -592,8 +595,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             }
 
             public static void ReadCapturedAnnotatedParameter(
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                    Type tParameter = null
+                [DynamicallyAccessedMembers(
+                    DynamicallyAccessedMemberTypes.PublicMethods
+                )] Type tParameter = null
             )
             {
                 LocalFunction();
@@ -629,8 +633,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 ProducedBy = Tool.Analyzer
             )]
             public static void ReadCapturedParameterAfterWriteMismatch(
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                    Type tParameter = null
+                [DynamicallyAccessedMembers(
+                    DynamicallyAccessedMemberTypes.PublicMethods
+                )] Type tParameter = null
             )
             {
                 tParameter = GetWithPublicFields();
@@ -782,8 +787,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             }
 
             public static void ReadCapturedAnnotatedParameter(
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                    Type tParameter = null
+                [DynamicallyAccessedMembers(
+                    DynamicallyAccessedMemberTypes.PublicMethods
+                )] Type tParameter = null
             )
             {
                 var lambda = [ExpectedWarning(
@@ -819,8 +825,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 ProducedBy = Tool.Analyzer
             )]
             public static void ReadCapturedParameterAfterWriteMismatch(
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                    Type tParameter = null
+                [DynamicallyAccessedMembers(
+                    DynamicallyAccessedMemberTypes.PublicMethods
+                )] Type tParameter = null
             )
             {
                 tParameter = GetWithPublicFields();

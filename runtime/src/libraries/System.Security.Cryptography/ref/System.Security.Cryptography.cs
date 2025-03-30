@@ -1087,8 +1087,9 @@ namespace System.Security.Cryptography
         }
 
         public bool Equals(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
-                System.Security.Cryptography.CngAlgorithm? other
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
+                true
+            )] System.Security.Cryptography.CngAlgorithm? other
         )
         {
             throw null;
@@ -1159,8 +1160,9 @@ namespace System.Security.Cryptography
         }
 
         public bool Equals(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
-                System.Security.Cryptography.CngAlgorithmGroup? other
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
+                true
+            )] System.Security.Cryptography.CngAlgorithmGroup? other
         )
         {
             throw null;
@@ -1445,8 +1447,9 @@ namespace System.Security.Cryptography
         }
 
         public bool Equals(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
-                System.Security.Cryptography.CngKeyBlobFormat? other
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
+                true
+            )] System.Security.Cryptography.CngKeyBlobFormat? other
         )
         {
             throw null;
@@ -1659,8 +1662,9 @@ namespace System.Security.Cryptography
         }
 
         public bool Equals(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
-                System.Security.Cryptography.CngProvider? other
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
+                true
+            )] System.Security.Cryptography.CngProvider? other
         )
         {
             throw null;
@@ -8231,8 +8235,9 @@ namespace System.Security.Cryptography
         }
 
         public bool Equals(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
-                System.Security.Cryptography.RSAEncryptionPadding? other
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
+                true
+            )] System.Security.Cryptography.RSAEncryptionPadding? other
         )
         {
             throw null;
@@ -8515,8 +8520,9 @@ namespace System.Security.Cryptography
         }
 
         public bool Equals(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
-                System.Security.Cryptography.RSASignaturePadding? other
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
+                true
+            )] System.Security.Cryptography.RSASignaturePadding? other
         )
         {
             throw null;
@@ -11442,8 +11448,9 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         public virtual bool Equals(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
-                System.Security.Cryptography.X509Certificates.X509Certificate? other
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
+                true
+            )] System.Security.Cryptography.X509Certificates.X509Certificate? other
         )
         {
             throw null;

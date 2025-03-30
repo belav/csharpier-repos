@@ -352,8 +352,7 @@ namespace System.Reflection
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicMethods
-            )]
-                Type interfaceType
+            )] Type interfaceType
         ) => throw new NotSupportedException(SR.NotSupported_SignatureType);
 
         protected sealed override bool IsContextfulImpl() =>

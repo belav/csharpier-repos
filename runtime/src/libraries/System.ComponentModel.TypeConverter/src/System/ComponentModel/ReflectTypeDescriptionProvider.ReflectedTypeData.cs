@@ -556,8 +556,9 @@ namespace System.ComponentModel
             private Type? GetTypeFromName(
                 // this method doesn't create the type, but all callers are annotated with PublicConstructors,
                 // so use that value to ensure the Type will be preserved
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-                    string typeName
+                [DynamicallyAccessedMembers(
+                    DynamicallyAccessedMemberTypes.PublicConstructors
+                )] string typeName
             )
             {
                 if (string.IsNullOrEmpty(typeName))

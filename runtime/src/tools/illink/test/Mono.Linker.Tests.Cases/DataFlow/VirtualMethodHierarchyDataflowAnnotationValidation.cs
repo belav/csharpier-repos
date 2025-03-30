@@ -86,15 +86,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public virtual void SingleParameterBaseWithDerivedWithout(
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                )]
-                    Type p
+                )] Type p
             ) { }
 
             public virtual void SingleParameterBaseWithDerivedWith_(
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                )]
-                    Type p
+                )] Type p
             ) { }
 
             public virtual void SingleParameterBaseWithoutDerivedWith_(Type p) { }
@@ -212,8 +210,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public override void SingleParameterBaseWithDerivedWith_(
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                )]
-                    Type p
+                )] Type p
             ) { }
 
             [LogContains(
@@ -224,8 +221,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public override void SingleParameterBaseWithoutDerivedWith_(
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                )]
-                    Type p
+                )] Type p
             ) { }
 
             [LogDoesNotContain("DerivedClass.SingleParameterBaseWithoutDerivedWithout")]
@@ -453,8 +449,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public override void SingleParameterBaseWithoutDerivedWith_(
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                )]
-                    Type p
+                )] Type p
             ) { }
 
             [LogDoesNotContain("DerivedOverNoAnnotations.SingleParameterBaseWithoutDerivedWithout")]
@@ -496,15 +491,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public virtual void SingleParameterBaseWithDerivedWithout(
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                )]
-                    Type p
+                )] Type p
             ) { }
 
             public virtual void SingleParameterBaseWithDerivedWith_(
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                )]
-                    Type p
+                )] Type p
             ) { }
 
             // === Generic methods ===
@@ -542,8 +535,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public override void SingleParameterBaseWithDerivedWith_(
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                )]
-                    Type p
+                )] Type p
             ) { }
 
             // === Generic methods ===
@@ -583,8 +575,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             void SingleParameterBaseWithImplementationWith_(
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                )]
-                    Type p
+                )] Type p
             );
 
             void SingleParameterBaseWithoutImplementationWith_(Type p);
@@ -592,8 +583,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             void SingleParameterBaseWithImplementationWithout(
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                )]
-                    Type p
+                )] Type p
             );
 
             void SingleParameterBaseWithoutImplementationWithout(Type p);
@@ -653,8 +643,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public void SingleParameterBaseWithImplementationWith_(
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                )]
-                    Type p
+                )] Type p
             ) { }
 
             [LogContains("ImplementationClass.SingleParameterBaseWithImplementationWithout")]
@@ -664,8 +653,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public void SingleParameterBaseWithoutImplementationWith_(
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                )]
-                    Type p
+                )] Type p
             ) { }
 
             [LogDoesNotContain(
@@ -768,16 +756,18 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 static abstract Type AbstractMethod<
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
                 >(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicFields
+                    )] Type type
                 );
 
                 [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 static virtual Type VirtualMethod<
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
                 >(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicFields
+                    )] Type type
                 )
                 {
                     return null;
@@ -811,8 +801,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 public static Type AbstractMethod<
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
                 >(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicProperties
+                    )] Type type
                 )
                 {
                     return null;
@@ -826,8 +817,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 public static Type VirtualMethod<
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
                 >(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type type
                 )
                 {
                     return null;
@@ -840,8 +832,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 public static Type AbstractMethod<
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
                 >(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicFields
+                    )] Type type
                 )
                 {
                     return null;
@@ -851,8 +844,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 public static Type VirtualMethod<
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
                 >(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicFields
+                    )] Type type
                 )
                 {
                     return null;
@@ -891,8 +885,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 public static Type AbstractMethod<
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
                 >(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicProperties
+                    )] Type type
                 )
                 {
                     return null;
@@ -906,8 +901,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 public static Type VirtualMethod<
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
                 >(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type type
                 )
                 {
                     return null;
@@ -960,8 +956,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
                 [ExpectedWarning("IL2092")]
                 public static void ParamStatic(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type t
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type t
                 ) { }
 
                 [ExpectedWarning("IL2093")]
@@ -975,8 +972,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
                 [ExpectedWarning("IL2092")]
                 public void Param(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type t
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type t
                 ) { }
 
                 [ExpectedWarning("IL2093")]
@@ -993,8 +991,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
                 [ExpectedWarning("IL2092")]
                 public override void Param(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type t
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type t
                 ) { }
 
                 [ExpectedWarning("IL2093")]
@@ -1036,8 +1035,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 >() { }
 
                 public static void ParamWithMethodsStatic(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type t
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type t
                 ) { }
 
                 [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
@@ -1048,8 +1048,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 >() { }
 
                 public void ParamWithMethods(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type t
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type t
                 ) { }
 
                 [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
@@ -1063,8 +1064,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 >() { }
 
                 public override void ParamWithMethods(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type t
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type t
                 ) { }
 
                 [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
@@ -1112,14 +1114,16 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             {
                 [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 public abstract Type NonGenericAbstract(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type type
                 );
 
                 [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 public virtual Type NonGenericVirtual(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type type
                 ) => type;
 
                 public abstract void GenericAbstract<
@@ -1140,8 +1144,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 [ExpectedWarning("IL2092")]
                 [ExpectedWarning("IL2093")]
                 public override Type NonGenericAbstract(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicProperties
+                    )] Type type
                 ) => null;
 
                 [ExpectedWarning("IL2092")]
@@ -1163,8 +1168,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 [ExpectedWarning("IL2093")]
                 [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 public override Type UnannotatedAbstract(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicProperties
+                    )] Type type
                 ) => null;
 
                 [ExpectedWarning("IL2095")]
@@ -1183,8 +1189,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 [ExpectedWarning("IL2092")]
                 [ExpectedWarning("IL2092", ProducedBy = Tool.Analyzer)] // https://github.com/dotnet/linker/issues/3121
                 void IBaseWithDefault.DefaultMethod(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type type
                 ) { }
             }
 
@@ -1199,8 +1206,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 static abstract Type AnnotatedStaticGvm<
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
                 >(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicProperties
+                    )] Type type
                 );
 
                 static virtual Type UnannotatedStaticGvm<T>(Type type) => null;
@@ -1216,8 +1224,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 public Type UnannotatedGvm<
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
                 >(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type type
                 ) => null;
 
                 [ExpectedWarning("IL2092")]
@@ -1227,8 +1236,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 public Type UnannotatedGvmCalledThroughBase<
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
                 >(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type type
                 ) => null;
 
                 [ExpectedWarning("IL2092")]
@@ -1243,8 +1253,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 public static Type UnannotatedStaticGvm<
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
                 >(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicProperties
+                    )] Type type
                 ) => null;
             }
 

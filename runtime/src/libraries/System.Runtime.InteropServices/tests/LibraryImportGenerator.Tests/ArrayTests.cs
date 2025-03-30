@@ -68,8 +68,10 @@ namespace LibraryImportGenerator.IntegrationTests
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_string_lengths")]
             public static partial int SumStringLengths(
-                [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)]
-                    string[] strArray
+                [MarshalAs(
+                    UnmanagedType.LPArray,
+                    ArraySubType = UnmanagedType.LPWStr
+                )] string[] strArray
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "reverse_strings_replace")]

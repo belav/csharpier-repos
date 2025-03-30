@@ -143,8 +143,9 @@ namespace System.ComponentModel
         /// </summary>
         [return: DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)]
         public Type GetReflectionType(
-            [DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)]
-                Type objectType
+            [DynamicallyAccessedMembers(
+                TypeDescriptor.ReflectTypesDynamicallyAccessedMembers
+            )] Type objectType
         ) => GetReflectionType(objectType, null);
 
         /// <summary>

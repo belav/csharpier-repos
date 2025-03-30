@@ -57,8 +57,7 @@ namespace System
         public static object? CreateInstance(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )]
-                Type type
+            )] Type type
         ) => CreateInstance(type, nonPublic: false);
 
         [RequiresUnreferencedCode("Type and its constructor could be removed")]

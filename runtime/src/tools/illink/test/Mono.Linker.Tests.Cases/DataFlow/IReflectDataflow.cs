@@ -60,8 +60,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
                 )
-            ]
-                MyReflect mine
+            ] MyReflect mine
         ) { }
 
         [Kept]
@@ -74,8 +73,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [
                 KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute)),
                 DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)
-            ]
-                IReflect m
+            ] IReflect m
         ) { }
 
         [Kept]
@@ -235,8 +233,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     [DynamicallyAccessedMembers(
                         DynamicallyAccessedMemberTypes.PublicFields
                             | DynamicallyAccessedMemberTypes.NonPublicFields
-                    )]
-                        Type type
+                    )] Type type
                 )
                 {
                     _underlyingType = type;

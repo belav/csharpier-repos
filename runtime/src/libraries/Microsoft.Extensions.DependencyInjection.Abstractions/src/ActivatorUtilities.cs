@@ -183,8 +183,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
 #if NETCOREAPP
         private static ConstructorInfoEx[] GetOrAddConstructors(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-                Type type
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+            )] Type type
         )
         {
             // Not found. Do the slower work of checking for the value in the correct cache.
@@ -215,8 +216,9 @@ namespace Microsoft.Extensions.DependencyInjection
 #endif // NETCOREAPP
 
         private static ConstructorInfoEx[] CreateConstructorInfoExs(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-                Type type
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+            )] Type type
         )
         {
             ConstructorInfo[] constructors = type.GetConstructors();

@@ -11,6 +11,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.DebugConfiguration;
 
 [DataContract]
 internal record WorkspaceDebugConfigurationParams(
-    [JsonProperty(PropertyName = "workspacePath"), JsonConverter(typeof(DocumentUriConverter))]
-        Uri WorkspacePath
+    [
+        JsonProperty(PropertyName = "workspacePath"),
+        JsonConverter(typeof(DocumentUriConverter))
+    ] Uri WorkspacePath
 );

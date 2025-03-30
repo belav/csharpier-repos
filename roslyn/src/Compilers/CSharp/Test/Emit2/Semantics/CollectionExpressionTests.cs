@@ -9793,8 +9793,10 @@ static class Program
         [CombinatorialData]
         [Theory]
         public void ArrayEmpty_01(
-            [CombinatorialValues(TargetFramework.Mscorlib45Extended, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Mscorlib45Extended,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             if (!ExecutionConditionUtil.IsCoreClr && targetFramework == TargetFramework.Net80)
@@ -9866,8 +9868,10 @@ static class Program
         [CombinatorialData]
         [Theory]
         public void ArrayEmpty_02(
-            [CombinatorialValues(TargetFramework.Mscorlib45Extended, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Mscorlib45Extended,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             if (!ExecutionConditionUtil.IsCoreClr && targetFramework == TargetFramework.Net80)
@@ -10056,8 +10060,11 @@ static class Program
         [CombinatorialData]
         [Theory]
         public void SynthesizedReadOnlyArray(
-            [CombinatorialValues("IEnumerable<T>", "IReadOnlyCollection<T>", "IReadOnlyList<T>")]
-                string targetType
+            [CombinatorialValues(
+                "IEnumerable<T>",
+                "IReadOnlyCollection<T>",
+                "IReadOnlyList<T>"
+            )] string targetType
         )
         {
             string source = $$"""
@@ -10532,8 +10539,11 @@ static class Program
         [CombinatorialData]
         [Theory]
         public void SynthesizedReadOnlyList_01(
-            [CombinatorialValues("IEnumerable<T>", "IReadOnlyCollection<T>", "IReadOnlyList<T>")]
-                string targetType
+            [CombinatorialValues(
+                "IEnumerable<T>",
+                "IReadOnlyCollection<T>",
+                "IReadOnlyList<T>"
+            )] string targetType
         )
         {
             string source = $$"""
@@ -14606,8 +14616,7 @@ partial class Program
             [CombinatorialValues(
                 "public delegate void MyCollectionBuilder();",
                 "public enum MyCollectionBuilder { }"
-            )]
-                string builderTypeDefinition
+            )] string builderTypeDefinition
         )
         {
             string sourceA = $$"""
@@ -18859,8 +18868,10 @@ partial class Program
         [CombinatorialData]
         [Theory]
         public void ListConstruction_02(
-            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Net70,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             string source = """
@@ -19228,8 +19239,10 @@ partial class Program
         [CombinatorialData]
         [Theory]
         public void ListConstruction_DerivedType_01(
-            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Net70,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             string source = """
@@ -19282,8 +19295,10 @@ partial class Program
         [CombinatorialData]
         [Theory]
         public void ListConstruction_DerivedType_02(
-            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Net70,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             string source = """
@@ -19351,8 +19366,10 @@ partial class Program
         [CombinatorialData]
         [Theory]
         public void ListConstruction_Async(
-            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Net70,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             string source = $$"""
@@ -19883,8 +19900,10 @@ partial class Program
         [CombinatorialData]
         [Theory]
         public void RefSafety_Return_01(
-            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Net70,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             string source = """
@@ -19939,8 +19958,10 @@ partial class Program
         [CombinatorialData]
         [Theory]
         public void RefSafety_Return_02(
-            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Net70,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             string source = """
@@ -19976,8 +19997,10 @@ partial class Program
         [CombinatorialData]
         [Theory]
         public void RefSafety_Return_03(
-            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Net70,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             string source = """
@@ -20302,8 +20325,10 @@ partial class Program
         [CombinatorialData]
         [Theory]
         public void SpanArgument_01(
-            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Net70,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             string source = """
@@ -21501,8 +21526,10 @@ partial class Program
         [CombinatorialData]
         [Theory]
         public void SpanAssignment_03(
-            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Net70,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             string source = """
@@ -21927,8 +21954,10 @@ partial class Program
         [CombinatorialData]
         [Theory]
         public void SpanAssignment_RefLocal(
-            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Net70,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             string source = """
@@ -21958,8 +21987,10 @@ partial class Program
         [CombinatorialData]
         [Theory]
         public void SpanAssignment_NestedScope_01(
-            [CombinatorialValues(TargetFramework.Net70, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Net70,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             string source = """
@@ -23062,8 +23093,10 @@ partial class Program
         [CombinatorialData]
         [Theory]
         public void RuntimeHelpers_CreateSpan(
-            [CombinatorialValues(TargetFramework.Net60, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Net60,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             string source = """
@@ -23123,8 +23156,10 @@ partial class Program
         [CombinatorialData]
         [Theory]
         public void RuntimeHelpers_CreateSpan_Byte(
-            [CombinatorialValues(TargetFramework.Net60, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Net60,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             string source = """
@@ -23172,8 +23207,10 @@ partial class Program
         [CombinatorialData]
         [Theory]
         public void RuntimeHelpers_CreateSpan_NotApplicable_01(
-            [CombinatorialValues(TargetFramework.Net60, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Net60,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             string source = """
@@ -23304,8 +23341,10 @@ partial class Program
         [CombinatorialData]
         [Theory]
         public void RuntimeHelpers_CreateSpan_RefStruct(
-            [CombinatorialValues(TargetFramework.Net60, TargetFramework.Net80)]
-                TargetFramework targetFramework
+            [CombinatorialValues(
+                TargetFramework.Net60,
+                TargetFramework.Net80
+            )] TargetFramework targetFramework
         )
         {
             string sourceA = $$"""

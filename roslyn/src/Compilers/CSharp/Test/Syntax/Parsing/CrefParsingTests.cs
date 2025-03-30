@@ -1549,8 +1549,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 LanguageVersion.CSharp11,
                 LanguageVersion.CSharp12,
                 LanguageVersion.Preview
-            )]
-                LanguageVersion languageVersion
+            )] LanguageVersion languageVersion
         )
         {
             UsingNode(
@@ -1591,8 +1590,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 LanguageVersion.CSharp11,
                 LanguageVersion.CSharp12,
                 LanguageVersion.Preview
-            )]
-                LanguageVersion languageVersion
+            )] LanguageVersion languageVersion
         )
         {
             UsingNode(
@@ -1633,8 +1631,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 LanguageVersion.CSharp11,
                 LanguageVersion.CSharp12,
                 LanguageVersion.Preview
-            )]
-                LanguageVersion languageVersion
+            )] LanguageVersion languageVersion
         )
         {
             UsingNode(
@@ -1683,8 +1680,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 LanguageVersion.CSharp11,
                 LanguageVersion.CSharp12,
                 LanguageVersion.Preview
-            )]
-                LanguageVersion languageVersion
+            )] LanguageVersion languageVersion
         )
         {
             UsingNode(
@@ -1733,8 +1729,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 LanguageVersion.CSharp11,
                 LanguageVersion.CSharp12,
                 LanguageVersion.Preview
-            )]
-                LanguageVersion languageVersion
+            )] LanguageVersion languageVersion
         )
         {
             UsingNode(
@@ -1789,8 +1784,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 LanguageVersion.CSharp11,
                 LanguageVersion.CSharp12,
                 LanguageVersion.Preview
-            )]
-                LanguageVersion languageVersion
+            )] LanguageVersion languageVersion
         )
         {
             UsingNode(

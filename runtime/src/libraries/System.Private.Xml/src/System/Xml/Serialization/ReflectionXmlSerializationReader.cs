@@ -1589,8 +1589,7 @@ namespace System.Xml.Serialization
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicConstructors
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
-            )]
-                Type type
+            )] Type type
         ) =>
             type.IsValueType
                 ? null

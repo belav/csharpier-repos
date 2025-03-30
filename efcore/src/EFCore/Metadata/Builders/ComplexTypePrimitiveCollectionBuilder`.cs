@@ -152,8 +152,9 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty>
     /// <param name="valueGeneratorType">A type that inherits from <see cref="ValueGenerator" />.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasValueGenerator(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-            Type? valueGeneratorType
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+        )] Type? valueGeneratorType
     ) =>
         (ComplexTypePrimitiveCollectionBuilder<TProperty>)
             base.HasValueGenerator(valueGeneratorType);
@@ -217,8 +218,9 @@ public class ComplexTypePrimitiveCollectionBuilder<TProperty>
     /// <param name="valueGeneratorFactoryType">A type that inherits from <see cref="ValueGeneratorFactory" />.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public new virtual ComplexTypePrimitiveCollectionBuilder<TProperty> HasValueGeneratorFactory(
-        [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)]
-            Type? valueGeneratorFactoryType
+        [DynamicallyAccessedMembers(
+            ValueGeneratorFactory.DynamicallyAccessedMemberTypes
+        )] Type? valueGeneratorFactoryType
     ) =>
         (ComplexTypePrimitiveCollectionBuilder<TProperty>)
             base.HasValueGeneratorFactory(valueGeneratorFactoryType);

@@ -2558,8 +2558,9 @@ namespace System.Buffers
         }
 
         public static System.Buffers.StandardFormat Parse(
-            [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute("NumericFormat")]
-                System.ReadOnlySpan<char> format
+            [System.Diagnostics.CodeAnalysis.StringSyntaxAttribute(
+                "NumericFormat"
+            )] System.ReadOnlySpan<char> format
         )
         {
             throw null;

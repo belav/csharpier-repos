@@ -22,8 +22,9 @@ internal sealed class TypedPolicy : IOutputCachePolicy
     /// </summary>
     /// <param name="policyType">The type of policy.</param>
     public TypedPolicy(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-            Type policyType
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+        )] Type policyType
     )
     {
         ArgumentNullException.ThrowIfNull(policyType);

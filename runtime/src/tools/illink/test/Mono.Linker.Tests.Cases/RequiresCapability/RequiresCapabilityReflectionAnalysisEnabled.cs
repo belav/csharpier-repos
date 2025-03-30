@@ -106,8 +106,7 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             [RequiresUnreferencedCode("--- RequiresAndPublicMethods ---")]
             static void RequiresAndPublicMethods(
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                    Type type
+                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type type
             )
             {
                 // This should not produce a warning since the method is annotated with Requires

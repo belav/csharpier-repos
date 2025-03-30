@@ -100,8 +100,7 @@ namespace System.Reflection.Emit
         public virtual void ThrowException(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )]
-                Type excType
+            )] Type excType
         )
         {
             // Emits the il to throw an exception

@@ -25,13 +25,15 @@ namespace System.Reflection.Emit
         }
 
         public void SetBaseTypeConstraint(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-                Type? baseTypeConstraint
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.All
+            )] Type? baseTypeConstraint
         ) => SetBaseTypeConstraintCore(baseTypeConstraint);
 
         protected abstract void SetBaseTypeConstraintCore(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-                Type? baseTypeConstraint
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.All
+            )] Type? baseTypeConstraint
         );
 
         public void SetInterfaceConstraints(params Type[]? interfaceConstraints) =>

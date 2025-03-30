@@ -22,8 +22,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExternalAccess.Pythia
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     internal sealed class PythiaDeclarationNameRecommender(
-        [Import(AllowDefault = true)]
-            Lazy<IPythiaDeclarationNameRecommenderImplementation>? implementation
+        [Import(
+            AllowDefault = true
+        )] Lazy<IPythiaDeclarationNameRecommenderImplementation>? implementation
     ) : IDeclarationNameRecommender
     {
         private readonly Lazy<IPythiaDeclarationNameRecommenderImplementation>? _lazyImplementation =

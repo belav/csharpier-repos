@@ -480,8 +480,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertIfTo
         [Theory]
         [CombinatorialData]
         public async Task TestIsExpression(
-            [CombinatorialValues(LanguageVersion.CSharp8, LanguageVersion.CSharp9)]
-                LanguageVersion languageVersion
+            [CombinatorialValues(
+                LanguageVersion.CSharp8,
+                LanguageVersion.CSharp9
+            )] LanguageVersion languageVersion
         )
         {
             var source = """

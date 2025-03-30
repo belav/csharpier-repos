@@ -613,8 +613,7 @@ namespace System.Reflection.Emit
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicMethods
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
-            )]
-                System.Type interfaceType
+            )] System.Type interfaceType
         )
         {
             throw null;
@@ -783,8 +782,9 @@ namespace System.Reflection.Emit
         }
 
         public override bool IsAssignableFrom(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
-                System.Reflection.TypeInfo? typeInfo
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
+                true
+            )] System.Reflection.TypeInfo? typeInfo
         )
         {
             throw null;
@@ -1222,8 +1222,7 @@ namespace System.Reflection.Emit
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicMethods
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
-            )]
-                System.Type interfaceType
+            )] System.Type interfaceType
         )
         {
             throw null;
@@ -1392,8 +1391,9 @@ namespace System.Reflection.Emit
         }
 
         public override bool IsAssignableFrom(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
-                System.Reflection.TypeInfo? typeInfo
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
+                true
+            )] System.Reflection.TypeInfo? typeInfo
         )
         {
             throw null;
@@ -1481,15 +1481,13 @@ namespace System.Reflection.Emit
         public void SetBaseTypeConstraint(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )]
-                System.Type? baseTypeConstraint
+            )] System.Type? baseTypeConstraint
         ) { }
 
         protected abstract void SetBaseTypeConstraintCore(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )]
-                Type? baseTypeConstraint
+            )] Type? baseTypeConstraint
         );
 
         public void SetCustomAttribute(
@@ -2526,15 +2524,13 @@ namespace System.Reflection.Emit
         public void AddInterfaceImplementation(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )]
-                System.Type interfaceType
+            )] System.Type interfaceType
         ) { }
 
         protected abstract void AddInterfaceImplementationCore(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )]
-                System.Type interfaceType
+            )] System.Type interfaceType
         );
 
         [return: System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
@@ -3132,8 +3128,7 @@ namespace System.Reflection.Emit
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.NonPublicMethods
                     | System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicMethods
-            )]
-                System.Type interfaceType
+            )] System.Type interfaceType
         )
         {
             throw null;
@@ -3310,8 +3305,9 @@ namespace System.Reflection.Emit
         }
 
         public override bool IsAssignableFrom(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
-                System.Reflection.TypeInfo? typeInfo
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
+                true
+            )] System.Reflection.TypeInfo? typeInfo
         )
         {
             throw null;
@@ -3415,15 +3411,13 @@ namespace System.Reflection.Emit
         public void SetParent(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembersAttribute(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )]
-                System.Type? parent
+            )] System.Type? parent
         ) { }
 
         protected abstract void SetParentCore(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
-            )]
-                System.Type? parent
+            )] System.Type? parent
         );
 
         public override string ToString()

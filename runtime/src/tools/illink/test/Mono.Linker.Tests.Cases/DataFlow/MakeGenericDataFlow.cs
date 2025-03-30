@@ -208,8 +208,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 static void AnnotationMatch(
                     [DynamicallyAccessedMembers(
                         DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                    )]
-                        Type withCtor = null
+                    )] Type withCtor = null
                 )
                 {
                     typeof(GenericWithNewConstraint<>).MakeGenericType(withCtor);
@@ -217,8 +216,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
                 [ExpectedWarning("IL2070")]
                 static void AnnotationMismatch(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type withPublicMethods = null
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type withPublicMethods = null
                 )
                 {
                     typeof(GenericWithNewConstraint<>).MakeGenericType(withPublicMethods);
@@ -228,8 +228,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     [DynamicallyAccessedMembers(
                         DynamicallyAccessedMemberTypes.PublicMethods
                             | DynamicallyAccessedMemberTypes.PublicConstructors
-                    )]
-                        Type withMethodsAndCtors = null
+                    )] Type withMethodsAndCtors = null
                 )
                 {
                     typeof(GenericWithNewConstraintAndAnnotations<>).MakeGenericType(
@@ -239,8 +238,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
                 [ExpectedWarning("IL2070")]
                 static void AnnotationAndConstraintMismatch(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type withMethods = null
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type withMethods = null
                 )
                 {
                     typeof(GenericWithNewConstraintAndAnnotations<>).MakeGenericType(withMethods);
@@ -270,8 +270,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 static void AnnotationMatch(
                     [DynamicallyAccessedMembers(
                         DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                    )]
-                        Type withCtor = null
+                    )] Type withCtor = null
                 )
                 {
                     typeof(GenericWithStructConstraint<>).MakeGenericType(withCtor);
@@ -279,8 +278,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
                 [ExpectedWarning("IL2070")]
                 static void AnnotationMismatch(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type withPublicMethods = null
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type withPublicMethods = null
                 )
                 {
                     typeof(GenericWithStructConstraint<>).MakeGenericType(withPublicMethods);
@@ -307,8 +307,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 static void AnnotationMatch(
                     [DynamicallyAccessedMembers(
                         DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                    )]
-                        Type withCtor = null
+                    )] Type withCtor = null
                 )
                 {
                     typeof(GenericWithUnmanagedConstraint<>).MakeGenericType(withCtor);
@@ -316,8 +315,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
                 [ExpectedWarning("IL2070")]
                 static void AnnotationMismatch(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type withPublicMethods = null
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type withPublicMethods = null
                 )
                 {
                     typeof(GenericWithUnmanagedConstraint<>).MakeGenericType(withPublicMethods);
@@ -897,8 +897,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 static void AnnotationMatch(
                     [DynamicallyAccessedMembers(
                         DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                    )]
-                        Type withCtor = null
+                    )] Type withCtor = null
                 )
                 {
                     typeof(NewConstraint)
@@ -911,8 +910,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
                 [ExpectedWarning("IL2070")]
                 static void AnnotationMismatch(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type withPublicMethods = null
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type withPublicMethods = null
                 )
                 {
                     typeof(NewConstraint)
@@ -927,8 +927,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     [DynamicallyAccessedMembers(
                         DynamicallyAccessedMemberTypes.PublicMethods
                             | DynamicallyAccessedMemberTypes.PublicConstructors
-                    )]
-                        Type withMethodsAndCtors = null
+                    )] Type withMethodsAndCtors = null
                 )
                 {
                     typeof(NewConstraint)
@@ -941,8 +940,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
                 [ExpectedWarning("IL2070")]
                 static void AnnotationAndConstraintMismatch(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type withMethods = null
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type withMethods = null
                 )
                 {
                     typeof(NewConstraint)
@@ -985,8 +985,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 static void AnnotationMatch(
                     [DynamicallyAccessedMembers(
                         DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                    )]
-                        Type withCtor = null
+                    )] Type withCtor = null
                 )
                 {
                     typeof(StructConstraint)
@@ -999,8 +998,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
                 [ExpectedWarning("IL2070")]
                 static void AnnotationMismatch(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type withPublicMethods = null
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type withPublicMethods = null
                 )
                 {
                     typeof(StructConstraint)
@@ -1040,8 +1040,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 static void AnnotationMatch(
                     [DynamicallyAccessedMembers(
                         DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                    )]
-                        Type withCtor = null
+                    )] Type withCtor = null
                 )
                 {
                     typeof(UnmanagedConstraint)
@@ -1054,8 +1053,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
                 [ExpectedWarning("IL2070")]
                 static void AnnotationMismatch(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type withPublicMethods = null
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type withPublicMethods = null
                 )
                 {
                     typeof(UnmanagedConstraint)
@@ -1087,8 +1087,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [ExpectedWarning("IL2070", nameof(MethodInfo.MakeGenericMethod))]
             static void TestGetMethodFromHandleWithWarning(
-                [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                    Type publicMethodsType = null
+                [DynamicallyAccessedMembers(
+                    DynamicallyAccessedMemberTypes.PublicMethods
+                )] Type publicMethodsType = null
             )
             {
                 MethodInfo m = (MethodInfo)

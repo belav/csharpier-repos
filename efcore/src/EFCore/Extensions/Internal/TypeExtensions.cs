@@ -62,8 +62,7 @@ public static class TypeExtensions
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicProperties
                 | DynamicallyAccessedMemberTypes.NonPublicProperties
-        )]
-            this Type type
+        )] this Type type
     )
     {
         var defaultPropertyAttribute = type.GetCustomAttributes<DefaultMemberAttribute>()

@@ -328,8 +328,9 @@ namespace System.Threading
 
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("address")]
         public static object? VolatileRead(
-            [System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("address")]
-                ref object? address
+            [System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute(
+                "address"
+            )] ref object? address
         )
         {
             throw null;

@@ -354,8 +354,7 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
         [DynamicallyAccessedMembers(
             DynamicallyAccessedMemberTypes.PublicProperties
                 | DynamicallyAccessedMemberTypes.NonPublicProperties
-        )]
-            Type type
+        )] Type type
     ) => type.FindIndexerProperty();
 
     /// <summary>

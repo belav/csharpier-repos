@@ -13,8 +13,9 @@ namespace Microsoft.AspNetCore.ResponseCompression;
 internal sealed class CompressionProviderFactory : ICompressionProvider
 {
     public CompressionProviderFactory(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-            Type providerType
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+        )] Type providerType
     )
     {
         ProviderType = providerType;

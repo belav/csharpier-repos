@@ -23,8 +23,10 @@ namespace Mono.Linker.Tests.Cases.Attributes
         [Kept]
         [DllImport("lib")]
         static extern void KeepParamMarshal(
-            [MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(ParamMarshal))]
-                string s
+            [MarshalAs(
+                UnmanagedType.CustomMarshaler,
+                MarshalTypeRef = typeof(ParamMarshal)
+            )] string s
         );
 
         [Kept]

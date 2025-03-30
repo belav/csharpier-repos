@@ -191,8 +191,9 @@ namespace System.Text.Json.Serialization.Metadata
             );
 
         private static DynamicMethod CreateAddMethodDelegate(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                Type collectionType
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+            )] Type collectionType
         )
         {
             // We verified this won't be null when we created the converter that calls this method.

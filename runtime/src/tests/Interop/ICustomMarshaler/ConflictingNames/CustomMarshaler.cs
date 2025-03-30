@@ -53,8 +53,7 @@ namespace CustomMarshalers
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(WrappedStringCustomMarshaler)
-            )]
-                WrappedString str
+            )] WrappedString str
         );
 
         public int ParseInt(string str)

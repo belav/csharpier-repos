@@ -242,8 +242,7 @@ namespace System.Linq.Expressions
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicConstructors
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
-            )]
-                Type type
+            )] Type type
         )
         {
             ArgumentNullException.ThrowIfNull(type);

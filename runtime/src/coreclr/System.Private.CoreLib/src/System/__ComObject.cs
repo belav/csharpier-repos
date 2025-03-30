@@ -108,8 +108,7 @@ namespace System
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicConstructors
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
-            )]
-                RuntimeType t
+            )] RuntimeType t
         )
         {
             // Check to see if we already have a cached event provider for this type.
@@ -127,8 +126,7 @@ namespace System
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicConstructors
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
-            )]
-                RuntimeType t
+            )] RuntimeType t
         )
         {
             // Create the event provider for the specified type.

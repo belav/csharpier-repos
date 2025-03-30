@@ -161,8 +161,7 @@ namespace System.Web.Mvc.Test
                     Prefix = "some prefix",
                     Include = "incl_a, incl_b",
                     Exclude = "excl_a, excl_b"
-                )]
-                    object p1
+                )] object p1
             ) { }
 
             public void ParameterHasNoBindAttributes(object p1) { }

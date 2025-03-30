@@ -188,8 +188,7 @@ namespace System.Reflection.Runtime.TypeInfos
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicMethods
-            )]
-                Type interfaceType
+            )] Type interfaceType
         )
         {
             // restrictions and known limitations compared to CoreCLR:

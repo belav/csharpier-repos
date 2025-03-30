@@ -537,8 +537,7 @@ namespace System.Reflection.Emit
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicMethods
-            )]
-                Type interfaceType
+            )] Type interfaceType
         )
         {
             throw new NotSupportedException(SR.NotSupported_NonReflectedType);

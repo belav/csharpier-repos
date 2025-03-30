@@ -119,8 +119,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         Type ReturnPublicConstructorsFailure(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )]
-                Type publicParameterlessConstructorType
+            )] Type publicParameterlessConstructorType
         )
         {
             return publicParameterlessConstructorType;
@@ -129,8 +128,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [ExpectedWarning("IL2068", nameof(ReturnNonPublicConstructorsFailure))]
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
         Type ReturnNonPublicConstructorsFailure(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-                Type publicConstructorsType
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+            )] Type publicConstructorsType
         )
         {
             return publicConstructorsType;

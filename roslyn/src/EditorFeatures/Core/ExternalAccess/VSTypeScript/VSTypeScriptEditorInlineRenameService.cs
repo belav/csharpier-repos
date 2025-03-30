@@ -18,8 +18,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     internal sealed class VSTypeScriptEditorInlineRenameService(
-        [Import(AllowDefault = true)]
-            Lazy<VSTypeScriptEditorInlineRenameServiceImplementation>? service
+        [Import(
+            AllowDefault = true
+        )] Lazy<VSTypeScriptEditorInlineRenameServiceImplementation>? service
     ) : IEditorInlineRenameService
     {
         private readonly Lazy<VSTypeScriptEditorInlineRenameServiceImplementation>? _service =

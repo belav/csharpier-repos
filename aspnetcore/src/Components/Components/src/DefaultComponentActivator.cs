@@ -11,8 +11,9 @@ internal sealed class DefaultComponentActivator : IComponentActivator
 
     /// <inheritdoc />
     public IComponent CreateInstance(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-            Type componentType
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicConstructors
+        )] Type componentType
     )
     {
         if (!typeof(IComponent).IsAssignableFrom(componentType))

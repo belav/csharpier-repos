@@ -1552,8 +1552,10 @@ public static class Program2
 
         [Theory, CombinatorialData]
         public void InExtensionMethodsReceiverTypes_ValueTypes_Allowed_IL(
-            [CombinatorialValues("IsReadOnlyAttribute", "RequiresLocationAttribute")]
-                string attributeName
+            [CombinatorialValues(
+                "IsReadOnlyAttribute",
+                "RequiresLocationAttribute"
+            )] string attributeName
         )
         {
             var reference = CompileIL(
@@ -1597,8 +1599,10 @@ public static class Program
 
         [Theory, CombinatorialData]
         public void InExtensionMethodsReceiverTypes_ReferenceTypes_NotAllowed_IL(
-            [CombinatorialValues("IsReadOnlyAttribute", "RequiresLocationAttribute")]
-                string attributeName
+            [CombinatorialValues(
+                "IsReadOnlyAttribute",
+                "RequiresLocationAttribute"
+            )] string attributeName
         )
         {
             var reference = CompileIL(
@@ -1651,8 +1655,10 @@ public static class Program
 
         [Theory, CombinatorialData]
         public void InExtensionMethodsReceiverTypes_InterfaceTypes_NotAllowed_IL(
-            [CombinatorialValues("IsReadOnlyAttribute", "RequiresLocationAttribute")]
-                string attributeName
+            [CombinatorialValues(
+                "IsReadOnlyAttribute",
+                "RequiresLocationAttribute"
+            )] string attributeName
         )
         {
             var reference = CompileIL(
@@ -1705,8 +1711,10 @@ public static class Program
 
         [Theory, CombinatorialData]
         public void InExtensionMethodsReceiverTypes_UnconstrainedGenericTypes_NotAllowed_IL(
-            [CombinatorialValues("IsReadOnlyAttribute", "RequiresLocationAttribute")]
-                string attributeName
+            [CombinatorialValues(
+                "IsReadOnlyAttribute",
+                "RequiresLocationAttribute"
+            )] string attributeName
         )
         {
             var reference = CompileIL(
@@ -1759,8 +1767,10 @@ public static class Program
 
         [Theory, CombinatorialData]
         public void InExtensionMethodsReceiverTypes_StructConstrainedGenericTypes_NotAllowed_IL(
-            [CombinatorialValues("IsReadOnlyAttribute", "RequiresLocationAttribute")]
-                string attributeName
+            [CombinatorialValues(
+                "IsReadOnlyAttribute",
+                "RequiresLocationAttribute"
+            )] string attributeName
         )
         {
             var reference = CompileIL(
@@ -1813,8 +1823,10 @@ public static class Program
 
         [Theory, CombinatorialData]
         public void InExtensionMethodsReceiverTypes_ClassConstrainedGenericTypes_NotAllowed_IL(
-            [CombinatorialValues("IsReadOnlyAttribute", "RequiresLocationAttribute")]
-                string attributeName
+            [CombinatorialValues(
+                "IsReadOnlyAttribute",
+                "RequiresLocationAttribute"
+            )] string attributeName
         )
         {
             var reference = CompileIL(
@@ -1867,8 +1879,10 @@ public static class Program
 
         [Theory, CombinatorialData]
         public void InExtensionMethodsReceiverTypes_InterfaceConstrainedGenericTypes_NotAllowed_IL(
-            [CombinatorialValues("IsReadOnlyAttribute", "RequiresLocationAttribute")]
-                string attributeName
+            [CombinatorialValues(
+                "IsReadOnlyAttribute",
+                "RequiresLocationAttribute"
+            )] string attributeName
         )
         {
             var reference = CompileIL(

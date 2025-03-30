@@ -107,16 +107,16 @@ namespace LibraryImportGenerator.IntegrationTests
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "double_int_ref")]
             public static partial IntWrapperWithoutGetPinnableReference DoubleIntRef(
-                [MarshalUsing(typeof(IntWrapperWithoutGetPinnableReferenceStatefulMarshaller))]
-                    IntWrapperWithoutGetPinnableReference pInt
+                [MarshalUsing(
+                    typeof(IntWrapperWithoutGetPinnableReferenceStatefulMarshaller)
+                )] IntWrapperWithoutGetPinnableReference pInt
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "double_int_ref")]
             public static partial IntWrapperWithoutGetPinnableReference DoubleIntRefNoAlloc(
                 [MarshalUsing(
                     typeof(IntWrapperWithoutGetPinnableReferenceStatefulNoAllocMarshaller)
-                )]
-                    IntWrapperWithoutGetPinnableReference pInt
+                )] IntWrapperWithoutGetPinnableReference pInt
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "double_int_ref")]

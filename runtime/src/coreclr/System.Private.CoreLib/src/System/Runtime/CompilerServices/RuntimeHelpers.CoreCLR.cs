@@ -206,8 +206,7 @@ namespace System.Runtime.CompilerServices
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicConstructors
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
-            )]
-                Type type
+            )] Type type
         )
         {
             if (type is not RuntimeType rt)

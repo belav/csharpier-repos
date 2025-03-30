@@ -166,8 +166,7 @@ namespace marshalertest
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(MarshalTest),
                 MarshalCookie = "1"
-            )]
-                ref string p
+            )] ref string p
         );
 
         [DllImport(
@@ -180,8 +179,7 @@ namespace marshalertest
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(MarshalTest),
                 MarshalCookie = "2"
-            )]
-                ref string p
+            )] ref string p
         );
 
         [DllImport(
@@ -193,8 +191,7 @@ namespace marshalertest
             [param: MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(MarshalerNoInterface)
-            )]
-                ref string p
+            )] ref string p
         );
 
         [DllImport(
@@ -206,8 +203,7 @@ namespace marshalertest
             [param: MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(MarshalerNoMethod)
-            )]
-                ref string p
+            )] ref string p
         );
 
         [DllImport(
@@ -219,8 +215,7 @@ namespace marshalertest
             [param: MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(MarshalerWrongArgumentType)
-            )]
-                ref string p
+            )] ref string p
         );
 
         [DllImport(
@@ -232,8 +227,7 @@ namespace marshalertest
             [param: MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(MarshalerWrongArgumentCount)
-            )]
-                ref string p
+            )] ref string p
         );
 
         [DllImport(
@@ -245,8 +239,7 @@ namespace marshalertest
             [param: MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(MarshalerNullInstance)
-            )]
-                ref string p
+            )] ref string p
         );
 
         [DllImport(
@@ -258,8 +251,7 @@ namespace marshalertest
             [param: MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(MarshalerWrongReturnType)
-            )]
-                ref string p
+            )] ref string p
         );
 
         public static unsafe void ExpectThrow<T>(string message, TestFn func, ref int errorCount)

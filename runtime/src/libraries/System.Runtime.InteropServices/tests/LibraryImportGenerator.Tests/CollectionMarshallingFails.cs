@@ -22,27 +22,32 @@ namespace LibraryImportGenerator.IntegrationTests
 
             [LibraryImport("DoesNotExist", StringMarshalling = StringMarshalling.Utf8)]
             public static partial void MarshalSingleDimensionalArray(
-                [MarshalUsing(typeof(BoolStructInMarshaller), ElementIndirectionDepth = 1)]
-                    BoolStruct[] c
+                [MarshalUsing(
+                    typeof(BoolStructInMarshaller),
+                    ElementIndirectionDepth = 1
+                )] BoolStruct[] c
             );
 
             [LibraryImport("DoesNotExist", StringMarshalling = StringMarshalling.Utf8)]
             public static partial void MarshalMultidimensionalArray_CheckOuterArrayIsIndexTracked(
-                [MarshalUsing(typeof(BoolStructArrayMarshaller), ElementIndirectionDepth = 1)]
-                    BoolStruct[][] c
+                [MarshalUsing(
+                    typeof(BoolStructArrayMarshaller),
+                    ElementIndirectionDepth = 1
+                )] BoolStruct[][] c
             );
 
             [LibraryImport("DoesNotExist", StringMarshalling = StringMarshalling.Utf8)]
             public static partial void MarshalMultidimensionalArray_CheckInnerArraysAreCleared(
-                [MarshalUsing(typeof(BoolStructInMarshallerAllowNull), ElementIndirectionDepth = 2)]
-                    BoolStruct[][] c
+                [MarshalUsing(
+                    typeof(BoolStructInMarshallerAllowNull),
+                    ElementIndirectionDepth = 2
+                )] BoolStruct[][] c
             );
 
             [LibraryImport("DoesNotExist")]
             public static partial void MarshalArray_Ref(
                 [MarshalUsing(typeof(BoolStructInMarshaller), ElementIndirectionDepth = 1)]
-                [MarshalUsing(ConstantElementCount = 10)]
-                    ref BoolStruct[] c
+                [MarshalUsing(ConstantElementCount = 10)] ref BoolStruct[] c
             );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "negate_bool_struct_array_out")]

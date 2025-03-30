@@ -25,8 +25,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     internal class MetadataAsSourceFileService(
-        [ImportMany]
-            IEnumerable<
+        [ImportMany] IEnumerable<
             Lazy<IMetadataAsSourceFileProvider, MetadataAsSourceFileProviderMetadata>
         > providers
     ) : IMetadataAsSourceFileService

@@ -268,8 +268,7 @@ namespace System.ComponentModel
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
-            )]
-                string designerTypeName
+            )] string designerTypeName
         ) { }
 
         public DesignerAttribute(
@@ -317,8 +316,7 @@ namespace System.ComponentModel
                     .CodeAnalysis
                     .DynamicallyAccessedMemberTypes
                     .PublicParameterlessConstructor
-            )]
-                System.Type designerType
+            )] System.Type designerType
         ) { }
 
         public DesignerAttribute(

@@ -14,8 +14,9 @@ namespace SharedTypes.ComInterfaces
         [return: MarshalUsing(CountElementName = nameof(size))]
         int[] GetReturn(out int size);
         int GetOut(
-            [MarshalUsing(CountElementName = MarshalUsingAttribute.ReturnsCountValue)]
-                out int[] array
+            [MarshalUsing(
+                CountElementName = MarshalUsingAttribute.ReturnsCountValue
+            )] out int[] array
         );
         void SetContents([MarshalUsing(CountElementName = nameof(size))] int[] array, int size);
         void FillAscending(

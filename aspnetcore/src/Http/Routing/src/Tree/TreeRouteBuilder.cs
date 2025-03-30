@@ -245,6 +245,7 @@ internal class TreeRouteBuilder
     /// Gets the list of <see cref="InboundRouteEntry"/>.
     /// </summary>
 #endif
+
     public IList<InboundRouteEntry> InboundEntries { get; } = new List<InboundRouteEntry>();
 
 #if !COMPONENTS
@@ -258,6 +259,7 @@ internal class TreeRouteBuilder
     /// </summary>
     /// <returns>The <see cref="TreeRouter"/>.</returns>
 #endif
+
     public TreeRouter Build()
     {
         return Build(version: 0);

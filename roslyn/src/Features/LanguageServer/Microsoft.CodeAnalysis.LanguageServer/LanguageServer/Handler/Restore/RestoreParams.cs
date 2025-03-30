@@ -13,8 +13,7 @@ internal sealed record RestoreParams(
     [property:
         DataMember(Name = "projectFilePath"),
         JsonProperty(NullValueHandling = NullValueHandling.Ignore)
-    ]
-        string? ProjectFilePath
+    ] string? ProjectFilePath
 ) : IPartialResultParams<RestorePartialResult>
 {
     [DataMember(Name = Methods.PartialResultTokenName)]

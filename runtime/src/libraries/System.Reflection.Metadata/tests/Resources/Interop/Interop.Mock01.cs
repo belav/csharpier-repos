@@ -178,7 +178,11 @@ namespace MockInterop01
         CharSet = CharSet.Auto
     )]
     public delegate void InteropDeleWithStructArray(
-        [In, Out, ComAliasName("MockInterop01.UnionStruct"), MarshalAs(UnmanagedType.LPArray)]
-            UnionStruct[] p
+        [
+            In,
+            Out,
+            ComAliasName("MockInterop01.UnionStruct"),
+            MarshalAs(UnmanagedType.LPArray)
+        ] UnionStruct[] p
     );
 }

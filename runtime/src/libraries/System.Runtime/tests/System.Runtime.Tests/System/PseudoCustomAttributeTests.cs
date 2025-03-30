@@ -319,8 +319,7 @@ namespace System.Tests
                     In,
                     Out,
                     Optional
-                ]
-                    int[] x
+                ] int[] x
             );
         }
 

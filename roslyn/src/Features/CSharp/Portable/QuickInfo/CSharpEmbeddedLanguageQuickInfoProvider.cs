@@ -22,8 +22,9 @@ internal sealed class CSharpEmbeddedLanguageQuickInfoProvider
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     public CSharpEmbeddedLanguageQuickInfoProvider(
-        [ImportMany]
-            IEnumerable<Lazy<IEmbeddedLanguageQuickInfoProvider, EmbeddedLanguageMetadata>> services
+        [ImportMany] IEnumerable<
+            Lazy<IEmbeddedLanguageQuickInfoProvider, EmbeddedLanguageMetadata>
+        > services
     )
         : base(
             LanguageNames.CSharp,

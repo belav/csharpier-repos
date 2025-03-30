@@ -26,8 +26,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Navigation
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public FSharpCrossLanguageSymbolNavigationService(
-            [Import(AllowDefault = true)]
-                IFSharpCrossLanguageSymbolNavigationService underlyingService
+            [Import(
+                AllowDefault = true
+            )] IFSharpCrossLanguageSymbolNavigationService underlyingService
         )
         {
             _underlyingService = underlyingService;

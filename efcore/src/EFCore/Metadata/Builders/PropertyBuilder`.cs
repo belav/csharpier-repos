@@ -173,8 +173,9 @@ public class PropertyBuilder<TProperty> : PropertyBuilder
     /// <param name="valueGeneratorType">A type that inherits from <see cref="ValueGenerator" />.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public new virtual PropertyBuilder<TProperty> HasValueGenerator(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-            Type? valueGeneratorType
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+        )] Type? valueGeneratorType
     ) => (PropertyBuilder<TProperty>)base.HasValueGenerator(valueGeneratorType);
 
     /// <summary>
@@ -262,8 +263,9 @@ public class PropertyBuilder<TProperty> : PropertyBuilder
     /// <param name="valueGeneratorFactoryType">A type that inherits from <see cref="ValueGeneratorFactory" />.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public new virtual PropertyBuilder<TProperty> HasValueGeneratorFactory(
-        [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)]
-            Type? valueGeneratorFactoryType
+        [DynamicallyAccessedMembers(
+            ValueGeneratorFactory.DynamicallyAccessedMemberTypes
+        )] Type? valueGeneratorFactoryType
     ) => (PropertyBuilder<TProperty>)base.HasValueGeneratorFactory(valueGeneratorFactoryType);
 
     /// <summary>
@@ -385,8 +387,9 @@ public class PropertyBuilder<TProperty> : PropertyBuilder
     /// <param name="providerClrType">The type to convert to and from or a type that inherits from <see cref="ValueConverter" />.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public new virtual PropertyBuilder<TProperty> HasConversion(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-            Type? providerClrType
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+        )] Type? providerClrType
     ) => (PropertyBuilder<TProperty>)base.HasConversion(providerClrType);
 
     /// <summary>

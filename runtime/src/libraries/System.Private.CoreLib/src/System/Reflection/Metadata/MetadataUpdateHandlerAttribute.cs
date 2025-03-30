@@ -32,8 +32,7 @@ namespace System.Reflection.Metadata
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicMethods
-            )]
-                Type handlerType
+            )] Type handlerType
         ) => HandlerType = handlerType;
 
         /// <summary>Gets the type that handles metadata updates and that should be notified when any occur.</summary>

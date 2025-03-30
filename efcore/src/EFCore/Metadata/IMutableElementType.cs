@@ -74,8 +74,9 @@ public interface IMutableElementType : IReadOnlyElementType, IMutableAnnotatable
     ///     A type that inherits from <see cref="ValueConverter" />, or <see langword="null" /> to remove any previously set converter.
     /// </param>
     void SetValueConverter(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-            Type? converterType
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+        )] Type? converterType
     );
 
     /// <summary>
@@ -103,8 +104,9 @@ public interface IMutableElementType : IReadOnlyElementType, IMutableAnnotatable
     ///     A type that inherits from <see cref="ValueComparer" />, or <see langword="null" /> to remove any previously set comparer.
     /// </param>
     void SetValueComparer(
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-            Type? comparerType
+        [DynamicallyAccessedMembers(
+            DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+        )] Type? comparerType
     );
 
     /// <summary>

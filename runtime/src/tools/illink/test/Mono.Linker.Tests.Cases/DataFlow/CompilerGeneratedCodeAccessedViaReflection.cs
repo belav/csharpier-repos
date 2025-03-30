@@ -994,8 +994,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             static void TestLambdaThroughDelegate()
             {
                 Action<Type> a = (
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type type
                 ) => { };
                 a(null);
             }
@@ -1007,8 +1008,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 a(null);
 
                 void LocalFunction(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type type
                 ) { }
             }
 
@@ -1038,8 +1040,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             static void Lambda()
             {
                 Action<Type> a = (
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type type
                 ) =>
                 {
                     type.GetMethods();
@@ -1065,8 +1068,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 LocalFunctionInner(typeof(string));
 
                 static void LocalFunctionInner(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.PublicMethods
+                    )] Type type
                 )
                 {
                     type.GetMethods();

@@ -458,8 +458,10 @@ namespace System.ServiceModel.ComIntegration
         }
 
         void PopulateByKey(
-            [In, MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)]
-                Object[] aKeys
+            [
+                In,
+                MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)
+            ] Object[] aKeys
         );
 
         [DispId(0x0000000d)]

@@ -239,8 +239,9 @@ namespace System.Data.Common
         }
 
         private static DbProviderFactory GetFactoryInstance(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
-                Type providerFactoryClass
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicFields
+            )] Type providerFactoryClass
         )
         {
             ADP.CheckArgumentNull(providerFactoryClass, nameof(providerFactoryClass));
@@ -276,8 +277,9 @@ namespace System.Data.Common
 
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
         private static Type GetProviderTypeFromTypeName(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
-                string assemblyQualifiedName
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicFields
+            )] string assemblyQualifiedName
         )
         {
             Type? providerType = Type.GetType(assemblyQualifiedName);

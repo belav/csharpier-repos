@@ -1989,8 +1989,7 @@ namespace System.Text.Json.Serialization.Tests
         public static Type WithConstructors(
             [System.Diagnostics.CodeAnalysis.DynamicallyAccessedMembers(
                 System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.PublicConstructors
-            )]
-                this Type type
+            )] this Type type
         ) => type;
 #else
         public static Type WithConstructors(this Type type) => type;

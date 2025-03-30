@@ -101,8 +101,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         public static void MethodWithRefParameter(
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-                ref Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] ref Type type
         )
         {
             type = typeof(ClassReturnedAsRefFromMethodTakingTypeByRef);

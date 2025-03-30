@@ -269,8 +269,7 @@ namespace System.Reflection.Emit
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicMethods
-            )]
-                Type interfaceType
+            )] Type interfaceType
         )
         {
             throw new NotSupportedException();
@@ -418,8 +417,9 @@ namespace System.Reflection.Emit
         }
 
         protected override void SetBaseTypeConstraintCore(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-                Type? baseTypeConstraint
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.All
+            )] Type? baseTypeConstraint
         )
         {
             m_type.SetParent(baseTypeConstraint);

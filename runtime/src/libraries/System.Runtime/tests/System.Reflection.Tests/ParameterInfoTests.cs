@@ -776,8 +776,8 @@ namespace System.Reflection.Tests
             ) { }
 
             public void Foo3(
-                [CustomBindingFlags(Value = BindingFlags.DeclaredOnly)]
-                    BindingFlags bf = BindingFlags.FlattenHierarchy
+                [CustomBindingFlags(Value = BindingFlags.DeclaredOnly)] BindingFlags bf =
+                    BindingFlags.FlattenHierarchy
             ) { }
 
             public void DateTimeParamWithDateTimeConstantAttr(

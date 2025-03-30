@@ -1925,8 +1925,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Theory]
         [CombinatorialData]
         public void WithProjectCompilationOptionsReplacesSyntaxTreeOptionProvider(
-            [CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-                string languageName
+            [CombinatorialValues(
+                LanguageNames.CSharp,
+                LanguageNames.VisualBasic
+            )] string languageName
         )
         {
             var projectId = ProjectId.CreateNewId();
@@ -5431,8 +5433,10 @@ public class C : A {
         [Theory]
         [CombinatorialData]
         public async Task TestAddingEditorConfigFileWithDiagnosticSeverity(
-            [CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-                string languageName
+            [CombinatorialValues(
+                LanguageNames.CSharp,
+                LanguageNames.VisualBasic
+            )] string languageName
         )
         {
             using var workspace = CreateWorkspace();
@@ -5496,8 +5500,10 @@ public class C : A {
         [Theory]
         [CombinatorialData]
         public async Task TestAddingAndRemovingEditorConfigFileWithDiagnosticSeverity(
-            [CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-                string languageName
+            [CombinatorialValues(
+                LanguageNames.CSharp,
+                LanguageNames.VisualBasic
+            )] string languageName
         )
         {
             using var workspace = CreateWorkspace();
@@ -5575,8 +5581,10 @@ public class C : A {
         [Theory]
         [CombinatorialData]
         public async Task TestChangingAnEditorConfigFile(
-            [CombinatorialValues(LanguageNames.CSharp, LanguageNames.VisualBasic)]
-                string languageName
+            [CombinatorialValues(
+                LanguageNames.CSharp,
+                LanguageNames.VisualBasic
+            )] string languageName
         )
         {
             using var workspace = CreateWorkspace();

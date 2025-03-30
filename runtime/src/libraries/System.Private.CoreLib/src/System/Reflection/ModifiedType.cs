@@ -194,8 +194,7 @@ namespace System.Reflection
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicMethods
-            )]
-                Type interfaceType
+            )] Type interfaceType
         ) => _unmodifiedType.GetInterfaceMap(interfaceType);
 
         [DynamicallyAccessedMembers(

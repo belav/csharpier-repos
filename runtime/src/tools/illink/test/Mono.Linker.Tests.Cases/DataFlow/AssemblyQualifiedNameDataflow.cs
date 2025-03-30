@@ -125,18 +125,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         private static void RequirePublicParameterlessConstructor(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )]
-                string type
+            )] string type
         ) { }
 
         private static void RequirePublicConstructors(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-                string type
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicConstructors
+            )] string type
         ) { }
 
         private static void RequireNonPublicConstructors(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
-                string type
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.NonPublicConstructors
+            )] string type
         ) { }
 
         private static void RequireNothing(string type) { }

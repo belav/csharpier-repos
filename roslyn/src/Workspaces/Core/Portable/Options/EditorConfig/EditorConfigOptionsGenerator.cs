@@ -25,8 +25,9 @@ namespace Microsoft.CodeAnalysis.Options.EditorConfig
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public EditorConfigOptionsGenerator(
-            [ImportMany]
-                IEnumerable<Lazy<IEditorConfigOptionsCollection, LanguageMetadata>> generators
+            [ImportMany] IEnumerable<
+                Lazy<IEditorConfigOptionsCollection, LanguageMetadata>
+            > generators
         )
         {
             _editorConfigGenerators = generators;

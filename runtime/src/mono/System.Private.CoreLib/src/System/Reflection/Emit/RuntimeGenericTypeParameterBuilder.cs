@@ -67,8 +67,9 @@ namespace System.Reflection.Emit
         }
 
         protected override void SetBaseTypeConstraintCore(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-                Type? baseTypeConstraint
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.All
+            )] Type? baseTypeConstraint
         )
         {
             this.base_type = baseTypeConstraint ?? typeof(object);
@@ -410,8 +411,7 @@ namespace System.Reflection.Emit
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicMethods
                     | DynamicallyAccessedMemberTypes.NonPublicMethods
-            )]
-                Type interfaceType
+            )] Type interfaceType
         )
         {
             throw not_supported();

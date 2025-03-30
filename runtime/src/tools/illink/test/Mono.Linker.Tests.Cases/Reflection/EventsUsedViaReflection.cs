@@ -90,8 +90,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
         [Kept]
         static void TestDataFlowWithAnnotation(
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-                Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)] Type type
         )
         {
             var events = type.GetEvents(BindingFlags.Public | BindingFlags.Static);

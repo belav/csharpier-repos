@@ -1777,24 +1777,27 @@ namespace System.Xml
         }
 
         public virtual bool TryGetLocalNameAsDictionaryString(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
-                out System.Xml.XmlDictionaryString? localName
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
+                true
+            )] out System.Xml.XmlDictionaryString? localName
         )
         {
             throw null;
         }
 
         public virtual bool TryGetNamespaceUriAsDictionaryString(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
-                out System.Xml.XmlDictionaryString? namespaceUri
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
+                true
+            )] out System.Xml.XmlDictionaryString? namespaceUri
         )
         {
             throw null;
         }
 
         public virtual bool TryGetValueAsDictionaryString(
-            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)]
-                out System.Xml.XmlDictionaryString? value
+            [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(
+                true
+            )] out System.Xml.XmlDictionaryString? value
         )
         {
             throw null;

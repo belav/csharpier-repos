@@ -47,8 +47,7 @@ namespace Mono.Linker.Tests.Cases.ComponentModel
                 [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-                )]
-                    Type visualType
+                )] Type visualType
             )
             {
                 try

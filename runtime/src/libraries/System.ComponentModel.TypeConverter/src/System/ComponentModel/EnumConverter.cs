@@ -21,8 +21,9 @@ namespace System.ComponentModel
         /// type.
         /// </summary>
         public EnumConverter(
-            [DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)]
-                Type type
+            [DynamicallyAccessedMembers(
+                TypeDescriptor.ReflectTypesDynamicallyAccessedMembers
+            )] Type type
         )
         {
             EnumType = type;

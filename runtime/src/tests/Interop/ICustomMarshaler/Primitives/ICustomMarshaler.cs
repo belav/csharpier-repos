@@ -51,8 +51,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(StringForwardingCustomMarshaler)
-            )]
-                string str
+            )] string str
         );
 
         public static void CustomMarshaler_ArrayType_Success()
@@ -86,8 +85,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalType = "System.Runtime.InteropServices.Tests.ICustomMarshalerTests+ArrayForwardingCustomMarshaler"
-            )]
-                string[] str
+            )] string[] str
         );
 
         public static void CustomMarshaler_BoxedValueType_Success()
@@ -124,8 +122,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(BoxedValueTypeCustomMarshaler)
-            )]
-                object i
+            )] object i
         );
 
         public static void Parameter_CustomMarshalerProvidedOnClassType_ForwardsCorrectly()
@@ -185,8 +182,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(ClassForwardingCustomMarshaler)
-            )]
-                StringContainer str
+            )] StringContainer str
         );
 
         public static void Parameter_CustomMarshalerProvided_CallsMethodsInCorrectOrdering()
@@ -326,8 +322,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(OrderTrackingCustomMarshaler)
-            )]
-                string str
+            )] string str
         );
 
         [DllImport("CustomMarshalersPrimitives", EntryPoint = "NativeParseIntRef")]
@@ -335,8 +330,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(OrderTrackingCustomMarshaler)
-            )]
-                ref string str
+            )] ref string str
         );
 
         [DllImport("CustomMarshalersPrimitives", EntryPoint = "NativeParseIntOut")]
@@ -344,8 +338,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(OrderTrackingCustomMarshaler)
-            )]
-                out string str
+            )] out string str
         );
 
         [return: MarshalAs(
@@ -401,8 +394,7 @@ namespace System.Runtime.InteropServices.Tests
                 UnmanagedType.CustomMarshaler,
                 MarshalType = "System.Runtime.InteropServices.Tests.ICustomMarshalerTests+OverridingCustomMarshaler",
                 MarshalTypeRef = typeof(StringForwardingCustomMarshaler)
-            )]
-                string str
+            )] string str
         );
 
         public static void Parameter_CookieProvided_PassesCookieToGetInstance()
@@ -443,8 +435,7 @@ namespace System.Runtime.InteropServices.Tests
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(CookieTrackingCustomMarshaler),
                 MarshalCookie = "Cookie"
-            )]
-                string str
+            )] string str
         );
 
         public static void Parameter_NotCustomMarshalerType_UsesSpecifiedMarshaler()
@@ -455,8 +446,10 @@ namespace System.Runtime.InteropServices.Tests
 
         [DllImport(LibcLibrary, EntryPoint = "atoi", CallingConvention = CallingConvention.Cdecl)]
         public static extern int NonCustomMarshalerTypeMethod(
-            [MarshalAs(UnmanagedType.LPStr, MarshalTypeRef = typeof(OverridingCustomMarshaler))]
-                string str
+            [MarshalAs(
+                UnmanagedType.LPStr,
+                MarshalTypeRef = typeof(OverridingCustomMarshaler)
+            )] string str
         );
 
         public static void CustomMarshaler_Generic_Success()
@@ -491,8 +484,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(GenericCustomMarshaler<int>)
-            )]
-                string str
+            )] string str
         );
 
         public static void CustomMarshaler_ValueTypeWithStringType_Success()
@@ -527,8 +519,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(CustomMarshalerValueType)
-            )]
-                string str
+            )] string str
         );
 
         public static void Parameter_MarshalerOnValueType_ThrowsMarshalDirectiveException()
@@ -541,8 +532,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(StringForwardingCustomMarshaler)
-            )]
-                int str
+            )] int str
         );
 
         public static unsafe void Parameter_MarshalerOnPointer_ThrowsMarshalDirectiveException()
@@ -555,8 +545,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(StringForwardingCustomMarshaler)
-            )]
-                int* str
+            )] int* str
         );
 
         public static void Parameter_NullICustomMarshaler_ThrowsTypeLoadException()
@@ -599,8 +588,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(GenericCustomMarshaler<>)
-            )]
-                string str
+            )] string str
         );
 
         public static void Parameter_GetInstanceMethodDoesntExist_ThrowsApplicationException()
@@ -626,8 +614,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(NoGetInstanceCustomMarshaler)
-            )]
-                string str
+            )] string str
         );
 
         public static void Parameter_GetInstanceMethodInstanceMethod_ThrowsApplicationException()
@@ -656,8 +643,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(InstanceGetInstanceCustomMarshaler)
-            )]
-                string str
+            )] string str
         );
 
         public static void Parameter_GetInstanceMethodNoParameters_ThrowsApplicationException()
@@ -686,8 +672,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(NoParameterGetInstanceCustomMarshaler)
-            )]
-                string str
+            )] string str
         );
 
         public static void Parameter_GetInstanceMethodNonStringParameter_ThrowsApplicationException()
@@ -716,8 +701,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(NonStringGetInstanceCustomMarshaler)
-            )]
-                string str
+            )] string str
         );
 
         public static void Parameter_GetInstanceMethodReturnsVoid_ThrowsApplicationException()
@@ -745,8 +729,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(VoidGetInstanceCustomMarshaler)
-            )]
-                string str
+            )] string str
         );
 
         public static void Parameter_GetInstanceMethodReturnsNull_ThrowsApplicationException()
@@ -774,8 +757,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(NullGetInstanceCustomMarshaler)
-            )]
-                string str
+            )] string str
         );
 
         public static void Parameter_GetInstanceMethodThrows_ThrowsActualException()
@@ -804,8 +786,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(ThrowingGetInstanceCustomMarshaler)
-            )]
-                string str
+            )] string str
         );
 
         public static void Parameter_MarshalManagedToNativeThrows_ThrowsActualException()
@@ -835,8 +816,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(ThrowingMarshalManagedToNativeCustomMarshaler)
-            )]
-                string str
+            )] string str
         );
 
         public static void Parameter_CleanUpNativeDataMethodThrows_ThrowsActualException()
@@ -867,8 +847,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(ThrowingCleanUpNativeDataCustomMarshaler)
-            )]
-                string str
+            )] string str
         );
 
         public static void Field_ParentIsStruct_ThrowsTypeLoadException()
@@ -958,16 +937,14 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(OuterCustomMarshaler)
-            )]
-                string str
+            )] string str
         );
 
         public delegate string TestDelegateRef(
             [MarshalAs(
                 UnmanagedType.CustomMarshaler,
                 MarshalTypeRef = typeof(BoxedValueTypeCustomMarshaler)
-            )]
-                ref int val
+            )] ref int val
         );
 
         [DllImport("CustomMarshalersPrimitives", EntryPoint = "NativeParseIntDelegateRef")]

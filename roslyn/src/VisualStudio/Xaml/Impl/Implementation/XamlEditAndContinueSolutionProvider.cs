@@ -24,8 +24,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public XamlEditAndContinueSolutionProvider(
-            [ImportMany]
-                IEnumerable<IEditAndContinueSolutionProvider> editAndContinueSolutionProviders
+            [ImportMany] IEnumerable<IEditAndContinueSolutionProvider> editAndContinueSolutionProviders
         )
         {
             _editAndContinueSolutionProviders = editAndContinueSolutionProviders;

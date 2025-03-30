@@ -1467,8 +1467,7 @@ class Test
                 LanguageVersion.CSharp11,
                 LanguageVersion.CSharp12,
                 LanguageVersion.Preview
-            )]
-                LanguageVersion languageVersion
+            )] LanguageVersion languageVersion
         )
         {
             UsingExpression(
@@ -1544,8 +1543,7 @@ class Test
                 LanguageVersion.CSharp11,
                 LanguageVersion.CSharp12,
                 LanguageVersion.Preview
-            )]
-                LanguageVersion languageVersion
+            )] LanguageVersion languageVersion
         )
         {
             UsingExpression(
@@ -1587,8 +1585,7 @@ class Test
                 LanguageVersion.CSharp11,
                 LanguageVersion.CSharp12,
                 LanguageVersion.Preview
-            )]
-                LanguageVersion languageVersion
+            )] LanguageVersion languageVersion
         )
         {
             UsingExpression(

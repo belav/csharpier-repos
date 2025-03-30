@@ -146,8 +146,9 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             class GetInterfaceInCtor
             {
                 public GetInterfaceInCtor(
-                    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]
-                        Type type
+                    [DynamicallyAccessedMembers(
+                        DynamicallyAccessedMemberTypes.Interfaces
+                    )] Type type
                 )
                 {
                     type.GetInterface("ITestInterface").RequiresInterfaces();

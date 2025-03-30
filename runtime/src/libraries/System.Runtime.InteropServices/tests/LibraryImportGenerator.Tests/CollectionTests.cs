@@ -125,15 +125,19 @@ namespace LibraryImportGenerator.IntegrationTests
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "return_zero")]
                 [return: MarshalUsing(typeof(ExceptionOnUnmarshal))]
                 public static partial int GuaranteedUnmarshal(
-                    [MarshalUsing(typeof(ListGuaranteedUnmarshal<,>), ConstantElementCount = 1)]
-                        out List<int> ret
+                    [MarshalUsing(
+                        typeof(ListGuaranteedUnmarshal<,>),
+                        ConstantElementCount = 1
+                    )] out List<int> ret
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "return_zero")]
                 [return: MarshalUsing(typeof(ExceptionOnUnmarshal))]
                 public static partial int GuaranteedUnmarshal(
-                    [MarshalUsing(typeof(ListGuaranteedUnmarshal<,>), ConstantElementCount = 1)]
-                        out List<BoolStruct> ret
+                    [MarshalUsing(
+                        typeof(ListGuaranteedUnmarshal<,>),
+                        ConstantElementCount = 1
+                    )] out List<BoolStruct> ret
                 );
 
                 [ContiguousCollectionMarshaller]
@@ -279,15 +283,19 @@ namespace LibraryImportGenerator.IntegrationTests
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "return_zero")]
                 [return: MarshalUsing(typeof(ExceptionOnUnmarshal))]
                 public static partial int GuaranteedUnmarshal(
-                    [MarshalUsing(typeof(ListGuaranteedUnmarshal<,>), ConstantElementCount = 1)]
-                        out List<int> ret
+                    [MarshalUsing(
+                        typeof(ListGuaranteedUnmarshal<,>),
+                        ConstantElementCount = 1
+                    )] out List<int> ret
                 );
 
                 [LibraryImport(NativeExportsNE_Binary, EntryPoint = "return_zero")]
                 [return: MarshalUsing(typeof(ExceptionOnUnmarshal))]
                 public static partial int GuaranteedUnmarshal(
-                    [MarshalUsing(typeof(ListGuaranteedUnmarshal<,>), ConstantElementCount = 1)]
-                        out List<BoolStruct> ret
+                    [MarshalUsing(
+                        typeof(ListGuaranteedUnmarshal<,>),
+                        ConstantElementCount = 1
+                    )] out List<BoolStruct> ret
                 );
 
                 [ContiguousCollectionMarshaller]

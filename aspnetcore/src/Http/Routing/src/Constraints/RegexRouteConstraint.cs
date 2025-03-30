@@ -46,8 +46,7 @@ internal class RegexRouteConstraint : IRouteConstraint
         [StringSyntax(
             StringSyntaxAttribute.Regex,
             RegexOptions.CultureInvariant | RegexOptions.Compiled | RegexOptions.IgnoreCase
-        )]
-            string regexPattern
+        )] string regexPattern
     )
     {
         ArgumentNullException.ThrowIfNull(regexPattern);

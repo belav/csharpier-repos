@@ -136,8 +136,7 @@ public sealed class ManagedAuthenticatedEncryptorFactory : IAuthenticatedEncrypt
         public static Func<T> CreateFactory<T>(
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
-            )]
-                Type implementation
+            )] Type implementation
         )
             where T : class
         {
