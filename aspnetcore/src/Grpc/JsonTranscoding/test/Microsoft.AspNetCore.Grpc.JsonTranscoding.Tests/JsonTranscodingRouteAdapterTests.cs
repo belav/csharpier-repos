@@ -32,14 +32,17 @@ public class JsonTranscodingRouteAdapterTests
         var route = HttpRoutePattern.Parse("/v1/{book.name=shelves/*/books/*}");
         var adapter = JsonTranscodingRouteAdapter.Parse(route);
 
-        Assert.Equal("/v1/shelves/{__Complex_book.name_2}/books/{__Complex_book.name_4}", adapter.ResolvedRouteTemplate);
+        Assert.Equal(
+            "/v1/shelves/{__Complex_book.name_2}/books/{__Complex_book.name_4}",
+            adapter.ResolvedRouteTemplate
+        );
         Assert.Single(adapter.RewriteVariableActions);
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.RouteValues = new RouteValueDictionary
         {
             { "__Complex_book.name_2", "first" },
-            { "__Complex_book.name_4", "second" }
+            { "__Complex_book.name_4", "second" },
         };
 
         adapter.RewriteVariableActions[0](httpContext);
@@ -138,7 +141,7 @@ public class JsonTranscodingRouteAdapterTests
         var httpContext = new DefaultHttpContext();
         httpContext.Request.RouteValues = new RouteValueDictionary
         {
-            { "__Complex_x.y.z_1", "my/value/b/c/d" }
+            { "__Complex_x.y.z_1", "my/value/b/c/d" },
         };
 
         adapter.RewriteVariableActions[0](httpContext);
@@ -157,7 +160,7 @@ public class JsonTranscodingRouteAdapterTests
         var httpContext = new DefaultHttpContext();
         httpContext.Request.RouteValues = new RouteValueDictionary
         {
-            { "__Complex_x.y.z_1", "my/value/b/c/d:verb" }
+            { "__Complex_x.y.z_1", "my/value/b/c/d:verb" },
         };
 
         adapter.RewriteVariableActions[0](httpContext);
@@ -174,10 +177,7 @@ public class JsonTranscodingRouteAdapterTests
         Assert.Equal("/a/c/{__Complex_b_2}", adapter.ResolvedRouteTemplate);
 
         var httpContext = new DefaultHttpContext();
-        httpContext.Request.RouteValues = new RouteValueDictionary
-        {
-            { "__Complex_b_2", "value" }
-        };
+        httpContext.Request.RouteValues = new RouteValueDictionary { { "__Complex_b_2", "value" } };
 
         adapter.RewriteVariableActions[0](httpContext);
 
@@ -193,10 +193,7 @@ public class JsonTranscodingRouteAdapterTests
         Assert.Equal("/a/c/{__Complex_b_2}/d", adapter.ResolvedRouteTemplate);
 
         var httpContext = new DefaultHttpContext();
-        httpContext.Request.RouteValues = new RouteValueDictionary
-        {
-            { "__Complex_b_2", "value" }
-        };
+        httpContext.Request.RouteValues = new RouteValueDictionary { { "__Complex_b_2", "value" } };
 
         adapter.RewriteVariableActions[0](httpContext);
 
@@ -212,10 +209,7 @@ public class JsonTranscodingRouteAdapterTests
         Assert.Equal("/a/c/{**__Complex_b_2}", adapter.ResolvedRouteTemplate);
 
         var httpContext = new DefaultHttpContext();
-        httpContext.Request.RouteValues = new RouteValueDictionary
-        {
-            { "__Complex_b_2", "value" }
-        };
+        httpContext.Request.RouteValues = new RouteValueDictionary { { "__Complex_b_2", "value" } };
 
         adapter.RewriteVariableActions[0](httpContext);
 
@@ -246,12 +240,15 @@ public class JsonTranscodingRouteAdapterTests
         var pattern = HttpRoutePattern.Parse("/v1/greeter/{name=**}:verb");
         var adapter = JsonTranscodingRouteAdapter.Parse(pattern);
 
-        Assert.Equal("/v1/greeter/{**__Complex_name_2:regex(:verb$)}", adapter.ResolvedRouteTemplate);
+        Assert.Equal(
+            "/v1/greeter/{**__Complex_name_2:regex(:verb$)}",
+            adapter.ResolvedRouteTemplate
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.RouteValues = new RouteValueDictionary
         {
-            { "__Complex_name_2", "test/name:verb" }
+            { "__Complex_name_2", "test/name:verb" },
         };
 
         adapter.RewriteVariableActions[0](httpContext);
@@ -265,12 +262,15 @@ public class JsonTranscodingRouteAdapterTests
         var pattern = HttpRoutePattern.Parse("/v1/greeter/{name=**}:verb");
         var adapter = JsonTranscodingRouteAdapter.Parse(pattern);
 
-        Assert.Equal("/v1/greeter/{**__Complex_name_2:regex(:verb$)}", adapter.ResolvedRouteTemplate);
+        Assert.Equal(
+            "/v1/greeter/{**__Complex_name_2:regex(:verb$)}",
+            adapter.ResolvedRouteTemplate
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.RouteValues = new RouteValueDictionary
         {
-            { "__Complex_name_2", "test/name/:verb" }
+            { "__Complex_name_2", "test/name/:verb" },
         };
 
         adapter.RewriteVariableActions[0](httpContext);

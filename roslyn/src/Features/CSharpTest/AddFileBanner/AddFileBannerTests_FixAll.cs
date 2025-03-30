@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddFileBanner
         public async Task FixAllInProject()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>{|FixAllInProject:|}using System;
@@ -43,7 +43,7 @@ class Program3
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>// This is the banner
@@ -71,14 +71,15 @@ class Program3
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact]
         public async Task FixAllInSolution()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>{|FixAllInSolution:|}using System;
@@ -105,7 +106,7 @@ class Program3
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>// This is the banner
@@ -135,14 +136,15 @@ class Program3
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact]
         public async Task FixAll_AlreadyHasBanner()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>{|FixAllInProject:|}using System;
@@ -182,7 +184,7 @@ class Program5
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>// This is the banner
@@ -225,14 +227,15 @@ class Program5
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact]
         public async Task FixAll_UpdatedFileNameInBanner()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""Bar1.cs"">{|FixAllInProject:|}using System;
@@ -259,7 +262,7 @@ class Program3
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""Bar1.cs"">// This is the banner in Bar1.cs
@@ -293,7 +296,8 @@ class Program3
 }
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Theory]
@@ -305,7 +309,7 @@ class Program3
             var fixAllScopeString = $"FixAllIn{fixAllScope}";
 
             await TestMissingInRegularAndScriptAsync(
-@$"
+                @$"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>{{|{fixAllScopeString}:|}}using System;
@@ -324,7 +328,8 @@ class Program2
 }}
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
     }
 }

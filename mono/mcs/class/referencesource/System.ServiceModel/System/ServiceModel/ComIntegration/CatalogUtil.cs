@@ -5,16 +5,15 @@ namespace System.ServiceModel.ComIntegration
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.InteropServices;
     using System.Runtime;
+    using System.Runtime.InteropServices;
 
     class ComCatalogObject
     {
         ICatalogObject catalogObject;
         ICatalogCollection catalogCollection;
 
-        public ComCatalogObject(ICatalogObject catalogObject,
-                                ICatalogCollection catalogCollection)
+        public ComCatalogObject(ICatalogObject catalogObject, ICatalogCollection catalogCollection)
         {
             this.catalogObject = catalogObject;
             this.catalogCollection = catalogCollection;
@@ -27,18 +26,14 @@ namespace System.ServiceModel.ComIntegration
 
         public string Name
         {
-            get
-            {
-                return (string)(this.catalogObject.Name());
-            }
+            get { return (string)(this.catalogObject.Name()); }
         }
 
         public ComCatalogCollection GetCollection(string collectionName)
         {
             ICatalogCollection collection;
-            collection = (ICatalogCollection)this.catalogCollection.GetCollection(
-                collectionName,
-                this.catalogObject.Key());
+            collection = (ICatalogCollection)
+                this.catalogCollection.GetCollection(collectionName, this.catalogObject.Key());
             collection.Populate();
 
             return new ComCatalogCollection(collection);
@@ -56,10 +51,7 @@ namespace System.ServiceModel.ComIntegration
 
         public int Count
         {
-            get
-            {
-                return this.catalogCollection.Count();
-            }
+            get { return this.catalogCollection.Count(); }
         }
 
         // (Not a property because I make a new object every time.)
@@ -119,7 +111,8 @@ namespace System.ServiceModel.ComIntegration
     {
         internal static string[] GetRoleMembers(
             ComCatalogObject application,
-            ComCatalogCollection rolesCollection)
+            ComCatalogCollection rolesCollection
+        )
         {
             ComCatalogCollection applicationRoles;
             applicationRoles = application.GetCollection("Roles");
@@ -168,8 +161,7 @@ namespace System.ServiceModel.ComIntegration
 
             try
             {
-                partitionCollection = (ICatalogCollection)catalog.GetCollection(
-                    "Partitions");
+                partitionCollection = (ICatalogCollection)catalog.GetCollection("Partitions");
                 partitionCollection.Populate();
             }
             catch (COMException comException)
@@ -186,9 +178,8 @@ namespace System.ServiceModel.ComIntegration
                     partition = (ICatalogObject)partitionCollection.Item(i);
 
                     ICatalogCollection appCollection;
-                    appCollection = (ICatalogCollection)partitionCollection.GetCollection(
-                        "Applications",
-                        partition.Key());
+                    appCollection = (ICatalogCollection)
+                        partitionCollection.GetCollection("Applications", partition.Key());
                     appCollection.Populate();
 
                     appObject = FindApplication(appCollection, applicationId);
@@ -199,8 +190,7 @@ namespace System.ServiceModel.ComIntegration
             else
             {
                 ICatalogCollection appCollection;
-                appCollection = (ICatalogCollection)catalog.GetCollection(
-                    "Applications");
+                appCollection = (ICatalogCollection)catalog.GetCollection("Applications");
                 appCollection.Populate();
 
                 appObject = FindApplication(appCollection, applicationId);
@@ -211,8 +201,7 @@ namespace System.ServiceModel.ComIntegration
             return null;
         }
 
-        static ICatalogObject FindApplication(ICatalogCollection appCollection,
-                                              Guid applicationId)
+        static ICatalogObject FindApplication(ICatalogCollection appCollection, Guid applicationId)
         {
             ICatalogObject appObject = null;
 

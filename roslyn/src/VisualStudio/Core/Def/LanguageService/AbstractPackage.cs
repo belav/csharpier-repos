@@ -23,16 +23,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             }
         }
 
-        protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
+        protected override async Task InitializeAsync(
+            CancellationToken cancellationToken,
+            IProgress<ServiceProgressData> progress
+        )
         {
             await base.InitializeAsync(cancellationToken, progress).ConfigureAwait(true);
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            _componentModel_doNotAccessDirectly = (IComponentModel)await GetServiceAsync(typeof(SComponentModel)).ConfigureAwait(true);
+            _componentModel_doNotAccessDirectly = (IComponentModel)
+                await GetServiceAsync(typeof(SComponentModel)).ConfigureAwait(true);
             Assumes.Present(_componentModel_doNotAccessDirectly);
         }
 
-        protected async Task LoadComponentsInUIContextOnceSolutionFullyLoadedAsync(CancellationToken cancellationToken)
+        protected async Task LoadComponentsInUIContextOnceSolutionFullyLoadedAsync(
+            CancellationToken cancellationToken
+        )
         {
             // UIContexts can be "zombied" if UIContexts aren't supported because we're in a command line build or in other scenarios.
             // Trying to await them will throw.

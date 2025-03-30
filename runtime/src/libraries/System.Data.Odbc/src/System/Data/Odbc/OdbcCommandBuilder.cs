@@ -9,26 +9,22 @@ namespace System.Data.Odbc
 {
     public sealed class OdbcCommandBuilder : DbCommandBuilder
     {
-        public OdbcCommandBuilder() : base()
+        public OdbcCommandBuilder()
+            : base()
         {
             GC.SuppressFinalize(this);
         }
 
-        public OdbcCommandBuilder(OdbcDataAdapter? adapter) : this()
+        public OdbcCommandBuilder(OdbcDataAdapter? adapter)
+            : this()
         {
             DataAdapter = adapter;
         }
 
         public new OdbcDataAdapter? DataAdapter
         {
-            get
-            {
-                return (base.DataAdapter as OdbcDataAdapter);
-            }
-            set
-            {
-                base.DataAdapter = value;
-            }
+            get { return (base.DataAdapter as OdbcDataAdapter); }
+            set { base.DataAdapter = value; }
         }
 
         private void OdbcRowUpdatingHandler(object sender, OdbcRowUpdatingEventArgs ruevent)
@@ -40,6 +36,7 @@ namespace System.Data.Odbc
         {
             return (OdbcCommand)base.GetInsertCommand();
         }
+
         public new OdbcCommand GetInsertCommand(bool useColumnsForParameterNames)
         {
             return (OdbcCommand)base.GetInsertCommand(useColumnsForParameterNames);
@@ -49,6 +46,7 @@ namespace System.Data.Odbc
         {
             return (OdbcCommand)base.GetUpdateCommand();
         }
+
         public new OdbcCommand GetUpdateCommand(bool useColumnsForParameterNames)
         {
             return (OdbcCommand)base.GetUpdateCommand(useColumnsForParameterNames);
@@ -58,6 +56,7 @@ namespace System.Data.Odbc
         {
             return (OdbcCommand)base.GetDeleteCommand();
         }
+
         public new OdbcCommand GetDeleteCommand(bool useColumnsForParameterNames)
         {
             return (OdbcCommand)base.GetDeleteCommand(useColumnsForParameterNames);
@@ -65,8 +64,10 @@ namespace System.Data.Odbc
 
         protected override string GetParameterName(int parameterOrdinal)
         {
-            return "p" + parameterOrdinal.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            return "p"
+                + parameterOrdinal.ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
+
         protected override string GetParameterName(string parameterName)
         {
             return parameterName;
@@ -77,7 +78,12 @@ namespace System.Data.Odbc
             return "?";
         }
 
-        protected override void ApplyParameterInfo(DbParameter parameter, DataRow datarow, StatementType statementType, bool whereClause)
+        protected override void ApplyParameterInfo(
+            DbParameter parameter,
+            DataRow datarow,
+            StatementType statementType,
+            bool whereClause
+        )
         {
             OdbcParameter p = (OdbcParameter)parameter;
             object valueType = datarow[SchemaTableColumn.ProviderType];
@@ -152,7 +158,6 @@ namespace System.Data.Odbc
             }
         }
 
-
         // DeriveParametersFromStoredProcedure (
         //  OdbcConnection connection,
         //  OdbcCommand command);
@@ -160,7 +165,10 @@ namespace System.Data.Odbc
         // Uses SQLProcedureColumns to create an array of OdbcParameters
         //
 
-        private static OdbcParameter[] DeriveParametersFromStoredProcedure(OdbcConnection connection, OdbcCommand command)
+        private static OdbcParameter[] DeriveParametersFromStoredProcedure(
+            OdbcConnection connection,
+            OdbcCommand command
+        )
         {
             List<OdbcParameter> rParams = new List<OdbcParameter>();
 
@@ -176,7 +184,16 @@ namespace System.Data.Odbc
             // parts[3] = ProcedureName
             //
             string quote = connection.QuoteChar(ADP.DeriveParameters);
-            string?[] parts = MultipartIdentifier.ParseMultipartIdentifier(command.CommandText, quote, quote, '.', 4, true, SR.ODBC_ODBCCommandText, false);
+            string?[] parts = MultipartIdentifier.ParseMultipartIdentifier(
+                command.CommandText,
+                quote,
+                quote,
+                '.',
+                4,
+                true,
+                SR.ODBC_ODBCCommandText,
+                false
+            );
             if (null == parts[3])
             { // match Everett behavior, if the commandtext is nothing but whitespace set the command text to the whitespace
                 parts[3] = command.CommandText;
@@ -192,7 +209,13 @@ namespace System.Data.Odbc
                 connection.HandleError(hstmt, retcode);
             }
 
-            using (OdbcDataReader reader = new OdbcDataReader(command, cmdWrapper, CommandBehavior.Default))
+            using (
+                OdbcDataReader reader = new OdbcDataReader(
+                    command,
+                    cmdWrapper,
+                    CommandBehavior.Default
+                )
+            )
             {
                 reader.FirstResult();
                 cColsAffected = reader.FieldCount;
@@ -229,14 +252,18 @@ namespace System.Data.Odbc
                             Debug.Fail("Unexpected Parametertype while DeriveParameters");
                             break;
                     }
-                    parameter.OdbcType = TypeMap.FromSqlType((ODBC32.SQL_TYPE)reader.GetInt16(ODBC32.DATA_TYPE - 1))._odbcType;
+                    parameter.OdbcType = TypeMap
+                        .FromSqlType((ODBC32.SQL_TYPE)reader.GetInt16(ODBC32.DATA_TYPE - 1))
+                        ._odbcType;
                     parameter.Size = (int)reader.GetInt32(ODBC32.COLUMN_SIZE - 1);
                     switch (parameter.OdbcType)
                     {
                         case OdbcType.Decimal:
                         case OdbcType.Numeric:
-                            parameter.ScaleInternal = (byte)reader.GetInt16(ODBC32.DECIMAL_DIGITS - 1);
-                            parameter.PrecisionInternal = (byte)reader.GetInt16(ODBC32.NUM_PREC_RADIX - 1);
+                            parameter.ScaleInternal = (byte)
+                                reader.GetInt16(ODBC32.DECIMAL_DIGITS - 1);
+                            parameter.PrecisionInternal = (byte)
+                                reader.GetInt16(ODBC32.NUM_PREC_RADIX - 1);
                             break;
                     }
                     rParams.Add(parameter);
@@ -248,7 +275,10 @@ namespace System.Data.Odbc
 
         public override string QuoteIdentifier(string unquotedIdentifier)
         {
-            return QuoteIdentifier(unquotedIdentifier, null /* use DataAdapter.SelectCommand.Connection if available */);
+            return QuoteIdentifier(
+                unquotedIdentifier,
+                null /* use DataAdapter.SelectCommand.Connection if available */
+            );
         }
 
         public string QuoteIdentifier(string unquotedIdentifier, OdbcConnection? connection)
@@ -303,7 +333,10 @@ namespace System.Data.Odbc
 
         public override string UnquoteIdentifier(string quotedIdentifier)
         {
-            return UnquoteIdentifier(quotedIdentifier, null /* use DataAdapter.SelectCommand.Connection if available */);
+            return UnquoteIdentifier(
+                quotedIdentifier,
+                null /* use DataAdapter.SelectCommand.Connection if available */
+            );
         }
 
         public string UnquoteIdentifier(string quotedIdentifier, OdbcConnection? connection)
@@ -332,7 +365,12 @@ namespace System.Data.Odbc
 
             // ignoring the return value because it is acceptable for the quotedString to not be quoted in this context.
             string? unquotedIdentifier;
-            ADP.RemoveStringQuotes(quotePrefix, quoteSuffix, quotedIdentifier, out unquotedIdentifier);
+            ADP.RemoveStringQuotes(
+                quotePrefix,
+                quoteSuffix,
+                quotedIdentifier,
+                out unquotedIdentifier
+            );
             return unquotedIdentifier!;
         }
     }

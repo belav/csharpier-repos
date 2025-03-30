@@ -15,20 +15,30 @@ namespace System
     // un-escaped format
     // We are assuming that the string will be always built as Lit{Var}Lit[{Var}Lit[{Var}Lit[...]]],
     // when the first and last literals may be empty
-    class UriTemplateCompoundPathSegment : UriTemplatePathSegment, IComparable<UriTemplateCompoundPathSegment>
+    class UriTemplateCompoundPathSegment
+        : UriTemplatePathSegment,
+            IComparable<UriTemplateCompoundPathSegment>
     {
         readonly string firstLiteral;
         readonly List<VarAndLitPair> varLitPairs;
 
         CompoundSegmentClass csClass;
 
-        UriTemplateCompoundPathSegment(string originalSegment, bool endsWithSlash, string firstLiteral)
+        UriTemplateCompoundPathSegment(
+            string originalSegment,
+            bool endsWithSlash,
+            string firstLiteral
+        )
             : base(originalSegment, UriTemplatePartType.Compound, endsWithSlash)
         {
             this.firstLiteral = firstLiteral;
             this.varLitPairs = new List<VarAndLitPair>();
         }
-        public static new UriTemplateCompoundPathSegment CreateFromUriTemplate(string segment, UriTemplate template)
+
+        public static new UriTemplateCompoundPathSegment CreateFromUriTemplate(
+            string segment,
+            UriTemplate template
+        )
         {
             string origSegment = segment;
             bool endsWithSlash = segment.EndsWith("/", StringComparison.Ordinal);
@@ -38,30 +48,63 @@ namespace System
             }
 
             int nextVarStart = segment.IndexOf("{", StringComparison.Ordinal);
-            Fx.Assert(nextVarStart >= 0, "The method is only called after identifying a '{' character in the segment");
-            string firstLiteral = ((nextVarStart > 0) ? segment.Substring(0, nextVarStart) : string.Empty);
+            Fx.Assert(
+                nextVarStart >= 0,
+                "The method is only called after identifying a '{' character in the segment"
+            );
+            string firstLiteral = (
+                (nextVarStart > 0) ? segment.Substring(0, nextVarStart) : string.Empty
+            );
             if (firstLiteral.IndexOf(UriTemplate.WildcardPath, StringComparison.Ordinal) != -1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(
-                    SR.GetString(SR.UTInvalidWildcardInVariableOrLiteral, template.originalTemplate, UriTemplate.WildcardPath)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new FormatException(
+                        SR.GetString(
+                            SR.UTInvalidWildcardInVariableOrLiteral,
+                            template.originalTemplate,
+                            UriTemplate.WildcardPath
+                        )
+                    )
+                );
             }
-            UriTemplateCompoundPathSegment result = new UriTemplateCompoundPathSegment(origSegment, endsWithSlash,
-                ((firstLiteral != string.Empty) ? Uri.UnescapeDataString(firstLiteral) : string.Empty));
+            UriTemplateCompoundPathSegment result = new UriTemplateCompoundPathSegment(
+                origSegment,
+                endsWithSlash,
+                (
+                    (firstLiteral != string.Empty)
+                        ? Uri.UnescapeDataString(firstLiteral)
+                        : string.Empty
+                )
+            );
             do
             {
                 int nextVarEnd = segment.IndexOf("}", nextVarStart + 1, StringComparison.Ordinal);
                 if (nextVarEnd < nextVarStart + 2)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(
-                        SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, segment)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new FormatException(
+                            SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, segment)
+                        )
+                    );
                 }
                 bool hasDefault;
-                string varName = template.AddPathVariable(UriTemplatePartType.Compound,
-                    segment.Substring(nextVarStart + 1, nextVarEnd - nextVarStart - 1), out hasDefault);
+                string varName = template.AddPathVariable(
+                    UriTemplatePartType.Compound,
+                    segment.Substring(nextVarStart + 1, nextVarEnd - nextVarStart - 1),
+                    out hasDefault
+                );
                 if (hasDefault)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR.GetString(SR.UTDefaultValueToCompoundSegmentVar, template, origSegment, varName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.UTDefaultValueToCompoundSegmentVar,
+                                template,
+                                origSegment,
+                                varName
+                            )
+                        )
+                    );
                 }
                 nextVarStart = segment.IndexOf("{", nextVarEnd + 1, StringComparison.Ordinal);
                 string literal;
@@ -69,8 +112,14 @@ namespace System
                 {
                     if (nextVarStart == nextVarEnd + 1)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("template",
-                            SR.GetString(SR.UTDoesNotSupportAdjacentVarsInCompoundSegment, template, segment));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            "template",
+                            SR.GetString(
+                                SR.UTDoesNotSupportAdjacentVarsInCompoundSegment,
+                                template,
+                                segment
+                            )
+                        );
                     }
                     literal = segment.Substring(nextVarEnd + 1, nextVarStart - nextVarEnd - 1);
                 }
@@ -84,15 +133,30 @@ namespace System
                 }
                 if (literal.IndexOf(UriTemplate.WildcardPath, StringComparison.Ordinal) != -1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(
-                        SR.GetString(SR.UTInvalidWildcardInVariableOrLiteral, template.originalTemplate, UriTemplate.WildcardPath)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new FormatException(
+                            SR.GetString(
+                                SR.UTInvalidWildcardInVariableOrLiteral,
+                                template.originalTemplate,
+                                UriTemplate.WildcardPath
+                            )
+                        )
+                    );
                 }
                 if (literal.IndexOf('}') != -1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(
-                        SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, segment)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new FormatException(
+                            SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, segment)
+                        )
+                    );
                 }
-                result.varLitPairs.Add(new VarAndLitPair(varName, ((literal == string.Empty) ? string.Empty : Uri.UnescapeDataString(literal))));
+                result.varLitPairs.Add(
+                    new VarAndLitPair(
+                        varName,
+                        ((literal == string.Empty) ? string.Empty : Uri.UnescapeDataString(literal))
+                    )
+                );
             } while (nextVarStart > 0);
 
             if (string.IsNullOrEmpty(result.firstLiteral))
@@ -123,7 +187,10 @@ namespace System
 
         public override void Bind(string[] values, ref int valueIndex, StringBuilder path)
         {
-            Fx.Assert(valueIndex + this.varLitPairs.Count <= values.Length, "Not enough values to bind");
+            Fx.Assert(
+                valueIndex + this.varLitPairs.Count <= values.Length,
+                "Not enough values to bind"
+            );
             path.Append(this.firstLiteral);
             for (int pairIndex = 0; pairIndex < this.varLitPairs.Count; pairIndex++)
             {
@@ -135,6 +202,7 @@ namespace System
                 path.Append("/");
             }
         }
+
         public override bool IsEquivalentTo(UriTemplatePathSegment other, bool ignoreTrailingSlash)
         {
             if (other == null)
@@ -146,7 +214,8 @@ namespace System
             {
                 return false;
             }
-            UriTemplateCompoundPathSegment otherAsCompound = other as UriTemplateCompoundPathSegment;
+            UriTemplateCompoundPathSegment otherAsCompound =
+                other as UriTemplateCompoundPathSegment;
             if (otherAsCompound == null)
             {
                 // if other can't be cast as a compound then it can't be equivalent
@@ -156,14 +225,23 @@ namespace System
             {
                 return false;
             }
-            if (StringComparer.OrdinalIgnoreCase.Compare(this.firstLiteral, otherAsCompound.firstLiteral) != 0)
+            if (
+                StringComparer.OrdinalIgnoreCase.Compare(
+                    this.firstLiteral,
+                    otherAsCompound.firstLiteral
+                ) != 0
+            )
             {
                 return false;
             }
             for (int pairIndex = 0; pairIndex < this.varLitPairs.Count; pairIndex++)
             {
-                if (StringComparer.OrdinalIgnoreCase.Compare(this.varLitPairs[pairIndex].Literal,
-                    otherAsCompound.varLitPairs[pairIndex].Literal) != 0)
+                if (
+                    StringComparer.OrdinalIgnoreCase.Compare(
+                        this.varLitPairs[pairIndex].Literal,
+                        otherAsCompound.varLitPairs[pairIndex].Literal
+                    ) != 0
+                )
                 {
                     return false;
                 }
@@ -171,7 +249,11 @@ namespace System
 
             return true;
         }
-        public override bool IsMatch(UriTemplateLiteralPathSegment segment, bool ignoreTrailingSlash)
+
+        public override bool IsMatch(
+            UriTemplateLiteralPathSegment segment,
+            bool ignoreTrailingSlash
+        )
         {
             if (!ignoreTrailingSlash && (this.EndsWithSlash != segment.EndsWithSlash))
             {
@@ -179,13 +261,15 @@ namespace System
             }
             return TryLookup(segment.AsUnescapedString(), null);
         }
+
         public override void Lookup(string segment, NameValueCollection boundParameters)
         {
             if (!TryLookup(segment, boundParameters))
             {
                 Fx.Assert("How can that be? Lookup is expected to be called after IsMatch");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.UTCSRLookupBeforeMatch)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.UTCSRLookupBeforeMatch))
+                );
             }
         }
 
@@ -205,14 +289,21 @@ namespace System
             }
             for (int pairIndex = 0; pairIndex < this.varLitPairs.Count - 1; pairIndex++)
             {
-                int nextLiteralPosition = segment.IndexOf(this.varLitPairs[pairIndex].Literal, segmentPosition, StringComparison.Ordinal);
+                int nextLiteralPosition = segment.IndexOf(
+                    this.varLitPairs[pairIndex].Literal,
+                    segmentPosition,
+                    StringComparison.Ordinal
+                );
                 if (nextLiteralPosition < segmentPosition + 1)
                 {
                     return false;
                 }
                 if (boundParameters != null)
                 {
-                    string varValue = segment.Substring(segmentPosition, nextLiteralPosition - segmentPosition);
+                    string varValue = segment.Substring(
+                        segmentPosition,
+                        nextLiteralPosition - segmentPosition
+                    );
                     boundParameters.Add(this.varLitPairs[pairIndex].VarName, varValue);
                 }
                 segmentPosition = nextLiteralPosition + this.varLitPairs[pairIndex].Literal.Length;
@@ -223,18 +314,35 @@ namespace System
                 {
                     if (boundParameters != null)
                     {
-                        boundParameters.Add(this.varLitPairs[varLitPairs.Count - 1].VarName,
-                            segment.Substring(segmentPosition));
+                        boundParameters.Add(
+                            this.varLitPairs[varLitPairs.Count - 1].VarName,
+                            segment.Substring(segmentPosition)
+                        );
                     }
                     return true;
                 }
-                else if ((segmentPosition + this.varLitPairs[varLitPairs.Count - 1].Literal.Length < segment.Length) &&
-                    segment.EndsWith(this.varLitPairs[varLitPairs.Count - 1].Literal, StringComparison.Ordinal))
+                else if (
+                    (
+                        segmentPosition + this.varLitPairs[varLitPairs.Count - 1].Literal.Length
+                        < segment.Length
+                    )
+                    && segment.EndsWith(
+                        this.varLitPairs[varLitPairs.Count - 1].Literal,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     if (boundParameters != null)
                     {
-                        boundParameters.Add(this.varLitPairs[varLitPairs.Count - 1].VarName,
-                            segment.Substring(segmentPosition, segment.Length - segmentPosition - this.varLitPairs[varLitPairs.Count - 1].Literal.Length));
+                        boundParameters.Add(
+                            this.varLitPairs[varLitPairs.Count - 1].VarName,
+                            segment.Substring(
+                                segmentPosition,
+                                segment.Length
+                                    - segmentPosition
+                                    - this.varLitPairs[varLitPairs.Count - 1].Literal.Length
+                            )
+                        );
                     }
                     return true;
                 }
@@ -254,22 +362,22 @@ namespace System
         //  The idea is that we are sorting the segments based on preferred matching, when we have two
         //  compound segments matching the same wire segment, we will give preference to the preceding one.
         //  The order is based on the following concepts:
-        //   - We are defining four classes of compound segments: prefix+suffix, prefix-only, suffix-only 
+        //   - We are defining four classes of compound segments: prefix+suffix, prefix-only, suffix-only
         //      and none
         //   - Whenever we are comparing segments from different class the preferred one is the segment with
         //      the prefared class, based on the order we defined them (p+s \ p \ s \ n).
-        //   - Within each class the preference is based on the prefix\suffix, while prefix has precedence 
+        //   - Within each class the preference is based on the prefix\suffix, while prefix has precedence
         //      over suffix if both exists.
         //   - If after comparing the class, as well as the prefix\suffix, we didn't reach to a conclusion,
         //      the preference is given to the segment with more variables parts.
         //  This order mostly follows the intuitive common sense; the major issue comes from preferring the
         //  prefix over the suffix in the case where both exist. This is derived from the problematic of any
-        //  other type of solution that don't prefere the prefix over the suffix or vice versa. To better 
+        //  other type of solution that don't prefere the prefix over the suffix or vice versa. To better
         //  understanding lets considered the following example:
         //   In comparing 'foo{x}bar' and 'food{x}ar', unless we are preferring prefix or suffix, we have
         //   to state that they have the same order. So is the case with 'foo{x}babar' and 'food{x}ar', which
         //   will lead us to claiming the 'foo{x}bar' and 'foo{x}babar' are from the same order, which they
-        //   clearly are not. 
+        //   clearly are not.
         //  Taking other approaches to this problem results in similar cases. The only solution is preferring
         //  either the prefix or the suffix over the other; since we already preferred prefix over suffix
         //  implicitly (we preferred the prefix only class over the suffix only, we also prefared literal
@@ -282,9 +390,14 @@ namespace System
         //  In the above third case - if we are opening the table with allowDuplicate=false, we will throw;
         //  if we are opening it with allowDuplicate=true we will let it go and might match both templates
         //  for certain wire candidates.
-        int IComparable<UriTemplateCompoundPathSegment>.CompareTo(UriTemplateCompoundPathSegment other)
+        int IComparable<UriTemplateCompoundPathSegment>.CompareTo(
+            UriTemplateCompoundPathSegment other
+        )
         {
-            Fx.Assert(other != null, "We are only expected to get here for comparing real compound segments");
+            Fx.Assert(
+                other != null,
+                "We are only expected to get here for comparing real compound segments"
+            );
 
             switch (this.csClass)
             {
@@ -361,10 +474,17 @@ namespace System
                     return 0;
             }
         }
+
         int CompareToOtherThatHasPrefixAndSuffix(UriTemplateCompoundPathSegment other)
         {
-            Fx.Assert(this.csClass == CompoundSegmentClass.HasPrefixAndSuffix, "Otherwise, how did we got here?");
-            Fx.Assert(other.csClass == CompoundSegmentClass.HasPrefixAndSuffix, "Otherwise, how did we got here?");
+            Fx.Assert(
+                this.csClass == CompoundSegmentClass.HasPrefixAndSuffix,
+                "Otherwise, how did we got here?"
+            );
+            Fx.Assert(
+                other.csClass == CompoundSegmentClass.HasPrefixAndSuffix,
+                "Otherwise, how did we got here?"
+            );
 
             // In this case we are determining the order based on the prefix of the two segments,
             //  then by their suffix and then based on the number of variables
@@ -386,10 +506,17 @@ namespace System
                 return prefixOrder;
             }
         }
+
         int CompareToOtherThatHasOnlyPrefix(UriTemplateCompoundPathSegment other)
         {
-            Fx.Assert(this.csClass == CompoundSegmentClass.HasOnlyPrefix, "Otherwise, how did we got here?");
-            Fx.Assert(other.csClass == CompoundSegmentClass.HasOnlyPrefix, "Otherwise, how did we got here?");
+            Fx.Assert(
+                this.csClass == CompoundSegmentClass.HasOnlyPrefix,
+                "Otherwise, how did we got here?"
+            );
+            Fx.Assert(
+                other.csClass == CompoundSegmentClass.HasOnlyPrefix,
+                "Otherwise, how did we got here?"
+            );
 
             // In this case we are determining the order based on the prefix of the two segments,
             //  then based on the number of variables
@@ -403,10 +530,17 @@ namespace System
                 return prefixOrder;
             }
         }
+
         int CompareToOtherThatHasOnlySuffix(UriTemplateCompoundPathSegment other)
         {
-            Fx.Assert(this.csClass == CompoundSegmentClass.HasOnlySuffix, "Otherwise, how did we got here?");
-            Fx.Assert(other.csClass == CompoundSegmentClass.HasOnlySuffix, "Otherwise, how did we got here?");
+            Fx.Assert(
+                this.csClass == CompoundSegmentClass.HasOnlySuffix,
+                "Otherwise, how did we got here?"
+            );
+            Fx.Assert(
+                other.csClass == CompoundSegmentClass.HasOnlySuffix,
+                "Otherwise, how did we got here?"
+            );
 
             // In this case we are determining the order based on the suffix of the two segments,
             //  then based on the number of variables
@@ -420,24 +554,46 @@ namespace System
                 return suffixOrder;
             }
         }
+
         int CompareToOtherThatHasNoPrefixNorSuffix(UriTemplateCompoundPathSegment other)
         {
-            Fx.Assert(this.csClass == CompoundSegmentClass.HasNoPrefixNorSuffix, "Otherwise, how did we got here?");
-            Fx.Assert(other.csClass == CompoundSegmentClass.HasNoPrefixNorSuffix, "Otherwise, how did we got here?");
+            Fx.Assert(
+                this.csClass == CompoundSegmentClass.HasNoPrefixNorSuffix,
+                "Otherwise, how did we got here?"
+            );
+            Fx.Assert(
+                other.csClass == CompoundSegmentClass.HasNoPrefixNorSuffix,
+                "Otherwise, how did we got here?"
+            );
 
             // In this case the order is determined by the number of variables
             return (other.varLitPairs.Count - this.varLitPairs.Count);
         }
+
         int ComparePrefixToOtherPrefix(UriTemplateCompoundPathSegment other)
         {
-            return string.Compare(other.firstLiteral, this.firstLiteral, StringComparison.OrdinalIgnoreCase);
+            return string.Compare(
+                other.firstLiteral,
+                this.firstLiteral,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
+
         int CompareSuffixToOtherSuffix(UriTemplateCompoundPathSegment other)
         {
-            string reversedSuffix = ReverseString(this.varLitPairs[this.varLitPairs.Count - 1].Literal);
-            string reversedOtherSuffix = ReverseString(other.varLitPairs[other.varLitPairs.Count - 1].Literal);
-            return string.Compare(reversedOtherSuffix, reversedSuffix, StringComparison.OrdinalIgnoreCase);
+            string reversedSuffix = ReverseString(
+                this.varLitPairs[this.varLitPairs.Count - 1].Literal
+            );
+            string reversedOtherSuffix = ReverseString(
+                other.varLitPairs[other.varLitPairs.Count - 1].Literal
+            );
+            return string.Compare(
+                reversedOtherSuffix,
+                reversedSuffix,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
+
         static string ReverseString(string stringToReverse)
         {
             char[] reversedString = new char[stringToReverse.Length];
@@ -454,7 +610,7 @@ namespace System
             HasPrefixAndSuffix,
             HasOnlyPrefix,
             HasOnlySuffix,
-            HasNoPrefixNorSuffix
+            HasNoPrefixNorSuffix,
         }
 
         struct VarAndLitPair
@@ -470,17 +626,11 @@ namespace System
 
             public string Literal
             {
-                get
-                {
-                    return this.literal;
-                }
+                get { return this.literal; }
             }
             public string VarName
             {
-                get
-                {
-                    return this.varName;
-                }
+                get { return this.varName; }
             }
         }
     }

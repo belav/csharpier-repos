@@ -23,30 +23,60 @@ namespace Microsoft.Win32.RegistryTests
         public void NegativeTests()
         {
             // Should throw if passed value is null
-            Assert.Throws<ArgumentNullException>(() => Registry.SetValue(TestRegistryKey.Name, "test", value: null));
+            Assert.Throws<ArgumentNullException>(() =>
+                Registry.SetValue(TestRegistryKey.Name, "test", value: null)
+            );
 
             // Should throw if passed keyName is null
-            Assert.Throws<ArgumentNullException>(() => Registry.SetValue(keyName: null, valueName: "test", value: "test"));
+            Assert.Throws<ArgumentNullException>(() =>
+                Registry.SetValue(keyName: null, valueName: "test", value: "test")
+            );
 
             // Should throw if passed string does NOT start with one of the valid base key names
-            AssertExtensions.Throws<ArgumentException>("keyName", null, () => Registry.SetValue("HHHH_MMMM", "test", "test"));
+            AssertExtensions.Throws<ArgumentException>(
+                "keyName",
+                null,
+                () => Registry.SetValue("HHHH_MMMM", "test", "test")
+            );
 
             // Should throw if passed string which only starts with one of the valid base key names but actually it isn't valid.
-            AssertExtensions.Throws<ArgumentException>("keyName", null, () => Registry.SetValue("HKEY_LOCAL_MACHINE_FOOBAR", "test", "test"));
+            AssertExtensions.Throws<ArgumentException>(
+                "keyName",
+                null,
+                () => Registry.SetValue("HKEY_LOCAL_MACHINE_FOOBAR", "test", "test")
+            );
 
             // Should throw if key length above 255 characters but prior to V4, the limit is 16383
             const int maxValueNameLength = 16383;
-            AssertExtensions.Throws<ArgumentException>("name", null, () => Registry.SetValue(TestRegistryKey.Name, new string('a', maxValueNameLength + 1), 5));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                null,
+                () =>
+                    Registry.SetValue(
+                        TestRegistryKey.Name,
+                        new string('a', maxValueNameLength + 1),
+                        5
+                    )
+            );
 
             // Should throw if passed value is array with uninitialized elements
-            AssertExtensions.Throws<ArgumentException>(null, () => Registry.SetValue(TestRegistryKey.Name, "StringArr", value: new string[1]));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Registry.SetValue(TestRegistryKey.Name, "StringArr", value: new string[1])
+            );
 
             // Should throw because only String[] (REG_MULTI_SZ) and byte[] (REG_BINARY) are supported.
             // RegistryKey.SetValue does not support arrays of type UInt32[].
-            AssertExtensions.Throws<ArgumentException>(null, () => Registry.SetValue(TestRegistryKey.Name, "IntArray", new[] { 1, 2, 3 }));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Registry.SetValue(TestRegistryKey.Name, "IntArray", new[] { 1, 2, 3 })
+            );
         }
 
-        public static IEnumerable<object[]> TestValueTypes { get { return TestData.TestValueTypes; } }
+        public static IEnumerable<object[]> TestValueTypes
+        {
+            get { return TestData.TestValueTypes; }
+        }
 
         [Theory]
         [MemberData(nameof(TestValueTypes))]
@@ -101,7 +131,7 @@ namespace Microsoft.Win32.RegistryTests
             {
                 "This is a public",
                 "broadcast intend to test",
-                "lot of things. one of which"
+                "lot of things. one of which",
             };
 
             Registry.SetValue(TestRegistryKey.Name, testValueName, expected);
@@ -109,11 +139,18 @@ namespace Microsoft.Win32.RegistryTests
             TestRegistryKey.DeleteValue(testValueName);
         }
 
-        public static IEnumerable<object[]> TestEnvironment { get { return TestData.TestEnvironment; } }
+        public static IEnumerable<object[]> TestEnvironment
+        {
+            get { return TestData.TestEnvironment; }
+        }
 
         [Theory]
         [MemberData(nameof(TestEnvironment))]
-        public void SetValueWithEnvironmentVariable(string valueName, string envVariableName, string expectedVariableValue)
+        public void SetValueWithEnvironmentVariable(
+            string valueName,
+            string envVariableName,
+            string expectedVariableValue
+        )
         {
             // ExpandEnvironmentStrings is converting "C:\Program Files (Arm)" to "C:\Program Files (x86)".
             if (envVariableName == "ProgramFiles" && PlatformDetection.IsArmProcess)

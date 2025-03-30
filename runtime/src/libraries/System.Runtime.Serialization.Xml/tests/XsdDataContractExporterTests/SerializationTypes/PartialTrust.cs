@@ -3,10 +3,12 @@ using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
 using System.Xml;
-using System.Xml.Serialization;
 using System.Xml.Schema;
+using System.Xml.Serialization;
 
-[assembly:AllowPartiallyTrustedCallers]
+[assembly: AllowPartiallyTrustedCallers]
+
+
 #if UseSeparateAssemblyNamespace
 namespace SerializableTypes.XsdDataContractExporterTests
 #else
@@ -19,7 +21,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         //[SerializationPermissionNotRequired]
         public class SafePoint
         {
-            int x = 42, y = 43;
+            int x = 42,
+                y = 43;
         }
 
         [Serializable]
@@ -27,7 +30,10 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         public class SafePoint3D : SafePoint
         {
             int z = 44;
-            DateTimeOffset dateCreated = new DateTimeOffset(new DateTime(1997, 03, 11, 07, 15, 30), new TimeSpan(1,2,60));
+            DateTimeOffset dateCreated = new DateTimeOffset(
+                new DateTime(1997, 03, 11, 07, 15, 30),
+                new TimeSpan(1, 2, 60)
+            );
         }
 
         [Serializable]
@@ -41,7 +47,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         [Serializable]
         public class UnsafePoint
         {
-            int x = 42, y = 43;
+            int x = 42,
+                y = 43;
         }
 
         [Serializable]
@@ -50,7 +57,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         {
             int z = 44;
         }
-        
+
         [Serializable]
         //[SerializationPermissionNotRequired]
         public class UnsafeCube
@@ -68,10 +75,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 //Console.WriteLine("Default Ctor");
             }
 
-            public AttributeOnlyIXmlSerializable(string init)
-            {
-
-            }
+            public AttributeOnlyIXmlSerializable(string init) { }
 
             public XmlSchema GetSchema()
             {
@@ -99,12 +103,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 //may be called to invoke GetSchema() method
             }
 
-            public UnsafeAttributeOnlyIXmlSerializable(string init)
-            {
-
-            }
-
+            public UnsafeAttributeOnlyIXmlSerializable(string init) { }
         }
     }
 }
-

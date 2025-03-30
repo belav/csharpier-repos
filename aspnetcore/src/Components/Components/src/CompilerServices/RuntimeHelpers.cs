@@ -31,7 +31,11 @@ public static class RuntimeHelpers
     // really messy to write to try and write the parameter type for ValueChanged - because it can contain generic
     // type parameters. We're using a trick of type inference to generate the proper typing for the delegate
     // so that method-group-to-delegate conversion works.
-    public static EventCallback<T> CreateInferredEventCallback<T>(object receiver, Action<T> callback, T value)
+    public static EventCallback<T> CreateInferredEventCallback<T>(
+        object receiver,
+        Action<T> callback,
+        T value
+    )
     {
         return EventCallback.Factory.Create<T>(receiver, callback);
     }
@@ -48,7 +52,11 @@ public static class RuntimeHelpers
     // really messy to write to try and write the parameter type for ValueChanged - because it can contain generic
     // type parameters. We're using a trick of type inference to generate the proper typing for the delegate
     // so that method-group-to-delegate conversion works.
-    public static EventCallback<T> CreateInferredEventCallback<T>(object receiver, Func<T, Task> callback, T value)
+    public static EventCallback<T> CreateInferredEventCallback<T>(
+        object receiver,
+        Func<T, Task> callback,
+        T value
+    )
     {
         return EventCallback.Factory.Create<T>(receiver, callback);
     }
@@ -65,7 +73,11 @@ public static class RuntimeHelpers
     // really messy to write the parameter type for ValueChanged - because it can contain generic
     // type parameters. We're using a trick of type inference to generate the proper typing for the delegate
     // so that method-group-to-delegate conversion works.
-    public static EventCallback<T> CreateInferredEventCallback<T>(object receiver, EventCallback<T> callback, T value)
+    public static EventCallback<T> CreateInferredEventCallback<T>(
+        object receiver,
+        EventCallback<T> callback,
+        T value
+    )
     {
         return EventCallback.Factory.Create<T>(receiver, callback);
     }

@@ -27,11 +27,7 @@ public class TryUpdateModelIntegrationTest
         });
 
         var modelState = testContext.ModelState;
-        var model = new Address
-        {
-            Street = "DefaultStreet",
-            City = "Toronto",
-        };
+        var model = new Address { Street = "DefaultStreet", City = "Toronto" };
         var oldModel = model;
 
         // Act
@@ -104,28 +100,26 @@ public class TryUpdateModelIntegrationTest
         // Arrange
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString = QueryString.Create(new Dictionary<string, string>
-            {
+            request.QueryString = QueryString.Create(
+                new Dictionary<string, string>
+                {
                     { "[0].Name", "One Name" },
                     { "[1].Address.Street", "Two Street" },
-            });
+                }
+            );
         });
 
         var modelState = testContext.ModelState;
         var model = new List<Person1>
+        {
+            new Person1
             {
-                new Person1
-                {
-                    Name = "One",
-                    Address = new Address
-                    {
-                        Street = "DefaultStreet",
-                        City = "Toronto",
-                    },
-                },
-                new Person1 { Name = "Two" },
-                new Person1 { Name = "Three" },
-            };
+                Name = "One",
+                Address = new Address { Street = "DefaultStreet", City = "Toronto" },
+            },
+            new Person1 { Name = "Two" },
+            new Person1 { Name = "Three" },
+        };
 
         // Act
         var result = await TryUpdateModelAsync(model, string.Empty, testContext);
@@ -147,7 +141,8 @@ public class TryUpdateModelIntegrationTest
                 Assert.NotNull(element.Address);
                 Assert.Equal("Two Street", element.Address.Street);
                 Assert.Null(element.Address.City);
-            });
+            }
+        );
 
         // ModelState
         Assert.True(modelState.IsValid);
@@ -169,11 +164,7 @@ public class TryUpdateModelIntegrationTest
         var model = new Person1
         {
             Name = "Joe",
-            Address = new Address
-            {
-                Street = "DefaultStreet",
-                City = "Toronto",
-            },
+            Address = new Address { Street = "DefaultStreet", City = "Toronto" },
         };
         var oldModel = model;
 
@@ -252,10 +243,7 @@ public class TryUpdateModelIntegrationTest
         });
 
         var modelState = testContext.ModelState;
-        var model = new Person2
-        {
-            Address = new List<Address>(),
-        };
+        var model = new Person2 { Address = new List<Address>() };
         var collection = model.Address;
 
         // Act
@@ -306,18 +294,10 @@ public class TryUpdateModelIntegrationTest
         var model = new Person3
         {
             Address =
-                {
-                    new Address
-                    {
-                        Street = "Old street",
-                        City = "Redmond",
-                    },
-                    new Address
-                    {
-                        Street = "Older street",
-                        City = "Toronto",
-                    },
-                },
+            {
+                new Address { Street = "Old street", City = "Redmond" },
+                new Address { Street = "Older street", City = "Toronto" },
+            },
         };
 
         // Act
@@ -462,11 +442,7 @@ public class TryUpdateModelIntegrationTest
         {
             Address = new Address[]
             {
-                    new Address
-                    {
-                        Street = "Old street",
-                        City = "Toronto",
-                    },
+                new Address { Street = "Old street", City = "Toronto" },
             },
         };
         var collection = model.Address;
@@ -532,14 +508,11 @@ public class TryUpdateModelIntegrationTest
 
     private class Person7
     {
-        public IEnumerable<Address> Address { get; } = new Address[]
-        {
-                new Address()
-                {
-                     City = "Redmond",
-                     Street = "One Microsoft Way"
-                }
-        };
+        public IEnumerable<Address> Address { get; } =
+            new Address[]
+            {
+                new Address() { City = "Redmond", Street = "One Microsoft Way" },
+            };
     }
 
     [Fact]
@@ -571,7 +544,8 @@ public class TryUpdateModelIntegrationTest
             {
                 Assert.Equal("Redmond", a.City);
                 Assert.Equal("One Microsoft Way", a.Street);
-            });
+            }
+        );
 
         // ModelState
         Assert.True(modelState.IsValid);
@@ -579,14 +553,11 @@ public class TryUpdateModelIntegrationTest
 
     private class Person8
     {
-        public ICollection<Address> Address { get; } = new Address[]
-        {
-                new Address()
-                {
-                     City = "Redmond",
-                     Street = "One Microsoft Way"
-                }
-        };
+        public ICollection<Address> Address { get; } =
+            new Address[]
+            {
+                new Address() { City = "Redmond", Street = "One Microsoft Way" },
+            };
     }
 
     [Fact]
@@ -618,7 +589,8 @@ public class TryUpdateModelIntegrationTest
             {
                 Assert.Equal("Redmond", a.City);
                 Assert.Equal("One Microsoft Way", a.Street);
-            });
+            }
+        );
 
         // ModelState
         Assert.True(modelState.IsValid);
@@ -634,11 +606,7 @@ public class TryUpdateModelIntegrationTest
         });
 
         var modelState = testContext.ModelState;
-        var model = new Address
-        {
-            Street = "DefaultStreet",
-            City = "Toronto",
-        };
+        var model = new Address { Street = "DefaultStreet", City = "Toronto" };
         var oldModel = model;
 
         // Act
@@ -704,28 +672,26 @@ public class TryUpdateModelIntegrationTest
         // Arrange
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString = QueryString.Create(new Dictionary<string, string>
-            {
+            request.QueryString = QueryString.Create(
+                new Dictionary<string, string>
+                {
                     { "prefix[0].Name", "One Name" },
                     { "prefix[1].Address.Street", "Two Street" },
-            });
+                }
+            );
         });
 
         var modelState = testContext.ModelState;
         var model = new List<Person1>
+        {
+            new Person1
             {
-                new Person1
-                {
-                    Name = "One",
-                    Address = new Address
-                    {
-                        Street = "DefaultStreet",
-                        City = "Toronto",
-                    },
-                },
-                new Person1 { Name = "Two" },
-                new Person1 { Name = "Three" },
-            };
+                Name = "One",
+                Address = new Address { Street = "DefaultStreet", City = "Toronto" },
+            },
+            new Person1 { Name = "Two" },
+            new Person1 { Name = "Three" },
+        };
 
         // Act
         var result = await TryUpdateModelAsync(model, "prefix", testContext);
@@ -747,7 +713,8 @@ public class TryUpdateModelIntegrationTest
                 Assert.NotNull(element.Address);
                 Assert.Equal("Two Street", element.Address.Street);
                 Assert.Null(element.Address.City);
-            });
+            }
+        );
 
         // ModelState
         Assert.True(modelState.IsValid);
@@ -769,11 +736,7 @@ public class TryUpdateModelIntegrationTest
         var model = new Person1
         {
             Name = "Joe",
-            Address = new Address
-            {
-                Street = "DefaultStreet",
-                City = "Toronto",
-            },
+            Address = new Address { Street = "DefaultStreet", City = "Toronto" },
         };
         var oldModel = model;
 
@@ -847,10 +810,7 @@ public class TryUpdateModelIntegrationTest
         });
 
         var modelState = testContext.ModelState;
-        var model = new Person2
-        {
-            Address = new List<Address>(),
-        };
+        var model = new Person2 { Address = new List<Address>() };
         var collection = model.Address;
 
         // Act
@@ -891,18 +851,10 @@ public class TryUpdateModelIntegrationTest
         var model = new Person3
         {
             Address =
-                {
-                    new Address
-                    {
-                        Street = "Old street",
-                        City = "Redmond",
-                    },
-                    new Address
-                    {
-                        Street = "Older street",
-                        City = "Toronto",
-                    },
-                },
+            {
+                new Address { Street = "Old street", City = "Redmond" },
+                new Address { Street = "Older street", City = "Toronto" },
+            },
         };
 
         // Act
@@ -979,11 +931,7 @@ public class TryUpdateModelIntegrationTest
         {
             Address = new Address[]
             {
-                    new Address
-                    {
-                        Street = "Old street",
-                        City = "Toronto",
-                    },
+                new Address { Street = "Old street", City = "Toronto" },
             },
         };
         var collection = model.Address;
@@ -1047,15 +995,34 @@ public class TryUpdateModelIntegrationTest
     {
         // Arrange
         var data = "some data";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request => UpdateRequest(request, data, "files"));
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+            UpdateRequest(request, data, "files")
+        );
         var modelState = testContext.ModelState;
         var model = new List<IFormFile>
-            {
-                new FormFile(new MemoryStream(), baseStreamOffset: 0, length: 0, name: "file", fileName: "file1"),
-                new FormFile(new MemoryStream(), baseStreamOffset: 0, length: 0, name: "file", fileName: "file2"),
-                new FormFile(new MemoryStream(), baseStreamOffset: 0, length: 0, name: "file", fileName: "file3"),
-            };
+        {
+            new FormFile(
+                new MemoryStream(),
+                baseStreamOffset: 0,
+                length: 0,
+                name: "file",
+                fileName: "file1"
+            ),
+            new FormFile(
+                new MemoryStream(),
+                baseStreamOffset: 0,
+                length: 0,
+                name: "file",
+                fileName: "file2"
+            ),
+            new FormFile(
+                new MemoryStream(),
+                baseStreamOffset: 0,
+                length: 0,
+                name: "file",
+                fileName: "file3"
+            ),
+        };
 
         // Act
         var result = await TryUpdateModelAsync(model, prefix: "files", testContext: testContext);
@@ -1086,10 +1053,12 @@ public class TryUpdateModelIntegrationTest
     private class AddressWithNoParameterlessConstructor
     {
         private readonly int _id;
+
         public AddressWithNoParameterlessConstructor(int id)
         {
             _id = id;
         }
+
         public string Street { get; set; }
         public string City { get; set; }
     }
@@ -1149,16 +1118,17 @@ public class TryUpdateModelIntegrationTest
         });
 
         var modelState = testContext.ModelState;
-        var model = new AddressRecord("DefaultStreet", "Toronto")
-        {
-            ZipCode = "98001",
-        };
+        var model = new AddressRecord("DefaultStreet", "Toronto") { ZipCode = "98001" };
         var oldModel = model;
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<NotSupportedException>(() => TryUpdateModelAsync(model, string.Empty, testContext));
-        Assert.Equal($"TryUpdateModelAsync cannot update a record type model. If a '{model.GetType()}' must be updated, include it in an object type.", ex.Message);
-
+        var ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
+            TryUpdateModelAsync(model, string.Empty, testContext)
+        );
+        Assert.Equal(
+            $"TryUpdateModelAsync cannot update a record type model. If a '{model.GetType()}' must be updated, include it in an object type.",
+            ex.Message
+        );
     }
 
     private class ModelWithRecordTypeProperty
@@ -1172,7 +1142,9 @@ public class TryUpdateModelIntegrationTest
         // Arrange
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString = QueryString.Create("Address.ZipCode", "98007").Add("Address.Street", "SomeStreet");
+            request.QueryString = QueryString
+                .Create("Address.ZipCode", "98007")
+                .Add("Address.Street", "SomeStreet");
         });
 
         var modelState = testContext.ModelState;
@@ -1218,16 +1190,15 @@ public class TryUpdateModelIntegrationTest
         // Arrange
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.QueryString = QueryString.Create("Address.ZipCode", "98007").Add("Address.Street", "SomeStreet");
+            request.QueryString = QueryString
+                .Create("Address.ZipCode", "98007")
+                .Add("Address.Street", "SomeStreet");
         });
 
         var modelState = testContext.ModelState;
         var model = new ModelWithRecordTypeProperty
         {
-            Address = new AddressRecord("DefaultStreet", "DefaultCity")
-            {
-                ZipCode = "98056",
-            },
+            Address = new AddressRecord("DefaultStreet", "DefaultCity") { ZipCode = "98056" },
         };
         var oldModel = model;
 
@@ -1267,25 +1238,29 @@ public class TryUpdateModelIntegrationTest
                 Assert.Equal("98007", state.RawValue);
                 Assert.Empty(state.Errors);
                 Assert.Equal(ModelValidationState.Valid, state.ValidationState);
-            });
+            }
+        );
     }
 
     private void UpdateRequest(HttpRequest request, string data, string name)
     {
         const string fileName = "text.txt";
         var fileCollection = new FormFileCollection();
-        var formCollection = new FormCollection(new Dictionary<string, StringValues>(), fileCollection);
+        var formCollection = new FormCollection(
+            new Dictionary<string, StringValues>(),
+            fileCollection
+        );
 
         request.Form = formCollection;
-        request.ContentType = "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq";
+        request.ContentType =
+            "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq";
 
         request.Headers["Content-Disposition"] = $"form-data; name={name}; filename={fileName}";
 
         var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(data));
-        fileCollection.Add(new FormFile(memoryStream, 0, data.Length, name, fileName)
-        {
-            Headers = request.Headers
-        });
+        fileCollection.Add(
+            new FormFile(memoryStream, 0, data.Length, name, fileName) { Headers = request.Headers }
+        );
     }
 
     private class CustomReadOnlyCollection<T> : ICollection<T>
@@ -1293,9 +1268,7 @@ public class TryUpdateModelIntegrationTest
         private readonly ICollection<T> _original;
 
         public CustomReadOnlyCollection()
-            : this(new List<T>())
-        {
-        }
+            : this(new List<T>()) { }
 
         public CustomReadOnlyCollection(ICollection<T> original)
         {
@@ -1354,7 +1327,8 @@ public class TryUpdateModelIntegrationTest
     private async Task<bool> TryUpdateModelAsync(
         object model,
         string prefix,
-        ModelBindingTestContext testContext)
+        ModelBindingTestContext testContext
+    )
     {
         var valueProvider = await CompositeValueProvider.CreateAsync(testContext);
         return await ModelBindingHelper.TryUpdateModelAsync(
@@ -1365,6 +1339,7 @@ public class TryUpdateModelIntegrationTest
             testContext.MetadataProvider,
             TestModelBinderFactory.CreateDefault(),
             valueProvider,
-            ModelBindingTestHelper.GetObjectValidator(testContext.MetadataProvider));
+            ModelBindingTestHelper.GetObjectValidator(testContext.MetadataProvider)
+        );
     }
 }

@@ -4,9 +4,9 @@
 namespace System.Runtime.Serialization
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.CompilerServices;
 
 #if USE_REFEMIT
     public sealed class SurrogateDataContract : DataContract
@@ -14,13 +14,17 @@ namespace System.Runtime.Serialization
     internal sealed class SurrogateDataContract : DataContract
 #endif
     {
-        [Fx.Tag.SecurityNote(Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
-            + " Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
+                + " Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain."
+        )]
         [SecurityCritical]
         SurrogateDataContractCriticalHelper helper;
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes SecurityCritical field 'helper'.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes SecurityCritical field 'helper'.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         internal SurrogateDataContract(Type type, ISerializationSurrogate serializationSurrogate)
             : base(new SurrogateDataContractCriticalHelper(type, serializationSurrogate))
@@ -30,29 +34,49 @@ namespace System.Runtime.Serialization
 
         internal ISerializationSurrogate SerializationSurrogate
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical serializationSurrogate property.",
-                Safe = "serializationSurrogate only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical serializationSurrogate property.",
+                Safe = "serializationSurrogate only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get { return helper.SerializationSurrogate; }
         }
 
-        public override void WriteXmlValue(XmlWriterDelegator xmlWriter, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator xmlWriter,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
-            SerializationInfo serInfo = new SerializationInfo(UnderlyingType, XmlObjectSerializer.FormatterConverter, !context.UnsafeTypeForwardingEnabled);
+            SerializationInfo serInfo = new SerializationInfo(
+                UnderlyingType,
+                XmlObjectSerializer.FormatterConverter,
+                !context.UnsafeTypeForwardingEnabled
+            );
             SerializationSurrogateGetObjectData(obj, serInfo, context.GetStreamingContext());
             context.WriteSerializationInfo(xmlWriter, UnderlyingType, serInfo);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls the critical methods of ISurrogateSelector", Safe = "Demands for FullTrust")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls the critical methods of ISurrogateSelector",
+            Safe = "Demands for FullTrust"
+        )]
         [SecuritySafeCritical]
         [PermissionSet(SecurityAction.Demand, Unrestricted = true)]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        object SerializationSurrogateSetObjectData(object obj, SerializationInfo serInfo, StreamingContext context)
+        object SerializationSurrogateSetObjectData(
+            object obj,
+            SerializationInfo serInfo,
+            StreamingContext context
+        )
         {
             return SerializationSurrogate.SetObjectData(obj, serInfo, context, null);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls the critical methods of IObjectReference", Safe = "Demands for FullTrust")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls the critical methods of IObjectReference",
+            Safe = "Demands for FullTrust"
+        )]
         [SecuritySafeCritical]
         [PermissionSet(SecurityAction.Demand, Unrestricted = true)]
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -61,7 +85,10 @@ namespace System.Runtime.Serialization
             return obj.GetRealObject(context);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls the critical methods of FormatterServices", Safe = "Demands for FullTrust")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls the critical methods of FormatterServices",
+            Safe = "Demands for FullTrust"
+        )]
         [SecuritySafeCritical]
         [PermissionSet(SecurityAction.Demand, Unrestricted = true)]
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -70,24 +97,40 @@ namespace System.Runtime.Serialization
             return FormatterServices.GetUninitializedObject(objType);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls the critical methods of ISerializationSurrogate", Safe = "Demands for FullTrust")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls the critical methods of ISerializationSurrogate",
+            Safe = "Demands for FullTrust"
+        )]
         [SecuritySafeCritical]
         [PermissionSet(SecurityAction.Demand, Unrestricted = true)]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        void SerializationSurrogateGetObjectData(object obj, SerializationInfo serInfo, StreamingContext context)
+        void SerializationSurrogateGetObjectData(
+            object obj,
+            SerializationInfo serInfo,
+            StreamingContext context
+        )
         {
             SerializationSurrogate.GetObjectData(obj, serInfo, context);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext context
+        )
         {
             xmlReader.Read();
             Type objType = UnderlyingType;
-            object obj = objType.IsArray ? Array.CreateInstance(objType.GetElementType(), 0) : GetUninitializedObject(objType);
+            object obj = objType.IsArray
+                ? Array.CreateInstance(objType.GetElementType(), 0)
+                : GetUninitializedObject(objType);
             context.AddNewObject(obj);
             string objectId = context.GetObjectId();
             SerializationInfo serInfo = context.ReadSerializationInfo(xmlReader, objType);
-            object newObj = SerializationSurrogateSetObjectData(obj, serInfo, context.GetStreamingContext());
+            object newObj = SerializationSurrogateSetObjectData(
+                obj,
+                serInfo,
+                context.GetStreamingContext()
+            );
             if (newObj == null)
                 newObj = obj;
             if (newObj is IDeserializationCallback)
@@ -99,8 +142,10 @@ namespace System.Runtime.Serialization
             return newObj;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Holds all state used for for (de)serializing with ISerializationSurrogate."
-            + " Since it accesses data on the base type that is cached statically, we lock down access to it.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds all state used for for (de)serializing with ISerializationSurrogate."
+                + " Since it accesses data on the base type that is cached statically, we lock down access to it."
+        )]
 #if !NO_SECURITY_ATTRIBUTES
         [SecurityCritical(SecurityCriticalScope.Everything)]
 #endif
@@ -108,12 +153,20 @@ namespace System.Runtime.Serialization
         {
             ISerializationSurrogate serializationSurrogate;
 
-            internal SurrogateDataContractCriticalHelper(Type type, ISerializationSurrogate serializationSurrogate)
+            internal SurrogateDataContractCriticalHelper(
+                Type type,
+                ISerializationSurrogate serializationSurrogate
+            )
                 : base(type)
             {
                 this.serializationSurrogate = serializationSurrogate;
-                string name, ns;
-                DataContract.GetDefaultStableName(DataContract.GetClrTypeFullName(type), out name, out ns);
+                string name,
+                    ns;
+                DataContract.GetDefaultStableName(
+                    DataContract.GetClrTypeFullName(type),
+                    out name,
+                    out ns
+                );
                 SetDataContractName(CreateQualifiedName(name, ns));
             }
 
@@ -124,4 +177,3 @@ namespace System.Runtime.Serialization
         }
     }
 }
-

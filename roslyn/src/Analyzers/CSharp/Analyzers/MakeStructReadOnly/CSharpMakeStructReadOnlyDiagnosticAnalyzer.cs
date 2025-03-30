@@ -13,65 +13,93 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Microsoft.CodeAnalysis.CSharp.MakeStructReadOnly;
 
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class CSharpMakeStructReadOnlyDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+internal sealed class CSharpMakeStructReadOnlyDiagnosticAnalyzer
+    : AbstractBuiltInCodeStyleDiagnosticAnalyzer
 {
     public CSharpMakeStructReadOnlyDiagnosticAnalyzer()
-        : base(IDEDiagnosticIds.MakeStructReadOnlyDiagnosticId,
-               EnforceOnBuildValues.MakeStructReadOnly,
-               CSharpCodeStyleOptions.PreferReadOnlyStruct,
-               new LocalizableResourceString(nameof(CSharpAnalyzersResources.Make_struct_readonly), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)),
-               new LocalizableResourceString(nameof(CSharpAnalyzersResources.Struct_can_be_made_readonly), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-    {
-    }
+        : base(
+            IDEDiagnosticIds.MakeStructReadOnlyDiagnosticId,
+            EnforceOnBuildValues.MakeStructReadOnly,
+            CSharpCodeStyleOptions.PreferReadOnlyStruct,
+            new LocalizableResourceString(
+                nameof(CSharpAnalyzersResources.Make_struct_readonly),
+                CSharpAnalyzersResources.ResourceManager,
+                typeof(CSharpAnalyzersResources)
+            ),
+            new LocalizableResourceString(
+                nameof(CSharpAnalyzersResources.Struct_can_be_made_readonly),
+                CSharpAnalyzersResources.ResourceManager,
+                typeof(CSharpAnalyzersResources)
+            )
+        ) { }
 
-    public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-        => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+    public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+        DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-    protected override void InitializeWorker(AnalysisContext context)
-        => context.RegisterCompilationStartAction(context =>
+    protected override void InitializeWorker(AnalysisContext context) =>
+        context.RegisterCompilationStartAction(context =>
         {
             var compilation = context.Compilation;
             if (compilation.LanguageVersion() < LanguageVersion.CSharp7_2)
                 return;
 
-            context.RegisterSymbolStartAction(context =>
-            {
-                // First, see if this at least strongly looks like a struct that could be converted.
-                if (!IsCandidate(context, out var location, out var additionalLocation, out var option))
-                    return;
-
-                // Looks good.  However, we have to make sure that the struct has no code which actually overwrites 'this'
-
-                var writesToThis = false;
-                context.RegisterSyntaxNodeAction(context =>
+            context.RegisterSymbolStartAction(
+                context =>
                 {
-                    var semanticModel = context.SemanticModel;
-                    var thisExpression = (ThisExpressionSyntax)context.Node;
-                    var cancellationToken = context.CancellationToken;
-                    writesToThis = writesToThis || thisExpression.IsWrittenTo(semanticModel, cancellationToken);
-                }, SyntaxKind.ThisExpression);
-
-                context.RegisterSymbolEndAction(context =>
-                {
-                    // if we wrote to 'this', then we cannot convert this struct.
-                    if (writesToThis)
+                    // First, see if this at least strongly looks like a struct that could be converted.
+                    if (
+                        !IsCandidate(
+                            context,
+                            out var location,
+                            out var additionalLocation,
+                            out var option
+                        )
+                    )
                         return;
 
-                    context.ReportDiagnostic(DiagnosticHelper.Create(
-                        Descriptor,
-                        location,
-                        option.Notification,
-                        additionalLocations: ImmutableArray.Create(additionalLocation),
-                        properties: null));
-                });
-            }, SymbolKind.NamedType);
+                    // Looks good.  However, we have to make sure that the struct has no code which actually overwrites 'this'
+
+                    var writesToThis = false;
+                    context.RegisterSyntaxNodeAction(
+                        context =>
+                        {
+                            var semanticModel = context.SemanticModel;
+                            var thisExpression = (ThisExpressionSyntax)context.Node;
+                            var cancellationToken = context.CancellationToken;
+                            writesToThis =
+                                writesToThis
+                                || thisExpression.IsWrittenTo(semanticModel, cancellationToken);
+                        },
+                        SyntaxKind.ThisExpression
+                    );
+
+                    context.RegisterSymbolEndAction(context =>
+                    {
+                        // if we wrote to 'this', then we cannot convert this struct.
+                        if (writesToThis)
+                            return;
+
+                        context.ReportDiagnostic(
+                            DiagnosticHelper.Create(
+                                Descriptor,
+                                location,
+                                option.Notification,
+                                additionalLocations: ImmutableArray.Create(additionalLocation),
+                                properties: null
+                            )
+                        );
+                    });
+                },
+                SymbolKind.NamedType
+            );
         });
 
     private bool IsCandidate(
         SymbolStartAnalysisContext context,
         [NotNullWhen(true)] out Location? primaryLocation,
         [NotNullWhen(true)] out Location? additionalLocation,
-        [NotNullWhen(true)] out CodeStyleOption2<bool>? option)
+        [NotNullWhen(true)] out CodeStyleOption2<bool>? option
+    )
     {
         var typeSymbol = (INamedTypeSymbol)context.Symbol;
         var cancellationToken = context.CancellationToken;
@@ -93,7 +121,16 @@ internal sealed class CSharpMakeStructReadOnlyDiagnosticAnalyzer : AbstractBuilt
 
         var options = context.GetCSharpAnalyzerOptions(typeDeclaration.SyntaxTree);
         option = options.PreferReadOnlyStruct;
-        if (!option.Value || ShouldSkipAnalysis(typeDeclaration.SyntaxTree, context.Options, context.Compilation.Options, option.Notification, cancellationToken))
+        if (
+            !option.Value
+            || ShouldSkipAnalysis(
+                typeDeclaration.SyntaxTree,
+                context.Options,
+                context.Compilation.Options,
+                option.Notification,
+                cancellationToken
+            )
+        )
             return false;
 
         // Now, ensure we have at least one field and that all fields are readonly.

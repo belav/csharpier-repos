@@ -12,12 +12,15 @@ namespace Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 public static class JsonSerializerSettingsProvider
 {
     private const int DefaultMaxDepth = 32;
-    private static readonly ProblemDetailsConverter ProblemDetailsConverter = new ProblemDetailsConverter();
-    private static readonly ValidationProblemDetailsConverter ValidationProblemDetailsConverter = new ValidationProblemDetailsConverter();
+    private static readonly ProblemDetailsConverter ProblemDetailsConverter =
+        new ProblemDetailsConverter();
+    private static readonly ValidationProblemDetailsConverter ValidationProblemDetailsConverter =
+        new ValidationProblemDetailsConverter();
 
     // return shared resolver by default for perf so slow reflection logic is cached once
     // developers can set their own resolver after the settings are returned if desired
-    private static readonly DefaultContractResolver SharedContractResolver = CreateContractResolver();
+    private static readonly DefaultContractResolver SharedContractResolver =
+        CreateContractResolver();
 
     /// <summary>
     /// Creates default <see cref="JsonSerializerSettings"/>.
@@ -39,20 +42,13 @@ public static class JsonSerializerSettingsProvider
             // Setting this to None prevents Json.NET from loading malicious, unsafe, or security-sensitive types
             TypeNameHandling = TypeNameHandling.None,
 
-            Converters =
-                {
-                    ValidationProblemDetailsConverter,
-                    ProblemDetailsConverter,
-                }
+            Converters = { ValidationProblemDetailsConverter, ProblemDetailsConverter },
         };
     }
 
     // To enable unit testing
     internal static DefaultContractResolver CreateContractResolver()
     {
-        return new DefaultContractResolver
-        {
-            NamingStrategy = new CamelCaseNamingStrategy(),
-        };
+        return new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() };
     }
 }

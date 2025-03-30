@@ -1,16 +1,15 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 #if FEATURE_REMOTING
 namespace System.Runtime.Serialization.Formatters.Binary
 {
     using System;
     using System.Collections;
-    using System.Runtime.Remoting.Messaging;
     using System.Reflection;
-
+    using System.Runtime.Remoting.Messaging;
 
     [Serializable]
     internal sealed class BinaryMethodCallMessage
@@ -24,13 +23,23 @@ namespace System.Runtime.Serialization.Formatters.Binary
 
         Type[] _instArgs = null;
         Object[] _args = null;
+
         [System.Security.SecurityCritical] // auto-generated
         LogicalCallContext _logicalCallContext = null;
 
         Object[] _properties = null;
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal BinaryMethodCallMessage(String uri, String methodName, String typeName, Type[] instArgs, Object[] args, Object methodSignature, LogicalCallContext callContext, Object[] properties)
+        [System.Security.SecurityCritical] // auto-generated
+        internal BinaryMethodCallMessage(
+            String uri,
+            String methodName,
+            String typeName,
+            Type[] instArgs,
+            Object[] args,
+            Object methodSignature,
+            LogicalCallContext callContext,
+            Object[] properties
+        )
         {
             _methodName = methodName;
             _typeName = typeName;
@@ -48,44 +57,42 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 _logicalCallContext = callContext;
 
             _properties = properties;
-
         }
 
         public String MethodName
         {
-            get {return _methodName;}
+            get { return _methodName; }
         }
 
         public String TypeName
         {
-            get {return _typeName;}
+            get { return _typeName; }
         }
-
 
         public Type[] InstantiationArgs
         {
-            get {return _instArgs;}
+            get { return _instArgs; }
         }
-        
+
         public Object MethodSignature
         {
-            get {return _methodSignature;}
+            get { return _methodSignature; }
         }
 
         public Object[] Args
         {
-            get {return _args;}
+            get { return _args; }
         }
 
         public LogicalCallContext LogicalCallContext
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {return _logicalCallContext;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _logicalCallContext; }
         }
 
         public bool HasProperties
         {
-            get {return (_properties != null);}
+            get { return (_properties != null); }
         }
 
         internal void PopulateMessageProperties(IDictionary dict)
@@ -95,9 +102,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
                 dict[de.Key] = de.Value;
             }
         }
-
     }
-
 
     [Serializable]
     internal class BinaryMethodReturnMessage
@@ -109,54 +114,61 @@ namespace System.Runtime.Serialization.Formatters.Binary
         Object _returnValue = null;
 
         Object[] _args = null;
+
         [System.Security.SecurityCritical] // auto-generated
         LogicalCallContext _logicalCallContext = null;
 
         Object[] _properties = null;
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal BinaryMethodReturnMessage(Object returnValue, Object[] args, Exception e, LogicalCallContext callContext, Object[] properties)
+        [System.Security.SecurityCritical] // auto-generated
+        internal BinaryMethodReturnMessage(
+            Object returnValue,
+            Object[] args,
+            Exception e,
+            LogicalCallContext callContext,
+            Object[] properties
+        )
         {
             _returnValue = returnValue;
             if (args == null)
                 args = new Object[0];
 
             _outargs = args;
-            _args= args;
+            _args = args;
             _exception = e;
 
             if (callContext == null)
                 _logicalCallContext = new LogicalCallContext();
             else
                 _logicalCallContext = callContext;
-            
+
             _properties = properties;
         }
 
         public Exception Exception
         {
-            get {return _exception;}
+            get { return _exception; }
         }
 
-        public Object  ReturnValue
+        public Object ReturnValue
         {
-            get {return _returnValue;}
+            get { return _returnValue; }
         }
-        
+
         public Object[] Args
         {
-            get {return _args;}
+            get { return _args; }
         }
 
         public LogicalCallContext LogicalCallContext
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {return _logicalCallContext;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _logicalCallContext; }
         }
 
         public bool HasProperties
         {
-            get {return (_properties != null);}
+            get { return (_properties != null); }
         }
 
         internal void PopulateMessageProperties(IDictionary dict)
@@ -168,5 +180,4 @@ namespace System.Runtime.Serialization.Formatters.Binary
         }
     }
 }
-#endif //  FEATURE_REMOTING    
-
+#endif //  FEATURE_REMOTING

@@ -24,26 +24,29 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
     internal partial class ConvertRegularStringToRawStringProvider
         : AbstractConvertStringProvider<LiteralExpressionSyntax>
     {
-        public static readonly IConvertStringProvider Instance = new ConvertRegularStringToRawStringProvider();
+        public static readonly IConvertStringProvider Instance =
+            new ConvertRegularStringToRawStringProvider();
 
-        private ConvertRegularStringToRawStringProvider()
-        {
-        }
+        private ConvertRegularStringToRawStringProvider() { }
 
-        protected override bool CheckSyntax(LiteralExpressionSyntax stringExpression)
-            => stringExpression.Kind() is SyntaxKind.StringLiteralExpression;
+        protected override bool CheckSyntax(LiteralExpressionSyntax stringExpression) =>
+            stringExpression.Kind() is SyntaxKind.StringLiteralExpression;
 
         protected override bool CanConvert(
             ParsedDocument document,
             LiteralExpressionSyntax stringExpression,
             SyntaxFormattingOptions formattingOptions,
             out CanConvertParams convertParams,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return CanConvertStringLiteral(stringExpression.Token, out convertParams);
         }
 
-        private static bool CanConvertStringLiteral(SyntaxToken token, out CanConvertParams convertParams)
+        private static bool CanConvertStringLiteral(
+            SyntaxToken token,
+            out CanConvertParams convertParams
+        )
         {
             convertParams = default;
             if (token.Kind() != SyntaxKind.StringLiteralToken)
@@ -58,7 +61,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             if (!ConvertToRawStringHelpers.CanConvert(characters))
                 return false;
 
-            // TODO(cyrusn): Should we offer this on empty strings... seems undesirable as you'd end with a gigantic 
+            // TODO(cyrusn): Should we offer this on empty strings... seems undesirable as you'd end with a gigantic
             // three line alternative over just ""
             if (characters.IsEmpty)
                 return false;
@@ -91,17 +94,24 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                 //
                 // This changes the contents of the literal, but that can be fine for the domain the user is working in.
                 // Offer this, but let the user know that this will change runtime semantics.
-                canBeMultiLineWithoutLeadingWhiteSpaces = token.IsVerbatimStringLiteral() &&
-                    (HasLeadingWhitespace(characters) || HasTrailingWhitespace(characters)) &&
-                    CleanupWhitespace(characters).Length > 0;
+                canBeMultiLineWithoutLeadingWhiteSpaces =
+                    token.IsVerbatimStringLiteral()
+                    && (HasLeadingWhitespace(characters) || HasTrailingWhitespace(characters))
+                    && CleanupWhitespace(characters).Length > 0;
             }
 
             // If we have escaped quotes in the string, then this is a good option to bubble up as something to convert
             // to a raw string.  Otherwise, still offer this refactoring, but at low priority as the user may be
             // invoking this on lots of strings that they have no interest in converting.
-            var priority = AllEscapesAreQuotes(characters) ? CodeActionPriority.Default : CodeActionPriority.Low;
+            var priority = AllEscapesAreQuotes(characters)
+                ? CodeActionPriority.Default
+                : CodeActionPriority.Low;
 
-            convertParams = new CanConvertParams(priority, canBeSingleLine, canBeMultiLineWithoutLeadingWhiteSpaces);
+            convertParams = new CanConvertParams(
+                priority,
+                canBeSingleLine,
+                canBeMultiLineWithoutLeadingWhiteSpaces
+            );
             return true;
 
             static bool HasLeadingWhitespace(VirtualCharSequence characters)
@@ -128,10 +138,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             LiteralExpressionSyntax stringExpression,
             ConvertToRawKind kind,
             SyntaxFormattingOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var newToken = GetReplacementToken(
-                document, stringExpression.Token, kind, options, cancellationToken);
+                document,
+                stringExpression.Token,
+                kind,
+                options,
+                cancellationToken
+            );
             return stringExpression.WithToken(newToken);
         }
 
@@ -140,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             SyntaxToken token,
             ConvertToRawKind kind,
             SyntaxFormattingOptions formattingOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var characters = CSharpVirtualCharService.Instance.TryConvertToVirtualChars(token);
             Contract.ThrowIfTrue(characters.IsDefaultOrEmpty);
@@ -159,13 +176,24 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                 //
                 // In this case, figure out what indentation we're normally like to put this string.  Update *both* the
                 // contents *and* the starting quotes of the raw string.
-                var indenter = parsedDocument.LanguageServices.GetRequiredService<IIndentationService>();
-                var indentationVal = indenter.GetIndentation(parsedDocument, tokenLine.LineNumber, indentationOptions, cancellationToken);
+                var indenter =
+                    parsedDocument.LanguageServices.GetRequiredService<IIndentationService>();
+                var indentationVal = indenter.GetIndentation(
+                    parsedDocument,
+                    tokenLine.LineNumber,
+                    indentationOptions,
+                    cancellationToken
+                );
 
-                var indentation = indentationVal.GetIndentationString(parsedDocument.Text, indentationOptions);
+                var indentation = indentationVal.GetIndentationString(
+                    parsedDocument.Text,
+                    indentationOptions
+                );
                 var newToken = ConvertToMultiLineRawIndentedString(indentation);
 
-                newToken = newToken.WithLeadingTrivia(newToken.LeadingTrivia.Add(Whitespace(indentation)));
+                newToken = newToken.WithLeadingTrivia(
+                    newToken.LeadingTrivia.Add(Whitespace(indentation))
+                );
                 return newToken;
             }
             else
@@ -173,7 +201,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                 // otherwise this was a string literal on a line that already contains contents.  Or it's a string
                 // literal on its own line, but indented some amount.  Figure out the indentation of the contents from
                 // this, but leave the string literal starting at whatever position it's at.
-                var indentation = token.GetPreferredIndentation(parsedDocument, indentationOptions, cancellationToken);
+                var indentation = token.GetPreferredIndentation(
+                    parsedDocument,
+                    indentationOptions,
+                    cancellationToken
+                );
                 return ConvertToMultiLineRawIndentedString(indentation);
             }
 
@@ -197,7 +229,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                     SyntaxKind.SingleLineRawStringLiteralToken,
                     builder.ToString(),
                     characters.CreateString(),
-                    token.TrailingTrivia);
+                    token.TrailingTrivia
+                );
             }
 
             SyntaxToken ConvertToMultiLineRawIndentedString(string indentation)
@@ -244,7 +277,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                     SyntaxKind.MultiLineRawStringLiteralToken,
                     builder.ToString(),
                     characters.CreateString(),
-                    token.TrailingTrivia);
+                    token.TrailingTrivia
+                );
             }
         }
 
@@ -285,13 +319,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             }
 
             // Remove all trailing whitespace and newlines from the final string.
-            while (result.Count > 0 && (IsCSharpNewLine(result[^1]) || IsCSharpWhitespace(result[^1])))
+            while (
+                result.Count > 0 && (IsCSharpNewLine(result[^1]) || IsCSharpWhitespace(result[^1]))
+            )
                 result.RemoveAt(result.Count - 1);
 
             return VirtualCharSequence.Create(result.ToImmutable());
         }
 
-        private static void AddRange(ImmutableSegmentedList<VirtualChar>.Builder result, VirtualCharSequence sequence)
+        private static void AddRange(
+            ImmutableSegmentedList<VirtualChar>.Builder result,
+            VirtualCharSequence sequence
+        )
         {
             foreach (var c in sequence)
                 result.Add(c);
@@ -311,19 +350,28 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                     continue;
 
                 var currentLineLeadingWhitespace = GetLeadingWhitespace(currentLine);
-                commonLeadingWhitespace = ComputeCommonWhitespacePrefix(commonLeadingWhitespace, currentLineLeadingWhitespace);
+                commonLeadingWhitespace = ComputeCommonWhitespacePrefix(
+                    commonLeadingWhitespace,
+                    currentLineLeadingWhitespace
+                );
             }
 
             return commonLeadingWhitespace.Length;
         }
 
         private static VirtualCharSequence ComputeCommonWhitespacePrefix(
-            VirtualCharSequence leadingWhitespace1, VirtualCharSequence leadingWhitespace2)
+            VirtualCharSequence leadingWhitespace1,
+            VirtualCharSequence leadingWhitespace2
+        )
         {
             var length = Math.Min(leadingWhitespace1.Length, leadingWhitespace2.Length);
 
             var current = 0;
-            while (current < length && IsCSharpWhitespace(leadingWhitespace1[current]) && leadingWhitespace1[current].Rune == leadingWhitespace2[current].Rune)
+            while (
+                current < length
+                && IsCSharpWhitespace(leadingWhitespace1[current])
+                && leadingWhitespace1[current].Rune == leadingWhitespace2[current].Rune
+            )
                 current++;
 
             return leadingWhitespace1.GetSubSequence(TextSpan.FromBounds(0, current));
@@ -338,7 +386,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             return line.GetSubSequence(TextSpan.FromBounds(0, current));
         }
 
-        private static void BreakIntoLines(VirtualCharSequence characters, ArrayBuilder<VirtualCharSequence> lines)
+        private static void BreakIntoLines(
+            VirtualCharSequence characters,
+            ArrayBuilder<VirtualCharSequence> lines
+        )
         {
             var index = 0;
 
@@ -348,7 +399,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
 
         private static VirtualCharSequence GetNextLine(
             VirtualCharSequence characters,
-            ref int index)
+            ref int index
+        )
         {
             var end = index;
             while (end < characters.Length && !IsCSharpNewLine(characters[end]))

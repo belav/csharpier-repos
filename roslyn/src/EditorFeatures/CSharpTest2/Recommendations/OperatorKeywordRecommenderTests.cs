@@ -15,59 +15,61 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 int i = 0;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Goo {
                     public static implicit $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -87,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Goo {
                     public static explicit $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -97,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Goo {
                     int $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542271")]
@@ -107,7 +112,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Goo {
                     public static int $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542271")]
@@ -117,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Goo {
                     public static extern int $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542271")]
@@ -127,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class Goo {
                     public static IList<int> $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -137,7 +145,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface Goo {
                     public static int $$
-                """);
+                """
+            );
         }
     }
 }

@@ -4,26 +4,26 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
-namespace System.Net.NetworkInformation {
+namespace System.Net.NetworkInformation
+{
     using System;
     using System.Runtime.Serialization;
 
     [Serializable]
-    public class PingException : InvalidOperationException {
-
+    public class PingException : InvalidOperationException
+    {
         internal PingException() { }
 
-        protected PingException(SerializationInfo serializationInfo, StreamingContext streamingContext) :
-            base(serializationInfo, streamingContext) {}
+        protected PingException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+            : base(serializationInfo, streamingContext) { }
 
-        public PingException(string message) : base(message) {
-        }
+        public PingException(string message)
+            : base(message) { }
 
-        public PingException(string message, Exception innerException) :
-            base(message, innerException) {
-
-        }
-    }; 
+        public PingException(string message, Exception innerException)
+            : base(message, innerException) { }
+    };
 } // namespace System.Net
-

@@ -14,7 +14,7 @@ namespace Microsoft.Win32.RegistryTests
             new object[] { Registry.ClassesRoot, "HKEY_CLASSES_ROOT" },
             new object[] { Registry.Users, "HKEY_USERS" },
             new object[] { Registry.PerformanceData, "HKEY_PERFORMANCE_DATA" },
-            new object[] { Registry.CurrentConfig, "HKEY_CURRENT_CONFIG" }
+            new object[] { Registry.CurrentConfig, "HKEY_CURRENT_CONFIG" },
         };
 
         [Theory]

@@ -90,7 +90,7 @@ public class ExternalException : Exception
 
         if (v0 == 100)
         {
-            lock(this)
+            lock (this)
             {
                 Console.WriteLine("TryCatch Thread Passed");
                 ExternalException.Ignored = 100;
@@ -98,7 +98,7 @@ public class ExternalException : Exception
         }
         else
         {
-            lock(this)
+            lock (this)
             {
                 Console.WriteLine("TryCatch Thread Failed");
                 Console.WriteLine(0);
@@ -121,7 +121,5 @@ public class ExternalException : Exception
         }
     }
 
-    public ExternalException()
-    {
-    }
+    public ExternalException() { }
 }

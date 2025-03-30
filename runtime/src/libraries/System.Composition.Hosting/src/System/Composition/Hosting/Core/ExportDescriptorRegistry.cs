@@ -10,14 +10,18 @@ namespace System.Composition.Hosting.Core
     {
         private readonly object _thisLock = new object();
         private readonly ExportDescriptorProvider[] _exportDescriptorProviders;
-        private volatile Dictionary<CompositionContract, ExportDescriptor[]> _partDefinitions = new Dictionary<CompositionContract, ExportDescriptor[]>();
+        private volatile Dictionary<CompositionContract, ExportDescriptor[]> _partDefinitions =
+            new Dictionary<CompositionContract, ExportDescriptor[]>();
 
         public ExportDescriptorRegistry(ExportDescriptorProvider[] exportDescriptorProviders)
         {
             _exportDescriptorProviders = exportDescriptorProviders;
         }
 
-        public bool TryGetSingleForExport(CompositionContract exportKey, out ExportDescriptor defaultForExport)
+        public bool TryGetSingleForExport(
+            CompositionContract exportKey,
+            out ExportDescriptor defaultForExport
+        )
         {
             ExportDescriptor[] allForExport;
             if (!_partDefinitions.TryGetValue(exportKey, out allForExport))
@@ -26,8 +30,14 @@ namespace System.Composition.Hosting.Core
                 {
                     if (!_partDefinitions.ContainsKey(exportKey))
                     {
-                        var updatedDefinitions = new Dictionary<CompositionContract, ExportDescriptor[]>(_partDefinitions);
-                        var updateOperation = new ExportDescriptorRegistryUpdate(updatedDefinitions, _exportDescriptorProviders);
+                        var updatedDefinitions = new Dictionary<
+                            CompositionContract,
+                            ExportDescriptor[]
+                        >(_partDefinitions);
+                        var updateOperation = new ExportDescriptorRegistryUpdate(
+                            updatedDefinitions,
+                            _exportDescriptorProviders
+                        );
                         updateOperation.Execute(exportKey);
 
                         _partDefinitions = updatedDefinitions;
@@ -47,7 +57,9 @@ namespace System.Composition.Hosting.Core
             // cardinality violations in advance of this in all but a few very rare scenarios.
             if (allForExport.Length != 1)
             {
-                var ex = new CompositionFailedException(SR.Format(SR.CardinalityMismatch_TooManyExports, exportKey));
+                var ex = new CompositionFailedException(
+                    SR.Format(SR.CardinalityMismatch_TooManyExports, exportKey)
+                );
                 Debug.WriteLine(SR.Diagnostic_ThrowingException, ex.ToString());
                 throw ex;
             }

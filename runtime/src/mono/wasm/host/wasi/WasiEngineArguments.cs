@@ -15,8 +15,11 @@ internal sealed class WasiEngineArguments
     public IEnumerable<string> AppArgs => CommonConfig.RemainingArgs;
 
     public bool IsSingleFileBundle =>
-        CommonConfig.HostProperties.Extra?.TryGetValue("singleFileBundle", out JsonElement singleFileValue) == true&&
-        singleFileValue.GetBoolean();
+        CommonConfig.HostProperties.Extra?.TryGetValue(
+            "singleFileBundle",
+            out JsonElement singleFileValue
+        ) == true
+        && singleFileValue.GetBoolean();
 
     public WasiEngineArguments(CommonConfiguration commonConfig)
     {
@@ -26,6 +29,8 @@ internal sealed class WasiEngineArguments
     public void Validate()
     {
         if (CommonConfig.Host is not WasmHost.Wasmtime)
-            throw new ArgumentException($"Internal error: host {CommonConfig.Host} not supported as a jsengine");
+            throw new ArgumentException(
+                $"Internal error: host {CommonConfig.Host} not supported as a jsengine"
+            );
     }
 }

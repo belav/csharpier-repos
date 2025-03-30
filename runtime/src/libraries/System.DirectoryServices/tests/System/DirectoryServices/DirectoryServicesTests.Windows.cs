@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Runtime.InteropServices;
-using System.Collections.Generic;
 using System.Collections;
-using Xunit;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using ActiveDirectoryComInterop;
+using Xunit;
 
 namespace System.DirectoryServices.Tests
 {
@@ -22,20 +22,37 @@ namespace System.DirectoryServices.Tests
                 {
                     using (DirectoryEntry rootOU = CreateOU(de, "dateRoot", "Date OU"))
                     {
-                        long deTime = GetTimeValue((IADsLargeInteger) de.Properties["uSNCreated"].Value);
-                        long rootOUTime = GetTimeValue((IADsLargeInteger) rootOU.Properties["uSNCreated"].Value);
+                        long deTime = GetTimeValue(
+                            (IADsLargeInteger)de.Properties["uSNCreated"].Value
+                        );
+                        long rootOUTime = GetTimeValue(
+                            (IADsLargeInteger)rootOU.Properties["uSNCreated"].Value
+                        );
 
                         // we are sure rootOU is created after de
                         Assert.True(rootOUTime > deTime);
 
-                        IADs iads = (IADs) rootOU.NativeObject;
+                        IADs iads = (IADs)rootOU.NativeObject;
                         Assert.Equal("ou=dateRoot", iads.Name);
                         Assert.Equal("Class", iads.Class);
-                        Assert.Contains(LdapConfiguration.Configuration.ServerName, iads.ADsPath, StringComparison.OrdinalIgnoreCase);
+                        Assert.Contains(
+                            LdapConfiguration.Configuration.ServerName,
+                            iads.ADsPath,
+                            StringComparison.OrdinalIgnoreCase
+                        );
 
-                        IADsSecurityDescriptor iadsSD = (IADsSecurityDescriptor) de.Properties["ntSecurityDescriptor"].Value;
-                        Assert.Contains(iadsSD.Owner.Split('\\')[0], LdapConfiguration.Configuration.SearchDn, StringComparison.OrdinalIgnoreCase);
-                        Assert.Contains(iadsSD.Group.Split('\\')[0], LdapConfiguration.Configuration.SearchDn, StringComparison.OrdinalIgnoreCase);
+                        IADsSecurityDescriptor iadsSD = (IADsSecurityDescriptor)
+                            de.Properties["ntSecurityDescriptor"].Value;
+                        Assert.Contains(
+                            iadsSD.Owner.Split('\\')[0],
+                            LdapConfiguration.Configuration.SearchDn,
+                            StringComparison.OrdinalIgnoreCase
+                        );
+                        Assert.Contains(
+                            iadsSD.Group.Split('\\')[0],
+                            LdapConfiguration.Configuration.SearchDn,
+                            StringComparison.OrdinalIgnoreCase
+                        );
                     }
                 }
                 finally
@@ -47,7 +64,7 @@ namespace System.DirectoryServices.Tests
 
         private long GetTimeValue(IADsLargeInteger largeInteger)
         {
-            return (long) largeInteger.LowPart | (long) (largeInteger.HighPart << 32);
+            return (long)largeInteger.LowPart | (long)(largeInteger.HighPart << 32);
         }
     }
 }

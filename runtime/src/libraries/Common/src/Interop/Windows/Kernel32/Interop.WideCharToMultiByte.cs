@@ -10,10 +10,15 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Kernel32)]
         internal static unsafe partial int WideCharToMultiByte(
-            uint CodePage, uint dwFlags,
-            char* lpWideCharStr, int cchWideChar,
-            byte* lpMultiByteStr, int cbMultiByte,
-            byte* lpDefaultChar, BOOL* lpUsedDefaultChar);
+            uint CodePage,
+            uint dwFlags,
+            char* lpWideCharStr,
+            int cchWideChar,
+            byte* lpMultiByteStr,
+            int cbMultiByte,
+            byte* lpDefaultChar,
+            BOOL* lpUsedDefaultChar
+        );
 
         internal const uint CP_ACP = 0;
         internal const uint WC_NO_BEST_FIT_CHARS = 0x00000400;

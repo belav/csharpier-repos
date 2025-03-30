@@ -8,15 +8,18 @@ using System.Reflection.Runtime.Assemblies;
 using System.Reflection.Runtime.CustomAttributes;
 using System.Reflection.Runtime.General;
 using System.Text;
-
 using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 {
     internal sealed partial class NativeFormatRuntimeNamedTypeInfo : RuntimeNamedTypeInfo
     {
-        private NativeFormatRuntimeNamedTypeInfo(MetadataReader reader, TypeDefinitionHandle typeDefinitionHandle, RuntimeTypeHandle typeHandle) :
-            base(typeHandle)
+        private NativeFormatRuntimeNamedTypeInfo(
+            MetadataReader reader,
+            TypeDefinitionHandle typeDefinitionHandle,
+            RuntimeTypeHandle typeHandle
+        )
+            : base(typeHandle)
         {
             _reader = reader;
             _typeDefinitionHandle = typeDefinitionHandle;
@@ -32,7 +35,8 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
                 // by name to ensure we get the right one.
 
                 ScopeDefinitionHandle scopeDefinitionHandle = NamespaceChain.DefiningScope;
-                RuntimeAssemblyName runtimeAssemblyName = scopeDefinitionHandle.ToRuntimeAssemblyName(_reader);
+                RuntimeAssemblyName runtimeAssemblyName =
+                    scopeDefinitionHandle.ToRuntimeAssemblyName(_reader);
 
                 return RuntimeAssemblyInfo.GetRuntimeAssembly(runtimeAssemblyName);
             }
@@ -50,7 +54,13 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
                 // Otherwise fall back to attributes
                 foreach (CustomAttributeHandle cah in _typeDefinition.CustomAttributes)
                 {
-                    if (cah.IsCustomAttributeOfType(_reader, "System.Runtime.CompilerServices", "IsByRefLikeAttribute"))
+                    if (
+                        cah.IsCustomAttributeOfType(
+                            _reader,
+                            "System.Runtime.CompilerServices",
+                            "IsByRefLikeAttribute"
+                        )
+                    )
                         return true;
                 }
                 return false;
@@ -68,7 +78,13 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
                 // Following age-old CLR tradition, we search for the custom attribute using a name-based search. Since this makes it harder
                 // to be sure we won't run into custom attribute constructors that comply with the GuidAttribute(String) signature,
                 // we'll check that it does and silently skip the CA if it doesn't match the expected pattern.
-                if (cah.IsCustomAttributeOfType(_reader, "System.Runtime.InteropServices", "GuidAttribute"))
+                if (
+                    cah.IsCustomAttributeOfType(
+                        _reader,
+                        "System.Runtime.InteropServices",
+                        "GuidAttribute"
+                    )
+                )
                 {
                     CustomAttribute ca = cah.GetCustomAttribute(_reader);
                     HandleCollection.Enumerator fahEnumerator = ca.FixedArguments.GetEnumerator();
@@ -79,7 +95,11 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
                         continue;
                     if (guidStringArgumentHandle.HandleType != HandleType.ConstantStringValue)
                         continue;
-                    return new Guid(guidStringArgumentHandle.ToConstantStringValueHandle(_reader).GetString(_reader));
+                    return new Guid(
+                        guidStringArgumentHandle
+                            .ToConstantStringValueHandle(_reader)
+                            .GetString(_reader)
+                    );
                 }
             }
             return null;
@@ -93,18 +113,12 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 
         public sealed override bool IsGenericTypeDefinition
         {
-            get
-            {
-                return _typeDefinition.GenericParameters.GetEnumerator().MoveNext();
-            }
+            get { return _typeDefinition.GenericParameters.GetEnumerator().MoveNext(); }
         }
 
         public sealed override string Namespace
         {
-            get
-            {
-                return NamespaceChain.NameSpace.EscapeTypeNameIdentifier();
-            }
+            get { return NamespaceChain.NameSpace.EscapeTypeNameIdentifier(); }
         }
 
         public sealed override Type GetGenericTypeDefinition()
@@ -116,17 +130,16 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 
         public sealed override int MetadataToken
         {
-            get
-            {
-                throw new InvalidOperationException(SR.NoMetadataTokenAvailable);
-            }
+            get { throw new InvalidOperationException(SR.NoMetadataTokenAvailable); }
         }
 
         public sealed override string ToString()
         {
             StringBuilder? sb = null;
 
-            foreach (GenericParameterHandle genericParameterHandle in _typeDefinition.GenericParameters)
+            foreach (
+                GenericParameterHandle genericParameterHandle in _typeDefinition.GenericParameters
+            )
             {
                 if (sb == null)
                 {
@@ -138,7 +151,9 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
                     sb.Append(',');
                 }
 
-                sb.Append(genericParameterHandle.GetGenericParameter(_reader).Name.GetString(_reader));
+                sb.Append(
+                    genericParameterHandle.GetGenericParameter(_reader).Name.GetString(_reader)
+                );
             }
 
             if (sb == null)
@@ -193,17 +208,28 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
             }
         }
 
-        protected sealed override IEnumerable<CustomAttributeData> TrueCustomAttributes => RuntimeCustomAttributeData.GetCustomAttributes(_reader, _typeDefinition.CustomAttributes);
+        protected sealed override IEnumerable<CustomAttributeData> TrueCustomAttributes =>
+            RuntimeCustomAttributeData.GetCustomAttributes(
+                _reader,
+                _typeDefinition.CustomAttributes
+            );
 
         internal sealed override RuntimeTypeInfo[] RuntimeGenericTypeParameters
         {
             get
             {
-                LowLevelList<RuntimeTypeInfo> genericTypeParameters = new LowLevelList<RuntimeTypeInfo>();
+                LowLevelList<RuntimeTypeInfo> genericTypeParameters =
+                    new LowLevelList<RuntimeTypeInfo>();
 
-                foreach (GenericParameterHandle genericParameterHandle in _typeDefinition.GenericParameters)
+                foreach (
+                    GenericParameterHandle genericParameterHandle in _typeDefinition.GenericParameters
+                )
                 {
-                    RuntimeTypeInfo genericParameterType = NativeFormat.NativeFormatRuntimeGenericParameterTypeInfoForTypes.GetRuntimeGenericParameterTypeInfoForTypes(this, genericParameterHandle);
+                    RuntimeTypeInfo genericParameterType =
+                        NativeFormat.NativeFormatRuntimeGenericParameterTypeInfoForTypes.GetRuntimeGenericParameterTypeInfoForTypes(
+                            this,
+                            genericParameterHandle
+                        );
                     genericTypeParameters.Add(genericParameterType);
                 }
 
@@ -233,7 +259,8 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
         {
             get
             {
-                LowLevelList<QTypeDefRefOrSpec> directlyImplementedInterfaces = new LowLevelList<QTypeDefRefOrSpec>();
+                LowLevelList<QTypeDefRefOrSpec> directlyImplementedInterfaces =
+                    new LowLevelList<QTypeDefRefOrSpec>();
                 foreach (Handle ifcHandle in _typeDefinition.Interfaces)
                     directlyImplementedInterfaces.Add(new QTypeDefRefOrSpec(_reader, ifcHandle));
                 return directlyImplementedInterfaces.ToArray();
@@ -242,50 +269,32 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 
         internal MetadataReader Reader
         {
-            get
-            {
-                return _reader;
-            }
+            get { return _reader; }
         }
 
         internal TypeDefinitionHandle TypeDefinitionHandle
         {
-            get
-            {
-                return _typeDefinitionHandle;
-            }
+            get { return _typeDefinitionHandle; }
         }
 
         internal EventHandleCollection DeclaredEventHandles
         {
-            get
-            {
-                return _typeDefinition.Events;
-            }
+            get { return _typeDefinition.Events; }
         }
 
         internal FieldHandleCollection DeclaredFieldHandles
         {
-            get
-            {
-                return _typeDefinition.Fields;
-            }
+            get { return _typeDefinition.Fields; }
         }
 
         internal MethodHandleCollection DeclaredMethodAndConstructorHandles
         {
-            get
-            {
-                return _typeDefinition.Methods;
-            }
+            get { return _typeDefinition.Methods; }
         }
 
         internal PropertyHandleCollection DeclaredPropertyHandles
         {
-            get
-            {
-                return _typeDefinition.Properties;
-            }
+            get { return _typeDefinition.Properties; }
         }
 
         public bool Equals(NativeFormatRuntimeNamedTypeInfo? other)
@@ -297,10 +306,7 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 
         internal sealed override QTypeDefRefOrSpec TypeDefinitionQHandle
         {
-            get
-            {
-                return new QTypeDefRefOrSpec(_reader, _typeDefinitionHandle, true);
-            }
+            get { return new QTypeDefRefOrSpec(_reader, _typeDefinitionHandle, true); }
         }
 
         private readonly MetadataReader _reader;
@@ -311,7 +317,10 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
         {
             get
             {
-                return _lazyNamespaceChain ??= new NamespaceChain(_reader, _typeDefinition.NamespaceDefinition);
+                return _lazyNamespaceChain ??= new NamespaceChain(
+                    _reader,
+                    _typeDefinition.NamespaceDefinition
+                );
             }
         }
 

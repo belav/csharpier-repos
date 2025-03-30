@@ -67,7 +67,10 @@ namespace System.IO.Pipelines.Tests
             reader.Complete();
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public async Task CanReadMultipleTimes(bool useZeroByteReads)
@@ -111,7 +114,10 @@ namespace System.IO.Pipelines.Tests
 
             // We're using the pipe here as a way to pump bytes into the reader asynchronously
             var pipe = new Pipe();
-            var options = new StreamPipeReaderOptions(bufferSize: 4096, useZeroByteReads: useZeroByteReads);
+            var options = new StreamPipeReaderOptions(
+                bufferSize: 4096,
+                useZeroByteReads: useZeroByteReads
+            );
             PipeReader reader = PipeReader.Create(pipe.Reader.AsStream(), options);
 
             var writes = new[] { 4096, 1024, 123, 4096, 100 };
@@ -127,10 +133,21 @@ namespace System.IO.Pipelines.Tests
 
         [Theory]
         [MemberData(nameof(ReadSettings))]
-        public async Task ReadWithDifferentSettings(int bytesInBuffer, int bufferSize, int minimumReadSize, int[] readBufferSizes)
+        public async Task ReadWithDifferentSettings(
+            int bytesInBuffer,
+            int bufferSize,
+            int minimumReadSize,
+            int[] readBufferSizes
+        )
         {
-            var options = new StreamPipeReaderOptions(bufferSize: bufferSize, minimumReadSize: minimumReadSize, pool: new HeapBufferPool());
-            var stream = new MemoryStream(Enumerable.Range(0, bytesInBuffer).Select(i => (byte)i).ToArray());
+            var options = new StreamPipeReaderOptions(
+                bufferSize: bufferSize,
+                minimumReadSize: minimumReadSize,
+                pool: new HeapBufferPool()
+            );
+            var stream = new MemoryStream(
+                Enumerable.Range(0, bytesInBuffer).Select(i => (byte)i).ToArray()
+            );
             PipeReader reader = PipeReader.Create(stream, options);
 
             for (int i = 0; i < readBufferSizes.Length; i++)
@@ -171,7 +188,6 @@ namespace System.IO.Pipelines.Tests
             byte[] helloBytes = "Hello World"u8.ToArray();
             var stream = new ThrowAfterZeroByteReadStream(helloBytes);
             PipeReader reader = PipeReader.Create(stream);
-
 
             ReadResult readResult = await reader.ReadAsync();
             ReadOnlySequence<byte> buffer = readResult.Buffer;
@@ -232,7 +248,8 @@ namespace System.IO.Pipelines.Tests
             PipeReader reader = PipeReader.Create(Stream.Null);
 
             reader.Complete();
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await reader.ReadAsync());
+            await Assert.ThrowsAsync<InvalidOperationException>(async () => await reader.ReadAsync()
+            );
         }
 
         [Fact]
@@ -269,13 +286,19 @@ namespace System.IO.Pipelines.Tests
             reader.Complete();
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public async Task ReadCanBeCanceledViaCancelPendingReadWhenReadAsync(bool useZeroByteReads)
         {
             var stream = new CancelledReadsStream();
-            PipeReader reader = PipeReader.Create(stream, new StreamPipeReaderOptions(useZeroByteReads: useZeroByteReads));
+            PipeReader reader = PipeReader.Create(
+                stream,
+                new StreamPipeReaderOptions(useZeroByteReads: useZeroByteReads)
+            );
 
             ValueTask<ReadResult> task = reader.ReadAsync();
 
@@ -288,13 +311,21 @@ namespace System.IO.Pipelines.Tests
             reader.Complete();
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task ReadCanBeCanceledViaCancelPendingReadWhenReadAtLeastAsync(bool useZeroByteReads)
+        public async Task ReadCanBeCanceledViaCancelPendingReadWhenReadAtLeastAsync(
+            bool useZeroByteReads
+        )
         {
             var stream = new CancelledReadsStream();
-            PipeReader reader = PipeReader.Create(stream, new StreamPipeReaderOptions(useZeroByteReads: useZeroByteReads));
+            PipeReader reader = PipeReader.Create(
+                stream,
+                new StreamPipeReaderOptions(useZeroByteReads: useZeroByteReads)
+            );
 
             ValueTask<ReadResult> task = reader.ReadAtLeastAsync(1);
 
@@ -383,7 +414,11 @@ namespace System.IO.Pipelines.Tests
         {
             using (var pool = new DisposeTrackingBufferPool())
             {
-                var options = new StreamPipeReaderOptions(pool: pool, bufferSize: 4096, minimumReadSize: 1024);
+                var options = new StreamPipeReaderOptions(
+                    pool: pool,
+                    bufferSize: 4096,
+                    minimumReadSize: 1024
+                );
                 // 2 full segments
                 var stream = new MemoryStream(new byte[options.BufferSize * 2]);
                 PipeReader reader = PipeReader.Create(stream, options);
@@ -451,7 +486,11 @@ namespace System.IO.Pipelines.Tests
         {
             using (var pool = new DisposeTrackingBufferPool())
             {
-                var options = new StreamPipeReaderOptions(pool: pool, bufferSize: 4096, minimumReadSize: 1024);
+                var options = new StreamPipeReaderOptions(
+                    pool: pool,
+                    bufferSize: 4096,
+                    minimumReadSize: 1024
+                );
                 // 2 full segments
                 var stream = new MemoryStream(new byte[options.BufferSize * 3]);
                 PipeReader reader = PipeReader.Create(stream, options);
@@ -479,7 +518,11 @@ namespace System.IO.Pipelines.Tests
         {
             // We're using the pipe here as a way to pump bytes into the reader asynchronously
             var pipe = new Pipe();
-            var options = new StreamPipeReaderOptions(pool: new HeapBufferPool(), bufferSize: 10, minimumReadSize: 5);
+            var options = new StreamPipeReaderOptions(
+                pool: new HeapBufferPool(),
+                bufferSize: 10,
+                minimumReadSize: 5
+            );
             PipeReader reader = PipeReader.Create(pipe.Reader.AsStream(), options);
 
             pipe.Writer.WriteEmpty(6);
@@ -515,7 +558,13 @@ namespace System.IO.Pipelines.Tests
             bool fired = false;
             PipeReader reader = PipeReader.Create(Stream.Null);
 #pragma warning disable CS0618 // Type or member is obsolete
-            reader.OnWriterCompleted((_, __) => { fired = true; }, null);
+            reader.OnWriterCompleted(
+                (_, __) =>
+                {
+                    fired = true;
+                },
+                null
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
             reader.Complete();
             Assert.False(fired);
@@ -532,7 +581,9 @@ namespace System.IO.Pipelines.Tests
             ReadOnlySequence<byte> buffer = readResult.Buffer;
 
             PipeReader reader = PipeReader.Create(Stream.Null);
-            Assert.Throws<InvalidOperationException>(() => reader.AdvanceTo(buffer.Start, buffer.End));
+            Assert.Throws<InvalidOperationException>(() =>
+                reader.AdvanceTo(buffer.Start, buffer.End)
+            );
 
             pipe.Reader.Complete();
             pipe.Writer.Complete();
@@ -549,15 +600,23 @@ namespace System.IO.Pipelines.Tests
         [Fact]
         public void InvalidBufferSizeThrows()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new StreamPipeReaderOptions(bufferSize: -2));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new StreamPipeReaderOptions(bufferSize: 0));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StreamPipeReaderOptions(bufferSize: -2)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StreamPipeReaderOptions(bufferSize: 0)
+            );
         }
 
         [Fact]
         public void InvalidMinimumReadSizeThrows()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new StreamPipeReaderOptions(minimumReadSize: -2));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new StreamPipeReaderOptions(minimumReadSize: 0));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StreamPipeReaderOptions(minimumReadSize: -2)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new StreamPipeReaderOptions(minimumReadSize: 0)
+            );
         }
 
         [Fact]
@@ -575,7 +634,12 @@ namespace System.IO.Pipelines.Tests
         {
             using (var pool = new TestMemoryPool())
             {
-                var options = new StreamPipeReaderOptions(pool: pool, bufferSize: 1234, minimumReadSize: 5678, leaveOpen: true);
+                var options = new StreamPipeReaderOptions(
+                    pool: pool,
+                    bufferSize: 1234,
+                    minimumReadSize: 5678,
+                    leaveOpen: true
+                );
                 Assert.Same(pool, options.Pool);
                 Assert.Equal(1234, options.BufferSize);
                 Assert.Equal(5678, options.MinimumReadSize);
@@ -587,7 +651,10 @@ namespace System.IO.Pipelines.Tests
         public void LeaveUnderlyingStreamOpen()
         {
             var stream = new MemoryStream();
-            PipeReader reader = PipeReader.Create(stream, new StreamPipeReaderOptions(leaveOpen: true));
+            PipeReader reader = PipeReader.Create(
+                stream,
+                new StreamPipeReaderOptions(leaveOpen: true)
+            );
 
             reader.Complete();
 
@@ -599,7 +666,9 @@ namespace System.IO.Pipelines.Tests
         {
             PipeReader reader = PipeReader.Create(new ThrowsOperationCanceledExceptionStream());
 
-            await Assert.ThrowsAsync<OperationCanceledException>(async () => await reader.ReadAsync());
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+                await reader.ReadAsync()
+            );
         }
 
         [Fact]
@@ -635,17 +704,52 @@ namespace System.IO.Pipelines.Tests
         {
             get
             {
-                yield return CreateRead(bytesInBuffer: 1024, bufferSize: 1024, minimumReadSize: 1024, readSizes: new[] { 1024, 0 });
-                yield return CreateRead(bytesInBuffer: 1023, bufferSize: 512, minimumReadSize: 512, readSizes: new[] { 512, 511, 0 });
-                yield return CreateRead(bytesInBuffer: 512, bufferSize: 1000, minimumReadSize: 512, readSizes: new[] { 512, 0 });
-                yield return CreateRead(bytesInBuffer: 10, bufferSize: 100, minimumReadSize: 512, readSizes: new[] { 10, 0 });
-                yield return CreateRead(bytesInBuffer: 8192, bufferSize: 3000, minimumReadSize: 2048, readSizes: new[] { 3000, 3000, 2192, 0 });
-                yield return CreateRead(bytesInBuffer: 4096, bufferSize: 3000, minimumReadSize: 2048, readSizes: new[] { 3000, 1096, 0 });
+                yield return CreateRead(
+                    bytesInBuffer: 1024,
+                    bufferSize: 1024,
+                    minimumReadSize: 1024,
+                    readSizes: new[] { 1024, 0 }
+                );
+                yield return CreateRead(
+                    bytesInBuffer: 1023,
+                    bufferSize: 512,
+                    minimumReadSize: 512,
+                    readSizes: new[] { 512, 511, 0 }
+                );
+                yield return CreateRead(
+                    bytesInBuffer: 512,
+                    bufferSize: 1000,
+                    minimumReadSize: 512,
+                    readSizes: new[] { 512, 0 }
+                );
+                yield return CreateRead(
+                    bytesInBuffer: 10,
+                    bufferSize: 100,
+                    minimumReadSize: 512,
+                    readSizes: new[] { 10, 0 }
+                );
+                yield return CreateRead(
+                    bytesInBuffer: 8192,
+                    bufferSize: 3000,
+                    minimumReadSize: 2048,
+                    readSizes: new[] { 3000, 3000, 2192, 0 }
+                );
+                yield return CreateRead(
+                    bytesInBuffer: 4096,
+                    bufferSize: 3000,
+                    minimumReadSize: 2048,
+                    readSizes: new[] { 3000, 1096, 0 }
+                );
             }
         }
 
         // Helper to make the above code look nicer
-        private static object[] CreateRead(int bytesInBuffer, int bufferSize, int minimumReadSize, int[] readSizes)
+        private static object[] CreateRead(
+            int bytesInBuffer,
+            int bufferSize,
+            int minimumReadSize,
+            int[] readSizes
+        )
         {
             return new object[] { bytesInBuffer, bufferSize, minimumReadSize, readSizes };
         }
@@ -657,12 +761,21 @@ namespace System.IO.Pipelines.Tests
                 throw new OperationCanceledException();
             }
 
-            public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 throw new OperationCanceledException();
             }
+
 #if NETCOREAPP
-            public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+            public override ValueTask<int> ReadAsync(
+                Memory<byte> buffer,
+                CancellationToken cancellationToken = default
+            )
             {
                 throw new OperationCanceledException();
             }
@@ -671,18 +784,19 @@ namespace System.IO.Pipelines.Tests
 
         private class ThrowAfterZeroByteReadStream : MemoryStream
         {
-            public ThrowAfterZeroByteReadStream()
-            {
+            public ThrowAfterZeroByteReadStream() { }
 
-            }
-
-            public ThrowAfterZeroByteReadStream(byte[] buffer) : base(buffer)
-            {
-
-            }
+            public ThrowAfterZeroByteReadStream(byte[] buffer)
+                : base(buffer) { }
 
             private bool _throwOnNextCallToRead;
-            public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+
+            public override async Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 if (_throwOnNextCallToRead)
                 {
@@ -697,7 +811,10 @@ namespace System.IO.Pipelines.Tests
             }
 
 #if NETCOREAPP
-            public override async ValueTask<int> ReadAsync(Memory<byte> destination, CancellationToken cancellationToken = default)
+            public override async ValueTask<int> ReadAsync(
+                Memory<byte> destination,
+                CancellationToken cancellationToken = default
+            )
             {
                 if (_throwOnNextCallToRead)
                 {

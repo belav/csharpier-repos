@@ -12,10 +12,7 @@ public class ResponseCookiesTest
 {
     private IFeatureCollection MakeFeatures(IHeaderDictionary headers)
     {
-        var responseFeature = new HttpResponseFeature()
-        {
-            Headers = headers
-        };
+        var responseFeature = new HttpResponseFeature() { Headers = headers };
         var features = new FeatureCollection();
         features.Set<IHttpResponseFeature>(responseFeature);
         return features;
@@ -33,15 +30,14 @@ public class ResponseCookiesTest
         services.AddLogging();
         services.AddSingleton<ILoggerFactory>(loggerFactory);
 
-        features.Set<IServiceProvidersFeature>(new ServiceProvidersFeature() { RequestServices = services.BuildServiceProvider() });
+        features.Set<IServiceProvidersFeature>(
+            new ServiceProvidersFeature() { RequestServices = services.BuildServiceProvider() }
+        );
 
         var cookies = new ResponseCookies(features);
         var testCookie = "TestCookie";
 
-        cookies.Append(testCookie, "value", new CookieOptions()
-        {
-            SameSite = SameSiteMode.None,
-        });
+        cookies.Append(testCookie, "value", new CookieOptions() { SameSite = SameSiteMode.None });
 
         var cookieHeaderValues = headers.SetCookie;
         Assert.Single(cookieHeaderValues);
@@ -51,7 +47,10 @@ public class ResponseCookiesTest
         Assert.DoesNotContain("secure", cookieHeaderValues[0]);
 
         var writeContext = Assert.Single(sink.Writes);
-        Assert.Equal("The cookie 'TestCookie' has set 'SameSite=None' and must also set 'Secure'.", writeContext.Message);
+        Assert.Equal(
+            "The cookie 'TestCookie' has set 'SameSite=None' and must also set 'Secure'.",
+            writeContext.Message
+        );
     }
 
     [Fact]
@@ -62,10 +61,11 @@ public class ResponseCookiesTest
         var cookies = new ResponseCookies(features);
         var testCookie = "TestCookie";
 
-        cookies.Append(testCookie, "value", new CookieOptions()
-        {
-            Extensions = { "simple", "key=value" }
-        });
+        cookies.Append(
+            testCookie,
+            "value",
+            new CookieOptions() { Extensions = { "simple", "key=value" } }
+        );
 
         var cookieHeaderValues = headers.SetCookie;
         Assert.Single(cookieHeaderValues);
@@ -83,10 +83,7 @@ public class ResponseCookiesTest
         var cookies = new ResponseCookies(features);
         var testCookie = "TestCookie";
 
-        cookies.Delete(testCookie, new CookieOptions()
-        {
-            Extensions = { "simple", "key=value" }
-        });
+        cookies.Delete(testCookie, new CookieOptions() { Extensions = { "simple", "key=value" } });
 
         var cookieHeaderValues = headers.SetCookie;
         Assert.Single(cookieHeaderValues);
@@ -123,25 +120,53 @@ public class ResponseCookiesTest
 
         var testCookies = new (string Key, string Path, string Domain)[]
         {
-                new ("key1", "/path1/", null),
-                new ("key1", "/path2/", null),
-                new ("key2", "/path1/", "localhost"),
-                new ("key2", "/path2/", "localhost"),
+            new("key1", "/path1/", null),
+            new("key1", "/path2/", null),
+            new("key2", "/path1/", "localhost"),
+            new("key2", "/path2/", "localhost"),
         };
 
         foreach (var cookie in testCookies)
         {
-            responseCookies.Delete(cookie.Key, new CookieOptions() { Domain = cookie.Domain, Path = cookie.Path });
+            responseCookies.Delete(
+                cookie.Key,
+                new CookieOptions() { Domain = cookie.Domain, Path = cookie.Path }
+            );
         }
 
         var deletedCookies = headers.SetCookie.ToArray();
         Assert.Equal(testCookies.Length, deletedCookies.Length);
 
-        Assert.Single(deletedCookies, cookie => cookie.StartsWith("key1", StringComparison.InvariantCulture) && cookie.Contains("path=/path1/"));
-        Assert.Single(deletedCookies, cookie => cookie.StartsWith("key1", StringComparison.InvariantCulture) && cookie.Contains("path=/path2/"));
-        Assert.Single(deletedCookies, cookie => cookie.StartsWith("key2", StringComparison.InvariantCulture) && cookie.Contains("path=/path1/") && cookie.Contains("domain=localhost"));
-        Assert.Single(deletedCookies, cookie => cookie.StartsWith("key2", StringComparison.InvariantCulture) && cookie.Contains("path=/path2/") && cookie.Contains("domain=localhost"));
-        Assert.All(deletedCookies, cookie => Assert.Contains("expires=Thu, 01 Jan 1970 00:00:00 GMT", cookie));
+        Assert.Single(
+            deletedCookies,
+            cookie =>
+                cookie.StartsWith("key1", StringComparison.InvariantCulture)
+                && cookie.Contains("path=/path1/")
+        );
+        Assert.Single(
+            deletedCookies,
+            cookie =>
+                cookie.StartsWith("key1", StringComparison.InvariantCulture)
+                && cookie.Contains("path=/path2/")
+        );
+        Assert.Single(
+            deletedCookies,
+            cookie =>
+                cookie.StartsWith("key2", StringComparison.InvariantCulture)
+                && cookie.Contains("path=/path1/")
+                && cookie.Contains("domain=localhost")
+        );
+        Assert.Single(
+            deletedCookies,
+            cookie =>
+                cookie.StartsWith("key2", StringComparison.InvariantCulture)
+                && cookie.Contains("path=/path2/")
+                && cookie.Contains("domain=localhost")
+        );
+        Assert.All(
+            deletedCookies,
+            cookie => Assert.Contains("expires=Thu, 01 Jan 1970 00:00:00 GMT", cookie)
+        );
     }
 
     [Fact]
@@ -153,23 +178,44 @@ public class ResponseCookiesTest
 
         var testCookies = new (string Key, string Path, string Domain)[]
         {
-                new ("key1", "/path1/", null),
-                new ("key1", "/path1/", null),
-                new ("key2", "/path1/", "localhost"),
-                new ("key2", "/path1/", "localhost"),
+            new("key1", "/path1/", null),
+            new("key1", "/path1/", null),
+            new("key2", "/path1/", "localhost"),
+            new("key2", "/path1/", "localhost"),
         };
 
         foreach (var cookie in testCookies)
         {
-            responseCookies.Append(cookie.Key, cookie.Key, new CookieOptions() { Domain = cookie.Domain, Path = cookie.Path });
-            responseCookies.Delete(cookie.Key, new CookieOptions() { Domain = cookie.Domain, Path = cookie.Path });
+            responseCookies.Append(
+                cookie.Key,
+                cookie.Key,
+                new CookieOptions() { Domain = cookie.Domain, Path = cookie.Path }
+            );
+            responseCookies.Delete(
+                cookie.Key,
+                new CookieOptions() { Domain = cookie.Domain, Path = cookie.Path }
+            );
         }
 
         var deletedCookies = headers.SetCookie.ToArray();
         Assert.Equal(2, deletedCookies.Length);
-        Assert.Single(deletedCookies, cookie => cookie.StartsWith("key1", StringComparison.InvariantCulture) && cookie.Contains("path=/path1/"));
-        Assert.Single(deletedCookies, cookie => cookie.StartsWith("key2", StringComparison.InvariantCulture) && cookie.Contains("path=/path1/") && cookie.Contains("domain=localhost"));
-        Assert.All(deletedCookies, cookie => Assert.Contains("expires=Thu, 01 Jan 1970 00:00:00 GMT", cookie));
+        Assert.Single(
+            deletedCookies,
+            cookie =>
+                cookie.StartsWith("key1", StringComparison.InvariantCulture)
+                && cookie.Contains("path=/path1/")
+        );
+        Assert.Single(
+            deletedCookies,
+            cookie =>
+                cookie.StartsWith("key2", StringComparison.InvariantCulture)
+                && cookie.Contains("path=/path1/")
+                && cookie.Contains("domain=localhost")
+        );
+        Assert.All(
+            deletedCookies,
+            cookie => Assert.Contains("expires=Thu, 01 Jan 1970 00:00:00 GMT", cookie)
+        );
     }
 
     [Fact]
@@ -188,7 +234,7 @@ public class ResponseCookiesTest
             Expires = time,
             Domain = "example.com",
             SameSite = SameSiteMode.Lax,
-            Extensions = { "extension" }
+            Extensions = { "extension" },
         };
 
         cookies.Delete(testCookie, options);

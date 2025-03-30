@@ -50,7 +50,5 @@ public sealed record ValueConverterSelectorDependencies
     ///     </para>
     /// </remarks>
     [EntityFrameworkInternal]
-    public ValueConverterSelectorDependencies()
-    {
-    }
+    public ValueConverterSelectorDependencies() { }
 }

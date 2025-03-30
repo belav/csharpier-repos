@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 namespace Def
 {
     using System;
@@ -27,4 +28,3 @@ namespace Def
         }
     }
 }
-

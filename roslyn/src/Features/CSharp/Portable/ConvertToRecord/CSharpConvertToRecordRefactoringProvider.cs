@@ -11,25 +11,32 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertToRecord), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ConvertToRecord
+        ),
+        Shared
+    ]
     internal sealed class CSharpConvertToRecordRefactoringProvider : CodeRefactoringProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpConvertToRecordRefactoringProvider()
-        {
-        }
+        public CSharpConvertToRecordRefactoringProvider() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
             var (document, _, cancellationToken) = context;
 
-            var typeDeclaration = await context.TryGetRelevantNodeAsync<TypeDeclarationSyntax>().ConfigureAwait(false);
+            var typeDeclaration = await context
+                .TryGetRelevantNodeAsync<TypeDeclarationSyntax>()
+                .ConfigureAwait(false);
             if (typeDeclaration == null)
                 return;
 
-            var action = await ConvertToRecordEngine.GetCodeActionAsync(
-                document, typeDeclaration, context.Options, cancellationToken).ConfigureAwait(false);
+            var action = await ConvertToRecordEngine
+                .GetCodeActionAsync(document, typeDeclaration, context.Options, cancellationToken)
+                .ConfigureAwait(false);
             if (action != null)
                 context.RegisterRefactoring(action);
         }

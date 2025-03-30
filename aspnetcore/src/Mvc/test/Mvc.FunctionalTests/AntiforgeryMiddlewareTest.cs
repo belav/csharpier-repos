@@ -37,8 +37,14 @@ public class AntiforgeryMiddlewareTest
         var antiforgeryOptions = app.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
 
-        var request = new HttpRequestMessage(HttpMethod.Post, "/Test/PostWithRequireAntiforgeryToken");
-        request.Headers.Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "/Test/PostWithRequireAntiforgeryToken"
+        );
+        request.Headers.Add(
+            "Cookie",
+            antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken
+        );
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
             new("__RequestVerificationToken", tokens.RequestToken),
@@ -55,14 +61,20 @@ public class AntiforgeryMiddlewareTest
     public async Task Works_WithAntiforgeryMetadata_AndFilterAttribute_ValidToken()
     {
         var builder = WebApplication.CreateBuilder();
-        builder.Services.AddMvcCore().UseSpecificControllers(typeof(TestWithBothAttributesController)).AddViews();
+        builder
+            .Services.AddMvcCore()
+            .UseSpecificControllers(typeof(TestWithBothAttributesController))
+            .AddViews();
         builder.Services.AddAntiforgery();
         builder.WebHost.UseTestServer();
         await using var app = builder.Build();
         app.UseAntiforgery();
         var exception = Assert.Throws<InvalidOperationException>(() => app.MapControllers());
 
-        Assert.Equal("Cannot apply [ValidateAntiForgeryTokenAttribute] and [RequireAntiforgeryTokenAttribute] at the same time.", exception.Message);
+        Assert.Equal(
+            "Cannot apply [ValidateAntiForgeryTokenAttribute] and [RequireAntiforgeryTokenAttribute] at the same time.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -80,7 +92,10 @@ public class AntiforgeryMiddlewareTest
 
         var client = app.GetTestClient();
 
-        var request = new HttpRequestMessage(HttpMethod.Post, "/Test/PostWithRequireAntiforgeryToken");
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "/Test/PostWithRequireAntiforgeryToken"
+        );
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
             new("name", "Test task"),
@@ -100,17 +115,26 @@ public class AntiforgeryMiddlewareTest
         builder.Services.AddAntiforgery();
         builder.WebHost.UseTestServer();
         await using var app = builder.Build();
-        app.Use((context, next) =>
-        {
-            context.Features.Set<IHttpMaxRequestBodySizeFeature>(new FakeHttpMaxRequestBodySizeFeature(5_000_000));
-            return next(context);
-        });
+        app.Use(
+            (context, next) =>
+            {
+                context.Features.Set<IHttpMaxRequestBodySizeFeature>(
+                    new FakeHttpMaxRequestBodySizeFeature(5_000_000)
+                );
+                return next(context);
+            }
+        );
         app.UseRouting();
-        app.Use((context, next) =>
-        {
-            context.Request.Body = new SizeLimitedStream(context.Request.Body, context.Features.Get<IHttpMaxRequestBodySizeFeature>()?.MaxRequestBodySize);
-            return next(context);
-        });
+        app.Use(
+            (context, next) =>
+            {
+                context.Request.Body = new SizeLimitedStream(
+                    context.Request.Body,
+                    context.Features.Get<IHttpMaxRequestBodySizeFeature>()?.MaxRequestBodySize
+                );
+                return next(context);
+            }
+        );
         app.UseAntiforgery();
         app.MapControllers();
 
@@ -121,8 +145,14 @@ public class AntiforgeryMiddlewareTest
         var antiforgeryOptions = app.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
 
-        var request = new HttpRequestMessage(HttpMethod.Post, "/Test/PostWithRequireAntiforgeryTokenAndSizeLimit");
-        request.Headers.Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "/Test/PostWithRequireAntiforgeryTokenAndSizeLimit"
+        );
+        request.Headers.Add(
+            "Cookie",
+            antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken
+        );
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
             new("__RequestVerificationToken", tokens.RequestToken),
@@ -131,7 +161,9 @@ public class AntiforgeryMiddlewareTest
             new("dueDate", DateTime.Today.AddDays(1).ToString(CultureInfo.InvariantCulture)),
         };
         request.Content = new FormUrlEncodedContent(nameValueCollection);
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () => await client.SendAsync(request));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await client.SendAsync(request)
+        );
         Assert.Equal("The maximum number of bytes have been read.", exception.Message);
     }
 
@@ -153,8 +185,14 @@ public class AntiforgeryMiddlewareTest
         var antiforgeryOptions = app.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
 
-        var request = new HttpRequestMessage(HttpMethod.Post, "/Test/PostWithRequireAntiforgeryTokenAndFormLimit");
-        request.Headers.Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "/Test/PostWithRequireAntiforgeryTokenAndFormLimit"
+        );
+        request.Headers.Add(
+            "Cookie",
+            antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken
+        );
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
             new("__RequestVerificationToken", tokens.RequestToken),
@@ -171,7 +209,9 @@ public class AntiforgeryMiddlewareTest
     public async Task Works_WithAntiforgeryMetadata_ValidToken_DisableRequestSizeLimits()
     {
         var builder = WebApplication.CreateBuilder();
-        builder.Services.AddMvcCore().UseSpecificControllers(typeof(TestWithRequestSizeLimitController));
+        builder
+            .Services.AddMvcCore()
+            .UseSpecificControllers(typeof(TestWithRequestSizeLimitController));
         builder.Services.AddAntiforgery();
         builder.WebHost.UseTestServer();
         await using var app = builder.Build();
@@ -185,8 +225,14 @@ public class AntiforgeryMiddlewareTest
         var antiforgeryOptions = app.Services.GetRequiredService<IOptions<AntiforgeryOptions>>();
         var tokens = antiforgery.GetAndStoreTokens(new DefaultHttpContext());
 
-        var request = new HttpRequestMessage(HttpMethod.Post, "/TestWithRequestSizeLimit/PostWithRequireAntiforgeryTokenAndDisableSizeLimit");
-        request.Headers.Add("Cookie", antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken);
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "/TestWithRequestSizeLimit/PostWithRequireAntiforgeryTokenAndDisableSizeLimit"
+        );
+        request.Headers.Add(
+            "Cookie",
+            antiforgeryOptions.Value.Cookie.Name + "=" + tokens.CookieToken
+        );
         var nameValueCollection = new List<KeyValuePair<string, string>>
         {
             new("__RequestVerificationToken", tokens.RequestToken),
@@ -205,20 +251,20 @@ public class AntiforgeryMiddlewareTest
     {
         [HttpPost]
         [RequireAntiforgeryToken]
-        public ActionResult PostWithRequireAntiforgeryToken([FromForm] Todo todo)
-            => new OkObjectResult(todo);
+        public ActionResult PostWithRequireAntiforgeryToken([FromForm] Todo todo) =>
+            new OkObjectResult(todo);
 
         [HttpPost]
         [RequireAntiforgeryToken]
         [RequestSizeLimit(4)]
-        public ActionResult PostWithRequireAntiforgeryTokenAndSizeLimit([FromForm] Todo todo)
-            => new OkObjectResult(todo);
+        public ActionResult PostWithRequireAntiforgeryTokenAndSizeLimit([FromForm] Todo todo) =>
+            new OkObjectResult(todo);
 
         [HttpPost]
         [RequireAntiforgeryToken]
         [RequestFormLimits(ValueCountLimit = 2)]
-        public ActionResult PostWithRequireAntiforgeryTokenAndFormLimit([FromForm] Todo todo)
-            => new OkObjectResult(todo);
+        public ActionResult PostWithRequireAntiforgeryTokenAndFormLimit([FromForm] Todo todo) =>
+            new OkObjectResult(todo);
     }
 
     [Route("[controller]/[action]")]
@@ -228,8 +274,9 @@ public class AntiforgeryMiddlewareTest
         [HttpPost]
         [RequireAntiforgeryToken]
         [ValidateAntiForgeryToken]
-        public ActionResult PostWithRequireAntiforgeryTokenAndFilterAttribute([FromForm] Todo todo)
-            => new OkObjectResult(todo);
+        public ActionResult PostWithRequireAntiforgeryTokenAndFilterAttribute(
+            [FromForm] Todo todo
+        ) => new OkObjectResult(todo);
     }
 
     [Route("[controller]/[action]")]
@@ -239,8 +286,9 @@ public class AntiforgeryMiddlewareTest
     {
         [HttpPost]
         [RequireAntiforgeryToken]
-        public ActionResult PostWithRequireAntiforgeryTokenAndDisableSizeLimit([FromForm] Todo todo)
-            => new OkObjectResult(todo);
+        public ActionResult PostWithRequireAntiforgeryTokenAndDisableSizeLimit(
+            [FromForm] Todo todo
+        ) => new OkObjectResult(todo);
     }
 
     public class Todo
@@ -254,11 +302,13 @@ public class AntiforgeryMiddlewareTest
     {
         public FakeHttpMaxRequestBodySizeFeature(
             long? maxRequestBodySize = null,
-            bool isReadOnly = false)
+            bool isReadOnly = false
+        )
         {
             MaxRequestBodySize = maxRequestBodySize;
             IsReadOnly = isReadOnly;
         }
+
         public bool IsReadOnly { get; }
         public long? MaxRequestBodySize { get; set; }
     }
@@ -268,7 +318,8 @@ internal static class MvCoreBuilderExtensions
 {
     internal static void UseSpecificControllers(
         this ApplicationPartManager partManager,
-        params Type[] controllerTypes)
+        params Type[] controllerTypes
+    )
     {
         partManager.FeatureProviders.Add(new TestControllerFeatureProvider());
         partManager.ApplicationParts.Clear();
@@ -277,11 +328,16 @@ internal static class MvCoreBuilderExtensions
 
     internal static IMvcCoreBuilder UseSpecificControllers(
         this IMvcCoreBuilder mvcCoreBuilder,
-        params Type[] controllerTypes) => mvcCoreBuilder
-        .ConfigureApplicationPartManager(partManager => partManager.UseSpecificControllers(controllerTypes));
+        params Type[] controllerTypes
+    ) =>
+        mvcCoreBuilder.ConfigureApplicationPartManager(partManager =>
+            partManager.UseSpecificControllers(controllerTypes)
+        );
 }
 
-internal class SelectedControllersApplicationParts(Type[] types) : ApplicationPart, IApplicationPartTypeProvider
+internal class SelectedControllersApplicationParts(Type[] types)
+    : ApplicationPart,
+        IApplicationPartTypeProvider
 {
     public override string Name { get; } = string.Empty;
 

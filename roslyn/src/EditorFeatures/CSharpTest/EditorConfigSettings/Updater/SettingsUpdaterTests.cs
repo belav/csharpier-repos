@@ -34,47 +34,103 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
         {
             var projectId = ProjectId.CreateNewId();
 
-            var workspace = new AdhocWorkspace(EditorTestCompositions.EditorFeatures.GetHostServices(), WorkspaceKind.Host);
+            var workspace = new AdhocWorkspace(
+                EditorTestCompositions.EditorFeatures.GetHostServices(),
+                WorkspaceKind.Host
+            );
 
-            Assert.True(workspace.TryApplyChanges(workspace.CurrentSolution
-                .AddProject(ProjectInfo.Create(projectId, VersionStamp.Create(), "proj1", "proj1.dll", LanguageNames.CSharp, filePath: "/a/b/proj1.csproj"))
-                .AddDocument(DocumentId.CreateNewId(projectId), "goo.cs", "public class Goo { }")
-                .AddAdditionalDocument(DocumentId.CreateNewId(projectId), "add.txt", "text")
-                .AddAnalyzerConfigDocument(DocumentId.CreateNewId(projectId), "editorcfg", SourceText.From(""), filePath: EditorconfigPath)));
+            Assert.True(
+                workspace.TryApplyChanges(
+                    workspace
+                        .CurrentSolution.AddProject(
+                            ProjectInfo.Create(
+                                projectId,
+                                VersionStamp.Create(),
+                                "proj1",
+                                "proj1.dll",
+                                LanguageNames.CSharp,
+                                filePath: "/a/b/proj1.csproj"
+                            )
+                        )
+                        .AddDocument(
+                            DocumentId.CreateNewId(projectId),
+                            "goo.cs",
+                            "public class Goo { }"
+                        )
+                        .AddAdditionalDocument(DocumentId.CreateNewId(projectId), "add.txt", "text")
+                        .AddAnalyzerConfigDocument(
+                            DocumentId.CreateNewId(projectId),
+                            "editorcfg",
+                            SourceText.From(""),
+                            filePath: EditorconfigPath
+                        )
+                )
+            );
 
             return workspace;
         }
 
-        private static IGlobalOptionService GetGlobalOptions(Workspace workspace)
-            => workspace.Services.SolutionServices.ExportProvider.GetExportedValue<IGlobalOptionService>();
+        private static IGlobalOptionService GetGlobalOptions(Workspace workspace) =>
+            workspace.Services.SolutionServices.ExportProvider.GetExportedValue<IGlobalOptionService>();
 
-        private static AnalyzerConfigDocument CreateAnalyzerConfigDocument(Workspace workspace, string contents)
+        private static AnalyzerConfigDocument CreateAnalyzerConfigDocument(
+            Workspace workspace,
+            string contents
+        )
         {
             var solution = workspace.CurrentSolution;
-            var documentId = solution.Projects.Single().State.AnalyzerConfigDocumentStates.Ids.First();
+            var documentId = solution
+                .Projects.Single()
+                .State.AnalyzerConfigDocumentStates.Ids.First();
             var text = SourceText.From(contents);
-            var newSolution1 = solution.WithAnalyzerConfigDocumentText(documentId, text, PreservationMode.PreserveIdentity);
+            var newSolution1 = solution.WithAnalyzerConfigDocumentText(
+                documentId,
+                text,
+                PreservationMode.PreserveIdentity
+            );
             var analyzerConfigDocument = newSolution1.GetAnalyzerConfigDocument(documentId);
             Assert.True(analyzerConfigDocument!.TryGetText(out var actualText));
             Assert.Same(text, actualText);
             return analyzerConfigDocument;
         }
 
-        private static async Task TestAsync(string initialEditorConfig, string updatedEditorConfig, params (IOption2, object)[] options)
+        private static async Task TestAsync(
+            string initialEditorConfig,
+            string updatedEditorConfig,
+            params (IOption2, object)[] options
+        )
         {
             using var workspace = CreateWorkspaceWithProjectAndDocuments();
-            var analyzerConfigDocument = CreateAnalyzerConfigDocument(workspace, initialEditorConfig);
+            var analyzerConfigDocument = CreateAnalyzerConfigDocument(
+                workspace,
+                initialEditorConfig
+            );
             var sourcetext = await analyzerConfigDocument.GetTextAsync(default);
-            var result = SettingsUpdateHelper.TryUpdateAnalyzerConfigDocument(sourcetext, analyzerConfigDocument.FilePath!, options);
+            var result = SettingsUpdateHelper.TryUpdateAnalyzerConfigDocument(
+                sourcetext,
+                analyzerConfigDocument.FilePath!,
+                options
+            );
             Assert.Equal(updatedEditorConfig, result?.ToString());
         }
 
-        private static async Task TestAsync(string initialEditorConfig, string updatedEditorConfig, params (AnalyzerSetting, ReportDiagnostic)[] options)
+        private static async Task TestAsync(
+            string initialEditorConfig,
+            string updatedEditorConfig,
+            params (AnalyzerSetting, ReportDiagnostic)[] options
+        )
         {
             using var workspace = CreateWorkspaceWithProjectAndDocuments();
-            var analyzerConfigDocument = CreateAnalyzerConfigDocument(workspace, initialEditorConfig);
+            var analyzerConfigDocument = CreateAnalyzerConfigDocument(
+                workspace,
+                initialEditorConfig
+            );
             var sourcetext = await analyzerConfigDocument.GetTextAsync(default);
-            var result = SettingsUpdateHelper.TryUpdateAnalyzerConfigDocument(sourcetext, analyzerConfigDocument.FilePath!, options);
+            var result = SettingsUpdateHelper.TryUpdateAnalyzerConfigDocument(
+                sourcetext,
+                analyzerConfigDocument.FilePath!,
+                options
+            );
             Assert.Equal(updatedEditorConfig, result?.ToString());
         }
 
@@ -84,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             await TestAsync(
                 string.Empty,
                 "[*.cs]\r\ncsharp_new_line_before_else = true",
-                (CSharpFormattingOptions2.NewLineForElse, true));
+                (CSharpFormattingOptions2.NewLineForElse, true)
+            );
         }
 
         [Fact]
@@ -93,25 +150,44 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             await TestAsync(
                 string.Empty,
                 "[*.cs]\r\ncsharp_style_throw_expression = true:suggestion",
-                (CSharpCodeStyleOptions.PreferThrowExpression, CodeStyleOption2.TrueWithSuggestionEnforcement));
+                (
+                    CSharpCodeStyleOptions.PreferThrowExpression,
+                    CodeStyleOption2.TrueWithSuggestionEnforcement
+                )
+            );
         }
 
         [Fact]
         public async Task TestAddNewEnumCodeStyleOptionWithSeverityAsync()
         {
-            var option = new CodeStyleOption2<AddImportPlacement>(AddImportPlacement.InsideNamespace, NotificationOption2.Warning);
+            var option = new CodeStyleOption2<AddImportPlacement>(
+                AddImportPlacement.InsideNamespace,
+                NotificationOption2.Warning
+            );
             await TestAsync(
                 string.Empty,
                 "[*.cs]\r\ncsharp_using_directive_placement = inside_namespace:warning",
-                (CSharpCodeStyleOptions.PreferredUsingDirectivePlacement, option));
+                (CSharpCodeStyleOptions.PreferredUsingDirectivePlacement, option)
+            );
         }
 
         [Theory, CombinatorialData]
         internal async Task TestAddNewAnalyzerOptionOptionAsync(
-            [CombinatorialValues(Language.CSharp, Language.VisualBasic, (Language.CSharp | Language.VisualBasic))]
-            Language language,
-            [CombinatorialValues(ReportDiagnostic.Warn, ReportDiagnostic.Error, ReportDiagnostic.Info, ReportDiagnostic.Hidden, ReportDiagnostic.Suppress)]
-            ReportDiagnostic severity)
+            [CombinatorialValues(
+                Language.CSharp,
+                Language.VisualBasic,
+                (Language.CSharp | Language.VisualBasic)
+            )]
+                Language language,
+            [CombinatorialValues(
+                ReportDiagnostic.Warn,
+                ReportDiagnostic.Error,
+                ReportDiagnostic.Info,
+                ReportDiagnostic.Hidden,
+                ReportDiagnostic.Suppress
+            )]
+                ReportDiagnostic severity
+        )
         {
             var expectedHeader = "";
             if (language.HasFlag(Language.CSharp) && language.HasFlag(Language.VisualBasic))
@@ -130,13 +206,27 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             var expectedSeverity = severity.ToEditorConfigString();
 
             var id = "Test001";
-            var descriptor = new DiagnosticDescriptor(id: id, title: "", messageFormat: "", category: "Naming", defaultSeverity: DiagnosticSeverity.Warning, isEnabledByDefault: false);
-            var analyzerSetting = new AnalyzerSetting(descriptor, ReportDiagnostic.Suppress, null!, language, new SettingLocation(EditorConfigSettings.LocationKind.VisualStudio, null));
+            var descriptor = new DiagnosticDescriptor(
+                id: id,
+                title: "",
+                messageFormat: "",
+                category: "Naming",
+                defaultSeverity: DiagnosticSeverity.Warning,
+                isEnabledByDefault: false
+            );
+            var analyzerSetting = new AnalyzerSetting(
+                descriptor,
+                ReportDiagnostic.Suppress,
+                null!,
+                language,
+                new SettingLocation(EditorConfigSettings.LocationKind.VisualStudio, null)
+            );
 
             await TestAsync(
                 string.Empty,
                 $"{expectedHeader}\r\ndotnet_diagnostic.{id}.severity = {expectedSeverity}",
-                (analyzerSetting, severity));
+                (analyzerSetting, severity)
+            );
         }
 
         [Fact]
@@ -145,13 +235,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             await TestAsync(
                 "[*.cs]\r\ncsharp_new_line_before_else = true",
                 "[*.cs]\r\ncsharp_new_line_before_else = false",
-                (CSharpFormattingOptions2.NewLineForElse, false));
+                (CSharpFormattingOptions2.NewLineForElse, false)
+            );
         }
 
         [Fact]
         public async Task TestAddNewWhitespaceOptionToExistingFileAsync()
         {
-            var initialEditorConfig = @"
+            var initialEditorConfig =
+                @"
 [*.{cs,vb}]
 
 # CA1000: Do not declare static members on generic types
@@ -159,7 +251,8 @@ dotnet_diagnostic.CA1000.severity = false
 
 ";
 
-            var updatedEditorConfig = @"
+            var updatedEditorConfig =
+                @"
 [*.{cs,vb}]
 
 # CA1000: Do not declare static members on generic types
@@ -171,20 +264,23 @@ csharp_new_line_before_else = true";
             await TestAsync(
                 initialEditorConfig,
                 updatedEditorConfig,
-                (CSharpFormattingOptions2.NewLineForElse, true));
+                (CSharpFormattingOptions2.NewLineForElse, true)
+            );
         }
 
         [Fact]
         public async Task TestAddNewWhitespaceOptionToWithNonMathcingGroupsAsync()
         {
-            var initialEditorConfig = @"
+            var initialEditorConfig =
+                @"
 root = true
 
 # Xml files
 [*.xml]
 indent_size = 2";
 
-            var updatedEditorConfig = @"
+            var updatedEditorConfig =
+                @"
 root = true
 
 # Xml files
@@ -195,13 +291,15 @@ csharp_new_line_before_else = true";
             await TestAsync(
                 initialEditorConfig,
                 updatedEditorConfig,
-                (CSharpFormattingOptions2.NewLineForElse, true));
+                (CSharpFormattingOptions2.NewLineForElse, true)
+            );
         }
 
         [Fact]
         public async Task TestAddNewWhitespaceOptionWithStarGroup()
         {
-            var initialEditorConfig = @"
+            var initialEditorConfig =
+                @"
 root = true
 
 # Xml files
@@ -214,7 +312,8 @@ indent_size = 2
 # CSharp code style settings:
 [*.cs]";
 
-            var updatedEditorConfig = @"
+            var updatedEditorConfig =
+                @"
 root = true
 
 # Xml files
@@ -231,7 +330,8 @@ csharp_new_line_before_else = true";
             await TestAsync(
                 initialEditorConfig,
                 updatedEditorConfig,
-                (CSharpFormattingOptions2.NewLineForElse, true));
+                (CSharpFormattingOptions2.NewLineForElse, true)
+            );
         }
 
         [Fact]
@@ -242,13 +342,15 @@ csharp_new_line_before_else = true";
                 "[*.cs]\r\ncsharp_new_line_before_else = true\r\ncsharp_new_line_before_catch = true\r\ncsharp_new_line_before_finally = true",
                 (CSharpFormattingOptions2.NewLineForElse, true),
                 (CSharpFormattingOptions2.NewLineForCatch, true),
-                (CSharpFormattingOptions2.NewLineForFinally, true));
+                (CSharpFormattingOptions2.NewLineForFinally, true)
+            );
         }
 
         [Fact]
         public async Task TestAddOptionThatAppliesToBothLanguages()
         {
-            var initialEditorConfig = @"
+            var initialEditorConfig =
+                @"
 root = true
 
 # Xml files
@@ -261,7 +363,8 @@ indent_size = 2
 # CSharp code style settings:
 [*.cs]";
 
-            var updatedEditorConfig = @"
+            var updatedEditorConfig =
+                @"
 root = true
 
 # Xml files
@@ -278,13 +381,15 @@ dotnet_sort_system_directives_first = true
             await TestAsync(
                 initialEditorConfig,
                 updatedEditorConfig,
-                (GenerationOptions.PlaceSystemNamespaceFirst, true));
+                (GenerationOptions.PlaceSystemNamespaceFirst, true)
+            );
         }
 
         [Fact]
         public async Task TestAddOptionWithRelativePathGroupingPresent()
         {
-            var initialEditorConfig = @"
+            var initialEditorConfig =
+                @"
 root = true
 
 # Xml files
@@ -300,7 +405,8 @@ indent_size = 2
 # CSharp code style settings:
 [*.cs]";
 
-            var updatedEditorConfig = @"
+            var updatedEditorConfig =
+                @"
 root = true
 
 # Xml files
@@ -320,7 +426,8 @@ csharp_new_line_before_else = true";
             await TestAsync(
                 initialEditorConfig,
                 updatedEditorConfig,
-                (CSharpFormattingOptions2.NewLineForElse, true));
+                (CSharpFormattingOptions2.NewLineForElse, true)
+            );
         }
 
         [Fact]
@@ -329,8 +436,21 @@ csharp_new_line_before_else = true";
             var workspace = CreateWorkspaceWithProjectAndDocuments();
             var updater = new AnalyzerSettingsUpdater(workspace, EditorconfigPath);
             var id = "Test001";
-            var descriptor = new DiagnosticDescriptor(id: id, title: "", messageFormat: "", category: "Naming", defaultSeverity: DiagnosticSeverity.Warning, isEnabledByDefault: false);
-            var analyzerSetting = new AnalyzerSetting(descriptor, ReportDiagnostic.Suppress, updater, Language.CSharp, new SettingLocation(EditorConfigSettings.LocationKind.VisualStudio, null));
+            var descriptor = new DiagnosticDescriptor(
+                id: id,
+                title: "",
+                messageFormat: "",
+                category: "Naming",
+                defaultSeverity: DiagnosticSeverity.Warning,
+                isEnabledByDefault: false
+            );
+            var analyzerSetting = new AnalyzerSetting(
+                descriptor,
+                ReportDiagnostic.Suppress,
+                updater,
+                Language.CSharp,
+                new SettingLocation(EditorConfigSettings.LocationKind.VisualStudio, null)
+            );
             analyzerSetting.ChangeSeverity(ReportDiagnostic.Error);
             var updates = await updater.GetChangedEditorConfigAsync(default);
             var update = Assert.Single(updates);
@@ -351,17 +471,30 @@ csharp_new_line_before_else = true";
                 new TestAnalyzerConfigOptions(key => value),
                 globalOptions,
                 LanguageNames.CSharp,
-                EditorconfigPath);
+                EditorconfigPath
+            );
 
-            var setting = CodeStyleSetting.Create(CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer, "description", options, updater);
+            var setting = CodeStyleSetting.Create(
+                CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer,
+                "description",
+                options,
+                updater
+            );
             setting.ChangeSeverity(ReportDiagnostic.Error);
             var updates = await updater.GetChangedEditorConfigAsync(default);
             var update = Assert.Single(updates);
-            Assert.Equal("[*.cs]\r\ncsharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = false:error", update.NewText);
+            Assert.Equal(
+                "[*.cs]\r\ncsharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = false:error",
+                update.NewText
+            );
             value = "false:error";
 
             var solution = workspace.CurrentSolution;
-            var editorconfig = solution.Projects.SelectMany(p => p.AnalyzerConfigDocuments.Where(a => a.FilePath == EditorconfigPath)).Single();
+            var editorconfig = solution
+                .Projects.SelectMany(p =>
+                    p.AnalyzerConfigDocuments.Where(a => a.FilePath == EditorconfigPath)
+                )
+                .Single();
             var text = await editorconfig.GetTextAsync();
 
             var newSolution = solution.WithAnalyzerConfigDocumentText(editorconfig.Id, text);
@@ -370,7 +503,10 @@ csharp_new_line_before_else = true";
             setting.ChangeValue(0);
             updates = await updater.GetChangedEditorConfigAsync(default);
             update = Assert.Single(updates);
-            Assert.Equal("[*.cs]\r\ncsharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = true:error", update.NewText);
+            Assert.Equal(
+                "[*.cs]\r\ncsharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = true:error",
+                update.NewText
+            );
         }
 
         [Fact]
@@ -384,9 +520,15 @@ csharp_new_line_before_else = true";
                 TestAnalyzerConfigOptions.Instance,
                 globalOptions,
                 LanguageNames.CSharp,
-                EditorconfigPath);
+                EditorconfigPath
+            );
 
-            var setting = Setting.Create(CSharpFormattingOptions2.NewLineForElse, "description", options, updater);
+            var setting = Setting.Create(
+                CSharpFormattingOptions2.NewLineForElse,
+                "description",
+                options,
+                updater
+            );
             setting.SetValue(false);
             var updates = await updater.GetChangedEditorConfigAsync(default);
             var update = Assert.Single(updates);
@@ -397,7 +539,9 @@ csharp_new_line_before_else = true";
         public async Task TestNamingStyleSettingsUpdater()
         {
             var workspace = CreateWorkspaceWithProjectAndDocuments();
-            var settingsProviderFactory = workspace.Services.GetRequiredService<IWorkspaceSettingsProviderFactory<NamingStyleSetting>>();
+            var settingsProviderFactory = workspace.Services.GetRequiredService<
+                IWorkspaceSettingsProviderFactory<NamingStyleSetting>
+            >();
             var settingsProvider = settingsProviderFactory.GetForFile(EditorconfigPath);
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);
@@ -410,7 +554,9 @@ csharp_new_line_before_else = true";
 
             setting0.ChangeSeverity(ReportDiagnostic.Error);
 
-            var newText = await settingsProvider.GetChangedEditorConfigAsync(SourceText.From(string.Empty));
+            var newText = await settingsProvider.GetChangedEditorConfigAsync(
+                SourceText.From(string.Empty)
+            );
             var fileText = newText.ToString();
             Assert.Equal(ExpectedInitialEditorConfig, fileText);
             Assert.Equal(ReportDiagnostic.Error, setting0.Severity);
@@ -435,7 +581,7 @@ csharp_new_line_before_else = true";
         }
 
         private readonly string ExpectedInitialEditorConfig =
-@$"
+            @$"
 [*.{{cs,vb}}]
 #### {CompilerExtensionsResources.Naming_styles} ####
 
@@ -486,7 +632,7 @@ dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').T
 ";
 
         private readonly string ExpectedEditorConfigAfterAllSeveritiesChanged =
-@$"
+            @$"
 [*.{{cs,vb}}]
 #### {CompilerExtensionsResources.Naming_styles} ####
 
@@ -537,7 +683,7 @@ dotnet_naming_style.{CompilerExtensionsResources.Pascal_Case.Replace(' ', '_').T
 ";
 
         private readonly string ExpectedEditorConfigAfterSymbolSpecChange =
-@$"
+            @$"
 [*.{{cs,vb}}]
 #### {CompilerExtensionsResources.Naming_styles} ####
 

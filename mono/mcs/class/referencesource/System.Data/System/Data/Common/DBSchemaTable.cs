@@ -6,16 +6,17 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.Common {
-
+namespace System.Data.Common
+{
     using System;
     using System.Data;
     using System.Data.ProviderBase;
     using System.Diagnostics;
-    
-    sealed internal class DbSchemaTable {
 
-        private enum ColumnEnum {
+    internal sealed class DbSchemaTable
+    {
+        private enum ColumnEnum
+        {
             ColumnName,
             ColumnOrdinal,
             ColumnSize,
@@ -39,7 +40,8 @@ namespace System.Data.Common {
             SchemaMappingUnsortedIndex,
         }
 
-        static readonly private string[] DBCOLUMN_NAME = new string[] {
+        private static readonly string[] DBCOLUMN_NAME = new string[]
+        {
             SchemaTableColumn.ColumnName,
             SchemaTableColumn.ColumnOrdinal,
             SchemaTableColumn.ColumnSize,
@@ -68,55 +70,118 @@ namespace System.Data.Common {
         private DataColumn[] columnCache = new DataColumn[DBCOLUMN_NAME.Length];
         private bool _returnProviderSpecificTypes;
 
-        internal DbSchemaTable(DataTable dataTable, bool returnProviderSpecificTypes) {
+        internal DbSchemaTable(DataTable dataTable, bool returnProviderSpecificTypes)
+        {
             this.dataTable = dataTable;
             this.columns = dataTable.Columns;
             _returnProviderSpecificTypes = returnProviderSpecificTypes;
         }
 
-        internal DataColumn ColumnName      { get { return CachedDataColumn(ColumnEnum.ColumnName);}}
-        internal DataColumn Size            { get { return CachedDataColumn(ColumnEnum.ColumnSize);}}
-        internal DataColumn BaseServerName  { get { return CachedDataColumn(ColumnEnum.BaseServerName);}}
-        internal DataColumn BaseColumnName  { get { return CachedDataColumn(ColumnEnum.BaseColumnName);}}
-        internal DataColumn BaseTableName   { get { return CachedDataColumn(ColumnEnum.BaseTableName);}}
-        internal DataColumn BaseCatalogName { get { return CachedDataColumn(ColumnEnum.BaseCatalogName);}}
-        internal DataColumn BaseSchemaName  { get { return CachedDataColumn(ColumnEnum.BaseSchemaName);}}
-        internal DataColumn IsAutoIncrement { get { return CachedDataColumn(ColumnEnum.IsAutoIncrement);}}
-        internal DataColumn IsUnique        { get { return CachedDataColumn(ColumnEnum.IsUnique);}}
-        internal DataColumn IsKey           { get { return CachedDataColumn(ColumnEnum.IsKey);}}
-        internal DataColumn IsRowVersion    { get { return CachedDataColumn(ColumnEnum.IsRowVersion);}}
+        internal DataColumn ColumnName
+        {
+            get { return CachedDataColumn(ColumnEnum.ColumnName); }
+        }
+        internal DataColumn Size
+        {
+            get { return CachedDataColumn(ColumnEnum.ColumnSize); }
+        }
+        internal DataColumn BaseServerName
+        {
+            get { return CachedDataColumn(ColumnEnum.BaseServerName); }
+        }
+        internal DataColumn BaseColumnName
+        {
+            get { return CachedDataColumn(ColumnEnum.BaseColumnName); }
+        }
+        internal DataColumn BaseTableName
+        {
+            get { return CachedDataColumn(ColumnEnum.BaseTableName); }
+        }
+        internal DataColumn BaseCatalogName
+        {
+            get { return CachedDataColumn(ColumnEnum.BaseCatalogName); }
+        }
+        internal DataColumn BaseSchemaName
+        {
+            get { return CachedDataColumn(ColumnEnum.BaseSchemaName); }
+        }
+        internal DataColumn IsAutoIncrement
+        {
+            get { return CachedDataColumn(ColumnEnum.IsAutoIncrement); }
+        }
+        internal DataColumn IsUnique
+        {
+            get { return CachedDataColumn(ColumnEnum.IsUnique); }
+        }
+        internal DataColumn IsKey
+        {
+            get { return CachedDataColumn(ColumnEnum.IsKey); }
+        }
+        internal DataColumn IsRowVersion
+        {
+            get { return CachedDataColumn(ColumnEnum.IsRowVersion); }
+        }
 
-        internal DataColumn AllowDBNull              { get { return CachedDataColumn(ColumnEnum.AllowDBNull);}}
-        internal DataColumn IsExpression             { get { return CachedDataColumn(ColumnEnum.IsExpression);}}
-        internal DataColumn IsHidden                 { get { return CachedDataColumn(ColumnEnum.IsHidden);}}
-        internal DataColumn IsLong                   { get { return CachedDataColumn(ColumnEnum.IsLong);}}
-        internal DataColumn IsReadOnly               { get { return CachedDataColumn(ColumnEnum.IsReadOnly);}}
+        internal DataColumn AllowDBNull
+        {
+            get { return CachedDataColumn(ColumnEnum.AllowDBNull); }
+        }
+        internal DataColumn IsExpression
+        {
+            get { return CachedDataColumn(ColumnEnum.IsExpression); }
+        }
+        internal DataColumn IsHidden
+        {
+            get { return CachedDataColumn(ColumnEnum.IsHidden); }
+        }
+        internal DataColumn IsLong
+        {
+            get { return CachedDataColumn(ColumnEnum.IsLong); }
+        }
+        internal DataColumn IsReadOnly
+        {
+            get { return CachedDataColumn(ColumnEnum.IsReadOnly); }
+        }
 
-        internal DataColumn UnsortedIndex   { get { return CachedDataColumn(ColumnEnum.SchemaMappingUnsortedIndex);}}
-        
-        internal DataColumn DataType {
-            get {
-                if (_returnProviderSpecificTypes) {
-                    return CachedDataColumn(ColumnEnum.ProviderSpecificDataType, ColumnEnum.DataType);
+        internal DataColumn UnsortedIndex
+        {
+            get { return CachedDataColumn(ColumnEnum.SchemaMappingUnsortedIndex); }
+        }
+
+        internal DataColumn DataType
+        {
+            get
+            {
+                if (_returnProviderSpecificTypes)
+                {
+                    return CachedDataColumn(
+                        ColumnEnum.ProviderSpecificDataType,
+                        ColumnEnum.DataType
+                    );
                 }
                 return CachedDataColumn(ColumnEnum.DataType);
             }
         }
 
-        private DataColumn CachedDataColumn(ColumnEnum column) {
+        private DataColumn CachedDataColumn(ColumnEnum column)
+        {
             return CachedDataColumn(column, column);
         }
-        
-        private DataColumn CachedDataColumn(ColumnEnum column, ColumnEnum column2) {
-            DataColumn dataColumn = columnCache[(int) column];
-            if (null == dataColumn) {
-                int index = columns.IndexOf(DBCOLUMN_NAME[(int) column]);
-                if ((-1 == index) && (column != column2)) {
-                    index = columns.IndexOf(DBCOLUMN_NAME[(int) column2]);
+
+        private DataColumn CachedDataColumn(ColumnEnum column, ColumnEnum column2)
+        {
+            DataColumn dataColumn = columnCache[(int)column];
+            if (null == dataColumn)
+            {
+                int index = columns.IndexOf(DBCOLUMN_NAME[(int)column]);
+                if ((-1 == index) && (column != column2))
+                {
+                    index = columns.IndexOf(DBCOLUMN_NAME[(int)column2]);
                 }
-                if (-1 != index) {
+                if (-1 != index)
+                {
                     dataColumn = columns[index];
-                    columnCache[(int) column] = dataColumn;
+                    columnCache[(int)column] = dataColumn;
                 }
             }
             return dataColumn;

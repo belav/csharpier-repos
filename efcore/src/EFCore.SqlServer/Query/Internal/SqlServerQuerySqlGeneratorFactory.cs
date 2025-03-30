@@ -25,7 +25,8 @@ public class SqlServerQuerySqlGeneratorFactory : IQuerySqlGeneratorFactory
     public SqlServerQuerySqlGeneratorFactory(
         QuerySqlGeneratorDependencies dependencies,
         IRelationalTypeMappingSource typeMappingSource,
-        ISqlServerSingletonOptions sqlServerSingletonOptions)
+        ISqlServerSingletonOptions sqlServerSingletonOptions
+    )
     {
         Dependencies = dependencies;
         _typeMappingSource = typeMappingSource;
@@ -43,6 +44,10 @@ public class SqlServerQuerySqlGeneratorFactory : IQuerySqlGeneratorFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual QuerySqlGenerator Create()
-        => new SqlServerQuerySqlGenerator(Dependencies, _typeMappingSource, _sqlServerSingletonOptions);
+    public virtual QuerySqlGenerator Create() =>
+        new SqlServerQuerySqlGenerator(
+            Dependencies,
+            _typeMappingSource,
+            _sqlServerSingletonOptions
+        );
 }

@@ -14,11 +14,12 @@ internal sealed class SafeNativeOverlapped : SafeHandle
     private readonly ThreadPoolBoundHandle? _boundHandle;
 
     public SafeNativeOverlapped()
-        : base(IntPtr.Zero, true)
-    {
-    }
+        : base(IntPtr.Zero, true) { }
 
-    internal unsafe SafeNativeOverlapped(ThreadPoolBoundHandle boundHandle, NativeOverlapped* handle)
+    internal unsafe SafeNativeOverlapped(
+        ThreadPoolBoundHandle boundHandle,
+        NativeOverlapped* handle
+    )
         : base(IntPtr.Zero, true)
     {
         SetHandle((IntPtr)handle);
@@ -32,7 +33,10 @@ internal sealed class SafeNativeOverlapped : SafeHandle
 
     protected override bool ReleaseHandle()
     {
-        Debug.Assert(_boundHandle != null, "ReleaseHandle can't be called on SafeNativeOverlapped.Zero.");
+        Debug.Assert(
+            _boundHandle != null,
+            "ReleaseHandle can't be called on SafeNativeOverlapped.Zero."
+        );
 
         IntPtr oldHandle = Interlocked.Exchange(ref handle, IntPtr.Zero);
         // Do not call free durring AppDomain shutdown, there may be an outstanding operation.

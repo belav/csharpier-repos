@@ -12,7 +12,8 @@ namespace System.Xml.XmlReaderTests
 {
     public static class AsyncReaderLateInitTests
     {
-        private const string _dummyXml = @"<?xml version=""1.0""?>
+        private const string _dummyXml =
+            @"<?xml version=""1.0""?>
                 <root>
                     <a/><!-- comment -->
                     <b>bbb</b>
@@ -35,7 +36,12 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadAsyncAfterInitializationWithStreamDoesNotThrow()
         {
-            using (XmlReader reader = XmlReader.Create(GetDummyXmlStream(), new XmlReaderSettings() { Async = true }))
+            using (
+                XmlReader reader = XmlReader.Create(
+                    GetDummyXmlStream(),
+                    new XmlReaderSettings() { Async = true }
+                )
+            )
             {
                 reader.ReadAsync().Wait();
             }
@@ -44,7 +50,12 @@ namespace System.Xml.XmlReaderTests
         [Theory, InlineData(true), InlineData(false)]
         public static void ReadAfterInitializationWithStreamOnAsyncReaderDoesNotThrow(bool async)
         {
-            using (XmlReader reader = XmlReader.Create(GetDummyXmlStream(), new XmlReaderSettings() { Async = async }))
+            using (
+                XmlReader reader = XmlReader.Create(
+                    GetDummyXmlStream(),
+                    new XmlReaderSettings() { Async = async }
+                )
+            )
             {
                 reader.Read();
             }
@@ -53,46 +64,87 @@ namespace System.Xml.XmlReaderTests
         [Fact]
         public static void ReadAsyncAfterInitializationWithTextReaderDoesNotThrow()
         {
-            using (XmlReader reader = XmlReader.Create(GetDummyXmlTextReader(), new XmlReaderSettings() { Async = true }))
+            using (
+                XmlReader reader = XmlReader.Create(
+                    GetDummyXmlTextReader(),
+                    new XmlReaderSettings() { Async = true }
+                )
+            )
             {
                 reader.ReadAsync().Wait();
             }
         }
 
         [Theory, InlineData(true), InlineData(false)]
-        public static void ReadAfterInitializationWithTextReaderOnAsyncReaderDoesNotThrow(bool async)
+        public static void ReadAfterInitializationWithTextReaderOnAsyncReaderDoesNotThrow(
+            bool async
+        )
         {
-            using (XmlReader reader = XmlReader.Create(GetDummyXmlTextReader(), new XmlReaderSettings() { Async = async }))
+            using (
+                XmlReader reader = XmlReader.Create(
+                    GetDummyXmlTextReader(),
+                    new XmlReaderSettings() { Async = async }
+                )
+            )
             {
                 reader.Read();
             }
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91541", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91541",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public static void ReadAsyncAfterInitializationWithUriThrows()
         {
-            using (XmlReader reader = XmlReader.Create("http://test.test/test.html", new XmlReaderSettings() { Async = true }))
+            using (
+                XmlReader reader = XmlReader.Create(
+                    "http://test.test/test.html",
+                    new XmlReaderSettings() { Async = true }
+                )
+            )
             {
-                Assert.Throws<System.Net.Http.HttpRequestException>(() => reader.ReadAsync().GetAwaiter().GetResult());
+                Assert.Throws<System.Net.Http.HttpRequestException>(() =>
+                    reader.ReadAsync().GetAwaiter().GetResult()
+                );
             }
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91541", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91541",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public static void ReadAfterInitializationWithUriOnAsyncReaderTrows()
         {
-            using (XmlReader reader = XmlReader.Create("http://test.test/test.html", new XmlReaderSettings() { Async = true }))
+            using (
+                XmlReader reader = XmlReader.Create(
+                    "http://test.test/test.html",
+                    new XmlReaderSettings() { Async = true }
+                )
+            )
             {
                 Assert.Throws<System.Net.Http.HttpRequestException>(() => reader.Read());
             }
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91541", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91541",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public static void InitializationWithUriOnNonAsyncReaderThrows()
         {
-            Assert.Throws<System.Net.Http.HttpRequestException>(() => XmlReader.Create("http://test.test/test.html", new XmlReaderSettings() { Async = false }));
+            Assert.Throws<System.Net.Http.HttpRequestException>(() =>
+                XmlReader.Create(
+                    "http://test.test/test.html",
+                    new XmlReaderSettings() { Async = false }
+                )
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -100,17 +152,29 @@ namespace System.Xml.XmlReaderTests
         public static void SynchronizationContextCurrent_NotUsedForAsyncOperations()
         {
             Task.Run(() =>
-            {
-                var sc = new TrackingSynchronizationContext();
-                SynchronizationContext.SetSynchronizationContext(sc);
-
-                using (XmlReader reader = XmlReader.Create(new DribbleReadXmlAsyncStream(_dummyXml), new XmlReaderSettings { Async = true,  }))
                 {
-                    while (reader.ReadAsync().GetAwaiter().GetResult());
-                }
+                    var sc = new TrackingSynchronizationContext();
+                    SynchronizationContext.SetSynchronizationContext(sc);
 
-                Assert.True(sc.CallStacks.Count == 0, "Sync Ctx used: " + string.Join(Environment.NewLine + Environment.NewLine, sc.CallStacks));
-            }).GetAwaiter().GetResult();
+                    using (
+                        XmlReader reader = XmlReader.Create(
+                            new DribbleReadXmlAsyncStream(_dummyXml),
+                            new XmlReaderSettings { Async = true }
+                        )
+                    )
+                    {
+                        while (reader.ReadAsync().GetAwaiter().GetResult())
+                            ;
+                    }
+
+                    Assert.True(
+                        sc.CallStacks.Count == 0,
+                        "Sync Ctx used: "
+                            + string.Join(Environment.NewLine + Environment.NewLine, sc.CallStacks)
+                    );
+                })
+                .GetAwaiter()
+                .GetResult();
         }
 
         private sealed class DribbleReadXmlAsyncStream : Stream
@@ -120,7 +184,12 @@ namespace System.Xml.XmlReaderTests
 
             public DribbleReadXmlAsyncStream(string xml) => _bytes = Encoding.UTF8.GetBytes(xml);
 
-            public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) =>
+            public override Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            ) =>
                 Task.Run(() => // to dribble out a byte at a time
                 {
                     if (count <= 0 || _pos >= _bytes.Length)
@@ -132,17 +201,31 @@ namespace System.Xml.XmlReaderTests
                     return 1;
                 });
 
-            public override int Read(byte[] buffer, int offset, int count) => ReadAsync(buffer, offset, count).GetAwaiter().GetResult();
+            public override int Read(byte[] buffer, int offset, int count) =>
+                ReadAsync(buffer, offset, count).GetAwaiter().GetResult();
+
             public override bool CanRead => true;
             public override bool CanSeek => false;
             public override bool CanWrite => false;
             public override long Length => throw new NotSupportedException();
-            public override long Position { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+            public override long Position
+            {
+                get => throw new NotSupportedException();
+                set => throw new NotSupportedException();
+            }
+
             public override void Flush() { }
-            public override Task FlushAsync(CancellationToken cancellationToken) => Task.CompletedTask;
-            public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+
+            public override Task FlushAsync(CancellationToken cancellationToken) =>
+                Task.CompletedTask;
+
+            public override long Seek(long offset, SeekOrigin origin) =>
+                throw new NotSupportedException();
+
             public override void SetLength(long value) => throw new NotSupportedException();
-            public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+
+            public override void Write(byte[] buffer, int offset, int count) =>
+                throw new NotSupportedException();
         }
     }
 }

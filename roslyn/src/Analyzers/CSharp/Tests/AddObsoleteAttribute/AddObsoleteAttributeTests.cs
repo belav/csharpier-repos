@@ -9,7 +9,8 @@ using Microsoft.CodeAnalysis.Test.Utilities;
 using Xunit;
 using VerifyCS = Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions.CSharpCodeFixVerifier<
     Microsoft.CodeAnalysis.Testing.EmptyDiagnosticAnalyzer,
-    Microsoft.CodeAnalysis.CSharp.AddObsoleteAttribute.CSharpAddObsoleteAttributeCodeFixProvider>;
+    Microsoft.CodeAnalysis.CSharp.AddObsoleteAttribute.CSharpAddObsoleteAttributeCodeFixProvider
+>;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
 {
@@ -34,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
                 [System.Obsolete]
                 class Derived : Base {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -55,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
                 [System.Obsolete]
                 class Derived : Base {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -76,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
                 [System.Obsolete]
                 class Derived : Base {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -112,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
                     [System.Obsolete]
                     int i = Base.i;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -139,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
                         int i = Base.i;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -166,7 +172,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
                     [System.Obsolete]
                     protected override void ObMethod() { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -195,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
                         int j = Base.i;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -224,7 +232,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
                         int j = Base.i;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -260,7 +269,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
                         int j = Base.i;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -301,7 +311,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -342,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -383,7 +395,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddObsoleteAttribute
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]

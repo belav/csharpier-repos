@@ -27,18 +27,25 @@ internal sealed class MsBuildProjectFinder
 
         if (Directory.Exists(projectPath))
         {
-            var projects = Directory.EnumerateFileSystemEntries(projectPath, "*.*proj", SearchOption.TopDirectoryOnly)
-                .Where(f => !".xproj".Equals(Path.GetExtension(f), StringComparison.OrdinalIgnoreCase))
+            var projects = Directory
+                .EnumerateFileSystemEntries(projectPath, "*.*proj", SearchOption.TopDirectoryOnly)
+                .Where(f =>
+                    !".xproj".Equals(Path.GetExtension(f), StringComparison.OrdinalIgnoreCase)
+                )
                 .ToList();
 
             if (projects.Count > 1)
             {
-                throw new FileNotFoundException(SecretsHelpersResources.FormatError_MultipleProjectsFound(projectPath));
+                throw new FileNotFoundException(
+                    SecretsHelpersResources.FormatError_MultipleProjectsFound(projectPath)
+                );
             }
 
             if (projects.Count == 0)
             {
-                throw new FileNotFoundException(SecretsHelpersResources.FormatError_NoProjectsFound(projectPath));
+                throw new FileNotFoundException(
+                    SecretsHelpersResources.FormatError_NoProjectsFound(projectPath)
+                );
             }
 
             return projects[0];
@@ -46,7 +53,9 @@ internal sealed class MsBuildProjectFinder
 
         if (!File.Exists(projectPath))
         {
-            throw new FileNotFoundException(SecretsHelpersResources.FormatError_ProjectPath_NotFound(projectPath));
+            throw new FileNotFoundException(
+                SecretsHelpersResources.FormatError_ProjectPath_NotFound(projectPath)
+            );
         }
 
         return projectPath;

@@ -15,7 +15,11 @@ namespace Microsoft.AspNetCore.Http.RequestDelegateGenerator.StaticRouteHandlerM
 
 internal class Endpoint
 {
-    public Endpoint(IInvocationOperation operation, WellKnownTypes wellKnownTypes, SemanticModel semanticModel)
+    public Endpoint(
+        IInvocationOperation operation,
+        WellKnownTypes wellKnownTypes,
+        SemanticModel semanticModel
+    )
     {
         Operation = operation;
         Location = GetLocation(operation);
@@ -24,7 +28,12 @@ internal class Endpoint
 
         if (!operation.TryGetRouteHandlerMethod(semanticModel, out var method))
         {
-            Diagnostics.Add(Diagnostic.Create(DiagnosticDescriptors.UnableToResolveMethod, Operation.Syntax.GetLocation()));
+            Diagnostics.Add(
+                Diagnostic.Create(
+                    DiagnosticDescriptors.UnableToResolveMethod,
+                    Operation.Syntax.GetLocation()
+                )
+            );
             return;
         }
 
@@ -32,7 +41,8 @@ internal class Endpoint
         Response.EmitRequiredDiagnostics(Diagnostics, Operation.Syntax.GetLocation());
         IsAwaitable = Response?.IsAwaitable == true;
 
-        EmitterContext.HasResponseMetadata = Response is { } response && !(response.IsIResult || response.HasNoResponse);
+        EmitterContext.HasResponseMetadata =
+            Response is { } response && !(response.IsIResult || response.HasNoResponse);
 
         // NOTE: We set this twice. It is possible that we don't have any parameters so we
         //       want this to be true if the response type implements IEndpointMetadataProvider.
@@ -70,10 +80,13 @@ internal class Endpoint
                     }
                     break;
                 case EndpointParameterSource.Unknown:
-                    Diagnostics.Add(Diagnostic.Create(
-                        DiagnosticDescriptors.UnableToResolveParameterDescriptor,
-                        Operation.Syntax.GetLocation(),
-                        parameter.SymbolName));
+                    Diagnostics.Add(
+                        Diagnostic.Create(
+                            DiagnosticDescriptors.UnableToResolveParameterDescriptor,
+                            Operation.Syntax.GetLocation(),
+                            parameter.SymbolName
+                        )
+                    );
                     break;
             }
 
@@ -83,9 +96,14 @@ internal class Endpoint
         Parameters = parameters;
 
         EmitterContext.RequiresLoggingHelper = !Parameters.All(parameter =>
-            parameter is not null &&
-            parameter.Source == EndpointParameterSource.SpecialType ||
-            parameter is { IsArray: true, ElementType.SpecialType: SpecialType.System_String, Source: EndpointParameterSource.Query });
+            parameter is not null && parameter.Source == EndpointParameterSource.SpecialType
+            || parameter
+                is {
+                    IsArray: true,
+                    ElementType.SpecialType: SpecialType.System_String,
+                    Source: EndpointParameterSource.Query
+                }
+        );
     }
 
     public string HttpMethod { get; }
@@ -103,14 +121,19 @@ internal class Endpoint
     public override bool Equals(object o) =>
         o is Endpoint other && Location == other.Location && SignatureEquals(this, other);
 
-    public override int GetHashCode() =>
-        HashCode.Combine(Location, GetSignatureHashCode(this));
+    public override int GetHashCode() => HashCode.Combine(Location, GetSignatureHashCode(this));
 
     public static bool SignatureEquals(Endpoint a, Endpoint b)
     {
-        if (!string.Equals(a.Response?.WrappedResponseType, b.Response?.WrappedResponseType, StringComparison.Ordinal) ||
-            !a.HttpMethod.Equals(b.HttpMethod, StringComparison.Ordinal) ||
-            a.Parameters.Length != b.Parameters.Length)
+        if (
+            !string.Equals(
+                a.Response?.WrappedResponseType,
+                b.Response?.WrappedResponseType,
+                StringComparison.Ordinal
+            )
+            || !a.HttpMethod.Equals(b.HttpMethod, StringComparison.Ordinal)
+            || a.Parameters.Length != b.Parameters.Length
+        )
         {
             return false;
         }
@@ -146,7 +169,9 @@ internal class Endpoint
         // - Expression: which is a `MemberAccessExpressionSyntax` that represents the method being invoked.
         // - ArgumentList: the list of arguments being invoked.
         // Here, we resolve the `MemberAccessExpressionSyntax` to get the location of the method being invoked.
-        var memberAccessorExpression = ((MemberAccessExpressionSyntax)((InvocationExpressionSyntax)operation.Syntax).Expression);
+        var memberAccessorExpression = (
+            (MemberAccessExpressionSyntax)((InvocationExpressionSyntax)operation.Syntax).Expression
+        );
         // The `MemberAccessExpressionSyntax` in turn includes three properties:
         // - Expression: the expression that is being accessed.
         // - OperatorToken: the operator token, typically the dot separate.
@@ -156,9 +181,15 @@ internal class Endpoint
         // Resolve LineSpan associated with the name span so we can resolve the line and character number.
         var lineSpan = operation.Syntax.SyntaxTree.GetLineSpan(invocationNameSpan);
         // Resolve the filepath of the invocation while accounting for source mapped paths.
-        var filePath = operation.Syntax.SyntaxTree.GetInterceptorFilePath(operation.SemanticModel?.Compilation.Options.SourceReferenceResolver);
+        var filePath = operation.Syntax.SyntaxTree.GetInterceptorFilePath(
+            operation.SemanticModel?.Compilation.Options.SourceReferenceResolver
+        );
         // LineSpan.LinePosition is 0-indexed, but we want to display 1-indexed line and character numbers in the interceptor attribute.
-        return (filePath, lineSpan.StartLinePosition.Line + 1, lineSpan.StartLinePosition.Character + 1);
+        return (
+            filePath,
+            lineSpan.StartLinePosition.Line + 1,
+            lineSpan.StartLinePosition.Character + 1
+        );
     }
 
     private static string GetHttpMethod(IInvocationOperation operation)

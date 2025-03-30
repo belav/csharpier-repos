@@ -13,19 +13,16 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> and
 ///     <see href="https://aka.ms/efcore-docs-value-generation">EF Core value generation</see> for more information and examples.
 /// </remarks>
-public class CosmosValueGenerationConvention :
-    ValueGenerationConvention,
-    IEntityTypeAnnotationChangedConvention
+public class CosmosValueGenerationConvention
+    : ValueGenerationConvention,
+        IEntityTypeAnnotationChangedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="CosmosValueGenerationConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    public CosmosValueGenerationConvention(
-        ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+    public CosmosValueGenerationConvention(ProviderConventionSetBuilderDependencies dependencies)
+        : base(dependencies) { }
 
     /// <summary>
     ///     Called after an annotation is changed on an entity type.
@@ -40,10 +37,13 @@ public class CosmosValueGenerationConvention :
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context)
+        IConventionContext<IConventionAnnotation> context
+    )
     {
-        if (name != CosmosAnnotationNames.ContainerName
-            || (annotation == null) == (oldAnnotation == null))
+        if (
+            name != CosmosAnnotationNames.ContainerName
+            || (annotation == null) == (oldAnnotation == null)
+        )
         {
             return;
         }
@@ -69,27 +69,25 @@ public class CosmosValueGenerationConvention :
     {
         var entityType = property.DeclaringType as IConventionEntityType;
         var propertyType = property.ClrType.UnwrapNullableType();
-        if (propertyType == typeof(int)
-            && entityType != null)
+        if (propertyType == typeof(int) && entityType != null)
         {
             var ownership = entityType.FindOwnership();
-            if (ownership is { IsUnique: false }
-                && !entityType.IsDocumentRoot())
+            if (ownership is { IsUnique: false } && !entityType.IsDocumentRoot())
             {
                 var pk = property.FindContainingPrimaryKey();
-                if (pk != null
+                if (
+                    pk != null
                     && !property.IsForeignKey()
                     && pk.Properties.Count == ownership.Properties.Count + 1
                     && property.IsShadowProperty()
-                    && ownership.Properties.All(fkProperty => pk.Properties.Contains(fkProperty)))
+                    && ownership.Properties.All(fkProperty => pk.Properties.Contains(fkProperty))
+                )
                 {
                     return ValueGenerated.OnAddOrUpdate;
                 }
             }
         }
 
-        return propertyType != typeof(Guid)
-            ? null
-            : base.GetValueGenerated(property);
+        return propertyType != typeof(Guid) ? null : base.GetValueGenerated(property);
     }
 }

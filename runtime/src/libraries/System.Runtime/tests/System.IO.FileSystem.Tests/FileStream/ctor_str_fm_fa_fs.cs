@@ -9,27 +9,44 @@ namespace System.IO.Tests
 {
     public partial class FileStream_ctor_str_fm_fa_fs : FileStream_ctor_str_fm_fa
     {
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access) =>
-            CreateFileStream(path, mode, access, FileShare.Read);
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access
+        ) => CreateFileStream(path, mode, access, FileShare.Read);
 
-        protected virtual FileStream CreateFileStream(string path, FileMode mode, FileAccess access, FileShare share) =>
-            new FileStream(path, mode, access, share);
+        protected virtual FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share
+        ) => new FileStream(path, mode, access, share);
 
         [Fact]
         public void InvalidShareThrows()
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 GetExpectedParamName("share"),
-                () => CreateFileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, ~FileShare.None));
+                () =>
+                    CreateFileStream(
+                        GetTestFilePath(),
+                        FileMode.Create,
+                        FileAccess.ReadWrite,
+                        ~FileShare.None
+                    )
+            );
         }
 
         private static readonly FileShare[] s_shares =
         {
             FileShare.None,
             FileShare.Delete,
-            FileShare.Read, FileShare.Read | FileShare.Delete,
-            FileShare.Write, FileShare.Write | FileShare.Delete,
-            FileShare.ReadWrite, FileShare.ReadWrite | FileShare.Delete
+            FileShare.Read,
+            FileShare.Read | FileShare.Delete,
+            FileShare.Write,
+            FileShare.Write | FileShare.Delete,
+            FileShare.ReadWrite,
+            FileShare.ReadWrite | FileShare.Delete,
 
             // Does not include FileShare.Inheritable, as doing so when other tests concurrently spawn processes
             // results in those file handles being inherited, which then keeps the file open longer
@@ -41,10 +58,23 @@ namespace System.IO.Tests
         {
             // create the file
             string fileName = GetTestFilePath();
-            CreateFileStream(fileName, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete).Dispose();
+            CreateFileStream(
+                    fileName,
+                    FileMode.CreateNew,
+                    FileAccess.ReadWrite,
+                    FileShare.ReadWrite | FileShare.Delete
+                )
+                .Dispose();
 
             // just check that the inputs are accepted, actual sharing varies by platform so we separate the behavior testing
-            foreach (FileAccess access in new[] { FileAccess.ReadWrite, FileAccess.Write, FileAccess.Read })
+            foreach (
+                FileAccess access in new[]
+                {
+                    FileAccess.ReadWrite,
+                    FileAccess.Write,
+                    FileAccess.Read,
+                }
+            )
             {
                 foreach (FileShare share in s_shares)
                 {
@@ -54,7 +84,10 @@ namespace System.IO.Tests
                     }
                     catch (Exception e)
                     {
-                        throw new Exception($"Failed with FileAccess {access} and FileShare {share}", e);
+                        throw new Exception(
+                            $"Failed with FileAccess {access} and FileShare {share}",
+                            e
+                        );
                     }
                 }
             }
@@ -63,19 +96,40 @@ namespace System.IO.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void FileShareOpen_Inheritable()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                int i = 0;
-                foreach (FileAccess access in new[] { FileAccess.ReadWrite, FileAccess.Write, FileAccess.Read })
+            RemoteExecutor
+                .Invoke(() =>
                 {
-                    foreach (FileShare share in s_shares)
+                    int i = 0;
+                    foreach (
+                        FileAccess access in new[]
+                        {
+                            FileAccess.ReadWrite,
+                            FileAccess.Write,
+                            FileAccess.Read,
+                        }
+                    )
                     {
-                        string fileName = GetTestFilePath(i++);
-                        CreateFileStream(fileName, FileMode.CreateNew, FileAccess.ReadWrite, FileShare.ReadWrite | FileShare.Delete).Dispose();
-                        CreateFileStream(fileName, FileMode.Open, access, share | FileShare.Inheritable).Dispose();
+                        foreach (FileShare share in s_shares)
+                        {
+                            string fileName = GetTestFilePath(i++);
+                            CreateFileStream(
+                                    fileName,
+                                    FileMode.CreateNew,
+                                    FileAccess.ReadWrite,
+                                    FileShare.ReadWrite | FileShare.Delete
+                                )
+                                .Dispose();
+                            CreateFileStream(
+                                    fileName,
+                                    FileMode.Open,
+                                    access,
+                                    share | FileShare.Inheritable
+                                )
+                                .Dispose();
+                        }
                     }
-                }
-            }).Dispose();
+                })
+                .Dispose();
         }
 
         [Fact]
@@ -89,11 +143,15 @@ namespace System.IO.Tests
                 {
                     try
                     {
-                        CreateFileStream(GetTestFilePath(i++), FileMode.Create, access, share).Dispose();
+                        CreateFileStream(GetTestFilePath(i++), FileMode.Create, access, share)
+                            .Dispose();
                     }
                     catch (Exception e)
                     {
-                        throw new Exception($"Failed with FileAccess {access} and FileShare {share}", e);
+                        throw new Exception(
+                            $"Failed with FileAccess {access} and FileShare {share}",
+                            e
+                        );
                     }
                 }
             }
@@ -104,17 +162,28 @@ namespace System.IO.Tests
         {
             // just check that the inputs are accepted, actual sharing varies by platform so we separate the behavior testing
             int i = 0;
-            foreach (FileAccess access in new[] { FileAccess.ReadWrite, FileAccess.Write, FileAccess.Read })
+            foreach (
+                FileAccess access in new[]
+                {
+                    FileAccess.ReadWrite,
+                    FileAccess.Write,
+                    FileAccess.Read,
+                }
+            )
             {
                 foreach (FileShare share in s_shares)
                 {
                     try
                     {
-                        CreateFileStream(GetTestFilePath(i++), FileMode.OpenOrCreate, access, share).Dispose();
+                        CreateFileStream(GetTestFilePath(i++), FileMode.OpenOrCreate, access, share)
+                            .Dispose();
                     }
                     catch (Exception e)
                     {
-                        throw new Exception($"Failed with FileAccess {access} and FileShare {share}", e);
+                        throw new Exception(
+                            $"Failed with FileAccess {access} and FileShare {share}",
+                            e
+                        );
                     }
                 }
             }
@@ -122,16 +191,28 @@ namespace System.IO.Tests
 
         [InlineData(FileMode.Create)]
         [InlineData(FileMode.Truncate)]
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsFileLockingEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsFileLockingEnabled)
+        )]
         public void NoTruncateOnFileShareViolation(FileMode fileMode)
         {
             string fileName = GetTestFilePath();
 
-            using (FileStream fs = CreateFileStream(fileName, FileMode.Create, FileAccess.ReadWrite, FileShare.None))
+            using (
+                FileStream fs = CreateFileStream(
+                    fileName,
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.None
+                )
+            )
             {
                 fs.Write(new byte[] { 42 }, 0, 1);
                 fs.Flush();
-                FSAssert.ThrowsSharingViolation(() => CreateFileStream(fileName, fileMode, FileAccess.Write, FileShare.None).Dispose());
+                FSAssert.ThrowsSharingViolation(() =>
+                    CreateFileStream(fileName, fileMode, FileAccess.Write, FileShare.None).Dispose()
+                );
             }
             using (FileStream reader = CreateFileStream(fileName, FileMode.Open, FileAccess.Read))
             {

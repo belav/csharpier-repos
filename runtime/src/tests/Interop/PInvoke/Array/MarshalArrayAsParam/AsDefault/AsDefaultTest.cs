@@ -66,183 +66,154 @@ public class ArrayMarshal
     #region InAttribute attribute applied
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_Int")]
-    private static extern bool CStyle_Array_Int_In([In]int[] actual, int cActual);
+    private static extern bool CStyle_Array_Int_In([In] int[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_Uint")]
-    private static extern bool CStyle_Array_Uint_In([In]uint[] actual, int cActual);
+    private static extern bool CStyle_Array_Uint_In([In] uint[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_Short")]
-    private static extern bool CStyle_Array_Short_In([In]short[] actual, int cActual);
+    private static extern bool CStyle_Array_Short_In([In] short[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_Word")]
-    private static extern bool CStyle_Array_Word_In([In]ushort[] actual, int cActual);
+    private static extern bool CStyle_Array_Word_In([In] ushort[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_Long64")]
-    private static extern bool CStyle_Array_Long64_In([In]long[] actual, int cActual);
+    private static extern bool CStyle_Array_Long64_In([In] long[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_ULong64")]
-    private static extern bool CStyle_Array_ULong64_In([In]ulong[] actual, int cActual);
+    private static extern bool CStyle_Array_ULong64_In([In] ulong[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_Double")]
-    private static extern bool CStyle_Array_Double_In([In]double[] actual, int cActual);
+    private static extern bool CStyle_Array_Double_In([In] double[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_Float")]
-    private static extern bool CStyle_Array_Float_In([In]float[] actual, int cActual);
+    private static extern bool CStyle_Array_Float_In([In] float[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_Byte")]
-    private static extern bool CStyle_Array_Byte_In([In]byte[] actual, int cActual);
+    private static extern bool CStyle_Array_Byte_In([In] byte[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_Char")]
-    private static extern bool CStyle_Array_Char_In([In]char[] actual, int cActual);
+    private static extern bool CStyle_Array_Char_In([In] char[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_LPCSTR")]
-    private static extern bool CStyle_Array_LPCSTR_In([In]string[] actual, int cActual);
+    private static extern bool CStyle_Array_LPCSTR_In([In] string[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_LPSTR")]
-    private static extern bool CStyle_Array_LPSTR_In([In]string[] actual, int cActual);
+    private static extern bool CStyle_Array_LPSTR_In([In] string[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_Struct")]
-    private static extern bool CStyle_Array_Struct_In([In]TestStruct[] actual, int cActual);
+    private static extern bool CStyle_Array_Struct_In([In] TestStruct[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_Bool")]
-    private static extern bool CStyle_Array_Bool_In([In]bool[] actual, int cActual);
+    private static extern bool CStyle_Array_Bool_In([In] bool[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative", EntryPoint = "CStyle_Array_Object")]
-    private static extern bool CStyle_Array_Object_In([In]object[] actual, int cActual);
+    private static extern bool CStyle_Array_Object_In([In] object[] actual, int cActual);
     #endregion
 
     #region InAttribute and OutAttribute attributes applied
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Int_InOut(
-        [In, Out] int[] actual, int cActual);
+    private static extern bool CStyle_Array_Int_InOut([In, Out] int[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Int_InOut_Null(
-        [In, Out] int[] actual);
+    private static extern bool CStyle_Array_Int_InOut_Null([In, Out] int[] actual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Int_InOut_ZeroLength(
-        [In, Out] int[] actual);
+    private static extern bool CStyle_Array_Int_InOut_ZeroLength([In, Out] int[] actual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Object_InOut(
-        [In, Out] object[] actual, int cActual);
+    private static extern bool CStyle_Array_Object_InOut([In, Out] object[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Uint_InOut(
-        [In, Out] uint[] actual, int cActual);
+    private static extern bool CStyle_Array_Uint_InOut([In, Out] uint[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Short_InOut(
-        [In, Out] short[] actual, int cActual);
+    private static extern bool CStyle_Array_Short_InOut([In, Out] short[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Word_InOut(
-        [In, Out] ushort[] actual, int cActual);
+    private static extern bool CStyle_Array_Word_InOut([In, Out] ushort[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Long64_InOut(
-        [In, Out] long[] actual, int cActual);
+    private static extern bool CStyle_Array_Long64_InOut([In, Out] long[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_ULong64_InOut(
-        [In, Out] ulong[] actual, int cActual);
+    private static extern bool CStyle_Array_ULong64_InOut([In, Out] ulong[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Double_InOut(
-        [In, Out] double[] actual, int cActual);
+    private static extern bool CStyle_Array_Double_InOut([In, Out] double[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Float_InOut(
-        [In, Out] float[] actual, int cActual);
+    private static extern bool CStyle_Array_Float_InOut([In, Out] float[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Byte_InOut(
-        [In, Out] byte[] actual, int cActual);
+    private static extern bool CStyle_Array_Byte_InOut([In, Out] byte[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Char_InOut(
-        [In, Out] char[] actual, int cActual);
+    private static extern bool CStyle_Array_Char_InOut([In, Out] char[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_LPSTR_InOut(
-        [In, Out] string[] actual, int cActual);
+    private static extern bool CStyle_Array_LPSTR_InOut([In, Out] string[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
     private static extern bool CStyle_Array_Struct_InOut(
-        [In, Out] TestStruct[] actual, int cActual);
+        [In, Out] TestStruct[] actual,
+        int cActual
+    );
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Bool_InOut(
-        [In, Out] bool[] actual, int cActual);
+    private static extern bool CStyle_Array_Bool_InOut([In, Out] bool[] actual, int cActual);
     #endregion
 
     #region OutAttribute attributes applied
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Int_Out(
-        [Out] int[] actual, int cActual);
+    private static extern bool CStyle_Array_Int_Out([Out] int[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Int_Out_Null(
-        [Out] int[] actual);
+    private static extern bool CStyle_Array_Int_Out_Null([Out] int[] actual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Int_Out_ZeroLength(
-        [Out] int[] actual);
+    private static extern bool CStyle_Array_Int_Out_ZeroLength([Out] int[] actual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Object_Out(
-        [Out] object[] actual, int cActual);
+    private static extern bool CStyle_Array_Object_Out([Out] object[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Uint_Out(
-        [Out] uint[] actual, int cActual);
+    private static extern bool CStyle_Array_Uint_Out([Out] uint[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Short_Out(
-        [Out] short[] actual, int cActual);
+    private static extern bool CStyle_Array_Short_Out([Out] short[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Word_Out(
-        [Out] ushort[] actual, int cActual);
+    private static extern bool CStyle_Array_Word_Out([Out] ushort[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Long64_Out(
-        [Out] long[] actual, int cActual);
+    private static extern bool CStyle_Array_Long64_Out([Out] long[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_ULong64_Out(
-        [Out] ulong[] actual, int cActual);
+    private static extern bool CStyle_Array_ULong64_Out([Out] ulong[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Double_Out(
-        [Out] double[] actual, int cActual);
+    private static extern bool CStyle_Array_Double_Out([Out] double[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Float_Out(
-        [Out] float[] actual, int cActual);
+    private static extern bool CStyle_Array_Float_Out([Out] float[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Byte_Out(
-        [Out] byte[] actual, int cActual);
+    private static extern bool CStyle_Array_Byte_Out([Out] byte[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Char_Out(
-        [Out] char[] actual, int cActual);
+    private static extern bool CStyle_Array_Char_Out([Out] char[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_LPSTR_Out(
-        [Out] string[] actual, int cActual);
+    private static extern bool CStyle_Array_LPSTR_Out([Out] string[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Struct_Out(
-        [Out] TestStruct[] actual, int cActual);
+    private static extern bool CStyle_Array_Struct_Out([Out] TestStruct[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
-    private static extern bool CStyle_Array_Bool_Out(
-        [Out] bool[] actual, int cActual);
+    private static extern bool CStyle_Array_Bool_Out([Out] bool[] actual, int cActual);
 
     [DllImport("MarshalArrayLPArrayNative")]
     private static extern int Get_Multidimensional_Array_Sum(int[,] array, int rows, int columns);
@@ -315,14 +286,38 @@ public class ArrayMarshal
         Console.WriteLine("ByVal marshaling CLR array as c-style-array no attributes");
 
         Assert.True(CStyle_Array_Int(InitArray<int>(ARRAY_SIZE), ARRAY_SIZE));
-        Assert.True(CStyle_Array_Uint(InitArray<uint>(ARRAY_SIZE), ARRAY_SIZE),"CStyle_Array_Uint") ;
-        Assert.True(CStyle_Array_Short(InitArray<short>(ARRAY_SIZE), ARRAY_SIZE),"CStyle_Array_Short");
-        Assert.True(CStyle_Array_Word(InitArray<ushort>(ARRAY_SIZE), ARRAY_SIZE),"CStyle_Array_Word");
-        Assert.True(CStyle_Array_Long64(InitArray<long>(ARRAY_SIZE), ARRAY_SIZE),"CStyle_Array_Long64");
-        Assert.True(CStyle_Array_ULong64(InitArray<ulong>(ARRAY_SIZE), ARRAY_SIZE),"CStyle_Array_ULong64");
-        Assert.True(CStyle_Array_Double(InitArray<double>(ARRAY_SIZE), ARRAY_SIZE),"CStyle_Array_Double");
-        Assert.True(CStyle_Array_Float(InitArray<float>(ARRAY_SIZE), ARRAY_SIZE),"CStyle_Array_Float");
-        Assert.True(CStyle_Array_Byte(InitArray<byte>(ARRAY_SIZE), ARRAY_SIZE),"CStyle_Array_Byte");
+        Assert.True(
+            CStyle_Array_Uint(InitArray<uint>(ARRAY_SIZE), ARRAY_SIZE),
+            "CStyle_Array_Uint"
+        );
+        Assert.True(
+            CStyle_Array_Short(InitArray<short>(ARRAY_SIZE), ARRAY_SIZE),
+            "CStyle_Array_Short"
+        );
+        Assert.True(
+            CStyle_Array_Word(InitArray<ushort>(ARRAY_SIZE), ARRAY_SIZE),
+            "CStyle_Array_Word"
+        );
+        Assert.True(
+            CStyle_Array_Long64(InitArray<long>(ARRAY_SIZE), ARRAY_SIZE),
+            "CStyle_Array_Long64"
+        );
+        Assert.True(
+            CStyle_Array_ULong64(InitArray<ulong>(ARRAY_SIZE), ARRAY_SIZE),
+            "CStyle_Array_ULong64"
+        );
+        Assert.True(
+            CStyle_Array_Double(InitArray<double>(ARRAY_SIZE), ARRAY_SIZE),
+            "CStyle_Array_Double"
+        );
+        Assert.True(
+            CStyle_Array_Float(InitArray<float>(ARRAY_SIZE), ARRAY_SIZE),
+            "CStyle_Array_Float"
+        );
+        Assert.True(
+            CStyle_Array_Byte(InitArray<byte>(ARRAY_SIZE), ARRAY_SIZE),
+            "CStyle_Array_Byte"
+        );
         Assert.True(CStyle_Array_Char(InitArray<char>(ARRAY_SIZE), ARRAY_SIZE));
 
         string[] strArr = InitArray<string>(ARRAY_SIZE);
@@ -381,7 +376,9 @@ public class ArrayMarshal
 
     private static void TestMarshalInOut_ByVal()
     {
-        Console.WriteLine("By value marshaling CLR array as c-style-array with InAttribute and OutAttribute applied");
+        Console.WriteLine(
+            "By value marshaling CLR array as c-style-array with InAttribute and OutAttribute applied"
+        );
         Console.WriteLine("CStyle_Array_Int_InOut");
         int[] iArr = InitArray<int>(ARRAY_SIZE);
         Assert.True(CStyle_Array_Int_InOut(iArr, ARRAY_SIZE));
@@ -490,7 +487,12 @@ public class ArrayMarshal
         {
             if (!Object.Equals(arr1[i], arr2[i]))
             {
-                Console.WriteLine("Array marshaling error: Index: {0} :  Actual:{1}, Expected:{2},", i, arr1[i], arr2[i]);
+                Console.WriteLine(
+                    "Array marshaling error: Index: {0} :  Actual:{1}, Expected:{2},",
+                    i,
+                    arr1[i],
+                    arr2[i]
+                );
                 return false;
             }
         }
@@ -545,7 +547,9 @@ public class ArrayMarshal
 
     private static void TestMarshalOut_ByVal()
     {
-        Console.WriteLine("By value marshaling CLR array as c-style-array with OutAttribute applied");
+        Console.WriteLine(
+            "By value marshaling CLR array as c-style-array with OutAttribute applied"
+        );
 
         Console.WriteLine("CStyle_Array_Int_Out");
         int[] iArr = new int[ARRAY_SIZE];

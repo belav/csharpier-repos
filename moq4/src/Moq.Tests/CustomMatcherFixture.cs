@@ -2,7 +2,6 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -48,13 +47,11 @@ namespace Moq.Tests
 
                 if (rangeKind == Range.Exclusive)
                 {
-                    return value.CompareTo(from) > 0 &&
-                        value.CompareTo(to) < 0;
+                    return value.CompareTo(from) > 0 && value.CompareTo(to) < 0;
                 }
                 else
                 {
-                    return value.CompareTo(from) >= 0 &&
-                        value.CompareTo(to) <= 0;
+                    return value.CompareTo(from) >= 0 && value.CompareTo(to) <= 0;
                 }
             });
         }

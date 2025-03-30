@@ -12,9 +12,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x1 in new int[] { 1, 6, 0, -1, 3 }
-                             from x2 in new int[] { 55, 49, 9, -100, 24, 25 }
-                             select new { a1 = x1, a2 = x2 };
+            var q =
+                from x1 in new int[] { 1, 6, 0, -1, 3 }
+                from x2 in new int[] { 55, 49, 9, -100, 24, 25 }
+                select new { a1 = x1, a2 = x2 };
 
             Assert.Equal(q.OrderByDescending(e => e.a1), q.OrderByDescending(e => e.a1));
         }
@@ -22,12 +23,26 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x1 in new[] { 55, 49, 9, -100, 24, 25, -1, 0 }
-                             from x2 in new[] { "!@#$%^", "C", "AAA", "", null, "Calling Twice", "SoS", string.Empty }
-                             where !string.IsNullOrEmpty(x2)
-                             select new { a1 = x1, a2 = x2 };
+            var q =
+                from x1 in new[] { 55, 49, 9, -100, 24, 25, -1, 0 }
+                from x2 in new[]
+                {
+                    "!@#$%^",
+                    "C",
+                    "AAA",
+                    "",
+                    null,
+                    "Calling Twice",
+                    "SoS",
+                    string.Empty,
+                }
+                where !string.IsNullOrEmpty(x2)
+                select new { a1 = x1, a2 = x2 };
 
-            Assert.Equal(q.OrderByDescending(e => e.a1).ThenBy(f => f.a2), q.OrderByDescending(e => e.a1).ThenBy(f => f.a2));
+            Assert.Equal(
+                q.OrderByDescending(e => e.a1).ThenBy(f => f.a2),
+                q.OrderByDescending(e => e.a1).ThenBy(f => f.a2)
+            );
         }
 
         [Fact]
@@ -60,18 +75,17 @@ namespace System.Linq.Tests
         {
             var source = new[]
             {
-
                 new { Name = "Alpha", Score = 90 },
                 new { Name = "Robert", Score = 45 },
                 new { Name = "Prakash", Score = 99 },
-                new { Name = "Bob", Score = 0 }
+                new { Name = "Bob", Score = 0 },
             };
             var expected = new[]
             {
                 new { Name = "Robert", Score = 45 },
                 new { Name = "Prakash", Score = 99 },
                 new { Name = "Bob", Score = 0 },
-                new { Name = "Alpha", Score = 90 }
+                new { Name = "Alpha", Score = 90 },
             };
 
             Assert.Equal(expected, source.OrderByDescending(e => e.Name, null));
@@ -83,7 +97,10 @@ namespace System.Linq.Tests
             string[] source = { "Prakash", "Alpha", "DAN", "dan", "Prakash" };
             string[] expected = { "Prakash", "Prakash", "DAN", "dan", "Alpha" };
 
-            Assert.Equal(expected, source.OrderByDescending(e => e, StringComparer.OrdinalIgnoreCase));
+            Assert.Equal(
+                expected,
+                source.OrderByDescending(e => e, StringComparer.OrdinalIgnoreCase)
+            );
         }
 
         [Fact]
@@ -92,7 +109,10 @@ namespace System.Linq.Tests
             string[] source = { "Prakash", "Alpha", "DAN", "dan", "Prakash" };
             string[] expected = { "Prakash", "Prakash", "DAN", "dan", "Alpha" };
 
-            Assert.Equal(expected, source.RunOnce().OrderByDescending(e => e, StringComparer.OrdinalIgnoreCase));
+            Assert.Equal(
+                expected,
+                source.RunOnce().OrderByDescending(e => e, StringComparer.OrdinalIgnoreCase)
+            );
         }
 
         [Fact]
@@ -159,7 +179,9 @@ namespace System.Linq.Tests
 
             // The .NET Framework has a bug where the input is incorrectly ordered if the comparer
             // returns int.MaxValue or int.MinValue. See https://github.com/dotnet/corefx/pull/2240.
-            IEnumerable<int> ordered = outOfOrder.OrderByDescending(i => i, new ExtremeComparer()).ToArray();
+            IEnumerable<int> ordered = outOfOrder
+                .OrderByDescending(i => i, new ExtremeComparer())
+                .ToArray();
             Assert.Equal(Enumerable.Range(0, 10).Reverse(), ordered);
         }
 
@@ -167,14 +189,20 @@ namespace System.Linq.Tests
         public void NullSource()
         {
             IEnumerable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.OrderByDescending(i => i));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.OrderByDescending(i => i)
+            );
         }
 
         [Fact]
         public void NullKeySelector()
         {
             Func<DateTime, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => Enumerable.Empty<DateTime>().OrderByDescending(keySelector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => Enumerable.Empty<DateTime>().OrderByDescending(keySelector)
+            );
         }
 
         [Fact]

@@ -16,9 +16,7 @@ internal sealed partial class PageRouteModelFactory
     private readonly string _normalizedRootDirectory;
     private readonly string _normalizedAreaRootDirectory;
 
-    public PageRouteModelFactory(
-        RazorPagesOptions options,
-        ILogger logger)
+    public PageRouteModelFactory(RazorPagesOptions options, ILogger logger)
     {
         _options = options ?? throw new ArgumentNullException(nameof(options));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -44,7 +42,11 @@ internal sealed partial class PageRouteModelFactory
             return null;
         }
 
-        var routeModel = new PageRouteModel(relativePath, areaResult.viewEnginePath, areaResult.areaName);
+        var routeModel = new PageRouteModel(
+            relativePath,
+            areaResult.viewEnginePath,
+            areaResult.areaName
+        );
 
         var routePrefix = CreateAreaRoute(areaResult.areaName, areaResult.viewEnginePath);
         PopulateRouteModel(routeModel, routePrefix, routeTemplate);
@@ -53,7 +55,11 @@ internal sealed partial class PageRouteModelFactory
         return routeModel;
     }
 
-    private static void PopulateRouteModel(PageRouteModel model, string pageRoute, string? routeTemplate)
+    private static void PopulateRouteModel(
+        PageRouteModel model,
+        string pageRoute,
+        string? routeTemplate
+    )
     {
         model.RouteValues.Add("page", model.ViewEnginePath);
 
@@ -61,17 +67,17 @@ internal sealed partial class PageRouteModelFactory
         model.Selectors.Add(selectorModel);
 
         var fileName = Path.GetFileName(model.RelativePath);
-        if (!AttributeRouteModel.IsOverridePattern(routeTemplate) &&
-            string.Equals(IndexFileName, fileName, StringComparison.OrdinalIgnoreCase))
+        if (
+            !AttributeRouteModel.IsOverridePattern(routeTemplate)
+            && string.Equals(IndexFileName, fileName, StringComparison.OrdinalIgnoreCase)
+        )
         {
             // For pages without an override route, and ending in /Index.cshtml, we want to allow
             // incoming routing, but force outgoing routes to match to the path sans /Index.
             selectorModel.AttributeRouteModel!.SuppressLinkGeneration = true;
 
             var index = pageRoute.LastIndexOf('/');
-            var parentDirectoryPath = index == -1 ?
-                string.Empty :
-                pageRoute.Substring(0, index);
+            var parentDirectoryPath = index == -1 ? string.Empty : pageRoute.Substring(0, index);
             model.Selectors.Add(CreateSelectorModel(parentDirectoryPath, routeTemplate));
         }
     }
@@ -79,7 +85,8 @@ internal sealed partial class PageRouteModelFactory
     // Internal for unit testing
     internal bool TryParseAreaPath(
         string relativePath,
-        out (string areaName, string viewEnginePath) result)
+        out (string areaName, string viewEnginePath) result
+    )
     {
         // path = "/Areas/Products/Pages/Manage/Home.cshtml"
         // Result ("Products", "/Manage/Home")
@@ -89,9 +96,15 @@ internal sealed partial class PageRouteModelFactory
         Debug.Assert(relativePath.StartsWith('/'));
         // Parse the area root directory.
         var areaRootEndIndex = relativePath.IndexOf('/', startIndex: 1);
-        if (areaRootEndIndex == -1 ||
-            areaRootEndIndex >= relativePath.Length - 1 || // There's at least one token after the area root.
-            !relativePath.StartsWith(_normalizedAreaRootDirectory, StringComparison.OrdinalIgnoreCase)) // The path must start with area root.
+        if (
+            areaRootEndIndex == -1
+            || areaRootEndIndex >= relativePath.Length - 1
+            || // There's at least one token after the area root.
+            !relativePath.StartsWith(
+                _normalizedAreaRootDirectory,
+                StringComparison.OrdinalIgnoreCase
+            )
+        ) // The path must start with area root.
         {
             Log.UnsupportedAreaPath(_logger, relativePath);
             return false;
@@ -105,9 +118,21 @@ internal sealed partial class PageRouteModelFactory
             return false;
         }
 
-        var areaName = relativePath.Substring(areaRootEndIndex + 1, areaEndIndex - areaRootEndIndex - 1);
+        var areaName = relativePath.Substring(
+            areaRootEndIndex + 1,
+            areaEndIndex - areaRootEndIndex - 1
+        );
         // Ensure the next token is the "Pages" directory
-        if (string.Compare(relativePath, areaEndIndex, AreaPagesRoot, 0, AreaPagesRoot.Length, StringComparison.OrdinalIgnoreCase) != 0)
+        if (
+            string.Compare(
+                relativePath,
+                areaEndIndex,
+                AreaPagesRoot,
+                0,
+                AreaPagesRoot.Length,
+                StringComparison.OrdinalIgnoreCase
+            ) != 0
+        )
         {
             Log.UnsupportedAreaPath(_logger, relativePath);
             return false;
@@ -115,7 +140,10 @@ internal sealed partial class PageRouteModelFactory
 
         // Include the trailing slash of the root directory at the start of the viewEnginePath
         var pageNameIndex = areaEndIndex + AreaPagesRoot.Length - 1;
-        var viewEnginePath = relativePath.Substring(pageNameIndex, relativePath.Length - pageNameIndex - RazorViewEngine.ViewExtension.Length);
+        var viewEnginePath = relativePath.Substring(
+            pageNameIndex,
+            relativePath.Length - pageNameIndex - RazorViewEngine.ViewExtension.Length
+        );
 
         result = (areaName, viewEnginePath);
         return true;
@@ -127,7 +155,9 @@ internal sealed partial class PageRouteModelFactory
         // path = "/Pages/AllMyPages/Home.cshtml"
         // Result = "/Home"
         Debug.Assert(path.StartsWith(rootDirectory, StringComparison.OrdinalIgnoreCase));
-        Debug.Assert(path.EndsWith(RazorViewEngine.ViewExtension, StringComparison.OrdinalIgnoreCase));
+        Debug.Assert(
+            path.EndsWith(RazorViewEngine.ViewExtension, StringComparison.OrdinalIgnoreCase)
+        );
         var startIndex = rootDirectory.Length - 1;
         var endIndex = path.Length - RazorViewEngine.ViewExtension.Length;
         return path.Substring(startIndex, endIndex - startIndex);
@@ -141,18 +171,22 @@ internal sealed partial class PageRouteModelFactory
         Debug.Assert(!string.IsNullOrEmpty(viewEnginePath));
         Debug.Assert(viewEnginePath.StartsWith('/'));
 
-        return string.Create(1 + areaName.Length + viewEnginePath.Length, (areaName, viewEnginePath), (span, tuple) =>
-        {
-            var (areaNameValue, viewEnginePathValue) = tuple;
+        return string.Create(
+            1 + areaName.Length + viewEnginePath.Length,
+            (areaName, viewEnginePath),
+            (span, tuple) =>
+            {
+                var (areaNameValue, viewEnginePathValue) = tuple;
 
-            span[0] = '/';
-            span = span.Slice(1);
+                span[0] = '/';
+                span = span.Slice(1);
 
-            areaNameValue.AsSpan().CopyTo(span);
-            span = span.Slice(areaNameValue.Length);
+                areaNameValue.AsSpan().CopyTo(span);
+                span = span.Slice(areaNameValue.Length);
 
-            viewEnginePathValue.AsSpan().CopyTo(span);
-        });
+                viewEnginePathValue.AsSpan().CopyTo(span);
+            }
+        );
     }
 
     private static SelectorModel CreateSelectorModel(string prefix, string? routeTemplate)
@@ -163,10 +197,7 @@ internal sealed partial class PageRouteModelFactory
             {
                 Template = AttributeRouteModel.CombineTemplates(prefix, routeTemplate),
             },
-            EndpointMetadata =
-                {
-                    new PageRouteMetadata(prefix, routeTemplate)
-                }
+            EndpointMetadata = { new PageRouteMetadata(prefix, routeTemplate) },
         };
     }
 
@@ -183,7 +214,12 @@ internal sealed partial class PageRouteModelFactory
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Warning, "The page at '{FilePath}' is located under the area root directory '/Areas/' but does not follow the path format '/Areas/AreaName/Pages/Directory/FileName.cshtml", EventName = "UnsupportedAreaPath")]
+        [LoggerMessage(
+            1,
+            LogLevel.Warning,
+            "The page at '{FilePath}' is located under the area root directory '/Areas/' but does not follow the path format '/Areas/AreaName/Pages/Directory/FileName.cshtml",
+            EventName = "UnsupportedAreaPath"
+        )]
         public static partial void UnsupportedAreaPath(ILogger log, string filePath);
     }
 }

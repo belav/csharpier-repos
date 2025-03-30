@@ -5,8 +5,8 @@
 // Retrieves or assigns the object an IsAlive status.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 public class Dummy
 {
@@ -22,14 +22,14 @@ public class Test_Target
 {
     public static int[] array;
     public static Object[] obj;
-    
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void CreateArrays() 
+    public static void CreateArrays()
     {
         array = new int[50];
         obj = new Object[25];
     }
-    
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static WeakReference CreateArrayWeakReference()
     {
@@ -37,12 +37,12 @@ public class Test_Target
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void DestroyArrays() 
+    public static void DestroyArrays()
     {
         array = null;
         obj = null;
     }
-    
+
     public bool GetTargetTest()
     {
         CreateArrays();
@@ -52,12 +52,12 @@ public class Test_Target
 
         WeakReference weakobj = new WeakReference(obj);
         GCHandle objhandle = GCHandle.Alloc(obj, GCHandleType.Normal);
-        
+
         DestroyArrays();
         GC.Collect();
 
         Object target1 = weakarray.Target; // should be null
-        Object target2 = weakobj.Target;   // should be System.Object[]
+        Object target2 = weakobj.Target; // should be System.Object[]
 
         Console.WriteLine("{0},{1}", target1, target2);
 
@@ -78,10 +78,10 @@ public class Test_Target
         Dummy d1 = new Dummy(99);
         Dummy d2 = new Dummy(66);
 
-        WeakReference wr = new WeakReference(d1);   // array has only weak reference
-        wr.Target = d2;                             // overwrite wr.Target with d2
-        Dummy d3 = (Dummy)wr.Target;                // get wr.Target
-        GC.KeepAlive(d2);                           // required so d2 doesn't get collected before setting d3
+        WeakReference wr = new WeakReference(d1); // array has only weak reference
+        wr.Target = d2; // overwrite wr.Target with d2
+        Dummy d3 = (Dummy)wr.Target; // get wr.Target
+        GC.KeepAlive(d2); // required so d2 doesn't get collected before setting d3
 
         if (d3.val == 66)
         {
@@ -98,7 +98,8 @@ public class Test_Target
 
     public static int Main()
     {
-        bool passed1, passed2;
+        bool passed1,
+            passed2;
 
         Test_Target t = new Test_Target();
 

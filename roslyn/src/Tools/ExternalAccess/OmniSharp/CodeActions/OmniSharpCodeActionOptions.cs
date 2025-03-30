@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.CodeActions
 {
     internal readonly record struct OmniSharpCodeActionOptions(
         OmniSharpImplementTypeOptions ImplementTypeOptions,
-        OmniSharpLineFormattingOptions LineFormattingOptions)
+        OmniSharpLineFormattingOptions LineFormattingOptions
+    )
     {
         internal CodeActionOptions GetCodeActionOptions(LanguageServices languageServices)
         {
@@ -32,14 +33,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.CodeActions
                             TabSize = LineFormattingOptions.TabSize,
                             UseTabs = LineFormattingOptions.UseTabs,
                             NewLine = LineFormattingOptions.NewLine,
-                        }
-                    }
+                        },
+                    },
                 },
                 ImplementTypeOptions = new()
                 {
-                    InsertionBehavior = (ImplementTypeInsertionBehavior)ImplementTypeOptions.InsertionBehavior,
-                    PropertyGenerationBehavior = (ImplementTypePropertyGenerationBehavior)ImplementTypeOptions.PropertyGenerationBehavior
-                }
+                    InsertionBehavior = (ImplementTypeInsertionBehavior)
+                        ImplementTypeOptions.InsertionBehavior,
+                    PropertyGenerationBehavior = (ImplementTypePropertyGenerationBehavior)
+                        ImplementTypeOptions.PropertyGenerationBehavior,
+                },
             };
         }
     }

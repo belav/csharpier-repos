@@ -10,22 +10,64 @@ namespace Microsoft.AspNetCore.Shared;
 
 internal static class DebuggerHelpers
 {
-    public static string GetDebugText(string key1, object? value1, bool includeNullValues = true, string? prefix = null)
+    public static string GetDebugText(
+        string key1,
+        object? value1,
+        bool includeNullValues = true,
+        string? prefix = null
+    )
     {
-        return GetDebugText(new KeyValuePair<string, object?>[] { Create(key1, value1) }, includeNullValues, prefix);
+        return GetDebugText(
+            new KeyValuePair<string, object?>[] { Create(key1, value1) },
+            includeNullValues,
+            prefix
+        );
     }
 
-    public static string GetDebugText(string key1, object? value1, string key2, object? value2, bool includeNullValues = true, string? prefix = null)
+    public static string GetDebugText(
+        string key1,
+        object? value1,
+        string key2,
+        object? value2,
+        bool includeNullValues = true,
+        string? prefix = null
+    )
     {
-        return GetDebugText(new KeyValuePair<string, object?>[] { Create(key1, value1), Create(key2, value2) }, includeNullValues, prefix);
+        return GetDebugText(
+            new KeyValuePair<string, object?>[] { Create(key1, value1), Create(key2, value2) },
+            includeNullValues,
+            prefix
+        );
     }
 
-    public static string GetDebugText(string key1, object? value1, string key2, object? value2, string key3, object? value3, bool includeNullValues = true, string? prefix = null)
+    public static string GetDebugText(
+        string key1,
+        object? value1,
+        string key2,
+        object? value2,
+        string key3,
+        object? value3,
+        bool includeNullValues = true,
+        string? prefix = null
+    )
     {
-        return GetDebugText(new KeyValuePair<string, object?>[] { Create(key1, value1), Create(key2, value2), Create(key3, value3) }, includeNullValues, prefix);
+        return GetDebugText(
+            new KeyValuePair<string, object?>[]
+            {
+                Create(key1, value1),
+                Create(key2, value2),
+                Create(key3, value3),
+            },
+            includeNullValues,
+            prefix
+        );
     }
 
-    public static string GetDebugText(ReadOnlySpan<KeyValuePair<string, object?>> values, bool includeNullValues = true, string? prefix = null)
+    public static string GetDebugText(
+        ReadOnlySpan<KeyValuePair<string, object?>> values,
+        bool includeNullValues = true,
+        string? prefix = null
+    )
     {
         if (values.Length == 0)
         {
@@ -103,7 +145,11 @@ internal static class DebuggerHelpers
         }
 
         // Empty collections don't have a value.
-        if (value is not string && value is IEnumerable enumerable && !enumerable.GetEnumerator().MoveNext())
+        if (
+            value is not string
+            && value is IEnumerable enumerable
+            && !enumerable.GetEnumerator().MoveNext()
+        )
         {
             return false;
         }
@@ -111,5 +157,6 @@ internal static class DebuggerHelpers
         return true;
     }
 
-    private static KeyValuePair<string, object?> Create(string key, object? value) => new KeyValuePair<string, object?>(key, value);
+    private static KeyValuePair<string, object?> Create(string key, object? value) =>
+        new KeyValuePair<string, object?>(key, value);
 }

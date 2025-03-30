@@ -36,7 +36,8 @@ public static class LinkGeneratorRouteValuesAddressExtensions
         object? values,
         PathString? pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(httpContext);
@@ -49,7 +50,8 @@ public static class LinkGeneratorRouteValuesAddressExtensions
             address.AmbientValues,
             pathBase,
             fragment,
-            options);
+            options
+        );
     }
 
     /// <summary>
@@ -68,7 +70,11 @@ public static class LinkGeneratorRouteValuesAddressExtensions
     /// names from <c>RouteOptions</c>.
     /// </param>
     /// <returns>A URI with an absolute path, or <c>null</c>.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetPathByRouteValues(
         this LinkGenerator generator,
         HttpContext httpContext,
@@ -76,7 +82,8 @@ public static class LinkGeneratorRouteValuesAddressExtensions
         RouteValueDictionary? values = default,
         PathString? pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(httpContext);
@@ -89,7 +96,8 @@ public static class LinkGeneratorRouteValuesAddressExtensions
             address.AmbientValues,
             pathBase,
             fragment,
-            options);
+            options
+        );
     }
 
     /// <summary>
@@ -112,12 +120,19 @@ public static class LinkGeneratorRouteValuesAddressExtensions
         object? values,
         PathString pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
 
         var address = CreateAddress(httpContext: null, routeName, new(values));
-        return generator.GetPathByAddress<RouteValuesAddress>(address, address.ExplicitValues, pathBase, fragment, options);
+        return generator.GetPathByAddress<RouteValuesAddress>(
+            address,
+            address.ExplicitValues,
+            pathBase,
+            fragment,
+            options
+        );
     }
 
     /// <summary>
@@ -133,19 +148,30 @@ public static class LinkGeneratorRouteValuesAddressExtensions
     /// names from <c>RouteOptions</c>.
     /// </param>
     /// <returns>A URI with an absolute path, or <c>null</c>.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetPathByRouteValues(
         this LinkGenerator generator,
         string? routeName,
         RouteValueDictionary? values = default,
         PathString pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
 
         var address = CreateAddress(httpContext: null, routeName, values);
-        return generator.GetPathByAddress<RouteValuesAddress>(address, address.ExplicitValues, pathBase, fragment, options);
+        return generator.GetPathByAddress<RouteValuesAddress>(
+            address,
+            address.ExplicitValues,
+            pathBase,
+            fragment,
+            options
+        );
     }
 
     /// <summary>
@@ -189,7 +215,8 @@ public static class LinkGeneratorRouteValuesAddressExtensions
         HostString? host = default,
         PathString? pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(httpContext);
@@ -204,7 +231,8 @@ public static class LinkGeneratorRouteValuesAddressExtensions
             host,
             pathBase,
             fragment,
-            options);
+            options
+        );
     }
 
     /// <summary>
@@ -238,7 +266,11 @@ public static class LinkGeneratorRouteValuesAddressExtensions
     /// your deployment environment.
     /// </para>
     /// </remarks>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetUriByRouteValues(
         this LinkGenerator generator,
         HttpContext httpContext,
@@ -248,7 +280,8 @@ public static class LinkGeneratorRouteValuesAddressExtensions
         HostString? host = default,
         PathString? pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
         ArgumentNullException.ThrowIfNull(httpContext);
@@ -263,7 +296,8 @@ public static class LinkGeneratorRouteValuesAddressExtensions
             host,
             pathBase,
             fragment,
-            options);
+            options
+        );
     }
 
     /// <summary>
@@ -301,12 +335,21 @@ public static class LinkGeneratorRouteValuesAddressExtensions
         HostString host,
         PathString pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
 
         var address = CreateAddress(httpContext: null, routeName, new(values));
-        return generator.GetUriByAddress<RouteValuesAddress>(address, address.ExplicitValues, scheme, host, pathBase, fragment, options);
+        return generator.GetUriByAddress<RouteValuesAddress>(
+            address,
+            address.ExplicitValues,
+            scheme,
+            host,
+            pathBase,
+            fragment,
+            options
+        );
     }
 
     /// <summary>
@@ -335,7 +378,11 @@ public static class LinkGeneratorRouteValuesAddressExtensions
     /// your deployment environment.
     /// </para>
     /// </remarks>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static string? GetUriByRouteValues(
         this LinkGenerator generator,
         string? routeName,
@@ -344,15 +391,28 @@ public static class LinkGeneratorRouteValuesAddressExtensions
         HostString host,
         PathString pathBase = default,
         FragmentString fragment = default,
-        LinkOptions? options = default)
+        LinkOptions? options = default
+    )
     {
         ArgumentNullException.ThrowIfNull(generator);
 
         var address = CreateAddress(httpContext: null, routeName, values);
-        return generator.GetUriByAddress<RouteValuesAddress>(address, address.ExplicitValues, scheme, host, pathBase, fragment, options);
+        return generator.GetUriByAddress<RouteValuesAddress>(
+            address,
+            address.ExplicitValues,
+            scheme,
+            host,
+            pathBase,
+            fragment,
+            options
+        );
     }
 
-    private static RouteValuesAddress CreateAddress(HttpContext? httpContext, string? routeName, RouteValueDictionary? values)
+    private static RouteValuesAddress CreateAddress(
+        HttpContext? httpContext,
+        string? routeName,
+        RouteValueDictionary? values
+    )
     {
         return new RouteValuesAddress()
         {

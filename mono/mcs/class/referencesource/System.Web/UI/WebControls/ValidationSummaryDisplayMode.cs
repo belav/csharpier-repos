@@ -1,21 +1,20 @@
 //------------------------------------------------------------------------------
 // <copyright file="ValidationSummaryDisplayMode.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
 
-namespace System.Web.UI.WebControls {
-    
-
+namespace System.Web.UI.WebControls
+{
     /// <devdoc>
-    ///    <para>Specifies the validation summary display mode to be 
+    ///    <para>Specifies the validation summary display mode to be
     ///       used by the <see cref='System.Web.UI.WebControls.ValidationSummary'/> control.</para>
     /// </devdoc>
-    public enum ValidationSummaryDisplayMode {
-
+    public enum ValidationSummaryDisplayMode
+    {
         /// <devdoc>
         ///    Specifies that each error message is
         ///    displayed on its own line.
@@ -33,7 +32,6 @@ namespace System.Web.UI.WebControls {
         ///    displayed together in a single paragraph, separated from each other by two
         ///    spaces.
         /// </devdoc>
-        SingleParagraph = 2
+        SingleParagraph = 2,
     }
 }
-

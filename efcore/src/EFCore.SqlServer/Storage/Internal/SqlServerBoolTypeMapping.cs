@@ -27,12 +27,8 @@ public class SqlServerBoolTypeMapping : BoolTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqlServerBoolTypeMapping(
-        string storeType,
-        DbType? dbType = System.Data.DbType.Boolean)
-        : base(storeType, dbType)
-    {
-    }
+    public SqlServerBoolTypeMapping(string storeType, DbType? dbType = System.Data.DbType.Boolean)
+        : base(storeType, dbType) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -41,17 +37,15 @@ public class SqlServerBoolTypeMapping : BoolTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqlServerBoolTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqlServerBoolTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqlServerBoolTypeMapping(parameters);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -59,6 +53,6 @@ public class SqlServerBoolTypeMapping : BoolTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override string GenerateNonNullSqlLiteral(object value)
-        => $"CAST({base.GenerateNonNullSqlLiteral(value)} AS {StoreType})";
+    protected override string GenerateNonNullSqlLiteral(object value) =>
+        $"CAST({base.GenerateNonNullSqlLiteral(value)} AS {StoreType})";
 }

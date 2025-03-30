@@ -4,11 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Numerics;
+using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace FPBehaviorApp
@@ -28,7 +28,7 @@ namespace FPBehaviorApp
         ToInt,
         ToLong,
         ToUInt,
-        ToULong
+        ToULong,
     }
 
     public static class Native
@@ -90,11 +90,16 @@ namespace FPBehaviorApp
                 case FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_X86_X64:
                 case FPtoIntegerConversionType.CONVERT_BACKWARD_COMPATIBLE:
                 case FPtoIntegerConversionType.CONVERT_SENTINEL:
-                    return (Double.IsNaN(x) || (x<int.MinValue) || (x > int.MaxValue)) ? int.MinValue: (int) x;
+                    return (Double.IsNaN(x) || (x < int.MinValue) || (x > int.MaxValue))
+                        ? int.MinValue
+                        : (int)x;
 
                 case FPtoIntegerConversionType.CONVERT_SATURATING:
                 case FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32:
-                    return Double.IsNaN(x) ? 0 : (x< int.MinValue) ? int.MinValue : (x > int.MaxValue) ? int.MaxValue : (int) x;
+                    return Double.IsNaN(x) ? 0
+                        : (x < int.MinValue) ? int.MinValue
+                        : (x > int.MaxValue) ? int.MaxValue
+                        : (int)x;
             }
             return 0;
         }
@@ -111,14 +116,20 @@ namespace FPBehaviorApp
             {
                 case FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_X86_X64:
                 case FPtoIntegerConversionType.CONVERT_BACKWARD_COMPATIBLE:
-                    return (Double.IsNaN(x) || (x < long.MinValue) || (x >= llong_max_plus_1)) ? 0 : (uint)(long)x;
+                    return (Double.IsNaN(x) || (x < long.MinValue) || (x >= llong_max_plus_1))
+                        ? 0
+                        : (uint)(long)x;
 
                 case FPtoIntegerConversionType.CONVERT_SENTINEL:
-                    return (Double.IsNaN(x) || (x < 0) || (x > uint.MaxValue)) ? uint.MaxValue : (uint)x;
+                    return (Double.IsNaN(x) || (x < 0) || (x > uint.MaxValue))
+                        ? uint.MaxValue
+                        : (uint)x;
 
                 case FPtoIntegerConversionType.CONVERT_SATURATING:
                 case FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32:
-                    return (Double.IsNaN(x) || (x < 0)) ? 0 : (x > uint.MaxValue) ? uint.MaxValue : (uint)x;
+                    return (Double.IsNaN(x) || (x < 0)) ? 0
+                        : (x > uint.MaxValue) ? uint.MaxValue
+                        : (uint)x;
             }
 
             return 0;
@@ -139,7 +150,9 @@ namespace FPBehaviorApp
                 case FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_X86_X64:
                 case FPtoIntegerConversionType.CONVERT_BACKWARD_COMPATIBLE:
                 case FPtoIntegerConversionType.CONVERT_SENTINEL:
-                    return (Double.IsNaN(x) || (x < long.MinValue) || (x >= llong_max_plus_1)) ? long.MinValue : (long)x;
+                    return (Double.IsNaN(x) || (x < long.MinValue) || (x >= llong_max_plus_1))
+                        ? long.MinValue
+                        : (long)x;
 
                 case FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32:
                     if (x > 0)
@@ -152,7 +165,10 @@ namespace FPBehaviorApp
                     }
 
                 case FPtoIntegerConversionType.CONVERT_SATURATING:
-                    return Double.IsNaN(x) ? 0 : (x < long.MinValue) ? long.MinValue : (x >= llong_max_plus_1) ? long.MaxValue : (long)x;
+                    return Double.IsNaN(x) ? 0
+                        : (x < long.MinValue) ? long.MinValue
+                        : (x >= llong_max_plus_1) ? long.MaxValue
+                        : (long)x;
             }
 
             return 0;
@@ -160,8 +176,14 @@ namespace FPBehaviorApp
             static ulong CppNativeArm32ConvertDoubleToUInt64(double y)
             {
                 const double uintmax_plus_1 = -2.0 * (double)int.MinValue;
-                uint hi32Bits = ConvertDoubleToUInt32(y / uintmax_plus_1, FPtoIntegerConversionType.CONVERT_SATURATING);
-                uint lo32Bits = ConvertDoubleToUInt32(y - (((double)hi32Bits) * uintmax_plus_1), FPtoIntegerConversionType.CONVERT_SATURATING);
+                uint hi32Bits = ConvertDoubleToUInt32(
+                    y / uintmax_plus_1,
+                    FPtoIntegerConversionType.CONVERT_SATURATING
+                );
+                uint lo32Bits = ConvertDoubleToUInt32(
+                    y - (((double)hi32Bits) * uintmax_plus_1),
+                    FPtoIntegerConversionType.CONVERT_SATURATING
+                );
                 return (((ulong)hi32Bits) << (int)32) + lo32Bits;
             }
         }
@@ -180,31 +202,46 @@ namespace FPBehaviorApp
             switch (t)
             {
                 case FPtoIntegerConversionType.CONVERT_BACKWARD_COMPATIBLE:
-                    return (Double.IsNaN(x) || (x < long.MinValue) || (x >= ullong_max_plus_1)) ? unchecked((ulong)long.MinValue): (x < 0) ? (ulong)(long)x: (ulong)x;
+                    return (Double.IsNaN(x) || (x < long.MinValue) || (x >= ullong_max_plus_1))
+                            ? unchecked((ulong)long.MinValue)
+                        : (x < 0) ? (ulong)(long)x
+                        : (ulong)x;
 
                 case FPtoIntegerConversionType.CONVERT_SENTINEL:
-                    return (Double.IsNaN(x) || (x < 0) || (x >= ullong_max_plus_1)) ? ulong.MaxValue : (ulong)x;
+                    return (Double.IsNaN(x) || (x < 0) || (x >= ullong_max_plus_1))
+                        ? ulong.MaxValue
+                        : (ulong)x;
 
                 case FPtoIntegerConversionType.CONVERT_SATURATING:
-                    return (Double.IsNaN(x) || (x < 0)) ? 0 : (x >= ullong_max_plus_1) ? ulong.MaxValue : (ulong)x;
+                    return (Double.IsNaN(x) || (x < 0)) ? 0
+                        : (x >= ullong_max_plus_1) ? ulong.MaxValue
+                        : (ulong)x;
 
                 case FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32:
+                {
+                    if (x < two63)
                     {
-                        if (x < two63)
-                        {
-                            return (ulong)ConvertDoubleToInt64(x, FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32);
-                        }
-                        else
-                        {
-                            return (ulong)ConvertDoubleToInt64(x - two63, FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32) + (0x8000000000000000);
-                        }
+                        return (ulong)ConvertDoubleToInt64(
+                            x,
+                            FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32
+                        );
                     }
+                    else
+                    {
+                        return (ulong)ConvertDoubleToInt64(
+                                x - two63,
+                                FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32
+                            ) + (0x8000000000000000);
+                    }
+                }
 
                 case FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_X86_X64:
 
                     if (x < two63)
                     {
-                        return (x < long.MinValue) ? unchecked((ulong)long.MinValue) : (ulong)(long)x;
+                        return (x < long.MinValue)
+                            ? unchecked((ulong)long.MinValue)
+                            : (ulong)(long)x;
                     }
                     else
                     {
@@ -212,14 +249,21 @@ namespace FPBehaviorApp
                         const double llong_max_plus_1 = (double)((ulong)long.MaxValue + 1);
                         x -= two63;
                         x = Math.Truncate(x);
-                        return (ulong)((Double.IsNaN(x) || (x >= llong_max_plus_1)) ? long.MinValue : (long)x) + (0x8000000000000000);
+                        return (ulong)(
+                                (Double.IsNaN(x) || (x >= llong_max_plus_1))
+                                    ? long.MinValue
+                                    : (long)x
+                            ) + (0x8000000000000000);
                     }
             }
 
             return 0;
         }
 
-        public static Vector<int> ConvertToVectorInt32(Vector<float> vFloat, FPtoIntegerConversionType t)
+        public static Vector<int> ConvertToVectorInt32(
+            Vector<float> vFloat,
+            FPtoIntegerConversionType t
+        )
         {
             int[] values = new int[Vector<float>.Count];
             for (int i = 0; i < values.Length; i++)
@@ -229,7 +273,10 @@ namespace FPBehaviorApp
             return new Vector<int>(values);
         }
 
-        public static Vector<uint> ConvertToVectorUInt32(Vector<float> vFloat, FPtoIntegerConversionType t)
+        public static Vector<uint> ConvertToVectorUInt32(
+            Vector<float> vFloat,
+            FPtoIntegerConversionType t
+        )
         {
             uint[] values = new uint[Vector<float>.Count];
             for (int i = 0; i < values.Length; i++)
@@ -239,7 +286,10 @@ namespace FPBehaviorApp
             return new Vector<uint>(values);
         }
 
-        public static Vector<long> ConvertToVectorInt64(Vector<double> vFloat, FPtoIntegerConversionType t)
+        public static Vector<long> ConvertToVectorInt64(
+            Vector<double> vFloat,
+            FPtoIntegerConversionType t
+        )
         {
             long[] values = new long[Vector<double>.Count];
             for (int i = 0; i < values.Length; i++)
@@ -249,7 +299,10 @@ namespace FPBehaviorApp
             return new Vector<long>(values);
         }
 
-        public static Vector<ulong> ConvertToVectorUInt64(Vector<double> vFloat, FPtoIntegerConversionType t)
+        public static Vector<ulong> ConvertToVectorUInt64(
+            Vector<double> vFloat,
+            FPtoIntegerConversionType t
+        )
         {
             ulong[] values = new ulong[Vector<double>.Count];
             for (int i = 0; i < values.Length; i++)
@@ -263,9 +316,14 @@ namespace FPBehaviorApp
     public class Program
     {
         static int failures = 0;
-        static FPtoIntegerConversionType ManagedConversionRule = FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_X86_X64;
+        static FPtoIntegerConversionType ManagedConversionRule =
+            FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_X86_X64;
 
-        static void TestBitValue(uint value, double? dblValNullable = null, FPtoIntegerConversionType? tValue = null)
+        static void TestBitValue(
+            uint value,
+            double? dblValNullable = null,
+            FPtoIntegerConversionType? tValue = null
+        )
         {
             double dblVal;
 
@@ -280,8 +338,16 @@ namespace FPBehaviorApp
 
             if (!tValue.HasValue)
             {
-                TestBitValue(value, dblVal, FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_X86_X64);
-                TestBitValue(value, dblVal, FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32);
+                TestBitValue(
+                    value,
+                    dblVal,
+                    FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_X86_X64
+                );
+                TestBitValue(
+                    value,
+                    dblVal,
+                    FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32
+                );
                 TestBitValue(value, dblVal, FPtoIntegerConversionType.CONVERT_BACKWARD_COMPATIBLE);
                 TestBitValue(value, dblVal, FPtoIntegerConversionType.CONVERT_SATURATING);
                 TestBitValue(value, dblVal, FPtoIntegerConversionType.CONVERT_SENTINEL);
@@ -293,51 +359,87 @@ namespace FPBehaviorApp
             if (Managed.ConvertDoubleToInt32(dblVal, t) != Native.ConvertDoubleToInt32(dblVal, t))
             {
                 failures++;
-                Console.WriteLine($"Managed.ConvertDoubleToInt32(dblVal, t) != Native.ConvertDoubleToInt32(dblVal, t) {t} {value} {dblVal} {Managed.ConvertDoubleToInt32(dblVal, t)} != {Native.ConvertDoubleToInt32(dblVal, t)}");
+                Console.WriteLine(
+                    $"Managed.ConvertDoubleToInt32(dblVal, t) != Native.ConvertDoubleToInt32(dblVal, t) {t} {value} {dblVal} {Managed.ConvertDoubleToInt32(dblVal, t)} != {Native.ConvertDoubleToInt32(dblVal, t)}"
+                );
             }
 
             if (Managed.ConvertDoubleToUInt32(dblVal, t) != Native.ConvertDoubleToUInt32(dblVal, t))
             {
                 failures++;
-                Console.WriteLine($"Managed.ConvertDoubleToUInt32(dblVal, t) != Native.ConvertDoubleToUInt32(dblVal, t) {t} {value} {dblVal} {Managed.ConvertDoubleToUInt32(dblVal, t)} != {Native.ConvertDoubleToUInt32(dblVal, t)}");
+                Console.WriteLine(
+                    $"Managed.ConvertDoubleToUInt32(dblVal, t) != Native.ConvertDoubleToUInt32(dblVal, t) {t} {value} {dblVal} {Managed.ConvertDoubleToUInt32(dblVal, t)} != {Native.ConvertDoubleToUInt32(dblVal, t)}"
+                );
             }
 
             if (Managed.ConvertDoubleToInt64(dblVal, t) != Native.ConvertDoubleToInt64(dblVal, t))
             {
                 failures++;
-                Console.WriteLine($"Managed.ConvertDoubleToInt64(dblVal, t) != Native.ConvertDoubleToInt64(dblVal, t) {t} {value} {dblVal} {Managed.ConvertDoubleToInt64(dblVal, t)} != {Native.ConvertDoubleToInt64(dblVal, t)}");
+                Console.WriteLine(
+                    $"Managed.ConvertDoubleToInt64(dblVal, t) != Native.ConvertDoubleToInt64(dblVal, t) {t} {value} {dblVal} {Managed.ConvertDoubleToInt64(dblVal, t)} != {Native.ConvertDoubleToInt64(dblVal, t)}"
+                );
             }
 
             if (Managed.ConvertDoubleToUInt64(dblVal, t) != Native.ConvertDoubleToUInt64(dblVal, t))
             {
                 failures++;
-                Console.WriteLine($"Managed.ConvertDoubleToUInt64(dblVal, t) != Native.ConvertDoubleToUInt64(dblVal, t) {t} {value} {dblVal} {Managed.ConvertDoubleToUInt64(dblVal, t)} != {Native.ConvertDoubleToUInt64(dblVal, t)}");
+                Console.WriteLine(
+                    $"Managed.ConvertDoubleToUInt64(dblVal, t) != Native.ConvertDoubleToUInt64(dblVal, t) {t} {value} {dblVal} {Managed.ConvertDoubleToUInt64(dblVal, t)} != {Native.ConvertDoubleToUInt64(dblVal, t)}"
+                );
             }
-            
+
             if (t == ManagedConversionRule)
             {
-                if (Managed.ConvertDoubleToInt32(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR) != Managed.ConvertDoubleToInt32(dblVal, t))
+                if (
+                    Managed.ConvertDoubleToInt32(
+                        dblVal,
+                        FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR
+                    ) != Managed.ConvertDoubleToInt32(dblVal, t)
+                )
                 {
                     failures++;
-                    Console.WriteLine($"ConvertDoubleToInt32 NativeCompilerBehavior(managed) {t} {value} {dblVal} {Managed.ConvertDoubleToInt32(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR)} != {Managed.ConvertDoubleToInt32(dblVal, t)}");
+                    Console.WriteLine(
+                        $"ConvertDoubleToInt32 NativeCompilerBehavior(managed) {t} {value} {dblVal} {Managed.ConvertDoubleToInt32(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR)} != {Managed.ConvertDoubleToInt32(dblVal, t)}"
+                    );
                 }
 
-                if (Managed.ConvertDoubleToUInt32(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR) != Managed.ConvertDoubleToUInt32(dblVal, t))
+                if (
+                    Managed.ConvertDoubleToUInt32(
+                        dblVal,
+                        FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR
+                    ) != Managed.ConvertDoubleToUInt32(dblVal, t)
+                )
                 {
                     failures++;
-                    Console.WriteLine($"ConvertDoubleToUInt32 NativeCompilerBehavior(managed) {t} {value} {dblVal} {Managed.ConvertDoubleToUInt32(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR)} != {Managed.ConvertDoubleToUInt32(dblVal, t)}");
+                    Console.WriteLine(
+                        $"ConvertDoubleToUInt32 NativeCompilerBehavior(managed) {t} {value} {dblVal} {Managed.ConvertDoubleToUInt32(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR)} != {Managed.ConvertDoubleToUInt32(dblVal, t)}"
+                    );
                 }
 
-                if (Managed.ConvertDoubleToInt64(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR) != Managed.ConvertDoubleToInt64(dblVal, t))
+                if (
+                    Managed.ConvertDoubleToInt64(
+                        dblVal,
+                        FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR
+                    ) != Managed.ConvertDoubleToInt64(dblVal, t)
+                )
                 {
                     failures++;
-                    Console.WriteLine($"ConvertDoubleToInt64 NativeCompilerBehavior(managed) {t} {value} {dblVal} {Managed.ConvertDoubleToInt64(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR)} != {Managed.ConvertDoubleToInt64(dblVal, t)}");
+                    Console.WriteLine(
+                        $"ConvertDoubleToInt64 NativeCompilerBehavior(managed) {t} {value} {dblVal} {Managed.ConvertDoubleToInt64(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR)} != {Managed.ConvertDoubleToInt64(dblVal, t)}"
+                    );
                 }
-                
-                if (Managed.ConvertDoubleToUInt64(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR) != Managed.ConvertDoubleToUInt64(dblVal, t))
+
+                if (
+                    Managed.ConvertDoubleToUInt64(
+                        dblVal,
+                        FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR
+                    ) != Managed.ConvertDoubleToUInt64(dblVal, t)
+                )
                 {
                     failures++;
-                    Console.WriteLine($"ConvertDoubleToUInt64 NativeCompilerBehavior(managed) {t} {value} {dblVal} {Managed.ConvertDoubleToUInt64(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR)} != {Managed.ConvertDoubleToUInt64(dblVal, t)}");
+                    Console.WriteLine(
+                        $"ConvertDoubleToUInt64 NativeCompilerBehavior(managed) {t} {value} {dblVal} {Managed.ConvertDoubleToUInt64(dblVal, FPtoIntegerConversionType.CONVERT_NATIVECOMPILERBEHAVIOR)} != {Managed.ConvertDoubleToUInt64(dblVal, t)}"
+                    );
                 }
 
                 Vector<float> vFloat = new Vector<float>((float)dblVal);
@@ -346,22 +448,30 @@ namespace FPBehaviorApp
                 if (Managed.ConvertToVectorInt32(vFloat, t) != Vector.ConvertToInt32(vFloat))
                 {
                     failures++;
-                    Console.WriteLine($"Managed.ConvertToVectorInt32(vFloat, t) != Vector.ConvertToInt32(vFloat) {t} {value} {dblVal} {Managed.ConvertToVectorInt32(vFloat, t)} != {Vector.ConvertToInt32(vFloat)}");
+                    Console.WriteLine(
+                        $"Managed.ConvertToVectorInt32(vFloat, t) != Vector.ConvertToInt32(vFloat) {t} {value} {dblVal} {Managed.ConvertToVectorInt32(vFloat, t)} != {Vector.ConvertToInt32(vFloat)}"
+                    );
                 }
                 if (Managed.ConvertToVectorUInt32(vFloat, t) != Vector.ConvertToUInt32(vFloat))
                 {
                     failures++;
-                    Console.WriteLine($"Managed.ConvertToVectorUInt32(vFloat, t) != Vector.ConvertToUInt32(vFloat) {t} {value} {dblVal} {Managed.ConvertToVectorUInt32(vFloat, t)} != {Vector.ConvertToUInt32(vFloat)}");
+                    Console.WriteLine(
+                        $"Managed.ConvertToVectorUInt32(vFloat, t) != Vector.ConvertToUInt32(vFloat) {t} {value} {dblVal} {Managed.ConvertToVectorUInt32(vFloat, t)} != {Vector.ConvertToUInt32(vFloat)}"
+                    );
                 }
                 if (Managed.ConvertToVectorInt64(vDouble, t) != Vector.ConvertToInt64(vDouble))
                 {
                     failures++;
-                    Console.WriteLine($"Managed.ConvertToVectorInt64(vDouble, t) != Vector.ConvertToInt64(vDouble) {t} {value} {dblVal} {Managed.ConvertToVectorInt64(vDouble, t)} != {Vector.ConvertToInt64(vDouble)}");
+                    Console.WriteLine(
+                        $"Managed.ConvertToVectorInt64(vDouble, t) != Vector.ConvertToInt64(vDouble) {t} {value} {dblVal} {Managed.ConvertToVectorInt64(vDouble, t)} != {Vector.ConvertToInt64(vDouble)}"
+                    );
                 }
                 if (Managed.ConvertToVectorUInt64(vDouble, t) != Vector.ConvertToUInt64(vDouble))
                 {
                     failures++;
-                    Console.WriteLine($"Managed.ConvertToVectorUInt64(vDouble, t) != Vector.ConvertToUInt64(vDouble) {t} {value} {dblVal} {Managed.ConvertToVectorUInt64(vDouble, t)} != {Vector.ConvertToUInt64(vDouble)}");
+                    Console.WriteLine(
+                        $"Managed.ConvertToVectorUInt64(vDouble, t) != Vector.ConvertToUInt64(vDouble) {t} {value} {dblVal} {Managed.ConvertToVectorUInt64(vDouble, t)} != {Vector.ConvertToUInt64(vDouble)}"
+                    );
                 }
             }
 
@@ -379,18 +489,22 @@ namespace FPBehaviorApp
             {
                 case Architecture.X86:
                 case Architecture.X64:
-                    Program.ManagedConversionRule = FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_X86_X64;
+                    Program.ManagedConversionRule =
+                        FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_X86_X64;
                     break;
 
                 case Architecture.Arm:
-                    Program.ManagedConversionRule = FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32;
+                    Program.ManagedConversionRule =
+                        FPtoIntegerConversionType.CONVERT_MANAGED_BACKWARD_COMPATIBLE_ARM32;
                     break;
 
                 case Architecture.Arm64:
                     Program.ManagedConversionRule = FPtoIntegerConversionType.CONVERT_SATURATING;
                     break;
             }
-            Console.WriteLine($"Expected managed float behavior is {Program.ManagedConversionRule} Execute with parameter to adjust");
+            Console.WriteLine(
+                $"Expected managed float behavior is {Program.ManagedConversionRule} Execute with parameter to adjust"
+            );
             Console.WriteLine("Specific test cases");
 
             TestBitValue(0, 9223372036854777856.0);
@@ -421,9 +535,11 @@ namespace FPBehaviorApp
                 TestBitValue(bitValue);
             }
 
-            Console.WriteLine($"Walk through rest of 32bit float space skipping {increment} floats at a time (swap to 1 float at a time for a more exhaustive scan");
+            Console.WriteLine(
+                $"Walk through rest of 32bit float space skipping {increment} floats at a time (swap to 1 float at a time for a more exhaustive scan"
+            );
             int i = 0;
-            for (bitValue = increment + 1; bitValue > increment; bitValue+=increment)
+            for (bitValue = increment + 1; bitValue > increment; bitValue += increment)
             {
                 if (((++i) % 1_000_000) == 0)
                     Console.Write(".");

@@ -16,15 +16,20 @@ public class DefaultValuesTest : IDisposable
         {
             context.Database.EnsureCreatedResiliently();
 
-            context.Chippers.Add(
-                new Chipper { Id = "Default" });
+            context.Chippers.Add(new Chipper { Id = "Default" });
 
             context.SaveChanges();
 
-            var honeyDijon = context.Add(
-                new KettleChips { Name = "Honey Dijon" }).Entity;
-            var buffaloBleu = context.Add(
-                new KettleChips { Name = "Buffalo Bleu", BestBuyDate = new DateTime(2111, 1, 11) }).Entity;
+            var honeyDijon = context.Add(new KettleChips { Name = "Honey Dijon" }).Entity;
+            var buffaloBleu = context
+                .Add(
+                    new KettleChips
+                    {
+                        Name = "Buffalo Bleu",
+                        BestBuyDate = new DateTime(2111, 1, 11),
+                    }
+                )
+                .Entity;
 
             context.SaveChanges();
 
@@ -34,8 +39,14 @@ public class DefaultValuesTest : IDisposable
 
         using (var context = new ChipsContext(_serviceProvider, TestStore.Name))
         {
-            Assert.Equal(new DateTime(2035, 9, 25), context.Chips.Single(c => c.Name == "Honey Dijon").BestBuyDate);
-            Assert.Equal(new DateTime(2111, 1, 11), context.Chips.Single(c => c.Name == "Buffalo Bleu").BestBuyDate);
+            Assert.Equal(
+                new DateTime(2035, 9, 25),
+                context.Chips.Single(c => c.Name == "Honey Dijon").BestBuyDate
+            );
+            Assert.Equal(
+                new DateTime(2111, 1, 11),
+                context.Chips.Single(c => c.Name == "Buffalo Bleu").BestBuyDate
+            );
         }
     }
 
@@ -52,26 +63,27 @@ public class DefaultValuesTest : IDisposable
 
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<KettleChips> Chips { get; set; }
+
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public DbSet<Chipper> Chippers { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-                .UseSqlServer(SqlServerTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration())
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
+                .UseSqlServer(
+                    SqlServerTestStore.CreateConnectionString(_databaseName),
+                    b => b.ApplyConfiguration()
+                )
                 .UseInternalServiceProvider(_serviceProvider);
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<KettleChips>(
-                b =>
-                {
-                    b.Property(e => e.BestBuyDate)
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(new DateTime(2035, 9, 25));
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<KettleChips>(b =>
+            {
+                b.Property(e => e.BestBuyDate)
+                    .ValueGeneratedOnAdd()
+                    .HasDefaultValue(new DateTime(2035, 9, 25));
 
-                    b.Property(e => e.ChipperId)
-                        .IsRequired()
-                        .HasDefaultValue("Default");
-                });
+                b.Property(e => e.ChipperId).IsRequired().HasDefaultValue("Default");
+            });
     }
 
     private class KettleChips
@@ -96,6 +108,5 @@ public class DefaultValuesTest : IDisposable
 
     protected SqlServerTestStore TestStore { get; }
 
-    public virtual void Dispose()
-        => TestStore.Dispose();
+    public virtual void Dispose() => TestStore.Dispose();
 }

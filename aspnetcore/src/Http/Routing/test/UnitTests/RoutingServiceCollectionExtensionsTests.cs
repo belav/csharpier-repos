@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Routing;
+
 public class RoutingServiceCollectionExtensionsTests
 {
     [Fact]
@@ -53,7 +54,13 @@ public class RoutingServiceCollectionExtensionsTests
 
     public class DummyRegexRouteConstraint : IRouteConstraint
     {
-        public bool Match(HttpContext httpContext, IRouter route, string routeKey, RouteValueDictionary values, RouteDirection routeDirection)
+        public bool Match(
+            HttpContext httpContext,
+            IRouter route,
+            string routeKey,
+            RouteValueDictionary values,
+            RouteDirection routeDirection
+        )
         {
             return true;
         }

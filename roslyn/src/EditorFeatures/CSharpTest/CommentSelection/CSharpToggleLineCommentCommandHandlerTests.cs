@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_CaretInUncommentedLine()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -52,8 +51,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -69,8 +67,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_CaretBeforeUncommentedLine()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -79,8 +76,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -96,8 +92,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_SingleLineSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -106,8 +101,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -123,8 +117,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_PartialSingleLineSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -133,8 +126,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -150,8 +142,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_SingleLineWithWhitespaceSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -162,8 +153,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -181,8 +171,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_SelectionInsideCommentAtEndOfLine()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -191,8 +180,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -208,8 +196,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_SelectionAroundCommentAtEndOfLine()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -218,8 +205,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -235,8 +221,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_SelectionOutsideCommentAtEndOfLine()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -245,8 +230,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -262,8 +246,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_CaretOutsideCommentAtEndOfLine()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -272,8 +255,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -289,8 +271,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_CaretInsideCommentAtEndOfLine()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -299,8 +280,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -316,8 +296,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_CommentMarkerInString()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -326,8 +305,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -343,8 +321,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_MultipleLinesSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -354,8 +331,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -372,8 +348,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_MultipleLinesWithWhitespaceSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -386,8 +361,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -407,8 +381,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_MultipleLinesPartiallyCommentedSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -418,8 +391,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -436,8 +408,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_MultipleLinesWithCommentsInLineSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -447,8 +418,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -465,8 +435,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_MultipleLinesWithDifferentIndentationsSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                 [|    void M()
@@ -477,8 +446,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }|]
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                 [|    //void M()
@@ -496,8 +464,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_MultiCaret()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -507,8 +474,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -525,8 +491,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_MultiSeletion()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -536,8 +501,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -554,8 +518,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_MultiSeletionPartiallyCommented()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -565,8 +528,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -584,8 +546,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         public void AddComment_WithProjectionBuffer()
         {
             var surfaceMarkup = @"&lt; html &gt;@{|S1:|}";
-            var csharpMarkup =
-                """
+            var csharpMarkup = """
                 {|S1:class C
                 {
                     void M()
@@ -594,8 +555,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }|}
                 """;
-            var expected =
-                """
+            var expected = """
                 &lt; html &gt;@class C
                 {
                     void M()
@@ -611,8 +571,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_CaretInCommentedLine()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -621,8 +580,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -638,8 +596,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_CaretBeforeCommentedLine()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -648,8 +605,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -665,8 +621,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_CaretInCommentedLineWithEndComment()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -675,8 +630,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -692,8 +646,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_CaretInDoubleCommentedLine()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -702,8 +655,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -719,8 +671,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_CommentedLineSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -729,8 +680,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -746,8 +696,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_InsideCommentSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -756,8 +705,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -773,8 +721,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_CommentedLineWithWhitespaceSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -785,8 +732,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -804,8 +750,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_CommentMarkerInString()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -814,8 +759,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -831,8 +775,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_MultipleCommentedLinesSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -842,8 +785,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -860,8 +802,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_MultipleCommentedLinesAndWhitespaceSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -874,8 +815,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -895,8 +835,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_MultipleCommentedLinesWithEndCommentSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -906,8 +845,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -924,8 +862,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_MultipleLinesWithDifferentIndentationsSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                 [|    //void M()
@@ -936,8 +873,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     //}|]
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                 [|    void M()
@@ -955,8 +891,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_MultiCaret()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -967,8 +902,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -986,8 +920,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_MultiSeletion()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -998,8 +931,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -1018,8 +950,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         public void RemoveComment_WithProjectionBuffer()
         {
             var surfaceMarkup = @"&lt; html &gt;@{|S1:|}";
-            var csharpMarkup =
-                """
+            var csharpMarkup = """
                 {|S1:class C
                 {
                     void M()
@@ -1028,8 +959,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }|}
                 """;
-            var expected =
-                """
+            var expected = """
                 &lt; html &gt;@class C
                 {
                     void M()
@@ -1045,8 +975,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void ToggleComment_MultipleLinesSelected()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -1060,28 +989,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
             var expected = new string[]
             {
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|////var i = 1;
+                        void M()
+                        {
+                            [|////var i = 1;
 
-                        //var j = 2;|]
+                            //var j = 2;|]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|//var i = 1;
+                        void M()
+                        {
+                            [|//var i = 1;
 
-                        var j = 2;|]
+                            var j = 2;|]
+                        }
                     }
-                }
-                """
-        };
+                    """,
+            };
 
             ToggleCommentMultiple(markup, expected);
         }
@@ -1089,8 +1018,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void ToggleComment_MultipleSelection()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -1104,39 +1032,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
             var expected = new string[]
             {
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|////var i = |]1;
-                [||]
-                        [|//var j = 2;|]
+                        void M()
+                        {
+                            [|////var i = |]1;
+                    [||]
+                            [|//var j = 2;|]
+                        }
                     }
-                }
-                """,
+                    """,
                 """
-                class C
-                {
-                    void M()
+                    class C
                     {
-                        [|//var i = |]1;
-                [||]
-                        [|var j = 2;|]
+                        void M()
+                        {
+                            [|//var i = |]1;
+                    [||]
+                            [|var j = 2;|]
+                        }
                     }
-                }
-                """
-        };
+                    """,
+            };
 
             ToggleCommentMultiple(markup, expected);
         }
 
-        internal override AbstractCommentSelectionBase<ValueTuple> GetToggleCommentCommandHandler(TestWorkspace workspace)
+        internal override AbstractCommentSelectionBase<ValueTuple> GetToggleCommentCommandHandler(
+            TestWorkspace workspace
+        )
         {
-            return (AbstractCommentSelectionBase<ValueTuple>)workspace.ExportProvider.GetExportedValues<ICommandHandler>()
-                .First(export => typeof(ToggleLineCommentCommandHandler).Equals(export.GetType()));
+            return (AbstractCommentSelectionBase<ValueTuple>)
+                workspace
+                    .ExportProvider.GetExportedValues<ICommandHandler>()
+                    .First(export =>
+                        typeof(ToggleLineCommentCommandHandler).Equals(export.GetType())
+                    );
         }
 
-        internal override TestWorkspace GetWorkspace(string markup, TestComposition composition)
-            => TestWorkspace.CreateCSharp(markup, composition: composition);
+        internal override TestWorkspace GetWorkspace(string markup, TestComposition composition) =>
+            TestWorkspace.CreateCSharp(markup, composition: composition);
     }
 }

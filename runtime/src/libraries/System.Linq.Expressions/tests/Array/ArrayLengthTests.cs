@@ -21,7 +21,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionBoolArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckBoolArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckBoolArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -39,7 +41,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionByteArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckByteArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckByteArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -57,7 +61,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionCustomArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckCustomArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckCustomArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -75,7 +81,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionCharArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckCharArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckCharArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -93,7 +101,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionCustom2ArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckCustom2ArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckCustom2ArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -111,7 +121,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionDecimalArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckDecimalArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckDecimalArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -129,7 +141,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionDelegateArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckDelegateArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckDelegateArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -147,7 +161,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptiondoubleArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckDoubleArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckDoubleArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -165,7 +181,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionEnumArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckEnumArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckEnumArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -183,7 +201,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionEnumLongArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckEnumLongArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckEnumLongArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -201,7 +221,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionFloatArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckFloatArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckFloatArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -219,7 +241,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionFuncArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckFuncArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckFuncArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -237,7 +261,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionInterfaceArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckInterfaceArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckInterfaceArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -255,7 +281,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionIEquatableArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckIEquatableArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckIEquatableArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -273,7 +301,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionIEquatable2ArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckIEquatable2ArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckIEquatable2ArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -291,7 +321,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionIntArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckIntArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckIntArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -309,7 +341,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionLongArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckLongArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckLongArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -327,7 +361,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionObjectArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckObjectArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckObjectArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -345,7 +381,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionStructArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckStructArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckStructArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -363,7 +401,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionSByteArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckSByteArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckSByteArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -373,15 +413,26 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckStructWithStringArrayLengthTest(bool useInterpreter)
         {
-            CheckStructWithStringArrayLengthExpression(GenerateStructWithStringArray(0), useInterpreter);
-            CheckStructWithStringArrayLengthExpression(GenerateStructWithStringArray(1), useInterpreter);
-            CheckStructWithStringArrayLengthExpression(GenerateStructWithStringArray(5), useInterpreter);
+            CheckStructWithStringArrayLengthExpression(
+                GenerateStructWithStringArray(0),
+                useInterpreter
+            );
+            CheckStructWithStringArrayLengthExpression(
+                GenerateStructWithStringArray(1),
+                useInterpreter
+            );
+            CheckStructWithStringArrayLengthExpression(
+                GenerateStructWithStringArray(5),
+                useInterpreter
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionStructWithStringArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckStructWithStringArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckStructWithStringArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -391,15 +442,28 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckStructWithStringAndStructArrayLengthTest(bool useInterpreter)
         {
-            CheckStructWithStringAndStructArrayLengthExpression(GenerateStructWithStringAndStructArray(0), useInterpreter);
-            CheckStructWithStringAndStructArrayLengthExpression(GenerateStructWithStringAndStructArray(1), useInterpreter);
-            CheckStructWithStringAndStructArrayLengthExpression(GenerateStructWithStringAndStructArray(5), useInterpreter);
+            CheckStructWithStringAndStructArrayLengthExpression(
+                GenerateStructWithStringAndStructArray(0),
+                useInterpreter
+            );
+            CheckStructWithStringAndStructArrayLengthExpression(
+                GenerateStructWithStringAndStructArray(1),
+                useInterpreter
+            );
+            CheckStructWithStringAndStructArrayLengthExpression(
+                GenerateStructWithStringAndStructArray(5),
+                useInterpreter
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionStructWithStringAndStructArrayLengthTest(bool useInterpreter)
+        public static void CheckExceptionStructWithStringAndStructArrayLengthTest(
+            bool useInterpreter
+        )
         {
-            Assert.Throws<NullReferenceException>(() => CheckStructWithStringAndStructArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckStructWithStringAndStructArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -417,7 +481,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionShortArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckShortArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckShortArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -427,15 +493,26 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckStructWithTwoFieldsArrayLengthTest(bool useInterpreter)
         {
-            CheckStructWithTwoFieldsArrayLengthExpression(GenerateStructWithTwoFieldsArray(0), useInterpreter);
-            CheckStructWithTwoFieldsArrayLengthExpression(GenerateStructWithTwoFieldsArray(1), useInterpreter);
-            CheckStructWithTwoFieldsArrayLengthExpression(GenerateStructWithTwoFieldsArray(5), useInterpreter);
+            CheckStructWithTwoFieldsArrayLengthExpression(
+                GenerateStructWithTwoFieldsArray(0),
+                useInterpreter
+            );
+            CheckStructWithTwoFieldsArrayLengthExpression(
+                GenerateStructWithTwoFieldsArray(1),
+                useInterpreter
+            );
+            CheckStructWithTwoFieldsArrayLengthExpression(
+                GenerateStructWithTwoFieldsArray(5),
+                useInterpreter
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionStructWithTwoFieldsArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckStructWithTwoFieldsArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckStructWithTwoFieldsArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -445,15 +522,26 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckStructWithValueArrayLengthTest(bool useInterpreter)
         {
-            CheckStructWithValueArrayLengthExpression(GenerateStructWithValueArray(0), useInterpreter);
-            CheckStructWithValueArrayLengthExpression(GenerateStructWithValueArray(1), useInterpreter);
-            CheckStructWithValueArrayLengthExpression(GenerateStructWithValueArray(5), useInterpreter);
+            CheckStructWithValueArrayLengthExpression(
+                GenerateStructWithValueArray(0),
+                useInterpreter
+            );
+            CheckStructWithValueArrayLengthExpression(
+                GenerateStructWithValueArray(1),
+                useInterpreter
+            );
+            CheckStructWithValueArrayLengthExpression(
+                GenerateStructWithValueArray(5),
+                useInterpreter
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionStructWithValueArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckStructWithValueArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckStructWithValueArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -471,7 +559,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionStringArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckStringArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckStringArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -489,7 +579,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionUIntArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckUIntArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckUIntArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -507,7 +599,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionULongArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckULongArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckULongArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -525,7 +619,9 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckExceptionUShortArrayLengthTest(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckUShortArrayLengthExpression(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckUShortArrayLengthExpression(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -587,81 +683,111 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericStructWithStringAndFieldArrayLengthTest(bool useInterpreter)
+        public static void CheckExceptionGenericStructWithStringAndFieldArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckExceptionGenericArrayLengthTestHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericCustomWithClassRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckGenericCustomWithClassRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckGenericWithClassRestrictionArrayLengthTestHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericCustomWithClassRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckExceptionGenericCustomWithClassRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckExceptionGenericWithClassRestrictionArrayLengthTestHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericObjectWithClassRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckGenericObjectWithClassRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckGenericWithClassRestrictionArrayLengthTestHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericObjectWithClassRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckExceptionGenericObjectWithClassRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckExceptionGenericWithClassRestrictionArrayLengthTestHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericCustomWithClassAndNewRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckGenericCustomWithClassAndNewRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckGenericWithClassAndNewRestrictionArrayLengthTestHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericCustomWithClassAndNewRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckExceptionGenericCustomWithClassAndNewRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckExceptionGenericWithClassAndNewRestrictionArrayLengthTestHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericObjectWithClassAndNewRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckGenericObjectWithClassAndNewRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckGenericWithClassAndNewRestrictionArrayLengthTestHelper<object>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericObjectWithClassAndNewRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckExceptionGenericObjectWithClassAndNewRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
-            CheckExceptionGenericWithClassAndNewRestrictionArrayLengthTestHelper<object>(useInterpreter);
+            CheckExceptionGenericWithClassAndNewRestrictionArrayLengthTestHelper<object>(
+                useInterpreter
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericCustomWithSubClassRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckGenericCustomWithSubClassRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckGenericWithSubClassRestrictionArrayLengthTestHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericCustomWithSubClassRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckExceptionGenericCustomWithSubClassRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckExceptionGenericWithSubClassRestrictionArrayLengthTestHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericCustomWithSubClassAndNewRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckGenericCustomWithSubClassAndNewRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckGenericWithSubClassAndNewRestrictionArrayLengthTestHelper<C>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericCustomWithSubClassAndNewRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckExceptionGenericCustomWithSubClassAndNewRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
-            CheckExceptionGenericWithSubClassAndNewRestrictionArrayLengthTestHelper<C>(useInterpreter);
+            CheckExceptionGenericWithSubClassAndNewRestrictionArrayLengthTestHelper<C>(
+                useInterpreter
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -671,31 +797,41 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericEnumWithStructRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckExceptionGenericEnumWithStructRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckExceptionGenericWithStructRestrictionArrayLengthTestHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericStructWithStructRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckGenericStructWithStructRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckGenericWithStructRestrictionArrayLengthTestHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericStructWithStructRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckExceptionGenericStructWithStructRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckExceptionGenericWithStructRestrictionArrayLengthTestHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckGenericStructWithStringAndFieldWithStructRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckGenericStructWithStringAndFieldWithStructRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckGenericWithStructRestrictionArrayLengthTestHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckExceptionGenericStructWithStringAndFieldWithStructRestrictionArrayLengthTest(bool useInterpreter)
+        public static void CheckExceptionGenericStructWithStringAndFieldWithStructRestrictionArrayLengthTest(
+            bool useInterpreter
+        )
         {
             CheckExceptionGenericWithStructRestrictionArrayLengthTestHelper<Scs>(useInterpreter);
         }
@@ -713,67 +849,160 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericArrayLengthTestHelper<T>(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(() => CheckGenericArrayLengthExpression<T>(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckGenericArrayLengthExpression<T>(null, useInterpreter)
+            );
         }
 
-        private static void CheckGenericWithClassRestrictionArrayLengthTestHelper<Tc>(bool useInterpreter) where Tc : class
+        private static void CheckGenericWithClassRestrictionArrayLengthTestHelper<Tc>(
+            bool useInterpreter
+        )
+            where Tc : class
         {
-            CheckGenericWithClassRestrictionArrayLengthExpression<Tc>(GenerateGenericWithClassRestrictionArray<Tc>(0), useInterpreter);
-            CheckGenericWithClassRestrictionArrayLengthExpression<Tc>(GenerateGenericWithClassRestrictionArray<Tc>(1), useInterpreter);
-            CheckGenericWithClassRestrictionArrayLengthExpression<Tc>(GenerateGenericWithClassRestrictionArray<Tc>(5), useInterpreter);
+            CheckGenericWithClassRestrictionArrayLengthExpression<Tc>(
+                GenerateGenericWithClassRestrictionArray<Tc>(0),
+                useInterpreter
+            );
+            CheckGenericWithClassRestrictionArrayLengthExpression<Tc>(
+                GenerateGenericWithClassRestrictionArray<Tc>(1),
+                useInterpreter
+            );
+            CheckGenericWithClassRestrictionArrayLengthExpression<Tc>(
+                GenerateGenericWithClassRestrictionArray<Tc>(5),
+                useInterpreter
+            );
         }
 
-        private static void CheckExceptionGenericWithClassRestrictionArrayLengthTestHelper<Tc>(bool useInterpreter) where Tc : class
+        private static void CheckExceptionGenericWithClassRestrictionArrayLengthTestHelper<Tc>(
+            bool useInterpreter
+        )
+            where Tc : class
         {
-            Assert.Throws<NullReferenceException>(() => CheckGenericWithClassRestrictionArrayLengthExpression<Tc>(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckGenericWithClassRestrictionArrayLengthExpression<Tc>(null, useInterpreter)
+            );
         }
 
-        private static void CheckGenericWithClassAndNewRestrictionArrayLengthTestHelper<Tcn>(bool useInterpreter) where Tcn : class, new()
+        private static void CheckGenericWithClassAndNewRestrictionArrayLengthTestHelper<Tcn>(
+            bool useInterpreter
+        )
+            where Tcn : class, new()
         {
-            CheckGenericWithClassAndNewRestrictionArrayLengthExpression<Tcn>(GenerateGenericWithClassAndNewRestrictionArray<Tcn>(0), useInterpreter);
-            CheckGenericWithClassAndNewRestrictionArrayLengthExpression<Tcn>(GenerateGenericWithClassAndNewRestrictionArray<Tcn>(1), useInterpreter);
-            CheckGenericWithClassAndNewRestrictionArrayLengthExpression<Tcn>(GenerateGenericWithClassAndNewRestrictionArray<Tcn>(5), useInterpreter);
+            CheckGenericWithClassAndNewRestrictionArrayLengthExpression<Tcn>(
+                GenerateGenericWithClassAndNewRestrictionArray<Tcn>(0),
+                useInterpreter
+            );
+            CheckGenericWithClassAndNewRestrictionArrayLengthExpression<Tcn>(
+                GenerateGenericWithClassAndNewRestrictionArray<Tcn>(1),
+                useInterpreter
+            );
+            CheckGenericWithClassAndNewRestrictionArrayLengthExpression<Tcn>(
+                GenerateGenericWithClassAndNewRestrictionArray<Tcn>(5),
+                useInterpreter
+            );
         }
 
-        private static void CheckExceptionGenericWithClassAndNewRestrictionArrayLengthTestHelper<Tcn>(bool useInterpreter) where Tcn : class, new()
+        private static void CheckExceptionGenericWithClassAndNewRestrictionArrayLengthTestHelper<Tcn>(
+            bool useInterpreter
+        )
+            where Tcn : class, new()
         {
-            Assert.Throws<NullReferenceException>(() => CheckGenericWithClassAndNewRestrictionArrayLengthExpression<Tcn>(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckGenericWithClassAndNewRestrictionArrayLengthExpression<Tcn>(
+                    null,
+                    useInterpreter
+                )
+            );
         }
 
-        private static void CheckGenericWithSubClassRestrictionArrayLengthTestHelper<TC>(bool useInterpreter) where TC : C
+        private static void CheckGenericWithSubClassRestrictionArrayLengthTestHelper<TC>(
+            bool useInterpreter
+        )
+            where TC : C
         {
-            CheckGenericWithSubClassRestrictionArrayLengthExpression<TC>(GenerateGenericWithSubClassRestrictionArray<TC>(0), useInterpreter);
-            CheckGenericWithSubClassRestrictionArrayLengthExpression<TC>(GenerateGenericWithSubClassRestrictionArray<TC>(1), useInterpreter);
-            CheckGenericWithSubClassRestrictionArrayLengthExpression<TC>(GenerateGenericWithSubClassRestrictionArray<TC>(5), useInterpreter);
+            CheckGenericWithSubClassRestrictionArrayLengthExpression<TC>(
+                GenerateGenericWithSubClassRestrictionArray<TC>(0),
+                useInterpreter
+            );
+            CheckGenericWithSubClassRestrictionArrayLengthExpression<TC>(
+                GenerateGenericWithSubClassRestrictionArray<TC>(1),
+                useInterpreter
+            );
+            CheckGenericWithSubClassRestrictionArrayLengthExpression<TC>(
+                GenerateGenericWithSubClassRestrictionArray<TC>(5),
+                useInterpreter
+            );
         }
 
-        private static void CheckExceptionGenericWithSubClassRestrictionArrayLengthTestHelper<TC>(bool useInterpreter) where TC : C
+        private static void CheckExceptionGenericWithSubClassRestrictionArrayLengthTestHelper<TC>(
+            bool useInterpreter
+        )
+            where TC : C
         {
-            Assert.Throws<NullReferenceException>(() => CheckGenericWithSubClassRestrictionArrayLengthExpression<TC>(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckGenericWithSubClassRestrictionArrayLengthExpression<TC>(null, useInterpreter)
+            );
         }
 
-        private static void CheckGenericWithSubClassAndNewRestrictionArrayLengthTestHelper<TCn>(bool useInterpreter) where TCn : C, new()
+        private static void CheckGenericWithSubClassAndNewRestrictionArrayLengthTestHelper<TCn>(
+            bool useInterpreter
+        )
+            where TCn : C, new()
         {
-            CheckGenericWithSubClassAndNewRestrictionArrayLengthExpression<TCn>(GenerateGenericWithSubClassAndNewRestrictionArray<TCn>(0), useInterpreter);
-            CheckGenericWithSubClassAndNewRestrictionArrayLengthExpression<TCn>(GenerateGenericWithSubClassAndNewRestrictionArray<TCn>(1), useInterpreter);
-            CheckGenericWithSubClassAndNewRestrictionArrayLengthExpression<TCn>(GenerateGenericWithSubClassAndNewRestrictionArray<TCn>(5), useInterpreter);
+            CheckGenericWithSubClassAndNewRestrictionArrayLengthExpression<TCn>(
+                GenerateGenericWithSubClassAndNewRestrictionArray<TCn>(0),
+                useInterpreter
+            );
+            CheckGenericWithSubClassAndNewRestrictionArrayLengthExpression<TCn>(
+                GenerateGenericWithSubClassAndNewRestrictionArray<TCn>(1),
+                useInterpreter
+            );
+            CheckGenericWithSubClassAndNewRestrictionArrayLengthExpression<TCn>(
+                GenerateGenericWithSubClassAndNewRestrictionArray<TCn>(5),
+                useInterpreter
+            );
         }
 
-        private static void CheckExceptionGenericWithSubClassAndNewRestrictionArrayLengthTestHelper<TCn>(bool useInterpreter) where TCn : C, new()
+        private static void CheckExceptionGenericWithSubClassAndNewRestrictionArrayLengthTestHelper<TCn>(
+            bool useInterpreter
+        )
+            where TCn : C, new()
         {
-            Assert.Throws<NullReferenceException>(() => CheckGenericWithSubClassAndNewRestrictionArrayLengthExpression<TCn>(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckGenericWithSubClassAndNewRestrictionArrayLengthExpression<TCn>(
+                    null,
+                    useInterpreter
+                )
+            );
         }
 
-        private static void CheckGenericWithStructRestrictionArrayLengthTestHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckGenericWithStructRestrictionArrayLengthTestHelper<Ts>(
+            bool useInterpreter
+        )
+            where Ts : struct
         {
-            CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(GenerateGenericWithStructRestrictionArray<Ts>(0), useInterpreter);
-            CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(GenerateGenericWithStructRestrictionArray<Ts>(1), useInterpreter);
-            CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(GenerateGenericWithStructRestrictionArray<Ts>(5), useInterpreter);
+            CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(
+                GenerateGenericWithStructRestrictionArray<Ts>(0),
+                useInterpreter
+            );
+            CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(
+                GenerateGenericWithStructRestrictionArray<Ts>(1),
+                useInterpreter
+            );
+            CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(
+                GenerateGenericWithStructRestrictionArray<Ts>(5),
+                useInterpreter
+            );
         }
 
-        private static void CheckExceptionGenericWithStructRestrictionArrayLengthTestHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckExceptionGenericWithStructRestrictionArrayLengthTestHelper<Ts>(
+            bool useInterpreter
+        )
+            where Ts : struct
         {
-            Assert.Throws<NullReferenceException>(() => CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(null, useInterpreter));
+            Assert.Throws<NullReferenceException>(() =>
+                CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(null, useInterpreter)
+            );
         }
 
         #endregion
@@ -842,7 +1071,14 @@ namespace System.Linq.Expressions.Tests
 
         private static decimal[] GenerateDecimalArray(int size)
         {
-            decimal[] array = new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
+            decimal[] array = new decimal[]
+            {
+                decimal.Zero,
+                decimal.One,
+                decimal.MinusOne,
+                decimal.MinValue,
+                decimal.MaxValue,
+            };
             decimal[] result = new decimal[size];
             for (int i = 0; i < size; i++)
             {
@@ -854,7 +1090,21 @@ namespace System.Linq.Expressions.Tests
 
         private static Delegate[] GenerateDelegateArray(int size)
         {
-            Delegate[] array = new Delegate[] { null, (Func<object>)delegate () { return null; }, (Func<int, int>)delegate (int i) { return i + 1; }, (Action<object>)delegate { } };
+            Delegate[] array = new Delegate[]
+            {
+                null,
+                (Func<object>)
+                    delegate()
+                    {
+                        return null;
+                    },
+                (Func<int, int>)
+                    delegate(int i)
+                    {
+                        return i + 1;
+                    },
+                (Action<object>)delegate { },
+            };
             Delegate[] result = new Delegate[size];
             for (int i = 0; i < size; i++)
             {
@@ -866,7 +1116,18 @@ namespace System.Linq.Expressions.Tests
 
         private static double[] GeneratedoubleArray(int size)
         {
-            double[] array = new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
+            double[] array = new double[]
+            {
+                0,
+                1,
+                -1,
+                double.MinValue,
+                double.MaxValue,
+                double.Epsilon,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.NaN,
+            };
             double[] result = new double[size];
             for (int i = 0; i < size; i++)
             {
@@ -902,7 +1163,18 @@ namespace System.Linq.Expressions.Tests
 
         private static float[] GenerateFloatArray(int size)
         {
-            float[] array = new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
+            float[] array = new float[]
+            {
+                0,
+                1,
+                -1,
+                float.MinValue,
+                float.MaxValue,
+                float.Epsilon,
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+                float.NaN,
+            };
             float[] result = new float[size];
             for (int i = 0; i < size; i++)
             {
@@ -914,7 +1186,15 @@ namespace System.Linq.Expressions.Tests
 
         private static Func<object>[] GenerateFuncArray(int size)
         {
-            Func<object>[] array = new Func<object>[] { null, (Func<object>)delegate () { return null; } };
+            Func<object>[] array = new Func<object>[]
+            {
+                null,
+                (Func<object>)
+                    delegate()
+                    {
+                        return null;
+                    },
+            };
             Func<object>[] result = new Func<object>[size];
             for (int i = 0; i < size; i++)
             {
@@ -938,7 +1218,14 @@ namespace System.Linq.Expressions.Tests
 
         private static IEquatable<C>[] GenerateIEquatableArray(int size)
         {
-            IEquatable<C>[] array = new IEquatable<C>[] { null, new C(), new D(), new D(0), new D(5) };
+            IEquatable<C>[] array = new IEquatable<C>[]
+            {
+                null,
+                new C(),
+                new D(),
+                new D(0),
+                new D(5),
+            };
             IEquatable<C>[] result = new IEquatable<C>[size];
             for (int i = 0; i < size; i++)
             {
@@ -1140,7 +1427,8 @@ namespace System.Linq.Expressions.Tests
             return result;
         }
 
-        private static Tc[] GenerateGenericWithClassRestrictionArray<Tc>(int size) where Tc : class
+        private static Tc[] GenerateGenericWithClassRestrictionArray<Tc>(int size)
+            where Tc : class
         {
             Tc[] array = new Tc[] { null, default(Tc) };
             Tc[] result = new Tc[size];
@@ -1152,7 +1440,8 @@ namespace System.Linq.Expressions.Tests
             return result;
         }
 
-        private static Tcn[] GenerateGenericWithClassAndNewRestrictionArray<Tcn>(int size) where Tcn : class, new()
+        private static Tcn[] GenerateGenericWithClassAndNewRestrictionArray<Tcn>(int size)
+            where Tcn : class, new()
         {
             Tcn[] array = new Tcn[] { null, default(Tcn), new Tcn() };
             Tcn[] result = new Tcn[size];
@@ -1164,7 +1453,8 @@ namespace System.Linq.Expressions.Tests
             return result;
         }
 
-        private static TC[] GenerateGenericWithSubClassRestrictionArray<TC>(int size) where TC : C
+        private static TC[] GenerateGenericWithSubClassRestrictionArray<TC>(int size)
+            where TC : C
         {
             TC[] array = new TC[] { null, default(TC), (TC)new C() };
             TC[] result = new TC[size];
@@ -1176,7 +1466,8 @@ namespace System.Linq.Expressions.Tests
             return result;
         }
 
-        private static TCn[] GenerateGenericWithSubClassAndNewRestrictionArray<TCn>(int size) where TCn : C, new()
+        private static TCn[] GenerateGenericWithSubClassAndNewRestrictionArray<TCn>(int size)
+            where TCn : C, new()
         {
             TCn[] array = new TCn[] { null, default(TCn), new TCn(), (TCn)new C() };
             TCn[] result = new TCn[size];
@@ -1188,7 +1479,8 @@ namespace System.Linq.Expressions.Tests
             return result;
         }
 
-        private static Ts[] GenerateGenericWithStructRestrictionArray<Ts>(int size) where Ts : struct
+        private static Ts[] GenerateGenericWithStructRestrictionArray<Ts>(int size)
+            where Ts : struct
         {
             Ts[] array = new Ts[] { default(Ts), new Ts() };
             Ts[] result = new Ts[size];
@@ -1206,350 +1498,394 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckBoolArrayLengthExpression(bool[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(bool[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(bool[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckByteArrayLengthExpression(byte[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(byte[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(byte[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckCustomArrayLengthExpression(C[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(C[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(C[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckCharArrayLengthExpression(char[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(char[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(char[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckCustom2ArrayLengthExpression(D[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(D[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(D[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckDecimalArrayLengthExpression(decimal[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(decimal[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(decimal[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
-        private static void CheckDelegateArrayLengthExpression(Delegate[] array, bool useInterpreter)
+        private static void CheckDelegateArrayLengthExpression(
+            Delegate[] array,
+            bool useInterpreter
+        )
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(Delegate[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(Delegate[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckDoubleArrayLengthExpression(double[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(double[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(double[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckEnumArrayLengthExpression(E[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(E[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(E[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckEnumLongArrayLengthExpression(El[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(El[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(El[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckFloatArrayLengthExpression(float[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(float[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(float[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
-        private static void CheckFuncArrayLengthExpression(Func<object>[] array, bool useInterpreter)
+        private static void CheckFuncArrayLengthExpression(
+            Func<object>[] array,
+            bool useInterpreter
+        )
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(Func<object>[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(Func<object>[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckInterfaceArrayLengthExpression(I[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(I[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(I[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
-        private static void CheckIEquatableArrayLengthExpression(IEquatable<C>[] array, bool useInterpreter)
+        private static void CheckIEquatableArrayLengthExpression(
+            IEquatable<C>[] array,
+            bool useInterpreter
+        )
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(IEquatable<C>[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(IEquatable<C>[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
-        private static void CheckIEquatable2ArrayLengthExpression(IEquatable<D>[] array, bool useInterpreter)
+        private static void CheckIEquatable2ArrayLengthExpression(
+            IEquatable<D>[] array,
+            bool useInterpreter
+        )
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(IEquatable<D>[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(IEquatable<D>[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckIntArrayLengthExpression(int[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(int[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(int[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckLongArrayLengthExpression(long[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(long[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(long[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckObjectArrayLengthExpression(object[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(object[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(object[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckStructArrayLengthExpression(S[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(S[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(S[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckSByteArrayLengthExpression(sbyte[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(sbyte[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(sbyte[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
-        private static void CheckStructWithStringArrayLengthExpression(Sc[] array, bool useInterpreter)
+        private static void CheckStructWithStringArrayLengthExpression(
+            Sc[] array,
+            bool useInterpreter
+        )
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(Sc[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(Sc[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
-        private static void CheckStructWithStringAndStructArrayLengthExpression(Scs[] array, bool useInterpreter)
+        private static void CheckStructWithStringAndStructArrayLengthExpression(
+            Scs[] array,
+            bool useInterpreter
+        )
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(Scs[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(Scs[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckShortArrayLengthExpression(short[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(short[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(short[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
-        private static void CheckStructWithTwoFieldsArrayLengthExpression(Sp[] array, bool useInterpreter)
+        private static void CheckStructWithTwoFieldsArrayLengthExpression(
+            Sp[] array,
+            bool useInterpreter
+        )
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(Sp[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(Sp[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
-        private static void CheckStructWithValueArrayLengthExpression(Ss[] array, bool useInterpreter)
+        private static void CheckStructWithValueArrayLengthExpression(
+            Ss[] array,
+            bool useInterpreter
+        )
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(Ss[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(Ss[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckStringArrayLengthExpression(string[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(string[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(string[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckUIntArrayLengthExpression(uint[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(uint[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(uint[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckULongArrayLengthExpression(ulong[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(ulong[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(ulong[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckUShortArrayLengthExpression(ushort[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(ushort[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(ushort[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
         private static void CheckGenericArrayLengthExpression<T>(T[] array, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(T[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(T[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
-        private static void CheckGenericWithClassRestrictionArrayLengthExpression<Tc>(Tc[] array, bool useInterpreter) where Tc : class
+        private static void CheckGenericWithClassRestrictionArrayLengthExpression<Tc>(
+            Tc[] array,
+            bool useInterpreter
+        )
+            where Tc : class
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(Tc[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(Tc[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
-        private static void CheckGenericWithClassAndNewRestrictionArrayLengthExpression<Tcn>(Tcn[] array, bool useInterpreter) where Tcn : class, new()
+        private static void CheckGenericWithClassAndNewRestrictionArrayLengthExpression<Tcn>(
+            Tcn[] array,
+            bool useInterpreter
+        )
+            where Tcn : class, new()
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(Tcn[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(Tcn[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
-        private static void CheckGenericWithSubClassRestrictionArrayLengthExpression<TC>(TC[] array, bool useInterpreter) where TC : C
+        private static void CheckGenericWithSubClassRestrictionArrayLengthExpression<TC>(
+            TC[] array,
+            bool useInterpreter
+        )
+            where TC : C
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(TC[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(TC[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
-        private static void CheckGenericWithSubClassAndNewRestrictionArrayLengthExpression<TCn>(TCn[] array, bool useInterpreter) where TCn : C, new()
+        private static void CheckGenericWithSubClassAndNewRestrictionArrayLengthExpression<TCn>(
+            TCn[] array,
+            bool useInterpreter
+        )
+            where TCn : C, new()
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(TCn[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(TCn[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
 
-        private static void CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(Ts[] array, bool useInterpreter) where Ts : struct
+        private static void CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(
+            Ts[] array,
+            bool useInterpreter
+        )
+            where Ts : struct
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.ArrayLength(Expression.Constant(array, typeof(Ts[]))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.ArrayLength(Expression.Constant(array, typeof(Ts[]))),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
             Assert.Equal(array.Length, f());
         }
@@ -1570,22 +1906,29 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void NullArray()
         {
-            AssertExtensions.Throws<ArgumentNullException>("array", () => Expression.ArrayLength(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "array",
+                () => Expression.ArrayLength(null)
+            );
         }
 
         [Fact]
         public static void IsNotArray()
         {
             Expression notArray = Expression.Constant(8);
-            AssertExtensions.Throws<ArgumentException>("array", () => Expression.ArrayLength(notArray));
+            AssertExtensions.Throws<ArgumentException>(
+                "array",
+                () => Expression.ArrayLength(notArray)
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void ArrayTypeArrayAllowed(bool useInterpreter)
         {
             Array arr = new[] { 1, 2, 3 };
-            Func<int> func =
-                Expression.Lambda<Func<int>>(Expression.ArrayLength(Expression.Constant(arr))).Compile(useInterpreter);
+            Func<int> func = Expression
+                .Lambda<Func<int>>(Expression.ArrayLength(Expression.Constant(arr)))
+                .Compile(useInterpreter);
             Assert.Equal(3, func());
         }
 
@@ -1594,38 +1937,62 @@ namespace System.Linq.Expressions.Tests
         {
             Array arr = new[] { 1, 2, 3 };
             Expression arrayExpression = Expression.Constant(arr, typeof(Array));
-            AssertExtensions.Throws<ArgumentException>("array", () => Expression.ArrayLength(arrayExpression));
+            AssertExtensions.Throws<ArgumentException>(
+                "array",
+                () => Expression.ArrayLength(arrayExpression)
+            );
         }
 
         [Fact]
         public static void ArrayTypeArrayNotAllowedIfNotSZArray()
         {
-            Array arr = new[,] { { 1, 2, 3 }, { 1, 2, 2 } };
-            AssertExtensions.Throws<ArgumentException>("array", () => Expression.ArrayLength(Expression.Constant(arr)));
+            Array arr = new[,]
+            {
+                { 1, 2, 3 },
+                { 1, 2, 2 },
+            };
+            AssertExtensions.Throws<ArgumentException>(
+                "array",
+                () => Expression.ArrayLength(Expression.Constant(arr))
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported)
+        )]
         public static void ArrayTypeArrayNotAllowedIfNonZeroBoundArray()
         {
             Array arr = Array.CreateInstance(typeof(int), new[] { 3 }, new[] { -1 });
-            AssertExtensions.Throws<ArgumentException>("array", () => Expression.ArrayLength(Expression.Constant(arr)));
+            AssertExtensions.Throws<ArgumentException>(
+                "array",
+                () => Expression.ArrayLength(Expression.Constant(arr))
+            );
         }
 
         [Fact]
         public static void UnreadableArray()
         {
-            Expression array = Expression.Property(null, typeof(Unreadable<int[]>), nameof(Unreadable<int>.WriteOnly));
-            AssertExtensions.Throws<ArgumentException>("array", () => Expression.ArrayLength(array));
+            Expression array = Expression.Property(
+                null,
+                typeof(Unreadable<int[]>),
+                nameof(Unreadable<int>.WriteOnly)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "array",
+                () => Expression.ArrayLength(array)
+            );
         }
 
-        public static IEnumerable<object[]> TestArrays()
-            => Enumerable.Range(0, 6).Select(i => new object[] {new int[i * i]});
+        public static IEnumerable<object[]> TestArrays() =>
+            Enumerable.Range(0, 6).Select(i => new object[] { new int[i * i] });
 
         [Theory, PerCompilationType(nameof(TestArrays))]
         public static void MakeUnaryArrayLength(int[] array, bool useInterpreter)
         {
             Expression<Func<int>> lambda = Expression.Lambda<Func<int>>(
-                Expression.MakeUnary(ExpressionType.ArrayLength, Expression.Constant(array), null));
+                Expression.MakeUnary(ExpressionType.ArrayLength, Expression.Constant(array), null)
+            );
             Func<int> func = lambda.Compile(useInterpreter);
             Assert.Equal(array.Length, func());
         }

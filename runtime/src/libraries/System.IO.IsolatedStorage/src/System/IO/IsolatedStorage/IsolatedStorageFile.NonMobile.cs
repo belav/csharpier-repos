@@ -63,10 +63,18 @@ namespace System.IO.IsolatedStorage
         {
             string directoryName = Path.GetFileName(directory);
 
-            return
-                (Helper.IsApplication(Scope) && string.Equals(directoryName, s_appFiles, StringComparison.Ordinal))
-                || (Helper.IsAssembly(Scope) && string.Equals(directoryName, s_assemFiles, StringComparison.Ordinal))
-                || (Helper.IsDomain(Scope) && string.Equals(directoryName, s_files, StringComparison.Ordinal));
+            return (
+                    Helper.IsApplication(Scope)
+                    && string.Equals(directoryName, s_appFiles, StringComparison.Ordinal)
+                )
+                || (
+                    Helper.IsAssembly(Scope)
+                    && string.Equals(directoryName, s_assemFiles, StringComparison.Ordinal)
+                )
+                || (
+                    Helper.IsDomain(Scope)
+                    && string.Equals(directoryName, s_files, StringComparison.Ordinal)
+                );
         }
 
         private string? GetParentDirectory()

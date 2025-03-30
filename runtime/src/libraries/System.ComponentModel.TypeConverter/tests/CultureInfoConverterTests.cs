@@ -1,13 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.DotNet.RemoteExecutor;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Tests;
+using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
 
 namespace System.ComponentModel.Tests
@@ -20,9 +20,21 @@ namespace System.ComponentModel.Tests
 
         public override IEnumerable<ConvertTest> ConvertFromTestData()
         {
-            yield return ConvertTest.Valid(string.Empty, CultureInfo.InvariantCulture, CultureInfo.InvariantCulture);
-            yield return ConvertTest.Valid("nl-BE", new CultureInfo("nl-BE"), CultureInfo.InvariantCulture);
-            yield return ConvertTest.Valid("(Default)", CultureInfo.InvariantCulture, CultureInfo.InvariantCulture);
+            yield return ConvertTest.Valid(
+                string.Empty,
+                CultureInfo.InvariantCulture,
+                CultureInfo.InvariantCulture
+            );
+            yield return ConvertTest.Valid(
+                "nl-BE",
+                new CultureInfo("nl-BE"),
+                CultureInfo.InvariantCulture
+            );
+            yield return ConvertTest.Valid(
+                "(Default)",
+                CultureInfo.InvariantCulture,
+                CultureInfo.InvariantCulture
+            );
             CultureInfo culture = null;
             try
             {
@@ -32,8 +44,16 @@ namespace System.ComponentModel.Tests
 
             if (culture != null)
             {
-                yield return ConvertTest.Valid("nl-B", new CultureInfo("nl--B"), CultureInfo.InvariantCulture);
-                yield return ConvertTest.Valid("nl-B", new CultureInfo("nl--B"), new CultureInfo("en-US"));
+                yield return ConvertTest.Valid(
+                    "nl-B",
+                    new CultureInfo("nl--B"),
+                    CultureInfo.InvariantCulture
+                );
+                yield return ConvertTest.Valid(
+                    "nl-B",
+                    new CultureInfo("nl--B"),
+                    new CultureInfo("en-US")
+                );
             }
             if (PlatformDetection.IsNotBrowser)
             {
@@ -50,12 +70,19 @@ namespace System.ComponentModel.Tests
             yield return ConvertTest.Valid(new CustomCultureInfo(), "nl-BE");
             yield return ConvertTest.Valid(null, "(Default)");
             yield return ConvertTest.Valid(CultureInfo.InvariantCulture, "(Default)");
-            yield return ConvertTest.Valid(CultureInfo.InvariantCulture, "(Default)", CultureInfo.InvariantCulture);
+            yield return ConvertTest.Valid(
+                CultureInfo.InvariantCulture,
+                "(Default)",
+                CultureInfo.InvariantCulture
+            );
             yield return ConvertTest.Valid(new CultureInfo("nl-BE"), "nl-BE");
             yield return ConvertTest.Valid(1, "1");
 
             yield return ConvertTest.CantConvertTo(CultureInfo.InvariantCulture, typeof(object));
-            yield return ConvertTest.CantConvertTo(CultureInfo.InvariantCulture, typeof(CultureInfo));
+            yield return ConvertTest.CantConvertTo(
+                CultureInfo.InvariantCulture,
+                typeof(CultureInfo)
+            );
             yield return ConvertTest.CantConvertTo(CultureInfo.InvariantCulture, typeof(int));
         }
 
@@ -74,7 +101,10 @@ namespace System.ComponentModel.Tests
             catch (CultureNotFoundException)
             {
                 // If we cannot create the cultures we should get exception from the Converter too.
-                AssertExtensions.Throws<ArgumentException>("value", () => Converter.ConvertFrom(null, CultureInfo.InvariantCulture, cultureName));
+                AssertExtensions.Throws<ArgumentException>(
+                    "value",
+                    () => Converter.ConvertFrom(null, CultureInfo.InvariantCulture, cultureName)
+                );
             }
         }
 
@@ -84,8 +114,16 @@ namespace System.ComponentModel.Tests
             var culture = new CultureInfo("en-US");
             Assert.True(Converter.CanConvertTo(typeof(InstanceDescriptor)));
 
-            InstanceDescriptor instanceDescriptor = Assert.IsType<InstanceDescriptor>(Converter.ConvertTo(culture, typeof(InstanceDescriptor)));
-            Assert.Equal(new Type[] { typeof(string) }, Assert.IsAssignableFrom<ConstructorInfo>(instanceDescriptor.MemberInfo).GetParameters().Select(p => p.ParameterType));
+            InstanceDescriptor instanceDescriptor = Assert.IsType<InstanceDescriptor>(
+                Converter.ConvertTo(culture, typeof(InstanceDescriptor))
+            );
+            Assert.Equal(
+                new Type[] { typeof(string) },
+                Assert
+                    .IsAssignableFrom<ConstructorInfo>(instanceDescriptor.MemberInfo)
+                    .GetParameters()
+                    .Select(p => p.ParameterType)
+            );
             Assert.Equal(new object[] { culture.Name }, instanceDescriptor.Arguments);
         }
 
@@ -94,13 +132,17 @@ namespace System.ComponentModel.Tests
         [InlineData(typeof(int))]
         public void ConvertTo_InvalidValue_ThrowsNotSupportedException(Type destinationType)
         {
-            Assert.Throws<NotSupportedException>(() => Converter.ConvertTo(new object(), destinationType));
+            Assert.Throws<NotSupportedException>(() =>
+                Converter.ConvertTo(new object(), destinationType)
+            );
         }
 
         [Theory]
         [InlineData(typeof(InstanceDescriptor))]
         [InlineData(typeof(int))]
-        public void ConvertTo_InstanceAndNullCulture_ThrowsNotSupportedException(Type destinationType)
+        public void ConvertTo_InstanceAndNullCulture_ThrowsNotSupportedException(
+            Type destinationType
+        )
         {
             Assert.Throws<NotSupportedException>(() => Converter.ConvertTo(null, destinationType));
         }
@@ -134,23 +176,24 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(ConvertFrom_OverriddenGetCultureName_TestData))]
-        public void ConvertFrom_OverriddenGetCultureName_ReturnsExpected(string fixedValue, string text, CultureInfo expected)
+        public void ConvertFrom_OverriddenGetCultureName_ReturnsExpected(
+            string fixedValue,
+            string text,
+            CultureInfo expected
+        )
         {
-            var converter = new FixedCultureInfoConverter
-            {
-                FixedValue = fixedValue
-            };
+            var converter = new FixedCultureInfoConverter { FixedValue = fixedValue };
             Assert.Equal(expected, converter.ConvertFromString(text));
         }
 
         [Fact]
         public void GetCultureName_Overridden_ConversionsReturnsExpected()
         {
-            var converter = new FixedCultureInfoConverter
-            {
-                FixedValue = "Fixed"
-            };
-            Assert.Equal("(Default)", converter.ConvertTo(CultureInfo.InvariantCulture, typeof(string)));
+            var converter = new FixedCultureInfoConverter { FixedValue = "Fixed" };
+            Assert.Equal(
+                "(Default)",
+                converter.ConvertTo(CultureInfo.InvariantCulture, typeof(string))
+            );
             Assert.Equal("Fixed", converter.ConvertTo(new CultureInfo("en-US"), typeof(string)));
         }
 
@@ -160,15 +203,31 @@ namespace System.ComponentModel.Tests
         public void CultureInfoConverterForDefaultValue(bool useSystemResourceKeys)
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options.RuntimeConfigurationOptions.Add("System.Resources.UseSystemResourceKeys", useSystemResourceKeys);
+            options.RuntimeConfigurationOptions.Add(
+                "System.Resources.UseSystemResourceKeys",
+                useSystemResourceKeys
+            );
 
-            RemoteExecutor.Invoke(() =>
-            {
-                using (new ThreadCultureChange(null, CultureInfo.InvariantCulture))
-                {
-                    Assert.Equal("", ((CultureInfo)TypeDescriptor.GetConverter(typeof(System.Globalization.CultureInfo)).ConvertFrom(null, null, "(Default)")).Name);
-                }
-            }, options).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        using (new ThreadCultureChange(null, CultureInfo.InvariantCulture))
+                        {
+                            Assert.Equal(
+                                "",
+                                (
+                                    (CultureInfo)
+                                        TypeDescriptor
+                                            .GetConverter(typeof(System.Globalization.CultureInfo))
+                                            .ConvertFrom(null, null, "(Default)")
+                                ).Name
+                            );
+                        }
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         private class SubCultureInfoConverter : CultureInfoConverter
@@ -189,9 +248,8 @@ namespace System.ComponentModel.Tests
         [Serializable]
         private sealed class CustomCultureInfo : CultureInfo
         {
-            public CustomCultureInfo() : base("nl-BE")
-            {
-            }
+            public CustomCultureInfo()
+                : base("nl-BE") { }
 
             public override string DisplayName => "display";
 

@@ -7,16 +7,18 @@ namespace System.ServiceModel
     {
         None,
         Message,
-        TransportWithMessageCredential
+        TransportWithMessageCredential,
     }
 
     static class WSFederationHttpSecurityModeHelper
     {
         internal static bool IsDefined(WSFederationHttpSecurityMode value)
         {
-            return (value == WSFederationHttpSecurityMode.None ||
-                value == WSFederationHttpSecurityMode.Message ||
-                value == WSFederationHttpSecurityMode.TransportWithMessageCredential);
+            return (
+                value == WSFederationHttpSecurityMode.None
+                || value == WSFederationHttpSecurityMode.Message
+                || value == WSFederationHttpSecurityMode.TransportWithMessageCredential
+            );
         }
     }
 }

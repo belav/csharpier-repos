@@ -4,23 +4,26 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.ComponentModel;
     using System.Configuration;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Description;
     using System.Globalization;
+    using System.IdentityModel.Tokens;
     using System.Net;
     using System.Net.Security;
     using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
-    using System.IdentityModel.Tokens;
-    using System.ComponentModel;
     using System.Xml;
 
-    public sealed partial class FederatedMessageSecurityOverHttpElement : ServiceModelConfigurationElement
+    public sealed partial class FederatedMessageSecurityOverHttpElement
+        : ServiceModelConfigurationElement
     {
-
-        [ConfigurationProperty(ConfigurationStrings.AlgorithmSuite, DefaultValue = ConfigurationStrings.Default)]
+        [ConfigurationProperty(
+            ConfigurationStrings.AlgorithmSuite,
+            DefaultValue = ConfigurationStrings.Default
+        )]
         [TypeConverter(typeof(SecurityAlgorithmSuiteConverter))]
         public SecurityAlgorithmSuite AlgorithmSuite
         {
@@ -31,17 +34,26 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.ClaimTypeRequirements)]
         public ClaimTypeElementCollection ClaimTypeRequirements
         {
-            get { return (ClaimTypeElementCollection)base[ConfigurationStrings.ClaimTypeRequirements]; }
+            get
+            {
+                return (ClaimTypeElementCollection)base[ConfigurationStrings.ClaimTypeRequirements];
+            }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.EstablishSecurityContext, DefaultValue = FederatedMessageSecurityOverHttp.DefaultEstablishSecurityContext)]
+        [ConfigurationProperty(
+            ConfigurationStrings.EstablishSecurityContext,
+            DefaultValue = FederatedMessageSecurityOverHttp.DefaultEstablishSecurityContext
+        )]
         public bool EstablishSecurityContext
         {
             get { return (bool)base[ConfigurationStrings.EstablishSecurityContext]; }
             set { base[ConfigurationStrings.EstablishSecurityContext] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.IssuedKeyType, DefaultValue = FederatedMessageSecurityOverHttp.DefaultIssuedKeyType)]
+        [ConfigurationProperty(
+            ConfigurationStrings.IssuedKeyType,
+            DefaultValue = FederatedMessageSecurityOverHttp.DefaultIssuedKeyType
+        )]
         [ServiceModelEnumValidator(typeof(System.IdentityModel.Tokens.SecurityKeyTypeHelper))]
         public SecurityKeyType IssuedKeyType
         {
@@ -68,7 +80,11 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.Issuer)]
         public IssuedTokenParametersEndpointAddressElement Issuer
         {
-            get { return (IssuedTokenParametersEndpointAddressElement)base[ConfigurationStrings.Issuer]; }
+            get
+            {
+                return (IssuedTokenParametersEndpointAddressElement)
+                    base[ConfigurationStrings.Issuer];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.IssuerMetadata)]
@@ -77,7 +93,10 @@ namespace System.ServiceModel.Configuration
             get { return (EndpointAddressElementBase)base[ConfigurationStrings.IssuerMetadata]; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.NegotiateServiceCredential, DefaultValue = MessageSecurityOverHttp.DefaultNegotiateServiceCredential)]
+        [ConfigurationProperty(
+            ConfigurationStrings.NegotiateServiceCredential,
+            DefaultValue = MessageSecurityOverHttp.DefaultNegotiateServiceCredential
+        )]
         public bool NegotiateServiceCredential
         {
             get { return (bool)base[ConfigurationStrings.NegotiateServiceCredential]; }
@@ -87,7 +106,11 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.TokenRequestParameters)]
         public XmlElementElementCollection TokenRequestParameters
         {
-            get { return (XmlElementElementCollection)base[ConfigurationStrings.TokenRequestParameters]; }
+            get
+            {
+                return (XmlElementElementCollection)
+                    base[ConfigurationStrings.TokenRequestParameters];
+            }
         }
 
         internal void ApplyConfiguration(FederatedMessageSecurityOverHttp security)
@@ -104,18 +127,32 @@ namespace System.ServiceModel.Configuration
             {
                 security.IssuedTokenType = this.IssuedTokenType;
             }
-            if (PropertyValueOrigin.Default != this.ElementInformation.Properties[ConfigurationStrings.Issuer].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                != this.ElementInformation.Properties[ConfigurationStrings.Issuer].ValueOrigin
+            )
             {
                 security.IssuerAddress = ConfigLoader.LoadEndpointAddress(this.Issuer);
 
                 if (!string.IsNullOrEmpty(this.Issuer.Binding))
                 {
-                    security.IssuerBinding = ConfigLoader.LookupBinding(this.Issuer.Binding, this.Issuer.BindingConfiguration, this.EvaluationContext);
+                    security.IssuerBinding = ConfigLoader.LookupBinding(
+                        this.Issuer.Binding,
+                        this.Issuer.BindingConfiguration,
+                        this.EvaluationContext
+                    );
                 }
             }
-            if (PropertyValueOrigin.Default != this.ElementInformation.Properties[ConfigurationStrings.IssuerMetadata].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.IssuerMetadata]
+                    .ValueOrigin
+            )
             {
-                security.IssuerMetadataAddress = ConfigLoader.LoadEndpointAddress(this.IssuerMetadata);
+                security.IssuerMetadataAddress = ConfigLoader.LoadEndpointAddress(
+                    this.IssuerMetadata
+                );
             }
             foreach (XmlElementElement xmlElement in this.TokenRequestParameters)
             {
@@ -123,7 +160,9 @@ namespace System.ServiceModel.Configuration
             }
             foreach (ClaimTypeElement claimType in this.ClaimTypeRequirements)
             {
-                security.ClaimTypeRequirements.Add(new ClaimTypeRequirement(claimType.ClaimType, claimType.IsOptional));
+                security.ClaimTypeRequirements.Add(
+                    new ClaimTypeRequirement(claimType.ClaimType, claimType.IsOptional)
+                );
             }
         }
 
@@ -133,10 +172,22 @@ namespace System.ServiceModel.Configuration
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("security");
             }
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.NegotiateServiceCredential, security.NegotiateServiceCredential);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.AlgorithmSuite, security.AlgorithmSuite);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.IssuedKeyType, security.IssuedKeyType);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.EstablishSecurityContext, security.EstablishSecurityContext);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.NegotiateServiceCredential,
+                security.NegotiateServiceCredential
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.AlgorithmSuite,
+                security.AlgorithmSuite
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.IssuedKeyType,
+                security.IssuedKeyType
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.EstablishSecurityContext,
+                security.EstablishSecurityContext
+            );
             if (security.IssuedTokenType != null)
             {
                 this.IssuedTokenType = security.IssuedTokenType;
@@ -154,12 +205,17 @@ namespace System.ServiceModel.Configuration
             {
                 if (null == this.Issuer.Address)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigNullIssuerAddress)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(SR.GetString(SR.ConfigNullIssuerAddress))
+                    );
                 }
 
                 this.Issuer.BindingConfiguration = this.Issuer.Address.ToString();
-                BindingsSection.TryAdd(this.Issuer.BindingConfiguration,
-                    security.IssuerBinding, out bindingType);
+                BindingsSection.TryAdd(
+                    this.Issuer.BindingConfiguration,
+                    security.IssuerBinding,
+                    out bindingType
+                );
                 this.Issuer.Binding = bindingType;
             }
             foreach (XmlElement element in security.TokenRequestParameters)
@@ -168,7 +224,10 @@ namespace System.ServiceModel.Configuration
             }
             foreach (ClaimTypeRequirement claimTypeRequirement in security.ClaimTypeRequirements)
             {
-                ClaimTypeElement element = new ClaimTypeElement(claimTypeRequirement.ClaimType, claimTypeRequirement.IsOptional);
+                ClaimTypeElement element = new ClaimTypeElement(
+                    claimTypeRequirement.ClaimType,
+                    claimTypeRequirement.IsOptional
+                );
                 this.ClaimTypeRequirements.Add(element);
             }
         }

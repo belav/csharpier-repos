@@ -11,9 +11,7 @@ namespace System.Web.Http.ModelBinding.Binders
     {
         private ModelBinderProvider[] _providers;
 
-        public CompositeModelBinderProvider()
-        {
-        }
+        public CompositeModelBinderProvider() { }
 
         public CompositeModelBinderProvider(IEnumerable<ModelBinderProvider> providers)
         {
@@ -32,13 +30,15 @@ namespace System.Web.Http.ModelBinding.Binders
 
         public override IModelBinder GetBinder(HttpConfiguration configuration, Type modelType)
         {
-            IEnumerable<ModelBinderProvider> providers = _providers ?? configuration.Services.GetModelBinderProviders();
+            IEnumerable<ModelBinderProvider> providers =
+                _providers ?? configuration.Services.GetModelBinderProviders();
 
-            // Pre-filter out any binders that we know can't match. 
-            IEnumerable<IModelBinder> binders = from provider in providers 
-                                                let binder = provider.GetBinder(configuration, modelType) 
-                                                where binder != null 
-                                                select binder;
+            // Pre-filter out any binders that we know can't match.
+            IEnumerable<IModelBinder> binders =
+                from provider in providers
+                let binder = provider.GetBinder(configuration, modelType)
+                where binder != null
+                select binder;
             return new CompositeModelBinder(binders);
         }
     }

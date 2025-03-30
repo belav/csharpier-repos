@@ -13,11 +13,14 @@ public class RoutingDynamicTest : IClassFixture<MvcTestFixture<RoutingWebSite.St
 {
     public RoutingDynamicTest(MvcTestFixture<RoutingWebSite.StartupForDynamic> fixture)
     {
-        Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        Factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = Factory.CreateDefaultClient();
     }
 
-    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) => builder.UseStartup<RoutingWebSite.StartupForDynamic>();
+    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>
+        builder.UseStartup<RoutingWebSite.StartupForDynamic>();
 
     public WebApplicationFactory<StartupForDynamic> Factory { get; }
     public HttpClient Client { get; }
@@ -134,7 +137,9 @@ public class RoutingDynamicTest : IClassFixture<MvcTestFixture<RoutingWebSite.St
     {
         // Regression test for https://github.com/dotnet/aspnetcore/issues/13996
         // Arrange
-        var client = Factory.WithWebHostBuilder(b => b.UseStartup<StartupForDynamicAndRazorPages>()).CreateDefaultClient();
+        var client = Factory
+            .WithWebHostBuilder(b => b.UseStartup<StartupForDynamicAndRazorPages>())
+            .CreateDefaultClient();
         var url = "/PageWithLinks";
 
         // Act
@@ -151,7 +156,9 @@ public class RoutingDynamicTest : IClassFixture<MvcTestFixture<RoutingWebSite.St
     {
         // Regression test for https://github.com/dotnet/aspnetcore/issues/13996
         // Arrange
-        var client = Factory.WithWebHostBuilder(b => b.UseStartup<StartupForDynamicAndRazorPages>()).CreateDefaultClient();
+        var client = Factory
+            .WithWebHostBuilder(b => b.UseStartup<StartupForDynamicAndRazorPages>())
+            .CreateDefaultClient();
         var url = "/de/area%3Dadmin,controller%3Ddynamic,action%3Dindex";
 
         // Act

@@ -26,7 +26,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void DBNull_Marshals_To_Null()
         {
-            Assert.Equal(VarEnum.VT_NULL, ComVariantMarshaller.ConvertToUnmanaged(DBNull.Value).VarType);
+            Assert.Equal(
+                VarEnum.VT_NULL,
+                ComVariantMarshaller.ConvertToUnmanaged(DBNull.Value).VarType
+            );
             Assert.Same(DBNull.Value, ComVariantMarshaller.ConvertToManaged(ComVariant.Null));
         }
 
@@ -226,7 +229,10 @@ namespace System.Runtime.InteropServices.Tests
             ErrorWrapper errorWrapper = new ErrorWrapper(hr);
             ComVariant variant = ComVariantMarshaller.ConvertToUnmanaged(errorWrapper);
             Assert.Equal(VarEnum.VT_ERROR, variant.VarType);
-            Assert.Equal(errorWrapper.ErrorCode, Assert.IsType<int>(ComVariantMarshaller.ConvertToManaged(variant)));
+            Assert.Equal(
+                errorWrapper.ErrorCode,
+                Assert.IsType<int>(ComVariantMarshaller.ConvertToManaged(variant))
+            );
             ComVariantMarshaller.Free(variant);
         }
 
@@ -242,7 +248,10 @@ namespace System.Runtime.InteropServices.Tests
         public void VariantWrapper_Throws(object obj)
         {
             VariantWrapper wrapper = new VariantWrapper(obj);
-            Assert.Throws<ArgumentException>("managed", () => ComVariantMarshaller.ConvertToUnmanaged(wrapper));
+            Assert.Throws<ArgumentException>(
+                "managed",
+                () => ComVariantMarshaller.ConvertToUnmanaged(wrapper)
+            );
         }
 
         public static IEnumerable<object[]> ValidDecimalValues()
@@ -290,9 +299,14 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(ValidCurrencyValues))]
         public void CurrencyWrapper_Marshals_To_CY(decimal value)
         {
-            ComVariant variant = ComVariantMarshaller.ConvertToUnmanaged(new CurrencyWrapper(value));
+            ComVariant variant = ComVariantMarshaller.ConvertToUnmanaged(
+                new CurrencyWrapper(value)
+            );
             Assert.Equal(VarEnum.VT_CY, variant.VarType);
-            Assert.Equal(value, Assert.IsType<decimal>(ComVariantMarshaller.ConvertToManaged(variant)));
+            Assert.Equal(
+                value,
+                Assert.IsType<decimal>(ComVariantMarshaller.ConvertToManaged(variant))
+            );
             ComVariantMarshaller.Free(variant);
         }
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -318,10 +332,17 @@ namespace System.Runtime.InteropServices.Tests
             ComVariant variant = ComVariantMarshaller.ConvertToUnmanaged(obj);
             Assert.Equal(VarEnum.VT_UNKNOWN, variant.VarType);
             // Validate that the correct object is wrapped.
-            Assert.True(ComWrappers.TryGetObject(variant.GetRawDataRef<nint>(), out object wrappedObj));
+            Assert.True(
+                ComWrappers.TryGetObject(variant.GetRawDataRef<nint>(), out object wrappedObj)
+            );
             Assert.Same(obj, wrappedObj);
             // Validate that we use the same ComWrappers instance as ComInterfaceMarshaller<T>.
-            Assert.Same(obj, ComInterfaceMarshaller<object>.ConvertToManaged((void*)variant.GetRawDataRef<nint>()));
+            Assert.Same(
+                obj,
+                ComInterfaceMarshaller<object>.ConvertToManaged(
+                    (void*)variant.GetRawDataRef<nint>()
+                )
+            );
             Assert.Same(obj, ComVariantMarshaller.ConvertToManaged(variant));
             ComVariantMarshaller.Free(variant);
         }
@@ -333,7 +354,9 @@ namespace System.Runtime.InteropServices.Tests
             var obj = new ComExposedType();
             ComVariant variant = ComVariantMarshaller.ConvertToUnmanaged(new UnknownWrapper(obj));
             Assert.Equal(VarEnum.VT_UNKNOWN, variant.VarType);
-            Assert.True(ComWrappers.TryGetObject(variant.GetRawDataRef<nint>(), out object wrappedObj));
+            Assert.True(
+                ComWrappers.TryGetObject(variant.GetRawDataRef<nint>(), out object wrappedObj)
+            );
             Assert.Same(obj, wrappedObj);
             Assert.Same(obj, ComVariantMarshaller.ConvertToManaged(variant));
             ComVariantMarshaller.Free(variant);
@@ -381,7 +404,10 @@ namespace System.Runtime.InteropServices.Tests
         public unsafe void ByRef_Primitives(VarEnum elementType, object valueToSet)
         {
             long storage = 0;
-            ComVariant variant = ComVariant.CreateRaw(VarEnum.VT_BYREF | elementType, (nint)(&storage));
+            ComVariant variant = ComVariant.CreateRaw(
+                VarEnum.VT_BYREF | elementType,
+                (nint)(&storage)
+            );
             // Set up the marshaller
             ComVariantMarshaller.RefPropagate marshaller = default;
             marshaller.FromUnmanaged(variant);
@@ -396,7 +422,13 @@ namespace System.Runtime.InteropServices.Tests
 
             // Validate that the new value of the variant is the same as the value we set.
             // Go through IConvertible to handle the case of "same size, different signedness" (e.g. int and uint)
-            Assert.Equal(valueToSet, ((IConvertible)ComVariantMarshaller.ConvertToManaged(variant)).ToType(valueToSet.GetType(), null));
+            Assert.Equal(
+                valueToSet,
+                ((IConvertible)ComVariantMarshaller.ConvertToManaged(variant)).ToType(
+                    valueToSet.GetType(),
+                    null
+                )
+            );
         }
     }
 }

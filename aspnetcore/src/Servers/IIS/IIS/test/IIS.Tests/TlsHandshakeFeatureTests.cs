@@ -9,7 +9,11 @@ using Xunit;
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 [SkipIfHostableWebCoreNotAvailable]
-[MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win8, SkipReason = "https://github.com/aspnet/IISIntegration/issues/866")]
+[MinimumOSVersion(
+    OperatingSystems.Windows,
+    WindowsVersions.Win8,
+    SkipReason = "https://github.com/aspnet/IISIntegration/issues/866"
+)]
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class TlsHandshakeFeatureTests : StrictTestServerTests
 {
@@ -18,11 +22,16 @@ public class TlsHandshakeFeatureTests : StrictTestServerTests
     public async Task SetsTlsHandshakeFeatureForHttps()
     {
         ITlsHandshakeFeature tlsHandshakeFeature = null;
-        using (var testServer = await TestServer.CreateHttps(ctx =>
-        {
-            tlsHandshakeFeature = ctx.Features.Get<ITlsHandshakeFeature>();
-            return Task.CompletedTask;
-        }, LoggerFactory))
+        using (
+            var testServer = await TestServer.CreateHttps(
+                ctx =>
+                {
+                    tlsHandshakeFeature = ctx.Features.Get<ITlsHandshakeFeature>();
+                    return Task.CompletedTask;
+                },
+                LoggerFactory
+            )
+        )
         {
             await testServer.HttpClient.GetStringAsync("/");
         }
@@ -46,7 +55,10 @@ public class TlsHandshakeFeatureTests : StrictTestServerTests
         Assert.True(hashStrength >= 0, "HashStrength: " + hashStrength); // May be 0 for some algorithms
 
         var keyExchangeAlgorithm = tlsHandshakeFeature.KeyExchangeAlgorithm;
-        Assert.True(keyExchangeAlgorithm >= ExchangeAlgorithmType.None, "KeyExchangeAlgorithm: " + keyExchangeAlgorithm);
+        Assert.True(
+            keyExchangeAlgorithm >= ExchangeAlgorithmType.None,
+            "KeyExchangeAlgorithm: " + keyExchangeAlgorithm
+        );
 
         var keyExchangeStrength = tlsHandshakeFeature.KeyExchangeStrength;
         Assert.True(keyExchangeStrength >= 0, "KeyExchangeStrength: " + keyExchangeStrength);
@@ -62,11 +74,16 @@ public class TlsHandshakeFeatureTests : StrictTestServerTests
     public async Task DoesNotSetTlsHandshakeFeatureForHttp()
     {
         ITlsHandshakeFeature tlsHandshakeFeature = null;
-        using (var testServer = await TestServer.Create(ctx =>
-        {
-            tlsHandshakeFeature = ctx.Features.Get<ITlsHandshakeFeature>();
-            return Task.CompletedTask;
-        }, LoggerFactory))
+        using (
+            var testServer = await TestServer.Create(
+                ctx =>
+                {
+                    tlsHandshakeFeature = ctx.Features.Get<ITlsHandshakeFeature>();
+                    return Task.CompletedTask;
+                },
+                LoggerFactory
+            )
+        )
         {
             await testServer.HttpClient.GetStringAsync("/");
         }

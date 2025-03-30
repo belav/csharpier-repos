@@ -20,10 +20,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -43,66 +43,73 @@ using System.Xml;
 
 namespace Mono.Http.Modules
 {
-	public class BasicAuthenticationModule : AuthenticationModule
-	{
-		static char[] separator = {':'};
+    public class BasicAuthenticationModule : AuthenticationModule
+    {
+        static char[] separator = { ':' };
 
-		public BasicAuthenticationModule () : base ("Basic") {}
+        public BasicAuthenticationModule()
+            : base("Basic") { }
 
-		protected override bool AcceptCredentials (HttpApplication app, string authentication) 
-		{
-			byte[] userpass = Convert.FromBase64String (authentication);
-			string[] up = Encoding.UTF8.GetString (userpass).Split (separator);
-			string username = up [0];
-			string password = up [1];
+        protected override bool AcceptCredentials(HttpApplication app, string authentication)
+        {
+            byte[] userpass = Convert.FromBase64String(authentication);
+            string[] up = Encoding.UTF8.GetString(userpass).Split(separator);
+            string username = up[0];
+            string password = up[1];
 
-			string userFileName = app.Request.MapPath (ConfigurationSettings.AppSettings ["Basic.Users"]);
-			if (userFileName == null || !File.Exists (userFileName))
-				return false;
+            string userFileName = app.Request.MapPath(
+                ConfigurationSettings.AppSettings["Basic.Users"]
+            );
+            if (userFileName == null || !File.Exists(userFileName))
+                return false;
 
-			XmlDocument userDoc = new XmlDocument ();
-			userDoc.Load (userFileName);
+            XmlDocument userDoc = new XmlDocument();
+            userDoc.Load(userFileName);
 
-			string xPath = String.Format ("/users/user[@name='{0}']", username);
-			XmlNode user = userDoc.SelectSingleNode (xPath);
+            string xPath = String.Format("/users/user[@name='{0}']", username);
+            XmlNode user = userDoc.SelectSingleNode(xPath);
 
-			if (user == null)
-				return false;
+            if (user == null)
+                return false;
 
-			XmlAttribute att = user.Attributes ["password"];
-			if (att == null || password != att.Value)
-				return false;
+            XmlAttribute att = user.Attributes["password"];
+            if (att == null || password != att.Value)
+                return false;
 
-			XmlNodeList roleNodes = user.SelectNodes ("role");
-			string[] roles = new string [roleNodes.Count];
-			int i = 0;
-			foreach (XmlNode xn in roleNodes) {
-				XmlAttribute rolename = xn.Attributes ["name"];
-				if (rolename == null)
-					continue;
+            XmlNodeList roleNodes = user.SelectNodes("role");
+            string[] roles = new string[roleNodes.Count];
+            int i = 0;
+            foreach (XmlNode xn in roleNodes)
+            {
+                XmlAttribute rolename = xn.Attributes["name"];
+                if (rolename == null)
+                    continue;
 
-				roles [i++] = rolename.Value;
-			}
-			app.Context.User = new GenericPrincipal (new GenericIdentity (username, AuthenticationMethod), roles);
-			return true;
-		}
+                roles[i++] = rolename.Value;
+            }
+            app.Context.User = new GenericPrincipal(
+                new GenericIdentity(username, AuthenticationMethod),
+                roles
+            );
+            return true;
+        }
 
-		#region Event Handlers
+        #region Event Handlers
 
-		// We add the WWW-Authenticate header here, so if an authorization 
-		// fails elsewhere than in this module, we can still request authentication 
-		// from the client.
-		public override void OnEndRequest (object source, EventArgs eventArgs)
-		{
-			HttpApplication app = (HttpApplication) source;
-			if (app.Response.StatusCode != 401 || !AuthenticationRequired)
-				return;
+        // We add the WWW-Authenticate header here, so if an authorization
+        // fails elsewhere than in this module, we can still request authentication
+        // from the client.
+        public override void OnEndRequest(object source, EventArgs eventArgs)
+        {
+            HttpApplication app = (HttpApplication)source;
+            if (app.Response.StatusCode != 401 || !AuthenticationRequired)
+                return;
 
-			string realm = ConfigurationSettings.AppSettings ["Basic.Realm"];
-			string challenge = String.Format ("{0} realm=\"{1}\"", AuthenticationMethod, realm);
-			app.Response.AppendHeader ("WWW-Authenticate", challenge);
-		}
+            string realm = ConfigurationSettings.AppSettings["Basic.Realm"];
+            string challenge = String.Format("{0} realm=\"{1}\"", AuthenticationMethod, realm);
+            app.Response.AppendHeader("WWW-Authenticate", challenge);
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

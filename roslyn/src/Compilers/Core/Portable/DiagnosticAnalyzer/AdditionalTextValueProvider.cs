@@ -20,9 +20,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="computeValue">Delegate to compute the value associated with a given <see cref="AdditionalText"/> instance.</param>
         /// <param name="additionalTextComparer">Optional equality comparer to determine equivalent <see cref="AdditionalText"/> instances that have the same value.
         /// If no comparer is provided, then <see cref="EqualityComparer{T}.Default"/> is used by default.</param>
-        public AdditionalTextValueProvider(Func<AdditionalText, TValue> computeValue, IEqualityComparer<AdditionalText>? additionalTextComparer = null)
+        public AdditionalTextValueProvider(
+            Func<AdditionalText, TValue> computeValue,
+            IEqualityComparer<AdditionalText>? additionalTextComparer = null
+        )
         {
-            CoreValueProvider = new AnalysisValueProvider<AdditionalText, TValue>(computeValue, additionalTextComparer ?? EqualityComparer<AdditionalText>.Default);
+            CoreValueProvider = new AnalysisValueProvider<AdditionalText, TValue>(
+                computeValue,
+                additionalTextComparer ?? EqualityComparer<AdditionalText>.Default
+            );
         }
     }
 }

@@ -64,6 +64,7 @@ namespace RabbitMQ.Client.Impl
     public class SimpleBlockingRpcContinuation : IRpcContinuation
     {
         public readonly BlockingCell m_cell = new BlockingCell();
+
         public SimpleBlockingRpcContinuation() { }
 
         public virtual void HandleCommand(Command cmd)

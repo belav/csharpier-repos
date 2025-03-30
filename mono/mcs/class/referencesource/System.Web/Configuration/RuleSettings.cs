@@ -4,24 +4,26 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
-    using System.Text;
-    using System.ComponentModel;
-    using System.Web.Hosting;
-    using System.Web.Util;
-    using System.Web.Configuration;
-    using System.Web.Management;
-    using System.Web.Compilation;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Web.Compilation;
+    using System.Web.Configuration;
+    using System.Web.Hosting;
+    using System.Web.Management;
+    using System.Web.Util;
+    using System.Xml;
 
-    public sealed class RuleSettings : ConfigurationElement {
+    public sealed class RuleSettings : ConfigurationElement
+    {
         internal static int DEFAULT_MIN_INSTANCES = 1;
         internal static int DEFAULT_MAX_LIMIT = int.MaxValue;
         internal static TimeSpan DEFAULT_MIN_INTERVAL = TimeSpan.Zero;
@@ -29,63 +31,71 @@ namespace System.Web.Configuration {
 
         private static ConfigurationPropertyCollection _properties;
 
-        private static readonly ConfigurationProperty _propName =
-            new ConfigurationProperty("name",
-                                        typeof(string),
-                                        null,
-                                        null,
-                                        StdValidatorsAndConverters.NonEmptyStringValidator,
-                                        ConfigurationPropertyOptions.IsRequired | 
-                                        ConfigurationPropertyOptions.IsKey);
-        private static readonly ConfigurationProperty _propEventName =
-            new ConfigurationProperty("eventName", 
-                                        typeof(string), 
-                                        String.Empty, 
-                                        ConfigurationPropertyOptions.IsRequired);
+        private static readonly ConfigurationProperty _propName = new ConfigurationProperty(
+            "name",
+            typeof(string),
+            null,
+            null,
+            StdValidatorsAndConverters.NonEmptyStringValidator,
+            ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        );
+        private static readonly ConfigurationProperty _propEventName = new ConfigurationProperty(
+            "eventName",
+            typeof(string),
+            String.Empty,
+            ConfigurationPropertyOptions.IsRequired
+        );
 
-        private static readonly ConfigurationProperty _propProvider =
-            new ConfigurationProperty("provider", 
-                                        typeof(string), 
-                                        String.Empty, 
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propProvider = new ConfigurationProperty(
+            "provider",
+            typeof(string),
+            String.Empty,
+            ConfigurationPropertyOptions.None
+        );
 
-        private static readonly ConfigurationProperty _propProfile =
-            new ConfigurationProperty("profile", 
-                                        typeof(string), 
-                                        String.Empty, 
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propProfile = new ConfigurationProperty(
+            "profile",
+            typeof(string),
+            String.Empty,
+            ConfigurationPropertyOptions.None
+        );
 
-        private static readonly ConfigurationProperty _propMinInstances =
-            new ConfigurationProperty("minInstances",
-                                        typeof(int),
-                                        DEFAULT_MIN_INSTANCES,
-                                        null,
-                                        StdValidatorsAndConverters.NonZeroPositiveIntegerValidator,
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propMinInstances = new ConfigurationProperty(
+            "minInstances",
+            typeof(int),
+            DEFAULT_MIN_INSTANCES,
+            null,
+            StdValidatorsAndConverters.NonZeroPositiveIntegerValidator,
+            ConfigurationPropertyOptions.None
+        );
 
-        private static readonly ConfigurationProperty _propMaxLimit =
-            new ConfigurationProperty("maxLimit",
-                                        typeof(int),
-                                        DEFAULT_MAX_LIMIT,
-                                        new InfiniteIntConverter(),
-                                        StdValidatorsAndConverters.PositiveIntegerValidator,
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propMaxLimit = new ConfigurationProperty(
+            "maxLimit",
+            typeof(int),
+            DEFAULT_MAX_LIMIT,
+            new InfiniteIntConverter(),
+            StdValidatorsAndConverters.PositiveIntegerValidator,
+            ConfigurationPropertyOptions.None
+        );
 
-        private static readonly ConfigurationProperty _propMinInterval =
-            new ConfigurationProperty("minInterval",
-                                        typeof(TimeSpan),
-                                        DEFAULT_MIN_INTERVAL,
-                                        StdValidatorsAndConverters.InfiniteTimeSpanConverter,
-                                        null,
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propMinInterval = new ConfigurationProperty(
+            "minInterval",
+            typeof(TimeSpan),
+            DEFAULT_MIN_INTERVAL,
+            StdValidatorsAndConverters.InfiniteTimeSpanConverter,
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
-        private static readonly ConfigurationProperty _propCustom =
-            new ConfigurationProperty("custom", 
-                                        typeof(string), 
-                                        String.Empty, 
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propCustom = new ConfigurationProperty(
+            "custom",
+            typeof(string),
+            String.Empty,
+            ConfigurationPropertyOptions.None
+        );
 
-        static RuleSettings() {
+        static RuleSettings()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propName);
@@ -98,26 +108,45 @@ namespace System.Web.Configuration {
             _properties.Add(_propCustom);
         }
 
-        internal RuleSettings() {
-        }
+        internal RuleSettings() { }
 
         public RuleSettings(String name, String eventName, String provider)
-            : this() {
+            : this()
+        {
             Name = name;
             EventName = eventName;
             Provider = provider;
         }
 
-        public RuleSettings(String name, String eventName, String provider, String profile, int minInstances, int maxLimit, TimeSpan minInterval)
-            : this(name, eventName, provider) {
+        public RuleSettings(
+            String name,
+            String eventName,
+            String provider,
+            String profile,
+            int minInstances,
+            int maxLimit,
+            TimeSpan minInterval
+        )
+            : this(name, eventName, provider)
+        {
             Profile = profile;
             MinInstances = minInstances;
             MaxLimit = maxLimit;
             MinInterval = minInterval;
         }
 
-        public RuleSettings(String name, String eventName, String provider, String profile, int minInstances, int maxLimit, TimeSpan minInterval, string custom)
-            : this(name, eventName, provider) {
+        public RuleSettings(
+            String name,
+            String eventName,
+            String provider,
+            String profile,
+            int minInstances,
+            int maxLimit,
+            TimeSpan minInterval,
+            string custom
+        )
+            : this(name, eventName, provider)
+        {
             Profile = profile;
             MinInstances = minInstances;
             MaxLimit = maxLimit;
@@ -125,95 +154,70 @@ namespace System.Web.Configuration {
             Custom = custom;
         }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("name", IsRequired = true, IsKey = true, DefaultValue = "")]
         [StringValidator(MinLength = 1)]
-        public String Name {
-            get {
-                return (string)base[_propName];
-            }
-            set {
-                base[_propName] = value;
-            }
+        public String Name
+        {
+            get { return (string)base[_propName]; }
+            set { base[_propName] = value; }
         }
 
         [ConfigurationProperty("eventName", IsRequired = true, DefaultValue = "")]
-        public String EventName {
-            get {
-                return (string)base[_propEventName];
-            }
-            set {
-                base[_propEventName] = value;
-            }
+        public String EventName
+        {
+            get { return (string)base[_propEventName]; }
+            set { base[_propEventName] = value; }
         }
 
         [ConfigurationProperty("custom", DefaultValue = "")]
-        public String Custom {
-            get {
-                return (string)base[_propCustom];
-            }
-            set {
-                base[_propCustom] = value;
-            }
+        public String Custom
+        {
+            get { return (string)base[_propCustom]; }
+            set { base[_propCustom] = value; }
         }
 
         [ConfigurationProperty("profile", DefaultValue = "")]
-        public String Profile {
-            get {
-                return (string)base[_propProfile];
-            }
-            set {
-                base[_propProfile] = value;
-            }
+        public String Profile
+        {
+            get { return (string)base[_propProfile]; }
+            set { base[_propProfile] = value; }
         }
 
         [ConfigurationProperty("provider", DefaultValue = "")]
-        public String Provider {
-            get {
-                return (string)base[_propProvider];
-            }
-            set {
-                base[_propProvider] = value;
-            }
+        public String Provider
+        {
+            get { return (string)base[_propProvider]; }
+            set { base[_propProvider] = value; }
         }
 
         [ConfigurationProperty("minInstances", DefaultValue = 1)]
         [IntegerValidator(MinValue = 1)]
-        public int MinInstances {
-            get {
-                return (int)base[_propMinInstances];
-            }
-            set {
-                base[_propMinInstances] = value;
-            }
+        public int MinInstances
+        {
+            get { return (int)base[_propMinInstances]; }
+            set { base[_propMinInstances] = value; }
         }
 
         [ConfigurationProperty("maxLimit", DefaultValue = int.MaxValue)]
         [TypeConverter(typeof(InfiniteIntConverter))]
         [IntegerValidator(MinValue = 0)]
-        public int MaxLimit {
-            get {
-                return (int)base[_propMaxLimit];
-            }
-            set {
-                base[_propMaxLimit] = value;
-            }
+        public int MaxLimit
+        {
+            get { return (int)base[_propMaxLimit]; }
+            set { base[_propMaxLimit] = value; }
         }
 
         [ConfigurationProperty("minInterval", DefaultValue = "00:00:00")]
         [TypeConverter(typeof(InfiniteTimeSpanConverter))]
-        public TimeSpan MinInterval {
-            get {
-                return (TimeSpan)base[_propMinInterval];
-            }
-            set {
-                base[_propMinInterval] = value;
-            }
+        public TimeSpan MinInterval
+        {
+            get { return (TimeSpan)base[_propMinInterval]; }
+            set { base[_propMinInterval] = value; }
         }
     }
 }

@@ -10,7 +10,8 @@ namespace System.Data
     {
         public DataTable Table { get; }
 
-        internal DataTablePropertyDescriptor(DataTable dataTable) : base(dataTable.TableName, null)
+        internal DataTablePropertyDescriptor(DataTable dataTable)
+            : base(dataTable.TableName, null)
         {
             Table = dataTable;
         }
@@ -22,8 +23,7 @@ namespace System.Data
         public override Type PropertyType => typeof(IBindingList);
 
         public override bool Equals([NotNullWhen(true)] object? other) =>
-            other is DataTablePropertyDescriptor descriptor &&
-            descriptor.Table == Table;
+            other is DataTablePropertyDescriptor descriptor && descriptor.Table == Table;
 
         public override int GetHashCode() => Table.GetHashCode();
 
@@ -31,7 +31,8 @@ namespace System.Data
 
         public override object GetValue(object? component)
         {
-            DataViewManagerListItemTypeDescriptor dataViewManagerListItem = (DataViewManagerListItemTypeDescriptor)component!;
+            DataViewManagerListItemTypeDescriptor dataViewManagerListItem =
+                (DataViewManagerListItemTypeDescriptor)component!;
             return dataViewManagerListItem.GetDataView(Table);
         }
 

@@ -1,5 +1,5 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
 //
 // <OWNER>Microsoft</OWNER>
@@ -48,16 +48,14 @@ namespace System.Threading
         //
         // Constructs an AsyncLocal<T> that does not receive change notifications.
         //
-        public AsyncLocal() 
-        {
-        }
+        public AsyncLocal() { }
 
         //
         // Constructs an AsyncLocal<T> with a delegate that is called whenever the current value changes
         // on any thread.
         //
         [SecurityCritical]
-        public AsyncLocal(Action<AsyncLocalValueChangedArgs<T>> valueChangedHandler) 
+        public AsyncLocal(Action<AsyncLocalValueChangedArgs<T>> valueChangedHandler)
         {
             m_valueChangedHandler = valueChangedHandler;
         }
@@ -65,25 +63,28 @@ namespace System.Threading
         public T Value
         {
             [SecuritySafeCritical]
-            get 
-            { 
+            get
+            {
                 object obj = ExecutionContext.GetLocalValue(this);
                 return (obj == null) ? default(T) : (T)obj;
             }
             [SecuritySafeCritical]
-            set 
-            {
-                ExecutionContext.SetLocalValue(this, value, m_valueChangedHandler != null); 
-            }
+            set { ExecutionContext.SetLocalValue(this, value, m_valueChangedHandler != null); }
         }
 
         [SecurityCritical]
-        void IAsyncLocal.OnValueChanged(object previousValueObj, object currentValueObj, bool contextChanged)
+        void IAsyncLocal.OnValueChanged(
+            object previousValueObj,
+            object currentValueObj,
+            bool contextChanged
+        )
         {
             Contract.Assert(m_valueChangedHandler != null);
             T previousValue = previousValueObj == null ? default(T) : (T)previousValueObj;
             T currentValue = currentValueObj == null ? default(T) : (T)currentValueObj;
-            m_valueChangedHandler(new AsyncLocalValueChangedArgs<T>(previousValue, currentValue, contextChanged));
+            m_valueChangedHandler(
+                new AsyncLocalValueChangedArgs<T>(previousValue, currentValue, contextChanged)
+            );
         }
     }
 
@@ -100,7 +101,7 @@ namespace System.Threading
     {
         public T PreviousValue { get; private set; }
         public T CurrentValue { get; private set; }
-        
+
         //
         // If the value changed because we changed to a different ExecutionContext, this is true.  If it changed
         // because someone set the Value property, this is false.

@@ -14,7 +14,7 @@ namespace System.Text.Unicode
 #else
     internal
 #endif
-        static class Utf8
+    static class Utf8
     {
         /*
          * OperationStatus-based APIs for transcoding of chunked data.
@@ -44,7 +44,14 @@ namespace System.Text.Unicode
         /// in <paramref name="source"/> will be replaced with U+FFFD in <paramref name="destination"/>, and
         /// this method will not return <see cref="OperationStatus.InvalidData"/>.
         /// </remarks>
-        public static unsafe OperationStatus FromUtf16(ReadOnlySpan<char> source, Span<byte> destination, out int charsRead, out int bytesWritten, bool replaceInvalidSequences = true, bool isFinalBlock = true)
+        public static unsafe OperationStatus FromUtf16(
+            ReadOnlySpan<char> source,
+            Span<byte> destination,
+            out int charsRead,
+            out int bytesWritten,
+            bool replaceInvalidSequences = true,
+            bool isFinalBlock = true
+        )
         {
             fixed (char* pOriginalSource = &MemoryMarshal.GetReference(source))
             fixed (byte* pOriginalDestination = &MemoryMarshal.GetReference(destination))
@@ -62,19 +69,24 @@ namespace System.Text.Unicode
                     // It's safe for us to use Unsafe.AsPointer on them during this loop.
 
                     operationStatus = Utf8Utility.TranscodeToUtf8(
-                        pInputBuffer: (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source)),
+                        pInputBuffer: (char*)
+                            Unsafe.AsPointer(ref MemoryMarshal.GetReference(source)),
                         inputLength: source.Length,
-                        pOutputBuffer: (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination)),
+                        pOutputBuffer: (byte*)
+                            Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination)),
                         outputBytesRemaining: destination.Length,
                         pInputBufferRemaining: out pInputBufferRemaining,
-                        pOutputBufferRemaining: out pOutputBufferRemaining);
+                        pOutputBufferRemaining: out pOutputBufferRemaining
+                    );
 
                     // If we finished the operation entirely or we ran out of space in the destination buffer,
                     // or if we need more input data and the caller told us that there's possibly more data
                     // coming, return immediately.
 
-                    if (operationStatus <= OperationStatus.DestinationTooSmall
-                        || (operationStatus == OperationStatus.NeedMoreData && !isFinalBlock))
+                    if (
+                        operationStatus <= OperationStatus.DestinationTooSmall
+                        || (operationStatus == OperationStatus.NeedMoreData && !isFinalBlock)
+                    )
                     {
                         break;
                     }
@@ -92,7 +104,12 @@ namespace System.Text.Unicode
                     // We're going to attempt to write U+FFFD to the destination buffer.
                     // Do we even have enough space to do so?
 
-                    destination = destination.Slice((int)(pOutputBufferRemaining - (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination))));
+                    destination = destination.Slice(
+                        (int)(
+                            pOutputBufferRemaining
+                            - (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination))
+                        )
+                    );
 
                     if (destination.Length <= 2)
                     {
@@ -107,11 +124,18 @@ namespace System.Text.Unicode
 
                     // Invalid UTF-16 sequences are always of length 1. Just skip the next character.
 
-                    source = source.Slice((int)(pInputBufferRemaining - (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source))) + 1);
+                    source = source.Slice(
+                        (int)(
+                            pInputBufferRemaining
+                            - (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source))
+                        ) + 1
+                    );
 
                     operationStatus = OperationStatus.Done; // we patched the error - if we're about to break out of the loop this is a success case
-                    pInputBufferRemaining = (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source));
-                    pOutputBufferRemaining = (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination));
+                    pInputBufferRemaining = (char*)
+                        Unsafe.AsPointer(ref MemoryMarshal.GetReference(source));
+                    pOutputBufferRemaining = (byte*)
+                        Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination));
                 }
 
                 // Not possible to make any further progress - report to our caller how far we got.
@@ -130,7 +154,14 @@ namespace System.Text.Unicode
         /// in <paramref name="source"/> will be replaced with U+FFFD in <paramref name="destination"/>, and
         /// this method will not return <see cref="OperationStatus.InvalidData"/>.
         /// </remarks>
-        public static unsafe OperationStatus ToUtf16(ReadOnlySpan<byte> source, Span<char> destination, out int bytesRead, out int charsWritten, bool replaceInvalidSequences = true, bool isFinalBlock = true)
+        public static unsafe OperationStatus ToUtf16(
+            ReadOnlySpan<byte> source,
+            Span<char> destination,
+            out int bytesRead,
+            out int charsWritten,
+            bool replaceInvalidSequences = true,
+            bool isFinalBlock = true
+        )
         {
             // NOTE: Changes to this method should be kept in sync with ToUtf16PreservingReplacement below.
             // See it for an explanation of the differences
@@ -153,19 +184,24 @@ namespace System.Text.Unicode
                     // It's safe for us to use Unsafe.AsPointer on them during this loop.
 
                     operationStatus = Utf8Utility.TranscodeToUtf16(
-                        pInputBuffer: (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source)),
+                        pInputBuffer: (byte*)
+                            Unsafe.AsPointer(ref MemoryMarshal.GetReference(source)),
                         inputLength: source.Length,
-                        pOutputBuffer: (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination)),
+                        pOutputBuffer: (char*)
+                            Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination)),
                         outputCharsRemaining: destination.Length,
                         pInputBufferRemaining: out pInputBufferRemaining,
-                        pOutputBufferRemaining: out pOutputBufferRemaining);
+                        pOutputBufferRemaining: out pOutputBufferRemaining
+                    );
 
                     // If we finished the operation entirely or we ran out of space in the destination buffer,
                     // or if we need more input data and the caller told us that there's possibly more data
                     // coming, return immediately.
 
-                    if (operationStatus <= OperationStatus.DestinationTooSmall
-                        || (operationStatus == OperationStatus.NeedMoreData && !isFinalBlock))
+                    if (
+                        operationStatus <= OperationStatus.DestinationTooSmall
+                        || (operationStatus == OperationStatus.NeedMoreData && !isFinalBlock)
+                    )
                     {
                         break;
                     }
@@ -183,7 +219,12 @@ namespace System.Text.Unicode
                     // We're going to attempt to write U+FFFD to the destination buffer.
                     // Do we even have enough space to do so?
 
-                    destination = destination.Slice((int)(pOutputBufferRemaining - (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination))));
+                    destination = destination.Slice(
+                        (int)(
+                            pOutputBufferRemaining
+                            - (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination))
+                        )
+                    );
 
                     if (destination.IsEmpty)
                     {
@@ -197,15 +238,22 @@ namespace System.Text.Unicode
                     // Now figure out how many bytes of the source we must skip over before we should retry
                     // the operation. This might be more than 1 byte.
 
-                    source = source.Slice((int)(pInputBufferRemaining - (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source))));
+                    source = source.Slice(
+                        (int)(
+                            pInputBufferRemaining
+                            - (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source))
+                        )
+                    );
                     Debug.Assert(!source.IsEmpty, "Expected 'Done' if source is fully consumed.");
 
                     Rune.DecodeFromUtf8(source, out _, out int bytesConsumedJustNow);
                     source = source.Slice(bytesConsumedJustNow);
 
                     operationStatus = OperationStatus.Done; // we patched the error - if we're about to break out of the loop this is a success case
-                    pInputBufferRemaining = (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source));
-                    pOutputBufferRemaining = (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination));
+                    pInputBufferRemaining = (byte*)
+                        Unsafe.AsPointer(ref MemoryMarshal.GetReference(source));
+                    pOutputBufferRemaining = (char*)
+                        Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination));
                 }
 
                 // Not possible to make any further progress - report to our caller how far we got.
@@ -216,7 +264,14 @@ namespace System.Text.Unicode
             }
         }
 
-        internal static unsafe OperationStatus ToUtf16PreservingReplacement(ReadOnlySpan<byte> source, Span<char> destination, out int bytesRead, out int charsWritten, bool replaceInvalidSequences = true, bool isFinalBlock = true)
+        internal static unsafe OperationStatus ToUtf16PreservingReplacement(
+            ReadOnlySpan<byte> source,
+            Span<char> destination,
+            out int bytesRead,
+            out int charsWritten,
+            bool replaceInvalidSequences = true,
+            bool isFinalBlock = true
+        )
         {
             // NOTE: Changes to this method should be kept in sync with ToUtf16 above.
             //
@@ -247,19 +302,24 @@ namespace System.Text.Unicode
                     // It's safe for us to use Unsafe.AsPointer on them during this loop.
 
                     operationStatus = Utf8Utility.TranscodeToUtf16(
-                        pInputBuffer: (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source)),
+                        pInputBuffer: (byte*)
+                            Unsafe.AsPointer(ref MemoryMarshal.GetReference(source)),
                         inputLength: source.Length,
-                        pOutputBuffer: (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination)),
+                        pOutputBuffer: (char*)
+                            Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination)),
                         outputCharsRemaining: destination.Length,
                         pInputBufferRemaining: out pInputBufferRemaining,
-                        pOutputBufferRemaining: out pOutputBufferRemaining);
+                        pOutputBufferRemaining: out pOutputBufferRemaining
+                    );
 
                     // If we finished the operation entirely or we ran out of space in the destination buffer,
                     // or if we need more input data and the caller told us that there's possibly more data
                     // coming, return immediately.
 
-                    if (operationStatus <= OperationStatus.DestinationTooSmall
-                        || (operationStatus == OperationStatus.NeedMoreData && !isFinalBlock))
+                    if (
+                        operationStatus <= OperationStatus.DestinationTooSmall
+                        || (operationStatus == OperationStatus.NeedMoreData && !isFinalBlock)
+                    )
                     {
                         break;
                     }
@@ -281,8 +341,18 @@ namespace System.Text.Unicode
                     //
                     // Check if we even have enough space to do so?
 
-                    source = source.Slice((int)(pInputBufferRemaining - (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source))));
-                    destination = destination.Slice((int)(pOutputBufferRemaining - (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination))));
+                    source = source.Slice(
+                        (int)(
+                            pInputBufferRemaining
+                            - (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source))
+                        )
+                    );
+                    destination = destination.Slice(
+                        (int)(
+                            pOutputBufferRemaining
+                            - (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination))
+                        )
+                    );
 
                     Debug.Assert(!source.IsEmpty, "Expected 'Done' if source is fully consumed.");
                     Rune.DecodeFromUtf8(source, out _, out int bytesConsumedJustNow);
@@ -303,8 +373,10 @@ namespace System.Text.Unicode
 
                     operationStatus = OperationStatus.Done; // we patched the error - if we're about to break out of the loop this is a success case
 
-                    pInputBufferRemaining = (byte*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(source));
-                    pOutputBufferRemaining = (char*)Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination));
+                    pInputBufferRemaining = (byte*)
+                        Unsafe.AsPointer(ref MemoryMarshal.GetReference(source));
+                    pOutputBufferRemaining = (char*)
+                        Unsafe.AsPointer(ref MemoryMarshal.GetReference(destination));
                 }
 
                 // Not possible to make any further progress - report to our caller how far we got.
@@ -320,7 +392,12 @@ namespace System.Text.Unicode
         /// <param name="handler">The interpolated string.</param>
         /// <param name="bytesWritten">The number of characters written to the span.</param>
         /// <returns>true if the entire interpolated string could be formatted successfully; otherwise, false.</returns>
-        public static bool TryWrite(Span<byte> destination, [InterpolatedStringHandlerArgument(nameof(destination))] ref TryWriteInterpolatedStringHandler handler, out int bytesWritten)
+        public static bool TryWrite(
+            Span<byte> destination,
+            [InterpolatedStringHandlerArgument(nameof(destination))]
+                ref TryWriteInterpolatedStringHandler handler,
+            out int bytesWritten
+        )
         {
             // The span argument isn't used directly in the method; rather, it'll be used by the compiler to create the handler.
             // We could validate here that span == handler._destination, but that doesn't seem necessary.
@@ -340,7 +417,13 @@ namespace System.Text.Unicode
         /// <param name="handler">The interpolated string.</param>
         /// <param name="bytesWritten">The number of characters written to the span.</param>
         /// <returns>true if the entire interpolated string could be formatted successfully; otherwise, false.</returns>
-        public static bool TryWrite(Span<byte> destination, IFormatProvider? provider, [InterpolatedStringHandlerArgument(nameof(destination), nameof(provider))] ref TryWriteInterpolatedStringHandler handler, out int bytesWritten) =>
+        public static bool TryWrite(
+            Span<byte> destination,
+            IFormatProvider? provider,
+            [InterpolatedStringHandlerArgument(nameof(destination), nameof(provider))]
+                ref TryWriteInterpolatedStringHandler handler,
+            out int bytesWritten
+        ) =>
             // The provider is passed to the handler by the compiler, so the actual implementation of the method
             // is the same as the non-provider overload.
             TryWrite(destination, ref handler, out bytesWritten);
@@ -352,12 +435,16 @@ namespace System.Text.Unicode
         {
             /// <summary>The destination UTF-8 buffer.</summary>
             private readonly Span<byte> _destination;
+
             /// <summary>Optional provider to pass to IFormattable.ToString, ISpanFormattable.TryFormat, and IUtf8SpanFormattable.TryFormat calls.</summary>
             private readonly IFormatProvider? _provider;
+
             /// <summary>The number of bytes written to <see cref="_destination"/>.</summary>
             internal int _pos;
+
             /// <summary>true if all formatting operations have succeeded; otherwise, false.</summary>
             internal bool _success;
+
             /// <summary>Whether <see cref="_provider"/> provides an ICustomFormatter.</summary>
             private readonly bool _hasCustomFormatter;
 
@@ -367,7 +454,12 @@ namespace System.Text.Unicode
             /// <param name="destination">The destination buffer.</param>
             /// <param name="shouldAppend">Upon return, true if the destination may be long enough to support the formatting, or false if it won't be.</param>
             /// <remarks>This is intended to be called only by compiler-generated code. Arguments are not validated as they'd otherwise be for members intended to be used directly.</remarks>
-            public TryWriteInterpolatedStringHandler(int literalLength, int formattedCount, Span<byte> destination, out bool shouldAppend)
+            public TryWriteInterpolatedStringHandler(
+                int literalLength,
+                int formattedCount,
+                Span<byte> destination,
+                out bool shouldAppend
+            )
             {
                 _destination = destination;
                 _provider = null;
@@ -383,13 +475,21 @@ namespace System.Text.Unicode
             /// <param name="provider">An object that supplies culture-specific formatting information.</param>
             /// <param name="shouldAppend">Upon return, true if the destination may be long enough to support the formatting, or false if it won't be.</param>
             /// <remarks>This is intended to be called only by compiler-generated code. Arguments are not validated as they'd otherwise be for members intended to be used directly.</remarks>
-            public TryWriteInterpolatedStringHandler(int literalLength, int formattedCount, Span<byte> destination, IFormatProvider? provider, out bool shouldAppend)
+            public TryWriteInterpolatedStringHandler(
+                int literalLength,
+                int formattedCount,
+                Span<byte> destination,
+                IFormatProvider? provider,
+                out bool shouldAppend
+            )
             {
                 _destination = destination;
                 _provider = provider;
                 _pos = 0;
                 _success = shouldAppend = destination.Length >= literalLength; // UTF8 encoding never produces fewer bytes than input characters
-                _hasCustomFormatter = provider is not null && DefaultInterpolatedStringHandler.HasCustomFormatter(provider);
+                _hasCustomFormatter =
+                    provider is not null
+                    && DefaultInterpolatedStringHandler.HasCustomFormatter(provider);
             }
 
             /// <summary>Writes the specified string to the handler.</summary>
@@ -405,8 +505,11 @@ namespace System.Text.Unicode
                     // The 99.999% for AppendLiteral is to be called with a const string.
                     // ReadUtf8 is a JIT intrinsic that can do the UTF8 encoding at JIT time.
                     int bytesWritten = UTF8Encoding.UTF8EncodingSealed.ReadUtf8(
-                        ref value.GetRawStringData(), value.Length,
-                        ref MemoryMarshal.GetReference(dest), dest.Length);
+                        ref value.GetRawStringData(),
+                        value.Length,
+                        ref MemoryMarshal.GetReference(dest),
+                        dest.Length
+                    );
                     if (bytesWritten < 0)
                     {
                         return Fail();
@@ -444,7 +547,14 @@ namespace System.Text.Unicode
                 // If the value can format itself directly into our buffer, do so.
                 if (value is IUtf8SpanFormattable)
                 {
-                    if (((IUtf8SpanFormattable)value).TryFormat(_destination.Slice(_pos), out int bytesWritten, format: default, _provider))
+                    if (
+                        ((IUtf8SpanFormattable)value).TryFormat(
+                            _destination.Slice(_pos),
+                            out int bytesWritten,
+                            format: default,
+                            _provider
+                        )
+                    )
                     {
                         _pos += bytesWritten;
                         return true;
@@ -497,7 +607,14 @@ namespace System.Text.Unicode
                 // If the value can format itself directly into our buffer, do so.
                 if (value is IUtf8SpanFormattable)
                 {
-                    if (((IUtf8SpanFormattable)value).TryFormat(_destination.Slice(_pos), out int bytesWritten, format, _provider))
+                    if (
+                        ((IUtf8SpanFormattable)value).TryFormat(
+                            _destination.Slice(_pos),
+                            out int bytesWritten,
+                            format,
+                            _provider
+                        )
+                    )
                     {
                         _pos += bytesWritten;
                         return true;
@@ -536,7 +653,8 @@ namespace System.Text.Unicode
                 int startingPos = _pos;
                 if (AppendFormatted(value))
                 {
-                    return alignment == 0 || TryAppendOrInsertAlignmentIfNeeded(startingPos, alignment);
+                    return alignment == 0
+                        || TryAppendOrInsertAlignmentIfNeeded(startingPos, alignment);
                 }
 
                 return Fail();
@@ -552,7 +670,8 @@ namespace System.Text.Unicode
                 int startingPos = _pos;
                 if (AppendFormatted(value, format))
                 {
-                    return alignment == 0 || TryAppendOrInsertAlignmentIfNeeded(startingPos, alignment);
+                    return alignment == 0
+                        || TryAppendOrInsertAlignmentIfNeeded(startingPos, alignment);
                 }
 
                 return Fail();
@@ -562,7 +681,9 @@ namespace System.Text.Unicode
             /// <param name="value">The span to write.</param>
             public bool AppendFormatted(scoped ReadOnlySpan<char> value)
             {
-                if (Encoding.UTF8.TryGetBytes(value, _destination.Slice(_pos), out int bytesWritten))
+                if (
+                    Encoding.UTF8.TryGetBytes(value, _destination.Slice(_pos), out int bytesWritten)
+                )
                 {
                     _pos += bytesWritten;
                     return true;
@@ -575,12 +696,17 @@ namespace System.Text.Unicode
             /// <param name="value">The span to write.</param>
             /// <param name="alignment">Minimum number of characters that should be written for this value.  If the value is negative, it indicates left-aligned and the required minimum is the absolute value.</param>
             /// <param name="format">The format string.</param>
-            public bool AppendFormatted(scoped ReadOnlySpan<char> value, int alignment = 0, string? format = null)
+            public bool AppendFormatted(
+                scoped ReadOnlySpan<char> value,
+                int alignment = 0,
+                string? format = null
+            )
             {
                 int startingPos = _pos;
                 if (AppendFormatted(value))
                 {
-                    return alignment == 0 || TryAppendOrInsertAlignmentIfNeeded(startingPos, alignment);
+                    return alignment == 0
+                        || TryAppendOrInsertAlignmentIfNeeded(startingPos, alignment);
                 }
 
                 return Fail();
@@ -603,12 +729,17 @@ namespace System.Text.Unicode
             /// <param name="utf8Value">The span to write.</param>
             /// <param name="alignment">Minimum number of characters that should be written for this value.  If the value is negative, it indicates left-aligned and the required minimum is the absolute value.</param>
             /// <param name="format">The format string.</param>
-            public bool AppendFormatted(scoped ReadOnlySpan<byte> utf8Value, int alignment = 0, string? format = null)
+            public bool AppendFormatted(
+                scoped ReadOnlySpan<byte> utf8Value,
+                int alignment = 0,
+                string? format = null
+            )
             {
                 int startingPos = _pos;
                 if (AppendFormatted(utf8Value))
                 {
-                    return alignment == 0 || TryAppendOrInsertAlignmentIfNeeded(startingPos, alignment);
+                    return alignment == 0
+                        || TryAppendOrInsertAlignmentIfNeeded(startingPos, alignment);
                 }
 
                 return Fail();
@@ -617,8 +748,9 @@ namespace System.Text.Unicode
             /// <summary>Writes the specified value to the handler.</summary>
             /// <param name="value">The value to write.</param>
             public bool AppendFormatted(string? value) =>
-                _hasCustomFormatter ? AppendCustomFormatter(value, format: null) :
-                AppendFormatted(value.AsSpan());
+                _hasCustomFormatter
+                    ? AppendCustomFormatter(value, format: null)
+                    : AppendFormatted(value.AsSpan());
 
             /// <summary>Writes the specified value to the handler.</summary>
             /// <param name="value">The value to write.</param>
@@ -654,11 +786,17 @@ namespace System.Text.Unicode
                 Debug.Assert(_hasCustomFormatter);
                 Debug.Assert(_provider is not null);
 
-                ICustomFormatter? formatter = (ICustomFormatter?)_provider.GetFormat(typeof(ICustomFormatter));
-                Debug.Assert(formatter is not null, "An incorrectly written provider said it implemented ICustomFormatter, and then didn't");
+                ICustomFormatter? formatter = (ICustomFormatter?)
+                    _provider.GetFormat(typeof(ICustomFormatter));
+                Debug.Assert(
+                    formatter is not null,
+                    "An incorrectly written provider said it implemented ICustomFormatter, and then didn't"
+                );
 
-                if (formatter is not null &&
-                    formatter.Format(format, value, _provider) is string customFormatted)
+                if (
+                    formatter is not null
+                    && formatter.Format(format, value, _provider) is string customFormatted
+                )
                 {
                     return AppendFormatted(customFormatted.AsSpan());
                 }
@@ -675,12 +813,29 @@ namespace System.Text.Unicode
                 Debug.Assert(value is ISpanFormattable);
 
                 Span<char> utf16 = stackalloc char[256];
-                return ((ISpanFormattable)value).TryFormat(utf16, out int charsWritten, format, _provider) ?
-                    AppendFormatted(utf16.Slice(0, charsWritten)) :
-                    GrowAndAppendFormatted(ref this, value, utf16.Length, out charsWritten, format);
+                return ((ISpanFormattable)value).TryFormat(
+                    utf16,
+                    out int charsWritten,
+                    format,
+                    _provider
+                )
+                    ? AppendFormatted(utf16.Slice(0, charsWritten))
+                    : GrowAndAppendFormatted(
+                        ref this,
+                        value,
+                        utf16.Length,
+                        out charsWritten,
+                        format
+                    );
 
                 [MethodImpl(MethodImplOptions.NoInlining)]
-                static bool GrowAndAppendFormatted(scoped ref TryWriteInterpolatedStringHandler thisRef, T value, int length, out int charsWritten, string? format)
+                static bool GrowAndAppendFormatted(
+                    scoped ref TryWriteInterpolatedStringHandler thisRef,
+                    T value,
+                    int length,
+                    out int charsWritten,
+                    string? format
+                )
                 {
                     Debug.Assert(value is ISpanFormattable);
 
@@ -689,16 +844,25 @@ namespace System.Text.Unicode
                         int newLength = length * 2;
                         if ((uint)newLength > Array.MaxLength)
                         {
-                            newLength = length == Array.MaxLength ?
-                                Array.MaxLength + 1 : // force OOM
-                                Array.MaxLength;
+                            newLength =
+                                length == Array.MaxLength
+                                    ? Array.MaxLength + 1
+                                    : // force OOM
+                                    Array.MaxLength;
                         }
                         length = newLength;
 
                         char[] array = ArrayPool<char>.Shared.Rent(length);
                         try
                         {
-                            if (((ISpanFormattable)value).TryFormat(array, out charsWritten, format, thisRef._provider))
+                            if (
+                                ((ISpanFormattable)value).TryFormat(
+                                    array,
+                                    out charsWritten,
+                                    format,
+                                    thisRef._provider
+                                )
+                            )
                             {
                                 return thisRef.AppendFormatted(array.AsSpan(0, charsWritten));
                             }
@@ -722,12 +886,24 @@ namespace System.Text.Unicode
                 Debug.Assert(typeof(T).IsEnum);
 
                 Span<char> utf16 = stackalloc char[256];
-                return Enum.TryFormatUnconstrained(value, utf16, out int charsWritten, format) ?
-                    AppendFormatted(utf16.Slice(0, charsWritten)) :
-                    GrowAndAppendFormatted(ref this, value, utf16.Length, out charsWritten, format);
+                return Enum.TryFormatUnconstrained(value, utf16, out int charsWritten, format)
+                    ? AppendFormatted(utf16.Slice(0, charsWritten))
+                    : GrowAndAppendFormatted(
+                        ref this,
+                        value,
+                        utf16.Length,
+                        out charsWritten,
+                        format
+                    );
 
                 [MethodImpl(MethodImplOptions.NoInlining)]
-                static bool GrowAndAppendFormatted(scoped ref TryWriteInterpolatedStringHandler thisRef, T value, int length, out int charsWritten, string? format)
+                static bool GrowAndAppendFormatted(
+                    scoped ref TryWriteInterpolatedStringHandler thisRef,
+                    T value,
+                    int length,
+                    out int charsWritten,
+                    string? format
+                )
                 {
                     Debug.Assert(value is ISpanFormattable);
 
@@ -736,9 +912,11 @@ namespace System.Text.Unicode
                         int newLength = length * 2;
                         if ((uint)newLength > Array.MaxLength)
                         {
-                            newLength = length == Array.MaxLength ?
-                                Array.MaxLength + 1 : // force OOM
-                                Array.MaxLength;
+                            newLength =
+                                length == Array.MaxLength
+                                    ? Array.MaxLength + 1
+                                    : // force OOM
+                                    Array.MaxLength;
                         }
                         length = newLength;
 
@@ -789,7 +967,9 @@ namespace System.Text.Unicode
                     }
                     else
                     {
-                        _destination.Slice(startingPos, bytesWritten).CopyTo(_destination.Slice(startingPos + paddingNeeded));
+                        _destination
+                            .Slice(startingPos, bytesWritten)
+                            .CopyTo(_destination.Slice(startingPos + paddingNeeded));
                         _destination.Slice(startingPos, paddingNeeded).Fill((byte)' ');
                     }
 

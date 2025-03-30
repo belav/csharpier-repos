@@ -19,17 +19,18 @@ public struct AA
     public char[,,] m_achField2;
     public bool[,][][,] m_abField3;
     public static ushort m_ushStatic1;
+
     public TestEnum Method4()
     {
         return TestEnum.blue;
     }
 }
 
-
 public class App
 {
     public static AA m_xStatic1 = new AA();
     public static AA m_xStatic2 = new AA();
+
     [Fact]
     public static int TestEntryPoint()
     {

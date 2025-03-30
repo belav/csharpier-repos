@@ -25,8 +25,13 @@ namespace System.Configuration.Internal
 
         void Init(IInternalConfigRoot configRoot, params object[] hostInitParams);
 
-        void InitForConfiguration(ref string locationSubPath, out string configPath, out string locationConfigPath,
-            IInternalConfigRoot configRoot, params object[] hostInitConfigurationParams);
+        void InitForConfiguration(
+            ref string locationSubPath,
+            out string configPath,
+            out string locationConfigPath,
+            IInternalConfigRoot configRoot,
+            params object[] hostInitConfigurationParams
+        );
 
         // To support creation of new config record - whether that path requires a configRecord.
         bool IsConfigRecordRequired(string configPath);
@@ -49,14 +54,27 @@ namespace System.Configuration.Internal
 
         Stream OpenStreamForRead(string streamName, bool assertPermissions);
 
-        Stream OpenStreamForWrite(string streamName, string templateStreamName, ref object writeContext);
+        Stream OpenStreamForWrite(
+            string streamName,
+            string templateStreamName,
+            ref object writeContext
+        );
 
-        Stream OpenStreamForWrite(string streamName, string templateStreamName, ref object writeContext,
-            bool assertPermissions);
+        Stream OpenStreamForWrite(
+            string streamName,
+            string templateStreamName,
+            ref object writeContext,
+            bool assertPermissions
+        );
 
         void WriteCompleted(string streamName, bool success, object writeContext);
 
-        void WriteCompleted(string streamName, bool success, object writeContext, bool assertPermissions);
+        void WriteCompleted(
+            string streamName,
+            bool success,
+            object writeContext,
+            bool assertPermissions
+        );
 
         void DeleteStream(string streamName);
 
@@ -72,11 +90,18 @@ namespace System.Configuration.Internal
 
         bool IsLocationApplicable(string configPath);
 
-        bool IsDefinitionAllowed(string configPath, ConfigurationAllowDefinition allowDefinition,
-            ConfigurationAllowExeDefinition allowExeDefinition);
+        bool IsDefinitionAllowed(
+            string configPath,
+            ConfigurationAllowDefinition allowDefinition,
+            ConfigurationAllowExeDefinition allowExeDefinition
+        );
 
-        void VerifyDefinitionAllowed(string configPath, ConfigurationAllowDefinition allowDefinition,
-            ConfigurationAllowExeDefinition allowExeDefinition, IConfigErrorInfo errorInfo);
+        void VerifyDefinitionAllowed(
+            string configPath,
+            ConfigurationAllowDefinition allowDefinition,
+            ConfigurationAllowExeDefinition allowExeDefinition,
+            IConfigErrorInfo errorInfo
+        );
 
         bool PrefetchAll(string configPath, string streamName);
 
@@ -87,11 +112,17 @@ namespace System.Configuration.Internal
 
         object CreateConfigurationContext(string configPath, string locationSubPath);
 
-        string DecryptSection(string encryptedXml, ProtectedConfigurationProvider protectionProvider,
-            ProtectedConfigurationSection protectedConfigSection);
+        string DecryptSection(
+            string encryptedXml,
+            ProtectedConfigurationProvider protectionProvider,
+            ProtectedConfigurationSection protectedConfigSection
+        );
 
-        string EncryptSection(string clearTextXml, ProtectedConfigurationProvider protectionProvider,
-            ProtectedConfigurationSection protectedConfigSection);
+        string EncryptSection(
+            string clearTextXml,
+            ProtectedConfigurationProvider protectionProvider,
+            ProtectedConfigurationSection protectedConfigSection
+        );
 
         Type GetConfigType(string typeName, bool throwOnError);
 
@@ -103,7 +134,15 @@ namespace System.Configuration.Internal
 
         IDisposable Impersonate();
 
-        [System.ObsoleteAttribute("Code Access Security is not supported or honored by the runtime.", DiagnosticId = "SYSLIB0003", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
-        void GetRestrictedPermissions(IInternalConfigRecord configRecord, out PermissionSet permissionSet, out bool isHostReady);
+        [System.ObsoleteAttribute(
+            "Code Access Security is not supported or honored by the runtime.",
+            DiagnosticId = "SYSLIB0003",
+            UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
+        )]
+        void GetRestrictedPermissions(
+            IInternalConfigRecord configRecord,
+            out PermissionSet permissionSet,
+            out bool isHostReady
+        );
     }
 }

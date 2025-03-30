@@ -10,7 +10,10 @@ public class AuthenticationStartupBase
 {
     private readonly Action<IEndpointRouteBuilder> _configureMode;
 
-    public AuthenticationStartupBase(IConfiguration configuration, Action<IEndpointRouteBuilder> configureMode)
+    public AuthenticationStartupBase(
+        IConfiguration configuration,
+        Action<IEndpointRouteBuilder> configureMode
+    )
     {
         Configuration = configuration;
         _configureMode = configureMode;
@@ -28,8 +31,11 @@ public class AuthenticationStartupBase
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
         services.AddAuthorization(options =>
         {
-            options.AddPolicy("NameMustStartWithB", policy =>
-                policy.RequireAssertion(ctx => ctx.User.Identity.Name?.StartsWith('B') ?? false));
+            options.AddPolicy(
+                "NameMustStartWithB",
+                policy =>
+                    policy.RequireAssertion(ctx => ctx.User.Identity.Name?.StartsWith('B') ?? false)
+            );
         });
     }
 
@@ -48,35 +54,34 @@ public class AuthenticationStartupBase
         app.UseAuthentication();
 
         // Mount the server-side Blazor app on /subdir
-        app.Map("/subdir", app =>
-        {
-            app.UseBlazorFrameworkFiles();
-            app.UseStaticFiles();
-
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
+        app.Map(
+            "/subdir",
+            app =>
             {
-                endpoints.MapControllers();
-                endpoints.MapRazorPages();
-                endpoints.MapBlazorHub();
-                _configureMode(endpoints);
-            });
-        });
+                app.UseBlazorFrameworkFiles();
+                app.UseStaticFiles();
+
+                app.UseRouting();
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                    endpoints.MapRazorPages();
+                    endpoints.MapBlazorHub();
+                    _configureMode(endpoints);
+                });
+            }
+        );
     }
 }
 
 public class AuthenticationStartup : AuthenticationStartupBase
 {
     public AuthenticationStartup(IConfiguration configuration)
-        : base(configuration, (endpoints) => endpoints.MapFallbackToFile("index.html"))
-    {
-    }
+        : base(configuration, (endpoints) => endpoints.MapFallbackToFile("index.html")) { }
 }
 
 public class ServerAuthenticationStartup : AuthenticationStartupBase
 {
     public ServerAuthenticationStartup(IConfiguration configuration)
-        : base(configuration, (endpoints) => endpoints.MapFallbackToPage("/_ServerHost"))
-    {
-    }
+        : base(configuration, (endpoints) => endpoints.MapFallbackToPage("/_ServerHost")) { }
 }

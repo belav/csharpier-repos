@@ -18,29 +18,36 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Reflection.Runtime.General;
-
 using Internal.LowLevelLinq;
 using Internal.Reflection.Extensions.NonPortable;
-
 
 namespace System.Reflection.Runtime.Assemblies
 {
     internal partial class RuntimeAssemblyInfo
     {
-        public sealed override IList<CustomAttributeData> GetCustomAttributesData() => CustomAttributes.ToReadOnlyCollection();
-        public sealed override object[] GetCustomAttributes(bool inherit) => CustomAttributeExtensions.GetCustomAttributes(this).ToArray();  // inherit is meaningless for Assemblies
+        public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
+            CustomAttributes.ToReadOnlyCollection();
+
+        public sealed override object[] GetCustomAttributes(bool inherit) =>
+            CustomAttributeExtensions.GetCustomAttributes(this).ToArray(); // inherit is meaningless for Assemblies
 
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, skipTypeValidation: true); // inherit is meaningless for Assemblies
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                skipTypeValidation: true
+            ); // inherit is meaningless for Assemblies
             return cads.InstantiateAsArray(attributeType);
         }
 
         public sealed override bool IsDefined(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, skipTypeValidation: true); // inherit is meaningless for Assemblies
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                skipTypeValidation: true
+            ); // inherit is meaningless for Assemblies
             return cads.Any();
         }
     }
@@ -50,20 +57,31 @@ namespace System.Reflection.Runtime.MethodInfos
 {
     internal abstract partial class RuntimeConstructorInfo
     {
-        public sealed override IList<CustomAttributeData> GetCustomAttributesData() => CustomAttributes.ToReadOnlyCollection();
-        public sealed override object[] GetCustomAttributes(bool inherit) => CustomAttributeExtensions.GetCustomAttributes(this, inherit).ToArray();
+        public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
+            CustomAttributes.ToReadOnlyCollection();
+
+        public sealed override object[] GetCustomAttributes(bool inherit) =>
+            CustomAttributeExtensions.GetCustomAttributes(this, inherit).ToArray();
 
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, inherit: inherit, skipTypeValidation: true);
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                inherit: inherit,
+                skipTypeValidation: true
+            );
             return cads.InstantiateAsArray(attributeType);
         }
 
         public sealed override bool IsDefined(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, inherit: inherit, skipTypeValidation: true);
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                inherit: inherit,
+                skipTypeValidation: true
+            );
             return cads.Any();
         }
     }
@@ -73,20 +91,31 @@ namespace System.Reflection.Runtime.EventInfos
 {
     internal abstract partial class RuntimeEventInfo
     {
-        public sealed override IList<CustomAttributeData> GetCustomAttributesData() => CustomAttributes.ToReadOnlyCollection();
-        public sealed override object[] GetCustomAttributes(bool inherit) => CustomAttributeExtensions.GetCustomAttributes(this, inherit: false).ToArray();  // Desktop compat: for events, this form of the api ignores "inherit"
+        public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
+            CustomAttributes.ToReadOnlyCollection();
+
+        public sealed override object[] GetCustomAttributes(bool inherit) =>
+            CustomAttributeExtensions.GetCustomAttributes(this, inherit: false).ToArray(); // Desktop compat: for events, this form of the api ignores "inherit"
 
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, inherit: false, skipTypeValidation: true); // Desktop compat: for events, this form of the api ignores "inherit"
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                inherit: false,
+                skipTypeValidation: true
+            ); // Desktop compat: for events, this form of the api ignores "inherit"
             return cads.InstantiateAsArray(attributeType);
         }
 
         public sealed override bool IsDefined(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, inherit: false, skipTypeValidation: true); // Desktop compat: for events, this form of the api ignores "inherit"
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                inherit: false,
+                skipTypeValidation: true
+            ); // Desktop compat: for events, this form of the api ignores "inherit"
             return cads.Any();
         }
     }
@@ -96,20 +125,31 @@ namespace System.Reflection.Runtime.FieldInfos
 {
     internal abstract partial class RuntimeFieldInfo
     {
-        public sealed override IList<CustomAttributeData> GetCustomAttributesData() => CustomAttributes.ToReadOnlyCollection();
-        public sealed override object[] GetCustomAttributes(bool inherit) => CustomAttributeExtensions.GetCustomAttributes(this, inherit).ToArray();
+        public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
+            CustomAttributes.ToReadOnlyCollection();
+
+        public sealed override object[] GetCustomAttributes(bool inherit) =>
+            CustomAttributeExtensions.GetCustomAttributes(this, inherit).ToArray();
 
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, inherit: inherit, skipTypeValidation: true);
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                inherit: inherit,
+                skipTypeValidation: true
+            );
             return cads.InstantiateAsArray(attributeType);
         }
 
         public sealed override bool IsDefined(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, inherit: inherit, skipTypeValidation: true);
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                inherit: inherit,
+                skipTypeValidation: true
+            );
             return cads.Any();
         }
     }
@@ -119,20 +159,31 @@ namespace System.Reflection.Runtime.MethodInfos
 {
     internal abstract partial class RuntimeMethodInfo
     {
-        public sealed override IList<CustomAttributeData> GetCustomAttributesData() => CustomAttributes.ToReadOnlyCollection();
-        public sealed override object[] GetCustomAttributes(bool inherit) => CustomAttributeExtensions.GetCustomAttributes(this, inherit).ToArray();
+        public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
+            CustomAttributes.ToReadOnlyCollection();
+
+        public sealed override object[] GetCustomAttributes(bool inherit) =>
+            CustomAttributeExtensions.GetCustomAttributes(this, inherit).ToArray();
 
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, inherit: inherit, skipTypeValidation: true);
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                inherit: inherit,
+                skipTypeValidation: true
+            );
             return cads.InstantiateAsArray(attributeType);
         }
 
         public sealed override bool IsDefined(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, inherit: inherit, skipTypeValidation: true);
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                inherit: inherit,
+                skipTypeValidation: true
+            );
             return cads.Any();
         }
     }
@@ -142,20 +193,29 @@ namespace System.Reflection.Runtime.Modules
 {
     internal abstract partial class RuntimeModule
     {
-        public sealed override IList<CustomAttributeData> GetCustomAttributesData() => CustomAttributes.ToReadOnlyCollection();
-        public sealed override object[] GetCustomAttributes(bool inherit) => CustomAttributeExtensions.GetCustomAttributes(this).ToArray();  // inherit is meaningless for Modules
+        public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
+            CustomAttributes.ToReadOnlyCollection();
+
+        public sealed override object[] GetCustomAttributes(bool inherit) =>
+            CustomAttributeExtensions.GetCustomAttributes(this).ToArray(); // inherit is meaningless for Modules
 
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, skipTypeValidation: true); // inherit is meaningless for Modules
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                skipTypeValidation: true
+            ); // inherit is meaningless for Modules
             return cads.InstantiateAsArray(attributeType);
         }
 
         public sealed override bool IsDefined(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, skipTypeValidation: true); // inherit is meaningless for Modules
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                skipTypeValidation: true
+            ); // inherit is meaningless for Modules
             return cads.Any();
         }
     }
@@ -165,20 +225,31 @@ namespace System.Reflection.Runtime.ParameterInfos
 {
     internal abstract partial class RuntimeParameterInfo
     {
-        public sealed override IList<CustomAttributeData> GetCustomAttributesData() => CustomAttributes.ToReadOnlyCollection();
-        public sealed override object[] GetCustomAttributes(bool inherit) => CustomAttributeExtensions.GetCustomAttributes(this, inherit: false).ToArray(); // Desktop compat: for parameters, this form of the api ignores "inherit"
+        public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
+            CustomAttributes.ToReadOnlyCollection();
+
+        public sealed override object[] GetCustomAttributes(bool inherit) =>
+            CustomAttributeExtensions.GetCustomAttributes(this, inherit: false).ToArray(); // Desktop compat: for parameters, this form of the api ignores "inherit"
 
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, inherit: false, skipTypeValidation: true); // Desktop compat: for parameters, this form of the api ignores "inherit"
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                inherit: false,
+                skipTypeValidation: true
+            ); // Desktop compat: for parameters, this form of the api ignores "inherit"
             return cads.InstantiateAsArray(attributeType);
         }
 
         public sealed override bool IsDefined(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, inherit: false, skipTypeValidation: true); // Desktop compat: for parameters, this form of the api ignores "inherit"
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                inherit: false,
+                skipTypeValidation: true
+            ); // Desktop compat: for parameters, this form of the api ignores "inherit"
             return cads.Any();
         }
     }
@@ -188,20 +259,31 @@ namespace System.Reflection.Runtime.PropertyInfos
 {
     internal abstract partial class RuntimePropertyInfo
     {
-        public sealed override IList<CustomAttributeData> GetCustomAttributesData() => CustomAttributes.ToReadOnlyCollection();
-        public sealed override object[] GetCustomAttributes(bool inherit) => CustomAttributeExtensions.GetCustomAttributes(this, inherit: false).ToArray(); // Desktop compat: for properties, this form of the api ignores "inherit"
+        public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
+            CustomAttributes.ToReadOnlyCollection();
+
+        public sealed override object[] GetCustomAttributes(bool inherit) =>
+            CustomAttributeExtensions.GetCustomAttributes(this, inherit: false).ToArray(); // Desktop compat: for properties, this form of the api ignores "inherit"
 
         public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, inherit: false, skipTypeValidation: true); // Desktop compat: for properties, this form of the api ignores "inherit"
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                inherit: false,
+                skipTypeValidation: true
+            ); // Desktop compat: for properties, this form of the api ignores "inherit"
             return cads.InstantiateAsArray(attributeType);
         }
 
         public sealed override bool IsDefined(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(attributeType, inherit: false, skipTypeValidation: true); // Desktop compat: for properties, this form of the api ignores "inherit"
+            IEnumerable<CustomAttributeData> cads = this.GetMatchingCustomAttributes(
+                attributeType,
+                inherit: false,
+                skipTypeValidation: true
+            ); // Desktop compat: for properties, this form of the api ignores "inherit"
             return cads.Any();
         }
     }
@@ -211,20 +293,33 @@ namespace System.Reflection.Runtime.TypeInfos
 {
     internal abstract partial class RuntimeTypeInfo
     {
-        public IList<CustomAttributeData> GetCustomAttributesData() => CustomAttributes.ToReadOnlyCollection();
-        public object[] GetCustomAttributes(bool inherit) => CustomAttributeExtensions.GetCustomAttributes(this.ToType(), inherit).ToArray();
+        public IList<CustomAttributeData> GetCustomAttributesData() =>
+            CustomAttributes.ToReadOnlyCollection();
+
+        public object[] GetCustomAttributes(bool inherit) =>
+            CustomAttributeExtensions.GetCustomAttributes(this.ToType(), inherit).ToArray();
 
         public object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.ToType().GetMatchingCustomAttributes(attributeType, inherit: inherit, skipTypeValidation: true);
+            IEnumerable<CustomAttributeData> cads = this.ToType()
+                .GetMatchingCustomAttributes(
+                    attributeType,
+                    inherit: inherit,
+                    skipTypeValidation: true
+                );
             return cads.InstantiateAsArray(attributeType);
         }
 
         public bool IsDefined(Type attributeType, bool inherit)
         {
             ArgumentNullException.ThrowIfNull(attributeType);
-            IEnumerable<CustomAttributeData> cads = this.ToType().GetMatchingCustomAttributes(attributeType, inherit: inherit, skipTypeValidation: true);
+            IEnumerable<CustomAttributeData> cads = this.ToType()
+                .GetMatchingCustomAttributes(
+                    attributeType,
+                    inherit: inherit,
+                    skipTypeValidation: true
+                );
             return cads.Any();
         }
     }

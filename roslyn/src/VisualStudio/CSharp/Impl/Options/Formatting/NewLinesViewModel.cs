@@ -19,14 +19,22 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options.Formatting
     /// </summary>
     internal class NewLinesViewModel : AbstractOptionPreviewViewModel
     {
-        private static readonly Conversions<NewLineBeforeOpenBracePlacement, int> s_newLinesForBracesConversions = new(v => (int)v, v => (NewLineBeforeOpenBracePlacement)v);
+        private static readonly Conversions<
+            NewLineBeforeOpenBracePlacement,
+            int
+        > s_newLinesForBracesConversions = new(
+            v => (int)v,
+            v => (NewLineBeforeOpenBracePlacement)v
+        );
 
-        private const string s_previewText = @"//[
+        private const string s_previewText =
+            @"//[
 class C {
 }
 //]";
 
-        private const string s_methodPreview = @"class c {
+        private const string s_methodPreview =
+            @"class c {
 //[
     void Goo(){
         Console.WriteLine();
@@ -40,7 +48,8 @@ class C {
 //]
 }";
 
-        private const string s_propertyPreview = @"class c {
+        private const string s_propertyPreview =
+            @"class c {
 //[
     public int Property {
         get {
@@ -52,7 +61,8 @@ class C {
 //]
 }";
 
-        private const string s_tryCatchFinallyPreview = @"using System;
+        private const string s_tryCatchFinallyPreview =
+            @"using System;
 class C {
     void Goo() {
 //[
@@ -66,7 +76,8 @@ class C {
     }
 }";
 
-        private const string s_ifElsePreview = @"class C {
+        private const string s_ifElsePreview =
+            @"class C {
     void Goo() {
 //[
         if (false) {
@@ -77,7 +88,8 @@ class C {
     }
 }";
 
-        private const string s_forBlockPreview = @"class C {
+        private const string s_forBlockPreview =
+            @"class C {
     void Goo() {
 //[
         for (int i; i < 10; i++){
@@ -86,7 +98,8 @@ class C {
     }
 }";
 
-        private const string s_lambdaPreview = @"using System;
+        private const string s_lambdaPreview =
+            @"using System;
 class C {
     void Goo() {
 //[
@@ -96,7 +109,8 @@ class C {
 //]
     }
 }";
-        private const string s_anonymousMethodPreview = @"using System;
+        private const string s_anonymousMethodPreview =
+            @"using System;
 
 delegate int D(int x);
 
@@ -110,7 +124,8 @@ class C {
     }
 }";
 
-        private const string s_anonymousTypePreview = @"using System;
+        private const string s_anonymousTypePreview =
+            @"using System;
 class C {
     void Goo() {
 //[
@@ -120,7 +135,8 @@ class C {
 //]
     }
 }";
-        private const string s_InitializerPreviewTrue = @"using System;
+        private const string s_InitializerPreviewTrue =
+            @"using System;
 using System.Collections.Generic;
 
 class C {
@@ -148,7 +164,8 @@ class B {
     public int A { get; set; }
     public int B { get; set; }
 }";
-        private const string s_InitializerPreviewFalse = @"using System;
+        private const string s_InitializerPreviewFalse =
+            @"using System;
 using System.Collections.Generic;
 
 class C {
@@ -173,7 +190,8 @@ class B {
     public int A { get; set; }
     public int B { get; set; }
 }";
-        private const string s_objectInitializerPreview = @"using System;
+        private const string s_objectInitializerPreview =
+            @"using System;
 class C {
     void Goo() {
 //[
@@ -188,7 +206,8 @@ class B {
     public int A { get; set; }
     public int B { get; set; }
 }";
-        private const string s_queryExpressionPreview = @"using System;
+        private const string s_queryExpressionPreview =
+            @"using System;
 using System.Linq;
 using System.Collections.Generic;
 class C {
@@ -203,32 +222,193 @@ class B {
     public int B { get; set; }
 }";
 
-        public NewLinesViewModel(OptionStore optionStore, IServiceProvider serviceProvider) : base(optionStore, serviceProvider, LanguageNames.CSharp)
+        public NewLinesViewModel(OptionStore optionStore, IServiceProvider serviceProvider)
+            : base(optionStore, serviceProvider, LanguageNames.CSharp)
         {
-            Items.Add(new HeaderItemViewModel() { Header = CSharpVSResources.New_line_options_for_braces });
+            Items.Add(
+                new HeaderItemViewModel() { Header = CSharpVSResources.New_line_options_for_braces }
+            );
 
             var newLineBeforeOpenBraceValue = new StrongBox<NewLineBeforeOpenBracePlacement>();
-            Items.Add(new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(CSharpFormattingOptions2.NewLineBeforeOpenBrace, (int)NewLineBeforeOpenBracePlacement.Types, CSharpVSResources.Place_open_brace_on_new_line_for_types, s_previewText, this, optionStore, newLineBeforeOpenBraceValue, s_newLinesForBracesConversions));
-            Items.Add(new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(CSharpFormattingOptions2.NewLineBeforeOpenBrace, (int)NewLineBeforeOpenBracePlacement.Methods, CSharpVSResources.Place_open_brace_on_new_line_for_methods_local_functions, s_methodPreview, this, optionStore, newLineBeforeOpenBraceValue, s_newLinesForBracesConversions));
-            Items.Add(new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(CSharpFormattingOptions2.NewLineBeforeOpenBrace, (int)NewLineBeforeOpenBracePlacement.Properties, CSharpVSResources.Place_open_brace_on_new_line_for_properties_indexers_and_events, s_propertyPreview, this, optionStore, newLineBeforeOpenBraceValue, s_newLinesForBracesConversions));
-            Items.Add(new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(CSharpFormattingOptions2.NewLineBeforeOpenBrace, (int)NewLineBeforeOpenBracePlacement.Accessors, CSharpVSResources.Place_open_brace_on_new_line_for_property_indexer_and_event_accessors, s_propertyPreview, this, optionStore, newLineBeforeOpenBraceValue, s_newLinesForBracesConversions));
-            Items.Add(new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(CSharpFormattingOptions2.NewLineBeforeOpenBrace, (int)NewLineBeforeOpenBracePlacement.AnonymousMethods, CSharpVSResources.Place_open_brace_on_new_line_for_anonymous_methods, s_anonymousMethodPreview, this, optionStore, newLineBeforeOpenBraceValue, s_newLinesForBracesConversions));
-            Items.Add(new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(CSharpFormattingOptions2.NewLineBeforeOpenBrace, (int)NewLineBeforeOpenBracePlacement.ControlBlocks, CSharpVSResources.Place_open_brace_on_new_line_for_control_blocks, s_forBlockPreview, this, optionStore, newLineBeforeOpenBraceValue, s_newLinesForBracesConversions));
-            Items.Add(new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(CSharpFormattingOptions2.NewLineBeforeOpenBrace, (int)NewLineBeforeOpenBracePlacement.AnonymousTypes, CSharpVSResources.Place_open_brace_on_new_line_for_anonymous_types, s_anonymousTypePreview, this, optionStore, newLineBeforeOpenBraceValue, s_newLinesForBracesConversions));
-            Items.Add(new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(CSharpFormattingOptions2.NewLineBeforeOpenBrace, (int)NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers, CSharpVSResources.Place_open_brace_on_new_line_for_object_collection_array_and_with_initializers, s_InitializerPreviewTrue, s_InitializerPreviewFalse, this, optionStore, newLineBeforeOpenBraceValue, s_newLinesForBracesConversions));
-            Items.Add(new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(CSharpFormattingOptions2.NewLineBeforeOpenBrace, (int)NewLineBeforeOpenBracePlacement.LambdaExpressionBody, CSharpVSResources.Place_open_brace_on_new_line_for_lambda_expression, s_lambdaPreview, this, optionStore, newLineBeforeOpenBraceValue, s_newLinesForBracesConversions));
+            Items.Add(
+                new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace,
+                    (int)NewLineBeforeOpenBracePlacement.Types,
+                    CSharpVSResources.Place_open_brace_on_new_line_for_types,
+                    s_previewText,
+                    this,
+                    optionStore,
+                    newLineBeforeOpenBraceValue,
+                    s_newLinesForBracesConversions
+                )
+            );
+            Items.Add(
+                new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace,
+                    (int)NewLineBeforeOpenBracePlacement.Methods,
+                    CSharpVSResources.Place_open_brace_on_new_line_for_methods_local_functions,
+                    s_methodPreview,
+                    this,
+                    optionStore,
+                    newLineBeforeOpenBraceValue,
+                    s_newLinesForBracesConversions
+                )
+            );
+            Items.Add(
+                new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace,
+                    (int)NewLineBeforeOpenBracePlacement.Properties,
+                    CSharpVSResources.Place_open_brace_on_new_line_for_properties_indexers_and_events,
+                    s_propertyPreview,
+                    this,
+                    optionStore,
+                    newLineBeforeOpenBraceValue,
+                    s_newLinesForBracesConversions
+                )
+            );
+            Items.Add(
+                new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace,
+                    (int)NewLineBeforeOpenBracePlacement.Accessors,
+                    CSharpVSResources.Place_open_brace_on_new_line_for_property_indexer_and_event_accessors,
+                    s_propertyPreview,
+                    this,
+                    optionStore,
+                    newLineBeforeOpenBraceValue,
+                    s_newLinesForBracesConversions
+                )
+            );
+            Items.Add(
+                new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace,
+                    (int)NewLineBeforeOpenBracePlacement.AnonymousMethods,
+                    CSharpVSResources.Place_open_brace_on_new_line_for_anonymous_methods,
+                    s_anonymousMethodPreview,
+                    this,
+                    optionStore,
+                    newLineBeforeOpenBraceValue,
+                    s_newLinesForBracesConversions
+                )
+            );
+            Items.Add(
+                new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace,
+                    (int)NewLineBeforeOpenBracePlacement.ControlBlocks,
+                    CSharpVSResources.Place_open_brace_on_new_line_for_control_blocks,
+                    s_forBlockPreview,
+                    this,
+                    optionStore,
+                    newLineBeforeOpenBraceValue,
+                    s_newLinesForBracesConversions
+                )
+            );
+            Items.Add(
+                new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace,
+                    (int)NewLineBeforeOpenBracePlacement.AnonymousTypes,
+                    CSharpVSResources.Place_open_brace_on_new_line_for_anonymous_types,
+                    s_anonymousTypePreview,
+                    this,
+                    optionStore,
+                    newLineBeforeOpenBraceValue,
+                    s_newLinesForBracesConversions
+                )
+            );
+            Items.Add(
+                new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace,
+                    (int)NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers,
+                    CSharpVSResources.Place_open_brace_on_new_line_for_object_collection_array_and_with_initializers,
+                    s_InitializerPreviewTrue,
+                    s_InitializerPreviewFalse,
+                    this,
+                    optionStore,
+                    newLineBeforeOpenBraceValue,
+                    s_newLinesForBracesConversions
+                )
+            );
+            Items.Add(
+                new CheckBoxEnumFlagsOptionViewModel<NewLineBeforeOpenBracePlacement>(
+                    CSharpFormattingOptions2.NewLineBeforeOpenBrace,
+                    (int)NewLineBeforeOpenBracePlacement.LambdaExpressionBody,
+                    CSharpVSResources.Place_open_brace_on_new_line_for_lambda_expression,
+                    s_lambdaPreview,
+                    this,
+                    optionStore,
+                    newLineBeforeOpenBraceValue,
+                    s_newLinesForBracesConversions
+                )
+            );
 
-            Items.Add(new HeaderItemViewModel() { Header = CSharpVSResources.New_line_options_for_keywords });
+            Items.Add(
+                new HeaderItemViewModel()
+                {
+                    Header = CSharpVSResources.New_line_options_for_keywords,
+                }
+            );
 
-            Items.Add(new CheckBoxOptionViewModel(CSharpFormattingOptions2.NewLineForElse, CSharpVSResources.Place_else_on_new_line, s_ifElsePreview, this, optionStore));
-            Items.Add(new CheckBoxOptionViewModel(CSharpFormattingOptions2.NewLineForCatch, CSharpVSResources.Place_catch_on_new_line, s_tryCatchFinallyPreview, this, optionStore));
-            Items.Add(new CheckBoxOptionViewModel(CSharpFormattingOptions2.NewLineForFinally, CSharpVSResources.Place_finally_on_new_line, s_tryCatchFinallyPreview, this, optionStore));
+            Items.Add(
+                new CheckBoxOptionViewModel(
+                    CSharpFormattingOptions2.NewLineForElse,
+                    CSharpVSResources.Place_else_on_new_line,
+                    s_ifElsePreview,
+                    this,
+                    optionStore
+                )
+            );
+            Items.Add(
+                new CheckBoxOptionViewModel(
+                    CSharpFormattingOptions2.NewLineForCatch,
+                    CSharpVSResources.Place_catch_on_new_line,
+                    s_tryCatchFinallyPreview,
+                    this,
+                    optionStore
+                )
+            );
+            Items.Add(
+                new CheckBoxOptionViewModel(
+                    CSharpFormattingOptions2.NewLineForFinally,
+                    CSharpVSResources.Place_finally_on_new_line,
+                    s_tryCatchFinallyPreview,
+                    this,
+                    optionStore
+                )
+            );
 
-            Items.Add(new HeaderItemViewModel() { Header = CSharpVSResources.New_line_options_for_expressions });
+            Items.Add(
+                new HeaderItemViewModel()
+                {
+                    Header = CSharpVSResources.New_line_options_for_expressions,
+                }
+            );
 
-            Items.Add(new CheckBoxOptionViewModel(CSharpFormattingOptions2.NewLineForMembersInObjectInit, CSharpVSResources.Place_members_in_object_initializers_on_new_line, s_objectInitializerPreview, this, optionStore));
-            Items.Add(new CheckBoxOptionViewModel(CSharpFormattingOptions2.NewLineForMembersInAnonymousTypes, CSharpVSResources.Place_members_in_anonymous_types_on_new_line, s_anonymousTypePreview, this, optionStore));
-            Items.Add(new CheckBoxOptionViewModel(CSharpFormattingOptions2.NewLineForClausesInQuery, CSharpVSResources.Place_query_expression_clauses_on_new_line, s_queryExpressionPreview, this, optionStore));
+            Items.Add(
+                new CheckBoxOptionViewModel(
+                    CSharpFormattingOptions2.NewLineForMembersInObjectInit,
+                    CSharpVSResources.Place_members_in_object_initializers_on_new_line,
+                    s_objectInitializerPreview,
+                    this,
+                    optionStore
+                )
+            );
+            Items.Add(
+                new CheckBoxOptionViewModel(
+                    CSharpFormattingOptions2.NewLineForMembersInAnonymousTypes,
+                    CSharpVSResources.Place_members_in_anonymous_types_on_new_line,
+                    s_anonymousTypePreview,
+                    this,
+                    optionStore
+                )
+            );
+            Items.Add(
+                new CheckBoxOptionViewModel(
+                    CSharpFormattingOptions2.NewLineForClausesInQuery,
+                    CSharpVSResources.Place_query_expression_clauses_on_new_line,
+                    s_queryExpressionPreview,
+                    this,
+                    optionStore
+                )
+            );
         }
     }
 }

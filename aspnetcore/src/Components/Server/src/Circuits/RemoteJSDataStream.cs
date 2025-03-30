@@ -21,7 +21,13 @@ internal sealed class RemoteJSDataStream : Stream
     private DateTimeOffset _lastDataReceivedTime;
     private bool _disposed;
 
-    public static async Task<bool> ReceiveData(RemoteJSRuntime runtime, long streamId, long chunkId, byte[] chunk, string error)
+    public static async Task<bool> ReceiveData(
+        RemoteJSRuntime runtime,
+        long streamId,
+        long chunkId,
+        byte[] chunk,
+        string error
+    )
     {
         if (!runtime.RemoteJSDataStreamInstances.TryGetValue(streamId, out var instance))
         {
@@ -39,19 +45,35 @@ internal sealed class RemoteJSDataStream : Stream
         long totalLength,
         long signalRMaximumIncomingBytes,
         TimeSpan jsInteropDefaultCallTimeout,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         // Enforce minimum 1 kb, maximum 50 kb, SignalR message size.
         // We budget 512 bytes overhead for the transfer, thus leaving at least 512 bytes for data
         // transfer per chunk with a 1 kb message size.
         // Additionally, to maintain interactivity, we put an upper limit of 50 kb on the message size.
-        var chunkSize = signalRMaximumIncomingBytes > 1024 ?
-            (int)Math.Min(signalRMaximumIncomingBytes, 50 * 1024) - 512 :
-            throw new ArgumentException($"SignalR MaximumIncomingBytes must be at least 1 kb.");
+        var chunkSize =
+            signalRMaximumIncomingBytes > 1024
+                ? (int)Math.Min(signalRMaximumIncomingBytes, 50 * 1024) - 512
+                : throw new ArgumentException(
+                    $"SignalR MaximumIncomingBytes must be at least 1 kb."
+                );
 
         var streamId = runtime.RemoteJSDataStreamNextInstanceId++;
-        var remoteJSDataStream = new RemoteJSDataStream(runtime, streamId, totalLength, chunkSize, jsInteropDefaultCallTimeout, cancellationToken);
-        await runtime.InvokeVoidAsync("Blazor._internal.sendJSDataStream", jsStreamReference, streamId, chunkSize);
+        var remoteJSDataStream = new RemoteJSDataStream(
+            runtime,
+            streamId,
+            totalLength,
+            chunkSize,
+            jsInteropDefaultCallTimeout,
+            cancellationToken
+        );
+        await runtime.InvokeVoidAsync(
+            "Blazor._internal.sendJSDataStream",
+            jsStreamReference,
+            streamId,
+            chunkSize
+        );
         return remoteJSDataStream;
     }
 
@@ -61,7 +83,8 @@ internal sealed class RemoteJSDataStream : Stream
         long totalLength,
         int chunkSize,
         TimeSpan jsInteropDefaultCallTimeout,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         _runtime = runtime;
         _streamId = streamId;
@@ -91,12 +114,16 @@ internal sealed class RemoteJSDataStream : Stream
         {
             if (!string.IsNullOrEmpty(error))
             {
-                throw new InvalidOperationException($"An error occurred while reading the remote stream: {error}");
+                throw new InvalidOperationException(
+                    $"An error occurred while reading the remote stream: {error}"
+                );
             }
 
             if (chunkId != _expectedChunkId)
             {
-                throw new EndOfStreamException($"Out of sequence chunk received, expected {_expectedChunkId}, but received {chunkId}.");
+                throw new EndOfStreamException(
+                    $"Out of sequence chunk received, expected {_expectedChunkId}, but received {chunkId}."
+                );
             }
 
             ++_expectedChunkId;
@@ -108,14 +135,18 @@ internal sealed class RemoteJSDataStream : Stream
 
             if (chunk.Length > _chunkSize)
             {
-                throw new EndOfStreamException("The incoming data chunk exceeded the permitted length.");
+                throw new EndOfStreamException(
+                    "The incoming data chunk exceeded the permitted length."
+                );
             }
 
             _bytesRead += chunk.Length;
 
             if (_bytesRead > _totalLength)
             {
-                throw new EndOfStreamException($"The incoming data stream declared a length {_totalLength}, but {_bytesRead} bytes were sent.");
+                throw new EndOfStreamException(
+                    $"The incoming data stream declared a length {_totalLength}, but {_bytesRead} bytes were sent."
+                );
             }
 
             // Start timeout _after_ performing validations on data.
@@ -160,34 +191,51 @@ internal sealed class RemoteJSDataStream : Stream
         set => throw new NotSupportedException();
     }
 
-    public override void Flush()
-        => throw new NotSupportedException();
+    public override void Flush() => throw new NotSupportedException();
 
-    public override int Read(byte[] buffer, int offset, int count)
-        => throw new NotSupportedException("Synchronous reads are not supported.");
+    public override int Read(byte[] buffer, int offset, int count) =>
+        throw new NotSupportedException("Synchronous reads are not supported.");
 
-    public override long Seek(long offset, SeekOrigin origin)
-        => throw new NotSupportedException();
+    public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
 
-    public override void SetLength(long value)
-        => throw new NotSupportedException();
+    public override void SetLength(long value) => throw new NotSupportedException();
 
-    public override void Write(byte[] buffer, int offset, int count)
-        => throw new NotSupportedException();
+    public override void Write(byte[] buffer, int offset, int count) =>
+        throw new NotSupportedException();
 
-    public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override async Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
-        var linkedCancellationToken = GetLinkedCancellationToken(_streamCancellationToken, cancellationToken);
-        return await _pipeReaderStream.ReadAsync(buffer.AsMemory(offset, count), linkedCancellationToken);
+        var linkedCancellationToken = GetLinkedCancellationToken(
+            _streamCancellationToken,
+            cancellationToken
+        );
+        return await _pipeReaderStream.ReadAsync(
+            buffer.AsMemory(offset, count),
+            linkedCancellationToken
+        );
     }
 
-    public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+    public override async ValueTask<int> ReadAsync(
+        Memory<byte> buffer,
+        CancellationToken cancellationToken = default
+    )
     {
-        var linkedCancellationToken = GetLinkedCancellationToken(_streamCancellationToken, cancellationToken);
+        var linkedCancellationToken = GetLinkedCancellationToken(
+            _streamCancellationToken,
+            cancellationToken
+        );
         return await _pipeReaderStream.ReadAsync(buffer, linkedCancellationToken);
     }
 
-    private static CancellationToken GetLinkedCancellationToken(CancellationToken a, CancellationToken b)
+    private static CancellationToken GetLinkedCancellationToken(
+        CancellationToken a,
+        CancellationToken b
+    )
     {
         if (a.CanBeCanceled && b.CanBeCanceled)
         {
@@ -205,10 +253,15 @@ internal sealed class RemoteJSDataStream : Stream
     {
         await Task.Delay(_jsInteropDefaultCallTimeout);
 
-        if (!_disposed && (DateTimeOffset.UtcNow >= _lastDataReceivedTime.Add(_jsInteropDefaultCallTimeout)))
+        if (
+            !_disposed
+            && (DateTimeOffset.UtcNow >= _lastDataReceivedTime.Add(_jsInteropDefaultCallTimeout))
+        )
         {
             // Dispose of the stream if a chunk isn't received within the jsInteropDefaultCallTimeout.
-            var timeoutException = new TimeoutException("Did not receive any data in the allotted time.");
+            var timeoutException = new TimeoutException(
+                "Did not receive any data in the allotted time."
+            );
             await CompletePipeAndDisposeStream(timeoutException);
             _runtime.RaiseUnhandledException(timeoutException);
         }

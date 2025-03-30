@@ -17,12 +17,20 @@ namespace System.Drawing
             return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
         }
 
-        public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
+        public override bool CanConvertTo(
+            ITypeDescriptorContext? context,
+            [NotNullWhen(true)] Type? destinationType
+        )
         {
-            return destinationType == typeof(InstanceDescriptor) || base.CanConvertTo(context, destinationType);
+            return destinationType == typeof(InstanceDescriptor)
+                || base.CanConvertTo(context, destinationType);
         }
 
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object value
+        )
         {
             if (value is string strValue)
             {
@@ -47,7 +55,9 @@ namespace System.Drawing
 
                 if (values.Length != 4)
                 {
-                    throw new ArgumentException(SR.Format(SR.TextParseFailedFormat, text, "x, y, width, height"));
+                    throw new ArgumentException(
+                        SR.Format(SR.TextParseFailedFormat, text, "x, y, width, height")
+                    );
                 }
 
                 return new Rectangle(values[0], values[1], values[2], values[3]);
@@ -56,7 +66,12 @@ namespace System.Drawing
             return base.ConvertFrom(context, culture, value);
         }
 
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
@@ -75,19 +90,22 @@ namespace System.Drawing
                         intConverter.ConvertToString(context, culture, rect.X),
                         intConverter.ConvertToString(context, culture, rect.Y),
                         intConverter.ConvertToString(context, culture, rect.Width),
-                        intConverter.ConvertToString(context, culture, rect.Height)
+                        intConverter.ConvertToString(context, culture, rect.Height),
                     };
                     return string.Join(sep, args);
                 }
                 else if (destinationType == typeof(InstanceDescriptor))
                 {
-                    ConstructorInfo? ctor = typeof(Rectangle).GetConstructor(new Type[] {
-                        typeof(int), typeof(int), typeof(int), typeof(int)});
+                    ConstructorInfo? ctor = typeof(Rectangle).GetConstructor(
+                        new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) }
+                    );
 
                     if (ctor != null)
                     {
-                        return new InstanceDescriptor(ctor, new object[] {
-                            rect.X, rect.Y, rect.Width, rect.Height});
+                        return new InstanceDescriptor(
+                            ctor,
+                            new object[] { rect.X, rect.Y, rect.Width, rect.Height }
+                        );
                     }
                 }
             }
@@ -95,7 +113,10 @@ namespace System.Drawing
             return base.ConvertTo(context, culture, value, destinationType);
         }
 
-        public override object CreateInstance(ITypeDescriptorContext? context, IDictionary propertyValues)
+        public override object CreateInstance(
+            ITypeDescriptorContext? context,
+            IDictionary propertyValues
+        )
         {
             ArgumentNullException.ThrowIfNull(propertyValues);
 
@@ -104,8 +125,16 @@ namespace System.Drawing
             object? width = propertyValues["Width"];
             object? height = propertyValues["Height"];
 
-            if (x == null || y == null || width == null || height == null ||
-                !(x is int) || !(y is int) || !(width is int) || !(height is int))
+            if (
+                x == null
+                || y == null
+                || width == null
+                || height == null
+                || !(x is int)
+                || !(y is int)
+                || !(width is int)
+                || !(height is int)
+            )
             {
                 throw new ArgumentException(SR.PropertyValueInvalidEntry);
             }
@@ -117,10 +146,20 @@ namespace System.Drawing
 
         private static readonly string[] s_propertySort = { "X", "Y", "Width", "Height" };
 
-        [RequiresUnreferencedCode("The Type of value cannot be statically discovered. " + AttributeCollection.FilterRequiresUnreferencedCodeMessage)]
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext? context, object? value, Attribute[]? attributes)
+        [RequiresUnreferencedCode(
+            "The Type of value cannot be statically discovered. "
+                + AttributeCollection.FilterRequiresUnreferencedCodeMessage
+        )]
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext? context,
+            object? value,
+            Attribute[]? attributes
+        )
         {
-            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(Rectangle), attributes);
+            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(
+                typeof(Rectangle),
+                attributes
+            );
             return props.Sort(s_propertySort);
         }
 

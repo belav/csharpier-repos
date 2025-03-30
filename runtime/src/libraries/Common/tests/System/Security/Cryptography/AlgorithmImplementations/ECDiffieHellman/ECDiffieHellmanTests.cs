@@ -3,9 +3,8 @@
 
 using System.Collections.Generic;
 using System.Security.Cryptography.Tests;
-
-using Xunit;
 using Test.Cryptography;
+using Xunit;
 
 namespace System.Security.Cryptography.EcDiffieHellman.Tests
 {
@@ -25,7 +24,11 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 {
                     foreach (KeySizes keySizes in defaultKeysize.LegalKeySizes)
                     {
-                        for (int size = keySizes.MinSize; size <= keySizes.MaxSize; size += keySizes.SkipSize)
+                        for (
+                            int size = keySizes.MinSize;
+                            size <= keySizes.MaxSize;
+                            size += keySizes.SkipSize
+                        )
                         {
                             everyKeysize.Add(new object[] { size });
 
@@ -54,7 +57,11 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 {
                     foreach (KeySizes keySizes in defaultKeysize.LegalKeySizes)
                     {
-                        for (int size = keySizes.MinSize; size <= keySizes.MaxSize; size += keySizes.SkipSize)
+                        for (
+                            int size = keySizes.MinSize;
+                            size <= keySizes.MaxSize;
+                            size += keySizes.SkipSize
+                        )
                         {
                             if (firstSize == -1)
                             {
@@ -145,9 +152,15 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
 
                 pubKey.Dispose();
                 Assert.Throws<ObjectDisposedException>(() => key.DeriveKeyFromHash(pubKey, hash));
-                Assert.Throws<ObjectDisposedException>(() => key.DeriveKeyFromHmac(pubKey, hash, null));
-                Assert.Throws<ObjectDisposedException>(() => key.DeriveKeyFromHmac(pubKey, hash, new byte[3]));
-                Assert.Throws<ObjectDisposedException>(() => key.DeriveKeyTls(pubKey, new byte[4], new byte[64]));
+                Assert.Throws<ObjectDisposedException>(() =>
+                    key.DeriveKeyFromHmac(pubKey, hash, null)
+                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                    key.DeriveKeyFromHmac(pubKey, hash, new byte[3])
+                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                    key.DeriveKeyTls(pubKey, new byte[4], new byte[64])
+                );
 
                 pubKey = key.PublicKey;
             }
@@ -156,18 +169,25 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
 
             Assert.Throws<ObjectDisposedException>(() => key.DeriveKeyFromHash(pubKey, hash));
             Assert.Throws<ObjectDisposedException>(() => key.DeriveKeyFromHmac(pubKey, hash, null));
-            Assert.Throws<ObjectDisposedException>(() => key.DeriveKeyFromHmac(pubKey, hash, new byte[3]));
-            Assert.Throws<ObjectDisposedException>(() => key.DeriveKeyTls(pubKey, new byte[4], new byte[64]));
-            Assert.Throws<ObjectDisposedException>(() => key.GenerateKey(ECCurve.NamedCurves.nistP256));
-            Assert.Throws<ObjectDisposedException>(() => key.ImportParameters(EccTestData.GetNistP256ReferenceKey()));
+            Assert.Throws<ObjectDisposedException>(() =>
+                key.DeriveKeyFromHmac(pubKey, hash, new byte[3])
+            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                key.DeriveKeyTls(pubKey, new byte[4], new byte[64])
+            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                key.GenerateKey(ECCurve.NamedCurves.nistP256)
+            );
+            Assert.Throws<ObjectDisposedException>(() =>
+                key.ImportParameters(EccTestData.GetNistP256ReferenceKey())
+            );
 
             // Either set_KeySize or the ExportParameters should throw.
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    key.KeySize = 384;
-                    key.ExportParameters(false);
-                });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                key.KeySize = 384;
+                key.ExportParameters(false);
+            });
 
             pubKey.Dispose();
         }
@@ -182,17 +202,20 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 Q =
                 {
                     X = (
-                        "014AACFCDA18F77EBF11DC0A2D394D3032E86C3AC0B5F558916361163EA6AD3DB27" +
-                        "F6476D6C6E5D9C4A77BCCC5C0069D481718DACA3B1B13035AF5D246C4DC0CE0EA").HexToByteArray(),
+                        "014AACFCDA18F77EBF11DC0A2D394D3032E86C3AC0B5F558916361163EA6AD3DB27"
+                        + "F6476D6C6E5D9C4A77BCCC5C0069D481718DACA3B1B13035AF5D246C4DC0CE0EA"
+                    ).HexToByteArray(),
 
                     Y = (
-                        "00CA500F75537C782E027DE568F148334BF56F7E24C3830792236B5D20F7A33E998" +
-                        "62B1744D2413E4C4AC29DBA42FC48D23AE5B916BED73997EC69B3911C686C5164").HexToByteArray(),
+                        "00CA500F75537C782E027DE568F148334BF56F7E24C3830792236B5D20F7A33E998"
+                        + "62B1744D2413E4C4AC29DBA42FC48D23AE5B916BED73997EC69B3911C686C5164"
+                    ).HexToByteArray(),
                 },
 
                 D = (
-                    "00202F9F5480723D1ACF15372CE0B99B6CC3E8772FFDDCF828EEEB314B3EAA35B19" +
-                    "886AAB1E6871E548C261C7708BF561A4C373D3EED13F0749851F57B86DC049D71").HexToByteArray(),
+                    "00202F9F5480723D1ACF15372CE0B99B6CC3E8772FFDDCF828EEEB314B3EAA35B19"
+                    + "886AAB1E6871E548C261C7708BF561A4C373D3EED13F0749851F57B86DC049D71"
+                ).HexToByteArray(),
             };
 
             ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create();

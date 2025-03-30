@@ -3,6 +3,7 @@
 
 using System;
 using System.Diagnostics;
+
 namespace Microsoft.Interop
 {
     public sealed record ManagedToNativeStubCodeContext : StubCodeContext
@@ -18,7 +19,8 @@ namespace Microsoft.Interop
 
         public ManagedToNativeStubCodeContext(
             string returnIdentifier,
-            string nativeReturnIdentifier)
+            string nativeReturnIdentifier
+        )
         {
             _returnIdentifier = returnIdentifier;
             _nativeReturnIdentifier = nativeReturnIdentifier;

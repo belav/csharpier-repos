@@ -37,34 +37,62 @@ namespace Microsoft.CodeAnalysis.CommentSelection
     internal class ToggleLineCommentCommandHandler(
         ITextUndoHistoryRegistry undoHistoryRegistry,
         IEditorOperationsFactoryService editorOperationsFactoryService,
-        EditorOptionsService editorOptionsService) :
+        EditorOptionsService editorOptionsService
+    )
+        :
         // Value tuple to represent that there is no distinct command to be passed in.
-        AbstractCommentSelectionBase<ValueTuple>(undoHistoryRegistry, editorOperationsFactoryService, editorOptionsService),
-        ICommandHandler<ToggleLineCommentCommandArgs>
+        AbstractCommentSelectionBase<ValueTuple>(
+            undoHistoryRegistry,
+            editorOperationsFactoryService,
+            editorOptionsService
+        ),
+            ICommandHandler<ToggleLineCommentCommandArgs>
     {
-        private static readonly CommentSelectionResult s_emptyCommentSelectionResult =
-            new(new List<TextChange>(), new List<CommentTrackingSpan>(), Operation.Uncomment);
+        private static readonly CommentSelectionResult s_emptyCommentSelectionResult = new(
+            new List<TextChange>(),
+            new List<CommentTrackingSpan>(),
+            Operation.Uncomment
+        );
 
-        public CommandState GetCommandState(ToggleLineCommentCommandArgs args)
-            => GetCommandState(args.SubjectBuffer);
+        public CommandState GetCommandState(ToggleLineCommentCommandArgs args) =>
+            GetCommandState(args.SubjectBuffer);
 
-        public bool ExecuteCommand(ToggleLineCommentCommandArgs args, CommandExecutionContext context)
-            => ExecuteCommand(args.TextView, args.SubjectBuffer, ValueTuple.Create(), context);
+        public bool ExecuteCommand(
+            ToggleLineCommentCommandArgs args,
+            CommandExecutionContext context
+        ) => ExecuteCommand(args.TextView, args.SubjectBuffer, ValueTuple.Create(), context);
 
         public override string DisplayName => EditorFeaturesResources.Toggle_Line_Comment;
 
-        protected override string GetTitle(ValueTuple command) => EditorFeaturesResources.Toggle_Line_Comment;
+        protected override string GetTitle(ValueTuple command) =>
+            EditorFeaturesResources.Toggle_Line_Comment;
 
-        protected override string GetMessage(ValueTuple command) => EditorFeaturesResources.Toggling_line_comment;
+        protected override string GetMessage(ValueTuple command) =>
+            EditorFeaturesResources.Toggling_line_comment;
 
-        internal override CommentSelectionResult CollectEdits(Document document, ICommentSelectionService service,
-            ITextBuffer subjectBuffer, NormalizedSnapshotSpanCollection selectedSpans, ValueTuple command, CancellationToken cancellationToken)
+        internal override CommentSelectionResult CollectEdits(
+            Document document,
+            ICommentSelectionService service,
+            ITextBuffer subjectBuffer,
+            NormalizedSnapshotSpanCollection selectedSpans,
+            ValueTuple command,
+            CancellationToken cancellationToken
+        )
         {
-            using (Logger.LogBlock(FunctionId.CommandHandler_ToggleLineComment, KeyValueLogMessage.Create(LogType.UserAction, m =>
-            {
-                m[LanguageNameString] = document.Project.Language;
-                m[LengthString] = subjectBuffer.CurrentSnapshot.Length;
-            }), cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.CommandHandler_ToggleLineComment,
+                    KeyValueLogMessage.Create(
+                        LogType.UserAction,
+                        m =>
+                        {
+                            m[LanguageNameString] = document.Project.Language;
+                            m[LengthString] = subjectBuffer.CurrentSnapshot.Length;
+                        }
+                    ),
+                    cancellationToken
+                )
+            )
             {
                 var commentInfo = service.GetInfo();
                 if (commentInfo.SupportsSingleLineComment)
@@ -76,25 +104,38 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             }
         }
 
-        private static CommentSelectionResult ToggleLineComment(CommentSelectionInfo commentInfo,
-            NormalizedSnapshotSpanCollection selectedSpans)
+        private static CommentSelectionResult ToggleLineComment(
+            CommentSelectionInfo commentInfo,
+            NormalizedSnapshotSpanCollection selectedSpans
+        )
         {
             var textChanges = ArrayBuilder<TextChange>.GetInstance();
             var trackingSpans = ArrayBuilder<CommentTrackingSpan>.GetInstance();
 
             var linesInSelections = selectedSpans.ToDictionary(
                 span => span,
-                span => GetLinesFromSelectedSpan(span).ToImmutableArray());
+                span => GetLinesFromSelectedSpan(span).ToImmutableArray()
+            );
 
             var isMultiCaret = selectedSpans.Count > 1;
 
             Operation operation;
             // If any of the lines are uncommented, add comments.
-            if (linesInSelections.Values.Any(lines => SelectionHasUncommentedLines(lines, commentInfo)))
+            if (
+                linesInSelections.Values.Any(lines =>
+                    SelectionHasUncommentedLines(lines, commentInfo)
+                )
+            )
             {
                 foreach (var selection in linesInSelections)
                 {
-                    CommentLines(selection.Key, selection.Value, textChanges, trackingSpans, commentInfo);
+                    CommentLines(
+                        selection.Key,
+                        selection.Value,
+                        textChanges,
+                        trackingSpans,
+                        commentInfo
+                    );
                 }
 
                 operation = Operation.Comment;
@@ -103,7 +144,13 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             {
                 foreach (var selection in linesInSelections)
                 {
-                    UncommentLines(selection.Key, selection.Value, textChanges, trackingSpans, commentInfo);
+                    UncommentLines(
+                        selection.Key,
+                        selection.Value,
+                        textChanges,
+                        trackingSpans,
+                        commentInfo
+                    );
                 }
 
                 operation = Operation.Uncomment;
@@ -117,15 +164,20 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             ImmutableArray<ITextSnapshotLine> commentedLines,
             ArrayBuilder<TextChange> textChanges,
             ArrayBuilder<CommentTrackingSpan> trackingSpans,
-            CommentSelectionInfo commentInfo)
+            CommentSelectionInfo commentInfo
+        )
         {
             foreach (var line in commentedLines)
             {
                 if (!line.IsEmptyOrWhitespace())
                 {
                     var text = line.GetText();
-                    var commentIndex = text.IndexOf(commentInfo.SingleLineCommentString) + line.Start;
-                    var spanToRemove = TextSpan.FromBounds(commentIndex, commentIndex + commentInfo.SingleLineCommentString.Length);
+                    var commentIndex =
+                        text.IndexOf(commentInfo.SingleLineCommentString) + line.Start;
+                    var spanToRemove = TextSpan.FromBounds(
+                        commentIndex,
+                        commentIndex + commentInfo.SingleLineCommentString.Length
+                    );
                     DeleteText(textChanges, spanToRemove);
                 }
             }
@@ -139,14 +191,23 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             ImmutableArray<ITextSnapshotLine> linesInSelection,
             ArrayBuilder<TextChange> textChanges,
             ArrayBuilder<CommentTrackingSpan> trackingSpans,
-            CommentSelectionInfo commentInfo)
+            CommentSelectionInfo commentInfo
+        )
         {
-            var indentation = DetermineSmallestIndent(selectedSpan, linesInSelection.First(), linesInSelection.Last());
+            var indentation = DetermineSmallestIndent(
+                selectedSpan,
+                linesInSelection.First(),
+                linesInSelection.Last()
+            );
             foreach (var line in linesInSelection)
             {
                 if (!line.IsEmptyOrWhitespace())
                 {
-                    InsertText(textChanges, line.Start + indentation, commentInfo.SingleLineCommentString);
+                    InsertText(
+                        textChanges,
+                        line.Start + indentation,
+                        commentInfo.SingleLineCommentString
+                    );
                 }
             }
 
@@ -176,14 +237,26 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             return lines;
         }
 
-        private static bool SelectionHasUncommentedLines(ImmutableArray<ITextSnapshotLine> linesInSelection, CommentSelectionInfo commentInfo)
-            => linesInSelection.Any(static (l, commentInfo) => !IsLineCommentedOrEmpty(l, commentInfo), commentInfo);
+        private static bool SelectionHasUncommentedLines(
+            ImmutableArray<ITextSnapshotLine> linesInSelection,
+            CommentSelectionInfo commentInfo
+        ) =>
+            linesInSelection.Any(
+                static (l, commentInfo) => !IsLineCommentedOrEmpty(l, commentInfo),
+                commentInfo
+            );
 
-        private static bool IsLineCommentedOrEmpty(ITextSnapshotLine line, CommentSelectionInfo info)
+        private static bool IsLineCommentedOrEmpty(
+            ITextSnapshotLine line,
+            CommentSelectionInfo info
+        )
         {
             var lineText = line.GetText();
             // We don't add / remove anything for empty lines.
-            return lineText.Trim().StartsWith(info.SingleLineCommentString, StringComparison.Ordinal) || line.IsEmptyOrWhitespace();
+            return lineText
+                    .Trim()
+                    .StartsWith(info.SingleLineCommentString, StringComparison.Ordinal)
+                || line.IsEmptyOrWhitespace();
         }
     }
 }

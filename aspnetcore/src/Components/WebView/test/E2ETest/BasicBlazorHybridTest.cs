@@ -23,12 +23,22 @@ public class BasicBlazorHybridTest
         var thisProgramDir = Path.GetDirectoryName(typeof(Program).Assembly.Location);
 
         // Add correct runtime sub-folder to PATH to ensure native files are discovered (this is supposed to happen automatically, but somehow it doesn't...)
-        var newNativePath = Path.Combine(thisProgramDir, "runtimes", RuntimeInformation.RuntimeIdentifier, "native");
+        var newNativePath = Path.Combine(
+            thisProgramDir,
+            "runtimes",
+            RuntimeInformation.RuntimeIdentifier,
+            "native"
+        );
         Console.WriteLine($"Adding new native path: {newNativePath}");
-        Environment.SetEnvironmentVariable("PATH", newNativePath + ";" + Environment.GetEnvironmentVariable("PATH"));
+        Environment.SetEnvironmentVariable(
+            "PATH",
+            newNativePath + ";" + Environment.GetEnvironmentVariable("PATH")
+        );
         Console.WriteLine($"New PATH env var: {Environment.GetEnvironmentVariable("PATH")}");
 
-        var thisAppFiles = Directory.GetFiles(thisProgramDir, "*", SearchOption.AllDirectories).ToArray();
+        var thisAppFiles = Directory
+            .GetFiles(thisProgramDir, "*", SearchOption.AllDirectories)
+            .ToArray();
         Console.WriteLine($"Found {thisAppFiles.Length} files in this app:");
         foreach (var file in thisAppFiles)
         {
@@ -49,11 +59,14 @@ public class BasicBlazorHybridTest
                 title: "Hello, world!",
                 hostPage: hostPage,
                 services: serviceCollection.BuildServiceProvider(),
-                pathBase: "/subdir"); // The content in BasicTestApp assumes this
+                pathBase: "/subdir"
+            ); // The content in BasicTestApp assumes this
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Exception {ex.GetType().FullName} while creating window: {ex.Message}");
+            Console.WriteLine(
+                $"Exception {ex.GetType().FullName} while creating window: {ex.Message}"
+            );
             Console.WriteLine(ex.StackTrace);
         }
 
@@ -61,8 +74,11 @@ public class BasicBlazorHybridTest
         AppDomain.CurrentDomain.UnhandledException += (sender, error) =>
         {
             Console.Write(
-                "Fatal exception" + Environment.NewLine +
-                error.ExceptionObject.ToString() + Environment.NewLine);
+                "Fatal exception"
+                    + Environment.NewLine
+                    + error.ExceptionObject.ToString()
+                    + Environment.NewLine
+            );
         };
 
         Console.WriteLine($"Setting up root components...");
@@ -74,20 +90,24 @@ public class BasicBlazorHybridTest
         var isWebViewReady = false;
 
         Console.WriteLine($"RegisterWebMessageReceivedHandler...");
-        mainWindow.PhotinoWindow.RegisterWebMessageReceivedHandler((s, msg) =>
-        {
-            if (!msg.StartsWith("__bwv:", StringComparison.Ordinal))
+        mainWindow.PhotinoWindow.RegisterWebMessageReceivedHandler(
+            (s, msg) =>
             {
-                if (msg == "wvt:Started")
+                if (!msg.StartsWith("__bwv:", StringComparison.Ordinal))
                 {
-                    isWebViewReady = true;
-                }
-                else if (msg.StartsWith(NewControlDivValueMessage, StringComparison.Ordinal))
-                {
-                    _latestControlDivValue = msg.Substring(NewControlDivValueMessage.Length + 1);
+                    if (msg == "wvt:Started")
+                    {
+                        isWebViewReady = true;
+                    }
+                    else if (msg.StartsWith(NewControlDivValueMessage, StringComparison.Ordinal))
+                    {
+                        _latestControlDivValue = msg.Substring(
+                            NewControlDivValueMessage.Length + 1
+                        );
+                    }
                 }
             }
-        });
+        );
         var testPassed = false;
 
         mainWindow.PhotinoWindow.WindowCreated += (s, e) =>
@@ -115,7 +135,12 @@ public class BasicBlazorHybridTest
                     Console.WriteLine($"WebView is ready!");
 
                     // 2. Check TestPage starting state
-                    if (!await WaitForControlDiv(mainWindow.PhotinoWindow, controlValueToWaitFor: "0"))
+                    if (
+                        !await WaitForControlDiv(
+                            mainWindow.PhotinoWindow,
+                            controlValueToWaitFor: "0"
+                        )
+                    )
                     {
                         return;
                     }
@@ -124,7 +149,12 @@ public class BasicBlazorHybridTest
                     mainWindow.PhotinoWindow.SendWebMessage($"wvt:ClickButton:incrementButton");
 
                     // 4. Check TestPage is updated after button click
-                    if (!await WaitForControlDiv(mainWindow.PhotinoWindow, controlValueToWaitFor: "1"))
+                    if (
+                        !await WaitForControlDiv(
+                            mainWindow.PhotinoWindow,
+                            controlValueToWaitFor: "1"
+                        )
+                    )
                     {
                         return;
                     }
@@ -164,9 +194,11 @@ public class BasicBlazorHybridTest
     const int MaxWaitTimes = 30;
     const int WaitTimeInMS = 250;
 
-    public async Task<bool> WaitForControlDiv(PhotinoWindow photinoWindow, string controlValueToWaitFor)
+    public async Task<bool> WaitForControlDiv(
+        PhotinoWindow photinoWindow,
+        string controlValueToWaitFor
+    )
     {
-
         for (var i = 0; i < MaxWaitTimes; i++)
         {
             // Tell WebView to report the current controlDiv value (this is inside the loop because
@@ -178,14 +210,20 @@ public class BasicBlazorHybridTest
             // And wait for the value to appear
             if (_latestControlDivValue == controlValueToWaitFor)
             {
-                Console.WriteLine($"WebView reported the expected controlDiv value of {controlValueToWaitFor}!");
+                Console.WriteLine(
+                    $"WebView reported the expected controlDiv value of {controlValueToWaitFor}!"
+                );
                 return true;
             }
-            Console.WriteLine($"Waiting for controlDiv to have value '{controlValueToWaitFor}', but it's still '{_latestControlDivValue}', so waiting {WaitTimeInMS}ms.");
+            Console.WriteLine(
+                $"Waiting for controlDiv to have value '{controlValueToWaitFor}', but it's still '{_latestControlDivValue}', so waiting {WaitTimeInMS}ms."
+            );
             await Task.Delay(WaitTimeInMS);
         }
 
-        Console.WriteLine($"Waited {MaxWaitTimes * WaitTimeInMS}ms but couldn't get controlDiv to have value '{controlValueToWaitFor}' (last value is '{_latestControlDivValue}').");
+        Console.WriteLine(
+            $"Waited {MaxWaitTimes * WaitTimeInMS}ms but couldn't get controlDiv to have value '{controlValueToWaitFor}' (last value is '{_latestControlDivValue}')."
+        );
         return false;
     }
 }

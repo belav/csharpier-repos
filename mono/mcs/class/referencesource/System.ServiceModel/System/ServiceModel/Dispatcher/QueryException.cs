@@ -19,19 +19,21 @@ namespace System.ServiceModel.Dispatcher
         NotAtomized,
         NotSupported,
         InvalidBodyAccess,
-        InvalidNamespacePrefix
+        InvalidNamespacePrefix,
     }
 
     internal class QueryProcessingException : XPathException
     {
         QueryProcessingError error;
 
-        internal QueryProcessingException(QueryProcessingError error, string message) : base(message, null)
+        internal QueryProcessingException(QueryProcessingError error, string message)
+            : base(message, null)
         {
             this.error = error;
         }
 
-        internal QueryProcessingException(QueryProcessingError error) : this(error, null)
+        internal QueryProcessingException(QueryProcessingError error)
+            : this(error, null)
         {
             this.error = error;
         }
@@ -76,19 +78,21 @@ namespace System.ServiceModel.Dispatcher
         DuplicateOpcode,
         OpcodeExists,
         OpcodeNotFound,
-        PredicateNestingTooDeep
+        PredicateNestingTooDeep,
     }
 
     internal class QueryCompileException : XPathException
     {
         QueryCompileError error;
 
-        internal QueryCompileException(QueryCompileError error, string message) : base(message, null)
+        internal QueryCompileException(QueryCompileError error, string message)
+            : base(message, null)
         {
             this.error = error;
         }
 
-        internal QueryCompileException(QueryCompileError error) : this(error, null)
+        internal QueryCompileException(QueryCompileError error)
+            : this(error, null)
         {
             this.error = error;
         }

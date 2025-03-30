@@ -1,12 +1,13 @@
-﻿using System.Web.UI.WebControls;
-using System.Security.Permissions;
+﻿using System.Security.Permissions;
+using System.Web.UI.WebControls;
 
-namespace System.Web.DynamicData {
+namespace System.Web.DynamicData
+{
     /// <summary>
     /// Interface implemented by objects that know how to create field temnplates
     /// </summary>
-    public interface IFieldTemplateFactory {
-
+    public interface IFieldTemplateFactory
+    {
         /// <summary>
         /// Initialize the FieldTemplateFactory, passing it the meta model that it will work with
         /// </summary>
@@ -19,6 +20,10 @@ namespace System.Web.DynamicData {
         /// <param name="mode">The mode (Readonly, Edit, Insert) for which the field template is needed</param>
         /// <param name="uiHint">The UIHint (if any) that should affect the field template lookup</param>
         /// <returns></returns>
-        IFieldTemplate CreateFieldTemplate(MetaColumn column, DataBoundControlMode mode, string uiHint);
+        IFieldTemplate CreateFieldTemplate(
+            MetaColumn column,
+            DataBoundControlMode mode,
+            string uiHint
+        );
     }
 }

@@ -14,11 +14,13 @@ namespace System.Text.Json
         /// <see cref="JsonException"/> is thrown.
         /// </summary>
         Disallow = 0,
+
         /// <summary>
         /// Allow comments within the JSON input and ignore them.
         /// The <see cref="Utf8JsonReader"/> will behave as if no comments were present.
         /// </summary>
         Skip = 1,
+
         /// <summary>
         /// Allow comments within the JSON input and treat them as valid tokens.
         /// While reading, the caller will be able to access the comment values.

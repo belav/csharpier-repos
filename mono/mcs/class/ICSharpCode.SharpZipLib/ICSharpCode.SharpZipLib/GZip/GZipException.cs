@@ -20,7 +20,7 @@
 // making a combined work based on this library.  Thus, the terms and
 // conditions of the GNU General Public License cover the whole
 // combination.
-// 
+//
 // As a special exception, the copyright holders of this library give you
 // permission to link this library with independent modules to produce an
 // executable, regardless of the license terms of these independent
@@ -38,25 +38,24 @@ using ICSharpCode.SharpZipLib;
 
 namespace ICSharpCode.SharpZipLib.GZip
 {
-	/// <summary>
-	/// GZipException represents a Gzip specific exception	
-	/// </summary>
-	[System.ObsoleteAttribute("This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead.")]
-	public class GZipException : SharpZipBaseException
-	{
-		/// <summary>
-		/// Initialise a new instance of GZipException
-		/// </summary>
-		public GZipException()
-		{
-		}
-		
-		/// <summary>
-		/// Initialise a new instance of GZipException with its message string.
-		/// </summary>
-		/// <param name="message">A <see cref="string"></see>string that describes the error.</param>
-		public GZipException(string message) : base(message)
-		{
-		}
-	}
+    /// <summary>
+    /// GZipException represents a Gzip specific exception
+    /// </summary>
+    [System.ObsoleteAttribute(
+        "This assembly has been deprecated. Please use https://www.nuget.org/packages/SharpZipLib/ instead."
+    )]
+    public class GZipException : SharpZipBaseException
+    {
+        /// <summary>
+        /// Initialise a new instance of GZipException
+        /// </summary>
+        public GZipException() { }
+
+        /// <summary>
+        /// Initialise a new instance of GZipException with its message string.
+        /// </summary>
+        /// <param name="message">A <see cref="string"></see>string that describes the error.</param>
+        public GZipException(string message)
+            : base(message) { }
+    }
 }

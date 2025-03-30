@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate;
 /// <summary>
 /// Authenticates requests using Negotiate, Kerberos, or NTLM.
 /// </summary>
-public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthenticationRequestHandler
+public class NegotiateHandler
+    : AuthenticationHandler<NegotiateOptions>,
+        IAuthenticationRequestHandler
 {
     private const string AuthPersistenceKey = nameof(AuthPersistence);
     private const string NegotiateVerb = "Negotiate";
@@ -32,17 +34,24 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
     /// </summary>
     /// <inheritdoc />
     [Obsolete("ISystemClock is obsolete, use TimeProvider on AuthenticationSchemeOptions instead.")]
-    public NegotiateHandler(IOptionsMonitor<NegotiateOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
-        : base(options, logger, encoder, clock)
-    { }
+    public NegotiateHandler(
+        IOptionsMonitor<NegotiateOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock
+    )
+        : base(options, logger, encoder, clock) { }
 
     /// <summary>
     /// Creates a new <see cref="NegotiateHandler"/>
     /// </summary>
     /// <inheritdoc />
-    public NegotiateHandler(IOptionsMonitor<NegotiateOptions> options, ILoggerFactory logger, UrlEncoder encoder)
-        : base(options, logger, encoder)
-    { }
+    public NegotiateHandler(
+        IOptionsMonitor<NegotiateOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder
+    )
+        : base(options, logger, encoder) { }
 
     /// <summary>
     /// The handler calls methods on the events which give the application control at certain points where processing is occurring.
@@ -58,9 +67,11 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
     /// Creates the default events type.
     /// </summary>
     /// <returns></returns>
-    protected override Task<object> CreateEventsAsync() => Task.FromResult<object>(new NegotiateEvents());
+    protected override Task<object> CreateEventsAsync() =>
+        Task.FromResult<object>(new NegotiateEvents());
 
-    private bool IsSupportedProtocol => HttpProtocol.IsHttp11(Request.Protocol) || HttpProtocol.IsHttp10(Request.Protocol);
+    private bool IsSupportedProtocol =>
+        HttpProtocol.IsHttp11(Request.Protocol) || HttpProtocol.IsHttp10(Request.Protocol);
 
     /// <summary>
     /// Intercepts incomplete Negotiate authentication handshakes and continues or completes them.
@@ -100,7 +111,9 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
             {
                 if (_negotiateState?.IsCompleted == false)
                 {
-                    throw new InvalidOperationException("An anonymous request was received in between authentication handshake requests.");
+                    throw new InvalidOperationException(
+                        "An anonymous request was received in between authentication handshake requests."
+                    );
                 }
                 return false;
             }
@@ -115,7 +128,9 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
             {
                 if (_negotiateState?.IsCompleted == false)
                 {
-                    throw new InvalidOperationException("Non-negotiate request was received in between authentication handshake requests.");
+                    throw new InvalidOperationException(
+                        "Non-negotiate request was received in between authentication handshake requests."
+                    );
                 }
                 return false;
             }
@@ -134,7 +149,11 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
 
             _negotiateState ??= Options.StateFactory.CreateInstance();
 
-            var outgoing = _negotiateState.GetOutgoingBlob(token, out var errorType, out var exception);
+            var outgoing = _negotiateState.GetOutgoingBlob(
+                token,
+                out var errorType,
+                out var exception
+            );
             if (errorType != BlobErrorType.None)
             {
                 Debug.Assert(exception != null);
@@ -194,7 +213,10 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
                     // Only include it if the response ultimately succeeds. This avoids adding it twice if Challenge is called again.
                     if (Response.StatusCode < StatusCodes.Status400BadRequest)
                     {
-                        Response.Headers.Append(HeaderNames.WWWAuthenticate, AuthHeaderPrefix + outgoing);
+                        Response.Headers.Append(
+                            HeaderNames.WWWAuthenticate,
+                            AuthHeaderPrefix + outgoing
+                        );
                     }
                     return Task.CompletedTask;
                 });
@@ -206,8 +228,10 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
             {
                 // NTLM was already put in the persitence cache on the prior request so we could complete the handshake.
                 // Take it out if we don't want it to persist.
-                Debug.Assert(object.ReferenceEquals(persistence?.State, _negotiateState),
-                    "NTLM is a two stage process, it must have already been in the cache for the handshake to succeed.");
+                Debug.Assert(
+                    object.ReferenceEquals(persistence?.State, _negotiateState),
+                    "NTLM is a two stage process, it must have already been in the cache for the handshake to succeed."
+                );
                 Logger.DisablingCredentialPersistence(_negotiateState.Protocol);
                 persistence.State = null;
                 Response.RegisterForDispose(_negotiateState);
@@ -266,7 +290,10 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
 
     private async Task<bool?> InvokeAuthenticateFailedEvent(Exception ex)
     {
-        var errorContext = new AuthenticationFailedContext(Context, Scheme, Options) { Exception = ex };
+        var errorContext = new AuthenticationFailedContext(Context, Scheme, Options)
+        {
+            Exception = ex,
+        };
         await Events.AuthenticationFailed(errorContext);
 
         if (errorContext.Result != null)
@@ -281,7 +308,10 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
             }
             else if (errorContext.Result.Failure != null)
             {
-                throw new AuthenticationFailureException("An error was returned from the AuthenticationFailed event.", errorContext.Result.Failure);
+                throw new AuthenticationFailureException(
+                    "An error was returned from the AuthenticationFailed event.",
+                    errorContext.Result.Failure
+                );
             }
         }
 
@@ -296,7 +326,9 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
     {
         if (!_requestProcessed)
         {
-            throw new InvalidOperationException("AuthenticateAsync must not be called before the UseAuthentication middleware runs.");
+            throw new InvalidOperationException(
+                "AuthenticateAsync must not be called before the UseAuthentication middleware runs."
+            );
         }
 
         if (!IsSupportedProtocol)
@@ -316,7 +348,9 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
         if (!_negotiateState.IsCompleted)
         {
             // This case should have been rejected by HandleRequestAsync
-            throw new InvalidOperationException("Attempting to use an incomplete authentication context.");
+            throw new InvalidOperationException(
+                "Attempting to use an incomplete authentication context."
+            );
         }
 
         // Make a new copy of the user for each request, they are mutable objects and
@@ -339,7 +373,7 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
         {
             var ldapContext = new LdapContext(Context, Scheme, Options, Options.LdapSettings)
             {
-                Principal = user
+                Principal = user,
             };
 
             await Events.RetrieveLdapClaims(ldapContext);
@@ -349,18 +383,22 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
                 return ldapContext.Result;
             }
 
-            await LdapAdapter.RetrieveClaimsAsync(ldapContext.LdapSettings, (ldapContext.Principal.Identity as ClaimsIdentity)!, Logger);
+            await LdapAdapter.RetrieveClaimsAsync(
+                ldapContext.LdapSettings,
+                (ldapContext.Principal.Identity as ClaimsIdentity)!,
+                Logger
+            );
 
             authenticatedContext = new AuthenticatedContext(Context, Scheme, Options)
             {
-                Principal = ldapContext.Principal
+                Principal = ldapContext.Principal,
             };
         }
         else
         {
             authenticatedContext = new AuthenticatedContext(Context, Scheme, Options)
             {
-                Principal = user
+                Principal = user,
             };
         }
 
@@ -371,7 +409,11 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
             return authenticatedContext.Result;
         }
 
-        var ticket = new AuthenticationTicket(authenticatedContext.Principal, authenticatedContext.Properties, Scheme.Name);
+        var ticket = new AuthenticationTicket(
+            authenticatedContext.Principal,
+            authenticatedContext.Properties,
+            Scheme.Name
+        );
         return AuthenticateResult.Success(ticket);
     }
 
@@ -398,7 +440,10 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
 
     private AuthPersistence EstablishConnectionPersistence(IDictionary<object, object?> items)
     {
-        Debug.Assert(!items.ContainsKey(AuthPersistenceKey), "This should only be registered once per connection");
+        Debug.Assert(
+            !items.ContainsKey(AuthPersistenceKey),
+            "This should only be registered once per connection"
+        );
         var persistence = new AuthPersistence();
         RegisterForConnectionDispose(persistence);
         items[AuthPersistenceKey] = persistence;
@@ -408,13 +453,18 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
     private IDictionary<object, object?> GetConnectionItems()
     {
         return Context.Features.Get<IConnectionItemsFeature>()?.Items
-            ?? throw new NotSupportedException($"Negotiate authentication requires a server that supports {nameof(IConnectionItemsFeature)} like Kestrel.");
+            ?? throw new NotSupportedException(
+                $"Negotiate authentication requires a server that supports {nameof(IConnectionItemsFeature)} like Kestrel."
+            );
     }
 
     private void RegisterForConnectionDispose(IDisposable authState)
     {
-        var connectionCompleteFeature = Context.Features.Get<IConnectionCompleteFeature>()
-            ?? throw new NotSupportedException($"Negotiate authentication requires a server that supports {nameof(IConnectionCompleteFeature)} like Kestrel.");
+        var connectionCompleteFeature =
+            Context.Features.Get<IConnectionCompleteFeature>()
+            ?? throw new NotSupportedException(
+                $"Negotiate authentication requires a server that supports {nameof(IConnectionCompleteFeature)} like Kestrel."
+            );
         connectionCompleteFeature.OnCompleted(DisposeState, authState);
     }
 

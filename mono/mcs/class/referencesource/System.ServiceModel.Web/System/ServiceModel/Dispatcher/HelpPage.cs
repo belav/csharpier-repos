@@ -48,11 +48,16 @@ namespace System.ServiceModel.Dispatcher
 
         Message GetHelpPage()
         {
-            Uri baseUri = UriTemplate.RewriteUri(OperationContext.Current.Channel.LocalAddress.Uri, WebOperationContext.Current.IncomingRequest.Headers[HttpRequestHeader.Host]);
+            Uri baseUri = UriTemplate.RewriteUri(
+                OperationContext.Current.Channel.LocalAddress.Uri,
+                WebOperationContext.Current.IncomingRequest.Headers[HttpRequestHeader.Host]
+            );
             string helpPage = this.helpPageCache.Lookup(baseUri.Authority);
             if (String.IsNullOrEmpty(helpPage))
             {
-                helpPage = HelpHtmlBuilder.CreateHelpPage(baseUri, operationInfoDictionary.Values).ToString();
+                helpPage = HelpHtmlBuilder
+                    .CreateHelpPage(baseUri, operationInfoDictionary.Values)
+                    .ToString();
                 if (HttpContext.Current == null)
                 {
                     this.helpPageCache.AddOrUpdate(baseUri.Authority, helpPage);
@@ -63,15 +68,23 @@ namespace System.ServiceModel.Dispatcher
 
         Message GetOperationHelpPage(string operation)
         {
-            Uri requestUri = UriTemplate.RewriteUri(WebOperationContext.Current.IncomingRequest.UriTemplateMatch.RequestUri, WebOperationContext.Current.IncomingRequest.Headers[HttpRequestHeader.Host]);
+            Uri requestUri = UriTemplate.RewriteUri(
+                WebOperationContext.Current.IncomingRequest.UriTemplateMatch.RequestUri,
+                WebOperationContext.Current.IncomingRequest.Headers[HttpRequestHeader.Host]
+            );
             string helpPage = this.operationPageCache.Lookup(requestUri.AbsoluteUri);
             if (String.IsNullOrEmpty(helpPage))
             {
                 OperationHelpInformation operationInfo;
                 if (this.operationInfoDictionary.TryGetValue(operation, out operationInfo))
                 {
-                    Uri baseUri = UriTemplate.RewriteUri(OperationContext.Current.Channel.LocalAddress.Uri, WebOperationContext.Current.IncomingRequest.Headers[HttpRequestHeader.Host]);
-                    helpPage = HelpHtmlBuilder.CreateOperationHelpPage(baseUri, operationInfo).ToString();
+                    Uri baseUri = UriTemplate.RewriteUri(
+                        OperationContext.Current.Channel.LocalAddress.Uri,
+                        WebOperationContext.Current.IncomingRequest.Headers[HttpRequestHeader.Host]
+                    );
+                    helpPage = HelpHtmlBuilder
+                        .CreateOperationHelpPage(baseUri, operationInfo)
+                        .ToString();
                     if (HttpContext.Current == null)
                     {
                         this.operationPageCache.AddOrUpdate(requestUri.AbsoluteUri, helpPage);
@@ -79,7 +92,9 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else
                 {
-                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WebFaultException(HttpStatusCode.NotFound));
+                    throw System.ServiceModel.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new WebFaultException(HttpStatusCode.NotFound)
+                    );
                 }
             }
             return WebOperationContext.Current.CreateTextResponse(helpPage, "text/html");
@@ -89,8 +104,14 @@ namespace System.ServiceModel.Dispatcher
         {
             return new KeyValuePair<UriTemplate, object>[]
             {
-                new KeyValuePair<UriTemplate, object>(new UriTemplate(OperationListHelpPageUriTemplate), HelpMethodName),
-                new KeyValuePair<UriTemplate, object>(new UriTemplate(OperationHelpPageUriTemplate), HelpOperationMethodName)
+                new KeyValuePair<UriTemplate, object>(
+                    new UriTemplate(OperationListHelpPageUriTemplate),
+                    HelpMethodName
+                ),
+                new KeyValuePair<UriTemplate, object>(
+                    new UriTemplate(OperationHelpPageUriTemplate),
+                    HelpOperationMethodName
+                ),
             };
         }
 
@@ -100,7 +121,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.Public);
                 HttpContext.Current.Response.Cache.SetMaxAge(TimeSpan.MaxValue);
-                HttpContext.Current.Response.Cache.AddValidationCallback(new HttpCacheValidateHandler(this.CacheValidationCallback), this.startupTime);
+                HttpContext.Current.Response.Cache.AddValidationCallback(
+                    new HttpCacheValidateHandler(this.CacheValidationCallback),
+                    this.startupTime
+                );
                 HttpContext.Current.Response.Cache.SetValidUntilExpires(true);
             }
             switch ((string)match.Data)
@@ -114,7 +138,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        void CacheValidationCallback(HttpContext context, object state, ref HttpValidationStatus result)
+        void CacheValidationCallback(
+            HttpContext context,
+            object state,
+            ref HttpValidationStatus result
+        )
         {
             if (((DateTime)state) == this.startupTime)
             {
@@ -142,34 +170,22 @@ namespace System.ServiceModel.Dispatcher
 
         public string Name
         {
-            get
-            {
-                return od.Name;
-            }
+            get { return od.Name; }
         }
 
         public string UriTemplate
         {
-            get
-            {
-                return UriTemplateClientFormatter.GetUTStringOrDefault(od);
-            }
+            get { return UriTemplateClientFormatter.GetUTStringOrDefault(od); }
         }
 
         public string Method
         {
-            get
-            {
-                return WebHttpBehavior.GetWebMethod(od);
-            }
+            get { return WebHttpBehavior.GetWebMethod(od); }
         }
 
         public string Description
         {
-            get
-            {
-                return WebHttpBehavior.GetDescription(od);
-            }
+            get { return WebHttpBehavior.GetDescription(od); }
         }
 
         public string JavascriptCallbackParameterName
@@ -186,10 +202,7 @@ namespace System.ServiceModel.Dispatcher
 
         public WebMessageBodyStyle BodyStyle
         {
-            get
-            {
-                return behavior.GetBodyStyle(od);
-            }
+            get { return behavior.GetBodyStyle(od); }
         }
 
         public MessageHelpInformation Request
@@ -198,8 +211,13 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.request == null)
                 {
-                    this.request = new MessageHelpInformation(od, true, GetRequestBodyType(od, this.UriTemplate),
-                        this.BodyStyle == WebMessageBodyStyle.WrappedRequest || this.BodyStyle == WebMessageBodyStyle.Wrapped);
+                    this.request = new MessageHelpInformation(
+                        od,
+                        true,
+                        GetRequestBodyType(od, this.UriTemplate),
+                        this.BodyStyle == WebMessageBodyStyle.WrappedRequest
+                            || this.BodyStyle == WebMessageBodyStyle.Wrapped
+                    );
                 }
                 return this.request;
             }
@@ -211,8 +229,13 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.response == null)
                 {
-                    this.response = new MessageHelpInformation(od, false, GetResponseBodyType(od),
-                        this.BodyStyle == WebMessageBodyStyle.WrappedResponse || this.BodyStyle == WebMessageBodyStyle.Wrapped);
+                    this.response = new MessageHelpInformation(
+                        od,
+                        false,
+                        GetResponseBodyType(od),
+                        this.BodyStyle == WebMessageBodyStyle.WrappedResponse
+                            || this.BodyStyle == WebMessageBodyStyle.Wrapped
+                    );
                 }
                 return this.response;
             }
@@ -258,7 +281,9 @@ namespace System.ServiceModel.Dispatcher
                 UriTemplate template = new UriTemplate(uriTemplate);
                 IEnumerable<MessagePartDescription> parts =
                     from part in od.Messages[0].Body.Parts
-                    where !template.PathSegmentVariableNames.Contains(part.Name.ToUpperInvariant()) && !template.QueryValueVariableNames.Contains(part.Name.ToUpperInvariant())
+                    where
+                        !template.PathSegmentVariableNames.Contains(part.Name.ToUpperInvariant())
+                        && !template.QueryValueVariableNames.Contains(part.Name.ToUpperInvariant())
                     select part;
 
                 if (parts.Count() == 1)
@@ -289,11 +314,18 @@ namespace System.ServiceModel.Dispatcher
         public XElement XmlExample { get; private set; }
         public XElement JsonExample { get; private set; }
 
-        internal MessageHelpInformation(OperationDescription od, bool isRequest, Type type, bool wrapped)
+        internal MessageHelpInformation(
+            OperationDescription od,
+            bool isRequest,
+            Type type,
+            bool wrapped
+        )
         {
             this.Type = type;
             this.SupportsJson = WebHttpBehavior.SupportsJsonFormat(od);
-            string direction = isRequest ? SR2.GetString(SR2.HelpPageRequest) : SR2.GetString(SR2.HelpPageResponse);
+            string direction = isRequest
+                ? SR2.GetString(SR2.HelpPageRequest)
+                : SR2.GetString(SR2.HelpPageResponse);
 
             if (wrapped && !typeof(void).Equals(type))
             {
@@ -327,12 +359,18 @@ namespace System.ServiceModel.Dispatcher
             }
             else if (typeof(AtomPub10ServiceDocumentFormatter).IsAssignableFrom(type))
             {
-                this.BodyDescription = SR2.GetString(SR2.HelpPageIsAtomPubServiceDocument, direction);
+                this.BodyDescription = SR2.GetString(
+                    SR2.HelpPageIsAtomPubServiceDocument,
+                    direction
+                );
                 this.FormatString = WebMessageFormat.Xml.ToString();
             }
             else if (typeof(AtomPub10CategoriesDocumentFormatter).IsAssignableFrom(type))
             {
-                this.BodyDescription = SR2.GetString(SR2.HelpPageIsAtomPubCategoriesDocument, direction);
+                this.BodyDescription = SR2.GetString(
+                    SR2.HelpPageIsAtomPubCategoriesDocument,
+                    direction
+                );
                 this.FormatString = WebMessageFormat.Xml.ToString();
             }
             else if (typeof(Rss20FeedFormatter).IsAssignableFrom(type))
@@ -345,7 +383,9 @@ namespace System.ServiceModel.Dispatcher
                 this.BodyDescription = SR2.GetString(SR2.HelpPageIsSyndication, direction);
                 this.FormatString = WebMessageFormat.Xml.ToString();
             }
-            else if (typeof(XElement).IsAssignableFrom(type) || typeof(XmlElement).IsAssignableFrom(type))
+            else if (
+                typeof(XElement).IsAssignableFrom(type) || typeof(XmlElement).IsAssignableFrom(type)
+            )
             {
                 this.BodyDescription = SR2.GetString(SR2.HelpPageIsXML, direction);
                 this.FormatString = WebMessageFormat.Xml.ToString();
@@ -354,10 +394,13 @@ namespace System.ServiceModel.Dispatcher
             {
                 try
                 {
-                    bool usesXmlSerializer = od.Behaviors.Contains(typeof(XmlSerializerOperationBehavior));
+                    bool usesXmlSerializer = od.Behaviors.Contains(
+                        typeof(XmlSerializerOperationBehavior)
+                    );
                     XmlQualifiedName name;
                     this.SchemaSet = new XmlSchemaSet();
-                    IDictionary<XmlQualifiedName, Type> knownTypes = new Dictionary<XmlQualifiedName, Type>();
+                    IDictionary<XmlQualifiedName, Type> knownTypes =
+                        new Dictionary<XmlQualifiedName, Type>();
                     if (usesXmlSerializer)
                     {
                         XmlReflectionImporter importer = new XmlReflectionImporter();
@@ -376,22 +419,39 @@ namespace System.ServiceModel.Dispatcher
                         XsdDataContractExporter exporter = new XsdDataContractExporter();
                         List<Type> listTypes = new List<Type>(od.KnownTypes);
                         bool isQueryable;
-                        Type dataContractType = DataContractSerializerOperationFormatter.GetSubstituteDataContractType(this.Type, out isQueryable);
+                        Type dataContractType =
+                            DataContractSerializerOperationFormatter.GetSubstituteDataContractType(
+                                this.Type,
+                                out isQueryable
+                            );
                         listTypes.Add(dataContractType);
                         exporter.Export(listTypes);
                         if (!exporter.CanExport(dataContractType))
                         {
-                            this.BodyDescription = SR2.GetString(SR2.HelpPageCouldNotGenerateSchema);
+                            this.BodyDescription = SR2.GetString(
+                                SR2.HelpPageCouldNotGenerateSchema
+                            );
                             this.FormatString = SR2.GetString(SR2.HelpPageUnknown);
                             return;
                         }
                         name = exporter.GetRootElementName(dataContractType);
-                        DataContract typeDataContract = DataContract.GetDataContract(dataContractType);
+                        DataContract typeDataContract = DataContract.GetDataContract(
+                            dataContractType
+                        );
                         if (typeDataContract.KnownDataContracts != null)
                         {
-                            foreach (XmlQualifiedName dataContractName in typeDataContract.KnownDataContracts.Keys)
+                            foreach (
+                                XmlQualifiedName dataContractName in typeDataContract
+                                    .KnownDataContracts
+                                    .Keys
+                            )
                             {
-                                knownTypes.Add(dataContractName, typeDataContract.KnownDataContracts[dataContractName].UnderlyingType);
+                                knownTypes.Add(
+                                    dataContractName,
+                                    typeDataContract
+                                        .KnownDataContracts[dataContractName]
+                                        .UnderlyingType
+                                );
                             }
                         }
                         foreach (Type knownType in od.KnownTypes)
@@ -419,9 +479,19 @@ namespace System.ServiceModel.Dispatcher
                     if (this.SupportsJson)
                     {
                         XDocument exampleDocument = new XDocument();
-                        using (XmlWriter writer = XmlWriter.Create(exampleDocument.CreateWriter(), settings))
+                        using (
+                            XmlWriter writer = XmlWriter.Create(
+                                exampleDocument.CreateWriter(),
+                                settings
+                            )
+                        )
                         {
-                            HelpExampleGenerator.GenerateJsonSample(this.SchemaSet, name, writer, knownTypes);
+                            HelpExampleGenerator.GenerateJsonSample(
+                                this.SchemaSet,
+                                name,
+                                writer,
+                                knownTypes
+                            );
                         }
                         this.JsonExample = exampleDocument.Root;
                     }
@@ -431,17 +501,20 @@ namespace System.ServiceModel.Dispatcher
                         foreach (XmlSchema schema in this.SchemaSet.Schemas(name.Namespace))
                         {
                             this.Schema = schema;
-
                         }
                     }
 
                     XDocument XmlExampleDocument = new XDocument();
-                    using (XmlWriter writer = XmlWriter.Create(XmlExampleDocument.CreateWriter(), settings))
+                    using (
+                        XmlWriter writer = XmlWriter.Create(
+                            XmlExampleDocument.CreateWriter(),
+                            settings
+                        )
+                    )
                     {
                         HelpExampleGenerator.GenerateXmlSample(this.SchemaSet, name, writer);
                     }
                     this.XmlExample = XmlExampleDocument.Root;
-
                 }
                 catch (Exception e)
                 {

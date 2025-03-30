@@ -28,7 +28,8 @@ sealed partial class Program
         BeforeMain(args);
 
         AssignConfiguration(ref args);
-        var summaries = BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly)
+        var summaries = BenchmarkSwitcher
+            .FromAssembly(typeof(Program).Assembly)
             .Run(args, ManualConfig.CreateEmpty());
 
         foreach (var summary in summaries)
@@ -75,7 +76,9 @@ sealed partial class Program
         {
             // Compat: support the old style of passing a config that is used by our build system.
             SuppressConsole();
-            AspNetCoreBenchmarkAttribute.ConfigName = AspNetCoreBenchmarkAttribute.NamedConfiguration.Validation;
+            AspNetCoreBenchmarkAttribute.ConfigName = AspNetCoreBenchmarkAttribute
+                .NamedConfiguration
+                .Validation;
             args = argsList.ToArray();
             return;
         }
@@ -94,7 +97,9 @@ sealed partial class Program
         {
             Console.WriteLine("Using the debug config since you are debugging. I hope that's OK!");
             Console.WriteLine("Specify a configuration with --config <name> to override");
-            AspNetCoreBenchmarkAttribute.ConfigName = AspNetCoreBenchmarkAttribute.NamedConfiguration.Debug;
+            AspNetCoreBenchmarkAttribute.ConfigName = AspNetCoreBenchmarkAttribute
+                .NamedConfiguration
+                .Debug;
             return;
         }
     }

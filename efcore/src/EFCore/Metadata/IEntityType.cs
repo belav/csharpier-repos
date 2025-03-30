@@ -28,8 +28,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     /// <summary>
     ///     Returns the <see cref="IProperty" /> that will be used for storing a discriminator value.
     /// </summary>
-    new IProperty? FindDiscriminatorProperty()
-        => (IProperty?)((IReadOnlyEntityType)this).FindDiscriminatorProperty();
+    new IProperty? FindDiscriminatorProperty() =>
+        (IProperty?)((IReadOnlyEntityType)this).FindDiscriminatorProperty();
 
     /// <summary>
     ///     Gets the root base type for a given entity type.
@@ -37,50 +37,48 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     /// <returns>
     ///     The root base type. If the given entity type is not a derived type, then the same entity type is returned.
     /// </returns>
-    new IEntityType GetRootType()
-        => (IEntityType)((IReadOnlyEntityType)this).GetRootType();
+    new IEntityType GetRootType() => (IEntityType)((IReadOnlyEntityType)this).GetRootType();
 
     /// <summary>
     ///     Gets all types in the model from which a given entity type derives, starting with the root.
     /// </summary>
     /// <returns>The base types.</returns>
-    new IEnumerable<IEntityType> GetAllBaseTypes()
-        => GetAllBaseTypesAscending().Reverse();
+    new IEnumerable<IEntityType> GetAllBaseTypes() => GetAllBaseTypesAscending().Reverse();
 
     /// <summary>
     ///     Returns all base types of the given entity type, including the type itself, top to bottom.
     /// </summary>
     /// <returns>The base types.</returns>
-    new IEnumerable<IEntityType> GetAllBaseTypesInclusive()
-        => GetAllBaseTypesInclusiveAscending().Reverse();
+    new IEnumerable<IEntityType> GetAllBaseTypesInclusive() =>
+        GetAllBaseTypesInclusiveAscending().Reverse();
 
     /// <summary>
     ///     Gets all types in the model from which a given entity type derives, starting with the closest one.
     /// </summary>
     /// <returns>The base types.</returns>
-    new IEnumerable<IEntityType> GetAllBaseTypesAscending()
-        => GetAllBaseTypesInclusiveAscending().Skip(1);
+    new IEnumerable<IEntityType> GetAllBaseTypesAscending() =>
+        GetAllBaseTypesInclusiveAscending().Skip(1);
 
     /// <summary>
     ///     Returns all base types of the given entity type, including the type itself, bottom to top.
     /// </summary>
     /// <returns>The base types.</returns>
-    new IEnumerable<IEntityType> GetAllBaseTypesInclusiveAscending()
-        => ((IReadOnlyEntityType)this).GetAllBaseTypesInclusiveAscending().Cast<IEntityType>();
+    new IEnumerable<IEntityType> GetAllBaseTypesInclusiveAscending() =>
+        ((IReadOnlyEntityType)this).GetAllBaseTypesInclusiveAscending().Cast<IEntityType>();
 
     /// <summary>
     ///     Gets all types in the model that derive from this entity type.
     /// </summary>
     /// <returns>The derived types.</returns>
-    new IEnumerable<IEntityType> GetDerivedTypes()
-        => ((IReadOnlyEntityType)this).GetDerivedTypes().Cast<IEntityType>();
+    new IEnumerable<IEntityType> GetDerivedTypes() =>
+        ((IReadOnlyEntityType)this).GetDerivedTypes().Cast<IEntityType>();
 
     /// <summary>
     ///     Returns all derived types of this entity type, including the type itself.
     /// </summary>
     /// <returns>Derived types.</returns>
-    new IEnumerable<IEntityType> GetDerivedTypesInclusive()
-        => ((IReadOnlyEntityType)this).GetDerivedTypesInclusive().Cast<IEntityType>();
+    new IEnumerable<IEntityType> GetDerivedTypesInclusive() =>
+        ((IReadOnlyEntityType)this).GetDerivedTypesInclusive().Cast<IEntityType>();
 
     /// <summary>
     ///     Gets all types in the model that directly derive from this entity type.
@@ -93,8 +91,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     ///     which are not <see langword="abstract" />.
     /// </summary>
     /// <returns>Non-abstract, derived types.</returns>
-    new IEnumerable<IEntityType> GetConcreteDerivedTypesInclusive()
-        => ((IReadOnlyEntityType)this).GetConcreteDerivedTypesInclusive().Cast<IEntityType>();
+    new IEnumerable<IEntityType> GetConcreteDerivedTypesInclusive() =>
+        ((IReadOnlyEntityType)this).GetConcreteDerivedTypesInclusive().Cast<IEntityType>();
 
     /// <summary>
     ///     Gets the primary or alternate key that is defined on the given property. Returns <see langword="null" /> if no key is defined
@@ -102,8 +100,7 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     /// </summary>
     /// <param name="property">The property that the key is defined on.</param>
     /// <returns>The key, or null if none is defined.</returns>
-    new IKey? FindKey(IReadOnlyProperty property)
-        => FindKey(new[] { property });
+    new IKey? FindKey(IReadOnlyProperty property) => FindKey(new[] { property });
 
     /// <summary>
     ///     Returns the closest entity type that is a parent of both given entity types. If one of the given entities is
@@ -115,8 +112,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     ///     The closest common parent of this entity type and <paramref name="otherEntityType" />,
     ///     or <see langword="null" /> if they have not common parent.
     /// </returns>
-    IEntityType? FindClosestCommonParent(IEntityType otherEntityType)
-        => (IEntityType?)((IReadOnlyEntityType)this).FindClosestCommonParent(otherEntityType);
+    IEntityType? FindClosestCommonParent(IEntityType otherEntityType) =>
+        (IEntityType?)((IReadOnlyEntityType)this).FindClosestCommonParent(otherEntityType);
 
     /// <summary>
     ///     Gets the least derived type between the specified two.
@@ -126,8 +123,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     ///     The least derived type between the specified two.
     ///     If the given entity types are not related, then <see langword="null" /> is returned.
     /// </returns>
-    IEntityType? LeastDerivedType(IEntityType otherEntityType)
-        => (IEntityType?)((IReadOnlyEntityType)this).LeastDerivedType(otherEntityType);
+    IEntityType? LeastDerivedType(IEntityType otherEntityType) =>
+        (IEntityType?)((IReadOnlyEntityType)this).LeastDerivedType(otherEntityType);
 
     /// <summary>
     ///     Gets primary key for this entity type. Returns <see langword="null" /> if no primary key is defined.
@@ -175,7 +172,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     new IForeignKey? FindForeignKey(
         IReadOnlyList<IReadOnlyProperty> properties,
         IReadOnlyKey principalKey,
-        IReadOnlyEntityType principalEntityType);
+        IReadOnlyEntityType principalEntityType
+    );
 
     /// <summary>
     ///     Gets the foreign keys defined on the given property. Only foreign keys that are defined on exactly the specified
@@ -183,8 +181,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     /// </summary>
     /// <param name="property">The property to find the foreign keys on.</param>
     /// <returns>The foreign keys.</returns>
-    new IEnumerable<IForeignKey> FindForeignKeys(IReadOnlyProperty property)
-        => FindForeignKeys(new[] { property });
+    new IEnumerable<IForeignKey> FindForeignKeys(IReadOnlyProperty property) =>
+        FindForeignKeys(new[] { property });
 
     /// <summary>
     ///     Gets the foreign keys defined on the given properties. Only foreign keys that are defined on exactly the specified
@@ -209,15 +207,17 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     new IForeignKey? FindForeignKey(
         IReadOnlyProperty property,
         IReadOnlyKey principalKey,
-        IReadOnlyEntityType principalEntityType)
-        => FindForeignKey(new[] { property }, principalKey, principalEntityType);
+        IReadOnlyEntityType principalEntityType
+    ) => FindForeignKey(new[] { property }, principalKey, principalEntityType);
 
     /// <summary>
     ///     Gets the foreign keys declared on the given <see cref="IEntityType" /> using the given properties.
     /// </summary>
     /// <param name="properties">The properties to find the foreign keys on.</param>
     /// <returns>Declared foreign keys.</returns>
-    new IEnumerable<IForeignKey> FindDeclaredForeignKeys(IReadOnlyList<IReadOnlyProperty> properties);
+    new IEnumerable<IForeignKey> FindDeclaredForeignKeys(
+        IReadOnlyList<IReadOnlyProperty> properties
+    );
 
     /// <summary>
     ///     Gets all foreign keys declared on the given <see cref="IEntityType" />.
@@ -260,24 +260,23 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     ///     Returns the relationship to the owner if this is an owned type or <see langword="null" /> otherwise.
     /// </summary>
     /// <returns>The relationship to the owner if this is an owned type or <see langword="null" /> otherwise.</returns>
-    new IForeignKey? FindOwnership()
-        => (IForeignKey?)((IReadOnlyEntityType)this).FindOwnership();
+    new IForeignKey? FindOwnership() => (IForeignKey?)((IReadOnlyEntityType)this).FindOwnership();
 
     /// <summary>
     ///     Gets a navigation property on the given entity type. Returns <see langword="null" /> if no navigation property is found.
     /// </summary>
     /// <param name="memberInfo">The navigation property on the entity class.</param>
     /// <returns>The navigation property, or <see langword="null" /> if none is found.</returns>
-    new INavigation? FindNavigation(MemberInfo memberInfo)
-        => FindNavigation(Check.NotNull(memberInfo, nameof(memberInfo)).GetSimpleMemberName());
+    new INavigation? FindNavigation(MemberInfo memberInfo) =>
+        FindNavigation(Check.NotNull(memberInfo, nameof(memberInfo)).GetSimpleMemberName());
 
     /// <summary>
     ///     Gets a navigation property on the given entity type. Returns <see langword="null" /> if no navigation property is found.
     /// </summary>
     /// <param name="name">The name of the navigation property on the entity class.</param>
     /// <returns>The navigation property, or <see langword="null" /> if none is found.</returns>
-    new INavigation? FindNavigation(string name)
-        => (INavigation?)((IReadOnlyEntityType)this).FindNavigation(name);
+    new INavigation? FindNavigation(string name) =>
+        (INavigation?)((IReadOnlyEntityType)this).FindNavigation(name);
 
     /// <summary>
     ///     Gets a navigation property on the given entity type. Does not return navigation properties defined on a base type.
@@ -307,8 +306,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     ///     and base entity typed types.
     /// </remarks>
     /// <returns>Derived navigation properties.</returns>
-    new IEnumerable<INavigation> GetDerivedNavigations()
-        => ((IReadOnlyEntityType)this).GetDerivedNavigations().Cast<INavigation>();
+    new IEnumerable<INavigation> GetDerivedNavigations() =>
+        ((IReadOnlyEntityType)this).GetDerivedNavigations().Cast<INavigation>();
 
     /// <summary>
     ///     Gets all navigation properties on the given entity type.
@@ -321,8 +320,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     /// </summary>
     /// <param name="memberInfo">The navigation property on the entity class.</param>
     /// <returns>The navigation property, or <see langword="null" /> if none is found.</returns>
-    new ISkipNavigation? FindSkipNavigation(MemberInfo memberInfo)
-        => (ISkipNavigation?)((IReadOnlyEntityType)this).FindSkipNavigation(memberInfo);
+    new ISkipNavigation? FindSkipNavigation(MemberInfo memberInfo) =>
+        (ISkipNavigation?)((IReadOnlyEntityType)this).FindSkipNavigation(memberInfo);
 
     /// <summary>
     ///     Gets a skip navigation property on this entity type. Returns <see langword="null" /> if no skip navigation property is found.
@@ -337,8 +336,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     /// </summary>
     /// <param name="name">The name of the navigation property on the entity class.</param>
     /// <returns>The navigation property, or <see langword="null" /> if none is found.</returns>
-    new ISkipNavigation? FindDeclaredSkipNavigation(string name)
-        => (ISkipNavigation?)((IReadOnlyEntityType)this).FindDeclaredSkipNavigation(name);
+    new ISkipNavigation? FindDeclaredSkipNavigation(string name) =>
+        (ISkipNavigation?)((IReadOnlyEntityType)this).FindDeclaredSkipNavigation(name);
 
     /// <summary>
     ///     Gets all skip navigation properties declared on this entity type.
@@ -349,8 +348,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     ///     Use <see cref="GetSkipNavigations" /> to also return skip navigation properties declared on base types.
     /// </remarks>
     /// <returns>Declared foreign keys.</returns>
-    new IEnumerable<ISkipNavigation> GetDeclaredSkipNavigations()
-        => ((IReadOnlyEntityType)this).GetDeclaredSkipNavigations().Cast<ISkipNavigation>();
+    new IEnumerable<ISkipNavigation> GetDeclaredSkipNavigations() =>
+        ((IReadOnlyEntityType)this).GetDeclaredSkipNavigations().Cast<ISkipNavigation>();
 
     /// <summary>
     ///     Gets all skip navigation properties declared on the types derived from this entity type.
@@ -361,8 +360,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     ///     and base entity typed types.
     /// </remarks>
     /// <returns>Derived skip navigation properties.</returns>
-    new IEnumerable<ISkipNavigation> GetDerivedSkipNavigations()
-        => ((IReadOnlyEntityType)this).GetDerivedSkipNavigations().Cast<ISkipNavigation>();
+    new IEnumerable<ISkipNavigation> GetDerivedSkipNavigations() =>
+        ((IReadOnlyEntityType)this).GetDerivedSkipNavigations().Cast<ISkipNavigation>();
 
     /// <summary>
     ///     Gets the skip navigation properties on this entity type.
@@ -392,8 +391,7 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     /// </summary>
     /// <param name="property">The property to find the index on.</param>
     /// <returns>The index, or <see langword="null" /> if none is found.</returns>
-    new IIndex? FindIndex(IReadOnlyProperty property)
-        => FindIndex(new[] { property });
+    new IIndex? FindIndex(IReadOnlyProperty property) => FindIndex(new[] { property });
 
     /// <summary>
     ///     Gets all indexes declared on the given <see cref="IEntityType" />.
@@ -430,8 +428,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     /// </remarks>
     /// <param name="memberInfo">The property on the entity class.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
-    new IProperty? FindProperty(MemberInfo memberInfo)
-        => (IProperty?)((IReadOnlyEntityType)this).FindProperty(memberInfo);
+    new IProperty? FindProperty(MemberInfo memberInfo) =>
+        (IProperty?)((IReadOnlyEntityType)this).FindProperty(memberInfo);
 
     /// <summary>
     ///     Gets the property with a given name. Returns <see langword="null" /> if no property with the given name is defined.
@@ -452,9 +450,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     /// </remarks>
     /// <param name="propertyNames">The property names.</param>
     /// <returns>The properties, or <see langword="null" /> if any property is not found.</returns>
-    new IReadOnlyList<IProperty>? FindProperties(
-        IReadOnlyList<string> propertyNames)
-        => (IReadOnlyList<IProperty>?)((IReadOnlyEntityType)this).FindProperties(propertyNames);
+    new IReadOnlyList<IProperty>? FindProperties(IReadOnlyList<string> propertyNames) =>
+        (IReadOnlyList<IProperty>?)((IReadOnlyEntityType)this).FindProperties(propertyNames);
 
     /// <summary>
     ///     Gets a property with the given name.
@@ -465,8 +462,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     /// </remarks>
     /// <param name="name">The property name.</param>
     /// <returns>The property.</returns>
-    new IProperty GetProperty(string name)
-        => (IProperty)((IReadOnlyEntityType)this).GetProperty(name);
+    new IProperty GetProperty(string name) =>
+        (IProperty)((IReadOnlyEntityType)this).GetProperty(name);
 
     /// <summary>
     ///     Finds a property declared on the type with the given name.
@@ -496,8 +493,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     ///     and base entity typed types.
     /// </remarks>
     /// <returns>Derived non-navigation properties.</returns>
-    new IEnumerable<IProperty> GetDerivedProperties()
-        => ((IReadOnlyEntityType)this).GetDerivedProperties().Cast<IProperty>();
+    new IEnumerable<IProperty> GetDerivedProperties() =>
+        ((IReadOnlyEntityType)this).GetDerivedProperties().Cast<IProperty>();
 
     /// <summary>
     ///     Gets the properties defined on this entity type.
@@ -555,8 +552,8 @@ public interface IEntityType : IReadOnlyEntityType, ITypeBase
     ///     and base entity typed types.
     /// </remarks>
     /// <returns>Derived service properties.</returns>
-    new IEnumerable<IServiceProperty> GetDerivedServiceProperties()
-        => ((IReadOnlyEntityType)this).GetDerivedServiceProperties().Cast<IServiceProperty>();
+    new IEnumerable<IServiceProperty> GetDerivedServiceProperties() =>
+        ((IReadOnlyEntityType)this).GetDerivedServiceProperties().Cast<IServiceProperty>();
 
     /// <summary>
     ///     Gets all the <see cref="IServiceProperty" /> defined on this entity type.

@@ -67,6 +67,11 @@ public class InitCommand : ICommand
 
     public void Execute(CommandContext context)
     {
-        UserSecretsCreator.CreateUserSecretsId(context.Reporter, ProjectPath, WorkingDirectory, OverrideId);
+        UserSecretsCreator.CreateUserSecretsId(
+            context.Reporter,
+            ProjectPath,
+            WorkingDirectory,
+            OverrideId
+        );
     }
 }

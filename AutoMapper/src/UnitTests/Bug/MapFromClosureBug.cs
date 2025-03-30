@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
+
 public class MapFromClosureBug : NonValidatingSpecBase
 {
     private static readonly IDateProvider _dateProvider = new DateProvider();
@@ -18,9 +19,7 @@ public class MapFromClosureBug : NonValidatingSpecBase
         public Booking Booking { get; set; }
     }
 
-    public class Restaurant
-    {
-    }
+    public class Restaurant { }
 
     public class Booking
     {
@@ -41,6 +40,7 @@ public class MapFromClosureBug : NonValidatingSpecBase
     {
         public int? Total { get; set; }
     }
+
     [Fact]
     public void Should_map_successfully()
     {
@@ -48,8 +48,13 @@ public class MapFromClosureBug : NonValidatingSpecBase
         {
             cfg.CreateMap<Result, ResultDto>();
             cfg.CreateMap<Booking, BookingDto>()
-                .ForMember(d => d.Total,
-                    o => o.MapFrom(b => b.CalculateTotal(_dateProvider.CurrentRestaurantTime(b.Restaurant))));
+                .ForMember(
+                    d => d.Total,
+                    o =>
+                        o.MapFrom(b =>
+                            b.CalculateTotal(_dateProvider.CurrentRestaurantTime(b.Restaurant))
+                        )
+                );
         });
 
         var mapper = mapperConfiguration.CreateMapper();

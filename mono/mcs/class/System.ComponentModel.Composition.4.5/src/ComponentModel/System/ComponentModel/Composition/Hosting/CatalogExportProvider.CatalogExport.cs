@@ -4,8 +4,8 @@
 using System;
 using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics.CodeAnalysis;
-using Microsoft.Internal;
 using System.Threading;
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.Hosting
 {
@@ -17,8 +17,11 @@ namespace System.ComponentModel.Composition.Hosting
             protected readonly ComposablePartDefinition _partDefinition;
             protected readonly ExportDefinition _definition;
 
-            public CatalogExport(CatalogExportProvider catalogExportProvider,
-                ComposablePartDefinition partDefinition, ExportDefinition definition)
+            public CatalogExport(
+                CatalogExportProvider catalogExportProvider,
+                ComposablePartDefinition partDefinition,
+                ExportDefinition definition
+            )
             {
                 this._catalogExportProvider = catalogExportProvider;
                 this._partDefinition = partDefinition;
@@ -27,23 +30,20 @@ namespace System.ComponentModel.Composition.Hosting
 
             public override ExportDefinition Definition
             {
-                get
-                {
-                    return this._definition;
-                }
+                get { return this._definition; }
             }
 
             protected virtual bool IsSharedPart
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             protected CatalogPart GetPartCore()
             {
-                return this._catalogExportProvider.GetComposablePart(this._partDefinition, this.IsSharedPart);
+                return this._catalogExportProvider.GetComposablePart(
+                    this._partDefinition,
+                    this.IsSharedPart
+                );
             }
 
             protected void ReleasePartCore(CatalogPart part, object value)
@@ -58,14 +58,24 @@ namespace System.ComponentModel.Composition.Hosting
 
             protected override object GetExportedValueCore()
             {
-                return this._catalogExportProvider.GetExportedValue(this.GetPart(), this._definition, this.IsSharedPart);
+                return this._catalogExportProvider.GetExportedValue(
+                    this.GetPart(),
+                    this._definition,
+                    this.IsSharedPart
+                );
             }
 
             [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-            public static CatalogExport CreateExport(CatalogExportProvider catalogExportProvider,
-                ComposablePartDefinition partDefinition, ExportDefinition definition, CreationPolicy importCreationPolicy)
+            public static CatalogExport CreateExport(
+                CatalogExportProvider catalogExportProvider,
+                ComposablePartDefinition partDefinition,
+                ExportDefinition definition,
+                CreationPolicy importCreationPolicy
+            )
             {
-                CreationPolicy partPolicy = partDefinition.Metadata.GetValue<CreationPolicy>(CompositionConstants.PartCreationPolicyMetadataName);
+                CreationPolicy partPolicy = partDefinition.Metadata.GetValue<CreationPolicy>(
+                    CompositionConstants.PartCreationPolicyMetadataName
+                );
                 bool isSharedPart = ShouldUseSharedPart(partPolicy, importCreationPolicy);
 
                 if (isSharedPart)
@@ -74,11 +84,18 @@ namespace System.ComponentModel.Composition.Hosting
                 }
                 else
                 {
-                    return new NonSharedCatalogExport(catalogExportProvider, partDefinition, definition);
+                    return new NonSharedCatalogExport(
+                        catalogExportProvider,
+                        partDefinition,
+                        definition
+                    );
                 }
             }
 
-            private static bool ShouldUseSharedPart(CreationPolicy partPolicy, CreationPolicy importPolicy)
+            private static bool ShouldUseSharedPart(
+                CreationPolicy partPolicy,
+                CreationPolicy importPolicy
+            )
             {
                 // Matrix that details which policy to use for a given part to satisfy a given import.
                 //                   Part.Any   Part.Shared  Part.NonShared
@@ -89,28 +106,33 @@ namespace System.ComponentModel.Composition.Hosting
                 switch (partPolicy)
                 {
                     case CreationPolicy.Any:
+                    {
+                        if (
+                            importPolicy == CreationPolicy.Any
+                            || importPolicy == CreationPolicy.NewScope
+                            || importPolicy == CreationPolicy.Shared
+                        )
                         {
-                            if (importPolicy == CreationPolicy.Any ||
-                                importPolicy == CreationPolicy.NewScope ||
-                                importPolicy == CreationPolicy.Shared)
-                            {
-                                return true;
-                            }
-                            return false;
-                        }
-
-                    case CreationPolicy.NonShared:
-                        {
-                            Assumes.IsTrue(importPolicy != CreationPolicy.Shared);
-                            return false;
-                        }
-
-                    default:
-                        {
-                            Assumes.IsTrue(partPolicy == CreationPolicy.Shared);
-                            Assumes.IsTrue(importPolicy != CreationPolicy.NonShared && importPolicy != CreationPolicy.NewScope);
                             return true;
                         }
+                        return false;
+                    }
+
+                    case CreationPolicy.NonShared:
+                    {
+                        Assumes.IsTrue(importPolicy != CreationPolicy.Shared);
+                        return false;
+                    }
+
+                    default:
+                    {
+                        Assumes.IsTrue(partPolicy == CreationPolicy.Shared);
+                        Assumes.IsTrue(
+                            importPolicy != CreationPolicy.NonShared
+                                && importPolicy != CreationPolicy.NewScope
+                        );
+                        return true;
+                    }
                 }
             }
         }
@@ -120,11 +142,12 @@ namespace System.ComponentModel.Composition.Hosting
             private CatalogPart _part;
             private readonly object _lock = new object();
 
-            public NonSharedCatalogExport(CatalogExportProvider catalogExportProvider,
-                ComposablePartDefinition partDefinition, ExportDefinition definition)
-                : base(catalogExportProvider, partDefinition, definition)
-            {
-            }
+            public NonSharedCatalogExport(
+                CatalogExportProvider catalogExportProvider,
+                ComposablePartDefinition partDefinition,
+                ExportDefinition definition
+            )
+                : base(catalogExportProvider, partDefinition, definition) { }
 
             protected override CatalogPart GetPart()
             {
@@ -154,10 +177,7 @@ namespace System.ComponentModel.Composition.Hosting
 
             protected override bool IsSharedPart
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             void IDisposable.Dispose()

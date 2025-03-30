@@ -11,7 +11,9 @@ public partial class RoutePatternParserTests
     [Fact]
     public void Parse_SingleLiteral()
     {
-        Test(@"""cool""", @"<Tree>
+        Test(
+            @"""cool""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -21,13 +23,16 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void Parse_SingleParameter()
     {
-        Test(@"""{p}""", @"<Tree>
+        Test(
+            @"""{p}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -43,13 +48,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""p"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void Parse_OptionalParameter()
     {
-        Test(@"""{p?}""", @"<Tree>
+        Test(
+            @"""{p?}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -68,13 +76,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""p"" IsCatchAll=""false"" IsOptional=""true"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void Parse_MultipleLiterals()
     {
-        Test(@"""cool/awesome/super""", @"<Tree>
+        Test(
+            @"""cool/awesome/super""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -100,13 +111,16 @@ public partial class RoutePatternParserTests
     <EndOfFile />
   </CompilationUnit>
   <Parameters />
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void Parse_MultipleParameters()
     {
-        Test(@"""{p1}/{p2}/{*p3}""", @"<Tree>
+        Test(
+            @"""{p1}/{p2}/{*p3}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -151,13 +165,16 @@ public partial class RoutePatternParserTests
     <Parameter Name=""p2"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""p3"" IsCatchAll=""true"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void Parse_ComplexSegment_LP()
     {
-        Test(@"""cool-{p1}""", @"<Tree>
+        Test(
+            @"""cool-{p1}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -176,13 +193,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""p1"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void Parse_ComplexSegment_PL()
     {
-        Test(@"""{p1}-cool""", @"<Tree>
+        Test(
+            @"""{p1}-cool""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -201,13 +221,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""p1"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void Parse_ComplexSegment_PLP()
     {
-        Test(@"""{p1}-cool-{p2}""", @"<Tree>
+        Test(
+            @"""{p1}-cool-{p2}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -234,13 +257,16 @@ public partial class RoutePatternParserTests
     <Parameter Name=""p1"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""p2"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void Parse_ComplexSegment_LPL()
     {
-        Test(@"""cool-{p1}-awesome""", @"<Tree>
+        Test(
+            @"""cool-{p1}-awesome""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Literal>
@@ -262,13 +288,16 @@ public partial class RoutePatternParserTests
   <Parameters>
     <Parameter Name=""p1"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void Parse_ComplexSegment_OptionalParameterFollowingPeriod()
     {
-        Test(@"""{p1}.{p2?}""", @"<Tree>
+        Test(
+            @"""{p1}.{p2?}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -298,13 +327,16 @@ public partial class RoutePatternParserTests
     <Parameter Name=""p1"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""p2"" IsCatchAll=""false"" IsOptional=""true"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void Parse_ComplexSegment_ParametersFollowingPeriod()
     {
-        Test(@"""{p1}.{p2}""", @"<Tree>
+        Test(
+            @"""{p1}.{p2}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -331,13 +363,16 @@ public partial class RoutePatternParserTests
     <Parameter Name=""p1"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""p2"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void Parse_ComplexSegment_OptionalParameterFollowingPeriod_ThreeParameters()
     {
-        Test(@"""{p1}.{p2}.{p3?}""", @"<Tree>
+        Test(
+            @"""{p1}.{p2}.{p3?}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -378,13 +413,16 @@ public partial class RoutePatternParserTests
     <Parameter Name=""p2"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""p3"" IsCatchAll=""false"" IsOptional=""true"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void Parse_ComplexSegment_ThreeParametersSeparatedByPeriod()
     {
-        Test(@"""{p1}.{p2}.{p3}""", @"<Tree>
+        Test(
+            @"""{p1}.{p2}.{p3}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -422,13 +460,16 @@ public partial class RoutePatternParserTests
     <Parameter Name=""p2"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""p3"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void Parse_ComplexSegment_OptionalParameterFollowingPeriod_MiddleSegment()
     {
-        Test(@"""{p1}.{p2?}/{p3}""", @"<Tree>
+        Test(
+            @"""{p1}.{p2?}/{p3}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -471,13 +512,16 @@ public partial class RoutePatternParserTests
     <Parameter Name=""p2"" IsCatchAll=""false"" IsOptional=""true"" EncodeSlashes=""true"" />
     <Parameter Name=""p3"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void Parse_ComplexSegment_OptionalParameterFollowingPeriod_LastSegment()
     {
-        Test(@"""{p1}/{p2}.{p3?}""", @"<Tree>
+        Test(
+            @"""{p1}/{p2}.{p3?}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -520,13 +564,16 @@ public partial class RoutePatternParserTests
     <Parameter Name=""p2"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""p3"" IsCatchAll=""false"" IsOptional=""true"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Fact]
     public void Parse_ComplexSegment_OptionalParameterFollowingPeriod_PeriodAfterSlash()
     {
-        Test(@"""{p2}/.{p3?}""", @"<Tree>
+        Test(
+            @"""{p2}/.{p3?}""",
+            @"<Tree>
   <CompilationUnit>
     <Segment>
       <Parameter>
@@ -561,12 +608,16 @@ public partial class RoutePatternParserTests
     <Parameter Name=""p2"" IsCatchAll=""false"" IsOptional=""false"" EncodeSlashes=""true"" />
     <Parameter Name=""p3"" IsCatchAll=""false"" IsOptional=""true"" EncodeSlashes=""true"" />
   </Parameters>
-</Tree>");
+</Tree>"
+        );
     }
 
     [Theory]
     [InlineData(@"{p1:regex(^\d{{3}}-\d{{3}}-\d{{4}}$)}", @"regex(^\d{3}-\d{3}-\d{4}$)")] // ssn
-    [InlineData(@"{p1:regex(^\d{{1,2}}\/\d{{1,2}}\/\d{{4}}$)}", @"regex(^\d{1,2}\/\d{1,2}\/\d{4}$)")] // date
+    [InlineData(
+        @"{p1:regex(^\d{{1,2}}\/\d{{1,2}}\/\d{{4}}$)}",
+        @"regex(^\d{1,2}\/\d{1,2}\/\d{4}$)"
+    )] // date
     [InlineData(@"{p1:regex(^\w+\@\w+\.\w+)}", @"regex(^\w+\@\w+\.\w+)")] // email
     [InlineData(@"{p1:regex(([}}])\w+)}", @"regex(([}])\w+)")] // Not balanced }
     [InlineData(@"{p1:regex(([{{(])\w+)}", @"regex(([{(])\w+)")] // Not balanced {
@@ -574,7 +625,10 @@ public partial class RoutePatternParserTests
     {
         var tree = Test(@"""" + template.Replace(@"\", @"\\") + @"""");
         var parameter = tree.GetRouteParameter("p1");
-        Assert.Collection(parameter.Policies, p => Assert.Equal(":" + constraint.Replace("{", "{{").Replace("}", "}}"), p));
+        Assert.Collection(
+            parameter.Policies,
+            p => Assert.Equal(":" + constraint.Replace("{", "{{").Replace("}", "}}"), p)
+        );
     }
 
     [Theory]
@@ -587,7 +641,10 @@ public partial class RoutePatternParserTests
     public void Parse_RegularExpressions_Invalid(string template)
     {
         var tree = Test(@"""" + template.Replace(@"\", @"\\") + @"""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.TemplateRoute_MismatchedParameter, p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.TemplateRoute_MismatchedParameter, p.Message)
+        );
     }
 
     [Theory]
@@ -596,7 +653,10 @@ public partial class RoutePatternParserTests
     public void Parse_RegularExpressions_Unescaped(string template)
     {
         var tree = Test(@"""" + template.Replace(@"\", @"\\") + @"""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.TemplateRoute_UnescapedBrace, p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.TemplateRoute_UnescapedBrace, p.Message)
+        );
     }
 
     [Theory]
@@ -608,11 +668,21 @@ public partial class RoutePatternParserTests
     public void Parse_ComplexSegment_OptionalParameter_NotTheLastPart(
         string template,
         string parameter,
-        string invalid)
+        string invalid
+    )
     {
         var tree = Test(@"""" + template.Replace(@"\", @"\\") + @"""");
         // Use contains because other diagnostics can be recorded.
-        Assert.Contains(tree.Diagnostics, p => p.Message == Resources.FormatTemplateRoute_OptionalParameterHasTobeTheLast(template, parameter, invalid));
+        Assert.Contains(
+            tree.Diagnostics,
+            p =>
+                p.Message
+                == Resources.FormatTemplateRoute_OptionalParameterHasTobeTheLast(
+                    template,
+                    parameter,
+                    invalid
+                )
+        );
     }
 
     [Theory]
@@ -621,17 +691,38 @@ public partial class RoutePatternParserTests
     [InlineData("..{p2?}", "..")]
     [InlineData("{p1}.abc.{p2?}", ".abc.")]
     [InlineData("{p1}{p2?}", "{p1}")]
-    public void Parse_ComplexSegment_OptionalParametersSeparatedByPeriod_Invalid(string template, string parameter)
+    public void Parse_ComplexSegment_OptionalParametersSeparatedByPeriod_Invalid(
+        string template,
+        string parameter
+    )
     {
         var tree = Test(@"""" + template.Replace(@"\", @"\\") + @"""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.FormatTemplateRoute_OptionalParameterCanbBePrecededByPeriod(template, "p2", parameter), p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p =>
+                Assert.Equal(
+                    Resources.FormatTemplateRoute_OptionalParameterCanbBePrecededByPeriod(
+                        template,
+                        "p2",
+                        parameter
+                    ),
+                    p.Message
+                )
+        );
     }
 
     [Fact]
     public void InvalidTemplate_WithRepeatedParameter()
     {
         var tree = Test(@"""{Controller}.mvc/{id}/{controller}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.FormatTemplateRoute_RepeatedParameter("controller"), p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p =>
+                Assert.Equal(
+                    Resources.FormatTemplateRoute_RepeatedParameter("controller"),
+                    p.Message
+                )
+        );
     }
 
     [Theory]
@@ -645,21 +736,30 @@ public partial class RoutePatternParserTests
     {
         var tree = Test(@"""" + template.Replace(@"\", @"\\") + @"""");
         // Use contains because other diagnostics can be recorded.
-        Assert.Contains(tree.Diagnostics, p => p.Message == Resources.TemplateRoute_MismatchedParameter);
+        Assert.Contains(
+            tree.Diagnostics,
+            p => p.Message == Resources.TemplateRoute_MismatchedParameter
+        );
     }
 
     [Fact]
     public void InvalidTemplate_CannotHaveCatchAllInMultiSegment()
     {
         var tree = Test(@"""123{a}abc{*moo}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.TemplateRoute_CannotHaveCatchAllInMultiSegment, p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.TemplateRoute_CannotHaveCatchAllInMultiSegment, p.Message)
+        );
     }
 
     [Fact]
     public void InvalidTemplate_CannotHaveMoreThanOneCatchAll()
     {
         var tree = Test(@"""{*p1}/{*p2}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.TemplateRoute_CatchAllMustBeLast, p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.TemplateRoute_CatchAllMustBeLast, p.Message)
+        );
     }
 
     [Fact]
@@ -669,14 +769,18 @@ public partial class RoutePatternParserTests
         Assert.Collection(
             tree.Diagnostics,
             p => Assert.Equal(Resources.TemplateRoute_CannotHaveCatchAllInMultiSegment, p.Message),
-            p => Assert.Equal(Resources.TemplateRoute_CannotHaveCatchAllInMultiSegment, p.Message));
+            p => Assert.Equal(Resources.TemplateRoute_CannotHaveCatchAllInMultiSegment, p.Message)
+        );
     }
 
     [Fact]
     public void InvalidTemplate_CannotHaveCatchAllWithNoName()
     {
         var tree = Test(@"""foo/{*}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.FormatTemplateRoute_InvalidParameterName(""), p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.FormatTemplateRoute_InvalidParameterName(""), p.Message)
+        );
     }
 
     [Theory]
@@ -691,18 +795,25 @@ public partial class RoutePatternParserTests
     [InlineData("{p/}", "p/")]
     public void ParseRouteParameter_ThrowsIf_ParameterContainsSpecialCharacters(
         string template,
-        string parameterName)
+        string parameterName
+    )
     {
         var tree = Test(@"""" + template.Replace(@"\", @"\\") + @"""");
         // Use contains because other diagnostics can be recorded.
-        Assert.Contains(tree.Diagnostics, p => p.Message == Resources.FormatTemplateRoute_InvalidParameterName(parameterName));
+        Assert.Contains(
+            tree.Diagnostics,
+            p => p.Message == Resources.FormatTemplateRoute_InvalidParameterName(parameterName)
+        );
     }
 
     [Fact]
     public void InvalidTemplate_CannotHaveConsecutiveOpenBrace()
     {
         var tree = Test(@"""foo/{{p1}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.TemplateRoute_MismatchedParameter, p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.TemplateRoute_MismatchedParameter, p.Message)
+        );
     }
 
     [Fact]
@@ -710,70 +821,100 @@ public partial class RoutePatternParserTests
     {
         var tree = Test(@"""foo/{p1}}""");
         // Use contains because other diagnostics can be recorded.
-        Assert.Contains(tree.Diagnostics, p => p.Message == Resources.TemplateRoute_MismatchedParameter);
+        Assert.Contains(
+            tree.Diagnostics,
+            p => p.Message == Resources.TemplateRoute_MismatchedParameter
+        );
     }
 
     [Fact]
     public void InvalidTemplate_SameParameterTwiceThrows()
     {
         var tree = Test(@"""{aaa}/{AAA}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.FormatTemplateRoute_RepeatedParameter("AAA"), p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.FormatTemplateRoute_RepeatedParameter("AAA"), p.Message)
+        );
     }
 
     [Fact]
     public void InvalidTemplate_SameParameterTwiceAndOneCatchAllThrows()
     {
         var tree = Test(@"""{aaa}/{*AAA}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.FormatTemplateRoute_RepeatedParameter("AAA"), p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.FormatTemplateRoute_RepeatedParameter("AAA"), p.Message)
+        );
     }
 
     [Fact]
     public void InvalidTemplate_InvalidParameterNameWithCloseBracketThrows()
     {
         var tree = Test(@"""{a}/{aa}a}/{z}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.TemplateRoute_MismatchedParameter, p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.TemplateRoute_MismatchedParameter, p.Message)
+        );
     }
 
     [Fact]
     public void InvalidTemplate_InvalidParameterNameWithOpenBracketThrows()
     {
         var tree = Test(@"""{a}/{a{aa}/{z}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.TemplateRoute_UnescapedBrace, p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.TemplateRoute_UnescapedBrace, p.Message)
+        );
     }
 
     [Fact]
     public void InvalidTemplate_InvalidParameterNameWithEmptyNameThrows()
     {
         var tree = Test(@"""{a}/{}/{z}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.FormatTemplateRoute_InvalidParameterName(""), p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.FormatTemplateRoute_InvalidParameterName(""), p.Message)
+        );
     }
 
     [Fact]
     public void InvalidTemplate_InvalidParameterNameWithQuestionThrows()
     {
         var tree = Test(@"""{Controller}.mvc/{?}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.FormatTemplateRoute_InvalidParameterName(""), p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.FormatTemplateRoute_InvalidParameterName(""), p.Message)
+        );
     }
 
     [Fact]
     public void InvalidTemplate_ConsecutiveSeparatorsSlashSlashThrows()
     {
         var tree = Test(@"""{a}//{z}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.TemplateRoute_CannotHaveConsecutiveSeparators, p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.TemplateRoute_CannotHaveConsecutiveSeparators, p.Message)
+        );
     }
 
     [Fact]
     public void InvalidTemplate_WithCatchAllNotAtTheEndThrows()
     {
         var tree = Test(@"""foo/{p1}/{*p2}/{p3}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.TemplateRoute_CatchAllMustBeLast, p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.TemplateRoute_CatchAllMustBeLast, p.Message)
+        );
     }
 
     [Fact]
     public void InvalidTemplate_RepeatedParametersThrows()
     {
         var tree = Test(@"""foo/aa{p1}{p2}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.TemplateRoute_CannotHaveConsecutiveParameters, p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.TemplateRoute_CannotHaveConsecutiveParameters, p.Message)
+        );
     }
 
     [Theory]
@@ -789,43 +930,83 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_CannotStartWithTilde()
     {
         var tree = Test(@"""~foo""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.TemplateRoute_InvalidRouteTemplate, p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.TemplateRoute_InvalidRouteTemplate, p.Message)
+        );
     }
 
     [Fact]
     public void InvalidTemplate_CannotContainQuestionMark()
     {
         var tree = Test(@"""foor?bar""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.FormatTemplateRoute_InvalidLiteral("foor?bar"), p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.FormatTemplateRoute_InvalidLiteral("foor?bar"), p.Message)
+        );
     }
 
     [Fact]
     public void InvalidTemplate_ParameterCannotContainQuestionMark_UnlessAtEnd()
     {
         var tree = Test(@"""{foor?b}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.FormatTemplateRoute_InvalidParameterName("foor?b"), p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p =>
+                Assert.Equal(
+                    Resources.FormatTemplateRoute_InvalidParameterName("foor?b"),
+                    p.Message
+                )
+        );
     }
 
     [Fact]
     public void InvalidTemplate_CatchAllMarkedOptional()
     {
         var tree = Test(@"""{a}/{*b?}""");
-        Assert.Collection(tree.Diagnostics, p => Assert.Equal(Resources.TemplateRoute_CatchAllCannotBeOptional, p.Message));
+        Assert.Collection(
+            tree.Diagnostics,
+            p => Assert.Equal(Resources.TemplateRoute_CatchAllCannotBeOptional, p.Message)
+        );
     }
 
     [Theory]
     [InlineData("{id}", new[] { "id" }, new[] { "" })]
     [InlineData("{category}/product/{group}", new[] { "category", "group" }, new[] { "", "" })]
-    [InlineData("{category:int}/product/{group:range(10, 20)}?", new[] { "category", "group" }, new[] { ":int", ":range(10, 20)" })]
-    [InlineData("{person:int}/{ssn:regex(^\\\\d{{3}}-\\\\d{{2}}-\\\\d{{4}}$)}", new[] { "person", "ssn" }, new[] { ":int", ":regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)" })]
-    [InlineData("{area=Home}/{controller:required}/{id:int=0}", new[] { "area", "controller", "id" }, new[] { "=Home", ":required", ":int=0" })]
+    [InlineData(
+        "{category:int}/product/{group:range(10, 20)}?",
+        new[] { "category", "group" },
+        new[] { ":int", ":range(10, 20)" }
+    )]
+    [InlineData(
+        "{person:int}/{ssn:regex(^\\\\d{{3}}-\\\\d{{2}}-\\\\d{{4}}$)}",
+        new[] { "person", "ssn" },
+        new[] { ":int", ":regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)" }
+    )]
+    [InlineData(
+        "{area=Home}/{controller:required}/{id:int=0}",
+        new[] { "area", "controller", "id" },
+        new[] { "=Home", ":required", ":int=0" }
+    )]
     [InlineData("{category}/product/{group?}", new[] { "category", "group" }, new[] { "", "?" })]
-    [InlineData("{category}/{product}/{*sku}", new[] { "category", "product", "sku" }, new[] { "", "", "" })]
+    [InlineData(
+        "{category}/{product}/{*sku}",
+        new[] { "category", "product", "sku" },
+        new[] { "", "", "" }
+    )]
     [InlineData("{category}-product-{sku}", new[] { "category", "sku" }, new[] { "", "" })]
     [InlineData("category-{product}-sku", new[] { "product" }, new[] { "" })]
     [InlineData("{category}.{sku?}", new[] { "category", "sku" }, new[] { "", "?" })]
-    [InlineData("{category}.{product?}/{sku}", new[] { "category", "product", "sku" }, new[] { "", "?", "" })]
-    public void RouteTokenizer_Works_ForSimpleRouteTemplates(string template, string[] expectedNames, string[] expectedQualifiers)
+    [InlineData(
+        "{category}.{product?}/{sku}",
+        new[] { "category", "product", "sku" },
+        new[] { "", "?", "" }
+    )]
+    public void RouteTokenizer_Works_ForSimpleRouteTemplates(
+        string template,
+        string[] expectedNames,
+        string[] expectedQualifiers
+    )
     {
         var tree = Test(@"""" + template + @"""", runSubTreeTests: false);
 

@@ -28,29 +28,32 @@
 
 using System.Collections.ObjectModel;
 
-namespace System.Data.Services {
-	[AttributeUsage (AttributeTargets.Class, AllowMultiple = false, Inherited = true )]
-	public sealed class ETagAttribute : Attribute {
-		public ETagAttribute (string propertyName)
-		{
-			if (propertyName == null)
-				throw new ArgumentNullException ("propertyName");
+namespace System.Data.Services
+{
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    public sealed class ETagAttribute : Attribute
+    {
+        public ETagAttribute(string propertyName)
+        {
+            if (propertyName == null)
+                throw new ArgumentNullException("propertyName");
 
-			this.properties = new ReadOnlyCollection<string> (new[] { propertyName });
-		}
+            this.properties = new ReadOnlyCollection<string>(new[] { propertyName });
+        }
 
-		public ETagAttribute (params string[] propertyNames)
-		{
-			if (propertyNames == null)
-				throw new ArgumentNullException ("propertyNames");
+        public ETagAttribute(params string[] propertyNames)
+        {
+            if (propertyNames == null)
+                throw new ArgumentNullException("propertyNames");
 
-			this.properties = new ReadOnlyCollection<string> (propertyNames);
-		}
+            this.properties = new ReadOnlyCollection<string>(propertyNames);
+        }
 
-		public ReadOnlyCollection<string> PropertyNames {
-			get { return this.properties; }
-		}
+        public ReadOnlyCollection<string> PropertyNames
+        {
+            get { return this.properties; }
+        }
 
-		private readonly ReadOnlyCollection<string> properties;
-	}
+        private readonly ReadOnlyCollection<string> properties;
+    }
 }

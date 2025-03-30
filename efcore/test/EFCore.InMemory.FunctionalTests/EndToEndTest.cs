@@ -23,20 +23,17 @@ public class EndToEndInMemoryTest : IClassFixture<InMemoryFixture>
     }
 
     // ReSharper disable once ClassNeverInstantiated.Local
-    private class Private
-    {
-    }
+    private class Private { }
 
     private void Can_add_update_delete_end_to_end<T>()
         where T : class, new()
     {
         var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-        modelBuilder.Entity<T>(
-            eb =>
-            {
-                eb.Property<int>("Id");
-                eb.Property<string>("Name");
-            });
+        modelBuilder.Entity<T>(eb =>
+        {
+            eb.Property<int>("Id");
+            eb.Property<string>("Name");
+        });
 
         var optionsBuilder = new DbContextOptionsBuilder()
             .UseModel(modelBuilder.FinalizeModel())

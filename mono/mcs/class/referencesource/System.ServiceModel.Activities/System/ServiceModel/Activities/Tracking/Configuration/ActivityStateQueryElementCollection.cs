@@ -4,14 +4,17 @@
 
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
-    using System.Runtime;
     using System.Configuration;
+    using System.Runtime;
 
     [Fx.Tag.XamlVisible(false)]
-    [ConfigurationCollection(typeof(ActivityStateQueryElement),
+    [ConfigurationCollection(
+        typeof(ActivityStateQueryElement),
         CollectionType = ConfigurationElementCollectionType.BasicMap,
-        AddItemName = TrackingConfigurationStrings.ActivityQuery)]
-    public class ActivityStateQueryElementCollection : TrackingConfigurationCollection<ActivityStateQueryElement>
+        AddItemName = TrackingConfigurationStrings.ActivityQuery
+    )]
+    public class ActivityStateQueryElementCollection
+        : TrackingConfigurationCollection<ActivityStateQueryElement>
     {
         protected override string ElementName
         {

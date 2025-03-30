@@ -10,13 +10,18 @@ namespace Microsoft.AspNetCore.Components.Analyzers.Tests.TestFiles.ComponentInt
     {
         private void Test()
         {
-            var test = /*MMField*/RenderTreeFrameType.Attribute;
+            var test = /*MMField*/
+            RenderTreeFrameType.Attribute;
             GC.KeepAlive(test);
 
-            var frame = /*MMNewObject*/new RenderTreeFrame();
-            GC.KeepAlive(/*MMProperty*/frame.Component);
+            var frame = /*MMNewObject*/
+            new RenderTreeFrame();
+            GC.KeepAlive( /*MMProperty*/
+                frame.Component
+            );
 
-            var range = /*MMNewObject2*/new ArrayRange<string>(null, 0);
+            var range = /*MMNewObject2*/
+            new ArrayRange<string>(null, 0);
             /*MMInvocation*/range.Clone();
         }
     }

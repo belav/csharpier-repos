@@ -2,16 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Net;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Net;
 using System.Runtime.CompilerServices;
-
 using ILCompiler;
+using Internal.JitInterface;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Interop;
-using Internal.JitInterface;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
@@ -24,7 +22,10 @@ namespace Internal.IL.Stubs
         private readonly MethodDesc _targetMethod;
         private readonly Marshaller[] _marshallers;
         private readonly PInvokeMetadata _importMetadata;
-        private static readonly ConditionalWeakTable<TypeSystemContext, ConcurrentDictionary<MethodDesc, PInvokeTargetNativeMethod>> s_contexts = new ();
+        private static readonly ConditionalWeakTable<
+            TypeSystemContext,
+            ConcurrentDictionary<MethodDesc, PInvokeTargetNativeMethod>
+        > s_contexts = new();
 
         private PInvokeILEmitter(MethodDesc targetMethod)
         {
@@ -49,21 +50,30 @@ namespace Internal.IL.Stubs
             }
 
             MethodSignature nativeSig = new MethodSignature(
-                _targetMethod.Signature.Flags, 0, nativeReturnType,
-                nativeParameterTypes);
+                _targetMethod.Signature.Flags,
+                0,
+                nativeReturnType,
+                nativeParameterTypes
+            );
 
             var rawTargetMethod = AllocateTargetNativeMethod(_targetMethod, nativeSig);
 
             callsiteSetupCodeStream.Emit(ILOpcode.call, emitter.NewToken(rawTargetMethod));
 
-            static PInvokeTargetNativeMethod AllocateTargetNativeMethod(MethodDesc targetMethod, MethodSignature nativeSigArg)
+            static PInvokeTargetNativeMethod AllocateTargetNativeMethod(
+                MethodDesc targetMethod,
+                MethodSignature nativeSigArg
+            )
             {
                 var contextMethods = s_contexts.GetOrCreateValue(targetMethod.Context);
                 if (contextMethods.TryGetValue(targetMethod, out var pinvokeTargetMethod))
                 {
                     return pinvokeTargetMethod;
                 }
-                return contextMethods.GetOrAdd(targetMethod, new PInvokeTargetNativeMethod(targetMethod, nativeSigArg));
+                return contextMethods.GetOrAdd(
+                    targetMethod,
+                    new PInvokeTargetNativeMethod(targetMethod, nativeSigArg)
+                );
             }
         }
 
@@ -72,13 +82,23 @@ namespace Internal.IL.Stubs
             if (!_importMetadata.Flags.PreserveSig)
                 throw new NotSupportedException();
 
-            if (MarshalHelpers.ShouldCheckForPendingException(_targetMethod.Context.Target, _importMetadata))
+            if (
+                MarshalHelpers.ShouldCheckForPendingException(
+                    _targetMethod.Context.Target,
+                    _importMetadata
+                )
+            )
                 throw new NotSupportedException();
 
             if (_targetMethod.IsUnmanagedCallersOnly)
                 throw new NotSupportedException();
 
-            if (_targetMethod.HasCustomAttribute("System.Runtime.InteropServices", "LCIDConversionAttribute"))
+            if (
+                _targetMethod.HasCustomAttribute(
+                    "System.Runtime.InteropServices",
+                    "LCIDConversionAttribute"
+                )
+            )
                 throw new NotSupportedException();
 
             if (_importMetadata.Flags.SetLastError)
@@ -140,7 +160,8 @@ namespace Internal.IL.Stubs
     {
         public bool IsMarshallingRequired { get; }
 
-        public PInvokeILStubMethodIL(ILStubMethodIL methodIL) : base(methodIL)
+        public PInvokeILStubMethodIL(ILStubMethodIL methodIL)
+            : base(methodIL)
         {
             IsMarshallingRequired = Marshaller.IsMarshallingRequired(methodIL.OwningMethod);
         }

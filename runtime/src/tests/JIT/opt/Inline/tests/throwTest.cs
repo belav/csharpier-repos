@@ -27,6 +27,7 @@ namespace JitInliningTest
             }
         }
     }
+
     public class throwTest
     {
         [Fact]

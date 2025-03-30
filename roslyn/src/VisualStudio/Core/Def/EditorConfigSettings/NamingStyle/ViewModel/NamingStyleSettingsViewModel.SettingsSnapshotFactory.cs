@@ -11,12 +11,16 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
 {
     internal partial class NamingStyleSettingsViewModel
     {
-        internal sealed class SettingsSnapshotFactory : SettingsSnapshotFactoryBase<NamingStyleSetting, SettingsEntriesSnapshot>
+        internal sealed class SettingsSnapshotFactory
+            : SettingsSnapshotFactoryBase<NamingStyleSetting, SettingsEntriesSnapshot>
         {
-            public SettingsSnapshotFactory(ISettingsProvider<NamingStyleSetting> data) : base(data) { }
+            public SettingsSnapshotFactory(ISettingsProvider<NamingStyleSetting> data)
+                : base(data) { }
 
-            protected override SettingsEntriesSnapshot CreateSnapshot(ImmutableArray<NamingStyleSetting> data, int currentVersionNumber)
-                => new(data, currentVersionNumber);
+            protected override SettingsEntriesSnapshot CreateSnapshot(
+                ImmutableArray<NamingStyleSetting> data,
+                int currentVersionNumber
+            ) => new(data, currentVersionNumber);
         }
     }
 }

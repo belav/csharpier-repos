@@ -1,22 +1,22 @@
 ﻿#pragma warning disable 0420
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>Microsoft</OWNER>
 ////////////////////////////////////////////////////////////////////////////////
 
 using System;
-using System.Security;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Runtime;
 using System.Runtime.InteropServices;
+using System.Security;
 #if !MONO
 using System.Security.Permissions;
 #endif
-using System.Diagnostics.Contracts;
-using System.Runtime;
 
 namespace System.Threading
 {
@@ -45,41 +45,45 @@ namespace System.Threading
     public class CancellationTokenSource : IDisposable
     {
         //static sources that can be used as the backing source for 'fixed' CancellationTokens that never change state.
-        private static readonly CancellationTokenSource _staticSource_Set = new CancellationTokenSource(true);
-        private static readonly CancellationTokenSource _staticSource_NotCancelable = new CancellationTokenSource(false);
+        private static readonly CancellationTokenSource _staticSource_Set =
+            new CancellationTokenSource(true);
+        private static readonly CancellationTokenSource _staticSource_NotCancelable =
+            new CancellationTokenSource(false);
 
         //Note: the callback lists array is only created on first registration.
         //      the actual callback lists are only created on demand.
         //      Storing a registered callback costs around >60bytes, hence some overhead for the lists array is OK
         // At most 24 lists seems reasonable, and caps the cost of the listsArray to 96bytes(32-bit,24-way) or 192bytes(64-bit,24-way).
-        private static readonly int s_nLists = (PlatformHelper.ProcessorCount > 24) ? 24 : PlatformHelper.ProcessorCount; 
+        private static readonly int s_nLists =
+            (PlatformHelper.ProcessorCount > 24) ? 24 : PlatformHelper.ProcessorCount;
 
         private volatile ManualResetEvent m_kernelEvent; //lazily initialized if required.
 
         private volatile SparselyPopulatedArray<CancellationCallbackInfo>[] m_registeredCallbacksLists;
- 
+
         // legal values for m_state
         private const int CANNOT_BE_CANCELED = 0;
         private const int NOT_CANCELED = 1;
         private const int NOTIFYING = 2;
         private const int NOTIFYINGCOMPLETE = 3;
-        
+
         //m_state uses the pattern "volatile int32 reads, with cmpxch writes" which is safe for updates and cannot suffer torn reads.
         private volatile int m_state;
 
-
         /// The ID of the thread currently executing the main body of CTS.Cancel()
         /// this helps us to know if a call to ctr.Dispose() is running 'within' a cancellation callback.
-        /// This is updated as we move between the main thread calling cts.Cancel() and any syncContexts that are used to 
+        /// This is updated as we move between the main thread calling cts.Cancel() and any syncContexts that are used to
         /// actually run the callbacks.
         private volatile int m_threadIDExecutingCallbacks = -1;
 
         private bool m_disposed;
 
-        private CancellationTokenRegistration [] m_linkingRegistrations; //lazily initialized if required.
-        
-        private static readonly Action<object> s_LinkedTokenCancelDelegate = new Action<object>(LinkedTokenCancelDelegate);
-        
+        private CancellationTokenRegistration[] m_linkingRegistrations; //lazily initialized if required.
+
+        private static readonly Action<object> s_LinkedTokenCancelDelegate = new Action<object>(
+            LinkedTokenCancelDelegate
+        );
+
         // we track the running callback to assist ctr.Dispose() to wait for the target callback to complete.
         private volatile CancellationCallbackInfo m_executingCallback;
 
@@ -92,8 +96,8 @@ namespace System.Threading
             Contract.Assert(source != null);
             cts.Cancel();
         }
-        
-        // ---------------------- 
+
+        // ----------------------
         // ** public properties
 
         /// <summary>
@@ -163,7 +167,7 @@ namespace System.Threading
             }
         }
 
-        // ---------------------- 
+        // ----------------------
         // ** internal and private properties.
 
         /// <summary>
@@ -186,11 +190,11 @@ namespace System.Threading
                 // fast path if already allocated.
                 if (m_kernelEvent != null)
                     return m_kernelEvent;
-                
+
                 // lazy-init the mre.
                 ManualResetEvent mre = new ManualResetEvent(false);
                 if (Interlocked.CompareExchange(ref m_kernelEvent, mre, null) != null)
-                {    
+                {
                     ((IDisposable)mre).Dispose();
                 }
 
@@ -204,7 +208,6 @@ namespace System.Threading
                 return m_kernelEvent;
             }
         }
-
 
         /// <summary>
         /// The currently executing callback
@@ -224,16 +227,20 @@ namespace System.Threading
         {
             get
             {
-                SparselyPopulatedArray<CancellationCallbackInfo>[] callbackLists = m_registeredCallbacksLists;
+                SparselyPopulatedArray<CancellationCallbackInfo>[] callbackLists =
+                    m_registeredCallbacksLists;
                 if (callbackLists == null)
                     return 0;
 
                 int count = 0;
-                foreach(SparselyPopulatedArray<CancellationCallbackInfo> sparseArray in callbackLists)
+                foreach (
+                    SparselyPopulatedArray<CancellationCallbackInfo> sparseArray in callbackLists
+                )
                 {
-                    if(sparseArray != null)
+                    if (sparseArray != null)
                     {
-                        SparselyPopulatedArrayFragment<CancellationCallbackInfo> currCallbacks = sparseArray.Head;
+                        SparselyPopulatedArrayFragment<CancellationCallbackInfo> currCallbacks =
+                            sparseArray.Head;
                         while (currCallbacks != null)
                         {
                             for (int i = 0; i < currCallbacks.Length; i++)
@@ -261,7 +268,7 @@ namespace System.Threading
 
         // ** Private constructors for static sources.
         // set=false ==> cannot be canceled.
-        // set=true  ==> is canceled. 
+        // set=true  ==> is canceled.
         private CancellationTokenSource(bool set)
         {
             m_state = set ? NOTIFYINGCOMPLETE : CANNOT_BE_CANCELED;
@@ -276,12 +283,12 @@ namespace System.Threading
         /// </exception>
         /// <remarks>
         /// <para>
-        /// The countdown for the delay starts during the call to the constructor.  When the delay expires, 
+        /// The countdown for the delay starts during the call to the constructor.  When the delay expires,
         /// the constructed <see cref="T:System.Threading.CancellationTokenSource"/> is canceled, if it has
         /// not been canceled already.
         /// </para>
         /// <para>
-        /// Subsequent calls to CancelAfter will reset the delay for the constructed 
+        /// Subsequent calls to CancelAfter will reset the delay for the constructed
         /// <see cref="T:System.Threading.CancellationTokenSource"/>, if it has not been
         /// canceled already.
         /// </para>
@@ -306,12 +313,12 @@ namespace System.Threading
         /// </exception>
         /// <remarks>
         /// <para>
-        /// The countdown for the millisecondsDelay starts during the call to the constructor.  When the millisecondsDelay expires, 
+        /// The countdown for the millisecondsDelay starts during the call to the constructor.  When the millisecondsDelay expires,
         /// the constructed <see cref="T:System.Threading.CancellationTokenSource"/> is canceled (if it has
         /// not been canceled already).
         /// </para>
         /// <para>
-        /// Subsequent calls to CancelAfter will reset the millisecondsDelay for the constructed 
+        /// Subsequent calls to CancelAfter will reset the millisecondsDelay for the constructed
         /// <see cref="T:System.Threading.CancellationTokenSource"/>, if it has not been
         /// canceled already.
         /// </para>
@@ -341,8 +348,8 @@ namespace System.Threading
         /// <remarks>
         /// <para>
         /// The associated <see cref="T:System.Threading.CancellationToken" /> will be
-        /// notified of the cancellation and will transition to a state where 
-        /// <see cref="System.Threading.CancellationToken.IsCancellationRequested">IsCancellationRequested</see> returns true. 
+        /// notified of the cancellation and will transition to a state where
+        /// <see cref="System.Threading.CancellationToken.IsCancellationRequested">IsCancellationRequested</see> returns true.
         /// Any callbacks or cancelable operations
         /// registered with the <see cref="T:System.Threading.CancellationToken"/>  will be executed.
         /// </para>
@@ -359,7 +366,7 @@ namespace System.Threading
         /// <exception cref="T:System.AggregateException">An aggregate exception containing all the exceptions thrown
         /// by the registered callbacks on the associated <see cref="T:System.Threading.CancellationToken"/>.</exception>
         /// <exception cref="T:System.ObjectDisposedException">This <see
-        /// cref="T:System.Threading.CancellationTokenSource"/> has been disposed.</exception> 
+        /// cref="T:System.Threading.CancellationTokenSource"/> has been disposed.</exception>
         public void Cancel()
         {
             Cancel(false);
@@ -371,16 +378,16 @@ namespace System.Threading
         /// <remarks>
         /// <para>
         /// The associated <see cref="T:System.Threading.CancellationToken" /> will be
-        /// notified of the cancellation and will transition to a state where 
-        /// <see cref="System.Threading.CancellationToken.IsCancellationRequested">IsCancellationRequested</see> returns true. 
+        /// notified of the cancellation and will transition to a state where
+        /// <see cref="System.Threading.CancellationToken.IsCancellationRequested">IsCancellationRequested</see> returns true.
         /// Any callbacks or cancelable operations
         /// registered with the <see cref="T:System.Threading.CancellationToken"/>  will be executed.
         /// </para>
         /// <para>
-        /// Cancelable operations and callbacks registered with the token should not throw exceptions. 
+        /// Cancelable operations and callbacks registered with the token should not throw exceptions.
         /// If <paramref name="throwOnFirstException"/> is true, an exception will immediately propagate out of the
         /// call to Cancel, preventing the remaining callbacks and cancelable operations from being processed.
-        /// If <paramref name="throwOnFirstException"/> is false, this overload will aggregate any 
+        /// If <paramref name="throwOnFirstException"/> is false, this overload will aggregate any
         /// exceptions thrown into a <see cref="System.AggregateException"/>,
         /// such that one callback throwing an exception will not prevent other registered callbacks from being executed.
         /// </para>
@@ -393,11 +400,11 @@ namespace System.Threading
         /// <exception cref="T:System.AggregateException">An aggregate exception containing all the exceptions thrown
         /// by the registered callbacks on the associated <see cref="T:System.Threading.CancellationToken"/>.</exception>
         /// <exception cref="T:System.ObjectDisposedException">This <see
-        /// cref="T:System.Threading.CancellationTokenSource"/> has been disposed.</exception> 
+        /// cref="T:System.Threading.CancellationTokenSource"/> has been disposed.</exception>
         public void Cancel(bool throwOnFirstException)
         {
             ThrowIfDisposed();
-            NotifyCancellation(throwOnFirstException);            
+            NotifyCancellation(throwOnFirstException);
         }
 
         /// <summary>
@@ -410,17 +417,17 @@ namespace System.Threading
         /// cref="T:System.Threading.CancellationTokenSource"/> has been disposed.
         /// </exception>
         /// <exception cref="T:System.ArgumentOutOfRangeException">
-        /// The exception thrown when <paramref name="delay"/> is less than -1 or 
+        /// The exception thrown when <paramref name="delay"/> is less than -1 or
         /// greater than Int32.MaxValue.
         /// </exception>
         /// <remarks>
         /// <para>
-        /// The countdown for the delay starts during this call.  When the delay expires, 
+        /// The countdown for the delay starts during this call.  When the delay expires,
         /// this <see cref="T:System.Threading.CancellationTokenSource"/> is canceled, if it has
         /// not been canceled already.
         /// </para>
         /// <para>
-        /// Subsequent calls to CancelAfter will reset the delay for this  
+        /// Subsequent calls to CancelAfter will reset the delay for this
         /// <see cref="T:System.Threading.CancellationTokenSource"/>, if it has not been
         /// canceled already.
         /// </para>
@@ -450,12 +457,12 @@ namespace System.Threading
         /// </exception>
         /// <remarks>
         /// <para>
-        /// The countdown for the millisecondsDelay starts during this call.  When the millisecondsDelay expires, 
+        /// The countdown for the millisecondsDelay starts during this call.  When the millisecondsDelay expires,
         /// this <see cref="T:System.Threading.CancellationTokenSource"/> is canceled, if it has
         /// not been canceled already.
         /// </para>
         /// <para>
-        /// Subsequent calls to CancelAfter will reset the millisecondsDelay for this  
+        /// Subsequent calls to CancelAfter will reset the millisecondsDelay for this
         /// <see cref="T:System.Threading.CancellationTokenSource"/>, if it has not been
         /// canceled already.
         /// </para>
@@ -469,10 +476,11 @@ namespace System.Threading
                 throw new ArgumentOutOfRangeException("millisecondsDelay");
             }
 
-            if (IsCancellationRequested) return;
+            if (IsCancellationRequested)
+                return;
 
             // There is a race condition here as a Cancel could occur between the check of
-            // IsCancellationRequested and the creation of the timer.  This is benign; in the 
+            // IsCancellationRequested and the creation of the timer.  This is benign; in the
             // worst case, a timer will be created that has no effect when it expires.
 
             // Also, if Dispose() is called right here (after ThrowIfDisposed(), before timer
@@ -494,7 +502,6 @@ namespace System.Threading
                 }
             }
 
-            
             // It is possible that m_timer has already been disposed, so we must do
             // the following in a try/catch block.
             try
@@ -508,10 +515,11 @@ namespace System.Threading
                 // would not be a good way to deal with the observe/dispose
                 // race condition.
             }
-
         }
 
-        private static readonly TimerCallback s_timerCallback = new TimerCallback(TimerCallbackLogic);
+        private static readonly TimerCallback s_timerCallback = new TimerCallback(
+            TimerCallbackLogic
+        );
 
         // Common logic for a timer delegate
         private static void TimerCallbackLogic(object obj)
@@ -531,7 +539,8 @@ namespace System.Threading
                 catch (ObjectDisposedException)
                 {
                     // If the ODE was not due to the target cts being disposed, then propagate the ODE.
-                    if (!cts.IsDisposed) throw;
+                    if (!cts.IsDisposed)
+                        throw;
                 }
             }
         }
@@ -563,7 +572,7 @@ namespace System.Threading
                 //      This is safe without locks because the reg.Dispose() only
                 //      mutates a sparseArrayFragment and then reads from properties of the CTS that are not
                 //      invalidated by cts.Dispose().
-                //     
+                //
                 //      We also tolerate that a callback can be registered after the CTS has been
                 //      disposed.  This is safe without locks because InternalRegister is tolerant
                 //      of m_registeredCallbacksLists becoming null during its execution.  However,
@@ -576,7 +585,8 @@ namespace System.Threading
                 if (m_disposed)
                     return;
 
-                if (m_timer != null) m_timer.Dispose();
+                if (m_timer != null)
+                    m_timer.Dispose();
 
                 var linkingRegistrations = m_linkingRegistrations;
                 if (linkingRegistrations != null)
@@ -592,7 +602,6 @@ namespace System.Threading
                 // so we can now perform main disposal work without risk of linking callbacks trying to use this CTS.
 
                 m_registeredCallbacksLists = null; // free for GC.
-
 #if MONO
                 //
                 // .NET version has a race on m_kernelEvent which it's not easy to
@@ -639,7 +648,10 @@ namespace System.Threading
         // separation enables inlining of ThrowIfDisposed
         private static void ThrowObjectDisposedException()
         {
-            throw new ObjectDisposedException(null, Environment.GetResourceString("CancellationTokenSource_Disposed"));
+            throw new ObjectDisposedException(
+                null,
+                Environment.GetResourceString("CancellationTokenSource_Disposed")
+            );
         }
 
         /// <summary>
@@ -657,7 +669,11 @@ namespace System.Threading
         /// callback will have been run by the time this method returns.
         /// </summary>
         internal CancellationTokenRegistration InternalRegister(
-            Action<object> callback, object stateForCallback, SynchronizationContext targetSyncContext, ExecutionContext executionContext)
+            Action<object> callback,
+            object stateForCallback,
+            SynchronizationContext targetSyncContext,
+            ExecutionContext executionContext
+        )
         {
             if (AppContextSwitches.ThrowExceptionIfDisposedCancellationTokenSource)
             {
@@ -685,34 +701,61 @@ namespace System.Threading
                 // comes in after this line, we simply run the minor risk of having m_registeredCallbacksLists reinitialized
                 // (after it was cleared to null during Dispose).
 
-                if (m_disposed && !AppContextSwitches.ThrowExceptionIfDisposedCancellationTokenSource)
+                if (
+                    m_disposed
+                    && !AppContextSwitches.ThrowExceptionIfDisposedCancellationTokenSource
+                )
                     return new CancellationTokenRegistration();
 
                 int myIndex = Thread.CurrentThread.ManagedThreadId % s_nLists;
 
-                CancellationCallbackInfo callbackInfo = new CancellationCallbackInfo(callback, stateForCallback, targetSyncContext, executionContext, this);
+                CancellationCallbackInfo callbackInfo = new CancellationCallbackInfo(
+                    callback,
+                    stateForCallback,
+                    targetSyncContext,
+                    executionContext,
+                    this
+                );
 
                 //allocate the callback list array
                 var registeredCallbacksLists = m_registeredCallbacksLists;
                 if (registeredCallbacksLists == null)
                 {
-                    SparselyPopulatedArray<CancellationCallbackInfo>[] list = new SparselyPopulatedArray<CancellationCallbackInfo>[s_nLists];
-                    registeredCallbacksLists = Interlocked.CompareExchange(ref m_registeredCallbacksLists, list, null);
-                    if (registeredCallbacksLists == null) registeredCallbacksLists = list;
+                    SparselyPopulatedArray<CancellationCallbackInfo>[] list =
+                        new SparselyPopulatedArray<CancellationCallbackInfo>[s_nLists];
+                    registeredCallbacksLists = Interlocked.CompareExchange(
+                        ref m_registeredCallbacksLists,
+                        list,
+                        null
+                    );
+                    if (registeredCallbacksLists == null)
+                        registeredCallbacksLists = list;
                 }
 
                 //allocate the actual lists on-demand to save mem in low-use situations, and to avoid false-sharing.
-                var callbacks = Volatile.Read<SparselyPopulatedArray<CancellationCallbackInfo>>(ref registeredCallbacksLists[myIndex]);
+                var callbacks = Volatile.Read<SparselyPopulatedArray<CancellationCallbackInfo>>(
+                    ref registeredCallbacksLists[myIndex]
+                );
                 if (callbacks == null)
                 {
-                    SparselyPopulatedArray<CancellationCallbackInfo> callBackArray = new SparselyPopulatedArray<CancellationCallbackInfo>(4);
-                    Interlocked.CompareExchange(ref (registeredCallbacksLists[myIndex]), callBackArray, null);
+                    SparselyPopulatedArray<CancellationCallbackInfo> callBackArray =
+                        new SparselyPopulatedArray<CancellationCallbackInfo>(4);
+                    Interlocked.CompareExchange(
+                        ref (registeredCallbacksLists[myIndex]),
+                        callBackArray,
+                        null
+                    );
                     callbacks = registeredCallbacksLists[myIndex];
                 }
 
                 // Now add the registration to the list.
-                SparselyPopulatedArrayAddInfo<CancellationCallbackInfo> addInfo = callbacks.Add(callbackInfo);
-                CancellationTokenRegistration registration = new CancellationTokenRegistration(callbackInfo, addInfo);
+                SparselyPopulatedArrayAddInfo<CancellationCallbackInfo> addInfo = callbacks.Add(
+                    callbackInfo
+                );
+                CancellationTokenRegistration registration = new CancellationTokenRegistration(
+                    callbackInfo,
+                    addInfo
+                );
 
                 if (!IsCancellationRequested)
                     return registration;
@@ -728,7 +771,7 @@ namespace System.Threading
                 if (!deregisterOccurred)
                 {
                     // The thread that is running Cancel() snagged our callback for execution.
-                    // So we don't need to run it, but we do return the registration so that 
+                    // So we don't need to run it, but we do return the registration so that
                     // ctr.Dispose() will wait for callback completion.
                     return registration;
                 }
@@ -740,7 +783,7 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         private void NotifyCancellation(bool throwOnFirstException)
         {
@@ -753,18 +796,23 @@ namespace System.Threading
             {
                 // Dispose of the timer, if any
                 Timer timer = m_timer;
-                if(timer != null) timer.Dispose();
+                if (timer != null)
+                    timer.Dispose();
 
                 //record the threadID being used for running the callbacks.
                 ThreadIDExecutingCallbacks = Thread.CurrentThread.ManagedThreadId;
-                
+
                 //If the kernel event is null at this point, it will be set during lazy construction.
 #if MONO
                 var ke = m_kernelEvent;
-                if (ke != null) {
-                    try {
+                if (ke != null)
+                {
+                    try
+                    {
                         ke.Set(); // update the MRE value.
-                    } catch (ObjectDisposedException) {
+                    }
+                    catch (ObjectDisposedException)
+                    {
                         //
                         // Rethrow only when we are not in race with Dispose
                         //
@@ -779,7 +827,7 @@ namespace System.Threading
 
                 // - late enlisters to the Canceled event will have their callbacks called immediately in the Register() methods.
                 // - Callbacks are not called inside a lock.
-                // - After transition, no more delegates will be added to the 
+                // - After transition, no more delegates will be added to the
                 // - list of handlers, and hence it can be consumed and cleared at leisure by ExecuteCallbackHandlers.
                 ExecuteCallbackHandlers(throwOnFirstException);
                 Contract.Assert(IsCancellationCompleted, "Expected cancellation to have finished");
@@ -794,13 +842,20 @@ namespace System.Threading
         /// </remarks>
         private void ExecuteCallbackHandlers(bool throwOnFirstException)
         {
-            Contract.Assert(IsCancellationRequested, "ExecuteCallbackHandlers should only be called after setting IsCancellationRequested->true");
-            Contract.Assert(ThreadIDExecutingCallbacks != -1, "ThreadIDExecutingCallbacks should have been set.");
+            Contract.Assert(
+                IsCancellationRequested,
+                "ExecuteCallbackHandlers should only be called after setting IsCancellationRequested->true"
+            );
+            Contract.Assert(
+                ThreadIDExecutingCallbacks != -1,
+                "ThreadIDExecutingCallbacks should have been set."
+            );
 
             // Design decision: call the delegates in LIFO order so that callbacks fire 'deepest first'.
             // This is intended to help with nesting scenarios so that child enlisters cancel before their parents.
             List<Exception> exceptionList = null;
-            SparselyPopulatedArray<CancellationCallbackInfo>[] callbackLists = m_registeredCallbacksLists;
+            SparselyPopulatedArray<CancellationCallbackInfo>[] callbackLists =
+                m_registeredCallbacksLists;
 
             // If there are no callbacks to run, we can safely exit.  Any ----s to lazy initialize it
             // will see IsCancellationRequested and will then run the callback themselves.
@@ -809,15 +864,18 @@ namespace System.Threading
                 Interlocked.Exchange(ref m_state, NOTIFYINGCOMPLETE);
                 return;
             }
-            
+
             try
             {
                 for (int index = 0; index < callbackLists.Length; index++)
                 {
-                    SparselyPopulatedArray<CancellationCallbackInfo> list = Volatile.Read<SparselyPopulatedArray<CancellationCallbackInfo>>(ref callbackLists[index]);
+                    SparselyPopulatedArray<CancellationCallbackInfo> list = Volatile.Read<
+                        SparselyPopulatedArray<CancellationCallbackInfo>
+                    >(ref callbackLists[index]);
                     if (list != null)
                     {
-                        SparselyPopulatedArrayFragment<CancellationCallbackInfo> currArrayFragment = list.Tail;
+                        SparselyPopulatedArrayFragment<CancellationCallbackInfo> currArrayFragment =
+                            list.Tail;
 
                         while (currArrayFragment != null)
                         {
@@ -834,7 +892,11 @@ namespace System.Threading
                                 if (m_executingCallback != null)
                                 {
                                     //Transition to the target sync context (if necessary), and continue our work there.
-                                    CancellationCallbackCoreWorkArguments args = new CancellationCallbackCoreWorkArguments(currArrayFragment, i);
+                                    CancellationCallbackCoreWorkArguments args =
+                                        new CancellationCallbackCoreWorkArguments(
+                                            currArrayFragment,
+                                            i
+                                        );
 
                                     // marshal exceptions: either aggregate or perform an immediate rethrow
                                     // We assume that syncCtx.Send() has forwarded on user exceptions when appropriate.
@@ -842,23 +904,27 @@ namespace System.Threading
                                     {
                                         if (m_executingCallback.TargetSyncContext != null)
                                         {
-
-                                            m_executingCallback.TargetSyncContext.Send(CancellationCallbackCoreWork_OnSyncContext, args);
-                                            // CancellationCallbackCoreWork_OnSyncContext may have altered ThreadIDExecutingCallbacks, so reset it. 
-                                            ThreadIDExecutingCallbacks = Thread.CurrentThread.ManagedThreadId;
+                                            m_executingCallback.TargetSyncContext.Send(
+                                                CancellationCallbackCoreWork_OnSyncContext,
+                                                args
+                                            );
+                                            // CancellationCallbackCoreWork_OnSyncContext may have altered ThreadIDExecutingCallbacks, so reset it.
+                                            ThreadIDExecutingCallbacks = Thread
+                                                .CurrentThread
+                                                .ManagedThreadId;
                                         }
                                         else
                                         {
                                             CancellationCallbackCoreWork(args);
                                         }
                                     }
-                                    catch(Exception ex)
+                                    catch (Exception ex)
                                     {
                                         if (throwOnFirstException)
                                             throw;
-    
+
                                         // Otherwise, log it and proceed.
-                                        if(exceptionList == null)
+                                        if (exceptionList == null)
                                             exceptionList = new List<Exception>();
                                         exceptionList.Add(ex);
                                     }
@@ -894,18 +960,22 @@ namespace System.Threading
         {
             // remove the intended callback..and ensure that it worked.
             // otherwise the callback has disappeared in the interim and we can immediately return.
-            CancellationCallbackInfo callback = args.m_currArrayFragment.SafeAtomicRemove(args.m_currArrayIndex, m_executingCallback);
+            CancellationCallbackInfo callback = args.m_currArrayFragment.SafeAtomicRemove(
+                args.m_currArrayIndex,
+                m_executingCallback
+            );
             if (callback == m_executingCallback)
             {
                 if (callback.TargetExecutionContext != null)
                 {
                     // we are running via a custom sync context, so update the executing threadID
-                    callback.CancellationTokenSource.ThreadIDExecutingCallbacks = Thread.CurrentThread.ManagedThreadId;
+                    callback.CancellationTokenSource.ThreadIDExecutingCallbacks = Thread
+                        .CurrentThread
+                        .ManagedThreadId;
                 }
                 callback.ExecuteCallback();
             }
         }
-
 
         /// <summary>
         /// Creates a <see cref="T:System.Threading.CancellationTokenSource">CancellationTokenSource</see> that will be in the canceled state
@@ -913,31 +983,42 @@ namespace System.Threading
         /// </summary>
         /// <param name="token1">The first <see cref="T:System.Threading.CancellationToken">CancellationToken</see> to observe.</param>
         /// <param name="token2">The second <see cref="T:System.Threading.CancellationToken">CancellationToken</see> to observe.</param>
-        /// <returns>A <see cref="T:System.Threading.CancellationTokenSource">CancellationTokenSource</see> that is linked 
+        /// <returns>A <see cref="T:System.Threading.CancellationTokenSource">CancellationTokenSource</see> that is linked
         /// to the source tokens.</returns>
-        public static CancellationTokenSource CreateLinkedTokenSource(CancellationToken token1, CancellationToken token2)
+        public static CancellationTokenSource CreateLinkedTokenSource(
+            CancellationToken token1,
+            CancellationToken token2
+        )
         {
             CancellationTokenSource linkedTokenSource = new CancellationTokenSource();
 
             bool token2CanBeCanceled = token2.CanBeCanceled;
 
-            if( token1.CanBeCanceled )
+            if (token1.CanBeCanceled)
             {
-                linkedTokenSource.m_linkingRegistrations = new CancellationTokenRegistration[token2CanBeCanceled ? 2 : 1]; // there will be at least 1 and at most 2 linkings
-                linkedTokenSource.m_linkingRegistrations[0] = token1.InternalRegisterWithoutEC(s_LinkedTokenCancelDelegate, linkedTokenSource);
+                linkedTokenSource.m_linkingRegistrations = new CancellationTokenRegistration[
+                    token2CanBeCanceled ? 2 : 1
+                ]; // there will be at least 1 and at most 2 linkings
+                linkedTokenSource.m_linkingRegistrations[0] = token1.InternalRegisterWithoutEC(
+                    s_LinkedTokenCancelDelegate,
+                    linkedTokenSource
+                );
             }
-            
-            if( token2CanBeCanceled )
+
+            if (token2CanBeCanceled)
             {
                 int index = 1;
-                if( linkedTokenSource.m_linkingRegistrations == null )
+                if (linkedTokenSource.m_linkingRegistrations == null)
                 {
                     linkedTokenSource.m_linkingRegistrations = new CancellationTokenRegistration[1]; // this will be the only linking
                     index = 0;
                 }
-                linkedTokenSource.m_linkingRegistrations[index] = token2.InternalRegisterWithoutEC(s_LinkedTokenCancelDelegate, linkedTokenSource);
+                linkedTokenSource.m_linkingRegistrations[index] = token2.InternalRegisterWithoutEC(
+                    s_LinkedTokenCancelDelegate,
+                    linkedTokenSource
+                );
             }
-            
+
             return linkedTokenSource;
         }
 
@@ -946,29 +1027,38 @@ namespace System.Threading
         /// when any of the source tokens are in the canceled state.
         /// </summary>
         /// <param name="tokens">The <see cref="T:System.Threading.CancellationToken">CancellationToken</see> instances to observe.</param>
-        /// <returns>A <see cref="T:System.Threading.CancellationTokenSource">CancellationTokenSource</see> that is linked 
+        /// <returns>A <see cref="T:System.Threading.CancellationTokenSource">CancellationTokenSource</see> that is linked
         /// to the source tokens.</returns>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="tokens"/> is null.</exception>
-        public static CancellationTokenSource CreateLinkedTokenSource(params CancellationToken[] tokens)
+        public static CancellationTokenSource CreateLinkedTokenSource(
+            params CancellationToken[] tokens
+        )
         {
             if (tokens == null)
                 throw new ArgumentNullException("tokens");
 
             if (tokens.Length == 0)
-                throw new ArgumentException(Environment.GetResourceString("CancellationToken_CreateLinkedToken_TokensIsEmpty"));
+                throw new ArgumentException(
+                    Environment.GetResourceString(
+                        "CancellationToken_CreateLinkedToken_TokensIsEmpty"
+                    )
+                );
 
             // a defensive copy is not required as the array has value-items that have only a single IntPtr field,
             // hence each item cannot be null itself, and reads of the payloads cannot be torn.
             Contract.EndContractBlock();
 
             CancellationTokenSource linkedTokenSource = new CancellationTokenSource();
-            linkedTokenSource.m_linkingRegistrations = new CancellationTokenRegistration[tokens.Length];
+            linkedTokenSource.m_linkingRegistrations = new CancellationTokenRegistration[
+                tokens.Length
+            ];
 
             for (int i = 0; i < tokens.Length; i++)
             {
                 if (tokens[i].CanBeCanceled)
                 {
-                    linkedTokenSource.m_linkingRegistrations[i] = tokens[i].InternalRegisterWithoutEC(s_LinkedTokenCancelDelegate, linkedTokenSource);
+                    linkedTokenSource.m_linkingRegistrations[i] = tokens[i]
+                        .InternalRegisterWithoutEC(s_LinkedTokenCancelDelegate, linkedTokenSource);
                 }
                 // Empty slots in the array will be default(CancellationTokenRegistration), which are nops to Dispose.
                 // Based on usage patterns, such occurrences should also be rare, such that it's not worth resizing
@@ -978,7 +1068,6 @@ namespace System.Threading
             return linkedTokenSource;
         }
 
-
         // Wait for a single callback to complete (or, more specifically, to not be running).
         // It is ok to call this method if the callback has already finished.
         // Calling this method before the target callback has been selected for execution would be an error.
@@ -987,7 +1076,7 @@ namespace System.Threading
             SpinWait sw = new SpinWait();
             while (ExecutingCallback == callbackInfo)
             {
-                sw.SpinOnce();  //spin as we assume callback execution is fast and that this situation is rare.
+                sw.SpinOnce(); //spin as we assume callback execution is fast and that this situation is rare.
             }
         }
     }
@@ -1000,8 +1089,11 @@ namespace System.Threading
     {
         internal SparselyPopulatedArrayFragment<CancellationCallbackInfo> m_currArrayFragment;
         internal int m_currArrayIndex;
-        
-        public CancellationCallbackCoreWorkArguments(SparselyPopulatedArrayFragment<CancellationCallbackInfo> currArrayFragment, int currArrayIndex)
+
+        public CancellationCallbackCoreWorkArguments(
+            SparselyPopulatedArrayFragment<CancellationCallbackInfo> currArrayFragment,
+            int currArrayIndex
+        )
         {
             m_currArrayFragment = currArrayFragment;
             m_currArrayIndex = currArrayIndex;
@@ -1013,7 +1105,7 @@ namespace System.Threading
     // ----------------------------------------------------------
 
     /// <summary>
-    /// A helper class for collating the various bits of information required to execute 
+    /// A helper class for collating the various bits of information required to execute
     /// cancellation callbacks.
     /// </summary>
     internal class CancellationCallbackInfo
@@ -1025,8 +1117,12 @@ namespace System.Threading
         internal readonly CancellationTokenSource CancellationTokenSource;
 
         internal CancellationCallbackInfo(
-            Action<object> callback, object stateForCallback, SynchronizationContext targetSyncContext, ExecutionContext targetExecutionContext,
-            CancellationTokenSource cancellationTokenSource)
+            Action<object> callback,
+            object stateForCallback,
+            SynchronizationContext targetSyncContext,
+            ExecutionContext targetExecutionContext,
+            CancellationTokenSource cancellationTokenSource
+        )
         {
             Callback = callback;
             StateForCallback = stateForCallback;
@@ -1050,12 +1146,12 @@ namespace System.Threading
             {
                 // Lazily initialize the callback delegate; benign ----
                 var callback = s_executionContextCallback;
-                if (callback == null) s_executionContextCallback = callback = new ContextCallback(ExecutionContextCallback);
-                
-                ExecutionContext.Run(
-                    TargetExecutionContext,
-                    callback,
-                    this);
+                if (callback == null)
+                    s_executionContextCallback = callback = new ContextCallback(
+                        ExecutionContextCallback
+                    );
+
+                ExecutionContext.Run(TargetExecutionContext, callback, this);
             }
             else
             {
@@ -1075,7 +1171,6 @@ namespace System.Threading
         }
     }
 
-
     // ----------------------------------------------------------
     // -- SparselyPopulatedArray --
     // ----------------------------------------------------------
@@ -1085,9 +1180,10 @@ namespace System.Threading
     /// lock-free additions and growth, and also for constant time removal (by nulling out).
     /// </summary>
     /// <typeparam name="T">The kind of elements contained within.</typeparam>
-    internal class SparselyPopulatedArray<T> where T : class
+    internal class SparselyPopulatedArray<T>
+        where T : class
     {
-#if DEBUG        
+#if DEBUG
         private readonly SparselyPopulatedArrayFragment<T> m_head;
 #endif
         private volatile SparselyPopulatedArrayFragment<T> m_tail;
@@ -1098,8 +1194,8 @@ namespace System.Threading
         /// <param name="initialSize">How many array slots to pre-allocate.</param>
         internal SparselyPopulatedArray(int initialSize)
         {
-#if DEBUG            
-            m_head = 
+#if DEBUG
+            m_head =
 #endif
             m_tail = new SparselyPopulatedArrayFragment<T>(initialSize);
         }
@@ -1166,9 +1262,19 @@ namespace System.Threading
                         {
                             // If the slot is null, try to CAS our element into it.
                             int tryIndex = (start + i) % c;
-                            Contract.Assert(tryIndex >= 0 && tryIndex < curr.m_elements.Length, "tryIndex is outside of bounds");
-                            
-                            if (curr.m_elements[tryIndex] == null && Interlocked.CompareExchange(ref curr.m_elements[tryIndex], element, null) == null)
+                            Contract.Assert(
+                                tryIndex >= 0 && tryIndex < curr.m_elements.Length,
+                                "tryIndex is outside of bounds"
+                            );
+
+                            if (
+                                curr.m_elements[tryIndex] == null
+                                && Interlocked.CompareExchange(
+                                    ref curr.m_elements[tryIndex],
+                                    element,
+                                    null
+                                ) == null
+                            )
                             {
                                 // We adjust the free count by --. Note: if this drops to 0, we will skip
                                 // the fragment on the next search iteration.  Searching threads will -- the
@@ -1185,7 +1291,9 @@ namespace System.Threading
 
                 // If we got here, we need to add a new chunk to the tail and try again.
                 SparselyPopulatedArrayFragment<T> newTail = new SparselyPopulatedArrayFragment<T>(
-                    tail.m_elements.Length == 4096 ? 4096 : tail.m_elements.Length * 2, tail);
+                    tail.m_elements.Length == 4096 ? 4096 : tail.m_elements.Length * 2,
+                    tail
+                );
                 if (Interlocked.CompareExchange(ref tail.m_next, newTail, null) == null)
                 {
                     m_tail = newTail;
@@ -1198,7 +1306,8 @@ namespace System.Threading
     /// A struct to hold a link to the exact spot in an array an element was inserted, enabling
     /// constant time removal later on.
     /// </summary>
-    internal struct SparselyPopulatedArrayAddInfo<T> where T : class
+    internal struct SparselyPopulatedArrayAddInfo<T>
+        where T : class
     {
         private SparselyPopulatedArrayFragment<T> m_source;
         private int m_index;
@@ -1226,16 +1335,16 @@ namespace System.Threading
     /// A fragment of a sparsely populated array, doubly linked.
     /// </summary>
     /// <typeparam name="T">The kind of elements contained within.</typeparam>
-    internal class SparselyPopulatedArrayFragment<T> where T : class
+    internal class SparselyPopulatedArrayFragment<T>
+        where T : class
     {
         internal readonly T[] m_elements; // The contents, sparsely populated (with nulls).
         internal volatile int m_freeCount; // A hint of the number of free elements.
         internal volatile SparselyPopulatedArrayFragment<T> m_next; // The next fragment in the chain.
         internal volatile SparselyPopulatedArrayFragment<T> m_prev; // The previous fragment in the chain.
 
-        internal SparselyPopulatedArrayFragment(int size) : this(size, null)
-        {
-        }
+        internal SparselyPopulatedArrayFragment(int size)
+            : this(size, null) { }
 
         internal SparselyPopulatedArrayFragment(int size, SparselyPopulatedArrayFragment<T> prev)
         {
@@ -1272,8 +1381,12 @@ namespace System.Threading
         // otherwise the remove did not occur.
         internal T SafeAtomicRemove(int index, T expectedElement)
         {
-            T prevailingValue = Interlocked.CompareExchange(ref m_elements[index], null, expectedElement);
-            if (prevailingValue != null) 
+            T prevailingValue = Interlocked.CompareExchange(
+                ref m_elements[index],
+                null,
+                expectedElement
+            );
+            if (prevailingValue != null)
                 ++m_freeCount;
             return prevailingValue;
         }

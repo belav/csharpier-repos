@@ -10,14 +10,20 @@ internal interface IRazorComponentApplication
 {
     ComponentApplicationBuilder GetBuilder();
 
-    static ComponentApplicationBuilder GetBuilderForAssembly(ComponentApplicationBuilder builder, Assembly assembly)
+    static ComponentApplicationBuilder GetBuilderForAssembly(
+        ComponentApplicationBuilder builder,
+        Assembly assembly
+    )
     {
         var libraryName = assembly.FullName!;
         var (pages, components) = CreatePageRouteCollection(libraryName, assembly);
         builder.AddLibrary(new AssemblyComponentLibraryDescriptor(libraryName, pages, components));
         return builder;
 
-        static (IReadOnlyList<PageComponentBuilder>, IReadOnlyList<ComponentBuilder>) CreatePageRouteCollection(string name, Assembly assembly)
+        static (
+            IReadOnlyList<PageComponentBuilder>,
+            IReadOnlyList<ComponentBuilder>
+        ) CreatePageRouteCollection(string name, Assembly assembly)
         {
             var exported = assembly.GetExportedTypes();
             var pages = new List<PageComponentBuilder>();
@@ -28,19 +34,30 @@ internal interface IRazorComponentApplication
                 var candidate = exported[i];
                 if (candidate.IsAssignableTo(typeof(IComponent)))
                 {
-                    if (candidate.GetCustomAttributes<RouteAttribute>() is { } routes &&
-                        routes.Any())
+                    if (
+                        candidate.GetCustomAttributes<RouteAttribute>() is { } routes
+                        && routes.Any()
+                    )
                     {
-                        pages.Add(new PageComponentBuilder()
-                        {
-                            RouteTemplates = routes.Select(r => r.Template).ToList(),
-                            AssemblyName = name,
-                            PageType = candidate
-                        });
+                        pages.Add(
+                            new PageComponentBuilder()
+                            {
+                                RouteTemplates = routes.Select(r => r.Template).ToList(),
+                                AssemblyName = name,
+                                PageType = candidate,
+                            }
+                        );
                     }
 
                     var renderMode = candidate.GetCustomAttribute<RenderModeAttribute>();
-                    components.Add(new ComponentBuilder() { AssemblyName = name, ComponentType = candidate, RenderMode = renderMode });
+                    components.Add(
+                        new ComponentBuilder()
+                        {
+                            AssemblyName = name,
+                            ComponentType = candidate,
+                            RenderMode = renderMode,
+                        }
+                    );
                 }
             }
 

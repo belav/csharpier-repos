@@ -4,25 +4,35 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.ComponentModel;
     using System.Configuration;
     using System.Globalization;
     using System.Net;
     using System.Net.Security;
     using System.ServiceModel;
     using System.ServiceModel.Security;
-    using System.ComponentModel;
 
     public sealed partial class BasicHttpMessageSecurityElement : ServiceModelConfigurationElement
     {
-        [ConfigurationProperty(ConfigurationStrings.ClientCredentialType, DefaultValue = BasicHttpMessageSecurity.DefaultClientCredentialType)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ClientCredentialType,
+            DefaultValue = BasicHttpMessageSecurity.DefaultClientCredentialType
+        )]
         [ServiceModelEnumValidator(typeof(BasicHttpMessageCredentialTypeHelper))]
         public BasicHttpMessageCredentialType ClientCredentialType
         {
-            get { return (BasicHttpMessageCredentialType)base[ConfigurationStrings.ClientCredentialType]; }
+            get
+            {
+                return (BasicHttpMessageCredentialType)
+                    base[ConfigurationStrings.ClientCredentialType];
+            }
             set { base[ConfigurationStrings.ClientCredentialType] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.AlgorithmSuite, DefaultValue = ConfigurationStrings.Default)]
+        [ConfigurationProperty(
+            ConfigurationStrings.AlgorithmSuite,
+            DefaultValue = ConfigurationStrings.Default
+        )]
         [TypeConverter(typeof(SecurityAlgorithmSuiteConverter))]
         public SecurityAlgorithmSuite AlgorithmSuite
         {
@@ -37,7 +47,12 @@ namespace System.ServiceModel.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("security");
             }
             security.ClientCredentialType = this.ClientCredentialType;
-            if (PropertyValueOrigin.Default != this.ElementInformation.Properties[ConfigurationStrings.AlgorithmSuite].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                != this.ElementInformation
+                    .Properties[ConfigurationStrings.AlgorithmSuite]
+                    .ValueOrigin
+            )
             {
                 security.AlgorithmSuite = this.AlgorithmSuite;
             }
@@ -49,8 +64,14 @@ namespace System.ServiceModel.Configuration
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("security");
             }
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ClientCredentialType, security.ClientCredentialType);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.AlgorithmSuite, security.AlgorithmSuite);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ClientCredentialType,
+                security.ClientCredentialType
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.AlgorithmSuite,
+                security.AlgorithmSuite
+            );
         }
     }
 }

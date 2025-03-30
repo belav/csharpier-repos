@@ -20,9 +20,20 @@ namespace System.Globalization.Tests
             yield return new object[] { "he-IL", 0x40d, 0x4e7, 0x1f4, 0x2715, 0x35e, true };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))] // OS changes
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )] // OS changes
         [MemberData(nameof(TextInfo_TestData))]
-        public void MiscTest(string cultureName, int lcid, int ansiCodePage, int ebcdiCCodePage, int macCodePage, int oemCodePage, bool isRightToLeft)
+        public void MiscTest(
+            string cultureName,
+            int lcid,
+            int ansiCodePage,
+            int ebcdiCCodePage,
+            int macCodePage,
+            int oemCodePage,
+            bool isRightToLeft
+        )
         {
             TextInfo ti = CultureInfo.GetCultureInfo(cultureName).TextInfo;
             Assert.Equal(lcid, ti.LCID);
@@ -39,11 +50,14 @@ namespace System.Globalization.Tests
             TextInfo ti = CultureInfo.GetCultureInfo("en-US").TextInfo;
             Assert.True(ti.IsReadOnly, "IsReadOnly should be true with cached TextInfo object");
 
-            ti = (TextInfo) ti.Clone();
+            ti = (TextInfo)ti.Clone();
             Assert.False(ti.IsReadOnly, "IsReadOnly should be false with cloned TextInfo object");
 
             ti = TextInfo.ReadOnly(ti);
-            Assert.True(ti.IsReadOnly, "IsReadOnly should be true with created read-nly TextInfo object");
+            Assert.True(
+                ti.IsReadOnly,
+                "IsReadOnly should be true with created read-nly TextInfo object"
+            );
         }
 
         [Fact]
@@ -54,7 +68,10 @@ namespace System.Globalization.Tests
             Assert.Equal("Growl To The Rescue", ti.ToTitleCase("gROWL to the rescue"));
             Assert.Equal("Inside The US Government", ti.ToTitleCase("inside the US government"));
             Assert.Equal("Sports And MLB Baseball", ti.ToTitleCase("sports and MLB baseball"));
-            Assert.Equal("The Return Of Sherlock Holmes", ti.ToTitleCase("The Return of Sherlock Holmes"));
+            Assert.Equal(
+                "The Return Of Sherlock Holmes",
+                ti.ToTitleCase("The Return of Sherlock Holmes")
+            );
             Assert.Equal("UNICEF And Children", ti.ToTitleCase("UNICEF and children"));
 
             AssertExtensions.Throws<ArgumentNullException>("str", () => ti.ToTitleCase(null));
@@ -65,10 +82,20 @@ namespace System.Globalization.Tests
             yield return new object[] { "nl-NL", "IJ IJ IJ IJ", "ij iJ Ij IJ" };
             yield return new object[] { "nl-be", "IJzeren Eigenschappen", "ijzeren eigenschappen" };
             yield return new object[] { "NL-NL", "Lake IJssel", "lake iJssel" };
-            yield return new object[] { "NL-BE", "Boba N' IJango Fett PEW PEW", "Boba n' Ijango fett PEW PEW" };
+            yield return new object[]
+            {
+                "NL-BE",
+                "Boba N' IJango Fett PEW PEW",
+                "Boba n' Ijango fett PEW PEW",
+            };
             yield return new object[] { "en-us", "Ijill And Ijack", "ijill and ijack" };
             yield return new object[] { "de-DE", "Ij Ij IJ Ij", "ij ij IJ ij" };
-            yield return new object[] { "he-il", "Ijon't Know What Will Happen.", "Ijon't know what Will happen." };
+            yield return new object[]
+            {
+                "he-il",
+                "Ijon't Know What Will Happen.",
+                "Ijon't know what Will happen.",
+            };
         }
 
         [Theory]
@@ -98,7 +125,11 @@ namespace System.Globalization.Tests
 
         public static IEnumerable<object[]> IsReadOnly_TestData()
         {
-            yield return new object[] { CultureInfo.ReadOnly(new CultureInfo("en-US")).TextInfo, true };
+            yield return new object[]
+            {
+                CultureInfo.ReadOnly(new CultureInfo("en-US")).TextInfo,
+                true,
+            };
             yield return new object[] { CultureInfo.InvariantCulture.TextInfo, true };
             yield return new object[] { new CultureInfo("").TextInfo, false };
             yield return new object[] { new CultureInfo("en-US").TextInfo, false };
@@ -150,7 +181,10 @@ namespace System.Globalization.Tests
         {
             try
             {
-                Assert.Equal(separator, CultureInfo.GetCultureInfo(cultureName).TextInfo.ListSeparator);
+                Assert.Equal(
+                    separator,
+                    CultureInfo.GetCultureInfo(cultureName).TextInfo.ListSeparator
+                );
             }
             catch (CultureNotFoundException)
             {
@@ -172,24 +206,53 @@ namespace System.Globalization.Tests
         [Fact]
         public void ListSeparator_Set_Invalid()
         {
-            Assert.Throws<InvalidOperationException>(() => CultureInfo.InvariantCulture.TextInfo.ListSeparator = "");
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CultureInfo("en-US").TextInfo.ListSeparator = null);
+            Assert.Throws<InvalidOperationException>(() =>
+                CultureInfo.InvariantCulture.TextInfo.ListSeparator = ""
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CultureInfo("en-US").TextInfo.ListSeparator = null
+            );
         }
 
         public static IEnumerable<object[]> Equals_TestData()
         {
-            yield return new object[] { CultureInfo.InvariantCulture.TextInfo, CultureInfo.InvariantCulture.TextInfo, true };
-            yield return new object[] { CultureInfo.InvariantCulture.TextInfo, new CultureInfo("").TextInfo, true };
-            yield return new object[] { CultureInfo.InvariantCulture.TextInfo, new CultureInfo("en-US"), false };
+            yield return new object[]
+            {
+                CultureInfo.InvariantCulture.TextInfo,
+                CultureInfo.InvariantCulture.TextInfo,
+                true,
+            };
+            yield return new object[]
+            {
+                CultureInfo.InvariantCulture.TextInfo,
+                new CultureInfo("").TextInfo,
+                true,
+            };
+            yield return new object[]
+            {
+                CultureInfo.InvariantCulture.TextInfo,
+                new CultureInfo("en-US"),
+                false,
+            };
 
-            yield return new object[] { new CultureInfo("en-US").TextInfo, new CultureInfo("en-US").TextInfo, true };
-            yield return new object[] { new CultureInfo("en-US").TextInfo, new CultureInfo("fr-FR").TextInfo, false };
+            yield return new object[]
+            {
+                new CultureInfo("en-US").TextInfo,
+                new CultureInfo("en-US").TextInfo,
+                true,
+            };
+            yield return new object[]
+            {
+                new CultureInfo("en-US").TextInfo,
+                new CultureInfo("fr-FR").TextInfo,
+                false,
+            };
 
             yield return new object[] { new CultureInfo("en-US").TextInfo, null, false };
             yield return new object[] { new CultureInfo("en-US").TextInfo, new object(), false };
             yield return new object[] { new CultureInfo("en-US").TextInfo, 123, false };
             yield return new object[] { new CultureInfo("en-US").TextInfo, "en-US", false };
-
         }
 
         [Theory]
@@ -203,7 +266,7 @@ namespace System.Globalization.Tests
             }
         }
 
-        private static readonly string [] s_cultureNames = new string[] { "en-US", "fr", "fr-FR" };
+        private static readonly string[] s_cultureNames = new string[] { "en-US", "fr", "fr-FR" };
 
         // ToLower_TestData_netcore has the data which is specific to netcore framework
         public static IEnumerable<object[]> ToLower_TestData_netcore()
@@ -211,12 +274,22 @@ namespace System.Globalization.Tests
             foreach (string cultureName in s_cultureNames)
             {
                 // DESERT CAPITAL LETTER LONG I has a lower case variant (but not on Windows 7).
-                yield return new object[] { cultureName, "\U00010400", PlatformDetection.IsWindows7 ? "\U00010400" : "\U00010428" };
+                yield return new object[]
+                {
+                    cultureName,
+                    "\U00010400",
+                    PlatformDetection.IsWindows7 ? "\U00010400" : "\U00010428",
+                };
             }
 
             if (!PlatformDetection.IsNlsGlobalization)
             {
-                yield return new object[] { "", "\U00010400", PlatformDetection.IsWindows7 ? "\U00010400" : "\U00010428" };
+                yield return new object[]
+                {
+                    "",
+                    "\U00010400",
+                    PlatformDetection.IsWindows7 ? "\U00010400" : "\U00010428",
+                };
             }
         }
 
@@ -250,13 +323,38 @@ namespace System.Globalization.Tests
 
                 yield return new object[] { cultureName, "HELLOWOR!LD123", "hellowor!ld123" };
                 yield return new object[] { cultureName, "HelloWor!ld123", "hellowor!ld123" };
-                yield return new object[] { cultureName, "Hello\n\0World\u0009!", "hello\n\0world\t!" };
+                yield return new object[]
+                {
+                    cultureName,
+                    "Hello\n\0World\u0009!",
+                    "hello\n\0world\t!",
+                };
 
-                yield return new object[] { cultureName, "THIS IS A LONGER TEST CASE", "this is a longer test case" };
-                yield return new object[] { cultureName, "this Is A LONGER mIXEd casE test case", "this is a longer mixed case test case" };
+                yield return new object[]
+                {
+                    cultureName,
+                    "THIS IS A LONGER TEST CASE",
+                    "this is a longer test case",
+                };
+                yield return new object[]
+                {
+                    cultureName,
+                    "this Is A LONGER mIXEd casE test case",
+                    "this is a longer mixed case test case",
+                };
 
-                yield return new object[] { cultureName, "THIS \t hAs \t SOMe \t tabs", "this \t has \t some \t tabs" };
-                yield return new object[] { cultureName, "EMBEDDED\0NuLL\0Byte\0", "embedded\0null\0byte\0" };
+                yield return new object[]
+                {
+                    cultureName,
+                    "THIS \t hAs \t SOMe \t tabs",
+                    "this \t has \t some \t tabs",
+                };
+                yield return new object[]
+                {
+                    cultureName,
+                    "EMBEDDED\0NuLL\0Byte\0",
+                    "embedded\0null\0byte\0",
+                };
 
                 // LATIN CAPITAL LETTER O WITH ACUTE, which has a lower case variant.
                 yield return new object[] { cultureName, "\u00D3", "\u00F3" };
@@ -292,11 +390,15 @@ namespace System.Globalization.Tests
                 {
                     yield return new object[] { cultureName, "I", "\u0131" };
                     yield return new object[] { cultureName, "HI!", "h\u0131!" };
-                    yield return new object[] { cultureName, "HI\n\0H\u0130\t!", "h\u0131\n\0hi\u0009!" };
+                    yield return new object[]
+                    {
+                        cultureName,
+                        "HI\n\0H\u0130\t!",
+                        "h\u0131\n\0hi\u0009!",
+                    };
                 }
                 yield return new object[] { cultureName, "\u0130", "i" };
                 yield return new object[] { cultureName, "i", "i" };
-
             }
 
             // ICU has special tailoring for the en-US-POSIX locale which treats "i" and "I" as different letters
@@ -337,9 +439,21 @@ namespace System.Globalization.Tests
             // Invalid UTF-16 in a string (mismatched surrogate pairs) should be unchanged.
             foreach (string cultureName in new string[] { "", "en-US", "fr" })
             {
-                ToLower(cultureName, "BE CAREFUL, \uD83C\uD83C, THIS ONE IS TRICKY", "be careful, \uD83C\uD83C, this one is tricky");
-                ToLower(cultureName, "BE CAREFUL, \uDF08\uD83C, THIS ONE IS TRICKY", "be careful, \uDF08\uD83C, this one is tricky");
-                ToLower(cultureName, "BE CAREFUL, \uDF08\uDF08, THIS ONE IS TRICKY", "be careful, \uDF08\uDF08, this one is tricky");
+                ToLower(
+                    cultureName,
+                    "BE CAREFUL, \uD83C\uD83C, THIS ONE IS TRICKY",
+                    "be careful, \uD83C\uD83C, this one is tricky"
+                );
+                ToLower(
+                    cultureName,
+                    "BE CAREFUL, \uDF08\uD83C, THIS ONE IS TRICKY",
+                    "be careful, \uDF08\uD83C, this one is tricky"
+                );
+                ToLower(
+                    cultureName,
+                    "BE CAREFUL, \uDF08\uDF08, THIS ONE IS TRICKY",
+                    "be careful, \uDF08\uDF08, this one is tricky"
+                );
             }
         }
 
@@ -349,7 +463,10 @@ namespace System.Globalization.Tests
         [InlineData("fr")]
         public void ToLower_Null_ThrowsArgumentNullException(string cultureName)
         {
-            AssertExtensions.Throws<ArgumentNullException>("str", () => new CultureInfo(cultureName).TextInfo.ToLower(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "str",
+                () => new CultureInfo(cultureName).TextInfo.ToLower(null)
+            );
         }
 
         // ToUpper_TestData_netcore has the data which is specific to netcore framework
@@ -358,7 +475,12 @@ namespace System.Globalization.Tests
             foreach (string cultureName in s_cultureNames)
             {
                 // DESERT SMALL LETTER LONG I has an upper case variant (but not on Windows 7).
-                yield return new object[] { cultureName, "\U00010428", PlatformDetection.IsWindows7 ? "\U00010428" : "\U00010400" };
+                yield return new object[]
+                {
+                    cultureName,
+                    "\U00010428",
+                    PlatformDetection.IsWindows7 ? "\U00010428" : "\U00010400",
+                };
             }
         }
 
@@ -379,13 +501,38 @@ namespace System.Globalization.Tests
 
                 yield return new object[] { cultureName, "HelloWor!ld123", "HELLOWOR!LD123" };
                 yield return new object[] { cultureName, "HELLOWOR!LD123", "HELLOWOR!LD123" };
-                yield return new object[] { cultureName, "Hello\n\0World\u0009!", "HELLO\n\0WORLD\t!" };
+                yield return new object[]
+                {
+                    cultureName,
+                    "Hello\n\0World\u0009!",
+                    "HELLO\n\0WORLD\t!",
+                };
 
-                yield return new object[] { cultureName, "this is a longer test case", "THIS IS A LONGER TEST CASE" };
-                yield return new object[] { cultureName, "this Is A LONGER mIXEd casE test case", "THIS IS A LONGER MIXED CASE TEST CASE" };
-                yield return new object[] { cultureName, "this \t HaS \t somE \t TABS", "THIS \t HAS \t SOME \t TABS" };
+                yield return new object[]
+                {
+                    cultureName,
+                    "this is a longer test case",
+                    "THIS IS A LONGER TEST CASE",
+                };
+                yield return new object[]
+                {
+                    cultureName,
+                    "this Is A LONGER mIXEd casE test case",
+                    "THIS IS A LONGER MIXED CASE TEST CASE",
+                };
+                yield return new object[]
+                {
+                    cultureName,
+                    "this \t HaS \t somE \t TABS",
+                    "THIS \t HAS \t SOME \t TABS",
+                };
 
-                yield return new object[] { cultureName, "embedded\0NuLL\0Byte\0", "EMBEDDED\0NULL\0BYTE\0" };
+                yield return new object[]
+                {
+                    cultureName,
+                    "embedded\0NuLL\0Byte\0",
+                    "EMBEDDED\0NULL\0BYTE\0",
+                };
 
                 // LATIN SMALL LETTER O WITH ACUTE, which has an upper case variant.
                 yield return new object[] { cultureName, "\u00F3", "\u00D3" };
@@ -396,7 +543,6 @@ namespace System.Globalization.Tests
                 // RAINBOW (outside the BMP and does not case)
                 yield return new object[] { cultureName, "\U0001F308", "\U0001F308" };
 
-                
                 // Unicode defines some codepoints which expand into multiple codepoints
                 // when cased (see SpecialCasing.txt from UNIDATA for some examples). We have never done
                 // these sorts of expansions, since it would cause string lengths to change when cased,
@@ -406,7 +552,12 @@ namespace System.Globalization.Tests
                 yield return new object[] { cultureName, "\u00DF", "\u00DF" };
                 yield return new object[] { cultureName, "stra\u00DFe", "STRA\u00DFE" };
                 if (!PlatformDetection.IsNlsGlobalization)
-                    yield return new object[] { cultureName, "st\uD801\uDC37ra\u00DFe", "ST\uD801\uDC0FRA\u00DFE" };
+                    yield return new object[]
+                    {
+                        cultureName,
+                        "st\uD801\uDC37ra\u00DFe",
+                        "ST\uD801\uDC0FRA\u00DFE",
+                    };
 
                 // Ligatures do not expand when cased.
                 yield return new object[] { cultureName, "\uFB00", "\uFB00" };
@@ -423,7 +574,12 @@ namespace System.Globalization.Tests
                 if (!PlatformDetection.IsAndroid && !PlatformDetection.IsLinuxBionic)
                 {
                     yield return new object[] { cultureName, "i", "\u0130" };
-                    yield return new object[] { cultureName, "H\u0131\n\0Hi\u0009!", "HI\n\0H\u0130\t!" };
+                    yield return new object[]
+                    {
+                        cultureName,
+                        "H\u0131\n\0Hi\u0009!",
+                        "HI\n\0H\u0130\t!",
+                    };
                 }
                 yield return new object[] { cultureName, "\u0130", "\u0130" };
                 yield return new object[] { cultureName, "\u0131", "I" };
@@ -466,11 +622,23 @@ namespace System.Globalization.Tests
         public void ToUpper_InvalidSurrogates()
         {
             // Invalid UTF-16 in a string (mismatched surrogate pairs) should be unchanged.
-            foreach (string cultureName in new string[] { "", "en-US", "fr"})
+            foreach (string cultureName in new string[] { "", "en-US", "fr" })
             {
-                ToUpper(cultureName, "be careful, \uD83C\uD83C, this one is tricky", "BE CAREFUL, \uD83C\uD83C, THIS ONE IS TRICKY");
-                ToUpper(cultureName, "be careful, \uDF08\uD83C, this one is tricky", "BE CAREFUL, \uDF08\uD83C, THIS ONE IS TRICKY");
-                ToUpper(cultureName, "be careful, \uDF08\uDF08, this one is tricky", "BE CAREFUL, \uDF08\uDF08, THIS ONE IS TRICKY");
+                ToUpper(
+                    cultureName,
+                    "be careful, \uD83C\uD83C, this one is tricky",
+                    "BE CAREFUL, \uD83C\uD83C, THIS ONE IS TRICKY"
+                );
+                ToUpper(
+                    cultureName,
+                    "be careful, \uDF08\uD83C, this one is tricky",
+                    "BE CAREFUL, \uDF08\uD83C, THIS ONE IS TRICKY"
+                );
+                ToUpper(
+                    cultureName,
+                    "be careful, \uDF08\uDF08, this one is tricky",
+                    "BE CAREFUL, \uDF08\uDF08, THIS ONE IS TRICKY"
+                );
             }
         }
 
@@ -480,7 +648,10 @@ namespace System.Globalization.Tests
         [InlineData("fr")]
         public void ToUpper_Null_ThrowsArgumentNullException(string cultureName)
         {
-            AssertExtensions.Throws<ArgumentNullException>("str", () => new CultureInfo(cultureName).TextInfo.ToUpper(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "str",
+                () => new CultureInfo(cultureName).TextInfo.ToUpper(null)
+            );
         }
 
         [Theory]

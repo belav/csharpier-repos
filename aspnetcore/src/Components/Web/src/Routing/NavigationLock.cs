@@ -7,7 +7,7 @@ using Microsoft.JSInterop;
 namespace Microsoft.AspNetCore.Components.Routing;
 
 /// <summary>
-/// A component that can be used to intercept navigation events. 
+/// A component that can be used to intercept navigation events.
 /// </summary>
 public sealed class NavigationLock : IComponent, IHandleAfterRender, IAsyncDisposable
 {
@@ -48,22 +48,37 @@ public sealed class NavigationLock : IComponent, IHandleAfterRender, IAsyncDispo
     {
         foreach (var parameter in parameters)
         {
-            if (parameter.Name.Equals(nameof(OnBeforeInternalNavigation), StringComparison.OrdinalIgnoreCase))
+            if (
+                parameter.Name.Equals(
+                    nameof(OnBeforeInternalNavigation),
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                OnBeforeInternalNavigation = (EventCallback<LocationChangingContext>)parameter.Value;
+                OnBeforeInternalNavigation =
+                    (EventCallback<LocationChangingContext>)parameter.Value;
             }
-            else if (parameter.Name.Equals(nameof(ConfirmExternalNavigation), StringComparison.OrdinalIgnoreCase))
+            else if (
+                parameter.Name.Equals(
+                    nameof(ConfirmExternalNavigation),
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 ConfirmExternalNavigation = (bool)parameter.Value;
             }
             else
             {
-                throw new ArgumentException($"The component '{nameof(NavigationLock)}' does not accept a parameter with the name '{parameter.Name}'.");
+                throw new ArgumentException(
+                    $"The component '{nameof(NavigationLock)}' does not accept a parameter with the name '{parameter.Name}'."
+                );
             }
         }
 
-        if (_hasLocationChangingHandler != HasLocationChangingHandler ||
-            _confirmExternalNavigation != ConfirmExternalNavigation)
+        if (
+            _hasLocationChangingHandler != HasLocationChangingHandler
+            || _confirmExternalNavigation != ConfirmExternalNavigation
+        )
         {
             _renderHandle.Render(static builder => { });
         }

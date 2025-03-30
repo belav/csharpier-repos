@@ -3,6 +3,7 @@
 // </copyright>
 using System;
 
-namespace System.Runtime.Caching {
+namespace System.Runtime.Caching
+{
     public delegate void CacheEntryRemovedCallback(CacheEntryRemovedArguments arguments);
 }

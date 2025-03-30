@@ -16,7 +16,8 @@ public static class RateLimiterEndpointConventionBuilderExtensions
     /// <param name="builder">The endpoint convention builder.</param>
     /// <param name="policyName">The name of the rate limiting policy to add to the endpoint.</param>
     /// <returns>The original convention builder parameter.</returns>
-    public static TBuilder RequireRateLimiting<TBuilder>(this TBuilder builder, string policyName) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder RequireRateLimiting<TBuilder>(this TBuilder builder, string policyName)
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(policyName);
@@ -35,14 +36,28 @@ public static class RateLimiterEndpointConventionBuilderExtensions
     /// <param name="builder">The endpoint convention builder.</param>
     /// <param name="policy">The rate limiting policy to add to the endpoint.</param>
     /// <returns>The original convention builder parameter.</returns>
-    public static TBuilder RequireRateLimiting<TBuilder, TPartitionKey>(this TBuilder builder, IRateLimiterPolicy<TPartitionKey> policy) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder RequireRateLimiting<TBuilder, TPartitionKey>(
+        this TBuilder builder,
+        IRateLimiterPolicy<TPartitionKey> policy
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(policy);
 
         builder.Add(endpointBuilder =>
         {
-            endpointBuilder.Metadata.Add(new EnableRateLimitingAttribute(new DefaultRateLimiterPolicy(RateLimiterOptions.ConvertPartitioner<TPartitionKey>(null, policy.GetPartition), policy.OnRejected)));
+            endpointBuilder.Metadata.Add(
+                new EnableRateLimitingAttribute(
+                    new DefaultRateLimiterPolicy(
+                        RateLimiterOptions.ConvertPartitioner<TPartitionKey>(
+                            null,
+                            policy.GetPartition
+                        ),
+                        policy.OnRejected
+                    )
+                )
+            );
         });
         return builder;
     }
@@ -53,7 +68,8 @@ public static class RateLimiterEndpointConventionBuilderExtensions
     /// <param name="builder">The endpoint convention builder.</param>
     /// <returns>The original convention builder parameter.</returns>
     /// <remarks>Will skip both the global limiter, and any endpoint-specific limiters that apply to the endpoint(s).</remarks>
-    public static TBuilder DisableRateLimiting<TBuilder>(this TBuilder builder) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder DisableRateLimiting<TBuilder>(this TBuilder builder)
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
 

@@ -9,7 +9,10 @@ namespace Microsoft.Internal.Collections
 {
     internal static partial class CollectionServices
     {
-        public static ICollection<object> GetCollectionWrapper(Type itemType, object collectionObject)
+        public static ICollection<object> GetCollectionWrapper(
+            Type itemType,
+            object collectionObject
+        )
         {
             ArgumentNullException.ThrowIfNull(itemType);
             ArgumentNullException.ThrowIfNull(collectionObject);

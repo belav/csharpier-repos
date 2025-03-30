@@ -4,11 +4,9 @@ using System;
 
 /// <summary><see cref="AAttribute" /></summary>
 [Obsolete("whatever", true)]
-public class AAttribute : Attribute {
-}
+public class AAttribute : Attribute { }
 
-class Demo {
-	static void Main ()
-	{
-	}
+class Demo
+{
+    static void Main() { }
 }

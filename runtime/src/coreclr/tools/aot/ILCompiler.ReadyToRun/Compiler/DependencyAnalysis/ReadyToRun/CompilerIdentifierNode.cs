@@ -10,13 +10,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
     internal class CompilerIdentifierNode : HeaderTableNode
     {
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.ReadOnlyDataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.ReadOnlyDataSection;
 
         public override int ClassCode => 230053202;
 
-        public CompilerIdentifierNode(TargetDetails target)
-        {
-        }
+        public CompilerIdentifierNode(TargetDetails target) { }
 
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
@@ -26,9 +25,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         private string GetCompilerVersion()
         {
             return Assembly
-                   .GetExecutingAssembly()
-                   .GetCustomAttribute<AssemblyFileVersionAttribute>()
-                   .Version;
+                .GetExecutingAssembly()
+                .GetCustomAttribute<AssemblyFileVersionAttribute>()
+                .Version;
         }
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)

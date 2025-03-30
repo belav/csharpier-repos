@@ -8,6 +8,6 @@ namespace System.Net.Security
     {
         None = 0,
         MutualAuthRequested = 1, // default setting
-        MutualAuthRequired = 2
+        MutualAuthRequired = 2,
     }
 }

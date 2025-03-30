@@ -27,12 +27,33 @@ public static class AuthorizationServiceCollectionExtensions
         // aren't included by default.
         services.AddOptions();
 
-        services.TryAdd(ServiceDescriptor.Transient<IAuthorizationService, DefaultAuthorizationService>());
-        services.TryAdd(ServiceDescriptor.Transient<IAuthorizationPolicyProvider, DefaultAuthorizationPolicyProvider>());
-        services.TryAdd(ServiceDescriptor.Transient<IAuthorizationHandlerProvider, DefaultAuthorizationHandlerProvider>());
-        services.TryAdd(ServiceDescriptor.Transient<IAuthorizationEvaluator, DefaultAuthorizationEvaluator>());
-        services.TryAdd(ServiceDescriptor.Transient<IAuthorizationHandlerContextFactory, DefaultAuthorizationHandlerContextFactory>());
-        services.TryAddEnumerable(ServiceDescriptor.Transient<IAuthorizationHandler, PassThroughAuthorizationHandler>());
+        services.TryAdd(
+            ServiceDescriptor.Transient<IAuthorizationService, DefaultAuthorizationService>()
+        );
+        services.TryAdd(
+            ServiceDescriptor.Transient<
+                IAuthorizationPolicyProvider,
+                DefaultAuthorizationPolicyProvider
+            >()
+        );
+        services.TryAdd(
+            ServiceDescriptor.Transient<
+                IAuthorizationHandlerProvider,
+                DefaultAuthorizationHandlerProvider
+            >()
+        );
+        services.TryAdd(
+            ServiceDescriptor.Transient<IAuthorizationEvaluator, DefaultAuthorizationEvaluator>()
+        );
+        services.TryAdd(
+            ServiceDescriptor.Transient<
+                IAuthorizationHandlerContextFactory,
+                DefaultAuthorizationHandlerContextFactory
+            >()
+        );
+        services.TryAddEnumerable(
+            ServiceDescriptor.Transient<IAuthorizationHandler, PassThroughAuthorizationHandler>()
+        );
         return services;
     }
 
@@ -42,7 +63,10 @@ public static class AuthorizationServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
     /// <param name="configure">An action delegate to configure the provided <see cref="AuthorizationOptions"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
-    public static IServiceCollection AddAuthorizationCore(this IServiceCollection services, Action<AuthorizationOptions> configure)
+    public static IServiceCollection AddAuthorizationCore(
+        this IServiceCollection services,
+        Action<AuthorizationOptions> configure
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(services);
         ArgumentNullThrowHelper.ThrowIfNull(configure);

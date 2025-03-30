@@ -11,9 +11,7 @@ namespace System.Xml.Schema
     {
         private readonly XmlSchemaObject? _parent;
 
-        public XmlSchemaObjectCollection()
-        {
-        }
+        public XmlSchemaObjectCollection() { }
 
         public XmlSchemaObjectCollection(XmlSchemaObject? parent)
         {

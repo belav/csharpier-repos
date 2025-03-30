@@ -6,13 +6,13 @@ using Xunit;
 namespace System.SpanTests
 {
     public static partial class ReadOnlySpanTests
-    {    
+    {
         [Fact]
         public static void ZeroLengthCount_Int()
         {
             Assert.Equal(0, ReadOnlySpan<int>.Empty.Count(0));
         }
-        
+
         [Fact]
         public static void ZeroLengthCount_RosInt()
         {
@@ -85,7 +85,7 @@ namespace System.SpanTests
                 Assert.Equal(2, span.Count(5555));
             }
         }
-        
+
         [Fact]
         public static void TestMultipleCount_RosInt()
         {
@@ -125,11 +125,14 @@ namespace System.SpanTests
                 foreach (TInt elem in a)
                 {
                     int numCompares = log.CountCompares(elem.Value, 9999);
-                    Assert.True(numCompares == 1, $"Expected {numCompares} == 1 for element {elem.Value}.");
+                    Assert.True(
+                        numCompares == 1,
+                        $"Expected {numCompares} == 1 for element {elem.Value}."
+                    );
                 }
             }
         }
-        
+
         [Fact]
         public static void OnNoMatchForCountMakeSureEveryElementIsCompared_RosTInt()
         {
@@ -144,7 +147,10 @@ namespace System.SpanTests
                 }
 
                 ReadOnlySpan<TInt> span = new ReadOnlySpan<TInt>(a);
-                Assert.Equal(0, span.Count(new TInt[] { new TInt(9999, log), new TInt(10000, log) }));
+                Assert.Equal(
+                    0,
+                    span.Count(new TInt[] { new TInt(9999, log), new TInt(10000, log) })
+                );
 
                 // Since we asked for a non-existent value, make sure each element of the array was compared once.
                 // (Strictly speaking, it would not be illegal for Count to compare an element more than once but
@@ -156,10 +162,16 @@ namespace System.SpanTests
                 for (int i = 0; i < length - 1; i++)
                 {
                     int numCompares = log.CountCompares(a[i].Value, 9999);
-                    Assert.True(numCompares == 1, $"Expected {numCompares} == 1 for element {a[i].Value}.");
-                    
+                    Assert.True(
+                        numCompares == 1,
+                        $"Expected {numCompares} == 1 for element {a[i].Value}."
+                    );
+
                     numCompares = log.CountCompares(a[i].Value, 10000);
-                    Assert.True(numCompares == 0, $"Expected {numCompares} == 0 for element {a[i].Value}.");
+                    Assert.True(
+                        numCompares == 0,
+                        $"Expected {numCompares} == 0 for element {a[i].Value}."
+                    );
                 }
             }
         }
@@ -214,7 +226,16 @@ namespace System.SpanTests
                 }
 
                 ReadOnlySpan<TInt> span = new ReadOnlySpan<TInt>(a, GuardLength, length);
-                Assert.Equal(0, span.Count(new TInt[] { new TInt(9999, CheckForOutOfRangeAccess), new TInt(9999, CheckForOutOfRangeAccess) }));
+                Assert.Equal(
+                    0,
+                    span.Count(
+                        new TInt[]
+                        {
+                            new TInt(9999, CheckForOutOfRangeAccess),
+                            new TInt(9999, CheckForOutOfRangeAccess),
+                        }
+                    )
+                );
             }
         }
 
@@ -223,7 +244,7 @@ namespace System.SpanTests
         {
             Assert.Equal(0, ReadOnlySpan<string>.Empty.Count("a"));
         }
-        
+
         [Fact]
         public static void ZeroLengthCount_RosString()
         {
@@ -263,7 +284,10 @@ namespace System.SpanTests
 
                 for (int targetIndex = 0; targetIndex < length - 1; targetIndex++)
                 {
-                    Assert.Equal(1, span.Count(new string[] { a[targetIndex], a[targetIndex + 1] }));
+                    Assert.Equal(
+                        1,
+                        span.Count(new string[] { a[targetIndex], a[targetIndex + 1] })
+                    );
                 }
             }
         }
@@ -286,7 +310,7 @@ namespace System.SpanTests
                 Assert.Equal(0, span.Count(target));
             }
         }
-        
+
         [Fact]
         public static void TestNoMatchCount_RosString()
         {
@@ -334,7 +358,7 @@ namespace System.SpanTests
                 {
                     a[i] = (10 * (i + 1)).ToString();
                 }
-                
+
                 a[0] = a[1] = a[^1] = a[^2] = "5555";
 
                 ReadOnlySpan<string> span = new ReadOnlySpan<string>(a);
@@ -345,17 +369,17 @@ namespace System.SpanTests
         [Fact]
         public static void TestOrdinalStringCount_String()
         {
-            ReadOnlySpan<string> span = new string[] { "ii", "II", "ìì", "ii" };
+            ReadOnlySpan<string> span = new string[] { "ii", "II", "ï¿½ï¿½", "ii" };
             Assert.Equal(2, span.Count("ii"));
         }
 
         [Fact]
         public static void TestOrdinalStringCount_RosString()
         {
-            ReadOnlySpan<string> span = new string[] { "ii", "II", "ìì", "ii", "ìì" };
+            ReadOnlySpan<string> span = new string[] { "ii", "II", "ï¿½ï¿½", "ii", "ï¿½ï¿½" };
             Assert.Equal(1, span.Count(new string[] { "ii", "II" }));
         }
-        
+
         [Fact]
         public static void TestOverlapDoNotCount_RosChar()
         {

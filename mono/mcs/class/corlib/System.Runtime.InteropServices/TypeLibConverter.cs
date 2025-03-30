@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,39 +35,66 @@ using System.Reflection.Emit;
 
 namespace System.Runtime.InteropServices
 {
-	[ComVisible(true)]
-	[Guid ("f1c3bf79-c3e4-11d3-88e7-00902754c43a")]
-	[ClassInterface (ClassInterfaceType.None)]
-	public sealed class TypeLibConverter : ITypeLibConverter
-	{
-		public TypeLibConverter ()
-		{
-		}
+    [ComVisible(true)]
+    [Guid("f1c3bf79-c3e4-11d3-88e7-00902754c43a")]
+    [ClassInterface(ClassInterfaceType.None)]
+    public sealed class TypeLibConverter : ITypeLibConverter
+    {
+        public TypeLibConverter() { }
 
-		[MonoTODO ("implement")]
-		[return: MarshalAs (UnmanagedType.Interface)]
-		public object ConvertAssemblyToTypeLib (Assembly assembly, string strTypeLibName, TypeLibExporterFlags flags, ITypeLibExporterNotifySink notifySink)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO("implement")]
+        [return: MarshalAs(UnmanagedType.Interface)]
+        public object ConvertAssemblyToTypeLib(
+            Assembly assembly,
+            string strTypeLibName,
+            TypeLibExporterFlags flags,
+            ITypeLibExporterNotifySink notifySink
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO ("implement")]
-		public AssemblyBuilder ConvertTypeLibToAssembly ([MarshalAs(UnmanagedType.Interface)] object typeLib, string asmFileName, int flags, ITypeLibImporterNotifySink notifySink, byte[] publicKey, StrongNameKeyPair keyPair, bool unsafeInterfaces)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO("implement")]
+        public AssemblyBuilder ConvertTypeLibToAssembly(
+            [MarshalAs(UnmanagedType.Interface)] object typeLib,
+            string asmFileName,
+            int flags,
+            ITypeLibImporterNotifySink notifySink,
+            byte[] publicKey,
+            StrongNameKeyPair keyPair,
+            bool unsafeInterfaces
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO ("implement")]
-		public AssemblyBuilder ConvertTypeLibToAssembly ([MarshalAs(UnmanagedType.Interface)] object typeLib, string asmFileName, TypeLibImporterFlags flags, ITypeLibImporterNotifySink notifySink, byte[] publicKey, StrongNameKeyPair keyPair, string asmNamespace, Version asmVersion)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO("implement")]
+        public AssemblyBuilder ConvertTypeLibToAssembly(
+            [MarshalAs(UnmanagedType.Interface)] object typeLib,
+            string asmFileName,
+            TypeLibImporterFlags flags,
+            ITypeLibImporterNotifySink notifySink,
+            byte[] publicKey,
+            StrongNameKeyPair keyPair,
+            string asmNamespace,
+            Version asmVersion
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO ("implement")]
-		public bool GetPrimaryInteropAssembly (Guid g, int major, int minor, int lcid, out string asmName, out string asmCodeBase)
-		{
-			throw new NotImplementedException ();
-		}	
-	}
+        [MonoTODO("implement")]
+        public bool GetPrimaryInteropAssembly(
+            Guid g,
+            int major,
+            int minor,
+            int lcid,
+            out string asmName,
+            out string asmCodeBase
+        )
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 #endif

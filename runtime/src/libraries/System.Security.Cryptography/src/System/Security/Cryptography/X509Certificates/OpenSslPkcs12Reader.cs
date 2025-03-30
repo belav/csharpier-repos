@@ -24,15 +24,23 @@ namespace System.Security.Cryptography.X509Certificates
             throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
         }
 
-        public static bool TryRead(ReadOnlySpan<byte> data, [NotNullWhen(true)] out OpenSslPkcs12Reader? pkcs12Reader) =>
-            TryRead(data, out pkcs12Reader, out _, captureException: false);
+        public static bool TryRead(
+            ReadOnlySpan<byte> data,
+            [NotNullWhen(true)] out OpenSslPkcs12Reader? pkcs12Reader
+        ) => TryRead(data, out pkcs12Reader, out _, captureException: false);
 
-        public static bool TryRead(ReadOnlySpan<byte> data, [NotNullWhen(true)] out OpenSslPkcs12Reader? pkcs12Reader, [NotNullWhen(false)] out Exception? openSslException) =>
-            TryRead(data, out pkcs12Reader, out openSslException!, captureException: true);
+        public static bool TryRead(
+            ReadOnlySpan<byte> data,
+            [NotNullWhen(true)] out OpenSslPkcs12Reader? pkcs12Reader,
+            [NotNullWhen(false)] out Exception? openSslException
+        ) => TryRead(data, out pkcs12Reader, out openSslException!, captureException: true);
 
         protected override AsymmetricAlgorithm LoadKey(ReadOnlyMemory<byte> pkcs8)
         {
-            PrivateKeyInfoAsn privateKeyInfo = PrivateKeyInfoAsn.Decode(pkcs8, AsnEncodingRules.BER);
+            PrivateKeyInfoAsn privateKeyInfo = PrivateKeyInfoAsn.Decode(
+                pkcs8,
+                AsnEncodingRules.BER
+            );
             AsymmetricAlgorithm key;
 
             switch (privateKeyInfo.PrivateKeyAlgorithm.Algorithm)
@@ -50,7 +58,8 @@ namespace System.Security.Cryptography.X509Certificates
                 default:
                     throw new CryptographicException(
                         SR.Cryptography_UnknownAlgorithmIdentifier,
-                        privateKeyInfo.PrivateKeyAlgorithm.Algorithm);
+                        privateKeyInfo.PrivateKeyAlgorithm.Algorithm
+                    );
             }
 
             key.ImportPkcs8PrivateKey(pkcs8.Span, out int bytesRead);
@@ -83,7 +92,8 @@ namespace System.Security.Cryptography.X509Certificates
             ReadOnlySpan<byte> data,
             [NotNullWhen(true)] out OpenSslPkcs12Reader? pkcs12Reader,
             out Exception? openSslException,
-            bool captureException)
+            bool captureException
+        )
         {
             openSslException = null;
 

@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.IO;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace System.Text.Json.Serialization.Tests
@@ -13,7 +13,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ClassWithNullProperty()
         {
-            TestClassWithNull obj = JsonSerializer.Deserialize<TestClassWithNull>(TestClassWithNull.s_json);
+            TestClassWithNull obj = JsonSerializer.Deserialize<TestClassWithNull>(
+                TestClassWithNull.s_json
+            );
             obj.Verify();
         }
 
@@ -41,10 +43,11 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             {
-                Dictionary<string, object> obj = JsonSerializer.Deserialize<Dictionary<string, object>>("null");
+                Dictionary<string, object> obj = JsonSerializer.Deserialize<
+                    Dictionary<string, object>
+                >("null");
                 Assert.Null(obj);
             }
-
         }
 
         [Fact]
@@ -69,7 +72,10 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void DefaultIgnoreNullValuesOnRead()
         {
-            TestClassWithInitializedProperties obj = JsonSerializer.Deserialize<TestClassWithInitializedProperties>(TestClassWithInitializedProperties.s_null_json);
+            TestClassWithInitializedProperties obj =
+                JsonSerializer.Deserialize<TestClassWithInitializedProperties>(
+                    TestClassWithInitializedProperties.s_null_json
+                );
             Assert.Null(obj.MyString);
             Assert.Null(obj.MyInt);
             Assert.Null(obj.MyDateTime);
@@ -93,7 +99,11 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.IgnoreNullValues = true;
 
-            TestClassWithInitializedProperties obj = JsonSerializer.Deserialize<TestClassWithInitializedProperties>(TestClassWithInitializedProperties.s_null_json, options);
+            TestClassWithInitializedProperties obj =
+                JsonSerializer.Deserialize<TestClassWithInitializedProperties>(
+                    TestClassWithInitializedProperties.s_null_json,
+                    options
+                );
 
             Assert.Equal("Hello", obj.MyString);
             Assert.Equal(1, obj.MyInt);
@@ -117,7 +127,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ParseNullArgumentFail()
         {
-            Assert.Throws<ArgumentNullException>(() => JsonSerializer.Deserialize<string>((string)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Deserialize<string>((string)null)
+            );
             Assert.Throws<ArgumentNullException>(() => JsonSerializer.Deserialize("1", (Type)null));
         }
 
@@ -159,11 +171,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("null"));
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("\"\""));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>(""));   // Empty JSON is invalid
+            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("")); // Empty JSON is invalid
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("1234")); // Can't convert a JSON number to JSON string/char
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("\"stringTooLong\""));
+            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("\"stringTooLong\"")
+            );
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("\"\u0059B\""));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("\"\uD800\uDC00\""));
+            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<char>("\"\uD800\uDC00\"")
+            );
             Assert.Equal('a', JsonSerializer.Deserialize<char>("\"a\""));
             Assert.Equal('Y', JsonSerializer.Deserialize<char>("\"\u0059\""));
         }
@@ -176,9 +190,15 @@ namespace System.Text.Json.Serialization.Tests
 
             Utf8JsonReader reader = new Utf8JsonReader(nullStringAsBytes);
 
-            JsonTestHelper.AssertThrows<JsonException>(ref reader, (ref Utf8JsonReader reader) => JsonSerializer.Deserialize<SimpleStruct>(ref reader));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<SimpleStruct>(nullStringAsBytes));
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<SimpleStruct>(nullString));
+            JsonTestHelper.AssertThrows<JsonException>(
+                ref reader,
+                (ref Utf8JsonReader reader) => JsonSerializer.Deserialize<SimpleStruct>(ref reader)
+            );
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<SimpleStruct>(nullStringAsBytes)
+            );
+            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<SimpleStruct>(nullString)
+            );
 
             // null can be assigned to nullable structs.
             Assert.Null(JsonSerializer.Deserialize<SimpleStruct?>(nullStringAsBytes));
@@ -189,8 +209,10 @@ namespace System.Text.Json.Serialization.Tests
         public static async Task ParseNullStringShouldThrowJsonExceptionAsync()
         {
             using (var stream = new MemoryStream("null"u8.ToArray()))
-            { 
-                await Assert.ThrowsAsync<JsonException>(async () => await JsonSerializer.DeserializeAsync<SimpleStruct>(stream));
+            {
+                await Assert.ThrowsAsync<JsonException>(async () =>
+                    await JsonSerializer.DeserializeAsync<SimpleStruct>(stream)
+                );
 
                 // null can be assigned to nullable structs.
                 stream.Position = 0;
@@ -202,22 +224,30 @@ namespace System.Text.Json.Serialization.Tests
         public static void DeserializeDictionaryWithNullValues()
         {
             {
-                Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(@"{""key"":null}");
+                Dictionary<string, string> dict = JsonSerializer.Deserialize<
+                    Dictionary<string, string>
+                >(@"{""key"":null}");
                 Assert.Null(dict["key"]);
             }
 
             {
-                Dictionary<string, object> dict = JsonSerializer.Deserialize<Dictionary<string, object>>(@"{""key"":null}");
+                Dictionary<string, object> dict = JsonSerializer.Deserialize<
+                    Dictionary<string, object>
+                >(@"{""key"":null}");
                 Assert.Null(dict["key"]);
             }
 
             {
-                Dictionary<string, Dictionary<string, string>> dict = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(@"{""key"":null}");
+                Dictionary<string, Dictionary<string, string>> dict = JsonSerializer.Deserialize<
+                    Dictionary<string, Dictionary<string, string>>
+                >(@"{""key"":null}");
                 Assert.Null(dict["key"]);
             }
 
             {
-                Dictionary<string, Dictionary<string, object>> dict = JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, object>>>(@"{""key"":null}");
+                Dictionary<string, Dictionary<string, object>> dict = JsonSerializer.Deserialize<
+                    Dictionary<string, Dictionary<string, object>>
+                >(@"{""key"":null}");
                 Assert.Null(dict["key"]);
             }
         }
@@ -233,25 +263,22 @@ namespace System.Text.Json.Serialization.Tests
             if (type.IsValueType)
             {
                 // Unsupported struct types throw
-                Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize("null", type));
+                Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize("null", type)
+                );
 
-                var options = new JsonSerializerOptions
-                {
-                    IgnoreNullValues = true
-                };
+                var options = new JsonSerializerOptions { IgnoreNullValues = true };
 
                 // We still throw when we have an unsupported root.
-                Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize("null", type, options));
+                Assert.Throws<NotSupportedException>(() =>
+                    JsonSerializer.Deserialize("null", type, options)
+                );
             }
             else
             {
                 // Unsupported reference types handle null values.
                 Assert.Null(JsonSerializer.Deserialize("null", type));
 
-                var options = new JsonSerializerOptions
-                {
-                    IgnoreNullValues = true
-                };
+                var options = new JsonSerializerOptions { IgnoreNullValues = true };
 
                 Assert.Null(JsonSerializer.Deserialize("null", type, options));
             }
@@ -266,7 +293,12 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(JsonTokenType.Null, reader.TokenType);
 
             T? result = converter.Read(ref reader, typeof(T), JsonSerializerOptions.Default);
-            Assert.True(result is null or JsonDocument { RootElement.ValueKind: JsonValueKind.Null } or JsonElement { ValueKind: JsonValueKind.Null });
+            Assert.True(
+                result
+                    is null
+                        or JsonDocument { RootElement.ValueKind: JsonValueKind.Null }
+                        or JsonElement { ValueKind: JsonValueKind.Null }
+            );
         }
 
         [Theory]
@@ -284,16 +316,23 @@ namespace System.Text.Json.Serialization.Tests
             List<T>? list = JsonSerializer.Deserialize<List<T>>("[null]");
             AssertNull(list[0]);
 
-            GenericRecord<T>? record = JsonSerializer.Deserialize<GenericRecord<T>>("""{"Value":null}""");
+            GenericRecord<T>? record = JsonSerializer.Deserialize<GenericRecord<T>>(
+                """{"Value":null}"""
+            );
             AssertNull(record.Value);
 
-            Dictionary<string, T>? dictionary = JsonSerializer.Deserialize<Dictionary<string, T>>("""{"Key":null}""");
+            Dictionary<string, T>? dictionary = JsonSerializer.Deserialize<Dictionary<string, T>>(
+                """{"Key":null}"""
+            );
             AssertNull(dictionary["Key"]);
 
-            static void AssertNull(T? result) => Assert.True(
-                result is null
-                       or JsonDocument { RootElement.ValueKind: JsonValueKind.Null }
-                       or JsonElement { ValueKind: JsonValueKind.Null });
+            static void AssertNull(T? result) =>
+                Assert.True(
+                    result
+                        is null
+                            or JsonDocument { RootElement.ValueKind: JsonValueKind.Null }
+                            or JsonElement { ValueKind: JsonValueKind.Null }
+                );
         }
     }
 }

@@ -50,7 +50,10 @@ namespace System.Reflection.Context.Projection
 
         public override IList<CustomAttributeData> GetCustomAttributesData()
         {
-            return Projector.Project(base.GetCustomAttributesData(), Projector.ProjectCustomAttributeData);
+            return Projector.Project(
+                base.GetCustomAttributesData(),
+                Projector.ProjectCustomAttributeData
+            );
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)
@@ -72,9 +75,9 @@ namespace System.Reflection.Context.Projection
 
         public override bool Equals([NotNullWhen(true)] object? o)
         {
-            return o is ProjectingFieldInfo other &&
-                   Projector == other.Projector &&
-                   UnderlyingField.Equals(other.UnderlyingField);
+            return o is ProjectingFieldInfo other
+                && Projector == other.Projector
+                && UnderlyingField.Equals(other.UnderlyingField);
         }
 
         public override int GetHashCode()

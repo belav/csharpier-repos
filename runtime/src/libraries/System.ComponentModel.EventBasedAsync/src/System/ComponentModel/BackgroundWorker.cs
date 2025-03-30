@@ -34,17 +34,16 @@ namespace System.ComponentModel
 
         public bool CancellationPending
         {
-            get
-            {
-                return _cancellationPending;
-            }
+            get { return _cancellationPending; }
         }
 
         public void CancelAsync()
         {
             if (!WorkerSupportsCancellation)
             {
-                throw new InvalidOperationException(SR.BackgroundWorker_WorkerDoesntSupportCancellation);
+                throw new InvalidOperationException(
+                    SR.BackgroundWorker_WorkerDoesntSupportCancellation
+                );
             }
 
             _cancellationPending = true;
@@ -54,10 +53,7 @@ namespace System.ComponentModel
 
         public bool IsBusy
         {
-            get
-            {
-                return _isRunning;
-            }
+            get { return _isRunning; }
         }
 
         protected virtual void OnDoWork(DoWorkEventArgs e)
@@ -97,7 +93,10 @@ namespace System.ComponentModel
                 throw new InvalidOperationException(SR.BackgroundWorker_WorkerDoesntReportProgress);
             }
 
-            ProgressChangedEventArgs args = new ProgressChangedEventArgs(percentProgress, userState);
+            ProgressChangedEventArgs args = new ProgressChangedEventArgs(
+                percentProgress,
+                userState
+            );
 
             if (_asyncOperation != null)
             {
@@ -126,40 +125,26 @@ namespace System.ComponentModel
 
             _asyncOperation = AsyncOperationManager.CreateOperation(null);
             Task.Factory.StartNew(
-                        WorkerThreadStart,
-                        argument,
-                        CancellationToken.None,
-                        TaskCreationOptions.DenyChildAttach,
-                        TaskScheduler.Default
-                    );
+                WorkerThreadStart,
+                argument,
+                CancellationToken.None,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
         }
 
         public event RunWorkerCompletedEventHandler? RunWorkerCompleted;
 
         public bool WorkerReportsProgress
         {
-            get
-            {
-                return _workerReportsProgress;
-            }
-
-            set
-            {
-                _workerReportsProgress = value;
-            }
+            get { return _workerReportsProgress; }
+            set { _workerReportsProgress = value; }
         }
 
         public bool WorkerSupportsCancellation
         {
-            get
-            {
-                return _canCancelWorker;
-            }
-
-            set
-            {
-                _canCancelWorker = value;
-            }
+            get { return _canCancelWorker; }
+            set { _canCancelWorker = value; }
         }
 
         private void WorkerThreadStart(object? argument)
@@ -192,8 +177,6 @@ namespace System.ComponentModel
             _asyncOperation.PostOperationCompleted(_operationCompleted, e);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-        }
+        protected override void Dispose(bool disposing) { }
     }
 }

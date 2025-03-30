@@ -11,29 +11,53 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public void CannotCreateForNonDelegate()
         {
-            string msg = AssertExtensions.Throws<ArgumentException>(null, () => CallSite<Expression>.Create(null)).Message;
+            string msg = AssertExtensions
+                .Throws<ArgumentException>(null, () => CallSite<Expression>.Create(null))
+                .Message;
             CallSiteBinder binder = new CallSiteBinderDefaultBehaviourTests.NopCallSiteBinder();
-            Assert.Equal(msg, AssertExtensions.Throws<ArgumentException>(null, () => CallSite<Expression>.Create(binder)).Message);
-            Assert.Equal(msg, AssertExtensions.Throws<ArgumentException>(null, () => CallSite.Create(typeof(Expression), binder)).Message);
+            Assert.Equal(
+                msg,
+                AssertExtensions
+                    .Throws<ArgumentException>(null, () => CallSite<Expression>.Create(binder))
+                    .Message
+            );
+            Assert.Equal(
+                msg,
+                AssertExtensions
+                    .Throws<ArgumentException>(
+                        null,
+                        () => CallSite.Create(typeof(Expression), binder)
+                    )
+                    .Message
+            );
         }
 
         [Fact]
         public void NonGenericCreateNullType()
         {
             CallSiteBinder binder = new CallSiteBinderDefaultBehaviourTests.NopCallSiteBinder();
-            AssertExtensions.Throws<ArgumentNullException>("delegateType", () => CallSite.Create(null, binder));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "delegateType",
+                () => CallSite.Create(null, binder)
+            );
         }
 
         [Fact]
         public void NonGenericCreateNullBinder()
         {
-            AssertExtensions.Throws<ArgumentNullException>("binder", () => CallSite.Create(typeof(Func<string>), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "binder",
+                () => CallSite.Create(typeof(Func<string>), null)
+            );
         }
 
         [Fact]
         public void NullBinder()
         {
-            AssertExtensions.Throws<ArgumentNullException>("binder", () => CallSite<Func<CallSite, object, object>>.Create(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "binder",
+                () => CallSite<Func<CallSite, object, object>>.Create(null)
+            );
         }
     }
 }

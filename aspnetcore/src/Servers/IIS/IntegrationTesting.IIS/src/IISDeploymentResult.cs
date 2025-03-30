@@ -15,18 +15,22 @@ public class IISDeploymentResult : DeploymentResult, IDisposable
 
     public string AppPoolName { get; }
 
-    public IISDeploymentResult(ILoggerFactory loggerFactory,
+    public IISDeploymentResult(
+        ILoggerFactory loggerFactory,
         IISDeploymentParameters deploymentParameters,
         string applicationBaseUri,
         string contentRoot,
         string appPoolName,
         CancellationToken hostShutdownToken,
-        Process hostProcess)
-        : base(loggerFactory,
-              deploymentParameters,
-              applicationBaseUri,
-              contentRoot,
-              hostShutdownToken)
+        Process hostProcess
+    )
+        : base(
+            loggerFactory,
+            deploymentParameters,
+            applicationBaseUri,
+            contentRoot,
+            hostShutdownToken
+        )
     {
         AppPoolName = appPoolName;
         HostProcess = hostProcess;

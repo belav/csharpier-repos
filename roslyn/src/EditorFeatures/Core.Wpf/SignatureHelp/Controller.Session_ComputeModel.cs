@@ -28,19 +28,32 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
         {
             public void ComputeModel(
                 ImmutableArray<ISignatureHelpProvider> providers,
-                SignatureHelpTriggerInfo triggerInfo)
+                SignatureHelpTriggerInfo triggerInfo
+            )
             {
                 this.Computation.ThreadingContext.ThrowIfNotOnUIThread();
 
-                var caretPosition = Controller.TextView.GetCaretPoint(Controller.SubjectBuffer).Value;
-                var disconnectedBufferGraph = new DisconnectedBufferGraph(Controller.SubjectBuffer, Controller.TextView.TextBuffer);
+                var caretPosition = Controller
+                    .TextView.GetCaretPoint(Controller.SubjectBuffer)
+                    .Value;
+                var disconnectedBufferGraph = new DisconnectedBufferGraph(
+                    Controller.SubjectBuffer,
+                    Controller.TextView.TextBuffer
+                );
 
                 // If we've already computed a model, then just use that.  Otherwise, actually
                 // compute a new model and send that along.
                 Computation.ChainTaskAndNotifyControllerWhenFinished(
-                    (model, cancellationToken) => ComputeModelInBackgroundAsync(
-                        model, providers, caretPosition, disconnectedBufferGraph,
-                        triggerInfo, cancellationToken));
+                    (model, cancellationToken) =>
+                        ComputeModelInBackgroundAsync(
+                            model,
+                            providers,
+                            caretPosition,
+                            disconnectedBufferGraph,
+                            triggerInfo,
+                            cancellationToken
+                        )
+                );
             }
 
             private async Task<Model> ComputeModelInBackgroundAsync(
@@ -49,16 +62,25 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 SnapshotPoint caretPosition,
                 DisconnectedBufferGraph disconnectedBufferGraph,
                 SignatureHelpTriggerInfo triggerInfo,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 try
                 {
-                    using (Logger.LogBlock(FunctionId.SignatureHelp_ModelComputation_ComputeModelInBackground, cancellationToken))
+                    using (
+                        Logger.LogBlock(
+                            FunctionId.SignatureHelp_ModelComputation_ComputeModelInBackground,
+                            cancellationToken
+                        )
+                    )
                     {
                         this.Computation.ThreadingContext.ThrowIfNotOnBackgroundThread();
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        var document = Controller.DocumentProvider.GetDocument(caretPosition.Snapshot, cancellationToken);
+                        var document = Controller.DocumentProvider.GetDocument(
+                            caretPosition.Snapshot,
+                            cancellationToken
+                        );
                         if (document == null)
                         {
                             return currentModel;
@@ -70,26 +92,40 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                             return null;
                         }
 
-                        if (triggerInfo.TriggerReason == SignatureHelpTriggerReason.RetriggerCommand)
+                        if (
+                            triggerInfo.TriggerReason == SignatureHelpTriggerReason.RetriggerCommand
+                        )
                         {
                             if (currentModel == null)
                             {
                                 return null;
                             }
 
-                            if (triggerInfo.TriggerCharacter.HasValue &&
-                                !currentModel.Provider.IsRetriggerCharacter(triggerInfo.TriggerCharacter.Value))
+                            if (
+                                triggerInfo.TriggerCharacter.HasValue
+                                && !currentModel.Provider.IsRetriggerCharacter(
+                                    triggerInfo.TriggerCharacter.Value
+                                )
+                            )
                             {
                                 return currentModel;
                             }
                         }
 
-                        var options = Controller.GlobalOptions.GetSignatureHelpOptions(document.Project.Language);
+                        var options = Controller.GlobalOptions.GetSignatureHelpOptions(
+                            document.Project.Language
+                        );
 
                         // first try to query the providers that can trigger on the specified character
                         var (provider, items) = await ComputeItemsAsync(
-                            providers, caretPosition, triggerInfo,
-                            options, document, cancellationToken).ConfigureAwait(false);
+                                providers,
+                                caretPosition,
+                                triggerInfo,
+                                options,
+                                document,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
 
                         if (provider == null)
                         {
@@ -97,49 +133,96 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                             return null;
                         }
 
-                        if (currentModel != null &&
-                            currentModel.Provider == provider &&
-                            currentModel.GetCurrentSpanInSubjectBuffer(disconnectedBufferGraph.SubjectBufferSnapshot).Span.Start == items.ApplicableSpan.Start &&
-                            currentModel.Items.IndexOf(currentModel.SelectedItem) == items.SelectedItemIndex &&
-                            currentModel.ArgumentIndex == items.ArgumentIndex &&
-                            currentModel.ArgumentCount == items.ArgumentCount &&
-                            currentModel.ArgumentName == items.ArgumentName)
+                        if (
+                            currentModel != null
+                            && currentModel.Provider == provider
+                            && currentModel
+                                .GetCurrentSpanInSubjectBuffer(
+                                    disconnectedBufferGraph.SubjectBufferSnapshot
+                                )
+                                .Span.Start == items.ApplicableSpan.Start
+                            && currentModel.Items.IndexOf(currentModel.SelectedItem)
+                                == items.SelectedItemIndex
+                            && currentModel.ArgumentIndex == items.ArgumentIndex
+                            && currentModel.ArgumentCount == items.ArgumentCount
+                            && currentModel.ArgumentName == items.ArgumentName
+                        )
                         {
                             // The new model is the same as the current model.  Return the currentModel
                             // so we keep the active selection.
                             return currentModel;
                         }
 
-                        var selectedItem = GetSelectedItem(currentModel, items, provider, out var userSelected);
+                        var selectedItem = GetSelectedItem(
+                            currentModel,
+                            items,
+                            provider,
+                            out var userSelected
+                        );
 
-                        var model = new Model(disconnectedBufferGraph, items.ApplicableSpan, provider,
-                            items.Items, selectedItem, items.ArgumentIndex, items.ArgumentCount, items.ArgumentName,
-                            selectedParameter: 0, userSelected);
+                        var model = new Model(
+                            disconnectedBufferGraph,
+                            items.ApplicableSpan,
+                            provider,
+                            items.Items,
+                            selectedItem,
+                            items.ArgumentIndex,
+                            items.ArgumentCount,
+                            items.ArgumentName,
+                            selectedParameter: 0,
+                            userSelected
+                        );
 
                         var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
-                        var isCaseSensitive = syntaxFactsService == null || syntaxFactsService.IsCaseSensitive;
-                        var selection = DefaultSignatureHelpSelector.GetSelection(model.Items,
-                            model.SelectedItem, model.UserSelected, model.ArgumentIndex, model.ArgumentCount, model.ArgumentName, isCaseSensitive);
+                        var isCaseSensitive =
+                            syntaxFactsService == null || syntaxFactsService.IsCaseSensitive;
+                        var selection = DefaultSignatureHelpSelector.GetSelection(
+                            model.Items,
+                            model.SelectedItem,
+                            model.UserSelected,
+                            model.ArgumentIndex,
+                            model.ArgumentCount,
+                            model.ArgumentName,
+                            isCaseSensitive
+                        );
 
-                        return model.WithSelectedItem(selection.SelectedItem, selection.UserSelected)
-                                    .WithSelectedParameter(selection.SelectedParameter);
+                        return model
+                            .WithSelectedItem(selection.SelectedItem, selection.UserSelected)
+                            .WithSelectedParameter(selection.SelectedParameter);
                     }
                 }
-                catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken, ErrorSeverity.Critical))
+                catch (Exception e)
+                    when (FatalError.ReportAndPropagateUnlessCanceled(
+                            e,
+                            cancellationToken,
+                            ErrorSeverity.Critical
+                        )
+                    )
                 {
                     throw ExceptionUtilities.Unreachable();
                 }
             }
 
-            private static SignatureHelpItem GetSelectedItem(Model currentModel, SignatureHelpItems items, ISignatureHelpProvider provider, out bool userSelected)
+            private static SignatureHelpItem GetSelectedItem(
+                Model currentModel,
+                SignatureHelpItems items,
+                ISignatureHelpProvider provider,
+                out bool userSelected
+            )
             {
                 // Try to find the most appropriate item in the list to select by default.
 
                 // If it's the same provider as the previous model we have, and we had a user-selection,
                 // then try to return the user-selection.
-                if (currentModel != null && currentModel.Provider == provider && currentModel.UserSelected)
+                if (
+                    currentModel != null
+                    && currentModel.Provider == provider
+                    && currentModel.UserSelected
+                )
                 {
-                    var userSelectedItem = items.Items.FirstOrDefault(i => DisplayPartsMatch(i, currentModel.SelectedItem));
+                    var userSelectedItem = items.Items.FirstOrDefault(i =>
+                        DisplayPartsMatch(i, currentModel.SelectedItem)
+                    );
                     if (userSelectedItem != null)
                     {
                         userSelected = true;
@@ -160,7 +243,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 {
                     // If the provider did not pick a default, and it's the same provider as the previous
                     // model we have, then try to return the same item that we had before.
-                    lastSelectionOrDefault = items.Items.FirstOrDefault(i => DisplayPartsMatch(i, currentModel.SelectedItem));
+                    lastSelectionOrDefault = items.Items.FirstOrDefault(i =>
+                        DisplayPartsMatch(i, currentModel.SelectedItem)
+                    );
                 }
 
                 // Otherwise, just pick the first item we have.
@@ -169,19 +254,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 return lastSelectionOrDefault;
             }
 
-            private static bool DisplayPartsMatch(SignatureHelpItem i1, SignatureHelpItem i2)
-                => i1.GetAllParts().SequenceEqual(i2.GetAllParts(), CompareParts);
+            private static bool DisplayPartsMatch(SignatureHelpItem i1, SignatureHelpItem i2) =>
+                i1.GetAllParts().SequenceEqual(i2.GetAllParts(), CompareParts);
 
-            private static bool CompareParts(TaggedText p1, TaggedText p2)
-                => p1.ToString() == p2.ToString();
+            private static bool CompareParts(TaggedText p1, TaggedText p2) =>
+                p1.ToString() == p2.ToString();
 
-            private static async Task<(ISignatureHelpProvider provider, SignatureHelpItems items)> ComputeItemsAsync(
+            private static async Task<(
+                ISignatureHelpProvider provider,
+                SignatureHelpItems items
+            )> ComputeItemsAsync(
                 ImmutableArray<ISignatureHelpProvider> providers,
                 SnapshotPoint caretPosition,
                 SignatureHelpTriggerInfo triggerInfo,
                 SignatureHelpOptions options,
                 Document document,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 try
                 {
@@ -194,8 +283,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     {
                         cancellationToken.ThrowIfCancellationRequested();
 
-                        var currentItems = await provider.GetItemsAsync(document, caretPosition, triggerInfo, options, cancellationToken).ConfigureAwait(false);
-                        if (currentItems != null && currentItems.ApplicableSpan.IntersectsWith(caretPosition.Position))
+                        var currentItems = await provider
+                            .GetItemsAsync(
+                                document,
+                                caretPosition,
+                                triggerInfo,
+                                options,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
+                        if (
+                            currentItems != null
+                            && currentItems.ApplicableSpan.IntersectsWith(caretPosition.Position)
+                        )
                         {
                             // If another provider provides sig help items, then only take them if they
                             // start after the last batch of items.  i.e. we want the set of items that
@@ -215,7 +315,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
 
                     return (bestProvider, bestItems);
                 }
-                catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken, ErrorSeverity.Critical))
+                catch (Exception e)
+                    when (FatalError.ReportAndCatchUnlessCanceled(
+                            e,
+                            cancellationToken,
+                            ErrorSeverity.Critical
+                        )
+                    )
                 {
                     return (null, null);
                 }

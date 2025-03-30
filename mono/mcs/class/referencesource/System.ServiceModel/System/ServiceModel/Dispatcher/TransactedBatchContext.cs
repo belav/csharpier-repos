@@ -22,12 +22,19 @@ namespace System.ServiceModel.Dispatcher
         internal TransactedBatchContext(SharedTransactedBatchContext shared)
         {
             this.shared = shared;
-            this.transaction = TransactionBehavior.CreateTransaction(shared.IsolationLevel, shared.TransactionTimeout);
+            this.transaction = TransactionBehavior.CreateTransaction(
+                shared.IsolationLevel,
+                shared.TransactionTimeout
+            );
             this.transaction.EnlistVolatile(this, EnlistmentOptions.None);
             if (shared.TransactionTimeout <= TimeSpan.Zero)
                 this.commitNotLaterThan = DateTime.MaxValue;
             else
-                this.commitNotLaterThan = DateTime.UtcNow + TimeSpan.FromMilliseconds(shared.TransactionTimeout.TotalMilliseconds * 4 / 5);
+                this.commitNotLaterThan =
+                    DateTime.UtcNow
+                    + TimeSpan.FromMilliseconds(
+                        shared.TransactionTimeout.TotalMilliseconds * 4 / 5
+                    );
             this.commits = 0;
             this.batchFinished = false;
             this.inDispatch = false;
@@ -35,10 +42,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool AboutToExpire
         {
-            get
-            {
-                return DateTime.UtcNow > this.commitNotLaterThan;
-            }
+            get { return DateTime.UtcNow > this.commitNotLaterThan; }
         }
 
         internal bool IsActive
@@ -50,7 +54,8 @@ namespace System.ServiceModel.Dispatcher
 
                 try
                 {
-                    return TransactionStatus.Active == this.transaction.TransactionInformation.Status;
+                    return TransactionStatus.Active
+                        == this.transaction.TransactionInformation.Status;
                 }
                 catch (ObjectDisposedException ex)
                 {
@@ -67,7 +72,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.inDispatch == value)
                 {
-                    Fx.Assert("System.ServiceModel.Dispatcher.ChannelHandler.TransactedBatchContext.InDispatch: (inDispatch == value)");
+                    Fx.Assert(
+                        "System.ServiceModel.Dispatcher.ChannelHandler.TransactedBatchContext.InDispatch: (inDispatch == value)"
+                    );
                 }
                 this.inDispatch = value;
                 if (this.inDispatch)
@@ -122,7 +129,10 @@ namespace System.ServiceModel.Dispatcher
         {
             ++this.commits;
 
-            if (this.commits >= this.shared.CurrentBatchSize || DateTime.UtcNow >= this.commitNotLaterThan)
+            if (
+                this.commits >= this.shared.CurrentBatchSize
+                || DateTime.UtcNow >= this.commitNotLaterThan
+            )
             {
                 ForceCommit();
             }
@@ -175,7 +185,11 @@ namespace System.ServiceModel.Dispatcher
         bool isBatching;
         ChannelHandler handler;
 
-        internal SharedTransactedBatchContext(ChannelHandler handler, ChannelDispatcher dispatcher, int maxConcurrentBatches)
+        internal SharedTransactedBatchContext(
+            ChannelHandler handler,
+            ChannelDispatcher dispatcher,
+            int maxConcurrentBatches
+        )
         {
             this.handler = handler;
             this.maxBatchSize = dispatcher.MaxTransactedBatchSize;
@@ -205,7 +219,10 @@ namespace System.ServiceModel.Dispatcher
             lock (thisLock)
             {
                 ++this.currentConcurrentDispatches;
-                if (this.currentConcurrentDispatches == this.currentConcurrentBatches && this.currentConcurrentBatches < this.maxConcurrentBatches)
+                if (
+                    this.currentConcurrentDispatches == this.currentConcurrentBatches
+                    && this.currentConcurrentBatches < this.maxConcurrentBatches
+                )
                 {
                     TransactedBatchContext context = new TransactedBatchContext(this);
                     ++this.currentConcurrentBatches;
@@ -222,7 +239,9 @@ namespace System.ServiceModel.Dispatcher
                 --this.currentConcurrentDispatches;
                 if (this.currentConcurrentDispatches < 0)
                 {
-                    Fx.Assert("System.ServiceModel.Dispatcher.ChannelHandler.SharedTransactedBatchContext.BatchDone: (currentConcurrentDispatches < 0)");
+                    Fx.Assert(
+                        "System.ServiceModel.Dispatcher.ChannelHandler.SharedTransactedBatchContext.BatchDone: (currentConcurrentDispatches < 0)"
+                    );
                 }
             }
         }
@@ -234,7 +253,9 @@ namespace System.ServiceModel.Dispatcher
                 --this.currentConcurrentBatches;
                 if (this.currentConcurrentBatches < 0)
                 {
-                    Fx.Assert("System.ServiceModel.Dispatcher.ChannelHandler.SharedTransactedBatchContext.BatchDone: (currentConcurrentBatches < 0)");
+                    Fx.Assert(
+                        "System.ServiceModel.Dispatcher.ChannelHandler.SharedTransactedBatchContext.BatchDone: (currentConcurrentBatches < 0)"
+                    );
                 }
             }
         }
@@ -252,18 +273,12 @@ namespace System.ServiceModel.Dispatcher
 
         internal IsolationLevel IsolationLevel
         {
-            get
-            {
-                return this.isolationLevel;
-            }
+            get { return this.isolationLevel; }
         }
 
         internal TimeSpan TransactionTimeout
         {
-            get
-            {
-                return this.txTimeout;
-            }
+            get { return this.txTimeout; }
         }
 
         internal void ReportAbort()
@@ -304,11 +319,13 @@ namespace System.ServiceModel.Dispatcher
                 TraceUtility.TraceEvent(
                     TraceEventType.Verbose,
                     batchingNow ? TraceCode.MsmqEnteredBatch : TraceCode.MsmqLeftBatch,
-                    batchingNow ? SR.GetString(SR.TraceCodeMsmqEnteredBatch) : SR.GetString(SR.TraceCodeMsmqLeftBatch),
+                    batchingNow
+                        ? SR.GetString(SR.TraceCodeMsmqEnteredBatch)
+                        : SR.GetString(SR.TraceCodeMsmqLeftBatch),
                     null,
                     null,
-                    null);
-
+                    null
+                );
             }
         }
 

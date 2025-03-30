@@ -7,7 +7,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
 {
     internal static class NameManager
     {
-        private static readonly Name[] s_predefinedNames = {
+        private static readonly Name[] s_predefinedNames =
+        {
             new Name(".ctor"),
             new Name("Finalize"),
             new Name(".cctor"),
@@ -129,7 +130,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
             new Name("checked"),
             new Name("is"),
             new Name("typeof"),
-            new Name("unchecked")
+            new Name("unchecked"),
         };
 
         private static readonly NameTable s_names = GetKnownNames();

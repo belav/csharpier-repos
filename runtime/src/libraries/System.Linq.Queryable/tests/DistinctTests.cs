@@ -62,7 +62,10 @@ namespace System.Linq.Tests
         public void NullSourceCustomComparer()
         {
             IQueryable<string> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.Distinct(StringComparer.Ordinal));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.Distinct(StringComparer.Ordinal)
+            );
         }
 
         [Fact]
@@ -75,7 +78,10 @@ namespace System.Linq.Tests
         [Fact]
         public void Distinct2()
         {
-            var count = new[] { 0, 1, 2, 2, 0 }.AsQueryable().Distinct(EqualityComparer<int>.Default).Count();
+            var count = new[] { 0, 1, 2, 2, 0 }
+                .AsQueryable()
+                .Distinct(EqualityComparer<int>.Default)
+                .Count();
             Assert.Equal(3, count);
         }
 
@@ -84,8 +90,14 @@ namespace System.Linq.Tests
         {
             IQueryable<int> source = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.DistinctBy(x => x));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.DistinctBy(x => x, EqualityComparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.DistinctBy(x => x)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.DistinctBy(x => x, EqualityComparer<int>.Default)
+            );
         }
 
         [Fact]
@@ -94,8 +106,14 @@ namespace System.Linq.Tests
             IQueryable<int> source = Enumerable.Empty<int>().AsQueryable();
             Expression<Func<int, int>> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => source.DistinctBy(keySelector));
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => source.DistinctBy(keySelector, EqualityComparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => source.DistinctBy(keySelector)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => source.DistinctBy(keySelector, EqualityComparer<int>.Default)
+            );
         }
 
         [Fact]
@@ -110,7 +128,11 @@ namespace System.Linq.Tests
         public void DistinctBy_CustomComparison()
         {
             var expected = Enumerable.Range(0, 3);
-            var actual = Enumerable.Range(0, 20).AsQueryable().DistinctBy(x => x % 3, EqualityComparer<int>.Default).ToArray();
+            var actual = Enumerable
+                .Range(0, 20)
+                .AsQueryable()
+                .DistinctBy(x => x % 3, EqualityComparer<int>.Default)
+                .ToArray();
             Assert.Equal(expected, actual);
         }
     }

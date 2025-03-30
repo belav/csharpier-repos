@@ -45,7 +45,8 @@ internal class Project
         string? buildExtensionsDir,
         string? framework = null,
         string? configuration = null,
-        string? runtime = null)
+        string? runtime = null
+    )
     {
         Debug.Assert(!string.IsNullOrEmpty(file), "file is null or empty.");
 
@@ -55,9 +56,13 @@ internal class Project
 
         var efTargetsPath = Path.Combine(
             buildExtensionsDir,
-            Path.GetFileName(file) + ".EntityFrameworkCore.targets");
-        using (var input = typeof(Resources).Assembly.GetManifestResourceStream(
-                   "Microsoft.EntityFrameworkCore.Tools.Resources.EntityFrameworkCore.targets")!)
+            Path.GetFileName(file) + ".EntityFrameworkCore.targets"
+        );
+        using (
+            var input = typeof(Resources).Assembly.GetManifestResourceStream(
+                "Microsoft.EntityFrameworkCore.Tools.Resources.EntityFrameworkCore.targets"
+            )!
+        )
         using (var output = File.OpenWrite(efTargetsPath))
         {
             // NB: Copy always in case it changes
@@ -91,7 +96,7 @@ internal class Project
                 "/target:GetEFProjectMetadata",
                 propertyArg,
                 "/verbosity:quiet",
-                "/nologo"
+                "/nologo",
             };
 
             args.Add(file);
@@ -102,7 +107,8 @@ internal class Project
                 throw new CommandException(Resources.GetMetadataFailed);
             }
 
-            metadata = File.ReadLines(metadataFile).Select(l => l.Split(new[] { ':' }, 2))
+            metadata = File.ReadLines(metadataFile)
+                .Select(l => l.Split(new[] { ':' }, 2))
                 .ToDictionary(s => s[0], s => s[1].TrimStart());
         }
         finally
@@ -130,7 +136,7 @@ internal class Project
             TargetFrameworkMoniker = metadata["TargetFrameworkMoniker"],
             Nullable = metadata["Nullable"],
             TargetFramework = metadata["TargetFramework"],
-            TargetPlatformIdentifier = metadata["TargetPlatformIdentifier"]
+            TargetPlatformIdentifier = metadata["TargetPlatformIdentifier"],
         };
     }
 

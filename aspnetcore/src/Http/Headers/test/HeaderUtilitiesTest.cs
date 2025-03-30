@@ -73,7 +73,9 @@ public class HeaderUtilitiesTest
     public void TryParseSeconds_Succeeds(string headerValues, string targetValue, int expectedValue)
     {
         TimeSpan? value;
-        Assert.True(HeaderUtilities.TryParseSeconds(new StringValues(headerValues), targetValue, out value));
+        Assert.True(
+            HeaderUtilities.TryParseSeconds(new StringValues(headerValues), targetValue, out value)
+        );
         Assert.Equal(TimeSpan.FromSeconds(expectedValue), value);
     }
 
@@ -93,7 +95,9 @@ public class HeaderUtilitiesTest
     public void TryParseSeconds_Fails(string headerValues, string targetValue)
     {
         TimeSpan? value;
-        Assert.False(HeaderUtilities.TryParseSeconds(new StringValues(headerValues), targetValue, out value));
+        Assert.False(
+            HeaderUtilities.TryParseSeconds(new StringValues(headerValues), targetValue, out value)
+        );
     }
 
     [Theory]
@@ -103,7 +107,10 @@ public class HeaderUtilitiesTest
     [InlineData(long.MaxValue)]
     public void FormatNonNegativeInt64_MatchesToString(long value)
     {
-        Assert.Equal(value.ToString(CultureInfo.InvariantCulture), HeaderUtilities.FormatNonNegativeInt64(value));
+        Assert.Equal(
+            value.ToString(CultureInfo.InvariantCulture),
+            HeaderUtilities.FormatNonNegativeInt64(value)
+        );
     }
 
     [Theory]
@@ -112,7 +119,9 @@ public class HeaderUtilitiesTest
     [InlineData(long.MinValue)]
     public void FormatNonNegativeInt64_Throws_ForNegativeValues(long value)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() => HeaderUtilities.FormatNonNegativeInt64(value));
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            HeaderUtilities.FormatNonNegativeInt64(value)
+        );
     }
 
     [Theory]
@@ -125,7 +134,10 @@ public class HeaderUtilitiesTest
     [InlineData(long.MaxValue)]
     public void FormatInt64_MatchesToString(long value)
     {
-        Assert.Equal(value.ToString(CultureInfo.InvariantCulture), HeaderUtilities.FormatInt64(value));
+        Assert.Equal(
+            value.ToString(CultureInfo.InvariantCulture),
+            HeaderUtilities.FormatInt64(value)
+        );
     }
 
     [Theory]
@@ -168,9 +180,16 @@ public class HeaderUtilitiesTest
     [InlineData("directive1, directive2=80", "directive", false)]
     [InlineData("directive1;, directive2=80", "directive", false)]
     [InlineData("directive1=value;q=0.6;directive2 = 42 ", "directive2", false)]
-    public void ContainsCacheDirective_MatchesExactValue(string headerValues, string targetValue, bool contains)
+    public void ContainsCacheDirective_MatchesExactValue(
+        string headerValues,
+        string targetValue,
+        bool contains
+    )
     {
-        Assert.Equal(contains, HeaderUtilities.ContainsCacheDirective(new StringValues(headerValues), targetValue));
+        Assert.Equal(
+            contains,
+            HeaderUtilities.ContainsCacheDirective(new StringValues(headerValues), targetValue)
+        );
     }
 
     [Theory]
@@ -233,6 +252,7 @@ public class HeaderUtilitiesTest
 
         Assert.Equal(expected, actual);
     }
+
     [Theory]
     [InlineData("\"hello\"", true)]
     [InlineData("\"hello", false)]
@@ -284,13 +304,19 @@ public class HeaderUtilitiesTest
     [InlineData("\r")]
     public void SetAndEscapeValue_ControlCharactersThrowFormatException(string input)
     {
-        Assert.Throws<FormatException>(() => { var actual = HeaderUtilities.EscapeAsQuotedString(input); });
+        Assert.Throws<FormatException>(() =>
+        {
+            var actual = HeaderUtilities.EscapeAsQuotedString(input);
+        });
     }
 
     [Fact]
     public void SetAndEscapeValue_ThrowsFormatExceptionOnDelCharacter()
     {
-        Assert.Throws<FormatException>(() => { var actual = HeaderUtilities.EscapeAsQuotedString($"{(char)0x7F}"); });
+        Assert.Throws<FormatException>(() =>
+        {
+            var actual = HeaderUtilities.EscapeAsQuotedString($"{(char)0x7F}");
+        });
     }
 
     [Theory]
@@ -299,8 +325,8 @@ public class HeaderUtilitiesTest
     public void TryParseQualityDouble_WithoutDecimalPart_ReturnsCorrectQuality(
         string inputString,
         double expectedQuality,
-        int expectedLength)
-        => VerifyTryParseQualityDoubleSuccess(inputString, 7, expectedQuality, expectedLength);
+        int expectedLength
+    ) => VerifyTryParseQualityDoubleSuccess(inputString, 7, expectedQuality, expectedLength);
 
     [Theory]
     [InlineData("text;q=0,*;q=1", 0d, 1)]
@@ -308,8 +334,8 @@ public class HeaderUtilitiesTest
     public void TryParseQualityDouble_WithoutDecimalPart_WithSubsequentCharacters_ReturnsCorrectQuality(
         string inputString,
         double expectedQuality,
-        int expectedLength)
-        => VerifyTryParseQualityDoubleSuccess(inputString, 7, expectedQuality, expectedLength);
+        int expectedLength
+    ) => VerifyTryParseQualityDoubleSuccess(inputString, 7, expectedQuality, expectedLength);
 
     [Theory]
     [InlineData("text;q=0.", 0d, 2)]
@@ -325,8 +351,10 @@ public class HeaderUtilitiesTest
     [InlineData("text;q=0.12345678", 0.12345678d, 10)]
     [InlineData("text;q=0.98765432", 0.98765432d, 10)]
     public void TryParseQualityDouble_WithDecimalPart_ReturnsCorrectQuality(
-        string inputString, double expectedQuality, int expectedLength)
-        => VerifyTryParseQualityDoubleSuccess(inputString, 7, expectedQuality, expectedLength);
+        string inputString,
+        double expectedQuality,
+        int expectedLength
+    ) => VerifyTryParseQualityDoubleSuccess(inputString, 7, expectedQuality, expectedLength);
 
     [Theory]
     [InlineData("text;q=0.,*;q=1", 0d, 2)]
@@ -342,16 +370,28 @@ public class HeaderUtilitiesTest
     [InlineData("text;q=0.12345678,*;q=1", 0.12345678d, 10)]
     [InlineData("text;q=0.98765432,*;q=1", 0.98765432d, 10)]
     public void TryParseQualityDouble_WithDecimalPart_WithSubsequentCharacters_ReturnsCorrectQuality(
-        string inputString, double expectedQuality, int expectedLength)
-        => VerifyTryParseQualityDoubleSuccess(inputString, 7, expectedQuality, expectedLength);
+        string inputString,
+        double expectedQuality,
+        int expectedLength
+    ) => VerifyTryParseQualityDoubleSuccess(inputString, 7, expectedQuality, expectedLength);
 
-    private static void VerifyTryParseQualityDoubleSuccess(string inputString, int startIndex, double expectedQuality, int expectedLength)
+    private static void VerifyTryParseQualityDoubleSuccess(
+        string inputString,
+        int startIndex,
+        double expectedQuality,
+        int expectedLength
+    )
     {
         // Arrange
         var input = new StringSegment(inputString);
 
         // Act
-        var result = HeaderUtilities.TryParseQualityDouble(input, startIndex, out var actualQuality, out var actualLength);
+        var result = HeaderUtilities.TryParseQualityDouble(
+            input,
+            startIndex,
+            out var actualQuality,
+            out var actualLength
+        );
 
         // Assert
         Assert.True(result);
@@ -360,8 +400,8 @@ public class HeaderUtilitiesTest
     }
 
     [Fact]
-    public void TryParseQualityDouble_StartIndexIsOutOfRange_ReturnsFalse()
-        => VerifyTryParseQualityDoubleFailure("text;q=0.1", 10);
+    public void TryParseQualityDouble_StartIndexIsOutOfRange_ReturnsFalse() =>
+        VerifyTryParseQualityDoubleFailure("text;q=0.1", 10);
 
     [Theory]
     [InlineData("text;q=2")]
@@ -369,8 +409,9 @@ public class HeaderUtilitiesTest
     [InlineData("text;q=.1")]
     [InlineData("text;q=/.1")]
     [InlineData("text;q=:.1")]
-    public void TryParseQualityDouble_HasInvalidStartingCharacter_ReturnsFalse(string inputString)
-        => VerifyTryParseQualityDoubleFailure(inputString, 7);
+    public void TryParseQualityDouble_HasInvalidStartingCharacter_ReturnsFalse(
+        string inputString
+    ) => VerifyTryParseQualityDoubleFailure(inputString, 7);
 
     [Theory]
     [InlineData("text;q=00")]
@@ -381,21 +422,24 @@ public class HeaderUtilitiesTest
     [InlineData("text;q=10.")]
     [InlineData("text;q=10.0")]
     [InlineData("text;q=11.0")]
-    public void TryParseQualityDouble_HasMoreThanOneDigitBeforeDot_ReturnsFalse(string inputString)
-        => VerifyTryParseQualityDoubleFailure(inputString, 7);
+    public void TryParseQualityDouble_HasMoreThanOneDigitBeforeDot_ReturnsFalse(
+        string inputString
+    ) => VerifyTryParseQualityDoubleFailure(inputString, 7);
 
     [Theory]
     [InlineData("text;q=0.000000000")]
     [InlineData("text;q=1.000000000")]
     [InlineData("text;q=0.000000001")]
-    public void TryParseQualityDouble_ExceedsQualityValueMaxCharacterCount_ReturnsFalse(string inputString)
-        => VerifyTryParseQualityDoubleFailure(inputString, 7);
+    public void TryParseQualityDouble_ExceedsQualityValueMaxCharacterCount_ReturnsFalse(
+        string inputString
+    ) => VerifyTryParseQualityDoubleFailure(inputString, 7);
 
     [Theory]
     [InlineData("text;q=1.000000001")]
     [InlineData("text;q=2")]
-    public void TryParseQualityDouble_ParsedQualityIsGreaterThanOne_ReturnsFalse(string inputString)
-        => VerifyTryParseQualityDoubleFailure(inputString, 7);
+    public void TryParseQualityDouble_ParsedQualityIsGreaterThanOne_ReturnsFalse(
+        string inputString
+    ) => VerifyTryParseQualityDoubleFailure(inputString, 7);
 
     private static void VerifyTryParseQualityDoubleFailure(string inputString, int startIndex)
     {
@@ -403,7 +447,12 @@ public class HeaderUtilitiesTest
         var input = new StringSegment(inputString);
 
         // Act
-        var result = HeaderUtilities.TryParseQualityDouble(input, startIndex, out var quality, out var length);
+        var result = HeaderUtilities.TryParseQualityDouble(
+            input,
+            startIndex,
+            out var quality,
+            out var length
+        );
 
         // Assert
         Assert.False(result);

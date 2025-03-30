@@ -3,7 +3,6 @@
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal abstract class Behavior
@@ -26,9 +25,7 @@ namespace Moq
     */
     abstract class Behavior
     {
-        protected Behavior()
-        {
-        }
+        protected Behavior() { }
 
         public abstract void Execute(Invocation invocation);
     }

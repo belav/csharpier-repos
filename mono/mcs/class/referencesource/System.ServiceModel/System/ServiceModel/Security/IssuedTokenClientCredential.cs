@@ -12,36 +12,46 @@ namespace System.ServiceModel.Security
 
     public sealed class IssuedTokenClientCredential
     {
-        SecurityKeyEntropyMode defaultKeyEntropyMode = AcceleratedTokenProvider.defaultKeyEntropyMode;
+        SecurityKeyEntropyMode defaultKeyEntropyMode =
+            AcceleratedTokenProvider.defaultKeyEntropyMode;
         KeyedByTypeCollection<IEndpointBehavior> localIssuerChannelBehaviors;
         Dictionary<Uri, KeyedByTypeCollection<IEndpointBehavior>> issuerChannelBehaviors;
         bool cacheIssuedTokens = SpnegoTokenProvider.defaultClientCacheTokens;
         TimeSpan maxIssuedTokenCachingTime = SpnegoTokenProvider.DefaultClientMaxTokenCachingTime;
         EndpointAddress localIssuerAddress;
         Binding localIssuerBinding;
-        int issuedTokenRenewalThresholdPercentage = AcceleratedTokenProvider.defaultServiceTokenValidityThresholdPercentage;
+        int issuedTokenRenewalThresholdPercentage =
+            AcceleratedTokenProvider.defaultServiceTokenValidityThresholdPercentage;
         bool isReadOnly;
 
-        internal IssuedTokenClientCredential()
-        {
-        }
+        internal IssuedTokenClientCredential() { }
 
         internal IssuedTokenClientCredential(IssuedTokenClientCredential other)
         {
             this.defaultKeyEntropyMode = other.defaultKeyEntropyMode;
             this.cacheIssuedTokens = other.cacheIssuedTokens;
-            this.issuedTokenRenewalThresholdPercentage = other.issuedTokenRenewalThresholdPercentage;
+            this.issuedTokenRenewalThresholdPercentage =
+                other.issuedTokenRenewalThresholdPercentage;
             this.maxIssuedTokenCachingTime = other.maxIssuedTokenCachingTime;
             this.localIssuerAddress = other.localIssuerAddress;
-            this.localIssuerBinding = (other.localIssuerBinding != null) ? new CustomBinding(other.localIssuerBinding) : null;
+            this.localIssuerBinding =
+                (other.localIssuerBinding != null)
+                    ? new CustomBinding(other.localIssuerBinding)
+                    : null;
             if (other.localIssuerChannelBehaviors != null)
-                this.localIssuerChannelBehaviors = GetBehaviorCollection(other.localIssuerChannelBehaviors);
+                this.localIssuerChannelBehaviors = GetBehaviorCollection(
+                    other.localIssuerChannelBehaviors
+                );
             if (other.issuerChannelBehaviors != null)
             {
-                this.issuerChannelBehaviors = new Dictionary<Uri, KeyedByTypeCollection<IEndpointBehavior>>();
+                this.issuerChannelBehaviors =
+                    new Dictionary<Uri, KeyedByTypeCollection<IEndpointBehavior>>();
                 foreach (Uri uri in other.issuerChannelBehaviors.Keys)
                 {
-                    this.issuerChannelBehaviors.Add(uri, GetBehaviorCollection(other.issuerChannelBehaviors[uri]));
+                    this.issuerChannelBehaviors.Add(
+                        uri,
+                        GetBehaviorCollection(other.issuerChannelBehaviors[uri])
+                    );
                 }
             }
             this.isReadOnly = other.isReadOnly;
@@ -49,10 +59,7 @@ namespace System.ServiceModel.Security
 
         public EndpointAddress LocalIssuerAddress
         {
-            get
-            {
-                return this.localIssuerAddress;
-            }
+            get { return this.localIssuerAddress; }
             set
             {
                 ThrowIfImmutable();
@@ -60,12 +67,9 @@ namespace System.ServiceModel.Security
             }
         }
 
-        public Binding LocalIssuerBinding 
+        public Binding LocalIssuerBinding
         {
-            get
-            {
-                return this.localIssuerBinding;
-            }
+            get { return this.localIssuerBinding; }
             set
             {
                 ThrowIfImmutable();
@@ -75,10 +79,7 @@ namespace System.ServiceModel.Security
 
         public SecurityKeyEntropyMode DefaultKeyEntropyMode
         {
-            get
-            {
-                return this.defaultKeyEntropyMode;
-            }
+            get { return this.defaultKeyEntropyMode; }
             set
             {
                 SecurityKeyEntropyModeHelper.Validate(value);
@@ -89,10 +90,7 @@ namespace System.ServiceModel.Security
 
         public bool CacheIssuedTokens
         {
-            get
-            {
-                return this.cacheIssuedTokens;
-            }
+            get { return this.cacheIssuedTokens; }
             set
             {
                 ThrowIfImmutable();
@@ -100,12 +98,9 @@ namespace System.ServiceModel.Security
             }
         }
 
-        public int IssuedTokenRenewalThresholdPercentage 
+        public int IssuedTokenRenewalThresholdPercentage
         {
-            get
-            {
-                return this.issuedTokenRenewalThresholdPercentage;
-            }
+            get { return this.issuedTokenRenewalThresholdPercentage; }
             set
             {
                 ThrowIfImmutable();
@@ -118,7 +113,8 @@ namespace System.ServiceModel.Security
             get
             {
                 if (this.issuerChannelBehaviors == null)
-                    this.issuerChannelBehaviors = new Dictionary<Uri, KeyedByTypeCollection<IEndpointBehavior>>();
+                    this.issuerChannelBehaviors =
+                        new Dictionary<Uri, KeyedByTypeCollection<IEndpointBehavior>>();
                 return this.issuerChannelBehaviors;
             }
         }
@@ -128,29 +124,37 @@ namespace System.ServiceModel.Security
             get
             {
                 if (this.localIssuerChannelBehaviors == null)
-                    this.localIssuerChannelBehaviors = new KeyedByTypeCollection<IEndpointBehavior>();
+                    this.localIssuerChannelBehaviors =
+                        new KeyedByTypeCollection<IEndpointBehavior>();
                 return this.localIssuerChannelBehaviors;
             }
         }
 
         public TimeSpan MaxIssuedTokenCachingTime
         {
-            get
-            {
-                return this.maxIssuedTokenCachingTime;
-            }
+            get { return this.maxIssuedTokenCachingTime; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 ThrowIfImmutable();
@@ -158,9 +162,12 @@ namespace System.ServiceModel.Security
             }
         }
 
-        KeyedByTypeCollection<IEndpointBehavior> GetBehaviorCollection(KeyedByTypeCollection<IEndpointBehavior> behaviors)
+        KeyedByTypeCollection<IEndpointBehavior> GetBehaviorCollection(
+            KeyedByTypeCollection<IEndpointBehavior> behaviors
+        )
         {
-            KeyedByTypeCollection<IEndpointBehavior> result = new KeyedByTypeCollection<IEndpointBehavior>();
+            KeyedByTypeCollection<IEndpointBehavior> result =
+                new KeyedByTypeCollection<IEndpointBehavior>();
             foreach (IEndpointBehavior behavior in behaviors)
             {
                 result.Add(behavior);
@@ -177,7 +184,9 @@ namespace System.ServiceModel.Security
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             }
         }
     }

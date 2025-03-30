@@ -10,17 +10,22 @@ using Xunit;
 
 public class Test1 : I2
 {
-
     [Fact]
     public static int TestEntryPoint()
     {
         string result = Test<Test1>();
         const string expectedResult = "Test1.M1";
-        Console.WriteLine("Expected {0}, found {1}: {2}", expectedResult, result, expectedResult == result ? "match" : "mismatch");
+        Console.WriteLine(
+            "Expected {0}, found {1}: {2}",
+            expectedResult,
+            result,
+            expectedResult == result ? "match" : "mismatch"
+        );
         return result == expectedResult ? 100 : 101;
     }
 
-    static string Test<i1>() where i1 : I1
+    static string Test<i1>()
+        where i1 : I1
     {
         return i1.M1();
     }

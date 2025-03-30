@@ -13,9 +13,7 @@ public class Operation : OperationBase
     [JsonProperty(nameof(value))]
     public object value { get; set; }
 
-    public Operation()
-    {
-    }
+    public Operation() { }
 
     public Operation(string op, string path, string from, object value)
         : base(op, path, from)
@@ -24,9 +22,7 @@ public class Operation : OperationBase
     }
 
     public Operation(string op, string path, string from)
-        : base(op, path, from)
-    {
-    }
+        : base(op, path, from) { }
 
     public void Apply(object objectToApplyTo, IObjectAdapter adapter)
     {
@@ -67,8 +63,10 @@ public class Operation : OperationBase
 
     public bool ShouldSerializevalue()
     {
-        return (OperationType == OperationType.Add
+        return (
+            OperationType == OperationType.Add
             || OperationType == OperationType.Replace
-            || OperationType == OperationType.Test);
+            || OperationType == OperationType.Test
+        );
     }
 }

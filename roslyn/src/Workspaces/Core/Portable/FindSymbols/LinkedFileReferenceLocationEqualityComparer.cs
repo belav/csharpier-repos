@@ -12,13 +12,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols;
 /// Helper comparer to enable consumers of <see cref="SymbolFinder.FindReferencesAsync(ISymbol, Solution,
 /// CancellationToken)"/> to process references found in linked files only a single time.
 /// </summary>
-internal sealed class LinkedFileReferenceLocationEqualityComparer : IEqualityComparer<ReferenceLocation>
+internal sealed class LinkedFileReferenceLocationEqualityComparer
+    : IEqualityComparer<ReferenceLocation>
 {
-    public static readonly IEqualityComparer<ReferenceLocation> Instance = new LinkedFileReferenceLocationEqualityComparer();
+    public static readonly IEqualityComparer<ReferenceLocation> Instance =
+        new LinkedFileReferenceLocationEqualityComparer();
 
-    private LinkedFileReferenceLocationEqualityComparer()
-    {
-    }
+    private LinkedFileReferenceLocationEqualityComparer() { }
 
     public bool Equals(ReferenceLocation x, ReferenceLocation y)
     {
@@ -26,6 +26,5 @@ internal sealed class LinkedFileReferenceLocationEqualityComparer : IEqualityCom
         return x.Location.SourceSpan == y.Location.SourceSpan;
     }
 
-    public int GetHashCode(ReferenceLocation obj)
-        => obj.Location.SourceSpan.GetHashCode();
+    public int GetHashCode(ReferenceLocation obj) => obj.Location.SourceSpan.GetHashCode();
 }

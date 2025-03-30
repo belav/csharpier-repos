@@ -16,7 +16,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         Bitwise,
         BitXor,
         Logical,
-        Lim
+        Lim,
     }
 
     [Flags]
@@ -32,10 +32,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         Bitwise = 1 << BinOpKind.Bitwise,
         BitXor = 1 << BinOpKind.BitXor,
         Logical = 1 << BinOpKind.Logical,
+
         // The different combinations needed in operators.cs
         Integer = Add | Sub | Mul | Equal | Compare | Bitwise | BitXor,
         Real = Add | Sub | Mul | Equal | Compare,
         BoolNorm = Equal | BitXor,
+
         // These are special ones.
         Delegate = Add | Sub | Equal,
         Enum = Sub | Equal | Compare | Bitwise | BitXor,

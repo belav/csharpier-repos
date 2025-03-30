@@ -31,7 +31,11 @@ public static class HtmlLocalizerExtensions
     /// <param name="name">The key to use.</param>
     /// <param name="arguments">The values to format the string with.</param>
     /// <returns>The <see cref="LocalizedHtmlString"/> resource.</returns>
-    public static LocalizedHtmlString GetHtml(this IHtmlLocalizer htmlLocalizer, string name, params object[] arguments)
+    public static LocalizedHtmlString GetHtml(
+        this IHtmlLocalizer htmlLocalizer,
+        string name,
+        params object[] arguments
+    )
     {
         ArgumentNullException.ThrowIfNull(htmlLocalizer);
         ArgumentNullException.ThrowIfNull(name);

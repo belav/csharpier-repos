@@ -26,7 +26,8 @@ namespace System.CodeDom
             Name = name;
         }
 
-        public TypeAttributes TypeAttributes { get; set; } = TypeAttributes.Public | TypeAttributes.Class;
+        public TypeAttributes TypeAttributes { get; set; } =
+            TypeAttributes.Public | TypeAttributes.Class;
 
         public CodeTypeReferenceCollection BaseTypes
         {
@@ -44,7 +45,10 @@ namespace System.CodeDom
 
         public bool IsClass
         {
-            get => (TypeAttributes & TypeAttributes.ClassSemanticsMask) == TypeAttributes.Class && !_isEnum && !_isStruct;
+            get =>
+                (TypeAttributes & TypeAttributes.ClassSemanticsMask) == TypeAttributes.Class
+                && !_isEnum
+                && !_isStruct;
             set
             {
                 if (value)
@@ -122,6 +126,7 @@ namespace System.CodeDom
             }
         }
 
-        public CodeTypeParameterCollection TypeParameters => _typeParameters ??= new CodeTypeParameterCollection();
+        public CodeTypeParameterCollection TypeParameters =>
+            _typeParameters ??= new CodeTypeParameterCollection();
     }
 }

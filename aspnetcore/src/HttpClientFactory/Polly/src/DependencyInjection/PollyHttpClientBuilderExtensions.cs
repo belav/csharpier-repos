@@ -28,7 +28,10 @@ public static class PollyHttpClientBuilderExtensions
     /// See the remarks on <see cref="PolicyHttpMessageHandler"/> for guidance on configuring policies.
     /// </para>
     /// </remarks>
-    public static IHttpClientBuilder AddPolicyHandler(this IHttpClientBuilder builder, IAsyncPolicy<HttpResponseMessage> policy)
+    public static IHttpClientBuilder AddPolicyHandler(
+        this IHttpClientBuilder builder,
+        IAsyncPolicy<HttpResponseMessage> policy
+    )
     {
         if (builder == null)
         {
@@ -60,7 +63,8 @@ public static class PollyHttpClientBuilderExtensions
     /// </remarks>
     public static IHttpClientBuilder AddPolicyHandler(
         this IHttpClientBuilder builder,
-        Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector)
+        Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector
+    )
     {
         if (builder == null)
         {
@@ -92,7 +96,8 @@ public static class PollyHttpClientBuilderExtensions
     /// </remarks>
     public static IHttpClientBuilder AddPolicyHandler(
         this IHttpClientBuilder builder,
-        Func<IServiceProvider, HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector)
+        Func<IServiceProvider, HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector
+    )
     {
         if (builder == null)
         {
@@ -104,10 +109,12 @@ public static class PollyHttpClientBuilderExtensions
             throw new ArgumentNullException(nameof(policySelector));
         }
 
-        builder.AddHttpMessageHandler((services) =>
-        {
-            return new PolicyHttpMessageHandler((request) => policySelector(services, request));
-        });
+        builder.AddHttpMessageHandler(
+            (services) =>
+            {
+                return new PolicyHttpMessageHandler((request) => policySelector(services, request));
+            }
+        );
         return builder;
     }
 
@@ -125,7 +132,10 @@ public static class PollyHttpClientBuilderExtensions
     /// See the remarks on <see cref="PolicyHttpMessageHandler"/> for guidance on configuring policies.
     /// </para>
     /// </remarks>
-    public static IHttpClientBuilder AddPolicyHandlerFromRegistry(this IHttpClientBuilder builder, string policyKey)
+    public static IHttpClientBuilder AddPolicyHandlerFromRegistry(
+        this IHttpClientBuilder builder,
+        string policyKey
+    )
     {
         if (builder == null)
         {
@@ -137,14 +147,16 @@ public static class PollyHttpClientBuilderExtensions
             throw new ArgumentNullException(nameof(policyKey));
         }
 
-        builder.AddHttpMessageHandler((services) =>
-        {
-            var registry = services.GetRequiredService<IReadOnlyPolicyRegistry<string>>();
+        builder.AddHttpMessageHandler(
+            (services) =>
+            {
+                var registry = services.GetRequiredService<IReadOnlyPolicyRegistry<string>>();
 
-            var policy = registry.Get<IAsyncPolicy<HttpResponseMessage>>(policyKey);
+                var policy = registry.Get<IAsyncPolicy<HttpResponseMessage>>(policyKey);
 
-            return new PolicyHttpMessageHandler(policy);
-        });
+                return new PolicyHttpMessageHandler(policy);
+            }
+        );
         return builder;
     }
 
@@ -164,7 +176,12 @@ public static class PollyHttpClientBuilderExtensions
     /// </remarks>
     public static IHttpClientBuilder AddPolicyHandlerFromRegistry(
         this IHttpClientBuilder builder,
-        Func<IReadOnlyPolicyRegistry<string>, HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector)
+        Func<
+            IReadOnlyPolicyRegistry<string>,
+            HttpRequestMessage,
+            IAsyncPolicy<HttpResponseMessage>
+        > policySelector
+    )
     {
         if (builder == null)
         {
@@ -176,11 +193,13 @@ public static class PollyHttpClientBuilderExtensions
             throw new ArgumentNullException(nameof(policySelector));
         }
 
-        builder.AddHttpMessageHandler((services) =>
-        {
-            var registry = services.GetRequiredService<IReadOnlyPolicyRegistry<string>>();
-            return new PolicyHttpMessageHandler((request) => policySelector(registry, request));
-        });
+        builder.AddHttpMessageHandler(
+            (services) =>
+            {
+                var registry = services.GetRequiredService<IReadOnlyPolicyRegistry<string>>();
+                return new PolicyHttpMessageHandler((request) => policySelector(registry, request));
+            }
+        );
         return builder;
     }
 
@@ -208,13 +227,14 @@ public static class PollyHttpClientBuilderExtensions
     /// <para>
     /// The policy created by <paramref name="configurePolicy"/> will be cached indefinitely per named client. Policies
     /// are generally designed to act as singletons, and can be shared when appropriate. To share a policy across multiple
-    /// named clients, first create the policy and then pass it to multiple calls to 
+    /// named clients, first create the policy and then pass it to multiple calls to
     /// <see cref="AddPolicyHandler(IHttpClientBuilder, IAsyncPolicy{HttpResponseMessage})"/> as desired.
     /// </para>
     /// </remarks>
     public static IHttpClientBuilder AddTransientHttpErrorPolicy(
         this IHttpClientBuilder builder,
-        Func<PolicyBuilder<HttpResponseMessage>, IAsyncPolicy<HttpResponseMessage>> configurePolicy)
+        Func<PolicyBuilder<HttpResponseMessage>, IAsyncPolicy<HttpResponseMessage>> configurePolicy
+    )
     {
         if (builder == null)
         {
@@ -251,7 +271,16 @@ public static class PollyHttpClientBuilderExtensions
     /// See the remarks on <see cref="PolicyHttpMessageHandler"/> for guidance on configuring policies.
     /// </para>
     /// </remarks>
-    public static IHttpClientBuilder AddPolicyHandler(this IHttpClientBuilder builder, Func<IServiceProvider, HttpRequestMessage, string, IAsyncPolicy<HttpResponseMessage>> policyFactory, Func<HttpRequestMessage, string> keySelector)
+    public static IHttpClientBuilder AddPolicyHandler(
+        this IHttpClientBuilder builder,
+        Func<
+            IServiceProvider,
+            HttpRequestMessage,
+            string,
+            IAsyncPolicy<HttpResponseMessage>
+        > policyFactory,
+        Func<HttpRequestMessage, string> keySelector
+    )
     {
         if (builder == null)
         {
@@ -268,23 +297,27 @@ public static class PollyHttpClientBuilderExtensions
             throw new ArgumentNullException(nameof(policyFactory));
         }
 
-        builder.AddHttpMessageHandler((services) =>
-        {
-            var registry = services.GetRequiredService<IPolicyRegistry<string>>();
-            return new PolicyHttpMessageHandler((request) =>
+        builder.AddHttpMessageHandler(
+            (services) =>
             {
-                var key = keySelector(request);
+                var registry = services.GetRequiredService<IPolicyRegistry<string>>();
+                return new PolicyHttpMessageHandler(
+                    (request) =>
+                    {
+                        var key = keySelector(request);
 
-                if (registry.TryGet<IAsyncPolicy<HttpResponseMessage>>(key, out var policy))
-                {
-                    return policy;
-                }
+                        if (registry.TryGet<IAsyncPolicy<HttpResponseMessage>>(key, out var policy))
+                        {
+                            return policy;
+                        }
 
-                var newPolicy = policyFactory(services, request, key);
-                registry[key] = newPolicy;
-                return newPolicy;
-            });
-        });
+                        var newPolicy = policyFactory(services, request, key);
+                        registry[key] = newPolicy;
+                        return newPolicy;
+                    }
+                );
+            }
+        );
         return builder;
     }
 }

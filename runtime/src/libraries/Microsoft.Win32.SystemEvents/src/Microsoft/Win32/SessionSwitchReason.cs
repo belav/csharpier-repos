@@ -54,6 +54,6 @@ namespace Microsoft.Win32
         /// <devdoc>
         ///      A session has changed its remote controlled status.
         /// </devdoc>
-        SessionRemoteControl = Interop.Wtsapi32.WTS_SESSION_REMOTE_CONTROL
+        SessionRemoteControl = Interop.Wtsapi32.WTS_SESSION_REMOTE_CONTROL,
     }
 }

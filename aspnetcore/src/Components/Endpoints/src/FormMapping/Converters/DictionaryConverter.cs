@@ -7,11 +7,10 @@ using System.Runtime.CompilerServices;
 
 namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 
-internal abstract class DictionaryConverter<TDictionary> : FormDataConverter<TDictionary>
-{
-}
+internal abstract class DictionaryConverter<TDictionary> : FormDataConverter<TDictionary> { }
 
-internal sealed class DictionaryConverter<TDictionary, TDictionaryPolicy, TBuffer, TKey, TValue> : DictionaryConverter<TDictionary>
+internal sealed class DictionaryConverter<TDictionary, TDictionaryPolicy, TBuffer, TKey, TValue>
+    : DictionaryConverter<TDictionary>
     where TKey : ISpanParsable<TKey>
     where TDictionaryPolicy : IDictionaryBufferAdapter<TDictionary, TBuffer, TKey, TValue>
 {
@@ -31,7 +30,8 @@ internal sealed class DictionaryConverter<TDictionary, TDictionaryPolicy, TBuffe
         Type type,
         FormDataMapperOptions options,
         [NotNullWhen(true)] out TDictionary? result,
-        out bool found)
+        out bool found
+    )
     {
         TValue currentValue;
         TBuffer buffer;
@@ -59,7 +59,13 @@ internal sealed class DictionaryConverter<TDictionary, TDictionaryPolicy, TBuffe
         foreach (var key in keys)
         {
             context.PushPrefix(key.Span);
-            currentElementSuccess = _valueConverter.TryRead(ref context, _elementType, options, out currentValue!, out foundCurrentValue);
+            currentElementSuccess = _valueConverter.TryRead(
+                ref context,
+                _elementType,
+                options,
+                out currentValue!,
+                out foundCurrentValue
+            );
             succeded &= currentElementSuccess;
             context.PopPrefix(key.Span);
 
@@ -68,8 +74,13 @@ internal sealed class DictionaryConverter<TDictionary, TDictionaryPolicy, TBuffe
                 succeded = false;
                 var currentPrefix = context.GetPrefix();
                 context.AddMappingError(
-                    FormattableStringFactory.Create(FormDataResources.DictionaryUnparsableKey, key[1..^1], currentPrefix),
-                    null);
+                    FormattableStringFactory.Create(
+                        FormDataResources.DictionaryUnparsableKey,
+                        key[1..^1],
+                        currentPrefix
+                    ),
+                    null
+                );
 
                 continue;
             }
@@ -78,8 +89,13 @@ internal sealed class DictionaryConverter<TDictionary, TDictionaryPolicy, TBuffe
             if (keyCount > maxCollectionSize)
             {
                 context.AddMappingError(
-                     FormattableStringFactory.Create(FormDataResources.MaxCollectionSizeReached, "dictionary", maxCollectionSize),
-                     null);
+                    FormattableStringFactory.Create(
+                        FormDataResources.MaxCollectionSizeReached,
+                        "dictionary",
+                        maxCollectionSize
+                    ),
+                    null
+                );
                 succeded = false;
                 break;
             }

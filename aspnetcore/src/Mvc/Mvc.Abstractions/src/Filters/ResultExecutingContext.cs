@@ -20,7 +20,8 @@ public class ResultExecutingContext : FilterContext
         ActionContext actionContext,
         IList<IFilterMetadata> filters,
         IActionResult result,
-        object controller)
+        object controller
+    )
         : base(actionContext, filters)
     {
         Result = result;

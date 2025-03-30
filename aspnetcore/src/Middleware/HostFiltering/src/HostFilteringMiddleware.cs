@@ -20,11 +20,12 @@ public class HostFilteringMiddleware
     // Matches Http.Sys.
     private static readonly byte[] DefaultResponse = Encoding.ASCII.GetBytes(
         "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\"http://www.w3.org/TR/html4/strict.dtd\">\r\n"
-        + "<HTML><HEAD><TITLE>Bad Request</TITLE>\r\n"
-        + "<META HTTP-EQUIV=\"Content-Type\" Content=\"text/html; charset=us-ascii\"></ HEAD >\r\n"
-        + "<BODY><h2>Bad Request - Invalid Hostname</h2>\r\n"
-        + "<hr><p>HTTP Error 400. The request hostname is invalid.</p>\r\n"
-        + "</BODY></HTML>");
+            + "<HTML><HEAD><TITLE>Bad Request</TITLE>\r\n"
+            + "<META HTTP-EQUIV=\"Content-Type\" Content=\"text/html; charset=us-ascii\"></ HEAD >\r\n"
+            + "<BODY><h2>Bad Request - Invalid Hostname</h2>\r\n"
+            + "<hr><p>HTTP Error 400. The request hostname is invalid.</p>\r\n"
+            + "</BODY></HTML>"
+    );
 
     private readonly RequestDelegate _next;
     private readonly ILogger<HostFilteringMiddleware> _logger;
@@ -39,8 +40,11 @@ public class HostFilteringMiddleware
     /// <param name="next"></param>
     /// <param name="logger"></param>
     /// <param name="optionsMonitor"></param>
-    public HostFilteringMiddleware(RequestDelegate next, ILogger<HostFilteringMiddleware> logger,
-        IOptionsMonitor<HostFilteringOptions> optionsMonitor)
+    public HostFilteringMiddleware(
+        RequestDelegate next,
+        ILogger<HostFilteringMiddleware> logger,
+        IOptionsMonitor<HostFilteringOptions> optionsMonitor
+    )
     {
         _next = next ?? throw new ArgumentNullException(nameof(next));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -100,7 +104,10 @@ public class HostFilteringMiddleware
     private IList<StringSegment> Configure()
     {
         var allowedHosts = new List<StringSegment>();
-        if (_options.AllowedHosts?.Count > 0 && !TryProcessHosts(_options.AllowedHosts, allowedHosts))
+        if (
+            _options.AllowedHosts?.Count > 0
+            && !TryProcessHosts(_options.AllowedHosts, allowedHosts)
+        )
         {
             _logger.WildcardDetected();
             _allowedHosts = allowedHosts;
@@ -147,9 +154,11 @@ public class HostFilteringMiddleware
 
     private static bool IsTopLevelWildcard(string host)
     {
-        return (string.Equals("*", host, StringComparison.Ordinal) // HttpSys wildcard
-                       || string.Equals("[::]", host, StringComparison.Ordinal) // Kestrel wildcard, IPv6 Any
-                       || string.Equals("0.0.0.0", host, StringComparison.Ordinal)); // IPv4 Any
+        return (
+            string.Equals("*", host, StringComparison.Ordinal) // HttpSys wildcard
+            || string.Equals("[::]", host, StringComparison.Ordinal) // Kestrel wildcard, IPv6 Any
+            || string.Equals("0.0.0.0", host, StringComparison.Ordinal)
+        ); // IPv4 Any
     }
 
     // This does not duplicate format validations that are expected to be performed by the host.

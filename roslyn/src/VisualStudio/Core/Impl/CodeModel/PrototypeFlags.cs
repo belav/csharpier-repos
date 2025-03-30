@@ -22,6 +22,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         ParameterDefaultValues = EnvDTE.vsCMPrototype.vsCMPrototypeParamDefaultValues,
         ParametersMask = (ParameterTypes | ParameterNames | ParameterDefaultValues),
         Type = EnvDTE.vsCMPrototype.vsCMPrototypeType,
-        Initializer = EnvDTE.vsCMPrototype.vsCMPrototypeInitExpression
+        Initializer = EnvDTE.vsCMPrototype.vsCMPrototypeInitExpression,
     }
 }

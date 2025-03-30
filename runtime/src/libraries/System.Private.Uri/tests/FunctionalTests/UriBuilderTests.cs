@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using Xunit;
 
 namespace System.PrivateUri.Tests
@@ -41,40 +40,119 @@ namespace System.PrivateUri.Tests
         public void Ctor_Empty()
         {
             var uriBuilder = new UriBuilder();
-            VerifyUriBuilder(uriBuilder, scheme: "http", userName: "", password: "", host: "localhost", port: -1, path: "/", query: "", fragment: "");
+            VerifyUriBuilder(
+                uriBuilder,
+                scheme: "http",
+                userName: "",
+                password: "",
+                host: "localhost",
+                port: -1,
+                path: "/",
+                query: "",
+                fragment: ""
+            );
         }
 
         [Theory]
         [InlineData("http://host/", true, "http", "", "", "host", 80, "/", "", "")]
         [InlineData("http://username@host/", true, "http", "username", "", "host", 80, "/", "", "")]
-        [InlineData("http://username:password@host/", true, "http", "username", "password", "host", 80, "/", "", "")]
+        [InlineData(
+            "http://username:password@host/",
+            true,
+            "http",
+            "username",
+            "password",
+            "host",
+            80,
+            "/",
+            "",
+            ""
+        )]
         [InlineData("http://host:90/", true, "http", "", "", "host", 90, "/", "", "")]
         [InlineData("http://host/path", true, "http", "", "", "host", 80, "/path", "", "")]
         [InlineData("http://host/?query", true, "http", "", "", "host", 80, "/", "?query", "")]
-        [InlineData("http://host/#fragment", true, "http", "", "", "host", 80, "/", "", "#fragment")]
-        [InlineData("http://username:password@host:90/path1/path2?query#fragment", true, "http", "username", "password", "host", 90, "/path1/path2", "?query", "#fragment")]
+        [InlineData(
+            "http://host/#fragment",
+            true,
+            "http",
+            "",
+            "",
+            "host",
+            80,
+            "/",
+            "",
+            "#fragment"
+        )]
+        [InlineData(
+            "http://username:password@host:90/path1/path2?query#fragment",
+            true,
+            "http",
+            "username",
+            "password",
+            "host",
+            90,
+            "/path1/path2",
+            "?query",
+            "#fragment"
+        )]
         [InlineData("www.host.com", false, "http", "", "", "www.host.com", 80, "/", "", "")] // Relative
         [InlineData("unknownscheme:", true, "unknownscheme", "", "", "", -1, "", "", "")] // No authority
-        public void Ctor_String(string uriString, bool createUri, string scheme, string username, string password, string host, int port, string path, string query, string fragment)
+        public void Ctor_String(
+            string uriString,
+            bool createUri,
+            string scheme,
+            string username,
+            string password,
+            string host,
+            int port,
+            string path,
+            string query,
+            string fragment
+        )
         {
             var uriBuilder = new UriBuilder(uriString);
-            VerifyUriBuilder(uriBuilder, scheme, username, password, host, port, path, query, fragment);
+            VerifyUriBuilder(
+                uriBuilder,
+                scheme,
+                username,
+                password,
+                host,
+                port,
+                path,
+                query,
+                fragment
+            );
 
             if (createUri)
             {
                 uriBuilder = new UriBuilder(new Uri(uriString, UriKind.RelativeOrAbsolute));
-                VerifyUriBuilder(uriBuilder, scheme, username, password, host, port, path, query, fragment);
+                VerifyUriBuilder(
+                    uriBuilder,
+                    scheme,
+                    username,
+                    password,
+                    host,
+                    port,
+                    path,
+                    query,
+                    fragment
+                );
             }
             else
             {
-                Assert.Throws<InvalidOperationException>(() => new UriBuilder(new Uri(uriString, UriKind.RelativeOrAbsolute)));
+                Assert.Throws<InvalidOperationException>(() =>
+                    new UriBuilder(new Uri(uriString, UriKind.RelativeOrAbsolute))
+                );
             }
         }
 
         [Fact]
         public void Ctor_String_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("uriString", () => new UriBuilder((string)null)); // UriString is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "uriString",
+                () => new UriBuilder((string)null)
+            ); // UriString is null
             Assert.Throws<UriFormatException>(() => new UriBuilder(@"http://host\")); // UriString is invalid
         }
 
@@ -97,7 +175,12 @@ namespace System.PrivateUri.Tests
         [InlineData("http", null, "http", "")]
         [InlineData(null, "", "", "")]
         [InlineData(null, null, "", "")]
-        public void Ctor_String_String(string schemeName, string hostName, string expectedScheme, string expectedHost)
+        public void Ctor_String_String(
+            string schemeName,
+            string hostName,
+            string expectedScheme,
+            string expectedHost
+        )
         {
             var uriBuilder = new UriBuilder(schemeName, hostName);
             VerifyUriBuilder(uriBuilder, expectedScheme, "", "", expectedHost, -1, "/", "", "");
@@ -116,7 +199,13 @@ namespace System.PrivateUri.Tests
         [InlineData("http", null, 180, "http", "")]
         [InlineData(null, "", -1, "", "")]
         [InlineData(null, null, 65535, "", "")]
-        public void Ctor_String_String_Int(string scheme, string host, int port, string expectedScheme, string expectedHost)
+        public void Ctor_String_String_Int(
+            string scheme,
+            string host,
+            int port,
+            string expectedScheme,
+            string expectedHost
+        )
         {
             var uriBuilder = new UriBuilder(scheme, host, port);
             VerifyUriBuilder(uriBuilder, expectedScheme, "", "", expectedHost, port, "/", "", "");
@@ -135,28 +224,133 @@ namespace System.PrivateUri.Tests
         [InlineData("http", null, 180, @"path1\path2\", "http", "", "path1/path2/")]
         [InlineData(null, "", -1, "\u1234", "", "", "%E1%88%B4")]
         [InlineData(null, null, 65535, "\u1234\u2345", "", "", "%E1%88%B4%E2%8D%85")]
-        public void Ctor_String_String_Int_String(string schemeName, string hostName, int port, string pathValue, string expectedScheme, string expectedHost, string expectedPath)
+        public void Ctor_String_String_Int_String(
+            string schemeName,
+            string hostName,
+            int port,
+            string pathValue,
+            string expectedScheme,
+            string expectedHost,
+            string expectedPath
+        )
         {
             var uriBuilder = new UriBuilder(schemeName, hostName, port, pathValue);
-            VerifyUriBuilder(uriBuilder, expectedScheme, "", "", expectedHost, port, expectedPath, "", "");
+            VerifyUriBuilder(
+                uriBuilder,
+                expectedScheme,
+                "",
+                "",
+                expectedHost,
+                port,
+                expectedPath,
+                "",
+                ""
+            );
         }
 
         [Theory]
-        [InlineData("http", "host", 0, "/path", "?query#fragment", "http", "host", "/path", "?query", "#fragment")]
-        [InlineData("HTTP", "host", 20, "/path1/path2", "?query&query2=value#fragment", "http", "host", "/path1/path2", "?query&query2=value", "#fragment")]
-        [InlineData("http", "[::1]", 40, "/", "#fragment?query", "http", "[::1]", "/", "", "#fragment?query")]
-        [InlineData("https", "::1]", 60, "/path1/", "?query", "https", "[::1]]", "/path1/", "?query", "")]
+        [InlineData(
+            "http",
+            "host",
+            0,
+            "/path",
+            "?query#fragment",
+            "http",
+            "host",
+            "/path",
+            "?query",
+            "#fragment"
+        )]
+        [InlineData(
+            "HTTP",
+            "host",
+            20,
+            "/path1/path2",
+            "?query&query2=value#fragment",
+            "http",
+            "host",
+            "/path1/path2",
+            "?query&query2=value",
+            "#fragment"
+        )]
+        [InlineData(
+            "http",
+            "[::1]",
+            40,
+            "/",
+            "#fragment?query",
+            "http",
+            "[::1]",
+            "/",
+            "",
+            "#fragment?query"
+        )]
+        [InlineData(
+            "https",
+            "::1]",
+            60,
+            "/path1/",
+            "?query",
+            "https",
+            "[::1]]",
+            "/path1/",
+            "?query",
+            ""
+        )]
         [InlineData("http", "::1", 80, null, "#fragment", "http", "[::1]", "/", "", "#fragment")]
         [InlineData("http", "", 120, "path1/path2", "?#", "http", "", "path1/path2", "", "")]
-        [InlineData("", "host", 140, "path1/path2/path3/", "?", "", "host", "path1/path2/path3/", "", "")]
+        [InlineData(
+            "",
+            "host",
+            140,
+            "path1/path2/path3/",
+            "?",
+            "",
+            "host",
+            "path1/path2/path3/",
+            "",
+            ""
+        )]
         [InlineData("", "", 160, @"\path1\path2\path3", "#", "", "", "/path1/path2/path3", "", "")]
-        [InlineData("http", null, 180, @"path1\path2\", "?\u1234#\u2345", "http", "", "path1/path2/", "?\u1234", "#\u2345")]
+        [InlineData(
+            "http",
+            null,
+            180,
+            @"path1\path2\",
+            "?\u1234#\u2345",
+            "http",
+            "",
+            "path1/path2/",
+            "?\u1234",
+            "#\u2345"
+        )]
         [InlineData(null, "", -1, "\u1234", "", "", "", "%E1%88%B4", "", "")]
         [InlineData(null, null, 65535, "\u1234\u2345", null, "", "", "%E1%88%B4%E2%8D%85", "", "")]
-        public void Ctor_String_String_Int_String_String(string schemeName, string hostName, int port, string pathValue, string extraValue, string expectedScheme, string expectedHost, string expectedPath, string expectedQuery, string expectedFragment)
+        public void Ctor_String_String_Int_String_String(
+            string schemeName,
+            string hostName,
+            int port,
+            string pathValue,
+            string extraValue,
+            string expectedScheme,
+            string expectedHost,
+            string expectedPath,
+            string expectedQuery,
+            string expectedFragment
+        )
         {
             var uriBuilder = new UriBuilder(schemeName, hostName, port, pathValue, extraValue);
-            VerifyUriBuilder(uriBuilder, expectedScheme, "", "", expectedHost, port, expectedPath, expectedQuery, expectedFragment);
+            VerifyUriBuilder(
+                uriBuilder,
+                expectedScheme,
+                "",
+                "",
+                expectedHost,
+                port,
+                expectedPath,
+                expectedQuery,
+                expectedFragment
+            );
         }
 
         [Theory]
@@ -164,7 +358,11 @@ namespace System.PrivateUri.Tests
         [InlineData("fragment?fragment")]
         public void Ctor_InvalidExtraValue_ThrowsArgumentException(string extraValue)
         {
-            AssertExtensions.Throws<ArgumentException>("extraValue", null, () => new UriBuilder("scheme", "host", 80, "path", extraValue));
+            AssertExtensions.Throws<ArgumentException>(
+                "extraValue",
+                null,
+                () => new UriBuilder("scheme", "host", 80, "path", extraValue)
+            );
         }
 
         [Theory]
@@ -184,12 +382,32 @@ namespace System.PrivateUri.Tests
         [InlineData("-")]
         public void InvalidScheme_ThrowsArgumentException(string schemeName)
         {
-            AssertExtensions.Throws<ArgumentException>("value", null, () => new UriBuilder(schemeName, "host"));
-            AssertExtensions.Throws<ArgumentException>("value", null, () => new UriBuilder(schemeName, "host", 80));
-            AssertExtensions.Throws<ArgumentException>("value", null, () => new UriBuilder(schemeName, "host", 80, "path"));
-            AssertExtensions.Throws<ArgumentException>("value", null, () => new UriBuilder(schemeName, "host", 80, "?query#fragment"));
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                null,
+                () => new UriBuilder(schemeName, "host")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                null,
+                () => new UriBuilder(schemeName, "host", 80)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                null,
+                () => new UriBuilder(schemeName, "host", 80, "path")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                null,
+                () => new UriBuilder(schemeName, "host", 80, "?query#fragment")
+            );
 
-            AssertExtensions.Throws<ArgumentException>("value", null, () => new UriBuilder().Scheme = schemeName);
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                null,
+                () => new UriBuilder().Scheme = schemeName
+            );
         }
 
         [Theory]
@@ -214,7 +432,9 @@ namespace System.PrivateUri.Tests
         [InlineData(null, "")]
         public void Password_Get_Set(string value, string expected)
         {
-            var uriBuilder = new UriBuilder("http://userinfo1:PLACEHOLDER@domain/path?query#fragment");
+            var uriBuilder = new UriBuilder(
+                "http://userinfo1:PLACEHOLDER@domain/path?query#fragment"
+            );
             uriBuilder.Password = value;
             Assert.Equal(expected, uriBuilder.Password);
 
@@ -252,9 +472,15 @@ namespace System.PrivateUri.Tests
         [InlineData(65536)]
         public void InvalidPort_ThrowsArgumentOutOfRangeException(int portNumber)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UriBuilder("scheme", "host", portNumber));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UriBuilder("scheme", "host", portNumber, "path"));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UriBuilder("scheme", "host", portNumber, "path", "?query#fragment"));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new UriBuilder("scheme", "host", portNumber)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new UriBuilder("scheme", "host", portNumber, "path")
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new UriBuilder("scheme", "host", portNumber, "path", "?query#fragment")
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() => new UriBuilder().Port = portNumber);
         }
@@ -323,16 +549,61 @@ namespace System.PrivateUri.Tests
             yield return new object[] { new UriBuilder(), new UriBuilder(), true };
             yield return new object[] { new UriBuilder(), null, false };
 
-            yield return new object[] { new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"), new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"), true };
-            yield return new object[] { new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"), new UriBuilder("http://domain.com:80/path/file?query#fragment"), true }; // Ignores userinfo
-            yield return new object[] { new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"), new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment2"), true }; // Ignores fragment
-            yield return new object[] { new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"), new UriBuilder("http://username:password@host.com:80/path/file?query#fragment"), false };
-            yield return new object[] { new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"), new UriBuilder("http://username:password@domain.com:90/path/file?query#fragment"), false };
-            yield return new object[] { new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"), new UriBuilder("http://username:password@domain.com:80/path2/file?query#fragment"), false };
-            yield return new object[] { new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"), new UriBuilder("http://username:password@domain.com:80/path/file?query2#fragment"), false };
+            yield return new object[]
+            {
+                new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"),
+                new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"),
+                true,
+            };
+            yield return new object[]
+            {
+                new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"),
+                new UriBuilder("http://domain.com:80/path/file?query#fragment"),
+                true,
+            }; // Ignores userinfo
+            yield return new object[]
+            {
+                new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"),
+                new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment2"),
+                true,
+            }; // Ignores fragment
+            yield return new object[]
+            {
+                new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"),
+                new UriBuilder("http://username:password@host.com:80/path/file?query#fragment"),
+                false,
+            };
+            yield return new object[]
+            {
+                new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"),
+                new UriBuilder("http://username:password@domain.com:90/path/file?query#fragment"),
+                false,
+            };
+            yield return new object[]
+            {
+                new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"),
+                new UriBuilder("http://username:password@domain.com:80/path2/file?query#fragment"),
+                false,
+            };
+            yield return new object[]
+            {
+                new UriBuilder("http://username:password@domain.com:80/path/file?query#fragment"),
+                new UriBuilder("http://username:password@domain.com:80/path/file?query2#fragment"),
+                false,
+            };
 
-            yield return new object[] { new UriBuilder("unknown:"), new UriBuilder("unknown:"), true };
-            yield return new object[] { new UriBuilder("unknown:"), new UriBuilder("different:"), false };
+            yield return new object[]
+            {
+                new UriBuilder("unknown:"),
+                new UriBuilder("unknown:"),
+                true,
+            };
+            yield return new object[]
+            {
+                new UriBuilder("unknown:"),
+                new UriBuilder("different:"),
+                false,
+            };
         }
 
         [Theory]
@@ -349,25 +620,127 @@ namespace System.PrivateUri.Tests
         public static IEnumerable<object[]> ToString_TestData()
         {
             yield return new object[] { new UriBuilder(), "http://localhost/" };
-            yield return new object[] { new UriBuilder() { Scheme = "" }, "localhost/" };
-            yield return new object[] { new UriBuilder() { Scheme = "unknown" }, "unknown://localhost/" };
-            yield return new object[] { new UriBuilder() { Scheme = "unknown", Host = "" }, "unknown:/" };
-            yield return new object[] { new UriBuilder() { Scheme = "unknown", Host = "", Path = "path1/path2" }, "unknown:path1/path2" };
-            yield return new object[] { new UriBuilder() { UserName = "username" }, "http://username@localhost/" };
-            yield return new object[] { new UriBuilder() { UserName = "username", Password = "password" }, "http://username:password@localhost/" };
-            yield return new object[] { new UriBuilder() { Port = 80 }, "http://localhost:80/" };
-            yield return new object[] { new UriBuilder() { Port = 0 }, "http://localhost:0/" };
-            yield return new object[] { new UriBuilder() { Host = "", Port = 80 }, "http:///" };
-            yield return new object[] { new UriBuilder() { Host = "host", Path = "" }, "http://host/" };
-            yield return new object[] { new UriBuilder() { Host = "host", Path = "/" }, "http://host/" };
-            yield return new object[] { new UriBuilder() { Host = "host", Path = @"\" }, "http://host/" };
-            yield return new object[] { new UriBuilder() { Host = "host", Path = "path" }, "http://host/path" };
-            yield return new object[] { new UriBuilder() { Host = "host", Path = "path", Query = "query" }, "http://host/path?query" };
-            yield return new object[] { new UriBuilder() { Host = "host", Path = "path", Fragment = "fragment" }, "http://host/path#fragment" };
-            yield return new object[] { new UriBuilder() { Host = "host", Path = "path", Query = "query", Fragment = "fragment" }, "http://host/path?query#fragment" };
-            yield return new object[] { new UriBuilder() { Host = "host", Query = "query" }, "http://host/?query" };
-            yield return new object[] { new UriBuilder() { Host = "host", Fragment = "fragment" }, "http://host/#fragment" };
-            yield return new object[] { new UriBuilder() { Host = "host", Query = "query", Fragment = "fragment" }, "http://host/?query#fragment" };
+            yield return new object[]
+            {
+                new UriBuilder() { Scheme = "" },
+                "localhost/",
+            };
+            yield return new object[]
+            {
+                new UriBuilder() { Scheme = "unknown" },
+                "unknown://localhost/",
+            };
+            yield return new object[]
+            {
+                new UriBuilder() { Scheme = "unknown", Host = "" },
+                "unknown:/",
+            };
+            yield return new object[]
+            {
+                new UriBuilder()
+                {
+                    Scheme = "unknown",
+                    Host = "",
+                    Path = "path1/path2",
+                },
+                "unknown:path1/path2",
+            };
+            yield return new object[]
+            {
+                new UriBuilder() { UserName = "username" },
+                "http://username@localhost/",
+            };
+            yield return new object[]
+            {
+                new UriBuilder() { UserName = "username", Password = "password" },
+                "http://username:password@localhost/",
+            };
+            yield return new object[]
+            {
+                new UriBuilder() { Port = 80 },
+                "http://localhost:80/",
+            };
+            yield return new object[]
+            {
+                new UriBuilder() { Port = 0 },
+                "http://localhost:0/",
+            };
+            yield return new object[]
+            {
+                new UriBuilder() { Host = "", Port = 80 },
+                "http:///",
+            };
+            yield return new object[]
+            {
+                new UriBuilder() { Host = "host", Path = "" },
+                "http://host/",
+            };
+            yield return new object[]
+            {
+                new UriBuilder() { Host = "host", Path = "/" },
+                "http://host/",
+            };
+            yield return new object[]
+            {
+                new UriBuilder() { Host = "host", Path = @"\" },
+                "http://host/",
+            };
+            yield return new object[]
+            {
+                new UriBuilder() { Host = "host", Path = "path" },
+                "http://host/path",
+            };
+            yield return new object[]
+            {
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Path = "path",
+                    Query = "query",
+                },
+                "http://host/path?query",
+            };
+            yield return new object[]
+            {
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Path = "path",
+                    Fragment = "fragment",
+                },
+                "http://host/path#fragment",
+            };
+            yield return new object[]
+            {
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Path = "path",
+                    Query = "query",
+                    Fragment = "fragment",
+                },
+                "http://host/path?query#fragment",
+            };
+            yield return new object[]
+            {
+                new UriBuilder() { Host = "host", Query = "query" },
+                "http://host/?query",
+            };
+            yield return new object[]
+            {
+                new UriBuilder() { Host = "host", Fragment = "fragment" },
+                "http://host/#fragment",
+            };
+            yield return new object[]
+            {
+                new UriBuilder()
+                {
+                    Host = "host",
+                    Query = "query",
+                    Fragment = "fragment",
+                },
+                "http://host/?query#fragment",
+            };
         }
 
         [Theory]
@@ -387,21 +760,35 @@ namespace System.PrivateUri.Tests
 
         [Theory]
         [InlineData(@"user/\?#@name", "", "http://user%2F%5C%3F%23%40name@localhost/")]
-        [InlineData(@"user/\?#@name", @"/\?#@", "http://user%2F%5C%3F%23%40name:%2F%5C%3F%23%40@localhost/")]
-        public void ToString_EncodingUserInfo(string username, string password, string expectedToString)
+        [InlineData(
+            @"user/\?#@name",
+            @"/\?#@",
+            "http://user%2F%5C%3F%23%40name:%2F%5C%3F%23%40@localhost/"
+        )]
+        public void ToString_EncodingUserInfo(
+            string username,
+            string password,
+            string expectedToString
+        )
         {
-            var uriBuilder = new UriBuilder
-            {
-                UserName = username,
-                Password = password
-            };
+            var uriBuilder = new UriBuilder { UserName = username, Password = password };
 
             Assert.Equal(expectedToString, uriBuilder.ToString());
             Assert.Equal(username, uriBuilder.UserName);
             Assert.Equal(password, uriBuilder.Password);
         }
 
-        private static void VerifyUriBuilder(UriBuilder uriBuilder, string scheme, string userName, string password, string host, int port, string path, string query, string fragment)
+        private static void VerifyUriBuilder(
+            UriBuilder uriBuilder,
+            string scheme,
+            string userName,
+            string password,
+            string host,
+            int port,
+            string path,
+            string query,
+            string fragment
+        )
         {
             Assert.Equal(scheme, uriBuilder.Scheme);
             Assert.Equal(userName, uriBuilder.UserName);

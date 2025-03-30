@@ -2,20 +2,18 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Xunit;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using Xunit;
 
 internal class MyCriticalHandle : CriticalHandle
 {
     static int s_uniqueHandleValue;
     static HashSet<int> s_closedHandles = new HashSet<int>();
 
-    public MyCriticalHandle() : base(new IntPtr(-1))
-    {
-
-    }
+    public MyCriticalHandle()
+        : base(new IntPtr(-1)) { }
 
     public override bool IsInvalid
     {
@@ -35,14 +33,8 @@ internal class MyCriticalHandle : CriticalHandle
 
     internal IntPtr Handle
     {
-        get
-        {
-            return handle;
-        }
-        set
-        {
-            handle = value;
-        }
+        get { return handle; }
+        set { handle = value; }
     }
 
     internal static IntPtr GetUniqueHandle()
@@ -59,28 +51,45 @@ internal class MyCriticalHandle : CriticalHandle
 internal class Native
 {
     [UnmanagedFunctionPointer(System.Runtime.InteropServices.CallingConvention.StdCall)]
-    [return: MarshalAs(UnmanagedType.Bool)]internal delegate bool IsHandleClosed(IntPtr handle);
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal delegate bool IsHandleClosed(IntPtr handle);
 
     [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
-    internal static extern IntPtr In([MarshalAs(UnmanagedType.LPArray)]MyCriticalHandle[] handle);
+    internal static extern IntPtr In([MarshalAs(UnmanagedType.LPArray)] MyCriticalHandle[] handle);
 
     [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
-    internal static extern void Out(IntPtr handleValue, [MarshalAs(UnmanagedType.LPArray)]out MyCriticalHandle[] handle);
+    internal static extern void Out(
+        IntPtr handleValue,
+        [MarshalAs(UnmanagedType.LPArray)] out MyCriticalHandle[] handle
+    );
 
-    [DllImport("CriticalHandlesNative", EntryPoint = "Ref", CallingConvention = CallingConvention.StdCall)]
-    internal static extern IntPtr InRef([In, MarshalAs(UnmanagedType.LPArray)]ref MyCriticalHandle[] handle);
+    [DllImport(
+        "CriticalHandlesNative",
+        EntryPoint = "Ref",
+        CallingConvention = CallingConvention.StdCall
+    )]
+    internal static extern IntPtr InRef(
+        [In, MarshalAs(UnmanagedType.LPArray)] ref MyCriticalHandle[] handle
+    );
 
     [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
-    internal static extern IntPtr Ref([MarshalAs(UnmanagedType.LPArray)]ref MyCriticalHandle[] handle);
+    internal static extern IntPtr Ref(
+        [MarshalAs(UnmanagedType.LPArray)] ref MyCriticalHandle[] handle
+    );
 
     [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
-    internal static extern IntPtr RefModify(IntPtr handleValue, [MarshalAs(UnmanagedType.LPArray)]ref MyCriticalHandle[] handle);
+    internal static extern IntPtr RefModify(
+        IntPtr handleValue,
+        [MarshalAs(UnmanagedType.LPArray)] ref MyCriticalHandle[] handle
+    );
 
     [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
     internal static extern MyCriticalHandle[] Ret(IntPtr handleValue);
 
     [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
-    internal static extern IntPtr SetIsHandleClosedCallback([MarshalAs(UnmanagedType.FunctionPtr)]IsHandleClosed isHandleClosed);
+    internal static extern IntPtr SetIsHandleClosedCallback(
+        [MarshalAs(UnmanagedType.FunctionPtr)] IsHandleClosed isHandleClosed
+    );
 }
 
 public class CriticalHandleArrayTest
@@ -95,7 +104,10 @@ public class CriticalHandleArrayTest
     public static void In()
     {
         IntPtr handleValue = MyCriticalHandle.GetUniqueHandle();
-        MyCriticalHandle[] myCriticalHandleArray = new MyCriticalHandle[] { new MyCriticalHandle() { Handle = handleValue } };
+        MyCriticalHandle[] myCriticalHandleArray = new MyCriticalHandle[]
+        {
+            new MyCriticalHandle() { Handle = handleValue },
+        };
         Assert.Throws<MarshalDirectiveException>(() => Native.In(myCriticalHandleArray));
     }
 
@@ -109,20 +121,28 @@ public class CriticalHandleArrayTest
     {
         IntPtr handleValue = MyCriticalHandle.GetUniqueHandle();
         MyCriticalHandle[] myCriticalHandleArray;
-        Assert.Throws<MarshalDirectiveException>(() => Native.Out(handleValue, out myCriticalHandleArray));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            Native.Out(handleValue, out myCriticalHandleArray)
+        );
     }
 
     public static void InRef()
     {
         IntPtr handleValue = MyCriticalHandle.GetUniqueHandle();
-        MyCriticalHandle[] myCriticalHandleArray = new MyCriticalHandle[] { new MyCriticalHandle() { Handle = handleValue } };
+        MyCriticalHandle[] myCriticalHandleArray = new MyCriticalHandle[]
+        {
+            new MyCriticalHandle() { Handle = handleValue },
+        };
         Assert.Throws<MarshalDirectiveException>(() => Native.InRef(ref myCriticalHandleArray));
     }
 
     public static void Ref()
     {
         IntPtr handleValue = MyCriticalHandle.GetUniqueHandle();
-        MyCriticalHandle[] myCriticalHandleArray = new MyCriticalHandle[] { new MyCriticalHandle() { Handle = handleValue } };
+        MyCriticalHandle[] myCriticalHandleArray = new MyCriticalHandle[]
+        {
+            new MyCriticalHandle() { Handle = handleValue },
+        };
         Assert.Throws<MarshalDirectiveException>(() => Native.Ref(ref myCriticalHandleArray));
     }
 
@@ -130,8 +150,13 @@ public class CriticalHandleArrayTest
     {
         IntPtr handleValue1 = MyCriticalHandle.GetUniqueHandle();
         IntPtr handleValue2 = MyCriticalHandle.GetUniqueHandle();
-        MyCriticalHandle[] myCriticalHandleArray = new MyCriticalHandle[] { new MyCriticalHandle() { Handle = handleValue1 } };
-        Assert.Throws<MarshalDirectiveException>(() => Native.RefModify(handleValue2, ref myCriticalHandleArray));
+        MyCriticalHandle[] myCriticalHandleArray = new MyCriticalHandle[]
+        {
+            new MyCriticalHandle() { Handle = handleValue1 },
+        };
+        Assert.Throws<MarshalDirectiveException>(() =>
+            Native.RefModify(handleValue2, ref myCriticalHandleArray)
+        );
     }
 
     [Fact]

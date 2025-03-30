@@ -23,11 +23,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         public bool IsChecked
         {
-            get
-            {
-                return _isChecked;
-            }
-
+            get { return _isChecked; }
             set
             {
                 SetProperty(ref _isChecked, value);
@@ -39,7 +35,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
         }
 
-        public AbstractRadioButtonViewModel(string description, string preview, AbstractOptionPreviewViewModel info, bool isChecked, string group)
+        public AbstractRadioButtonViewModel(
+            string description,
+            string preview,
+            AbstractOptionPreviewViewModel info,
+            bool isChecked,
+            string group
+        )
         {
             Description = description;
             this.Preview = preview;
@@ -49,6 +51,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             SetProperty(ref _isChecked, isChecked);
         }
 
-        internal abstract void SetOptionAndUpdatePreview(AbstractOptionPreviewViewModel info, string preview);
+        internal abstract void SetOptionAndUpdatePreview(
+            AbstractOptionPreviewViewModel info,
+            string preview
+        );
     }
 }

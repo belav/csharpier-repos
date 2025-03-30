@@ -7,11 +7,12 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Common.Utils;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Common.Utils;
 using System.Diagnostics;
 using System.Linq;
+
 namespace System.Data.Mapping.Update.Internal
 {
     /// <summary>
@@ -55,11 +56,15 @@ namespace System.Data.Mapping.Update.Internal
         /// <returns>Merged key.</returns>
         internal CompositeKey Merge(KeyManager keyManager, CompositeKey other)
         {
-            Debug.Assert(null != other && other.KeyComponents.Length == this.KeyComponents.Length, "expected a compatible CompositeKey");
+            Debug.Assert(
+                null != other && other.KeyComponents.Length == this.KeyComponents.Length,
+                "expected a compatible CompositeKey"
+            );
             PropagatorResult[] mergedKeyValues = new PropagatorResult[this.KeyComponents.Length];
             for (int i = 0; i < this.KeyComponents.Length; i++)
             {
-                mergedKeyValues[i] = this.KeyComponents[i].Merge(keyManager, other.KeyComponents[i]);
+                mergedKeyValues[i] = this.KeyComponents[i]
+                    .Merge(keyManager, other.KeyComponents[i]);
             }
             return new CompositeKey(mergedKeyValues);
         }
@@ -81,16 +86,27 @@ namespace System.Data.Mapping.Update.Internal
             public bool Equals(CompositeKey left, CompositeKey right)
             {
                 // Short circuit the comparison if we know the other reference is equivalent
-                if (object.ReferenceEquals(left, right)) { return true; }
+                if (object.ReferenceEquals(left, right))
+                {
+                    return true;
+                }
 
                 // If either side is null, return false order (both can't be null because of
                 // the previous check)
-                if (null == left || null == right) { return false; }
+                if (null == left || null == right)
+                {
+                    return false;
+                }
 
-                Debug.Assert(null != left.KeyComponents && null != right.KeyComponents,
-                    "(Update/JoinPropagator) CompositeKey must be initialized");
+                Debug.Assert(
+                    null != left.KeyComponents && null != right.KeyComponents,
+                    "(Update/JoinPropagator) CompositeKey must be initialized"
+                );
 
-                if (left.KeyComponents.Length != right.KeyComponents.Length) { return false; }
+                if (left.KeyComponents.Length != right.KeyComponents.Length)
+                {
+                    return false;
+                }
 
                 for (int i = 0; i < left.KeyComponents.Length; i++)
                 {
@@ -102,16 +118,24 @@ namespace System.Data.Mapping.Update.Internal
                     // value)
                     if (leftValue.Identifier != PropagatorResult.NullIdentifier)
                     {
-                        if (rightValue.Identifier == PropagatorResult.NullIdentifier ||
-                            _manager.GetCliqueIdentifier(leftValue.Identifier) != _manager.GetCliqueIdentifier(rightValue.Identifier))
+                        if (
+                            rightValue.Identifier == PropagatorResult.NullIdentifier
+                            || _manager.GetCliqueIdentifier(leftValue.Identifier)
+                                != _manager.GetCliqueIdentifier(rightValue.Identifier)
+                        )
                         {
                             return false;
                         }
                     }
                     else
                     {
-                        if (rightValue.Identifier != PropagatorResult.NullIdentifier ||
-                            !ByValueEqualityComparer.Default.Equals(leftValue.GetSimpleValue(), rightValue.GetSimpleValue()))
+                        if (
+                            rightValue.Identifier != PropagatorResult.NullIdentifier
+                            || !ByValueEqualityComparer.Default.Equals(
+                                leftValue.GetSimpleValue(),
+                                rightValue.GetSimpleValue()
+                            )
+                        )
                         {
                             return false;
                         }
@@ -142,9 +166,13 @@ namespace System.Data.Mapping.Update.Internal
                 {
                     // no identifier exists for this key component, so use the actual key
                     // value
-                    Debug.Assert(null != keyComponent && null != keyComponent,
-                        "key value must not be null");
-                    return ByValueEqualityComparer.Default.GetHashCode(keyComponent.GetSimpleValue());
+                    Debug.Assert(
+                        null != keyComponent && null != keyComponent,
+                        "key value must not be null"
+                    );
+                    return ByValueEqualityComparer.Default.GetHashCode(
+                        keyComponent.GetSimpleValue()
+                    );
                 }
                 else
                 {

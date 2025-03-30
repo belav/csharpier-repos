@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.CompensatingResourceManager.LogRecord.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,62 +31,62 @@
 using System;
 using System.EnterpriseServices;
 
-namespace System.EnterpriseServices.CompensatingResourceManager {
+namespace System.EnterpriseServices.CompensatingResourceManager
+{
+    public sealed class LogRecord
+    {
+        #region Fields
 
-	public sealed class LogRecord {
+        LogRecordFlags flags;
+        object record;
+        int sequence;
 
-		#region Fields
+        #endregion // Fields
 
-		LogRecordFlags flags;
-		object record;
-		int sequence;
+        #region Constructors
 
-		#endregion // Fields
+        [MonoTODO]
+        internal LogRecord() { }
 
-		#region Constructors
+        [MonoTODO]
+        internal LogRecord(_LogRecord logRecord)
+        {
+            flags = (LogRecordFlags)logRecord.dwCrmFlags;
+            sequence = logRecord.dwSequenceNumber;
+            record = logRecord.blobUserData;
+        }
 
-		[MonoTODO]
-		internal LogRecord ()
-		{
-		}
+        #endregion // Constructors
 
-		[MonoTODO]
-		internal LogRecord (_LogRecord logRecord)
-		{
-			flags = (LogRecordFlags) logRecord.dwCrmFlags;
-			sequence = logRecord.dwSequenceNumber;
-			record = logRecord.blobUserData;
-		}
+        #region Properties
 
-		#endregion // Constructors
+        public LogRecordFlags Flags
+        {
+            get { return flags; }
+        }
 
-		#region Properties
+        public object Record
+        {
+            get { return record; }
+        }
 
-		public LogRecordFlags Flags {
-			get { return flags; }
-		}
+        public int Sequence
+        {
+            get { return sequence; }
+        }
 
-		public object Record {
-			get { return record; }
-		}
-
-		public int Sequence {
-			get { return sequence; }
-		}
-
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 
 #pragma warning disable 649
-	internal struct _LogRecord {
-		
-		#region Fields
+    internal struct _LogRecord
+    {
+        #region Fields
 
-		public int dwCrmFlags;
-		public int dwSequenceNumber;
-		public object blobUserData; // FIXME: This is not the correct type
-
-		#endregion // Fields
-	}
+        public int dwCrmFlags;
+        public int dwSequenceNumber;
+        public object blobUserData; // FIXME: This is not the correct type
+        #endregion // Fields
+    }
 #pragma warning restore 649
 }

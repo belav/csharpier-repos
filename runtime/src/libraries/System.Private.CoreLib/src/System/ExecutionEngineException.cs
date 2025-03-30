@@ -9,9 +9,13 @@ namespace System
     /// <summary>
     /// The exception that is thrown when there is an internal error in the execution engine of the common language runtime.
     /// </summary>
-    [Obsolete("ExecutionEngineException previously indicated an unspecified fatal error in the runtime. The runtime no longer raises this exception so this type is obsolete.")]
+    [Obsolete(
+        "ExecutionEngineException previously indicated an unspecified fatal error in the runtime. The runtime no longer raises this exception so this type is obsolete."
+    )]
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class ExecutionEngineException : SystemException
     {
         public ExecutionEngineException()
@@ -32,8 +36,7 @@ namespace System
             HResult = HResults.COR_E_EXECUTIONENGINE;
         }
 
-        private ExecutionEngineException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        private ExecutionEngineException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

@@ -14,31 +14,43 @@ namespace System.Xml.ReaderSettingsTests
         {
             // for function v1
             {
-                this.AddChild(new CVariation(v1) { Attribute = new Variation("ReaderSettings not null") { Priority = 0 } });
+                this.AddChild(
+                    new CVariation(v1)
+                    {
+                        Attribute = new Variation("ReaderSettings not null") { Priority = 0 },
+                    }
+                );
             }
-
 
             // for function WrappingScenario
             {
-                this.AddChild(new CVariation(WrappingScenario) { Attribute = new Variation("Wrapping scenario") });
+                this.AddChild(
+                    new CVariation(WrappingScenario)
+                    {
+                        Attribute = new Variation("Wrapping scenario"),
+                    }
+                );
             }
-
 
             // for function v3
             {
-                this.AddChild(new CVariation(v3) { Attribute = new Variation("Reset") { Priority = 0 } });
+                this.AddChild(
+                    new CVariation(v3) { Attribute = new Variation("Reset") { Priority = 0 } }
+                );
             }
-
 
             // for function v4
             {
-                this.AddChild(new CVariation(v4) { Attribute = new Variation("Clone") { Priority = 0 } });
+                this.AddChild(
+                    new CVariation(v4) { Attribute = new Variation("Clone") { Priority = 0 } }
+                );
             }
-
 
             // for function v5
             {
-                this.AddChild(new CVariation(v5) { Attribute = new Variation("NameTable") { Priority = 0 } });
+                this.AddChild(
+                    new CVariation(v5) { Attribute = new Variation("NameTable") { Priority = 0 } }
+                );
             }
         }
     }

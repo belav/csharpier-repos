@@ -1,18 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration.Provider;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
+using System.Web.Security;
 using System.Workflow.Runtime;
 using System.Workflow.Runtime.Hosting;
-
-using System.Web.Security;
-using System.Security.Principal;
-using System.Configuration.Provider;
 
 namespace System.Workflow.Activities
 {
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class WebWorkflowRole : WorkflowRole
     {
         private string m_roleName;
@@ -20,10 +21,7 @@ namespace System.Workflow.Activities
 
         public override string Name
         {
-            get
-            {
-                return this.m_roleName;
-            }
+            get { return this.m_roleName; }
             set
             {
                 if (value == null)
@@ -33,14 +31,8 @@ namespace System.Workflow.Activities
         }
         public string RoleProvider
         {
-            get
-            {
-                return this.m_roleProvider;
-            }
-            set
-            {
-                this.m_roleProvider = value;
-            }
+            get { return this.m_roleProvider; }
+            set { this.m_roleProvider = value; }
         }
 
         public WebWorkflowRole(string roleName)
@@ -53,6 +45,7 @@ namespace System.Workflow.Activities
             this.m_roleName = roleName;
             this.m_roleProvider = null;
         }
+
         public WebWorkflowRole(string roleName, string provider)
         {
             if (null == roleName)
@@ -88,7 +81,9 @@ namespace System.Workflow.Activities
 
             RoleProvider rp = Roles.Providers[this.RoleProvider];
             if (rp == null)
-                throw new ProviderException(SR.GetString(SR.Error_RoleProviderNotAvailableOrEnabled, this.RoleProvider));
+                throw new ProviderException(
+                    SR.GetString(SR.Error_RoleProviderNotAvailableOrEnabled, this.RoleProvider)
+                );
             return rp;
         }
     }

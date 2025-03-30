@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Moq.Async
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class TaskFactory<TResult> : AwaitableFactory<Task<TResult>, TResult>
@@ -54,7 +53,8 @@ namespace Moq.Async
         {
             return Expression.MakeMemberAccess(
                 awaitableExpression,
-                typeof(Task<TResult>).GetProperty(nameof(Task<TResult>.Result)));
+                typeof(Task<TResult>).GetProperty(nameof(Task<TResult>.Result))
+            );
         }
 
         public override bool TryGetResult(Task<TResult> task, out TResult result)

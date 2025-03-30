@@ -4,20 +4,19 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Text;
-using Roslyn.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection.Metadata;
-using System;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Text;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 {
-    internal sealed class PEGlobalNamespaceSymbol
-        : PENamespaceSymbol
+    internal sealed class PEGlobalNamespaceSymbol : PENamespaceSymbol
     {
         /// <summary>
         /// The module containing the namespace.
@@ -33,50 +32,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return _moduleSymbol;
-            }
+            get { return _moduleSymbol; }
         }
 
         internal override PEModuleSymbol ContainingPEModule
         {
-            get
-            {
-                return _moduleSymbol;
-            }
+            get { return _moduleSymbol; }
         }
 
         public override string Name
         {
-            get
-            {
-                return string.Empty;
-            }
+            get { return string.Empty; }
         }
 
         public override bool IsGlobalNamespace
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override AssemblySymbol ContainingAssembly
         {
-            get
-            {
-                return _moduleSymbol.ContainingAssembly;
-            }
+            get { return _moduleSymbol.ContainingAssembly; }
         }
 
         internal override ModuleSymbol ContainingModule
         {
-            get
-            {
-                return _moduleSymbol;
-            }
+            get { return _moduleSymbol; }
         }
 
         protected override void EnsureAllMembersLoaded()
@@ -87,11 +68,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                 try
                 {
-                    groups = _moduleSymbol.Module.GroupTypesByNamespaceOrThrow(System.StringComparer.Ordinal);
+                    groups = _moduleSymbol.Module.GroupTypesByNamespaceOrThrow(
+                        System.StringComparer.Ordinal
+                    );
                 }
                 catch (BadImageFormatException)
                 {
-                    groups = SpecializedCollections.EmptyEnumerable<IGrouping<string, TypeDefinitionHandle>>();
+                    groups = SpecializedCollections.EmptyEnumerable<
+                        IGrouping<string, TypeDefinitionHandle>
+                    >();
                 }
 
                 LoadAllMembers(groups);

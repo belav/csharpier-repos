@@ -14,7 +14,12 @@ namespace Microsoft.AspNetCore.Http.HttpResults;
 /// with Unprocessable Entity (422) status code.
 /// </summary>
 /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
-public sealed class UnprocessableEntity<TValue> : IResult, IEndpointMetadataProvider, IStatusCodeHttpResult, IValueHttpResult, IValueHttpResult<TValue>
+public sealed class UnprocessableEntity<TValue>
+    : IResult,
+        IEndpointMetadataProvider,
+        IStatusCodeHttpResult,
+        IValueHttpResult,
+        IValueHttpResult<TValue>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="UnprocessableEntity"/> class with the values
@@ -48,23 +53,31 @@ public sealed class UnprocessableEntity<TValue> : IResult, IEndpointMetadataProv
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.UnprocessableEntityObjectResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.UnprocessableEntityObjectResult"
+        );
 
         HttpResultsHelper.Log.WritingResultAsStatusCode(logger, StatusCode);
         httpContext.Response.StatusCode = StatusCode;
 
-        return HttpResultsHelper.WriteResultAsJsonAsync(
-                httpContext,
-                logger: logger,
-                Value);
+        return HttpResultsHelper.WriteResultAsJsonAsync(httpContext, logger: logger, Value);
     }
 
     /// <inheritdoc/>
-    static void IEndpointMetadataProvider.PopulateMetadata(MethodInfo method, EndpointBuilder builder)
+    static void IEndpointMetadataProvider.PopulateMetadata(
+        MethodInfo method,
+        EndpointBuilder builder
+    )
     {
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder.Metadata.Add(new ProducesResponseTypeMetadata(StatusCodes.Status422UnprocessableEntity, typeof(TValue), new[] { "application/json" }));
+        builder.Metadata.Add(
+            new ProducesResponseTypeMetadata(
+                StatusCodes.Status422UnprocessableEntity,
+                typeof(TValue),
+                new[] { "application/json" }
+            )
+        );
     }
 }

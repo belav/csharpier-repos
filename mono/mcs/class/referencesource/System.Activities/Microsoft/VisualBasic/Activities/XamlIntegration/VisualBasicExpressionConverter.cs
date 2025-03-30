@@ -7,41 +7,53 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
     using System;
     using System.Activities.Expressions;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Text.RegularExpressions;
-    using System.Reflection;
-    using System.Xml.Linq;
     using System.ComponentModel;
-    using System.Xaml;
-    using System.Windows.Markup;
+    using System.Linq;
+    using System.Reflection;
+    using System.Runtime;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime;
+    using System.Text;
+    using System.Text.RegularExpressions;
     using System.Threading;
+    using System.Windows.Markup;
+    using System.Xaml;
+    using System.Xml.Linq;
 
     static class VisualBasicExpressionConverter
     {
         static readonly Regex assemblyQualifiedNamespaceRegex = new Regex(
-            "clr-namespace:(?<namespace>[^;]*);assembly=(?<assembly>.*)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            "clr-namespace:(?<namespace>[^;]*);assembly=(?<assembly>.*)",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase
+        );
 
-        public static VisualBasicSettings CollectXmlNamespacesAndAssemblies(ITypeDescriptorContext context)
+        public static VisualBasicSettings CollectXmlNamespacesAndAssemblies(
+            ITypeDescriptorContext context
+        )
         {
-            // access XamlSchemaContext.ReferenceAssemblies 
+            // access XamlSchemaContext.ReferenceAssemblies
             // for the Compiled Xaml scenario
             IList<Assembly> xsCtxReferenceAssemblies = null;
-            IXamlSchemaContextProvider xamlSchemaContextProvider = context.GetService(typeof(IXamlSchemaContextProvider)) as IXamlSchemaContextProvider;
-            if (xamlSchemaContextProvider != null && xamlSchemaContextProvider.SchemaContext != null)
+            IXamlSchemaContextProvider xamlSchemaContextProvider =
+                context.GetService(typeof(IXamlSchemaContextProvider))
+                as IXamlSchemaContextProvider;
+            if (
+                xamlSchemaContextProvider != null
+                && xamlSchemaContextProvider.SchemaContext != null
+            )
             {
-                xsCtxReferenceAssemblies = xamlSchemaContextProvider.SchemaContext.ReferenceAssemblies;
+                xsCtxReferenceAssemblies = xamlSchemaContextProvider
+                    .SchemaContext
+                    .ReferenceAssemblies;
                 if (xsCtxReferenceAssemblies != null && xsCtxReferenceAssemblies.Count == 0)
                 {
                     xsCtxReferenceAssemblies = null;
                 }
-            } 
+            }
 
             VisualBasicSettings settings = null;
-            IXamlNamespaceResolver namespaceResolver = (IXamlNamespaceResolver)context.GetService(typeof(IXamlNamespaceResolver));
+            IXamlNamespaceResolver namespaceResolver = (IXamlNamespaceResolver)
+                context.GetService(typeof(IXamlNamespaceResolver));
 
             if (namespaceResolver == null)
             {
@@ -65,19 +77,26 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
 
                         if (!mapping.IsEmpty)
                         {
-                            foreach (ReadOnlyVisualBasicImportReference importReference in mapping.ImportReferences)
+                            foreach (
+                                ReadOnlyVisualBasicImportReference importReference in mapping.ImportReferences
+                            )
                             {
                                 if (xsCtxReferenceAssemblies != null)
                                 {
-                                    // this is "compiled Xaml" 
+                                    // this is "compiled Xaml"
                                     VisualBasicImportReference newImportReference;
 
                                     if (importReference.EarlyBoundAssembly != null)
                                     {
-                                        if (xsCtxReferenceAssemblies.Contains(importReference.EarlyBoundAssembly))
+                                        if (
+                                            xsCtxReferenceAssemblies.Contains(
+                                                importReference.EarlyBoundAssembly
+                                            )
+                                        )
                                         {
                                             newImportReference = importReference.Clone();
-                                            newImportReference.EarlyBoundAssembly = importReference.EarlyBoundAssembly;
+                                            newImportReference.EarlyBoundAssembly =
+                                                importReference.EarlyBoundAssembly;
                                             settings.ImportReferences.Add(newImportReference);
                                         }
                                         continue;
@@ -85,13 +104,21 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
 
                                     for (int i = 0; i < xsCtxReferenceAssemblies.Count; i++)
                                     {
-                                        AssemblyName xsCtxAssemblyName = VisualBasicHelper.GetFastAssemblyName(xsCtxReferenceAssemblies[i]);
-                                        if (importReference.AssemblySatisfiesReference(xsCtxAssemblyName))
+                                        AssemblyName xsCtxAssemblyName =
+                                            VisualBasicHelper.GetFastAssemblyName(
+                                                xsCtxReferenceAssemblies[i]
+                                            );
+                                        if (
+                                            importReference.AssemblySatisfiesReference(
+                                                xsCtxAssemblyName
+                                            )
+                                        )
                                         {
                                             // bind this assembly early to the importReference
                                             // so later AssemblyName resolution can be skipped
                                             newImportReference = importReference.Clone();
-                                            newImportReference.EarlyBoundAssembly = xsCtxReferenceAssemblies[i];
+                                            newImportReference.EarlyBoundAssembly =
+                                                xsCtxReferenceAssemblies[i];
                                             settings.ImportReferences.Add(newImportReference);
                                             break;
                                         }
@@ -100,13 +127,15 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                                 else
                                 {
                                     // this is "loose Xaml"
-                                    VisualBasicImportReference newImportReference = importReference.Clone();
+                                    VisualBasicImportReference newImportReference =
+                                        importReference.Clone();
                                     if (importReference.EarlyBoundAssembly != null)
                                     {
-                                        // VBImportReference.Clone() method deliberately doesn't copy 
+                                        // VBImportReference.Clone() method deliberately doesn't copy
                                         // its EarlyBoundAssembly to the cloned instance.
                                         // we need to explicitly copy the original's EarlyBoundAssembly
-                                        newImportReference.EarlyBoundAssembly = importReference.EarlyBoundAssembly;
+                                        newImportReference.EarlyBoundAssembly =
+                                            importReference.EarlyBoundAssembly;
                                     }
                                     settings.ImportReferences.Add(newImportReference);
                                 }
@@ -118,10 +147,15 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
             return settings;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Critical because we are accessing critical member AssemblyCache.XmlnsMappings.",
-            Safe = "Safe because we prevent partial trusted code from manipulating the cache directly by creating a read-only wrapper around the cached XmlnsMapping.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because we are accessing critical member AssemblyCache.XmlnsMappings.",
+            Safe = "Safe because we prevent partial trusted code from manipulating the cache directly by creating a read-only wrapper around the cached XmlnsMapping."
+        )]
         [SecuritySafeCritical]
-        private static void WrapCachedMapping(NamespaceDeclaration prefix, out ReadOnlyXmlnsMapping readOnlyMapping)
+        private static void WrapCachedMapping(
+            NamespaceDeclaration prefix,
+            out ReadOnlyXmlnsMapping readOnlyMapping
+        )
         {
             XmlnsMapping mapping = new XmlnsMapping();
             XNamespace xmlns = XNamespace.Get(prefix.Namespace);
@@ -140,8 +174,9 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                         {
                             Assembly = match.Groups["assembly"].Value,
                             Import = match.Groups["namespace"].Value,
-                            Xmlns = xmlns
-                        });
+                            Xmlns = xmlns,
+                        }
+                    );
                 }
                 else
                 {
@@ -160,17 +195,17 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
         /// <remarks>
         ///     <list type="bullet">
         ///         <item><description>
-        ///         XmlnsMappings for static assemblies are not GC'd. In v4.0 we can assume that all static assemblies 
-        ///         containing XmlnsDefinition attributes are non-collectible. The CLR will provide no public mechanism 
-        ///         for unloading a static assembly or specifying that a static assembly is collectible. While there 
-        ///         may be some small number of assemblies identified by the CLR as collectible, none will contain 
+        ///         XmlnsMappings for static assemblies are not GC'd. In v4.0 we can assume that all static assemblies
+        ///         containing XmlnsDefinition attributes are non-collectible. The CLR will provide no public mechanism
+        ///         for unloading a static assembly or specifying that a static assembly is collectible. While there
+        ///         may be some small number of assemblies identified by the CLR as collectible, none will contain
         ///         XmlnsDefinition attributes. Should the CLR provide a public mechanism for unloading a static assembly
         ///         or specifying that a static assembly is collectible, we should revisit this decision based on scenarios
         ///         that flow from these mechanisms.
         ///         </description></item>
         ///         <item><description>
         ///         XmlnsMappings for dynamic assemblies are not created. This is because the hosted Visual Basic compiler
-        ///         does not support dynamic assembly references. Should support for dynamic assembly references be 
+        ///         does not support dynamic assembly references. Should support for dynamic assembly references be
         ///         added to the Visual Basic compiler, we should strip away Assembly.IsDynamic checks from this class and
         ///         update the code ensure that VisualBasicImportReference instances are removed in a timely manner.
         ///         </description></item>
@@ -183,13 +218,17 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
             // This is here so that obtaining the lock is not required to be SecurityCritical.
             public static object XmlnsMappingsLockObject = new object();
 
-            [Fx.Tag.SecurityNote(Critical = "Critical because we are storing assembly references and if we alloed PT access, they could mess with that.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Critical because we are storing assembly references and if we alloed PT access, they could mess with that."
+            )]
             [SecurityCritical]
             static Dictionary<XNamespace, XmlnsMapping> xmlnsMappings;
 
             public static Dictionary<XNamespace, XmlnsMapping> XmlnsMappings
             {
-                [Fx.Tag.SecurityNote(Critical = "Critical because providing access to the critical xmlnsMappings dictionary.")]
+                [Fx.Tag.SecurityNote(
+                    Critical = "Critical because providing access to the critical xmlnsMappings dictionary."
+                )]
                 [SecurityCritical]
                 get
                 {
@@ -198,13 +237,18 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                 }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Critical because we are accessing critical member xmlnsMappings and CacheLoadedAssembly. Only called from CLR.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Critical because we are accessing critical member xmlnsMappings and CacheLoadedAssembly. Only called from CLR."
+            )]
             [SecurityCritical]
             static void OnAssemblyLoaded(object sender, AssemblyLoadEventArgs args)
             {
                 Assembly assembly = args.LoadedAssembly;
 
-                if (assembly.IsDefined(typeof(XmlnsDefinitionAttribute), false) && !assembly.IsDynamic)
+                if (
+                    assembly.IsDefined(typeof(XmlnsDefinitionAttribute), false)
+                    && !assembly.IsDynamic
+                )
                 {
                     lock (XmlnsMappingsLockObject)
                     {
@@ -213,9 +257,11 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                 }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Critical because we are accessing AppDomain.AssemblyLoaded and we are accessing critical member xmlnsMappings.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Critical because we are accessing AppDomain.AssemblyLoaded and we are accessing critical member xmlnsMappings."
+            )]
             [SecurityCritical]
-            static void EnsureInitialized()            
+            static void EnsureInitialized()
             {
                 if (initialized)
                 {
@@ -224,9 +270,11 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
 
                 if (xmlnsMappings == null)
                 {
-                    Interlocked.CompareExchange(ref xmlnsMappings,
+                    Interlocked.CompareExchange(
+                        ref xmlnsMappings,
                         new Dictionary<XNamespace, XmlnsMapping>(new XNamespaceEqualityComparer()),
-                        null);
+                        null
+                    );
                 }
 
                 lock (XmlnsMappingsLockObject)
@@ -244,24 +292,30 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                     {
                         Assembly assembly = assemblies[i];
 
-                        if (assembly.IsDefined(typeof(XmlnsDefinitionAttribute), false) && ! assembly.IsDynamic)
+                        if (
+                            assembly.IsDefined(typeof(XmlnsDefinitionAttribute), false)
+                            && !assembly.IsDynamic
+                        )
                         {
                             CacheLoadedAssembly(assembly);
                         }
                     }
-                    
+
                     initialized = true;
                 }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Critical because we are accessing critical member xmlnsMappings.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Critical because we are accessing critical member xmlnsMappings."
+            )]
             [SecurityCritical]
             static void CacheLoadedAssembly(Assembly assembly)
             {
                 // this VBImportReference is only used as an entry to the xmlnsMappings cache
                 // and is never meant to be Xaml serialized.
                 // those VBImportReferences that are to be Xaml serialized are created by Clone() method.
-                XmlnsDefinitionAttribute[] attributes = (XmlnsDefinitionAttribute[])assembly.GetCustomAttributes(typeof(XmlnsDefinitionAttribute), false);
+                XmlnsDefinitionAttribute[] attributes = (XmlnsDefinitionAttribute[])
+                    assembly.GetCustomAttributes(typeof(XmlnsDefinitionAttribute), false);
                 string assemblyName = assembly.FullName;
                 XmlnsMapping mapping;
 
@@ -290,8 +344,7 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
 
             class XNamespaceEqualityComparer : IEqualityComparer<XNamespace>
             {
-                public XNamespaceEqualityComparer()
-                { }
+                public XNamespaceEqualityComparer() { }
 
                 bool IEqualityComparer<XNamespace>.Equals(XNamespace x, XNamespace y)
                 {
@@ -306,7 +359,7 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
         }
 
         /// <summary>
-        /// Struct used to cache XML Namespace mappings. 
+        /// Struct used to cache XML Namespace mappings.
         /// </summary>
         struct XmlnsMapping
         {
@@ -314,15 +367,14 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
 
             public bool IsEmpty
             {
-                get
-                {
-                    return this.ImportReferences == null || this.ImportReferences.Count == 0;
-                }
+                get { return this.ImportReferences == null || this.ImportReferences.Count == 0; }
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Critical because we are accessing a XmlnsMapping that is stored in the XmlnsMappings cache, which is SecurityCritical.",
-            Safe = "Safe because we are wrapping the XmlnsMapping and not allowing unsafe code to modify it.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because we are accessing a XmlnsMapping that is stored in the XmlnsMappings cache, which is SecurityCritical.",
+            Safe = "Safe because we are wrapping the XmlnsMapping and not allowing unsafe code to modify it."
+        )]
         [SecuritySafeCritical]
         struct ReadOnlyXmlnsMapping
         {
@@ -335,17 +387,16 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
 
             internal bool IsEmpty
             {
-                get
-                {
-                    return this.wrappedMapping.IsEmpty;
-                }
+                get { return this.wrappedMapping.IsEmpty; }
             }
 
             internal IEnumerable<ReadOnlyVisualBasicImportReference> ImportReferences
             {
                 get
                 {
-                    foreach (VisualBasicImportReference wrappedReference in this.wrappedMapping.ImportReferences)
+                    foreach (
+                        VisualBasicImportReference wrappedReference in this.wrappedMapping.ImportReferences
+                    )
                     {
                         yield return new ReadOnlyVisualBasicImportReference(wrappedReference);
                     }
@@ -353,8 +404,10 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Critical because we are accessing a VisualBasicImportReference that is stored in the XmlnsMappings cache, which is SecurityCritical.",
-            Safe = "Safe because we are wrapping the VisualBasicImportReference and not allowing unsafe code to modify it.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Critical because we are accessing a VisualBasicImportReference that is stored in the XmlnsMappings cache, which is SecurityCritical.",
+            Safe = "Safe because we are wrapping the VisualBasicImportReference and not allowing unsafe code to modify it."
+        )]
         [SecuritySafeCritical]
         struct ReadOnlyVisualBasicImportReference
         {
@@ -400,11 +453,19 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                 {
                     return false;
                 }
-                if (this.wrappedReference.AssemblyName.Version != null && !this.wrappedReference.AssemblyName.Version.Equals(assemblyName.Version))
+                if (
+                    this.wrappedReference.AssemblyName.Version != null
+                    && !this.wrappedReference.AssemblyName.Version.Equals(assemblyName.Version)
+                )
                 {
                     return false;
                 }
-                if (this.wrappedReference.AssemblyName.CultureInfo != null && !this.wrappedReference.AssemblyName.CultureInfo.Equals(assemblyName.CultureInfo))
+                if (
+                    this.wrappedReference.AssemblyName.CultureInfo != null
+                    && !this.wrappedReference.AssemblyName.CultureInfo.Equals(
+                        assemblyName.CultureInfo
+                    )
+                )
                 {
                     return false;
                 }

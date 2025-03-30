@@ -7,6 +7,6 @@ namespace System.DirectoryServices.Protocols
     {
         Base = 0,
         OneLevel = 1,
-        Subtree = 2
+        Subtree = 2,
     }
 }

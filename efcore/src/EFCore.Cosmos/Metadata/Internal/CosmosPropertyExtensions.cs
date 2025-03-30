@@ -20,7 +20,9 @@ public static class CosmosPropertyExtensions
     public static bool IsOrdinalKeyProperty(this IReadOnlyProperty property)
     {
         Check.DebugAssert(
-            (property.DeclaringType as IEntityType)?.IsOwned() == true, $"Expected {property.DeclaringType.DisplayName()} to be owned.");
+            (property.DeclaringType as IEntityType)?.IsOwned() == true,
+            $"Expected {property.DeclaringType.DisplayName()} to be owned."
+        );
 
         return property.ClrType == typeof(int)
             && !property.IsForeignKey()

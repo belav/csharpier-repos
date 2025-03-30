@@ -4,6 +4,7 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Channels;
@@ -11,26 +12,37 @@ namespace System.ServiceModel.Dispatcher
     using System.Threading;
     using System.Workflow.Runtime;
     using System.Workflow.Runtime.Hosting;
-    using System.Diagnostics;
 
     sealed class WorkflowOperationAsyncResult : AsyncResult
     {
         static readonly object[] emptyObjectArray = new object[] { };
 
-        static Action<object> waitCallback = new Action<object>(WorkflowOperationAsyncResult.DoWork);
-        static SendOrPostCallback sendOrPostCallback = Fx.ThunkCallback(new SendOrPostCallback(waitCallback));
+        static Action<object> waitCallback = new Action<object>(
+            WorkflowOperationAsyncResult.DoWork
+        );
+        static SendOrPostCallback sendOrPostCallback = Fx.ThunkCallback(
+            new SendOrPostCallback(waitCallback)
+        );
 
         Guid instanceIdGuid;
         string instanceIdString;
         bool isOneway;
-        IDictionary<string, string> outgoingContextProperties = SerializableReadOnlyDictionary<string, string>.Empty;
+        IDictionary<string, string> outgoingContextProperties = SerializableReadOnlyDictionary<
+            string,
+            string
+        >.Empty;
         object[] outputs = emptyObjectArray;
         object returnValue;
         long time;
 
-        public WorkflowOperationAsyncResult(WorkflowOperationInvoker workflowOperationInvoker,
-            WorkflowDurableInstance workflowDurableInstance, object[] inputs,
-            AsyncCallback callback, object state, long time)
+        public WorkflowOperationAsyncResult(
+            WorkflowOperationInvoker workflowOperationInvoker,
+            WorkflowDurableInstance workflowDurableInstance,
+            object[] inputs,
+            AsyncCallback callback,
+            object state,
+            long time
+        )
             : base(callback, state)
         {
             if (inputs == null)
@@ -40,12 +52,16 @@ namespace System.ServiceModel.Dispatcher
 
             if (workflowDurableInstance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("workflowDurableInstance");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "workflowDurableInstance"
+                );
             }
 
             if (workflowOperationInvoker == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("workflowOperationInvoker");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "workflowOperationInvoker"
+                );
             }
 
             string queueName;
@@ -53,21 +69,30 @@ namespace System.ServiceModel.Dispatcher
             WorkflowRequestContext workflowRequestContext = new WorkflowRequestContext(
                 this,
                 inputs,
-                GetContextProperties());
+                GetContextProperties()
+            );
 
             queueName = workflowOperationInvoker.StaticQueueName;
 
-            if (workflowRequestContext.ContextProperties.Count > 1) //DurableDispatchContextProperty. 
+            if (workflowRequestContext.ContextProperties.Count > 1) //DurableDispatchContextProperty.
             {
-                queueName = QueueNameHelper.Create(workflowOperationInvoker.StaticQueueName, workflowRequestContext.ContextProperties);
+                queueName = QueueNameHelper.Create(
+                    workflowOperationInvoker.StaticQueueName,
+                    workflowRequestContext.ContextProperties
+                );
             }
 
-            WorkflowInstance workflowInstance = workflowDurableInstance.GetWorkflowInstance
-                (workflowOperationInvoker.CanCreateInstance);
+            WorkflowInstance workflowInstance = workflowDurableInstance.GetWorkflowInstance(
+                workflowOperationInvoker.CanCreateInstance
+            );
 
-            AsyncCallbackState callbackState = new AsyncCallbackState(workflowRequestContext,
-                workflowInstance, workflowOperationInvoker.DispatchRuntime.SynchronizationContext,
-                workflowOperationInvoker.InstanceLifetimeManager, queueName);
+            AsyncCallbackState callbackState = new AsyncCallbackState(
+                workflowRequestContext,
+                workflowInstance,
+                workflowOperationInvoker.DispatchRuntime.SynchronizationContext,
+                workflowOperationInvoker.InstanceLifetimeManager,
+                queueName
+            );
 
             this.isOneway = workflowOperationInvoker.IsOneWay;
             this.instanceIdGuid = workflowInstance.InstanceId;
@@ -77,27 +102,28 @@ namespace System.ServiceModel.Dispatcher
 
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
-                string traceText = SR2.GetString(SR2.WorkflowOperationInvokerItemQueued, this.InstanceId, queueName);
-                TraceUtility.TraceEvent(TraceEventType.Verbose,
-                    TraceCode.WorkflowOperationInvokerItemQueued, SR.GetString(SR.TraceCodeWorkflowOperationInvokerItemQueued),
+                string traceText = SR2.GetString(
+                    SR2.WorkflowOperationInvokerItemQueued,
+                    this.InstanceId,
+                    queueName
+                );
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    TraceCode.WorkflowOperationInvokerItemQueued,
+                    SR.GetString(SR.TraceCodeWorkflowOperationInvokerItemQueued),
                     new StringTraceRecord("ItemDetails", traceText),
-                    this, null);
+                    this,
+                    null
+                );
             }
         }
 
         public long BeginTime
         {
-            get
-            {
-                return this.time;
-            }
+            get { return this.time; }
         }
 
-        public bool HasWorkflowRequestContextBeenSerialized
-        {
-            get; 
-            set;
-        }
+        public bool HasWorkflowRequestContextBeenSerialized { get; set; }
 
         internal string InstanceId
         {
@@ -105,7 +131,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.instanceIdString == null)
                 {
-                    Fx.Assert(!this.instanceIdGuid.Equals(Guid.Empty), "WorkflowOperationInvokerAsyncResut.instanceIdGuid != Guid.Empty");
+                    Fx.Assert(
+                        !this.instanceIdGuid.Equals(Guid.Empty),
+                        "WorkflowOperationInvokerAsyncResut.instanceIdGuid != Guid.Empty"
+                    );
                     this.instanceIdString = this.instanceIdGuid.ToString();
                 }
 
@@ -143,12 +172,17 @@ namespace System.ServiceModel.Dispatcher
 
             if (!IsCompleted)
             {
-                this.outgoingContextProperties = (contextProperties != null) ? new ContextDictionary(contextProperties) : null;
+                this.outgoingContextProperties =
+                    (contextProperties != null) ? new ContextDictionary(contextProperties) : null;
             }
             base.Complete(false, exception);
         }
 
-        public void SendResponse(object returnValue, object[] outputs, IDictionary<string, string> contextProperties)
+        public void SendResponse(
+            object returnValue,
+            object[] outputs,
+            IDictionary<string, string> contextProperties
+        )
         {
             if (outputs == null)
             {
@@ -159,7 +193,8 @@ namespace System.ServiceModel.Dispatcher
             {
                 this.returnValue = returnValue;
                 this.outputs = outputs;
-                this.outgoingContextProperties = (contextProperties != null) ? new ContextDictionary(contextProperties) : null;
+                this.outgoingContextProperties =
+                    (contextProperties != null) ? new ContextDictionary(contextProperties) : null;
             }
             base.Complete(false);
         }
@@ -180,7 +215,7 @@ namespace System.ServiceModel.Dispatcher
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("state");
             }
 
-            AsyncCallbackState callbackState = (AsyncCallbackState) state;
+            AsyncCallbackState callbackState = (AsyncCallbackState)state;
 
             bool executingWork = false;
             try
@@ -189,13 +224,15 @@ namespace System.ServiceModel.Dispatcher
                 //We have to do another post to get to correct thread.
                 if (callbackState.SynchronizationContext != null)
                 {
-                    SynchronizationContext synchronizationContext = callbackState.SynchronizationContext;
+                    SynchronizationContext synchronizationContext =
+                        callbackState.SynchronizationContext;
                     callbackState.SynchronizationContext = null;
 
                     SynchronizationContextWorkflowSchedulerService.SynchronizationContextPostHelper.Post(
                         synchronizationContext,
                         WorkflowOperationAsyncResult.sendOrPostCallback,
-                        callbackState);
+                        callbackState
+                    );
                 }
                 else //We are in correct thread to do the work.
                 {
@@ -206,14 +243,17 @@ namespace System.ServiceModel.Dispatcher
 
                         if (callbackState.WorkflowInstanceLifeTimeManager != null)
                         {
-                            callbackState.WorkflowInstanceLifeTimeManager.NotifyMessageArrived(callbackState.WorkflowInstance.InstanceId);
+                            callbackState.WorkflowInstanceLifeTimeManager.NotifyMessageArrived(
+                                callbackState.WorkflowInstance.InstanceId
+                            );
                         }
 
                         callbackState.WorkflowInstance.EnqueueItemOnIdle(
                             callbackState.QueueName,
                             callbackState.WorkflowRequestContext,
                             null,
-                            null);
+                            null
+                        );
                     }
                 }
             }
@@ -225,9 +265,14 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (callbackState.WorkflowInstanceLifeTimeManager != null)
                     {
-                        callbackState.WorkflowInstanceLifeTimeManager.ScheduleTimer(callbackState.WorkflowInstance.InstanceId);
+                        callbackState.WorkflowInstanceLifeTimeManager.ScheduleTimer(
+                            callbackState.WorkflowInstance.InstanceId
+                        );
                     }
-                    callbackState.WorkflowRequestContext.SendFault(new FaultException(operationFault), null);
+                    callbackState.WorkflowRequestContext.SendFault(
+                        new FaultException(operationFault),
+                        null
+                    );
                 }
                 catch (Exception unhandled)
                 {
@@ -249,7 +294,9 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (callbackState.WorkflowInstanceLifeTimeManager != null)
                     {
-                        callbackState.WorkflowInstanceLifeTimeManager.ScheduleTimer(callbackState.WorkflowInstance.InstanceId);
+                        callbackState.WorkflowInstanceLifeTimeManager.ScheduleTimer(
+                            callbackState.WorkflowInstance.InstanceId
+                        );
                     }
                     //We should field only user code exception; Everything else should go abort path.
                     callbackState.WorkflowRequestContext.GetAsyncResult().SendFault(e, null);
@@ -289,8 +336,13 @@ namespace System.ServiceModel.Dispatcher
             Fx.Assert(OperationContext.Current != null, "Called from non service thread");
 
             ContextMessageProperty incomingContextProperties = null;
-            if (OperationContext.Current.IncomingMessageProperties != null
-                && ContextMessageProperty.TryGet(OperationContext.Current.IncomingMessageProperties, out incomingContextProperties))
+            if (
+                OperationContext.Current.IncomingMessageProperties != null
+                && ContextMessageProperty.TryGet(
+                    OperationContext.Current.IncomingMessageProperties,
+                    out incomingContextProperties
+                )
+            )
             {
                 return incomingContextProperties.Context;
             }
@@ -307,13 +359,27 @@ namespace System.ServiceModel.Dispatcher
             if (outgoingContextProperties != null)
             {
                 ContextMessageProperty context;
-                if (!ContextMessageProperty.TryGet(OperationContext.Current.OutgoingMessageProperties, out context))
+                if (
+                    !ContextMessageProperty.TryGet(
+                        OperationContext.Current.OutgoingMessageProperties,
+                        out context
+                    )
+                )
                 {
-                    new ContextMessageProperty(this.outgoingContextProperties).AddOrReplaceInMessageProperties(OperationContext.Current.OutgoingMessageProperties);
+                    new ContextMessageProperty(
+                        this.outgoingContextProperties
+                    ).AddOrReplaceInMessageProperties(
+                        OperationContext.Current.OutgoingMessageProperties
+                    );
                 }
                 else
                 {
-                    foreach (KeyValuePair<string, string> contextElement in this.outgoingContextProperties)
+                    foreach (
+                        KeyValuePair<
+                            string,
+                            string
+                        > contextElement in this.outgoingContextProperties
+                    )
                     {
                         context.Context[contextElement.Key] = contextElement.Value;
                     }
@@ -334,7 +400,8 @@ namespace System.ServiceModel.Dispatcher
                 WorkflowInstance workflowInstance,
                 SynchronizationContext synchronizationContext,
                 WorkflowInstanceLifetimeManagerExtension instanceLifeTimeManager,
-                IComparable queueName)
+                IComparable queueName
+            )
             {
                 this.workflowInstance = workflowInstance;
                 this.workflowRequestContext = workflowRequestContext;
@@ -345,46 +412,28 @@ namespace System.ServiceModel.Dispatcher
 
             public IComparable QueueName
             {
-                get
-                {
-                    return this.queueName;
-                }
+                get { return this.queueName; }
             }
 
             public SynchronizationContext SynchronizationContext
             {
-                get
-                {
-                    return this.synchronizationContext;
-                }
-                set
-                {
-                    this.synchronizationContext = value;
-                }
+                get { return this.synchronizationContext; }
+                set { this.synchronizationContext = value; }
             }
 
             public WorkflowInstance WorkflowInstance
             {
-                get
-                {
-                    return this.workflowInstance;
-                }
+                get { return this.workflowInstance; }
             }
 
             public WorkflowInstanceLifetimeManagerExtension WorkflowInstanceLifeTimeManager
             {
-                get
-                {
-                    return this.instanceLifeTimeManager;
-                }
+                get { return this.instanceLifeTimeManager; }
             }
 
             public WorkflowRequestContext WorkflowRequestContext
             {
-                get
-                {
-                    return this.workflowRequestContext;
-                }
+                get { return this.workflowRequestContext; }
             }
         }
     }

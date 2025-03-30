@@ -8,7 +8,10 @@ using Microsoft.Win32.SafeHandles;
 
 namespace SharedTypes.ComInterfaces
 {
-    [GeneratedComInterface(Options = ComInterfaceOptions.ComObjectWrapper), Guid("0A52B77C-E08B-4274-A1F4-1A2BF2C07E60")]
+    [
+        GeneratedComInterface(Options = ComInterfaceOptions.ComObjectWrapper),
+        Guid("0A52B77C-E08B-4274-A1F4-1A2BF2C07E60")
+    ]
     internal partial interface ISafeFileHandle
     {
         void Method(SafeFileHandle p);
