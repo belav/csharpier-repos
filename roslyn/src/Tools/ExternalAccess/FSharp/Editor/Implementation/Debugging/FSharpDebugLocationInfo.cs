@@ -10,8 +10,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor.Implementation.Deb
     {
         internal readonly DebugLocationInfo UnderlyingObject;
 
-        public FSharpDebugLocationInfo(string name, int lineOffset)
-            => UnderlyingObject = new DebugLocationInfo(name, lineOffset);
+        public FSharpDebugLocationInfo(string name, int lineOffset) =>
+            UnderlyingObject = new DebugLocationInfo(name, lineOffset);
 
         public readonly string Name => UnderlyingObject.Name;
         public readonly int LineOffset => UnderlyingObject.LineOffset;

@@ -13,15 +13,23 @@ namespace System.Activities.DurableInstancing
 
     class LoadRetryAsyncResult : AsyncResult
     {
-        static AsyncCallback onTryCommandCallback = Fx.ThunkCallback(new AsyncCallback(OnTryCommandCallback));
+        static AsyncCallback onTryCommandCallback = Fx.ThunkCallback(
+            new AsyncCallback(OnTryCommandCallback)
+        );
         bool commandSuccess;
         TimeoutHelper commandTimeout;
         InstanceLockedException lastInstanceLockedException;
 
         int retryCount;
 
-        public LoadRetryAsyncResult(SqlWorkflowInstanceStore store, InstancePersistenceContext context,
-            InstancePersistenceCommand command, TimeSpan timeout, AsyncCallback callback, object state)
+        public LoadRetryAsyncResult(
+            SqlWorkflowInstanceStore store,
+            InstancePersistenceContext context,
+            InstancePersistenceCommand command,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
             : base(callback, state)
         {
             this.InstanceStore = store;
@@ -29,33 +37,22 @@ namespace System.Activities.DurableInstancing
             this.InstancePersistenceCommand = command;
             this.commandTimeout = new TimeoutHelper(timeout);
 
-            InstanceStore.BeginTryCommandInternal(this.InstancePersistenceContext, this.InstancePersistenceCommand,
-                this.commandTimeout.RemainingTime(), LoadRetryAsyncResult.onTryCommandCallback, this);
+            InstanceStore.BeginTryCommandInternal(
+                this.InstancePersistenceContext,
+                this.InstancePersistenceCommand,
+                this.commandTimeout.RemainingTime(),
+                LoadRetryAsyncResult.onTryCommandCallback,
+                this
+            );
         }
 
-        public SqlWorkflowInstanceStore InstanceStore 
-        { 
-            get; 
-            private set; 
-        }
+        public SqlWorkflowInstanceStore InstanceStore { get; private set; }
 
-        public TimeSpan RetryTimeout 
-        { 
-            get; 
-            private set; 
-        }
+        public TimeSpan RetryTimeout { get; private set; }
 
-        InstancePersistenceCommand InstancePersistenceCommand 
-        { 
-            get; 
-            set; 
-        }
+        InstancePersistenceCommand InstancePersistenceCommand { get; set; }
 
-        InstancePersistenceContext InstancePersistenceContext 
-        { 
-            get; 
-            set; 
-        }
+        InstancePersistenceContext InstancePersistenceContext { get; set; }
 
         public static bool End(IAsyncResult result)
         {
@@ -71,12 +68,20 @@ namespace System.Activities.DurableInstancing
 
         public void Retry()
         {
-            InstanceStore.BeginTryCommandInternal(this.InstancePersistenceContext, this.InstancePersistenceCommand,
-                this.commandTimeout.RemainingTime(), LoadRetryAsyncResult.onTryCommandCallback, this);
+            InstanceStore.BeginTryCommandInternal(
+                this.InstancePersistenceContext,
+                this.InstancePersistenceCommand,
+                this.commandTimeout.RemainingTime(),
+                LoadRetryAsyncResult.onTryCommandCallback,
+                this
+            );
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.DoNotCatchGeneralExceptionTypes, 
-            Justification = "Standard AsyncResult callback pattern.")]
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.DoNotCatchGeneralExceptionTypes,
+            Justification = "Standard AsyncResult callback pattern."
+        )]
         static void OnTryCommandCallback(IAsyncResult result)
         {
             LoadRetryAsyncResult tryCommandAsyncResult = (LoadRetryAsyncResult)(result.AsyncState);
@@ -89,7 +94,9 @@ namespace System.Activities.DurableInstancing
             }
             catch (InstanceLockedException instanceLockedException)
             {
-                TimeSpan retryDelay = tryCommandAsyncResult.InstanceStore.GetNextRetryDelay(++tryCommandAsyncResult.retryCount);
+                TimeSpan retryDelay = tryCommandAsyncResult.InstanceStore.GetNextRetryDelay(
+                    ++tryCommandAsyncResult.retryCount
+                );
 
                 if (retryDelay < tryCommandAsyncResult.commandTimeout.RemainingTime())
                 {
@@ -98,12 +105,15 @@ namespace System.Activities.DurableInstancing
                     if (tryCommandAsyncResult.InstanceStore.EnqueueRetry(tryCommandAsyncResult))
                     {
                         tryCommandAsyncResult.lastInstanceLockedException = instanceLockedException;
-                        completeFlag = false;                        
+                        completeFlag = false;
                     }
                 }
                 else if (TD.LockRetryTimeoutIsEnabled())
                 {
-                    TD.LockRetryTimeout(tryCommandAsyncResult.InstancePersistenceContext.EventTraceActivity, tryCommandAsyncResult.commandTimeout.OriginalTimeout.ToString());
+                    TD.LockRetryTimeout(
+                        tryCommandAsyncResult.InstancePersistenceContext.EventTraceActivity,
+                        tryCommandAsyncResult.commandTimeout.OriginalTimeout.ToString()
+                    );
                 }
 
                 if (completeFlag)
@@ -132,5 +142,4 @@ namespace System.Activities.DurableInstancing
             this.commandSuccess = this.InstanceStore.EndTryCommand(result);
         }
     }
-
 }

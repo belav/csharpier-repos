@@ -1,13 +1,14 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
-namespace System.Globalization {
+namespace System.Globalization
+{
     using System;
-    using System.Text;
     using System.Diagnostics.Contracts;
+    using System.Text;
 
     ////////////////////////////////////////////////////////////////////////////
     //
@@ -16,15 +17,18 @@ namespace System.Globalization {
     // when parsing Hebrew number character by character.
     //
     ////////////////////////////////////////////////////////////////////////////
-    
-    internal struct HebrewNumberParsingContext {
+
+    internal struct HebrewNumberParsingContext
+    {
         // The current state of the state machine for parsing Hebrew numbers.
         internal HebrewNumber.HS state;
+
         // The current value of the Hebrew number.
         // The final value is determined when state is FoundEndOfHebrewNumber.
         internal int result;
 
-        public HebrewNumberParsingContext(int result) {
+        public HebrewNumberParsingContext(int result)
+        {
             // Set the start state of the state machine for parsing Hebrew numbers.
             state = HebrewNumber.HS.Start;
             this.result = result;
@@ -36,8 +40,9 @@ namespace System.Globalization {
     // Please see ParseByChar() for comments about different states defined here.
     //
     ////////////////////////////////////////////////////////////////////////////
-    
-    internal enum HebrewNumberParsingState {
+
+    internal enum HebrewNumberParsingState
+    {
         InvalidHebrewNumber,
         NotHebrewDigit,
         FoundEndOfHebrewNumber,
@@ -57,13 +62,12 @@ namespace System.Globalization {
     //      5000 will be subtracted from the value.
     //
     ////////////////////////////////////////////////////////////////////////////
-    
-    internal class HebrewNumber {
 
+    internal class HebrewNumber
+    {
         // This class contains only static methods.  Add a private ctor so that
         // compiler won't generate a default one for us.
-        private HebrewNumber() {
-        }
+        private HebrewNumber() { }
 
         ////////////////////////////////////////////////////////////////////////////
         //
@@ -85,40 +89,46 @@ namespace System.Globalization {
         //
         ////////////////////////////////////////////////////////////////////////////
 
-        internal static String ToString(int Number) {
+        internal static String ToString(int Number)
+        {
             char cTens = '\x0';
-            char cUnits;               // tens and units chars
-            int Hundreds, Tens;              // hundreds and tens values
+            char cUnits; // tens and units chars
+            int Hundreds,
+                Tens; // hundreds and tens values
             StringBuilder szHebrew = new StringBuilder();
-
 
             //
             //  Adjust the number if greater than 5000.
             //
-            if (Number > 5000) {
+            if (Number > 5000)
+            {
                 Number -= 5000;
             }
 
-            Contract.Assert(Number > 0 && Number <= 999, "Number is out of range.");;
+            Contract.Assert(Number > 0 && Number <= 999, "Number is out of range.");
+            ;
 
             //
             //  Get the Hundreds.
             //
             Hundreds = Number / 100;
 
-            if (Hundreds > 0) {
+            if (Hundreds > 0)
+            {
                 Number -= Hundreds * 100;
                 // \x05e7 = 100
                 // \x05e8 = 200
                 // \x05e9 = 300
                 // \x05ea = 400
                 // If the number is greater than 400, use the multiples of 400.
-                for (int i = 0; i < (Hundreds / 4) ; i++) {
+                for (int i = 0; i < (Hundreds / 4); i++)
+                {
                     szHebrew.Append('\x05ea');
                 }
 
                 int remains = Hundreds % 4;
-                if (remains > 0) {
+                if (remains > 0)
+                {
                     szHebrew.Append((char)((int)'\x05e6' + remains));
                 }
             }
@@ -129,36 +139,37 @@ namespace System.Globalization {
             Tens = Number / 10;
             Number %= 10;
 
-            switch (Tens) {
-                case ( 0 ) :
+            switch (Tens)
+            {
+                case (0):
                     cTens = '\x0';
                     break;
-                case ( 1 ) :
-                    cTens = '\x05d9';          // Hebrew Letter Yod
+                case (1):
+                    cTens = '\x05d9'; // Hebrew Letter Yod
                     break;
-                case ( 2 ) :
-                    cTens = '\x05db';          // Hebrew Letter Kaf
+                case (2):
+                    cTens = '\x05db'; // Hebrew Letter Kaf
                     break;
-                case ( 3 ) :
-                    cTens = '\x05dc';          // Hebrew Letter Lamed
+                case (3):
+                    cTens = '\x05dc'; // Hebrew Letter Lamed
                     break;
-                case ( 4 ) :
-                    cTens = '\x05de';          // Hebrew Letter Mem
+                case (4):
+                    cTens = '\x05de'; // Hebrew Letter Mem
                     break;
-                case ( 5 ) :
-                    cTens = '\x05e0';          // Hebrew Letter Nun
+                case (5):
+                    cTens = '\x05e0'; // Hebrew Letter Nun
                     break;
-                case ( 6 ) :
-                    cTens = '\x05e1';          // Hebrew Letter Samekh
+                case (6):
+                    cTens = '\x05e1'; // Hebrew Letter Samekh
                     break;
-                case ( 7 ) :
-                    cTens = '\x05e2';          // Hebrew Letter Ayin
+                case (7):
+                    cTens = '\x05e2'; // Hebrew Letter Ayin
                     break;
-                case ( 8 ) :
-                    cTens = '\x05e4';          // Hebrew Letter Pe
+                case (8):
+                    cTens = '\x05e4'; // Hebrew Letter Pe
                     break;
-                case ( 9 ) :
-                    cTens = '\x05e6';          // Hebrew Letter Tsadi
+                case (9):
+                    cTens = '\x05e6'; // Hebrew Letter Tsadi
                     break;
             }
 
@@ -167,33 +178,46 @@ namespace System.Globalization {
             //
             cUnits = (char)(Number > 0 ? ((int)'\x05d0' + Number - 1) : 0);
 
-            if ((cUnits == '\x05d4') &&            // Hebrew Letter He  (5)
-                (cTens == '\x05d9')) {              // Hebrew Letter Yod (10)
-                cUnits = '\x05d5';                 // Hebrew Letter Vav (6)
-                cTens  = '\x05d8';                 // Hebrew Letter Tet (9)
+            if (
+                (cUnits == '\x05d4')
+                && // Hebrew Letter He  (5)
+                (cTens == '\x05d9')
+            )
+            { // Hebrew Letter Yod (10)
+                cUnits = '\x05d5'; // Hebrew Letter Vav (6)
+                cTens = '\x05d8'; // Hebrew Letter Tet (9)
             }
 
-            if ((cUnits == '\x05d5') &&            // Hebrew Letter Vav (6)
-                (cTens == '\x05d9')) {               // Hebrew Letter Yod (10)
-                cUnits = '\x05d6';                 // Hebrew Letter Zayin (7)
-                cTens  = '\x05d8';                 // Hebrew Letter Tet (9)
+            if (
+                (cUnits == '\x05d5')
+                && // Hebrew Letter Vav (6)
+                (cTens == '\x05d9')
+            )
+            { // Hebrew Letter Yod (10)
+                cUnits = '\x05d6'; // Hebrew Letter Zayin (7)
+                cTens = '\x05d8'; // Hebrew Letter Tet (9)
             }
 
             //
             //  Copy the appropriate info to the given buffer.
             //
 
-            if (cTens != '\x0') {
+            if (cTens != '\x0')
+            {
                 szHebrew.Append(cTens);
             }
 
-            if (cUnits != '\x0') {
+            if (cUnits != '\x0')
+            {
                 szHebrew.Append(cUnits);
             }
 
-            if (szHebrew.Length > 1) {
+            if (szHebrew.Length > 1)
+            {
                 szHebrew.Insert(szHebrew.Length - 1, '"');
-            } else {
+            }
+            else
+            {
                 szHebrew.Append('\'');
             }
 
@@ -209,14 +233,15 @@ namespace System.Globalization {
         // state machine.
         //
         ////////////////////////////////////////////////////////////////////////////
-        
-        enum HebrewToken {
+
+        enum HebrewToken
+        {
             Invalid = -1,
             Digit400 = 0,
             Digit200_300 = 1,
-            Digit100 = 2,   
-            Digit10 = 3,    // 10 ~ 90
-            Digit1 = 4,     // 1, 2, 3, 4, 5, 8, 
+            Digit100 = 2,
+            Digit10 = 3, // 10 ~ 90
+            Digit1 = 4, // 1, 2, 3, 4, 5, 8,
             Digit6_7 = 5,
             Digit7 = 6,
             Digit9 = 7,
@@ -229,11 +254,14 @@ namespace System.Globalization {
         // This class is used to map a token into its Hebrew digit value.
         //
         ////////////////////////////////////////////////////////////////////////////
-        
-        class HebrewValue {
+
+        class HebrewValue
+        {
             internal HebrewToken token;
             internal int value;
-            internal HebrewValue(HebrewToken token, int value) {
+
+            internal HebrewValue(HebrewToken token, int value)
+            {
                 this.token = token;
                 this.value = value;
             }
@@ -243,34 +271,35 @@ namespace System.Globalization {
         // Map a Hebrew character from U+05D0 ~ U+05EA to its digit value.
         // The value is -1 if the Hebrew character does not have a associated value.
         //
-        static HebrewValue[] HebrewValues = {
-            new HebrewValue(HebrewToken.Digit1, 1) , // '\x05d0
-            new HebrewValue(HebrewToken.Digit1, 2) , // '\x05d1
-            new HebrewValue(HebrewToken.Digit1, 3) , // '\x05d2
-            new HebrewValue(HebrewToken.Digit1, 4) , // '\x05d3
-            new HebrewValue(HebrewToken.Digit1, 5) , // '\x05d4
-            new HebrewValue(HebrewToken.Digit6_7,6) , // '\x05d5
-            new HebrewValue(HebrewToken.Digit6_7,7) , // '\x05d6
-            new HebrewValue(HebrewToken.Digit1, 8) , // '\x05d7
-            new HebrewValue(HebrewToken.Digit9, 9) , // '\x05d8
-            new HebrewValue(HebrewToken.Digit10, 10) , // '\x05d9;          // Hebrew Letter Yod
-            new HebrewValue(HebrewToken.Invalid, -1) , // '\x05da; 
-            new HebrewValue(HebrewToken.Digit10, 20) , // '\x05db;          // Hebrew Letter Kaf
-            new HebrewValue(HebrewToken.Digit10, 30) , // '\x05dc;          // Hebrew Letter Lamed
-            new HebrewValue(HebrewToken.Invalid, -1) , // '\x05dd;
-            new HebrewValue(HebrewToken.Digit10, 40) , // '\x05de;          // Hebrew Letter Mem
-            new HebrewValue(HebrewToken.Invalid, -1) , // '\x05df;
-            new HebrewValue(HebrewToken.Digit10, 50) , // '\x05e0;          // Hebrew Letter Nun
-            new HebrewValue(HebrewToken.Digit10, 60) , // '\x05e1;          // Hebrew Letter Samekh
-            new HebrewValue(HebrewToken.Digit10, 70) , // '\x05e2;          // Hebrew Letter Ayin
-            new HebrewValue(HebrewToken.Invalid, -1) , // '\x05e3;
-            new HebrewValue(HebrewToken.Digit10, 80) , // '\x05e4;          // Hebrew Letter Pe
-            new HebrewValue(HebrewToken.Invalid, -1) , // '\x05e5;
-            new HebrewValue(HebrewToken.Digit10, 90) , // '\x05e6;          // Hebrew Letter Tsadi
-            new HebrewValue(HebrewToken.Digit100, 100) , // '\x05e7;
-            new HebrewValue(HebrewToken.Digit200_300, 200) , // '\x05e8;
-            new HebrewValue(HebrewToken.Digit200_300, 300) , // '\x05e9;
-            new HebrewValue(HebrewToken.Digit400, 400) , // '\x05ea;
+        static HebrewValue[] HebrewValues =
+        {
+            new HebrewValue(HebrewToken.Digit1, 1), // '\x05d0
+            new HebrewValue(HebrewToken.Digit1, 2), // '\x05d1
+            new HebrewValue(HebrewToken.Digit1, 3), // '\x05d2
+            new HebrewValue(HebrewToken.Digit1, 4), // '\x05d3
+            new HebrewValue(HebrewToken.Digit1, 5), // '\x05d4
+            new HebrewValue(HebrewToken.Digit6_7, 6), // '\x05d5
+            new HebrewValue(HebrewToken.Digit6_7, 7), // '\x05d6
+            new HebrewValue(HebrewToken.Digit1, 8), // '\x05d7
+            new HebrewValue(HebrewToken.Digit9, 9), // '\x05d8
+            new HebrewValue(HebrewToken.Digit10, 10), // '\x05d9;          // Hebrew Letter Yod
+            new HebrewValue(HebrewToken.Invalid, -1), // '\x05da;
+            new HebrewValue(HebrewToken.Digit10, 20), // '\x05db;          // Hebrew Letter Kaf
+            new HebrewValue(HebrewToken.Digit10, 30), // '\x05dc;          // Hebrew Letter Lamed
+            new HebrewValue(HebrewToken.Invalid, -1), // '\x05dd;
+            new HebrewValue(HebrewToken.Digit10, 40), // '\x05de;          // Hebrew Letter Mem
+            new HebrewValue(HebrewToken.Invalid, -1), // '\x05df;
+            new HebrewValue(HebrewToken.Digit10, 50), // '\x05e0;          // Hebrew Letter Nun
+            new HebrewValue(HebrewToken.Digit10, 60), // '\x05e1;          // Hebrew Letter Samekh
+            new HebrewValue(HebrewToken.Digit10, 70), // '\x05e2;          // Hebrew Letter Ayin
+            new HebrewValue(HebrewToken.Invalid, -1), // '\x05e3;
+            new HebrewValue(HebrewToken.Digit10, 80), // '\x05e4;          // Hebrew Letter Pe
+            new HebrewValue(HebrewToken.Invalid, -1), // '\x05e5;
+            new HebrewValue(HebrewToken.Digit10, 90), // '\x05e6;          // Hebrew Letter Tsadi
+            new HebrewValue(HebrewToken.Digit100, 100), // '\x05e7;
+            new HebrewValue(HebrewToken.Digit200_300, 200), // '\x05e8;
+            new HebrewValue(HebrewToken.Digit200_300, 300), // '\x05e9;
+            new HebrewValue(HebrewToken.Digit400, 400), // '\x05ea;
         };
 
         const int minHebrewNumberCh = 0x05d0;
@@ -283,56 +312,261 @@ namespace System.Globalization {
         // DQ = Double Quote
         //
         ////////////////////////////////////////////////////////////////////////////
-        
-        internal enum HS {
-            _err = -1,          // an error state
+
+        internal enum HS
+        {
+            _err = -1, // an error state
             Start = 0,
-            S400 = 1,           // a Hebrew digit 400
-            S400_400 = 2,       // Two Hebrew digit 400
-            S400_X00 = 3,       // Two Hebrew digit 400 and followed by 100
-            S400_X0  = 4,       // Hebrew digit 400 and followed by 10 ~ 90
-            X00_DQ = 5,         // A hundred number and followed by a double quote.
+            S400 = 1, // a Hebrew digit 400
+            S400_400 = 2, // Two Hebrew digit 400
+            S400_X00 = 3, // Two Hebrew digit 400 and followed by 100
+            S400_X0 = 4, // Hebrew digit 400 and followed by 10 ~ 90
+            X00_DQ = 5, // A hundred number and followed by a double quote.
             S400_X00_X0 = 6,
-            X0_DQ = 7,          // A two-digit number and followed by a double quote.
-            X = 8,              // A single digit Hebrew number.
-            X0  = 9,            // A two-digit Hebrew number
-            X00 = 10,           // A three-digit Hebrew number
-            S400_DQ = 11,       // A Hebrew digit 400 and followed by a double quote.
+            X0_DQ = 7, // A two-digit number and followed by a double quote.
+            X = 8, // A single digit Hebrew number.
+            X0 = 9, // A two-digit Hebrew number
+            X00 = 10, // A three-digit Hebrew number
+            S400_DQ = 11, // A Hebrew digit 400 and followed by a double quote.
             S400_400_DQ = 12,
             S400_400_100 = 13,
-            S9 = 14,            // Hebrew digit 9
-            X00_S9 = 15,        // A hundered number and followed by a digit 9
-            S9_DQ = 16,         // Hebrew digit 9 and followed by a double quote
-            END = 100,          // A terminial state is reached.
+            S9 = 14, // Hebrew digit 9
+            X00_S9 = 15, // A hundered number and followed by a digit 9
+            S9_DQ = 16, // Hebrew digit 9 and followed by a double quote
+            END = 100, // A terminial state is reached.
         }
 
-        // 
+        //
         // The state machine for Hebrew number pasing.
         //
-        readonly static HS[][] NumberPasingState = {
-                           // 400            300/200         100             90~10           8~1      6,       7,       9,          '           "
-    /* 0 */             new HS[] {HS.S400,       HS.X00,         HS.X00,         HS.X0,          HS.X,    HS.X,    HS.X,    HS.S9,      HS._err,    HS._err},
-    /* 1: S400 */       new HS[] {HS.S400_400,   HS.S400_X00,    HS.S400_X00,    HS.S400_X0,     HS._err, HS._err, HS._err, HS.X00_S9  ,HS.END,     HS.S400_DQ},
-    /* 2: S400_400 */   new HS[] {HS._err,       HS._err,        HS.S400_400_100,HS.S400_X0,     HS._err, HS._err, HS._err, HS.X00_S9  ,HS._err,    HS.S400_400_DQ},
-    /* 3: S400_X00 */   new HS[] {HS._err,       HS._err,        HS._err,        HS.S400_X00_X0, HS._err, HS._err, HS._err, HS.X00_S9  ,HS._err,    HS.X00_DQ},
-    /* 4: S400_X0 */    new HS[] {HS._err,       HS._err,        HS._err,        HS._err,        HS._err, HS._err, HS._err, HS._err,    HS._err,    HS.X0_DQ}, 
-    /* 5: X00_DQ */     new HS[] {HS._err,       HS._err,        HS._err,        HS.END,         HS.END,  HS.END,  HS.END,  HS.END,     HS._err,    HS._err},
-    /* 6: S400_X00_X0 */new HS[] {HS._err,       HS._err,        HS._err,        HS._err,        HS._err, HS._err, HS._err, HS._err,    HS._err,    HS.X0_DQ},
-    /* 7: X0_DQ */      new HS[] {HS._err,       HS._err,        HS._err,        HS._err,        HS.END,  HS.END,  HS.END,  HS.END,     HS._err,    HS._err},
-    /* 8: X */          new HS[] {HS._err,       HS._err,        HS._err,        HS._err,        HS._err, HS._err, HS._err, HS._err,    HS.END,     HS._err},
-    /* 9: X0 */         new HS[] {HS._err,       HS._err,        HS._err,        HS._err,        HS._err, HS._err, HS._err, HS._err,    HS.END,     HS.X0_DQ},
-    /* 10: X00 */       new HS[] {HS._err,       HS._err,        HS._err,        HS.S400_X0,     HS._err, HS._err, HS._err, HS.X00_S9,  HS.END,     HS.X00_DQ},
-    /* 11: S400_DQ */   new HS[] {HS.END,        HS.END,         HS.END,         HS.END,         HS.END,  HS.END,  HS.END,  HS.END, HS._err,    HS._err},
-    /* 12: S400_400_DQ*/new HS[] {HS._err,       HS._err,        HS.END,         HS.END,         HS.END,  HS.END,  HS.END,  HS.END, HS._err,    HS._err},
-    /* 13: S400_400_100*/new HS[]{HS._err,       HS._err,        HS._err,        HS.S400_X00_X0, HS._err, HS._err, HS._err, HS.X00_S9,  HS._err,    HS.X00_DQ},
-    /* 14: S9 */        new HS[] {HS._err,       HS._err,        HS._err,        HS._err,        HS._err, HS._err, HS._err, HS._err,HS.END,    HS.S9_DQ},
-    /* 15: X00_S9 */    new HS[] {HS._err,       HS._err,        HS._err,        HS._err,        HS._err, HS._err, HS._err, HS._err,    HS._err,    HS.S9_DQ},
-    /* 16: S9_DQ */     new HS[] {HS._err,       HS._err,        HS._err,        HS._err,        HS._err, HS.END,  HS.END,  HS._err,    HS._err,    HS._err},
-    };
+        readonly static HS[][] NumberPasingState =
+        {
+            // 400            300/200         100             90~10           8~1      6,       7,       9,          '           "
+            /* 0 */new HS[]
+            {
+                HS.S400,
+                HS.X00,
+                HS.X00,
+                HS.X0,
+                HS.X,
+                HS.X,
+                HS.X,
+                HS.S9,
+                HS._err,
+                HS._err,
+            },
+            /* 1: S400 */new HS[]
+            {
+                HS.S400_400,
+                HS.S400_X00,
+                HS.S400_X00,
+                HS.S400_X0,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.X00_S9,
+                HS.END,
+                HS.S400_DQ,
+            },
+            /* 2: S400_400 */new HS[]
+            {
+                HS._err,
+                HS._err,
+                HS.S400_400_100,
+                HS.S400_X0,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.X00_S9,
+                HS._err,
+                HS.S400_400_DQ,
+            },
+            /* 3: S400_X00 */new HS[]
+            {
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.S400_X00_X0,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.X00_S9,
+                HS._err,
+                HS.X00_DQ,
+            },
+            /* 4: S400_X0 */new HS[]
+            {
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.X0_DQ,
+            },
+            /* 5: X00_DQ */new HS[]
+            {
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.END,
+                HS.END,
+                HS.END,
+                HS.END,
+                HS.END,
+                HS._err,
+                HS._err,
+            },
+            /* 6: S400_X00_X0 */new HS[]
+            {
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.X0_DQ,
+            },
+            /* 7: X0_DQ */new HS[]
+            {
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.END,
+                HS.END,
+                HS.END,
+                HS.END,
+                HS._err,
+                HS._err,
+            },
+            /* 8: X */new HS[]
+            {
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.END,
+                HS._err,
+            },
+            /* 9: X0 */new HS[]
+            {
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.END,
+                HS.X0_DQ,
+            },
+            /* 10: X00 */new HS[]
+            {
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.S400_X0,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.X00_S9,
+                HS.END,
+                HS.X00_DQ,
+            },
+            /* 11: S400_DQ */new HS[]
+            {
+                HS.END,
+                HS.END,
+                HS.END,
+                HS.END,
+                HS.END,
+                HS.END,
+                HS.END,
+                HS.END,
+                HS._err,
+                HS._err,
+            },
+            /* 12: S400_400_DQ*/new HS[]
+            {
+                HS._err,
+                HS._err,
+                HS.END,
+                HS.END,
+                HS.END,
+                HS.END,
+                HS.END,
+                HS.END,
+                HS._err,
+                HS._err,
+            },
+            /* 13: S400_400_100*/new HS[]
+            {
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.S400_X00_X0,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.X00_S9,
+                HS._err,
+                HS.X00_DQ,
+            },
+            /* 14: S9 */new HS[]
+            {
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.END,
+                HS.S9_DQ,
+            },
+            /* 15: X00_S9 */new HS[]
+            {
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.S9_DQ,
+            },
+            /* 16: S9_DQ */new HS[]
+            {
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS._err,
+                HS.END,
+                HS.END,
+                HS._err,
+                HS._err,
+                HS._err,
+            },
+        };
 
- 
         ////////////////////////////////////////////////////////////////////////
-        //  
+        //
         //  Actions:
         //      Parse the Hebrew number by passing one character at a time.
         //      The state between characters are maintained at HebrewNumberPasingContext.
@@ -348,32 +582,47 @@ namespace System.Globalization {
         //              continue to parse incoming characters.
         //
         ////////////////////////////////////////////////////////////////////////
-        
-        internal static HebrewNumberParsingState ParseByChar(char ch, ref HebrewNumberParsingContext context) {
+
+        internal static HebrewNumberParsingState ParseByChar(
+            char ch,
+            ref HebrewNumberParsingContext context
+        )
+        {
             HebrewToken token;
-            if (ch == '\'') {
+            if (ch == '\'')
+            {
                 token = HebrewToken.SingleQuote;
-            } else if (ch == '\"') {
+            }
+            else if (ch == '\"')
+            {
                 token = HebrewToken.DoubleQuote;
-            } else {
-                int index = (int)ch - minHebrewNumberCh;                
-                if (index >= 0 && index < HebrewValues.Length ) {
+            }
+            else
+            {
+                int index = (int)ch - minHebrewNumberCh;
+                if (index >= 0 && index < HebrewValues.Length)
+                {
                     token = HebrewValues[index].token;
-                    if (token == HebrewToken.Invalid) {
+                    if (token == HebrewToken.Invalid)
+                    {
                         return (HebrewNumberParsingState.NotHebrewDigit);
                     }
                     context.result += HebrewValues[index].value;
-                } else {
+                }
+                else
+                {
                     // Not in valid Hebrew digit range.
                     return (HebrewNumberParsingState.NotHebrewDigit);
                 }
             }
             context.state = NumberPasingState[(int)context.state][(int)token];
-            if (context.state == HS._err) {
+            if (context.state == HS._err)
+            {
                 // Invalid Hebrew state.  This indicates an incorrect Hebrew number.
                 return (HebrewNumberParsingState.InvalidHebrewNumber);
-            }                 
-            if (context.state == HS.END) {
+            }
+            if (context.state == HS.END)
+            {
                 // Reach a terminal state.
                 return (HebrewNumberParsingState.FoundEndOfHebrewNumber);
             }
@@ -391,13 +640,14 @@ namespace System.Globalization {
         //  true if the specified character is a valid Hebrew number character.
         //
         ////////////////////////////////////////////////////////////////////////
-        
-        internal static bool IsDigit(char ch) {
-            if (ch >= minHebrewNumberCh && ch <= maxHebrewNumberCh) {
+
+        internal static bool IsDigit(char ch)
+        {
+            if (ch >= minHebrewNumberCh && ch <= maxHebrewNumberCh)
+            {
                 return (HebrewValues[ch - minHebrewNumberCh].value >= 0);
             }
             return (ch == '\'' || ch == '\"');
         }
-
     }
 }

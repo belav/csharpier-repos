@@ -21,8 +21,10 @@ namespace Microsoft.Extensions.Caching.Memory
             private List<IDisposable>? _expirationTokenRegistrations;
             private List<PostEvictionCallbackRegistration>? _postEvictionCallbacks; // this is not really related to tokens, but was moved here to shrink typical CacheEntry size
 
-            internal List<IChangeToken> ExpirationTokens => _expirationTokens ??= new List<IChangeToken>();
-            internal List<PostEvictionCallbackRegistration> PostEvictionCallbacks => _postEvictionCallbacks ??= new List<PostEvictionCallbackRegistration>();
+            internal List<IChangeToken> ExpirationTokens =>
+                _expirationTokens ??= new List<IChangeToken>();
+            internal List<PostEvictionCallbackRegistration> PostEvictionCallbacks =>
+                _postEvictionCallbacks ??= new List<PostEvictionCallbackRegistration>();
 
             internal void AttachTokens(CacheEntry cacheEntry)
             {
@@ -37,7 +39,10 @@ namespace Microsoft.Extensions.Caching.Memory
                             if (expirationToken.ActiveChangeCallbacks)
                             {
                                 _expirationTokenRegistrations ??= new List<IDisposable>(1);
-                                IDisposable registration = expirationToken.RegisterChangeCallback((Action<object?>)ExpirationCallback, cacheEntry);
+                                IDisposable registration = expirationToken.RegisterChangeCallback(
+                                    (Action<object?>)ExpirationCallback,
+                                    cacheEntry
+                                );
                                 _expirationTokenRegistrations.Add(registration);
                             }
                         }
@@ -106,15 +111,21 @@ namespace Microsoft.Extensions.Caching.Memory
             {
                 if (_postEvictionCallbacks != null)
                 {
-                    Task.Factory.StartNew(state => InvokeCallbacks((CacheEntry)state!), cacheEntry,
-                        CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+                    Task.Factory.StartNew(
+                        state => InvokeCallbacks((CacheEntry)state!),
+                        cacheEntry,
+                        CancellationToken.None,
+                        TaskCreationOptions.DenyChildAttach,
+                        TaskScheduler.Default
+                    );
                 }
             }
 
             private static void InvokeCallbacks(CacheEntry entry)
             {
                 Debug.Assert(entry._tokens != null);
-                List<PostEvictionCallbackRegistration>? callbackRegistrations = Interlocked.Exchange(ref entry._tokens._postEvictionCallbacks, null);
+                List<PostEvictionCallbackRegistration>? callbackRegistrations =
+                    Interlocked.Exchange(ref entry._tokens._postEvictionCallbacks, null);
 
                 if (callbackRegistrations == null)
                 {
@@ -127,7 +138,12 @@ namespace Microsoft.Extensions.Caching.Memory
 
                     try
                     {
-                        registration.EvictionCallback?.Invoke(entry.Key, entry.Value, entry.EvictionReason, registration.State);
+                        registration.EvictionCallback?.Invoke(
+                            entry.Key,
+                            entry.Value,
+                            entry.EvictionReason,
+                            registration.State
+                        );
                     }
                     catch (Exception e)
                     {

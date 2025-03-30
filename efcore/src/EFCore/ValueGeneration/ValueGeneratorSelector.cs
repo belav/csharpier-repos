@@ -29,8 +29,7 @@ public class ValueGeneratorSelector : IValueGeneratorSelector
     /// <summary>
     ///     The cache being used to store value generator instances.
     /// </summary>
-    public virtual IValueGeneratorCache Cache
-        => Dependencies.Cache;
+    public virtual IValueGeneratorCache Cache => Dependencies.Cache;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="ValueGeneratorSelector" /> class.
@@ -55,8 +54,8 @@ public class ValueGeneratorSelector : IValueGeneratorSelector
     ///     this entity type may be different from the declared entity type on <paramref name="property" />
     /// </param>
     /// <returns>The value generator to be used.</returns>
-    public virtual ValueGenerator Select(IProperty property, ITypeBase typeBase)
-        => Cache.GetOrAdd(property, typeBase, (p, t) => CreateFromFactory(p, t) ?? Create(p, t));
+    public virtual ValueGenerator Select(IProperty property, ITypeBase typeBase) =>
+        Cache.GetOrAdd(property, typeBase, (p, t) => CreateFromFactory(p, t) ?? Create(p, t));
 
     private static ValueGenerator? CreateFromFactory(IProperty property, ITypeBase structuralType)
     {
@@ -65,8 +64,7 @@ public class ValueGeneratorSelector : IValueGeneratorSelector
         {
             var mapping = property.GetTypeMapping();
 #pragma warning disable CS0612 // Type or member is obsolete
-            if (mapping.ValueGeneratorFactory != null
-                && structuralType is IEntityType)
+            if (mapping.ValueGeneratorFactory != null && structuralType is IEntityType)
             {
                 factory = (p, t) => mapping.ValueGeneratorFactory.Invoke(p, (IEntityType)t);
             }
@@ -95,8 +93,7 @@ public class ValueGeneratorSelector : IValueGeneratorSelector
         }
 
         var converter = property.GetTypeMapping().Converter;
-        if (converter != null
-            && converter.ProviderClrType != propertyType)
+        if (converter != null && converter.ProviderClrType != propertyType)
         {
             generator = FindForType(property, typeBase, converter.ProviderClrType);
             if (generator != null)
@@ -106,7 +103,12 @@ public class ValueGeneratorSelector : IValueGeneratorSelector
         }
 
         throw new NotSupportedException(
-            CoreStrings.NoValueGenerator(property.Name, property.DeclaringType.DisplayName(), propertyType.ShortDisplayName()));
+            CoreStrings.NoValueGenerator(
+                property.Name,
+                property.DeclaringType.DisplayName(),
+                propertyType.ShortDisplayName()
+            )
+        );
     }
 
     /// <summary>
@@ -119,12 +121,13 @@ public class ValueGeneratorSelector : IValueGeneratorSelector
     /// </param>
     /// <param name="clrType">The type, which may be the provider type after conversion, rather than the property type.</param>
     /// <returns>The newly created value generator.</returns>
-    protected virtual ValueGenerator? FindForType(IProperty property, ITypeBase typeBase, Type clrType)
-        => clrType == typeof(Guid)
-            ? new GuidValueGenerator()
-            : clrType == typeof(string)
-                ? new StringValueGenerator()
-                : clrType == typeof(byte[])
-                    ? new BinaryValueGenerator()
-                    : null;
+    protected virtual ValueGenerator? FindForType(
+        IProperty property,
+        ITypeBase typeBase,
+        Type clrType
+    ) =>
+        clrType == typeof(Guid) ? new GuidValueGenerator()
+        : clrType == typeof(string) ? new StringValueGenerator()
+        : clrType == typeof(byte[]) ? new BinaryValueGenerator()
+        : null;
 }

@@ -24,11 +24,11 @@ using System;
 
 namespace System.DirectoryServices.ActiveDirectory
 {
-	public enum TopLevelNameStatus
-	{
-		Enabled,
-		NewlyCreated,
-		AdminDisabled,
-		ConflictDisabled = 4
-	}
+    public enum TopLevelNameStatus
+    {
+        Enabled,
+        NewlyCreated,
+        AdminDisabled,
+        ConflictDisabled = 4,
+    }
 }

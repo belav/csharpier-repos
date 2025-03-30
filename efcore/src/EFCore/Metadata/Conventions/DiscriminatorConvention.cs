@@ -9,10 +9,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class DiscriminatorConvention :
-    IEntityTypeBaseTypeChangedConvention,
-    IEntityTypeRemovedConvention,
-    IDiscriminatorPropertySetConvention
+public class DiscriminatorConvention
+    : IEntityTypeBaseTypeChangedConvention,
+        IEntityTypeRemovedConvention,
+        IDiscriminatorPropertySetConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="DiscriminatorConvention" />.
@@ -33,10 +33,13 @@ public class DiscriminatorConvention :
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionEntityType? newBaseType,
         IConventionEntityType? oldBaseType,
-        IConventionContext<IConventionEntityType> context)
+        IConventionContext<IConventionEntityType> context
+    )
     {
-        if (oldBaseType is { IsInModel: true, BaseType: null }
-            && !oldBaseType.GetDirectlyDerivedTypes().Any())
+        if (
+            oldBaseType is { IsInModel: true, BaseType: null }
+            && !oldBaseType.GetDirectlyDerivedTypes().Any()
+        )
         {
             oldBaseType.Builder.HasNoDiscriminator();
         }
@@ -69,7 +72,10 @@ public class DiscriminatorConvention :
                 var discriminator = entityTypeBuilder.HasDiscriminator(typeof(string));
                 if (discriminator != null)
                 {
-                    SetDefaultDiscriminatorValues(entityTypeBuilder.Metadata.GetDerivedTypesInclusive(), discriminator);
+                    SetDefaultDiscriminatorValues(
+                        entityTypeBuilder.Metadata.GetDerivedTypesInclusive(),
+                        discriminator
+                    );
                 }
             }
         }
@@ -79,7 +85,8 @@ public class DiscriminatorConvention :
     public virtual void ProcessDiscriminatorPropertySet(
         IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,
-        IConventionContext<string> context)
+        IConventionContext<string> context
+    )
     {
         if (name == null)
         {
@@ -89,7 +96,10 @@ public class DiscriminatorConvention :
         var discriminator = entityTypeBuilder.HasDiscriminator(typeof(string));
         if (discriminator != null)
         {
-            SetDefaultDiscriminatorValues(entityTypeBuilder.Metadata.GetDerivedTypesInclusive(), discriminator);
+            SetDefaultDiscriminatorValues(
+                entityTypeBuilder.Metadata.GetDerivedTypesInclusive(),
+                discriminator
+            );
         }
     }
 
@@ -97,13 +107,16 @@ public class DiscriminatorConvention :
     public virtual void ProcessEntityTypeRemoved(
         IConventionModelBuilder modelBuilder,
         IConventionEntityType entityType,
-        IConventionContext<IConventionEntityType> context)
+        IConventionContext<IConventionEntityType> context
+    )
     {
         var oldBaseType = entityType.BaseType;
-        if (oldBaseType != null
+        if (
+            oldBaseType != null
             && oldBaseType.IsInModel
             && oldBaseType.BaseType == null
-            && !oldBaseType.GetDirectlyDerivedTypes().Any())
+            && !oldBaseType.GetDirectlyDerivedTypes().Any()
+        )
         {
             oldBaseType.Builder.HasNoDiscriminator();
         }
@@ -116,7 +129,8 @@ public class DiscriminatorConvention :
     /// <param name="discriminatorBuilder">The discriminator builder.</param>
     protected virtual void SetDefaultDiscriminatorValues(
         IEnumerable<IConventionEntityType> entityTypes,
-        IConventionDiscriminatorBuilder discriminatorBuilder)
+        IConventionDiscriminatorBuilder discriminatorBuilder
+    )
     {
         foreach (var entityType in entityTypes)
         {

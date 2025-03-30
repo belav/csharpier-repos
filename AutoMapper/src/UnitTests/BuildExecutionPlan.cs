@@ -1,8 +1,10 @@
 ﻿namespace AutoMapper.UnitTests;
+
 public class BuildExecutionPlan : AutoMapperSpecBase
 {
     Model _source;
     Dto _destination;
+
     public class Model
     {
         public Guid? Id { get; set; }
@@ -12,6 +14,7 @@ public class BuildExecutionPlan : AutoMapperSpecBase
         public DateTime Date { get; set; }
         public int? IntValue { get; set; }
     }
+
     public class Dto
     {
         public Guid? Id { get; set; }
@@ -22,10 +25,13 @@ public class BuildExecutionPlan : AutoMapperSpecBase
         public int IntValue { get; set; }
         public string CompanyName { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c =>
-    {
-        c.CreateMap<Model, Dto>().ForMember(d => d.CompanyName, o => o.Ignore());
-    });
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(c =>
+        {
+            c.CreateMap<Model, Dto>().ForMember(d => d.CompanyName, o => o.Ignore());
+        });
+
     protected override void Because_of()
     {
         _source = new Model
@@ -38,8 +44,13 @@ public class BuildExecutionPlan : AutoMapperSpecBase
             IntValue = 13,
         };
         var plan = Configuration.BuildExecutionPlan(typeof(Model), typeof(Dto));
-        _destination = ((Func<Model, Dto, ResolutionContext, Dto>)plan.Compile())(_source, null, null);
+        _destination = ((Func<Model, Dto, ResolutionContext, Dto>)plan.Compile())(
+            _source,
+            null,
+            null
+        );
     }
+
     [Fact]
     public void Should_build_the_execution_plan()
     {
@@ -51,27 +62,34 @@ public class BuildExecutionPlan : AutoMapperSpecBase
         _destination.IntValue.ShouldBe(_source.IntValue.Value);
     }
 }
+
 public class When_reusing_the_execution_plan_inner_map : AutoMapperSpecBase
 {
     class Source
     {
         public Inner Inner { get; set; }
     }
+
     class Destination
     {
         public Inner Inner { get; set; }
     }
+
     class Inner { }
-    protected override MapperConfiguration CreateConfiguration() => new(c =>
-    {
-        c.AllowNullDestinationValues = false;
-        c.CreateMap<Inner, Inner>();
-        c.CreateMap<Source, Destination>().ForAllMembers(o =>
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(c =>
         {
-            o.AllowNull();
-            o.MapAtRuntime();
+            c.AllowNullDestinationValues = false;
+            c.CreateMap<Inner, Inner>();
+            c.CreateMap<Source, Destination>()
+                .ForAllMembers(o =>
+                {
+                    o.AllowNull();
+                    o.MapAtRuntime();
+                });
         });
-    });
+
     [Fact]
     public void Should_consider_per_member_settings()
     {
@@ -80,27 +98,34 @@ public class When_reusing_the_execution_plan_inner_map : AutoMapperSpecBase
         destination.Inner.ShouldBeNull();
     }
 }
+
 public class AllowNullWithMapAtRuntime : AutoMapperSpecBase
 {
     class Source
     {
         public Inner Inner { get; set; }
     }
+
     class Destination
     {
         public Inner Inner { get; set; }
     }
+
     class Inner { }
-    protected override MapperConfiguration CreateConfiguration() => new(c =>
-    {
-        c.AllowNullDestinationValues = false;
-        c.CreateMap<Inner, Inner>();
-        c.CreateMap<Source, Destination>().ForAllMembers(o =>
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(c =>
         {
-            o.AllowNull();
-            o.MapAtRuntime();
+            c.AllowNullDestinationValues = false;
+            c.CreateMap<Inner, Inner>();
+            c.CreateMap<Source, Destination>()
+                .ForAllMembers(o =>
+                {
+                    o.AllowNull();
+                    o.MapAtRuntime();
+                });
         });
-    });
+
     [Fact]
     public void Should_consider_per_member_settings()
     {
@@ -108,6 +133,7 @@ public class AllowNullWithMapAtRuntime : AutoMapperSpecBase
         destination.Inner.ShouldBeNull();
     }
 }
+
 public class When_reusing_the_execution_plan : AutoMapperSpecBase
 {
     class Source
@@ -115,20 +141,25 @@ public class When_reusing_the_execution_plan : AutoMapperSpecBase
         public int[] Ints { get; set; }
         public string String { get; set; }
     }
+
     class Destination
     {
         public int[] Ints { get; set; }
         public string String { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c =>
-    {
-        c.AllowNullDestinationValues = false;
-        c.CreateMap<Source, Destination>().ForAllMembers(o =>
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(c =>
         {
-            o.AllowNull();
-            o.MapAtRuntime();
+            c.AllowNullDestinationValues = false;
+            c.CreateMap<Source, Destination>()
+                .ForAllMembers(o =>
+                {
+                    o.AllowNull();
+                    o.MapAtRuntime();
+                });
         });
-    });
+
     [Fact]
     public void Should_consider_per_member_settings()
     {
@@ -139,29 +170,36 @@ public class When_reusing_the_execution_plan : AutoMapperSpecBase
         destination.String.ShouldBeNull();
     }
 }
+
 public class When_reusing_the_execution_plan_existing_destination : AutoMapperSpecBase
 {
     class Source
     {
         public int[] Ints { get; set; }
     }
+
     class OtherSource
     {
         public int[] Ints { get; set; }
     }
+
     class Destination
     {
         public ICollection<int> Ints { get; set; } = new HashSet<int>();
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c =>
-    {
-        c.CreateMap<OtherSource, Destination>().ForAllMembers(o => o.MapAtRuntime());
-        c.CreateMap<Source, Destination>().ForAllMembers(o =>
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(c =>
         {
-            o.UseDestinationValue();
-            o.MapAtRuntime();
+            c.CreateMap<OtherSource, Destination>().ForAllMembers(o => o.MapAtRuntime());
+            c.CreateMap<Source, Destination>()
+                .ForAllMembers(o =>
+                {
+                    o.UseDestinationValue();
+                    o.MapAtRuntime();
+                });
         });
-    });
+
     [Fact]
     public void Should_consider_per_member_settings()
     {

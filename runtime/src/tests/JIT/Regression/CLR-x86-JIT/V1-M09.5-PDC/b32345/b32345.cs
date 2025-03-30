@@ -3,9 +3,11 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
+
     public class BB
     {
         public static uint m_uStatic3 = 205u;
@@ -26,6 +28,7 @@ namespace Test
                 }
             }
         }
+
         [Fact]
         public static int TestEntryPoint()
         {
@@ -33,7 +36,10 @@ namespace Test
             {
                 Static1();
             }
-            catch (Exception) { return 100; }
+            catch (Exception)
+            {
+                return 100;
+            }
             return 1;
         }
     }

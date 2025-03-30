@@ -25,8 +25,7 @@ namespace Microsoft.CodeAnalysis.Editor.Structure
     [Export(typeof(AbstractStructureTaggerProvider))]
     [TagType(typeof(IStructureTag))]
     [ContentType(ContentTypeNames.RoslynContentType)]
-    internal class StructureTaggerProvider :
-        AbstractStructureTaggerProvider
+    internal class StructureTaggerProvider : AbstractStructureTaggerProvider
     {
         private readonly ITextEditorFactoryService _textEditorFactoryService;
 
@@ -39,24 +38,35 @@ namespace Microsoft.CodeAnalysis.Editor.Structure
             ITextEditorFactoryService textEditorFactoryService,
             IGlobalOptionService globalOptions,
             [Import(AllowDefault = true)] ITextBufferVisibilityTracker? visibilityTracker,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, editorOptionsService, projectionBufferFactoryService, visibilityTracker, listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                threadingContext,
+                editorOptionsService,
+                projectionBufferFactoryService,
+                visibilityTracker,
+                listenerProvider
+            )
         {
             _textEditorFactoryService = textEditorFactoryService;
         }
 
         internal override object? GetCollapsedHintForm(StructureTag structureTag)
         {
-            return new ViewHostingControl(CreateElisionBufferView, () => CreateElisionBufferForTagTooltip(structureTag));
+            return new ViewHostingControl(
+                CreateElisionBufferView,
+                () => CreateElisionBufferForTagTooltip(structureTag)
+            );
         }
 
-        private IWpfTextView CreateElisionBufferView(ITextBuffer finalBuffer)
-            => CreateShrunkenTextView(ThreadingContext, _textEditorFactoryService, finalBuffer);
+        private IWpfTextView CreateElisionBufferView(ITextBuffer finalBuffer) =>
+            CreateShrunkenTextView(ThreadingContext, _textEditorFactoryService, finalBuffer);
 
         private static IWpfTextView CreateShrunkenTextView(
             IThreadingContext threadingContext,
             ITextEditorFactoryService textEditorFactoryService,
-            ITextBuffer finalBuffer)
+            ITextBuffer finalBuffer
+        )
         {
             var roles = textEditorFactoryService.CreateTextViewRoleSet(OutliningRegionTextViewRole);
             var view = textEditorFactoryService.CreateTextView(finalBuffer, roles);

@@ -5,14 +5,14 @@ using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading;
-
 using static System.Runtime.InteropServices.ComWrappers;
 
 namespace System.Runtime.InteropServices
 {
     internal static class TrackerObjectManager
     {
-        internal static readonly IntPtr s_findReferencesTargetCallback = FindReferenceTargetsCallback.CreateFindReferenceTargetsCallback();
+        internal static readonly IntPtr s_findReferencesTargetCallback =
+            FindReferenceTargetsCallback.CreateFindReferenceTargetsCallback();
         internal static readonly IntPtr s_globalHostServices = CreateHostServices();
 
         internal static volatile IntPtr s_trackerManager;
@@ -38,13 +38,25 @@ namespace System.Runtime.InteropServices
                 return;
             }
 
-            IReferenceTracker.GetReferenceTrackerManager(referenceTracker, out IntPtr referenceTrackerManager);
+            IReferenceTracker.GetReferenceTrackerManager(
+                referenceTracker,
+                out IntPtr referenceTrackerManager
+            );
 
             // Attempt to set the tracker instance.
             // If set, the ownership of referenceTrackerManager has been transferred
-            if (Interlocked.CompareExchange(ref s_trackerManager, referenceTrackerManager, IntPtr.Zero) == IntPtr.Zero)
+            if (
+                Interlocked.CompareExchange(
+                    ref s_trackerManager,
+                    referenceTrackerManager,
+                    IntPtr.Zero
+                ) == IntPtr.Zero
+            )
             {
-                IReferenceTrackerManager.SetReferenceTrackerHost(s_trackerManager, s_globalHostServices);
+                IReferenceTrackerManager.SetReferenceTrackerHost(
+                    s_trackerManager,
+                    s_globalHostServices
+                );
 
                 // Our GC callbacks are used only for reference walk of tracker objects, so register it here
                 // when we find our first tracker object.
@@ -141,9 +153,20 @@ namespace System.Runtime.InteropServices
             delegate* unmanaged<int, void> gcStopCallback = &GCStopCollection;
             delegate* unmanaged<int, void> gcAfterMarkCallback = &GCAfterMarkPhase;
 
-            if (!RuntimeImports.RhRegisterGcCallout(RuntimeImports.GcRestrictedCalloutKind.StartCollection, (IntPtr)gcStartCallback) ||
-                !RuntimeImports.RhRegisterGcCallout(RuntimeImports.GcRestrictedCalloutKind.EndCollection, (IntPtr)gcStopCallback) ||
-                !RuntimeImports.RhRegisterGcCallout(RuntimeImports.GcRestrictedCalloutKind.AfterMarkPhase, (IntPtr)gcAfterMarkCallback))
+            if (
+                !RuntimeImports.RhRegisterGcCallout(
+                    RuntimeImports.GcRestrictedCalloutKind.StartCollection,
+                    (IntPtr)gcStartCallback
+                )
+                || !RuntimeImports.RhRegisterGcCallout(
+                    RuntimeImports.GcRestrictedCalloutKind.EndCollection,
+                    (IntPtr)gcStopCallback
+                )
+                || !RuntimeImports.RhRegisterGcCallout(
+                    RuntimeImports.GcRestrictedCalloutKind.AfterMarkPhase,
+                    (IntPtr)gcAfterMarkCallback
+                )
+            )
             {
                 throw new OutOfMemoryException();
             }
@@ -214,7 +237,9 @@ namespace System.Runtime.InteropServices
 
         public static void SetReferenceTrackerHost(IntPtr pThis, IntPtr referenceTrackerHost)
         {
-            Marshal.ThrowExceptionForHR((*(delegate* unmanaged<IntPtr, IntPtr, int>**)pThis)[6](pThis, referenceTrackerHost));
+            Marshal.ThrowExceptionForHR(
+                (*(delegate* unmanaged<IntPtr, IntPtr, int>**)pThis)[6](pThis, referenceTrackerHost)
+            );
         }
     }
 
@@ -235,13 +260,19 @@ namespace System.Runtime.InteropServices
         // Used during GC callback
         public static int FindTrackerTargets(IntPtr pThis, IntPtr findReferenceTargetsCallback)
         {
-            return (*(delegate* unmanaged<IntPtr, IntPtr, int>**)pThis)[5](pThis, findReferenceTargetsCallback);
+            return (*(delegate* unmanaged<IntPtr, IntPtr, int>**)pThis)[5]
+                (pThis, findReferenceTargetsCallback);
         }
 
-        public static void GetReferenceTrackerManager(IntPtr pThis, out IntPtr referenceTrackerManager)
+        public static void GetReferenceTrackerManager(
+            IntPtr pThis,
+            out IntPtr referenceTrackerManager
+        )
         {
             fixed (IntPtr* ptr = &referenceTrackerManager)
-                Marshal.ThrowExceptionForHR((*(delegate* unmanaged<IntPtr, IntPtr*, int>**)pThis)[6](pThis, ptr));
+                Marshal.ThrowExceptionForHR(
+                    (*(delegate* unmanaged<IntPtr, IntPtr*, int>**)pThis)[6](pThis, ptr)
+                );
         }
 
         public static void AddRefFromTrackerSource(IntPtr pThis)
@@ -266,7 +297,11 @@ namespace System.Runtime.InteropServices
         internal static GCHandle s_currentRootObjectHandle;
 
         [UnmanagedCallersOnly]
-        private static unsafe int IFindReferenceTargetsCallback_QueryInterface(IntPtr pThis, Guid* guid, IntPtr* ppObject)
+        private static unsafe int IFindReferenceTargetsCallback_QueryInterface(
+            IntPtr pThis,
+            Guid* guid,
+            IntPtr* ppObject
+        )
         {
             if (*guid == IID_IFindReferenceTargetsCallback || *guid == IID_IUnknown)
             {
@@ -280,7 +315,10 @@ namespace System.Runtime.InteropServices
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe int IFindReferenceTargetsCallback_FoundTrackerTarget(IntPtr pThis, IntPtr referenceTrackerTarget)
+        private static unsafe int IFindReferenceTargetsCallback_FoundTrackerTarget(
+            IntPtr pThis,
+            IntPtr referenceTrackerTarget
+        )
         {
             if (referenceTrackerTarget == IntPtr.Zero)
             {
@@ -290,7 +328,12 @@ namespace System.Runtime.InteropServices
             if (TryGetObject(referenceTrackerTarget, out object? foundObject))
             {
                 // Notify the runtime a reference path was found.
-                return TrackerObjectManager.AddReferencePath(s_currentRootObjectHandle.Target, foundObject) ? HResults.S_OK : HResults.S_FALSE;
+                return TrackerObjectManager.AddReferencePath(
+                    s_currentRootObjectHandle.Target,
+                    foundObject
+                )
+                    ? HResults.S_OK
+                    : HResults.S_FALSE;
             }
 
             return HResults.S_OK;
@@ -298,11 +341,19 @@ namespace System.Runtime.InteropServices
 
         private static unsafe IntPtr CreateDefaultIFindReferenceTargetsCallbackVftbl()
         {
-            IntPtr* vftbl = (IntPtr*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(FindReferenceTargetsCallback), 4 * sizeof(IntPtr));
-            vftbl[0] = (IntPtr)(delegate* unmanaged<IntPtr, Guid*, IntPtr*, int>)&IFindReferenceTargetsCallback_QueryInterface;
+            IntPtr* vftbl = (IntPtr*)
+                RuntimeHelpers.AllocateTypeAssociatedMemory(
+                    typeof(FindReferenceTargetsCallback),
+                    4 * sizeof(IntPtr)
+                );
+            vftbl[0] = (IntPtr)
+                (delegate* unmanaged<IntPtr, Guid*, IntPtr*, int>)
+                    &IFindReferenceTargetsCallback_QueryInterface;
             vftbl[1] = (IntPtr)(delegate* unmanaged<IntPtr, uint>)&ComWrappers.Untracked_AddRef;
             vftbl[2] = (IntPtr)(delegate* unmanaged<IntPtr, uint>)&ComWrappers.Untracked_Release;
-            vftbl[3] = (IntPtr)(delegate* unmanaged<IntPtr, IntPtr, int>)&IFindReferenceTargetsCallback_FoundTrackerTarget;
+            vftbl[3] = (IntPtr)
+                (delegate* unmanaged<IntPtr, IntPtr, int>)
+                    &IFindReferenceTargetsCallback_FoundTrackerTarget;
             return (IntPtr)vftbl;
         }
 
@@ -334,15 +385,17 @@ namespace System.Runtime.InteropServices
     // This is used during a GC callback so it needs to be free of any managed allocations.
     internal unsafe struct DependentHandleList
     {
-        private int _freeIndex;                // The next available slot
-        private int _capacity;                 // Total numbers of slots available in the list
-        private IntPtr* _pHandles;             // All handles
-        private int _shrinkHint;               // How many times we've consistently seen "hints" that a
-                                               // shrink is needed
+        private int _freeIndex; // The next available slot
+        private int _capacity; // Total numbers of slots available in the list
+        private IntPtr* _pHandles; // All handles
+        private int _shrinkHint; // How many times we've consistently seen "hints" that a
 
-        private const int DefaultCapacity = 100;       // Default initial capacity of this list
-        private const int ShrinkHintThreshold = 10;    // The number of hints we've seen before we really
-                                                       // shrink the list
+        // shrink is needed
+
+        private const int DefaultCapacity = 100; // Default initial capacity of this list
+        private const int ShrinkHintThreshold = 10; // The number of hints we've seen before we really
+
+        // shrink the list
 
         public bool AddDependentHandle(object target, object dependent)
         {
@@ -379,7 +432,8 @@ namespace System.Runtime.InteropServices
             {
                 _capacity = DefaultCapacity;
 #if TARGET_WINDOWS
-                _pHandles = (IntPtr*)Interop.Ucrtbase.calloc((nuint)_capacity, (nuint)sizeof(IntPtr));
+                _pHandles = (IntPtr*)
+                    Interop.Ucrtbase.calloc((nuint)_capacity, (nuint)sizeof(IntPtr));
 #else
                 _pHandles = (IntPtr*)Interop.Sys.Calloc((nuint)_capacity, (nuint)sizeof(IntPtr));
 #endif
@@ -437,9 +491,11 @@ namespace System.Runtime.InteropServices
 
             // Shrink the size of the memory
 #if TARGET_WINDOWS
-            IntPtr* pNewHandles = (IntPtr*)Interop.Ucrtbase.realloc(_pHandles, (nuint)(newCapacity * sizeof(IntPtr)));
+            IntPtr* pNewHandles = (IntPtr*)
+                Interop.Ucrtbase.realloc(_pHandles, (nuint)(newCapacity * sizeof(IntPtr)));
 #else
-            IntPtr* pNewHandles = (IntPtr*)Interop.Sys.Realloc(_pHandles, (nuint)(newCapacity * sizeof(IntPtr)));
+            IntPtr* pNewHandles = (IntPtr*)
+                Interop.Sys.Realloc(_pHandles, (nuint)(newCapacity * sizeof(IntPtr)));
 #endif
             if (pNewHandles == null)
                 return false;
@@ -454,9 +510,11 @@ namespace System.Runtime.InteropServices
         {
             int newCapacity = _capacity * 2;
 #if TARGET_WINDOWS
-            IntPtr* pNewHandles = (IntPtr*)Interop.Ucrtbase.realloc(_pHandles, (nuint)(newCapacity * sizeof(IntPtr)));
+            IntPtr* pNewHandles = (IntPtr*)
+                Interop.Ucrtbase.realloc(_pHandles, (nuint)(newCapacity * sizeof(IntPtr)));
 #else
-            IntPtr* pNewHandles = (IntPtr*)Interop.Sys.Realloc(_pHandles, (nuint)(newCapacity * sizeof(IntPtr)));
+            IntPtr* pNewHandles = (IntPtr*)
+                Interop.Sys.Realloc(_pHandles, (nuint)(newCapacity * sizeof(IntPtr)));
 #endif
             if (pNewHandles == null)
                 return false;

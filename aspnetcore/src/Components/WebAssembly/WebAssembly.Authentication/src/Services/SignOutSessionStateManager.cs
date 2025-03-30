@@ -11,11 +11,15 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 /// <summary>
 /// Handles CSRF protection for the logout endpoint.
 /// </summary>
-[Obsolete("Use 'Microsoft.AspNetCore.Components.Webassembly.Authentication.NavigationManagerExtensions.NavigateToLogout' instead.")]
+[Obsolete(
+    "Use 'Microsoft.AspNetCore.Components.Webassembly.Authentication.NavigationManagerExtensions.NavigateToLogout' instead."
+)]
 public class SignOutSessionStateManager
 {
     private readonly IJSRuntime _jsRuntime;
-    private static readonly JsonSerializerOptions _serializationOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+    private static readonly JsonSerializerOptions _serializationOptions = new JsonSerializerOptions(
+        JsonSerializerDefaults.Web
+    );
 
     /// <summary>
     /// Initialize a new instance of <see cref="SignOutSessionStateManager"/>.
@@ -28,14 +32,19 @@ public class SignOutSessionStateManager
     /// </summary>
     /// <returns>A <see cref="ValueTask"/> that completes when the state has been saved to session storage.</returns>
     [DynamicDependency(JsonSerialized, typeof(SignOutState))]
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "The correct members will be preserved by the above DynamicDependency.")]
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2026:RequiresUnreferencedCode",
+        Justification = "The correct members will be preserved by the above DynamicDependency."
+    )]
     // This should use JSON source generation
     public virtual ValueTask SetSignOutState()
     {
         return _jsRuntime.InvokeVoidAsync(
             "sessionStorage.setItem",
             "Microsoft.AspNetCore.Components.WebAssembly.Authentication.SignOutState",
-            JsonSerializer.Serialize(SignOutState.Instance, _serializationOptions));
+            JsonSerializer.Serialize(SignOutState.Instance, _serializationOptions)
+        );
     }
 
     /// <summary>
@@ -59,7 +68,8 @@ public class SignOutSessionStateManager
     {
         var result = await _jsRuntime.InvokeAsync<string>(
             "sessionStorage.getItem",
-            "Microsoft.AspNetCore.Components.WebAssembly.Authentication.SignOutState");
+            "Microsoft.AspNetCore.Components.WebAssembly.Authentication.SignOutState"
+        );
         if (result == null)
         {
             return default;
@@ -69,15 +79,21 @@ public class SignOutSessionStateManager
     }
 
     [DynamicDependency(JsonSerialized, typeof(SignOutState))]
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "The correct members will be preserved by the above DynamicDependency.")]
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2026:RequiresUnreferencedCode",
+        Justification = "The correct members will be preserved by the above DynamicDependency."
+    )]
     // This should use JSON source generation
-    private static SignOutState DeserializeSignOutState(string result) => JsonSerializer.Deserialize<SignOutState>(result, _serializationOptions);
+    private static SignOutState DeserializeSignOutState(string result) =>
+        JsonSerializer.Deserialize<SignOutState>(result, _serializationOptions);
 
     private ValueTask ClearSignOutState()
     {
         return _jsRuntime.InvokeVoidAsync(
             "sessionStorage.removeItem",
-            "Microsoft.AspNetCore.Components.WebAssembly.Authentication.SignOutState");
+            "Microsoft.AspNetCore.Components.WebAssembly.Authentication.SignOutState"
+        );
     }
 
     private struct SignOutState

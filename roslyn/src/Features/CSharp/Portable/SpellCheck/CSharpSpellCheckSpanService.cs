@@ -12,6 +12,4 @@ namespace Microsoft.CodeAnalysis.CSharp.SpellCheck;
 [ExportLanguageService(typeof(ISpellCheckSpanService), LanguageNames.CSharp), Shared]
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-internal class CSharpSpellCheckSpanService() : AbstractSpellCheckSpanService('\\')
-{
-}
+internal class CSharpSpellCheckSpanService() : AbstractSpellCheckSpanService('\\') { }

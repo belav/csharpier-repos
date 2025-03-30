@@ -16,14 +16,18 @@ namespace System.ServiceModel.Activities
         MessageQuerySet messageQuerySet;
 
         public QueryCorrelationInitializer()
-            : base()
-        {
-        }
+            : base() { }
 
-        [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.CollectionPropertiesShouldBeReadOnly,
-            Justification = "MessageQuerySet is a stand-alone class. We want to allow users to create their own.")]
-        [SuppressMessage(FxCop.Category.Xaml, FxCop.Rule.PropertyExternalTypesMustBeKnown,
-            Justification = "MessageQuerySet is a known XAML-serializable type in this assembly.")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            FxCop.Rule.CollectionPropertiesShouldBeReadOnly,
+            Justification = "MessageQuerySet is a stand-alone class. We want to allow users to create their own."
+        )]
+        [SuppressMessage(
+            FxCop.Category.Xaml,
+            FxCop.Rule.PropertyExternalTypesMustBeKnown,
+            Justification = "MessageQuerySet is a known XAML-serializable type in this assembly."
+        )]
         public MessageQuerySet MessageQuerySet
         {
             get
@@ -34,10 +38,7 @@ namespace System.ServiceModel.Activities
                 }
                 return this.messageQuerySet;
             }
-            set
-            {
-                this.messageQuerySet = value;
-            }
+            set { this.messageQuerySet = value; }
         }
 
         internal override CorrelationInitializer CloneCore()

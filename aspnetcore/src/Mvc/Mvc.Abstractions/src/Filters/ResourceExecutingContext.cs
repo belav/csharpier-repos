@@ -20,7 +20,8 @@ public class ResourceExecutingContext : FilterContext
     public ResourceExecutingContext(
         ActionContext actionContext,
         IList<IFilterMetadata> filters,
-        IList<IValueProviderFactory> valueProviderFactories)
+        IList<IValueProviderFactory> valueProviderFactories
+    )
         : base(actionContext, filters)
     {
         ArgumentNullException.ThrowIfNull(valueProviderFactories);

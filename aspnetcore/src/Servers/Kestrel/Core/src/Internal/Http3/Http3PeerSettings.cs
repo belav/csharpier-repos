@@ -12,7 +12,8 @@ internal sealed class Http3PeerSettings
     public const uint DefaultH3Datagram = 0;
 
     public uint HeaderTableSize { get; internal set; } = DefaultHeaderTableSize;
-    public uint MaxRequestHeaderFieldSectionSize { get; internal set; } = DefaultMaxRequestHeaderFieldSize;
+    public uint MaxRequestHeaderFieldSectionSize { get; internal set; } =
+        DefaultMaxRequestHeaderFieldSize;
     public uint EnableWebTransport { get; internal set; } = DefaultEnableWebTransport;
     public uint H3Datagram { get; internal set; } = DefaultH3Datagram;
 
@@ -30,7 +31,12 @@ internal sealed class Http3PeerSettings
 
         if (MaxRequestHeaderFieldSectionSize != DefaultMaxRequestHeaderFieldSize)
         {
-            list.Add(new Http3PeerSetting(Http3SettingType.MaxFieldSectionSize, MaxRequestHeaderFieldSectionSize));
+            list.Add(
+                new Http3PeerSetting(
+                    Http3SettingType.MaxFieldSectionSize,
+                    MaxRequestHeaderFieldSectionSize
+                )
+            );
         }
 
         if (EnableWebTransport != DefaultEnableWebTransport)

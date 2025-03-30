@@ -17,7 +17,9 @@ public class RouteOptionsTests
         services.AddOptions();
 
         // Act
-        services.AddRouting(options => options.ConstraintMap.Add("foo", typeof(TestRouteConstraint)));
+        services.AddRouting(options =>
+            options.ConstraintMap.Add("foo", typeof(TestRouteConstraint))
+        );
         var serviceProvider = services.BuildServiceProvider();
 
         // Assert
@@ -34,8 +36,16 @@ public class RouteOptionsTests
         services.AddRouting();
         var serviceProvider = services.BuildServiceProvider();
 
-        var endpoint1 = new Endpoint((c) => Task.CompletedTask, EndpointMetadataCollection.Empty, string.Empty);
-        var endpoint2 = new Endpoint((c) => Task.CompletedTask, EndpointMetadataCollection.Empty, string.Empty);
+        var endpoint1 = new Endpoint(
+            (c) => Task.CompletedTask,
+            EndpointMetadataCollection.Empty,
+            string.Empty
+        );
+        var endpoint2 = new Endpoint(
+            (c) => Task.CompletedTask,
+            EndpointMetadataCollection.Empty,
+            string.Empty
+        );
 
         var options = serviceProvider.GetRequiredService<IOptions<RouteOptions>>().Value;
         var endpointDataSource = serviceProvider.GetRequiredService<EndpointDataSource>();
@@ -51,9 +61,11 @@ public class RouteOptionsTests
         options.EndpointDataSources.Add(new DefaultEndpointDataSource(endpoint2));
 
         // Assert 2
-        Assert.Collection(endpointDataSource.Endpoints,
+        Assert.Collection(
+            endpointDataSource.Endpoints,
             ep => Assert.Same(endpoint1, ep),
-            ep => Assert.Same(endpoint2, ep));
+            ep => Assert.Same(endpoint2, ep)
+        );
     }
 
     private class TestRouteConstraint : IRouteConstraint
@@ -64,12 +76,14 @@ public class RouteOptionsTests
         }
 
         public string Pattern { get; private set; }
+
         public bool Match(
             HttpContext httpContext,
             IRouter route,
             string routeKey,
             RouteValueDictionary values,
-            RouteDirection routeDirection)
+            RouteDirection routeDirection
+        )
         {
             throw new NotImplementedException();
         }

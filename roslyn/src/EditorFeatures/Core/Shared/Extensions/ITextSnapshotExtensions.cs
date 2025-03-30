@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this ITextBuffer textBuffer,
             TextSpan span,
             EditorOptionsService editorOptionsService,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var document = textBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
@@ -39,12 +40,26 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             }
 
             var documentSyntax = ParsedDocument.CreateSynchronously(document, cancellationToken);
-            var rules = FormattingRuleUtilities.GetFormattingRules(documentSyntax, span, additionalRules: null);
+            var rules = FormattingRuleUtilities.GetFormattingRules(
+                documentSyntax,
+                span,
+                additionalRules: null
+            );
 
             var formatter = document.GetRequiredLanguageService<ISyntaxFormattingService>();
 
-            var options = textBuffer.GetSyntaxFormattingOptions(editorOptionsService, document.Project.Services, explicitFormat: false);
-            var result = formatter.GetFormattingResult(documentSyntax.Root, SpecializedCollections.SingletonEnumerable(span), options, rules, cancellationToken);
+            var options = textBuffer.GetSyntaxFormattingOptions(
+                editorOptionsService,
+                document.Project.Services,
+                explicitFormat: false
+            );
+            var result = formatter.GetFormattingResult(
+                documentSyntax.Root,
+                SpecializedCollections.SingletonEnumerable(span),
+                options,
+                rules,
+                cancellationToken
+            );
             var changes = result.GetTextChanges(cancellationToken);
 
             using (Logger.LogBlock(FunctionId.Formatting_ApplyResultToBuffer, cancellationToken))
@@ -56,13 +71,15 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         /// <summary>
         /// Get <see cref="Document"/> from <see cref="Text.Extensions.GetOpenDocumentInCurrentContextWithChanges(ITextSnapshot)"/>
         /// once <see cref="IWorkspaceStatusService.WaitUntilFullyLoadedAsync(CancellationToken)"/> returns
-        /// 
-        /// for synchronous code path, make sure to use synchronous version 
+        ///
+        /// for synchronous code path, make sure to use synchronous version
         /// <see cref="GetFullyLoadedOpenDocumentInCurrentContextWithChanges(ITextSnapshot, IUIThreadOperationContext, IThreadingContext)"/>.
         /// otherwise, one can get into a deadlock
         /// </summary>
         public static async Task<Document?> GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
-            this ITextSnapshot snapshot, IUIThreadOperationContext operationContext)
+            this ITextSnapshot snapshot,
+            IUIThreadOperationContext operationContext
+        )
         {
             // just get a document from whatever we have
             var document = snapshot.TextBuffer.AsTextContainer().GetOpenDocumentInCurrentContext();
@@ -73,14 +90,22 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             }
 
             // partial mode is always cancellable
-            using (operationContext.AddScope(allowCancellation: true, EditorFeaturesResources.Waiting_for_background_work_to_finish))
+            using (
+                operationContext.AddScope(
+                    allowCancellation: true,
+                    EditorFeaturesResources.Waiting_for_background_work_to_finish
+                )
+            )
             {
-                var service = document.Project.Solution.Services.GetService<IWorkspaceStatusService>();
+                var service =
+                    document.Project.Solution.Services.GetService<IWorkspaceStatusService>();
                 if (service != null)
                 {
                     // TODO: decide for prototype, we don't do anything complex and just ask workspace whether it is fully loaded
                     // later we might need to go and change all these with more specific info such as document/project/solution
-                    await service.WaitUntilFullyLoadedAsync(operationContext.UserCancellationToken).ConfigureAwait(false);
+                    await service
+                        .WaitUntilFullyLoadedAsync(operationContext.UserCancellationToken)
+                        .ConfigureAwait(false);
                 }
 
                 // get proper document
@@ -93,13 +118,19 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         /// once <see cref="IWorkspaceStatusService.WaitUntilFullyLoadedAsync(CancellationToken)"/> returns
         /// </summary>
         public static Document? GetFullyLoadedOpenDocumentInCurrentContextWithChanges(
-            this ITextSnapshot snapshot, IUIThreadOperationContext operationContext, IThreadingContext threadingContext)
+            this ITextSnapshot snapshot,
+            IUIThreadOperationContext operationContext,
+            IThreadingContext threadingContext
+        )
         {
             // make sure this is only called from UI thread
             threadingContext.ThrowIfNotOnUIThread();
 
             return threadingContext.JoinableTaskFactory.Run(() =>
-                snapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(operationContext));
+                snapshot.GetFullyLoadedOpenDocumentInCurrentContextWithChangesAsync(
+                    operationContext
+                )
+            );
         }
     }
 }

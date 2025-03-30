@@ -29,7 +29,12 @@ public class StaticFileMiddleware
     /// <param name="hostingEnv">The <see cref="IWebHostEnvironment"/> used by this middleware.</param>
     /// <param name="options">The configuration options.</param>
     /// <param name="loggerFactory">An <see cref="ILoggerFactory"/> instance used to create loggers.</param>
-    public StaticFileMiddleware(RequestDelegate next, IWebHostEnvironment hostingEnv, IOptions<StaticFileOptions> options, ILoggerFactory loggerFactory)
+    public StaticFileMiddleware(
+        RequestDelegate next,
+        IWebHostEnvironment hostingEnv,
+        IOptions<StaticFileOptions> options,
+        ILoggerFactory loggerFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(hostingEnv);
@@ -38,7 +43,8 @@ public class StaticFileMiddleware
 
         _next = next;
         _options = options.Value;
-        _contentTypeProvider = _options.ContentTypeProvider ?? new FileExtensionContentTypeProvider();
+        _contentTypeProvider =
+            _options.ContentTypeProvider ?? new FileExtensionContentTypeProvider();
         _fileProvider = _options.FileProvider ?? Helpers.ResolveFileProvider(hostingEnv);
         _matchUrl = _options.RequestPath;
         _logger = loggerFactory.CreateLogger<StaticFileMiddleware>();
@@ -46,7 +52,11 @@ public class StaticFileMiddleware
         // See HostingEnvironmentExtensions.Initialize
         if (_fileProvider is NullFileProvider && _fileProvider == hostingEnv.WebRootFileProvider)
         {
-            _logger.WebRootPathNotFound(Path.GetFullPath(Path.Combine(hostingEnv.ContentRootPath, hostingEnv.WebRootPath ?? "wwwroot")));
+            _logger.WebRootPathNotFound(
+                Path.GetFullPath(
+                    Path.Combine(hostingEnv.ContentRootPath, hostingEnv.WebRootPath ?? "wwwroot")
+                )
+            );
         }
     }
 
@@ -83,16 +93,26 @@ public class StaticFileMiddleware
     }
 
     // Return true because we only want to run if there is no endpoint delegate.
-    private static bool ValidateNoEndpointDelegate(HttpContext context) => context.GetEndpoint()?.RequestDelegate is null;
+    private static bool ValidateNoEndpointDelegate(HttpContext context) =>
+        context.GetEndpoint()?.RequestDelegate is null;
 
     private static bool ValidateMethod(HttpContext context)
     {
         return Helpers.IsGetOrHeadMethod(context.Request.Method);
     }
 
-    internal static bool ValidatePath(HttpContext context, PathString matchUrl, out PathString subPath) => Helpers.TryMatchPath(context, matchUrl, forDirectory: false, out subPath);
+    internal static bool ValidatePath(
+        HttpContext context,
+        PathString matchUrl,
+        out PathString subPath
+    ) => Helpers.TryMatchPath(context, matchUrl, forDirectory: false, out subPath);
 
-    internal static bool LookupContentType(IContentTypeProvider contentTypeProvider, StaticFileOptions options, PathString subPath, out string? contentType)
+    internal static bool LookupContentType(
+        IContentTypeProvider contentTypeProvider,
+        StaticFileOptions options,
+        PathString subPath,
+        out string? contentType
+    )
     {
         if (contentTypeProvider.TryGetContentType(subPath.Value!, out contentType))
         {
@@ -110,7 +130,14 @@ public class StaticFileMiddleware
 
     private Task TryServeStaticFile(HttpContext context, string? contentType, PathString subPath)
     {
-        var fileContext = new StaticFileContext(context, _options, _logger, _fileProvider, contentType, subPath);
+        var fileContext = new StaticFileContext(
+            context,
+            _options,
+            _logger,
+            _fileProvider,
+            contentType,
+            subPath
+        );
 
         if (!fileContext.LookupFileInfo())
         {

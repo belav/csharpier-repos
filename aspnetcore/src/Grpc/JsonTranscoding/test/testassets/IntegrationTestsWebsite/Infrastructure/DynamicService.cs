@@ -3,6 +3,4 @@
 
 namespace IntegrationTestsWebsite.Infrastructure;
 
-public class DynamicService
-{
-}
+public class DynamicService { }

@@ -18,45 +18,63 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicGenerateFromUsage()
-            : base(nameof(BasicGenerateFromUsage))
-        {
-        }
+            : base(nameof(BasicGenerateFromUsage)) { }
 
         [IdeFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateLocal)]
         public async Task GenerateLocal()
         {
             await SetUpEditorAsync(
-@"Module Program
+                @"Module Program
     Sub Main(args As String())
         Dim x As String = $$xyz
     End Sub
-End Module", HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync("Generate local 'xyz'", applyFix: true, cancellationToken: HangMitigatingCancellationToken);
+End Module",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Generate local 'xyz'",
+                applyFix: true,
+                cancellationToken: HangMitigatingCancellationToken
+            );
             await TestServices.EditorVerifier.TextContainsAsync(
-@"Module Program
+                @"Module Program
     Sub Main(args As String())
         Dim xyz As String = Nothing
         Dim x As String = xyz
     End Sub
-End Module", cancellationToken: HangMitigatingCancellationToken);
+End Module",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact, Trait(Traits.Feature, Traits.Features.CodeActionsGenerateType)]
         public async Task GenerateTypeInNewFile()
         {
             await SetUpEditorAsync(
-@"Module Program
+                @"Module Program
     Sub Main(args As String())
         Dim x As New $$ClassInNewFile()
     End Sub
-End Module", HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.CodeActionAsync("Generate class 'ClassInNewFile' in new file", applyFix: true, cancellationToken: HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.OpenFileAsync(ProjectName, "ClassInNewFile.vb", HangMitigatingCancellationToken);
+End Module",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.CodeActionAsync(
+                "Generate class 'ClassInNewFile' in new file",
+                applyFix: true,
+                cancellationToken: HangMitigatingCancellationToken
+            );
+            await TestServices.SolutionExplorer.OpenFileAsync(
+                ProjectName,
+                "ClassInNewFile.vb",
+                HangMitigatingCancellationToken
+            );
             await TestServices.EditorVerifier.TextContainsAsync(
-@"Friend Class ClassInNewFile
+                @"Friend Class ClassInNewFile
     Public Sub New()
     End Sub
-End Class", cancellationToken: HangMitigatingCancellationToken);
+End Class",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
     }
 }

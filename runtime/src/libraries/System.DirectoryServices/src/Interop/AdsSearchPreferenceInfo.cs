@@ -8,10 +8,12 @@ namespace System.DirectoryServices
     [StructLayout(LayoutKind.Sequential)]
     internal struct AdsSearchPreferenceInfo
     {
-        public int /*AdsSearchPreferences*/ dwSearchPref;
+        public int /*AdsSearchPreferences*/
+        dwSearchPref;
         internal int pad;
         public AdsValue vValue;
-        public int /*AdsStatus*/ dwStatus;
+        public int /*AdsStatus*/
+        dwStatus;
         internal int pad2;
     }
 }

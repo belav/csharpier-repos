@@ -26,7 +26,8 @@ namespace System.Tests
 
         protected override bool Enumerator_Empty_UsesSingletonInstance => true;
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
-        protected override bool Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException => false;
+        protected override bool Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException =>
+            false;
         protected override bool IsReadOnly_ValidityValue => true;
         protected override bool AddRemoveClear_ThrowsNotSupported => true;
 
@@ -57,7 +58,11 @@ namespace System.Tests
 
             for (int i = 0; i < expected.Count; ++i)
             {
-                Assert.True(expected[i] == null ? (segment as IList<T>)[i] == null : expected[i].Equals((segment as IList<T>)[i]));
+                Assert.True(
+                    expected[i] == null
+                        ? (segment as IList<T>)[i] == null
+                        : expected[i].Equals((segment as IList<T>)[i])
+                );
             }
         }
 
@@ -81,25 +86,52 @@ namespace System.Tests
         [Fact]
         public void Ctor_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("array", () => new ArraySegment<T>(null));
-            AssertExtensions.Throws<ArgumentNullException>("array", () => new ArraySegment<T>(null, -1, 1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => new ArraySegment<T>(new T[10], -1, 0)); // Offset < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => new ArraySegment<T>(new T[10], 0, -1)); // Count < 0
-            AssertExtensions.Throws<ArgumentException>(null, () => new ArraySegment<T>(new T[10], 10, 1)); // Offset + count > array.Length
-            AssertExtensions.Throws<ArgumentException>(null, () => new ArraySegment<T>(new T[10], 9, 2)); // Offset + count > array.Length
+            AssertExtensions.Throws<ArgumentNullException>(
+                "array",
+                () => new ArraySegment<T>(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "array",
+                () => new ArraySegment<T>(null, -1, 1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "offset",
+                () => new ArraySegment<T>(new T[10], -1, 0)
+            ); // Offset < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => new ArraySegment<T>(new T[10], 0, -1)
+            ); // Count < 0
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new ArraySegment<T>(new T[10], 10, 1)
+            ); // Offset + count > array.Length
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new ArraySegment<T>(new T[10], 9, 2)
+            ); // Offset + count > array.Length
         }
 
         [Fact]
         public void CopyTo_Default_ThrowsInvalidOperationException()
         {
             // Source is default
-            Assert.Throws<InvalidOperationException>(() => default(ArraySegment<T>).CopyTo(new T[0]));
-            Assert.Throws<InvalidOperationException>(() => default(ArraySegment<T>).CopyTo(new T[0], 0));
-            Assert.Throws<InvalidOperationException>(() => ((ICollection<T>)default(ArraySegment<T>)).CopyTo(new T[0], 0));
-            Assert.Throws<InvalidOperationException>(() => default(ArraySegment<T>).CopyTo(new ArraySegment<T>(new T[0])));
+            Assert.Throws<InvalidOperationException>(() => default(ArraySegment<T>).CopyTo(new T[0])
+            );
+            Assert.Throws<InvalidOperationException>(() =>
+                default(ArraySegment<T>).CopyTo(new T[0], 0)
+            );
+            Assert.Throws<InvalidOperationException>(() =>
+                ((ICollection<T>)default(ArraySegment<T>)).CopyTo(new T[0], 0)
+            );
+            Assert.Throws<InvalidOperationException>(() =>
+                default(ArraySegment<T>).CopyTo(new ArraySegment<T>(new T[0]))
+            );
 
             // Destination is default
-            Assert.Throws<InvalidOperationException>(() => new ArraySegment<T>(new T[0]).CopyTo(default(ArraySegment<T>)));
+            Assert.Throws<InvalidOperationException>(() =>
+                new ArraySegment<T>(new T[0]).CopyTo(default(ArraySegment<T>))
+            );
         }
 
         [Fact]
@@ -144,7 +176,8 @@ namespace System.Tests
         [Fact]
         public void GetEnumerator_Default_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => default(ArraySegment<T>).GetEnumerator());
+            Assert.Throws<InvalidOperationException>(() => default(ArraySegment<T>).GetEnumerator()
+            );
         }
 
         [Fact]
@@ -221,7 +254,6 @@ namespace System.Tests
         }
     }
 
-
     public static partial class ArraySegment_Tests
     {
         public static IEnumerable<object[]> Equals_TestData()
@@ -229,14 +261,44 @@ namespace System.Tests
             var intArray1 = new int[] { 7, 8, 9, 10, 11, 12 };
             var intArray2 = new int[] { 7, 8, 9, 10, 11, 12 };
 
-            yield return new object[] { new ArraySegment<int>(intArray1), new ArraySegment<int>(intArray1), true };
-            yield return new object[] { new ArraySegment<int>(intArray1), new ArraySegment<int>(intArray1, 0, intArray1.Length), true };
+            yield return new object[]
+            {
+                new ArraySegment<int>(intArray1),
+                new ArraySegment<int>(intArray1),
+                true,
+            };
+            yield return new object[]
+            {
+                new ArraySegment<int>(intArray1),
+                new ArraySegment<int>(intArray1, 0, intArray1.Length),
+                true,
+            };
 
-            yield return new object[] { new ArraySegment<int>(intArray1, 2, 3), new ArraySegment<int>(intArray1, 2, 3), true };
-            yield return new object[] { new ArraySegment<int>(intArray1, 3, 3), new ArraySegment<int>(intArray1, 2, 3), false };
-            yield return new object[] { new ArraySegment<int>(intArray1, 2, 4), new ArraySegment<int>(intArray1, 2, 3), false };
+            yield return new object[]
+            {
+                new ArraySegment<int>(intArray1, 2, 3),
+                new ArraySegment<int>(intArray1, 2, 3),
+                true,
+            };
+            yield return new object[]
+            {
+                new ArraySegment<int>(intArray1, 3, 3),
+                new ArraySegment<int>(intArray1, 2, 3),
+                false,
+            };
+            yield return new object[]
+            {
+                new ArraySegment<int>(intArray1, 2, 4),
+                new ArraySegment<int>(intArray1, 2, 3),
+                false,
+            };
 
-            yield return new object[] { new ArraySegment<int>(intArray1, 2, 4), new ArraySegment<int>(intArray2, 2, 3), false };
+            yield return new object[]
+            {
+                new ArraySegment<int>(intArray1, 2, 4),
+                new ArraySegment<int>(intArray2, 2, 3),
+                false,
+            };
 
             yield return new object[] { new ArraySegment<int>(intArray1), intArray1, false };
             yield return new object[] { new ArraySegment<int>(intArray1), null, false };
@@ -290,7 +352,10 @@ namespace System.Tests
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => iList[iList.Count]); // Index >= list.Count
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => iList[-1] = 0); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => iList[iList.Count] = 0); // Index >= list.Count
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => iList[iList.Count] = 0
+            ); // Index >= list.Count
         }
 
         [Fact]
@@ -413,58 +478,96 @@ namespace System.Tests
             var destinationModel = new int[count + 2 * CopyPadding];
 
             // CopyTo(T[])
-            CopyAndInvoke(destinationModel, destination =>
-            {
-                arraySegment.CopyTo(destination);
+            CopyAndInvoke(
+                destinationModel,
+                destination =>
+                {
+                    arraySegment.CopyTo(destination);
 
-                Assert.Equal(Enumerable.Repeat(default(int), 2 * CopyPadding), destination.Skip(count));
+                    Assert.Equal(
+                        Enumerable.Repeat(default(int), 2 * CopyPadding),
+                        destination.Skip(count)
+                    );
 
-                Assert.Equal(arraySegment, destination.Take(count));
-            });
+                    Assert.Equal(arraySegment, destination.Take(count));
+                }
+            );
 
             // CopyTo(T[], int)
-            CopyAndInvoke(destinationModel, destination =>
-            {
-                arraySegment.CopyTo(destination, CopyPadding);
+            CopyAndInvoke(
+                destinationModel,
+                destination =>
+                {
+                    arraySegment.CopyTo(destination, CopyPadding);
 
-                Assert.Equal(Enumerable.Repeat(default(int), CopyPadding), destination.Take(CopyPadding));
-                Assert.Equal(Enumerable.Repeat(default(int), CopyPadding), destination.Skip(CopyPadding + count));
+                    Assert.Equal(
+                        Enumerable.Repeat(default(int), CopyPadding),
+                        destination.Take(CopyPadding)
+                    );
+                    Assert.Equal(
+                        Enumerable.Repeat(default(int), CopyPadding),
+                        destination.Skip(CopyPadding + count)
+                    );
 
-                Assert.Equal(arraySegment, destination.Skip(CopyPadding).Take(count));
-            });
+                    Assert.Equal(arraySegment, destination.Skip(CopyPadding).Take(count));
+                }
+            );
 
             // ICollection<T>.CopyTo(T[], int)
-            CopyAndInvoke(destinationModel, destination =>
-            {
-                ((ICollection<int>)arraySegment).CopyTo(destination, CopyPadding);
+            CopyAndInvoke(
+                destinationModel,
+                destination =>
+                {
+                    ((ICollection<int>)arraySegment).CopyTo(destination, CopyPadding);
 
-                Assert.Equal(Enumerable.Repeat(default(int), CopyPadding), destination.Take(CopyPadding));
-                Assert.Equal(Enumerable.Repeat(default(int), CopyPadding), destination.Skip(CopyPadding + count));
+                    Assert.Equal(
+                        Enumerable.Repeat(default(int), CopyPadding),
+                        destination.Take(CopyPadding)
+                    );
+                    Assert.Equal(
+                        Enumerable.Repeat(default(int), CopyPadding),
+                        destination.Skip(CopyPadding + count)
+                    );
 
-                Assert.Equal(arraySegment, destination.Skip(CopyPadding).Take(count));
-            });
+                    Assert.Equal(arraySegment, destination.Skip(CopyPadding).Take(count));
+                }
+            );
 
             // CopyTo(ArraySegment<T>)
-            CopyAndInvoke(destinationModel, destination =>
-            {
-                // We want to make sure this overload is handling edge cases correctly, like ArraySegments that
-                // do not begin at the array's start, do not end at the array's end, or have a bigger count than
-                // the source ArraySegment. Construct an ArraySegment that will test all of these conditions.
-                int destinationIndex = DestinationSegmentPadding;
-                int destinationCount = destination.Length - 2 * DestinationSegmentPadding;
-                var destinationSegment = new ArraySegment<int>(destination, destinationIndex, destinationCount);
+            CopyAndInvoke(
+                destinationModel,
+                destination =>
+                {
+                    // We want to make sure this overload is handling edge cases correctly, like ArraySegments that
+                    // do not begin at the array's start, do not end at the array's end, or have a bigger count than
+                    // the source ArraySegment. Construct an ArraySegment that will test all of these conditions.
+                    int destinationIndex = DestinationSegmentPadding;
+                    int destinationCount = destination.Length - 2 * DestinationSegmentPadding;
+                    var destinationSegment = new ArraySegment<int>(
+                        destination,
+                        destinationIndex,
+                        destinationCount
+                    );
 
-                arraySegment.CopyTo(destinationSegment);
+                    arraySegment.CopyTo(destinationSegment);
 
-                Assert.Equal(Enumerable.Repeat(default(int), destinationIndex), destination.Take(destinationIndex));
-                int remainder = destination.Length - destinationIndex - count;
-                Assert.Equal(Enumerable.Repeat(default(int), remainder), destination.Skip(destinationIndex + count));
+                    Assert.Equal(
+                        Enumerable.Repeat(default(int), destinationIndex),
+                        destination.Take(destinationIndex)
+                    );
+                    int remainder = destination.Length - destinationIndex - count;
+                    Assert.Equal(
+                        Enumerable.Repeat(default(int), remainder),
+                        destination.Skip(destinationIndex + count)
+                    );
 
-                Assert.Equal(arraySegment, destination.Skip(destinationIndex).Take(count));
-            });
+                    Assert.Equal(arraySegment, destination.Skip(destinationIndex).Take(count));
+                }
+            );
         }
 
-        private static void CopyAndInvoke<T>(T[] array, Action<T[]> action) => action(array.ToArray());
+        private static void CopyAndInvoke<T>(T[] array, Action<T[]> action) =>
+            action(array.ToArray());
 
         [Theory]
         [MemberData(nameof(ArraySegment_TestData))]
@@ -475,25 +578,55 @@ namespace System.Tests
             // ArraySegment.CopyTo calls Array.Copy internally, so the exception parameter names come from there.
 
             // Destination is null
-            AssertExtensions.Throws<ArgumentNullException>("destinationArray", () => arraySegment.CopyTo(null));
-            AssertExtensions.Throws<ArgumentNullException>("destinationArray", () => arraySegment.CopyTo(null, 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "destinationArray",
+                () => arraySegment.CopyTo(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "destinationArray",
+                () => arraySegment.CopyTo(null, 0)
+            );
 
             // Destination index not within range
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("destinationIndex", () => arraySegment.CopyTo(new int[0], -1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "destinationIndex",
+                () => arraySegment.CopyTo(new int[0], -1)
+            );
 
             // Destination array too small arraySegment.Count + destinationIndex > destinationArray.Length
-            AssertExtensions.Throws<ArgumentException>("destinationArray", () => arraySegment.CopyTo(new int[arraySegment.Count * 2], arraySegment.Count + 1));
+            AssertExtensions.Throws<ArgumentException>(
+                "destinationArray",
+                () => arraySegment.CopyTo(new int[arraySegment.Count * 2], arraySegment.Count + 1)
+            );
 
             if (arraySegment.Any())
             {
                 // Destination not large enough
-                AssertExtensions.Throws<ArgumentException>("destinationArray", () => arraySegment.CopyTo(new int[count - 1]));
-                AssertExtensions.Throws<ArgumentException>("destinationArray", () => arraySegment.CopyTo(new int[count - 1], 0));
-                AssertExtensions.Throws<ArgumentException>("destination", null, () => arraySegment.CopyTo(new ArraySegment<int>(new int[count - 1])));
+                AssertExtensions.Throws<ArgumentException>(
+                    "destinationArray",
+                    () => arraySegment.CopyTo(new int[count - 1])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "destinationArray",
+                    () => arraySegment.CopyTo(new int[count - 1], 0)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "destination",
+                    null,
+                    () => arraySegment.CopyTo(new ArraySegment<int>(new int[count - 1]))
+                );
 
                 // Don't write beyond the limits of the destination in cases where source.Count > destination.Count
-                AssertExtensions.Throws<ArgumentException>("destination", null, () => arraySegment.CopyTo(new ArraySegment<int>(new int[count], 1, 0))); // destination.Array can't fit source at destination.Offset
-                AssertExtensions.Throws<ArgumentException>("destination", null, () => arraySegment.CopyTo(new ArraySegment<int>(new int[count], 0, count - 1))); // destination.Array can fit source at destination.Offset, but destination can't
+                AssertExtensions.Throws<ArgumentException>(
+                    "destination",
+                    null,
+                    () => arraySegment.CopyTo(new ArraySegment<int>(new int[count], 1, 0))
+                ); // destination.Array can't fit source at destination.Offset
+                AssertExtensions.Throws<ArgumentException>(
+                    "destination",
+                    null,
+                    () => arraySegment.CopyTo(new ArraySegment<int>(new int[count], 0, count - 1))
+                ); // destination.Array can fit source at destination.Offset, but destination can't
             }
         }
 
@@ -582,7 +715,8 @@ namespace System.Tests
             Assert.Throws<InvalidOperationException>(() => ((IEnumerator<int>)enumerator).Current);
             Assert.Throws<InvalidOperationException>(() => ((IEnumerator)enumerator).Current);
 
-            while (enumerator.MoveNext()) ;
+            while (enumerator.MoveNext())
+                ;
 
             // After end
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
@@ -630,8 +764,11 @@ namespace System.Tests
             int[] array = arraySegment.Array;
 
             // Before array start
-            Assert.Throws<ArgumentOutOfRangeException>(() => arraySegment[-arraySegment.Offset - 1]);
-            Assert.Throws<ArgumentOutOfRangeException>(() => arraySegment[-arraySegment.Offset - 1] = default(int));
+            Assert.Throws<ArgumentOutOfRangeException>(() => arraySegment[-arraySegment.Offset - 1]
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                arraySegment[-arraySegment.Offset - 1] = default(int)
+            );
 
             // After array start (if Offset > 0), before start
             Assert.Throws<ArgumentOutOfRangeException>(() => arraySegment[-1]);
@@ -639,18 +776,28 @@ namespace System.Tests
 
             // Before array end (if Offset + Count < Array.Length), after end
             Assert.Throws<ArgumentOutOfRangeException>(() => arraySegment[arraySegment.Count]);
-            Assert.Throws<ArgumentOutOfRangeException>(() => arraySegment[arraySegment.Count] = default(int));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                arraySegment[arraySegment.Count] = default(int)
+            );
 
             // After array end
-            Assert.Throws<ArgumentOutOfRangeException>(() => arraySegment[-arraySegment.Offset + array.Length]);
-            Assert.Throws<ArgumentOutOfRangeException>(() => arraySegment[-arraySegment.Offset + array.Length] = default(int));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                arraySegment[-arraySegment.Offset + array.Length]
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                arraySegment[-arraySegment.Offset + array.Length] = default(int)
+            );
         }
 
         [Theory]
         [MemberData(nameof(Slice_TestData))]
         public static void Slice(ArraySegment<int> arraySegment, int index, int count)
         {
-            var expected = new ArraySegment<int>(arraySegment.Array, arraySegment.Offset + index, count);
+            var expected = new ArraySegment<int>(
+                arraySegment.Array,
+                arraySegment.Offset + index,
+                count
+            );
 
             if (index + count == arraySegment.Count)
             {
@@ -662,7 +809,9 @@ namespace System.Tests
 
         public static IEnumerable<object[]> Slice_TestData()
         {
-            IEnumerable<ArraySegment<int>> arraySegments = ArraySegment_TestData().Select(array => array.Single()).Cast<ArraySegment<int>>();
+            IEnumerable<ArraySegment<int>> arraySegments = ArraySegment_TestData()
+                .Select(array => array.Single())
+                .Cast<ArraySegment<int>>();
 
             foreach (ArraySegment<int> arraySegment in arraySegments)
             {
@@ -678,8 +827,18 @@ namespace System.Tests
                 }
 
                 yield return new object[] { arraySegment, 0, arraySegment.Count / 2 }; // Preserve start, multiple items, end at middle
-                yield return new object[] { arraySegment, arraySegment.Count / 2, arraySegment.Count / 2 }; // Start at middle, multiple items, end at middle (due to integer division truncation) or preserve end
-                yield return new object[] { arraySegment, arraySegment.Count / 4, arraySegment.Count / 2 }; // Start at middle, multiple items, end at middle
+                yield return new object[]
+                {
+                    arraySegment,
+                    arraySegment.Count / 2,
+                    arraySegment.Count / 2,
+                }; // Start at middle, multiple items, end at middle (due to integer division truncation) or preserve end
+                yield return new object[]
+                {
+                    arraySegment,
+                    arraySegment.Count / 4,
+                    arraySegment.Count / 2,
+                }; // Start at middle, multiple items, end at middle
             }
         }
 
@@ -689,10 +848,16 @@ namespace System.Tests
         {
             if (index + count == arraySegment.Count)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arraySegment.Slice(index));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => arraySegment.Slice(index)
+                );
             }
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => arraySegment.Slice(index, count));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => arraySegment.Slice(index, count)
+            );
         }
 
         public static IEnumerable<object[]> Slice_Invalid_TestData()
@@ -700,10 +865,30 @@ namespace System.Tests
             var arraySegment = new ArraySegment<int>(new int[3], offset: 1, count: 1);
 
             yield return new object[] { arraySegment, -arraySegment.Offset, arraySegment.Offset };
-            yield return new object[] { arraySegment, -arraySegment.Offset, arraySegment.Offset + arraySegment.Count };
-            yield return new object[] { arraySegment, -arraySegment.Offset, arraySegment.Array.Length };
-            yield return new object[] { arraySegment, 0, arraySegment.Array.Length - arraySegment.Offset };
-            yield return new object[] { arraySegment, arraySegment.Count, arraySegment.Array.Length - arraySegment.Offset - arraySegment.Count };
+            yield return new object[]
+            {
+                arraySegment,
+                -arraySegment.Offset,
+                arraySegment.Offset + arraySegment.Count,
+            };
+            yield return new object[]
+            {
+                arraySegment,
+                -arraySegment.Offset,
+                arraySegment.Array.Length,
+            };
+            yield return new object[]
+            {
+                arraySegment,
+                0,
+                arraySegment.Array.Length - arraySegment.Offset,
+            };
+            yield return new object[]
+            {
+                arraySegment,
+                arraySegment.Count,
+                arraySegment.Array.Length - arraySegment.Offset - arraySegment.Count,
+            };
         }
 
         [Theory]
@@ -711,7 +896,10 @@ namespace System.Tests
         public static void ToArray(ArraySegment<int> arraySegment)
         {
             // ToList is called here so we copy the data and raise an assert if ToArray modifies the underlying array.
-            List<int> expected = arraySegment.Array.Skip(arraySegment.Offset).Take(arraySegment.Count).ToList();
+            List<int> expected = arraySegment
+                .Array.Skip(arraySegment.Offset)
+                .Take(arraySegment.Count)
+                .ToList();
             Assert.Equal(expected, arraySegment.ToArray());
         }
 
@@ -724,10 +912,12 @@ namespace System.Tests
                 (array: new[] { 3, 4, 5, 6 }, index: 0, count: 3), // Starts at beginning, ends in middle
                 (array: new[] { 3, 4, 5, 6 }, index: 1, count: 3), // Starts in middle, ends at end
                 (array: new[] { 3, 4, 5, 6 }, index: 1, count: 2), // Starts in middle, ends in middle
-                (array: new[] { 3, 4, 5, 6 }, index: 1, count: 0) // Non-empty array, count == 0
+                (array: new[] { 3, 4, 5, 6 }, index: 1, count: 0), // Non-empty array, count == 0
             };
 
-            return arraySegments.Select(aseg => new object[] { new ArraySegment<int>(aseg.array, aseg.index, aseg.count) });
+            return arraySegments.Select(aseg =>
+                new object[] { new ArraySegment<int>(aseg.array, aseg.index, aseg.count) }
+            );
         }
     }
 }

@@ -6,11 +6,11 @@ namespace System.Activities.Tracking
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Runtime.Serialization;
-    using System.Runtime;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Runtime;
+    using System.Runtime.Serialization;
+    using System.Text;
 
     [DataContract]
     [Fx.Tag.XamlVisible(false)]
@@ -21,14 +21,10 @@ namespace System.Activities.Tracking
         ActivityInfo activity;
 
         public CustomTrackingRecord(string name)
-            : this(name, TraceLevel.Info)
-        {
-        }
+            : this(name, TraceLevel.Info) { }
 
         public CustomTrackingRecord(string name, TraceLevel level)
-            : this(Guid.Empty, name, level)
-        {
-        }
+            : this(Guid.Empty, name, level) { }
 
         public CustomTrackingRecord(Guid instanceId, string name, TraceLevel level)
             : base(instanceId)
@@ -54,17 +50,11 @@ namespace System.Activities.Tracking
                 }
             }
         }
-        
+
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
-            private set
-            {
-                this.name = value;
-            }
+            get { return this.name; }
+            private set { this.name = value; }
         }
 
         public ActivityInfo Activity
@@ -113,12 +103,14 @@ namespace System.Activities.Tracking
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture,
+            return string.Format(
+                CultureInfo.InvariantCulture,
                 "CustomTrackingRecord {{ {0}, Name={1}, Activity {{ {2} }}, Level = {3} }}",
                 base.ToString(),
                 this.Name,
                 this.Activity == null ? "<null>" : this.Activity.ToString(),
-                this.Level);
+                this.Level
+            );
         }
     }
 }

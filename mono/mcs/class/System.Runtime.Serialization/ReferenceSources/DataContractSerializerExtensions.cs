@@ -2,42 +2,54 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Collections.ObjectModel;
+using System.Reflection;
 #if !NO_CODEDOM
 using System.CodeDom;
 #endif
-using System.Collections.ObjectModel;
-using System.Reflection;
 
 namespace System.Runtime.Serialization
 {
     public static class DataContractSerializerExtensions
     {
-        public static ISerializationSurrogateProvider GetSerializationSurrogateProvider(this DataContractSerializer serializer) 
+        public static ISerializationSurrogateProvider GetSerializationSurrogateProvider(
+            this DataContractSerializer serializer
+        )
         {
-            SurrogateProviderAdapter adapter = serializer.DataContractSurrogate as SurrogateProviderAdapter;
+            SurrogateProviderAdapter adapter =
+                serializer.DataContractSurrogate as SurrogateProviderAdapter;
             return (adapter == null) ? null : adapter.Provider;
         }
 
-        public static void SetSerializationSurrogateProvider(this DataContractSerializer serializer, ISerializationSurrogateProvider provider)
+        public static void SetSerializationSurrogateProvider(
+            this DataContractSerializer serializer,
+            ISerializationSurrogateProvider provider
+        )
         {
             // allocate every time, expectation is that this won't happen enough to warrant maintaining a CondtionalWeakTable.
-            IDataContractSurrogate adapter = (provider != null) ? new SurrogateProviderAdapter(provider) : null;
+            IDataContractSurrogate adapter =
+                (provider != null) ? new SurrogateProviderAdapter(provider) : null;
 
             // DCS doesn't expose a setter, access the field directly as a workaround
             typeof(DataContractSerializer)
-              .GetField("dataContractSurrogate", BindingFlags.Instance | BindingFlags.NonPublic)
-              .SetValue(serializer, adapter);
+                .GetField("dataContractSurrogate", BindingFlags.Instance | BindingFlags.NonPublic)
+                .SetValue(serializer, adapter);
         }
 
         private class SurrogateProviderAdapter : IDataContractSurrogate
         {
             private ISerializationSurrogateProvider _provider;
+
             public SurrogateProviderAdapter(ISerializationSurrogateProvider provider)
             {
                 _provider = provider;
             }
 
-            public ISerializationSurrogateProvider Provider { get { return _provider; } }
+            public ISerializationSurrogateProvider Provider
+            {
+                get { return _provider; }
+            }
+
             public object GetCustomDataToExport(Type clrType, Type dataContractType)
             {
                 throw NotImplemented.ByDesign;
@@ -68,13 +80,20 @@ namespace System.Runtime.Serialization
                 return _provider.GetObjectToSerialize(obj, targetType);
             }
 
-            public Type GetReferencedTypeOnImport(string typeName, string typeNamespace, object customData)
+            public Type GetReferencedTypeOnImport(
+                string typeName,
+                string typeNamespace,
+                object customData
+            )
             {
                 throw NotImplemented.ByDesign;
             }
 
 #if !NO_CODEDOM
-            public CodeTypeDeclaration ProcessImportedType(CodeTypeDeclaration typeDeclaration, CodeCompileUnit compileUnit)
+            public CodeTypeDeclaration ProcessImportedType(
+                CodeTypeDeclaration typeDeclaration,
+                CodeCompileUnit compileUnit
+            )
             {
                 throw NotImplemented.ByDesign;
             }

@@ -5,11 +5,15 @@ using System.Collections.Concurrent;
 
 namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 
-internal sealed class ConcurrentStackBufferAdapter<TElement> : ICollectionBufferAdapter<ConcurrentStack<TElement>, ConcurrentStack<TElement>, TElement>
+internal sealed class ConcurrentStackBufferAdapter<TElement>
+    : ICollectionBufferAdapter<ConcurrentStack<TElement>, ConcurrentStack<TElement>, TElement>
 {
     public static ConcurrentStack<TElement> CreateBuffer() => new();
 
-    public static ConcurrentStack<TElement> Add(ref ConcurrentStack<TElement> buffer, TElement element)
+    public static ConcurrentStack<TElement> Add(
+        ref ConcurrentStack<TElement> buffer,
+        TElement element
+    )
     {
         buffer.Push(element);
         return buffer;

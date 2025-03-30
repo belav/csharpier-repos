@@ -48,7 +48,8 @@ public sealed record QueryTranslationPreprocessorDependencies
     public QueryTranslationPreprocessorDependencies(
         ITypeMappingSource typeMappingSource,
         IEvaluatableExpressionFilter evaluatableExpressionFilter,
-        INavigationExpansionExtensibilityHelper navigationExpansionExtensibilityHelper)
+        INavigationExpansionExtensibilityHelper navigationExpansionExtensibilityHelper
+    )
     {
         TypeMappingSource = typeMappingSource;
         EvaluatableExpressionFilter = evaluatableExpressionFilter;

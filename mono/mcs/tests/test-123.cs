@@ -1,51 +1,51 @@
-class X {
+class X
+{
+    static object get_non_null()
+    {
+        return new X();
+    }
 
-	static object get_non_null ()
-	{
-		return new X ();
-	}
+    static object get_null()
+    {
+        return null;
+    }
 
-	static object get_null ()
-	{
-		return null;
-	}
-	
-	public static int Main ()
-	{
-		int a = 5;
-		object o;
-		decimal d = 0M;
-		
-		//
-		// compile time
-		//
-		if (!(get_non_null () is object))
-			return 1;
+    public static int Main()
+    {
+        int a = 5;
+        object o;
+        decimal d = 0M;
 
-		if (get_null () is object)
-			return 2;
+        //
+        // compile time
+        //
+        if (!(get_non_null() is object))
+            return 1;
 
-		if (!(a is object))
-			return 3;
+        if (get_null() is object)
+            return 2;
 
-		//
-		// explicit reference
-		//
-		if (null is object)
-			return 4;
+        if (!(a is object))
+            return 3;
 
-		o = a;
-		if (!(o is int))
-			return 5;
+        //
+        // explicit reference
+        //
+        if (null is object)
+            return 4;
 
-		if (d is int)
-			return 6;
-			
-		object oi = 1;
-		if (!(oi is int))
-			return 7;
+        o = a;
+        if (!(o is int))
+            return 5;
 
-		System.Console.WriteLine ("Is tests pass");
-		return 0;
-	}
+        if (d is int)
+            return 6;
+
+        object oi = 1;
+        if (!(oi is int))
+            return 7;
+
+        System.Console.WriteLine("Is tests pass");
+        return 0;
+    }
 }

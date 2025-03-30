@@ -60,7 +60,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 Assert.Equal(0, symbol.Arity);
                 Assert.Equal(default, symbol.ImplementationAttributes);
                 Assert.Equal(Accessibility.NotApplicable, symbol.DeclaredAccessibility);
-                Assert.Equal(FlowAnalysisAnnotations.None, symbol.ReturnTypeFlowAnalysisAnnotations);
+                Assert.Equal(
+                    FlowAnalysisAnnotations.None,
+                    symbol.ReturnTypeFlowAnalysisAnnotations
+                );
                 Assert.Equal(FlowAnalysisAnnotations.None, symbol.FlowAnalysisAnnotations);
 
                 Assert.False(symbol.IsExtensionMethod);
@@ -83,7 +86,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 Assert.False(symbol.IsMetadataVirtual(true));
                 Assert.False(symbol.IsMetadataVirtual(false));
 
-                Assert.Equal(symbol.IsVararg, symbol.CallingConvention.IsCallingConvention(CallingConvention.ExtraArguments));
+                Assert.Equal(
+                    symbol.IsVararg,
+                    symbol.CallingConvention.IsCallingConvention(CallingConvention.ExtraArguments)
+                );
 
                 Assert.True(symbol.IsImplicitlyDeclared);
 
@@ -138,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string? expectedConvertedType = null,
             string? expectedSymbol = null,
             CandidateReason expectedCandidateReason = CandidateReason.None,
-            string[]? expectedSymbolCandidates = null)
+            string[]? expectedSymbolCandidates = null
+        )
         {
             AssertEx.Equal(expectedSyntax, syntax.ToString());
             var semanticInfo = model.GetSemanticInfoSummary(syntax);
@@ -152,19 +159,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             else
             {
                 exprType = semanticInfo.Type;
-                AssertEx.Equal(expectedType, semanticInfo.Type.ToTestDisplayString(includeNonNullable: false));
+                AssertEx.Equal(
+                    expectedType,
+                    semanticInfo.Type.ToTestDisplayString(includeNonNullable: false)
+                );
             }
 
             if (expectedConvertedType is null)
             {
-                Assert.Equal(semanticInfo.Type, semanticInfo.ConvertedType, SymbolEqualityComparer.IncludeNullability);
+                Assert.Equal(
+                    semanticInfo.Type,
+                    semanticInfo.ConvertedType,
+                    SymbolEqualityComparer.IncludeNullability
+                );
             }
             else
             {
-                AssertEx.Equal(expectedConvertedType, semanticInfo.ConvertedType.ToTestDisplayString(includeNonNullable: false));
+                AssertEx.Equal(
+                    expectedConvertedType,
+                    semanticInfo.ConvertedType.ToTestDisplayString(includeNonNullable: false)
+                );
             }
 
-            verifySymbolInfo(expectedSymbol, expectedCandidateReason, expectedSymbolCandidates, semanticInfo);
+            verifySymbolInfo(
+                expectedSymbol,
+                expectedCandidateReason,
+                expectedSymbolCandidates,
+                semanticInfo
+            );
 
             if (exprType is IFunctionPointerTypeSymbol ptrType)
             {
@@ -174,13 +196,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             switch (syntax)
             {
                 case FunctionPointerTypeSyntax { ParameterList: { Parameters: var paramSyntaxes } }:
-                    verifyNestedFunctionPointerSyntaxSemanticInfo(model, (IFunctionPointerTypeSymbol)exprType, paramSyntaxes);
+                    verifyNestedFunctionPointerSyntaxSemanticInfo(
+                        model,
+                        (IFunctionPointerTypeSymbol)exprType,
+                        paramSyntaxes
+                    );
                     break;
 
-                case PrefixUnaryExpressionSyntax { RawKind: (int)SyntaxKind.AddressOfExpression, Operand: var operand }:
+                case PrefixUnaryExpressionSyntax
+                {
+                    RawKind: (int)SyntaxKind.AddressOfExpression,
+                    Operand: var operand
+                }:
                     // Members should only be accessible from the underlying operand
                     Assert.Empty(semanticInfo.MemberGroup);
-                    var expectedConversionKind = (expectedType, expectedConvertedType, expectedSymbol) switch
+                    var expectedConversionKind = (
+                        expectedType,
+                        expectedConvertedType,
+                        expectedSymbol
+                    ) switch
                     {
                         (null, null, _) => ConversionKind.Identity,
                         (_, _, null) => ConversionKind.NoConversion,
@@ -193,14 +227,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     Assert.Null(semanticInfo.ConvertedType);
                     if (expectedSymbolCandidates != null)
                     {
-                        AssertEx.Equal(expectedSymbolCandidates, semanticInfo.MemberGroup.Select(s => s.ToTestDisplayString(includeNonNullable: false)));
+                        AssertEx.Equal(
+                            expectedSymbolCandidates,
+                            semanticInfo.MemberGroup.Select(s =>
+                                s.ToTestDisplayString(includeNonNullable: false)
+                            )
+                        );
                     }
                     else
                     {
-                        Assert.Contains(semanticInfo.MemberGroup, actual => actual.ToTestDisplayString(includeNonNullable: false) == expectedSymbol);
+                        Assert.Contains(
+                            semanticInfo.MemberGroup,
+                            actual =>
+                                actual.ToTestDisplayString(includeNonNullable: false)
+                                == expectedSymbol
+                        );
                     }
 
-                    verifySymbolInfo(expectedSymbol, expectedCandidateReason, expectedSymbolCandidates, semanticInfo);
+                    verifySymbolInfo(
+                        expectedSymbol,
+                        expectedCandidateReason,
+                        expectedSymbolCandidates,
+                        semanticInfo
+                    );
 
                     break;
             }
@@ -209,19 +258,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 string? expectedSymbol,
                 CandidateReason expectedReason,
                 string[]? expectedSymbolCandidates,
-                CompilationUtils.SemanticInfoSummary semanticInfo)
+                CompilationUtils.SemanticInfoSummary semanticInfo
+            )
             {
                 if (expectedSymbol is object)
                 {
                     Assert.Empty(semanticInfo.CandidateSymbols);
-                    AssertEx.Equal(expectedSymbol, semanticInfo.Symbol.ToTestDisplayString(includeNonNullable: false));
+                    AssertEx.Equal(
+                        expectedSymbol,
+                        semanticInfo.Symbol.ToTestDisplayString(includeNonNullable: false)
+                    );
                     Assert.Equal(CandidateReason.None, semanticInfo.CandidateReason);
                 }
                 else if (expectedSymbolCandidates is object)
                 {
                     Assert.Null(semanticInfo.Symbol);
                     Assert.Equal(expectedReason, semanticInfo.CandidateReason);
-                    AssertEx.Equal(expectedSymbolCandidates, semanticInfo.CandidateSymbols.Select(s => s.ToTestDisplayString(includeNonNullable: false)));
+                    AssertEx.Equal(
+                        expectedSymbolCandidates,
+                        semanticInfo.CandidateSymbols.Select(s =>
+                            s.ToTestDisplayString(includeNonNullable: false)
+                        )
+                    );
                 }
                 else
                 {
@@ -231,7 +289,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 }
             }
 
-            static void verifyNestedFunctionPointerSyntaxSemanticInfo(SemanticModel model, IFunctionPointerTypeSymbol ptrType, SeparatedSyntaxList<FunctionPointerParameterSyntax> paramSyntaxes)
+            static void verifyNestedFunctionPointerSyntaxSemanticInfo(
+                SemanticModel model,
+                IFunctionPointerTypeSymbol ptrType,
+                SeparatedSyntaxList<FunctionPointerParameterSyntax> paramSyntaxes
+            )
             {
                 // https://github.com/dotnet/roslyn/issues/43321 Nullability in type syntaxes that don't have an origin bound node
                 // can differ.
@@ -247,26 +309,52 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 assertEqualSemanticInformation(model, returnParam!, signature.ReturnType);
             }
 
-            static void assertEqualSemanticInformation(SemanticModel model, TypeSyntax typeSyntax, ITypeSymbol signatureType)
+            static void assertEqualSemanticInformation(
+                SemanticModel model,
+                TypeSyntax typeSyntax,
+                ITypeSymbol signatureType
+            )
             {
                 var semanticInfo = model.GetSemanticInfoSummary(typeSyntax);
-                Assert.Equal<ISymbol>(signatureType, semanticInfo.Type, SymbolEqualityComparer.Default);
-                Assert.Equal(semanticInfo.Type, semanticInfo.ConvertedType, SymbolEqualityComparer.IncludeNullability);
+                Assert.Equal<ISymbol>(
+                    signatureType,
+                    semanticInfo.Type,
+                    SymbolEqualityComparer.Default
+                );
+                Assert.Equal(
+                    semanticInfo.Type,
+                    semanticInfo.ConvertedType,
+                    SymbolEqualityComparer.IncludeNullability
+                );
 
                 Assert.Equal(CandidateReason.None, semanticInfo.CandidateReason);
                 Assert.Equal(signatureType, semanticInfo.Type, SymbolEqualityComparer.Default);
                 Assert.Empty(semanticInfo.CandidateSymbols);
 
-                if (typeSyntax is FunctionPointerTypeSyntax { ParameterList: { Parameters: var paramSyntaxes } })
+                if (
+                    typeSyntax is FunctionPointerTypeSyntax
+                    {
+                        ParameterList: { Parameters: var paramSyntaxes }
+                    }
+                )
                 {
                     var paramPtrType = (IFunctionPointerTypeSymbol)semanticInfo.Type!;
                     CommonVerifyFunctionPointer(paramPtrType.GetSymbol());
-                    verifyNestedFunctionPointerSyntaxSemanticInfo(model, paramPtrType, paramSyntaxes);
+                    verifyNestedFunctionPointerSyntaxSemanticInfo(
+                        model,
+                        paramPtrType,
+                        paramSyntaxes
+                    );
                 }
             }
         }
 
-        public static void VerifyFunctionPointerSymbol(TypeSymbol type, CallingConvention expectedConvention, (RefKind RefKind, Action<TypeSymbol> TypeVerifier) returnVerifier, params (RefKind RefKind, Action<TypeSymbol> TypeVerifier)[] argumentVerifiers)
+        public static void VerifyFunctionPointerSymbol(
+            TypeSymbol type,
+            CallingConvention expectedConvention,
+            (RefKind RefKind, Action<TypeSymbol> TypeVerifier) returnVerifier,
+            params (RefKind RefKind, Action<TypeSymbol> TypeVerifier)[] argumentVerifiers
+        )
         {
             FunctionPointerTypeSymbol funcPtr = (FunctionPointerTypeSymbol)type;
 
@@ -279,14 +367,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             switch (signature.RefKind)
             {
                 case RefKind.RefReadOnly:
-                    Assert.True(CustomModifierUtils.HasInAttributeModifier(signature.RefCustomModifiers));
-                    Assert.False(CustomModifierUtils.HasOutAttributeModifier(signature.RefCustomModifiers));
+                    Assert.True(
+                        CustomModifierUtils.HasInAttributeModifier(signature.RefCustomModifiers)
+                    );
+                    Assert.False(
+                        CustomModifierUtils.HasOutAttributeModifier(signature.RefCustomModifiers)
+                    );
                     break;
 
                 case RefKind.None:
                 case RefKind.Ref:
-                    Assert.False(CustomModifierUtils.HasInAttributeModifier(signature.RefCustomModifiers));
-                    Assert.False(CustomModifierUtils.HasOutAttributeModifier(signature.RefCustomModifiers));
+                    Assert.False(
+                        CustomModifierUtils.HasInAttributeModifier(signature.RefCustomModifiers)
+                    );
+                    Assert.False(
+                        CustomModifierUtils.HasOutAttributeModifier(signature.RefCustomModifiers)
+                    );
                     break;
 
                 case RefKind.Out:
@@ -305,19 +401,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 switch (parameter.RefKind)
                 {
                     case RefKind.Out:
-                        Assert.True(CustomModifierUtils.HasOutAttributeModifier(parameter.RefCustomModifiers));
-                        Assert.False(CustomModifierUtils.HasInAttributeModifier(parameter.RefCustomModifiers));
+                        Assert.True(
+                            CustomModifierUtils.HasOutAttributeModifier(
+                                parameter.RefCustomModifiers
+                            )
+                        );
+                        Assert.False(
+                            CustomModifierUtils.HasInAttributeModifier(parameter.RefCustomModifiers)
+                        );
                         break;
 
                     case RefKind.In:
-                        Assert.True(CustomModifierUtils.HasInAttributeModifier(parameter.RefCustomModifiers));
-                        Assert.False(CustomModifierUtils.HasOutAttributeModifier(parameter.RefCustomModifiers));
+                        Assert.True(
+                            CustomModifierUtils.HasInAttributeModifier(parameter.RefCustomModifiers)
+                        );
+                        Assert.False(
+                            CustomModifierUtils.HasOutAttributeModifier(
+                                parameter.RefCustomModifiers
+                            )
+                        );
                         break;
 
                     case RefKind.Ref:
                     case RefKind.None:
-                        Assert.False(CustomModifierUtils.HasInAttributeModifier(parameter.RefCustomModifiers));
-                        Assert.False(CustomModifierUtils.HasOutAttributeModifier(parameter.RefCustomModifiers));
+                        Assert.False(
+                            CustomModifierUtils.HasInAttributeModifier(parameter.RefCustomModifiers)
+                        );
+                        Assert.False(
+                            CustomModifierUtils.HasOutAttributeModifier(
+                                parameter.RefCustomModifiers
+                            )
+                        );
                         break;
 
                     default:
@@ -327,29 +441,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
         }
 
-        public static Action<TypeSymbol> IsVoidType() => typeSymbol => Assert.True(typeSymbol.IsVoidType());
+        public static Action<TypeSymbol> IsVoidType() =>
+            typeSymbol => Assert.True(typeSymbol.IsVoidType());
 
-        public static Action<TypeSymbol> IsSpecialType(SpecialType specialType)
-            => typeSymbol => Assert.Equal(specialType, typeSymbol.SpecialType);
+        public static Action<TypeSymbol> IsSpecialType(SpecialType specialType) =>
+            typeSymbol => Assert.Equal(specialType, typeSymbol.SpecialType);
 
-        public static Action<TypeSymbol> IsTypeName(string typeName)
-            => typeSymbol => Assert.Equal(typeName, typeSymbol.Name);
+        public static Action<TypeSymbol> IsTypeName(string typeName) =>
+            typeSymbol => Assert.Equal(typeName, typeSymbol.Name);
 
-        public static Action<TypeSymbol> IsArrayType(Action<TypeSymbol> arrayTypeVerifier)
-            => typeSymbol =>
+        public static Action<TypeSymbol> IsArrayType(Action<TypeSymbol> arrayTypeVerifier) =>
+            typeSymbol =>
             {
                 Assert.True(typeSymbol.IsArray());
                 arrayTypeVerifier(((ArrayTypeSymbol)typeSymbol).ElementType);
             };
 
-        public static Action<TypeSymbol> IsUnsupportedType()
-            => typeSymbol => Assert.True(typeSymbol is UnsupportedMetadataTypeSymbol);
+        public static Action<TypeSymbol> IsUnsupportedType() =>
+            typeSymbol => Assert.True(typeSymbol is UnsupportedMetadataTypeSymbol);
 
-        public static Action<TypeSymbol> IsFunctionPointerTypeSymbol(CallingConvention callingConvention, (RefKind, Action<TypeSymbol>) returnVerifier, params (RefKind, Action<TypeSymbol>)[] argumentVerifiers)
-            => typeSymbol => VerifyFunctionPointerSymbol((FunctionPointerTypeSymbol)typeSymbol, callingConvention, returnVerifier, argumentVerifiers);
+        public static Action<TypeSymbol> IsFunctionPointerTypeSymbol(
+            CallingConvention callingConvention,
+            (RefKind, Action<TypeSymbol>) returnVerifier,
+            params (RefKind, Action<TypeSymbol>)[] argumentVerifiers
+        ) =>
+            typeSymbol =>
+                VerifyFunctionPointerSymbol(
+                    (FunctionPointerTypeSymbol)typeSymbol,
+                    callingConvention,
+                    returnVerifier,
+                    argumentVerifiers
+                );
 
-        public static Action<TypeSymbol> IsErrorType()
-            => typeSymbol => Assert.True(typeSymbol.IsErrorType());
-
+        public static Action<TypeSymbol> IsErrorType() =>
+            typeSymbol => Assert.True(typeSymbol.IsErrorType());
     }
 }

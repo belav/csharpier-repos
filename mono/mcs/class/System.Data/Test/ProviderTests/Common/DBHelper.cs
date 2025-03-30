@@ -2,7 +2,7 @@
 //
 // Authors:
 //      Sureshkumar T (tsureshkumar@novell.com)
-// 
+//
 // Copyright (c) 2004 Novell Inc., and the individuals listed on the
 // ChangeLog entries.
 //
@@ -33,48 +33,55 @@ using System.Text;
 
 namespace MonoTests.System.Data.Connected
 {
-	public sealed class DBHelper
-	{
-		public static Random random = new Random ( (int) DateTime.Now.Ticks);
-		
-		public static int ExecuteNonQuery (IDbConnection connection ,string query)
-		{
-			IDbCommand command = connection.CreateCommand ();
-			command.CommandType = CommandType.Text;
-			command.CommandText = query;
-			command.CommandTimeout = 120;
-			int result = -1;
-			try {
-				result = command.ExecuteNonQuery ();
-			} catch {
-				return -2;
-			}
-			return result;
-		}
+    public sealed class DBHelper
+    {
+        public static Random random = new Random((int)DateTime.Now.Ticks);
 
-		public static int ExecuteSimpleSP (IDbConnection connection ,string proc)
-		{
-			IDbCommand command = connection.CreateCommand ();
-			command.CommandType = CommandType.StoredProcedure;
-			command.CommandText = proc;
-			int result = -1;
-			try {
-				result = command.ExecuteNonQuery ();
-			} catch {
-				return -2;
-			}
-			return result;
-		}
+        public static int ExecuteNonQuery(IDbConnection connection, string query)
+        {
+            IDbCommand command = connection.CreateCommand();
+            command.CommandType = CommandType.Text;
+            command.CommandText = query;
+            command.CommandTimeout = 120;
+            int result = -1;
+            try
+            {
+                result = command.ExecuteNonQuery();
+            }
+            catch
+            {
+                return -2;
+            }
+            return result;
+        }
 
-		public static string GetRandomName (string prefix, int length)
-		{
-			StringBuilder s = new StringBuilder (prefix.Length + 1 + length);
-			s.Append (prefix);
-			s.Append ("_");
-			for (int i = 0; i < length; i++) {
-				s.Append (random.Next (25) + 'A');
-			}
-			return s.ToString ();
-		}
-	}
+        public static int ExecuteSimpleSP(IDbConnection connection, string proc)
+        {
+            IDbCommand command = connection.CreateCommand();
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = proc;
+            int result = -1;
+            try
+            {
+                result = command.ExecuteNonQuery();
+            }
+            catch
+            {
+                return -2;
+            }
+            return result;
+        }
+
+        public static string GetRandomName(string prefix, int length)
+        {
+            StringBuilder s = new StringBuilder(prefix.Length + 1 + length);
+            s.Append(prefix);
+            s.Append("_");
+            for (int i = 0; i < length; i++)
+            {
+                s.Append(random.Next(25) + 'A');
+            }
+            return s.ToString();
+        }
+    }
 }

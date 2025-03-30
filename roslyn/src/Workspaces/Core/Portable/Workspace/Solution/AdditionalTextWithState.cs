@@ -14,9 +14,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// <remarks>
     /// Create a <see cref="SourceText"/> from a <see cref="AdditionalDocumentState"/>.
     /// </remarks>
-    internal sealed class AdditionalTextWithState(AdditionalDocumentState documentState) : AdditionalText
+    internal sealed class AdditionalTextWithState(AdditionalDocumentState documentState)
+        : AdditionalText
     {
-        private readonly AdditionalDocumentState _documentState = documentState ?? throw new ArgumentNullException(nameof(documentState));
+        private readonly AdditionalDocumentState _documentState =
+            documentState ?? throw new ArgumentNullException(nameof(documentState));
 
         /// <summary>
         /// Resolved path of the document.

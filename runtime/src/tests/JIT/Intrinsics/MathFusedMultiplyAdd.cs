@@ -20,14 +20,27 @@ namespace MathFusedMultiplyAddTest
             return _returnCode;
         }
 
-#region MathF.FusedMultiplyAdd
+        #region MathF.FusedMultiplyAdd
         static void TestFloats()
         {
             float[] testValues =
-                {
-                    MathF.PI, MathF.E, 0.0f, -0.0f, float.MinValue, float.MaxValue, 42, -42, 1000, -1000,
-                    int.MaxValue, int.MinValue, float.NaN, float.PositiveInfinity, float.NegativeInfinity
-                };
+            {
+                MathF.PI,
+                MathF.E,
+                0.0f,
+                -0.0f,
+                float.MinValue,
+                float.MaxValue,
+                42,
+                -42,
+                1000,
+                -1000,
+                int.MaxValue,
+                int.MinValue,
+                float.NaN,
+                float.PositiveInfinity,
+                float.NegativeInfinity,
+            };
 
             foreach (float a in testValues)
             {
@@ -60,43 +73,35 @@ namespace MathFusedMultiplyAddTest
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check1(float a, float b, float c) =>
-            CompareFloats(ReferenceMultiplyAdd( a,  b,  c), 
-                        MathF.FusedMultiplyAdd( a,  b,  c));
+            CompareFloats(ReferenceMultiplyAdd(a, b, c), MathF.FusedMultiplyAdd(a, b, c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check2(float a, float b, float c) =>
-            CompareFloats(ReferenceMultiplyAdd(-a,  b,  c),
-                        MathF.FusedMultiplyAdd(-a,  b,  c));
+            CompareFloats(ReferenceMultiplyAdd(-a, b, c), MathF.FusedMultiplyAdd(-a, b, c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check3(float a, float b, float c) =>
-            CompareFloats(ReferenceMultiplyAdd(-a, -b,  c),
-                        MathF.FusedMultiplyAdd(-a, -b,  c));
+            CompareFloats(ReferenceMultiplyAdd(-a, -b, c), MathF.FusedMultiplyAdd(-a, -b, c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check4(float a, float b, float c) =>
-            CompareFloats(ReferenceMultiplyAdd(-a, -b, -c),
-                        MathF.FusedMultiplyAdd(-a, -b, -c));
+            CompareFloats(ReferenceMultiplyAdd(-a, -b, -c), MathF.FusedMultiplyAdd(-a, -b, -c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check5(float a, float b, float c) =>
-            CompareFloats(ReferenceMultiplyAdd( a, -b,  c), 
-                        MathF.FusedMultiplyAdd( a, -b,  c));
+            CompareFloats(ReferenceMultiplyAdd(a, -b, c), MathF.FusedMultiplyAdd(a, -b, c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check6(float a, float b, float c) =>
-            CompareFloats(ReferenceMultiplyAdd( a, -b, -c), 
-                        MathF.FusedMultiplyAdd( a, -b, -c));
+            CompareFloats(ReferenceMultiplyAdd(a, -b, -c), MathF.FusedMultiplyAdd(a, -b, -c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check7(float a, float b, float c) =>
-            CompareFloats(ReferenceMultiplyAdd(-a,  b, -c), 
-                        MathF.FusedMultiplyAdd(-a,  b, -c));
+            CompareFloats(ReferenceMultiplyAdd(-a, b, -c), MathF.FusedMultiplyAdd(-a, b, -c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check8(float a, float b, float c) =>
-            CompareFloats(ReferenceMultiplyAdd( a,  b, -c), 
-                        MathF.FusedMultiplyAdd( a,  b, -c));
+            CompareFloats(ReferenceMultiplyAdd(a, b, -c), MathF.FusedMultiplyAdd(a, b, -c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static float ReferenceMultiplyAdd(float a, float b, float c) => a * b + c;
@@ -119,52 +124,70 @@ namespace MathFusedMultiplyAddTest
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void TestExplicitFmaUsage1(ref Vector128<float> a, float b)
         {
-            CompareFloats(ReferenceMultiplyAdd(a.ToScalar(), b, _c32.ToScalar()),
-                Fma.MultiplyAdd(a, Vector128.CreateScalarUnsafe(b), _c32).ToScalar());
+            CompareFloats(
+                ReferenceMultiplyAdd(a.ToScalar(), b, _c32.ToScalar()),
+                Fma.MultiplyAdd(a, Vector128.CreateScalarUnsafe(b), _c32).ToScalar()
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void TestExplicitFmaUsage2(ref Vector128<float> a, float b)
         {
-            CompareFloats(ReferenceMultiplyAdd(a.ToScalar(), a.ToScalar(), a.ToScalar()),
-                Fma.MultiplyAdd(a, a, a).ToScalar());
+            CompareFloats(
+                ReferenceMultiplyAdd(a.ToScalar(), a.ToScalar(), a.ToScalar()),
+                Fma.MultiplyAdd(a, a, a).ToScalar()
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void TestExplicitFmaUsage3(ref Vector128<float> a, float b)
         {
-            CompareFloats(ReferenceMultiplyAdd(_c32.ToScalar(), _c32.ToScalar(), _c32.ToScalar()),
-                Fma.MultiplyAdd(_c32, _c32, _c32).ToScalar());
+            CompareFloats(
+                ReferenceMultiplyAdd(_c32.ToScalar(), _c32.ToScalar(), _c32.ToScalar()),
+                Fma.MultiplyAdd(_c32, _c32, _c32).ToScalar()
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void TestExplicitFmaUsage4(ref Vector128<float> a, float b)
         {
-            CompareFloats(ReferenceMultiplyAdd(b, b, 333f), 
+            CompareFloats(
+                ReferenceMultiplyAdd(b, b, 333f),
                 Fma.MultiplyAdd(
-                    Vector128.CreateScalarUnsafe(b),
-                    Vector128.CreateScalarUnsafe(b), 
-                    Vector128.CreateScalarUnsafe(333f)).ToScalar());
+                        Vector128.CreateScalarUnsafe(b),
+                        Vector128.CreateScalarUnsafe(b),
+                        Vector128.CreateScalarUnsafe(333f)
+                    )
+                    .ToScalar()
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void TestExplicitFmaUsage5(ref Vector128<float> a, float b)
         {
-            CompareDoubles(ReferenceMultiplyAdd(-b, -b, -333f),
+            CompareDoubles(
+                ReferenceMultiplyAdd(-b, -b, -333f),
                 Fma.MultiplyAdd(
-                    Vector128.CreateScalarUnsafe(-b),
-                    Vector128.CreateScalarUnsafe(-b),
-                    Vector128.CreateScalarUnsafe(-333f)).ToScalar());
+                        Vector128.CreateScalarUnsafe(-b),
+                        Vector128.CreateScalarUnsafe(-b),
+                        Vector128.CreateScalarUnsafe(-333f)
+                    )
+                    .ToScalar()
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void TestExplicitFmaUsage6(ref Vector128<float> a, float b)
         {
-            CompareFloats(ReferenceMultiplyAdd(b, b, b),
+            CompareFloats(
+                ReferenceMultiplyAdd(b, b, b),
                 Fma.MultiplyAdd(
-                    Vector128.CreateScalarUnsafe(b),
-                    Vector128.CreateScalar(b),
-                    Vector128.Create(b)).ToScalar());
+                        Vector128.CreateScalarUnsafe(b),
+                        Vector128.CreateScalar(b),
+                        Vector128.Create(b)
+                    )
+                    .ToScalar()
+            );
         }
         #endregion
 
@@ -172,10 +195,23 @@ namespace MathFusedMultiplyAddTest
         static void TestDoubles()
         {
             double[] testValues =
-                {
-                    Math.PI, Math.E, 0.0, -0.0, double.MinValue, double.MaxValue, 42, -42, 100000, -100000,
-                    long.MaxValue, long.MinValue, double.NaN, double.PositiveInfinity, double.NegativeInfinity
-                };
+            {
+                Math.PI,
+                Math.E,
+                0.0,
+                -0.0,
+                double.MinValue,
+                double.MaxValue,
+                42,
+                -42,
+                100000,
+                -100000,
+                long.MaxValue,
+                long.MinValue,
+                double.NaN,
+                double.PositiveInfinity,
+                double.NegativeInfinity,
+            };
 
             foreach (double a in testValues)
             {
@@ -208,43 +244,35 @@ namespace MathFusedMultiplyAddTest
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check1(double a, double b, double c) =>
-            CompareDoubles(ReferenceMultiplyAdd( a,  b,  c), 
-                          Math.FusedMultiplyAdd( a,  b,  c));
+            CompareDoubles(ReferenceMultiplyAdd(a, b, c), Math.FusedMultiplyAdd(a, b, c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check2(double a, double b, double c) =>
-            CompareDoubles(ReferenceMultiplyAdd(-a,  b,  c),
-                          Math.FusedMultiplyAdd(-a,  b,  c));
+            CompareDoubles(ReferenceMultiplyAdd(-a, b, c), Math.FusedMultiplyAdd(-a, b, c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check3(double a, double b, double c) =>
-            CompareDoubles(ReferenceMultiplyAdd(-a, -b,  c),
-                          Math.FusedMultiplyAdd(-a, -b,  c));
+            CompareDoubles(ReferenceMultiplyAdd(-a, -b, c), Math.FusedMultiplyAdd(-a, -b, c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check4(double a, double b, double c) =>
-            CompareDoubles(ReferenceMultiplyAdd(-a, -b, -c),
-                          Math.FusedMultiplyAdd(-a, -b, -c));
+            CompareDoubles(ReferenceMultiplyAdd(-a, -b, -c), Math.FusedMultiplyAdd(-a, -b, -c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check5(double a, double b, double c) =>
-            CompareDoubles(ReferenceMultiplyAdd( a, -b,  c), 
-                          Math.FusedMultiplyAdd( a, -b,  c));
+            CompareDoubles(ReferenceMultiplyAdd(a, -b, c), Math.FusedMultiplyAdd(a, -b, c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check6(double a, double b, double c) =>
-            CompareDoubles(ReferenceMultiplyAdd( a, -b, -c), 
-                          Math.FusedMultiplyAdd( a, -b, -c));
+            CompareDoubles(ReferenceMultiplyAdd(a, -b, -c), Math.FusedMultiplyAdd(a, -b, -c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check7(double a, double b, double c) =>
-            CompareDoubles(ReferenceMultiplyAdd(-a,  b, -c), 
-                          Math.FusedMultiplyAdd(-a,  b, -c));
+            CompareDoubles(ReferenceMultiplyAdd(-a, b, -c), Math.FusedMultiplyAdd(-a, b, -c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void Check8(double a, double b, double c) =>
-            CompareDoubles(ReferenceMultiplyAdd( a,  b, -c), 
-                          Math.FusedMultiplyAdd( a,  b, -c));
+            CompareDoubles(ReferenceMultiplyAdd(a, b, -c), Math.FusedMultiplyAdd(a, b, -c));
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static double ReferenceMultiplyAdd(double a, double b, double c) => a * b + c;
@@ -267,53 +295,71 @@ namespace MathFusedMultiplyAddTest
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void TestExplicitFmaUsage1(ref Vector128<double> a, double b)
         {
-            CompareDoubles(ReferenceMultiplyAdd(a.ToScalar(), b, _c64.ToScalar()),
-                Fma.MultiplyAdd(a, Vector128.CreateScalarUnsafe(b), _c64).ToScalar());
+            CompareDoubles(
+                ReferenceMultiplyAdd(a.ToScalar(), b, _c64.ToScalar()),
+                Fma.MultiplyAdd(a, Vector128.CreateScalarUnsafe(b), _c64).ToScalar()
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void TestExplicitFmaUsage2(ref Vector128<double> a, double b)
         {
-            CompareDoubles(ReferenceMultiplyAdd(a.ToScalar(), a.ToScalar(), a.ToScalar()),
-                Fma.MultiplyAdd(a, a, a).ToScalar());
+            CompareDoubles(
+                ReferenceMultiplyAdd(a.ToScalar(), a.ToScalar(), a.ToScalar()),
+                Fma.MultiplyAdd(a, a, a).ToScalar()
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void TestExplicitFmaUsage3(ref Vector128<double> a, double b)
         {
-            CompareDoubles(ReferenceMultiplyAdd(_c64.ToScalar(), _c64.ToScalar(), _c64.ToScalar()),
-                Fma.MultiplyAdd(_c64, _c64, _c64).ToScalar());
+            CompareDoubles(
+                ReferenceMultiplyAdd(_c64.ToScalar(), _c64.ToScalar(), _c64.ToScalar()),
+                Fma.MultiplyAdd(_c64, _c64, _c64).ToScalar()
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void TestExplicitFmaUsage4(ref Vector128<double> a, double b)
         {
-            CompareDoubles(ReferenceMultiplyAdd(b, b, b), 
+            CompareDoubles(
+                ReferenceMultiplyAdd(b, b, b),
                 Fma.MultiplyAdd(
-                    Vector128.CreateScalarUnsafe(b),
-                    Vector128.CreateScalarUnsafe(b), 
-                    Vector128.CreateScalarUnsafe(b)).ToScalar());
+                        Vector128.CreateScalarUnsafe(b),
+                        Vector128.CreateScalarUnsafe(b),
+                        Vector128.CreateScalarUnsafe(b)
+                    )
+                    .ToScalar()
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void TestExplicitFmaUsage5(ref Vector128<double> a, double b)
         {
-            CompareDoubles(ReferenceMultiplyAdd(-b, -b, -333.0),
+            CompareDoubles(
+                ReferenceMultiplyAdd(-b, -b, -333.0),
                 Fma.MultiplyAdd(
-                    Vector128.CreateScalarUnsafe(-b),
-                    Vector128.CreateScalarUnsafe(-b),
-                    Vector128.CreateScalarUnsafe(-333.0)).ToScalar());
+                        Vector128.CreateScalarUnsafe(-b),
+                        Vector128.CreateScalarUnsafe(-b),
+                        Vector128.CreateScalarUnsafe(-333.0)
+                    )
+                    .ToScalar()
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void TestExplicitFmaUsage6(ref Vector128<double> a, double b)
         {
-            CompareDoubles(ReferenceMultiplyAdd(b, b, b),
+            CompareDoubles(
+                ReferenceMultiplyAdd(b, b, b),
                 Fma.MultiplyAdd(
-                    Vector128.CreateScalarUnsafe(b),
-                    Vector128.CreateScalar(b),
-                    Vector128.Create(b)).ToScalar());
+                        Vector128.CreateScalarUnsafe(b),
+                        Vector128.CreateScalar(b),
+                        Vector128.Create(b)
+                    )
+                    .ToScalar()
+            );
         }
-#endregion
+        #endregion
     }
 }

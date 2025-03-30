@@ -96,12 +96,20 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OnlyOneData), new[] { 0, 1, 2, 16 })]
         public static void Count_One(int count, int position)
         {
-            Assert.Equal(Math.Min(1, count), ParallelEnumerable.Range(0, count).Count(i => i == position));
+            Assert.Equal(
+                Math.Min(1, count),
+                ParallelEnumerable.Range(0, count).Count(i => i == position)
+            );
         }
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(OnlyOneData), new int[] { /* Sources.OuterLoopCount */ })]
+        [MemberData(
+            nameof(OnlyOneData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
         public static void Count_One_Longrunning(int count, int position)
         {
             Count_One(count, position);
@@ -111,12 +119,20 @@ namespace System.Linq.Parallel.Tests
         [MemberData(nameof(OnlyOneData), new[] { 0, 1, 2, 16 })]
         public static void LongCount_One(int count, long position)
         {
-            Assert.Equal(Math.Min(1, count), ParallelEnumerable.Range(0, count).LongCount(i => i == position));
+            Assert.Equal(
+                Math.Min(1, count),
+                ParallelEnumerable.Range(0, count).LongCount(i => i == position)
+            );
         }
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(OnlyOneData), new int[] { /* Sources.OuterLoopCount */ })]
+        [MemberData(
+            nameof(OnlyOneData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
         public static void LongCount_One_Longrunning(int count, long position)
         {
             LongCount_One(count, position);
@@ -125,17 +141,59 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Count_OperationCanceledException()
         {
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Count(x => { canceler(); return true; }));
-            AssertThrows.EventuallyCanceled((source, canceler) => source.LongCount(x => { canceler(); return true; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Count(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
+            );
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.LongCount(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
+            );
         }
 
         [Fact]
         public static void Count_AggregateException_Wraps_OperationCanceledException()
         {
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Count(x => { canceler(); return true; }));
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.LongCount(x => { canceler(); return true; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Count(x => { canceler(); return true; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.LongCount(x => { canceler(); return true; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Count(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
+            );
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.LongCount(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Count(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.LongCount(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
+            );
         }
 
         [Fact]
@@ -151,20 +209,52 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void CountLongCount_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Count(x => { throw new DeliberateTestException(); }));
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).LongCount(x => { throw new DeliberateTestException(); }));
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .Count(x =>
+                    {
+                        throw new DeliberateTestException();
+                    })
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(() =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .LongCount(x =>
+                    {
+                        throw new DeliberateTestException();
+                    })
+            );
         }
 
         [Fact]
         public static void CountLongCount_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<bool>)null).Count());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<bool>)null).Count(x => x));
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => ParallelEnumerable.Empty<bool>().Count(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<bool>)null).Count()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<bool>)null).Count(x => x)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => ParallelEnumerable.Empty<bool>().Count(null)
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<bool>)null).LongCount());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<bool>)null).LongCount(x => x));
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => ParallelEnumerable.Empty<bool>().LongCount(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<bool>)null).LongCount()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<bool>)null).LongCount(x => x)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => ParallelEnumerable.Empty<bool>().LongCount(null)
+            );
         }
     }
 }

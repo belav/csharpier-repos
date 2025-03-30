@@ -5,32 +5,40 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel;
     using System.Configuration;
-    using System.ServiceModel.Security;
-    using System.ServiceModel.Channels;
-    using System.Xml;
-    using System.Security.Principal;
     using System.Security.Cryptography.X509Certificates;
+    using System.Security.Principal;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Security;
+    using System.Xml;
 
     public sealed partial class WindowsClientElement : ConfigurationElement
     {
-        public WindowsClientElement()
-        {
-        }
+        public WindowsClientElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.AllowNtlm, DefaultValue = SspiSecurityTokenProvider.DefaultAllowNtlm)]
+        [ConfigurationProperty(
+            ConfigurationStrings.AllowNtlm,
+            DefaultValue = SspiSecurityTokenProvider.DefaultAllowNtlm
+        )]
         public bool AllowNtlm
         {
             get { return (bool)base[ConfigurationStrings.AllowNtlm]; }
             set { base[ConfigurationStrings.AllowNtlm] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.AllowedImpersonationLevel, DefaultValue = WindowsClientCredential.DefaultImpersonationLevel)]
+        [ConfigurationProperty(
+            ConfigurationStrings.AllowedImpersonationLevel,
+            DefaultValue = WindowsClientCredential.DefaultImpersonationLevel
+        )]
         [ServiceModelEnumValidator(typeof(TokenImpersonationLevelHelper))]
         public TokenImpersonationLevel AllowedImpersonationLevel
         {
-            get { return (TokenImpersonationLevel)base[ConfigurationStrings.AllowedImpersonationLevel]; }
+            get
+            {
+                return (TokenImpersonationLevel)
+                    base[ConfigurationStrings.AllowedImpersonationLevel];
+            }
             set { base[ConfigurationStrings.AllowedImpersonationLevel] = value; }
         }
 
@@ -38,7 +46,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (null == from)
             {
@@ -56,7 +66,7 @@ namespace System.ServiceModel.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("windows");
             }
 
-// To suppress AllowNtlm warning.
+            // To suppress AllowNtlm warning.
 #pragma warning disable 618
             windows.AllowNtlm = this.AllowNtlm;
 #pragma warning restore 618
@@ -65,6 +75,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

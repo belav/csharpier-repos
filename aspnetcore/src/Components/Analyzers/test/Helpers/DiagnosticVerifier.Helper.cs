@@ -17,10 +17,15 @@ namespace TestHelper;
 /// </summary>
 public abstract partial class DiagnosticVerifier
 {
-    private static readonly MetadataReference CorlibReference = MetadataReference.CreateFromFile(typeof(object).Assembly.Location);
-    private static readonly MetadataReference SystemCoreReference = MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location);
-    private static readonly MetadataReference CSharpSymbolsReference = MetadataReference.CreateFromFile(typeof(CSharpCompilation).Assembly.Location);
-    private static readonly MetadataReference CodeAnalysisReference = MetadataReference.CreateFromFile(typeof(Compilation).Assembly.Location);
+    private static readonly MetadataReference CorlibReference = MetadataReference.CreateFromFile(
+        typeof(object).Assembly.Location
+    );
+    private static readonly MetadataReference SystemCoreReference =
+        MetadataReference.CreateFromFile(typeof(Enumerable).Assembly.Location);
+    private static readonly MetadataReference CSharpSymbolsReference =
+        MetadataReference.CreateFromFile(typeof(CSharpCompilation).Assembly.Location);
+    private static readonly MetadataReference CodeAnalysisReference =
+        MetadataReference.CreateFromFile(typeof(Compilation).Assembly.Location);
 
     internal static string DefaultFilePathPrefix = "Test";
     internal static string CSharpDefaultFileExt = "cs";
@@ -36,7 +41,11 @@ public abstract partial class DiagnosticVerifier
     /// <param name="language">The language the source classes are in</param>
     /// <param name="analyzer">The analyzer to be run on the sources</param>
     /// <returns>An IEnumerable of Diagnostics that surfaced in the source code, sorted by Location</returns>
-    private static Diagnostic[] GetSortedDiagnostics(string[] sources, string language, DiagnosticAnalyzer analyzer)
+    private static Diagnostic[] GetSortedDiagnostics(
+        string[] sources,
+        string language,
+        DiagnosticAnalyzer analyzer
+    )
     {
         return GetSortedDiagnosticsFromDocuments(analyzer, GetDocuments(sources, language));
     }
@@ -48,7 +57,10 @@ public abstract partial class DiagnosticVerifier
     /// <param name="analyzer">The analyzer to run on the documents</param>
     /// <param name="documents">The Documents that the analyzer will be run on</param>
     /// <returns>An IEnumerable of Diagnostics that surfaced in the source code, sorted by Location</returns>
-    protected static Diagnostic[] GetSortedDiagnosticsFromDocuments(DiagnosticAnalyzer analyzer, Document[] documents)
+    protected static Diagnostic[] GetSortedDiagnosticsFromDocuments(
+        DiagnosticAnalyzer analyzer,
+        Document[] documents
+    )
     {
         var projects = new HashSet<Project>();
         foreach (var document in documents)
@@ -59,7 +71,9 @@ public abstract partial class DiagnosticVerifier
         var diagnostics = new List<Diagnostic>();
         foreach (var project in projects)
         {
-            var compilationWithAnalyzers = project.GetCompilationAsync().Result.WithAnalyzers(ImmutableArray.Create(analyzer));
+            var compilationWithAnalyzers = project
+                .GetCompilationAsync()
+                .Result.WithAnalyzers(ImmutableArray.Create(analyzer));
             var diags = compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync().Result;
             foreach (var diag in diags)
             {
@@ -118,7 +132,9 @@ public abstract partial class DiagnosticVerifier
 
         if (sources.Length != documents.Length)
         {
-            throw new InvalidOperationException("Amount of sources did not match amount of Documents created");
+            throw new InvalidOperationException(
+                "Amount of sources did not match amount of Documents created"
+            );
         }
 
         return documents;
@@ -144,13 +160,13 @@ public abstract partial class DiagnosticVerifier
     private static Project CreateProject(string[] sources, string language = LanguageNames.CSharp)
     {
         string fileNamePrefix = DefaultFilePathPrefix;
-        string fileExt = language == LanguageNames.CSharp ? CSharpDefaultFileExt : VisualBasicDefaultExt;
+        string fileExt =
+            language == LanguageNames.CSharp ? CSharpDefaultFileExt : VisualBasicDefaultExt;
 
         var projectId = ProjectId.CreateNewId(debugName: TestProjectName);
 
         var solution = new AdhocWorkspace()
-            .CurrentSolution
-            .AddProject(projectId, TestProjectName, TestProjectName, language)
+            .CurrentSolution.AddProject(projectId, TestProjectName, TestProjectName, language)
             .AddMetadataReference(projectId, CorlibReference)
             .AddMetadataReference(projectId, SystemCoreReference)
             .AddMetadataReference(projectId, CSharpSymbolsReference)
@@ -168,4 +184,3 @@ public abstract partial class DiagnosticVerifier
     }
     #endregion
 }
-

@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public const string UseCollectionInitializerDiagnosticId = "IDE0028";
 
         public const string UseCoalesceExpressionForTernaryConditionalCheckDiagnosticId = "IDE0029";
-        public const string UseCoalesceExpressionForNullableTernaryConditionalCheckDiagnosticId = "IDE0030";
+        public const string UseCoalesceExpressionForNullableTernaryConditionalCheckDiagnosticId =
+            "IDE0030";
 
         public const string UseNullPropagationDiagnosticId = "IDE0031";
 
@@ -203,6 +204,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public const string AnalyzerChangedId = "IDE1001";
         public const string AnalyzerDependencyConflictId = "IDE1002";
         public const string MissingAnalyzerReferenceId = "IDE1003";
+
         // public const string ErrorReadingRulesetId = "IDE1004";
         public const string InvokeDelegateWithConditionalAccessId = "IDE1005";
         public const string NamingRuleId = "IDE1006";

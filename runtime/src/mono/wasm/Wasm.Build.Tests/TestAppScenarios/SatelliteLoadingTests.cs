@@ -9,8 +9,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
-using Xunit.Abstractions;
 using Xunit;
+using Xunit.Abstractions;
 
 #nullable enable
 
@@ -18,10 +18,11 @@ namespace Wasm.Build.Tests.TestAppScenarios;
 
 public class SatelliteLoadingTests : AppTestBase
 {
-    public SatelliteLoadingTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-        : base(output, buildContext)
-    {
-    }
+    public SatelliteLoadingTests(
+        ITestOutputHelper output,
+        SharedBuildPerTestClassFixture buildContext
+    )
+        : base(output, buildContext) { }
 
     [Fact]
     public async Task LoadSatelliteAssembly()
@@ -29,7 +30,9 @@ public class SatelliteLoadingTests : AppTestBase
         CopyTestAsset("WasmBasicTestApp", "SatelliteLoadingTests");
         BuildProject("Debug");
 
-        var result = await RunSdkStyleApp(new(Configuration: "Debug", TestScenario: "SatelliteAssembliesTest"));
+        var result = await RunSdkStyleApp(
+            new(Configuration: "Debug", TestScenario: "SatelliteAssembliesTest")
+        );
         Assert.Collection(
             result.TestOutput,
             m => Assert.Equal("default: hello", m),

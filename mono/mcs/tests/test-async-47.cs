@@ -2,38 +2,40 @@ using System;
 
 class C
 {
-	public static void Main ()
-	{
-		new C ().Test ();
-	}
+    public static void Main()
+    {
+        new C().Test();
+    }
 
-	void Test ()
-	{
-		var v = new View ();
-		v.Click += async (o, e) => {
-			var b = new Builder ();
-			b.SetButton (() => {
-				Console.WriteLine (this);
-			});
-		};
-		v.Run ();
-	}
+    void Test()
+    {
+        var v = new View();
+        v.Click += async (o, e) =>
+        {
+            var b = new Builder();
+            b.SetButton(() =>
+            {
+                Console.WriteLine(this);
+            });
+        };
+        v.Run();
+    }
 }
 
 class View
 {
-	public event EventHandler Click;
+    public event EventHandler Click;
 
-	public void Run ()
-	{
-		Click (null, null);
-	}
+    public void Run()
+    {
+        Click(null, null);
+    }
 }
 
 class Builder
 {
-	public void SetButton (Action h)
-	{
-		h ();
-	}
+    public void SetButton(Action h)
+    {
+        h();
+    }
 }

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="DeviceFilterEditorDialog.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -16,38 +16,39 @@ namespace System.Web.UI.Design.MobileControls
     using System.IO;
     using System.Reflection;
     using System.Web.UI;
-//    using System.Web.UI.Design.Util;
+    using System.Web.UI.Design.MobileControls.Util;
+    //    using System.Web.UI.Design.Util;
     using System.Web.UI.MobileControls;
     using System.Windows.Forms;
-    using System.Web.UI.Design.MobileControls.Util;
-
     using Control = System.Windows.Forms.Control;
+    using DeviceFilterMode = Util.DeviceFilterNode.DeviceFilterMode;
     using Label = System.Windows.Forms.Label;
     using TextBox = System.Windows.Forms.TextBox;
-    using DeviceFilterMode = Util.DeviceFilterNode.DeviceFilterMode;
 
     /// <summary>
     ///   The General page for the TextView control.
     /// </summary>
     /// <internalonly/>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal sealed class DeviceFilterEditorDialog : DesignerForm
     {
         /// <summary>
         ///   Initializes the UI of the form.
         /// </summary>
-        
-        private EditableTreeList        _filterList = null;
-        private DefaultDialogButtons    _dialogButtons = null;
-        private WebConfigManager        _webConfig = null;
-        private ISite                   _site = null;
+        private EditableTreeList _filterList = null;
+        private DefaultDialogButtons _dialogButtons = null;
+        private WebConfigManager _webConfig = null;
+        private ISite _site = null;
 
-        private static readonly String _nameOfDefaultFilter =
-            SR.GetString(SR.DeviceFilter_DefaultChoice);
+        private static readonly String _nameOfDefaultFilter = SR.GetString(
+            SR.DeviceFilter_DefaultChoice
+        );
 
         private System.Windows.Forms.Label _lblCompare;
         private System.Windows.Forms.ComboBox _cbCompare;
@@ -69,13 +70,12 @@ namespace System.Web.UI.Design.MobileControls
         private HeaderLabel _lblHeader;
 
         internal DeviceFilterEditorDialog(ISite site)
-            : this(site, new WebConfigManager(site))
-        {
-        }
-        
+            : this(site, new WebConfigManager(site)) { }
+
         // NOTE: A FileLoadException is thrown if an error occurs while reading
         //       web.config.
-        internal DeviceFilterEditorDialog(ISite site, WebConfigManager webConfig) : base(site)
+        internal DeviceFilterEditorDialog(ISite site, WebConfigManager webConfig)
+            : base(site)
         {
             InitializeComponent();
 
@@ -109,7 +109,7 @@ namespace System.Web.UI.Design.MobileControls
             this._lblMethod.TabIndex = tabOffset++;
             this._txtMethod.TabIndex = tabOffset++;
             this._dialogButtons.TabIndex = tabOffset++;
-            
+
             _webConfig = webConfig;
             this._site = site;
             GenericUI.InitDialog(this, site);
@@ -119,7 +119,7 @@ namespace System.Web.UI.Design.MobileControls
 
             // Attempt to load Device Filters
             ArrayList filters = null;
-            try 
+            try
             {
                 filters = _webConfig.ReadDeviceFilters();
             }
@@ -129,9 +129,7 @@ namespace System.Web.UI.Design.MobileControls
                     SR.GetString(SR.DeviceFilterEditorDialog_Title),
                     SR.GetString(SR.DeviceFilterEditorDialog_WebConfigMissingOnOpen)
                 );
-                throw new FileLoadException(
-                    SR.GetString(SR.WebConfig_FileLoadException, e)
-                );
+                throw new FileLoadException(SR.GetString(SR.WebConfig_FileLoadException, e));
             }
             catch (Exception e)
             {
@@ -146,22 +144,17 @@ namespace System.Web.UI.Design.MobileControls
                 {
                     GenericUI.ShowWarningMessage(
                         SR.GetString(SR.DeviceFilterEditorDialog_Title),
-                        SR.GetString(
-                            SR.DeviceFilterEditorDialog_WebConfigParsingError,
-                            e.Message
-                        )
+                        SR.GetString(SR.DeviceFilterEditorDialog_WebConfigParsingError, e.Message)
                     );
                 }
-                throw new FileLoadException(
-                    SR.GetString(SR.WebConfig_FileLoadException, e)
-                );
+                throw new FileLoadException(SR.GetString(SR.WebConfig_FileLoadException, e));
             }
 
             // Make sure web.config is checked out before we make changes.
             _webConfig.EnsureWebConfigCheckedOut();
 
             // Insert the Device Filters into the List UI
-            foreach(DeviceFilterNode filter in filters)
+            foreach (DeviceFilterNode filter in filters)
             {
                 DeviceFilterTreeNode node = new DeviceFilterTreeNode(filter);
                 _filterList.TvList.Nodes.Add(node);
@@ -173,16 +166,16 @@ namespace System.Web.UI.Design.MobileControls
             //       we wrote another implementation of GetUniqueLabel()
             //       that compared against filters [ArrayList returned
             //       from ReadDeviceFilters()].
-            foreach(DeviceFilterTreeNode node in _filterList.TvList.Nodes)
+            foreach (DeviceFilterTreeNode node in _filterList.TvList.Nodes)
             {
-                if(String.IsNullOrEmpty(node.Text))
+                if (String.IsNullOrEmpty(node.Text))
                 {
                     node.Text = _filterList.GetUniqueLabel(
                         SR.GetString(SR.DeviceFilterNode_DefaultFilterName)
                     );
                 }
             }
-                
+
             // Initialize the UI
             _rbCompare.Click += new EventHandler(OnClickCompareRadioButton);
             _rbDelegate.Click += new EventHandler(OnClickDelegateRadioButton);
@@ -204,10 +197,9 @@ namespace System.Web.UI.Design.MobileControls
             _dialogButtons.CmdCancel.Click += new EventHandler(OnClickCancel);
         }
 
-        protected override string HelpTopic {
-            get {
-                return "net.Mobile.DeviceFilterEditorDialog"; 
-            }
+        protected override string HelpTopic
+        {
+            get { return "net.Mobile.DeviceFilterEditorDialog"; }
         }
 
         private void InitializeComponent()
@@ -237,22 +229,30 @@ namespace System.Web.UI.Design.MobileControls
 
             this._lblHeader.Location = new System.Drawing.Point(0, 0);
             this._lblHeader.Size = new System.Drawing.Size(434, 16);
-            this._lblHeader.Anchor = (System.Windows.Forms.AnchorStyles.Top
-                | System.Windows.Forms.AnchorStyles.Left);
-            this._pnlHeader.Controls.AddRange(new System.Windows.Forms.Control[] {
-                this._lblHeader
-            });
+            this._lblHeader.Anchor = (
+                System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left
+            );
+            this._pnlHeader.Controls.AddRange(
+                new System.Windows.Forms.Control[] { this._lblHeader }
+            );
             this._pnlHeader.Location = new System.Drawing.Point(6, 5);
             this._pnlHeader.Size = new System.Drawing.Size(434, 16);
-            this._pnlHeader.Anchor = (System.Windows.Forms.AnchorStyles.Top
-                | System.Windows.Forms.AnchorStyles.Left);
-            this._pnlMain.Controls.AddRange(new System.Windows.Forms.Control[] {this._dialogButtons,
-                                                                                  this._pnlRight,
-                                                                                  this._filterList});
+            this._pnlHeader.Anchor = (
+                System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left
+            );
+            this._pnlMain.Controls.AddRange(
+                new System.Windows.Forms.Control[]
+                {
+                    this._dialogButtons,
+                    this._pnlRight,
+                    this._filterList,
+                }
+            );
             this._pnlMain.Location = new System.Drawing.Point(6, 27);
             this._pnlMain.Size = new System.Drawing.Size(434, 253);
-            this._pnlMain.Anchor = (System.Windows.Forms.AnchorStyles.Bottom
-                | System.Windows.Forms.AnchorStyles.Left);
+            this._pnlMain.Anchor = (
+                System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left
+            );
             this._filterList.Size = new System.Drawing.Size(198, 224);
             this._filterList.Location = new System.Drawing.Point(0, 0);
             this._rbCompare.Location = new System.Drawing.Point(8, 21);
@@ -267,12 +267,17 @@ namespace System.Web.UI.Design.MobileControls
             this._txtMethod.Size = new System.Drawing.Size(211, 20);
             this._txtArgument.Location = new System.Drawing.Point(0, 64);
             this._txtArgument.Size = new System.Drawing.Size(211, 20);
-            this._pnlRight.Controls.AddRange(new System.Windows.Forms.Control[] {this._pnlCompare,
-                                                                                 this._pnlDelegate,
-                                                                                 this._glAttributes,
-                                                                                 this._glType,
-                                                                                 this._rbDelegate,
-                                                                                 this._rbCompare});
+            this._pnlRight.Controls.AddRange(
+                new System.Windows.Forms.Control[]
+                {
+                    this._pnlCompare,
+                    this._pnlDelegate,
+                    this._glAttributes,
+                    this._glType,
+                    this._rbDelegate,
+                    this._rbCompare,
+                }
+            );
             this._pnlRight.Location = new System.Drawing.Point(215, 0);
             this._pnlRight.Size = new System.Drawing.Size(219, 226);
             this._lblMethod.Location = new System.Drawing.Point(0, 48);
@@ -282,10 +287,15 @@ namespace System.Web.UI.Design.MobileControls
             this._rbDelegate.Location = new System.Drawing.Point(8, 46);
             this._rbDelegate.Size = new System.Drawing.Size(211, 17);
             this._glType.Size = new System.Drawing.Size(216, 16);
-            this._pnlCompare.Controls.AddRange(new System.Windows.Forms.Control[] {this._txtArgument,
-                                                                                     this._lblArgument,
-                                                                                     this._cbCompare,
-                                                                                     this._lblCompare});
+            this._pnlCompare.Controls.AddRange(
+                new System.Windows.Forms.Control[]
+                {
+                    this._txtArgument,
+                    this._lblArgument,
+                    this._cbCompare,
+                    this._lblCompare,
+                }
+            );
             this._pnlCompare.Location = new System.Drawing.Point(8, 90);
             this._pnlCompare.Size = new System.Drawing.Size(211, 136);
             this._cbCompare.DropDownWidth = 211;
@@ -294,24 +304,31 @@ namespace System.Web.UI.Design.MobileControls
             this._cbCompare.Sorted = true;
             this._lblArgument.Location = new System.Drawing.Point(0, 48);
             this._lblArgument.Size = new System.Drawing.Size(211, 16);
-            this._pnlDelegate.Controls.AddRange(new System.Windows.Forms.Control[] {this._txtType,
-                                                                                      this._txtMethod,
-                                                                                      this._lblMethod,
-                                                                                      this._lblType});
+            this._pnlDelegate.Controls.AddRange(
+                new System.Windows.Forms.Control[]
+                {
+                    this._txtType,
+                    this._txtMethod,
+                    this._lblMethod,
+                    this._lblType,
+                }
+            );
             this._pnlDelegate.Location = new System.Drawing.Point(8, 90);
             this._pnlDelegate.Size = new System.Drawing.Size(211, 136);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.ClientSize = new System.Drawing.Size(448, 289);
             this.AcceptButton = _dialogButtons.CmdOK;
             this.CancelButton = _dialogButtons.CmdCancel;
-            this.Controls.AddRange(new System.Windows.Forms.Control[] {this._pnlHeader, this._pnlMain});
+            this.Controls.AddRange(
+                new System.Windows.Forms.Control[] { this._pnlHeader, this._pnlMain }
+            );
         }
-        
+
         private void LoadAvailableCapabilities()
         {
             Type type = typeof(System.Web.Mobile.MobileCapabilities);
             PropertyInfo[] properties = type.GetProperties();
-            foreach(PropertyInfo property in properties)
+            foreach (PropertyInfo property in properties)
             {
                 _cbCompare.Items.Add(property.Name);
             }
@@ -331,9 +348,9 @@ namespace System.Web.UI.Design.MobileControls
 
         internal void SelectFilterByName(String name)
         {
-            foreach(DeviceFilterTreeNode filter in _filterList.TvList.Nodes)
+            foreach (DeviceFilterTreeNode filter in _filterList.TvList.Nodes)
             {
-                if(filter.DeviceFilter.Name == name)
+                if (filter.DeviceFilter.Name == name)
                 {
                     _filterList.TvList.SelectedNode = filter;
                     break;
@@ -345,56 +362,60 @@ namespace System.Web.UI.Design.MobileControls
         {
             NotAllowed,
             Required,
-            Optional
+            Optional,
         };
 
         private bool FilterIsLegal_CheckRow(RequirementFlag[] row1, bool[] row2)
         {
             Debug.Assert(row1.Length == row2.Length);
-            for(int i = 0; i < row1.Length; i++)
+            for (int i = 0; i < row1.Length; i++)
             {
-                if(row1[i] == RequirementFlag.NotAllowed && row2[i] == true)
+                if (row1[i] == RequirementFlag.NotAllowed && row2[i] == true)
                 {
                     return false;
                 }
-                else if(row1[i] == RequirementFlag.Required && row2[i] == false)
+                else if (row1[i] == RequirementFlag.Required && row2[i] == false)
                 {
                     return false;
                 }
             }
             return true;
         }
-        
+
         private bool FilterIsLegal(DeviceFilterNode filter)
         {
-            Object[] legalCombinations = {
-                new RequirementFlag[] {
-                    RequirementFlag.Required,         // compare mode
-                    RequirementFlag.Required,         // compare
-                    RequirementFlag.Optional,         // argument
-                    RequirementFlag.Optional,         // method
-                    RequirementFlag.Optional          // type
+            Object[] legalCombinations =
+            {
+                new RequirementFlag[]
+                {
+                    RequirementFlag.Required, // compare mode
+                    RequirementFlag.Required, // compare
+                    RequirementFlag.Optional, // argument
+                    RequirementFlag.Optional, // method
+                    RequirementFlag.Optional, // type
                 },
-                new RequirementFlag[] {
-                    RequirementFlag.NotAllowed,       // compare mode
-                    RequirementFlag.Optional,         // compare
-                    RequirementFlag.Optional,         // argument
-                    RequirementFlag.Required,         // method
-                    RequirementFlag.Required          // type
-                }
+                new RequirementFlag[]
+                {
+                    RequirementFlag.NotAllowed, // compare mode
+                    RequirementFlag.Optional, // compare
+                    RequirementFlag.Optional, // argument
+                    RequirementFlag.Required, // method
+                    RequirementFlag.Required, // type
+                },
             };
-            
-            bool[] filterCombination = {
+
+            bool[] filterCombination =
+            {
                 (filter.Mode == DeviceFilterMode.Compare),
                 ((filter.Compare != null) && (filter.Compare.Length > 0)),
                 ((filter.Argument != null) && (filter.Argument.Length > 0)),
                 ((filter.Type != null) && (filter.Type.Length > 0)),
                 ((filter.Method != null) && (filter.Method.Length > 0)),
             };
-            
-            foreach(RequirementFlag[] legalCombination in legalCombinations)
+
+            foreach (RequirementFlag[] legalCombination in legalCombinations)
             {
-                if(FilterIsLegal_CheckRow(legalCombination, filterCombination))
+                if (FilterIsLegal_CheckRow(legalCombination, filterCombination))
                 {
                     return true;
                 }
@@ -402,15 +423,15 @@ namespace System.Web.UI.Design.MobileControls
             return false;
         }
 
-        #if DEBUG
+#if DEBUG
         private bool Debug_DuplicateFiltersExist(ICollection filters)
         {
             // Filter names are case-sensitive.
-            IDictionary namesEncountered = new Hashtable();            
-            foreach(DeviceFilterTreeNode node in filters)
+            IDictionary namesEncountered = new Hashtable();
+            foreach (DeviceFilterTreeNode node in filters)
             {
                 DeviceFilterNode filter = node.DeviceFilter;
-                if(namesEncountered[filter.Name] != null)
+                if (namesEncountered[filter.Name] != null)
                 {
                     return true;
                 }
@@ -418,42 +439,40 @@ namespace System.Web.UI.Design.MobileControls
             }
             return false;
         }
-        #endif
+#endif
 
         private bool FiltersAreValid()
         {
-            #if DEBUG
+#if DEBUG
             Debug.Assert(
                 !Debug_DuplicateFiltersExist(_filterList.TvList.Nodes),
                 "UI failed to prevent duplicate filters from being created."
             );
-            #endif
+#endif
 
             ArrayList filtersInErrorList = new ArrayList();
-            foreach(DeviceFilterTreeNode filterNode in _filterList.TvList.Nodes)
+            foreach (DeviceFilterTreeNode filterNode in _filterList.TvList.Nodes)
             {
                 DeviceFilterNode filter = filterNode.DeviceFilter;
-                if(!FilterIsLegal(filter))
+                if (!FilterIsLegal(filter))
                 {
                     filtersInErrorList.Add(filter.Name);
                 }
             }
-            if(filtersInErrorList.Count != 0)
+            if (filtersInErrorList.Count != 0)
             {
                 GenericUI.ShowWarningMessage(
                     SR.GetString(SR.DeviceFilterEditorDialog_Title),
                     SR.GetString(
                         SR.DeviceFilterEditorDialog_InvalidFilter,
-                        GenericUI.BuildCommaDelimitedList(
-                            filtersInErrorList
-                        )
+                        GenericUI.BuildCommaDelimitedList(filtersInErrorList)
                     )
                 );
                 return false;
             }
             return true;
         }
-        
+
         private bool SaveFilters()
         {
             Cursor oldCursor = null;
@@ -463,13 +482,13 @@ namespace System.Web.UI.Design.MobileControls
                 this.Cursor = Cursors.WaitCursor;
 
                 ArrayList oldFilters = _webConfig.ReadDeviceFilters();
-                foreach(DeviceFilterNode filter in oldFilters)
+                foreach (DeviceFilterNode filter in oldFilters)
                 {
                     filter.Delete();
                 }
 
                 _webConfig.EnsureSystemWebSectionIsPresent();
-                foreach(DeviceFilterTreeNode filter in _filterList.TvList.Nodes)
+                foreach (DeviceFilterTreeNode filter in _filterList.TvList.Nodes)
                 {
                     filter.DeviceFilter.Save();
                 }
@@ -505,10 +524,11 @@ namespace System.Web.UI.Design.MobileControls
             String oldLabel,
             String newLabel,
             String errorDialogTitle
-        ) {
+        )
+        {
             Debug.Assert(site != null);
 
-            if(newLabel.Length == 0)
+            if (newLabel.Length == 0)
             {
                 GenericUI.ShowWarningMessage(
                     errorDialogTitle,
@@ -537,24 +557,24 @@ namespace System.Web.UI.Design.MobileControls
 
         private void OnClickOK(Object sender, EventArgs e)
         {
-            if(!FiltersAreValid())
+            if (!FiltersAreValid())
             {
                 return;
             }
-            if(!SaveFilters())
+            if (!SaveFilters())
             {
                 return;
             }
             Close();
             DialogResult = DialogResult.OK;
         }
-        
+
         private void OnClickCancel(Object sender, EventArgs e)
         {
             Close();
             DialogResult = DialogResult.Cancel;
         }
-        
+
         private void CompareMode()
         {
             DeviceFilterTreeNode node = (DeviceFilterTreeNode)_filterList.SelectedNode;
@@ -605,22 +625,22 @@ namespace System.Web.UI.Design.MobileControls
             UpdateButtonsEnabling();
             node.BeginEdit();
         }
-        
+
         private void OnClickCompareRadioButton(Object Sender, EventArgs e)
         {
             CompareMode();
         }
-        
+
         private void OnClickDelegateRadioButton(Object Sender, EventArgs e)
         {
-            DelegateMode(); 
+            DelegateMode();
         }
 
         private void OnFilterSelected(Object sender, TreeViewEventArgs e)
         {
-            DeviceFilterTreeNode node = (DeviceFilterTreeNode) e.Node;
+            DeviceFilterTreeNode node = (DeviceFilterTreeNode)e.Node;
             UpdateButtonsEnabling();
-            if(node.DeviceFilter.Mode == DeviceFilterMode.Compare)
+            if (node.DeviceFilter.Mode == DeviceFilterMode.Compare)
             {
                 CompareMode();
             }
@@ -633,16 +653,18 @@ namespace System.Web.UI.Design.MobileControls
         private void OnAfterLabelEdit(Object sender, NodeLabelEditEventArgs e)
         {
             // null still returned if label unmodified (verified 2310)
-            if(e.Label == null)
+            if (e.Label == null)
             {
                 return;
             }
 
             String oldLabel = e.Node.Text;
             String newLabel = e.Label;
-            
-            if(String.Compare(oldLabel, newLabel, StringComparison.OrdinalIgnoreCase) != 0
-                && _filterList.LabelExists(newLabel))
+
+            if (
+                String.Compare(oldLabel, newLabel, StringComparison.OrdinalIgnoreCase) != 0
+                && _filterList.LabelExists(newLabel)
+            )
             {
                 // if the filter is duplicate
                 GenericUI.ShowWarningMessage(
@@ -650,18 +672,30 @@ namespace System.Web.UI.Design.MobileControls
                     SR.GetString(SR.DeviceFilterEditorDialog_DuplicateName, newLabel)
                 );
             }
-            else if(String.Compare(newLabel, _nameOfDefaultFilter, StringComparison.OrdinalIgnoreCase) == 0)
+            else if (
+                String.Compare(newLabel, _nameOfDefaultFilter, StringComparison.OrdinalIgnoreCase)
+                == 0
+            )
             {
                 GenericUI.ShowWarningMessage(
                     SR.GetString(SR.DeviceFilterEditorDialog_Title),
                     SR.GetString(SR.DeviceFilterEditorDialog_IllegalDefaultName, newLabel)
                 );
             }
-            else if(NewLabelIsLegal(_site, _filterList, oldLabel, newLabel,
-                SR.GetString(SR.DeviceFilterEditorDialog_Title)
-            )) {
+            else if (
+                NewLabelIsLegal(
+                    _site,
+                    _filterList,
+                    oldLabel,
+                    newLabel,
+                    SR.GetString(SR.DeviceFilterEditorDialog_Title)
+                )
+            )
+            {
                 // if the filter name is legal
-                ((DeviceFilterTreeNode)e.Node).DeviceFilter.Name = e.Label;
+                ((DeviceFilterTreeNode)e.Node)
+                    .DeviceFilter
+                    .Name = e.Label;
                 return;
             }
             // if the filter name was duplicate or not legal
@@ -672,20 +706,22 @@ namespace System.Web.UI.Design.MobileControls
         {
             if (null != _filterList.SelectedNode)
             {
-                DeviceFilterNode node = ((DeviceFilterTreeNode)_filterList.SelectedNode).DeviceFilter;
-                if(sender == _cbCompare)
+                DeviceFilterNode node = (
+                    (DeviceFilterTreeNode)_filterList.SelectedNode
+                ).DeviceFilter;
+                if (sender == _cbCompare)
                 {
                     node.Compare = _cbCompare.Text;
                 }
-                else if(sender == _txtArgument)
+                else if (sender == _txtArgument)
                 {
                     node.Argument = _txtArgument.Text;
                 }
-                else if(sender == _txtType)
+                else if (sender == _txtType)
                 {
                     node.Type = _txtType.Text;
                 }
-                else if(sender == _txtMethod)
+                else if (sender == _txtMethod)
                 {
                     node.Method = _txtMethod.Text;
                 }
@@ -705,15 +741,16 @@ namespace System.Web.UI.Design.MobileControls
         ////////////////////////////////////////////////////////////////////////
 
         // AppliedDeviceFiltersDialog also needs access to this class.
-        [
-            System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-            Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-        ]
+        [System.Security.Permissions.SecurityPermission(
+            System.Security.Permissions.SecurityAction.Demand,
+            Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+        )]
         private class DeviceFilterTreeNode : TreeNode, ICloneable
         {
             internal readonly DeviceFilterNode DeviceFilter;
-        
-            internal DeviceFilterTreeNode(WebConfigManager webConfig) : base()
+
+            internal DeviceFilterTreeNode(WebConfigManager webConfig)
+                : base()
             {
                 DeviceFilter = new DeviceFilterNode(webConfig);
                 base.Text = DeviceFilter.Name;
@@ -732,7 +769,6 @@ namespace System.Web.UI.Design.MobileControls
                     Debug.Assert(DeviceFilter.Name == base.Text);
                     return DeviceFilter.Name;
                 }
-
                 set
                 {
                     base.Text = value;

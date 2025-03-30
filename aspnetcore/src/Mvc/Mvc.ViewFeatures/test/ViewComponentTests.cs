@@ -238,7 +238,9 @@ public class ViewComponentTests
     {
         // Arrange
         var httpContext = new DefaultHttpContext();
-        httpContext.Features.Set<ISessionFeature>(new SessionFeature() { Session = new TestSession() });
+        httpContext.Features.Set<ISessionFeature>(
+            new SessionFeature() { Session = new TestSession() }
+        );
         var viewContext = new ViewContext();
         viewContext.TempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>());
         var viewComponentContext = new ViewComponentContext();
@@ -254,9 +256,7 @@ public class ViewComponentTests
         Assert.Same(viewComponent.TempData, viewComponent.ViewContext.TempData);
     }
 
-    private class TestViewComponent : ViewComponent
-    {
-    }
+    private class TestViewComponent : ViewComponent { }
 
     private class SessionFeature : ISessionFeature
     {
@@ -265,9 +265,13 @@ public class ViewComponentTests
 
     private class TestSession : ISession
     {
-        private readonly Dictionary<string, byte[]> _innerDictionary = new Dictionary<string, byte[]>();
+        private readonly Dictionary<string, byte[]> _innerDictionary =
+            new Dictionary<string, byte[]>();
 
-        public IEnumerable<string> Keys { get { return _innerDictionary.Keys; } }
+        public IEnumerable<string> Keys
+        {
+            get { return _innerDictionary.Keys; }
+        }
 
         public string Id => "TestId";
 

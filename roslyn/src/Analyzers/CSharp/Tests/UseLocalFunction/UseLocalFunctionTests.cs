@@ -16,17 +16,22 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
-    public partial class UseLocalFunctionTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class UseLocalFunctionTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public UseLocalFunctionTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUseLocalFunctionDiagnosticAnalyzer(), new CSharpUseLocalFunctionCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUseLocalFunctionDiagnosticAnalyzer(),
+                new CSharpUseLocalFunctionCodeFixProvider()
+            );
 
-        private static readonly ParseOptions CSharp72ParseOptions = CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
+        private static readonly ParseOptions CSharp72ParseOptions =
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_2);
 
         [Fact]
         public async Task TestMissingBeforeCSharp7()
@@ -50,7 +55,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         };
                     }
                 }
-                """, parameters: new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6)));
+                """,
+                parameters: new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp6
+                    )
+                )
+            );
         }
 
         [Fact]
@@ -77,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         fibonacci = null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -103,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -127,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -152,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }, fib2 = x => x;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -174,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                             return fibonacci(v - 1, v - 2);
                         };
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -218,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -262,7 +279,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -306,7 +324,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -350,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -384,7 +404,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                                 : fibonacci(v - 1, v - 2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -418,7 +439,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                                 : fibonacci(v - 1, v - 2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -452,7 +474,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                                 : fibonacci(v - 1, v - 2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -496,7 +519,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -540,7 +564,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -584,7 +609,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -628,7 +654,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -672,7 +699,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -706,7 +734,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                                 : fibonacci(v - 1, v - 2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -740,7 +769,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                                 : fibonacci(v - 1, v - 2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -774,7 +804,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                                 : fibonacci(v - 1, v - 2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -800,7 +831,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -826,7 +858,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -871,7 +904,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -916,7 +950,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -962,9 +997,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     }
                 }
                 """,
-            // 7.1 is required for default literals, so 7.2 should be sufficient
-            // and is used in other tests
-            new TestParameters(parseOptions: CSharp72ParseOptions));
+                // 7.1 is required for default literals, so 7.2 should be sufficient
+                // and is used in other tests
+                new TestParameters(parseOptions: CSharp72ParseOptions)
+            );
         }
 
         [Fact]
@@ -1009,7 +1045,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1054,7 +1091,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1099,7 +1137,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1144,7 +1183,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1189,7 +1229,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1224,7 +1265,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                                 : fibonacci(v - 1, v - 2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1259,7 +1301,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                                 : fibonacci(v - 1, v - 2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1294,7 +1337,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                                 : fibonacci(v - 1, v - 2);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1332,7 +1376,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1370,7 +1415,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1409,7 +1455,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1448,7 +1495,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1494,7 +1542,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         } // Trailing trivia
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1521,8 +1570,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     }
                 }
                 """,
-            // Run with 7.2 to get read-only references
-            new TestParameters(parseOptions: CSharp72ParseOptions));
+                // Run with 7.2 to get read-only references
+                new TestParameters(parseOptions: CSharp72ParseOptions)
+            );
         }
 
         [Fact]
@@ -1548,7 +1598,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static ref readonly int lambda() => throw null;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23118")]
@@ -1570,7 +1621,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
 
                     public static void AssertSame(object expected, object actual) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23118")]
@@ -1608,7 +1660,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
 
                     public static void AssertSame(Func<string, Task> expected, object actual) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23118")]
@@ -1628,7 +1681,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
 
                     public static void M(Delegate expected) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23118")]
@@ -1648,7 +1702,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
 
                     public static void M(MulticastDelegate expected) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23118")]
@@ -1682,7 +1737,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
 
                     public static void M(Func<object, string> expected) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/56938")]
@@ -1717,7 +1773,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
 
                     public static void M(Func<string, object> expected) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/56938")]
@@ -1752,7 +1809,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
 
                     public static void M(Func<string, object> expected) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/56938")]
@@ -1787,7 +1845,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
 
                     public static void M(Func<string, object> expected) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22672")]
@@ -1812,7 +1871,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     }
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22672")]
@@ -1836,7 +1896,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23150")]
@@ -1863,7 +1924,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/22672")]
@@ -1888,7 +1950,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     }
                   }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24344")]
@@ -1909,7 +1972,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         return () => Method(action);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23150")]
@@ -1951,7 +2015,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23150")]
@@ -1993,7 +2058,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23150")]
@@ -2041,7 +2107,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23150")]
@@ -2089,7 +2156,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24760#issuecomment-364807853")]
@@ -2118,7 +2186,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static void local() => local();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24760#issuecomment-364807853")]
@@ -2147,7 +2216,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static void local() { local(); }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24760#issuecomment-364935495")]
@@ -2177,7 +2247,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         a(a(null));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2206,7 +2277,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static string a(string s) => a(a(s));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2234,7 +2306,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static string local(string s = "hello") => s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24760#issuecomment-364655480")]
@@ -2262,7 +2335,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static string local(string s = "hello") => s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2290,7 +2364,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static string local(string s = "hello") { return s; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24760#issuecomment-364764542")]
@@ -2318,7 +2393,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static void x(object a, object b) { }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2346,7 +2422,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static void x(string a, int b) { }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2376,7 +2453,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static async Task f() => await Task.Yield();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2406,7 +2484,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static async Task<int> f() { return 0; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2442,7 +2521,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
 
                     event EventHandler E;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24764")]
@@ -2476,7 +2556,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         x(a1: null, 0, 0);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/24764")]
@@ -2512,7 +2593,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2548,7 +2630,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         x(0, null, null, null, null, null);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2586,7 +2669,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2623,7 +2707,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2680,7 +2765,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         x(arg1: null);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -2708,7 +2794,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         void onUpdateSolutionCancel() { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -2736,7 +2823,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -2764,7 +2852,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -2790,7 +2879,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static int[] onUpdateSolutionCancel(int a) { return null; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -2818,7 +2908,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static async Task<int[]> onUpdateSolutionCancel(int a) { return null; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -2846,7 +2937,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -2874,7 +2966,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -2902,7 +2995,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -2930,7 +3024,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         void onUpdateSolutionCancel() { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -2958,7 +3053,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -2986,7 +3082,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -3014,7 +3111,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -3042,7 +3140,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -3070,7 +3169,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -3099,7 +3199,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         void onUpdateSolutionCancel() { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -3128,7 +3229,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -3157,7 +3259,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -3186,7 +3289,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -3215,7 +3319,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         void onUpdateSolutionCancel(int a) { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23872")]
@@ -3244,7 +3349,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         async void onUpdateSolutionCancel(int a) { buildCancelled = true; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23149")]
@@ -3268,7 +3374,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23149")]
@@ -3295,7 +3402,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23149")]
@@ -3317,7 +3425,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23149")]
@@ -3344,7 +3453,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/27950")]
@@ -3389,7 +3499,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         Callee(local);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23149")]
@@ -3433,7 +3544,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         Callee(local);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/56963")]
@@ -3466,7 +3578,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         var f2 = (Func<string>)f;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26526")]
@@ -3506,7 +3619,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26526")]
@@ -3554,7 +3668,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3606,7 +3721,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3658,7 +3774,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29793")]
@@ -3681,7 +3798,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29793")]
@@ -3704,7 +3822,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29793")]
@@ -3727,7 +3846,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29793")]
@@ -3767,7 +3887,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29793")]
@@ -3807,7 +3928,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29793")]
@@ -3859,7 +3981,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/29793")]
@@ -3901,7 +4024,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3945,7 +4069,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -3991,7 +4116,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4021,7 +4147,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static async Task f() => await Task.Yield();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4053,7 +4180,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static string? f(string? s) => s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4077,7 +4205,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         static long f(int _, string _, int a) => 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4107,7 +4236,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -4137,7 +4267,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68439")]
@@ -4162,7 +4293,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     }
                 }
                 """,
-                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp10));
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp10
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68439")]
@@ -4178,7 +4312,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
                     }
                 }
                 """,
-                new TestParameters(parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9)));
+                new TestParameters(
+                    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                        LanguageVersion.CSharp9
+                    )
+                )
+            );
         }
     }
 }

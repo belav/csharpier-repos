@@ -17,7 +17,9 @@ public static class StackExchangeRedisDependencyInjectionExtensions
     /// </summary>
     /// <param name="signalrBuilder">The <see cref="ISignalRServerBuilder"/>.</param>
     /// <returns>The same instance of the <see cref="ISignalRServerBuilder"/> for chaining.</returns>
-    public static ISignalRServerBuilder AddStackExchangeRedis(this ISignalRServerBuilder signalrBuilder)
+    public static ISignalRServerBuilder AddStackExchangeRedis(
+        this ISignalRServerBuilder signalrBuilder
+    )
     {
         return AddStackExchangeRedis(signalrBuilder, o => { });
     }
@@ -28,12 +30,18 @@ public static class StackExchangeRedisDependencyInjectionExtensions
     /// <param name="signalrBuilder">The <see cref="ISignalRServerBuilder"/>.</param>
     /// <param name="redisConnectionString">The connection string used to connect to the Redis server.</param>
     /// <returns>The same instance of the <see cref="ISignalRServerBuilder"/> for chaining.</returns>
-    public static ISignalRServerBuilder AddStackExchangeRedis(this ISignalRServerBuilder signalrBuilder, string redisConnectionString)
+    public static ISignalRServerBuilder AddStackExchangeRedis(
+        this ISignalRServerBuilder signalrBuilder,
+        string redisConnectionString
+    )
     {
-        return AddStackExchangeRedis(signalrBuilder, o =>
-        {
-            o.Configuration = ConfigurationOptions.Parse(redisConnectionString);
-        });
+        return AddStackExchangeRedis(
+            signalrBuilder,
+            o =>
+            {
+                o.Configuration = ConfigurationOptions.Parse(redisConnectionString);
+            }
+        );
     }
 
     /// <summary>
@@ -42,10 +50,16 @@ public static class StackExchangeRedisDependencyInjectionExtensions
     /// <param name="signalrBuilder">The <see cref="ISignalRServerBuilder"/>.</param>
     /// <param name="configure">A callback to configure the Redis options.</param>
     /// <returns>The same instance of the <see cref="ISignalRServerBuilder"/> for chaining.</returns>
-    public static ISignalRServerBuilder AddStackExchangeRedis(this ISignalRServerBuilder signalrBuilder, Action<RedisOptions> configure)
+    public static ISignalRServerBuilder AddStackExchangeRedis(
+        this ISignalRServerBuilder signalrBuilder,
+        Action<RedisOptions> configure
+    )
     {
         signalrBuilder.Services.Configure(configure);
-        signalrBuilder.Services.AddSingleton(typeof(HubLifetimeManager<>), typeof(RedisHubLifetimeManager<>));
+        signalrBuilder.Services.AddSingleton(
+            typeof(HubLifetimeManager<>),
+            typeof(RedisHubLifetimeManager<>)
+        );
         return signalrBuilder;
     }
 
@@ -56,12 +70,19 @@ public static class StackExchangeRedisDependencyInjectionExtensions
     /// <param name="redisConnectionString">The connection string used to connect to the Redis server.</param>
     /// <param name="configure">A callback to configure the Redis options.</param>
     /// <returns>The same instance of the <see cref="ISignalRServerBuilder"/> for chaining.</returns>
-    public static ISignalRServerBuilder AddStackExchangeRedis(this ISignalRServerBuilder signalrBuilder, string redisConnectionString, Action<RedisOptions> configure)
+    public static ISignalRServerBuilder AddStackExchangeRedis(
+        this ISignalRServerBuilder signalrBuilder,
+        string redisConnectionString,
+        Action<RedisOptions> configure
+    )
     {
-        return AddStackExchangeRedis(signalrBuilder, o =>
-        {
-            o.Configuration = ConfigurationOptions.Parse(redisConnectionString);
-            configure(o);
-        });
+        return AddStackExchangeRedis(
+            signalrBuilder,
+            o =>
+            {
+                o.Configuration = ConfigurationOptions.Parse(redisConnectionString);
+                configure(o);
+            }
+        );
     }
 }

@@ -18,7 +18,11 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// uses by default in its logic or for specifying the status code for consumption in
 /// the API analyzers.
 /// </remarks>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public sealed class DefaultStatusCodeAttribute : Attribute
 {
     /// <summary>

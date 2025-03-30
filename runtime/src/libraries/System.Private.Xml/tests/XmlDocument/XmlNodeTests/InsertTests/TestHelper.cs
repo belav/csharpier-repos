@@ -5,7 +5,13 @@ using Xunit;
 
 namespace System.Xml.XmlDocumentTests
 {
-    public enum InsertType { Prepend, Append, InsertBefore, InsertAfter }
+    public enum InsertType
+    {
+        Prepend,
+        Append,
+        InsertBefore,
+        InsertAfter,
+    }
 
     public static class TestHelper
     {
@@ -13,7 +19,11 @@ namespace System.Xml.XmlDocumentTests
         public delegate XmlNode InsertFrontOrEnd(XmlNode parent, XmlNode newChild);
 
         // A delegate to XmlNode.InsertBefore or XmlNode.InsertAfter
-        public delegate XmlNode InsertBeforeOrAfter(XmlNode parent, XmlNode newChild, XmlNode refChild);
+        public delegate XmlNode InsertBeforeOrAfter(
+            XmlNode parent,
+            XmlNode newChild,
+            XmlNode refChild
+        );
 
         public static XmlNode CreateNode(XmlDocument doc, XmlNodeType nodeType)
         {

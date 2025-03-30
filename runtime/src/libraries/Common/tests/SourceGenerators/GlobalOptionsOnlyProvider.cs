@@ -24,7 +24,7 @@ namespace SourceGenerators.Tests
             GlobalOptions = globalOptions;
         }
 
-        public sealed override AnalyzerConfigOptions GlobalOptions  { get; }
+        public sealed override AnalyzerConfigOptions GlobalOptions { get; }
 
         public sealed override AnalyzerConfigOptions GetOptions(SyntaxTree tree)
         {

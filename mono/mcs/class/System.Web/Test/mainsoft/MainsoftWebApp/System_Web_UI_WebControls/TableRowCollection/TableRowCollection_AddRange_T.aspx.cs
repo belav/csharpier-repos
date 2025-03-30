@@ -30,64 +30,65 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class TableRowCollection_AddRange_T
-		: GHTBaseWeb 
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+    public class TableRowCollection_AddRange_T : GHTBaseWeb
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
-			base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
-			System.Web.UI.WebControls.Table myTable = new System.Web.UI.WebControls.Table();
-			int numRows = 4;
-			// Create 3 rows, each containing 2 cells.
-			System.Web.UI.WebControls.TableRow [] arrayOfTableRows = new System.Web.UI.WebControls.TableRow[numRows];
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-			for (int j = 0; j<numRows; j++)
-			{
-				System.Web.UI.WebControls.TableRow myTableRow = new System.Web.UI.WebControls.TableRow();
-				myTableRow.Cells.Add(new System.Web.UI.WebControls.TableCell());
-				myTableRow.Cells[0].Text = "Row " + j.ToString();
-				arrayOfTableRows[j] = myTableRow;
-			}
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
+            base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
+            System.Web.UI.WebControls.Table myTable = new System.Web.UI.WebControls.Table();
+            int numRows = 4;
+            // Create 3 rows, each containing 2 cells.
+            System.Web.UI.WebControls.TableRow[] arrayOfTableRows =
+                new System.Web.UI.WebControls.TableRow[numRows];
 
-			try 
-			{
-				base.GHTSubTestBegin("AddRange Rows");
-				base.GHTActiveSubTest.Controls.Add(myTable);
-				myTable.Rows.AddRange(arrayOfTableRows);
-			}
-			catch (Exception ex) 
-			{
-				base.GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			base.GHTSubTestEnd();
+            for (int j = 0; j < numRows; j++)
+            {
+                System.Web.UI.WebControls.TableRow myTableRow =
+                    new System.Web.UI.WebControls.TableRow();
+                myTableRow.Cells.Add(new System.Web.UI.WebControls.TableCell());
+                myTableRow.Cells[0].Text = "Row " + j.ToString();
+                arrayOfTableRows[j] = myTableRow;
+            }
 
-			base.GHTTestEnd();
-		}
-	}
+            try
+            {
+                base.GHTSubTestBegin("AddRange Rows");
+                base.GHTActiveSubTest.Controls.Add(myTable);
+                myTable.Rows.AddRange(arrayOfTableRows);
+            }
+            catch (Exception ex)
+            {
+                base.GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            base.GHTSubTestEnd();
+
+            base.GHTTestEnd();
+        }
+    }
 }

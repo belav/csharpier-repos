@@ -20,10 +20,9 @@ public class PageApplicationModel
     public PageApplicationModel(
         PageActionDescriptor actionDescriptor,
         TypeInfo handlerType,
-        IReadOnlyList<object> handlerAttributes)
-        : this(actionDescriptor, handlerType, handlerType, handlerAttributes)
-    {
-    }
+        IReadOnlyList<object> handlerAttributes
+    )
+        : this(actionDescriptor, handlerType, handlerType, handlerAttributes) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="PageApplicationModel"/>.
@@ -32,20 +31,25 @@ public class PageApplicationModel
         PageActionDescriptor actionDescriptor,
         TypeInfo declaredModelType,
         TypeInfo handlerType,
-        IReadOnlyList<object> handlerAttributes)
+        IReadOnlyList<object> handlerAttributes
+    )
     {
-        ActionDescriptor = actionDescriptor ?? throw new ArgumentNullException(nameof(actionDescriptor));
+        ActionDescriptor =
+            actionDescriptor ?? throw new ArgumentNullException(nameof(actionDescriptor));
         DeclaredModelType = declaredModelType;
         HandlerType = handlerType;
 
         Filters = new List<IFilterMetadata>();
         Properties = new CopyOnWriteDictionary<object, object?>(
             actionDescriptor.Properties,
-            EqualityComparer<object>.Default);
+            EqualityComparer<object>.Default
+        );
         HandlerMethods = new List<PageHandlerModel>();
         HandlerProperties = new List<PagePropertyModel>();
         HandlerTypeAttributes = handlerAttributes;
-        EndpointMetadata = new List<object>(ActionDescriptor.EndpointMetadata ?? Array.Empty<object>());
+        EndpointMetadata = new List<object>(
+            ActionDescriptor.EndpointMetadata ?? Array.Empty<object>()
+        );
     }
 
     /// <summary>
@@ -64,8 +68,12 @@ public class PageApplicationModel
         Filters = new List<IFilterMetadata>(other.Filters);
         Properties = new Dictionary<object, object?>(other.Properties);
 
-        HandlerMethods = new List<PageHandlerModel>(other.HandlerMethods.Select(m => new PageHandlerModel(m)));
-        HandlerProperties = new List<PagePropertyModel>(other.HandlerProperties.Select(p => new PagePropertyModel(p)));
+        HandlerMethods = new List<PageHandlerModel>(
+            other.HandlerMethods.Select(m => new PageHandlerModel(m))
+        );
+        HandlerProperties = new List<PagePropertyModel>(
+            other.HandlerProperties.Select(p => new PagePropertyModel(p))
+        );
         HandlerTypeAttributes = other.HandlerTypeAttributes;
         EndpointMetadata = new List<object>(other.EndpointMetadata);
     }

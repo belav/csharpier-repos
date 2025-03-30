@@ -8,9 +8,6 @@ namespace JIT.HardwareIntrinsics.X86._Avx512Vbmi_VL_Vector256
 {
     public static partial class Program
     {
-        static Program()
-        {
-
-        }
+        static Program() { }
     }
 }

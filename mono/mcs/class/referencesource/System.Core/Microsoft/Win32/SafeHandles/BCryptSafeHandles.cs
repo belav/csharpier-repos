@@ -1,33 +1,39 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 using System;
+using System.Diagnostics.Contracts;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Cryptography;
-using System.Diagnostics.Contracts;
 
-namespace Microsoft.Win32.SafeHandles {
+namespace Microsoft.Win32.SafeHandles
+{
     /// <summary>
     ///     SafeHandle representing a BCRYPT_ALG_HANDLE
     /// </summary>
 #pragma warning disable 618    // Have not migrated to v4 transparency yet
     [System.Security.SecurityCritical(System.Security.SecurityCriticalScope.Everything)]
 #pragma warning restore 618
-    internal sealed class SafeBCryptAlgorithmHandle : SafeHandleZeroOrMinusOneIsInvalid {
-        private SafeBCryptAlgorithmHandle() : base(true) {
-        }
+    internal sealed class SafeBCryptAlgorithmHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        private SafeBCryptAlgorithmHandle()
+            : base(true) { }
 
         [DllImport("bcrypt")]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [SuppressUnmanagedCodeSecurity]
-        private static extern BCryptNative.ErrorCode BCryptCloseAlgorithmProvider(IntPtr hAlgorithm, int flags);
+        private static extern BCryptNative.ErrorCode BCryptCloseAlgorithmProvider(
+            IntPtr hAlgorithm,
+            int flags
+        );
 
-        protected override bool ReleaseHandle() {
+        protected override bool ReleaseHandle()
+        {
             return BCryptCloseAlgorithmProvider(handle, 0) == BCryptNative.ErrorCode.Success;
         }
     }
@@ -38,35 +44,38 @@ namespace Microsoft.Win32.SafeHandles {
 #pragma warning disable 618    // Have not migrated to v4 transparency yet
     [System.Security.SecurityCritical(System.Security.SecurityCriticalScope.Everything)]
 #pragma warning restore 618
-    internal sealed class SafeBCryptHashHandle : SafeHandleZeroOrMinusOneIsInvalid {
+    internal sealed class SafeBCryptHashHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
         private IntPtr m_hashObject;
 
-        private SafeBCryptHashHandle() : base(true) {
-        }
+        private SafeBCryptHashHandle()
+            : base(true) { }
 
         /// <summary>
         ///     Buffer holding the hash object. This buffer should be allocated with Marshal.AllocCoTaskMem.
         /// </summary>
-        internal IntPtr HashObject {
+        internal IntPtr HashObject
+        {
             get { return m_hashObject; }
-
-            set {
+            set
+            {
                 Contract.Requires(value != IntPtr.Zero);
                 m_hashObject = value;
             }
         }
-
 
         [DllImport("bcrypt")]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [SuppressUnmanagedCodeSecurity]
         private static extern BCryptNative.ErrorCode BCryptDestroyHash(IntPtr hHash);
 
-        protected override bool ReleaseHandle() {
+        protected override bool ReleaseHandle()
+        {
             bool success = BCryptDestroyHash(handle) == BCryptNative.ErrorCode.Success;
 
             // The hash object buffer must be released only after destroying the hash handle
-            if (m_hashObject != IntPtr.Zero) {
+            if (m_hashObject != IntPtr.Zero)
+            {
                 Marshal.FreeCoTaskMem(m_hashObject);
             }
 
@@ -78,16 +87,19 @@ namespace Microsoft.Win32.SafeHandles {
     ///     SafeHandle for a native BCRYPT_KEY_HANDLE.
     /// </summary>
     [SecuritySafeCritical]
-    internal sealed class SafeBCryptKeyHandle : SafeHandleZeroOrMinusOneIsInvalid {
-        internal SafeBCryptKeyHandle(): base(true){ }
+    internal sealed class SafeBCryptKeyHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        internal SafeBCryptKeyHandle()
+            : base(true) { }
 
         [DllImport("bcrypt.dll")]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        [SuppressUnmanagedCodeSecurity]        
+        [SuppressUnmanagedCodeSecurity]
         internal static extern BCryptNative.ErrorCode BCryptDestroyKey(IntPtr hKey);
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        protected override bool ReleaseHandle() {
+        protected override bool ReleaseHandle()
+        {
             return BCryptDestroyKey(handle) == BCryptNative.ErrorCode.Success;
         }
     }

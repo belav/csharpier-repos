@@ -12,10 +12,9 @@ namespace System.ServiceModel.Activities.Configuration
 
     public sealed class WorkflowHostingOptionsSection : ConfigurationSection
     {
-        public WorkflowHostingOptionsSection() : base()
-        {
-        }
-        
+        public WorkflowHostingOptionsSection()
+            : base() { }
+
         [ConfigurationProperty(ConfigurationStrings.OverrideSiteName, DefaultValue = "false")]
         public bool OverrideSiteName
         {
@@ -25,12 +24,15 @@ namespace System.ServiceModel.Activities.Configuration
 
         internal static WorkflowHostingOptionsSection GetSection()
         {
-            WorkflowHostingOptionsSection retval = (WorkflowHostingOptionsSection)ConfigurationManager.GetSection(ConfigurationStrings.WorkflowHostingOptionsSectionPath);
+            WorkflowHostingOptionsSection retval = (WorkflowHostingOptionsSection)
+                ConfigurationManager.GetSection(
+                    ConfigurationStrings.WorkflowHostingOptionsSectionPath
+                );
             if (retval == null)
             {
                 retval = new WorkflowHostingOptionsSection();
             }
-            
+
             return retval;
         }
     }

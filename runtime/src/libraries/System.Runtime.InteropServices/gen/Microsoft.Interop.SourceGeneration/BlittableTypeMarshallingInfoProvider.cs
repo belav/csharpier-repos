@@ -20,25 +20,41 @@ namespace Microsoft.Interop
             _compilation = compilation;
         }
 
-        public bool CanProvideMarshallingInfoForType(ITypeSymbol type) => type is INamedTypeSymbol { IsUnmanagedType: true } unmanagedType
-                && unmanagedType.IsConsideredBlittable();
-        public MarshallingInfo GetMarshallingInfo(ITypeSymbol type, int indirectionDepth, UseSiteAttributeProvider useSiteAttributes, GetMarshallingInfoCallback marshallingInfoCallback)
+        public bool CanProvideMarshallingInfoForType(ITypeSymbol type) =>
+            type is INamedTypeSymbol { IsUnmanagedType: true } unmanagedType
+            && unmanagedType.IsConsideredBlittable();
+
+        public MarshallingInfo GetMarshallingInfo(
+            ITypeSymbol type,
+            int indirectionDepth,
+            UseSiteAttributeProvider useSiteAttributes,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        )
         {
-            if (type.TypeKind is TypeKind.Enum or TypeKind.Pointer or TypeKind.FunctionPointer
-                || type.SpecialType.IsAlwaysBlittable())
+            if (
+                type.TypeKind is TypeKind.Enum or TypeKind.Pointer or TypeKind.FunctionPointer
+                || type.SpecialType.IsAlwaysBlittable()
+            )
             {
                 // Treat primitive types and enums as having no marshalling info.
                 // They are supported in configurations where runtime marshalling is enabled.
                 return NoMarshallingInfo.Instance;
             }
-            else if (_compilation.GetTypeByMetadataName(TypeNames.System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute) is null)
+            else if (
+                _compilation.GetTypeByMetadataName(
+                    TypeNames.System_Runtime_CompilerServices_DisableRuntimeMarshallingAttribute
+                )
+                is null
+            )
             {
                 // If runtime marshalling cannot be disabled, then treat this as a "missing support" scenario so we can gracefully fall back to using the forwarder downlevel.
                 return new MissingSupportMarshallingInfo();
             }
             else
             {
-                return new UnmanagedBlittableMarshallingInfo(type.IsStrictlyBlittableInContext(_compilation));
+                return new UnmanagedBlittableMarshallingInfo(
+                    type.IsStrictlyBlittableInContext(_compilation)
+                );
             }
         }
     }

@@ -12,18 +12,64 @@ namespace System.SpanTests
         [Fact]
         public static void Sort_InvalidArguments_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>("comparison", () => MemoryExtensions.Sort(Span<byte>.Empty, (Comparison<byte>)null));
-            AssertExtensions.Throws<ArgumentNullException>("comparison", () => MemoryExtensions.Sort(Span<byte>.Empty, Span<byte>.Empty, (Comparison<byte>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "comparison",
+                () => MemoryExtensions.Sort(Span<byte>.Empty, (Comparison<byte>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "comparison",
+                () =>
+                    MemoryExtensions.Sort(
+                        Span<byte>.Empty,
+                        Span<byte>.Empty,
+                        (Comparison<byte>)null
+                    )
+            );
 
-            Assert.Throws<ArgumentException>(() => MemoryExtensions.Sort((Span<byte>)new byte[1], (Span<byte>)new byte[2]));
-            Assert.Throws<ArgumentException>(() => MemoryExtensions.Sort((Span<byte>)new byte[2], (Span<byte>)new byte[1]));
-            Assert.Throws<ArgumentException>(() => MemoryExtensions.Sort((Span<byte>)new byte[1], (Span<byte>)new byte[2], Comparer<byte>.Default.Compare));
-            Assert.Throws<ArgumentException>(() => MemoryExtensions.Sort((Span<byte>)new byte[2], (Span<byte>)new byte[1], Comparer<byte>.Default.Compare));
-            Assert.Throws<ArgumentException>(() => MemoryExtensions.Sort((Span<byte>)new byte[1], (Span<byte>)new byte[2], Comparer<byte>.Default));
-            Assert.Throws<ArgumentException>(() => MemoryExtensions.Sort((Span<byte>)new byte[2], (Span<byte>)new byte[1], Comparer<byte>.Default));
+            Assert.Throws<ArgumentException>(() =>
+                MemoryExtensions.Sort((Span<byte>)new byte[1], (Span<byte>)new byte[2])
+            );
+            Assert.Throws<ArgumentException>(() =>
+                MemoryExtensions.Sort((Span<byte>)new byte[2], (Span<byte>)new byte[1])
+            );
+            Assert.Throws<ArgumentException>(() =>
+                MemoryExtensions.Sort(
+                    (Span<byte>)new byte[1],
+                    (Span<byte>)new byte[2],
+                    Comparer<byte>.Default.Compare
+                )
+            );
+            Assert.Throws<ArgumentException>(() =>
+                MemoryExtensions.Sort(
+                    (Span<byte>)new byte[2],
+                    (Span<byte>)new byte[1],
+                    Comparer<byte>.Default.Compare
+                )
+            );
+            Assert.Throws<ArgumentException>(() =>
+                MemoryExtensions.Sort(
+                    (Span<byte>)new byte[1],
+                    (Span<byte>)new byte[2],
+                    Comparer<byte>.Default
+                )
+            );
+            Assert.Throws<ArgumentException>(() =>
+                MemoryExtensions.Sort(
+                    (Span<byte>)new byte[2],
+                    (Span<byte>)new byte[1],
+                    Comparer<byte>.Default
+                )
+            );
 
-            Assert.Throws<InvalidOperationException>(() => MemoryExtensions.Sort((Span<NotImcomparable>)new NotImcomparable[10]));
-            Assert.Throws<InvalidOperationException>(() => MemoryExtensions.Sort((Span<NotImcomparable>)new NotImcomparable[10], (Span<byte>)new byte[10]));
+            Assert.Throws<InvalidOperationException>(() =>
+                MemoryExtensions.Sort((Span<NotImcomparable>)new NotImcomparable[10])
+            );
+            Assert.Throws<InvalidOperationException>(() =>
+                MemoryExtensions.Sort(
+                    (Span<NotImcomparable>)new NotImcomparable[10],
+                    (Span<byte>)new byte[10]
+                )
+            );
         }
 
         private struct NotImcomparable { }
@@ -37,7 +83,11 @@ namespace System.SpanTests
         [InlineData(5)]
         public static void Sort_CovariantArraysAllowed(int overload)
         {
-            Span<object> actual = Enumerable.Range(0, 10).Select(i => (object)i.ToString()).Reverse().ToArray();
+            Span<object> actual = Enumerable
+                .Range(0, 10)
+                .Select(i => (object)i.ToString())
+                .Reverse()
+                .ToArray();
 
             object[] expected = actual.ToArray();
             Array.Sort(expected);
@@ -57,10 +107,18 @@ namespace System.SpanTests
                     MemoryExtensions.Sort(actual, new byte[actual.Length].AsSpan());
                     break;
                 case 4:
-                    MemoryExtensions.Sort(actual, new byte[actual.Length].AsSpan(), StringComparer.CurrentCulture.Compare);
+                    MemoryExtensions.Sort(
+                        actual,
+                        new byte[actual.Length].AsSpan(),
+                        StringComparer.CurrentCulture.Compare
+                    );
                     break;
                 case 5:
-                    MemoryExtensions.Sort(actual, new byte[actual.Length].AsSpan(), (IComparer<object>)null);
+                    MemoryExtensions.Sort(
+                        actual,
+                        new byte[actual.Length].AsSpan(),
+                        (IComparer<object>)null
+                    );
                     break;
             }
 
@@ -94,7 +152,10 @@ namespace System.SpanTests
             Assert.Equal(expectedKeys, keys.ToArray());
 
             keys = origKeys.ToArray();
-            MemoryExtensions.Sort(keys, comparer != null ? (Comparison<T>)comparer.Compare : Comparer<T>.Default.Compare);
+            MemoryExtensions.Sort(
+                keys,
+                comparer != null ? (Comparison<T>)comparer.Compare : Comparer<T>.Default.Compare
+            );
             Assert.Equal(expectedKeys, keys.ToArray());
 
             if (comparer == null)
@@ -114,7 +175,11 @@ namespace System.SpanTests
 
             keys = origKeys.ToArray();
             values = origValues.ToArray();
-            MemoryExtensions.Sort(keys, values, comparer != null ? (Comparison<T>)comparer.Compare : Comparer<T>.Default.Compare);
+            MemoryExtensions.Sort(
+                keys,
+                values,
+                comparer != null ? (Comparison<T>)comparer.Compare : Comparer<T>.Default.Compare
+            );
             Assert.Equal(expectedKeys, keys.ToArray());
             Assert.Equal(expectedValues, values.ToArray());
         }
@@ -137,10 +202,19 @@ namespace System.SpanTests
                 yield return new object[] { CreateArray(i => i % 2 == 0), null };
                 yield return new object[] { CreateArray(i => (float)i), null };
                 yield return new object[] { CreateArray(i => (double)i), null };
-                yield return new object[] { CreateArray(i => (IntPtr)i), Comparer<IntPtr>.Create((i, j) => i.ToInt64().CompareTo(j.ToInt64())) };
-                yield return new object[] { CreateArray(i => (UIntPtr)i), Comparer<UIntPtr>.Create((i, j) => i.ToUInt64().CompareTo(j.ToUInt64())) };
+                yield return new object[]
+                {
+                    CreateArray(i => (IntPtr)i),
+                    Comparer<IntPtr>.Create((i, j) => i.ToInt64().CompareTo(j.ToInt64())),
+                };
+                yield return new object[]
+                {
+                    CreateArray(i => (UIntPtr)i),
+                    Comparer<UIntPtr>.Create((i, j) => i.ToUInt64().CompareTo(j.ToUInt64())),
+                };
 
-                T[] CreateArray<T>(Func<int, T> getValue) => Enumerable.Range(0, length).Select(_ => getValue(rand.Next())).ToArray();
+                T[] CreateArray<T>(Func<int, T> getValue) =>
+                    Enumerable.Range(0, length).Select(_ => getValue(rand.Next())).ToArray();
             }
         }
     }

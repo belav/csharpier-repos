@@ -8,25 +8,28 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-#if BUILDING_SOURCE_GENERATOR_TESTS
-using Microsoft.Extensions.Configuration;
-#endif
 using Microsoft.Extensions.Configuration.Memory;
 using Microsoft.Extensions.Configuration.Test;
 using Xunit;
+#if BUILDING_SOURCE_GENERATOR_TESTS
+using Microsoft.Extensions.Configuration;
+#endif
 
 namespace Microsoft.Extensions
 #if BUILDING_SOURCE_GENERATOR_TESTS
-    .SourceGeneration
+.SourceGeneration
 #endif
-    .Configuration.Binder.Tests
+.Configuration.Binder.Tests
 {
     public abstract class ConfigurationBinderTestsBase
     {
         public ConfigurationBinderTestsBase()
         {
 #if LAUNCH_DEBUGGER
-if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launch(); }
+            if (!System.Diagnostics.Debugger.IsAttached)
+            {
+                System.Diagnostics.Debugger.Launch();
+            }
 #endif
         }
     }
@@ -37,10 +40,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         public void BindWithNestedTypesWithReadOnlyProperties()
         {
             IConfiguration configuration = new ConfigurationBuilder()
-                .AddInMemoryCollection(new Dictionary<string, string?>
-                {
-                    { "Nested:MyProp", "Dummy" }
-                })
+                .AddInMemoryCollection(
+                    new Dictionary<string, string?> { { "Nested:MyProp", "Dummy" } }
+                )
                 .Build();
 
             var result = configuration.Get<RootConfig>();
@@ -63,8 +65,8 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Section:Option1", "opt1"},
-                {"Section:option2", "opt2"}
+                { "Section:Option1", "opt1" },
+                { "Section:option2", "opt2" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -84,10 +86,10 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Section:Integer", "-2"},
-                {"Section:Boolean", "TRUe"},
-                {"Section:Nested:Integer", "11"},
-                {"Section:Virtual", "Sup"}
+                { "Section:Integer", "-2" },
+                { "Section:Boolean", "TRUe" },
+                { "Section:Nested:Integer", "11" },
+                { "Section:Virtual", "Sup" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -97,7 +99,8 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
             var childOptions = options.Section.Get<DerivedOptions>();
             Test();
 
-            options = (ConfigurationInterfaceOptions)config.Get(typeof(ConfigurationInterfaceOptions));
+            options = (ConfigurationInterfaceOptions)
+                config.Get(typeof(ConfigurationInterfaceOptions));
             childOptions = (DerivedOptions)options.Section.Get(typeof(DerivedOptions));
             Test();
 
@@ -105,8 +108,10 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
             childOptions = options.Section.Get<DerivedOptions>(options => { });
             Test();
 
-            options = (ConfigurationInterfaceOptions)config.Get(typeof(ConfigurationInterfaceOptions), options => { });
-            childOptions = (DerivedOptions)options.Section.Get(typeof(DerivedOptions), options => { });
+            options = (ConfigurationInterfaceOptions)
+                config.Get(typeof(ConfigurationInterfaceOptions), options => { });
+            childOptions = (DerivedOptions)
+                options.Section.Get(typeof(DerivedOptions), options => { });
             Test();
 
             void Test()
@@ -127,10 +132,10 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Section:Integer", "-2"},
-                {"Section:Boolean", "TRUe"},
-                {"Section:Nested:Integer", "11"},
-                {"Section:Virtual", "Sup"}
+                { "Section:Integer", "-2" },
+                { "Section:Boolean", "TRUe" },
+                { "Section:Nested:Integer", "11" },
+                { "Section:Virtual", "Sup" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -150,12 +155,12 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Section:Integer", "-2"},
-                {"Section:Boolean", "TRUe"},
-                {"Section:Nested:Integer", "11"},
-                {"Section:Virtual", "Sup"},
-                {"Section:DerivedSection:Nested:Integer", "11"},
-                {"Section:DerivedSection:Virtual", "Sup"}
+                { "Section:Integer", "-2" },
+                { "Section:Boolean", "TRUe" },
+                { "Section:Nested:Integer", "11" },
+                { "Section:Virtual", "Sup" },
+                { "Section:DerivedSection:Nested:Integer", "11" },
+                { "Section:DerivedSection:Virtual", "Sup" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -184,10 +189,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void CanBindConfigurationKeyNameAttributes()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Named_Property", "Yo"},
-            };
+            var dic = new Dictionary<string, string> { { "Named_Property", "Yo" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -200,10 +202,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void EmptyStringIsNullable()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"empty", ""},
-            };
+            var dic = new Dictionary<string, string> { { "empty", "" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -223,9 +222,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -245,9 +244,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -267,9 +266,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -289,9 +288,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -309,10 +308,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void CanBindToObjectProperty()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Object", "whatever" }
-            };
+            var dic = new Dictionary<string, string> { { "Object", "whatever" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -328,10 +324,10 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", null},
-                {"Boolean", null},
-                {"Nested:Integer", null},
-                {"Object", null }
+                { "Integer", null },
+                { "Boolean", null },
+                { "Nested:Integer", null },
+                { "Object", null },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -373,10 +369,10 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"ThisDoesNotExistInTheModel", "42"},
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "ThisDoesNotExistInTheModel", "42" },
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -384,11 +380,17 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
 
             var instance = new ComplexOptions();
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true));
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true)
+            );
 
-            string expectedMessage = SR.Format(SR.Error_MissingConfig,
-                nameof(BinderOptions.ErrorOnUnknownConfiguration), nameof(BinderOptions), typeof(ComplexOptions), "'ThisDoesNotExistInTheModel'");
+            string expectedMessage = SR.Format(
+                SR.Error_MissingConfig,
+                nameof(BinderOptions.ErrorOnUnknownConfiguration),
+                nameof(BinderOptions),
+                typeof(ComplexOptions),
+                "'ThisDoesNotExistInTheModel'"
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -398,10 +400,10 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Nested:ThisDoesNotExistInTheModel", "42"},
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "Nested:ThisDoesNotExistInTheModel", "42" },
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -409,11 +411,17 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
 
             var instance = new ComplexOptions();
 
-            string expectedMessage = SR.Format(SR.Error_MissingConfig,
-                nameof(BinderOptions.ErrorOnUnknownConfiguration), nameof(BinderOptions), typeof(NestedOptions), "'ThisDoesNotExistInTheModel'");
+            string expectedMessage = SR.Format(
+                SR.Error_MissingConfig,
+                nameof(BinderOptions.ErrorOnUnknownConfiguration),
+                nameof(BinderOptions),
+                typeof(NestedOptions),
+                "'ThisDoesNotExistInTheModel'"
+            );
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true));
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true)
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -423,10 +431,10 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"ThisDoesNotExistInTheModel", "42"},
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "ThisDoesNotExistInTheModel", "42" },
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -434,11 +442,17 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
 
             var instance = new ComplexOptions();
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true));
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true)
+            );
 
-            string expectedMessage = SR.Format(SR.Error_MissingConfig,
-                nameof(BinderOptions.ErrorOnUnknownConfiguration), nameof(BinderOptions), typeof(ComplexOptions), "'ThisDoesNotExistInTheModel'");
+            string expectedMessage = SR.Format(
+                SR.Error_MissingConfig,
+                nameof(BinderOptions.ErrorOnUnknownConfiguration),
+                nameof(BinderOptions),
+                typeof(ComplexOptions),
+                "'ThisDoesNotExistInTheModel'"
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -448,10 +462,10 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Nested:ThisDoesNotExistInTheModel", "42"},
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "Nested:ThisDoesNotExistInTheModel", "42" },
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -459,11 +473,17 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
 
             var instance = new ComplexOptions();
 
-            string expectedMessage = SR.Format(SR.Error_MissingConfig,
-                nameof(BinderOptions.ErrorOnUnknownConfiguration), nameof(BinderOptions), typeof(NestedOptions), "'ThisDoesNotExistInTheModel'");
+            string expectedMessage = SR.Format(
+                SR.Error_MissingConfig,
+                nameof(BinderOptions.ErrorOnUnknownConfiguration),
+                nameof(BinderOptions),
+                typeof(NestedOptions),
+                "'ThisDoesNotExistInTheModel'"
+            );
 
-            var ex = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true));
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(instance, o => o.ErrorOnUnknownConfiguration = true)
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -471,9 +491,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void GetDefaultsWhenDataDoesNotExist()
         {
-            var dic = new Dictionary<string, string>
-            {
-            };
+            var dic = new Dictionary<string, string> { };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -492,10 +510,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void GetUri()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"AnUri", "http://www.bing.com"}
-            };
+            var dic = new Dictionary<string, string> { { "AnUri", "http://www.bing.com" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -529,10 +544,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         public void CanReadAllSupportedTypes(string value, Type type)
         {
             // arrange
-            var dic = new Dictionary<string, string>
-            {
-                {"Value", value}
-            };
+            var dic = new Dictionary<string, string> { { "Value", value } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -579,10 +591,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
             // arrange
             const string IncorrectValue = "Invalid data";
             const string ConfigKey = "Value";
-            var dic = new Dictionary<string, string>
-            {
-                {ConfigKey, IncorrectValue}
-            };
+            var dic = new Dictionary<string, string> { { ConfigKey, IncorrectValue } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -592,28 +601,26 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
 
             // act
 #pragma warning disable SYSLIB1104
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(options));
+            var exception = Assert.Throws<InvalidOperationException>(() => config.Bind(options));
 
-            var getValueException = Assert.Throws<InvalidOperationException>(
-                () => config.GetValue(type, "Value"));
+            var getValueException = Assert.Throws<InvalidOperationException>(() =>
+                config.GetValue(type, "Value")
+            );
 
-            var getException = Assert.Throws<InvalidOperationException>(
-                () => config.GetSection("Value").Get(type));
+            var getException = Assert.Throws<InvalidOperationException>(() =>
+                config.GetSection("Value").Get(type)
+            );
 #pragma warning restore SYSLIB1104
 
             // assert
             Assert.NotNull(exception.InnerException);
             Assert.NotNull(getException.InnerException);
+            Assert.Equal(SR.Format(SR.Error_FailedBinding, ConfigKey, type), exception.Message);
+            Assert.Equal(SR.Format(SR.Error_FailedBinding, ConfigKey, type), getException.Message);
             Assert.Equal(
                 SR.Format(SR.Error_FailedBinding, ConfigKey, type),
-                exception.Message);
-            Assert.Equal(
-                SR.Format(SR.Error_FailedBinding, ConfigKey, type),
-                getException.Message);
-            Assert.Equal(
-                SR.Format(SR.Error_FailedBinding, ConfigKey, type),
-                getValueException.Message);
+                getValueException.Message
+            );
         }
 
         [Fact]
@@ -622,10 +629,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
             const string IncorrectValue = "Invalid data";
             const string ConfigKey = "Nested:Value";
 
-            var dic = new Dictionary<string, string>
-            {
-                {ConfigKey, IncorrectValue}
-            };
+            var dic = new Dictionary<string, string> { { ConfigKey, IncorrectValue } };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -633,11 +637,12 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
 
             var options = new OptionsWithNesting();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(options));
+            var exception = Assert.Throws<InvalidOperationException>(() => config.Bind(options));
 
-            Assert.Equal(SR.Format(SR.Error_FailedBinding, ConfigKey, typeof(int)),
-                exception.Message);
+            Assert.Equal(
+                SR.Format(SR.Error_FailedBinding, ConfigKey, typeof(int)),
+                exception.Message
+            );
         }
 
         [Fact]
@@ -653,9 +658,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -674,9 +679,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -695,10 +700,10 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"},
-                {"Virtual", "Sup"}
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
+                { "Virtual", "Sup" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -718,10 +723,10 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"},
-                {"Virtual", "Sup"}
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
+                { "Virtual", "Sup" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -739,10 +744,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void GetCanReadStaticProperty()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"StaticProperty", "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { "StaticProperty", "stuff" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -757,10 +759,10 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"obj", "whut" },
-                {"obj:Integer", "-2"},
-                {"obj:Boolean", "TRUe"},
-                {"obj:Nested:Integer", "11"}
+                { "obj", "whut" },
+                { "obj:Integer", "-2" },
+                { "obj:Boolean", "TRUe" },
+                { "obj:Nested:Integer", "11" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -784,16 +786,15 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [InlineData("ProtectedPrivateSet")]
         public void GetIgnoresTests(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
             var options = config.Get<ComplexOptions>();
-            Assert.Null(options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options));
+            Assert.Null(
+                options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options)
+            );
         }
 
         [Theory]
@@ -802,20 +803,21 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [InlineData("ProtectedReadOnly")]
         public void NonPublicModeGetStillIgnoresReadonly(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
 #if BUILDING_SOURCE_GENERATOR_TESTS
-            var ex = Assert.Throws<NotSupportedException>(() => config.Get<ComplexOptions>(o => o.BindNonPublicProperties = true));
+            var ex = Assert.Throws<NotSupportedException>(() =>
+                config.Get<ComplexOptions>(o => o.BindNonPublicProperties = true)
+            );
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 #else
             var options = config.Get<ComplexOptions>(o => o.BindNonPublicProperties = true);
-            Assert.Null(options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options));
+            Assert.Null(
+                options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options)
+            );
 #endif
         }
 
@@ -830,10 +832,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [InlineData("ProtectedPrivateSet")]
         public void BindIgnoresTests(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -841,7 +840,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
             var options = new ComplexOptions();
             config.Bind(options);
 
-            Assert.Null(options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options));
+            Assert.Null(
+                options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options)
+            );
         }
 
         [Theory]
@@ -854,10 +855,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [InlineData("ProtectedPrivateSet")]
         public void BindCanSetNonPublicWhenSet(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -865,11 +863,16 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
             var options = new ComplexOptions();
 
 #if BUILDING_SOURCE_GENERATOR_TESTS
-            var ex = Assert.Throws<NotSupportedException>(() => config.Bind(options, o => o.BindNonPublicProperties = true));
+            var ex = Assert.Throws<NotSupportedException>(() =>
+                config.Bind(options, o => o.BindNonPublicProperties = true)
+            );
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 #else
             config.Bind(options, o => o.BindNonPublicProperties = true);
-            Assert.Equal("stuff", options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options));
+            Assert.Equal(
+                "stuff",
+                options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options)
+            );
 #endif
         }
 
@@ -883,26 +886,34 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [InlineData("ProtectedPrivateSet")]
         public void GetCanSetNonPublicWhenSet(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
 #if BUILDING_SOURCE_GENERATOR_TESTS
-            var ex = Assert.Throws<NotSupportedException>(() => config.Get<ComplexOptions>(o => o.BindNonPublicProperties = true));
+            var ex = Assert.Throws<NotSupportedException>(() =>
+                config.Get<ComplexOptions>(o => o.BindNonPublicProperties = true)
+            );
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 
-            ex = Assert.Throws<NotSupportedException>(() => config.Get(typeof(ComplexOptions), o => o.BindNonPublicProperties = true));
+            ex = Assert.Throws<NotSupportedException>(() =>
+                config.Get(typeof(ComplexOptions), o => o.BindNonPublicProperties = true)
+            );
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 #else
             var options = config.Get<ComplexOptions>(o => o.BindNonPublicProperties = true);
-            Assert.Equal("stuff", options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options));
+            Assert.Equal(
+                "stuff",
+                options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options)
+            );
 
-            options = (ComplexOptions)config.Get(typeof(ComplexOptions), o => o.BindNonPublicProperties = true);
-            Assert.Equal("stuff", options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options));
+            options = (ComplexOptions)
+                config.Get(typeof(ComplexOptions), o => o.BindNonPublicProperties = true);
+            Assert.Equal(
+                "stuff",
+                options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options)
+            );
 #endif
         }
 
@@ -912,39 +923,40 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [InlineData("ProtectedReadOnly")]
         public void NonPublicModeBindStillIgnoresReadonly(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
             var options = new ComplexOptions();
 #if BUILDING_SOURCE_GENERATOR_TESTS
-            Assert.Throws<NotSupportedException>(() => config.Bind(options, o => o.BindNonPublicProperties = true));
+            Assert.Throws<NotSupportedException>(() =>
+                config.Bind(options, o => o.BindNonPublicProperties = true)
+            );
 #else
             config.Bind(options, o => o.BindNonPublicProperties = true);
-            Assert.Null(options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options));
+            Assert.Null(
+                options.GetType().GetTypeInfo().GetDeclaredProperty(property).GetValue(options)
+            );
 #endif
         }
 
         [ConditionalFact(typeof(TestHelpers), nameof(TestHelpers.NotSourceGenMode))] // Ensure exception messages are in sync
         public void ExceptionWhenTryingToBindToInterface()
         {
-            var input = new Dictionary<string, string>
-            {
-                {"ISomeInterfaceProperty:Subkey", "x"}
-            };
+            var input = new Dictionary<string, string> { { "ISomeInterfaceProperty:Subkey", "x" } };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(() => config.Bind(new TestOptions()));
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions())
+            );
             Assert.Equal(
                 SR.Format(SR.Error_CannotActivateAbstractOrInterface, typeof(ISomeInterface)),
-                exception.Message);
+                exception.Message
+            );
         }
 
         [Fact]
@@ -952,18 +964,23 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var input = new Dictionary<string, string>
             {
-                {"ClassWithoutPublicConstructorProperty:Subkey", "x"}
+                { "ClassWithoutPublicConstructorProperty:Subkey", "x" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions()));
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions())
+            );
             Assert.Equal(
-                SR.Format(SR.Error_MissingPublicInstanceConstructor, typeof(ClassWithoutPublicConstructor)),
-                exception.Message);
+                SR.Format(
+                    SR.Error_MissingPublicInstanceConstructor,
+                    typeof(ClassWithoutPublicConstructor)
+                ),
+                exception.Message
+            );
         }
 
         [Fact]
@@ -971,20 +988,26 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var input = new Dictionary<string, string>
             {
-                {"ClassWhereParametersDoNotMatchPropertiesProperty:Name", "John"},
-                {"ClassWhereParametersDoNotMatchPropertiesProperty:Address", "123, Abc St."},
-                {"ClassWhereParametersDoNotMatchPropertiesProperty:Age", "42"}
+                { "ClassWhereParametersDoNotMatchPropertiesProperty:Name", "John" },
+                { "ClassWhereParametersDoNotMatchPropertiesProperty:Address", "123, Abc St." },
+                { "ClassWhereParametersDoNotMatchPropertiesProperty:Age", "42" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions()));
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions())
+            );
             Assert.Equal(
-                SR.Format(SR.Error_ConstructorParametersDoNotMatchProperties, typeof(ClassWhereParametersDoNotMatchProperties), "age"),
-                exception.Message);
+                SR.Format(
+                    SR.Error_ConstructorParametersDoNotMatchProperties,
+                    typeof(ClassWhereParametersDoNotMatchProperties),
+                    "age"
+                ),
+                exception.Message
+            );
         }
 
         [Fact]
@@ -992,19 +1015,25 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var input = new Dictionary<string, string>
             {
-                {"LineProperty:Color", "Red"},
-                {"LineProperty:Length", "22"}
+                { "LineProperty:Color", "Red" },
+                { "LineProperty:Length", "22" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions()));
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions())
+            );
             Assert.Equal(
-                SR.Format(SR.Error_ParameterHasNoMatchingConfig, typeof(Line), nameof(Line.Thickness)),
-                exception.Message);
+                SR.Format(
+                    SR.Error_ParameterHasNoMatchingConfig,
+                    typeof(Line),
+                    nameof(Line.Thickness)
+                ),
+                exception.Message
+            );
         }
 
         [Fact]
@@ -1012,20 +1041,26 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var input = new Dictionary<string, string>
             {
-                {"ClassWhereParametersDoNotMatchPropertiesProperty:Name", "John"},
-                {"ClassWhereParametersDoNotMatchPropertiesProperty:Address", "123, Abc St."},
-                {"ClassWhereParametersDoNotMatchPropertiesProperty:Age", "42"}
+                { "ClassWhereParametersDoNotMatchPropertiesProperty:Name", "John" },
+                { "ClassWhereParametersDoNotMatchPropertiesProperty:Address", "123, Abc St." },
+                { "ClassWhereParametersDoNotMatchPropertiesProperty:Age", "42" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions()));
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions())
+            );
             Assert.Equal(
-                SR.Format(SR.Error_ConstructorParametersDoNotMatchProperties, typeof(ClassWhereParametersDoNotMatchProperties), "age"),
-                exception.Message);
+                SR.Format(
+                    SR.Error_ConstructorParametersDoNotMatchProperties,
+                    typeof(ClassWhereParametersDoNotMatchProperties),
+                    "age"
+                ),
+                exception.Message
+            );
         }
 
         [Fact]
@@ -1033,8 +1068,8 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var input = new Dictionary<string, string>
             {
-                {"ClassWhereParametersHaveDefaultValueProperty:Name", "John"},
-                {"ClassWhereParametersHaveDefaultValueProperty:Address", "123, Abc St."}
+                { "ClassWhereParametersHaveDefaultValueProperty:Name", "John" },
+                { "ClassWhereParametersHaveDefaultValueProperty:Address", "123, Abc St." },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1045,18 +1080,33 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
 
             config.Bind(testOptions);
             Assert.Equal("John", testOptions.ClassWhereParametersHaveDefaultValueProperty.Name);
-            Assert.Equal("123, Abc St.", testOptions.ClassWhereParametersHaveDefaultValueProperty.Address);
+            Assert.Equal(
+                "123, Abc St.",
+                testOptions.ClassWhereParametersHaveDefaultValueProperty.Address
+            );
             Assert.Equal(42, testOptions.ClassWhereParametersHaveDefaultValueProperty.Age);
             Assert.Equal(42.0f, testOptions.ClassWhereParametersHaveDefaultValueProperty.F);
             Assert.Equal(3.14159, testOptions.ClassWhereParametersHaveDefaultValueProperty.D);
-            Assert.Equal(3.1415926535897932384626433M, testOptions.ClassWhereParametersHaveDefaultValueProperty.M);
-            Assert.Equal(StringComparison.Ordinal, testOptions.ClassWhereParametersHaveDefaultValueProperty.SC);
+            Assert.Equal(
+                3.1415926535897932384626433M,
+                testOptions.ClassWhereParametersHaveDefaultValueProperty.M
+            );
+            Assert.Equal(
+                StringComparison.Ordinal,
+                testOptions.ClassWhereParametersHaveDefaultValueProperty.SC
+            );
             Assert.Equal('q', testOptions.ClassWhereParametersHaveDefaultValueProperty.C);
             Assert.Equal(42, testOptions.ClassWhereParametersHaveDefaultValueProperty.NAge);
             Assert.Equal(42.0f, testOptions.ClassWhereParametersHaveDefaultValueProperty.NF);
             Assert.Equal(3.14159, testOptions.ClassWhereParametersHaveDefaultValueProperty.ND);
-            Assert.Equal(3.1415926535897932384626433M, testOptions.ClassWhereParametersHaveDefaultValueProperty.NM);
-            Assert.Equal(StringComparison.Ordinal, testOptions.ClassWhereParametersHaveDefaultValueProperty.NSC);
+            Assert.Equal(
+                3.1415926535897932384626433M,
+                testOptions.ClassWhereParametersHaveDefaultValueProperty.NM
+            );
+            Assert.Equal(
+                StringComparison.Ordinal,
+                testOptions.ClassWhereParametersHaveDefaultValueProperty.NSC
+            );
             Assert.Equal('q', testOptions.ClassWhereParametersHaveDefaultValueProperty.NC);
         }
 
@@ -1065,21 +1115,27 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var input = new Dictionary<string, string>
             {
-                {"ClassWhereParametersMatchPropertiesAndFieldsProperty:Name", "John"},
-                {"ClassWhereParametersMatchPropertiesAndFieldsProperty:Address", "123, Abc St."},
-                {"ClassWhereParametersMatchPropertiesAndFieldsProperty:Age", "42"}
+                { "ClassWhereParametersMatchPropertiesAndFieldsProperty:Name", "John" },
+                { "ClassWhereParametersMatchPropertiesAndFieldsProperty:Address", "123, Abc St." },
+                { "ClassWhereParametersMatchPropertiesAndFieldsProperty:Age", "42" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions()));
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions())
+            );
 
             Assert.Equal(
-                SR.Format(SR.Error_ConstructorParametersDoNotMatchProperties, typeof(ClassWhereParametersMatchPropertiesAndFields), "age"),
-                exception.Message);
+                SR.Format(
+                    SR.Error_ConstructorParametersDoNotMatchProperties,
+                    typeof(ClassWhereParametersMatchPropertiesAndFields),
+                    "age"
+                ),
+                exception.Message
+            );
         }
 
         [Fact]
@@ -1087,8 +1143,8 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var input = new Dictionary<string, string>
             {
-                {"RecordWhereParametersHaveDefaultValueProperty:Name", "John"},
-                {"RecordWhereParametersHaveDefaultValueProperty:Address", "123, Abc St."}
+                { "RecordWhereParametersHaveDefaultValueProperty:Name", "John" },
+                { "RecordWhereParametersHaveDefaultValueProperty:Address", "123, Abc St." },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1099,7 +1155,10 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
 
             config.Bind(testOptions);
             Assert.Equal("John", testOptions.RecordWhereParametersHaveDefaultValueProperty.Name);
-            Assert.Equal("123, Abc St.", testOptions.RecordWhereParametersHaveDefaultValueProperty.Address);
+            Assert.Equal(
+                "123, Abc St.",
+                testOptions.RecordWhereParametersHaveDefaultValueProperty.Address
+            );
             Assert.Equal(42, testOptions.RecordWhereParametersHaveDefaultValueProperty.Age);
         }
 
@@ -1108,19 +1167,21 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var input = new Dictionary<string, string>
             {
-                {"ThrowsWhenActivatedProperty:subkey", "x"}
+                { "ThrowsWhenActivatedProperty:subkey", "x" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions()));
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions())
+            );
             Assert.NotNull(exception.InnerException);
             Assert.Equal(
                 SR.Format(SR.Error_FailedToActivate, typeof(ThrowsWhenActivated)),
-                exception.Message);
+                exception.Message
+            );
         }
 
         [ConditionalFact(typeof(TestHelpers), nameof(TestHelpers.NotSourceGenMode))] // Ensure exception messages are in sync
@@ -1128,18 +1189,23 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var input = new Dictionary<string, string>
             {
-                {"NestedOptionsProperty:NestedOptions2Property:ISomeInterfaceProperty:subkey", "x"}
+                {
+                    "NestedOptionsProperty:NestedOptions2Property:ISomeInterfaceProperty:subkey",
+                    "x"
+                },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(input);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Bind(new TestOptions()));
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Bind(new TestOptions())
+            );
             Assert.Equal(
                 SR.Format(SR.Error_CannotActivateAbstractOrInterface, typeof(ISomeInterface)),
-                exception.Message);
+                exception.Message
+            );
         }
 
         [Fact]
@@ -1147,8 +1213,8 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"MyInt32", "42"},
-                {"MyString", "hello world"},
+                { "MyInt32", "42" },
+                { "MyString", "hello world" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1161,11 +1227,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void CanBindImmutableClass()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Length", "42"},
-                {"Color", "Green"},
-            };
+            var dic = new Dictionary<string, string> { { "Length", "42" }, { "Color", "Green" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1180,9 +1242,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"ContainerName", "Container123"},
-                {"LengthAndColor:Length", "42"},
-                {"LengthAndColor:Color", "Green"},
+                { "ContainerName", "Container123" },
+                { "LengthAndColor:Length", "42" },
+                { "LengthAndColor:Color", "Green" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1201,18 +1263,23 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"String1", "s1"},
-                {"Int1", "1"},
-                {"String2", "s2"},
-                {"Int2", "2"},
+                { "String1", "s1" },
+                { "Int1", "1" },
+                { "String2", "s2" },
+                { "Int2", "2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
-            string expectedMessage = SR.Format(SR.Error_MultipleParameterizedConstructors, typeof(ImmutableClassWithMultipleParameterizedConstructors));
+            string expectedMessage = SR.Format(
+                SR.Error_MultipleParameterizedConstructors,
+                typeof(ImmutableClassWithMultipleParameterizedConstructors)
+            );
 
-            var ex = Assert.Throws<InvalidOperationException>(() => config.Get<ImmutableClassWithMultipleParameterizedConstructors>());
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Get<ImmutableClassWithMultipleParameterizedConstructors>()
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -1224,18 +1291,24 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"String1", "s1"},
-                {"Int1", "1"},
-                {"String2", "s2"},
-                {"Int2", "2"},
+                { "String1", "s1" },
+                { "Int1", "1" },
+                { "String2", "s2" },
+                { "Int2", "2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
-            string expectedMessage = SR.Format(SR.Error_CannotBindToConstructorParameter, typeof(ImmutableClassWithOneParameterizedConstructorButWithInParameter), "string1");
+            string expectedMessage = SR.Format(
+                SR.Error_CannotBindToConstructorParameter,
+                typeof(ImmutableClassWithOneParameterizedConstructorButWithInParameter),
+                "string1"
+            );
 
-            var ex = Assert.Throws<InvalidOperationException>(() => config.Get<ImmutableClassWithOneParameterizedConstructorButWithInParameter>());
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Get<ImmutableClassWithOneParameterizedConstructorButWithInParameter>()
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -1247,18 +1320,24 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"String1", "s1"},
-                {"Int1", "1"},
-                {"String2", "s2"},
-                {"Int2", "2"},
+                { "String1", "s1" },
+                { "Int1", "1" },
+                { "String2", "s2" },
+                { "Int2", "2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
-            string expectedMessage = SR.Format(SR.Error_CannotBindToConstructorParameter, typeof(ImmutableClassWithOneParameterizedConstructorButWithRefParameter), "int1");
+            string expectedMessage = SR.Format(
+                SR.Error_CannotBindToConstructorParameter,
+                typeof(ImmutableClassWithOneParameterizedConstructorButWithRefParameter),
+                "int1"
+            );
 
-            var ex = Assert.Throws<InvalidOperationException>(() => config.Get<ImmutableClassWithOneParameterizedConstructorButWithRefParameter>());
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Get<ImmutableClassWithOneParameterizedConstructorButWithRefParameter>()
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -1270,18 +1349,24 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"String1", "s1"},
-                {"Int1", "1"},
-                {"String2", "s2"},
-                {"Int2", "2"},
+                { "String1", "s1" },
+                { "Int1", "1" },
+                { "String2", "s2" },
+                { "Int2", "2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
-            string expectedMessage = SR.Format(SR.Error_CannotBindToConstructorParameter, typeof(ImmutableClassWithOneParameterizedConstructorButWithOutParameter), "int2");
+            string expectedMessage = SR.Format(
+                SR.Error_CannotBindToConstructorParameter,
+                typeof(ImmutableClassWithOneParameterizedConstructorButWithOutParameter),
+                "int2"
+            );
 
-            var ex = Assert.Throws<InvalidOperationException>(() => config.Get<ImmutableClassWithOneParameterizedConstructorButWithOutParameter>());
+            var ex = Assert.Throws<InvalidOperationException>(() =>
+                config.Get<ImmutableClassWithOneParameterizedConstructorButWithOutParameter>()
+            );
 
             Assert.Equal(expectedMessage, ex.Message);
         }
@@ -1289,11 +1374,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void CanBindMutableStruct_UnmatchedConstructorsAreIgnored()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Length", "42"},
-                {"Color", "Green"},
-            };
+            var dic = new Dictionary<string, string> { { "Length", "42" }, { "Color", "Green" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1310,10 +1391,10 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"String1", "s1"},
-                {"Int1", "1"},
-                {"String2", "s2"},
-                {"Int2", "2"},
+                { "String1", "s1" },
+                { "Int1", "1" },
+                { "String2", "s2" },
+                { "Int2", "2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1331,9 +1412,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Length", "42"},
-                {"Color", "Green"},
-                {"Thickness", "1.23"},
+                { "Length", "42" },
+                { "Color", "Green" },
+                { "Thickness", "1.23" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1350,9 +1431,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Length", "42"},
-                {"Color", "Green"},
-                {"Thickness", "1.23"},
+                { "Length", "42" },
+                { "Color", "Green" },
+                { "Thickness", "1.23" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1367,11 +1448,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void CanBindRecordOptions()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Length", "42"},
-                {"Color", "Green"},
-            };
+            var dic = new Dictionary<string, string> { { "Length", "42" }, { "Color", "Green" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1384,11 +1461,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void CanBindClassWithPrimaryCtor()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Length", "42"},
-                {"Color", "Green"},
-            };
+            var dic = new Dictionary<string, string> { { "Length", "42" }, { "Color", "Green" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1401,10 +1474,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void CanBindClassWithPrimaryCtorWithDefaultValues()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Length", "-1"}
-            };
+            var dic = new Dictionary<string, string> { { "Length", "-1" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1427,7 +1497,10 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
             // GetValue works for only primitives.
             //Reflection impl handles them by honoring `TypeConverter` only.
             // Source-gen supports based on an allow-list.
-            Assert.Equal(default(RecordStructTypeOptions), config.GetValue<RecordStructTypeOptions>("Options"));
+            Assert.Equal(
+                default(RecordStructTypeOptions),
+                config.GetValue<RecordStructTypeOptions>("Options")
+            );
             Assert.False(config.GetValue<RecordStructTypeOptions?>("Options").HasValue);
 
             static void Validate(RecordStructTypeOptions options)
@@ -1438,11 +1511,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
 
             static IConfiguration GetConfiguration(string key1, string key2)
             {
-                var dic = new Dictionary<string, string>
-                {
-                    { key1, "42" },
-                    { key2, "Green" },
-                };
+                var dic = new Dictionary<string, string> { { key1, "42" }, { key2, "Green" } };
 
                 var configurationBuilder = new ConfigurationBuilder();
                 configurationBuilder.AddInMemoryCollection(dic);
@@ -1455,11 +1524,11 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                {"Number", "1"},
-                {"Nested1:ValueA", "Cool"},
-                {"Nested1:ValueB", "42"},
-                {"Nested2:ValueA", "Uncool"},
-                {"Nested2:ValueB", "24"},
+                { "Number", "1" },
+                { "Nested1:ValueA", "Cool" },
+                { "Nested1:ValueB", "42" },
+                { "Nested2:ValueA", "Uncool" },
+                { "Nested2:ValueB", "24" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1476,11 +1545,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void CanBindOnParametersAndProperties_PropertiesAreSetAfterTheConstructor()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Length", "42"},
-                {"Color", "Green"},
-            };
+            var dic = new Dictionary<string, string> { { "Length", "42" }, { "Color", "Green" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1493,11 +1558,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void CanBindReadonlyRecordStructOptions()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"Length", "42"},
-                {"Color", "Green"},
-            };
+            var dic = new Dictionary<string, string> { { "Length", "42" }, { "Color", "Green" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1513,7 +1574,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
             var bytes = new byte[] { 1, 2, 3, 4 };
             var dic = new Dictionary<string, string>
             {
-                { "MyByteArray", Convert.ToBase64String(bytes) }
+                { "MyByteArray", Convert.ToBase64String(bytes) },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1525,10 +1586,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void CanBindByteArrayWhenValueIsNull()
         {
-            var dic = new Dictionary<string, string>
-            {
-                { "MyByteArray", null }
-            };
+            var dic = new Dictionary<string, string> { { "MyByteArray", null } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
@@ -1542,32 +1600,37 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             var dic = new Dictionary<string, string>
             {
-                { "MyByteArray", "(not a valid base64 string)" }
+                { "MyByteArray", "(not a valid base64 string)" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
-            var exception = Assert.Throws<InvalidOperationException>(
-                () => config.Get<ByteArrayOptions>());
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                config.Get<ByteArrayOptions>()
+            );
             Assert.Equal(
                 SR.Format(SR.Error_FailedBinding, "MyByteArray", typeof(byte[])),
-                exception.Message);
+                exception.Message
+            );
         }
 
         [Fact]
         public void DoesNotReadPropertiesUnnecessarily()
         {
             ConfigurationBuilder configurationBuilder = new();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                { nameof(ClassWithReadOnlyPropertyThatThrows.Safe), "value" },
-                { nameof(ClassWithReadOnlyPropertyThatThrows.StringThrows), "value" },
-                { $"{nameof(ClassWithReadOnlyPropertyThatThrows.EnumerableThrows)}:0", "0" },
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string>
+                {
+                    { nameof(ClassWithReadOnlyPropertyThatThrows.Safe), "value" },
+                    { nameof(ClassWithReadOnlyPropertyThatThrows.StringThrows), "value" },
+                    { $"{nameof(ClassWithReadOnlyPropertyThatThrows.EnumerableThrows)}:0", "0" },
+                }
+            );
             IConfiguration config = configurationBuilder.Build();
 
-            ClassWithReadOnlyPropertyThatThrows bound = config.Get<ClassWithReadOnlyPropertyThatThrows>();
+            ClassWithReadOnlyPropertyThatThrows bound =
+                config.Get<ClassWithReadOnlyPropertyThatThrows>();
             Assert.Equal("value", bound.Safe);
         }
 
@@ -1579,12 +1642,14 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         public void CanBindNestedStructProperties()
         {
             ConfigurationBuilder configurationBuilder = new();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                { "ReadWriteNestedStruct:String", "s" },
-                { "ReadWriteNestedStruct:DeeplyNested:Int32", "100" },
-                { "ReadWriteNestedStruct:DeeplyNested:Boolean", "true" },
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string>
+                {
+                    { "ReadWriteNestedStruct:String", "s" },
+                    { "ReadWriteNestedStruct:DeeplyNested:Int32", "100" },
+                    { "ReadWriteNestedStruct:DeeplyNested:Boolean", "true" },
+                }
+            );
             IConfiguration config = configurationBuilder.Build();
 
             StructWithNestedStructs bound = config.Get<StructWithNestedStructs>();
@@ -1597,10 +1662,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         public void CanBindNestedStructProperties_SetterCalledWithMissingConfigEntry()
         {
             ConfigurationBuilder configurationBuilder = new();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                { "dmy", "dmy" },
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string> { { "dmy", "dmy" } }
+            );
 
             IConfiguration config = configurationBuilder.Build();
 
@@ -1615,10 +1679,12 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         public void CanBindNestedStructProperties_SetterNotCalledWithMissingConfigSection()
         {
             ConfigurationBuilder configurationBuilder = new();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                // An empty value will not trigger defaulting.
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string>
+                {
+                    // An empty value will not trigger defaulting.
+                }
+            );
 
             IConfiguration config = configurationBuilder.Build();
 
@@ -1632,8 +1698,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void CanBindNestedStructProperties_SetterCalledWithMissingConfig_Array()
         {
-            var config = TestHelpers.GetConfigurationFromJsonString(
-                """{"value": [{ }]}""");
+            var config = TestHelpers.GetConfigurationFromJsonString("""{"value": [{ }]}""");
 
             var bound = config.GetSection("value").Get<StructWithNestedStructAndSetterLogic[]>();
             Assert.Null(bound[0].String);
@@ -1644,12 +1709,14 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         public void IgnoresReadOnlyNestedStructProperties()
         {
             ConfigurationBuilder configurationBuilder = new();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                { "ReadOnlyNestedStruct:String", "s" },
-                { "ReadOnlyNestedStruct:DeeplyNested:Int32", "100" },
-                { "ReadOnlyNestedStruct:DeeplyNested:Boolean", "true" },
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string>
+                {
+                    { "ReadOnlyNestedStruct:String", "s" },
+                    { "ReadOnlyNestedStruct:DeeplyNested:Int32", "100" },
+                    { "ReadOnlyNestedStruct:DeeplyNested:Boolean", "true" },
+                }
+            );
             IConfiguration config = configurationBuilder.Build();
 
             StructWithNestedStructs bound = config.Get<StructWithNestedStructs>();
@@ -1662,12 +1729,14 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         public void CanBindNullableNestedStructProperties()
         {
             ConfigurationBuilder configurationBuilder = new();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                { "NullableNestedStruct:String", "s" },
-                { "NullableNestedStruct:DeeplyNested:Int32", "100" },
-                { "NullableNestedStruct:DeeplyNested:Boolean", "true" },
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string>
+                {
+                    { "NullableNestedStruct:String", "s" },
+                    { "NullableNestedStruct:DeeplyNested:Int32", "100" },
+                    { "NullableNestedStruct:DeeplyNested:Boolean", "true" },
+                }
+            );
             IConfiguration config = configurationBuilder.Build();
             StructWithNestedStructs bound = config.Get<StructWithNestedStructs>();
             Assert.NotNull(bound.NullableNestedStruct);
@@ -1680,15 +1749,17 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         public void CanBindVirtualProperties()
         {
             ConfigurationBuilder configurationBuilder = new();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                { $"{nameof(BaseClassWithVirtualProperty.Test)}:0", "1" },
-                { $"{nameof(BaseClassWithVirtualProperty.TestGetSetOverridden)}", "2" },
-                { $"{nameof(BaseClassWithVirtualProperty.TestGetOverridden)}", "3" },
-                { $"{nameof(BaseClassWithVirtualProperty.TestSetOverridden)}", "4" },
-                { $"{nameof(BaseClassWithVirtualProperty.TestNoOverridden)}", "5" },
-                { $"{nameof(BaseClassWithVirtualProperty.TestVirtualSet)}", "6" }
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string>
+                {
+                    { $"{nameof(BaseClassWithVirtualProperty.Test)}:0", "1" },
+                    { $"{nameof(BaseClassWithVirtualProperty.TestGetSetOverridden)}", "2" },
+                    { $"{nameof(BaseClassWithVirtualProperty.TestGetOverridden)}", "3" },
+                    { $"{nameof(BaseClassWithVirtualProperty.TestSetOverridden)}", "4" },
+                    { $"{nameof(BaseClassWithVirtualProperty.TestNoOverridden)}", "5" },
+                    { $"{nameof(BaseClassWithVirtualProperty.TestVirtualSet)}", "6" },
+                }
+            );
             IConfiguration config = configurationBuilder.Build();
 
             var test = new ClassOverridingVirtualProperty();
@@ -1706,16 +1777,17 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         public void PrivatePropertiesFromBaseClass_Bind()
         {
             ConfigurationBuilder configurationBuilder = new();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                { "PrivateProperty", "a" }
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string> { { "PrivateProperty", "a" } }
+            );
             IConfiguration config = configurationBuilder.Build();
 
             var test = new ClassOverridingVirtualProperty();
 
 #if BUILDING_SOURCE_GENERATOR_TESTS
-            var ex = Assert.Throws<NotSupportedException>(() => config.Bind(test, b => b.BindNonPublicProperties = true));
+            var ex = Assert.Throws<NotSupportedException>(() =>
+                config.Bind(test, b => b.BindNonPublicProperties = true)
+            );
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 #else
             config.Bind(test, b => b.BindNonPublicProperties = true);
@@ -1727,23 +1799,35 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         public void PrivatePropertiesFromBaseClass_Get()
         {
             ConfigurationBuilder configurationBuilder = new();
-            configurationBuilder.AddInMemoryCollection(new Dictionary<string, string>
-            {
-                { "PrivateProperty", "a" }
-            });
+            configurationBuilder.AddInMemoryCollection(
+                new Dictionary<string, string> { { "PrivateProperty", "a" } }
+            );
             IConfiguration config = configurationBuilder.Build();
 
 #if BUILDING_SOURCE_GENERATOR_TESTS
-            var ex = Assert.Throws<NotSupportedException>(() => config.Get<ClassOverridingVirtualProperty>(b => b.BindNonPublicProperties = true));
+            var ex = Assert.Throws<NotSupportedException>(() =>
+                config.Get<ClassOverridingVirtualProperty>(b => b.BindNonPublicProperties = true)
+            );
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 
-            ex = Assert.Throws<NotSupportedException>(() => config.Get(typeof(ClassOverridingVirtualProperty), b => b.BindNonPublicProperties = true));
+            ex = Assert.Throws<NotSupportedException>(() =>
+                config.Get(
+                    typeof(ClassOverridingVirtualProperty),
+                    b => b.BindNonPublicProperties = true
+                )
+            );
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 #else
-            var test = config.Get<ClassOverridingVirtualProperty>(b => b.BindNonPublicProperties = true);
+            var test = config.Get<ClassOverridingVirtualProperty>(b =>
+                b.BindNonPublicProperties = true
+            );
             Assert.Equal("a", test.ExposePrivatePropertyValue());
 
-            test = (ClassOverridingVirtualProperty)config.Get(typeof(ClassOverridingVirtualProperty), b => b.BindNonPublicProperties = true);
+            test = (ClassOverridingVirtualProperty)
+                config.Get(
+                    typeof(ClassOverridingVirtualProperty),
+                    b => b.BindNonPublicProperties = true
+                );
             Assert.Equal("a", test.ExposePrivatePropertyValue());
 #endif
         }
@@ -1751,7 +1835,8 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void EnsureCallingThePropertySetter()
         {
-            var json = @"{
+            var json =
+                @"{
                 ""IPFiltering"": {
                     ""HttpStatusCode"": 401,
                     ""Blacklist"": [ ""192.168.0.10-192.168.10.20"", ""fe80::/10"" ]
@@ -1762,7 +1847,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
                 .AddJsonStream(TestStreamHelpers.StringToStream(json))
                 .Build();
 
-            OptionWithCollectionProperties options = configuration.GetSection("IPFiltering").Get<OptionWithCollectionProperties>();
+            OptionWithCollectionProperties options = configuration
+                .GetSection("IPFiltering")
+                .Get<OptionWithCollectionProperties>();
 
             Assert.NotNull(options);
             Assert.Equal(2, options.Blacklist.Count);
@@ -1800,7 +1887,8 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void EnsureSuccessfullyBind()
         {
-            var json = @"{
+            var json =
+                @"{
                 ""queueConfig"": {
                     ""Namespaces"": [
                         {
@@ -1845,7 +1933,8 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void RecursiveTypeGraphs_DirectRef()
         {
-            var data = @"{
+            var data =
+                @"{
                 ""MyString"":""Hello"",
                 ""MyClass"": {
                     ""MyString"": ""World"",
@@ -1874,7 +1963,8 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void RecursiveTypeGraphs_IndirectRef()
         {
-            var data = @"{
+            var data =
+                @"{
                 ""MyString"":""Hello"",
                 ""MyList"": [{
                     ""MyString"": ""World"",
@@ -1903,7 +1993,8 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void TypeWithPrimitives_Pass()
         {
-            var data = @"{
+            var data =
+                @"{
                 ""Prop0"": true,
                 ""Prop1"": 1,
                 ""Prop2"": 2,
@@ -1946,10 +2037,22 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
             Assert.Equal((ulong)11, obj.Prop15);
             Assert.Equal("obj always parsed as string", obj.Prop16);
             Assert.Equal(CultureInfo.GetCultureInfoByIetfLanguageTag("yo-NG"), obj.Prop17);
-            Assert.Equal(DateTime.Parse("2023-03-29T18:23:43.9977489+00:00", CultureInfo.InvariantCulture), obj.Prop19);
-            Assert.Equal(DateTimeOffset.Parse("2023-03-29T18:21:22.8046981+00:00", CultureInfo.InvariantCulture), obj.Prop20);
+            Assert.Equal(
+                DateTime.Parse("2023-03-29T18:23:43.9977489+00:00", CultureInfo.InvariantCulture),
+                obj.Prop19
+            );
+            Assert.Equal(
+                DateTimeOffset.Parse(
+                    "2023-03-29T18:21:22.8046981+00:00",
+                    CultureInfo.InvariantCulture
+                ),
+                obj.Prop20
+            );
             Assert.Equal((decimal)5.3, obj.Prop21);
-            Assert.Equal(TimeSpan.Parse("10675199.02:48:05.4775807", CultureInfo.InvariantCulture), obj.Prop23);
+            Assert.Equal(
+                TimeSpan.Parse("10675199.02:48:05.4775807", CultureInfo.InvariantCulture),
+                obj.Prop23
+            );
             Assert.Equal(Guid.Parse("e905a75b-d195-494d-8938-e55dcee44574"), obj.Prop24);
             Uri.TryCreate("https://microsoft.com", UriKind.RelativeOrAbsolute, out Uri? value);
             Assert.Equal(value, obj.Prop25);
@@ -1959,7 +2062,8 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
             Assert.Equal(CultureInfo.GetCultureInfo("yo-NG"), obj.Prop17);
 
 #if NETCOREAPP
-            data = @"{
+            data =
+                @"{
                 ""Prop7"": 9,
                 ""Prop11"": 65500,
                 ""Prop12"": 34,
@@ -2009,12 +2113,14 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void BindRootStructIsNoOp()
         {
-            var configuration = TestHelpers.GetConfigurationFromJsonString("""
+            var configuration = TestHelpers.GetConfigurationFromJsonString(
+                """
                 {
                     "Int32": 9,
                     "Boolean": true,
                 }
-                """);
+                """
+            );
 
 #pragma warning disable SYSLIB1103
             StructWithNestedStructs.DeeplyNested obj = new();
@@ -2032,11 +2138,13 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void AllowsCaseInsensitiveMatch()
         {
-            var configuration = TestHelpers.GetConfigurationFromJsonString("""
+            var configuration = TestHelpers.GetConfigurationFromJsonString(
+                """
                 {
                     "vaLue": "MyString",
                 }
-                """);
+                """
+            );
 
             GenericOptions<string> obj = new();
             configuration.Bind(obj);
@@ -2045,14 +2153,17 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
             GenericOptionsRecord<string> obj1 = configuration.Get<GenericOptionsRecord<string>>();
             Assert.Equal("MyString", obj1.Value);
 
-            GenericOptionsWithParamCtor<string> obj2 = configuration.Get<GenericOptionsWithParamCtor<string>>();
+            GenericOptionsWithParamCtor<string> obj2 = configuration.Get<
+                GenericOptionsWithParamCtor<string>
+            >();
             Assert.Equal("MyString", obj2.Value);
         }
 
         [Fact]
         public void ObjWith_TypeConverter()
         {
-            var configuration = TestHelpers.GetConfigurationFromJsonString("""
+            var configuration = TestHelpers.GetConfigurationFromJsonString(
+                """
                 {
                     "Location":
                     {
@@ -2060,14 +2171,17 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
                         "Longitude": 4,
                     }
                 }
-                """);
+                """
+            );
 
             // TypeConverter impl is not honored (https://github.com/dotnet/runtime/issues/83599).
 
             GeolocationWrapper obj = configuration.Get<GeolocationWrapper>();
             ValidateGeolocation(obj.Location);
 
-            configuration = TestHelpers.GetConfigurationFromJsonString(""" { "Geolocation": "3, 4", } """);
+            configuration = TestHelpers.GetConfigurationFromJsonString(
+                """ { "Geolocation": "3, 4", } """
+            );
             obj = configuration.Get<GeolocationWrapper>();
             Assert.Equal(Geolocation.Zero, obj.Location);
         }
@@ -2075,7 +2189,8 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void ComplexObj_As_Dictionary_Element()
         {
-            var configuration = TestHelpers.GetConfigurationFromJsonString("""
+            var configuration = TestHelpers.GetConfigurationFromJsonString(
+                """
                 {
                     "First":
                     {
@@ -2083,19 +2198,24 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
                         "Longitude": 4,
                     }
                 }
-                """);
+                """
+            );
 
             Geolocation obj = configuration.Get<IDictionary<string, Geolocation>>()["First"];
             ValidateGeolocation(obj);
             obj = configuration.Get<IReadOnlyDictionary<string, Geolocation>>()["First"];
             ValidateGeolocation(obj);
 
-            GeolocationClass obj1 = configuration.Get<IDictionary<string, GeolocationClass>>()["First"];
+            GeolocationClass obj1 = configuration.Get<IDictionary<string, GeolocationClass>>()[
+                "First"
+            ];
             ValidateGeolocation(obj1);
             obj1 = configuration.Get<IReadOnlyDictionary<string, GeolocationClass>>()["First"];
             ValidateGeolocation(obj1);
 
-            GeolocationRecord obj2 = configuration.Get<IDictionary<string, GeolocationRecord>>()["First"];
+            GeolocationRecord obj2 = configuration.Get<IDictionary<string, GeolocationRecord>>()[
+                "First"
+            ];
             ValidateGeolocation(obj2);
             obj1 = configuration.Get<IReadOnlyDictionary<string, GeolocationClass>>()["First"];
             ValidateGeolocation(obj2);
@@ -2104,7 +2224,10 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void ComplexObj_As_Enumerable_Element()
         {
-            var configuration = TestHelpers.GetConfigurationFromJsonString("""{ "Enumerable": [{ "Latitude": 3, "Longitude": 4 }] }""")
+            var configuration = TestHelpers
+                .GetConfigurationFromJsonString(
+                    """{ "Enumerable": [{ "Latitude": 3, "Longitude": 4 }] }"""
+                )
                 .GetSection("Enumerable");
 
             Geolocation obj = configuration.Get<IList<Geolocation>>()[0];
@@ -2121,15 +2244,15 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
         public void TraceSwitchTest()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"TraceSwitch:Level", "Info"}
-            };
+            var dic = new Dictionary<string, string> { { "TraceSwitch:Level", "Info" } };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
-            TraceSwitch ts = new(displayName: "TraceSwitch", description: "This switch is set via config.");
+            TraceSwitch ts = new(
+                displayName: "TraceSwitch",
+                description: "This switch is set via config."
+            );
             ConfigurationBinder.Bind(config, "TraceSwitch", ts);
             Assert.Equal(TraceLevel.Info, ts.Level);
 #if NETCOREAPP
@@ -2147,42 +2270,98 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
 
         [Fact]
 #if !BUILDING_SOURCE_GENERATOR_TESTS
-        [ActiveIssue("Investigate Build browser-wasm linux Release LibraryTests_EAT CI failure for reflection impl", TestPlatforms.Browser)]
+        [ActiveIssue(
+            "Investigate Build browser-wasm linux Release LibraryTests_EAT CI failure for reflection impl",
+            TestPlatforms.Browser
+        )]
 #endif
         public void TestGraphWithUnsupportedMember()
         {
-            var configuration = TestHelpers.GetConfigurationFromJsonString("""{ "WriterOptions": { "Indented": "true" } }""");
+            var configuration = TestHelpers.GetConfigurationFromJsonString(
+                """{ "WriterOptions": { "Indented": "true" } }"""
+            );
             var obj = new GraphWithUnsupportedMember();
             configuration.Bind(obj);
             Assert.True(obj.WriterOptions.Indented);
 
             // Encoder prop not supported; throw if there's config data.
-            configuration = TestHelpers.GetConfigurationFromJsonString("""{ "WriterOptions": { "Indented": "true", "Encoder": { "Random": "" } } }""");
+            configuration = TestHelpers.GetConfigurationFromJsonString(
+                """{ "WriterOptions": { "Indented": "true", "Encoder": { "Random": "" } } }"""
+            );
             Assert.Throws<InvalidOperationException>(() => configuration.Bind(obj));
         }
 
         [Fact]
         public void CanBindToObjectMembers()
         {
-            var config = TestHelpers.GetConfigurationFromJsonString("""{ "Local": { "Authority": "Auth1" } }""");
+            var config = TestHelpers.GetConfigurationFromJsonString(
+                """{ "Local": { "Authority": "Auth1" } }"""
+            );
 
             // Regression tests for https://github.com/dotnet/runtime/issues/89273 and https://github.com/dotnet/runtime/issues/89732.
             TestBind(options => config.Bind("Local", options.GenericProp), obj => obj.GenericProp);
-            TestBind(options => config.GetSection("Local").Bind(options.NonGenericProp), obj => obj.NonGenericProp);
-            TestBind(options => config.GetSection("Local").Bind(options._genericField, _ => { }), obj => obj._genericField);
-            TestBind(options => config.Bind("Local", options._nonGenericField), obj => obj._nonGenericField);
+            TestBind(
+                options => config.GetSection("Local").Bind(options.NonGenericProp),
+                obj => obj.NonGenericProp
+            );
+            TestBind(
+                options => config.GetSection("Local").Bind(options._genericField, _ => { }),
+                obj => obj._genericField
+            );
+            TestBind(
+                options => config.Bind("Local", options._nonGenericField),
+                obj => obj._nonGenericField
+            );
 
             // Check statics.
-            TestBind(options => config.GetSection("Local").Bind(RemoteAuthenticationOptions<OidcProviderOptions>.StaticGenericProp), obj => RemoteAuthenticationOptions<OidcProviderOptions>.StaticGenericProp);
-            TestBind(options => config.GetSection("Local").Bind(RemoteAuthenticationOptions<OidcProviderOptions>.StaticNonGenericProp, _ => { }), obj => RemoteAuthenticationOptions<OidcProviderOptions>.StaticNonGenericProp);
-            TestBind(options => config.Bind("Local", RemoteAuthenticationOptions<OidcProviderOptions>.s_GenericField), obj => RemoteAuthenticationOptions<OidcProviderOptions>.s_GenericField);
-            TestBind(options => config.GetSection("Local").Bind(RemoteAuthenticationOptions<OidcProviderOptions>.s_NonGenericField), obj => RemoteAuthenticationOptions<OidcProviderOptions>.s_NonGenericField);
+            TestBind(
+                options =>
+                    config
+                        .GetSection("Local")
+                        .Bind(RemoteAuthenticationOptions<OidcProviderOptions>.StaticGenericProp),
+                obj => RemoteAuthenticationOptions<OidcProviderOptions>.StaticGenericProp
+            );
+            TestBind(
+                options =>
+                    config
+                        .GetSection("Local")
+                        .Bind(
+                            RemoteAuthenticationOptions<OidcProviderOptions>.StaticNonGenericProp,
+                            _ => { }
+                        ),
+                obj => RemoteAuthenticationOptions<OidcProviderOptions>.StaticNonGenericProp
+            );
+            TestBind(
+                options =>
+                    config.Bind(
+                        "Local",
+                        RemoteAuthenticationOptions<OidcProviderOptions>.s_GenericField
+                    ),
+                obj => RemoteAuthenticationOptions<OidcProviderOptions>.s_GenericField
+            );
+            TestBind(
+                options =>
+                    config
+                        .GetSection("Local")
+                        .Bind(RemoteAuthenticationOptions<OidcProviderOptions>.s_NonGenericField),
+                obj => RemoteAuthenticationOptions<OidcProviderOptions>.s_NonGenericField
+            );
 
             // No null refs.
-            config.GetSection("Local").Bind(new RemoteAuthenticationOptions<OidcProviderOptions>().NullGenericProp);
-            config.GetSection("Local").Bind(RemoteAuthenticationOptions<OidcProviderOptions>.s_NullNonGenericField);
+            config
+                .GetSection("Local")
+                .Bind(new RemoteAuthenticationOptions<OidcProviderOptions>().NullGenericProp);
+            config
+                .GetSection("Local")
+                .Bind(RemoteAuthenticationOptions<OidcProviderOptions>.s_NullNonGenericField);
 
-            static void TestBind(Action<RemoteAuthenticationOptions<OidcProviderOptions>> configure, Func<RemoteAuthenticationOptions<OidcProviderOptions>, OidcProviderOptions> getBindedProp)
+            static void TestBind(
+                Action<RemoteAuthenticationOptions<OidcProviderOptions>> configure,
+                Func<
+                    RemoteAuthenticationOptions<OidcProviderOptions>,
+                    OidcProviderOptions
+                > getBindedProp
+            )
             {
                 var obj = new RemoteAuthenticationOptions<OidcProviderOptions>();
                 configure(obj);
@@ -2205,12 +2384,15 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
             IConfiguration? configuration = null;
 
             Assert.Throws<ArgumentNullException>(() => configuration.Get<GeolocationClass>());
-            Assert.Throws<ArgumentNullException>(() => configuration.Get<GeolocationClass>(_ => { }));
+            Assert.Throws<ArgumentNullException>(() => configuration.Get<GeolocationClass>(_ => { })
+            );
             Assert.Throws<ArgumentNullException>(() => configuration.Get<Geolocation>());
             Assert.Throws<ArgumentNullException>(() => configuration.Get<Geolocation>(_ => { }));
 
             // Null Type.
-            configuration = TestHelpers.GetConfigurationFromJsonString(@"{""Longitude"":1,""Latitude"":2}");
+            configuration = TestHelpers.GetConfigurationFromJsonString(
+                @"{""Longitude"":1,""Latitude"":2}"
+            );
 #pragma warning disable SYSLIB1104 // The target type for a binder call could not be determined
             Assert.Throws<ArgumentNullException>(() => configuration.Get(type: null));
             Assert.Throws<ArgumentNullException>(() => configuration.Get(type: null, _ => { }));
@@ -2226,10 +2408,14 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
             Test(configuration: null, key);
 
             // Null type.
-            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(@"{""Longitude"":1,""Latitude"":2}");
+            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(
+                @"{""Longitude"":1,""Latitude"":2}"
+            );
 #pragma warning disable SYSLIB1104 // The target type for a binder call could not be determined
             Assert.Throws<ArgumentNullException>(() => configuration.GetValue(type: null, key));
-            Assert.Throws<ArgumentNullException>(() => configuration.GetValue(type: null, key, defaultValue: null));
+            Assert.Throws<ArgumentNullException>(() =>
+                configuration.GetValue(type: null, key, defaultValue: null)
+            );
 #pragma warning restore SYSLIB1104 // The target type for a binder call could not be determined
 
             // Null key.
@@ -2237,21 +2423,40 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
 
             void Test(IConfiguration? configuration, string? key)
             {
-                Assert.Throws<ArgumentNullException>(() => configuration.GetValue<GeolocationClass>(key));
-                Assert.Throws<ArgumentNullException>(() => configuration.GetValue<GeolocationClass>(key, defaultValue: null));
-                Assert.Throws<ArgumentNullException>(() => configuration.GetValue<Geolocation>(key));
-                Assert.Throws<ArgumentNullException>(() => configuration.GetValue<Geolocation>(key, defaultValue: default));
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue<GeolocationClass>(key)
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue<GeolocationClass>(key, defaultValue: null)
+                );
+                Assert.Throws<ArgumentNullException>(() => configuration.GetValue<Geolocation>(key)
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue<Geolocation>(key, defaultValue: default)
+                );
                 TestUntypedOverloads(configuration: null, key);
             }
 
             void TestUntypedOverloads(IConfiguration? configuration, string? key)
             {
-                Assert.Throws<ArgumentNullException>(() => configuration.GetValue(typeof(GeolocationClass), key));
-                Assert.Throws<ArgumentNullException>(() => configuration.GetValue(typeof(GeolocationClass), key, defaultValue: null));
-                Assert.Throws<ArgumentNullException>(() => configuration.GetValue(typeof(GeolocationClass), key, new GeolocationClass()));
-                Assert.Throws<ArgumentNullException>(() => configuration.GetValue(typeof(Geolocation), key));
-                Assert.Throws<ArgumentNullException>(() => configuration.GetValue(typeof(Geolocation), key, defaultValue: null));
-                Assert.Throws<ArgumentNullException>(() => configuration.GetValue(typeof(Geolocation), key, default(Geolocation)));
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue(typeof(GeolocationClass), key)
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue(typeof(GeolocationClass), key, defaultValue: null)
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue(typeof(GeolocationClass), key, new GeolocationClass())
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue(typeof(Geolocation), key)
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue(typeof(Geolocation), key, defaultValue: null)
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    configuration.GetValue(typeof(Geolocation), key, default(Geolocation))
+                );
             }
         }
 
@@ -2266,7 +2471,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
             Assert.Throws<ArgumentNullException>(() => configuration.Bind("", location));
 
             // Null object.
-            configuration = TestHelpers.GetConfigurationFromJsonString(@"{""Longitude"":1,""Latitude"":2}");
+            configuration = TestHelpers.GetConfigurationFromJsonString(
+                @"{""Longitude"":1,""Latitude"":2}"
+            );
             location = null;
             // Expect no exceptions.
             configuration.Bind(location);
@@ -2279,12 +2486,17 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         {
             // Regression test for https://github.com/dotnet/runtime/issues/91324.
 
-            IConfiguration configuration = new ConfigurationBuilder().AddInMemoryCollection(
-                new KeyValuePair<string, string?>[]
-                {
-                     new KeyValuePair<string, string?>("ConfigBindRepro:EndPoints:0", "localhost"),
-                     new KeyValuePair<string, string?>("ConfigBindRepro:Property", "true")
-                })
+            IConfiguration configuration = new ConfigurationBuilder()
+                .AddInMemoryCollection(
+                    new KeyValuePair<string, string?>[]
+                    {
+                        new KeyValuePair<string, string?>(
+                            "ConfigBindRepro:EndPoints:0",
+                            "localhost"
+                        ),
+                        new KeyValuePair<string, string?>("ConfigBindRepro:Property", "true"),
+                    }
+                )
                 .Build();
 
             AClass settings = new();
@@ -2297,7 +2509,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public static void TestGettingAbstractType()
         {
-            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(@"{""Value"":1}");
+            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(
+                @"{""Value"":1}"
+            );
             Assert.Throws<InvalidOperationException>(() => configuration.Get<AbstractBase>());
         }
 
@@ -2308,7 +2522,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
             // We only bind members on the declared binding type, i.e. AbstractBase, even
             // though the actual instances are derived types that may have their own properties.
 
-            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(@"{""Value"":1,""Value2"":2}");
+            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(
+                @"{""Value"":1,""Value2"":2}"
+            );
 
             AbstractBase d = new Derived();
             configuration.Bind(d);
@@ -2331,15 +2547,21 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public static void TestBindingAbstractMember_AsCtorParam()
         {
-            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(@"{ ""AbstractProp"": {""Value"":1} }");
+            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(
+                @"{ ""AbstractProp"": {""Value"":1} }"
+            );
             Assert.Throws<InvalidOperationException>(configuration.Get<ClassWithAbstractCtorParam>);
-            Assert.Throws<InvalidOperationException>(configuration.Get<ClassWithOptionalAbstractCtorParam>);
+            Assert.Throws<InvalidOperationException>(
+                configuration.Get<ClassWithOptionalAbstractCtorParam>
+            );
         }
 
         [Fact]
         public static void TestBindingInitializedAbstractMember()
         {
-            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(@"{ ""AbstractProp"": {""Value"":1} }");
+            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(
+                @"{ ""AbstractProp"": {""Value"":1} }"
+            );
             ClassWithAbstractProp c = new();
             c.AbstractProp = new Derived();
             configuration.Bind(c);
@@ -2349,7 +2571,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public static void TestBindingUninitializedAbstractMember()
         {
-            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(@"{ ""AbstractProp"": {""Value"":1} }");
+            IConfiguration configuration = TestHelpers.GetConfigurationFromJsonString(
+                @"{ ""AbstractProp"": {""Value"":1} }"
+            );
             ClassWithAbstractProp c = new();
             c.AbstractProp = null;
             Assert.Throws<InvalidOperationException>(() => configuration.Bind(c));
@@ -2358,20 +2582,24 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void GetIConfigurationSection()
         {
-            var configuration = TestHelpers.GetConfigurationFromJsonString("""
+            var configuration = TestHelpers.GetConfigurationFromJsonString(
+                """
                 {
                     "vaLue": "MyString",
                 }
-                """);
+                """
+            );
 
             var obj = configuration.GetSection("value").Get<IConfigurationSection>();
             Assert.Equal("MyString", obj.Value);
 
-            configuration = TestHelpers.GetConfigurationFromJsonString("""
+            configuration = TestHelpers.GetConfigurationFromJsonString(
+                """
                 {
                     "vaLue": [ "MyString", { "nested": "value" } ],
                 }
-                """);
+                """
+            );
 
             var list = configuration.GetSection("value").Get<List<IConfigurationSection>>();
             ValidateList(list);
@@ -2387,7 +2615,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
                 Assert.Equal("MyString", list[0].Value);
 
                 Assert.Equal("1", list[1].Key);
-                var nestedSection = Assert.IsAssignableFrom<IConfigurationSection>(list[1].GetSection("nested"));
+                var nestedSection = Assert.IsAssignableFrom<IConfigurationSection>(
+                    list[1].GetSection("nested")
+                );
                 Assert.Equal("value", nestedSection.Value);
             }
         }
@@ -2395,7 +2625,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void NullableDictKeys()
         {
-            var configuration = TestHelpers.GetConfigurationFromJsonString("""{ "1": "MyString" }""");
+            var configuration = TestHelpers.GetConfigurationFromJsonString(
+                """{ "1": "MyString" }"""
+            );
             var dict = configuration.Get<Dictionary<int?, string>>();
             Assert.Empty(dict);
         }
@@ -2403,13 +2635,15 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         [Fact]
         public void IConfigurationSectionAsCtorParam()
         {
-            var configuration = TestHelpers.GetConfigurationFromJsonString("""
+            var configuration = TestHelpers.GetConfigurationFromJsonString(
+                """
                 {
                     "MySection": "MySection",
                     "MyObject": "MyObject",
                     "MyString": "MyString",
                 }
-                """);
+                """
+            );
 
             var obj = configuration.Get<ClassWith_DirectlyAssignable_CtorParams>();
             Assert.Equal("MySection", obj.MySection.Value);
@@ -2421,10 +2655,9 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         public void SharedChildInstance()
         {
             var builder = new ConfigurationBuilder();
-            builder.AddInMemoryCollection(new KeyValuePair<string, string?>[]
-            {
-                new("A:B:ConnectionString", "localhost"),
-            });
+            builder.AddInMemoryCollection(
+                new KeyValuePair<string, string?>[] { new("A:B:ConnectionString", "localhost") }
+            );
 
             var config = builder.Build();
 
@@ -2447,7 +2680,7 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
                 InitialData = new Dictionary<string, string?>()
                 {
                     [$":{nameof(SimplePoco.A)}"] = expectedA,
-                }
+                },
             };
             var configRoot = new MockConfigurationRoot(new[] { configSource.Build(null) });
             var configSection = new ConfigurationSection(configRoot, string.Empty);
@@ -2463,8 +2696,8 @@ if (!System.Diagnostics.Debugger.IsAttached) { System.Diagnostics.Debugger.Launc
         // as is common when Configuration interfaces are mocked
         class MockConfigurationRoot : ConfigurationRoot, IConfigurationRoot
         {
-            public MockConfigurationRoot(IList<IConfigurationProvider> providers) : base(providers)
-            { }
+            public MockConfigurationRoot(IList<IConfigurationProvider> providers)
+                : base(providers) { }
 
             IConfigurationSection IConfiguration.GetSection(string key) =>
                 this[key] is null ? null : new ConfigurationSection(this, key);

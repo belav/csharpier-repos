@@ -26,16 +26,21 @@ public class AppsettingsTests : BlazorWasmTestBase
 
         string projectDirectory = Path.GetDirectoryName(projectFile)!;
 
-        File.WriteAllText(Path.Combine(projectDirectory, "wwwroot", "appsettings.json"), $"{{ \"Id\": \"{id}\" }}");
+        File.WriteAllText(
+            Path.Combine(projectDirectory, "wwwroot", "appsettings.json"),
+            $"{{ \"Id\": \"{id}\" }}"
+        );
 
         string programPath = Path.Combine(projectDirectory, "Program.cs");
         string programContent = File.ReadAllText(programPath);
-        programContent = programContent.Replace("var builder",
-        """
-        System.Console.WriteLine($"appSettings Exists '{File.Exists("/appsettings.json")}'");
-        System.Console.WriteLine($"appSettings Content '{File.ReadAllText("/appsettings.json")}'");
-        var builder
-        """);
+        programContent = programContent.Replace(
+            "var builder",
+            """
+            System.Console.WriteLine($"appSettings Exists '{File.Exists("/appsettings.json")}'");
+            System.Console.WriteLine($"appSettings Content '{File.ReadAllText("/appsettings.json")}'");
+            var builder
+            """
+        );
         File.WriteAllText(programPath, programContent);
 
         BlazorBuild(new BlazorBuildOptions(id, "debug", NativeFilesType.FromRuntimePack));
@@ -43,17 +48,19 @@ public class AppsettingsTests : BlazorWasmTestBase
         bool existsChecked = false;
         bool contentChecked = false;
 
-        await BlazorRunForBuildWithDotnetRun(new BlazorRunOptions()
-        {
-            Config = "debug",
-            OnConsoleMessage = msg =>
+        await BlazorRunForBuildWithDotnetRun(
+            new BlazorRunOptions()
             {
-                if (msg.Text.Contains("appSettings Exists 'True'"))
-                    existsChecked = true;
-                else if (msg.Text.Contains($"appSettings Content '{{ \"Id\": \"{id}\" }}'"))
-                    contentChecked = true;
+                Config = "debug",
+                OnConsoleMessage = msg =>
+                {
+                    if (msg.Text.Contains("appSettings Exists 'True'"))
+                        existsChecked = true;
+                    else if (msg.Text.Contains($"appSettings Content '{{ \"Id\": \"{id}\" }}'"))
+                        contentChecked = true;
+                },
             }
-        });
+        );
 
         Assert.True(existsChecked, "File '/appsettings.json' wasn't found");
         Assert.True(contentChecked, "Content of '/appsettings.json' is not matched");

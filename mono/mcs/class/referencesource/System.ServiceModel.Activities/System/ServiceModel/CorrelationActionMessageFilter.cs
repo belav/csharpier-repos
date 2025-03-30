@@ -15,15 +15,9 @@ namespace System.ServiceModel
         ActionMessageFilter innerFilter;
 
         public CorrelationActionMessageFilter()
-            : base()
-        {
-        }
+            : base() { }
 
-        public string Action
-        {
-            get;
-            set;
-        }
+        public string Action { get; set; }
 
         ActionMessageFilter GetInnerFilter()
         {

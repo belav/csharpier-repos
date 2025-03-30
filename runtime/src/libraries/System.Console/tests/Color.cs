@@ -15,15 +15,27 @@ public class Color
     private const char Esc = (char)0x1B;
 
     [Fact]
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+        "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+    )]
     public static void InvalidColors()
     {
-        AssertExtensions.Throws<ArgumentException>(null, () => Console.BackgroundColor = (ConsoleColor)42);
-        AssertExtensions.Throws<ArgumentException>(null, () => Console.ForegroundColor = (ConsoleColor)42);
+        AssertExtensions.Throws<ArgumentException>(
+            null,
+            () => Console.BackgroundColor = (ConsoleColor)42
+        );
+        AssertExtensions.Throws<ArgumentException>(
+            null,
+            () => Console.ForegroundColor = (ConsoleColor)42
+        );
     }
 
     [Fact]
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+        "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+    )]
     public static void RoundtrippingColor()
     {
         Console.BackgroundColor = Console.BackgroundColor;
@@ -40,7 +52,9 @@ public class Color
     public static void ForegroundColor_Throws_PlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.ForegroundColor);
-        Assert.Throws<PlatformNotSupportedException>(() => Console.ForegroundColor = ConsoleColor.Red);
+        Assert.Throws<PlatformNotSupportedException>(() =>
+            Console.ForegroundColor = ConsoleColor.Red
+        );
     }
 
     [Fact]
@@ -48,36 +62,50 @@ public class Color
     public static void BackgroundColor_Throws_PlatformNotSupportedException()
     {
         Assert.Throws<PlatformNotSupportedException>(() => Console.BackgroundColor);
-        Assert.Throws<PlatformNotSupportedException>(() => Console.BackgroundColor = ConsoleColor.Red);
+        Assert.Throws<PlatformNotSupportedException>(() =>
+            Console.BackgroundColor = ConsoleColor.Red
+        );
     }
 
     [Fact]
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+        "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+    )]
     public static void RedirectedOutputDoesNotUseAnsiSequences()
     {
         // Make sure that redirecting to a memory stream causes Console not to write out the ANSI sequences
 
-        Helpers.RunInRedirectedOutput((data) =>
-        {
-            Console.Write('1');
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.Write('2');
-            Console.BackgroundColor = ConsoleColor.Red;
-            Console.Write('3');
-            Console.ResetColor();
-            Console.Write('4');
+        Helpers.RunInRedirectedOutput(
+            (data) =>
+            {
+                Console.Write('1');
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write('2');
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.Write('3');
+                Console.ResetColor();
+                Console.Write('4');
 
-            Assert.Equal(0, Encoding.UTF8.GetString(data.ToArray()).ToCharArray().Count(c => c == Esc));
-            Assert.Equal("1234", Encoding.UTF8.GetString(data.ToArray()));
-        });
+                Assert.Equal(
+                    0,
+                    Encoding.UTF8.GetString(data.ToArray()).ToCharArray().Count(c => c == Esc)
+                );
+                Assert.Equal("1234", Encoding.UTF8.GetString(data.ToArray()));
+            }
+        );
     }
 
-    public static bool TermIsSetAndRemoteExecutorIsSupported
-        => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TERM")) && RemoteExecutor.IsSupported;
+    public static bool TermIsSetAndRemoteExecutorIsSupported =>
+        !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TERM"))
+        && RemoteExecutor.IsSupported;
 
     [ConditionalTheory(nameof(TermIsSetAndRemoteExecutorIsSupported))]
     [PlatformSpecific(TestPlatforms.AnyUnix)]
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+        "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+    )]
     [InlineData(null)]
     [InlineData("1")]
     [InlineData("true")]
@@ -111,9 +139,15 @@ public class Color
                 Console.Write("SEPARATOR");
             };
 
-            using RemoteInvokeHandle remote = RemoteExecutor.Invoke(main, i.ToString(CultureInfo.InvariantCulture), new RemoteInvokeOptions() { StartInfo = psi });
+            using RemoteInvokeHandle remote = RemoteExecutor.Invoke(
+                main,
+                i.ToString(CultureInfo.InvariantCulture),
+                new RemoteInvokeOptions() { StartInfo = psi }
+            );
 
-            bool expectedEscapes = envVar is not null && (envVar == "1" || envVar.Equals("true", StringComparison.OrdinalIgnoreCase));
+            bool expectedEscapes =
+                envVar is not null
+                && (envVar == "1" || envVar.Equals("true", StringComparison.OrdinalIgnoreCase));
 
             string stdout = remote.Process.StandardOutput.ReadToEnd();
             string[] parts = stdout.Split("SEPARATOR");

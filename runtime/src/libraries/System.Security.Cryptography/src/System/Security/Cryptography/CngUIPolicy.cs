@@ -12,26 +12,33 @@ namespace System.Security.Cryptography
     public sealed class CngUIPolicy
     {
         public CngUIPolicy(CngUIProtectionLevels protectionLevel)
-            : this(protectionLevel, friendlyName: null)
-        {
-        }
+            : this(protectionLevel, friendlyName: null) { }
 
         public CngUIPolicy(CngUIProtectionLevels protectionLevel, string? friendlyName)
-            : this(protectionLevel, friendlyName, description: null)
-        {
-        }
+            : this(protectionLevel, friendlyName, description: null) { }
 
-        public CngUIPolicy(CngUIProtectionLevels protectionLevel, string? friendlyName, string? description)
-            : this(protectionLevel, friendlyName, description, useContext: null)
-        {
-        }
+        public CngUIPolicy(
+            CngUIProtectionLevels protectionLevel,
+            string? friendlyName,
+            string? description
+        )
+            : this(protectionLevel, friendlyName, description, useContext: null) { }
 
-        public CngUIPolicy(CngUIProtectionLevels protectionLevel, string? friendlyName, string? description, string? useContext)
-            : this(protectionLevel, friendlyName, description, useContext, creationTitle: null)
-        {
-        }
+        public CngUIPolicy(
+            CngUIProtectionLevels protectionLevel,
+            string? friendlyName,
+            string? description,
+            string? useContext
+        )
+            : this(protectionLevel, friendlyName, description, useContext, creationTitle: null) { }
 
-        public CngUIPolicy(CngUIProtectionLevels protectionLevel, string? friendlyName, string? description, string? useContext, string? creationTitle)
+        public CngUIPolicy(
+            CngUIProtectionLevels protectionLevel,
+            string? friendlyName,
+            string? description,
+            string? useContext,
+            string? creationTitle
+        )
         {
             ProtectionLevel = protectionLevel;
             FriendlyName = friendlyName;

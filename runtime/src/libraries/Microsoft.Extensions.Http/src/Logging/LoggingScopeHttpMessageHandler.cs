@@ -47,16 +47,25 @@ namespace Microsoft.Extensions.Http.Logging
             _options = options;
         }
 
-        private Task<HttpResponseMessage> SendCoreAsync(HttpRequestMessage request, bool useAsync, CancellationToken cancellationToken)
+        private Task<HttpResponseMessage> SendCoreAsync(
+            HttpRequestMessage request,
+            bool useAsync,
+            CancellationToken cancellationToken
+        )
         {
             ThrowHelper.ThrowIfNull(request);
             return Core(request, useAsync, cancellationToken);
 
-            async Task<HttpResponseMessage> Core(HttpRequestMessage request, bool useAsync, CancellationToken cancellationToken)
+            async Task<HttpResponseMessage> Core(
+                HttpRequestMessage request,
+                bool useAsync,
+                CancellationToken cancellationToken
+            )
             {
                 var stopwatch = ValueStopwatch.StartNew();
 
-                Func<string, bool> shouldRedactHeaderValue = _options?.ShouldRedactHeaderValue ?? _shouldNotRedactHeaderValue;
+                Func<string, bool> shouldRedactHeaderValue =
+                    _options?.ShouldRedactHeaderValue ?? _shouldNotRedactHeaderValue;
 
                 using (Log.BeginRequestPipelineScope(_logger, request))
                 {
@@ -68,7 +77,12 @@ namespace Microsoft.Extensions.Http.Logging
 #else
                         : throw new NotImplementedException("Unreachable code");
 #endif
-                    Log.RequestPipelineEnd(_logger, response, stopwatch.GetElapsedTime(), shouldRedactHeaderValue);
+                    Log.RequestPipelineEnd(
+                        _logger,
+                        response,
+                        stopwatch.GetElapsedTime(),
+                        shouldRedactHeaderValue
+                    );
 
                     return response;
                 }
@@ -77,14 +91,18 @@ namespace Microsoft.Extensions.Http.Logging
 
         /// <inheritdoc />
         /// <remarks>Logs the request to and response from the sent <see cref="HttpRequestMessage"/>.</remarks>
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-            => SendCoreAsync(request, useAsync: true, cancellationToken);
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) => SendCoreAsync(request, useAsync: true, cancellationToken);
 
 #if NET5_0_OR_GREATER
         /// <inheritdoc />
         /// <remarks>Logs the request to and response from the sent <see cref="HttpRequestMessage"/>.</remarks>
-        protected override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken)
-            => SendCoreAsync(request, useAsync: false, cancellationToken).GetAwaiter().GetResult();
+        protected override HttpResponseMessage Send(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        ) => SendCoreAsync(request, useAsync: false, cancellationToken).GetAwaiter().GetResult();
 #endif
 
         // Used in tests
@@ -92,57 +110,119 @@ namespace Microsoft.Extensions.Http.Logging
         {
             public static class EventIds
             {
-                public static readonly EventId PipelineStart = new EventId(100, "RequestPipelineStart");
+                public static readonly EventId PipelineStart = new EventId(
+                    100,
+                    "RequestPipelineStart"
+                );
                 public static readonly EventId PipelineEnd = new EventId(101, "RequestPipelineEnd");
 
-                public static readonly EventId RequestHeader = new EventId(102, "RequestPipelineRequestHeader");
-                public static readonly EventId ResponseHeader = new EventId(103, "RequestPipelineResponseHeader");
+                public static readonly EventId RequestHeader = new EventId(
+                    102,
+                    "RequestPipelineRequestHeader"
+                );
+                public static readonly EventId ResponseHeader = new EventId(
+                    103,
+                    "RequestPipelineResponseHeader"
+                );
             }
 
-            private static readonly Func<ILogger, HttpMethod, string?, IDisposable?> _beginRequestPipelineScope = LoggerMessage.DefineScope<HttpMethod, string?>("HTTP {HttpMethod} {Uri}");
+            private static readonly Func<
+                ILogger,
+                HttpMethod,
+                string?,
+                IDisposable?
+            > _beginRequestPipelineScope = LoggerMessage.DefineScope<HttpMethod, string?>(
+                "HTTP {HttpMethod} {Uri}"
+            );
 
-            private static readonly Action<ILogger, HttpMethod, string?, Exception?> _requestPipelineStart = LoggerMessage.Define<HttpMethod, string?>(
+            private static readonly Action<
+                ILogger,
+                HttpMethod,
+                string?,
+                Exception?
+            > _requestPipelineStart = LoggerMessage.Define<HttpMethod, string?>(
                 LogLevel.Information,
                 EventIds.PipelineStart,
-                "Start processing HTTP request {HttpMethod} {Uri}");
+                "Start processing HTTP request {HttpMethod} {Uri}"
+            );
 
-            private static readonly Action<ILogger, double, int, Exception?> _requestPipelineEnd = LoggerMessage.Define<double, int>(
-                LogLevel.Information,
-                EventIds.PipelineEnd,
-                "End processing HTTP request after {ElapsedMilliseconds}ms - {StatusCode}");
+            private static readonly Action<ILogger, double, int, Exception?> _requestPipelineEnd =
+                LoggerMessage.Define<double, int>(
+                    LogLevel.Information,
+                    EventIds.PipelineEnd,
+                    "End processing HTTP request after {ElapsedMilliseconds}ms - {StatusCode}"
+                );
 
-            public static IDisposable? BeginRequestPipelineScope(ILogger logger, HttpRequestMessage request)
+            public static IDisposable? BeginRequestPipelineScope(
+                ILogger logger,
+                HttpRequestMessage request
+            )
             {
-                return _beginRequestPipelineScope(logger, request.Method, GetUriString(request.RequestUri));
+                return _beginRequestPipelineScope(
+                    logger,
+                    request.Method,
+                    GetUriString(request.RequestUri)
+                );
             }
 
-            public static void RequestPipelineStart(ILogger logger, HttpRequestMessage request, Func<string, bool> shouldRedactHeaderValue)
+            public static void RequestPipelineStart(
+                ILogger logger,
+                HttpRequestMessage request,
+                Func<string, bool> shouldRedactHeaderValue
+            )
             {
-                _requestPipelineStart(logger, request.Method, GetUriString(request.RequestUri), null);
+                _requestPipelineStart(
+                    logger,
+                    request.Method,
+                    GetUriString(request.RequestUri),
+                    null
+                );
 
                 if (logger.IsEnabled(LogLevel.Trace))
                 {
                     logger.Log(
                         LogLevel.Trace,
                         EventIds.RequestHeader,
-                        new HttpHeadersLogValue(HttpHeadersLogValue.Kind.Request, request.Headers, request.Content?.Headers, shouldRedactHeaderValue),
+                        new HttpHeadersLogValue(
+                            HttpHeadersLogValue.Kind.Request,
+                            request.Headers,
+                            request.Content?.Headers,
+                            shouldRedactHeaderValue
+                        ),
                         null,
-                        (state, ex) => state.ToString());
+                        (state, ex) => state.ToString()
+                    );
                 }
             }
 
-            public static void RequestPipelineEnd(ILogger logger, HttpResponseMessage response, TimeSpan duration, Func<string, bool> shouldRedactHeaderValue)
+            public static void RequestPipelineEnd(
+                ILogger logger,
+                HttpResponseMessage response,
+                TimeSpan duration,
+                Func<string, bool> shouldRedactHeaderValue
+            )
             {
-                _requestPipelineEnd(logger, duration.TotalMilliseconds, (int)response.StatusCode, null);
+                _requestPipelineEnd(
+                    logger,
+                    duration.TotalMilliseconds,
+                    (int)response.StatusCode,
+                    null
+                );
 
                 if (logger.IsEnabled(LogLevel.Trace))
                 {
                     logger.Log(
                         LogLevel.Trace,
                         EventIds.ResponseHeader,
-                        new HttpHeadersLogValue(HttpHeadersLogValue.Kind.Response, response.Headers, response.Content?.Headers, shouldRedactHeaderValue),
+                        new HttpHeadersLogValue(
+                            HttpHeadersLogValue.Kind.Response,
+                            response.Headers,
+                            response.Content?.Headers,
+                            shouldRedactHeaderValue
+                        ),
                         null,
-                        (state, ex) => state.ToString());
+                        (state, ex) => state.ToString()
+                    );
                 }
             }
 

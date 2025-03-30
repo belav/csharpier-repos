@@ -13,7 +13,10 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolution
 {
-    using VerifyCS = CSharpCodeFixVerifier<EmptyDiagnosticAnalyzer, CSharpResolveConflictMarkerCodeFixProvider>;
+    using VerifyCS = CSharpCodeFixVerifier<
+        EmptyDiagnosticAnalyzer,
+        CSharpResolveConflictMarkerCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsResolveConflictMarker)]
     public class ConflictMarkerResolutionTests
@@ -69,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -124,7 +128,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
@@ -187,7 +192,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 2,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
             }.RunAsync();
         }
 
@@ -226,7 +232,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -273,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
@@ -320,7 +328,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -359,7 +368,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
@@ -418,7 +428,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -477,7 +488,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
@@ -548,7 +560,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 2,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
             }.RunAsync();
         }
 
@@ -591,7 +604,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -632,7 +646,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -666,7 +681,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -700,7 +716,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
@@ -714,11 +731,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 {|CS8300:>>>>>>>|} merge rev
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = source,
-                FixedCode = source,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = source, FixedCode = source }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23847")]
@@ -731,11 +744,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 {|CS8300:=======|}
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = source,
-                FixedCode = source,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = source, FixedCode = source }.RunAsync();
         }
 
         [Fact]
@@ -748,11 +757,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 {|CS8300:||||||||}
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = source,
-                FixedCode = source,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = source, FixedCode = source }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/21107")]
@@ -805,7 +810,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 2,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -859,7 +865,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 2,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
@@ -919,7 +926,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 2,
                 CodeActionIndex = 2,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
             }.RunAsync();
         }
 
@@ -976,7 +984,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -1033,7 +1042,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
@@ -1098,7 +1108,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 2,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
             }.RunAsync();
         }
 
@@ -1139,7 +1150,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -1188,7 +1200,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
@@ -1237,7 +1250,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -1278,7 +1292,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
@@ -1324,7 +1339,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -1367,7 +1383,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -1403,7 +1420,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -1439,7 +1457,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 1,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
@@ -1454,11 +1473,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 {|CS8300:>>>>>>>|} merge rev
                 """;
 
-            await new VerifyCS.Test
-            {
-                TestCode = source,
-                FixedCode = source,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = source, FixedCode = source }.RunAsync();
         }
 
         [Fact]
@@ -1515,7 +1530,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 2,
                 CodeActionIndex = 0,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeTopEquivalenceKey,
             }.RunAsync();
         }
 
@@ -1573,7 +1589,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 2,
                 CodeActionIndex = 1,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBottomEquivalenceKey,
             }.RunAsync();
         }
 
@@ -1637,7 +1654,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConflictMarkerResolutio
                 FixedCode = fixedSource,
                 NumberOfIncrementalIterations = 2,
                 CodeActionIndex = 2,
-                CodeActionEquivalenceKey = AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
+                CodeActionEquivalenceKey =
+                    AbstractResolveConflictMarkerCodeFixProvider.TakeBothEquivalenceKey,
             }.RunAsync();
         }
     }

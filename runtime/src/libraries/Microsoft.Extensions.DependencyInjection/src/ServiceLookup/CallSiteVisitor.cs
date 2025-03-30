@@ -42,7 +42,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             {
                 case CallSiteKind.Factory:
                     return VisitFactory((FactoryCallSite)callSite, argument);
-                case  CallSiteKind.IEnumerable:
+                case CallSiteKind.IEnumerable:
                     return VisitIEnumerable((IEnumerableCallSite)callSite, argument);
                 case CallSiteKind.Constructor:
                     return VisitConstructor((ConstructorCallSite)callSite, argument);
@@ -51,7 +51,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 case CallSiteKind.ServiceProvider:
                     return VisitServiceProvider((ServiceProviderCallSite)callSite, argument);
                 default:
-                    throw new NotSupportedException(SR.Format(SR.CallSiteTypeNotSupported, callSite.GetType()));
+                    throw new NotSupportedException(
+                        SR.Format(SR.CallSiteTypeNotSupported, callSite.GetType())
+                    );
             }
         }
 
@@ -75,14 +77,29 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             return VisitCallSiteMain(callSite, argument);
         }
 
-        protected abstract TResult VisitConstructor(ConstructorCallSite constructorCallSite, TArgument argument);
+        protected abstract TResult VisitConstructor(
+            ConstructorCallSite constructorCallSite,
+            TArgument argument
+        );
 
-        protected abstract TResult VisitConstant(ConstantCallSite constantCallSite, TArgument argument);
+        protected abstract TResult VisitConstant(
+            ConstantCallSite constantCallSite,
+            TArgument argument
+        );
 
-        protected abstract TResult VisitServiceProvider(ServiceProviderCallSite serviceProviderCallSite, TArgument argument);
+        protected abstract TResult VisitServiceProvider(
+            ServiceProviderCallSite serviceProviderCallSite,
+            TArgument argument
+        );
 
-        protected abstract TResult VisitIEnumerable(IEnumerableCallSite enumerableCallSite, TArgument argument);
+        protected abstract TResult VisitIEnumerable(
+            IEnumerableCallSite enumerableCallSite,
+            TArgument argument
+        );
 
-        protected abstract TResult VisitFactory(FactoryCallSite factoryCallSite, TArgument argument);
+        protected abstract TResult VisitFactory(
+            FactoryCallSite factoryCallSite,
+            TArgument argument
+        );
     }
 }

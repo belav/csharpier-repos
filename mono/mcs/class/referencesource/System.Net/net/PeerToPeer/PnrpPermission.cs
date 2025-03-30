@@ -5,17 +5,22 @@
 //------------------------------------------------------------------------------
 namespace System.Net.PeerToPeer
 {
+    using System.Globalization;
     using System.Security;
     using System.Security.Permissions;
-    using System.Globalization;
 
     /// <remarks>
     /// PnrpPermission atrribute
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor |
-                     AttributeTargets.Class | AttributeTargets.Struct |
-                     AttributeTargets.Assembly,
-                     AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Constructor
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Assembly,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     [Serializable()]
     public sealed class PnrpPermissionAttribute : CodeAccessSecurityAttribute
     {
@@ -23,17 +28,21 @@ namespace System.Net.PeerToPeer
         /// Just call base constructor
         /// </summary>
         /// <param name="action"></param>
-        public PnrpPermissionAttribute(SecurityAction action) : base(action) { }
+        public PnrpPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         /// <summary>
-        /// As required by the SecurityAttribute class. 
+        /// As required by the SecurityAttribute class.
         /// </summary>
         /// <returns></returns>
-        public override IPermission CreatePermission() {
-            if (Unrestricted) {
+        public override IPermission CreatePermission()
+        {
+            if (Unrestricted)
+            {
                 return new PnrpPermission(PermissionState.Unrestricted);
             }
-            else {
+            else
+            {
                 return new PnrpPermission(PermissionState.None);
             }
         }
@@ -47,7 +56,9 @@ namespace System.Net.PeerToPeer
     {
         private bool m_noRestriction;
 
-        internal static readonly PnrpPermission UnrestrictedPnrpPermission = new PnrpPermission(PermissionState.Unrestricted);
+        internal static readonly PnrpPermission UnrestrictedPnrpPermission = new PnrpPermission(
+            PermissionState.Unrestricted
+        );
 
         /// <summary>
         ///    <para>
@@ -93,12 +104,17 @@ namespace System.Net.PeerToPeer
         public override IPermission Union(IPermission target)
         {
             // Pattern suggested by Security engine
-            if (target == null) {
+            if (target == null)
+            {
                 return this.Copy();
             }
             PnrpPermission other = target as PnrpPermission;
-            if (other == null) {
-                throw new ArgumentException( SR.GetString(SR.PnrpPermission_CantUnionWithNonPnrpPermission), "target");
+            if (other == null)
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.PnrpPermission_CantUnionWithNonPnrpPermission),
+                    "target"
+                );
             }
             return new PnrpPermission(m_noRestriction || other.m_noRestriction);
         }
@@ -109,21 +125,26 @@ namespace System.Net.PeerToPeer
         public override IPermission Intersect(IPermission target)
         {
             // Pattern suggested by Security engine
-            if (target == null) {
+            if (target == null)
+            {
                 return null;
             }
             PnrpPermission other = target as PnrpPermission;
-            if (other == null) {
-                throw new ArgumentException(SR.GetString(SR.PnrpPermission_CantIntersectWithNonPnrpPermission), "target");
+            if (other == null)
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.PnrpPermission_CantIntersectWithNonPnrpPermission),
+                    "target"
+                );
             }
             // return null if resulting permission is restricted and empty
             // Hence, the only way for a bool permission will be.
-            if (this.m_noRestriction && other.m_noRestriction) {
+            if (this.m_noRestriction && other.m_noRestriction)
+            {
                 return new PnrpPermission(true);
             }
             return null;
         }
-
 
         /// <summary>
         /// <para>Compares two <see cref='System.Net.PeerToPeer.PnrpPermission'/> instances.</para>
@@ -131,12 +152,17 @@ namespace System.Net.PeerToPeer
         public override bool IsSubsetOf(IPermission target)
         {
             // Pattern suggested by Security engine
-            if (target == null)  {
+            if (target == null)
+            {
                 return m_noRestriction == false;
             }
             PnrpPermission other = target as PnrpPermission;
-            if (other == null) {
-                throw new ArgumentException(SR.GetString(SR.PnrpPermission_TargetNotAPnrpPermission), "target");
+            if (other == null)
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.PnrpPermission_TargetNotAPnrpPermission),
+                    "target"
+                );
             }
             //Here is the matrix of result based on m_noRestriction for me and she
             //    me.noRestriction      she.noRestriction   me.isSubsetOf(she)
@@ -153,35 +179,58 @@ namespace System.Net.PeerToPeer
         /// <param name="securityElement"></param>
         public override void FromXml(SecurityElement e)
         {
-            if (e == null) {
+            if (e == null)
+            {
                 throw new ArgumentNullException(SR.GetString(SR.InvalidSecurityElem));
             }
             // SecurityElement must be a permission element
-            if (!e.Tag.Equals("IPermission")) {
-                throw new ArgumentException(SR.GetString(SR.InvalidSecurityElem), "securityElement");
+            if (!e.Tag.Equals("IPermission"))
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.InvalidSecurityElem),
+                    "securityElement"
+                );
             }
             string className = e.Attribute("class");
             // SecurityElement must be a permission element for this type
-            if (className == null) {
-                throw new ArgumentException(SR.GetString(SR.InvalidSecurityElem), "securityElement");
+            if (className == null)
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.InvalidSecurityElem),
+                    "securityElement"
+                );
             }
-            if (className.IndexOf(this.GetType().FullName, StringComparison.Ordinal) < 0) {
-                throw new ArgumentException(SR.GetString(SR.InvalidSecurityElem), "securityElement");
+            if (className.IndexOf(this.GetType().FullName, StringComparison.Ordinal) < 0)
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.InvalidSecurityElem),
+                    "securityElement"
+                );
             }
             string str = e.Attribute("Unrestricted");
-            m_noRestriction = (str != null ? (0 == string.Compare(str, "true", StringComparison.OrdinalIgnoreCase)) : false);
+            m_noRestriction = (
+                str != null
+                    ? (0 == string.Compare(str, "true", StringComparison.OrdinalIgnoreCase))
+                    : false
+            );
         }
 
         /// <summary>
-        /// Copyto a security element 
+        /// Copyto a security element
         /// </summary>
         /// <returns></returns>
         public override SecurityElement ToXml()
         {
             SecurityElement securityElement = new SecurityElement("IPermission");
-            securityElement.AddAttribute("class", this.GetType().FullName + ", " + this.GetType().Module.Assembly.FullName.Replace('\"', '\''));
+            securityElement.AddAttribute(
+                "class",
+                this.GetType().FullName
+                    + ", "
+                    + this.GetType().Module.Assembly.FullName.Replace('\"', '\'')
+            );
             securityElement.AddAttribute("version", "1");
-            if (m_noRestriction) {
+            if (m_noRestriction)
+            {
                 securityElement.AddAttribute("Unrestricted", "true");
             }
             return securityElement;

@@ -1,31 +1,38 @@
 //------------------------------------------------------------------------------
 // <copyright file="SoapClientMessage.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
+namespace System.Web.Services.Protocols
+{
+    using System;
+    using System.Collections;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Web.Services;
     using System.Xml.Serialization;
-    using System;
-    using System.Reflection;
-    using System.Collections;
-    using System.IO;
-    using System.ComponentModel;
-    using System.Runtime.InteropServices;
 
     /// <include file='doc\SoapClientMessage.uex' path='docs/doc[@for="SoapClientMessage"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class SoapClientMessage : SoapMessage {
+    public sealed class SoapClientMessage : SoapMessage
+    {
         SoapClientMethod method;
         SoapHttpClientProtocol protocol;
         string url;
 
         internal SoapExtension[] initializedExtensions;
 
-        internal SoapClientMessage(SoapHttpClientProtocol protocol, SoapClientMethod method, string url) {
+        internal SoapClientMessage(
+            SoapHttpClientProtocol protocol,
+            SoapClientMethod method,
+            string url
+        )
+        {
             this.method = method;
             this.protocol = protocol;
             this.url = url;
@@ -41,7 +48,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override bool OneWay {
+        public override bool OneWay
+        {
             get { return method.oneWay; }
         }
 
@@ -49,7 +57,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapHttpClientProtocol Client {
+        public SoapHttpClientProtocol Client
+        {
             get { return protocol; }
         }
 
@@ -57,10 +66,11 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override LogicalMethodInfo MethodInfo {
+        public override LogicalMethodInfo MethodInfo
+        {
             get { return method.methodInfo; }
         }
-    
+
         /*
         internal override SoapReflectedExtension[] Extensions {
             get { return method.extensions; }
@@ -75,7 +85,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override string Url {
+        public override string Url
+        {
             get { return url; }
         }
 
@@ -83,17 +94,25 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override string Action {
+        public override string Action
+        {
             get { return method.action; }
         }
 
         /// <include file='doc\SoapClientMessage.uex' path='docs/doc[@for="SoapClientMessage.SoapVersion"]/*' />
         [ComVisible(false)]
-        public override SoapProtocolVersion SoapVersion {
-            get { return protocol.SoapVersion == SoapProtocolVersion.Default ? SoapProtocolVersion.Soap11 : protocol.SoapVersion; }
+        public override SoapProtocolVersion SoapVersion
+        {
+            get
+            {
+                return protocol.SoapVersion == SoapProtocolVersion.Default
+                    ? SoapProtocolVersion.Soap11
+                    : protocol.SoapVersion;
+            }
         }
 
-        internal SoapClientMethod Method {
+        internal SoapClientMethod Method
+        {
             get { return method; }
         }
 
@@ -101,7 +120,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void EnsureOutStage() {
+        protected override void EnsureOutStage()
+        {
             EnsureStage(SoapMessageStage.AfterDeserialize);
         }
 
@@ -109,7 +129,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void EnsureInStage() {
+        protected override void EnsureInStage()
+        {
             EnsureStage(SoapMessageStage.BeforeSerialize);
         }
     }

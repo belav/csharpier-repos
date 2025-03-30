@@ -33,7 +33,12 @@ namespace System.DirectoryServices.AccountManagement
                 DirectoryEntry de = (DirectoryEntry)p.UnderlyingObject;
                 Type principalType = p.GetType();
 
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "Entering PushChangesToNative, type={0}", p.GetType());
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "SAMStoreCtx",
+                    "Entering PushChangesToNative, type={0}",
+                    p.GetType()
+                );
 
                 if (de == null)
                 {
@@ -43,14 +48,21 @@ namespace System.DirectoryServices.AccountManagement
                     // Determine the objectClass of the SAM entry we'll be creating
                     string objectClass;
 
-                    if (principalType == typeof(UserPrincipal) || principalType.IsSubclassOf(typeof(UserPrincipal)))
+                    if (
+                        principalType == typeof(UserPrincipal)
+                        || principalType.IsSubclassOf(typeof(UserPrincipal))
+                    )
                         objectClass = "user";
-                    else if (principalType == typeof(GroupPrincipal) || principalType.IsSubclassOf(typeof(GroupPrincipal)))
+                    else if (
+                        principalType == typeof(GroupPrincipal)
+                        || principalType.IsSubclassOf(typeof(GroupPrincipal))
+                    )
                         objectClass = "group";
                     else
                     {
                         throw new InvalidOperationException(
-                                        SR.Format(SR.StoreCtxUnsupportedPrincipalTypeForSave, principalType));
+                            SR.Format(SR.StoreCtxUnsupportedPrincipalTypeForSave, principalType)
+                        );
                     }
 
                     // Determine the SAM account name for the entry we'll be creating.  Use the name from the NT4 IdentityClaim.
@@ -68,8 +80,13 @@ namespace System.DirectoryServices.AccountManagement
                     }
 
                     GlobalDebug.WriteLineIf(
-                        GlobalDebug.Info, "SAMStoreCtx", "PushChangesToNative: created fresh DE, oc={0}, name={1}, path={2}",
-                        objectClass, samAccountName, de.Path);
+                        GlobalDebug.Info,
+                        "SAMStoreCtx",
+                        "PushChangesToNative: created fresh DE, oc={0}, name={1}, path={2}",
+                        objectClass,
+                        samAccountName,
+                        de.Path
+                    );
 
                     p.UnderlyingObject = de;
 
@@ -112,17 +129,22 @@ namespace System.DirectoryServices.AccountManagement
                         {
                             if (p.GetChangeStatusForProperty(propertyEntry.propertyName))
                             {
-                                GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "PushChangesToNative: pushing {0}", propertyEntry.propertyName);
+                                GlobalDebug.WriteLineIf(
+                                    GlobalDebug.Info,
+                                    "SAMStoreCtx",
+                                    "PushChangesToNative: pushing {0}",
+                                    propertyEntry.propertyName
+                                );
 
                                 // The property was set.  Write it to the DirectoryEntry.
                                 Debug.Assert(propertyEntry.propertyName == (string)dictEntry.Key);
                                 propertyEntry.papiToWinNTConverter(
-                                                    p,
-                                                    propertyEntry.propertyName,
-                                                    de,
-                                                    propertyEntry.suggestedWinNTPropertyName,
-                                                    this.IsLSAM
-                                                    );
+                                    p,
+                                    propertyEntry.propertyName,
+                                    de,
+                                    propertyEntry.suggestedWinNTPropertyName,
+                                    this.IsLSAM
+                                );
                             }
                         }
                     }
@@ -134,7 +156,11 @@ namespace System.DirectoryServices.AccountManagement
 
                 if (p.GetChangeStatusForProperty(PropertyNames.PwdInfoPassword))
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "PushChangesToNative: setting password");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SAMStoreCtx",
+                        "PushChangesToNative: setting password"
+                    );
 
                     // Only AuthenticablePrincipals can have PasswordInfo
                     Debug.Assert(p is AuthenticablePrincipal);
@@ -171,8 +197,10 @@ namespace System.DirectoryServices.AccountManagement
             if (index == Name.Length - 1)
                 return null;
 
-            return (index != -1) ? Name.Substring(index + 1) :    // +1 to skip the '/'
-                                   Name;
+            return (index != -1)
+                ? Name.Substring(index + 1)
+                : // +1 to skip the '/'
+                Name;
         }
 
         // Given a underlying store object (e.g., DirectoryEntry), further narrowed down a discriminant
@@ -203,7 +231,12 @@ namespace System.DirectoryServices.AccountManagement
 
             DirectoryEntry de = (DirectoryEntry)storeObject;
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "GetAsPrincipal: using path={0}", de.Path);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SAMStoreCtx",
+                "GetAsPrincipal: using path={0}",
+                de.Path
+            );
 
             // Construct an appropriate Principal object.
             Principal p = SDSUtils.DirectoryEntryToPrincipal(de, this.OwningContext, null);
@@ -212,9 +245,14 @@ namespace System.DirectoryServices.AccountManagement
             // Assign a SAMStoreKey to the newly-constructed Principal.
 
             // If it doesn't have an objectSid, it's not a principal and we shouldn't be here.
-            Debug.Assert((de.Properties["objectSid"] != null) && (de.Properties["objectSid"].Count == 1));
+            Debug.Assert(
+                (de.Properties["objectSid"] != null) && (de.Properties["objectSid"].Count == 1)
+            );
 
-            SAMStoreKey key = new SAMStoreKey(this.MachineFlatName, (byte[])de.Properties["objectSid"].Value);
+            SAMStoreKey key = new SAMStoreKey(
+                this.MachineFlatName,
+                (byte[])de.Properties["objectSid"].Value
+            );
             p.Key = key;
 
             return p;
@@ -257,8 +295,18 @@ namespace System.DirectoryServices.AccountManagement
                 {
                     if (null != entry.winNTToPapiConverter)
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "Load_PropertyName: loading {0}", entry.propertyName);
-                        entry.winNTToPapiConverter(de, entry.suggestedWinNTPropertyName, p, entry.propertyName);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SAMStoreCtx",
+                            "Load_PropertyName: loading {0}",
+                            entry.propertyName
+                        );
+                        entry.winNTToPapiConverter(
+                            de,
+                            entry.suggestedWinNTPropertyName,
+                            p,
+                            entry.propertyName
+                        );
                     }
                 }
             }
@@ -280,7 +328,13 @@ namespace System.DirectoryServices.AccountManagement
                 DirectoryEntry de = (DirectoryEntry)p.UnderlyingObject;
                 Debug.Assert(de != null);
 
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "Entering Load, type={0}, path={1}", p.GetType(), de.Path);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "SAMStoreCtx",
+                    "Entering Load, type={0}, path={1}",
+                    p.GetType(),
+                    de.Path
+                );
 
                 // The list of all the SAM attributes in the DirectoryEntry
                 ICollection samAttributes = de.Properties.PropertyNames;
@@ -306,7 +360,8 @@ namespace System.DirectoryServices.AccountManagement
                 // Map each SAM attribute into the Principal in turn
                 foreach (string samAttribute in samAttributes)
                 {
-                    ArrayList entries = (ArrayList)propertyMappingTableByWinNT[samAttribute.ToLowerInvariant()];
+                    ArrayList entries = (ArrayList)
+                        propertyMappingTableByWinNT[samAttribute.ToLowerInvariant()];
 
                     // If it's not in the table, it's not an SAM attribute we care about
                     if (entries == null)
@@ -316,8 +371,18 @@ namespace System.DirectoryServices.AccountManagement
                     // map to more than one Principal property.
                     foreach (PropertyMappingTableEntry entry in entries)
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "Load: loading {0}", entry.propertyName);
-                        entry.winNTToPapiConverter(de, entry.suggestedWinNTPropertyName, p, entry.propertyName);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SAMStoreCtx",
+                            "Load: loading {0}",
+                            entry.propertyName
+                        );
+                        entry.winNTToPapiConverter(
+                            de,
+                            entry.suggestedWinNTPropertyName,
+                            p,
+                            entry.propertyName
+                        );
                     }
                 }
             }
@@ -332,7 +397,11 @@ namespace System.DirectoryServices.AccountManagement
         // principalType can be used to scope the search to principals of a specified type, e.g., users or groups.
         // Specify typeof(Principal) to search all principal types.
         internal override Principal FindPrincipalByIdentRef(
-                                    Type principalType, string urnScheme, string urnValue, DateTime referenceDate)
+            Type principalType,
+            string urnScheme,
+            string urnValue,
+            DateTime referenceDate
+        )
         {
             // Perform the appropriate action based on the type of the UrnScheme
             if (urnScheme == UrnScheme.SidScheme)
@@ -353,12 +422,17 @@ namespace System.DirectoryServices.AccountManagement
                 {
                     pSid = Utils.ConvertByteArrayToIntPtr(sid);
 
-                    if (Interop.Advapi32.IsValidSid(pSid) && (Utils.ClassifySID(pSid) == SidType.FakeObject))
+                    if (
+                        Interop.Advapi32.IsValidSid(pSid)
+                        && (Utils.ClassifySID(pSid) == SidType.FakeObject)
+                    )
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info,
-                                                "SAMStoreCtx",
-                                                "FindPrincipalByIdentRef: fake principal {0}",
-                                                sidObj.ToString());
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "SAMStoreCtx",
+                            "FindPrincipalByIdentRef: fake principal {0}",
+                            sidObj.ToString()
+                        );
 
                         return ConstructFakePrincipalFromSID(sid);
                     }
@@ -408,7 +482,11 @@ namespace System.DirectoryServices.AccountManagement
                     // Are they perhaps searching for a fake group?
                     // If they passed in a valid SID for a fake group, construct and return the fake
                     // group.
-                    if (principalType == typeof(Principal) || principalType == typeof(GroupPrincipal) || principalType.IsSubclassOf(typeof(GroupPrincipal)))
+                    if (
+                        principalType == typeof(Principal)
+                        || principalType == typeof(GroupPrincipal)
+                        || principalType.IsSubclassOf(typeof(GroupPrincipal))
+                    )
                     {
                         // They passed in a hex string, is it a valid SID, and if so, does it correspond to a fake
                         // principal?
@@ -418,12 +496,17 @@ namespace System.DirectoryServices.AccountManagement
                         {
                             pSid = Utils.ConvertByteArrayToIntPtr(sid);
 
-                            if (Interop.Advapi32.IsValidSid(pSid) && (Utils.ClassifySID(pSid) == SidType.FakeObject))
+                            if (
+                                Interop.Advapi32.IsValidSid(pSid)
+                                && (Utils.ClassifySID(pSid) == SidType.FakeObject)
+                            )
                             {
-                                GlobalDebug.WriteLineIf(GlobalDebug.Info,
-                                                        "SAMStoreCtx",
-                                                        "FindPrincipalByIdentRef: fake principal {0} (scheme==null)",
-                                                        Utils.ByteArrayToString(sid));
+                                GlobalDebug.WriteLineIf(
+                                    GlobalDebug.Info,
+                                    "SAMStoreCtx",
+                                    "FindPrincipalByIdentRef: fake principal {0} (scheme==null)",
+                                    Utils.ByteArrayToString(sid)
+                                );
 
                                 return ConstructFakePrincipalFromSID(sid);
                             }
@@ -451,11 +534,13 @@ namespace System.DirectoryServices.AccountManagement
                     // Must have been a non-NT4 Account UrnValue.  Ignore it.
                 }
 
-                GlobalDebug.WriteLineIf(GlobalDebug.Info,
-                                        "SAMStoreCtx",
-                                        "FindPrincipalByIdentRef: scheme==null, found nt4={0}, found sid={1}",
-                                        (nt4Principal != null),
-                                        (sidPrincipal != null));
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "SAMStoreCtx",
+                    "FindPrincipalByIdentRef: scheme==null, found nt4={0}, found sid={1}",
+                    (nt4Principal != null),
+                    (sidPrincipal != null)
+                );
 
                 // If they both succeeded in finding a match, we have too many matches.
                 // Throw an exception.
@@ -463,9 +548,9 @@ namespace System.DirectoryServices.AccountManagement
                     throw new MultipleMatchesException(SR.MultipleMatchingPrincipals);
 
                 // Return whichever one matched.  If neither matched, this will return null.
-                return (sidPrincipal != null) ? GetAsPrincipal(sidPrincipal, null) :
-                            ((nt4Principal != null) ? GetAsPrincipal(nt4Principal, null) :
-                                null);
+                return (sidPrincipal != null)
+                    ? GetAsPrincipal(sidPrincipal, null)
+                    : ((nt4Principal != null) ? GetAsPrincipal(nt4Principal, null) : null);
             }
             else
             {
@@ -486,39 +571,72 @@ namespace System.DirectoryServices.AccountManagement
 
             // Map the SID to a machine and account name
             // If this fails, there's no match
-            int err = Utils.LookupSid(this.MachineUserSuppliedName, _credentials, sid, out name, out domainName, out _);
+            int err = Utils.LookupSid(
+                this.MachineUserSuppliedName,
+                _credentials,
+                sid,
+                out name,
+                out domainName,
+                out _
+            );
 
             if (err != 0)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Error,
-                                        "SAMStoreCtx",
-                                        "FindNativeBySIDIdentRef:LookupSid on {0} failed, err={1}",
-                                        this.MachineUserSuppliedName,
-                                        err);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Error,
+                    "SAMStoreCtx",
+                    "FindNativeBySIDIdentRef:LookupSid on {0} failed, err={1}",
+                    this.MachineUserSuppliedName,
+                    err
+                );
                 return null;
             }
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "FindNativeBySIDIdentRef: mapped to {0}\\{1}", domainName, name);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SAMStoreCtx",
+                "FindNativeBySIDIdentRef: mapped to {0}\\{1}",
+                domainName,
+                name
+            );
 
             // Fixup the domainName for BUILTIN principals
             if (Utils.ClassifySID(sid) == SidType.RealObjectFakeDomain)
             {
                 // BUILTIN principal ---> Issuer is actually our machine, not "BUILTIN" domain.
                 domainName = this.MachineFlatName;
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "FindNativeBySIDIdentRef: using {0} for domainName", domainName);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "SAMStoreCtx",
+                    "FindNativeBySIDIdentRef: using {0} for domainName",
+                    domainName
+                );
             }
 
             // Valid SID, but not for our context (machine).  No match.
-            if (!string.Equals(domainName, this.MachineFlatName, StringComparison.OrdinalIgnoreCase))
+            if (
+                !string.Equals(domainName, this.MachineFlatName, StringComparison.OrdinalIgnoreCase)
+            )
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn, "SAMStoreCtx", "FindNativeBySIDIdentRef: {0} != {1}, no match", domainName, this.MachineFlatName);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "SAMStoreCtx",
+                    "FindNativeBySIDIdentRef: {0} != {1}, no match",
+                    domainName,
+                    this.MachineFlatName
+                );
                 return null;
             }
 
             // Build the NT4 UrnValue
             samUrnValue = domainName + "\\" + name;
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "FindNativeBySIDIdentRef: searching for {0}", samUrnValue);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SAMStoreCtx",
+                "FindNativeBySIDIdentRef: searching for {0}",
+                samUrnValue
+            );
 
             return FindNativeByNT4IdentRef(principalType, samUrnValue);
         }
@@ -532,35 +650,58 @@ namespace System.DirectoryServices.AccountManagement
             if (index == urnValue.Length - 1)
                 throw new ArgumentException(SR.StoreCtxNT4IdentityClaimWrongForm);
 
-            string samAccountName = (index != -1) ? urnValue.Substring(index + 1) :    // +1 to skip the '/'
-                                                     urnValue;
+            string samAccountName =
+                (index != -1)
+                    ? urnValue.Substring(index + 1)
+                    : // +1 to skip the '/'
+                    urnValue;
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "FindNativeByNT4IdentRef: searching for {0}", samAccountName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SAMStoreCtx",
+                "FindNativeByNT4IdentRef: searching for {0}",
+                samAccountName
+            );
 
             // If they specified a specific type of principal, use that as a hint to speed up
             // the lookup.
             string principalHint = "";
 
-            if (principalType == typeof(UserPrincipal) || principalType.IsSubclassOf(typeof(UserPrincipal)))
+            if (
+                principalType == typeof(UserPrincipal)
+                || principalType.IsSubclassOf(typeof(UserPrincipal))
+            )
             {
                 principalHint = ",user";
                 principalType = typeof(UserPrincipal);
             }
-            else if (principalType == typeof(GroupPrincipal) || principalType.IsSubclassOf(typeof(GroupPrincipal)))
+            else if (
+                principalType == typeof(GroupPrincipal)
+                || principalType.IsSubclassOf(typeof(GroupPrincipal))
+            )
             {
                 principalHint = ",group";
                 principalType = typeof(GroupPrincipal);
             }
-            else if (principalType == typeof(ComputerPrincipal) || principalType.IsSubclassOf(typeof(ComputerPrincipal)))
+            else if (
+                principalType == typeof(ComputerPrincipal)
+                || principalType.IsSubclassOf(typeof(ComputerPrincipal))
+            )
             {
                 principalHint = ",computer";
                 principalType = typeof(ComputerPrincipal);
             }
 
             // Retrieve the object from SAM
-            string adsPath = "WinNT://" + this.MachineUserSuppliedName + "/" + samAccountName + principalHint;
+            string adsPath =
+                "WinNT://" + this.MachineUserSuppliedName + "/" + samAccountName + principalHint;
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "FindNativeByNT4IdentRef: adsPath={0}", adsPath);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SAMStoreCtx",
+                "FindNativeByNT4IdentRef: adsPath={0}",
+                adsPath
+            );
 
             DirectoryEntry de = SDSUtils.BuildDirectoryEntry(_credentials, _authTypes);
 
@@ -576,17 +717,24 @@ namespace System.DirectoryServices.AccountManagement
             }
             catch (System.Runtime.InteropServices.COMException e)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Error,
-                                        "SAMStoreCtx",
-                                        "FindNativeByNT4IdentRef: caught COMException, message={0}, code={1}",
-                                        e.Message,
-                                        e.ErrorCode);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Error,
+                    "SAMStoreCtx",
+                    "FindNativeByNT4IdentRef: caught COMException, message={0}, code={1}",
+                    e.Message,
+                    e.ErrorCode
+                );
 
                 // Failed to find it
-                if ((e.ErrorCode == unchecked((int)0x800708AB)) ||     // unknown user
-                     (e.ErrorCode == unchecked((int)0x800708AC)) ||     // unknown group
-                     (e.ErrorCode == unchecked((int)0x80070035)) ||     // bad net path
-                     (e.ErrorCode == unchecked((int)0x800708AD)))
+                if (
+                    (e.ErrorCode == unchecked((int)0x800708AB))
+                    || // unknown user
+                    (e.ErrorCode == unchecked((int)0x800708AC))
+                    || // unknown group
+                    (e.ErrorCode == unchecked((int)0x80070035))
+                    || // bad net path
+                    (e.ErrorCode == unchecked((int)0x800708AD))
+                )
                 {
                     return null;
                 }
@@ -600,18 +748,31 @@ namespace System.DirectoryServices.AccountManagement
 
             if ((principalType == typeof(UserPrincipal)) && SAMUtils.IsOfObjectClass(de, "User"))
                 fMatch = true;
-            else if ((principalType == typeof(GroupPrincipal)) && SAMUtils.IsOfObjectClass(de, "Group"))
+            else if (
+                (principalType == typeof(GroupPrincipal)) && SAMUtils.IsOfObjectClass(de, "Group")
+            )
                 fMatch = true;
-            else if ((principalType == typeof(ComputerPrincipal)) && SAMUtils.IsOfObjectClass(de, "Computer"))
+            else if (
+                (principalType == typeof(ComputerPrincipal))
+                && SAMUtils.IsOfObjectClass(de, "Computer")
+            )
                 fMatch = true;
-            else if ((principalType == typeof(AuthenticablePrincipal)) &&
-                      (SAMUtils.IsOfObjectClass(de, "User") || SAMUtils.IsOfObjectClass(de, "Computer")))
+            else if (
+                (principalType == typeof(AuthenticablePrincipal))
+                && (
+                    SAMUtils.IsOfObjectClass(de, "User") || SAMUtils.IsOfObjectClass(de, "Computer")
+                )
+            )
                 fMatch = true;
             else
             {
                 Debug.Assert(principalType == typeof(Principal));
 
-                if (SAMUtils.IsOfObjectClass(de, "User") || SAMUtils.IsOfObjectClass(de, "Group") || SAMUtils.IsOfObjectClass(de, "Computer"))
+                if (
+                    SAMUtils.IsOfObjectClass(de, "User")
+                    || SAMUtils.IsOfObjectClass(de, "Group")
+                    || SAMUtils.IsOfObjectClass(de, "Computer")
+                )
                     fMatch = true;
             }
 
@@ -641,83 +802,386 @@ namespace System.DirectoryServices.AccountManagement
         private static readonly object[,] s_propertyMappingTableRaw =
         {
             // PropertyName                          Principal Type     SAM property            Converter(WinNT->PAPI)                                    Converter(PAPI->WinNT)
-            {PropertyNames.PrincipalDisplayName,     typeof(UserPrincipal),      "FullName",             new FromWinNTConverterDelegate(StringFromWinNTConverter),  new ToWinNTConverterDelegate(StringToWinNTConverter)},
-            {PropertyNames.PrincipalDescription,     typeof(UserPrincipal),      "Description",          new FromWinNTConverterDelegate(StringFromWinNTConverter),  new ToWinNTConverterDelegate(StringToWinNTConverter)},
-            {PropertyNames.PrincipalDescription,     typeof(GroupPrincipal),     "Description",          new FromWinNTConverterDelegate(StringFromWinNTConverter),  new ToWinNTConverterDelegate(StringToWinNTConverter)},
-            {PropertyNames.PrincipalSamAccountName,                  typeof(Principal), "Name",            new FromWinNTConverterDelegate(SamAccountNameFromWinNTConverter),  null},
-            {PropertyNames.PrincipalSid,                        typeof(Principal), "objectSid",            new FromWinNTConverterDelegate(SidFromWinNTConverter), null },
-            {PropertyNames.PrincipalDistinguishedName, typeof(UserPrincipal), null,          null,  new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.PrincipalGuid,                      typeof(UserPrincipal), null,         null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.PrincipalUserPrincipalName,  typeof(UserPrincipal), null,         null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
+            {
+                PropertyNames.PrincipalDisplayName,
+                typeof(UserPrincipal),
+                "FullName",
+                new FromWinNTConverterDelegate(StringFromWinNTConverter),
+                new ToWinNTConverterDelegate(StringToWinNTConverter),
+            },
+            {
+                PropertyNames.PrincipalDescription,
+                typeof(UserPrincipal),
+                "Description",
+                new FromWinNTConverterDelegate(StringFromWinNTConverter),
+                new ToWinNTConverterDelegate(StringToWinNTConverter),
+            },
+            {
+                PropertyNames.PrincipalDescription,
+                typeof(GroupPrincipal),
+                "Description",
+                new FromWinNTConverterDelegate(StringFromWinNTConverter),
+                new ToWinNTConverterDelegate(StringToWinNTConverter),
+            },
+            {
+                PropertyNames.PrincipalSamAccountName,
+                typeof(Principal),
+                "Name",
+                new FromWinNTConverterDelegate(SamAccountNameFromWinNTConverter),
+                null,
+            },
+            {
+                PropertyNames.PrincipalSid,
+                typeof(Principal),
+                "objectSid",
+                new FromWinNTConverterDelegate(SidFromWinNTConverter),
+                null,
+            },
+            {
+                PropertyNames.PrincipalDistinguishedName,
+                typeof(UserPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.PrincipalGuid,
+                typeof(UserPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.PrincipalUserPrincipalName,
+                typeof(UserPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
             // Name and SamAccountNAme properties are currently routed to the same underlying Name property.
-            {PropertyNames.PrincipalName,                  typeof(Principal), "Name",            new FromWinNTConverterDelegate(SamAccountNameFromWinNTConverter),  null},
-
-
-
+            {
+                PropertyNames.PrincipalName,
+                typeof(Principal),
+                "Name",
+                new FromWinNTConverterDelegate(SamAccountNameFromWinNTConverter),
+                null,
+            },
             //
-            {PropertyNames.AuthenticablePrincipalEnabled,     typeof(UserPrincipal),  "UserFlags",     new FromWinNTConverterDelegate(UserFlagsFromWinNTConverter),  new ToWinNTConverterDelegate(UserFlagsToWinNTConverter)},
-            {PropertyNames.AuthenticablePrincipalCertificates, typeof(UserPrincipal),  "*******",       new FromWinNTConverterDelegate(CertFromWinNTConverter),       new ToWinNTConverterDelegate(CertToWinNT)},
-
+            {
+                PropertyNames.AuthenticablePrincipalEnabled,
+                typeof(UserPrincipal),
+                "UserFlags",
+                new FromWinNTConverterDelegate(UserFlagsFromWinNTConverter),
+                new ToWinNTConverterDelegate(UserFlagsToWinNTConverter),
+            },
+            {
+                PropertyNames.AuthenticablePrincipalCertificates,
+                typeof(UserPrincipal),
+                "*******",
+                new FromWinNTConverterDelegate(CertFromWinNTConverter),
+                new ToWinNTConverterDelegate(CertToWinNT),
+            },
             //
-            {PropertyNames.GroupIsSecurityGroup,     typeof(GroupPrincipal), "*******",    new FromWinNTConverterDelegate(GroupTypeFromWinNTConverter), new ToWinNTConverterDelegate(GroupTypeToWinNTConverter)},
-            {PropertyNames.GroupGroupScope,  typeof(GroupPrincipal), "groupType",  new FromWinNTConverterDelegate(GroupTypeFromWinNTConverter), new ToWinNTConverterDelegate(GroupTypeToWinNTConverter)},
-
+            {
+                PropertyNames.GroupIsSecurityGroup,
+                typeof(GroupPrincipal),
+                "*******",
+                new FromWinNTConverterDelegate(GroupTypeFromWinNTConverter),
+                new ToWinNTConverterDelegate(GroupTypeToWinNTConverter),
+            },
+            {
+                PropertyNames.GroupGroupScope,
+                typeof(GroupPrincipal),
+                "groupType",
+                new FromWinNTConverterDelegate(GroupTypeFromWinNTConverter),
+                new ToWinNTConverterDelegate(GroupTypeToWinNTConverter),
+            },
             //
-            {PropertyNames.UserEmailAddress, typeof(UserPrincipal),  "*******",  new FromWinNTConverterDelegate(EmailFromWinNTConverter),    new ToWinNTConverterDelegate(EmailToWinNTConverter)},
-
+            {
+                PropertyNames.UserEmailAddress,
+                typeof(UserPrincipal),
+                "*******",
+                new FromWinNTConverterDelegate(EmailFromWinNTConverter),
+                new ToWinNTConverterDelegate(EmailToWinNTConverter),
+            },
             //
-            {PropertyNames.AcctInfoLastLogon,             typeof(UserPrincipal), "LastLogin",              new FromWinNTConverterDelegate(DateFromWinNTConverter),            null},
-            {PropertyNames.AcctInfoPermittedWorkstations, typeof(UserPrincipal), "LoginWorkstations",      new FromWinNTConverterDelegate(MultiStringFromWinNTConverter),     new ToWinNTConverterDelegate(MultiStringToWinNTConverter)},
-            {PropertyNames.AcctInfoPermittedLogonTimes,   typeof(UserPrincipal), "LoginHours",             new FromWinNTConverterDelegate(BinaryFromWinNTConverter),          new ToWinNTConverterDelegate(LogonHoursToWinNTConverter)},
-            {PropertyNames.AcctInfoExpirationDate,        typeof(UserPrincipal), "AccountExpirationDate",  new FromWinNTConverterDelegate(DateFromWinNTConverter),            new ToWinNTConverterDelegate(AcctExpirDateToNTConverter)},
-            {PropertyNames.AcctInfoSmartcardRequired,     typeof(UserPrincipal), "UserFlags",              new FromWinNTConverterDelegate(UserFlagsFromWinNTConverter),       new ToWinNTConverterDelegate(UserFlagsToWinNTConverter)},
-            {PropertyNames.AcctInfoDelegationPermitted,   typeof(UserPrincipal), "UserFlags",              new FromWinNTConverterDelegate(UserFlagsFromWinNTConverter),       new ToWinNTConverterDelegate(UserFlagsToWinNTConverter)},
-            {PropertyNames.AcctInfoBadLogonCount,         typeof(UserPrincipal), "BadPasswordAttempts",    new FromWinNTConverterDelegate(IntFromWinNTConverter),             null},
-            {PropertyNames.AcctInfoHomeDirectory,         typeof(UserPrincipal), "HomeDirectory",          new FromWinNTConverterDelegate(StringFromWinNTConverter),          new ToWinNTConverterDelegate(StringToWinNTConverter)},
-            {PropertyNames.AcctInfoHomeDrive,             typeof(UserPrincipal), "HomeDirDrive",           new FromWinNTConverterDelegate(StringFromWinNTConverter),          new ToWinNTConverterDelegate(StringToWinNTConverter)},
-            {PropertyNames.AcctInfoScriptPath,            typeof(UserPrincipal), "LoginScript",            new FromWinNTConverterDelegate(StringFromWinNTConverter),          new ToWinNTConverterDelegate(StringToWinNTConverter)},
-
+            {
+                PropertyNames.AcctInfoLastLogon,
+                typeof(UserPrincipal),
+                "LastLogin",
+                new FromWinNTConverterDelegate(DateFromWinNTConverter),
+                null,
+            },
+            {
+                PropertyNames.AcctInfoPermittedWorkstations,
+                typeof(UserPrincipal),
+                "LoginWorkstations",
+                new FromWinNTConverterDelegate(MultiStringFromWinNTConverter),
+                new ToWinNTConverterDelegate(MultiStringToWinNTConverter),
+            },
+            {
+                PropertyNames.AcctInfoPermittedLogonTimes,
+                typeof(UserPrincipal),
+                "LoginHours",
+                new FromWinNTConverterDelegate(BinaryFromWinNTConverter),
+                new ToWinNTConverterDelegate(LogonHoursToWinNTConverter),
+            },
+            {
+                PropertyNames.AcctInfoExpirationDate,
+                typeof(UserPrincipal),
+                "AccountExpirationDate",
+                new FromWinNTConverterDelegate(DateFromWinNTConverter),
+                new ToWinNTConverterDelegate(AcctExpirDateToNTConverter),
+            },
+            {
+                PropertyNames.AcctInfoSmartcardRequired,
+                typeof(UserPrincipal),
+                "UserFlags",
+                new FromWinNTConverterDelegate(UserFlagsFromWinNTConverter),
+                new ToWinNTConverterDelegate(UserFlagsToWinNTConverter),
+            },
+            {
+                PropertyNames.AcctInfoDelegationPermitted,
+                typeof(UserPrincipal),
+                "UserFlags",
+                new FromWinNTConverterDelegate(UserFlagsFromWinNTConverter),
+                new ToWinNTConverterDelegate(UserFlagsToWinNTConverter),
+            },
+            {
+                PropertyNames.AcctInfoBadLogonCount,
+                typeof(UserPrincipal),
+                "BadPasswordAttempts",
+                new FromWinNTConverterDelegate(IntFromWinNTConverter),
+                null,
+            },
+            {
+                PropertyNames.AcctInfoHomeDirectory,
+                typeof(UserPrincipal),
+                "HomeDirectory",
+                new FromWinNTConverterDelegate(StringFromWinNTConverter),
+                new ToWinNTConverterDelegate(StringToWinNTConverter),
+            },
+            {
+                PropertyNames.AcctInfoHomeDrive,
+                typeof(UserPrincipal),
+                "HomeDirDrive",
+                new FromWinNTConverterDelegate(StringFromWinNTConverter),
+                new ToWinNTConverterDelegate(StringToWinNTConverter),
+            },
+            {
+                PropertyNames.AcctInfoScriptPath,
+                typeof(UserPrincipal),
+                "LoginScript",
+                new FromWinNTConverterDelegate(StringFromWinNTConverter),
+                new ToWinNTConverterDelegate(StringToWinNTConverter),
+            },
             //
-            {PropertyNames.PwdInfoLastPasswordSet,                   typeof(UserPrincipal),  "PasswordAge",   new FromWinNTConverterDelegate(ElapsedTimeFromWinNTConverter),       null},
-            {PropertyNames.PwdInfoLastBadPasswordAttempt,            typeof(UserPrincipal),  "*******",       new FromWinNTConverterDelegate(LastBadPwdAttemptFromWinNTConverter), null},
-            {PropertyNames.PwdInfoPasswordNotRequired,               typeof(UserPrincipal),  "UserFlags",     new FromWinNTConverterDelegate(UserFlagsFromWinNTConverter),    new ToWinNTConverterDelegate(UserFlagsToWinNTConverter)},
-            {PropertyNames.PwdInfoPasswordNeverExpires,              typeof(UserPrincipal),  "UserFlags",     new FromWinNTConverterDelegate(UserFlagsFromWinNTConverter),    new ToWinNTConverterDelegate(UserFlagsToWinNTConverter)},
-            {PropertyNames.PwdInfoCannotChangePassword,              typeof(UserPrincipal),  "UserFlags",     new FromWinNTConverterDelegate(UserFlagsFromWinNTConverter),    new ToWinNTConverterDelegate(UserFlagsToWinNTConverter)},
-            {PropertyNames.PwdInfoAllowReversiblePasswordEncryption, typeof(UserPrincipal),  "UserFlags",     new FromWinNTConverterDelegate(UserFlagsFromWinNTConverter),    new ToWinNTConverterDelegate(UserFlagsToWinNTConverter)},
-
+            {
+                PropertyNames.PwdInfoLastPasswordSet,
+                typeof(UserPrincipal),
+                "PasswordAge",
+                new FromWinNTConverterDelegate(ElapsedTimeFromWinNTConverter),
+                null,
+            },
+            {
+                PropertyNames.PwdInfoLastBadPasswordAttempt,
+                typeof(UserPrincipal),
+                "*******",
+                new FromWinNTConverterDelegate(LastBadPwdAttemptFromWinNTConverter),
+                null,
+            },
+            {
+                PropertyNames.PwdInfoPasswordNotRequired,
+                typeof(UserPrincipal),
+                "UserFlags",
+                new FromWinNTConverterDelegate(UserFlagsFromWinNTConverter),
+                new ToWinNTConverterDelegate(UserFlagsToWinNTConverter),
+            },
+            {
+                PropertyNames.PwdInfoPasswordNeverExpires,
+                typeof(UserPrincipal),
+                "UserFlags",
+                new FromWinNTConverterDelegate(UserFlagsFromWinNTConverter),
+                new ToWinNTConverterDelegate(UserFlagsToWinNTConverter),
+            },
+            {
+                PropertyNames.PwdInfoCannotChangePassword,
+                typeof(UserPrincipal),
+                "UserFlags",
+                new FromWinNTConverterDelegate(UserFlagsFromWinNTConverter),
+                new ToWinNTConverterDelegate(UserFlagsToWinNTConverter),
+            },
+            {
+                PropertyNames.PwdInfoAllowReversiblePasswordEncryption,
+                typeof(UserPrincipal),
+                "UserFlags",
+                new FromWinNTConverterDelegate(UserFlagsFromWinNTConverter),
+                new ToWinNTConverterDelegate(UserFlagsToWinNTConverter),
+            },
             //
             // Writable properties we don't support writing in SAM
             //
-            {PropertyNames.UserGivenName,            typeof(UserPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.UserMiddleName,           typeof(UserPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.UserSurname,              typeof(UserPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.UserVoiceTelephoneNumber, typeof(UserPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.UserEmployeeID,           typeof(UserPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-
-            {PropertyNames.PrincipalDisplayName,     typeof(GroupPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.PrincipalDisplayName,     typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-
-            {PropertyNames.PrincipalDescription,     typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-
-            {PropertyNames.AuthenticablePrincipalEnabled,        typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-
-            {PropertyNames.AuthenticablePrincipalCertificates,   typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-
-            {PropertyNames.ComputerServicePrincipalNames,        typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-
-            {PropertyNames.AcctInfoPermittedWorkstations, typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.AcctInfoPermittedLogonTimes,   typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.AcctInfoExpirationDate,        typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.AcctInfoSmartcardRequired,     typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.AcctInfoDelegationPermitted,   typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.AcctInfoHomeDirectory,         typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.AcctInfoHomeDrive,             typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.AcctInfoScriptPath,            typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-
-            {PropertyNames.PwdInfoPasswordNotRequired,               typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.PwdInfoPasswordNeverExpires,              typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.PwdInfoCannotChangePassword,              typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)},
-            {PropertyNames.PwdInfoAllowReversiblePasswordEncryption, typeof(ComputerPrincipal),       null,   null,   new ToWinNTConverterDelegate(ExceptionToWinNTConverter)}
+            {
+                PropertyNames.UserGivenName,
+                typeof(UserPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.UserMiddleName,
+                typeof(UserPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.UserSurname,
+                typeof(UserPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.UserVoiceTelephoneNumber,
+                typeof(UserPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.UserEmployeeID,
+                typeof(UserPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.PrincipalDisplayName,
+                typeof(GroupPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.PrincipalDisplayName,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.PrincipalDescription,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.AuthenticablePrincipalEnabled,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.AuthenticablePrincipalCertificates,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.ComputerServicePrincipalNames,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.AcctInfoPermittedWorkstations,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.AcctInfoPermittedLogonTimes,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.AcctInfoExpirationDate,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.AcctInfoSmartcardRequired,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.AcctInfoDelegationPermitted,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.AcctInfoHomeDirectory,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.AcctInfoHomeDrive,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.AcctInfoScriptPath,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.PwdInfoPasswordNotRequired,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.PwdInfoPasswordNeverExpires,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.PwdInfoCannotChangePassword,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
+            {
+                PropertyNames.PwdInfoAllowReversiblePasswordEncryption,
+                typeof(ComputerPrincipal),
+                null,
+                null,
+                new ToWinNTConverterDelegate(ExceptionToWinNTConverter),
+            },
         };
 
         private static readonly Hashtable s_userPropertyMappingTableByProperty;
@@ -739,13 +1203,13 @@ namespace System.DirectoryServices.AccountManagement
             User = 0x1,
             Computer = 0x2,
             Group = 0x4,
-            Principal = User | Computer | Group
+            Principal = User | Computer | Group,
         }
 
         private sealed class PropertyMappingTableEntry
         {
-            internal string propertyName;                  // PAPI name
-            internal string suggestedWinNTPropertyName;    // WinNT attribute name
+            internal string propertyName; // PAPI name
+            internal string suggestedWinNTPropertyName; // WinNT attribute name
             internal FromWinNTConverterDelegate winNTToPapiConverter;
             internal ToWinNTConverterDelegate papiToWinNTConverter;
         }
@@ -755,17 +1219,33 @@ namespace System.DirectoryServices.AccountManagement
         //
 
         // Loads the specified attribute of the DirectoryEntry into the specified property of the Principal
-        private delegate void FromWinNTConverterDelegate(DirectoryEntry de, string suggestedWinNTProperty, Principal p, string propertyName);
+        private delegate void FromWinNTConverterDelegate(
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            Principal p,
+            string propertyName
+        );
 
         // Loads the specified property of the Principal into the specified attribute of the DirectoryEntry.
         // For multivalued attributes, must test to make sure the value hasn't already been loaded into the DirectoryEntry
         // (to maintain idempotency when PushChangesToNative is called multiple times).
-        private delegate void ToWinNTConverterDelegate(Principal p, string propertyName, DirectoryEntry de, string suggestedWinNTProperty, bool isLSAM);
+        private delegate void ToWinNTConverterDelegate(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            bool isLSAM
+        );
 
         //
         // WinNT --> PAPI
         //
-        private static void StringFromWinNTConverter(DirectoryEntry de, string suggestedWinNTProperty, Principal p, string propertyName)
+        private static void StringFromWinNTConverter(
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            Principal p,
+            string propertyName
+        )
         {
             PropertyValueCollection values = de.Properties[suggestedWinNTProperty];
 
@@ -774,10 +1254,20 @@ namespace System.DirectoryServices.AccountManagement
             if ((values.Count > 0) && (((string)values[0]).Length == 0))
                 return;
 
-            SDSUtils.SingleScalarFromDirectoryEntry<string>(new dSPropertyCollection(de.Properties), suggestedWinNTProperty, p, propertyName);
+            SDSUtils.SingleScalarFromDirectoryEntry<string>(
+                new dSPropertyCollection(de.Properties),
+                suggestedWinNTProperty,
+                p,
+                propertyName
+            );
         }
 
-        private static void SidFromWinNTConverter(DirectoryEntry de, string suggestedWinNTProperty, Principal p, string propertyName)
+        private static void SidFromWinNTConverter(
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            Principal p,
+            string propertyName
+        )
         {
             byte[] sid = (byte[])de.Properties["objectSid"][0];
 
@@ -786,38 +1276,86 @@ namespace System.DirectoryServices.AccountManagement
             p.LoadValueIntoProperty(propertyName, (object)SidObj);
         }
 
-        private static void SamAccountNameFromWinNTConverter(DirectoryEntry de, string suggestedWinNTProperty, Principal p, string propertyName)
+        private static void SamAccountNameFromWinNTConverter(
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            Principal p,
+            string propertyName
+        )
         {
             Debug.Assert(de.Properties["Name"].Count == 1);
 
             string samAccountName = (string)de.Properties["Name"][0];
             //                string urnValue = p.Context.ConnectedServer + @"\" + samAccountName;
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "SamAccountNameFromWinNTConverter: loading SAM{0}", samAccountName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "SAMStoreCtx",
+                "SamAccountNameFromWinNTConverter: loading SAM{0}",
+                samAccountName
+            );
             p.LoadValueIntoProperty(propertyName, (object)samAccountName);
         }
 
-        private static void MultiStringFromWinNTConverter(DirectoryEntry de, string suggestedWinNTProperty, Principal p, string propertyName)
+        private static void MultiStringFromWinNTConverter(
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            Principal p,
+            string propertyName
+        )
         {
             // ValueCollection<string> is Load'ed from a List<string>
-            SDSUtils.MultiScalarFromDirectoryEntry<string>(new dSPropertyCollection(de.Properties), suggestedWinNTProperty, p, propertyName);
+            SDSUtils.MultiScalarFromDirectoryEntry<string>(
+                new dSPropertyCollection(de.Properties),
+                suggestedWinNTProperty,
+                p,
+                propertyName
+            );
         }
 
-        private static void IntFromWinNTConverter(DirectoryEntry de, string suggestedWinNTProperty, Principal p, string propertyName)
+        private static void IntFromWinNTConverter(
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            Principal p,
+            string propertyName
+        )
         {
-            SDSUtils.SingleScalarFromDirectoryEntry<int>(new dSPropertyCollection(de.Properties), suggestedWinNTProperty, p, propertyName);
+            SDSUtils.SingleScalarFromDirectoryEntry<int>(
+                new dSPropertyCollection(de.Properties),
+                suggestedWinNTProperty,
+                p,
+                propertyName
+            );
         }
 
-        private static void BinaryFromWinNTConverter(DirectoryEntry de, string suggestedWinNTProperty, Principal p, string propertyName)
+        private static void BinaryFromWinNTConverter(
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            Principal p,
+            string propertyName
+        )
         {
-            SDSUtils.SingleScalarFromDirectoryEntry<byte[]>(new dSPropertyCollection(de.Properties), suggestedWinNTProperty, p, propertyName);
+            SDSUtils.SingleScalarFromDirectoryEntry<byte[]>(
+                new dSPropertyCollection(de.Properties),
+                suggestedWinNTProperty,
+                p,
+                propertyName
+            );
         }
 
-        private static void CertFromWinNTConverter(DirectoryEntry de, string suggestedWinNTProperty, Principal p, string propertyName)
-        {
-        }
+        private static void CertFromWinNTConverter(
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            Principal p,
+            string propertyName
+        ) { }
 
-        private static void GroupTypeFromWinNTConverter(DirectoryEntry de, string suggestedWinNTProperty, Principal p, string propertyName)
+        private static void GroupTypeFromWinNTConverter(
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            Principal p,
+            string propertyName
+        )
         {
             // Groups are always enabled in SAM.  There is no such thing as a distribution group.
             p.LoadValueIntoProperty(PropertyNames.GroupIsSecurityGroup, (object)true);
@@ -841,15 +1379,26 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        private static void EmailFromWinNTConverter(DirectoryEntry de, string suggestedWinNTProperty, Principal p, string propertyName)
-        {
-        }
+        private static void EmailFromWinNTConverter(
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            Principal p,
+            string propertyName
+        ) { }
 
-        private static void LastBadPwdAttemptFromWinNTConverter(DirectoryEntry de, string suggestedWinNTProperty, Principal p, string propertyName)
-        {
-        }
+        private static void LastBadPwdAttemptFromWinNTConverter(
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            Principal p,
+            string propertyName
+        ) { }
 
-        private static void ElapsedTimeFromWinNTConverter(DirectoryEntry de, string suggestedWinNTProperty, Principal p, string propertyName)
+        private static void ElapsedTimeFromWinNTConverter(
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            Principal p,
+            string propertyName
+        )
         {
             // These properties are expressed as "seconds passed since the event of interest".  So to convert
             // to a DateTime, we subtract them from DateTime.UtcNow.
@@ -870,7 +1419,12 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        private static void DateFromWinNTConverter(DirectoryEntry de, string suggestedWinNTProperty, Principal p, string propertyName)
+        private static void DateFromWinNTConverter(
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            Principal p,
+            string propertyName
+        )
         {
             PropertyValueCollection values = de.Properties[suggestedWinNTProperty];
 
@@ -886,26 +1440,58 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        private static void UserFlagsFromWinNTConverter(DirectoryEntry de, string suggestedWinNTProperty, Principal p, string propertyName)
+        private static void UserFlagsFromWinNTConverter(
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            Principal p,
+            string propertyName
+        )
         {
-            Debug.Assert(string.Equals(suggestedWinNTProperty, "UserFlags", StringComparison.OrdinalIgnoreCase));
+            Debug.Assert(
+                string.Equals(
+                    suggestedWinNTProperty,
+                    "UserFlags",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
 
-            SDSUtils.AccountControlFromDirectoryEntry(new dSPropertyCollection(de.Properties), suggestedWinNTProperty, p, propertyName, true);
+            SDSUtils.AccountControlFromDirectoryEntry(
+                new dSPropertyCollection(de.Properties),
+                suggestedWinNTProperty,
+                p,
+                propertyName,
+                true
+            );
         }
 
         //
         // PAPI --> WinNT
         //
 
-        private static void ExceptionToWinNTConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedWinNTProperty, bool isLSAM)
+        private static void ExceptionToWinNTConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            bool isLSAM
+        )
         {
             throw new InvalidOperationException(
-                            SR.Format(SR.PrincipalUnsupportPropertyForType,
-                                      p.GetType(),
-                                      PropertyNamesExternal.GetExternalForm(propertyName)));
+                SR.Format(
+                    SR.PrincipalUnsupportPropertyForType,
+                    p.GetType(),
+                    PropertyNamesExternal.GetExternalForm(propertyName)
+                )
+            );
         }
 
-        private static void StringToWinNTConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedWinNTProperty, bool isLSAM)
+        private static void StringToWinNTConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            bool isLSAM
+        )
         {
             string value = (string)p.GetValueForProperty(propertyName);
 
@@ -918,12 +1504,29 @@ namespace System.DirectoryServices.AccountManagement
                 de.Properties[suggestedWinNTProperty].Value = "";
         }
 
-        private static void MultiStringToWinNTConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedWinNTProperty, bool isLSAM)
+        private static void MultiStringToWinNTConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            bool isLSAM
+        )
         {
-            SDSUtils.MultiStringToDirectoryEntryConverter(p, propertyName, de, suggestedWinNTProperty);
+            SDSUtils.MultiStringToDirectoryEntryConverter(
+                p,
+                propertyName,
+                de,
+                suggestedWinNTProperty
+            );
         }
 
-        private static void LogonHoursToWinNTConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedWinNTProperty, bool isLSAM)
+        private static void LogonHoursToWinNTConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            bool isLSAM
+        )
         {
             Debug.Assert(propertyName == PropertyNames.AcctInfoPermittedLogonTimes);
 
@@ -938,30 +1541,73 @@ namespace System.DirectoryServices.AccountManagement
             }
             else
             {
-                byte[] allHours = new byte[]{0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-                                             0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-                                             0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-                                             0xff, 0xff, 0xff, 0xff, 0xff, 0xff,
-                                             0xff};
+                byte[] allHours = new byte[]
+                {
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                    0xff,
+                };
 
                 de.Properties[suggestedWinNTProperty].Value = allHours;
             }
         }
 
-        private static void CertToWinNT(Principal p, string propertyName, DirectoryEntry de, string suggestedWinNTProperty, bool isLSAM)
+        private static void CertToWinNT(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            bool isLSAM
+        )
         {
             if (!isLSAM)
                 throw new InvalidOperationException(
-                    SR.Format(SR.PrincipalUnsupportPropertyForPlatform, PropertyNamesExternal.GetExternalForm(propertyName)));
+                    SR.Format(
+                        SR.PrincipalUnsupportPropertyForPlatform,
+                        PropertyNamesExternal.GetExternalForm(propertyName)
+                    )
+                );
         }
 
-        private static void GroupTypeToWinNTConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedWinNTProperty, bool isLSAM)
+        private static void GroupTypeToWinNTConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            bool isLSAM
+        )
         {
             if (propertyName == PropertyNames.GroupIsSecurityGroup)
             {
                 if (!isLSAM)
                     throw new InvalidOperationException(
-                        SR.Format(SR.PrincipalUnsupportPropertyForPlatform, PropertyNamesExternal.GetExternalForm(propertyName)));
+                        SR.Format(
+                            SR.PrincipalUnsupportPropertyForPlatform,
+                            PropertyNamesExternal.GetExternalForm(propertyName)
+                        )
+                    );
             }
             else
             {
@@ -975,14 +1621,30 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        private static void EmailToWinNTConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedWinNTProperty, bool isLSAM)
+        private static void EmailToWinNTConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            bool isLSAM
+        )
         {
             if (!isLSAM)
                 throw new InvalidOperationException(
-                    SR.Format(SR.PrincipalUnsupportPropertyForPlatform, PropertyNamesExternal.GetExternalForm(propertyName)));
+                    SR.Format(
+                        SR.PrincipalUnsupportPropertyForPlatform,
+                        PropertyNamesExternal.GetExternalForm(propertyName)
+                    )
+                );
         }
 
-        private static void AcctExpirDateToNTConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedWinNTProperty, bool isLSAM)
+        private static void AcctExpirDateToNTConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            bool isLSAM
+        )
         {
             Nullable<DateTime> value = (Nullable<DateTime>)p.GetValueForProperty(propertyName);
 
@@ -996,20 +1658,46 @@ namespace System.DirectoryServices.AccountManagement
                 de.Properties[suggestedWinNTProperty].Value = new DateTime(1970, 1, 1);
         }
 
-        private static void UserFlagsToWinNTConverter(Principal p, string propertyName, DirectoryEntry de, string suggestedWinNTProperty, bool isLSAM)
+        private static void UserFlagsToWinNTConverter(
+            Principal p,
+            string propertyName,
+            DirectoryEntry de,
+            string suggestedWinNTProperty,
+            bool isLSAM
+        )
         {
-            Debug.Assert(string.Equals(suggestedWinNTProperty, "UserFlags", StringComparison.OrdinalIgnoreCase));
+            Debug.Assert(
+                string.Equals(
+                    suggestedWinNTProperty,
+                    "UserFlags",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
 
-            SDSUtils.AccountControlToDirectoryEntry(p, propertyName, de, suggestedWinNTProperty, true, p.unpersisted);
+            SDSUtils.AccountControlToDirectoryEntry(
+                p,
+                propertyName,
+                de,
+                suggestedWinNTProperty,
+                true,
+                p.unpersisted
+            );
         }
 
-        private static void UpdateGroupMembership(Principal group, DirectoryEntry de, NetCred credentials, AuthenticationTypes authTypes)
+        private static void UpdateGroupMembership(
+            Principal group,
+            DirectoryEntry de,
+            NetCred credentials,
+            AuthenticationTypes authTypes
+        )
         {
             Debug.Assert(group.fakePrincipal == false);
 
-            PrincipalCollection members = (PrincipalCollection)group.GetValueForProperty(PropertyNames.GroupMembers);
+            PrincipalCollection members = (PrincipalCollection)
+                group.GetValueForProperty(PropertyNames.GroupMembers);
 
-            UnsafeNativeMethods.IADsGroup iADsGroup = (UnsafeNativeMethods.IADsGroup)de.NativeObject;
+            UnsafeNativeMethods.IADsGroup iADsGroup = (UnsafeNativeMethods.IADsGroup)
+                de.NativeObject;
 
             try
             {
@@ -1022,7 +1710,12 @@ namespace System.DirectoryServices.AccountManagement
                     // So we remove each member in turn, by enumerating over the group membership
                     // and calling remove on each.
 
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "UpdateGroupMembership: clearing {0}", de.Path);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SAMStoreCtx",
+                        "UpdateGroupMembership: clearing {0}",
+                        de.Path
+                    );
 
                     // Prepare the COM Interopt enumeration
                     UnsafeNativeMethods.IADsMembers iADsMembers = iADsGroup.Members();
@@ -1038,23 +1731,30 @@ namespace System.DirectoryServices.AccountManagement
                         if (hr == 0) // S_OK
                         {
                             // Found a member, remove it.
-                            UnsafeNativeMethods.IADs iADs = (UnsafeNativeMethods.IADs)nativeMembers[0];
+                            UnsafeNativeMethods.IADs iADs = (UnsafeNativeMethods.IADs)
+                                nativeMembers[0];
                             iADsGroup.Remove(iADs.ADsPath);
                         }
-                    }
-                    while (hr == 0);
+                    } while (hr == 0);
 
                     // Either hr == S_FALSE (1), which means we completed the enumerator,
                     // or we encountered an error
                     if (hr != 1)
                     {
                         // Error occurred.
-                        GlobalDebug.WriteLineIf(GlobalDebug.Warn, "SAMStoreCtx", "UpdateGroupMembership: error while clearing, hr={0}", hr);
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Warn,
+                            "SAMStoreCtx",
+                            "UpdateGroupMembership: error while clearing, hr={0}",
+                            hr
+                        );
 
                         throw new PrincipalOperationException(
-                                        SR.Format(
-                                                SR.SAMStoreCtxFailedToClearGroup,
-                                                hr.ToString(CultureInfo.InvariantCulture)));
+                            SR.Format(
+                                SR.SAMStoreCtxFailedToClearGroup,
+                                hr.ToString(CultureInfo.InvariantCulture)
+                            )
+                        );
                     }
                 }
 
@@ -1068,17 +1768,25 @@ namespace System.DirectoryServices.AccountManagement
                 {
                     Type memberType = member.GetType();
 
-                    if ((memberType != typeof(UserPrincipal)) && (!memberType.IsSubclassOf(typeof(UserPrincipal))) &&
-                         (memberType != typeof(ComputerPrincipal)) && (!memberType.IsSubclassOf(typeof(ComputerPrincipal))) &&
-                         (memberType != typeof(GroupPrincipal)) && (!memberType.IsSubclassOf(typeof(GroupPrincipal))))
+                    if (
+                        (memberType != typeof(UserPrincipal))
+                        && (!memberType.IsSubclassOf(typeof(UserPrincipal)))
+                        && (memberType != typeof(ComputerPrincipal))
+                        && (!memberType.IsSubclassOf(typeof(ComputerPrincipal)))
+                        && (memberType != typeof(GroupPrincipal))
+                        && (!memberType.IsSubclassOf(typeof(GroupPrincipal)))
+                    )
                     {
                         throw new InvalidOperationException(
-                                        SR.Format(SR.StoreCtxUnsupportedPrincipalTypeForGroupInsert, memberType));
+                            SR.Format(SR.StoreCtxUnsupportedPrincipalTypeForGroupInsert, memberType)
+                        );
                     }
 
                     // Can't inserted unpersisted principal
                     if (member.unpersisted)
-                        throw new InvalidOperationException(SR.StoreCtxGroupHasUnpersistedInsertedPrincipal);
+                        throw new InvalidOperationException(
+                            SR.StoreCtxGroupHasUnpersistedInsertedPrincipal
+                        );
 
                     Debug.Assert(member.Context != null);
 
@@ -1095,9 +1803,16 @@ namespace System.DirectoryServices.AccountManagement
                     string memberSidPath = GetSidADsPathFromPrincipal(member);
 
                     if (memberSidPath == null)
-                        throw new InvalidOperationException(SR.SAMStoreCtxCouldntGetSIDForGroupMember);
+                        throw new InvalidOperationException(
+                            SR.SAMStoreCtxCouldntGetSIDForGroupMember
+                        );
 
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "UpdateGroupMembership: inserting {0}", memberSidPath);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SAMStoreCtx",
+                        "UpdateGroupMembership: inserting {0}",
+                        memberSidPath
+                    );
 
                     // Add the member to the group
                     iADsGroup.Add(memberSidPath);
@@ -1123,9 +1838,16 @@ namespace System.DirectoryServices.AccountManagement
                     string memberSidPath = GetSidADsPathFromPrincipal(member);
 
                     if (memberSidPath == null)
-                        throw new InvalidOperationException(SR.SAMStoreCtxCouldntGetSIDForGroupMember);
+                        throw new InvalidOperationException(
+                            SR.SAMStoreCtxCouldntGetSIDForGroupMember
+                        );
 
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "SAMStoreCtx", "UpdateGroupMembership: removing {0}", memberSidPath);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "SAMStoreCtx",
+                        "UpdateGroupMembership: removing {0}",
+                        memberSidPath
+                    );
 
                     // Remove the member from the group
                     iADsGroup.Remove(memberSidPath);
@@ -1133,11 +1855,13 @@ namespace System.DirectoryServices.AccountManagement
             }
             catch (System.Runtime.InteropServices.COMException e)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Error,
-                                        "SAMStoreCtx",
-                                        "UpdateGroupMembership: caught COMException, message={0}, code={1}",
-                                        e.Message,
-                                        e.ErrorCode);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Error,
+                    "SAMStoreCtx",
+                    "UpdateGroupMembership: caught COMException, message={0}, code={1}",
+                    e.Message,
+                    e.ErrorCode
+                );
 
                 // ADSI threw an exception trying to update the group membership
                 throw ExceptionHelper.GetExceptionFromCOMException(e);
@@ -1154,7 +1878,11 @@ namespace System.DirectoryServices.AccountManagement
 
             if (Sid == null)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn, "SAMStoreCtx", "GetSidADsPathFromPrincipal: no SID");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "SAMStoreCtx",
+                    "GetSidADsPathFromPrincipal: no SID"
+                );
                 return null;
             }
 
@@ -1162,10 +1890,12 @@ namespace System.DirectoryServices.AccountManagement
 
             if (sddlSid == null)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn,
-                                        "SAMStoreCtx",
-                                        "GetSidADsPathFromPrincipal: Couldn't convert to SDDL ({0})",
-                                        Sid.ToString());
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "SAMStoreCtx",
+                    "GetSidADsPathFromPrincipal: Couldn't convert to SDDL ({0})",
+                    Sid.ToString()
+                );
                 return null;
             }
 

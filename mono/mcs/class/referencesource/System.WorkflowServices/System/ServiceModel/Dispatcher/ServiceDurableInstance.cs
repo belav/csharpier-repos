@@ -4,6 +4,7 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Diagnostics;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.ServiceModel;
@@ -11,7 +12,6 @@ namespace System.ServiceModel.Dispatcher
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Persistence;
     using System.Transactions;
-    using System.Diagnostics;
 
     class ServiceDurableInstance : DurableInstance
     {
@@ -36,10 +36,17 @@ namespace System.ServiceModel.Dispatcher
             bool saveStateInOperationTransaction,
             UnknownExceptionAction unknownExceptionAction,
             DurableRuntimeValidator runtimeValidator,
-            TimeSpan operationTimeout)
-            : this(persistenceProvider, contextManager, saveStateInOperationTransaction, unknownExceptionAction, runtimeValidator, operationTimeout, null)
-        {
-        }
+            TimeSpan operationTimeout
+        )
+            : this(
+                persistenceProvider,
+                contextManager,
+                saveStateInOperationTransaction,
+                unknownExceptionAction,
+                runtimeValidator,
+                operationTimeout,
+                null
+            ) { }
 
         public ServiceDurableInstance(
             PersistenceProvider persistenceProvider,
@@ -48,12 +55,18 @@ namespace System.ServiceModel.Dispatcher
             UnknownExceptionAction unknownExceptionAction,
             DurableRuntimeValidator runtimeValidator,
             TimeSpan operationTimeout,
-            Type serviceType)
-            : base(contextManager, persistenceProvider == null ? Guid.Empty : persistenceProvider.Id)
+            Type serviceType
+        )
+            : base(
+                contextManager,
+                persistenceProvider == null ? Guid.Empty : persistenceProvider.Id
+            )
         {
             if (persistenceProvider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("persistenceProvider");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "persistenceProvider"
+                );
             }
 
             if (contextManager == null)
@@ -63,11 +76,12 @@ namespace System.ServiceModel.Dispatcher
 
             if (runtimeValidator == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("runtimeValidator");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "runtimeValidator"
+                );
             }
 
-            Fx.Assert(operationTimeout > TimeSpan.Zero,
-                "Timeout needs to be greater than zero.");
+            Fx.Assert(operationTimeout > TimeSpan.Zero, "Timeout needs to be greater than zero.");
 
             this.lockingProvider = persistenceProvider as LockingPersistenceProvider;
             this.provider = persistenceProvider;
@@ -85,15 +99,12 @@ namespace System.ServiceModel.Dispatcher
             Delete = 1,
             Unlock = 2,
             Create = 3,
-            Update = 4
+            Update = 4,
         }
 
         public object Instance
         {
-            get
-            {
-                return this.instance;
-            }
+            get { return this.instance; }
         }
 
         public void AbortInstance()
@@ -103,36 +114,58 @@ namespace System.ServiceModel.Dispatcher
             if (concurrencyMode != ConcurrencyMode.Single)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(
-                    SR2.GetString(SR2.AbortInstanceRequiresSingle)));
+                    new InvalidOperationException(SR2.GetString(SR2.AbortInstanceRequiresSingle))
+                );
             }
 
             if (this.saveStateInOperationTransaction)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new InvalidOperationException(
-                    SR2.GetString(SR2.CannotAbortWithSaveStateInTransaction)));
+                        SR2.GetString(SR2.CannotAbortWithSaveStateInTransaction)
+                    )
+                );
             }
 
             if (this.markedForCompletion)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new InvalidOperationException(
-                    SR2.GetString(
-                    SR2.DurableOperationMethodInvalid,
-                    "AbortInstance",
-                    "CompleteInstance")));
+                        SR2.GetString(
+                            SR2.DurableOperationMethodInvalid,
+                            "AbortInstance",
+                            "CompleteInstance"
+                        )
+                    )
+                );
             }
 
             this.abortInstance = true;
         }
 
-        public IAsyncResult BeginFinishOperation(bool completeInstance, bool performPersistence, Exception operationException, AsyncCallback callback, object state)
+        public IAsyncResult BeginFinishOperation(
+            bool completeInstance,
+            bool performPersistence,
+            Exception operationException,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new FinishOperationAsyncResult(this, completeInstance, performPersistence, operationException, callback, state);
+            return new FinishOperationAsyncResult(
+                this,
+                completeInstance,
+                performPersistence,
+                operationException,
+                callback,
+                state
+            );
         }
 
-        public IAsyncResult BeginStartOperation(bool canCreateInstance, AsyncCallback callback, object state)
+        public IAsyncResult BeginStartOperation(
+            bool canCreateInstance,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new StartOperationAsyncResult(this, canCreateInstance, callback, state);
         }
@@ -147,16 +180,28 @@ namespace System.ServiceModel.Dispatcher
             return StartOperationAsyncResult.End(result);
         }
 
-        public void FinishOperation(bool completeInstance, bool performPersistence, Exception operationException)
+        public void FinishOperation(
+            bool completeInstance,
+            bool performPersistence,
+            Exception operationException
+        )
         {
             try
             {
                 bool disposeInstance;
-                OperationType operation = FinishOperationCommon(completeInstance, operationException, out disposeInstance);
+                OperationType operation = FinishOperationCommon(
+                    completeInstance,
+                    operationException,
+                    out disposeInstance
+                );
 
                 Fx.Assert(
-                    (performPersistence || (operation != OperationType.Delete && operation != OperationType.Unlock)),
-                    "If we aren't performing persistence then we are a NotAllowed contract and therefore should never have loaded from persistence.");
+                    (
+                        performPersistence
+                        || (operation != OperationType.Delete && operation != OperationType.Unlock)
+                    ),
+                    "If we aren't performing persistence then we are a NotAllowed contract and therefore should never have loaded from persistence."
+                );
 
                 if (performPersistence)
                 {
@@ -166,39 +211,59 @@ namespace System.ServiceModel.Dispatcher
                             // Do the null check out here to avoid creating the scope
                             if (this.lockingProvider != null)
                             {
-                                using (PersistenceScope scope = new PersistenceScope(
-                                    this.saveStateInOperationTransaction,
-                                    this.clonedTransaction))
+                                using (
+                                    PersistenceScope scope = new PersistenceScope(
+                                        this.saveStateInOperationTransaction,
+                                        this.clonedTransaction
+                                    )
+                                )
                                 {
                                     this.lockingProvider.Unlock(this.operationTimeout);
                                 }
                             }
                             break;
                         case OperationType.Delete:
-                            using (PersistenceScope scope = new PersistenceScope(
-                                this.saveStateInOperationTransaction,
-                                this.clonedTransaction))
+                            using (
+                                PersistenceScope scope = new PersistenceScope(
+                                    this.saveStateInOperationTransaction,
+                                    this.clonedTransaction
+                                )
+                            )
                             {
                                 this.provider.Delete(this.instance, this.operationTimeout);
 
                                 if (DiagnosticUtility.ShouldTraceInformation)
                                 {
-                                    string traceText = SR.GetString(SR.TraceCodeServiceDurableInstanceDeleted, this.InstanceId);
-                                    TraceUtility.TraceEvent(TraceEventType.Information,
-                                        TraceCode.ServiceDurableInstanceDeleted, traceText,
+                                    string traceText = SR.GetString(
+                                        SR.TraceCodeServiceDurableInstanceDeleted,
+                                        this.InstanceId
+                                    );
+                                    TraceUtility.TraceEvent(
+                                        TraceEventType.Information,
+                                        TraceCode.ServiceDurableInstanceDeleted,
+                                        traceText,
                                         new StringTraceRecord("DurableInstanceDetail", traceText),
-                                        this, null);
+                                        this,
+                                        null
+                                    );
                                 }
                             }
                             break;
                         case OperationType.Create:
-                            using (PersistenceScope scope = new PersistenceScope(
-                                this.saveStateInOperationTransaction,
-                                this.clonedTransaction))
+                            using (
+                                PersistenceScope scope = new PersistenceScope(
+                                    this.saveStateInOperationTransaction,
+                                    this.clonedTransaction
+                                )
+                            )
                             {
                                 if (this.lockingProvider != null)
                                 {
-                                    this.lockingProvider.Create(this.Instance, this.operationTimeout, disposeInstance);
+                                    this.lockingProvider.Create(
+                                        this.Instance,
+                                        this.operationTimeout,
+                                        disposeInstance
+                                    );
                                 }
                                 else
                                 {
@@ -207,22 +272,37 @@ namespace System.ServiceModel.Dispatcher
 
                                 if (DiagnosticUtility.ShouldTraceInformation)
                                 {
-                                    string traceText = SR2.GetString(SR2.ServiceDurableInstanceSavedDetails, this.InstanceId, (this.lockingProvider != null) ? "True" : "False");
-                                    TraceUtility.TraceEvent(TraceEventType.Information,
-                                        TraceCode.ServiceDurableInstanceSaved, SR.GetString(SR.TraceCodeServiceDurableInstanceSaved),
+                                    string traceText = SR2.GetString(
+                                        SR2.ServiceDurableInstanceSavedDetails,
+                                        this.InstanceId,
+                                        (this.lockingProvider != null) ? "True" : "False"
+                                    );
+                                    TraceUtility.TraceEvent(
+                                        TraceEventType.Information,
+                                        TraceCode.ServiceDurableInstanceSaved,
+                                        SR.GetString(SR.TraceCodeServiceDurableInstanceSaved),
                                         new StringTraceRecord("DurableInstanceDetail", traceText),
-                                        this, null);
+                                        this,
+                                        null
+                                    );
                                 }
                             }
                             break;
                         case OperationType.Update:
-                            using (PersistenceScope scope = new PersistenceScope(
-                                this.saveStateInOperationTransaction,
-                                this.clonedTransaction))
+                            using (
+                                PersistenceScope scope = new PersistenceScope(
+                                    this.saveStateInOperationTransaction,
+                                    this.clonedTransaction
+                                )
+                            )
                             {
                                 if (this.lockingProvider != null)
                                 {
-                                    this.lockingProvider.Update(this.Instance, this.operationTimeout, disposeInstance);
+                                    this.lockingProvider.Update(
+                                        this.Instance,
+                                        this.operationTimeout,
+                                        disposeInstance
+                                    );
                                 }
                                 else
                                 {
@@ -231,11 +311,19 @@ namespace System.ServiceModel.Dispatcher
 
                                 if (DiagnosticUtility.ShouldTraceInformation)
                                 {
-                                    string traceText = SR2.GetString(SR2.ServiceDurableInstanceSavedDetails, this.InstanceId, (this.lockingProvider != null) ? "True" : "False");
-                                    TraceUtility.TraceEvent(TraceEventType.Information,
-                                        TraceCode.ServiceDurableInstanceSaved, SR.GetString(SR.TraceCodeServiceDurableInstanceSaved),
+                                    string traceText = SR2.GetString(
+                                        SR2.ServiceDurableInstanceSavedDetails,
+                                        this.InstanceId,
+                                        (this.lockingProvider != null) ? "True" : "False"
+                                    );
+                                    TraceUtility.TraceEvent(
+                                        TraceEventType.Information,
+                                        TraceCode.ServiceDurableInstanceSaved,
+                                        SR.GetString(SR.TraceCodeServiceDurableInstanceSaved),
                                         new StringTraceRecord("DurableInstanceDetail", traceText),
-                                        this, null);
+                                        this,
+                                        null
+                                    );
                                 }
                             }
                             break;
@@ -264,10 +352,13 @@ namespace System.ServiceModel.Dispatcher
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new InvalidOperationException(
-                    SR2.GetString(
-                    SR2.DurableOperationMethodInvalid,
-                    "CompleteInstance",
-                    "AbortInstance")));
+                        SR2.GetString(
+                            SR2.DurableOperationMethodInvalid,
+                            "CompleteInstance",
+                            "AbortInstance"
+                        )
+                    )
+                );
             }
 
             this.markedForCompletion = true;
@@ -280,20 +371,27 @@ namespace System.ServiceModel.Dispatcher
                 if (this.markedForCompletion)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InstanceNotFoundException(this.InstanceId));
+                        new InstanceNotFoundException(this.InstanceId)
+                    );
                 }
 
                 if (this.instance == null)
                 {
                     if (!TryActivateInstance(canCreateInstance))
                     {
-                        using (PersistenceScope persistenceScope = new PersistenceScope(
-                            this.saveStateInOperationTransaction,
-                            this.clonedTransaction))
+                        using (
+                            PersistenceScope persistenceScope = new PersistenceScope(
+                                this.saveStateInOperationTransaction,
+                                this.clonedTransaction
+                            )
+                        )
                         {
                             if (this.lockingProvider != null)
                             {
-                                this.instance = this.lockingProvider.Load(this.operationTimeout, true);
+                                this.instance = this.lockingProvider.Load(
+                                    this.operationTimeout,
+                                    true
+                                );
                             }
                             else
                             {
@@ -302,11 +400,19 @@ namespace System.ServiceModel.Dispatcher
 
                             if (DiagnosticUtility.ShouldTraceInformation)
                             {
-                                string traceText = SR2.GetString(SR2.ServiceDurableInstanceLoadedDetails, this.InstanceId, (this.lockingProvider != null) ? "True" : "False");
-                                TraceUtility.TraceEvent(TraceEventType.Information,
-                                    TraceCode.ServiceDurableInstanceLoaded, SR.GetString(SR.TraceCodeServiceDurableInstanceLoaded),
+                                string traceText = SR2.GetString(
+                                    SR2.ServiceDurableInstanceLoadedDetails,
+                                    this.InstanceId,
+                                    (this.lockingProvider != null) ? "True" : "False"
+                                );
+                                TraceUtility.TraceEvent(
+                                    TraceEventType.Information,
+                                    TraceCode.ServiceDurableInstanceLoaded,
+                                    SR.GetString(SR.TraceCodeServiceDurableInstanceLoaded),
                                     new StringTraceRecord("DurableInstanceDetail", traceText),
-                                    this, null);
+                                    this,
+                                    null
+                                );
                             }
                         }
 
@@ -319,7 +425,8 @@ namespace System.ServiceModel.Dispatcher
 
             Fx.Assert(
                 this.instance != null,
-                "Instance should definitely be non-null here or we should have thrown an exception.");
+                "Instance should definitely be non-null here or we should have thrown an exception."
+            );
 
             return this.instance;
         }
@@ -329,12 +436,20 @@ namespace System.ServiceModel.Dispatcher
             this.provider.Abort();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.provider.BeginClose(timeout, callback, state);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.provider.BeginOpen(timeout, callback, state);
         }
@@ -372,7 +487,8 @@ namespace System.ServiceModel.Dispatcher
         {
             Fx.Assert(
                 this.instance != null,
-                "Before making this call we should check instance for null.");
+                "Before making this call we should check instance for null."
+            );
 
             IDisposable disposableInstance = this.instance as IDisposable;
 
@@ -382,18 +498,29 @@ namespace System.ServiceModel.Dispatcher
 
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    string traceText = SR.GetString(SR.TraceCodeServiceDurableInstanceDisposed, this.InstanceId);
-                    TraceUtility.TraceEvent(TraceEventType.Information,
-                        TraceCode.ServiceDurableInstanceDisposed, SR.GetString(SR.TraceCodeServiceDurableInstanceDisposed),
+                    string traceText = SR.GetString(
+                        SR.TraceCodeServiceDurableInstanceDisposed,
+                        this.InstanceId
+                    );
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.ServiceDurableInstanceDisposed,
+                        SR.GetString(SR.TraceCodeServiceDurableInstanceDisposed),
                         new StringTraceRecord("DurableInstanceDetail", traceText),
-                        this, null);
+                        this,
+                        null
+                    );
                 }
             }
 
             this.instance = null;
         }
 
-        OperationType FinishOperationCommon(bool completeInstance, Exception operationException, out bool disposeInstance)
+        OperationType FinishOperationCommon(
+            bool completeInstance,
+            Exception operationException,
+            out bool disposeInstance
+        )
         {
             // No need for Interlocked because we don't support
             // ConcurrencyMode.Multiple
@@ -401,11 +528,15 @@ namespace System.ServiceModel.Dispatcher
 
             DurableOperationContext.EndOperation();
 
-            Fx.Assert(this.outstandingOperations >= 0,
-                "OutstandingOperations should never go below zero.");
+            Fx.Assert(
+                this.outstandingOperations >= 0,
+                "OutstandingOperations should never go below zero."
+            );
 
-            Fx.Assert(this.instance != null,
-                "Instance should never been null here - we only get here if StartOperation completes successfully.");
+            Fx.Assert(
+                this.instance != null,
+                "Instance should never been null here - we only get here if StartOperation completes successfully."
+            );
 
             OperationType operation = OperationType.None;
             disposeInstance = false;
@@ -421,9 +552,12 @@ namespace System.ServiceModel.Dispatcher
 
             if (this.outstandingOperations == 0)
             {
-                if (this.saveStateInOperationTransaction &&
-                    this.clonedTransaction != null &&
-                    this.clonedTransaction.TransactionInformation.Status == TransactionStatus.Aborted)
+                if (
+                    this.saveStateInOperationTransaction
+                    && this.clonedTransaction != null
+                    && this.clonedTransaction.TransactionInformation.Status
+                        == TransactionStatus.Aborted
+                )
                 {
                     this.abortInstance = false;
                     this.markedForCompletion = false;
@@ -443,7 +577,10 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        Fx.Assert(this.unknownExceptionAction == UnknownExceptionAction.AbortInstance, "If it is not TerminateInstance then it must be AbortInstance.");
+                        Fx.Assert(
+                            this.unknownExceptionAction == UnknownExceptionAction.AbortInstance,
+                            "If it is not TerminateInstance then it must be AbortInstance."
+                        );
 
                         if (this.existsInPersistence)
                         {
@@ -471,8 +608,10 @@ namespace System.ServiceModel.Dispatcher
                         // No need for a transactional version of this as we do not allow
                         // AbortInstance to be called in scenarios with SaveStateInOperationTransaction
                         // set to true
-                        Fx.Assert(!this.saveStateInOperationTransaction,
-                            "SaveStateInOperationTransaction must be false if we allowed an abort.");
+                        Fx.Assert(
+                            !this.saveStateInOperationTransaction,
+                            "SaveStateInOperationTransaction must be false if we allowed an abort."
+                        );
 
                         if (this.lockingProvider != null)
                         {
@@ -487,7 +626,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (this.existsInPersistence)
                     {
-                        // We don't set exists in persistence to 
+                        // We don't set exists in persistence to
                         // false here because we want the proper
                         // persistence exceptions to get back to the
                         // client if we end up here again.
@@ -536,7 +675,9 @@ namespace System.ServiceModel.Dispatcher
                 else
                 {
                     DurableErrorHandler.CleanUpInstanceContextAtOperationCompletion();
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FaultException(new DurableDispatcherAddressingFault()));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new FaultException(new DurableDispatcherAddressingFault())
+                    );
                 }
             }
 
@@ -545,14 +686,29 @@ namespace System.ServiceModel.Dispatcher
 
         class FinishOperationAsyncResult : AsyncResult
         {
-            static AsyncCallback createCallback = Fx.ThunkCallback(new AsyncCallback(CreateComplete));
-            static AsyncCallback deleteCallback = Fx.ThunkCallback(new AsyncCallback(DeleteComplete));
-            static AsyncCallback unlockCallback = Fx.ThunkCallback(new AsyncCallback(UnlockComplete));
-            static AsyncCallback updateCallback = Fx.ThunkCallback(new AsyncCallback(UpdateComplete));
+            static AsyncCallback createCallback = Fx.ThunkCallback(
+                new AsyncCallback(CreateComplete)
+            );
+            static AsyncCallback deleteCallback = Fx.ThunkCallback(
+                new AsyncCallback(DeleteComplete)
+            );
+            static AsyncCallback unlockCallback = Fx.ThunkCallback(
+                new AsyncCallback(UnlockComplete)
+            );
+            static AsyncCallback updateCallback = Fx.ThunkCallback(
+                new AsyncCallback(UpdateComplete)
+            );
 
             ServiceDurableInstance durableInstance;
 
-            public FinishOperationAsyncResult(ServiceDurableInstance durableInstance, bool completeInstance, bool performPersistence, Exception operationException, AsyncCallback callback, object state)
+            public FinishOperationAsyncResult(
+                ServiceDurableInstance durableInstance,
+                bool completeInstance,
+                bool performPersistence,
+                Exception operationException,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.durableInstance = durableInstance;
@@ -561,7 +717,11 @@ namespace System.ServiceModel.Dispatcher
                 OperationType operation = OperationType.None;
                 bool completeSelf = false;
                 bool disposeInstace;
-                operation = this.durableInstance.FinishOperationCommon(completeInstance, operationException, out disposeInstace);
+                operation = this.durableInstance.FinishOperationCommon(
+                    completeInstance,
+                    operationException,
+                    out disposeInstace
+                );
 
                 if (performPersistence)
                 {
@@ -570,49 +730,92 @@ namespace System.ServiceModel.Dispatcher
                         case OperationType.Unlock:
                             if (this.durableInstance.lockingProvider != null)
                             {
-                                using (PersistenceScope scope = new PersistenceScope(
-                                    this.durableInstance.saveStateInOperationTransaction,
-                                    this.durableInstance.clonedTransaction))
+                                using (
+                                    PersistenceScope scope = new PersistenceScope(
+                                        this.durableInstance.saveStateInOperationTransaction,
+                                        this.durableInstance.clonedTransaction
+                                    )
+                                )
                                 {
-                                    result = this.durableInstance.lockingProvider.BeginUnlock(this.durableInstance.operationTimeout, unlockCallback, this);
+                                    result = this.durableInstance.lockingProvider.BeginUnlock(
+                                        this.durableInstance.operationTimeout,
+                                        unlockCallback,
+                                        this
+                                    );
                                 }
                             }
                             break;
                         case OperationType.Delete:
-                            using (PersistenceScope scope = new PersistenceScope(
-                                this.durableInstance.saveStateInOperationTransaction,
-                                this.durableInstance.clonedTransaction))
+                            using (
+                                PersistenceScope scope = new PersistenceScope(
+                                    this.durableInstance.saveStateInOperationTransaction,
+                                    this.durableInstance.clonedTransaction
+                                )
+                            )
                             {
-                                result = this.durableInstance.provider.BeginDelete(this.durableInstance.Instance, this.durableInstance.operationTimeout, deleteCallback, this);
+                                result = this.durableInstance.provider.BeginDelete(
+                                    this.durableInstance.Instance,
+                                    this.durableInstance.operationTimeout,
+                                    deleteCallback,
+                                    this
+                                );
                             }
                             break;
                         case OperationType.Create:
-                            using (PersistenceScope scope = new PersistenceScope(
-                                this.durableInstance.saveStateInOperationTransaction,
-                                this.durableInstance.clonedTransaction))
+                            using (
+                                PersistenceScope scope = new PersistenceScope(
+                                    this.durableInstance.saveStateInOperationTransaction,
+                                    this.durableInstance.clonedTransaction
+                                )
+                            )
                             {
                                 if (this.durableInstance.lockingProvider != null)
                                 {
-                                    result = this.durableInstance.lockingProvider.BeginCreate(this.durableInstance.Instance, this.durableInstance.operationTimeout, disposeInstace, createCallback, this);
+                                    result = this.durableInstance.lockingProvider.BeginCreate(
+                                        this.durableInstance.Instance,
+                                        this.durableInstance.operationTimeout,
+                                        disposeInstace,
+                                        createCallback,
+                                        this
+                                    );
                                 }
                                 else
                                 {
-                                    result = this.durableInstance.provider.BeginCreate(this.durableInstance.Instance, this.durableInstance.operationTimeout, createCallback, this);
+                                    result = this.durableInstance.provider.BeginCreate(
+                                        this.durableInstance.Instance,
+                                        this.durableInstance.operationTimeout,
+                                        createCallback,
+                                        this
+                                    );
                                 }
                             }
                             break;
                         case OperationType.Update:
-                            using (PersistenceScope scope = new PersistenceScope(
-                                this.durableInstance.saveStateInOperationTransaction,
-                                this.durableInstance.clonedTransaction))
+                            using (
+                                PersistenceScope scope = new PersistenceScope(
+                                    this.durableInstance.saveStateInOperationTransaction,
+                                    this.durableInstance.clonedTransaction
+                                )
+                            )
                             {
                                 if (this.durableInstance.lockingProvider != null)
                                 {
-                                    result = this.durableInstance.lockingProvider.BeginUpdate(this.durableInstance.Instance, this.durableInstance.operationTimeout, disposeInstace, updateCallback, this);
+                                    result = this.durableInstance.lockingProvider.BeginUpdate(
+                                        this.durableInstance.Instance,
+                                        this.durableInstance.operationTimeout,
+                                        disposeInstace,
+                                        updateCallback,
+                                        this
+                                    );
                                 }
                                 else
                                 {
-                                    result = this.durableInstance.provider.BeginUpdate(this.durableInstance.Instance, this.durableInstance.operationTimeout, updateCallback, this);
+                                    result = this.durableInstance.provider.BeginUpdate(
+                                        this.durableInstance.Instance,
+                                        this.durableInstance.operationTimeout,
+                                        updateCallback,
+                                        this
+                                    );
                                 }
                             }
                             break;
@@ -629,15 +832,20 @@ namespace System.ServiceModel.Dispatcher
                     this.durableInstance.DisposeInstance();
                 }
 
-                if (operation == OperationType.None ||
-                    (result != null && result.CompletedSynchronously))
+                if (
+                    operation == OperationType.None
+                    || (result != null && result.CompletedSynchronously)
+                )
                 {
                     completeSelf = true;
                 }
 
                 if (!performPersistence)
                 {
-                    Fx.Assert(result == null, "Should not have had a result if we didn't perform persistence.");
+                    Fx.Assert(
+                        result == null,
+                        "Should not have had a result if we didn't perform persistence."
+                    );
                     Complete(true);
                     return;
                 }
@@ -672,10 +880,13 @@ namespace System.ServiceModel.Dispatcher
                     return;
                 }
 
-                Fx.Assert(result.AsyncState is FinishOperationAsyncResult,
-                    "Async state should have been FinishOperationAsyncResult");
+                Fx.Assert(
+                    result.AsyncState is FinishOperationAsyncResult,
+                    "Async state should have been FinishOperationAsyncResult"
+                );
 
-                FinishOperationAsyncResult finishResult = (FinishOperationAsyncResult) result.AsyncState;
+                FinishOperationAsyncResult finishResult = (FinishOperationAsyncResult)
+                    result.AsyncState;
 
                 Exception completionException = null;
                 try
@@ -742,7 +953,10 @@ namespace System.ServiceModel.Dispatcher
             DependentTransaction clonedTransaction;
             TransactionScope scope;
 
-            public PersistenceScope(bool saveStateInOperationTransaction, DependentTransaction clonedTransaction)
+            public PersistenceScope(
+                bool saveStateInOperationTransaction,
+                DependentTransaction clonedTransaction
+            )
             {
                 if (!saveStateInOperationTransaction)
                 {
@@ -774,7 +988,12 @@ namespace System.ServiceModel.Dispatcher
             OperationContext operationContext;
             StartOperationScope scope;
 
-            public StartOperationAsyncResult(ServiceDurableInstance durableInstance, bool canCreateInstance, AsyncCallback callback, object state)
+            public StartOperationAsyncResult(
+                ServiceDurableInstance durableInstance,
+                bool canCreateInstance,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.durableInstance = durableInstance;
@@ -783,10 +1002,10 @@ namespace System.ServiceModel.Dispatcher
                 IAsyncResult result = null;
                 this.operationContext = OperationContext.Current;
 
-                scope = new StartOperationScope(this.durableInstance);               
+                scope = new StartOperationScope(this.durableInstance);
                 bool success = false;
                 try
-                {                   
+                {
                     if (this.durableInstance.instance == null)
                     {
                         if (this.durableInstance.TryActivateInstance(canCreateInstance))
@@ -795,17 +1014,29 @@ namespace System.ServiceModel.Dispatcher
                         }
                         else
                         {
-                            using (PersistenceScope persistenceScope = new PersistenceScope(
-                                this.durableInstance.saveStateInOperationTransaction,
-                                this.durableInstance.clonedTransaction))
+                            using (
+                                PersistenceScope persistenceScope = new PersistenceScope(
+                                    this.durableInstance.saveStateInOperationTransaction,
+                                    this.durableInstance.clonedTransaction
+                                )
+                            )
                             {
                                 if (this.durableInstance.lockingProvider != null)
                                 {
-                                    result = this.durableInstance.lockingProvider.BeginLoad(this.durableInstance.operationTimeout, true, loadCallback, this);
+                                    result = this.durableInstance.lockingProvider.BeginLoad(
+                                        this.durableInstance.operationTimeout,
+                                        true,
+                                        loadCallback,
+                                        this
+                                    );
                                 }
                                 else
                                 {
-                                    result = this.durableInstance.provider.BeginLoad(this.durableInstance.operationTimeout, loadCallback, this);
+                                    result = this.durableInstance.provider.BeginLoad(
+                                        this.durableInstance.operationTimeout,
+                                        loadCallback,
+                                        this
+                                    );
                                 }
                             }
 
@@ -822,14 +1053,13 @@ namespace System.ServiceModel.Dispatcher
                         completeSelf = true;
                     }
 
-
                     success = true;
                 }
                 finally
                 {
                     if (!success)
                     {
-                        scope.Dispose();                        
+                        scope.Dispose();
                     }
                 }
 
@@ -839,11 +1069,15 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (result != null)
                         {
-                            this.durableInstance.instance = this.durableInstance.provider.EndLoad(result);
+                            this.durableInstance.instance = this.durableInstance.provider.EndLoad(
+                                result
+                            );
                         }
 
-                        Fx.Assert(this.durableInstance.instance != null,
-                            "The instance should always be set here.");
+                        Fx.Assert(
+                            this.durableInstance.instance != null,
+                            "The instance should always be set here."
+                        );
 
                         Complete(true);
                         scope.Complete();
@@ -852,12 +1086,14 @@ namespace System.ServiceModel.Dispatcher
                     {
                         scope.Dispose();
                     }
-                }              
+                }
             }
 
             public static object End(IAsyncResult result)
             {
-                StartOperationAsyncResult startResult = AsyncResult.End<StartOperationAsyncResult>(result);
+                StartOperationAsyncResult startResult = AsyncResult.End<StartOperationAsyncResult>(
+                    result
+                );
 
                 return startResult.durableInstance.instance;
             }
@@ -869,10 +1105,13 @@ namespace System.ServiceModel.Dispatcher
                     return;
                 }
 
-                Fx.Assert(result.AsyncState is StartOperationAsyncResult,
-                    "Should have been passed a StartOperationAsyncResult as the state");
+                Fx.Assert(
+                    result.AsyncState is StartOperationAsyncResult,
+                    "Should have been passed a StartOperationAsyncResult as the state"
+                );
 
-                StartOperationAsyncResult startResult = (StartOperationAsyncResult) result.AsyncState;                                
+                StartOperationAsyncResult startResult = (StartOperationAsyncResult)
+                    result.AsyncState;
                 Exception completionException = null;
                 OperationContext oldOperationContext = OperationContext.Current;
                 OperationContext.Current = startResult.operationContext;
@@ -881,10 +1120,13 @@ namespace System.ServiceModel.Dispatcher
                 {
                     try
                     {
-                        startResult.durableInstance.instance = startResult.durableInstance.provider.EndLoad(result);
+                        startResult.durableInstance.instance =
+                            startResult.durableInstance.provider.EndLoad(result);
 
-                        Fx.Assert(startResult.durableInstance.instance != null,
-                            "The instance should always be set here.");
+                        Fx.Assert(
+                            startResult.durableInstance.instance != null,
+                            "The instance should always be set here."
+                        );
 
                         startResult.scope.Complete();
                     }
@@ -899,7 +1141,7 @@ namespace System.ServiceModel.Dispatcher
                     }
                     finally
                     {
-                        startResult.scope.Dispose();                        
+                        startResult.scope.Dispose();
                     }
 
                     startResult.Complete(false, completionException);
@@ -928,9 +1170,14 @@ namespace System.ServiceModel.Dispatcher
                 // ConcurrencyMode.Multiple
                 this.durableInstance.outstandingOperations++;
 
-                if (this.durableInstance.saveStateInOperationTransaction && Transaction.Current != null)
+                if (
+                    this.durableInstance.saveStateInOperationTransaction
+                    && Transaction.Current != null
+                )
                 {
-                    this.durableInstance.clonedTransaction = Transaction.Current.DependentClone(DependentCloneOption.BlockCommitUntilComplete);
+                    this.durableInstance.clonedTransaction = Transaction.Current.DependentClone(
+                        DependentCloneOption.BlockCommitUntilComplete
+                    );
                 }
             }
 
@@ -943,7 +1190,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!this.success)
                 {
-                    Fx.Assert(OperationContext.Current != null, "Operation context should not be null at this point.");
+                    Fx.Assert(
+                        OperationContext.Current != null,
+                        "Operation context should not be null at this point."
+                    );
 
                     DurableOperationContext.EndOperation();
 

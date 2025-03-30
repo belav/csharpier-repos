@@ -19,7 +19,8 @@ public class SqlServerNetTopologySuiteMemberTranslatorPlugin : IMemberTranslator
     /// </summary>
     public SqlServerNetTopologySuiteMemberTranslatorPlugin(
         IRelationalTypeMappingSource typeMappingSource,
-        ISqlExpressionFactory sqlExpressionFactory)
+        ISqlExpressionFactory sqlExpressionFactory
+    )
     {
         Translators = new IMemberTranslator[]
         {
@@ -28,7 +29,7 @@ public class SqlServerNetTopologySuiteMemberTranslatorPlugin : IMemberTranslator
             new SqlServerLineStringMemberTranslator(typeMappingSource, sqlExpressionFactory),
             new SqlServerMultiLineStringMemberTranslator(sqlExpressionFactory),
             new SqlServerPointMemberTranslator(sqlExpressionFactory),
-            new SqlServerPolygonMemberTranslator(typeMappingSource, sqlExpressionFactory)
+            new SqlServerPolygonMemberTranslator(typeMappingSource, sqlExpressionFactory),
         };
     }
 

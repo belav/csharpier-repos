@@ -9,14 +9,23 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class JsonResultWithSystemTextJsonTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithSystemTextJson>>
+public class JsonResultWithSystemTextJsonTest
+    : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithSystemTextJson>>
 {
     private IServiceCollection _serviceCollection;
 
-    public JsonResultWithSystemTextJsonTest(MvcTestFixture<BasicWebSite.StartupWithSystemTextJson> fixture)
+    public JsonResultWithSystemTextJsonTest(
+        MvcTestFixture<BasicWebSite.StartupWithSystemTextJson> fixture
+    )
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(b => b.UseStartup<BasicWebSite.StartupWithSystemTextJson>());
-        factory = factory.WithWebHostBuilder(b => b.ConfigureTestServices(serviceCollection => _serviceCollection = serviceCollection));
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(b =>
+                b.UseStartup<BasicWebSite.StartupWithSystemTextJson>()
+            );
+        factory = factory.WithWebHostBuilder(b =>
+            b.ConfigureTestServices(serviceCollection => _serviceCollection = serviceCollection)
+        );
 
         Client = factory.CreateDefaultClient();
     }

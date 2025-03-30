@@ -8,9 +8,7 @@ namespace System.Transactions.DtcProxyShim;
 internal sealed class TransactionNotifyShim : NotificationShimBase, ITransactionOutcomeEvents
 {
     internal TransactionNotifyShim(DtcProxyShimFactory shimFactory, object? enlistmentIdentifier)
-        : base(shimFactory, enlistmentIdentifier)
-    {
-    }
+        : base(shimFactory, enlistmentIdentifier) { }
 
     public void Committed(bool fRetaining, IntPtr pNewUOW, int hresult)
     {
@@ -24,13 +22,17 @@ internal sealed class TransactionNotifyShim : NotificationShimBase, ITransaction
         ShimFactory.NewNotification(this);
     }
 
-    public void HeuristicDecision(OletxTransactionHeuristic dwDecision, IntPtr pboidReason, int hresult)
+    public void HeuristicDecision(
+        OletxTransactionHeuristic dwDecision,
+        IntPtr pboidReason,
+        int hresult
+    )
     {
         NotificationType = dwDecision switch
         {
             OletxTransactionHeuristic.XACTHEURISTIC_ABORT => ShimNotificationType.AbortedNotify,
             OletxTransactionHeuristic.XACTHEURISTIC_COMMIT => ShimNotificationType.CommittedNotify,
-            _ => ShimNotificationType.InDoubtNotify
+            _ => ShimNotificationType.InDoubtNotify,
         };
 
         ShimFactory.NewNotification(this);

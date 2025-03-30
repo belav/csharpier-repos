@@ -12,14 +12,13 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel;
     using System.Threading;
 
-
     // IP address helper class for multi-homing support
     class PeerIPHelper
     {
         public event EventHandler AddressChanged;
 
         bool isOpen;
-        readonly IPAddress listenAddress;       // To listen on a single IP address.
+        readonly IPAddress listenAddress; // To listen on a single IP address.
         IPAddress[] localAddresses;
         AddressChangeHelper addressChangeHelper;
         Socket ipv6Socket;
@@ -34,7 +33,7 @@ namespace System.ServiceModel.Channels
             Unknown,
             Teredo,
             Isatap,
-            Six2Four
+            Six2Four,
         }
 
         public PeerIPHelper()
@@ -118,7 +117,10 @@ namespace System.ServiceModel.Channels
             return new ReadOnlyCollection<IPAddress>(cloneArray);
         }
 
-        public static ReadOnlyCollection<IPAddress> CloneAddresses(ReadOnlyCollection<IPAddress> sourceCollection, bool maskScopeId)
+        public static ReadOnlyCollection<IPAddress> CloneAddresses(
+            ReadOnlyCollection<IPAddress> sourceCollection,
+            bool maskScopeId
+        )
         {
             IPAddress[] cloneArray = new IPAddress[sourceCollection.Count];
             for (int i = 0; i < sourceCollection.Count; i++)
@@ -156,13 +158,13 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        // Retrieve the IP addresses configured on the machine. 
+        // Retrieve the IP addresses configured on the machine.
         IPAddress[] GetAddresses()
         {
             List<IPAddress> addresses = new List<IPAddress>();
             List<IPAddress> temporaryAddresses = new List<IPAddress>();
 
-            if (this.listenAddress != null)     // single local address scenario?
+            if (this.listenAddress != null) // single local address scenario?
             {
                 // Check if the specified address is configured
                 if (ValidAddress(this.listenAddress))
@@ -186,7 +188,9 @@ namespace System.ServiceModel.Channels
                 IPInterfaceProperties properties = networkIf.GetIPProperties();
                 if (properties != null)
                 {
-                    foreach (UnicastIPAddressInformation unicastAddress in properties.UnicastAddresses)
+                    foreach (
+                        UnicastIPAddressInformation unicastAddress in properties.UnicastAddresses
+                    )
                     {
                         if (NonTransientAddress(unicastAddress))
                         {
@@ -195,11 +199,8 @@ namespace System.ServiceModel.Channels
                             else
                                 addresses.Add(unicastAddress.Address);
                         }
-
                     }
-
                 }
-
             }
             if (addresses.Count > 0)
                 return ReorderAddresses(addresses);
@@ -207,14 +208,17 @@ namespace System.ServiceModel.Channels
                 return temporaryAddresses.ToArray();
         }
 
-
         internal static IPAddress[] ReorderAddresses(IEnumerable<IPAddress> sourceAddresses)
         {
             List<IPAddress> result = new List<IPAddress>();
             List<IPAddress> notAdded = new List<IPAddress>();
 
             AddressType addressType = AddressType.Unknown;
-            IPAddress v4Address = null, v6Address = null, isatapAddress = null, teredoAddress = null, six2FourAddress = null;
+            IPAddress v4Address = null,
+                v6Address = null,
+                isatapAddress = null,
+                teredoAddress = null,
+                six2FourAddress = null;
 
             foreach (IPAddress address in sourceAddresses)
             {
@@ -242,51 +246,51 @@ namespace System.ServiceModel.Channels
                 switch (addressType)
                 {
                     case AddressType.Teredo:
+                    {
+                        if (teredoAddress == null)
                         {
-                            if (teredoAddress == null)
-                            {
-                                teredoAddress = address;
-                            }
-                            else
-                            {
-                                notAdded.Add(address);
-                            }
-                            continue;
+                            teredoAddress = address;
                         }
+                        else
+                        {
+                            notAdded.Add(address);
+                        }
+                        continue;
+                    }
                     case AddressType.Six2Four:
+                    {
+                        if (six2FourAddress == null)
                         {
-                            if (six2FourAddress == null)
-                            {
-                                six2FourAddress = address;
-                            }
-                            else
-                            {
-                                notAdded.Add(address);
-                            }
-                            continue;
+                            six2FourAddress = address;
                         }
+                        else
+                        {
+                            notAdded.Add(address);
+                        }
+                        continue;
+                    }
                     case AddressType.Isatap:
+                    {
+                        if (isatapAddress == null)
                         {
-                            if (isatapAddress == null)
-                            {
-                                isatapAddress = address;
-                            }
-                            else
-                            {
-                                notAdded.Add(address);
-                            }
-                            continue;
+                            isatapAddress = address;
                         }
+                        else
+                        {
+                            notAdded.Add(address);
+                        }
+                        continue;
+                    }
                     default:
+                    {
+                        if (v6Address != null)
+                            notAdded.Add(address);
+                        else
                         {
-                            if (v6Address != null)
-                                notAdded.Add(address);
-                            else
-                            {
-                                v6Address = address;
-                            }
-                            continue;
+                            v6Address = address;
                         }
+                        continue;
+                    }
                 }
             }
             if (six2FourAddress != null)
@@ -303,7 +307,6 @@ namespace System.ServiceModel.Channels
             result.AddRange(notAdded);
 
             return result.ToArray();
-
         }
 
         static AddressType GetAddressType(IPAddress address)
@@ -321,7 +324,6 @@ namespace System.ServiceModel.Channels
             return result;
         }
 
-
         // Given an EPR, replaces its URI with the specified IP address
         public static EndpointAddress GetIPEndpointAddress(EndpointAddress epr, IPAddress address)
         {
@@ -336,8 +338,11 @@ namespace System.ServiceModel.Channels
             UriBuilder uriBuilder = new UriBuilder(uri);
             if (V6Address(ipAddress) && (ipAddress.IsIPv6LinkLocal || ipAddress.IsIPv6SiteLocal))
             {
-                // We make a copy of the IP address because scopeID will not be part of ToString() if set after IP address was created            
-                uriBuilder.Host = new IPAddress(ipAddress.GetAddressBytes(), ipAddress.ScopeId).ToString();
+                // We make a copy of the IP address because scopeID will not be part of ToString() if set after IP address was created
+                uriBuilder.Host = new IPAddress(
+                    ipAddress.GetAddressBytes(),
+                    ipAddress.ScopeId
+                ).ToString();
             }
             else
             {
@@ -362,8 +367,6 @@ namespace System.ServiceModel.Channels
             return (!address.IsTransient);
         }
 
-
-
         public static bool V4Address(IPAddress address)
         {
             return address.AddressFamily == AddressFamily.InterNetwork;
@@ -386,7 +389,9 @@ namespace System.ServiceModel.Channels
                     IPInterfaceProperties properties = networkIf.GetIPProperties();
                     if (properties != null)
                     {
-                        foreach (UnicastIPAddressInformation unicastAddress in properties.UnicastAddresses)
+                        foreach (
+                            UnicastIPAddressInformation unicastAddress in properties.UnicastAddresses
+                        )
                         {
                             if (address.Equals(unicastAddress.Address))
                             {
@@ -401,8 +406,10 @@ namespace System.ServiceModel.Channels
 
         static bool ValidInterface(NetworkInterface networkIf)
         {
-            return (networkIf.NetworkInterfaceType != NetworkInterfaceType.Loopback &&
-                    networkIf.OperationalStatus == OperationalStatus.Up);
+            return (
+                networkIf.NetworkInterfaceType != NetworkInterfaceType.Loopback
+                && networkIf.OperationalStatus == OperationalStatus.Up
+            );
         }
 
         // Process the address change notification from the system and check if the addresses
@@ -442,7 +449,11 @@ namespace System.ServiceModel.Channels
                 this.localAddresses = GetAddresses();
                 if (Socket.OSSupportsIPv6)
                 {
-                    this.ipv6Socket = new Socket(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.IP);
+                    this.ipv6Socket = new Socket(
+                        AddressFamily.InterNetworkV6,
+                        SocketType.Stream,
+                        ProtocolType.IP
+                    );
                 }
                 this.isOpen = true;
             }
@@ -451,7 +462,11 @@ namespace System.ServiceModel.Channels
         // Sorts the collection of addresses using sort ioctl
         public ReadOnlyCollection<IPAddress> SortAddresses(ReadOnlyCollection<IPAddress> addresses)
         {
-            ReadOnlyCollection<IPAddress> sortedAddresses = SocketAddressList.SortAddresses(this.ipv6Socket, listenAddress, addresses);
+            ReadOnlyCollection<IPAddress> sortedAddresses = SocketAddressList.SortAddresses(
+                this.ipv6Socket,
+                listenAddress,
+                addresses
+            );
 
             // If listening on specific address, copy the scope ID that we're listing on for the
             // link and site local addresses in the sorted list (so that the connect will work)
@@ -483,9 +498,9 @@ namespace System.ServiceModel.Channels
 
         //
         // Helper class to handle system address change events. Because multiple events can be fired as a result of
-        // a single significant change (such as interface being enabled/disabled), we try to handle the event just 
+        // a single significant change (such as interface being enabled/disabled), we try to handle the event just
         // once using the below mechanism:
-        // Start a timer that goes off after Timeout seconds. If get another address change event from the system 
+        // Start a timer that goes off after Timeout seconds. If get another address change event from the system
         // within this timespan, reset the timer to go off after another Timeout secs. When the timer finally fires,
         // the registered handlers are notified. This should minimize (but not completely eliminate -- think wireless
         // DHCP interface being enabled, for instance -- this could take longer) reacting multiple times for

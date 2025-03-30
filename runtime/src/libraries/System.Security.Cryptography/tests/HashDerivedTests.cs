@@ -67,56 +67,72 @@ namespace System.Security.Cryptography.Tests
         private class DerivedSHA1 : SHA1
         {
             public override void Initialize() => throw null;
+
             protected override byte[] HashFinal() => throw null;
+
             protected override void HashCore(byte[] array, int ibStart, int cbSize) => throw null;
         }
 
         private class DerivedSHA256 : SHA256
         {
             public override void Initialize() => throw null;
+
             protected override byte[] HashFinal() => throw null;
+
             protected override void HashCore(byte[] array, int ibStart, int cbSize) => throw null;
         }
 
         private class DerivedSHA384 : SHA384
         {
             public override void Initialize() => throw null;
+
             protected override byte[] HashFinal() => throw null;
+
             protected override void HashCore(byte[] array, int ibStart, int cbSize) => throw null;
         }
 
         private class DerivedSHA512 : SHA512
         {
             public override void Initialize() => throw null;
+
             protected override byte[] HashFinal() => throw null;
+
             protected override void HashCore(byte[] array, int ibStart, int cbSize) => throw null;
         }
 
         private class DerivedSHA3_256 : SHA3_256
         {
             public override void Initialize() => throw null;
+
             protected override byte[] HashFinal() => throw null;
+
             protected override void HashCore(byte[] array, int ibStart, int cbSize) => throw null;
         }
 
         private class DerivedSHA3_384 : SHA3_384
         {
             public override void Initialize() => throw null;
+
             protected override byte[] HashFinal() => throw null;
+
             protected override void HashCore(byte[] array, int ibStart, int cbSize) => throw null;
         }
 
         private class DerivedSHA3_512 : SHA3_512
         {
             public override void Initialize() => throw null;
+
             protected override byte[] HashFinal() => throw null;
+
             protected override void HashCore(byte[] array, int ibStart, int cbSize) => throw null;
         }
 
         private class DerivedMD5 : MD5
         {
             public override void Initialize() => throw null;
+
             protected override byte[] HashFinal() => throw null;
+
             protected override void HashCore(byte[] array, int ibStart, int cbSize) => throw null;
         }
     }

@@ -3,15 +3,16 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class ComplexNavigationsQueryRelationalFixtureBase : ComplexNavigationsQueryFixtureBase
+public abstract class ComplexNavigationsQueryRelationalFixtureBase
+    : ComplexNavigationsQueryFixtureBase
 {
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-        => base.AddOptions(builder).ConfigureWarnings(
-                c => c
-                    .Log(CoreEventId.DistinctAfterOrderByWithoutRowLimitingOperatorWarning)
-                    .Log(CoreEventId.FirstWithoutOrderByAndFilterWarning))
+    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+        base.AddOptions(builder)
+            .ConfigureWarnings(c =>
+                c.Log(CoreEventId.DistinctAfterOrderByWithoutRowLimitingOperatorWarning)
+                    .Log(CoreEventId.FirstWithoutOrderByAndFilterWarning)
+            )
             .EnableDetailedErrors();
 }

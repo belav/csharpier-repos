@@ -32,9 +32,12 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
         TEmbeddedEvent,
         TEmbeddedProperty,
         TEmbeddedParameter,
-        TEmbeddedTypeParameter>
+        TEmbeddedTypeParameter
+    >
     {
-        internal abstract class CommonEmbeddedEvent : CommonEmbeddedMember<TEventSymbol>, Cci.IEventDefinition
+        internal abstract class CommonEmbeddedEvent
+            : CommonEmbeddedMember<TEventSymbol>,
+                Cci.IEventDefinition
         {
             private readonly TEmbeddedMethod _adder;
             private readonly TEmbeddedMethod _remover;
@@ -42,8 +45,13 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             private int _isUsedForComAwareEventBinding;
 
-            protected CommonEmbeddedEvent(TEventSymbol underlyingEvent, TEmbeddedMethod adder, TEmbeddedMethod remover, TEmbeddedMethod caller) :
-                base(underlyingEvent)
+            protected CommonEmbeddedEvent(
+                TEventSymbol underlyingEvent,
+                TEmbeddedMethod adder,
+                TEmbeddedMethod remover,
+                TEmbeddedMethod caller
+            )
+                : base(underlyingEvent)
             {
                 Debug.Assert(adder != null || remover != null);
 
@@ -54,38 +62,55 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             internal override TEmbeddedTypesManager TypeManager
             {
-                get
-                {
-                    return AnAccessor.TypeManager;
-                }
+                get { return AnAccessor.TypeManager; }
             }
 
             protected abstract bool IsRuntimeSpecial { get; }
             protected abstract bool IsSpecialName { get; }
-            protected abstract Cci.ITypeReference GetType(TPEModuleBuilder moduleBuilder, TSyntaxNode syntaxNodeOpt, DiagnosticBag diagnostics);
+            protected abstract Cci.ITypeReference GetType(
+                TPEModuleBuilder moduleBuilder,
+                TSyntaxNode syntaxNodeOpt,
+                DiagnosticBag diagnostics
+            );
             protected abstract TEmbeddedType ContainingType { get; }
             protected abstract Cci.TypeMemberVisibility Visibility { get; }
             protected abstract string Name { get; }
 
             public TEventSymbol UnderlyingEvent
             {
-                get
-                {
-                    return this.UnderlyingSymbol;
-                }
+                get { return this.UnderlyingSymbol; }
             }
 
-            protected abstract void EmbedCorrespondingComEventInterfaceMethodInternal(TSyntaxNode syntaxNodeOpt, DiagnosticBag diagnostics, bool isUsedForComAwareEventBinding);
+            protected abstract void EmbedCorrespondingComEventInterfaceMethodInternal(
+                TSyntaxNode syntaxNodeOpt,
+                DiagnosticBag diagnostics,
+                bool isUsedForComAwareEventBinding
+            );
 
-            internal void EmbedCorrespondingComEventInterfaceMethod(TSyntaxNode syntaxNodeOpt, DiagnosticBag diagnostics, bool isUsedForComAwareEventBinding)
+            internal void EmbedCorrespondingComEventInterfaceMethod(
+                TSyntaxNode syntaxNodeOpt,
+                DiagnosticBag diagnostics,
+                bool isUsedForComAwareEventBinding
+            )
             {
-                if (_isUsedForComAwareEventBinding == 0 &&
-                    (!isUsedForComAwareEventBinding ||
-                     Interlocked.CompareExchange(ref _isUsedForComAwareEventBinding, 1, 0) == 0))
+                if (
+                    _isUsedForComAwareEventBinding == 0
+                    && (
+                        !isUsedForComAwareEventBinding
+                        || Interlocked.CompareExchange(ref _isUsedForComAwareEventBinding, 1, 0)
+                            == 0
+                    )
+                )
                 {
-                    Debug.Assert(!isUsedForComAwareEventBinding || _isUsedForComAwareEventBinding != 0);
+                    Debug.Assert(
+                        !isUsedForComAwareEventBinding || _isUsedForComAwareEventBinding != 0
+                    );
 
-                    EmbedCorrespondingComEventInterfaceMethodInternal(syntaxNodeOpt, diagnostics, isUsedForComAwareEventBinding);
+                    EmbedCorrespondingComEventInterfaceMethodInternal(
+                        syntaxNodeOpt,
+                        diagnostics,
+                        isUsedForComAwareEventBinding
+                    );
                 }
 
                 Debug.Assert(!isUsedForComAwareEventBinding || _isUsedForComAwareEventBinding != 0);
@@ -126,31 +151,26 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             bool Cci.IEventDefinition.IsRuntimeSpecial
             {
-                get
-                {
-                    return IsRuntimeSpecial;
-                }
+                get { return IsRuntimeSpecial; }
             }
 
             bool Cci.IEventDefinition.IsSpecialName
             {
-                get
-                {
-                    return IsSpecialName;
-                }
+                get { return IsSpecialName; }
             }
 
             Cci.ITypeReference Cci.IEventDefinition.GetType(EmitContext context)
             {
-                return GetType((TPEModuleBuilder)context.Module, (TSyntaxNode)context.SyntaxNode, context.Diagnostics);
+                return GetType(
+                    (TPEModuleBuilder)context.Module,
+                    (TSyntaxNode)context.SyntaxNode,
+                    context.Diagnostics
+                );
             }
 
             protected TEmbeddedMethod AnAccessor
             {
-                get
-                {
-                    return _adder ?? _remover;
-                }
+                get { return _adder ?? _remover; }
             }
 
             Cci.ITypeDefinition Cci.ITypeDefinitionMember.ContainingTypeDefinition
@@ -160,10 +180,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             Cci.TypeMemberVisibility Cci.ITypeDefinitionMember.Visibility
             {
-                get
-                {
-                    return Visibility;
-                }
+                get { return Visibility; }
             }
 
             Cci.ITypeReference Cci.ITypeMemberReference.GetContainingType(EmitContext context)
@@ -183,10 +200,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             string Cci.INamedEntity.Name
             {
-                get
-                {
-                    return Name;
-                }
+                get { return Name; }
             }
         }
     }

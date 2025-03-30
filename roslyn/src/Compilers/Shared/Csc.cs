@@ -14,18 +14,40 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine
 {
     internal sealed class Csc : CSharpCompiler
     {
-        internal Csc(string responseFile, BuildPaths buildPaths, string[] args, IAnalyzerAssemblyLoader analyzerLoader)
-            : base(CSharpCommandLineParser.Default, responseFile, args, buildPaths, Environment.GetEnvironmentVariable("LIB"), analyzerLoader)
-        {
-        }
+        internal Csc(
+            string responseFile,
+            BuildPaths buildPaths,
+            string[] args,
+            IAnalyzerAssemblyLoader analyzerLoader
+        )
+            : base(
+                CSharpCommandLineParser.Default,
+                responseFile,
+                args,
+                buildPaths,
+                Environment.GetEnvironmentVariable("LIB"),
+                analyzerLoader
+            ) { }
 
-        internal static int Run(string[] args, BuildPaths buildPaths, TextWriter textWriter, IAnalyzerAssemblyLoader analyzerLoader)
+        internal static int Run(
+            string[] args,
+            BuildPaths buildPaths,
+            TextWriter textWriter,
+            IAnalyzerAssemblyLoader analyzerLoader
+        )
         {
             FatalError.SetHandlers(FailFast.Handler, nonFatalHandler: null);
 
-            var responseFile = Path.Combine(buildPaths.ClientDirectory, CSharpCompiler.ResponseFileName);
+            var responseFile = Path.Combine(
+                buildPaths.ClientDirectory,
+                CSharpCompiler.ResponseFileName
+            );
             var compiler = new Csc(responseFile, buildPaths, args, analyzerLoader);
-            return ConsoleUtil.RunWithUtf8Output(compiler.Arguments.Utf8Output, textWriter, tw => compiler.Run(tw));
+            return ConsoleUtil.RunWithUtf8Output(
+                compiler.Arguments.Utf8Output,
+                textWriter,
+                tw => compiler.Run(tw)
+            );
         }
     }
 }

@@ -27,7 +27,10 @@ public class AzureFileLoggerOptions : BatchingLoggerOptions
         {
             if (value <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(FileSizeLimit)} must be positive.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    $"{nameof(FileSizeLimit)} must be positive."
+                );
             }
             _fileSizeLimit = value;
         }
@@ -44,7 +47,10 @@ public class AzureFileLoggerOptions : BatchingLoggerOptions
         {
             if (value <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), $"{nameof(RetainedFileCountLimit)} must be positive.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    $"{nameof(RetainedFileCountLimit)} must be positive."
+                );
             }
             _retainedFileCountLimit = value;
         }

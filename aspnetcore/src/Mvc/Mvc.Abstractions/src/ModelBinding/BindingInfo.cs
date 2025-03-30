@@ -18,9 +18,7 @@ public class BindingInfo
     /// <summary>
     /// Creates a new <see cref="BindingInfo"/>.
     /// </summary>
-    public BindingInfo()
-    {
-    }
+    public BindingInfo() { }
 
     /// <summary>
     /// Creates a copy of a <see cref="BindingInfo"/>.
@@ -67,8 +65,10 @@ public class BindingInfo
                 throw new ArgumentException(
                     Resources.FormatBinderType_MustBeIModelBinder(
                         value.FullName,
-                        typeof(IModelBinder).FullName),
-                    nameof(value));
+                        typeof(IModelBinder).FullName
+                    ),
+                    nameof(value)
+                );
             }
 
             _binderType = value;
@@ -155,7 +155,9 @@ public class BindingInfo
         else if (propertyFilterProviders.Length > 1)
         {
             isBindingInfoPresent = true;
-            bindingInfo.PropertyFilterProvider = new CompositePropertyFilterProvider(propertyFilterProviders);
+            bindingInfo.PropertyFilterProvider = new CompositePropertyFilterProvider(
+                propertyFilterProviders
+            );
         }
 
         // RequestPredicate
@@ -177,12 +179,16 @@ public class BindingInfo
         }
 
         // Keyed services
-        if (attributes.OfType<FromKeyedServicesAttribute>().FirstOrDefault() is { } fromKeyedServicesAttribute)
+        if (
+            attributes.OfType<FromKeyedServicesAttribute>().FirstOrDefault() is
+            { } fromKeyedServicesAttribute
+        )
         {
             if (bindingInfo.BindingSource != null)
             {
                 throw new NotSupportedException(
-                    $"The {nameof(FromKeyedServicesAttribute)} is not supported on parameters that are also annotated with {nameof(IBindingSourceMetadata)}.");
+                    $"The {nameof(FromKeyedServicesAttribute)} is not supported on parameters that are also annotated with {nameof(IBindingSourceMetadata)}."
+                );
             }
             isBindingInfoPresent = true;
             bindingInfo.BindingSource = BindingSource.Services;
@@ -198,7 +204,10 @@ public class BindingInfo
     /// <param name="attributes">A collection of attributes which are used to construct <see cref="BindingInfo"/>.</param>
     /// <param name="modelMetadata">The <see cref="ModelMetadata"/>.</param>
     /// <returns>A new instance of <see cref="BindingInfo"/> if any binding metadata was discovered; otherwise or <see langword="null"/>.</returns>
-    public static BindingInfo? GetBindingInfo(IEnumerable<object> attributes, ModelMetadata modelMetadata)
+    public static BindingInfo? GetBindingInfo(
+        IEnumerable<object> attributes,
+        ModelMetadata modelMetadata
+    )
     {
         ArgumentNullException.ThrowIfNull(attributes);
         ArgumentNullException.ThrowIfNull(modelMetadata);
@@ -257,9 +266,15 @@ public class BindingInfo
         // If the EmptyBody behavior is not configured will be inferred
         // as Allow when the NullablityState == NullablityStateNull or HasDefaultValue
         // https://github.com/dotnet/aspnetcore/issues/39754
-        if (EmptyBodyBehavior == EmptyBodyBehavior.Default &&
-            BindingSource == BindingSource.Body &&
-            (modelMetadata.NullabilityState == NullabilityState.Nullable || modelMetadata.IsNullableValueType || modelMetadata.HasDefaultValue))
+        if (
+            EmptyBodyBehavior == EmptyBodyBehavior.Default
+            && BindingSource == BindingSource.Body
+            && (
+                modelMetadata.NullabilityState == NullabilityState.Nullable
+                || modelMetadata.IsNullableValueType
+                || modelMetadata.HasDefaultValue
+            )
+        )
         {
             isBindingInfoPresent = true;
             EmptyBodyBehavior = EmptyBodyBehavior.Allow;
@@ -281,9 +296,7 @@ public class BindingInfo
 
         private Func<ModelMetadata, bool> CreatePropertyFilter()
         {
-            var propertyFilters = _providers
-                .Select(p => p.PropertyFilter)
-                .Where(p => p != null);
+            var propertyFilters = _providers.Select(p => p.PropertyFilter).Where(p => p != null);
 
             return (m) =>
             {

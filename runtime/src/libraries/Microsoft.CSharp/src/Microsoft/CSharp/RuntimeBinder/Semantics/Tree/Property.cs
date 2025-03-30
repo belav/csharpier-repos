@@ -16,7 +16,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // of the type we are actually calling through.  (We need to know the
         // "through" type to ensure that protected semantics are correctly enforced.)
 
-        public ExprProperty(CType type, Expr pOptionalObjectThrough, Expr pOptionalArguments, ExprMemberGroup pMemberGroup, PropWithType pwtSlot, MethWithType mwtSet)
+        public ExprProperty(
+            CType type,
+            Expr pOptionalObjectThrough,
+            Expr pOptionalArguments,
+            ExprMemberGroup pMemberGroup,
+            PropWithType pwtSlot,
+            MethWithType mwtSet
+        )
             : base(ExpressionKind.Property, type)
         {
             OptionalObjectThrough = pOptionalObjectThrough;
@@ -48,9 +55,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         internal static bool HasIsExternalInitModifier(MethWithType mwtSet)
         {
-            var types = (mwtSet.Meth()?.AssociatedMemberInfo as MethodInfo)?.ReturnParameter.GetRequiredCustomModifiers();
-            return types != null &&
-                types.Any(type => type.Name == "IsExternalInit" && !type.IsNested && type.Namespace == "System.Runtime.CompilerServices");
+            var types = (
+                mwtSet.Meth()?.AssociatedMemberInfo as MethodInfo
+            )?.ReturnParameter.GetRequiredCustomModifiers();
+            return types != null
+                && types.Any(type =>
+                    type.Name == "IsExternalInit"
+                    && !type.IsNested
+                    && type.Namespace == "System.Runtime.CompilerServices"
+                );
         }
     }
 }

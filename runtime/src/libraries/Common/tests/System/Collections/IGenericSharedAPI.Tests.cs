@@ -30,7 +30,8 @@ namespace System.Collections.Tests
         /// Used for the IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowsArgumentException tests. Some
         /// implementations throw a different exception type (e.g. ArgumentOutOfRangeException).
         /// </summary>
-        protected virtual Type IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType => typeof(ArgumentException);
+        protected virtual Type IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType =>
+            typeof(ArgumentException);
 
         protected virtual void AddToCollection(IEnumerable<T> collection, int numberOfItemsToAdd)
         {
@@ -39,7 +40,9 @@ namespace System.Collections.Tests
             while (Count(collection) < numberOfItemsToAdd)
             {
                 T toAdd = CreateT(seed++);
-                while (collection.Contains(toAdd, comparer) || InvalidValues.Contains(toAdd, comparer))
+                while (
+                    collection.Contains(toAdd, comparer) || InvalidValues.Contains(toAdd, comparer)
+                )
                     toAdd = CreateT(seed++);
                 Add(collection, toAdd);
             }
@@ -71,7 +74,9 @@ namespace System.Collections.Tests
         /// <summary>
         /// Returns a set of ModifyEnumerable delegates that modify the enumerable passed to them.
         /// </summary>
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations)
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        )
         {
             if ((operations & ModifyOperation.Add) == ModifyOperation.Add)
             {
@@ -139,14 +144,17 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly)
             {
-                Assert.All(InvalidValues, invalidValue =>
-                {
-                    IEnumerable<T> collection = GenericIEnumerableFactory(count);
-                    Add(collection, invalidValue);
-                    for (int i = 0; i < count; i++)
-                        Add(collection, CreateT(i));
-                    Assert.Equal(count * 2, Count(collection));
-                });
+                Assert.All(
+                    InvalidValues,
+                    invalidValue =>
+                    {
+                        IEnumerable<T> collection = GenericIEnumerableFactory(count);
+                        Add(collection, invalidValue);
+                        for (int i = 0; i < count; i++)
+                            Add(collection, CreateT(i));
+                        Assert.Equal(count * 2, Count(collection));
+                    }
+                );
             }
         }
 
@@ -156,14 +164,17 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly)
             {
-                Assert.All(InvalidValues, invalidValue =>
-                {
-                    IEnumerable<T> collection = GenericIEnumerableFactory(0);
-                    Add(collection, invalidValue);
-                    for (int i = 0; i < count; i++)
-                        Add(collection, CreateT(i));
-                    Assert.Equal(count, Count(collection));
-                });
+                Assert.All(
+                    InvalidValues,
+                    invalidValue =>
+                    {
+                        IEnumerable<T> collection = GenericIEnumerableFactory(0);
+                        Add(collection, invalidValue);
+                        for (int i = 0; i < count; i++)
+                            Add(collection, CreateT(i));
+                        Assert.Equal(count, Count(collection));
+                    }
+                );
             }
         }
 
@@ -173,12 +184,15 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly)
             {
-                Assert.All(InvalidValues, invalidValue =>
-                {
-                    IEnumerable<T> collection = GenericIEnumerableFactory(count);
-                    Add(collection, invalidValue);
-                    Assert.Equal(count, Count(collection));
-                });
+                Assert.All(
+                    InvalidValues,
+                    invalidValue =>
+                    {
+                        IEnumerable<T> collection = GenericIEnumerableFactory(count);
+                        Add(collection, invalidValue);
+                        Assert.Equal(count, Count(collection));
+                    }
+                );
             }
         }
 
@@ -271,7 +285,10 @@ namespace System.Collections.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsPreciseGcSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public void IGenericSharedAPI_ClearOrRemove_ReferenceRemovedFromCollection(bool useRemove)
@@ -284,11 +301,16 @@ namespace System.Collections.Tests
             IEnumerable<T> collection = GenericIEnumerableFactory();
 
             WeakReference<object> wr = PopulateAndRemove(collection, useRemove);
-            Assert.True(SpinWait.SpinUntil(() =>
-            {
-                GC.Collect();
-                return !wr.TryGetTarget(out _);
-            }, 30_000));
+            Assert.True(
+                SpinWait.SpinUntil(
+                    () =>
+                    {
+                        GC.Collect();
+                        return !wr.TryGetTarget(out _);
+                    },
+                    30_000
+                )
+            );
             GC.KeepAlive(collection);
 
             [MethodImpl(MethodImplOptions.NoInlining)]
@@ -339,7 +361,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void IGenericSharedAPI_Contains_ValidValueOnCollectionNotContainingThatValue(int count)
+        public void IGenericSharedAPI_Contains_ValidValueOnCollectionNotContainingThatValue(
+            int count
+        )
         {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             int seed = 4315;
@@ -351,7 +375,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void IGenericSharedAPI_IGenericSharedAPI_Contains_ValidValueOnCollectionContainingThatValue(int count)
+        public void IGenericSharedAPI_IGenericSharedAPI_Contains_ValidValueOnCollectionContainingThatValue(
+            int count
+        )
         {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             foreach (T item in collection)
@@ -360,7 +386,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void IGenericSharedAPI_Contains_DefaultValueOnCollectionNotContainingDefaultValue(int count)
+        public void IGenericSharedAPI_Contains_DefaultValueOnCollectionNotContainingDefaultValue(
+            int count
+        )
         {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             if (DefaultValueAllowed)
@@ -369,7 +397,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void IGenericSharedAPI_Contains_DefaultValueOnCollectionContainingDefaultValue(int count)
+        public void IGenericSharedAPI_Contains_DefaultValueOnCollectionContainingDefaultValue(
+            int count
+        )
         {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             if (DefaultValueAllowed && !IsReadOnly)
@@ -398,8 +428,10 @@ namespace System.Collections.Tests
         public void IGenericSharedAPI_Contains_InvalidValue_ThrowsArgumentException(int count)
         {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
-            Assert.All(InvalidValues, invalidValue =>
-                Assert.Throws<ArgumentException>(() => Contains(collection, invalidValue))
+            Assert.All(
+                InvalidValues,
+                invalidValue =>
+                    Assert.Throws<ArgumentException>(() => Contains(collection, invalidValue))
             );
         }
 
@@ -431,17 +463,22 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void IGenericSharedAPI_CopyTo_NegativeIndex_ThrowsArgumentOutOfRangeException(int count)
+        public void IGenericSharedAPI_CopyTo_NegativeIndex_ThrowsArgumentOutOfRangeException(
+            int count
+        )
         {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             T[] array = new T[count];
             Assert.Throws<ArgumentOutOfRangeException>(() => CopyTo(collection, array, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => CopyTo(collection, array, int.MinValue));
+            Assert.Throws<ArgumentOutOfRangeException>(() => CopyTo(collection, array, int.MinValue)
+            );
         }
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void IGenericSharedAPI_CopyTo_IndexEqualToArrayCount_ThrowsArgumentException(int count)
+        public void IGenericSharedAPI_CopyTo_IndexEqualToArrayCount_ThrowsArgumentException(
+            int count
+        )
         {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             T[] array = new T[count];
@@ -453,16 +490,23 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowsAnyArgumentException(int count)
+        public void IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowsAnyArgumentException(
+            int count
+        )
         {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             T[] array = new T[count];
-            Assert.Throws(IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType, () => CopyTo(collection, array, count + 1));
+            Assert.Throws(
+                IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType,
+                () => CopyTo(collection, array, count + 1)
+            );
         }
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void IGenericSharedAPI_CopyTo_NotEnoughSpaceInOffsettedArray_ThrowsArgumentException(int count)
+        public void IGenericSharedAPI_CopyTo_NotEnoughSpaceInOffsettedArray_ThrowsArgumentException(
+            int count
+        )
         {
             if (count > 0) // Want the T array to have at least 1 element
             {

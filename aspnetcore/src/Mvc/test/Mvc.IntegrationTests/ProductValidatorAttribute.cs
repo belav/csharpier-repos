@@ -34,7 +34,10 @@ public class ProductValidatorAttribute : ValidationAttribute
             }
         }
 
-        return new ValidationResult("Expected either ProductViewModel or SoftwareViewModel instance but got "
-            + value.GetType() + " instance");
+        return new ValidationResult(
+            "Expected either ProductViewModel or SoftwareViewModel instance but got "
+                + value.GetType()
+                + " instance"
+        );
     }
 }

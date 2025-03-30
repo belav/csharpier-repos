@@ -19,9 +19,7 @@ internal class ForwardingLoggerProvider : ILoggerProvider
         return new ForwardingLogger(categoryName, _logAction);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 
     internal class ForwardingLogger : ILogger
     {
@@ -34,7 +32,8 @@ internal class ForwardingLoggerProvider : ILoggerProvider
             _logAction = logAction;
         }
 
-        public IDisposable? BeginScope<TState>(TState state) where TState : notnull
+        public IDisposable? BeginScope<TState>(TState state)
+            where TState : notnull
         {
             return null!;
         }
@@ -44,7 +43,13 @@ internal class ForwardingLoggerProvider : ILoggerProvider
             return true;
         }
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception? exception,
+            Func<TState, Exception?, string> formatter
+        )
         {
             _logAction(logLevel, _categoryName, eventId, formatter(state, exception), exception);
         }

@@ -22,14 +22,25 @@ namespace System.Activities.Core.Presentation
     partial class FlowDecisionDesigner
     {
         public static readonly DependencyProperty ExpressionButtonVisibilityProperty =
-            DependencyProperty.Register("ExpressionButtonVisibility", typeof(Visibility), typeof(FlowDecisionDesigner));
+            DependencyProperty.Register(
+                "ExpressionButtonVisibility",
+                typeof(Visibility),
+                typeof(FlowDecisionDesigner)
+            );
 
         public static readonly DependencyProperty ExpressionButtonColorProperty =
-            DependencyProperty.Register("ExpressionButtonColor", typeof(Brush), typeof(FlowDecisionDesigner));
+            DependencyProperty.Register(
+                "ExpressionButtonColor",
+                typeof(Brush),
+                typeof(FlowDecisionDesigner)
+            );
 
-        static readonly DependencyProperty ShowAllConditionsProperty =
-            DependencyProperty.Register("ShowAllConditions", typeof(bool), typeof(FlowDecisionDesigner),
-            new UIPropertyMetadata(new PropertyChangedCallback(OnShowAllConditionsChanged)));
+        static readonly DependencyProperty ShowAllConditionsProperty = DependencyProperty.Register(
+            "ShowAllConditions",
+            typeof(bool),
+            typeof(FlowDecisionDesigner),
+            new UIPropertyMetadata(new PropertyChangedCallback(OnShowAllConditionsChanged))
+        );
 
         bool isPinned;
         bool expressionShown = false;
@@ -44,11 +55,18 @@ namespace System.Activities.Core.Presentation
                 //UnRegistering because of 137896: Inside tab control multiple Loaded events happen without an Unloaded event.
                 this.ModelItem.PropertyChanged -= OnModelItemPropertyChanged;
                 this.ModelItem.PropertyChanged += OnModelItemPropertyChanged;
-                OnModelItemPropertyChanged(this.ModelItem, new PropertyChangedEventArgs("Condition"));
+                OnModelItemPropertyChanged(
+                    this.ModelItem,
+                    new PropertyChangedEventArgs("Condition")
+                );
 
                 SetupBinding();
 
-                if (this.Context.Services.GetService<DesignerConfigurationService>().TargetFrameworkName.IsLessThan45())
+                if (
+                    this
+                        .Context.Services.GetService<DesignerConfigurationService>()
+                        .TargetFrameworkName.IsLessThan45()
+                )
                 {
                     this.displayNameTextBox.IsReadOnly = true;
                 }
@@ -75,17 +93,28 @@ namespace System.Activities.Core.Presentation
         private void InitializeAnnotation()
         {
             this.annotationManager = new AnnotationManager(this);
-            this.annotationManager.AnnotationVisualProvider = new FlowDecisionDesignerAnnotationVisualProvider(this);
+            this.annotationManager.AnnotationVisualProvider =
+                new FlowDecisionDesignerAnnotationVisualProvider(this);
         }
 
         void SetupBinding()
         {
             Binding showAllConditionsBinding = new Binding();
-            showAllConditionsBinding.RelativeSource = new RelativeSource(RelativeSourceMode.FindAncestor, typeof(FlowchartDesigner), 1);
-            showAllConditionsBinding.Path = new PropertyPath(FlowchartDesigner.ShowAllConditionsProperty);
+            showAllConditionsBinding.RelativeSource = new RelativeSource(
+                RelativeSourceMode.FindAncestor,
+                typeof(FlowchartDesigner),
+                1
+            );
+            showAllConditionsBinding.Path = new PropertyPath(
+                FlowchartDesigner.ShowAllConditionsProperty
+            );
             showAllConditionsBinding.Mode = BindingMode.OneWay;
 
-            BindingOperations.SetBinding(this, FlowDecisionDesigner.ShowAllConditionsProperty, showAllConditionsBinding);
+            BindingOperations.SetBinding(
+                this,
+                FlowDecisionDesigner.ShowAllConditionsProperty,
+                showAllConditionsBinding
+            );
         }
 
         public Visibility ExpressionButtonVisibility
@@ -111,32 +140,44 @@ namespace System.Activities.Core.Presentation
             builder.AddCustomAttributes(type, new DesignerAttribute(typeof(FlowDecisionDesigner)));
             builder.AddCustomAttributes(type, type.GetProperty("True"), BrowsableAttribute.No);
             builder.AddCustomAttributes(type, type.GetProperty("False"), BrowsableAttribute.No);
-            builder.AddCustomAttributes(type, type.GetProperty("Condition"), new HidePropertyInOutlineViewAttribute());
-            builder.AddCustomAttributes(type, new FeatureAttribute(typeof(FlowDecisionLabelFeature)));
-            builder.AddCustomAttributes(type, new ActivityDesignerOptionsAttribute
-            {
-                AllowDrillIn = false,
-                OutlineViewIconProvider = (modelItem) =>
+            builder.AddCustomAttributes(
+                type,
+                type.GetProperty("Condition"),
+                new HidePropertyInOutlineViewAttribute()
+            );
+            builder.AddCustomAttributes(
+                type,
+                new FeatureAttribute(typeof(FlowDecisionLabelFeature))
+            );
+            builder.AddCustomAttributes(
+                type,
+                new ActivityDesignerOptionsAttribute
                 {
-                    if (modelItem != null)
+                    AllowDrillIn = false,
+                    OutlineViewIconProvider = (modelItem) =>
                     {
-                        ResourceDictionary icons = EditorResources.GetIcons();
-                        if (icons.Contains("FlowDecisionIcon") && icons["FlowDecisionIcon"] is DrawingBrush)
+                        if (modelItem != null)
                         {
-                            return (DrawingBrush)icons["FlowDecisionIcon"];
+                            ResourceDictionary icons = EditorResources.GetIcons();
+                            if (
+                                icons.Contains("FlowDecisionIcon")
+                                && icons["FlowDecisionIcon"] is DrawingBrush
+                            )
+                            {
+                                return (DrawingBrush)icons["FlowDecisionIcon"];
+                            }
                         }
-                    }
 
-                    return null;
+                        return null;
+                    },
                 }
-            });
+            );
         }
 
         protected override AutomationPeer OnCreateAutomationPeer()
         {
             return new FlowchartExpressionAutomationPeer(this, base.OnCreateAutomationPeer());
         }
-
 
         void OnExpressionButtonClicked(object sender, RoutedEventArgs e)
         {
@@ -154,23 +195,31 @@ namespace System.Activities.Core.Presentation
 
         void Update()
         {
-            Activity expressionActivity = this.ModelItem.Properties["Condition"].ComputedValue as Activity;
-            string expressionString = ExpressionHelper.GetExpressionString(expressionActivity, this.ModelItem);
+            Activity expressionActivity =
+                this.ModelItem.Properties["Condition"].ComputedValue as Activity;
+            string expressionString = ExpressionHelper.GetExpressionString(
+                expressionActivity,
+                this.ModelItem
+            );
             bool expressionSpecified = !string.IsNullOrEmpty(expressionString);
             if (!expressionSpecified)
             {
                 this.isPinned = false;
             }
 
-            this.ExpressionButtonVisibility = expressionSpecified ? Visibility.Visible : Visibility.Collapsed;
+            this.ExpressionButtonVisibility = expressionSpecified
+                ? Visibility.Visible
+                : Visibility.Collapsed;
 
             if (this.isPinned)
             {
-                this.ExpressionButtonColor = WorkflowDesignerColors.FlowchartExpressionButtonPressedBrush;
+                this.ExpressionButtonColor =
+                    WorkflowDesignerColors.FlowchartExpressionButtonPressedBrush;
             }
             else if (this.IsMouseOver)
             {
-                this.ExpressionButtonColor = WorkflowDesignerColors.FlowchartExpressionButtonMouseOverBrush;
+                this.ExpressionButtonColor =
+                    WorkflowDesignerColors.FlowchartExpressionButtonMouseOverBrush;
             }
             else
             {
@@ -199,7 +248,10 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        static void OnShowAllConditionsChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        static void OnShowAllConditionsChanged(
+            DependencyObject obj,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             if (e.NewValue != DependencyProperty.UnsetValue)
             {
@@ -235,7 +287,9 @@ namespace System.Activities.Core.Presentation
             {
                 if (this.indicator == null)
                 {
-                    this.indicator = new UIElementToAnnotationIndicatorAdapter(this.designer.defaultAnnotationIndicator);
+                    this.indicator = new UIElementToAnnotationIndicatorAdapter(
+                        this.designer.defaultAnnotationIndicator
+                    );
                 }
 
                 return this.indicator;

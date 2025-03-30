@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 
-namespace System.ServiceModel.Security 
+namespace System.ServiceModel.Security
 {
     using System;
     using System.Collections;
@@ -12,12 +12,13 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Channels;
     using System.Threading;
 
-    // NOTE: this class does minimum argument checking as it is all internal 
-    class TimeBoundedCache 
+    // NOTE: this class does minimum argument checking as it is all internal
+    class TimeBoundedCache
     {
         static Action<object> purgeCallback;
         ReaderWriterLock cacheLock;
         Hashtable entries;
+
         // if there are less than lowWaterMark entries, no purging is done
         int lowWaterMark;
         int maxCacheItems;
@@ -27,7 +28,14 @@ namespace System.ServiceModel.Security
         IOThreadTimer purgingTimer;
         bool doRemoveNotification;
 
-        protected TimeBoundedCache(int lowWaterMark, int maxCacheItems, IEqualityComparer keyComparer, PurgingMode purgingMode, TimeSpan purgeInterval, bool doRemoveNotification)
+        protected TimeBoundedCache(
+            int lowWaterMark,
+            int maxCacheItems,
+            IEqualityComparer keyComparer,
+            PurgingMode purgingMode,
+            TimeSpan purgeInterval,
+            bool doRemoveNotification
+        )
         {
             this.entries = new Hashtable(keyComparer);
             this.cacheLock = new ReaderWriterLock();
@@ -38,13 +46,10 @@ namespace System.ServiceModel.Security
             this.doRemoveNotification = doRemoveNotification;
             this.nextPurgeTimeUtc = DateTime.UtcNow.Add(this.purgeInterval);
         }
-        
+
         public int Count
         {
-            get
-            {
-                return this.entries.Count;
-            }
+            get { return this.entries.Count; }
         }
 
         static Action<object> PurgeCallback
@@ -61,31 +66,31 @@ namespace System.ServiceModel.Security
 
         protected int Capacity
         {
-            get
-            {
-                return this.maxCacheItems;
-            }
+            get { return this.maxCacheItems; }
         }
 
         protected Hashtable Entries
         {
-            get
-            {
-                return this.entries;
-            }
+            get { return this.entries; }
         }
 
         protected ReaderWriterLock CacheLock
         {
-            get
-            {
-                return this.cacheLock;
-            }
+            get { return this.cacheLock; }
         }
 
-        protected bool TryAddItem(object key, object item, DateTime expirationTime, bool replaceExistingEntry)
+        protected bool TryAddItem(
+            object key,
+            object item,
+            DateTime expirationTime,
+            bool replaceExistingEntry
+        )
         {
-            return this.TryAddItem(key, new ExpirableItem(item, expirationTime), replaceExistingEntry);
+            return this.TryAddItem(
+                key,
+                new ExpirableItem(item, expirationTime),
+                replaceExistingEntry
+            );
         }
 
         void CancelTimerIfNeeded()
@@ -263,9 +268,7 @@ namespace System.ServiceModel.Security
             return null;
         }
 
-        protected virtual void OnRemove(object item)
-        {
-        }
+        protected virtual void OnRemove(object item) { }
 
         protected bool TryRemoveItem(object key)
         {
@@ -301,7 +304,6 @@ namespace System.ServiceModel.Security
             }
         }
 
-
         void EnforceQuota()
         {
             if (!(this.cacheLock.IsWriterLockHeld == true))
@@ -320,7 +322,6 @@ namespace System.ServiceModel.Security
                     {
                         this.entries.Remove(keysToBeRemoved[i]);
                     }
-                    
                 }
                 CancelTimerIfNeeded();
                 if (this.Count >= this.maxCacheItems)
@@ -345,7 +346,11 @@ namespace System.ServiceModel.Security
 
         bool IsExpired(IExpirableItem item)
         {
-            Fx.Assert(item.ExpirationTime == DateTime.MaxValue || item.ExpirationTime.Kind == DateTimeKind.Utc, "");
+            Fx.Assert(
+                item.ExpirationTime == DateTime.MaxValue
+                    || item.ExpirationTime.Kind == DateTimeKind.Utc,
+                ""
+            );
             return (item.ExpirationTime <= DateTime.UtcNow);
         }
 
@@ -355,11 +360,15 @@ namespace System.ServiceModel.Security
             {
                 return true;
             }
-            else if (this.purgingMode == PurgingMode.AccessBasedPurge && DateTime.UtcNow > this.nextPurgeTimeUtc && this.Count > this.lowWaterMark)
+            else if (
+                this.purgingMode == PurgingMode.AccessBasedPurge
+                && DateTime.UtcNow > this.nextPurgeTimeUtc
+                && this.Count > this.lowWaterMark
+            )
             {
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }
@@ -413,7 +422,9 @@ namespace System.ServiceModel.Security
         {
             string message = SR.GetString(SR.CacheQuotaReached, this.maxCacheItems);
             Exception inner = new QuotaExceededException(message);
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(message, inner));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new CommunicationException(message, inner)
+            );
         }
 
         static void PurgeCallbackStatic(object state)
@@ -470,7 +481,7 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            // positive, if item1 will expire before item2. 
+            // positive, if item1 will expire before item2.
             public int Compare(IExpirableItem item1, IExpirableItem item2)
             {
                 if (ReferenceEquals(item1, item2))
@@ -501,18 +512,27 @@ namespace System.ServiceModel.Security
             public ExpirableItem(object item, DateTime expirationTime)
             {
                 this.item = item;
-                Fx.Assert( expirationTime == DateTime.MaxValue || expirationTime.Kind == DateTimeKind.Utc, "");
+                Fx.Assert(
+                    expirationTime == DateTime.MaxValue || expirationTime.Kind == DateTimeKind.Utc,
+                    ""
+                );
                 this.expirationTime = expirationTime;
             }
 
-            public DateTime ExpirationTime { get { return this.expirationTime; } }
-            public object Item { get { return this.item; } }
+            public DateTime ExpirationTime
+            {
+                get { return this.expirationTime; }
+            }
+            public object Item
+            {
+                get { return this.item; }
+            }
         }
     }
 
     enum PurgingMode
     {
         TimerBasedPurge,
-        AccessBasedPurge
+        AccessBasedPurge,
     }
 }

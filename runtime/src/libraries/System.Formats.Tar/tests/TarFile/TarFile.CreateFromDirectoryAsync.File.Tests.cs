@@ -17,16 +17,47 @@ namespace System.Formats.Tar.Tests
         {
             CancellationTokenSource cs = new CancellationTokenSource();
             cs.Cancel();
-            return Assert.ThrowsAsync<TaskCanceledException>(() => TarFile.CreateFromDirectoryAsync("directory", "file.tar", includeBaseDirectory: false, cs.Token));
+            return Assert.ThrowsAsync<TaskCanceledException>(() =>
+                TarFile.CreateFromDirectoryAsync(
+                    "directory",
+                    "file.tar",
+                    includeBaseDirectory: false,
+                    cs.Token
+                )
+            );
         }
 
         [Fact]
         public async Task InvalidPaths_Throw_Async()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(() => TarFile.CreateFromDirectoryAsync(sourceDirectoryName: null,destinationFileName: "path", includeBaseDirectory: false));
-            await Assert.ThrowsAsync<ArgumentException>(() => TarFile.CreateFromDirectoryAsync(sourceDirectoryName: string.Empty,destinationFileName: "path", includeBaseDirectory: false));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => TarFile.CreateFromDirectoryAsync(sourceDirectoryName: "path",destinationFileName: null, includeBaseDirectory: false));
-            await Assert.ThrowsAsync<ArgumentException>(() => TarFile.CreateFromDirectoryAsync(sourceDirectoryName: "path",destinationFileName: string.Empty, includeBaseDirectory: false));
+            await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                TarFile.CreateFromDirectoryAsync(
+                    sourceDirectoryName: null,
+                    destinationFileName: "path",
+                    includeBaseDirectory: false
+                )
+            );
+            await Assert.ThrowsAsync<ArgumentException>(() =>
+                TarFile.CreateFromDirectoryAsync(
+                    sourceDirectoryName: string.Empty,
+                    destinationFileName: "path",
+                    includeBaseDirectory: false
+                )
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(() =>
+                TarFile.CreateFromDirectoryAsync(
+                    sourceDirectoryName: "path",
+                    destinationFileName: null,
+                    includeBaseDirectory: false
+                )
+            );
+            await Assert.ThrowsAsync<ArgumentException>(() =>
+                TarFile.CreateFromDirectoryAsync(
+                    sourceDirectoryName: "path",
+                    destinationFileName: string.Empty,
+                    includeBaseDirectory: false
+                )
+            );
         }
 
         [Fact]
@@ -37,7 +68,13 @@ namespace System.Formats.Tar.Tests
                 string dirPath = Path.Join(root.Path, "dir");
                 string filePath = Path.Join(root.Path, "file.tar");
 
-                await Assert.ThrowsAsync<DirectoryNotFoundException>(() => TarFile.CreateFromDirectoryAsync(sourceDirectoryName: "IDontExist", destinationFileName: filePath, includeBaseDirectory: false));
+                await Assert.ThrowsAsync<DirectoryNotFoundException>(() =>
+                    TarFile.CreateFromDirectoryAsync(
+                        sourceDirectoryName: "IDontExist",
+                        destinationFileName: filePath,
+                        includeBaseDirectory: false
+                    )
+                );
             }
         }
 
@@ -52,7 +89,13 @@ namespace System.Formats.Tar.Tests
                 string filePath = Path.Join(root.Path, "file.tar");
                 File.Create(filePath).Dispose();
 
-                await Assert.ThrowsAsync<IOException>(() => TarFile.CreateFromDirectoryAsync(sourceDirectoryName: dirPath, destinationFileName: filePath, includeBaseDirectory: false));
+                await Assert.ThrowsAsync<IOException>(() =>
+                    TarFile.CreateFromDirectoryAsync(
+                        sourceDirectoryName: dirPath,
+                        destinationFileName: filePath,
+                        includeBaseDirectory: false
+                    )
+                );
             }
         }
 
@@ -86,7 +129,11 @@ namespace System.Formats.Tar.Tests
             SetUnixFileMode(filePath2, filename2Mode);
 
             string destinationArchiveFileName = Path.Join(destination.Path, "output.tar");
-            TarFile.CreateFromDirectory(source.Path, destinationArchiveFileName, includeBaseDirectory);
+            TarFile.CreateFromDirectory(
+                source.Path,
+                destinationArchiveFileName,
+                includeBaseDirectory
+            );
 
             List<TarEntry> entries = new List<TarEntry>();
 
@@ -112,33 +159,35 @@ namespace System.Formats.Tar.Tests
             int expectedCount = 3 + (includeBaseDirectory ? 1 : 0);
             Assert.Equal(expectedCount, entries.Count);
 
-            string prefix = includeBaseDirectory ? Path.GetFileName(source.Path) + '/' : string.Empty;
+            string prefix = includeBaseDirectory
+                ? Path.GetFileName(source.Path) + '/'
+                : string.Empty;
 
             if (includeBaseDirectory)
             {
                 TarEntry baseEntry = entries.FirstOrDefault(x =>
-                    x.EntryType == TarEntryType.Directory &&
-                    x.Name == prefix);
+                    x.EntryType == TarEntryType.Directory && x.Name == prefix
+                );
                 Assert.NotNull(baseEntry);
                 AssertEntryModeFromFileSystemEquals(baseEntry, baseDirectoryMode);
             }
 
             TarEntry entry1 = entries.FirstOrDefault(x =>
-                x.EntryType == TarEntryType.RegularFile &&
-                x.Name == prefix + fileName1);
+                x.EntryType == TarEntryType.RegularFile && x.Name == prefix + fileName1
+            );
             Assert.NotNull(entry1);
             AssertEntryModeFromFileSystemEquals(entry1, filename1Mode);
 
             TarEntry directory = entries.FirstOrDefault(x =>
-                x.EntryType == TarEntryType.Directory &&
-                x.Name == prefix + subDirectoryName);
+                x.EntryType == TarEntryType.Directory && x.Name == prefix + subDirectoryName
+            );
             Assert.NotNull(directory);
             AssertEntryModeFromFileSystemEquals(directory, subDirectoryMode);
 
             string actualFileName2 = subDirectoryName + fileName2; // Notice the trailing separator in subDirectoryName
             TarEntry entry2 = entries.FirstOrDefault(x =>
-                x.EntryType == TarEntryType.RegularFile &&
-                x.Name == prefix + actualFileName2);
+                x.EntryType == TarEntryType.RegularFile && x.Name == prefix + actualFileName2
+            );
             Assert.NotNull(entry2);
             AssertEntryModeFromFileSystemEquals(entry2, filename2Mode);
         }
@@ -151,7 +200,11 @@ namespace System.Formats.Tar.Tests
             {
                 string destinationArchiveFileName = Path.Join(destination.Path, "output.tar");
 
-                await TarFile.CreateFromDirectoryAsync(source.Path, destinationArchiveFileName, includeBaseDirectory: true);
+                await TarFile.CreateFromDirectoryAsync(
+                    source.Path,
+                    destinationArchiveFileName,
+                    includeBaseDirectory: true
+                );
 
                 FileStreamOptions readOptions = new()
                 {
@@ -160,7 +213,9 @@ namespace System.Formats.Tar.Tests
                     Options = FileOptions.Asynchronous,
                 };
 
-                await using (FileStream fileStream = File.Open(destinationArchiveFileName, readOptions))
+                await using (
+                    FileStream fileStream = File.Open(destinationArchiveFileName, readOptions)
+                )
                 {
                     await using (TarReader reader = new TarReader(fileStream))
                     {
@@ -192,7 +247,11 @@ namespace System.Formats.Tar.Tests
 
                 string destinationArchiveFileName = Path.Join(destination.Path, "output.tar");
 
-                await TarFile.CreateFromDirectoryAsync(source.Path, destinationArchiveFileName, includeBaseDirectory);
+                await TarFile.CreateFromDirectoryAsync(
+                    source.Path,
+                    destinationArchiveFileName,
+                    includeBaseDirectory
+                );
 
                 FileStreamOptions readOptions = new()
                 {
@@ -201,11 +260,15 @@ namespace System.Formats.Tar.Tests
                     Options = FileOptions.Asynchronous,
                 };
 
-                await using (FileStream fileStream = File.Open(destinationArchiveFileName, readOptions))
+                await using (
+                    FileStream fileStream = File.Open(destinationArchiveFileName, readOptions)
+                )
                 {
                     await using (TarReader reader = new TarReader(fileStream))
                     {
-                        string prefix = includeBaseDirectory ? Path.GetFileName(source.Path) + '/' : string.Empty;
+                        string prefix = includeBaseDirectory
+                            ? Path.GetFileName(source.Path) + '/'
+                            : string.Empty;
 
                         TarEntry entry;
 
@@ -256,7 +319,11 @@ namespace System.Formats.Tar.Tests
             string subDirectory = Path.Join(sourceDirectoryName, "subDirectory");
             Directory.CreateSymbolicLink(subDirectory, externalDirectory); // Should not recurse here
 
-            await TarFile.CreateFromDirectoryAsync(sourceDirectoryName, destinationArchive, includeBaseDirectory: false);
+            await TarFile.CreateFromDirectoryAsync(
+                sourceDirectoryName,
+                destinationArchive,
+                includeBaseDirectory: false
+            );
 
             await using FileStream archiveStream = File.OpenRead(destinationArchive);
             await using TarReader reader = new(archiveStream, leaveOpen: false);
@@ -285,7 +352,11 @@ namespace System.Formats.Tar.Tests
             string sourceDirectoryName = Path.Join(root.Path, "baseDirectory");
             Directory.CreateSymbolicLink(sourceDirectoryName, externalDirectory);
 
-            await TarFile.CreateFromDirectoryAsync(sourceDirectoryName, destinationArchive, includeBaseDirectory: true); // Base directory is a symlink, do not recurse
+            await TarFile.CreateFromDirectoryAsync(
+                sourceDirectoryName,
+                destinationArchive,
+                includeBaseDirectory: true
+            ); // Base directory is a symlink, do not recurse
 
             await using FileStream archiveStream = File.OpenRead(destinationArchive);
             await using TarReader reader = new(archiveStream, leaveOpen: false);

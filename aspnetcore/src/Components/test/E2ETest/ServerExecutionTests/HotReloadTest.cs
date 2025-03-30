@@ -17,10 +17,9 @@ public class HotReloadTest : ServerTestBase<BasicTestAppServerSiteFixture<HotRel
     public HotReloadTest(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<HotReloadStartup> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     public override async Task InitializeAsync()
     {
@@ -36,16 +35,28 @@ public class HotReloadTest : ServerTestBase<BasicTestAppServerSiteFixture<HotRel
     [Fact]
     public async Task InvokingRender_CausesComponentToRender()
     {
-        Browser.Equal("This component was rendered 1 time(s).", () => Browser.Exists(By.TagName("h2")).Text);
+        Browser.Equal(
+            "This component was rendered 1 time(s).",
+            () => Browser.Exists(By.TagName("h2")).Text
+        );
         Browser.Equal("Initial title", () => Browser.Exists(By.TagName("h3")).Text);
-        Browser.Equal("Component with ShouldRender=false was rendered 1 time(s).", () => Browser.Exists(By.TagName("h4")).Text);
+        Browser.Equal(
+            "Component with ShouldRender=false was rendered 1 time(s).",
+            () => Browser.Exists(By.TagName("h4")).Text
+        );
 
         using var client = new HttpClient { BaseAddress = _serverFixture.RootUri };
         var response = await client.GetAsync("/rerender");
         response.EnsureSuccessStatusCode();
 
-        Browser.Equal("This component was rendered 2 time(s).", () => Browser.Exists(By.TagName("h2")).Text);
+        Browser.Equal(
+            "This component was rendered 2 time(s).",
+            () => Browser.Exists(By.TagName("h2")).Text
+        );
         Browser.Equal("Initial title", () => Browser.Exists(By.TagName("h3")).Text);
-        Browser.Equal("Component with ShouldRender=false was rendered 2 time(s).", () => Browser.Exists(By.TagName("h4")).Text);
+        Browser.Equal(
+            "Component with ShouldRender=false was rendered 2 time(s).",
+            () => Browser.Exists(By.TagName("h4")).Text
+        );
     }
 }

@@ -19,9 +19,7 @@ public class DateTimeToBinaryConverter : ValueConverter<DateTime, long>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
     public DateTimeToBinaryConverter()
-        : this(null)
-    {
-    }
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -34,16 +32,11 @@ public class DateTimeToBinaryConverter : ValueConverter<DateTime, long>
     ///     facets for the converted data.
     /// </param>
     public DateTimeToBinaryConverter(ConverterMappingHints? mappingHints)
-        : base(
-            v => v.ToBinary(),
-            v => DateTime.FromBinary(v),
-            mappingHints)
-    {
-    }
+        : base(v => v.ToBinary(), v => DateTime.FromBinary(v), mappingHints) { }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
-    public static ValueConverterInfo DefaultInfo { get; }
-        = new(typeof(DateTime), typeof(long), i => new DateTimeToBinaryConverter(i.MappingHints));
+    public static ValueConverterInfo DefaultInfo { get; } =
+        new(typeof(DateTime), typeof(long), i => new DateTimeToBinaryConverter(i.MappingHints));
 }

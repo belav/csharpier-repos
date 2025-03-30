@@ -9,26 +9,29 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-
 using System.Data.Common;
 using System.Data.Metadata.Edm;
-using System.Linq;
 using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
 
 namespace System.Data.Common.CommandTrees.Internal
 {
     internal sealed class ParameterRetriever : BasicCommandTreeVisitor
     {
-        private readonly Dictionary<string, DbParameterReferenceExpression> paramMappings = new Dictionary<string, DbParameterReferenceExpression>();
+        private readonly Dictionary<string, DbParameterReferenceExpression> paramMappings =
+            new Dictionary<string, DbParameterReferenceExpression>();
 
-        private ParameterRetriever()
-        {
-        }
+        private ParameterRetriever() { }
 
-        internal static System.Collections.ObjectModel.ReadOnlyCollection<DbParameterReferenceExpression> GetParameters(DbCommandTree tree)
+        internal static System.Collections.ObjectModel.ReadOnlyCollection<DbParameterReferenceExpression> GetParameters(
+            DbCommandTree tree
+        )
         {
-            Debug.Assert(tree != null, "Ensure command tree is non-null before calling ParamterRetriever.GetParameters");
+            Debug.Assert(
+                tree != null,
+                "Ensure command tree is non-null before calling ParamterRetriever.GetParameters"
+            );
 
             ParameterRetriever retriever = new ParameterRetriever();
             retriever.VisitCommandTree(tree);

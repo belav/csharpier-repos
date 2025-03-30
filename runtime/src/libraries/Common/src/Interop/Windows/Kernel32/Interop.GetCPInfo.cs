@@ -12,8 +12,12 @@ internal static partial class Interop
         {
             internal int MaxCharSize;
 
-            internal fixed byte DefaultChar[2 /* MAX_DEFAULTCHAR */];
-            internal fixed byte LeadByte[12 /* MAX_LEADBYTES */];
+            internal fixed byte DefaultChar[
+                2 /* MAX_DEFAULTCHAR */
+            ];
+            internal fixed byte LeadByte[
+                12 /* MAX_LEADBYTES */
+            ];
         }
 
         [LibraryImport(Libraries.Kernel32)]

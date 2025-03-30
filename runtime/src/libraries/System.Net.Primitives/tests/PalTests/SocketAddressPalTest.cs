@@ -5,18 +5,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
-
 using Xunit;
 
 namespace System.Net.Primitives.PalTests
 {
     public class SocketAddressPalTests
     {
-        public static object[][] AddressFamilyData = new object[][] {
+        public static object[][] AddressFamilyData = new object[][]
+        {
             new object[] { AddressFamily.Unspecified },
             new object[] { AddressFamily.Unix },
             new object[] { AddressFamily.InterNetwork },
-            new object[] { AddressFamily.InterNetworkV6 }
+            new object[] { AddressFamily.InterNetworkV6 },
         };
 
         [Theory, MemberData(nameof(AddressFamilyData))]
@@ -31,15 +31,18 @@ namespace System.Net.Primitives.PalTests
         public void AddressFamily_Get_Set_Throws()
         {
             var buffer = new byte[1];
-            Assert.ThrowsAny<Exception>(() => SocketAddressPal.SetAddressFamily(buffer, AddressFamily.InterNetwork));
+            Assert.ThrowsAny<Exception>(() =>
+                SocketAddressPal.SetAddressFamily(buffer, AddressFamily.InterNetwork)
+            );
             Assert.ThrowsAny<Exception>(() => SocketAddressPal.GetAddressFamily(buffer));
         }
 
-        public static object[][] PortData = new object[][] {
+        public static object[][] PortData = new object[][]
+        {
             new object[] { (ushort)0 },
             new object[] { (ushort)42 },
             new object[] { (ushort)1024 },
-            new object[] { (ushort)65535 }
+            new object[] { (ushort)65535 },
         };
 
         [Theory, MemberData(nameof(PortData))]
@@ -78,11 +81,12 @@ namespace System.Net.Primitives.PalTests
             Assert.ThrowsAny<Exception>(() => SocketAddressPal.GetPort(buffer));
         }
 
-        public static object[][] IPv4AddressData = new object[][] {
+        public static object[][] IPv4AddressData = new object[][]
+        {
             new object[] { 0x00000000 },
             new object[] { 0x04030201 },
             new object[] { 0x0100007F },
-            new object[] { 0xFFFFFFFF }
+            new object[] { 0xFFFFFFFF },
         };
 
         [Theory, MemberData(nameof(IPv4AddressData))]
@@ -103,23 +107,78 @@ namespace System.Net.Primitives.PalTests
             Assert.ThrowsAny<Exception>(() => SocketAddressPal.GetIPv4Address(buffer));
         }
 
-        public static object[][] IPv6AddressData = new object[][] {
-            new object[] {
-                new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-                (uint)0
+        public static object[][] IPv6AddressData = new object[][]
+        {
+            new object[] { new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 }, (uint)0 },
+            new object[]
+            {
+                new byte[]
+                {
+                    0x20,
+                    0x01,
+                    0x0d,
+                    0x0b8,
+                    0xaa,
+                    0xaa,
+                    0xbb,
+                    0xbb,
+                    0xcc,
+                    0xcc,
+                    0xdd,
+                    0xdd,
+                    0xee,
+                    0xee,
+                    0x00,
+                    0x01,
+                },
+                (uint)0xffeeddcc,
             },
-            new object[] {
-                new byte[] { 0x20, 0x01, 0x0d, 0x0b8, 0xaa, 0xaa, 0xbb, 0xbb, 0xcc, 0xcc, 0xdd, 0xdd, 0xee, 0xee, 0x00, 0x01 },
-                (uint)0xffeeddcc
+            new object[]
+            {
+                new byte[]
+                {
+                    0x20,
+                    0x01,
+                    0x0d,
+                    0x0b8,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x01,
+                },
+                (uint)0xccddeeff,
             },
-            new object[] {
-                new byte[] { 0x20, 0x01, 0x0d, 0x0b8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01 },
-                (uint)0xccddeeff
+            new object[]
+            {
+                new byte[]
+                {
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0x00,
+                    0xff,
+                    0xff,
+                    222,
+                    1,
+                    41,
+                    90,
+                },
+                (uint)0,
             },
-            new object[] {
-                new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 222, 1, 41, 90 },
-                (uint)0
-            }
         };
 
         [Theory, MemberData(nameof(IPv6AddressData))]
@@ -147,11 +206,17 @@ namespace System.Net.Primitives.PalTests
             uint unused;
             var buffer = new byte[4];
             SocketAddressPal.SetAddressFamily(buffer, AddressFamily.InterNetworkV6);
-            Assert.ThrowsAny<Exception>(() => SocketAddressPal.SetIPv6Address(buffer, new byte[16], 0));
-            Assert.ThrowsAny<Exception>(() => SocketAddressPal.GetIPv6Address(buffer, new byte[16], out unused));
+            Assert.ThrowsAny<Exception>(() =>
+                SocketAddressPal.SetIPv6Address(buffer, new byte[16], 0)
+            );
+            Assert.ThrowsAny<Exception>(() =>
+                SocketAddressPal.GetIPv6Address(buffer, new byte[16], out unused)
+            );
         }
 
-        public static IEnumerable<object[]> IPv4AddressAndPortData = IPv4AddressData.SelectMany(o => PortData.Select(p => o.Concat(p))).Select(o => o.ToArray());
+        public static IEnumerable<object[]> IPv4AddressAndPortData = IPv4AddressData
+            .SelectMany(o => PortData.Select(p => o.Concat(p)))
+            .Select(o => o.ToArray());
 
         [Theory, MemberData(nameof(IPv4AddressAndPortData))]
         public void IPv4AddressAndPort_Get_Set(uint address, ushort port)
@@ -165,7 +230,9 @@ namespace System.Net.Primitives.PalTests
             Assert.Equal(port, SocketAddressPal.GetPort(buffer));
         }
 
-        public static IEnumerable<object[]> IPv6AddressAndPortData = IPv6AddressData.SelectMany(o => PortData.Select(p => o.Concat(p))).Select(o => o.ToArray());
+        public static IEnumerable<object[]> IPv6AddressAndPortData = IPv6AddressData
+            .SelectMany(o => PortData.Select(p => o.Concat(p)))
+            .Select(o => o.ToArray());
 
         [Theory, MemberData(nameof(IPv6AddressAndPortData))]
         public void IPv6AddressAndPort_Get_Set(byte[] address, uint scope, ushort port)
@@ -191,10 +258,16 @@ namespace System.Net.Primitives.PalTests
         [Fact]
         public void ToString_ValidSocketAddress_ExpectedFormat()
         {
-            IPEndPoint ipLocalEndPoint = new IPEndPoint(IPAddress.Loopback, Convert.ToInt32("cafe", 16));
+            IPEndPoint ipLocalEndPoint = new IPEndPoint(
+                IPAddress.Loopback,
+                Convert.ToInt32("cafe", 16)
+            );
             SocketAddress socketAddress = ipLocalEndPoint.Serialize();
 
-            Assert.Equal("InterNetwork:16:{202,254,127,0,0,1,0,0,0,0,0,0,0,0}", socketAddress.ToString());
+            Assert.Equal(
+                "InterNetwork:16:{202,254,127,0,0,1,0,0,0,0,0,0,0,0}",
+                socketAddress.ToString()
+            );
         }
     }
 }

@@ -32,17 +32,21 @@ public class NoContentFormatterTests
         object value,
         bool declaredTypeAsString,
         bool expected,
-        bool useNonNullContentType)
+        bool useNonNullContentType
+    )
     {
         // Arrange
         var type = declaredTypeAsString ? typeof(string) : typeof(object);
-        var contentType = useNonNullContentType ? new StringSegment("text/plain") : new StringSegment();
+        var contentType = useNonNullContentType
+            ? new StringSegment("text/plain")
+            : new StringSegment();
 
         var context = new OutputFormatterWriteContext(
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             type,
-            value)
+            value
+        )
         {
             ContentType = contentType,
         };
@@ -66,7 +70,8 @@ public class NoContentFormatterTests
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             declaredType,
-            "Something non null.")
+            "Something non null."
+        )
         {
             ContentType = new StringSegment("text/plain"),
         };
@@ -87,21 +92,23 @@ public class NoContentFormatterTests
     public void CanWriteResult_ReturnsTrue_IfReturnValueIsNullAndTreatNullValueAsNoContentIsNotSet(
         string value,
         bool treatNullValueAsNoContent,
-        bool expected)
+        bool expected
+    )
     {
         // Arrange
         var context = new OutputFormatterWriteContext(
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             typeof(string),
-            value)
+            value
+        )
         {
             ContentType = new StringSegment("text/plain"),
         };
 
         var formatter = new HttpNoContentOutputFormatter()
         {
-            TreatNullValueAsNoContent = treatNullValueAsNoContent
+            TreatNullValueAsNoContent = treatNullValueAsNoContent,
         };
 
         // Act
@@ -119,7 +126,8 @@ public class NoContentFormatterTests
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             typeof(string),
-            @object: null);
+            @object: null
+        );
 
         var formatter = new HttpNoContentOutputFormatter();
 
@@ -138,7 +146,8 @@ public class NoContentFormatterTests
             new DefaultHttpContext(),
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             typeof(string),
-            @object: null);
+            @object: null
+        );
 
         var formatter = new HttpNoContentOutputFormatter();
 
@@ -161,7 +170,8 @@ public class NoContentFormatterTests
             httpContext,
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             typeof(string),
-            @object: null);
+            @object: null
+        );
 
         var formatter = new HttpNoContentOutputFormatter();
 

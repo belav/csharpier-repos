@@ -32,7 +32,8 @@ public class DistributedCacheTagHelper : CacheTagHelperBase
     /// <param name="htmlEncoder">The <see cref="HtmlEncoder"/>.</param>
     public DistributedCacheTagHelper(
         IDistributedCacheTagHelperService distributedCacheService,
-        HtmlEncoder htmlEncoder)
+        HtmlEncoder htmlEncoder
+    )
         : base(htmlEncoder)
     {
         _distributedCacheService = distributedCacheService;
@@ -60,7 +61,11 @@ public class DistributedCacheTagHelper : CacheTagHelperBase
         {
             var cacheKey = new CacheTagKey(this);
 
-            content = await _distributedCacheService.ProcessContentAsync(output, cacheKey, GetDistributedCacheEntryOptions());
+            content = await _distributedCacheService.ProcessContentAsync(
+                output,
+                cacheKey,
+                GetDistributedCacheEntryOptions()
+            );
         }
         else
         {

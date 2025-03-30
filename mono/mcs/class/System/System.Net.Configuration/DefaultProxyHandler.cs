@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,143 +38,175 @@ using XmlNode = System.Object;
 
 namespace System.Net.Configuration
 {
-	class DefaultProxyHandler : IConfigurationSectionHandler
-	{
-		public virtual object Create (object parent, object configContext, XmlNode section)
-		{
-			IWebProxy result = parent as IWebProxy;
+    class DefaultProxyHandler : IConfigurationSectionHandler
+    {
+        public virtual object Create(object parent, object configContext, XmlNode section)
+        {
+            IWebProxy result = parent as IWebProxy;
 #if (XML_DEP)
-			if (section.Attributes != null && section.Attributes.Count != 0)
-				HandlersUtil.ThrowException ("Unrecognized attribute", section);
+            if (section.Attributes != null && section.Attributes.Count != 0)
+                HandlersUtil.ThrowException("Unrecognized attribute", section);
 
-			XmlNodeList nodes = section.ChildNodes;
-			foreach (XmlNode child in nodes) {
-				XmlNodeType ntype = child.NodeType;
-				if (ntype == XmlNodeType.Whitespace || ntype == XmlNodeType.Comment)
-					continue;
+            XmlNodeList nodes = section.ChildNodes;
+            foreach (XmlNode child in nodes)
+            {
+                XmlNodeType ntype = child.NodeType;
+                if (ntype == XmlNodeType.Whitespace || ntype == XmlNodeType.Comment)
+                    continue;
 
-				if (ntype != XmlNodeType.Element)
-					HandlersUtil.ThrowException ("Only elements allowed", child);
-				
-				string name = child.Name;
-				if (name == "proxy") {
-					string sysdefault = HandlersUtil.ExtractAttributeValue ("usesystemdefault", child, true);
-					string bypass = HandlersUtil.ExtractAttributeValue ("bypassonlocal", child, true);
-					string address = HandlersUtil.ExtractAttributeValue ("proxyaddress", child, true);
-					if (child.Attributes != null && child.Attributes.Count != 0) {
-						HandlersUtil.ThrowException ("Unrecognized attribute", child);
-					}
+                if (ntype != XmlNodeType.Element)
+                    HandlersUtil.ThrowException("Only elements allowed", child);
 
-					result = new WebProxy ();
-					bool bp = (bypass != null && String.Compare (bypass, "true", true) == 0);
-					if (bp == false) {
-						if (bypass != null && String.Compare (bypass, "false", true) != 0)
-							HandlersUtil.ThrowException ("Invalid boolean value", child);
-					}
+                string name = child.Name;
+                if (name == "proxy")
+                {
+                    string sysdefault = HandlersUtil.ExtractAttributeValue(
+                        "usesystemdefault",
+                        child,
+                        true
+                    );
+                    string bypass = HandlersUtil.ExtractAttributeValue(
+                        "bypassonlocal",
+                        child,
+                        true
+                    );
+                    string address = HandlersUtil.ExtractAttributeValue(
+                        "proxyaddress",
+                        child,
+                        true
+                    );
+                    if (child.Attributes != null && child.Attributes.Count != 0)
+                    {
+                        HandlersUtil.ThrowException("Unrecognized attribute", child);
+                    }
 
-					if (!(result is WebProxy))
-						continue;
+                    result = new WebProxy();
+                    bool bp = (bypass != null && String.Compare(bypass, "true", true) == 0);
+                    if (bp == false)
+                    {
+                        if (bypass != null && String.Compare(bypass, "false", true) != 0)
+                            HandlersUtil.ThrowException("Invalid boolean value", child);
+                    }
 
-					((WebProxy) result).BypassProxyOnLocal = bp;
-					
-					if (address != null)
-						try {
-							((WebProxy) result).Address = new Uri (address);
-							continue;
-						} catch (UriFormatException) {} //MS: ignore bad URIs, fall through to default
-					
-					//MS: presence of valid address URI takes precedence over usesystemdefault
-					if (sysdefault != null && String.Compare (sysdefault, "true", true) == 0) {
-						address = Environment.GetEnvironmentVariable ("http_proxy");
-						if (address == null)
-							address = Environment.GetEnvironmentVariable ("HTTP_PROXY");
+                    if (!(result is WebProxy))
+                        continue;
 
-						if (address != null) {
-							try {
-								Uri uri = new Uri (address);
-								IPAddress ip;
-								if (IPAddress.TryParse (uri.Host, out ip)) {
-									if (IPAddress.Any.Equals (ip)) {
-										UriBuilder builder = new UriBuilder (uri);
-										builder.Host = "127.0.0.1";
-										uri = builder.Uri;
-									} else if (IPAddress.IPv6Any.Equals (ip)) {
-										UriBuilder builder = new UriBuilder (uri);
-										builder.Host = "[::1]";
-										uri = builder.Uri;
-									}
-								}
-								((WebProxy) result).Address = uri;
-							} catch (UriFormatException) { }
-						}
-					}
-					
-					continue;
-				}
+                    ((WebProxy)result).BypassProxyOnLocal = bp;
 
-				if (name == "bypasslist") {
-					if (!(result is WebProxy))
-						continue;
+                    if (address != null)
+                        try
+                        {
+                            ((WebProxy)result).Address = new Uri(address);
+                            continue;
+                        }
+                        catch (UriFormatException) { } //MS: ignore bad URIs, fall through to default
 
-					FillByPassList (child, (WebProxy) result);
-					continue;
-				}
+                    //MS: presence of valid address URI takes precedence over usesystemdefault
+                    if (sysdefault != null && String.Compare(sysdefault, "true", true) == 0)
+                    {
+                        address = Environment.GetEnvironmentVariable("http_proxy");
+                        if (address == null)
+                            address = Environment.GetEnvironmentVariable("HTTP_PROXY");
 
-				if (name == "module") {
-					HandlersUtil.ThrowException ("WARNING: module not implemented yet", child);
-				}
+                        if (address != null)
+                        {
+                            try
+                            {
+                                Uri uri = new Uri(address);
+                                IPAddress ip;
+                                if (IPAddress.TryParse(uri.Host, out ip))
+                                {
+                                    if (IPAddress.Any.Equals(ip))
+                                    {
+                                        UriBuilder builder = new UriBuilder(uri);
+                                        builder.Host = "127.0.0.1";
+                                        uri = builder.Uri;
+                                    }
+                                    else if (IPAddress.IPv6Any.Equals(ip))
+                                    {
+                                        UriBuilder builder = new UriBuilder(uri);
+                                        builder.Host = "[::1]";
+                                        uri = builder.Uri;
+                                    }
+                                }
+                                ((WebProxy)result).Address = uri;
+                            }
+                            catch (UriFormatException) { }
+                        }
+                    }
 
-				HandlersUtil.ThrowException ("Unexpected element", child);
-			}
+                    continue;
+                }
+
+                if (name == "bypasslist")
+                {
+                    if (!(result is WebProxy))
+                        continue;
+
+                    FillByPassList(child, (WebProxy)result);
+                    continue;
+                }
+
+                if (name == "module")
+                {
+                    HandlersUtil.ThrowException("WARNING: module not implemented yet", child);
+                }
+
+                HandlersUtil.ThrowException("Unexpected element", child);
+            }
 #endif
-			return result;
-		}
+            return result;
+        }
 
 #if (XML_DEP)
-		static void FillByPassList (XmlNode node, WebProxy proxy)
-		{
-			ArrayList bypass = new ArrayList (proxy.BypassArrayList);
-			if (node.Attributes != null && node.Attributes.Count != 0)
-				HandlersUtil.ThrowException ("Unrecognized attribute", node);
+        static void FillByPassList(XmlNode node, WebProxy proxy)
+        {
+            ArrayList bypass = new ArrayList(proxy.BypassArrayList);
+            if (node.Attributes != null && node.Attributes.Count != 0)
+                HandlersUtil.ThrowException("Unrecognized attribute", node);
 
-			XmlNodeList nodes = node.ChildNodes;
-			foreach (XmlNode child in nodes) {
-				XmlNodeType ntype = child.NodeType;
-				if (ntype == XmlNodeType.Whitespace || ntype == XmlNodeType.Comment)
-					continue;
+            XmlNodeList nodes = node.ChildNodes;
+            foreach (XmlNode child in nodes)
+            {
+                XmlNodeType ntype = child.NodeType;
+                if (ntype == XmlNodeType.Whitespace || ntype == XmlNodeType.Comment)
+                    continue;
 
-				if (ntype != XmlNodeType.Element)
-					HandlersUtil.ThrowException ("Only elements allowed", child);
-				
-				string name = child.Name;
-				if (name == "add") {
-					string address = HandlersUtil.ExtractAttributeValue ("address", child);
-					if (!bypass.Contains (address)) {
-						bypass.Add (address);
-					}
-					continue;
-				}
+                if (ntype != XmlNodeType.Element)
+                    HandlersUtil.ThrowException("Only elements allowed", child);
 
-				if (name == "remove") {
-					string address = HandlersUtil.ExtractAttributeValue ("address", child);
-					bypass.Remove (address);
-					continue;
-				}
+                string name = child.Name;
+                if (name == "add")
+                {
+                    string address = HandlersUtil.ExtractAttributeValue("address", child);
+                    if (!bypass.Contains(address))
+                    {
+                        bypass.Add(address);
+                    }
+                    continue;
+                }
 
-				if (name == "clear") {
-					if (node.Attributes != null && node.Attributes.Count != 0)
-						HandlersUtil.ThrowException ("Unrecognized attribute", node);
-					
-					bypass.Clear ();
-					continue;
-				}
+                if (name == "remove")
+                {
+                    string address = HandlersUtil.ExtractAttributeValue("address", child);
+                    bypass.Remove(address);
+                    continue;
+                }
 
-				HandlersUtil.ThrowException ("Unexpected element", child);
-			}
+                if (name == "clear")
+                {
+                    if (node.Attributes != null && node.Attributes.Count != 0)
+                        HandlersUtil.ThrowException("Unrecognized attribute", node);
 
-			proxy.BypassList = (string []) bypass.ToArray (typeof (string));
-		}
+                    bypass.Clear();
+                    continue;
+                }
+
+                HandlersUtil.ThrowException("Unexpected element", child);
+            }
+
+            proxy.BypassList = (string[])bypass.ToArray(typeof(string));
+        }
 #endif
-	}
+    }
 }
-

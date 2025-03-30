@@ -7,7 +7,6 @@ using System.Threading;
 using Microsoft.CodeAnalysis.CodeGeneration;
 using Microsoft.CodeAnalysis.CSharp.Extensions;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-
 using static Microsoft.CodeAnalysis.CodeGeneration.CodeGenerationHelpers;
 using static Microsoft.CodeAnalysis.CSharp.CodeGeneration.CSharpCodeGenerationHelpers;
 
@@ -20,10 +19,22 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CSharpCodeGenerationContextInfo info,
             IList<bool>? availableIndices,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var methodDeclaration = GenerateConversionDeclaration(method, GetDestination(destination), info, cancellationToken);
-            var members = Insert(destination.Members, methodDeclaration, info, availableIndices, after: LastOperator);
+            var methodDeclaration = GenerateConversionDeclaration(
+                method,
+                GetDestination(destination),
+                info,
+                cancellationToken
+            );
+            var members = Insert(
+                destination.Members,
+                methodDeclaration,
+                info,
+                availableIndices,
+                after: LastOperator
+            );
 
             return AddMembersTo(destination, members, cancellationToken);
         }
@@ -32,47 +43,75 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IMethodSymbol method,
             CodeGenerationDestination destination,
             CSharpCodeGenerationContextInfo info,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var declaration = GenerateConversionDeclarationWorker(method, destination, info, cancellationToken);
-            return AddFormatterAndCodeGeneratorAnnotationsTo(AddAnnotationsTo(method,
-                ConditionallyAddDocumentationCommentTo(declaration, method, info, cancellationToken)));
+            var declaration = GenerateConversionDeclarationWorker(
+                method,
+                destination,
+                info,
+                cancellationToken
+            );
+            return AddFormatterAndCodeGeneratorAnnotationsTo(
+                AddAnnotationsTo(
+                    method,
+                    ConditionallyAddDocumentationCommentTo(
+                        declaration,
+                        method,
+                        info,
+                        cancellationToken
+                    )
+                )
+            );
         }
 
         private static ConversionOperatorDeclarationSyntax GenerateConversionDeclarationWorker(
             IMethodSymbol method,
             CodeGenerationDestination destination,
             CSharpCodeGenerationContextInfo info,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var hasNoBody = !info.Context.GenerateMethodBodies || method.IsExtern;
 
-            var reusableSyntax = GetReuseableSyntaxNodeForSymbol<ConversionOperatorDeclarationSyntax>(method, info);
+            var reusableSyntax =
+                GetReuseableSyntaxNodeForSymbol<ConversionOperatorDeclarationSyntax>(method, info);
             if (reusableSyntax != null)
             {
                 return reusableSyntax;
             }
 
-            var keyword = method.MetadataName == WellKnownMemberNames.ImplicitConversionName
-                ? SyntaxFactory.Token(SyntaxKind.ImplicitKeyword)
-                : SyntaxFactory.Token(SyntaxKind.ExplicitKeyword);
+            var keyword =
+                method.MetadataName == WellKnownMemberNames.ImplicitConversionName
+                    ? SyntaxFactory.Token(SyntaxKind.ImplicitKeyword)
+                    : SyntaxFactory.Token(SyntaxKind.ExplicitKeyword);
 
             var checkedToken = SyntaxFacts.IsCheckedOperator(method.MetadataName)
                 ? SyntaxFactory.Token(SyntaxKind.CheckedKeyword)
                 : default;
 
             var declaration = SyntaxFactory.ConversionOperatorDeclaration(
-                attributeLists: AttributeGenerator.GenerateAttributeLists(method.GetAttributes(), info),
+                attributeLists: AttributeGenerator.GenerateAttributeLists(
+                    method.GetAttributes(),
+                    info
+                ),
                 modifiers: GenerateModifiers(destination),
                 implicitOrExplicitKeyword: keyword,
                 explicitInterfaceSpecifier: null,
                 operatorKeyword: SyntaxFactory.Token(SyntaxKind.OperatorKeyword),
                 checkedKeyword: checkedToken,
                 type: method.ReturnType.GenerateTypeSyntax(),
-                parameterList: ParameterGenerator.GenerateParameterList(method.Parameters, isExplicit: false, info: info),
+                parameterList: ParameterGenerator.GenerateParameterList(
+                    method.Parameters,
+                    isExplicit: false,
+                    info: info
+                ),
                 body: hasNoBody ? null : StatementGenerator.GenerateBlock(method),
                 expressionBody: null,
-                semicolonToken: hasNoBody ? SyntaxFactory.Token(SyntaxKind.SemicolonToken) : new SyntaxToken());
+                semicolonToken: hasNoBody
+                    ? SyntaxFactory.Token(SyntaxKind.SemicolonToken)
+                    : new SyntaxToken()
+            );
 
             declaration = UseExpressionBodyIfDesired(info, declaration, cancellationToken);
 
@@ -80,17 +119,28 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         }
 
         private static ConversionOperatorDeclarationSyntax UseExpressionBodyIfDesired(
-            CSharpCodeGenerationContextInfo info, ConversionOperatorDeclarationSyntax declaration, CancellationToken cancellationToken)
+            CSharpCodeGenerationContextInfo info,
+            ConversionOperatorDeclarationSyntax declaration,
+            CancellationToken cancellationToken
+        )
         {
             if (declaration.ExpressionBody == null)
             {
-                if (declaration.Body?.TryConvertToArrowExpressionBody(
-                    declaration.Kind(), info.LanguageVersion, info.Options.PreferExpressionBodiedOperators.Value, cancellationToken,
-                    out var expressionBody, out var semicolonToken) == true)
+                if (
+                    declaration.Body?.TryConvertToArrowExpressionBody(
+                        declaration.Kind(),
+                        info.LanguageVersion,
+                        info.Options.PreferExpressionBodiedOperators.Value,
+                        cancellationToken,
+                        out var expressionBody,
+                        out var semicolonToken
+                    ) == true
+                )
                 {
-                    return declaration.WithBody(null)
-                                      .WithExpressionBody(expressionBody)
-                                      .WithSemicolonToken(semicolonToken);
+                    return declaration
+                        .WithBody(null)
+                        .WithExpressionBody(expressionBody)
+                        .WithSemicolonToken(semicolonToken);
                 }
             }
 
@@ -104,12 +154,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             {
                 return SyntaxFactory.TokenList(
                     SyntaxFactory.Token(SyntaxKind.StaticKeyword),
-                    SyntaxFactory.Token(SyntaxKind.AbstractKeyword));
+                    SyntaxFactory.Token(SyntaxKind.AbstractKeyword)
+                );
             }
 
             return SyntaxFactory.TokenList(
                 SyntaxFactory.Token(SyntaxKind.PublicKeyword),
-                SyntaxFactory.Token(SyntaxKind.StaticKeyword));
+                SyntaxFactory.Token(SyntaxKind.StaticKeyword)
+            );
         }
     }
 }

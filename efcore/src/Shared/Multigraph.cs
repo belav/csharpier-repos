@@ -13,9 +13,7 @@ internal class Multigraph<TVertex, TEdge> : Graph<TVertex>
     private readonly Dictionary<TVertex, Dictionary<TVertex, object?>> _successorMap = new();
     private readonly Dictionary<TVertex, Dictionary<TVertex, object?>> _predecessorMap = new();
 
-    public Multigraph()
-    {
-    }
+    public Multigraph() { }
 
     public Multigraph(IComparer<TVertex> secondarySortComparer)
     {
@@ -23,9 +21,7 @@ internal class Multigraph<TVertex, TEdge> : Graph<TVertex>
     }
 
     public Multigraph(Comparison<TVertex> secondarySortComparer)
-        : this(Comparer<TVertex>.Create(secondarySortComparer))
-    {
-    }
+        : this(Comparer<TVertex>.Create(secondarySortComparer)) { }
 
     public IEnumerable<TEdge> GetEdges(TVertex from, TVertex to)
     {
@@ -33,20 +29,25 @@ internal class Multigraph<TVertex, TEdge> : Graph<TVertex>
         {
             if (successorSet.TryGetValue(to, out var edges))
             {
-                return edges is IEnumerable<Edge> edgeList ? edgeList.Select(e => e.Payload) : (new[] { ((Edge)edges!).Payload });
+                return edges is IEnumerable<Edge> edgeList
+                    ? edgeList.Select(e => e.Payload)
+                    : (new[] { ((Edge)edges!).Payload });
             }
         }
 
         return Enumerable.Empty<TEdge>();
     }
 
-    public void AddVertex(TVertex vertex)
-        => _vertices.Add(vertex);
+    public void AddVertex(TVertex vertex) => _vertices.Add(vertex);
 
-    public void AddVertices(IEnumerable<TVertex> vertices)
-        => _vertices.UnionWith(vertices);
+    public void AddVertices(IEnumerable<TVertex> vertices) => _vertices.UnionWith(vertices);
 
-    public void AddEdge(TVertex from, TVertex to, TEdge payload, bool requiresBatchingBoundary = false)
+    public void AddEdge(
+        TVertex from,
+        TVertex to,
+        TEdge payload,
+        bool requiresBatchingBoundary = false
+    )
     {
 #if DEBUG
         if (!_vertices.Contains(from))
@@ -112,48 +113,54 @@ internal class Multigraph<TVertex, TEdge> : Graph<TVertex>
         _predecessorMap.Clear();
     }
 
-    public IReadOnlyList<TVertex> TopologicalSort()
-        => TopologicalSort(null, null);
+    public IReadOnlyList<TVertex> TopologicalSort() => TopologicalSort(null, null);
 
     public IReadOnlyList<TVertex> TopologicalSort(
-        Func<TVertex, TVertex, IEnumerable<TEdge>, bool> tryBreakEdge)
-        => TopologicalSort(tryBreakEdge, null);
+        Func<TVertex, TVertex, IEnumerable<TEdge>, bool> tryBreakEdge
+    ) => TopologicalSort(tryBreakEdge, null);
 
     public IReadOnlyList<TVertex> TopologicalSort(
-        Func<IEnumerable<Tuple<TVertex, TVertex, IEnumerable<TEdge>>>, string> formatCycle)
-        => TopologicalSort(null, formatCycle);
+        Func<IEnumerable<Tuple<TVertex, TVertex, IEnumerable<TEdge>>>, string> formatCycle
+    ) => TopologicalSort(null, formatCycle);
 
     public IReadOnlyList<TVertex> TopologicalSort(
         Func<TVertex, TVertex, IEnumerable<TEdge>, bool>? tryBreakEdge,
         Func<IReadOnlyList<Tuple<TVertex, TVertex, IEnumerable<TEdge>>>, string>? formatCycle,
-        Func<string, string>? formatException = null)
+        Func<string, string>? formatException = null
+    )
     {
-        var batches = TopologicalSortCore(withBatching: false, tryBreakEdge, formatCycle, formatException);
+        var batches = TopologicalSortCore(
+            withBatching: false,
+            tryBreakEdge,
+            formatCycle,
+            formatException
+        );
 
-        Check.DebugAssert(batches.Count < 2, "TopologicalSortCore did batching but withBatching was false");
+        Check.DebugAssert(
+            batches.Count < 2,
+            "TopologicalSortCore did batching but withBatching was false"
+        );
 
-        return batches.Count == 1
-            ? batches[0]
-            : Array.Empty<TVertex>();
+        return batches.Count == 1 ? batches[0] : Array.Empty<TVertex>();
     }
 
-    protected virtual string? ToString(TVertex vertex)
-        => vertex.ToString();
+    protected virtual string? ToString(TVertex vertex) => vertex.ToString();
 
-    public IReadOnlyList<List<TVertex>> BatchingTopologicalSort()
-        => BatchingTopologicalSort(null, null);
+    public IReadOnlyList<List<TVertex>> BatchingTopologicalSort() =>
+        BatchingTopologicalSort(null, null);
 
     public IReadOnlyList<List<TVertex>> BatchingTopologicalSort(
         Func<TVertex, TVertex, IEnumerable<TEdge>, bool>? canBreakEdges,
         Func<IReadOnlyList<Tuple<TVertex, TVertex, IEnumerable<TEdge>>>, string>? formatCycle,
-        Func<string, string>? formatException = null)
-        => TopologicalSortCore(withBatching: true, canBreakEdges, formatCycle, formatException);
+        Func<string, string>? formatException = null
+    ) => TopologicalSortCore(withBatching: true, canBreakEdges, formatCycle, formatException);
 
     private IReadOnlyList<List<TVertex>> TopologicalSortCore(
         bool withBatching,
         Func<TVertex, TVertex, IEnumerable<TEdge>, bool>? canBreakEdges,
         Func<IReadOnlyList<Tuple<TVertex, TVertex, IEnumerable<TEdge>>>, string>? formatCycle,
-        Func<string, string>? formatException = null)
+        Func<string, string>? formatException = null
+    )
     {
         // Performs a breadth-first topological sort (Kahn's algorithm)
         var result = new List<List<TVertex>>();
@@ -236,9 +243,9 @@ internal class Multigraph<TVertex, TEdge> : Graph<TVertex>
                 var candidateVertices = predecessorCounts.Keys.ToList();
                 var candidateIndex = 0;
 
-                while ((candidateIndex < candidateVertices.Count)
-                       && !broken
-                       && canBreakEdges != null)
+                while (
+                    (candidateIndex < candidateVertices.Count) && !broken && canBreakEdges != null
+                )
                 {
                     var candidateVertex = candidateVertices[candidateIndex];
                     if (predecessorCounts[candidateVertex] == 0)
@@ -249,16 +256,26 @@ internal class Multigraph<TVertex, TEdge> : Graph<TVertex>
 
                     // Find a vertex in the unsorted portion of the graph that has edges to the candidate
                     var incomingNeighbor = GetIncomingNeighbors(candidateVertex)
-                        .First(
-                            neighbor => predecessorCounts.TryGetValue(neighbor, out var neighborPredecessors)
-                                && neighborPredecessors > 0);
+                        .First(neighbor =>
+                            predecessorCounts.TryGetValue(neighbor, out var neighborPredecessors)
+                            && neighborPredecessors > 0
+                        );
 
-                    if (canBreakEdges(incomingNeighbor, candidateVertex, GetEdges(incomingNeighbor, candidateVertex)))
+                    if (
+                        canBreakEdges(
+                            incomingNeighbor,
+                            candidateVertex,
+                            GetEdges(incomingNeighbor, candidateVertex)
+                        )
+                    )
                     {
                         var removed = _successorMap[incomingNeighbor].Remove(candidateVertex);
                         Check.DebugAssert(removed, "Candidate vertex not found in successor map");
                         removed = _predecessorMap[candidateVertex].Remove(incomingNeighbor);
-                        Check.DebugAssert(removed, "Incoming neighbor not found in predecessor map");
+                        Check.DebugAssert(
+                            removed,
+                            "Incoming neighbor not found in predecessor map"
+                        );
 
                         predecessorCounts[candidateVertex]--;
                         if (predecessorCounts[candidateVertex] == 0)
@@ -279,16 +296,20 @@ internal class Multigraph<TVertex, TEdge> : Graph<TVertex>
                     continue;
                 }
 
-                var currentCycleVertex = _vertices.First(
-                    v => predecessorCounts.TryGetValue(v, out var predecessorCount) && predecessorCount != 0);
+                var currentCycleVertex = _vertices.First(v =>
+                    predecessorCounts.TryGetValue(v, out var predecessorCount)
+                    && predecessorCount != 0
+                );
                 var cycle = new List<TVertex> { currentCycleVertex };
                 var finished = false;
                 while (!finished)
                 {
                     foreach (var predecessor in GetIncomingNeighbors(currentCycleVertex))
                     {
-                        if (!predecessorCounts.TryGetValue(predecessor, out var predecessorCount)
-                            || predecessorCount == 0)
+                        if (
+                            !predecessorCounts.TryGetValue(predecessor, out var predecessorCount)
+                            || predecessorCount == 0
+                        )
                         {
                             continue;
                         }
@@ -329,12 +350,17 @@ internal class Multigraph<TVertex, TEdge> : Graph<TVertex>
         // vertexes have a boundary-requiring dependency on a vertex with the same batch counter.
         void CheckBatchingBoundary(TVertex vertex)
         {
-            if (withBatching
-                && _predecessorMap[vertex].Any(
-                    kv =>
-                        (kv.Value is Edge { RequiresBatchingBoundary: true }
-                            || kv.Value is IEnumerable<Edge> edges && edges.Any(e => e.RequiresBatchingBoundary))
-                        && currentBatchSet.Contains(kv.Key)))
+            if (
+                withBatching
+                && _predecessorMap[vertex]
+                    .Any(kv =>
+                        (
+                            kv.Value is Edge { RequiresBatchingBoundary: true }
+                            || kv.Value is IEnumerable<Edge> edges
+                                && edges.Any(e => e.RequiresBatchingBoundary)
+                        ) && currentBatchSet.Contains(kv.Key)
+                    )
+            )
             {
                 batchBoundaryRequired = true;
             }
@@ -344,7 +370,8 @@ internal class Multigraph<TVertex, TEdge> : Graph<TVertex>
     private void ThrowCycle(
         List<TVertex> cycle,
         Func<IReadOnlyList<Tuple<TVertex, TVertex, IEnumerable<TEdge>>>, string>? formatCycle,
-        Func<string, string>? formatException = null)
+        Func<string, string>? formatException = null
+    )
     {
         string cycleString;
         if (formatCycle == null)
@@ -358,27 +385,31 @@ internal class Multigraph<TVertex, TEdge> : Graph<TVertex>
 
             foreach (var vertex in cycle.Skip(1))
             {
-                cycleData.Add(Tuple.Create(currentCycleVertex, vertex, GetEdges(currentCycleVertex, vertex)));
+                cycleData.Add(
+                    Tuple.Create(currentCycleVertex, vertex, GetEdges(currentCycleVertex, vertex))
+                );
                 currentCycleVertex = vertex;
             }
 
             cycleString = formatCycle(cycleData);
         }
 
-        var message = formatException == null ? CoreStrings.CircularDependency(cycleString) : formatException(cycleString);
+        var message =
+            formatException == null
+                ? CoreStrings.CircularDependency(cycleString)
+                : formatException(cycleString);
         throw new InvalidOperationException(message);
     }
 
-    public override IEnumerable<TVertex> Vertices
-        => _vertices;
+    public override IEnumerable<TVertex> Vertices => _vertices;
 
-    public override IEnumerable<TVertex> GetOutgoingNeighbors(TVertex from)
-        => _successorMap.TryGetValue(from, out var successorSet)
+    public override IEnumerable<TVertex> GetOutgoingNeighbors(TVertex from) =>
+        _successorMap.TryGetValue(from, out var successorSet)
             ? successorSet.Keys
             : Enumerable.Empty<TVertex>();
 
-    public override IEnumerable<TVertex> GetIncomingNeighbors(TVertex to)
-        => _predecessorMap.TryGetValue(to, out var predecessors)
+    public override IEnumerable<TVertex> GetIncomingNeighbors(TVertex to) =>
+        _predecessorMap.TryGetValue(to, out var predecessors)
             ? predecessors.Keys
             : Enumerable.Empty<TVertex>();
 

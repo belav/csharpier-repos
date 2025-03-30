@@ -56,25 +56,27 @@ public interface IReadOnlyComplexType : IReadOnlyTypeBase
     /// <param name="options">Options for generating the string.</param>
     /// <param name="indent">The number of indent spaces to use before each new line.</param>
     /// <returns>A human-readable representation.</returns>
-    string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+    string ToDebugString(
+        MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);
 
         try
         {
-            builder
-                .Append(indentString)
-                .Append("ComplexType: ")
-                .Append(DisplayName());
+            builder.Append(indentString).Append("ComplexType: ").Append(DisplayName());
 
             if (IsAbstract())
             {
                 builder.Append(" Abstract");
             }
 
-            if (this is EntityType
-                && GetChangeTrackingStrategy() != ChangeTrackingStrategy.Snapshot)
+            if (
+                this is EntityType
+                && GetChangeTrackingStrategy() != ChangeTrackingStrategy.Snapshot
+            )
             {
                 builder.Append(" ChangeTrackingStrategy.").Append(GetChangeTrackingStrategy());
             }
@@ -97,7 +99,9 @@ public interface IReadOnlyComplexType : IReadOnlyTypeBase
                     builder.AppendLine().Append(indentString).Append("  Complex properties: ");
                     foreach (var complexProperty in complexProperties)
                     {
-                        builder.AppendLine().Append(complexProperty.ToDebugString(options, indent + 4));
+                        builder
+                            .AppendLine()
+                            .Append(complexProperty.ToDebugString(options, indent + 4));
                     }
                 }
 

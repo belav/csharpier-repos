@@ -8,16 +8,16 @@ namespace System.ServiceModel.Dispatcher
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Reflection;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Web;
     using System.Text;
     using System.Xml;
-    using System.ServiceModel.Web;
-    using System.Diagnostics;
 
     class UriTemplateDispatchFormatter : IDispatchMessageFormatter
     {
@@ -30,19 +30,27 @@ namespace System.ServiceModel.Dispatcher
         int totalNumUTVars;
         UriTemplate uriTemplate;
 
-        public UriTemplateDispatchFormatter(OperationDescription operationDescription, IDispatchMessageFormatter inner, QueryStringConverter qsc, string contractName, Uri baseAddress)
+        public UriTemplateDispatchFormatter(
+            OperationDescription operationDescription,
+            IDispatchMessageFormatter inner,
+            QueryStringConverter qsc,
+            string contractName,
+            Uri baseAddress
+        )
         {
             this.inner = inner;
             this.qsc = qsc;
             this.baseAddress = baseAddress;
             this.operationName = operationDescription.Name;
-            UriTemplateClientFormatter.Populate(out this.pathMapping,
+            UriTemplateClientFormatter.Populate(
+                out this.pathMapping,
                 out this.queryMapping,
                 out this.totalNumUTVars,
                 out this.uriTemplate,
                 operationDescription,
                 qsc,
-                contractName);
+                contractName
+            );
         }
 
         public void DeserializeRequest(Message message, object[] parameters)
@@ -66,7 +74,8 @@ namespace System.ServiceModel.Dispatcher
                     utmr = this.uriTemplate.Match(this.baseAddress, message.Headers.To);
                 }
             }
-            NameValueCollection nvc = (utmr == null) ? new NameValueCollection() : utmr.BoundVariables;
+            NameValueCollection nvc =
+                (utmr == null) ? new NameValueCollection() : utmr.BoundVariables;
             for (int i = 0; i < parameters.Length; ++i)
             {
                 if (this.pathMapping.ContainsKey(i) && utmr != null)
@@ -76,7 +85,10 @@ namespace System.ServiceModel.Dispatcher
                 else if (this.queryMapping.ContainsKey(i) && utmr != null)
                 {
                     string queryVal = nvc[this.queryMapping[i].Key];
-                    parameters[i] = this.qsc.ConvertStringToValue(queryVal, this.queryMapping[i].Value);
+                    parameters[i] = this.qsc.ConvertStringToValue(
+                        queryVal,
+                        this.queryMapping[i].Value
+                    );
                 }
                 else
                 {
@@ -93,7 +105,10 @@ namespace System.ServiceModel.Dispatcher
                         bool isParameterIgnored = true;
                         foreach (KeyValuePair<string, Type> kvp in this.queryMapping.Values)
                         {
-                            if (String.Compare(key, kvp.Key, StringComparison.OrdinalIgnoreCase) == 0)
+                            if (
+                                String.Compare(key, kvp.Key, StringComparison.OrdinalIgnoreCase)
+                                == 0
+                            )
                             {
                                 isParameterIgnored = false;
                                 break;
@@ -101,16 +116,32 @@ namespace System.ServiceModel.Dispatcher
                         }
                         if (isParameterIgnored)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.WebUnknownQueryParameterIgnored, SR2.GetString(SR2.TraceCodeWebRequestUnknownQueryParameterIgnored, key, operationName));
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Information,
+                                TraceCode.WebUnknownQueryParameterIgnored,
+                                SR2.GetString(
+                                    SR2.TraceCodeWebRequestUnknownQueryParameterIgnored,
+                                    key,
+                                    operationName
+                                )
+                            );
                         }
                     }
                 }
             }
         }
 
-        public Message SerializeReply(MessageVersion messageVersion, object[] parameters, object result)
+        public Message SerializeReply(
+            MessageVersion messageVersion,
+            object[] parameters,
+            object result
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR2.GetString(SR2.QueryStringFormatterOperationNotSupportedServerSide)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(
+                    SR2.GetString(SR2.QueryStringFormatterOperationNotSupportedServerSide)
+                )
+            );
         }
     }
 }

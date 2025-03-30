@@ -8,7 +8,7 @@ namespace System.Reflection.Metadata.Ecma335
         UserString,
         String,
         Blob,
-        Guid
+        Guid,
     }
 
     internal static class HeapIndexExtensions

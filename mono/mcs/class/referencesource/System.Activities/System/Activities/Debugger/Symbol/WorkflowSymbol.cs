@@ -4,14 +4,14 @@
 namespace System.Activities.Debugger.Symbol
 {
     using System;
+    using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
     using System.IO.Compression;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Text;
-    using System.Globalization;
-    using System.Collections.Generic;
     using System.Security.Cryptography;
+    using System.Text;
 
     // Represent debug symbol of a workflow tree (similar to pdb file).
     // It contains the absolute path of the xaml file and the location of each activity in the workflow tree.
@@ -22,28 +22,27 @@ namespace System.Activities.Debugger.Symbol
         public ICollection<ActivitySymbol> Symbols { get; set; }
 
         private byte[] checksum;
+
         public byte[] GetChecksum()
         {
             if (this.checksum == null)
             {
                 return null;
             }
-            return (byte[]) this.checksum.Clone();
+            return (byte[])this.checksum.Clone();
         }
-        
+
         [Flags]
         internal enum EncodingFormat : byte
         {
-            String = 0x76,    // Format as well as cookie. String format is hidden from public.
+            String = 0x76, // Format as well as cookie. String format is hidden from public.
             Binary = 0x77,
-            Checksum = 0x80            
+            Checksum = 0x80,
         }
 
         internal const EncodingFormat DefaultEncodingFormat = EncodingFormat.Binary;
 
-        public WorkflowSymbol()
-        {
-        }
+        public WorkflowSymbol() { }
 
         // These constructors are private and used by Decode() method.
 
@@ -79,7 +78,7 @@ namespace System.Activities.Debugger.Symbol
                 switch (format)
                 {
                     case EncodingFormat.Binary:
-                        return ParseBinary(reader.ReadBytes(payloadBytesCount), checksum); // Compute the 
+                        return ParseBinary(reader.ReadBytes(payloadBytesCount), checksum); // Compute the
                     case EncodingFormat.String:
                         return ParseStringRepresentation(reader.ReadString(), checksum);
                 }
@@ -127,7 +126,7 @@ namespace System.Activities.Debugger.Symbol
                     Array.Copy(ms.GetBuffer(), buffer, ms.Length);
                     return Convert.ToBase64String(buffer);
                 }
-            } 
+            }
         }
 
         // Binary deserializer
@@ -190,7 +189,7 @@ namespace System.Activities.Debugger.Symbol
                     StartLine = int.Parse(symbolSegments[1], CultureInfo.InvariantCulture),
                     StartColumn = int.Parse(symbolSegments[2], CultureInfo.InvariantCulture),
                     EndLine = int.Parse(symbolSegments[3], CultureInfo.InvariantCulture),
-                    EndColumn = int.Parse(symbolSegments[4], CultureInfo.InvariantCulture)
+                    EndColumn = int.Parse(symbolSegments[4], CultureInfo.InvariantCulture),
                 };
             }
 
@@ -198,9 +197,8 @@ namespace System.Activities.Debugger.Symbol
             {
                 FileName = s[0],
                 Symbols = symbols,
-                checksum = checksum
+                checksum = checksum,
             };
-
         }
 
         public bool CalculateChecksum()
@@ -212,6 +210,5 @@ namespace System.Activities.Debugger.Symbol
             }
             return (this.checksum != null);
         }
-
     }
 }

@@ -12,44 +12,59 @@ using Xunit.Sdk;
 
 namespace Mono.Linker.Tests.TestCasesRunner
 {
-	public partial class TestRunner
-	{
-		partial void IgnoreTest (string reason)
-		{
-			throw new IgnoreTestException (reason);
-		}
+    public partial class TestRunner
+    {
+        partial void IgnoreTest(string reason)
+        {
+            throw new IgnoreTestException(reason);
+        }
 
-		static IEnumerable<string> additionalDefines = new string[] { "NATIVEAOT" };
-		private partial IEnumerable<string>? GetAdditionalDefines () => additionalDefines;
+        static IEnumerable<string> additionalDefines = new string[] { "NATIVEAOT" };
 
-		private static T GetResultOfTaskThatMakesAssertions<T> (Task<T> task)
-		{
-			try {
-				return task.Result;
-			} catch (AggregateException e) {
-				if (e.InnerException != null) {
-					if (e.InnerException is XunitException)
-						throw e.InnerException;
-				}
+        private partial IEnumerable<string>? GetAdditionalDefines() => additionalDefines;
 
-				throw;
-			}
-		}
+        private static T GetResultOfTaskThatMakesAssertions<T>(Task<T> task)
+        {
+            try
+            {
+                return task.Result;
+            }
+            catch (AggregateException e)
+            {
+                if (e.InnerException != null)
+                {
+                    if (e.InnerException is XunitException)
+                        throw e.InnerException;
+                }
 
-		protected partial TrimmingCustomizations? CustomizeTrimming (TrimmingDriver linker, TestCaseMetadataProvider metadataProvider)
-			=> null;
+                throw;
+            }
+        }
 
-		static partial void AddOutputDirectory (TestCaseSandbox sandbox, ManagedCompilationResult compilationResult, TrimmingArgumentBuilder builder)
-		{
-			builder.AddOutputDirectory (sandbox.OutputDirectory.Combine (compilationResult.InputAssemblyPath.FileNameWithoutExtension + ".obj"));
-		}
+        protected partial TrimmingCustomizations? CustomizeTrimming(
+            TrimmingDriver linker,
+            TestCaseMetadataProvider metadataProvider
+        ) => null;
 
-		static partial void AddInputReference (NPath inputReference, TrimmingArgumentBuilder builder)
-		{
-			// It's important to add all assemblies as "link" assemblies since the default configuration
-			// is to run the compiler in multi-file mode which will not process anything which is just in the reference set.
-			builder.AddLinkAssembly (inputReference);
-			builder.AddReference (inputReference);
-		}
-	}
+        static partial void AddOutputDirectory(
+            TestCaseSandbox sandbox,
+            ManagedCompilationResult compilationResult,
+            TrimmingArgumentBuilder builder
+        )
+        {
+            builder.AddOutputDirectory(
+                sandbox.OutputDirectory.Combine(
+                    compilationResult.InputAssemblyPath.FileNameWithoutExtension + ".obj"
+                )
+            );
+        }
+
+        static partial void AddInputReference(NPath inputReference, TrimmingArgumentBuilder builder)
+        {
+            // It's important to add all assemblies as "link" assemblies since the default configuration
+            // is to run the compiler in multi-file mode which will not process anything which is just in the reference set.
+            builder.AddLinkAssembly(inputReference);
+            builder.AddReference(inputReference);
+        }
+    }
 }

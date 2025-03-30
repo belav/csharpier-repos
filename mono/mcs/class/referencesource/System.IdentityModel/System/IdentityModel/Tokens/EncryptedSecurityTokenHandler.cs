@@ -25,17 +25,15 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Create an instance of <see cref="EncryptedSecurityTokenHandler"/>
         /// </summary>
-        public EncryptedSecurityTokenHandler()
-        {
-        }
+        public EncryptedSecurityTokenHandler() { }
 
         /// <summary>
         /// Indicates if the current XML element is pointing to a KeyIdentifierClause that
         /// can be de-serialized by this instance.
         /// </summary>
-        /// <param name="reader">An XML reader positioned at the start element. 
+        /// <param name="reader">An XML reader positioned at the start element.
         /// The reader should not be advanced.</param>
-        /// <returns>true if the XML reader is positioned at an EncryptedKey xml element 
+        /// <returns>true if the XML reader is positioned at an EncryptedKey xml element
         /// as defined in section 3.5.1 of 'http://www.w3.org/TR/2002/REC-xmlenc-core-20021210'.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is null.</exception>
         public override bool CanReadKeyIdentifierClause(XmlReader reader)
@@ -46,7 +44,10 @@ namespace System.IdentityModel.Tokens
             }
 
             // <EncryptedKey>
-            return reader.IsStartElement(XmlEncryptionConstants.Elements.EncryptedKey, XmlEncryptionConstants.Namespace);
+            return reader.IsStartElement(
+                XmlEncryptionConstants.Elements.EncryptedKey,
+                XmlEncryptionConstants.Namespace
+            );
         }
 
         /// <summary>
@@ -77,14 +78,16 @@ namespace System.IdentityModel.Tokens
         {
             get
             {
-                if ( _keyInfoSerializer == null )
+                if (_keyInfoSerializer == null)
                 {
-                    lock ( _syncObject )
+                    lock (_syncObject)
                     {
-                        if ( _keyInfoSerializer == null )
+                        if (_keyInfoSerializer == null)
                         {
-                            SecurityTokenHandlerCollection sthc = ( ContainingCollection != null ) ?
-                            ContainingCollection : SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
+                            SecurityTokenHandlerCollection sthc =
+                                (ContainingCollection != null)
+                                    ? ContainingCollection
+                                    : SecurityTokenHandlerCollection.CreateDefaultSecurityTokenHandlerCollection();
                             _keyInfoSerializer = new SecurityTokenSerializerAdapter(sthc);
                         }
                     }
@@ -138,13 +141,16 @@ namespace System.IdentityModel.Tokens
             encryptedData.ReadXml(XmlDictionaryReader.CreateDictionaryReader(reader));
 
             //
-            // All the clauses in a keyinfo must identify the same key, so we 
+            // All the clauses in a keyinfo must identify the same key, so we
             // can try each clause in turn and stop when one resolves.
             //
             SecurityKey decryptionKey = null;
             foreach (SecurityKeyIdentifierClause clause in encryptedData.KeyIdentifier)
             {
-                this.Configuration.ServiceTokenResolver.TryResolveSecurityKey(clause, out decryptionKey);
+                this.Configuration.ServiceTokenResolver.TryResolveSecurityKey(
+                    clause,
+                    out decryptionKey
+                );
 
                 if (null != decryptionKey)
                 {
@@ -166,21 +172,36 @@ namespace System.IdentityModel.Tokens
             if (null == decryptionKey)
             {
                 EncryptedKeyIdentifierClause encryptedKeyClause;
-                if (encryptedData.KeyIdentifier.TryFind<EncryptedKeyIdentifierClause>(out encryptedKeyClause))
+                if (
+                    encryptedData.KeyIdentifier.TryFind<EncryptedKeyIdentifierClause>(
+                        out encryptedKeyClause
+                    )
+                )
                 {
                     //
-                    // System.IdentityModel.Tokens.EncryptedKeyIdentifierClause.ToString() does not print out 
+                    // System.IdentityModel.Tokens.EncryptedKeyIdentifierClause.ToString() does not print out
                     // very good information except the cipher data in this case. We have worked around that
                     // by using the token serializer to serialize the key identifier clause again.
                     //
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new EncryptedTokenDecryptionFailedException(
-                            SR.GetString(SR.ID4036, XmlUtil.SerializeSecurityKeyIdentifier(encryptedData.KeyIdentifier, base.ContainingCollection.KeyInfoSerializer))));
+                        new EncryptedTokenDecryptionFailedException(
+                            SR.GetString(
+                                SR.ID4036,
+                                XmlUtil.SerializeSecurityKeyIdentifier(
+                                    encryptedData.KeyIdentifier,
+                                    base.ContainingCollection.KeyInfoSerializer
+                                )
+                            )
+                        )
+                    );
                 }
                 else
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new EncryptedTokenDecryptionFailedException(SR.GetString(SR.ID4036, encryptedData.KeyIdentifier.ToString())));
+                        new EncryptedTokenDecryptionFailedException(
+                            SR.GetString(SR.ID4036, encryptedData.KeyIdentifier.ToString())
+                        )
+                    );
                 }
             }
 
@@ -191,7 +212,8 @@ namespace System.IdentityModel.Tokens
             if (null == symmetricKey)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new SecurityTokenException(SR.GetString(SR.ID4023)));
+                    new SecurityTokenException(SR.GetString(SR.ID4023))
+                );
             }
 
             //
@@ -199,7 +221,11 @@ namespace System.IdentityModel.Tokens
             //
             byte[] plainText;
 
-            using (SymmetricAlgorithm decrypter = symmetricKey.GetSymmetricAlgorithm(encryptedData.Algorithm))
+            using (
+                SymmetricAlgorithm decrypter = symmetricKey.GetSymmetricAlgorithm(
+                    encryptedData.Algorithm
+                )
+            )
             {
                 plainText = encryptedData.Decrypt(decrypter);
             }
@@ -209,13 +235,27 @@ namespace System.IdentityModel.Tokens
             //
             // Read and return the plaintext token
             //
-            using (XmlReader innerTokenReader = XmlDictionaryReader.CreateTextReader(plainText, XmlDictionaryReaderQuotas.Max))
+            using (
+                XmlReader innerTokenReader = XmlDictionaryReader.CreateTextReader(
+                    plainText,
+                    XmlDictionaryReaderQuotas.Max
+                )
+            )
             {
-                if (this.ContainingCollection != null && this.ContainingCollection.CanReadToken(innerTokenReader))
+                if (
+                    this.ContainingCollection != null
+                    && this.ContainingCollection.CanReadToken(innerTokenReader)
+                )
                 {
                     return this.ContainingCollection.ReadToken(innerTokenReader);
                 }
-                throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4014, innerTokenReader.LocalName, innerTokenReader.NamespaceURI));
+                throw DiagnosticUtility.ThrowHelperInvalidOperation(
+                    SR.GetString(
+                        SR.ID4014,
+                        innerTokenReader.LocalName,
+                        innerTokenReader.NamespaceURI
+                    )
+                );
             }
         }
 
@@ -234,14 +274,27 @@ namespace System.IdentityModel.Tokens
             }
 
             // <EncryptedKey>
-            if (reader.IsStartElement(XmlEncryptionConstants.Elements.EncryptedKey, XmlEncryptionConstants.Namespace))
+            if (
+                reader.IsStartElement(
+                    XmlEncryptionConstants.Elements.EncryptedKey,
+                    XmlEncryptionConstants.Namespace
+                )
+            )
             {
                 EncryptedKeyElement encryptedKey = new EncryptedKeyElement(KeyInfoSerializer);
                 encryptedKey.ReadXml(XmlDictionaryReader.CreateDictionaryReader(reader));
-                return new EncryptedKeyIdentifierClause(encryptedKey.CipherData.CipherValue, encryptedKey.Algorithm, encryptedKey.KeyIdentifier);
+                return new EncryptedKeyIdentifierClause(
+                    encryptedKey.CipherData.CipherValue,
+                    encryptedKey.Algorithm,
+                    encryptedKey.KeyIdentifier
+                );
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID3275, reader.Name, reader.NamespaceURI)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(SR.ID3275, reader.Name, reader.NamespaceURI)
+                )
+            );
         }
 
         [Conditional("DEBUG")]
@@ -261,7 +314,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// By default returns an array with a single null string as there isn't any specific TokenType identifier that is 
+        /// By default returns an array with a single null string as there isn't any specific TokenType identifier that is
         /// associated with a <see cref="EncryptedSecurityToken"/>.
         /// </summary>
         public override string[] GetTokenTypeIdentifiers()
@@ -296,7 +349,10 @@ namespace System.IdentityModel.Tokens
             EncryptedSecurityToken encryptedToken = token as EncryptedSecurityToken;
             if (null == encryptedToken)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("token", SR.GetString(SR.ID4024));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "token",
+                    SR.GetString(SR.ID4024)
+                );
             }
 
             if (this.ContainingCollection == null)
@@ -313,16 +369,26 @@ namespace System.IdentityModel.Tokens
                 //
                 // Buffer the plaintext
                 //
-                using (XmlDictionaryWriter plaintextWriter = XmlDictionaryWriter.CreateTextWriter(plaintextStream, Encoding.UTF8, false))
+                using (
+                    XmlDictionaryWriter plaintextWriter = XmlDictionaryWriter.CreateTextWriter(
+                        plaintextStream,
+                        Encoding.UTF8,
+                        false
+                    )
+                )
                 {
-                    SecurityTokenHandler securityTokenHandler = this.ContainingCollection[encryptedToken.Token.GetType()];
+                    SecurityTokenHandler securityTokenHandler = this.ContainingCollection[
+                        encryptedToken.Token.GetType()
+                    ];
                     if (securityTokenHandler != null)
                     {
                         securityTokenHandler.WriteToken(plaintextWriter, encryptedToken.Token);
                     }
                     else
                     {
-                        throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4224, encryptedToken.Token.GetType()));
+                        throw DiagnosticUtility.ThrowHelperInvalidOperation(
+                            SR.GetString(SR.ID4224, encryptedToken.Token.GetType())
+                        );
                     }
                 }
 
@@ -337,20 +403,32 @@ namespace System.IdentityModel.Tokens
                 //
                 // Get the encryption key, which must be symmetric
                 //
-                SymmetricSecurityKey encryptingKey = encryptingCredentials.SecurityKey as SymmetricSecurityKey;
+                SymmetricSecurityKey encryptingKey =
+                    encryptingCredentials.SecurityKey as SymmetricSecurityKey;
                 if (encryptingKey == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.ID3064)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(SR.GetString(SR.ID3064))
+                    );
                 }
 
                 //
                 // Do the actual encryption
                 //
-                using (SymmetricAlgorithm symmetricAlgorithm = encryptingKey.GetSymmetricAlgorithm(encryptingCredentials.Algorithm))
+                using (
+                    SymmetricAlgorithm symmetricAlgorithm = encryptingKey.GetSymmetricAlgorithm(
+                        encryptingCredentials.Algorithm
+                    )
+                )
                 {
                     byte[] plainTextBytes = plaintextStream.GetBuffer();
                     DebugEncryptedTokenClearText(plainTextBytes, Encoding.UTF8);
-                    encryptedData.Encrypt(symmetricAlgorithm, plainTextBytes, 0, (int)plaintextStream.Length);
+                    encryptedData.Encrypt(
+                        symmetricAlgorithm,
+                        plainTextBytes,
+                        0,
+                        (int)plaintextStream.Length
+                    );
                 }
             }
 

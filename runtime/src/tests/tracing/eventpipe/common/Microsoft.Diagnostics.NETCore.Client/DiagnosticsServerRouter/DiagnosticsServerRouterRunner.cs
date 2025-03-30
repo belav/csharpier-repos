@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Diagnostics.NETCore.Client
@@ -21,24 +21,100 @@ namespace Microsoft.Diagnostics.NETCore.Client
             void OnRouterStopped();
         }
 
-        public static async Task<int> runIpcClientTcpServerRouter(CancellationToken token, string ipcClient, string tcpServer, int runtimeTimeoutMs, TcpServerRouterFactory.CreateInstanceDelegate tcpServerRouterFactory, ILogger logger, Callbacks callbacks)
+        public static async Task<int> runIpcClientTcpServerRouter(
+            CancellationToken token,
+            string ipcClient,
+            string tcpServer,
+            int runtimeTimeoutMs,
+            TcpServerRouterFactory.CreateInstanceDelegate tcpServerRouterFactory,
+            ILogger logger,
+            Callbacks callbacks
+        )
         {
-            return await runRouter(token, new IpcClientTcpServerRouterFactory(ipcClient, tcpServer, runtimeTimeoutMs, tcpServerRouterFactory, logger), callbacks).ConfigureAwait(false);
+            return await runRouter(
+                    token,
+                    new IpcClientTcpServerRouterFactory(
+                        ipcClient,
+                        tcpServer,
+                        runtimeTimeoutMs,
+                        tcpServerRouterFactory,
+                        logger
+                    ),
+                    callbacks
+                )
+                .ConfigureAwait(false);
         }
 
-        public static async Task<int> runIpcServerTcpServerRouter(CancellationToken token, string ipcServer, string tcpServer, int runtimeTimeoutMs, TcpServerRouterFactory.CreateInstanceDelegate tcpServerRouterFactory, ILogger logger, Callbacks callbacks)
+        public static async Task<int> runIpcServerTcpServerRouter(
+            CancellationToken token,
+            string ipcServer,
+            string tcpServer,
+            int runtimeTimeoutMs,
+            TcpServerRouterFactory.CreateInstanceDelegate tcpServerRouterFactory,
+            ILogger logger,
+            Callbacks callbacks
+        )
         {
-            return await runRouter(token, new IpcServerTcpServerRouterFactory(ipcServer, tcpServer, runtimeTimeoutMs, tcpServerRouterFactory, logger), callbacks).ConfigureAwait(false);
+            return await runRouter(
+                    token,
+                    new IpcServerTcpServerRouterFactory(
+                        ipcServer,
+                        tcpServer,
+                        runtimeTimeoutMs,
+                        tcpServerRouterFactory,
+                        logger
+                    ),
+                    callbacks
+                )
+                .ConfigureAwait(false);
         }
 
-        public static async Task<int> runIpcServerTcpClientRouter(CancellationToken token, string ipcServer, string tcpClient, int runtimeTimeoutMs, TcpClientRouterFactory.CreateInstanceDelegate tcpClientRouterFactory, ILogger logger, Callbacks callbacks)
+        public static async Task<int> runIpcServerTcpClientRouter(
+            CancellationToken token,
+            string ipcServer,
+            string tcpClient,
+            int runtimeTimeoutMs,
+            TcpClientRouterFactory.CreateInstanceDelegate tcpClientRouterFactory,
+            ILogger logger,
+            Callbacks callbacks
+        )
         {
-            return await runRouter(token, new IpcServerTcpClientRouterFactory(ipcServer, tcpClient, runtimeTimeoutMs, tcpClientRouterFactory, logger), callbacks).ConfigureAwait(false);
+            return await runRouter(
+                    token,
+                    new IpcServerTcpClientRouterFactory(
+                        ipcServer,
+                        tcpClient,
+                        runtimeTimeoutMs,
+                        tcpClientRouterFactory,
+                        logger
+                    ),
+                    callbacks
+                )
+                .ConfigureAwait(false);
         }
 
-        public static async Task<int> runIpcClientTcpClientRouter(CancellationToken token, string ipcClient, string tcpClient, int runtimeTimeoutMs, TcpClientRouterFactory.CreateInstanceDelegate tcpClientRouterFactory, ILogger logger, Callbacks callbacks)
+        public static async Task<int> runIpcClientTcpClientRouter(
+            CancellationToken token,
+            string ipcClient,
+            string tcpClient,
+            int runtimeTimeoutMs,
+            TcpClientRouterFactory.CreateInstanceDelegate tcpClientRouterFactory,
+            ILogger logger,
+            Callbacks callbacks
+        )
         {
-            return await runRouter(token, new IpcClientTcpClientRouterFactory(ipcClient, tcpClient, runtimeTimeoutMs, tcpClientRouterFactory, logger), callbacks).ConfigureAwait(false);
+            return await runRouter(
+                    token,
+                    new IpcClientTcpClientRouterFactory(
+                        ipcClient,
+                        tcpClient,
+                        runtimeTimeoutMs,
+                        tcpClientRouterFactory,
+                        logger
+                    ),
+                    callbacks
+                )
+                .ConfigureAwait(false);
         }
 
         public static bool isLoopbackOnly(string address)
@@ -55,7 +131,11 @@ namespace Microsoft.Diagnostics.NETCore.Client
             return isLooback;
         }
 
-        async static Task<int> runRouter(CancellationToken token, DiagnosticsServerRouterFactory routerFactory, Callbacks callbacks)
+        static async Task<int> runRouter(
+            CancellationToken token,
+            DiagnosticsServerRouterFactory routerFactory,
+            Callbacks callbacks
+        )
         {
             List<Task> runningTasks = new List<Task>();
             List<Router> runningRouters = new List<Router>();
@@ -84,8 +164,10 @@ namespace Microsoft.Diagnostics.NETCore.Client
                             foreach (var runningRouter in runningRouters)
                                 runningTasks.Add(runningRouter.RouterTaskCompleted.Task);
                             runningTasks.Add(routerTask);
-                        }
-                        while (await Task.WhenAny(runningTasks.ToArray()).ConfigureAwait(false) != routerTask);
+                        } while (
+                            await Task.WhenAny(runningTasks.ToArray()).ConfigureAwait(false)
+                            != routerTask
+                        );
 
                         if (routerTask.IsFaulted || routerTask.IsCanceled)
                         {
@@ -120,7 +202,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
                         // reconnect using same or different runtime instance.
                         if (ex is BackendStreamTimeoutException && runningRouters.Count == 0)
                         {
-                            routerFactory.Logger?.LogDebug("No backend stream available before timeout.");
+                            routerFactory.Logger?.LogDebug(
+                                "No backend stream available before timeout."
+                            );
                             routerFactory.Reset();
                         }
 
@@ -128,7 +212,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
                         // Shutdown router to prevent instances to outlive runtime process (if auto shutdown is enabled).
                         if (ex is RuntimeTimeoutException)
                         {
-                            routerFactory.Logger?.LogInformation("No runtime connected before timeout.");
+                            routerFactory.Logger?.LogInformation(
+                                "No runtime connected before timeout."
+                            );
                             routerFactory.Logger?.LogInformation("Starting automatic shutdown.");
                             throw;
                         }
@@ -142,7 +228,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
             finally
             {
                 if (token.IsCancellationRequested)
-                    routerFactory.Logger?.LogInformation("Shutting down due to cancelation request.");
+                    routerFactory.Logger?.LogInformation(
+                        "Shutting down due to cancelation request."
+                    );
 
                 runningRouters.RemoveAll(IsRouterDead);
                 runningRouters.Clear();

@@ -11,7 +11,10 @@ namespace System.Web.WebPages.Deployment
 {
     internal static class AppDomainHelper
     {
-        public static IDictionary<string, IEnumerable<string>> GetBinAssemblyReferences(string appPath, string configPath)
+        public static IDictionary<string, IEnumerable<string>> GetBinAssemblyReferences(
+            string appPath,
+            string configPath
+        )
         {
             string binDirectory = Path.Combine(appPath, "bin");
             if (!Directory.Exists(binDirectory))
@@ -28,14 +31,22 @@ namespace System.Web.WebPages.Deployment
                     ConfigurationFile = configPath,
                     PrivateBinPath = binDirectory,
                 };
-                appDomain = AppDomain.CreateDomain(typeof(AppDomainHelper).Namespace, AppDomain.CurrentDomain.Evidence, appDomainSetup);
+                appDomain = AppDomain.CreateDomain(
+                    typeof(AppDomainHelper).Namespace,
+                    AppDomain.CurrentDomain.Evidence,
+                    appDomainSetup
+                );
 
                 var type = typeof(RemoteAssemblyLoader);
-                var instance = (RemoteAssemblyLoader)appDomain.CreateInstanceAndUnwrap(type.Assembly.FullName, type.FullName);
+                var instance = (RemoteAssemblyLoader)
+                    appDomain.CreateInstanceAndUnwrap(type.Assembly.FullName, type.FullName);
 
-                return Directory.EnumerateFiles(binDirectory, "*.dll")
-                    .ToDictionary(assemblyPath => assemblyPath,
-                                  assemblyPath => instance.GetReferences(assemblyPath));
+                return Directory
+                    .EnumerateFiles(binDirectory, "*.dll")
+                    .ToDictionary(
+                        assemblyPath => assemblyPath,
+                        assemblyPath => instance.GetReferences(assemblyPath)
+                    );
             }
             finally
             {
@@ -48,13 +59,24 @@ namespace System.Web.WebPages.Deployment
 
         private sealed class RemoteAssemblyLoader : MarshalByRefObject
         {
-            [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Method needs to be instance level for cross domain invocation"),
-             SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFrom",
-                 Justification = "We want to load this specific assembly.")]
+            [
+                SuppressMessage(
+                    "Microsoft.Performance",
+                    "CA1822:MarkMembersAsStatic",
+                    Justification = "Method needs to be instance level for cross domain invocation"
+                ),
+                SuppressMessage(
+                    "Microsoft.Reliability",
+                    "CA2001:AvoidCallingProblematicMethods",
+                    MessageId = "System.Reflection.Assembly.LoadFrom",
+                    Justification = "We want to load this specific assembly."
+                )
+            ]
             public IEnumerable<string> GetReferences(string assemblyPath)
             {
                 var assembly = Assembly.LoadFrom(assemblyPath);
-                return assembly.GetReferencedAssemblies()
+                return assembly
+                    .GetReferencedAssemblies()
                     .Select(asmName => Assembly.Load(asmName.FullName).FullName)
                     .Concat(new[] { assembly.FullName })
                     .ToArray();

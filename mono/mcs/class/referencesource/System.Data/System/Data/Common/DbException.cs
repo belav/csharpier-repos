@@ -6,24 +6,27 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.Common {
-
+namespace System.Data.Common
+{
     [Serializable]
-    public abstract class DbException : System.Runtime.InteropServices.ExternalException {
+    public abstract class DbException : System.Runtime.InteropServices.ExternalException
+    {
+        protected DbException()
+            : base() { }
 
-        protected DbException() : base() {
-        }
+        protected DbException(System.String message)
+            : base(message) { }
 
-        protected DbException(System.String message) : base(message) {
-        }
+        protected DbException(System.String message, System.Exception innerException)
+            : base(message, innerException) { }
 
-        protected DbException(System.String message, System.Exception innerException) : base(message, innerException) {
-        }
+        protected DbException(System.String message, System.Int32 errorCode)
+            : base(message, errorCode) { }
 
-        protected DbException(System.String message, System.Int32 errorCode) : base(message, errorCode) {
-        }
-
-        protected DbException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context) {
-        }
+        protected DbException(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        )
+            : base(info, context) { }
     }
 }

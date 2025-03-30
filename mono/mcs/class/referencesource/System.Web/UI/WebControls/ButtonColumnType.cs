@@ -1,16 +1,15 @@
 //------------------------------------------------------------------------------
 // <copyright file="ButtonColumnType.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
-
 
     /// <devdoc>
     ///    <para>
@@ -18,9 +17,8 @@ namespace System.Web.UI.WebControls {
     ///       column.
     ///    </para>
     /// </devdoc>
-    public enum ButtonColumnType {
-
-
+    public enum ButtonColumnType
+    {
         /// <devdoc>
         ///    <para>
         ///       A
@@ -29,10 +27,9 @@ namespace System.Web.UI.WebControls {
         /// </devdoc>
         LinkButton = 0,
 
-
         /// <devdoc>
         ///    <para> A column of push buttons.</para>
         /// </devdoc>
-        PushButton = 1
+        PushButton = 1,
     }
 }

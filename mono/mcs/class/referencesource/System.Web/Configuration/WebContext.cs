@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
     using System.Configuration;
     using System.Security.Permissions;
@@ -16,41 +17,39 @@ namespace System.Web.Configuration {
     public sealed class WebContext
     {
         private WebApplicationLevel _pathLevel;
-        private string              _site;
-        private string              _applicationPath;
-        private string              _path;
-        private string              _locationSubPath;
-        private string              _appConfigPath;
+        private string _site;
+        private string _applicationPath;
+        private string _path;
+        private string _locationSubPath;
+        private string _appConfigPath;
 
         // Constructor
         //
-        // 
+        //
 
-
-        public WebContext( WebApplicationLevel pathLevel,
-                           string              site,
-                           string              applicationPath,
-                           string              path,
-                           string              locationSubPath,
-                           string              appConfigPath )
+        public WebContext(
+            WebApplicationLevel pathLevel,
+            string site,
+            string applicationPath,
+            string path,
+            string locationSubPath,
+            string appConfigPath
+        )
         {
-            _pathLevel       = pathLevel;
-            _site            = site;
+            _pathLevel = pathLevel;
+            _site = site;
             _applicationPath = applicationPath;
-            _path            = path;
+            _path = path;
             _locationSubPath = locationSubPath;
-            _appConfigPath   = appConfigPath;
+            _appConfigPath = appConfigPath;
         }
-        
+
         //
         // Retrieve the WebApplicationLevel we are being evaluated at
         //
         public WebApplicationLevel ApplicationLevel
-        { 
-            get
-            {
-                return _pathLevel;
-            }
+        {
+            get { return _pathLevel; }
         }
 
         // Site
@@ -59,12 +58,9 @@ namespace System.Web.Configuration {
         //
         public string Site
         {
-            get
-            {
-                return _site;
-            }
+            get { return _site; }
         }
-        
+
         // ApplicationPath
         //
         // What is the Application Path for the Application we are
@@ -76,10 +72,7 @@ namespace System.Web.Configuration {
         //
         public string ApplicationPath
         {
-            get
-            {
-                return _applicationPath;
-            }
+            get { return _applicationPath; }
         }
 
         // Path
@@ -88,10 +81,7 @@ namespace System.Web.Configuration {
         //
         public string Path
         {
-            get
-            {
-                return _path;
-            }
+            get { return _path; }
         }
 
         // LocationSubPath
@@ -104,20 +94,18 @@ namespace System.Web.Configuration {
         //   null - no associated location sub path.
         //          (This is still the case for ".", "" and it not being
         //          specified in the xml file)
-        //   string - The location path from the config file, after 
+        //   string - The location path from the config file, after
         //            normalization
         //
         public string LocationSubPath
         {
-            get
-            {
-                return _locationSubPath;
-            }
+            get { return _locationSubPath; }
         }
 
         // WOS 1955773: (Perf) 4,000 location sections in web.config file degrades working set
         // Hack: this is the only way to get this to System.Configuration.BaseConfigurationRecord without introducing a new public API.
-        public override string ToString() {
+        public override string ToString()
+        {
             return _appConfigPath;
         }
     }

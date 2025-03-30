@@ -13,7 +13,10 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    public readonly partial struct SeparatedSyntaxList<TNode> : IEquatable<SeparatedSyntaxList<TNode>>, IReadOnlyList<TNode> where TNode : SyntaxNode
+    public readonly partial struct SeparatedSyntaxList<TNode>
+        : IEquatable<SeparatedSyntaxList<TNode>>,
+            IReadOnlyList<TNode>
+        where TNode : SyntaxNode
     {
         private readonly SyntaxNodeOrTokenList _list;
         private readonly int _count;
@@ -52,32 +55,21 @@ namespace Microsoft.CodeAnalysis
         }
 
         internal SeparatedSyntaxList(SyntaxNode node, int index)
-            : this(new SyntaxNodeOrTokenList(node, index))
-        {
-        }
+            : this(new SyntaxNodeOrTokenList(node, index)) { }
 
         internal SyntaxNode? Node
         {
-            get
-            {
-                return _list.Node;
-            }
+            get { return _list.Node; }
         }
 
         public int Count
         {
-            get
-            {
-                return _count;
-            }
+            get { return _count; }
         }
 
         public int SeparatorCount
         {
-            get
-            {
-                return _separatorCount;
-            }
+            get { return _separatorCount; }
         }
 
         public TNode this[int index]
@@ -123,7 +115,12 @@ namespace Microsoft.CodeAnalysis
                     index = (index << 1) + 1;
                     var green = node.Green.GetRequiredSlot(index);
                     Debug.Assert(green.IsToken);
-                    return new SyntaxToken(node.Parent, green, node.GetChildPosition(index), _list.index + index);
+                    return new SyntaxToken(
+                        node.Parent,
+                        green,
+                        node.GetChildPosition(index),
+                        _list.index + index
+                    );
                 }
             }
 
@@ -155,11 +152,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the string representation of the nodes in this list including separators but not including 
+        /// Returns the string representation of the nodes in this list including separators but not including
         /// the first node's leading trivia and the last node or token's trailing trivia.
         /// </summary>
         /// <returns>
-        /// The string representation of the nodes in this list including separators but not including 
+        /// The string representation of the nodes in this list including separators but not including
         /// the first node's leading trivia and the last node or token's trailing trivia.
         /// </returns>
         public override string ToString()
@@ -168,7 +165,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the full string representation of the nodes in this list including separators, 
+        /// Returns the full string representation of the nodes in this list including separators,
         /// the first node's leading trivia, and the last node or token's trailing trivia.
         /// </summary>
         /// <returns>
@@ -303,12 +300,18 @@ namespace Microsoft.CodeAnalysis
             return _list;
         }
 
-        public static bool operator ==(SeparatedSyntaxList<TNode> left, SeparatedSyntaxList<TNode> right)
+        public static bool operator ==(
+            SeparatedSyntaxList<TNode> left,
+            SeparatedSyntaxList<TNode> right
+        )
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(SeparatedSyntaxList<TNode> left, SeparatedSyntaxList<TNode> right)
+        public static bool operator !=(
+            SeparatedSyntaxList<TNode> left,
+            SeparatedSyntaxList<TNode> right
+        )
         {
             return !left.Equals(right);
         }
@@ -379,7 +382,8 @@ namespace Microsoft.CodeAnalysis
             }
 
             var nodesWithSeps = this.GetWithSeparators();
-            int insertionIndex = index < this.Count ? nodesWithSeps.IndexOf(this[index]) : nodesWithSeps.Count;
+            int insertionIndex =
+                index < this.Count ? nodesWithSeps.IndexOf(this[index]) : nodesWithSeps.Count;
 
             // determine how to deal with separators (commas)
             if (insertionIndex > 0 && insertionIndex < nodesWithSeps.Count)
@@ -398,7 +402,10 @@ namespace Microsoft.CodeAnalysis
                 if (item != null)
                 {
                     // if item before insertion point is a node, add a separator
-                    if (nodesToInsertWithSeparators.Count > 0 || (insertionIndex > 0 && nodesWithSeps[insertionIndex - 1].IsNode))
+                    if (
+                        nodesToInsertWithSeparators.Count > 0
+                        || (insertionIndex > 0 && nodesWithSeps[insertionIndex - 1].IsNode)
+                    )
                     {
                         nodesToInsertWithSeparators.Add(item.Green.CreateSeparator<TNode>(item));
                     }
@@ -408,14 +415,19 @@ namespace Microsoft.CodeAnalysis
             }
 
             // if item after last inserted node is a node, add separator
-            if (insertionIndex < nodesWithSeps.Count && nodesWithSeps[insertionIndex] is { IsNode: true } nodeOrToken)
+            if (
+                insertionIndex < nodesWithSeps.Count
+                && nodesWithSeps[insertionIndex] is { IsNode: true } nodeOrToken
+            )
             {
                 var node = nodesWithSeps[insertionIndex].AsNode();
                 Debug.Assert(node is object);
                 nodesToInsertWithSeparators.Add(node.Green.CreateSeparator<TNode>(node)); // separator
             }
 
-            return new SeparatedSyntaxList<TNode>(nodesWithSeps.InsertRange(insertionIndex, nodesToInsertWithSeparators));
+            return new SeparatedSyntaxList<TNode>(
+                nodesWithSeps.InsertRange(insertionIndex, nodesToInsertWithSeparators)
+            );
         }
 
         private static bool KeepSeparatorWithPreviousNode(in SyntaxToken separator)
@@ -492,7 +504,9 @@ namespace Microsoft.CodeAnalysis
             var index = this.IndexOf(nodeInList);
             if (index >= 0 && index < this.Count)
             {
-                return new SeparatedSyntaxList<TNode>(this.GetWithSeparators().Replace(nodeInList, newNode));
+                return new SeparatedSyntaxList<TNode>(
+                    this.GetWithSeparators().Replace(nodeInList, newNode)
+                );
             }
 
             throw new ArgumentOutOfRangeException(nameof(nodeInList));
@@ -503,7 +517,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="nodeInList">The element to replace.</param>
         /// <param name="newNodes">The new nodes.</param>
-        public SeparatedSyntaxList<TNode> ReplaceRange(TNode nodeInList, IEnumerable<TNode> newNodes)
+        public SeparatedSyntaxList<TNode> ReplaceRange(
+            TNode nodeInList,
+            IEnumerable<TNode> newNodes
+        )
         {
             if (newNodes == null)
             {
@@ -538,7 +555,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="separatorToken">The separator token to be replaced.</param>
         /// <param name="newSeparator">The new separator token.</param>
-        public SeparatedSyntaxList<TNode> ReplaceSeparator(SyntaxToken separatorToken, SyntaxToken newSeparator)
+        public SeparatedSyntaxList<TNode> ReplaceSeparator(
+            SyntaxToken separatorToken,
+            SyntaxToken newSeparator
+        )
         {
             var nodesWithSeps = this.GetWithSeparators();
             var index = nodesWithSeps.IndexOf(separatorToken);
@@ -547,13 +567,17 @@ namespace Microsoft.CodeAnalysis
                 throw new ArgumentException("separatorToken");
             }
 
-            if (newSeparator.RawKind != nodesWithSeps[index].RawKind ||
-                newSeparator.Language != nodesWithSeps[index].Language)
+            if (
+                newSeparator.RawKind != nodesWithSeps[index].RawKind
+                || newSeparator.Language != nodesWithSeps[index].Language
+            )
             {
                 throw new ArgumentException("newSeparator");
             }
 
-            return new SeparatedSyntaxList<TNode>(nodesWithSeps.Replace(separatorToken, newSeparator));
+            return new SeparatedSyntaxList<TNode>(
+                nodesWithSeps.Replace(separatorToken, newSeparator)
+            );
         }
 
         // for debugging
@@ -596,19 +620,26 @@ namespace Microsoft.CodeAnalysis
             return SpecializedCollections.EmptyEnumerator<TNode>();
         }
 
-        public static implicit operator SeparatedSyntaxList<SyntaxNode>(SeparatedSyntaxList<TNode> nodes)
+        public static implicit operator SeparatedSyntaxList<SyntaxNode>(
+            SeparatedSyntaxList<TNode> nodes
+        )
         {
             return new SeparatedSyntaxList<SyntaxNode>(nodes._list);
         }
 
-        [Obsolete("This method is preserved for binary compatibility only. Use explicit cast instead.", error: true)]
+        [Obsolete(
+            "This method is preserved for binary compatibility only. Use explicit cast instead.",
+            error: true
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static SeparatedSyntaxList<TNode> op_Implicit(SeparatedSyntaxList<SyntaxNode> nodes)
         {
             return new SeparatedSyntaxList<TNode>(nodes._list);
         }
 
-        public static explicit operator SeparatedSyntaxList<TNode>(SeparatedSyntaxList<SyntaxNode> nodes)
+        public static explicit operator SeparatedSyntaxList<TNode>(
+            SeparatedSyntaxList<SyntaxNode> nodes
+        )
         {
             return new SeparatedSyntaxList<TNode>(nodes._list);
         }

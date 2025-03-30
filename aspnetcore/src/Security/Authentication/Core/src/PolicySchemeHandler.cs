@@ -21,8 +21,13 @@ public class PolicySchemeHandler : SignInAuthenticationHandler<PolicySchemeOptio
     /// <param name="encoder">The <see cref="UrlEncoder"/>.</param>
     /// <param name="clock">The <see cref="ISystemClock"/>.</param>
     [Obsolete("ISystemClock is obsolete, use TimeProvider on AuthenticationSchemeOptions instead.")]
-    public PolicySchemeHandler(IOptionsMonitor<PolicySchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
-    { }
+    public PolicySchemeHandler(
+        IOptionsMonitor<PolicySchemeOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock
+    )
+        : base(options, logger, encoder, clock) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="PolicySchemeHandler"/>.
@@ -30,26 +35,32 @@ public class PolicySchemeHandler : SignInAuthenticationHandler<PolicySchemeOptio
     /// <param name="options">The monitor for the options instance.</param>
     /// <param name="logger">The <see cref="ILoggerFactory"/>.</param>
     /// <param name="encoder">The <see cref="UrlEncoder"/>.</param>
-    public PolicySchemeHandler(IOptionsMonitor<PolicySchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder) : base(options, logger, encoder)
-    { }
+    public PolicySchemeHandler(
+        IOptionsMonitor<PolicySchemeOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder
+    )
+        : base(options, logger, encoder) { }
 
     /// <inheritdoc />
-    protected override Task HandleChallengeAsync(AuthenticationProperties? properties)
-        => throw new NotImplementedException();
+    protected override Task HandleChallengeAsync(AuthenticationProperties? properties) =>
+        throw new NotImplementedException();
 
     /// <inheritdoc />
-    protected override Task HandleForbiddenAsync(AuthenticationProperties? properties)
-        => throw new NotImplementedException();
+    protected override Task HandleForbiddenAsync(AuthenticationProperties? properties) =>
+        throw new NotImplementedException();
 
     /// <inheritdoc />
-    protected override Task HandleSignInAsync(ClaimsPrincipal user, AuthenticationProperties? properties)
-        => throw new NotImplementedException();
+    protected override Task HandleSignInAsync(
+        ClaimsPrincipal user,
+        AuthenticationProperties? properties
+    ) => throw new NotImplementedException();
 
     /// <inheritdoc />
-    protected override Task HandleSignOutAsync(AuthenticationProperties? properties)
-        => throw new NotImplementedException();
+    protected override Task HandleSignOutAsync(AuthenticationProperties? properties) =>
+        throw new NotImplementedException();
 
     /// <inheritdoc />
-    protected override Task<AuthenticateResult> HandleAuthenticateAsync()
-        => throw new NotImplementedException();
+    protected override Task<AuthenticateResult> HandleAuthenticateAsync() =>
+        throw new NotImplementedException();
 }

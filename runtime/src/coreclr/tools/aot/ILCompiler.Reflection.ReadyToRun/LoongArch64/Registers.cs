@@ -40,6 +40,6 @@ namespace ILCompiler.Reflection.ReadyToRun.LoongArch64
         S5,
         S6,
         S7,
-        S8
+        S8,
     }
 }

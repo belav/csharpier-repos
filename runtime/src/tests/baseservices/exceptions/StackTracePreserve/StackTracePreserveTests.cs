@@ -1,17 +1,18 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
-using System.Threading;
-using System.Runtime.ExceptionServices;
 using System.IO;
+using System.Runtime.ExceptionServices;
 using System.Security;
+using System.Threading;
 using Xunit;
 
 public class InactiveForeignException
 {
     private static ExceptionDispatchInfo s_EDI = null;
-    private static int iPassed = 0, iFailed = 0;
-    
+    private static int iPassed = 0,
+        iFailed = 0;
+
     private static Exception GetInnerException()
     {
         try
@@ -30,7 +31,7 @@ public class InactiveForeignException
         Console.WriteLine("...");
         throw new Exception("E1");
     }
-    
+
     private static void ThrowEntryPoint()
     {
         if (s_EDI == null)
@@ -39,7 +40,7 @@ public class InactiveForeignException
             {
                 ThrowEntryPointInner();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Caught exception with message: {0}", ex.Message);
                 s_EDI = ExceptionDispatchInfo.Capture(ex);
@@ -51,8 +52,7 @@ public class InactiveForeignException
             s_EDI = null;
         }
     }
-    
-    
+
     private static bool Scenario1()
     {
         s_EDI = null;
@@ -61,20 +61,20 @@ public class InactiveForeignException
         Thread t1 = new Thread(new ThreadStart(ThrowEntryPoint));
         t1.Start();
         t1.Join();
-        
+
         bool fPassed = false;
         if (s_EDI == null)
         {
             Console.WriteLine("s_EDI shouldn't be null!");
             goto exit;
         }
-        
+
         // ThrowAndCatch the exception
         try
         {
             s_EDI.Throw();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             string stackTrace = ex.StackTrace;
             if (stackTrace.IndexOf("ThrowEntryPoint") == -1)
@@ -88,41 +88,40 @@ public class InactiveForeignException
                 fPassed = true;
             }
         }
-exit:   
+        exit:
         Console.WriteLine("");
         return fPassed;
     }
-    
+
     private static void Scenario2Helper()
     {
-            try
-            {
-                s_EDI.Throw();
-            }
-            catch(Exception)
-            {
-                Console.WriteLine("Rethrowing caught exception..");
-                throw;
-            }
+        try
+        {
+            s_EDI.Throw();
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("Rethrowing caught exception..");
+            throw;
+        }
     }
-    
-    
+
     private static bool Scenario2(bool fShouldLetGoUnhandled)
     {
         s_EDI = null;
-        
+
         Console.WriteLine("\nScenario2");
         Thread t1 = new Thread(new ThreadStart(ThrowEntryPoint));
         t1.Start();
         t1.Join();
-        
+
         bool fPassed = false;
         if (s_EDI == null)
         {
             Console.WriteLine("s_EDI shouldn't be null!");
             goto exit;
         }
-        
+
         if (!fShouldLetGoUnhandled)
         {
             // ThrowRethrowAndCatch the exception
@@ -130,11 +129,13 @@ exit:
             {
                 Scenario2Helper();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 string stackTrace = ex.StackTrace;
-                if ((stackTrace.IndexOf("ThrowEntryPoint") == -1) || 
-                    (stackTrace.IndexOf("Scenario2Helper") == -1))
+                if (
+                    (stackTrace.IndexOf("ThrowEntryPoint") == -1)
+                    || (stackTrace.IndexOf("Scenario2Helper") == -1)
+                )
                 {
                     Console.WriteLine("FAILED - unable to find expected stackTrace");
                 }
@@ -151,7 +152,7 @@ exit:
             // ThrowRethrowAndUnhandled exception
             Scenario2Helper();
         }
-exit:        
+        exit:
         Console.WriteLine("");
         return fPassed;
     }
@@ -197,9 +198,11 @@ exit:
         catch (Exception ex)
         {
             string stackTrace = ex.StackTrace;
-            if ((stackTrace.IndexOf("ThrowEntryPoint") == -1) ||
-                (stackTrace.IndexOf("Scenario2Helper") == -1) ||
-                (stackTrace.IndexOf("Scenario3Helper") == -1))
+            if (
+                (stackTrace.IndexOf("ThrowEntryPoint") == -1)
+                || (stackTrace.IndexOf("Scenario2Helper") == -1)
+                || (stackTrace.IndexOf("Scenario3Helper") == -1)
+            )
             {
                 Console.WriteLine("FAILED - unable to find expected stackTrace");
             }
@@ -210,7 +213,7 @@ exit:
                 fPassed = true;
             }
         }
-    exit:
+        exit:
         Console.WriteLine("");
         return fPassed;
     }
@@ -260,7 +263,6 @@ exit:
         }
     }
 
-
     private static bool Scenario4()
     {
         s_EDI = null;
@@ -288,10 +290,11 @@ exit:
         catch (Exception ex)
         {
             string stackTrace = ex.StackTrace;
-            if ((stackTrace.IndexOf("ThrowEntryPointNestedHelper") == -1) ||
-                (stackTrace.IndexOf("Scenario4") == -1) ||
-                (stackTrace.IndexOf("ThrowEntryPoint2") != -1))
-
+            if (
+                (stackTrace.IndexOf("ThrowEntryPointNestedHelper") == -1)
+                || (stackTrace.IndexOf("Scenario4") == -1)
+                || (stackTrace.IndexOf("ThrowEntryPoint2") != -1)
+            )
             {
                 Console.WriteLine("FAILED - unable to find expected stackTrace");
             }
@@ -302,11 +305,10 @@ exit:
                 fPassed = true;
             }
         }
-    exit:
+        exit:
         Console.WriteLine("");
         return fPassed;
     }
-
 
     // Use EDI to throw exception during EH dispatch on the same
     // thread for the same exception instance.
@@ -321,20 +323,21 @@ exit:
         {
             try
             {
-                  ThrowEntryPointInner();
+                ThrowEntryPointInner();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 edi = ExceptionDispatchInfo.Capture(ex);
                 edi.Throw();
             }
         }
-        catch(Exception exOuter)
+        catch (Exception exOuter)
         {
             string stackTrace = exOuter.StackTrace;
-            if ((stackTrace.IndexOf("ThrowEntryPointInner") == -1) ||
-                (stackTrace.IndexOf("Scenario5") == -1))
-
+            if (
+                (stackTrace.IndexOf("ThrowEntryPointInner") == -1)
+                || (stackTrace.IndexOf("Scenario5") == -1)
+            )
             {
                 Console.WriteLine("FAILED - unable to find expected stackTrace");
             }
@@ -349,12 +352,12 @@ exit:
         return fPassed;
     }
 
-        // Use EDI to throw an unthrown exception.
+    // Use EDI to throw an unthrown exception.
     private static bool Scenario6()
     {
         bool fPassed = false;
         ExceptionDispatchInfo edi = null;
-        
+
         Console.WriteLine("\nScenario6");
 
         try
@@ -362,11 +365,10 @@ exit:
             edi = ExceptionDispatchInfo.Capture(new Exception("Unthrown exception"));
             edi.Throw();
         }
-        catch(Exception exOuter)
+        catch (Exception exOuter)
         {
             string stackTrace = exOuter.StackTrace;
             if ((stackTrace.IndexOf("Scenario6") == -1))
-
             {
                 Console.WriteLine("FAILED - unable to find expected stackTrace");
             }
@@ -380,32 +382,31 @@ exit:
 
         return fPassed;
     }
-    
+
     // Scenario 7 - Attempt to create EDI using a null reference throws
     // ArgumentNullException.
     private static bool Scenario7()
     {
         bool fPassed = false;
         Console.WriteLine("\nScenario7");
-        
-        try{
-            try{
+
+        try
+        {
+            try
+            {
                 ExceptionDispatchInfo edi = ExceptionDispatchInfo.Capture(null);
             }
-            catch(ArgumentNullException)
+            catch (ArgumentNullException)
             {
                 fPassed = true;
             }
         }
-        catch(Exception)
-        {
-        }
-        
-        Console.WriteLine("{0}", (fPassed)?"Passed":"Failed");
-        
+        catch (Exception) { }
+
+        Console.WriteLine("{0}", (fPassed) ? "Passed" : "Failed");
+
         return fPassed;
     }
-    
 
     private static void Scenario9HelperInner()
     {
@@ -449,7 +450,8 @@ exit:
             goto exit;
         }
 
-        string s1 = null, s2 = null;
+        string s1 = null,
+            s2 = null;
         try
         {
             Scenario9Helper();
@@ -471,13 +473,16 @@ exit:
 
         // S1 should have Scenario9HelperInner, Scenario9Helper and Scenario9 frames, in addition to the original frames.
         // S2 should have Scenario9 frame, in addition to the original frames.
-        if ((s1.IndexOf("Scenario9HelperInner") == -1) || (s1.IndexOf("Scenario9Helper") == -1) ||
-            (s2.IndexOf("Scenario9HelperInner") != -1) || (s2.IndexOf("Scenario9Helper") != -1))
+        if (
+            (s1.IndexOf("Scenario9HelperInner") == -1)
+            || (s1.IndexOf("Scenario9Helper") == -1)
+            || (s2.IndexOf("Scenario9HelperInner") != -1)
+            || (s2.IndexOf("Scenario9Helper") != -1)
+        )
         {
             Console.WriteLine("S1: {0}\n", s1);
             Console.WriteLine("S2: {0}", s2);
             Console.WriteLine("FAILED");
-
         }
         else
         {
@@ -487,7 +492,7 @@ exit:
             fPassed = true;
         }
 
-    exit:
+        exit:
         Console.WriteLine("");
         return fPassed;
     }
@@ -497,17 +502,14 @@ exit:
         if (fPassed)
             iPassed++;
         else
-            iFailed++;   
-
+            iFailed++;
     }
 
-    
     [Fact]
     public static int TestEntryPoint()
     {
         iPassed = iFailed = 0;
 
-        
         ProcessStatus(Scenario1());
         ProcessStatus(Scenario2(false));
         ProcessStatus(Scenario3());
@@ -516,16 +518,12 @@ exit:
         ProcessStatus(Scenario6());
         ProcessStatus(Scenario7());
         ProcessStatus(Scenario9());
-        
-
 
         // This is the unhandled exception case
         //ProcessStatus(Scenario2(true));
 
-
         Console.WriteLine("\nPassed: {0}\nFailed: {1}", iPassed, iFailed);
 
-        return ((iFailed == 0) && (iPassed > 0))?100:99;
-        
+        return ((iFailed == 0) && (iPassed > 0)) ? 100 : 99;
     }
 }

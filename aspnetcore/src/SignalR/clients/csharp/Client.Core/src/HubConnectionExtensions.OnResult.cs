@@ -9,15 +9,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Shared;
 
 namespace Microsoft.AspNetCore.SignalR.Client;
+
 public static partial class HubConnectionExtensions
 {
-    private static IDisposable On<TResult>(this HubConnection hubConnection, string methodName, Type[] parameterTypes, Func<object?[], TResult> handler)
+    private static IDisposable On<TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Type[] parameterTypes,
+        Func<object?[], TResult> handler
+    )
     {
-        return hubConnection.On(methodName, parameterTypes, static (parameters, state) =>
-        {
-            var currentHandler = (Func<object?[], TResult>)state;
-            return Task.FromResult<object?>(currentHandler(parameters));
-        }, handler);
+        return hubConnection.On(
+            methodName,
+            parameterTypes,
+            static (parameters, state) =>
+            {
+                var currentHandler = (Func<object?[], TResult>)state;
+                return Task.FromResult<object?>(currentHandler(parameters));
+            },
+            handler
+        );
     }
 
     /// <summary>
@@ -30,13 +41,23 @@ public static partial class HubConnectionExtensions
     /// <param name="parameterTypes">The parameters types expected by the hub method.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<TResult>(this HubConnection hubConnection, string methodName, Type[] parameterTypes, Func<object?[], Task<TResult>> handler)
+    public static IDisposable On<TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Type[] parameterTypes,
+        Func<object?[], Task<TResult>> handler
+    )
     {
-        return hubConnection.On(methodName, parameterTypes, static async (parameters, state) =>
-        {
-            var currentHandler = (Func<object?[], Task<TResult>>)state;
-            return await currentHandler(parameters).ConfigureAwait(false);
-        }, handler);
+        return hubConnection.On(
+            methodName,
+            parameterTypes,
+            static async (parameters, state) =>
+            {
+                var currentHandler = (Func<object?[], Task<TResult>>)state;
+                return await currentHandler(parameters).ConfigureAwait(false);
+            },
+            handler
+        );
     }
 
     /// <summary>
@@ -48,7 +69,11 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<TResult>(this HubConnection hubConnection, string methodName, Func<Task<TResult>> handler)
+    public static IDisposable On<TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<Task<TResult>> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
@@ -64,7 +89,11 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<TResult>(this HubConnection hubConnection, string methodName, Func<TResult> handler)
+    public static IDisposable On<TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<TResult> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
@@ -81,13 +110,15 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, TResult>(this HubConnection hubConnection, string methodName, Func<T1, TResult> handler)
+    public static IDisposable On<T1, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, TResult> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
-            new[] { typeof(T1) },
-            args => handler((T1)args[0]!));
+        return hubConnection.On(methodName, new[] { typeof(T1) }, args => handler((T1)args[0]!));
     }
 
     /// <summary>
@@ -101,13 +132,19 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, T2, TResult>(this HubConnection hubConnection, string methodName, Func<T1, T2, TResult> handler)
+    public static IDisposable On<T1, T2, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, T2, TResult> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
+        return hubConnection.On(
+            methodName,
             new[] { typeof(T1), typeof(T2) },
-            args => handler((T1)args[0]!, (T2)args[1]!));
+            args => handler((T1)args[0]!, (T2)args[1]!)
+        );
     }
 
     /// <summary>
@@ -122,13 +159,19 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, T2, T3, TResult>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, TResult> handler)
+    public static IDisposable On<T1, T2, T3, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, T2, T3, TResult> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
+        return hubConnection.On(
+            methodName,
             new[] { typeof(T1), typeof(T2), typeof(T3) },
-            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!));
+            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!)
+        );
     }
 
     /// <summary>
@@ -144,13 +187,19 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, T2, T3, T4, TResult>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, T4, TResult> handler)
+    public static IDisposable On<T1, T2, T3, T4, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, T2, T3, T4, TResult> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
+        return hubConnection.On(
+            methodName,
             new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) },
-            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!));
+            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!)
+        );
     }
 
     /// <summary>
@@ -167,13 +216,19 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, T2, T3, T4, T5, TResult>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, T4, T5, TResult> handler)
+    public static IDisposable On<T1, T2, T3, T4, T5, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, T2, T3, T4, T5, TResult> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
+        return hubConnection.On(
+            methodName,
             new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) },
-            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!));
+            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!)
+        );
     }
 
     /// <summary>
@@ -191,13 +246,27 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, T2, T3, T4, T5, T6, TResult>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, T4, T5, T6, TResult> handler)
+    public static IDisposable On<T1, T2, T3, T4, T5, T6, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, T2, T3, T4, T5, T6, TResult> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
+        return hubConnection.On(
+            methodName,
             new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6) },
-            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!, (T6)args[5]!));
+            args =>
+                handler(
+                    (T1)args[0]!,
+                    (T2)args[1]!,
+                    (T3)args[2]!,
+                    (T4)args[3]!,
+                    (T5)args[4]!,
+                    (T6)args[5]!
+                )
+        );
     }
 
     /// <summary>
@@ -216,13 +285,37 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, T2, T3, T4, T5, T6, T7, TResult>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, T4, T5, T6, T7, TResult> handler)
+    public static IDisposable On<T1, T2, T3, T4, T5, T6, T7, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, T2, T3, T4, T5, T6, T7, TResult> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
-            new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7) },
-            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!, (T6)args[5]!, (T7)args[6]!));
+        return hubConnection.On(
+            methodName,
+            new[]
+            {
+                typeof(T1),
+                typeof(T2),
+                typeof(T3),
+                typeof(T4),
+                typeof(T5),
+                typeof(T6),
+                typeof(T7),
+            },
+            args =>
+                handler(
+                    (T1)args[0]!,
+                    (T2)args[1]!,
+                    (T3)args[2]!,
+                    (T4)args[3]!,
+                    (T5)args[4]!,
+                    (T6)args[5]!,
+                    (T7)args[6]!
+                )
+        );
     }
 
     /// <summary>
@@ -242,13 +335,39 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> handler)
+    public static IDisposable On<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, T2, T3, T4, T5, T6, T7, T8, TResult> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
-            new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8) },
-            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!, (T6)args[5]!, (T7)args[6]!, (T8)args[7]!));
+        return hubConnection.On(
+            methodName,
+            new[]
+            {
+                typeof(T1),
+                typeof(T2),
+                typeof(T3),
+                typeof(T4),
+                typeof(T5),
+                typeof(T6),
+                typeof(T7),
+                typeof(T8),
+            },
+            args =>
+                handler(
+                    (T1)args[0]!,
+                    (T2)args[1]!,
+                    (T3)args[2]!,
+                    (T4)args[3]!,
+                    (T5)args[4]!,
+                    (T6)args[5]!,
+                    (T7)args[6]!,
+                    (T8)args[7]!
+                )
+        );
     }
 
     /// <summary>
@@ -261,13 +380,15 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, TResult>(this HubConnection hubConnection, string methodName, Func<T1, Task<TResult>> handler)
+    public static IDisposable On<T1, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, Task<TResult>> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
-            new[] { typeof(T1) },
-            args => handler((T1)args[0]!));
+        return hubConnection.On(methodName, new[] { typeof(T1) }, args => handler((T1)args[0]!));
     }
 
     /// <summary>
@@ -281,13 +402,19 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, T2, TResult>(this HubConnection hubConnection, string methodName, Func<T1, T2, Task<TResult>> handler)
+    public static IDisposable On<T1, T2, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, T2, Task<TResult>> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
+        return hubConnection.On(
+            methodName,
             new[] { typeof(T1), typeof(T2) },
-            args => handler((T1)args[0]!, (T2)args[1]!));
+            args => handler((T1)args[0]!, (T2)args[1]!)
+        );
     }
 
     /// <summary>
@@ -302,13 +429,19 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, T2, T3, TResult>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, Task<TResult>> handler)
+    public static IDisposable On<T1, T2, T3, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, T2, T3, Task<TResult>> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
+        return hubConnection.On(
+            methodName,
             new[] { typeof(T1), typeof(T2), typeof(T3) },
-            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!));
+            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!)
+        );
     }
 
     /// <summary>
@@ -324,13 +457,19 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, T2, T3, T4, TResult>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, T4, Task<TResult>> handler)
+    public static IDisposable On<T1, T2, T3, T4, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, T2, T3, T4, Task<TResult>> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
+        return hubConnection.On(
+            methodName,
             new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) },
-            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!));
+            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!)
+        );
     }
 
     /// <summary>
@@ -347,13 +486,19 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, T2, T3, T4, T5, TResult>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, T4, T5, Task<TResult>> handler)
+    public static IDisposable On<T1, T2, T3, T4, T5, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, T2, T3, T4, T5, Task<TResult>> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
+        return hubConnection.On(
+            methodName,
             new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) },
-            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!));
+            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!)
+        );
     }
 
     /// <summary>
@@ -371,13 +516,27 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, T2, T3, T4, T5, T6, TResult>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, T4, T5, T6, Task<TResult>> handler)
+    public static IDisposable On<T1, T2, T3, T4, T5, T6, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, T2, T3, T4, T5, T6, Task<TResult>> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
+        return hubConnection.On(
+            methodName,
             new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6) },
-            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!, (T6)args[5]!));
+            args =>
+                handler(
+                    (T1)args[0]!,
+                    (T2)args[1]!,
+                    (T3)args[2]!,
+                    (T4)args[3]!,
+                    (T5)args[4]!,
+                    (T6)args[5]!
+                )
+        );
     }
 
     /// <summary>
@@ -396,13 +555,37 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, T2, T3, T4, T5, T6, T7, TResult>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, T4, T5, T6, T7, Task<TResult>> handler)
+    public static IDisposable On<T1, T2, T3, T4, T5, T6, T7, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, T2, T3, T4, T5, T6, T7, Task<TResult>> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
-            new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7) },
-            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!, (T6)args[5]!, (T7)args[6]!));
+        return hubConnection.On(
+            methodName,
+            new[]
+            {
+                typeof(T1),
+                typeof(T2),
+                typeof(T3),
+                typeof(T4),
+                typeof(T5),
+                typeof(T6),
+                typeof(T7),
+            },
+            args =>
+                handler(
+                    (T1)args[0]!,
+                    (T2)args[1]!,
+                    (T3)args[2]!,
+                    (T4)args[3]!,
+                    (T5)args[4]!,
+                    (T6)args[5]!,
+                    (T7)args[6]!
+                )
+        );
     }
 
     /// <summary>
@@ -422,12 +605,38 @@ public static partial class HubConnectionExtensions
     /// <param name="methodName">The name of the hub method to define.</param>
     /// <param name="handler">The handler that will be raised when the hub method is invoked.</param>
     /// <returns>A subscription that can be disposed to unsubscribe from the hub method.</returns>
-    public static IDisposable On<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(this HubConnection hubConnection, string methodName, Func<T1, T2, T3, T4, T5, T6, T7, T8, Task<TResult>> handler)
+    public static IDisposable On<T1, T2, T3, T4, T5, T6, T7, T8, TResult>(
+        this HubConnection hubConnection,
+        string methodName,
+        Func<T1, T2, T3, T4, T5, T6, T7, T8, Task<TResult>> handler
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(hubConnection);
 
-        return hubConnection.On(methodName,
-            new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5), typeof(T6), typeof(T7), typeof(T8) },
-            args => handler((T1)args[0]!, (T2)args[1]!, (T3)args[2]!, (T4)args[3]!, (T5)args[4]!, (T6)args[5]!, (T7)args[6]!, (T8)args[7]!));
+        return hubConnection.On(
+            methodName,
+            new[]
+            {
+                typeof(T1),
+                typeof(T2),
+                typeof(T3),
+                typeof(T4),
+                typeof(T5),
+                typeof(T6),
+                typeof(T7),
+                typeof(T8),
+            },
+            args =>
+                handler(
+                    (T1)args[0]!,
+                    (T2)args[1]!,
+                    (T3)args[2]!,
+                    (T4)args[3]!,
+                    (T5)args[4]!,
+                    (T6)args[5]!,
+                    (T7)args[6]!,
+                    (T8)args[7]!
+                )
+        );
     }
 }

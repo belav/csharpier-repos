@@ -25,12 +25,22 @@ namespace JIT.HardwareIntrinsics.X86
 
         private ulong alignment;
 
-        public SimpleBinaryOpTest__DataTable(TOp1[] inArray1, TOp2[] inArray2, TResult[] outArray, int alignment)
+        public SimpleBinaryOpTest__DataTable(
+            TOp1[] inArray1,
+            TOp2[] inArray2,
+            TResult[] outArray,
+            int alignment
+        )
         {
             int sizeOfinArray1 = inArray1.Length * Unsafe.SizeOf<TOp1>();
             int sizeOfinArray2 = inArray2.Length * Unsafe.SizeOf<TOp2>();
             int sizeOfoutArray = outArray.Length * Unsafe.SizeOf<TResult>();
-            if (((alignment != 64) && (alignment != 32) && (alignment != 16)) || (alignment * 2) < sizeOfinArray1 || (alignment * 2) < sizeOfinArray2 || (alignment * 2) < sizeOfoutArray)
+            if (
+                ((alignment != 64) && (alignment != 32) && (alignment != 16))
+                || (alignment * 2) < sizeOfinArray1
+                || (alignment * 2) < sizeOfinArray2
+                || (alignment * 2) < sizeOfoutArray
+            )
             {
                 throw new ArgumentException("Invalid value of alignment");
             }
@@ -45,13 +55,24 @@ namespace JIT.HardwareIntrinsics.X86
 
             this.alignment = (ulong)alignment;
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray1Ptr), ref Unsafe.As<TOp1, byte>(ref inArray1[0]), (uint)sizeOfinArray1);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArray2Ptr), ref Unsafe.As<TOp2, byte>(ref inArray2[0]), (uint)sizeOfinArray2);
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.AsRef<byte>(inArray1Ptr),
+                ref Unsafe.As<TOp1, byte>(ref inArray1[0]),
+                (uint)sizeOfinArray1
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.AsRef<byte>(inArray2Ptr),
+                ref Unsafe.As<TOp2, byte>(ref inArray2[0]),
+                (uint)sizeOfinArray2
+            );
         }
 
-        public void* inArray1Ptr => Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
-        public void* inArray2Ptr => Align((byte*)(inHandle2.AddrOfPinnedObject().ToPointer()), alignment);
-        public void* outArrayPtr => Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
+        public void* inArray1Ptr =>
+            Align((byte*)(inHandle1.AddrOfPinnedObject().ToPointer()), alignment);
+        public void* inArray2Ptr =>
+            Align((byte*)(inHandle2.AddrOfPinnedObject().ToPointer()), alignment);
+        public void* outArrayPtr =>
+            Align((byte*)(outHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
         public void Dispose()
         {

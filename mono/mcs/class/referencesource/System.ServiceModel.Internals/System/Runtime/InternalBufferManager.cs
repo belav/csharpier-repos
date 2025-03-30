@@ -6,7 +6,6 @@ namespace System.Runtime
     using System;
     using System.Collections.Generic;
     using System.Threading;
-
 #if DEBUG
     using System.Collections.Concurrent;
     using System.Diagnostics;
@@ -17,9 +16,7 @@ namespace System.Runtime
 
     abstract class InternalBufferManager
     {
-        protected InternalBufferManager()
-        {
-        }
+        protected InternalBufferManager() { }
 
         public abstract byte[] TakeBuffer(int bufferSize);
         public abstract void ReturnBuffer(byte[] buffer);
@@ -33,7 +30,10 @@ namespace System.Runtime
             }
             else
             {
-                Fx.Assert(maxBufferPoolSize > 0 && maxBufferSize >= 0, "bad params, caller should verify");
+                Fx.Assert(
+                    maxBufferPoolSize > 0 && maxBufferSize >= 0,
+                    "bad params, caller should verify"
+                );
                 return new PooledBufferManager(maxBufferPoolSize, maxBufferSize);
             }
         }
@@ -52,7 +52,8 @@ namespace System.Runtime
             bool areQuotasBeingTuned;
             int totalMisses;
 #if DEBUG
-            ConcurrentDictionary<int, string> buffersPooled = new ConcurrentDictionary<int, string>();
+            ConcurrentDictionary<int, string> buffersPooled =
+                new ConcurrentDictionary<int, string>();
 #endif //DEBUG
 
             public PooledBufferManager(long maxMemoryToPool, int maxBufferSize)
@@ -62,11 +63,12 @@ namespace System.Runtime
                 this.remainingMemory = maxMemoryToPool;
                 List<BufferPool> bufferPoolList = new List<BufferPool>();
 
-                for (int bufferSize = minBufferSize;;)
+                for (int bufferSize = minBufferSize; ; )
                 {
                     long bufferCountLong = this.remainingMemory / bufferSize;
 
-                    int bufferCount = bufferCountLong > int.MaxValue ? int.MaxValue : (int)bufferCountLong;
+                    int bufferCount =
+                        bufferCountLong > int.MaxValue ? int.MaxValue : (int)bufferCountLong;
 
                     if (bufferCount > initialBufferCount)
                     {
@@ -117,7 +119,6 @@ namespace System.Runtime
 
             void ChangeQuota(ref BufferPool bufferPool, int delta)
             {
-
                 if (TraceCore.BufferPoolChangeQuotaIsEnabled(Fx.Trace))
                 {
                     TraceCore.BufferPoolChangeQuota(Fx.Trace, bufferPool.BufferSize, delta);
@@ -125,7 +126,10 @@ namespace System.Runtime
 
                 BufferPool oldBufferPool = bufferPool;
                 int newLimit = oldBufferPool.Limit + delta;
-                BufferPool newBufferPool = BufferPool.CreatePool(oldBufferPool.BufferSize, newLimit);
+                BufferPool newBufferPool = BufferPool.CreatePool(
+                    oldBufferPool.BufferSize,
+                    newLimit
+                );
                 for (int i = 0; i < newLimit; i++)
                 {
                     byte[] buffer = oldBufferPool.Take();
@@ -156,7 +160,8 @@ namespace System.Runtime
 
                     if (bufferPool.Peak < bufferPool.Limit)
                     {
-                        long bytesInExcess = (bufferPool.Limit - bufferPool.Peak) * (long)bufferPool.BufferSize;
+                        long bytesInExcess =
+                            (bufferPool.Limit - bufferPool.Peak) * (long)bufferPool.BufferSize;
 
                         if (bytesInExcess > maxBytesInExcess)
                         {
@@ -231,8 +236,9 @@ namespace System.Runtime
                             "Buffer '{0}' has already been returned to the bufferManager before. Previous CallStack: {1} Current CallStack: {2}",
                             hash,
                             originalStack,
-                            CaptureStackTrace()));
-
+                            CaptureStackTrace()
+                        )
+                    );
                 }
 #endif //DEBUG
 
@@ -241,7 +247,10 @@ namespace System.Runtime
                 {
                     if (buffer.Length != bufferPool.BufferSize)
                     {
-                        throw Fx.Exception.Argument("buffer", InternalSR.BufferIsNotRightSizeForBufferManager);
+                        throw Fx.Exception.Argument(
+                            "buffer",
+                            InternalSR.BufferIsNotRightSizeForBufferManager
+                        );
                     }
 
                     if (bufferPool.Return(buffer))
@@ -444,9 +453,9 @@ namespace System.Runtime
                 internal static BufferPool CreatePool(int bufferSize, int limit)
                 {
                     // To avoid many buffer drops during training of large objects which
-                    // get allocated on the LOH, we use the LargeBufferPool and for 
+                    // get allocated on the LOH, we use the LargeBufferPool and for
                     // bufferSize < 85000, the SynchronizedPool. However if bufferSize < 85000
-                    // and (bufferSize + array-overhead) > 85000, this would still use 
+                    // and (bufferSize + array-overhead) > 85000, this would still use
                     // the SynchronizedPool even though it is allocated on the LOH.
                     if (bufferSize < 85000)
                     {
@@ -496,10 +505,7 @@ namespace System.Runtime
 
                     object ThisLock
                     {
-                        get
-                        {
-                            return this.items;
-                        }
+                        get { return this.items; }
                     }
 
                     internal override void OnClear()
@@ -544,18 +550,14 @@ namespace System.Runtime
         {
             static GCBufferManager value = new GCBufferManager();
 
-            GCBufferManager()
-            {
-            }
+            GCBufferManager() { }
 
             public static GCBufferManager Value
             {
                 get { return value; }
             }
 
-            public override void Clear()
-            {
-            }
+            public override void Clear() { }
 
             public override byte[] TakeBuffer(int bufferSize)
             {

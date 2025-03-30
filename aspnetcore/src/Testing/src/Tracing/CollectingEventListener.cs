@@ -10,11 +10,15 @@ namespace Microsoft.AspNetCore.InternalTesting.Tracing;
 
 public class CollectingEventListener : EventListener
 {
-    private readonly ConcurrentQueue<EventWrittenEventArgs> _events = new ConcurrentQueue<EventWrittenEventArgs>();
+    private readonly ConcurrentQueue<EventWrittenEventArgs> _events =
+        new ConcurrentQueue<EventWrittenEventArgs>();
 
     private readonly object _lock = new object();
 
-    private readonly Dictionary<string, EventSource> _existingSources = new Dictionary<string, EventSource>(StringComparer.OrdinalIgnoreCase);
+    private readonly Dictionary<string, EventSource> _existingSources = new Dictionary<
+        string,
+        EventSource
+    >(StringComparer.OrdinalIgnoreCase);
     private readonly HashSet<string> _requestedEventSources = new HashSet<string>();
 
     public void CollectFrom(string eventSourceName)
@@ -35,7 +39,8 @@ public class CollectingEventListener : EventListener
         }
     }
 
-    public void CollectFrom(EventSource eventSource) => EnableEvents(eventSource, EventLevel.Verbose, EventKeywords.All);
+    public void CollectFrom(EventSource eventSource) =>
+        EnableEvents(eventSource, EventLevel.Verbose, EventKeywords.All);
 
     public IReadOnlyList<EventWrittenEventArgs> GetEventsWritten() => _events.ToArray();
 

@@ -4,6 +4,7 @@
 using System.Globalization;
 using System.Reflection;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ActionConstraints;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
@@ -12,7 +13,6 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -29,24 +29,24 @@ public class ActionSelectorTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                DisplayName = "A2",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A2",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "About" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "About" },
                 },
+            },
         };
 
         var selector = CreateSelector(actions);
@@ -68,25 +68,25 @@ public class ActionSelectorTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" },
-                        { "date", "10/31/2018 07:37:38 -07:00" },
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                    { "date", "10/31/2018 07:37:38 -07:00" },
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                DisplayName = "A2",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A2",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "About" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "About" },
                 },
+            },
         };
 
         var selector = CreateSelector(actions);
@@ -96,7 +96,8 @@ public class ActionSelectorTest
         routeContext.RouteData.Values.Add("action", "Index");
         routeContext.RouteData.Values.Add(
             "date",
-            new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)));
+            new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7))
+        );
 
         // Act
         var candidates = selector.SelectCandidates(routeContext);
@@ -110,24 +111,24 @@ public class ActionSelectorTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                DisplayName = "A2",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A2",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
+            },
         };
 
         var selector = CreateSelector(actions);
@@ -148,24 +149,24 @@ public class ActionSelectorTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                DisplayName = "A2",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A2",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "About" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "About" },
                 },
+            },
         };
 
         var selector = CreateSelector(actions);
@@ -186,19 +187,16 @@ public class ActionSelectorTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                    AttributeRouteInfo = new AttributeRouteInfo()
-                    {
-                        Template = "/Home",
-                    }
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
+                AttributeRouteInfo = new AttributeRouteInfo() { Template = "/Home" },
+            },
         };
 
         var selector = CreateSelector(actions);
@@ -222,33 +220,33 @@ public class ActionSelectorTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                DisplayName = "A2",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A2",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "home" },
+                    { "action", "Index" },
                 },
-                new ActionDescriptor() // This won't match the request
+            },
+            new ActionDescriptor() // This won't match the request
+            {
+                DisplayName = "A3",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A3",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "About" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "About" },
                 },
+            },
         };
 
         var expected = actions.Take(2).ToArray();
@@ -274,33 +272,33 @@ public class ActionSelectorTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "Index" },
                 },
-                new ActionDescriptor()
+            },
+            new ActionDescriptor()
+            {
+                DisplayName = "A2",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A2",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "home" },
-                        { "action", "Index" }
-                    },
+                    { "controller", "home" },
+                    { "action", "Index" },
                 },
-                new ActionDescriptor() // This won't match the request
+            },
+            new ActionDescriptor() // This won't match the request
+            {
+                DisplayName = "A3",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A3",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "controller", "Home" },
-                        { "action", "About" }
-                    },
+                    { "controller", "Home" },
+                    { "action", "About" },
                 },
+            },
         };
 
         var expected = actions.Take(2).ToArray();
@@ -323,16 +321,16 @@ public class ActionSelectorTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "area", null },
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                }
+                    { "area", null },
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+            },
         };
 
         var selector = CreateSelector(actions);
@@ -357,16 +355,16 @@ public class ActionSelectorTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "area", null },
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                }
+                    { "area", null },
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+            },
         };
 
         var selector = CreateSelector(actions);
@@ -391,16 +389,16 @@ public class ActionSelectorTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "area", null },
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                }
+                    { "area", null },
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+            },
         };
 
         var selector = CreateSelector(actions);
@@ -425,16 +423,16 @@ public class ActionSelectorTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "foo", "" },
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                }
+                    { "foo", "" },
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+            },
         };
 
         var selector = CreateSelector(actions);
@@ -459,16 +457,16 @@ public class ActionSelectorTest
     {
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor()
+            new ActionDescriptor()
+            {
+                DisplayName = "A1",
+                RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
-                    DisplayName = "A1",
-                    RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                    {
-                        { "foo", "" },
-                        { "controller", "Home" },
-                        { "action", "Index" }
-                    },
-                }
+                    { "foo", "" },
+                    { "controller", "Home" },
+                    { "action", "Index" },
+                },
+            },
         };
 
         var selector = CreateSelector(actions);
@@ -497,18 +495,25 @@ public class ActionSelectorTest
 
         var actions = new ActionDescriptor[]
         {
-                new ActionDescriptor() { DisplayName = "A1" },
-                new ActionDescriptor() { DisplayName = "A2" },
+            new ActionDescriptor() { DisplayName = "A1" },
+            new ActionDescriptor() { DisplayName = "A2" },
         };
         var selector = CreateSelector(actions, loggerFactory);
 
         var routeContext = CreateRouteContext("POST");
-        var actionNames = string.Join(Environment.NewLine, actions.Select(action => action.DisplayName));
-        var expectedMessage = "Request matched multiple actions resulting in " +
-            $"ambiguity. Matching actions: {actionNames}";
+        var actionNames = string.Join(
+            Environment.NewLine,
+            actions.Select(action => action.DisplayName)
+        );
+        var expectedMessage =
+            "Request matched multiple actions resulting in "
+            + $"ambiguity. Matching actions: {actionNames}";
 
         // Act
-        Assert.Throws<AmbiguousActionException>(() => { selector.SelectBestCandidate(routeContext, actions); });
+        Assert.Throws<AmbiguousActionException>(() =>
+        {
+            selector.SelectBestCandidate(routeContext, actions);
+        });
 
         // Assert
         Assert.Empty(sink.Scopes);
@@ -523,9 +528,9 @@ public class ActionSelectorTest
         var actionWithConstraints = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new HttpMethodActionConstraint(new string[] { "POST" }),
-                },
+            {
+                new HttpMethodActionConstraint(new string[] { "POST" }),
+            },
             Parameters = new List<ParameterDescriptor>(),
         };
 
@@ -553,17 +558,17 @@ public class ActionSelectorTest
         var action1 = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = false, },
-                },
+            {
+                new BooleanConstraint() { Pass = false },
+            },
         };
 
         var action2 = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = false, },
-                },
+            {
+                new BooleanConstraint() { Pass = false },
+            },
         };
 
         var actions = new ActionDescriptor[] { action1, action2 };
@@ -585,19 +590,19 @@ public class ActionSelectorTest
         var action1 = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = false, Order = 0 },
-                    new BooleanConstraint() { Pass = true, Order = 1 },
-                },
+            {
+                new BooleanConstraint() { Pass = false, Order = 0 },
+                new BooleanConstraint() { Pass = true, Order = 1 },
+            },
         };
 
         var action2 = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 0 },
-                    new BooleanConstraint() { Pass = false, Order = 1 },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 0 },
+                new BooleanConstraint() { Pass = false, Order = 1 },
+            },
         };
 
         var actions = new ActionDescriptor[] { action1, action2 };
@@ -619,12 +624,9 @@ public class ActionSelectorTest
         var actionWithConstraints = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new ConstraintFactory()
-                    {
-                        Constraint = new BooleanConstraint() { Pass = true },
-                    },
-                }
+            {
+                new ConstraintFactory() { Constraint = new BooleanConstraint() { Pass = true } },
+            },
         };
 
         var actionWithoutConstraints = new ActionDescriptor()
@@ -651,11 +653,9 @@ public class ActionSelectorTest
         var nullConstraint = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new ConstraintFactory()
-                    {
-                    },
-                }
+            {
+                new ConstraintFactory() { },
+            },
         };
 
         var actions = new ActionDescriptor[] { nullConstraint };
@@ -678,9 +678,9 @@ public class ActionSelectorTest
         var actionWithConstraints = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraintMarker() { Pass = true },
-                }
+            {
+                new BooleanConstraintMarker() { Pass = true },
+            },
         };
 
         var actionWithoutConstraints = new ActionDescriptor()
@@ -688,7 +688,7 @@ public class ActionSelectorTest
             Parameters = new List<ParameterDescriptor>(),
         };
 
-        var actions = new ActionDescriptor[] { actionWithConstraints, actionWithoutConstraints, };
+        var actions = new ActionDescriptor[] { actionWithConstraints, actionWithoutConstraints };
 
         var selector = CreateSelector(actions);
         var context = CreateRouteContext("POST");
@@ -708,17 +708,17 @@ public class ActionSelectorTest
         var best = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 0 },
+            },
         };
 
         var worst = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 1, },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 1 },
+            },
         };
 
         var actions = new ActionDescriptor[] { best, worst };
@@ -741,21 +741,21 @@ public class ActionSelectorTest
         var best = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
-                    new BooleanConstraint() { Pass = true, Order = 1, },
-                    new BooleanConstraint() { Pass = true, Order = 2, },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 0 },
+                new BooleanConstraint() { Pass = true, Order = 1 },
+                new BooleanConstraint() { Pass = true, Order = 2 },
+            },
         };
 
         var worst = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
-                    new BooleanConstraint() { Pass = true, Order = 1, },
-                    new BooleanConstraint() { Pass = true, Order = 3, },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 0 },
+                new BooleanConstraint() { Pass = true, Order = 1 },
+                new BooleanConstraint() { Pass = true, Order = 3 },
+            },
         };
 
         var actions = new ActionDescriptor[] { best, worst };
@@ -777,21 +777,21 @@ public class ActionSelectorTest
         var nomatch1 = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
-                    new BooleanConstraint() { Pass = true, Order = 1, },
-                    new BooleanConstraint() { Pass = false, Order = 2, },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 0 },
+                new BooleanConstraint() { Pass = true, Order = 1 },
+                new BooleanConstraint() { Pass = false, Order = 2 },
+            },
         };
 
         var nomatch2 = new ActionDescriptor()
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
-                {
-                    new BooleanConstraint() { Pass = true, Order = 0, },
-                    new BooleanConstraint() { Pass = true, Order = 1, },
-                    new BooleanConstraint() { Pass = false, Order = 3, },
-                },
+            {
+                new BooleanConstraint() { Pass = true, Order = 0 },
+                new BooleanConstraint() { Pass = true, Order = 1 },
+                new BooleanConstraint() { Pass = false, Order = 3 },
+            },
         };
 
         var best = new ActionDescriptor();
@@ -813,16 +813,18 @@ public class ActionSelectorTest
     {
         // Arrange
         var expectedMessage =
-            "Multiple actions matched. " +
-            "The following actions matched route data and had all constraints satisfied:" + Environment.NewLine +
-            Environment.NewLine +
-            "Ambiguous1" + Environment.NewLine +
-            "Ambiguous2";
+            "Multiple actions matched. "
+            + "The following actions matched route data and had all constraints satisfied:"
+            + Environment.NewLine
+            + Environment.NewLine
+            + "Ambiguous1"
+            + Environment.NewLine
+            + "Ambiguous2";
 
         var actions = new ActionDescriptor[]
         {
-                CreateAction(area: null, controller: "Store", action: "Buy"),
-                CreateAction(area: null, controller: "Store", action: "Buy"),
+            CreateAction(area: null, controller: "Store", action: "Buy"),
+            CreateAction(area: null, controller: "Store", action: "Buy"),
         };
 
         actions[0].DisplayName = "Ambiguous1";
@@ -850,7 +852,9 @@ public class ActionSelectorTest
     [InlineData("POST")]
     [InlineData("DELETE")]
     [InlineData("PATCH")]
-    public void HttpMethodAttribute_ActionWithMultipleHttpMethodAttributeViaAcceptVerbs_ORsMultipleHttpMethods(string verb)
+    public void HttpMethodAttribute_ActionWithMultipleHttpMethodAttributeViaAcceptVerbs_ORsMultipleHttpMethods(
+        string verb
+    )
     {
         // Arrange
         var routeContext = new RouteContext(GetHttpContext(verb));
@@ -871,7 +875,9 @@ public class ActionSelectorTest
     [InlineData("DELETE")]
     [InlineData("PATCH")]
     [InlineData("HEAD")]
-    public void HttpMethodAttribute_ActionWithMultipleHttpMethodAttributes_ORsMultipleHttpMethods(string verb)
+    public void HttpMethodAttribute_ActionWithMultipleHttpMethodAttributes_ORsMultipleHttpMethods(
+        string verb
+    )
     {
         // Arrange
         var routeContext = new RouteContext(GetHttpContext(verb));
@@ -888,7 +894,9 @@ public class ActionSelectorTest
     [Theory]
     [InlineData("GET")]
     [InlineData("PUT")]
-    public void HttpMethodAttribute_ActionDecoratedWithHttpMethodAttribute_OverridesConvention(string verb)
+    public void HttpMethodAttribute_ActionDecoratedWithHttpMethodAttribute_OverridesConvention(
+        string verb
+    )
     {
         // Arrange
         // Note no action name is passed, hence should return a null action descriptor.
@@ -926,7 +934,9 @@ public class ActionSelectorTest
     [InlineData("POST")]
     [InlineData("DELETE")]
     [InlineData("PATCH")]
-    public void ActionNameAttribute_ActionGetsExposedViaActionName_UnreachableByConvention(string verb)
+    public void ActionNameAttribute_ActionGetsExposedViaActionName_UnreachableByConvention(
+        string verb
+    )
     {
         // Arrange
         var routeContext = new RouteContext(GetHttpContext(verb));
@@ -956,7 +966,10 @@ public class ActionSelectorTest
     [InlineData("POST", "CustomActionName_RpcMethod")]
     [InlineData("DELETE", "CustomActionName_RpcMethod")]
     [InlineData("PATCH", "CustomActionName_RpcMethod")]
-    public void ActionNameAttribute_DifferentActionName_UsesActionNameFromActionNameAttribute(string verb, string actionName)
+    public void ActionNameAttribute_DifferentActionName_UsesActionNameFromActionNameAttribute(
+        string verb,
+        string actionName
+    )
     {
         // Arrange
         var routeContext = new RouteContext(GetHttpContext(verb));
@@ -976,17 +989,16 @@ public class ActionSelectorTest
         var actionDescriptorCollectionProvider = new DefaultActionDescriptorCollectionProvider(
             new[] { actionDescriptorProvider },
             Enumerable.Empty<IActionDescriptorChangeProvider>(),
-            NullLogger<DefaultActionDescriptorCollectionProvider>.Instance);
+            NullLogger<DefaultActionDescriptorCollectionProvider>.Instance
+        );
 
-        var actionConstraintProviders = new[]
-        {
-                new DefaultActionConstraintProvider(),
-            };
+        var actionConstraintProviders = new[] { new DefaultActionConstraintProvider() };
 
         var actionSelector = new ActionSelector(
             actionDescriptorCollectionProvider,
             GetActionConstraintCache(actionConstraintProviders),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         var candidates = actionSelector.SelectCandidates(context);
         return (ControllerActionDescriptor)actionSelector.SelectBestCandidate(context, candidates);
@@ -1003,11 +1015,15 @@ public class ActionSelectorTest
 
         var manager = GetApplicationManager(controllerTypes);
 
-        var modelProvider = new DefaultApplicationModelProvider(options, new EmptyModelMetadataProvider());
+        var modelProvider = new DefaultApplicationModelProvider(
+            options,
+            new EmptyModelMetadataProvider()
+        );
 
         var provider = new ControllerActionDescriptorProvider(
             manager,
-            new ApplicationModelFactory(new[] { modelProvider }, options));
+            new ApplicationModelFactory(new[] { modelProvider }, options)
+        );
 
         return provider;
     }
@@ -1031,17 +1047,15 @@ public class ActionSelectorTest
     {
         return new ActionDescriptor[]
         {
-                // Like a typical RPC controller
-                CreateAction(area: null, controller: "Home", action: "Index"),
-                CreateAction(area: null, controller: "Home", action: "Edit"),
-
-                // Like a typical REST controller
-                CreateAction(area: null, controller: "Product", action: null),
-                CreateAction(area: null, controller: "Product", action: null),
-
-                // RPC controller in an area with the same name as home
-                CreateAction(area: "Admin", controller: "Home", action: "Index"),
-                CreateAction(area: "Admin", controller: "Home", action: "Diagnostics"),
+            // Like a typical RPC controller
+            CreateAction(area: null, controller: "Home", action: "Index"),
+            CreateAction(area: null, controller: "Home", action: "Edit"),
+            // Like a typical REST controller
+            CreateAction(area: null, controller: "Product", action: null),
+            CreateAction(area: null, controller: "Product", action: null),
+            // RPC controller in an area with the same name as home
+            CreateAction(area: "Admin", controller: "Home", action: "Index"),
+            CreateAction(area: "Admin", controller: "Home", action: "Diagnostics"),
         };
     }
 
@@ -1049,18 +1063,29 @@ public class ActionSelectorTest
         IEnumerable<ActionDescriptor> actions,
         string area,
         string controller,
-        string action)
+        string action
+    )
     {
         var comparer = new RouteValueEqualityComparer();
 
-        return
-            actions
-            .Where(a => a.RouteValues.Any(kvp => kvp.Key == "area" && comparer.Equals(kvp.Value, area)))
-            .Where(a => a.RouteValues.Any(kvp => kvp.Key == "controller" && comparer.Equals(kvp.Value, controller)))
-            .Where(a => a.RouteValues.Any(kvp => kvp.Key == "action" && comparer.Equals(kvp.Value, action)));
+        return actions
+            .Where(a =>
+                a.RouteValues.Any(kvp => kvp.Key == "area" && comparer.Equals(kvp.Value, area))
+            )
+            .Where(a =>
+                a.RouteValues.Any(kvp =>
+                    kvp.Key == "controller" && comparer.Equals(kvp.Value, controller)
+                )
+            )
+            .Where(a =>
+                a.RouteValues.Any(kvp => kvp.Key == "action" && comparer.Equals(kvp.Value, action))
+            );
     }
 
-    private static ActionSelector CreateSelector(IReadOnlyList<ActionDescriptor> actions, ILoggerFactory loggerFactory = null)
+    private static ActionSelector CreateSelector(
+        IReadOnlyList<ActionDescriptor> actions,
+        ILoggerFactory loggerFactory = null
+    )
     {
         loggerFactory = loggerFactory ?? NullLoggerFactory.Instance;
 
@@ -1070,15 +1095,17 @@ public class ActionSelectorTest
             .Setup(p => p.ActionDescriptors)
             .Returns(new ActionDescriptorCollection(actions, 0));
 
-        var actionConstraintProviders = new IActionConstraintProvider[] {
-                    new DefaultActionConstraintProvider(),
-                    new BooleanConstraintProvider(),
-                };
+        var actionConstraintProviders = new IActionConstraintProvider[]
+        {
+            new DefaultActionConstraintProvider(),
+            new BooleanConstraintProvider(),
+        };
 
         return new ActionSelector(
             actionProvider.Object,
             GetActionConstraintCache(actionConstraintProviders),
-            loggerFactory);
+            loggerFactory
+        );
     }
 
     private static VirtualPathContext CreateContext(object routeValues)
@@ -1091,7 +1118,8 @@ public class ActionSelectorTest
         return new VirtualPathContext(
             new Mock<HttpContext>(MockBehavior.Strict).Object,
             new RouteValueDictionary(ambientValues),
-            new RouteValueDictionary(routeValues));
+            new RouteValueDictionary(routeValues)
+        );
     }
 
     private static RouteContext CreateRouteContext(string httpMethod)
@@ -1110,17 +1138,20 @@ public class ActionSelectorTest
         httpContext.SetupGet(c => c.Request).Returns(request.Object);
         httpContext.SetupGet(c => c.RequestServices).Returns(serviceProvider);
 
-        return new RouteContext(httpContext.Object)
-        {
-            RouteData = routeData,
-        };
+        return new RouteContext(httpContext.Object) { RouteData = routeData };
     }
 
     private static ActionDescriptor CreateAction(string area, string controller, string action)
     {
         var actionDescriptor = new ControllerActionDescriptor()
         {
-            ActionName = string.Format(CultureInfo.InvariantCulture, "Area: {0}, Controller: {1}, Action: {2}", area, controller, action),
+            ActionName = string.Format(
+                CultureInfo.InvariantCulture,
+                "Area: {0}, Controller: {1}, Action: {2}",
+                area,
+                controller,
+                action
+            ),
             Parameters = new List<ParameterDescriptor>(),
         };
 
@@ -1131,13 +1162,19 @@ public class ActionSelectorTest
         return actionDescriptor;
     }
 
-    private static ActionConstraintCache GetActionConstraintCache(IActionConstraintProvider[] actionConstraintProviders = null)
+    private static ActionConstraintCache GetActionConstraintCache(
+        IActionConstraintProvider[] actionConstraintProviders = null
+    )
     {
         var descriptorProvider = new DefaultActionDescriptorCollectionProvider(
             Enumerable.Empty<IActionDescriptorProvider>(),
             Enumerable.Empty<IActionDescriptorChangeProvider>(),
-            NullLogger<DefaultActionDescriptorCollectionProvider>.Instance);
-        return new ActionConstraintCache(descriptorProvider, actionConstraintProviders.AsEnumerable() ?? new List<IActionConstraintProvider>());
+            NullLogger<DefaultActionDescriptorCollectionProvider>.Instance
+        );
+        return new ActionConstraintCache(
+            descriptorProvider,
+            actionConstraintProviders.AsEnumerable() ?? new List<IActionConstraintProvider>()
+        );
     }
 
     private class BooleanConstraint : IActionConstraint
@@ -1185,46 +1222,32 @@ public class ActionSelectorTest
             }
         }
 
-        public void OnProvidersExecuted(ActionConstraintProviderContext context)
-        {
-        }
+        public void OnProvidersExecuted(ActionConstraintProviderContext context) { }
     }
 
     private class NonActionController
     {
         [NonAction]
-        public void Put()
-        {
-        }
+        public void Put() { }
 
         [NonAction]
-        public void RPCMethod()
-        {
-        }
+        public void RPCMethod() { }
 
         [NonAction]
         [HttpGet]
-        public void RPCMethodWithHttpGet()
-        {
-        }
+        public void RPCMethodWithHttpGet() { }
     }
 
     private class ActionNameController
     {
         [ActionName("CustomActionName_Verb")]
-        public void Put()
-        {
-        }
+        public void Put() { }
 
         [ActionName("CustomActionName_DefaultMethod")]
-        public void Index()
-        {
-        }
+        public void Index() { }
 
         [ActionName("CustomActionName_RpcMethod")]
-        public void RPCMethodWithHttpGet()
-        {
-        }
+        public void RPCMethodWithHttpGet() { }
     }
 
     private class HttpMethodAttributeTests_RestOnlyController
@@ -1235,13 +1258,9 @@ public class ActionSelectorTest
         [HttpDelete]
         [HttpPatch]
         [HttpHead]
-        public void Put()
-        {
-        }
+        public void Put() { }
 
         [AcceptVerbs("PUT", "post", "GET", "delete", "pATcH")]
-        public void Patch()
-        {
-        }
+        public void Patch() { }
     }
 }

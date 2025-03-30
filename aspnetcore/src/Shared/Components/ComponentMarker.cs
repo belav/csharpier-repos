@@ -75,7 +75,12 @@ internal struct ComponentMarker
         Descriptor = descriptor;
     }
 
-    public void WriteWebAssemblyData(string assembly, string typeName, string parameterDefinitions, string parameterValues)
+    public void WriteWebAssemblyData(
+        string assembly,
+        string typeName,
+        string parameterDefinitions,
+        string parameterValues
+    )
     {
         Assembly = assembly;
         TypeName = typeName;
@@ -83,11 +88,10 @@ internal struct ComponentMarker
         ParameterValues = parameterValues;
     }
 
-    public ComponentEndMarker? ToEndMarker()
-        => PrerenderId is null ? default : new() { PrerenderId = PrerenderId };
+    public ComponentEndMarker? ToEndMarker() =>
+        PrerenderId is null ? default : new() { PrerenderId = PrerenderId };
 
-    private static string GeneratePrerenderId()
-        => Guid.NewGuid().ToString("N");
+    private static string GeneratePrerenderId() => Guid.NewGuid().ToString("N");
 }
 
 internal struct ComponentEndMarker
@@ -97,8 +101,8 @@ internal struct ComponentEndMarker
 
 internal struct ComponentMarkerKey : IEquatable<ComponentMarkerKey>
 {
-    public ComponentMarkerKey(string locationHash, string? formattedComponentKey)
-        => (LocationHash, FormattedComponentKey) = (locationHash, formattedComponentKey);
+    public ComponentMarkerKey(string locationHash, string? formattedComponentKey) =>
+        (LocationHash, FormattedComponentKey) = (locationHash, formattedComponentKey);
 
     // A hash that distinguishes this component from other components in the render tree.
     // The output should be deterministic between endpoint invocations so that the client
@@ -113,19 +117,23 @@ internal struct ComponentMarkerKey : IEquatable<ComponentMarkerKey>
     // In addition, specifying a @key lets interactive components receive parameter updates dynamically.
     public string? FormattedComponentKey { get; set; }
 
-    public static bool operator ==(ComponentMarkerKey left, ComponentMarkerKey right)
-        => left.Equals(right);
+    public static bool operator ==(ComponentMarkerKey left, ComponentMarkerKey right) =>
+        left.Equals(right);
 
-    public static bool operator !=(ComponentMarkerKey left, ComponentMarkerKey right)
-        => !(left == right);
+    public static bool operator !=(ComponentMarkerKey left, ComponentMarkerKey right) =>
+        !(left == right);
 
-    public readonly bool Equals(ComponentMarkerKey other)
-        => string.Equals(LocationHash, other.LocationHash, StringComparison.Ordinal)
-        && string.Equals(FormattedComponentKey, other.FormattedComponentKey, StringComparison.Ordinal);
+    public readonly bool Equals(ComponentMarkerKey other) =>
+        string.Equals(LocationHash, other.LocationHash, StringComparison.Ordinal)
+        && string.Equals(
+            FormattedComponentKey,
+            other.FormattedComponentKey,
+            StringComparison.Ordinal
+        );
 
-    public override readonly bool Equals(object? obj)
-        => obj is ComponentMarkerKey other && Equals(other);
+    public override readonly bool Equals(object? obj) =>
+        obj is ComponentMarkerKey other && Equals(other);
 
-    public override readonly int GetHashCode()
-        => HashCode.Combine(LocationHash, FormattedComponentKey);
+    public override readonly int GetHashCode() =>
+        HashCode.Combine(LocationHash, FormattedComponentKey);
 }

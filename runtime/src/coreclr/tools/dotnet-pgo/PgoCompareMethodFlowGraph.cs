@@ -34,9 +34,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             if (total1 == 0 || total2 == 0)
                 return 0;
 
-            double overlap =
-                BasicBlocks
-                .Sum(bb => Math.Min(bb.BlockCount1 / (double)total1, bb.BlockCount2 / (double)total2));
+            double overlap = BasicBlocks.Sum(bb =>
+                Math.Min(bb.BlockCount1 / (double)total1, bb.BlockCount2 / (double)total2)
+            );
             return overlap;
         }
 
@@ -51,9 +51,11 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             if (total1 == 0 || total2 == 0)
                 return 0;
 
-            double overlap =
-                BasicBlocks
-                .Sum(bb => bb.Edges.Values.Sum(e => Math.Min(e.Count1 / (double)total1, e.Count2 / (double)total2)));
+            double overlap = BasicBlocks.Sum(bb =>
+                bb.Edges.Values.Sum(e =>
+                    Math.Min(e.Count1 / (double)total1, e.Count2 / (double)total2)
+                )
+            );
             return overlap;
         }
 
@@ -62,7 +64,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             long totalBlockCount1 = TotalBlockCount1;
             long totalBlockCount2 = TotalBlockCount2;
 
-            string createWeightLabel(long weight1, long totalWeight1, long weight2, long totalWeight2)
+            string createWeightLabel(
+                long weight1,
+                long totalWeight1,
+                long weight2,
+                long totalWeight2
+            )
             {
                 string label = "";
                 if (totalWeight1 == 0)
@@ -94,7 +101,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 string label = $"@ {bb.ILOffset:x3}";
                 if (ProfilesHadBasicBlocks && (totalBlockCount1 != 0 || totalBlockCount2 != 0))
                 {
-                    label += $"\\n{createWeightLabel(bb.BlockCount1, totalBlockCount1, bb.BlockCount2, totalBlockCount2)}";
+                    label +=
+                        $"\\n{createWeightLabel(bb.BlockCount1, totalBlockCount1, bb.BlockCount2, totalBlockCount2)}";
                 }
 
                 return label;
@@ -103,7 +111,9 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             long totalEdgeCount1 = TotalEdgeCount1;
             long totalEdgeCount2 = TotalEdgeCount2;
 
-            string getEdgeLabel((PgoCompareMethodBasicBlock from, PgoCompareMethodBasicBlock to) edge)
+            string getEdgeLabel(
+                (PgoCompareMethodBasicBlock from, PgoCompareMethodBasicBlock to) edge
+            )
             {
                 if (!ProfilesHadEdges)
                     return "";
@@ -112,13 +122,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 return createWeightLabel(weight1, totalEdgeCount1, weight2, totalEdgeCount2);
             }
 
-            string dot =
-                FlowGraphHelper.DumpGraph(
-                    BasicBlocks, EntryBasicBlock,
-                    bb => new HashSet<PgoCompareMethodBasicBlock>(bb.Edges.Keys),
-                    title,
-                    getLabel,
-                    getEdgeLabel);
+            string dot = FlowGraphHelper.DumpGraph(
+                BasicBlocks,
+                EntryBasicBlock,
+                bb => new HashSet<PgoCompareMethodBasicBlock>(bb.Edges.Keys),
+                title,
+                getLabel,
+                getEdgeLabel
+            );
             return dot;
         }
 
@@ -127,7 +138,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             string name1,
             MethodProfileData profile2,
             string name2,
-            out List<string> errors)
+            out List<string> errors
+        )
         {
             errors = new List<string>();
             if (profile1?.SchemaData == null)
@@ -153,9 +165,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 return null;
             }
 
-            bool hasComparableProfileData =
-                (hasBlocks1 && hasBlocks2) ||
-                (hasEdges1 && hasEdges2);
+            bool hasComparableProfileData = (hasBlocks1 && hasBlocks2) || (hasEdges1 && hasEdges2);
 
             if (!hasComparableProfileData)
             {
@@ -204,9 +214,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     new PgoCompareMethodBasicBlock
                     {
                         ILOffset = ilOffs,
-                        BlockCount1 = blocks1.TryGetValue(ilOffs, out PgoSchemaElem elem) ? elem.DataLong : 0,
+                        BlockCount1 = blocks1.TryGetValue(ilOffs, out PgoSchemaElem elem)
+                            ? elem.DataLong
+                            : 0,
                         BlockCount2 = blocks2.TryGetValue(ilOffs, out elem) ? elem.DataLong : 0,
-                    });
+                    }
+                );
             }
 
             foreach (((int ilFrom, int ilTo), _) in hasEdges1 ? edges1 : edges2)
@@ -215,15 +228,17 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 {
                     if (hasBlocks1 || hasBlocks2)
                     {
-                        errors.Add($"There is an edge from {ilFrom} -> {ilTo}, but no basic block found at {ilFrom}");
+                        errors.Add(
+                            $"There is an edge from {ilFrom} -> {ilTo}, but no basic block found at {ilFrom}"
+                        );
                     }
                     else
                     {
                         // If we have no BBs at all use the edges to construct BBs.
-                        ilToBB.Add(ilFrom, bbFrom = new PgoCompareMethodBasicBlock
-                        {
-                            ILOffset = ilFrom
-                        });
+                        ilToBB.Add(
+                            ilFrom,
+                            bbFrom = new PgoCompareMethodBasicBlock { ILOffset = ilFrom }
+                        );
                     }
                 }
 
@@ -231,19 +246,20 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 {
                     if (hasBlocks1 || hasBlocks2)
                     {
-                        errors.Add($"There is an edge from {ilFrom} -> {ilTo}, but no basic block found at {ilTo}");
+                        errors.Add(
+                            $"There is an edge from {ilFrom} -> {ilTo}, but no basic block found at {ilTo}"
+                        );
                     }
                     else
                     {
                         // If we have no BBs at all use the edges to construct BBs.
-                        ilToBB.Add(ilTo, bbTo = new PgoCompareMethodBasicBlock
-                        {
-                            ILOffset = ilTo
-                        });
+                        ilToBB.Add(ilTo, bbTo = new PgoCompareMethodBasicBlock { ILOffset = ilTo });
                     }
                 }
 
-                long edgeCount1 = edges1.TryGetValue((ilFrom, ilTo), out PgoSchemaElem elem) ? elem.DataLong : 0;
+                long edgeCount1 = edges1.TryGetValue((ilFrom, ilTo), out PgoSchemaElem elem)
+                    ? elem.DataLong
+                    : 0;
                 long edgeCount2 = edges2.TryGetValue((ilFrom, ilTo), out elem) ? elem.DataLong : 0;
                 bbFrom.Edges.Add(bbTo, (edgeCount1, edgeCount2));
             }
@@ -265,16 +281,22 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
         private static Dictionary<int, PgoSchemaElem> GroupBlocks(MethodProfileData data)
         {
-            return data.SchemaData
-               .Where(e => e.InstrumentationKind == PgoInstrumentationKind.BasicBlockIntCount || e.InstrumentationKind == PgoInstrumentationKind.BasicBlockLongCount)
-               .ToDictionary(e => e.ILOffset);
+            return data
+                .SchemaData.Where(e =>
+                    e.InstrumentationKind == PgoInstrumentationKind.BasicBlockIntCount
+                    || e.InstrumentationKind == PgoInstrumentationKind.BasicBlockLongCount
+                )
+                .ToDictionary(e => e.ILOffset);
         }
 
         private static Dictionary<(int, int), PgoSchemaElem> GroupEdges(MethodProfileData data)
         {
-            return data.SchemaData
-               .Where(e => e.InstrumentationKind == PgoInstrumentationKind.EdgeIntCount || e.InstrumentationKind == PgoInstrumentationKind.EdgeLongCount)
-               .ToDictionary(e => (e.ILOffset, e.Other));
+            return data
+                .SchemaData.Where(e =>
+                    e.InstrumentationKind == PgoInstrumentationKind.EdgeIntCount
+                    || e.InstrumentationKind == PgoInstrumentationKind.EdgeLongCount
+                )
+                .ToDictionary(e => (e.ILOffset, e.Other));
         }
     }
 
@@ -284,9 +306,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         public long BlockCount1 { get; init; }
         public long BlockCount2 { get; init; }
 
-        public Dictionary<PgoCompareMethodBasicBlock, (long Count1, long Count2)> Edges { get; } = new();
+        public Dictionary<PgoCompareMethodBasicBlock, (long Count1, long Count2)> Edges { get; } =
+            new();
 
-        public override bool Equals(object obj) => obj is PgoCompareMethodBasicBlock block && ILOffset == block.ILOffset;
+        public override bool Equals(object obj) =>
+            obj is PgoCompareMethodBasicBlock block && ILOffset == block.ILOffset;
+
         public override int GetHashCode() => HashCode.Combine(ILOffset);
     }
 }

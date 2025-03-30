@@ -12,23 +12,26 @@ namespace System.Web.Mvc.Test
     {
         private static readonly NameValueCollection _backingStore = new NameValueCollection()
         {
-            { "foo", "fooValue" }
+            { "foo", "fooValue" },
         };
 
-        private static readonly NameValueCollection _unvalidatedBackingStore = new NameValueCollection()
-        {
-            { "foo", "fooUnvalidated" }
-        };
+        private static readonly NameValueCollection _unvalidatedBackingStore =
+            new NameValueCollection() { { "foo", "fooUnvalidated" } };
 
         [Fact]
         public void GetValueProvider()
         {
             // Arrange
-            Mock<MockableUnvalidatedRequestValues> mockUnvalidatedValues = new Mock<MockableUnvalidatedRequestValues>();
-            QueryStringValueProviderFactory factory = new QueryStringValueProviderFactory(_ => mockUnvalidatedValues.Object);
+            Mock<MockableUnvalidatedRequestValues> mockUnvalidatedValues =
+                new Mock<MockableUnvalidatedRequestValues>();
+            QueryStringValueProviderFactory factory = new QueryStringValueProviderFactory(_ =>
+                mockUnvalidatedValues.Object
+            );
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.Setup(o => o.HttpContext.Request.QueryString).Returns(_backingStore);
+            mockControllerContext
+                .Setup(o => o.HttpContext.Request.QueryString)
+                .Returns(_backingStore);
 
             // Act
             IValueProvider valueProvider = factory.GetValueProvider(mockControllerContext.Object);
@@ -46,15 +49,21 @@ namespace System.Web.Mvc.Test
         public void GetValueProvider_GetValue_SkipValidation()
         {
             // Arrange
-            Mock<MockableUnvalidatedRequestValues> mockUnvalidatedValues = new Mock<MockableUnvalidatedRequestValues>();
+            Mock<MockableUnvalidatedRequestValues> mockUnvalidatedValues =
+                new Mock<MockableUnvalidatedRequestValues>();
             mockUnvalidatedValues.Setup(o => o.QueryString).Returns(_unvalidatedBackingStore);
-            QueryStringValueProviderFactory factory = new QueryStringValueProviderFactory(_ => mockUnvalidatedValues.Object);
+            QueryStringValueProviderFactory factory = new QueryStringValueProviderFactory(_ =>
+                mockUnvalidatedValues.Object
+            );
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();
-            mockControllerContext.Setup(o => o.HttpContext.Request.QueryString).Returns(_backingStore);
+            mockControllerContext
+                .Setup(o => o.HttpContext.Request.QueryString)
+                .Returns(_backingStore);
 
             // Act
-            IUnvalidatedValueProvider valueProvider = (IUnvalidatedValueProvider)factory.GetValueProvider(mockControllerContext.Object);
+            IUnvalidatedValueProvider valueProvider = (IUnvalidatedValueProvider)
+                factory.GetValueProvider(mockControllerContext.Object);
 
             // Assert
             Assert.Equal(typeof(QueryStringValueProvider), valueProvider.GetType());
@@ -73,7 +82,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { factory.GetValueProvider(null); }, "controllerContext");
+                delegate
+                {
+                    factory.GetValueProvider(null);
+                },
+                "controllerContext"
+            );
         }
     }
 }

@@ -10,13 +10,18 @@ namespace Microsoft.CodeAnalysis.InlineHints;
 [DataContract]
 internal readonly record struct InlineHintsOptions
 {
-    [DataMember] public InlineParameterHintsOptions ParameterOptions { get; init; } = InlineParameterHintsOptions.Default;
-    [DataMember] public InlineTypeHintsOptions TypeOptions { get; init; } = InlineTypeHintsOptions.Default;
-    [DataMember] public SymbolDescriptionOptions DisplayOptions { get; init; } = SymbolDescriptionOptions.Default;
+    [DataMember]
+    public InlineParameterHintsOptions ParameterOptions { get; init; } =
+        InlineParameterHintsOptions.Default;
 
-    public InlineHintsOptions()
-    {
-    }
+    [DataMember]
+    public InlineTypeHintsOptions TypeOptions { get; init; } = InlineTypeHintsOptions.Default;
+
+    [DataMember]
+    public SymbolDescriptionOptions DisplayOptions { get; init; } =
+        SymbolDescriptionOptions.Default;
+
+    public InlineHintsOptions() { }
 
     public static readonly InlineHintsOptions Default = new();
 }

@@ -23,25 +23,34 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             [FieldOffset(0)]
             internal bool BooleanValue;
+
             [FieldOffset(0)]
             internal byte ByteValue;
+
             [FieldOffset(0)]
             internal char CharValue;
+
             [FieldOffset(0)]
             internal short Int16Value;
+
             [FieldOffset(0)]
             internal int Int32Value;
+
             [FieldOffset(0)]
-            internal long Int64Value;// must be aligned to 8 because of HEAPI64 alignment
+            internal long Int64Value; // must be aligned to 8 because of HEAPI64 alignment
+
             [FieldOffset(0)]
             internal float SingleValue;
+
             [FieldOffset(0)]
-            internal double DoubleValue;// must be aligned to 8 because of Module.HEAPF64 view alignment
+            internal double DoubleValue; // must be aligned to 8 because of Module.HEAPF64 view alignment
+
             [FieldOffset(0)]
             internal IntPtr IntPtrValue;
 
             [FieldOffset(4)]
             internal IntPtr JSHandle;
+
             [FieldOffset(4)]
             internal IntPtr GCHandle;
 
@@ -53,6 +62,7 @@ namespace System.Runtime.InteropServices.JavaScript
             /// </summary>
             [FieldOffset(12)]
             internal MarshalerType Type;
+
             [FieldOffset(13)]
             internal MarshalerType ElementType;
         }

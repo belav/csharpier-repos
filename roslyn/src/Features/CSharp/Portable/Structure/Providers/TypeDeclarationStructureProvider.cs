@@ -12,23 +12,28 @@ using Microsoft.CodeAnalysis.Structure;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class TypeDeclarationStructureProvider : AbstractSyntaxNodeStructureProvider<TypeDeclarationSyntax>
+    internal class TypeDeclarationStructureProvider
+        : AbstractSyntaxNodeStructureProvider<TypeDeclarationSyntax>
     {
         protected override void CollectBlockSpans(
             SyntaxToken previousToken,
             TypeDeclarationSyntax typeDeclaration,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             CSharpStructureHelpers.CollectCommentBlockSpans(typeDeclaration, ref spans, options);
 
-            if (!typeDeclaration.OpenBraceToken.IsMissing &&
-                !typeDeclaration.CloseBraceToken.IsMissing)
+            if (
+                !typeDeclaration.OpenBraceToken.IsMissing
+                && !typeDeclaration.CloseBraceToken.IsMissing
+            )
             {
-                var lastToken = typeDeclaration.TypeParameterList == null
-                    ? typeDeclaration.Identifier
-                    : typeDeclaration.TypeParameterList.GetLastToken(includeZeroWidth: true);
+                var lastToken =
+                    typeDeclaration.TypeParameterList == null
+                        ? typeDeclaration.Identifier
+                        : typeDeclaration.TypeParameterList.GetLastToken(includeZeroWidth: true);
 
                 SyntaxNodeOrToken current = typeDeclaration;
                 var nextSibling = current.GetNextSibling();
@@ -38,16 +43,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 // Collapse to Definitions doesn't collapse type nodes, but a Toggle All Outlining would collapse groups
                 // of types to the compressed form of not showing blank lines. All kinds of types are grouped together
                 // in Metadata as Source.
-                var compressEmptyLines = options.IsMetadataAsSource
+                var compressEmptyLines =
+                    options.IsMetadataAsSource
                     && (!nextSibling.IsNode || nextSibling.AsNode() is BaseTypeDeclarationSyntax);
 
-                spans.AddIfNotNull(CSharpStructureHelpers.CreateBlockSpan(
-                    typeDeclaration,
-                    lastToken,
-                    compressEmptyLines: compressEmptyLines,
-                    autoCollapse: false,
-                    type: BlockTypes.Type,
-                    isCollapsible: true));
+                spans.AddIfNotNull(
+                    CSharpStructureHelpers.CreateBlockSpan(
+                        typeDeclaration,
+                        lastToken,
+                        compressEmptyLines: compressEmptyLines,
+                        autoCollapse: false,
+                        type: BlockTypes.Type,
+                        isCollapsible: true
+                    )
+                );
             }
 
             // add any leading comments before the end of the type block

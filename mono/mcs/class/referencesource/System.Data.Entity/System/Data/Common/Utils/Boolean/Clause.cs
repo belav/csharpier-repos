@@ -9,11 +9,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Common.Utils.Boolean
 {
@@ -47,13 +47,17 @@ namespace System.Data.Common.Utils.Boolean
         }
 
         // Given a collection of literals and a tree type, returns an expression of the given type.
-        private static BoolExpr<T_Identifier> ConvertLiteralsToExpr(Set<Literal<T_Identifier>> literals, ExprType treeType)
+        private static BoolExpr<T_Identifier> ConvertLiteralsToExpr(
+            Set<Literal<T_Identifier>> literals,
+            ExprType treeType
+        )
         {
             bool isAnd = ExprType.And == treeType;
             Debug.Assert(isAnd || ExprType.Or == treeType);
 
             IEnumerable<BoolExpr<T_Identifier>> literalExpressions = literals.Select(
-                new Func<Literal<T_Identifier>, BoolExpr<T_Identifier>>(ConvertLiteralToExpression));
+                new Func<Literal<T_Identifier>, BoolExpr<T_Identifier>>(ConvertLiteralToExpression)
+            );
 
             if (isAnd)
             {
@@ -66,7 +70,9 @@ namespace System.Data.Common.Utils.Boolean
         }
 
         // Given a literal, returns its logical equivalent expression.
-        private static BoolExpr<T_Identifier> ConvertLiteralToExpression(Literal<T_Identifier> literal)
+        private static BoolExpr<T_Identifier> ConvertLiteralToExpression(
+            Literal<T_Identifier> literal
+        )
         {
             return literal.Expr;
         }
@@ -93,67 +99,63 @@ namespace System.Data.Common.Utils.Boolean
 
     /// <summary>
     /// A DNF clause is of the form:
-    /// 
+    ///
     ///     Literal1 . Literal2 . ...
-    /// 
+    ///
     /// Each literal is of the form:
-    /// 
+    ///
     ///     Term
-    /// 
+    ///
     /// or
-    /// 
+    ///
     ///     !Term
     /// </summary>
     /// <typeparam name="T_Identifier">Type of normal form literal.</typeparam>
-    internal sealed class DnfClause<T_Identifier> : Clause<T_Identifier>,
-        IEquatable<DnfClause<T_Identifier>>
+    internal sealed class DnfClause<T_Identifier>
+        : Clause<T_Identifier>,
+            IEquatable<DnfClause<T_Identifier>>
     {
         /// <summary>
         /// Initialize a DNF clause.
         /// </summary>
         /// <param name="literals">Literals in clause.</param>
         internal DnfClause(Set<Literal<T_Identifier>> literals)
-            : base(literals, ExprType.And)
-        {
-        }
+            : base(literals, ExprType.And) { }
 
         public bool Equals(DnfClause<T_Identifier> other)
         {
-            return null != other &&
-                other.Literals.SetEquals(Literals);
+            return null != other && other.Literals.SetEquals(Literals);
         }
     }
 
     /// <summary>
     /// A CNF clause is of the form:
-    /// 
+    ///
     ///     Literal1 + Literal2 . ...
-    /// 
+    ///
     /// Each literal is of the form:
-    /// 
+    ///
     ///     Term
-    /// 
+    ///
     /// or
-    /// 
+    ///
     ///     !Term
     /// </summary>
     /// <typeparam name="T_Identifier">Type of normal form literal.</typeparam>
-    internal sealed class CnfClause<T_Identifier> : Clause<T_Identifier>,
-        IEquatable<CnfClause<T_Identifier>>
+    internal sealed class CnfClause<T_Identifier>
+        : Clause<T_Identifier>,
+            IEquatable<CnfClause<T_Identifier>>
     {
         /// <summary>
         /// Initialize a CNF clause.
         /// </summary>
         /// <param name="literals">Literals in clause.</param>
         internal CnfClause(Set<Literal<T_Identifier>> literals)
-            : base(literals, ExprType.Or)
-        {
-        }
+            : base(literals, ExprType.Or) { }
 
         public bool Equals(CnfClause<T_Identifier> other)
         {
-            return null != other &&
-                other.Literals.SetEquals(Literals);
+            return null != other && other.Literals.SetEquals(Literals);
         }
     }
 }

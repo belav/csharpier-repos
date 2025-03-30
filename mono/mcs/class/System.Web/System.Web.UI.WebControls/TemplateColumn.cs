@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,79 +29,89 @@
 using System.ComponentModel;
 using System.Web.UI;
 
-namespace System.Web.UI.WebControls {
-	public class TemplateColumn : DataGridColumn {
-		public override void InitializeCell (TableCell cell, int columnIndex, ListItemType itemType)
-		{
-			base.InitializeCell (cell, columnIndex, itemType);
-			ITemplate t = null;
-			switch (itemType) {
-			case ListItemType.Header:
-				t = HeaderTemplate;
-				break;
-			case ListItemType.Footer:
-				t = FooterTemplate;
-				break;
-			case ListItemType.Item:
-			case ListItemType.AlternatingItem:
-			case ListItemType.SelectedItem:
-				t = ItemTemplate;
-				if (t == null)
-					cell.Text = "&nbsp;";
-				break;
-			case ListItemType.EditItem:
-				t = EditItemTemplate;
-				if (t == null)
-					t = ItemTemplate;
-				if (t == null)
-					cell.Text = "&nbsp;";
-				break;
-			}
-			
-			if (t != null)
-				t.InstantiateIn (cell);
-		}
+namespace System.Web.UI.WebControls
+{
+    public class TemplateColumn : DataGridColumn
+    {
+        public override void InitializeCell(TableCell cell, int columnIndex, ListItemType itemType)
+        {
+            base.InitializeCell(cell, columnIndex, itemType);
+            ITemplate t = null;
+            switch (itemType)
+            {
+                case ListItemType.Header:
+                    t = HeaderTemplate;
+                    break;
+                case ListItemType.Footer:
+                    t = FooterTemplate;
+                    break;
+                case ListItemType.Item:
+                case ListItemType.AlternatingItem:
+                case ListItemType.SelectedItem:
+                    t = ItemTemplate;
+                    if (t == null)
+                        cell.Text = "&nbsp;";
+                    break;
+                case ListItemType.EditItem:
+                    t = EditItemTemplate;
+                    if (t == null)
+                        t = ItemTemplate;
+                    if (t == null)
+                        cell.Text = "&nbsp;";
+                    break;
+            }
 
-		ITemplate editItemTemplate, footerTemplate, headerTemplate, itemTemplate;
-		
-		[Browsable(false)]
-		[DefaultValue (null)]
-		[PersistenceMode(PersistenceMode.InnerProperty)]
-		[TemplateContainer (typeof(DataGridItem))]
-		[WebSysDescription ("")]
-		public virtual ITemplate EditItemTemplate {
-			get { return editItemTemplate; }
-			set { editItemTemplate = value; }
-		}
-		
-		[Browsable(false)]
-		[DefaultValue (null)]
-		[PersistenceMode(PersistenceMode.InnerProperty)]
-		[TemplateContainer (typeof(DataGridItem))]
-		[WebSysDescription ("")]
-		public virtual ITemplate FooterTemplate {
-			get { return footerTemplate; }
-			set { footerTemplate = value; }	
-		}
-		
-		[Browsable(false)]
-		[DefaultValue (null)]
-		[PersistenceMode(PersistenceMode.InnerProperty)]
-		[TemplateContainer (typeof(DataGridItem))]
-		[WebSysDescription ("")]
-		public virtual ITemplate HeaderTemplate {
-			get { return headerTemplate; }
-			set { headerTemplate = value; }
-		}
-		
-		[Browsable(false)]
-		[DefaultValue (null)]
-		[PersistenceMode(PersistenceMode.InnerProperty)]
-		[TemplateContainer (typeof(DataGridItem))]
-		[WebSysDescription ("")]
-		public virtual ITemplate ItemTemplate {
-			get { return itemTemplate; }
-			set { itemTemplate = value; }
-		}
-	}
+            if (t != null)
+                t.InstantiateIn(cell);
+        }
+
+        ITemplate editItemTemplate,
+            footerTemplate,
+            headerTemplate,
+            itemTemplate;
+
+        [Browsable(false)]
+        [DefaultValue(null)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [TemplateContainer(typeof(DataGridItem))]
+        [WebSysDescription("")]
+        public virtual ITemplate EditItemTemplate
+        {
+            get { return editItemTemplate; }
+            set { editItemTemplate = value; }
+        }
+
+        [Browsable(false)]
+        [DefaultValue(null)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [TemplateContainer(typeof(DataGridItem))]
+        [WebSysDescription("")]
+        public virtual ITemplate FooterTemplate
+        {
+            get { return footerTemplate; }
+            set { footerTemplate = value; }
+        }
+
+        [Browsable(false)]
+        [DefaultValue(null)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [TemplateContainer(typeof(DataGridItem))]
+        [WebSysDescription("")]
+        public virtual ITemplate HeaderTemplate
+        {
+            get { return headerTemplate; }
+            set { headerTemplate = value; }
+        }
+
+        [Browsable(false)]
+        [DefaultValue(null)]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [TemplateContainer(typeof(DataGridItem))]
+        [WebSysDescription("")]
+        public virtual ITemplate ItemTemplate
+        {
+            get { return itemTemplate; }
+            set { itemTemplate = value; }
+        }
+    }
 }

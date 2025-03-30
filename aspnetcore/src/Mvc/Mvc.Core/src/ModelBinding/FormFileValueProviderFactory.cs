@@ -28,7 +28,10 @@ public sealed class FormFileValueProviderFactory : IValueProviderFactory
         return Task.CompletedTask;
     }
 
-    private static async Task AddValueProviderAsync(ValueProviderFactoryContext context, HttpRequest request)
+    private static async Task AddValueProviderAsync(
+        ValueProviderFactoryContext context,
+        HttpRequest request
+    )
     {
         IFormCollection form;
 
@@ -40,13 +43,19 @@ public sealed class FormFileValueProviderFactory : IValueProviderFactory
         {
             // ReadFormAsync can throw InvalidDataException if the form content is malformed.
             // Wrap it in a ValueProviderException that the CompositeValueProvider special cases.
-            throw new ValueProviderException(Resources.FormatFailedToReadRequestForm(ex.Message), ex);
+            throw new ValueProviderException(
+                Resources.FormatFailedToReadRequestForm(ex.Message),
+                ex
+            );
         }
         catch (IOException ex)
         {
             // ReadFormAsync can throw IOException if the client disconnects.
             // Wrap it in a ValueProviderException that the CompositeValueProvider special cases.
-            throw new ValueProviderException(Resources.FormatFailedToReadRequestForm(ex.Message), ex);
+            throw new ValueProviderException(
+                Resources.FormatFailedToReadRequestForm(ex.Message),
+                ex
+            );
         }
 
         if (form.Files.Count > 0)

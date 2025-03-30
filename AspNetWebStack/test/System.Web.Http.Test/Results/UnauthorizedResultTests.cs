@@ -22,7 +22,13 @@ namespace System.Web.Http.Results
             HttpRequestMessage request = CreateRequest();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { CreateProductUnderTest(challenges, request); }, "challenges");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CreateProductUnderTest(challenges, request);
+                },
+                "challenges"
+            );
         }
 
         [Fact]
@@ -33,7 +39,13 @@ namespace System.Web.Http.Results
             HttpRequestMessage request = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { CreateProductUnderTest(challenges, request); }, "request");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CreateProductUnderTest(challenges, request);
+                },
+                "request"
+            );
         }
 
         [Fact]
@@ -78,7 +90,11 @@ namespace System.Web.Http.Results
             // Arrange
             AuthenticationHeaderValue expectedChallenge1 = CreateChallenge();
             AuthenticationHeaderValue expectedChallenge2 = CreateChallenge();
-            IEnumerable<AuthenticationHeaderValue> challenges = new[] { expectedChallenge1, expectedChallenge2 };
+            IEnumerable<AuthenticationHeaderValue> challenges = new[]
+            {
+                expectedChallenge1,
+                expectedChallenge2,
+            };
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
@@ -111,7 +127,13 @@ namespace System.Web.Http.Results
             ApiController controller = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { CreateProductUnderTest(challenges, controller); }, "controller");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CreateProductUnderTest(challenges, controller);
+                },
+                "controller"
+            );
         }
 
         [Fact]
@@ -120,7 +142,11 @@ namespace System.Web.Http.Results
             // Arrange
             AuthenticationHeaderValue expectedChallenge1 = CreateChallenge();
             AuthenticationHeaderValue expectedChallenge2 = CreateChallenge();
-            IEnumerable<AuthenticationHeaderValue> challenges = new[] { expectedChallenge1, expectedChallenge2 };
+            IEnumerable<AuthenticationHeaderValue> challenges = new[]
+            {
+                expectedChallenge1,
+                expectedChallenge2,
+            };
             ApiController controller = CreateController();
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
@@ -202,8 +228,13 @@ namespace System.Web.Http.Results
             UnauthorizedResult result = CreateProductUnderTest(challenges, controller);
 
             // Act & Assert
-            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() =>
-                { HttpRequestMessage ignore = result.Request; }, "ApiController.Request must not be null.");
+            InvalidOperationException exception = Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    HttpRequestMessage ignore = result.Request;
+                },
+                "ApiController.Request must not be null."
+            );
         }
 
         [Fact]
@@ -266,14 +297,18 @@ namespace System.Web.Http.Results
             return new FakeController();
         }
 
-        private static UnauthorizedResult CreateProductUnderTest(IEnumerable<AuthenticationHeaderValue> challenges,
-            HttpRequestMessage request)
+        private static UnauthorizedResult CreateProductUnderTest(
+            IEnumerable<AuthenticationHeaderValue> challenges,
+            HttpRequestMessage request
+        )
         {
             return new UnauthorizedResult(challenges, request);
         }
 
-        private static UnauthorizedResult CreateProductUnderTest(IEnumerable<AuthenticationHeaderValue> challenges,
-            ApiController controller)
+        private static UnauthorizedResult CreateProductUnderTest(
+            IEnumerable<AuthenticationHeaderValue> challenges,
+            ApiController controller
+        )
         {
             return new UnauthorizedResult(challenges, controller);
         }
@@ -283,8 +318,6 @@ namespace System.Web.Http.Results
             return new HttpRequestMessage();
         }
 
-        private class FakeController : ApiController
-        {
-        }
+        private class FakeController : ApiController { }
     }
 }

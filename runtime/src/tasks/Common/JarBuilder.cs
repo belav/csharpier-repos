@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
 using Microsoft.Build.Utilities;
 
 internal sealed class JarBuilder
@@ -18,10 +18,15 @@ internal sealed class JarBuilder
 
     public void Build(string inputDir, string outputFileName)
     {
-        IEnumerable<string> classFiles =
-            Directory.GetFiles(inputDir, "*.class", SearchOption.AllDirectories)
-                .Select(classFile => Path.GetRelativePath(inputDir, classFile));
+        IEnumerable<string> classFiles = Directory
+            .GetFiles(inputDir, "*.class", SearchOption.AllDirectories)
+            .Select(classFile => Path.GetRelativePath(inputDir, classFile));
 
-        Utils.RunProcess(_logger, "jar", $"-cf {outputFileName} {string.Join(" ", classFiles)}", workingDir: inputDir);
+        Utils.RunProcess(
+            _logger,
+            "jar",
+            $"-cf {outputFileName} {string.Join(" ", classFiles)}",
+            workingDir: inputDir
+        );
     }
 }

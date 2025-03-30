@@ -40,7 +40,8 @@ namespace System.IO
             Action<long> setLengthFunc = null,
             Action<byte[], int, int> writeFunc = null,
             Func<byte[], int, int, CancellationToken, Task> writeAsyncFunc = null,
-            Action<bool> disposeFunc = null)
+            Action<bool> disposeFunc = null
+        )
         {
             _canReadFunc = canReadFunc ?? (() => false);
             _canSeekFunc = canSeekFunc ?? (() => false);
@@ -49,41 +50,149 @@ namespace System.IO
             _flushFunc = flushFunc ?? (() => { });
             _flushAsyncFunc = flushAsyncFunc ?? (token => base.FlushAsync(token));
 
-            _lengthFunc = lengthFunc ?? (() => { throw new NotSupportedException(); });
-            _positionSetFunc = positionSetFunc ?? (_ => { throw new NotSupportedException(); });
-            _positionGetFunc = positionGetFunc ?? (() => { throw new NotSupportedException(); });
+            _lengthFunc =
+                lengthFunc
+                ?? (
+                    () =>
+                    {
+                        throw new NotSupportedException();
+                    }
+                );
+            _positionSetFunc =
+                positionSetFunc
+                ?? (
+                    _ =>
+                    {
+                        throw new NotSupportedException();
+                    }
+                );
+            _positionGetFunc =
+                positionGetFunc
+                ?? (
+                    () =>
+                    {
+                        throw new NotSupportedException();
+                    }
+                );
 
-            _readAsyncFunc = readAsyncFunc ?? ((buffer, offset, count, token) => base.ReadAsync(buffer, offset, count, token));
-            _readFunc = readFunc ?? ((buffer, offset, count) => readAsyncFunc(buffer, offset, count, default).GetAwaiter().GetResult());
+            _readAsyncFunc =
+                readAsyncFunc
+                ?? ((buffer, offset, count, token) => base.ReadAsync(buffer, offset, count, token));
+            _readFunc =
+                readFunc
+                ?? (
+                    (buffer, offset, count) =>
+                        readAsyncFunc(buffer, offset, count, default).GetAwaiter().GetResult()
+                );
 
-            _seekFunc = seekFunc ?? ((_, __) => { throw new NotSupportedException(); });
-            _setLengthFunc = setLengthFunc ?? (_ => { throw new NotSupportedException(); });
+            _seekFunc =
+                seekFunc
+                ?? (
+                    (_, __) =>
+                    {
+                        throw new NotSupportedException();
+                    }
+                );
+            _setLengthFunc =
+                setLengthFunc
+                ?? (
+                    _ =>
+                    {
+                        throw new NotSupportedException();
+                    }
+                );
 
-            _writeAsyncFunc = writeAsyncFunc ?? ((buffer, offset, count, token) => base.WriteAsync(buffer, offset, count, token));
-            _writeFunc = writeFunc ?? ((buffer, offset, count) => writeAsyncFunc(buffer, offset, count, default).GetAwaiter().GetResult());
+            _writeAsyncFunc =
+                writeAsyncFunc
+                ?? (
+                    (buffer, offset, count, token) => base.WriteAsync(buffer, offset, count, token)
+                );
+            _writeFunc =
+                writeFunc
+                ?? (
+                    (buffer, offset, count) =>
+                        writeAsyncFunc(buffer, offset, count, default).GetAwaiter().GetResult()
+                );
 
             _disposeFunc = disposeFunc;
         }
 
-        public override bool CanRead { get { return _canReadFunc(); } }
-        public override bool CanSeek { get { return _canSeekFunc(); } }
-        public override bool CanWrite { get { return _canWriteFunc(); } }
+        public override bool CanRead
+        {
+            get { return _canReadFunc(); }
+        }
+        public override bool CanSeek
+        {
+            get { return _canSeekFunc(); }
+        }
+        public override bool CanWrite
+        {
+            get { return _canWriteFunc(); }
+        }
 
-        public override void Flush() { _flushFunc(); }
-        public override Task FlushAsync(CancellationToken cancellationToken) { return _flushAsyncFunc(cancellationToken); }
+        public override void Flush()
+        {
+            _flushFunc();
+        }
 
-        public override long Length { get { return _lengthFunc(); } }
-        public override long Position { get { return _positionGetFunc(); } set { _positionSetFunc(value); } }
+        public override Task FlushAsync(CancellationToken cancellationToken)
+        {
+            return _flushAsyncFunc(cancellationToken);
+        }
 
-        public override int Read(byte[] buffer, int offset, int count) { return _readFunc(buffer, offset, count); }
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) { return _readAsyncFunc(buffer, offset, count, cancellationToken); }
+        public override long Length
+        {
+            get { return _lengthFunc(); }
+        }
+        public override long Position
+        {
+            get { return _positionGetFunc(); }
+            set { _positionSetFunc(value); }
+        }
 
-        public override long Seek(long offset, SeekOrigin origin) { return _seekFunc(offset, origin); }
-        public override void SetLength(long value) { _setLengthFunc(value); }
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            return _readFunc(buffer, offset, count);
+        }
 
-        public override void Write(byte[] buffer, int offset, int count) { _writeFunc(buffer, offset, count); }
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) { return _writeAsyncFunc(buffer, offset, count, cancellationToken); }
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
+        {
+            return _readAsyncFunc(buffer, offset, count, cancellationToken);
+        }
 
-        protected override void Dispose(bool disposing) { _disposeFunc?.Invoke(disposing); }
+        public override long Seek(long offset, SeekOrigin origin)
+        {
+            return _seekFunc(offset, origin);
+        }
+
+        public override void SetLength(long value)
+        {
+            _setLengthFunc(value);
+        }
+
+        public override void Write(byte[] buffer, int offset, int count)
+        {
+            _writeFunc(buffer, offset, count);
+        }
+
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
+        {
+            return _writeAsyncFunc(buffer, offset, count, cancellationToken);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _disposeFunc?.Invoke(disposing);
+        }
     }
 }

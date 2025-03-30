@@ -10,9 +10,7 @@ namespace Microsoft.EntityFrameworkCore.Utilities;
 [DebuggerStepThrough]
 internal static class DictionaryExtensions
 {
-    public static TValue GetOrAddNew<TKey, TValue>(
-        this IDictionary<TKey, TValue> source,
-        TKey key)
+    public static TValue GetOrAddNew<TKey, TValue>(this IDictionary<TKey, TValue> source, TKey key)
         where TValue : new()
     {
         if (!source.TryGetValue(key, out var value))
@@ -26,16 +24,16 @@ internal static class DictionaryExtensions
 
     public static TValue? Find<TKey, TValue>(
         this IReadOnlyDictionary<TKey, TValue> source,
-        TKey key)
-        => !source.TryGetValue(key, out var value) ? default : value;
+        TKey key
+    ) => !source.TryGetValue(key, out var value) ? default : value;
 
     public static bool TryGetAndRemove<TKey, TValue, TReturn>(
         this IDictionary<TKey, TValue> source,
         TKey key,
-        [NotNullWhen(true)] out TReturn value)
+        [NotNullWhen(true)] out TReturn value
+    )
     {
-        if (source.TryGetValue(key, out var item)
-            && item != null)
+        if (source.TryGetValue(key, out var item) && item != null)
         {
             source.Remove(key);
             value = (TReturn)(object)item;
@@ -48,13 +46,14 @@ internal static class DictionaryExtensions
 
     public static void Remove<TKey, TValue>(
         this IDictionary<TKey, TValue> source,
-        Func<TKey, TValue, bool> predicate)
-        => source.Remove((k, v, p) => p!(k, v), predicate);
+        Func<TKey, TValue, bool> predicate
+    ) => source.Remove((k, v, p) => p!(k, v), predicate);
 
     public static void Remove<TKey, TValue, TState>(
         this IDictionary<TKey, TValue> source,
         Func<TKey, TValue, TState?, bool> predicate,
-        TState? state)
+        TState? state
+    )
     {
         var found = false;
         var firstRemovedKey = default(TKey);

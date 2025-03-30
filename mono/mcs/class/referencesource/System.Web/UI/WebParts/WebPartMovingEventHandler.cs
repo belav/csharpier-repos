@@ -4,10 +4,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
 
     public delegate void WebPartMovingEventHandler(object sender, WebPartMovingEventArgs e);
 }
-

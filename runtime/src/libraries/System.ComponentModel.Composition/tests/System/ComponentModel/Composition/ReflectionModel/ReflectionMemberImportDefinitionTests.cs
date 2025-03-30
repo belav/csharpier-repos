@@ -16,14 +16,32 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void Constructor()
         {
-            PropertyInfo expectedMember = typeof(PublicImportsExpectingPublicExports).GetProperty("PublicImportPublicProperty");
+            PropertyInfo expectedMember = typeof(PublicImportsExpectingPublicExports).GetProperty(
+                "PublicImportPublicProperty"
+            );
             LazyMemberInfo expectedImportingMemberInfo = new LazyMemberInfo(expectedMember);
-            IEnumerable<KeyValuePair<string, Type>> requiredMetadata = new KeyValuePair<string, Type>[] { new KeyValuePair<string, Type>("Foo", typeof(object)) };
+            IEnumerable<KeyValuePair<string, Type>> requiredMetadata = new KeyValuePair<
+                string,
+                Type
+            >[]
+            {
+                new KeyValuePair<string, Type>("Foo", typeof(object)),
+            };
             IDictionary<string, object> metadata = new Dictionary<string, object>();
             metadata["Key"] = "value";
 
             ReflectionMemberImportDefinition definition = new ReflectionMemberImportDefinition(
-                expectedImportingMemberInfo, "Contract", (string)null, requiredMetadata, ImportCardinality.ZeroOrMore, true, false, CreationPolicy.NonShared, metadata,  null);
+                expectedImportingMemberInfo,
+                "Contract",
+                (string)null,
+                requiredMetadata,
+                ImportCardinality.ZeroOrMore,
+                true,
+                false,
+                CreationPolicy.NonShared,
+                metadata,
+                null
+            );
 
             Assert.Equal(expectedImportingMemberInfo, definition.ImportingLazyMember);
 
@@ -35,7 +53,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             Assert.False(definition.IsPrerequisite);
             Assert.Null(((ICompositionElement)definition).Origin);
             Assert.NotNull(((ICompositionElement)definition).DisplayName);
-            Assert.Contains(expectedMember.GetDisplayName(), ((ICompositionElement)definition).DisplayName);
+            Assert.Contains(
+                expectedMember.GetDisplayName(),
+                ((ICompositionElement)definition).DisplayName
+            );
         }
 
         [Fact]
@@ -44,7 +65,17 @@ namespace System.ComponentModel.Composition.ReflectionModel
             LazyMemberInfo member = CreateLazyMemberInfo();
 
             ReflectionMemberImportDefinition definition = new ReflectionMemberImportDefinition(
-                member, "Contract", (string)null, null, ImportCardinality.ZeroOrMore, true, false, CreationPolicy.NonShared, null, null);
+                member,
+                "Contract",
+                (string)null,
+                null,
+                ImportCardinality.ZeroOrMore,
+                true,
+                false,
+                CreationPolicy.NonShared,
+                null,
+                null
+            );
 
             Assert.NotNull(definition.RequiredMetadata);
             Assert.Equal(0, definition.RequiredMetadata.Count());
@@ -56,14 +87,26 @@ namespace System.ComponentModel.Composition.ReflectionModel
             LazyMemberInfo member = CreateLazyMemberInfo();
             var expectedPartDefinition = PartDefinitionFactory.CreateAttributed(typeof(object));
             ReflectionMemberImportDefinition definition = new ReflectionMemberImportDefinition(
-                member, "Contract", (string)null, null, ImportCardinality.ZeroOrMore, true, false, CreationPolicy.NonShared, null, expectedPartDefinition);
+                member,
+                "Contract",
+                (string)null,
+                null,
+                ImportCardinality.ZeroOrMore,
+                true,
+                false,
+                CreationPolicy.NonShared,
+                null,
+                expectedPartDefinition
+            );
 
             Assert.Same(expectedPartDefinition, ((ICompositionElement)definition).Origin);
         }
 
         private static LazyMemberInfo CreateLazyMemberInfo()
         {
-            PropertyInfo expectedMember = typeof(PublicImportsExpectingPublicExports).GetProperty("PublicImportPublicProperty");
+            PropertyInfo expectedMember = typeof(PublicImportsExpectingPublicExports).GetProperty(
+                "PublicImportPublicProperty"
+            );
             return new LazyMemberInfo(expectedMember);
         }
     }

@@ -1,5 +1,5 @@
 //
-// CodeAccessSecurityAttributeTest.cs - 
+// CodeAccessSecurityAttributeTest.cs -
 //	NUnit Test Cases for CodeAccessSecurityAttribute
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,88 +27,98 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoTests.System.Security.Permissions {
+namespace MonoTests.System.Security.Permissions
+{
+    // note: CodeAccessSecurityAttribute is abstract so we define our own to test
+    // no [Serialize] or [AttributeUsage] here to test their inheritance
+    public class NonAbstractCodeAccessSecurityAttribute : CodeAccessSecurityAttribute
+    {
+        public NonAbstractCodeAccessSecurityAttribute(SecurityAction action)
+            : base(action) { }
 
-	// note: CodeAccessSecurityAttribute is abstract so we define our own to test
-	// no [Serialize] or [AttributeUsage] here to test their inheritance
-	public class NonAbstractCodeAccessSecurityAttribute : CodeAccessSecurityAttribute {
+        public override IPermission CreatePermission()
+        {
+            return null;
+        }
+    }
 
-		public NonAbstractCodeAccessSecurityAttribute (SecurityAction action)
-			: base (action)
-		{
-		}
+    [TestFixture]
+    public class CodeAccessSecurityAttributeTest
+    {
+        [Test]
+        public void Action()
+        {
+            NonAbstractCodeAccessSecurityAttribute a = new NonAbstractCodeAccessSecurityAttribute(
+                SecurityAction.Assert
+            );
+            Assert.AreEqual(SecurityAction.Assert, a.Action, "Action=Assert");
+            a.Action = SecurityAction.Demand;
+            Assert.AreEqual(SecurityAction.Demand, a.Action, "Action=Demand");
+            a.Action = SecurityAction.Deny;
+            Assert.AreEqual(SecurityAction.Deny, a.Action, "Action=Deny");
+            a.Action = SecurityAction.InheritanceDemand;
+            Assert.AreEqual(SecurityAction.InheritanceDemand, a.Action, "Action=InheritanceDemand");
+            a.Action = SecurityAction.LinkDemand;
+            Assert.AreEqual(SecurityAction.LinkDemand, a.Action, "Action=LinkDemand");
+            a.Action = SecurityAction.PermitOnly;
+            Assert.AreEqual(SecurityAction.PermitOnly, a.Action, "Action=PermitOnly");
+            a.Action = SecurityAction.RequestMinimum;
+            Assert.AreEqual(SecurityAction.RequestMinimum, a.Action, "Action=RequestMinimum");
+            a.Action = SecurityAction.RequestOptional;
+            Assert.AreEqual(SecurityAction.RequestOptional, a.Action, "Action=RequestOptional");
+            a.Action = SecurityAction.RequestRefuse;
+            Assert.AreEqual(SecurityAction.RequestRefuse, a.Action, "Action=RequestRefuse");
+        }
 
-		public override IPermission CreatePermission ()
-		{
-			return null;
-		}
-	}
+        [Test]
+        public void Action_Invalid()
+        {
+            NonAbstractCodeAccessSecurityAttribute a = new NonAbstractCodeAccessSecurityAttribute(
+                (SecurityAction)Int32.MinValue
+            );
+            // no validation in attribute
+        }
 
-	[TestFixture]
-	public class CodeAccessSecurityAttributeTest {
+        [Test]
+        public void Unrestricted()
+        {
+            NonAbstractCodeAccessSecurityAttribute a = new NonAbstractCodeAccessSecurityAttribute(
+                SecurityAction.Assert
+            );
+            Assert.IsFalse(a.Unrestricted, "Unrestricted (default)");
+            a.Unrestricted = true;
+            Assert.IsTrue(a.Unrestricted, "Unrestricted (true)");
+            a.Unrestricted = false;
+            Assert.IsFalse(a.Unrestricted, "Unrestricted (false)");
+        }
 
-		[Test]
-		public void Action ()
-		{
-			NonAbstractCodeAccessSecurityAttribute a = new NonAbstractCodeAccessSecurityAttribute (SecurityAction.Assert);
-			Assert.AreEqual (SecurityAction.Assert, a.Action, "Action=Assert");
-			a.Action = SecurityAction.Demand;
-			Assert.AreEqual (SecurityAction.Demand, a.Action, "Action=Demand");
-			a.Action = SecurityAction.Deny;
-			Assert.AreEqual (SecurityAction.Deny, a.Action, "Action=Deny");
-			a.Action = SecurityAction.InheritanceDemand;
-			Assert.AreEqual (SecurityAction.InheritanceDemand, a.Action, "Action=InheritanceDemand");
-			a.Action = SecurityAction.LinkDemand;
-			Assert.AreEqual (SecurityAction.LinkDemand, a.Action, "Action=LinkDemand");
-			a.Action = SecurityAction.PermitOnly;
-			Assert.AreEqual (SecurityAction.PermitOnly, a.Action, "Action=PermitOnly");
-			a.Action = SecurityAction.RequestMinimum;
-			Assert.AreEqual (SecurityAction.RequestMinimum, a.Action, "Action=RequestMinimum");
-			a.Action = SecurityAction.RequestOptional;
-			Assert.AreEqual (SecurityAction.RequestOptional, a.Action, "Action=RequestOptional");
-			a.Action = SecurityAction.RequestRefuse;
-			Assert.AreEqual (SecurityAction.RequestRefuse, a.Action, "Action=RequestRefuse");
-		}
+        [Test]
+        public void Attributes()
+        {
+            Type t = typeof(NonAbstractCodeAccessSecurityAttribute);
+            Assert.IsFalse(t.IsSerializable, "IsSerializable");
 
-		[Test]
-		public void Action_Invalid ()
-		{
-			NonAbstractCodeAccessSecurityAttribute a = new NonAbstractCodeAccessSecurityAttribute ((SecurityAction)Int32.MinValue);
-			// no validation in attribute
-		}
+            object[] attrs = t.GetCustomAttributes(typeof(AttributeUsageAttribute), false);
+            Assert.AreEqual(0, attrs.Length, "AttributeUsage-false");
 
-		[Test]
-		public void Unrestricted ()
-		{
-			NonAbstractCodeAccessSecurityAttribute a = new NonAbstractCodeAccessSecurityAttribute (SecurityAction.Assert);
-			Assert.IsFalse (a.Unrestricted, "Unrestricted (default)");
-			a.Unrestricted = true;
-			Assert.IsTrue (a.Unrestricted, "Unrestricted (true)");
-			a.Unrestricted = false;
-			Assert.IsFalse (a.Unrestricted, "Unrestricted (false)");
-		}
-
-		[Test]
-		public void Attributes ()
-		{
-			Type t = typeof (NonAbstractCodeAccessSecurityAttribute);
-			Assert.IsFalse (t.IsSerializable, "IsSerializable");
-
-			object[] attrs = t.GetCustomAttributes (typeof (AttributeUsageAttribute), false);
-			Assert.AreEqual (0, attrs.Length, "AttributeUsage-false");
-
-			attrs = t.GetCustomAttributes (typeof (AttributeUsageAttribute), true);
-			Assert.AreEqual (1, attrs.Length, "AttributeUsage-true");
-			AttributeUsageAttribute aua = (AttributeUsageAttribute)attrs [0];
-			Assert.IsTrue (aua.AllowMultiple, "AllowMultiple");
-			Assert.IsFalse (aua.Inherited, "Inherited");
-			AttributeTargets at = (AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Constructor | AttributeTargets.Method);
-			Assert.AreEqual (at, aua.ValidOn, "ValidOn");
-		}
-	}
+            attrs = t.GetCustomAttributes(typeof(AttributeUsageAttribute), true);
+            Assert.AreEqual(1, attrs.Length, "AttributeUsage-true");
+            AttributeUsageAttribute aua = (AttributeUsageAttribute)attrs[0];
+            Assert.IsTrue(aua.AllowMultiple, "AllowMultiple");
+            Assert.IsFalse(aua.Inherited, "Inherited");
+            AttributeTargets at = (
+                AttributeTargets.Assembly
+                | AttributeTargets.Class
+                | AttributeTargets.Struct
+                | AttributeTargets.Constructor
+                | AttributeTargets.Method
+            );
+            Assert.AreEqual(at, aua.ValidOn, "ValidOn");
+        }
+    }
 }

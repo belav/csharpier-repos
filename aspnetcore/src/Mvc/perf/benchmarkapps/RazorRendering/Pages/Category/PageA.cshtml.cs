@@ -1,7 +1,7 @@
-﻿using Data;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Data;
+using Microsoft.Extensions.Logging;
 
 namespace Pages
 {
@@ -18,7 +18,8 @@ namespace Pages
         public List<DataA> Data1 { get; }
         public List<DataB> Data2 { get; }
 
-        public PageA(List<DataA> dataA, List<DataB> dataB, ILogger<PageA> logger) : base(logger)
+        public PageA(List<DataA> dataA, List<DataB> dataB, ILogger<PageA> logger)
+            : base(logger)
         {
             Data1 = dataA;
             Data2 = dataB;
@@ -31,5 +32,4 @@ namespace Pages
             await Task.Delay(0);
         }
     }
-
 }

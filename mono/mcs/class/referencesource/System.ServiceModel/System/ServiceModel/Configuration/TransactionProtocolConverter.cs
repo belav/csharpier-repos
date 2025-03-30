@@ -29,7 +29,11 @@ namespace System.ServiceModel.Configuration
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             string protocol = value as string;
 #pragma warning suppress 56507 // Microsoft, Really checking for null (meaning value was not a string) versus String.Empty
@@ -44,13 +48,20 @@ namespace System.ServiceModel.Configuration
                     case ConfigurationStrings.WSAtomicTransaction11:
                         return TransactionProtocol.WSAtomicTransaction11;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.ConfigInvalidTransactionFlowProtocolValue, protocol));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            SR.GetString(SR.ConfigInvalidTransactionFlowProtocolValue, protocol)
+                        );
                 }
             }
             return base.ConvertFrom(context, culture, value);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (typeof(string) == destinationType && value is TransactionProtocol)
             {

@@ -13,11 +13,18 @@ namespace Roslyn.Test.Utilities
 {
     public sealed class NotImplementedSymUnmanagedReader : ISymUnmanagedReader5
     {
-        public static readonly NotImplementedSymUnmanagedReader Instance = new NotImplementedSymUnmanagedReader();
+        public static readonly NotImplementedSymUnmanagedReader Instance =
+            new NotImplementedSymUnmanagedReader();
 
         private NotImplementedSymUnmanagedReader() { }
 
-        public int GetDocument(string url, Guid language, Guid languageVendor, Guid documentType, out ISymUnmanagedDocument retVal)
+        public int GetDocument(
+            string url,
+            Guid language,
+            Guid languageVendor,
+            Guid documentType,
+            out ISymUnmanagedDocument retVal
+        )
         {
             retVal = null;
             return HResult.E_NOTIMPL;
@@ -29,7 +36,11 @@ namespace Roslyn.Test.Utilities
             return HResult.E_NOTIMPL;
         }
 
-        public int GetDocumentVersion(ISymUnmanagedDocument pDoc, out int version, out bool pbCurrent)
+        public int GetDocumentVersion(
+            ISymUnmanagedDocument pDoc,
+            out int version,
+            out bool pbCurrent
+        )
         {
             version = 0;
             pbCurrent = false;
@@ -54,25 +65,46 @@ namespace Roslyn.Test.Utilities
             return HResult.E_NOTIMPL;
         }
 
-        public int GetMethodByVersionPreRemap(int methodToken, int version, out ISymUnmanagedMethod retVal)
+        public int GetMethodByVersionPreRemap(
+            int methodToken,
+            int version,
+            out ISymUnmanagedMethod retVal
+        )
         {
             retVal = null;
             return HResult.E_NOTIMPL;
         }
 
-        public int GetMethodFromDocumentPosition(ISymUnmanagedDocument document, int line, int column, out ISymUnmanagedMethod retVal)
+        public int GetMethodFromDocumentPosition(
+            ISymUnmanagedDocument document,
+            int line,
+            int column,
+            out ISymUnmanagedMethod retVal
+        )
         {
             retVal = null;
             return HResult.E_NOTIMPL;
         }
 
-        public int GetMethodsFromDocumentPosition(ISymUnmanagedDocument document, int line, int column, int cMethod, out int pcMethod, ISymUnmanagedMethod[] pRetVal)
+        public int GetMethodsFromDocumentPosition(
+            ISymUnmanagedDocument document,
+            int line,
+            int column,
+            int cMethod,
+            out int pcMethod,
+            ISymUnmanagedMethod[] pRetVal
+        )
         {
             pcMethod = 0;
             return HResult.E_NOTIMPL;
         }
 
-        public int GetMethodsInDocument(ISymUnmanagedDocument document, int cMethod, out int pcMethod, ISymUnmanagedMethod[] methods)
+        public int GetMethodsInDocument(
+            ISymUnmanagedDocument document,
+            int cMethod,
+            out int pcMethod,
+            ISymUnmanagedMethod[] methods
+        )
         {
             pcMethod = 0;
             return HResult.E_NOTIMPL;
@@ -84,31 +116,61 @@ namespace Roslyn.Test.Utilities
             return HResult.E_NOTIMPL;
         }
 
-        public int GetNamespaces(int cNameSpaces, out int pcNameSpaces, ISymUnmanagedNamespace[] namespaces)
+        public int GetNamespaces(
+            int cNameSpaces,
+            out int pcNameSpaces,
+            ISymUnmanagedNamespace[] namespaces
+        )
         {
             pcNameSpaces = 0;
             return HResult.E_NOTIMPL;
         }
 
-        public int GetSymAttribute(int parent, string name, int sizeBuffer, out int lengthBuffer, byte[] buffer)
+        public int GetSymAttribute(
+            int parent,
+            string name,
+            int sizeBuffer,
+            out int lengthBuffer,
+            byte[] buffer
+        )
         {
             lengthBuffer = 0;
             return HResult.E_NOTIMPL;
         }
 
-        public int GetSymAttributeByVersion(int methodToken, int version, string name, int bufferLength, out int count, byte[] customDebugInformation)
+        public int GetSymAttributeByVersion(
+            int methodToken,
+            int version,
+            string name,
+            int bufferLength,
+            out int count,
+            byte[] customDebugInformation
+        )
         {
             count = 0;
             return HResult.E_NOTIMPL;
         }
 
-        public int GetSymAttributeByVersionPreRemap(int methodToken, int version, string name, int bufferLength, out int count, byte[] customDebugInformation)
+        public int GetSymAttributeByVersionPreRemap(
+            int methodToken,
+            int version,
+            string name,
+            int bufferLength,
+            out int count,
+            byte[] customDebugInformation
+        )
         {
             count = 0;
             return HResult.E_NOTIMPL;
         }
 
-        public int GetSymAttributePreRemap(int parent, string name, int sizeBuffer, out int lengthBuffer, byte[] buffer)
+        public int GetSymAttributePreRemap(
+            int parent,
+            string name,
+            int sizeBuffer,
+            out int lengthBuffer,
+            byte[] buffer
+        )
         {
             lengthBuffer = 0;
             return HResult.E_NOTIMPL;
@@ -167,7 +229,11 @@ namespace Roslyn.Test.Utilities
             return HResult.E_NOTIMPL;
         }
 
-        public unsafe int GetPortableDebugMetadataByVersion(int version, out byte* metadata, out int size)
+        public unsafe int GetPortableDebugMetadataByVersion(
+            int version,
+            out byte* metadata,
+            out int size
+        )
         {
             metadata = null;
             size = 0;

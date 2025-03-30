@@ -12,7 +12,6 @@ using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Testing.Verifiers;
 using Microsoft.CodeAnalysis.VisualBasic;
 using Microsoft.CodeAnalysis.VisualBasic.Testing;
-
 #if !CODE_STYLE
 using System;
 using Microsoft.CodeAnalysis.Diagnostics;
@@ -36,7 +35,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 // reasonable TLS protocol version for outgoing connections.
 #pragma warning disable CA5364 // Do Not Use Deprecated Security Protocols
 #pragma warning disable CS0618 // Type or member is obsolete
-                if (ServicePointManager.SecurityProtocol == (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls))
+                if (
+                    ServicePointManager.SecurityProtocol
+                    == (SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls)
+                )
 #pragma warning restore CS0618 // Type or member is obsolete
 #pragma warning restore CA5364 // Do Not Use Deprecated Security Protocols
                 {
@@ -77,7 +79,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 await base.RunImplAsync(cancellationToken);
             }
 
-            protected override ImmutableArray<CodeAction> FilterCodeActions(ImmutableArray<CodeAction> actions)
+            protected override ImmutableArray<CodeAction> FilterCodeActions(
+                ImmutableArray<CodeAction> actions
+            )
             {
                 var result = base.FilterCodeActions(actions);
 
@@ -97,18 +101,33 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
 #if !CODE_STYLE
 
-            protected override AnalyzerOptions GetAnalyzerOptions(Project project)
-                => new WorkspaceAnalyzerOptions(base.GetAnalyzerOptions(project), _sharedState.GetIdeAnalyzerOptions(project));
+            protected override AnalyzerOptions GetAnalyzerOptions(Project project) =>
+                new WorkspaceAnalyzerOptions(
+                    base.GetAnalyzerOptions(project),
+                    _sharedState.GetIdeAnalyzerOptions(project)
+                );
 
-            protected override CodeRefactoringContext CreateCodeRefactoringContext(Document document, TextSpan span, Action<CodeAction> registerRefactoring, CancellationToken cancellationToken)
-                => new CodeRefactoringContext(document, span, (action, textSpan) => registerRefactoring(action), _sharedState.CodeActionOptions, cancellationToken);
+            protected override CodeRefactoringContext CreateCodeRefactoringContext(
+                Document document,
+                TextSpan span,
+                Action<CodeAction> registerRefactoring,
+                CancellationToken cancellationToken
+            ) =>
+                new CodeRefactoringContext(
+                    document,
+                    span,
+                    (action, textSpan) => registerRefactoring(action),
+                    _sharedState.CodeActionOptions,
+                    cancellationToken
+                );
 
             /// <summary>
             /// The <see cref="TestHost"/> we want this test to run in.  Defaults to <see cref="TestHost.InProcess"/> if unspecified.
             /// </summary>
             public TestHost TestHost { get; set; } = TestHost.InProcess;
 
-            private static readonly TestComposition s_editorFeaturesOOPComposition = EditorTestCompositions.EditorFeatures.WithTestHostParts(TestHost.OutOfProcess);
+            private static readonly TestComposition s_editorFeaturesOOPComposition =
+                EditorTestCompositions.EditorFeatures.WithTestHostParts(TestHost.OutOfProcess);
 
             protected override Workspace CreateWorkspaceImpl()
             {

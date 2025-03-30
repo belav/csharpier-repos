@@ -25,14 +25,20 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         public async Task ShowAsync(CancellationToken cancellationToken)
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            var codeDefinitionWindow = await GetRequiredGlobalServiceAsync<SVsCodeDefView, IVsCodeDefView>(cancellationToken);
+            var codeDefinitionWindow = await GetRequiredGlobalServiceAsync<
+                SVsCodeDefView,
+                IVsCodeDefView
+            >(cancellationToken);
             ErrorHandler.ThrowOnFailure(codeDefinitionWindow.ShowWindow());
         }
 
         public async Task HideAsync(CancellationToken cancellationToken)
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            var codeDefinitionWindow = await GetRequiredGlobalServiceAsync<SVsCodeDefView, IVsCodeDefView>(cancellationToken);
+            var codeDefinitionWindow = await GetRequiredGlobalServiceAsync<
+                SVsCodeDefView,
+                IVsCodeDefView
+            >(cancellationToken);
             ErrorHandler.ThrowOnFailure(codeDefinitionWindow.HideWindow());
         }
 
@@ -66,26 +72,41 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            await TestServices.Workspace.WaitForAsyncOperationsAsync(FeatureAttribute.CodeDefinitionWindow, cancellationToken);
+            await TestServices.Workspace.WaitForAsyncOperationsAsync(
+                FeatureAttribute.CodeDefinitionWindow,
+                cancellationToken
+            );
 
-            var codeDefinitionWindow = await GetRequiredGlobalServiceAsync<SVsCodeDefView, IVsCodeDefView>(cancellationToken);
+            var codeDefinitionWindow = await GetRequiredGlobalServiceAsync<
+                SVsCodeDefView,
+                IVsCodeDefView
+            >(cancellationToken);
 
             // The code definition window does some processing on idle, which we can force after we've completed our
             // processing.
             ErrorHandler.ThrowOnFailure(codeDefinitionWindow.ForceIdleProcessing());
         }
 
-        private async Task<IWpfTextView> GetCodeDefinitionWpfTextViewAsync(CancellationToken cancellationToken)
+        private async Task<IWpfTextView> GetCodeDefinitionWpfTextViewAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
-            var shell = await GetRequiredGlobalServiceAsync<SVsUIShell, IVsUIShell>(cancellationToken);
+            var shell = await GetRequiredGlobalServiceAsync<SVsUIShell, IVsUIShell>(
+                cancellationToken
+            );
             var windowGuid = Guid.Parse(ToolWindowGuids80.CodedefinitionWindow);
 
-            Marshal.ThrowExceptionForHR(shell.FindToolWindow(0, ref windowGuid, out var windowFrame));
+            Marshal.ThrowExceptionForHR(
+                shell.FindToolWindow(0, ref windowGuid, out var windowFrame)
+            );
 
             var view = VsShellUtilities.GetTextView(windowFrame);
-            var editorAdaptersService = await GetComponentModelServiceAsync<IVsEditorAdaptersFactoryService>(cancellationToken);
+            var editorAdaptersService =
+                await GetComponentModelServiceAsync<IVsEditorAdaptersFactoryService>(
+                    cancellationToken
+                );
 
             var wpfView = editorAdaptersService.GetWpfTextView(view);
 

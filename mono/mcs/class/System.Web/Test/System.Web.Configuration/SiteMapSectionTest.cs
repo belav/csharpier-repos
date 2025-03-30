@@ -1,5 +1,5 @@
 //
-// SiteMapSectionTest.cs 
+// SiteMapSectionTest.cs
 //	- unit tests for System.Web.Configuration.SiteMapSection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,27 +27,24 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using NUnit.Framework;
-
 using System;
 using System.Configuration;
-using System.Web.Configuration;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Security;
+using NUnit.Framework;
 
-namespace MonoTests.System.Web.Configuration {
-
-	[TestFixture]
-	public class SiteMapSectionTest  {
-
-		[Test]
-		public void Defaults ()
-		{
-			SiteMapSection s = new SiteMapSection ();
-			Assert.IsTrue (s.Enabled, "A1");
-			Assert.AreEqual ("AspNetXmlSiteMapProvider", s.DefaultProvider, "A2");
-		}
-	}
+namespace MonoTests.System.Web.Configuration
+{
+    [TestFixture]
+    public class SiteMapSectionTest
+    {
+        [Test]
+        public void Defaults()
+        {
+            SiteMapSection s = new SiteMapSection();
+            Assert.IsTrue(s.Enabled, "A1");
+            Assert.AreEqual("AspNetXmlSiteMapProvider", s.DefaultProvider, "A2");
+        }
+    }
 }
-

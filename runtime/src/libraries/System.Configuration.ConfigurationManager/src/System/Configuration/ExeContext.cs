@@ -5,8 +5,7 @@ namespace System.Configuration
 {
     public sealed class ExeContext
     {
-        internal ExeContext(ConfigurationUserLevel userContext,
-            string exePath)
+        internal ExeContext(ConfigurationUserLevel userContext, string exePath)
         {
             UserLevel = userContext;
             ExePath = exePath;

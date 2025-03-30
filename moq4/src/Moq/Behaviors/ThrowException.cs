@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace Moq.Behaviors
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class ThrowException : Behavior
@@ -28,7 +27,6 @@ namespace Moq.Behaviors
         sealed class ThrowException : Behavior
     */
     sealed class ThrowException : Behavior
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private readonly Exception exception;

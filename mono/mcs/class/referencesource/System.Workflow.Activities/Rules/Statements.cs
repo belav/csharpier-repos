@@ -1,12 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.CodeDom;
-using System.Reflection;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Reflection;
+using System.Text;
+using System.Workflow.Activities.Common;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Compiler;
-using System.Workflow.Activities.Common;
 
 namespace System.Workflow.Activities.Rules
 {
@@ -40,18 +40,28 @@ namespace System.Workflow.Activities.Rules
 
             if (exprStatement.Expression == null)
             {
-                ValidationError error = new ValidationError(Messages.NullInvokeStatementExpression, ErrorNumbers.Error_ParameterNotSet);
+                ValidationError error = new ValidationError(
+                    Messages.NullInvokeStatementExpression,
+                    ErrorNumbers.Error_ParameterNotSet
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = exprStatement;
                 validation.Errors.Add(error);
             }
             else if (exprStatement.Expression is CodeMethodInvokeExpression)
             {
-                RuleExpressionInfo exprInfo = RuleExpressionWalker.Validate(validation, exprStatement.Expression, false);
+                RuleExpressionInfo exprInfo = RuleExpressionWalker.Validate(
+                    validation,
+                    exprStatement.Expression,
+                    false
+                );
                 success = (exprInfo != null);
             }
             else
             {
-                ValidationError error = new ValidationError(Messages.InvokeNotHandled, ErrorNumbers.Error_CodeExpressionNotHandled);
+                ValidationError error = new ValidationError(
+                    Messages.InvokeNotHandled,
+                    ErrorNumbers.Error_CodeExpressionNotHandled
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = exprStatement;
                 validation.Errors.Add(error);
             }
@@ -61,7 +71,13 @@ namespace System.Workflow.Activities.Rules
 
         internal override void AnalyzeUsage(RuleAnalysis analysis)
         {
-            RuleExpressionWalker.AnalyzeUsage(analysis, exprStatement.Expression, false, false, null);
+            RuleExpressionWalker.AnalyzeUsage(
+                analysis,
+                exprStatement.Expression,
+                false,
+                false,
+                null
+            );
         }
 
         internal override void Execute(RuleExecution execution)
@@ -73,7 +89,9 @@ namespace System.Workflow.Activities.Rules
         {
             if (exprStatement.Expression == null)
             {
-                RuleEvaluationException exception = new RuleEvaluationException(Messages.InvokeStatementNull);
+                RuleEvaluationException exception = new RuleEvaluationException(
+                    Messages.InvokeStatementNull
+                );
                 exception.Data[RuleUserDataKeys.ErrorObject] = exprStatement;
                 throw exception;
             }
@@ -84,8 +102,13 @@ namespace System.Workflow.Activities.Rules
         internal override bool Match(CodeStatement comperand)
         {
             CodeExpressionStatement comperandStatement = comperand as CodeExpressionStatement;
-            return ((comperandStatement != null)
-                && RuleExpressionWalker.Match(exprStatement.Expression, comperandStatement.Expression));
+            return (
+                (comperandStatement != null)
+                && RuleExpressionWalker.Match(
+                    exprStatement.Expression,
+                    comperandStatement.Expression
+                )
+            );
         }
 
         internal override CodeStatement Clone()
@@ -118,7 +141,10 @@ namespace System.Workflow.Activities.Rules
 
             if (assignStatement.Left == null)
             {
-                ValidationError error = new ValidationError(Messages.NullAssignLeft, ErrorNumbers.Error_LeftOperandMissing);
+                ValidationError error = new ValidationError(
+                    Messages.NullAssignLeft,
+                    ErrorNumbers.Error_LeftOperandMissing
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = assignStatement;
                 validation.Errors.Add(error);
             }
@@ -126,19 +152,30 @@ namespace System.Workflow.Activities.Rules
             {
                 lhsExprInfo = validation.ExpressionInfo(assignStatement.Left);
                 if (lhsExprInfo == null)
-                    lhsExprInfo = RuleExpressionWalker.Validate(validation, assignStatement.Left, true);
+                    lhsExprInfo = RuleExpressionWalker.Validate(
+                        validation,
+                        assignStatement.Left,
+                        true
+                    );
             }
 
             RuleExpressionInfo rhsExprInfo = null;
             if (assignStatement.Right == null)
             {
-                ValidationError error = new ValidationError(Messages.NullAssignRight, ErrorNumbers.Error_RightOperandMissing);
+                ValidationError error = new ValidationError(
+                    Messages.NullAssignRight,
+                    ErrorNumbers.Error_RightOperandMissing
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = assignStatement;
                 validation.Errors.Add(error);
             }
             else
             {
-                rhsExprInfo = RuleExpressionWalker.Validate(validation, assignStatement.Right, false);
+                rhsExprInfo = RuleExpressionWalker.Validate(
+                    validation,
+                    assignStatement.Right,
+                    false
+                );
             }
 
             if (lhsExprInfo != null && rhsExprInfo != null)
@@ -149,7 +186,10 @@ namespace System.Workflow.Activities.Rules
                 if (assignmentType == typeof(NullLiteral))
                 {
                     // Can't assign to a null literal.
-                    ValidationError error = new ValidationError(Messages.NullAssignLeft, ErrorNumbers.Error_LeftOperandInvalidType);
+                    ValidationError error = new ValidationError(
+                        Messages.NullAssignLeft,
+                        ErrorNumbers.Error_LeftOperandInvalidType
+                    );
                     error.UserData[RuleUserDataKeys.ErrorObject] = assignStatement;
                     validation.Errors.Add(error);
                     success = false;
@@ -163,12 +203,27 @@ namespace System.Workflow.Activities.Rules
                 {
                     // The types aren't the same, but it still might be a legal assignment.
                     ValidationError error = null;
-                    if (!RuleValidation.TypesAreAssignable(expressionType, assignmentType, assignStatement.Right, out error))
+                    if (
+                        !RuleValidation.TypesAreAssignable(
+                            expressionType,
+                            assignmentType,
+                            assignStatement.Right,
+                            out error
+                        )
+                    )
                     {
                         if (error == null)
                         {
-                            message = string.Format(CultureInfo.CurrentCulture, Messages.AssignNotAllowed, RuleDecompiler.DecompileType(expressionType), RuleDecompiler.DecompileType(assignmentType));
-                            error = new ValidationError(message, ErrorNumbers.Error_OperandTypesIncompatible);
+                            message = string.Format(
+                                CultureInfo.CurrentCulture,
+                                Messages.AssignNotAllowed,
+                                RuleDecompiler.DecompileType(expressionType),
+                                RuleDecompiler.DecompileType(assignmentType)
+                            );
+                            error = new ValidationError(
+                                message,
+                                ErrorNumbers.Error_OperandTypesIncompatible
+                            );
                         }
                         error.UserData[RuleUserDataKeys.ErrorObject] = assignStatement;
                         validation.Errors.Add(error);
@@ -193,11 +248,21 @@ namespace System.Workflow.Activities.Rules
 
         internal override void Execute(RuleExecution execution)
         {
-            Type leftType = execution.Validation.ExpressionInfo(assignStatement.Left).ExpressionType;
-            Type rightType = execution.Validation.ExpressionInfo(assignStatement.Right).ExpressionType;
+            Type leftType = execution
+                .Validation.ExpressionInfo(assignStatement.Left)
+                .ExpressionType;
+            Type rightType = execution
+                .Validation.ExpressionInfo(assignStatement.Right)
+                .ExpressionType;
 
-            RuleExpressionResult leftResult = RuleExpressionWalker.Evaluate(execution, assignStatement.Left);
-            RuleExpressionResult rightResult = RuleExpressionWalker.Evaluate(execution, assignStatement.Right);
+            RuleExpressionResult leftResult = RuleExpressionWalker.Evaluate(
+                execution,
+                assignStatement.Left
+            );
+            RuleExpressionResult rightResult = RuleExpressionWalker.Evaluate(
+                execution,
+                assignStatement.Right
+            );
             leftResult.Value = Executor.AdjustType(rightType, rightResult.Value, leftType);
         }
 
@@ -205,13 +270,17 @@ namespace System.Workflow.Activities.Rules
         {
             if (assignStatement.Right == null)
             {
-                RuleEvaluationException exception = new RuleEvaluationException(Messages.AssignRightNull);
+                RuleEvaluationException exception = new RuleEvaluationException(
+                    Messages.AssignRightNull
+                );
                 exception.Data[RuleUserDataKeys.ErrorObject] = assignStatement;
                 throw exception;
             }
             if (assignStatement.Left == null)
             {
-                RuleEvaluationException exception = new RuleEvaluationException(Messages.AssignLeftNull);
+                RuleEvaluationException exception = new RuleEvaluationException(
+                    Messages.AssignLeftNull
+                );
                 exception.Data[RuleUserDataKeys.ErrorObject] = assignStatement;
                 throw exception;
             }
@@ -224,9 +293,11 @@ namespace System.Workflow.Activities.Rules
         internal override bool Match(CodeStatement comperand)
         {
             CodeAssignStatement comperandStatement = comperand as CodeAssignStatement;
-            return ((comperandStatement != null)
+            return (
+                (comperandStatement != null)
                 && RuleExpressionWalker.Match(assignStatement.Left, comperandStatement.Left)
-                && RuleExpressionWalker.Match(assignStatement.Right, comperandStatement.Right));
+                && RuleExpressionWalker.Match(assignStatement.Right, comperandStatement.Right)
+            );
         }
 
         internal override CodeStatement Clone()

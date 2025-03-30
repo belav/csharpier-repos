@@ -10,7 +10,8 @@ namespace System.Net
         private const string DisableIPv6AppCtxSwitch = "System.Net.DisableIPv6";
         private const string DisableIPv6EnvironmentVariable = "DOTNET_SYSTEM_NET_DISABLEIPV6";
 
-        public static bool OSSupportsIPv6 { get; } = IsSupported(AddressFamily.InterNetworkV6) && !IsIPv6Disabled();
+        public static bool OSSupportsIPv6 { get; } =
+            IsSupported(AddressFamily.InterNetworkV6) && !IsIPv6Disabled();
         public static bool OSSupportsIPv4 { get; } = IsSupported(AddressFamily.InterNetwork);
         public static bool OSSupportsUnixDomainSockets { get; } = IsSupported(AddressFamily.Unix);
 

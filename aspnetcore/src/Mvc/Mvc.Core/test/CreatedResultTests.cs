@@ -68,7 +68,7 @@ public class CreatedResultTests
     [Fact]
     public async Task CreatedResult_ReturnsStatusCode_NotSetLocationHeader()
     {
-        // Arrange        
+        // Arrange
         var httpContext = GetHttpContext();
         var actionContext = GetActionContext(httpContext);
         var result = new CreatedResult((string)null, "testInput");
@@ -104,9 +104,7 @@ public class CreatedResultTests
         var routeData = new RouteData();
         routeData.Routers.Add(Mock.Of<IRouter>());
 
-        return new ActionContext(httpContext,
-                                routeData,
-                                new ActionDescriptor());
+        return new ActionContext(httpContext, routeData, new ActionDescriptor());
     }
 
     private static HttpContext GetHttpContext()
@@ -122,14 +120,19 @@ public class CreatedResultTests
     {
         var options = Options.Create(new MvcOptions());
         options.Value.OutputFormatters.Add(new StringOutputFormatter());
-        options.Value.OutputFormatters.Add(SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions()));
+        options.Value.OutputFormatters.Add(
+            SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions())
+        );
 
         var services = new ServiceCollection();
-        services.AddSingleton<IActionResultExecutor<ObjectResult>>(new ObjectResultExecutor(
-            new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
-            new TestHttpResponseStreamWriterFactory(),
-            NullLoggerFactory.Instance,
-            options));
+        services.AddSingleton<IActionResultExecutor<ObjectResult>>(
+            new ObjectResultExecutor(
+                new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
+                new TestHttpResponseStreamWriterFactory(),
+                NullLoggerFactory.Instance,
+                options
+            )
+        );
 
         return services.BuildServiceProvider();
     }

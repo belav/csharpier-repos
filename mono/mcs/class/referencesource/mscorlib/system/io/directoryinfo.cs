@@ -1,16 +1,16 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  DirectoryInfo
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
-** Purpose: Exposes routines for enumerating through a 
+** Purpose: Exposes routines for enumerating through a
 ** directory.
 **
 **          April 11,2000
@@ -20,18 +20,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Runtime.Versioning;
 using System.Security;
+using System.Security.Permissions;
+using System.Text;
+using Microsoft.Win32;
 #if FEATURE_MACL
 using System.Security.AccessControl;
 #endif
-using System.Security.Permissions;
-using Microsoft.Win32;
-using System.Text;
-using System.Runtime.InteropServices;
-using System.Globalization;
-using System.Runtime.Serialization;
-using System.Runtime.Versioning;
-using System.Diagnostics.Contracts;
 
 namespace System.IO
 {
@@ -51,8 +51,7 @@ namespace System.IO
 #else
         [System.Security.SecuritySafeCritical]
 #endif //FEATURE_CORESYSTEM
-        private DirectoryInfo(){}
-
+        private DirectoryInfo() { }
 
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.Machine)]
@@ -74,7 +73,7 @@ namespace System.IO
         [ResourceConsumption(ResourceScope.Machine)]
         public DirectoryInfo(String path)
         {
-            if (path==null)
+            if (path == null)
                 throw new ArgumentNullException("path");
             Contract.EndContractBlock();
 
@@ -118,8 +117,9 @@ namespace System.IO
             DisplayPath = GetDisplayName(OriginalPath, FullPath);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private DirectoryInfo(SerializationInfo info, StreamingContext context) : base(info, context)
+        [System.Security.SecurityCritical] // auto-generated
+        private DirectoryInfo(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             Directory.CheckPermissions(string.Empty, FullPath, checkHost: false);
             DisplayPath = GetDisplayName(OriginalPath, FullPath);
@@ -129,7 +129,7 @@ namespace System.IO
         {
             [ResourceExposure(ResourceScope.Machine)]
             [ResourceConsumption(ResourceScope.Machine)]
-            get 
+            get
             {
 #if FEATURE_CORECLR
                 // DisplayPath is dir name for coreclr
@@ -146,7 +146,12 @@ namespace System.IO
             [SecuritySafeCritical]
             get
             {
-                Directory.CheckPermissions(string.Empty, FullPath, checkHost: true, access: FileSecurityStateAccess.PathDiscovery);
+                Directory.CheckPermissions(
+                    string.Empty,
+                    FullPath,
+                    checkHost: true,
+                    access: FileSecurityStateAccess.PathDiscovery
+                );
                 return FullPath;
             }
         }
@@ -156,7 +161,12 @@ namespace System.IO
             [SecurityCritical]
             get
             {
-                Directory.CheckPermissions(string.Empty, FullPath, checkHost: false, access: FileSecurityStateAccess.PathDiscovery);
+                Directory.CheckPermissions(
+                    string.Empty,
+                    FullPath,
+                    checkHost: false,
+                    access: FileSecurityStateAccess.PathDiscovery
+                );
                 return FullPath;
             }
         }
@@ -169,17 +179,22 @@ namespace System.IO
             get
             {
                 string parentName;
-                // FullPath might be either "c:\bar" or "c:\bar\".  Handle 
+                // FullPath might be either "c:\bar" or "c:\bar\".  Handle
                 // those cases, as well as avoiding mangling "c:\".
                 string s = FullPath;
                 if (s.Length > 3 && s.EndsWith(Path.DirectorySeparatorChar))
                     s = FullPath.Substring(0, FullPath.Length - 1);
                 parentName = Path.GetDirectoryName(s);
-                if (parentName==null)
+                if (parentName == null)
                     return null;
 
                 DirectoryInfo dir = new DirectoryInfo(parentName, false);
-                Directory.CheckPermissions(string.Empty, dir.FullPath, checkHost: true, access: FileSecurityStateAccess.PathDiscovery | FileSecurityStateAccess.Read);
+                Directory.CheckPermissions(
+                    string.Empty,
+                    dir.FullPath,
+                    checkHost: true,
+                    access: FileSecurityStateAccess.PathDiscovery | FileSecurityStateAccess.Read
+                );
                 return dir;
             }
         }
@@ -189,7 +204,8 @@ namespace System.IO
 #if FEATURE_CORECLR
         [System.Security.SecuritySafeCritical]
 #endif
-        public DirectoryInfo CreateSubdirectory(String path) {
+        public DirectoryInfo CreateSubdirectory(String path)
+        {
             if (path == null)
                 throw new ArgumentNullException("path");
             Contract.EndContractBlock();
@@ -198,7 +214,7 @@ namespace System.IO
         }
 
 #if FEATURE_MACL
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public DirectoryInfo CreateSubdirectory(String path, DirectorySecurity directorySecurity)
@@ -206,9 +222,9 @@ namespace System.IO
             return CreateSubdirectoryHelper(path, directorySecurity);
         }
 #else  // FEATURE_MACL
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
+#endif
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public DirectoryInfo CreateSubdirectory(String path, Object directorySecurity)
@@ -221,7 +237,7 @@ namespace System.IO
         }
 #endif // FEATURE_MACL
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         private DirectoryInfo CreateSubdirectoryHelper(String path, Object directorySecurity)
@@ -231,18 +247,40 @@ namespace System.IO
             String newDirs = Path.InternalCombine(FullPath, path);
             String fullPath = Path.GetFullPathInternal(newDirs);
 
-            if (0!=String.Compare(FullPath,0,fullPath,0, FullPath.Length,StringComparison.OrdinalIgnoreCase)) {
+            if (
+                0
+                != String.Compare(
+                    FullPath,
+                    0,
+                    fullPath,
+                    0,
+                    FullPath.Length,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
+            {
                 String displayPath = __Error.GetDisplayablePath(DisplayPath, false);
-                throw new ArgumentException(Environment.GetResourceString("Argument_InvalidSubPath", path, displayPath));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_InvalidSubPath", path, displayPath)
+                );
             }
 
             // Ensure we have permission to create this subdirectory.
             String demandDirForCreation = Directory.GetDemandDir(fullPath, true);
 #if FEATURE_CORECLR
-            FileSecurityState state = new FileSecurityState(FileSecurityStateAccess.Write, OriginalPath, demandDirForCreation);
+            FileSecurityState state = new FileSecurityState(
+                FileSecurityStateAccess.Write,
+                OriginalPath,
+                demandDirForCreation
+            );
             state.EnsureState();
 #else
-            FileIOPermission.QuickDemand(FileIOPermissionAccess.Write, demandDirForCreation, false, false);
+            FileIOPermission.QuickDemand(
+                FileIOPermissionAccess.Write,
+                demandDirForCreation,
+                false,
+                false
+            );
 #endif
 
             Directory.InternalCreateDirectory(fullPath, path, directorySecurity);
@@ -268,12 +306,13 @@ namespace System.IO
 #endif
 
         // Tests if the given path refers to an existing DirectoryInfo on disk.
-        // 
+        //
         // Your application must have Read permission to the directory's
         // contents.
         //
-        public override bool Exists {
-            [System.Security.SecuritySafeCritical]  // auto-generated
+        public override bool Exists
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
             get
             {
                 try
@@ -282,8 +321,9 @@ namespace System.IO
                         Refresh();
                     if (_dataInitialised != 0) // Refresh was unable to initialise the data
                         return false;
-                   
-                    return _data.fileAttributes != -1 && (_data.fileAttributes & Win32Native.FILE_ATTRIBUTE_DIRECTORY) != 0;
+
+                    return _data.fileAttributes != -1
+                        && (_data.fileAttributes & Win32Native.FILE_ATTRIBUTE_DIRECTORY) != 0;
                 }
                 catch
                 {
@@ -291,13 +331,18 @@ namespace System.IO
                 }
             }
         }
-      
+
 #if FEATURE_MACL
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         public DirectorySecurity GetAccessControl()
         {
-            return Directory.GetAccessControl(FullPath, AccessControlSections.Access | AccessControlSections.Owner | AccessControlSections.Group);
+            return Directory.GetAccessControl(
+                FullPath,
+                AccessControlSections.Access
+                    | AccessControlSections.Owner
+                    | AccessControlSections.Group
+            );
         }
 
         [ResourceExposure(ResourceScope.None)]
@@ -315,7 +360,7 @@ namespace System.IO
         }
 #endif
 
-        // Returns an array of Files in the current DirectoryInfo matching the 
+        // Returns an array of Files in the current DirectoryInfo matching the
         // given search criteria (ie, "*.txt").
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
@@ -328,7 +373,7 @@ namespace System.IO
             return InternalGetFiles(searchPattern, SearchOption.TopDirectoryOnly);
         }
 
-        // Returns an array of Files in the current DirectoryInfo matching the 
+        // Returns an array of Files in the current DirectoryInfo matching the
         // given search criteria (ie, "*.txt").
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
@@ -336,23 +381,37 @@ namespace System.IO
         {
             if (searchPattern == null)
                 throw new ArgumentNullException("searchPattern");
-            if ((searchOption != SearchOption.TopDirectoryOnly) && (searchOption != SearchOption.AllDirectories))
-                throw new ArgumentOutOfRangeException("searchOption", Environment.GetResourceString("ArgumentOutOfRange_Enum"));
+            if (
+                (searchOption != SearchOption.TopDirectoryOnly)
+                && (searchOption != SearchOption.AllDirectories)
+            )
+                throw new ArgumentOutOfRangeException(
+                    "searchOption",
+                    Environment.GetResourceString("ArgumentOutOfRange_Enum")
+                );
             Contract.EndContractBlock();
 
             return InternalGetFiles(searchPattern, searchOption);
         }
 
-        // Returns an array of Files in the current DirectoryInfo matching the 
+        // Returns an array of Files in the current DirectoryInfo matching the
         // given search criteria (ie, "*.txt").
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         private FileInfo[] InternalGetFiles(String searchPattern, SearchOption searchOption)
         {
             Contract.Requires(searchPattern != null);
-            Contract.Requires(searchOption == SearchOption.AllDirectories || searchOption == SearchOption.TopDirectoryOnly);
+            Contract.Requires(
+                searchOption == SearchOption.AllDirectories
+                    || searchOption == SearchOption.TopDirectoryOnly
+            );
 
-            IEnumerable<FileInfo> enble = FileSystemEnumerableFactory.CreateFileInfoIterator(FullPath, OriginalPath, searchPattern, searchOption);
+            IEnumerable<FileInfo> enble = FileSystemEnumerableFactory.CreateFileInfoIterator(
+                FullPath,
+                OriginalPath,
+                searchPattern,
+                searchOption
+            );
             List<FileInfo> fileList = new List<FileInfo>(enble);
             return fileList.ToArray();
         }
@@ -394,8 +453,14 @@ namespace System.IO
         {
             if (searchPattern == null)
                 throw new ArgumentNullException("searchPattern");
-            if ((searchOption != SearchOption.TopDirectoryOnly) && (searchOption != SearchOption.AllDirectories))
-                throw new ArgumentOutOfRangeException("searchOption", Environment.GetResourceString("ArgumentOutOfRange_Enum"));
+            if (
+                (searchOption != SearchOption.TopDirectoryOnly)
+                && (searchOption != SearchOption.AllDirectories)
+            )
+                throw new ArgumentOutOfRangeException(
+                    "searchOption",
+                    Environment.GetResourceString("ArgumentOutOfRange_Enum")
+                );
             Contract.EndContractBlock();
 
             return InternalGetFileSystemInfos(searchPattern, searchOption);
@@ -405,12 +470,24 @@ namespace System.IO
         // given search criteria (ie, "*.txt").
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private FileSystemInfo[] InternalGetFileSystemInfos(String searchPattern, SearchOption searchOption)
+        private FileSystemInfo[] InternalGetFileSystemInfos(
+            String searchPattern,
+            SearchOption searchOption
+        )
         {
             Contract.Requires(searchPattern != null);
-            Contract.Requires(searchOption == SearchOption.AllDirectories || searchOption == SearchOption.TopDirectoryOnly);
+            Contract.Requires(
+                searchOption == SearchOption.AllDirectories
+                    || searchOption == SearchOption.TopDirectoryOnly
+            );
 
-            IEnumerable<FileSystemInfo> enble = FileSystemEnumerableFactory.CreateFileSystemInfoIterator(FullPath, OriginalPath, searchPattern, searchOption);
+            IEnumerable<FileSystemInfo> enble =
+                FileSystemEnumerableFactory.CreateFileSystemInfoIterator(
+                    FullPath,
+                    OriginalPath,
+                    searchPattern,
+                    searchOption
+                );
             List<FileSystemInfo> fileList = new List<FileSystemInfo>(enble);
             return fileList.ToArray();
         }
@@ -424,7 +501,7 @@ namespace System.IO
             return InternalGetFileSystemInfos("*", SearchOption.TopDirectoryOnly);
         }
 
-        // Returns an array of Directories in the current DirectoryInfo matching the 
+        // Returns an array of Directories in the current DirectoryInfo matching the
         // given search criteria (ie, "System*" could match the System & System32
         // directories).
         [ResourceExposure(ResourceScope.Machine)]
@@ -438,7 +515,7 @@ namespace System.IO
             return InternalGetDirectories(searchPattern, SearchOption.TopDirectoryOnly);
         }
 
-        // Returns an array of Directories in the current DirectoryInfo matching the 
+        // Returns an array of Directories in the current DirectoryInfo matching the
         // given search criteria (ie, "System*" could match the System & System32
         // directories).
         [ResourceExposure(ResourceScope.Machine)]
@@ -447,24 +524,42 @@ namespace System.IO
         {
             if (searchPattern == null)
                 throw new ArgumentNullException("searchPattern");
-            if ((searchOption != SearchOption.TopDirectoryOnly) && (searchOption != SearchOption.AllDirectories))
-                throw new ArgumentOutOfRangeException("searchOption", Environment.GetResourceString("ArgumentOutOfRange_Enum"));
+            if (
+                (searchOption != SearchOption.TopDirectoryOnly)
+                && (searchOption != SearchOption.AllDirectories)
+            )
+                throw new ArgumentOutOfRangeException(
+                    "searchOption",
+                    Environment.GetResourceString("ArgumentOutOfRange_Enum")
+                );
             Contract.EndContractBlock();
 
             return InternalGetDirectories(searchPattern, searchOption);
         }
 
-        // Returns an array of Directories in the current DirectoryInfo matching the 
+        // Returns an array of Directories in the current DirectoryInfo matching the
         // given search criteria (ie, "System*" could match the System & System32
         // directories).
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private DirectoryInfo[] InternalGetDirectories(String searchPattern, SearchOption searchOption)
+        private DirectoryInfo[] InternalGetDirectories(
+            String searchPattern,
+            SearchOption searchOption
+        )
         {
             Contract.Requires(searchPattern != null);
-            Contract.Requires(searchOption == SearchOption.AllDirectories || searchOption == SearchOption.TopDirectoryOnly);
+            Contract.Requires(
+                searchOption == SearchOption.AllDirectories
+                    || searchOption == SearchOption.TopDirectoryOnly
+            );
 
-            IEnumerable<DirectoryInfo> enble = FileSystemEnumerableFactory.CreateDirectoryInfoIterator(FullPath, OriginalPath, searchPattern, searchOption);
+            IEnumerable<DirectoryInfo> enble =
+                FileSystemEnumerableFactory.CreateDirectoryInfoIterator(
+                    FullPath,
+                    OriginalPath,
+                    searchPattern,
+                    searchOption
+                );
             List<DirectoryInfo> fileList = new List<DirectoryInfo>(enble);
             return fileList.ToArray();
         }
@@ -489,12 +584,21 @@ namespace System.IO
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public IEnumerable<DirectoryInfo> EnumerateDirectories(String searchPattern, SearchOption searchOption)
+        public IEnumerable<DirectoryInfo> EnumerateDirectories(
+            String searchPattern,
+            SearchOption searchOption
+        )
         {
             if (searchPattern == null)
                 throw new ArgumentNullException("searchPattern");
-            if ((searchOption != SearchOption.TopDirectoryOnly) && (searchOption != SearchOption.AllDirectories))
-                throw new ArgumentOutOfRangeException("searchOption", Environment.GetResourceString("ArgumentOutOfRange_Enum"));
+            if (
+                (searchOption != SearchOption.TopDirectoryOnly)
+                && (searchOption != SearchOption.AllDirectories)
+            )
+                throw new ArgumentOutOfRangeException(
+                    "searchOption",
+                    Environment.GetResourceString("ArgumentOutOfRange_Enum")
+                );
             Contract.EndContractBlock();
 
             return InternalEnumerateDirectories(searchPattern, searchOption);
@@ -502,12 +606,23 @@ namespace System.IO
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private IEnumerable<DirectoryInfo> InternalEnumerateDirectories(String searchPattern, SearchOption searchOption)
+        private IEnumerable<DirectoryInfo> InternalEnumerateDirectories(
+            String searchPattern,
+            SearchOption searchOption
+        )
         {
             Contract.Requires(searchPattern != null);
-            Contract.Requires(searchOption == SearchOption.AllDirectories || searchOption == SearchOption.TopDirectoryOnly);
+            Contract.Requires(
+                searchOption == SearchOption.AllDirectories
+                    || searchOption == SearchOption.TopDirectoryOnly
+            );
 
-            return FileSystemEnumerableFactory.CreateDirectoryInfoIterator(FullPath, OriginalPath, searchPattern, searchOption);
+            return FileSystemEnumerableFactory.CreateDirectoryInfoIterator(
+                FullPath,
+                OriginalPath,
+                searchPattern,
+                searchOption
+            );
         }
 
         [ResourceExposure(ResourceScope.Machine)]
@@ -534,8 +649,14 @@ namespace System.IO
         {
             if (searchPattern == null)
                 throw new ArgumentNullException("searchPattern");
-            if ((searchOption != SearchOption.TopDirectoryOnly) && (searchOption != SearchOption.AllDirectories))
-                throw new ArgumentOutOfRangeException("searchOption", Environment.GetResourceString("ArgumentOutOfRange_Enum"));
+            if (
+                (searchOption != SearchOption.TopDirectoryOnly)
+                && (searchOption != SearchOption.AllDirectories)
+            )
+                throw new ArgumentOutOfRangeException(
+                    "searchOption",
+                    Environment.GetResourceString("ArgumentOutOfRange_Enum")
+                );
             Contract.EndContractBlock();
 
             return InternalEnumerateFiles(searchPattern, searchOption);
@@ -543,12 +664,23 @@ namespace System.IO
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private IEnumerable<FileInfo> InternalEnumerateFiles(String searchPattern, SearchOption searchOption)
+        private IEnumerable<FileInfo> InternalEnumerateFiles(
+            String searchPattern,
+            SearchOption searchOption
+        )
         {
             Contract.Requires(searchPattern != null);
-            Contract.Requires(searchOption == SearchOption.AllDirectories || searchOption == SearchOption.TopDirectoryOnly);
+            Contract.Requires(
+                searchOption == SearchOption.AllDirectories
+                    || searchOption == SearchOption.TopDirectoryOnly
+            );
 
-            return FileSystemEnumerableFactory.CreateFileInfoIterator(FullPath, OriginalPath, searchPattern, searchOption);
+            return FileSystemEnumerableFactory.CreateFileInfoIterator(
+                FullPath,
+                OriginalPath,
+                searchPattern,
+                searchOption
+            );
         }
 
         [ResourceExposure(ResourceScope.Machine)]
@@ -571,12 +703,21 @@ namespace System.IO
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public IEnumerable<FileSystemInfo> EnumerateFileSystemInfos(String searchPattern, SearchOption searchOption)
+        public IEnumerable<FileSystemInfo> EnumerateFileSystemInfos(
+            String searchPattern,
+            SearchOption searchOption
+        )
         {
             if (searchPattern == null)
                 throw new ArgumentNullException("searchPattern");
-            if ((searchOption != SearchOption.TopDirectoryOnly) && (searchOption != SearchOption.AllDirectories))
-                throw new ArgumentOutOfRangeException("searchOption", Environment.GetResourceString("ArgumentOutOfRange_Enum"));
+            if (
+                (searchOption != SearchOption.TopDirectoryOnly)
+                && (searchOption != SearchOption.AllDirectories)
+            )
+                throw new ArgumentOutOfRangeException(
+                    "searchOption",
+                    Environment.GetResourceString("ArgumentOutOfRange_Enum")
+                );
             Contract.EndContractBlock();
 
             return InternalEnumerateFileSystemInfos(searchPattern, searchOption);
@@ -584,14 +725,25 @@ namespace System.IO
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private IEnumerable<FileSystemInfo> InternalEnumerateFileSystemInfos(String searchPattern, SearchOption searchOption)
+        private IEnumerable<FileSystemInfo> InternalEnumerateFileSystemInfos(
+            String searchPattern,
+            SearchOption searchOption
+        )
         {
             Contract.Requires(searchPattern != null);
-            Contract.Requires(searchOption == SearchOption.AllDirectories || searchOption == SearchOption.TopDirectoryOnly);
+            Contract.Requires(
+                searchOption == SearchOption.AllDirectories
+                    || searchOption == SearchOption.TopDirectoryOnly
+            );
 
-            return FileSystemEnumerableFactory.CreateFileSystemInfoIterator(FullPath, OriginalPath, searchPattern, searchOption);
+            return FileSystemEnumerableFactory.CreateFileSystemInfoIterator(
+                FullPath,
+                OriginalPath,
+                searchPattern,
+                searchOption
+            );
         }
-        
+
         // Returns the root portion of the given path. The resulting string
         // consists of those rightmost characters of the path that constitute the
         // root of the path. Possible patterns for the resulting string are: An
@@ -602,7 +754,8 @@ namespace System.IO
         // The resulting string is null if path is null.
         //
 
-        public DirectoryInfo Root {
+        public DirectoryInfo Root
+        {
             [System.Security.SecuritySafeCritical]
             [ResourceExposure(ResourceScope.None)]
             [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
@@ -614,10 +767,19 @@ namespace System.IO
                 demandPath = Directory.GetDemandDir(rootPath, true);
 
 #if FEATURE_CORECLR
-                FileSecurityState sourceState = new FileSecurityState(FileSecurityStateAccess.PathDiscovery, String.Empty, demandPath);
+                FileSecurityState sourceState = new FileSecurityState(
+                    FileSecurityStateAccess.PathDiscovery,
+                    String.Empty,
+                    demandPath
+                );
                 sourceState.EnsureState();
 #else
-                FileIOPermission.QuickDemand(FileIOPermissionAccess.PathDiscovery, demandPath, false, false);
+                FileIOPermission.QuickDemand(
+                    FileIOPermissionAccess.PathDiscovery,
+                    demandPath,
+                    false,
+                    false
+                );
 #endif
                 return new DirectoryInfo(rootPath);
             }
@@ -628,13 +790,21 @@ namespace System.IO
         [ResourceConsumption(ResourceScope.Machine)]
         public void MoveTo(string destDirName)
         {
-            if (destDirName==null)
+            if (destDirName == null)
                 throw new ArgumentNullException("destDirName");
-            if (destDirName.Length==0)
-                throw new ArgumentException(Environment.GetResourceString("Argument_EmptyFileName"), "destDirName");
+            if (destDirName.Length == 0)
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_EmptyFileName"),
+                    "destDirName"
+                );
             Contract.EndContractBlock();
 
-            Directory.CheckPermissions(DisplayPath, FullPath, checkHost: true, access: FileSecurityStateAccess.Write | FileSecurityStateAccess.Read);
+            Directory.CheckPermissions(
+                DisplayPath,
+                FullPath,
+                checkHost: true,
+                access: FileSecurityStateAccess.Write | FileSecurityStateAccess.Read
+            );
 
             string fullDestDirName = Path.GetFullPathInternal(destDirName);
             if (!fullDestDirName.EndsWith(Path.DirectorySeparatorChar))
@@ -642,12 +812,17 @@ namespace System.IO
 
             // Demand read & write permission to destination.  The reason is
             // we hand back a DirectoryInfo to the destination that would allow
-            // you to read a directory listing from that directory.  Sure, you 
+            // you to read a directory listing from that directory.  Sure, you
             // had the ability to read the file contents in the old location,
-            // but you technically also need read permissions to the new 
+            // but you technically also need read permissions to the new
             // location as well, and write is not a true superset of read.
 
-            Directory.CheckPermissions(destDirName, fullDestDirName, checkHost: true, access: FileSecurityStateAccess.Write | FileSecurityStateAccess.Read);
+            Directory.CheckPermissions(
+                destDirName,
+                fullDestDirName,
+                checkHost: true,
+                access: FileSecurityStateAccess.Write | FileSecurityStateAccess.Read
+            );
 
             String fullSourcePath;
             if (FullPath.EndsWith(Path.DirectorySeparatorChar))
@@ -655,15 +830,24 @@ namespace System.IO
             else
                 fullSourcePath = FullPath + Path.DirectorySeparatorChar;
 
-            if (String.Compare(fullSourcePath, fullDestDirName, StringComparison.OrdinalIgnoreCase) == 0)
-                throw new IOException(Environment.GetResourceString("IO.IO_SourceDestMustBeDifferent"));
+            if (
+                String.Compare(fullSourcePath, fullDestDirName, StringComparison.OrdinalIgnoreCase)
+                == 0
+            )
+                throw new IOException(
+                    Environment.GetResourceString("IO.IO_SourceDestMustBeDifferent")
+                );
 
             String sourceRoot = Path.GetPathRoot(fullSourcePath);
             String destinationRoot = Path.GetPathRoot(fullDestDirName);
 
-            if (String.Compare(sourceRoot, destinationRoot, StringComparison.OrdinalIgnoreCase) != 0)
-                throw new IOException(Environment.GetResourceString("IO.IO_SourceDestMustHaveSameRoot"));
-                       
+            if (
+                String.Compare(sourceRoot, destinationRoot, StringComparison.OrdinalIgnoreCase) != 0
+            )
+                throw new IOException(
+                    Environment.GetResourceString("IO.IO_SourceDestMustHaveSameRoot")
+                );
+
             if (!Win32Native.MoveFile(FullPath, destDirName))
             {
                 int hr = Marshal.GetLastWin32Error();
@@ -673,8 +857,13 @@ namespace System.IO
                     __Error.WinIOError(hr, DisplayPath);
                 }
 
-                if (hr == Win32Native.ERROR_ACCESS_DENIED) // We did this for Win9x. We can't change it for backcomp. 
-                    throw new IOException(Environment.GetResourceString("UnauthorizedAccess_IODenied_Path", DisplayPath));
+                if (hr == Win32Native.ERROR_ACCESS_DENIED) // We did this for Win9x. We can't change it for backcomp.
+                    throw new IOException(
+                        Environment.GetResourceString(
+                            "UnauthorizedAccess_IODenied_Path",
+                            DisplayPath
+                        )
+                    );
 
                 __Error.WinIOError(hr, string.Empty);
             }
@@ -720,7 +909,7 @@ namespace System.IO
             {
                 displayName = ".";
             }
-            else 
+            else
             {
 #if FEATURE_CORECLR
                 displayName = GetDirName(fullPath);
@@ -747,11 +936,9 @@ namespace System.IO
             }
             else
             {
-                dirName = fullPath;  // For rooted paths, like "c:\"
+                dirName = fullPath; // For rooted paths, like "c:\"
             }
             return dirName;
         }
-
-    }       
+    }
 }
-

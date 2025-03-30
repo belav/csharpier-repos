@@ -1,22 +1,25 @@
 using System;
 using System.Collections;
-using System.Workflow.ComponentModel;
-using System.Workflow.Runtime;
 using System.Diagnostics;
 using System.Transactions;
+using System.Workflow.ComponentModel;
+using System.Workflow.Runtime;
 
 namespace System.Workflow.Runtime
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IPendingWork
     {
         /// <summary>
-        /// Allows pending work members to assert that they need to commit.  
+        /// Allows pending work members to assert that they need to commit.
         /// This is used to eliminate unnecessary commits.
         /// </summary>
         /// <param name="items">Items belonging to this pending work member</param>
         /// <returns>true if a Commit is required; false if not</returns>
         bool MustCommit(ICollection items);
+
         /// <summary>
         /// Commmit the work items using the transaction
         /// </summary>

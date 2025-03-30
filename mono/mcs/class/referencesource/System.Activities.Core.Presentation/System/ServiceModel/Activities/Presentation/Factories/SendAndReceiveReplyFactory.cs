@@ -5,15 +5,15 @@
 namespace System.ServiceModel.Activities.Presentation.Factories
 {
     using System.Activities;
+    using System.Activities.Expressions;
     using System.Activities.Presentation;
+    using System.Activities.Presentation.Services;
+    using System.Activities.Presentation.View;
     using System.Activities.Statements;
     using System.ServiceModel.Activities;
     using System.Windows;
     using System.Xml.Linq;
     using Microsoft.VisualBasic.Activities;
-    using System.Activities.Presentation.View;
-    using System.Activities.Presentation.Services;
-    using System.Activities.Expressions;
 
     public sealed class SendAndReceiveReplyFactory : IActivityTemplateFactory
     {
@@ -23,10 +23,17 @@ namespace System.ServiceModel.Activities.Presentation.Factories
 
         public Activity Create(DependencyObject target)
         {
-            string correlationHandleName = ActivityDesignerHelper.GenerateUniqueVariableNameForContext(target, correlationHandleNamePrefix);
+            string correlationHandleName =
+                ActivityDesignerHelper.GenerateUniqueVariableNameForContext(
+                    target,
+                    correlationHandleNamePrefix
+                );
 
-            Variable<CorrelationHandle> requestReplyCorrelation = new Variable<CorrelationHandle> { Name = correlationHandleName };
-           
+            Variable<CorrelationHandle> requestReplyCorrelation = new Variable<CorrelationHandle>
+            {
+                Name = correlationHandleName,
+            };
+
             Send send = new Send
             {
                 OperationName = "Operation1",
@@ -35,9 +42,12 @@ namespace System.ServiceModel.Activities.Presentation.Factories
                 {
                     new RequestReplyCorrelationInitializer
                     {
-                        CorrelationHandle = new VariableValue<CorrelationHandle> { Variable = requestReplyCorrelation }
-                    }
-                }
+                        CorrelationHandle = new VariableValue<CorrelationHandle>
+                        {
+                            Variable = requestReplyCorrelation,
+                        },
+                    },
+                },
             };
 
             Sequence sequence = new Sequence()
@@ -46,12 +56,8 @@ namespace System.ServiceModel.Activities.Presentation.Factories
                 Activities =
                 {
                     send,
-                    new ReceiveReply
-                    {      
-                        DisplayName = "ReceiveReplyForSend",
-                        Request = send,
-                    },
-                }
+                    new ReceiveReply { DisplayName = "ReceiveReplyForSend", Request = send },
+                },
             };
             return sequence;
         }

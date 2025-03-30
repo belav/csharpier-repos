@@ -6,7 +6,6 @@ using Xunit;
 
 public class Program
 {
-
     private static TestUtil.TestLog testLog;
 
     static Program()
@@ -45,8 +44,10 @@ public class Program
                         try
                         {
                             Console.WriteLine("   in try");
-                            if (count-- == 0) goto G1;
-                            if (count < 0) throw new Exception();
+                            if (count-- == 0)
+                                goto G1;
+                            if (count < 0)
+                                throw new Exception();
                         }
                         finally
                         {

@@ -29,8 +29,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "a", CallSiteKind.Inferred) };
+            var updatedSignature = new[]
+            {
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "a",
+                    CallSiteKind.Inferred
+                ),
+            };
             var updatedCode = """
                 class C
                 {
@@ -41,7 +47,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -57,8 +68,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "a", CallSiteKind.Inferred) };
+            var updatedSignature = new[]
+            {
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "a",
+                    CallSiteKind.Inferred
+                ),
+            };
             var updatedCode = """
                 class C
                 {
@@ -70,7 +87,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -86,8 +108,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "a", CallSiteKind.Inferred) };
+            var updatedSignature = new[]
+            {
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "a",
+                    CallSiteKind.Inferred
+                ),
+            };
             var updatedCode = """
                 class C
                 {
@@ -99,7 +127,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -116,8 +149,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "a", CallSiteKind.Inferred) };
+            var updatedSignature = new[]
+            {
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "a",
+                    CallSiteKind.Inferred
+                ),
+            };
             var updatedCode = """
                 class C
                 {
@@ -130,7 +169,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -145,9 +189,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(0),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "a", CallSiteKind.Inferred) };
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "a",
+                    CallSiteKind.Inferred
+                ),
+            };
             var updatedCode = """
                 class C
                 {
@@ -158,7 +208,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -175,8 +230,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "a", CallSiteKind.Inferred) };
+            var updatedSignature = new[]
+            {
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "a",
+                    CallSiteKind.Inferred
+                ),
+            };
             var updatedCode = """
                 class C
                 {
@@ -189,7 +250,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -206,8 +272,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "a", CallSiteKind.Inferred) };
+            var updatedSignature = new[]
+            {
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "a",
+                    CallSiteKind.Inferred
+                ),
+            };
             var updatedCode = """
                 class C
                 {
@@ -220,7 +292,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [Fact]
@@ -239,8 +316,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
-                AddedParameterOrExistingIndex.CreateAdded("B", "b", CallSiteKind.Inferred) };
+            var updatedSignature = new[]
+            {
+                AddedParameterOrExistingIndex.CreateAdded("B", "b", CallSiteKind.Inferred),
+            };
             var updatedCode = """
                 class B { }
                 class D : B { }
@@ -255,7 +334,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
     }
 }

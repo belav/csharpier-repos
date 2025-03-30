@@ -3,18 +3,17 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Linq;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis.Options;
 using Roslyn.Utilities;
-using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Internal.Log
 {
     internal static class FunctionIdOptions
     {
-        private static readonly ConcurrentDictionary<FunctionId, Option2<bool>> s_options =
-            new();
+        private static readonly ConcurrentDictionary<FunctionId, Option2<bool>> s_options = new();
 
         private static readonly Func<FunctionId, Option2<bool>> s_optionCreator = CreateOption;
 
@@ -36,18 +35,20 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             return new("FunctionIdOptions_" + name, defaultValue: false);
         }
 
-        private static IEnumerable<FunctionId> GetFunctionIds()
-            => Enum.GetValues(typeof(FunctionId)).Cast<FunctionId>();
+        private static IEnumerable<FunctionId> GetFunctionIds() =>
+            Enum.GetValues(typeof(FunctionId)).Cast<FunctionId>();
 
-        public static IEnumerable<IOption2> GetOptions()
-            => GetFunctionIds().Select(GetOption);
+        public static IEnumerable<IOption2> GetOptions() => GetFunctionIds().Select(GetOption);
 
-        public static Option2<bool> GetOption(FunctionId id)
-            => s_options.GetOrAdd(id, s_optionCreator);
+        public static Option2<bool> GetOption(FunctionId id) =>
+            s_options.GetOrAdd(id, s_optionCreator);
 
-        public static Func<FunctionId, bool> CreateFunctionIsEnabledPredicate(IGlobalOptionService globalOptions)
+        public static Func<FunctionId, bool> CreateFunctionIsEnabledPredicate(
+            IGlobalOptionService globalOptions
+        )
         {
-            var functionIdOptions = GetFunctionIds().ToDictionary(id => id, id => globalOptions.GetOption(GetOption(id)));
+            var functionIdOptions = GetFunctionIds()
+                .ToDictionary(id => id, id => globalOptions.GetOption(GetOption(id)));
             return functionId => functionIdOptions[functionId];
         }
     }

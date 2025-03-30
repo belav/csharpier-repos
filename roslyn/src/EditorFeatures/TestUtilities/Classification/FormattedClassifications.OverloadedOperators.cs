@@ -14,8 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
         public static class OverloadedOperators
         {
             [DebuggerStepThrough]
-            private static FormattedClassification New(string text)
-                => new FormattedClassification(text, ClassificationTypeNames.OperatorOverloaded);
+            private static FormattedClassification New(string text) =>
+                new FormattedClassification(text, ClassificationTypeNames.OperatorOverloaded);
 
             public static FormattedClassification Ampersand { get; } = New("&");
             public static FormattedClassification AmpersandEquals { get; } = New("&=");
@@ -32,9 +32,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             public static FormattedClassification GreaterThan { get; } = New(">");
             public static FormattedClassification GreaterThanEquals { get; } = New(">=");
             public static FormattedClassification GreaterThanGreaterThan { get; } = New(">>");
-            public static FormattedClassification GreaterThanGreaterThanGreaterThan { get; } = New(">>>");
-            public static FormattedClassification GreaterThanGreaterThanEquals { get; } = New(">>=");
-            public static FormattedClassification GreaterThanGreaterThanGreaterThanEquals { get; } = New(">>>=");
+            public static FormattedClassification GreaterThanGreaterThanGreaterThan { get; } =
+                New(">>>");
+            public static FormattedClassification GreaterThanGreaterThanEquals { get; } =
+                New(">>=");
+            public static FormattedClassification GreaterThanGreaterThanGreaterThanEquals { get; } =
+                New(">>>=");
             public static FormattedClassification LessThan { get; } = New("<");
             public static FormattedClassification LessThanEquals { get; } = New("<=");
             public static FormattedClassification LessThanGreaterThan { get; } = New("<>");

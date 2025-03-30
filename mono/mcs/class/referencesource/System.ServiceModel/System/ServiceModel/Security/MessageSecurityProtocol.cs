@@ -12,8 +12,8 @@ namespace System.ServiceModel.Security
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security.Tokens;
 
     abstract class MessageSecurityProtocol : SecurityProtocol
@@ -21,7 +21,11 @@ namespace System.ServiceModel.Security
         readonly MessageSecurityProtocolFactory factory;
         SecurityToken identityVerifiedToken; // verified for the readonly target
 
-        protected MessageSecurityProtocol(MessageSecurityProtocolFactory factory, EndpointAddress target, Uri via)
+        protected MessageSecurityProtocol(
+            MessageSecurityProtocolFactory factory,
+            EndpointAddress target,
+            Uri via
+        )
             : base(factory, target, via)
         {
             this.factory = factory;
@@ -49,12 +53,19 @@ namespace System.ServiceModel.Security
         {
             // if we are receiveing a response that has no security that we should accept this AND no security header exists
             // then it is OK to skip the header.
-            if (this.factory.ActAsInitiator
-              && this.factory.SecurityBindingElement.EnableUnsecuredResponse
-              && !this.factory.StandardsManager.SecurityVersion.DoesMessageContainSecurityHeader(message))
+            if (
+                this.factory.ActAsInitiator
+                && this.factory.SecurityBindingElement.EnableUnsecuredResponse
+                && !this.factory.StandardsManager.SecurityVersion.DoesMessageContainSecurityHeader(
+                    message
+                )
+            )
                 return false;
 
-            bool requiresAppSecurity = this.factory.RequireIntegrity || this.factory.RequireConfidentiality || this.factory.DetectReplays;
+            bool requiresAppSecurity =
+                this.factory.RequireIntegrity
+                || this.factory.RequireConfidentiality
+                || this.factory.DetectReplays;
             return requiresAppSecurity || factory.ExpectSupportingTokens;
         }
 
@@ -63,10 +74,16 @@ namespace System.ServiceModel.Security
             get
             {
                 // If were are the listener, don't apply security if the flag is set
-                if (!this.factory.ActAsInitiator && this.factory.SecurityBindingElement.EnableUnsecuredResponse)
+                if (
+                    !this.factory.ActAsInitiator
+                    && this.factory.SecurityBindingElement.EnableUnsecuredResponse
+                )
                     return false;
 
-                bool requiresAppSecurity = this.factory.ApplyIntegrity || this.factory.ApplyConfidentiality || this.factory.AddTimestamp;
+                bool requiresAppSecurity =
+                    this.factory.ApplyIntegrity
+                    || this.factory.ApplyConfidentiality
+                    || this.factory.AddTimestamp;
                 return requiresAppSecurity || factory.ExpectSupportingTokens;
             }
         }
@@ -76,7 +93,12 @@ namespace System.ServiceModel.Security
             get { return this.factory; }
         }
 
-        public override IAsyncResult BeginSecureOutgoingMessage(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginSecureOutgoingMessage(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             try
             {
@@ -91,14 +113,21 @@ namespace System.ServiceModel.Security
             catch (Exception exception)
             {
                 // Always immediately rethrow fatal exceptions.
-                if (Fx.IsFatal(exception)) throw;
+                if (Fx.IsFatal(exception))
+                    throw;
 
                 base.OnSecureOutgoingMessageFailure(message);
                 throw;
             }
         }
 
-        public override IAsyncResult BeginSecureOutgoingMessage(Message message, TimeSpan timeout, SecurityProtocolCorrelationState correlationState, AsyncCallback callback, object state)
+        public override IAsyncResult BeginSecureOutgoingMessage(
+            Message message,
+            TimeSpan timeout,
+            SecurityProtocolCorrelationState correlationState,
+            AsyncCallback callback,
+            object state
+        )
         {
             try
             {
@@ -108,19 +137,32 @@ namespace System.ServiceModel.Security
                 {
                     return new CompletedAsyncResult<Message>(message, callback, state);
                 }
-                return BeginSecureOutgoingMessageCore(message, timeout, correlationState, callback, state);
+                return BeginSecureOutgoingMessageCore(
+                    message,
+                    timeout,
+                    correlationState,
+                    callback,
+                    state
+                );
             }
             catch (Exception exception)
             {
                 // Always immediately rethrow fatal exceptions.
-                if (Fx.IsFatal(exception)) throw;
+                if (Fx.IsFatal(exception))
+                    throw;
 
                 base.OnSecureOutgoingMessageFailure(message);
                 throw;
             }
         }
 
-        protected abstract IAsyncResult BeginSecureOutgoingMessageCore(Message message, TimeSpan timeout, SecurityProtocolCorrelationState correlationState, AsyncCallback callback, object state);
+        protected abstract IAsyncResult BeginSecureOutgoingMessageCore(
+            Message message,
+            TimeSpan timeout,
+            SecurityProtocolCorrelationState correlationState,
+            AsyncCallback callback,
+            object state
+        );
 
         public override void EndSecureOutgoingMessage(IAsyncResult result, out Message message)
         {
@@ -137,14 +179,19 @@ namespace System.ServiceModel.Security
             catch (Exception exception)
             {
                 // Always immediately rethrow fatal exceptions.
-                if (Fx.IsFatal(exception)) throw;
+                if (Fx.IsFatal(exception))
+                    throw;
 
                 base.OnSecureOutgoingMessageFailure(null);
                 throw;
             }
         }
 
-        public override void EndSecureOutgoingMessage(IAsyncResult result, out Message message, out SecurityProtocolCorrelationState newCorrelationState)
+        public override void EndSecureOutgoingMessage(
+            IAsyncResult result,
+            out Message message,
+            out SecurityProtocolCorrelationState newCorrelationState
+        )
         {
             if (result == null)
             {
@@ -158,18 +205,31 @@ namespace System.ServiceModel.Security
             catch (Exception exception)
             {
                 // Always immediately rethrow fatal exceptions.
-                if (Fx.IsFatal(exception)) throw;
+                if (Fx.IsFatal(exception))
+                    throw;
 
                 base.OnSecureOutgoingMessageFailure(null);
                 throw;
             }
         }
 
-        protected abstract void EndSecureOutgoingMessageCore(IAsyncResult result, out Message message, out SecurityProtocolCorrelationState newCorrelationState);
+        protected abstract void EndSecureOutgoingMessageCore(
+            IAsyncResult result,
+            out Message message,
+            out SecurityProtocolCorrelationState newCorrelationState
+        );
 
         // helper method for attaching the client claims in a symmetric security protocol
-        protected void AttachRecipientSecurityProperty(Message message, SecurityToken protectionToken, bool isWrappedToken, IList<SecurityToken> basicTokens, IList<SecurityToken> endorsingTokens,
-           IList<SecurityToken> signedEndorsingTokens, IList<SecurityToken> signedTokens, Dictionary<SecurityToken, ReadOnlyCollection<IAuthorizationPolicy>> tokenPoliciesMapping)
+        protected void AttachRecipientSecurityProperty(
+            Message message,
+            SecurityToken protectionToken,
+            bool isWrappedToken,
+            IList<SecurityToken> basicTokens,
+            IList<SecurityToken> endorsingTokens,
+            IList<SecurityToken> signedEndorsingTokens,
+            IList<SecurityToken> signedTokens,
+            Dictionary<SecurityToken, ReadOnlyCollection<IAuthorizationPolicy>> tokenPoliciesMapping
+        )
         {
             ReadOnlyCollection<IAuthorizationPolicy> protectionTokenPolicies;
             if (isWrappedToken)
@@ -181,32 +241,77 @@ namespace System.ServiceModel.Security
                 protectionTokenPolicies = tokenPoliciesMapping[protectionToken];
             }
             SecurityMessageProperty security = SecurityMessageProperty.GetOrCreate(message);
-            security.ProtectionToken = new SecurityTokenSpecification(protectionToken, protectionTokenPolicies);
-            AddSupportingTokenSpecification(security, basicTokens, endorsingTokens, signedEndorsingTokens, signedTokens, tokenPoliciesMapping);
-            security.ServiceSecurityContext = new ServiceSecurityContext(security.GetInitiatorTokenAuthorizationPolicies());
+            security.ProtectionToken = new SecurityTokenSpecification(
+                protectionToken,
+                protectionTokenPolicies
+            );
+            AddSupportingTokenSpecification(
+                security,
+                basicTokens,
+                endorsingTokens,
+                signedEndorsingTokens,
+                signedTokens,
+                tokenPoliciesMapping
+            );
+            security.ServiceSecurityContext = new ServiceSecurityContext(
+                security.GetInitiatorTokenAuthorizationPolicies()
+            );
         }
 
         // helper method for attaching the server claims in a symmetric security protocol
-        protected void DoIdentityCheckAndAttachInitiatorSecurityProperty(Message message, SecurityToken protectionToken, ReadOnlyCollection<IAuthorizationPolicy> protectionTokenPolicies)
+        protected void DoIdentityCheckAndAttachInitiatorSecurityProperty(
+            Message message,
+            SecurityToken protectionToken,
+            ReadOnlyCollection<IAuthorizationPolicy> protectionTokenPolicies
+        )
         {
-            AuthorizationContext protectionAuthContext = EnsureIncomingIdentity(message, protectionToken, protectionTokenPolicies);
+            AuthorizationContext protectionAuthContext = EnsureIncomingIdentity(
+                message,
+                protectionToken,
+                protectionTokenPolicies
+            );
             SecurityMessageProperty security = SecurityMessageProperty.GetOrCreate(message);
-            security.ProtectionToken = new SecurityTokenSpecification(protectionToken, protectionTokenPolicies);
-            security.ServiceSecurityContext = new ServiceSecurityContext(protectionAuthContext, protectionTokenPolicies ?? EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance);
+            security.ProtectionToken = new SecurityTokenSpecification(
+                protectionToken,
+                protectionTokenPolicies
+            );
+            security.ServiceSecurityContext = new ServiceSecurityContext(
+                protectionAuthContext,
+                protectionTokenPolicies ?? EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance
+            );
         }
 
-        protected AuthorizationContext EnsureIncomingIdentity(Message message, SecurityToken token, ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
+        protected AuthorizationContext EnsureIncomingIdentity(
+            Message message,
+            SecurityToken token,
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
+        )
         {
             if (token == null)
             {
-                throw TraceUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.NoSigningTokenAvailableToDoIncomingIdentityCheck)), message);
+                throw TraceUtility.ThrowHelperError(
+                    new MessageSecurityException(
+                        SR.GetString(SR.NoSigningTokenAvailableToDoIncomingIdentityCheck)
+                    ),
+                    message
+                );
             }
-            AuthorizationContext authContext = (authorizationPolicies != null) ? AuthorizationContext.CreateDefaultAuthorizationContext(authorizationPolicies) : null;
+            AuthorizationContext authContext =
+                (authorizationPolicies != null)
+                    ? AuthorizationContext.CreateDefaultAuthorizationContext(authorizationPolicies)
+                    : null;
             if (this.factory.IdentityVerifier != null)
             {
                 if (this.Target == null)
                 {
-                    throw TraceUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.NoOutgoingEndpointAddressAvailableForDoingIdentityCheckOnReply)), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.NoOutgoingEndpointAddressAvailableForDoingIdentityCheckOnReply
+                            )
+                        ),
+                        message
+                    );
                 }
 
                 this.factory.IdentityVerifier.EnsureIncomingIdentity(this.Target, authContext);
@@ -214,7 +319,10 @@ namespace System.ServiceModel.Security
             return authContext;
         }
 
-        protected void EnsureOutgoingIdentity(SecurityToken token, SecurityTokenAuthenticator authenticator)
+        protected void EnsureOutgoingIdentity(
+            SecurityToken token,
+            SecurityTokenAuthenticator authenticator
+        )
         {
             if (object.ReferenceEquals(token, this.identityVerifiedToken))
             {
@@ -226,9 +334,15 @@ namespace System.ServiceModel.Security
             }
             if (this.Target == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.NoOutgoingEndpointAddressAvailableForDoingIdentityCheck)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageSecurityException(
+                        SR.GetString(SR.NoOutgoingEndpointAddressAvailableForDoingIdentityCheck)
+                    )
+                );
             }
-            ReadOnlyCollection<IAuthorizationPolicy> authzPolicies = authenticator.ValidateToken(token);
+            ReadOnlyCollection<IAuthorizationPolicy> authzPolicies = authenticator.ValidateToken(
+                token
+            );
             this.factory.IdentityVerifier.EnsureOutgoingIdentity(this.Target, authzPolicies);
             if (this.CacheIdentityCheckResultForToken)
             {
@@ -236,14 +350,21 @@ namespace System.ServiceModel.Security
             }
         }
 
-        protected SecurityProtocolCorrelationState GetCorrelationState(SecurityToken correlationToken)
+        protected SecurityProtocolCorrelationState GetCorrelationState(
+            SecurityToken correlationToken
+        )
         {
             return new SecurityProtocolCorrelationState(correlationToken);
         }
 
-        protected SecurityProtocolCorrelationState GetCorrelationState(SecurityToken correlationToken, ReceiveSecurityHeader securityHeader)
+        protected SecurityProtocolCorrelationState GetCorrelationState(
+            SecurityToken correlationToken,
+            ReceiveSecurityHeader securityHeader
+        )
         {
-            SecurityProtocolCorrelationState result = new SecurityProtocolCorrelationState(correlationToken);
+            SecurityProtocolCorrelationState result = new SecurityProtocolCorrelationState(
+                correlationToken
+            );
             if (securityHeader.MaintainSignatureConfirmationState && !this.factory.ActAsInitiator)
             {
                 result.SignatureConfirmations = securityHeader.GetSentSignatureValues();
@@ -251,7 +372,9 @@ namespace System.ServiceModel.Security
             return result;
         }
 
-        protected SecurityToken GetCorrelationToken(SecurityProtocolCorrelationState[] correlationStates)
+        protected SecurityToken GetCorrelationToken(
+            SecurityProtocolCorrelationState[] correlationStates
+        )
         {
             SecurityToken token = null;
             if (correlationStates != null)
@@ -266,23 +389,34 @@ namespace System.ServiceModel.Security
                     }
                     else if (!object.ReferenceEquals(token, correlationStates[i].Token))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.MultipleCorrelationTokensFound)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(SR.MultipleCorrelationTokensFound)
+                            )
+                        );
                     }
                 }
             }
             if (token == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.NoCorrelationTokenFound)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageSecurityException(SR.GetString(SR.NoCorrelationTokenFound))
+                );
             }
             return token;
         }
 
-
-        protected SecurityToken GetCorrelationToken(SecurityProtocolCorrelationState correlationState)
+        protected SecurityToken GetCorrelationToken(
+            SecurityProtocolCorrelationState correlationState
+        )
         {
             if (correlationState == null || correlationState.Token == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.CannotFindCorrelationStateForApplyingSecurity)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageSecurityException(
+                        SR.GetString(SR.CannotFindCorrelationStateForApplyingSecurity)
+                    )
+                );
             }
             return correlationState.Token;
         }
@@ -291,11 +425,21 @@ namespace System.ServiceModel.Security
         {
             if (token is WrappedKeySecurityToken)
             {
-                throw TraceUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.TokenNotExpectedInSecurityHeader, token)), message);
+                throw TraceUtility.ThrowHelperError(
+                    new MessageSecurityException(
+                        SR.GetString(SR.TokenNotExpectedInSecurityHeader, token)
+                    ),
+                    message
+                );
             }
         }
 
-        protected SecurityToken GetTokenAndEnsureOutgoingIdentity(SecurityTokenProvider provider, bool isEncryptionOn, TimeSpan timeout, SecurityTokenAuthenticator authenticator)
+        protected SecurityToken GetTokenAndEnsureOutgoingIdentity(
+            SecurityTokenProvider provider,
+            bool isEncryptionOn,
+            TimeSpan timeout,
+            SecurityTokenAuthenticator authenticator
+        )
         {
             SecurityToken token = GetToken(provider, this.Target, timeout);
             if (isEncryptionOn)
@@ -305,15 +449,23 @@ namespace System.ServiceModel.Security
             return token;
         }
 
-        protected SendSecurityHeader ConfigureSendSecurityHeader(Message message, string actor, IList<SupportingTokenSpecification> supportingTokens, SecurityProtocolCorrelationState correlationState)
+        protected SendSecurityHeader ConfigureSendSecurityHeader(
+            Message message,
+            string actor,
+            IList<SupportingTokenSpecification> supportingTokens,
+            SecurityProtocolCorrelationState correlationState
+        )
         {
             MessageSecurityProtocolFactory factory = this.MessageSecurityProtocolFactory;
             SendSecurityHeader securityHeader = CreateSendSecurityHeader(message, actor, factory);
-            securityHeader.SignThenEncrypt = factory.MessageProtectionOrder != MessageProtectionOrder.EncryptBeforeSign;
-            // If ProtectTokens is enabled then we make sure that both the client side and the service side sign the primary token 
+            securityHeader.SignThenEncrypt =
+                factory.MessageProtectionOrder != MessageProtectionOrder.EncryptBeforeSign;
+            // If ProtectTokens is enabled then we make sure that both the client side and the service side sign the primary token
             // ( if it is an issued token, the check exists in sendsecurityheader)in the primary signature while sending a message.
             securityHeader.ShouldProtectTokens = factory.SecurityBindingElement.ProtectTokens;
-            securityHeader.EncryptPrimarySignature = factory.MessageProtectionOrder == MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature;
+            securityHeader.EncryptPrimarySignature =
+                factory.MessageProtectionOrder
+                == MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature;
 
             if (factory.DoRequestSignatureConfirmation && correlationState != null)
             {
@@ -324,7 +476,9 @@ namespace System.ServiceModel.Security
                 }
                 else if (correlationState.SignatureConfirmations != null)
                 {
-                    securityHeader.AddSignatureConfirmations(correlationState.SignatureConfirmations);
+                    securityHeader.AddSignatureConfirmations(
+                        correlationState.SignatureConfirmations
+                    );
                 }
             }
 
@@ -342,17 +496,29 @@ namespace System.ServiceModel.Security
             return securityHeader;
         }
 
-        protected ReceiveSecurityHeader CreateSecurityHeader(Message message, string actor, MessageDirection transferDirection, SecurityStandardsManager standardsManager)
+        protected ReceiveSecurityHeader CreateSecurityHeader(
+            Message message,
+            string actor,
+            MessageDirection transferDirection,
+            SecurityStandardsManager standardsManager
+        )
         {
             standardsManager = standardsManager ?? this.factory.StandardsManager;
-            ReceiveSecurityHeader securityHeader = standardsManager.CreateReceiveSecurityHeader(message, actor,
-               this.factory.IncomingAlgorithmSuite, transferDirection);
+            ReceiveSecurityHeader securityHeader = standardsManager.CreateReceiveSecurityHeader(
+                message,
+                actor,
+                this.factory.IncomingAlgorithmSuite,
+                transferDirection
+            );
             securityHeader.Layout = this.factory.SecurityHeaderLayout;
-            securityHeader.MaxReceivedMessageSize = factory.SecurityBindingElement.MaxReceivedMessageSize;
+            securityHeader.MaxReceivedMessageSize = factory
+                .SecurityBindingElement
+                .MaxReceivedMessageSize;
             securityHeader.ReaderQuotas = factory.SecurityBindingElement.ReaderQuotas;
             if (this.factory.ExpectKeyDerivation)
             {
-                securityHeader.DerivedTokenAuthenticator = this.factory.DerivedKeyTokenAuthenticator;
+                securityHeader.DerivedTokenAuthenticator =
+                    this.factory.DerivedKeyTokenAuthenticator;
             }
             return securityHeader;
         }
@@ -373,19 +539,47 @@ namespace System.ServiceModel.Security
             }
         }
 
-        protected ReceiveSecurityHeader ConfigureReceiveSecurityHeader(Message message, string actor, SecurityProtocolCorrelationState[] correlationStates, out IList<SupportingTokenAuthenticatorSpecification> supportingAuthenticators)
+        protected ReceiveSecurityHeader ConfigureReceiveSecurityHeader(
+            Message message,
+            string actor,
+            SecurityProtocolCorrelationState[] correlationStates,
+            out IList<SupportingTokenAuthenticatorSpecification> supportingAuthenticators
+        )
         {
-            return ConfigureReceiveSecurityHeader(message, actor, correlationStates, null, out supportingAuthenticators);
+            return ConfigureReceiveSecurityHeader(
+                message,
+                actor,
+                correlationStates,
+                null,
+                out supportingAuthenticators
+            );
         }
 
-        protected ReceiveSecurityHeader ConfigureReceiveSecurityHeader(Message message, string actor, SecurityProtocolCorrelationState[] correlationStates, SecurityStandardsManager standardsManager, out IList<SupportingTokenAuthenticatorSpecification> supportingAuthenticators)
+        protected ReceiveSecurityHeader ConfigureReceiveSecurityHeader(
+            Message message,
+            string actor,
+            SecurityProtocolCorrelationState[] correlationStates,
+            SecurityStandardsManager standardsManager,
+            out IList<SupportingTokenAuthenticatorSpecification> supportingAuthenticators
+        )
         {
             MessageSecurityProtocolFactory factory = this.MessageSecurityProtocolFactory;
-            MessageDirection direction = factory.ActAsInitiator ? MessageDirection.Output : MessageDirection.Input;
-            ReceiveSecurityHeader securityHeader = CreateSecurityHeader(message, actor, direction, standardsManager);
+            MessageDirection direction = factory.ActAsInitiator
+                ? MessageDirection.Output
+                : MessageDirection.Input;
+            ReceiveSecurityHeader securityHeader = CreateSecurityHeader(
+                message,
+                actor,
+                direction,
+                standardsManager
+            );
 
             string action = message.Headers.Action;
-            supportingAuthenticators = GetSupportingTokenAuthenticatorsAndSetExpectationFlags(this.factory, message, securityHeader);
+            supportingAuthenticators = GetSupportingTokenAuthenticatorsAndSetExpectationFlags(
+                this.factory,
+                message,
+                securityHeader
+            );
             if (factory.RequireIntegrity || securityHeader.ExpectSignedTokens)
             {
                 securityHeader.RequiredSignatureParts = factory.GetIncomingSignatureParts(action);
@@ -395,18 +589,25 @@ namespace System.ServiceModel.Security
                 securityHeader.RequiredEncryptionParts = factory.GetIncomingEncryptionParts(action);
             }
 
-            securityHeader.ExpectEncryption = factory.RequireConfidentiality || securityHeader.ExpectBasicTokens;
-            securityHeader.ExpectSignature = factory.RequireIntegrity || securityHeader.ExpectSignedTokens;
+            securityHeader.ExpectEncryption =
+                factory.RequireConfidentiality || securityHeader.ExpectBasicTokens;
+            securityHeader.ExpectSignature =
+                factory.RequireIntegrity || securityHeader.ExpectSignedTokens;
             securityHeader.SetRequiredProtectionOrder(factory.MessageProtectionOrder);
 
             // On the receiving side if protectTokens is enabled
             // 1. If we are service, we make sure that the client always signs the primary token( can be any token type)else we throw.
-            //    But currently the service can sign the primary token in reply only if the primary token is an issued token 
-            // 2. If we are client, we do not care if the service signs the primary token or not. Otherwise it will be impossible to have a wcf client /service talk to each other unless we 
+            //    But currently the service can sign the primary token in reply only if the primary token is an issued token
+            // 2. If we are client, we do not care if the service signs the primary token or not. Otherwise it will be impossible to have a wcf client /service talk to each other unless we
             // either use a symmetric binding with issued tokens or asymmetric bindings with both the intiator and recipient parameters being issued tokens( later one is rare).
-            securityHeader.RequireSignedPrimaryToken = !factory.ActAsInitiator && factory.SecurityBindingElement.ProtectTokens;
+            securityHeader.RequireSignedPrimaryToken =
+                !factory.ActAsInitiator && factory.SecurityBindingElement.ProtectTokens;
 
-            if (factory.ActAsInitiator && factory.DoRequestSignatureConfirmation && HasCorrelationState(correlationStates))
+            if (
+                factory.ActAsInitiator
+                && factory.DoRequestSignatureConfirmation
+                && HasCorrelationState(correlationStates)
+            )
             {
                 securityHeader.MaintainSignatureConfirmationState = true;
                 securityHeader.ExpectSignatureConfirmation = true;
@@ -422,28 +623,57 @@ namespace System.ServiceModel.Security
             return securityHeader;
         }
 
-        protected void ProcessSecurityHeader(ReceiveSecurityHeader securityHeader, ref Message message,
-            SecurityToken requiredSigningToken, TimeSpan timeout, SecurityProtocolCorrelationState[] correlationStates)
+        protected void ProcessSecurityHeader(
+            ReceiveSecurityHeader securityHeader,
+            ref Message message,
+            SecurityToken requiredSigningToken,
+            TimeSpan timeout,
+            SecurityProtocolCorrelationState[] correlationStates
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
 
             securityHeader.ReplayDetectionEnabled = this.factory.DetectReplays;
-            securityHeader.SetTimeParameters(this.factory.NonceCache, this.factory.ReplayWindow, this.factory.MaxClockSkew);
+            securityHeader.SetTimeParameters(
+                this.factory.NonceCache,
+                this.factory.ReplayWindow,
+                this.factory.MaxClockSkew
+            );
 
-            securityHeader.Process(timeoutHelper.RemainingTime(), SecurityUtils.GetChannelBindingFromMessage(message), this.factory.ExtendedProtectionPolicy);
+            securityHeader.Process(
+                timeoutHelper.RemainingTime(),
+                SecurityUtils.GetChannelBindingFromMessage(message),
+                this.factory.ExtendedProtectionPolicy
+            );
             if (this.factory.AddTimestamp && securityHeader.Timestamp == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new MessageSecurityException(SR.GetString(SR.RequiredTimestampMissingInSecurityHeader)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new MessageSecurityException(
+                        SR.GetString(SR.RequiredTimestampMissingInSecurityHeader)
+                    )
+                );
             }
 
-            if (requiredSigningToken != null && requiredSigningToken != securityHeader.SignatureToken)
+            if (
+                requiredSigningToken != null
+                && requiredSigningToken != securityHeader.SignatureToken
+            )
             {
-                throw TraceUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.ReplyWasNotSignedWithRequiredSigningToken)), message);
+                throw TraceUtility.ThrowHelperError(
+                    new MessageSecurityException(
+                        SR.GetString(SR.ReplyWasNotSignedWithRequiredSigningToken)
+                    ),
+                    message
+                );
             }
 
             if (this.DoAutomaticEncryptionMatch)
             {
-                SecurityUtils.EnsureExpectedSymmetricMatch(securityHeader.SignatureToken, securityHeader.EncryptionToken, message);
+                SecurityUtils.EnsureExpectedSymmetricMatch(
+                    securityHeader.SignatureToken,
+                    securityHeader.EncryptionToken,
+                    message
+                );
             }
 
             if (securityHeader.MaintainSignatureConfirmationState && this.factory.ActAsInitiator)
@@ -454,9 +684,13 @@ namespace System.ServiceModel.Security
             message = securityHeader.ProcessedMessage;
         }
 
-        protected void CheckSignatureConfirmation(ReceiveSecurityHeader securityHeader, SecurityProtocolCorrelationState[] correlationStates)
+        protected void CheckSignatureConfirmation(
+            ReceiveSecurityHeader securityHeader,
+            SecurityProtocolCorrelationState[] correlationStates
+        )
         {
-            SignatureConfirmations receivedConfirmations = securityHeader.GetSentSignatureConfirmations();
+            SignatureConfirmations receivedConfirmations =
+                securityHeader.GetSentSignatureConfirmations();
             SignatureConfirmations sentSignatures = null;
             if (correlationStates != null)
             {
@@ -473,12 +707,19 @@ namespace System.ServiceModel.Security
             {
                 if (receivedConfirmations != null && receivedConfirmations.Count > 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.FoundUnexpectedSignatureConfirmations)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(SR.FoundUnexpectedSignatureConfirmations)
+                        )
+                    );
                 }
                 return;
             }
             bool allSignaturesConfirmed = false;
-            if (receivedConfirmations != null && sentSignatures.Count == receivedConfirmations.Count)
+            if (
+                receivedConfirmations != null
+                && sentSignatures.Count == receivedConfirmations.Count
+            )
             {
                 bool[] matchingSigIndexes = new bool[sentSignatures.Count];
                 for (int i = 0; i < sentSignatures.Count; ++i)
@@ -494,8 +735,15 @@ namespace System.ServiceModel.Security
                         {
                             continue;
                         }
-                        receivedConfirmations.GetConfirmation(j, out receivedSignature, out wasReceivedSigEncrypted);
-                        if ((wasReceivedSigEncrypted == wasSentSigEncrypted) && CryptoHelper.IsEqual(receivedSignature, sentSignature))
+                        receivedConfirmations.GetConfirmation(
+                            j,
+                            out receivedSignature,
+                            out wasReceivedSigEncrypted
+                        );
+                        if (
+                            (wasReceivedSigEncrypted == wasSentSigEncrypted)
+                            && CryptoHelper.IsEqual(receivedSignature, sentSignature)
+                        )
                         {
                             matchingSigIndexes[j] = true;
                             break;
@@ -517,7 +765,9 @@ namespace System.ServiceModel.Security
             }
             if (!allSignaturesConfirmed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.NotAllSignaturesConfirmed)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageSecurityException(SR.GetString(SR.NotAllSignaturesConfirmed))
+                );
             }
         }
 
@@ -538,14 +788,19 @@ namespace System.ServiceModel.Security
             catch (Exception exception)
             {
                 // Always immediately rethrow fatal exceptions.
-                if (Fx.IsFatal(exception)) throw;
+                if (Fx.IsFatal(exception))
+                    throw;
 
                 base.OnSecureOutgoingMessageFailure(message);
                 throw;
             }
         }
 
-        public override SecurityProtocolCorrelationState SecureOutgoingMessage(ref Message message, TimeSpan timeout, SecurityProtocolCorrelationState correlationState)
+        public override SecurityProtocolCorrelationState SecureOutgoingMessage(
+            ref Message message,
+            TimeSpan timeout,
+            SecurityProtocolCorrelationState correlationState
+        )
         {
             try
             {
@@ -555,27 +810,43 @@ namespace System.ServiceModel.Security
                 {
                     return null;
                 }
-                SecurityProtocolCorrelationState newCorrelationState = SecureOutgoingMessageCore(ref message, timeout, correlationState);
+                SecurityProtocolCorrelationState newCorrelationState = SecureOutgoingMessageCore(
+                    ref message,
+                    timeout,
+                    correlationState
+                );
                 base.OnOutgoingMessageSecured(message);
                 return newCorrelationState;
             }
             catch (Exception exception)
             {
                 // Always immediately rethrow fatal exceptions.
-                if (Fx.IsFatal(exception)) throw;
+                if (Fx.IsFatal(exception))
+                    throw;
 
                 base.OnSecureOutgoingMessageFailure(message);
                 throw;
             }
         }
 
-        protected abstract SecurityProtocolCorrelationState SecureOutgoingMessageCore(ref Message message, TimeSpan timeout, SecurityProtocolCorrelationState correlationState);
+        protected abstract SecurityProtocolCorrelationState SecureOutgoingMessageCore(
+            ref Message message,
+            TimeSpan timeout,
+            SecurityProtocolCorrelationState correlationState
+        );
 
         void ValidateOutgoingState(Message message)
         {
-            if (this.PerformIncomingAndOutgoingMessageExpectationChecks && !this.factory.ExpectOutgoingMessages)
+            if (
+                this.PerformIncomingAndOutgoingMessageExpectationChecks
+                && !this.factory.ExpectOutgoingMessages
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecurityBindingNotSetUpToProcessOutgoingMessages)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SecurityBindingNotSetUpToProcessOutgoingMessages)
+                    )
+                );
             }
             if (message == null)
             {
@@ -588,9 +859,16 @@ namespace System.ServiceModel.Security
             try
             {
                 this.CommunicationObject.ThrowIfClosedOrNotOpen();
-                if (this.PerformIncomingAndOutgoingMessageExpectationChecks && !factory.ExpectIncomingMessages)
+                if (
+                    this.PerformIncomingAndOutgoingMessageExpectationChecks
+                    && !factory.ExpectIncomingMessages
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecurityBindingNotSetUpToProcessIncomingMessages)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SecurityBindingNotSetUpToProcessIncomingMessages)
+                        )
+                    );
                 }
                 if (message == null)
                 {
@@ -612,21 +890,38 @@ namespace System.ServiceModel.Security
             catch (Exception e)
             {
                 // Always immediately rethrow fatal exceptions.
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
 
                 base.OnVerifyIncomingMessageFailure(message, e);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.MessageSecurityVerificationFailed), e));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageSecurityException(
+                        SR.GetString(SR.MessageSecurityVerificationFailed),
+                        e
+                    )
+                );
             }
         }
 
-        public override SecurityProtocolCorrelationState VerifyIncomingMessage(ref Message message, TimeSpan timeout, params SecurityProtocolCorrelationState[] correlationStates)
+        public override SecurityProtocolCorrelationState VerifyIncomingMessage(
+            ref Message message,
+            TimeSpan timeout,
+            params SecurityProtocolCorrelationState[] correlationStates
+        )
         {
             try
             {
                 this.CommunicationObject.ThrowIfClosedOrNotOpen();
-                if (this.PerformIncomingAndOutgoingMessageExpectationChecks && !factory.ExpectIncomingMessages)
+                if (
+                    this.PerformIncomingAndOutgoingMessageExpectationChecks
+                    && !factory.ExpectIncomingMessages
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecurityBindingNotSetUpToProcessIncomingMessages)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SecurityBindingNotSetUpToProcessIncomingMessages)
+                        )
+                    );
                 }
                 if (message == null)
                 {
@@ -637,7 +932,12 @@ namespace System.ServiceModel.Security
                     return null;
                 }
                 string actor = string.Empty; // message.Version.Envelope.UltimateDestinationActor;
-                SecurityProtocolCorrelationState newCorrelationState = VerifyIncomingMessageCore(ref message, actor, timeout, correlationStates);
+                SecurityProtocolCorrelationState newCorrelationState = VerifyIncomingMessageCore(
+                    ref message,
+                    actor,
+                    timeout,
+                    correlationStates
+                );
                 base.OnIncomingMessageVerified(message);
                 return newCorrelationState;
             }
@@ -649,16 +949,30 @@ namespace System.ServiceModel.Security
             catch (Exception e)
             {
                 // Always immediately rethrow fatal exceptions.
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
 
                 base.OnVerifyIncomingMessageFailure(message, e);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.MessageSecurityVerificationFailed), e));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MessageSecurityException(
+                        SR.GetString(SR.MessageSecurityVerificationFailed),
+                        e
+                    )
+                );
             }
         }
 
-        protected abstract SecurityProtocolCorrelationState VerifyIncomingMessageCore(ref Message message, string actor, TimeSpan timeout, SecurityProtocolCorrelationState[] correlationStates);
+        protected abstract SecurityProtocolCorrelationState VerifyIncomingMessageCore(
+            ref Message message,
+            string actor,
+            TimeSpan timeout,
+            SecurityProtocolCorrelationState[] correlationStates
+        );
 
-        internal SecurityProtocolCorrelationState GetSignatureConfirmationCorrelationState(SecurityProtocolCorrelationState oldCorrelationState, SecurityProtocolCorrelationState newCorrelationState)
+        internal SecurityProtocolCorrelationState GetSignatureConfirmationCorrelationState(
+            SecurityProtocolCorrelationState oldCorrelationState,
+            SecurityProtocolCorrelationState newCorrelationState
+        )
         {
             if (this.factory.ActAsInitiator)
             {
@@ -670,20 +984,32 @@ namespace System.ServiceModel.Security
             }
         }
 
-        protected abstract class GetOneTokenAndSetUpSecurityAsyncResult : GetSupportingTokensAsyncResult
+        protected abstract class GetOneTokenAndSetUpSecurityAsyncResult
+            : GetSupportingTokensAsyncResult
         {
             readonly MessageSecurityProtocol binding;
             readonly SecurityTokenProvider provider;
             Message message;
             readonly bool doIdentityChecks;
             SecurityTokenAuthenticator identityCheckAuthenticator;
-            static AsyncCallback getTokenCompleteCallback = Fx.ThunkCallback(new AsyncCallback(GetTokenCompleteCallback));
+            static AsyncCallback getTokenCompleteCallback = Fx.ThunkCallback(
+                new AsyncCallback(GetTokenCompleteCallback)
+            );
             SecurityProtocolCorrelationState newCorrelationState;
             SecurityProtocolCorrelationState oldCorrelationState;
             TimeoutHelper timeoutHelper;
 
-            public GetOneTokenAndSetUpSecurityAsyncResult(Message m, MessageSecurityProtocol binding, SecurityTokenProvider provider,
-                bool doIdentityChecks, SecurityTokenAuthenticator identityCheckAuthenticator, SecurityProtocolCorrelationState oldCorrelationState, TimeSpan timeout, AsyncCallback callback, object state)
+            public GetOneTokenAndSetUpSecurityAsyncResult(
+                Message m,
+                MessageSecurityProtocol binding,
+                SecurityTokenProvider provider,
+                bool doIdentityChecks,
+                SecurityTokenAuthenticator identityCheckAuthenticator,
+                SecurityProtocolCorrelationState oldCorrelationState,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(m, binding, timeout, callback, state)
             {
                 this.message = m;
@@ -709,9 +1035,13 @@ namespace System.ServiceModel.Security
                 get { return this.oldCorrelationState; }
             }
 
-            internal static Message End(IAsyncResult result, out SecurityProtocolCorrelationState newCorrelationState)
+            internal static Message End(
+                IAsyncResult result,
+                out SecurityProtocolCorrelationState newCorrelationState
+            )
             {
-                GetOneTokenAndSetUpSecurityAsyncResult self = AsyncResult.End<GetOneTokenAndSetUpSecurityAsyncResult>(result);
+                GetOneTokenAndSetUpSecurityAsyncResult self =
+                    AsyncResult.End<GetOneTokenAndSetUpSecurityAsyncResult>(result);
                 newCorrelationState = self.newCorrelationState;
                 return self.message;
             }
@@ -720,7 +1050,14 @@ namespace System.ServiceModel.Security
             {
                 if (token == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.TokenProviderCannotGetTokensForTarget, this.binding.Target)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.TokenProviderCannotGetTokensForTarget,
+                                this.binding.Target
+                            )
+                        )
+                    );
                 }
                 if (this.doIdentityChecks)
                 {
@@ -730,7 +1067,11 @@ namespace System.ServiceModel.Security
                 return true;
             }
 
-            protected abstract void OnGetTokenDone(ref Message message, SecurityToken token, TimeSpan timeout);
+            protected abstract void OnGetTokenDone(
+                ref Message message,
+                SecurityToken token,
+                TimeSpan timeout
+            );
 
             static void GetTokenCompleteCallback(IAsyncResult result)
             {
@@ -742,10 +1083,14 @@ namespace System.ServiceModel.Security
                 {
                     return;
                 }
-                GetOneTokenAndSetUpSecurityAsyncResult self = result.AsyncState as GetOneTokenAndSetUpSecurityAsyncResult;
+                GetOneTokenAndSetUpSecurityAsyncResult self =
+                    result.AsyncState as GetOneTokenAndSetUpSecurityAsyncResult;
                 if (self == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("result", SR.GetString(SR.InvalidAsyncResult));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "result",
+                        SR.GetString(SR.InvalidAsyncResult)
+                    );
                 }
                 Exception completionException = null;
                 bool completeSelf = false;
@@ -758,7 +1103,8 @@ namespace System.ServiceModel.Security
                 catch (Exception e)
                 {
                     // Always immediately rethrow fatal exceptions.
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
 
                     completeSelf = true;
                     completionException = e;
@@ -777,11 +1123,14 @@ namespace System.ServiceModel.Security
             protected override bool OnGetSupportingTokensDone(TimeSpan timeout)
             {
                 this.timeoutHelper = new TimeoutHelper(timeout);
-                IAsyncResult result = this.provider.BeginGetToken(timeoutHelper.RemainingTime(), getTokenCompleteCallback, this);
+                IAsyncResult result = this.provider.BeginGetToken(
+                    timeoutHelper.RemainingTime(),
+                    getTokenCompleteCallback,
+                    this
+                );
                 if (!result.CompletedSynchronously)
                 {
                     return false;
-
                 }
                 SecurityToken token = this.provider.EndGetToken(result);
                 return this.OnGetTokenComplete(token);
@@ -791,7 +1140,8 @@ namespace System.ServiceModel.Security
         // note: identity check done only on token obtained from first
         // token provider; either or both token providers may be null;
         // get token calls are skipped for null providers.
-        protected abstract class GetTwoTokensAndSetUpSecurityAsyncResult : GetSupportingTokensAsyncResult
+        protected abstract class GetTwoTokensAndSetUpSecurityAsyncResult
+            : GetSupportingTokensAsyncResult
         {
             readonly MessageSecurityProtocol binding;
             readonly SecurityTokenProvider primaryProvider;
@@ -800,17 +1150,28 @@ namespace System.ServiceModel.Security
             readonly bool doIdentityChecks;
             SecurityTokenAuthenticator identityCheckAuthenticator;
             SecurityToken primaryToken;
-            static readonly AsyncCallback getPrimaryTokenCompleteCallback = Fx.ThunkCallback(new AsyncCallback(GetPrimaryTokenCompleteCallback));
-            static readonly AsyncCallback getSecondaryTokenCompleteCallback = Fx.ThunkCallback(new AsyncCallback(GetSecondaryTokenCompleteCallback));
+            static readonly AsyncCallback getPrimaryTokenCompleteCallback = Fx.ThunkCallback(
+                new AsyncCallback(GetPrimaryTokenCompleteCallback)
+            );
+            static readonly AsyncCallback getSecondaryTokenCompleteCallback = Fx.ThunkCallback(
+                new AsyncCallback(GetSecondaryTokenCompleteCallback)
+            );
             SecurityProtocolCorrelationState newCorrelationState;
             SecurityProtocolCorrelationState oldCorrelationState;
             TimeoutHelper timeoutHelper;
 
-            public GetTwoTokensAndSetUpSecurityAsyncResult(Message m, MessageSecurityProtocol binding,
-                SecurityTokenProvider primaryProvider, SecurityTokenProvider secondaryProvider, bool doIdentityChecks, SecurityTokenAuthenticator identityCheckAuthenticator,
+            public GetTwoTokensAndSetUpSecurityAsyncResult(
+                Message m,
+                MessageSecurityProtocol binding,
+                SecurityTokenProvider primaryProvider,
+                SecurityTokenProvider secondaryProvider,
+                bool doIdentityChecks,
+                SecurityTokenAuthenticator identityCheckAuthenticator,
                 SecurityProtocolCorrelationState oldCorrelationState,
                 TimeSpan timeout,
-                AsyncCallback callback, object state)
+                AsyncCallback callback,
+                object state
+            )
                 : base(m, binding, timeout, callback, state)
             {
                 this.message = m;
@@ -837,9 +1198,13 @@ namespace System.ServiceModel.Security
                 get { return this.oldCorrelationState; }
             }
 
-            internal static Message End(IAsyncResult result, out SecurityProtocolCorrelationState newCorrelationState)
+            internal static Message End(
+                IAsyncResult result,
+                out SecurityProtocolCorrelationState newCorrelationState
+            )
             {
-                GetTwoTokensAndSetUpSecurityAsyncResult self = AsyncResult.End<GetTwoTokensAndSetUpSecurityAsyncResult>(result);
+                GetTwoTokensAndSetUpSecurityAsyncResult self =
+                    AsyncResult.End<GetTwoTokensAndSetUpSecurityAsyncResult>(result);
                 newCorrelationState = self.newCorrelationState;
                 return self.message;
             }
@@ -855,7 +1220,15 @@ namespace System.ServiceModel.Security
                 {
                     if (token == null)
                     {
-                        throw TraceUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.TokenProviderCannotGetTokensForTarget, this.binding.Target)), this.message);
+                        throw TraceUtility.ThrowHelperError(
+                            new MessageSecurityException(
+                                SR.GetString(
+                                    SR.TokenProviderCannotGetTokensForTarget,
+                                    this.binding.Target
+                                )
+                            ),
+                            this.message
+                        );
                     }
                     if (this.doIdentityChecks)
                     {
@@ -870,7 +1243,11 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    IAsyncResult result = this.secondaryProvider.BeginGetToken(this.timeoutHelper.RemainingTime(), getSecondaryTokenCompleteCallback, this);
+                    IAsyncResult result = this.secondaryProvider.BeginGetToken(
+                        this.timeoutHelper.RemainingTime(),
+                        getSecondaryTokenCompleteCallback,
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -889,13 +1266,31 @@ namespace System.ServiceModel.Security
             {
                 if (!secondaryCallSkipped && token == null)
                 {
-                    throw TraceUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.TokenProviderCannotGetTokensForTarget, this.binding.Target)), this.message);
+                    throw TraceUtility.ThrowHelperError(
+                        new MessageSecurityException(
+                            SR.GetString(
+                                SR.TokenProviderCannotGetTokensForTarget,
+                                this.binding.Target
+                            )
+                        ),
+                        this.message
+                    );
                 }
-                OnBothGetTokenCallsDone(ref this.message, this.primaryToken, token, timeoutHelper.RemainingTime());
+                OnBothGetTokenCallsDone(
+                    ref this.message,
+                    this.primaryToken,
+                    token,
+                    timeoutHelper.RemainingTime()
+                );
                 return true;
             }
 
-            protected abstract void OnBothGetTokenCallsDone(ref Message message, SecurityToken primaryToken, SecurityToken secondaryToken, TimeSpan timeout);
+            protected abstract void OnBothGetTokenCallsDone(
+                ref Message message,
+                SecurityToken primaryToken,
+                SecurityToken secondaryToken,
+                TimeSpan timeout
+            );
 
             static void GetPrimaryTokenCompleteCallback(IAsyncResult result)
             {
@@ -907,10 +1302,14 @@ namespace System.ServiceModel.Security
                 {
                     return;
                 }
-                GetTwoTokensAndSetUpSecurityAsyncResult self = result.AsyncState as GetTwoTokensAndSetUpSecurityAsyncResult;
+                GetTwoTokensAndSetUpSecurityAsyncResult self =
+                    result.AsyncState as GetTwoTokensAndSetUpSecurityAsyncResult;
                 if (self == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("result", SR.GetString(SR.InvalidAsyncResult));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "result",
+                        SR.GetString(SR.InvalidAsyncResult)
+                    );
                 }
                 bool completeSelf = false;
                 Exception completionException = null;
@@ -923,7 +1322,8 @@ namespace System.ServiceModel.Security
                 catch (Exception e)
                 {
                     // Always immediately rethrow fatal exceptions.
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
 
                     completeSelf = true;
                     completionException = e;
@@ -944,10 +1344,14 @@ namespace System.ServiceModel.Security
                 {
                     return;
                 }
-                GetTwoTokensAndSetUpSecurityAsyncResult self = result.AsyncState as GetTwoTokensAndSetUpSecurityAsyncResult;
+                GetTwoTokensAndSetUpSecurityAsyncResult self =
+                    result.AsyncState as GetTwoTokensAndSetUpSecurityAsyncResult;
                 if (self == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("result", SR.GetString(SR.InvalidAsyncResult));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "result",
+                        SR.GetString(SR.InvalidAsyncResult)
+                    );
                 }
                 bool completeSelf = false;
                 Exception completionException = null;
@@ -960,7 +1364,8 @@ namespace System.ServiceModel.Security
                 catch (Exception e)
                 {
                     // Always immediately rethrow fatal exceptions.
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
 
                     completeSelf = true;
                     completionException = e;
@@ -986,7 +1391,11 @@ namespace System.ServiceModel.Security
                 }
                 else
                 {
-                    IAsyncResult result = this.primaryProvider.BeginGetToken(this.timeoutHelper.RemainingTime(), getPrimaryTokenCompleteCallback, this);
+                    IAsyncResult result = this.primaryProvider.BeginGetToken(
+                        this.timeoutHelper.RemainingTime(),
+                        getPrimaryTokenCompleteCallback,
+                        this
+                    );
                     if (result.CompletedSynchronously)
                     {
                         SecurityToken token = this.primaryProvider.EndGetToken(result);

@@ -43,7 +43,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                     {
                         var member = _tag.MembersOnLine[0];
 
-                        _lazyToolTipTextBlock = new[] { new TaggedText(TextTags.Text, member.TopLevelDisplayText) }.ToTextBlock(_classificationFormatMap, _classificationTypeMap);
+                        _lazyToolTipTextBlock = new[]
+                        {
+                            new TaggedText(TextTags.Text, member.TopLevelDisplayText),
+                        }.ToTextBlock(_classificationFormatMap, _classificationTypeMap);
                     }
                     else if (members.Length == 1)
                     {
@@ -52,22 +55,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                         // Here we want to show a classified text with loc text,
                         // e.g. 'Bar' is inherited.
                         // But the classified text are inlines, so can't directly use string.format to generate the string
-                        var inlines = member.DisplayTexts.ToInlines(_classificationFormatMap, _classificationTypeMap);
-                        var startOfThePlaceholder = ServicesVSResources._0_is_inherited.IndexOf("{0}", StringComparison.Ordinal);
-                        var prefixString = ServicesVSResources._0_is_inherited[..startOfThePlaceholder];
-                        var suffixString = ServicesVSResources._0_is_inherited[(startOfThePlaceholder + "{0}".Length)..];
+                        var inlines = member.DisplayTexts.ToInlines(
+                            _classificationFormatMap,
+                            _classificationTypeMap
+                        );
+                        var startOfThePlaceholder = ServicesVSResources._0_is_inherited.IndexOf(
+                            "{0}",
+                            StringComparison.Ordinal
+                        );
+                        var prefixString = ServicesVSResources._0_is_inherited[
+                            ..startOfThePlaceholder
+                        ];
+                        var suffixString = ServicesVSResources._0_is_inherited[
+                            (startOfThePlaceholder + "{0}".Length)..
+                        ];
                         inlines.Insert(0, new Run(prefixString));
                         inlines.Add(new Run(suffixString));
 
                         _lazyToolTipTextBlock = inlines.ToTextBlock(_classificationFormatMap);
                         _lazyToolTipTextBlock.FlowDirection = FlowDirection.LeftToRight;
-
                     }
                     else
                     {
                         _lazyToolTipTextBlock = new TextBlock
                         {
-                            Text = ServicesVSResources.Multiple_members_are_inherited
+                            Text = ServicesVSResources.Multiple_members_are_inherited,
                         };
                     }
                 }
@@ -97,7 +109,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             IClassificationFormatMap classificationFormatMap,
             string automationName,
             double scaleFactor,
-            ImmutableArray<MenuItemViewModel> menuItemViewModels)
+            ImmutableArray<MenuItemViewModel> menuItemViewModels
+        )
         {
             _classificationTypeMap = classificationTypeMap;
             _classificationFormatMap = classificationFormatMap;
@@ -111,7 +124,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             ClassificationTypeMap classificationTypeMap,
             IClassificationFormatMap classificationFormatMap,
             InheritanceMarginTag tag,
-            double zoomLevel)
+            double zoomLevel
+        )
         {
             var members = tag.MembersOnLine;
 
@@ -123,23 +137,55 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                 var member = tag.MembersOnLine[0];
                 var automationName = member.TopLevelDisplayText;
 
-                var menuItemViewModels = members.SelectManyAsArray(m => InheritanceMarginHelpers.CreateModelsForMarginItem(m));
-                return new InheritanceMarginGlyphViewModel(tag, classificationTypeMap, classificationFormatMap, automationName!, scaleFactor, menuItemViewModels);
+                var menuItemViewModels = members.SelectManyAsArray(m =>
+                    InheritanceMarginHelpers.CreateModelsForMarginItem(m)
+                );
+                return new InheritanceMarginGlyphViewModel(
+                    tag,
+                    classificationTypeMap,
+                    classificationFormatMap,
+                    automationName!,
+                    scaleFactor,
+                    menuItemViewModels
+                );
             }
             else if (members.Length == 1)
             {
                 var member = tag.MembersOnLine[0];
 
-                var automationName = string.Format(ServicesVSResources._0_is_inherited, member.DisplayTexts.JoinText());
+                var automationName = string.Format(
+                    ServicesVSResources._0_is_inherited,
+                    member.DisplayTexts.JoinText()
+                );
                 var menuItemViewModels = InheritanceMarginHelpers.CreateModelsForMarginItem(member);
-                return new InheritanceMarginGlyphViewModel(tag, classificationTypeMap, classificationFormatMap, automationName, scaleFactor, menuItemViewModels);
+                return new InheritanceMarginGlyphViewModel(
+                    tag,
+                    classificationTypeMap,
+                    classificationFormatMap,
+                    automationName,
+                    scaleFactor,
+                    menuItemViewModels
+                );
             }
             else
             {
                 // Same automation name can't be set for control for accessibility purpose. So add the line number info.
-                var automationName = string.Format(ServicesVSResources.Multiple_members_are_inherited_on_line_0, tag.LineNumber);
-                var menuItemViewModels = InheritanceMarginHelpers.CreateMenuItemViewModelsForMultipleMembers(tag.MembersOnLine);
-                return new InheritanceMarginGlyphViewModel(tag, classificationTypeMap, classificationFormatMap, automationName, scaleFactor, menuItemViewModels);
+                var automationName = string.Format(
+                    ServicesVSResources.Multiple_members_are_inherited_on_line_0,
+                    tag.LineNumber
+                );
+                var menuItemViewModels =
+                    InheritanceMarginHelpers.CreateMenuItemViewModelsForMultipleMembers(
+                        tag.MembersOnLine
+                    );
+                return new InheritanceMarginGlyphViewModel(
+                    tag,
+                    classificationTypeMap,
+                    classificationFormatMap,
+                    automationName,
+                    scaleFactor,
+                    menuItemViewModels
+                );
             }
         }
     }

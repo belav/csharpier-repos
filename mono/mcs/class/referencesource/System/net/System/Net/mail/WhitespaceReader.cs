@@ -7,11 +7,11 @@
 namespace System.Net.Mail
 {
     using System;
-    using System.Text;
-    using System.Net.Mime;
-    using System.Globalization;
     using System.Collections;
     using System.Diagnostics;
+    using System.Globalization;
+    using System.Net.Mime;
+    using System.Text;
 
     // FWS, CFWS, and Comments are defined in RFC 2822 section 3.2.3.
     //
@@ -26,11 +26,11 @@ namespace System.Net.Mail
         //
         // This skips all folding and whitespace characters
         //
-        // Preconditions: 
-        // - The data string must not be null or empty. 
+        // Preconditions:
+        // - The data string must not be null or empty.
         // - The index must be within the upper bounds of the data string.
         //
-        // Return value: 
+        // Return value:
         // - The index of the next character that is NOT a whitespace character.
         // - -1 if the beginning of the data string is reached.
         //
@@ -41,7 +41,7 @@ namespace System.Net.Mail
             Debug.Assert(index < data.Length, "index was outside the bounds of the string");
             bool expectCR = false;
 
-            for ( ; index >= 0; index--)
+            for (; index >= 0; index--)
             {
                 // Check for a valid CRLF pair
                 if (data[index] == MailBnfHelper.CR && expectCR)
@@ -79,19 +79,19 @@ namespace System.Net.Mail
             return index;
         }
 
-        // This method functions similarly to ReadFwsReverse but will also skip any comments.  
+        // This method functions similarly to ReadFwsReverse but will also skip any comments.
         //
-        // Comments are text within '(' and ')' and may be nested. There may also be consecutive comments.  Unicode is 
+        // Comments are text within '(' and ')' and may be nested. There may also be consecutive comments.  Unicode is
         // allowed, as the comments are not transmitted.
-        // 
-        // This method was explicitly written in a non-recursive fashion to avoid malicious or accidental 
+        //
+        // This method was explicitly written in a non-recursive fashion to avoid malicious or accidental
         // stack-overflows from user input.
-        // 
-        // Preconditions: 
+        //
+        // Preconditions:
         // - The data string must not be null or empty
         // - The index must be within the upper bounds of the data string.
-        // 
-        // Return value: 
+        //
+        // Return value:
         // - The given index if it data[index] was not a ')' or white space
         // - The index of the next non comment or white space character
         //   e.g. " d ( ( c o mment) )" returns index 1
@@ -130,21 +130,32 @@ namespace System.Net.Mail
                     if (commentDepth < 0)
                     {
                         // Mismatched '('
-                        throw new FormatException(SR.GetString(SR.MailHeaderFieldInvalidCharacter, 
-                            MailBnfHelper.StartComment));
+                        throw new FormatException(
+                            SR.GetString(
+                                SR.MailHeaderFieldInvalidCharacter,
+                                MailBnfHelper.StartComment
+                            )
+                        );
                     }
                     index--;
                 }
                 // Check for valid characters within comments.  Allow Unicode, as we won't transmit any comments.
-                else if (commentDepth > 0
-                    && (data[index] > MailBnfHelper.Ascii7bitMaxValue || MailBnfHelper.Ctext[data[index]]))
+                else if (
+                    commentDepth > 0
+                    && (
+                        data[index] > MailBnfHelper.Ascii7bitMaxValue
+                        || MailBnfHelper.Ctext[data[index]]
+                    )
+                )
                 {
                     index--;
                 }
                 // If we're still in a comment, this must be an invalid char
                 else if (commentDepth > 0)
                 {
-                    throw new FormatException(SR.GetString(SR.MailHeaderFieldInvalidCharacter, data[index]));
+                    throw new FormatException(
+                        SR.GetString(SR.MailHeaderFieldInvalidCharacter, data[index])
+                    );
                 }
                 // We must no longer be in a comment, and this is not a whitespace char, return
                 else
@@ -159,7 +170,9 @@ namespace System.Net.Mail
             if (commentDepth > 0)
             {
                 // Mismatched ')', throw
-                throw new FormatException(SR.GetString(SR.MailHeaderFieldInvalidCharacter, MailBnfHelper.EndComment));
+                throw new FormatException(
+                    SR.GetString(SR.MailHeaderFieldInvalidCharacter, MailBnfHelper.EndComment)
+                );
             }
 
             return index;

@@ -18,16 +18,17 @@ public class IPNetwork
     /// <param name="prefix">The <see cref="IPAddress"/>.</param>
     /// <param name="prefixLength">The prefix length.</param>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="prefixLength"/> is out of range.</exception>
-    public IPNetwork(IPAddress prefix, int prefixLength) : this(prefix, prefixLength, true)
-    {
-    }
+    public IPNetwork(IPAddress prefix, int prefixLength)
+        : this(prefix, prefixLength, true) { }
 
     private IPNetwork(IPAddress prefix, int prefixLength, bool checkPrefixLengthRange)
     {
-        if (checkPrefixLengthRange &&
-            !IsValidPrefixLengthRange(prefix, prefixLength))
+        if (checkPrefixLengthRange && !IsValidPrefixLengthRange(prefix, prefixLength))
         {
-            throw new ArgumentOutOfRangeException(nameof(prefixLength), "The prefix length was out of range.");
+            throw new ArgumentOutOfRangeException(
+                nameof(prefixLength),
+                "The prefix length was out of range."
+            );
         }
 
         Prefix = prefix;
@@ -104,7 +105,7 @@ public class IPNetwork
         {
             AddressFamily.InterNetwork => prefixLength <= 32,
             AddressFamily.InterNetworkV6 => prefixLength <= 128,
-            _ => true
+            _ => true,
         };
     }
 
@@ -128,7 +129,10 @@ public class IPNetwork
 
         if (!IsValidPrefixLengthRange(prefix, prefixLength))
         {
-            throw new ArgumentOutOfRangeException(nameof(networkSpan), "The prefix length was out of range.");
+            throw new ArgumentOutOfRangeException(
+                nameof(networkSpan),
+                "The prefix length was out of range."
+            );
         }
 
         return new IPNetwork(prefix, prefixLength, false);
@@ -150,7 +154,10 @@ public class IPNetwork
     /// converted successfully; otherwise <see langword="false"/>.
     /// </returns>
     /// <inheritdoc cref="TryParseComponents(ReadOnlySpan{char}, out IPAddress?, out int)"/>
-    public static bool TryParse(ReadOnlySpan<char> networkSpan, [NotNullWhen(true)] out IPNetwork? network)
+    public static bool TryParse(
+        ReadOnlySpan<char> networkSpan,
+        [NotNullWhen(true)] out IPNetwork? network
+    )
     {
         network = null;
 
@@ -180,7 +187,8 @@ public class IPNetwork
     private static bool TryParseComponents(
         ReadOnlySpan<char> networkSpan,
         [NotNullWhen(true)] out IPAddress? prefix,
-        out int prefixLength)
+        out int prefixLength
+    )
     {
         prefix = null;
         prefixLength = default;

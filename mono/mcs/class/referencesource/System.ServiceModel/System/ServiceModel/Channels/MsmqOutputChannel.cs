@@ -1,6 +1,6 @@
-//------------------------------------------------------------  
-// Copyright (c) Microsoft Corporation.  All rights reserved.   
-//------------------------------------------------------------  
+//------------------------------------------------------------
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+//------------------------------------------------------------
 
 namespace System.ServiceModel.Channels
 {
@@ -17,20 +17,37 @@ namespace System.ServiceModel.Channels
         MsmqChannelFactory<IOutputChannel> factory;
         SecurityTokenProviderContainer certificateTokenProvider;
 
-        public MsmqOutputChannel(MsmqChannelFactory<IOutputChannel> factory, EndpointAddress to, Uri via, bool manualAddressing)
+        public MsmqOutputChannel(
+            MsmqChannelFactory<IOutputChannel> factory,
+            EndpointAddress to,
+            Uri via,
+            bool manualAddressing
+        )
             : base(factory, to, via, manualAddressing, factory.MessageVersion)
         {
             // construct the .NET framing preamble used for every message
             byte[] modeBytes = ClientSingletonSizedEncoder.ModeBytes;
             EncodedVia encodedVia = new EncodedVia(this.Via.AbsoluteUri);
-            EncodedContentType encodedContentType = EncodedContentType.Create(factory.MessageEncoderFactory.Encoder.ContentType);
+            EncodedContentType encodedContentType = EncodedContentType.Create(
+                factory.MessageEncoderFactory.Encoder.ContentType
+            );
 
-            this.preamble = DiagnosticUtility.Utility.AllocateByteArray(modeBytes.Length + ClientSingletonSizedEncoder.CalcStartSize(encodedVia, encodedContentType));
+            this.preamble = DiagnosticUtility.Utility.AllocateByteArray(
+                modeBytes.Length
+                    + ClientSingletonSizedEncoder.CalcStartSize(encodedVia, encodedContentType)
+            );
 
             Buffer.BlockCopy(modeBytes, 0, this.preamble, 0, modeBytes.Length);
-            ClientSingletonSizedEncoder.EncodeStart(this.preamble, modeBytes.Length, encodedVia, encodedContentType);
+            ClientSingletonSizedEncoder.EncodeStart(
+                this.preamble,
+                modeBytes.Length,
+                encodedVia,
+                encodedContentType
+            );
 
-            this.outputMessages = new SynchronizedDisposablePool<MsmqOutputMessage<IOutputChannel>>(factory.MaxPoolSize);
+            this.outputMessages = new SynchronizedDisposablePool<MsmqOutputMessage<IOutputChannel>>(
+                factory.MaxPoolSize
+            );
             if (factory.IsMsmqX509SecurityConfigured)
             {
                 this.certificateTokenProvider = factory.CreateX509TokenProvider(to, via);
@@ -59,7 +76,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             OnCloseCore(false, timeout);
             return new CompletedAsyncResult(callback, state);
@@ -93,8 +114,10 @@ namespace System.ServiceModel.Channels
         {
             try
             {
-                this.msmqQueue = new MsmqQueue(this.factory.AddressTranslator.UriToFormatName(this.RemoteAddress.Uri),
-                                           UnsafeNativeMethods.MQ_SEND_ACCESS);
+                this.msmqQueue = new MsmqQueue(
+                    this.factory.AddressTranslator.UriToFormatName(this.RemoteAddress.Uri),
+                    UnsafeNativeMethods.MQ_SEND_ACCESS
+                );
             }
             catch (MsmqException ex)
             {
@@ -110,7 +133,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             OnOpenCore(timeout);
             return new CompletedAsyncResult(callback, state);
@@ -126,7 +153,12 @@ namespace System.ServiceModel.Channels
             OnOpenCore(timeout);
         }
 
-        protected override IAsyncResult OnBeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             OnSend(message, timeout);
             return new CompletedAsyncResult(callback, state);
@@ -140,9 +172,20 @@ namespace System.ServiceModel.Channels
         protected override void OnSend(Message message, TimeSpan timeout)
         {
             // serialize the indigo message to byte array and copy the .NET framing preamble
-            ArraySegment<byte> messageData = this.factory.MessageEncoderFactory.Encoder.WriteMessage(
-                message, int.MaxValue, this.factory.BufferManager, preamble.Length);
-            Buffer.BlockCopy(preamble, 0, messageData.Array, messageData.Offset - preamble.Length, preamble.Length);
+            ArraySegment<byte> messageData =
+                this.factory.MessageEncoderFactory.Encoder.WriteMessage(
+                    message,
+                    int.MaxValue,
+                    this.factory.BufferManager,
+                    preamble.Length
+                );
+            Buffer.BlockCopy(
+                preamble,
+                0,
+                messageData.Array,
+                messageData.Offset - preamble.Length,
+                preamble.Length
+            );
 
             byte[] buffer = messageData.Array;
             int offset = messageData.Offset - preamble.Length;
@@ -151,12 +194,20 @@ namespace System.ServiceModel.Channels
             MsmqOutputMessage<IOutputChannel> msmqMessage = this.outputMessages.Take();
             if (msmqMessage == null)
             {
-                msmqMessage = new MsmqOutputMessage<IOutputChannel>(this.factory, size, this.RemoteAddress);
+                msmqMessage = new MsmqOutputMessage<IOutputChannel>(
+                    this.factory,
+                    size,
+                    this.RemoteAddress
+                );
                 MsmqDiagnostics.PoolFull(this.factory.MaxPoolSize);
             }
             try
             {
-                msmqMessage.ApplyCertificateIfNeeded(this.certificateTokenProvider, this.factory.MsmqTransportSecurity.MsmqAuthenticationMode, timeout);
+                msmqMessage.ApplyCertificateIfNeeded(
+                    this.certificateTokenProvider,
+                    this.factory.MsmqTransportSecurity.MsmqAuthenticationMode,
+                    timeout
+                );
                 msmqMessage.Body.EnsureBufferLength(size);
                 msmqMessage.Body.BufferLength = size;
                 Buffer.BlockCopy(buffer, offset, msmqMessage.Body.Buffer, 0, size);
@@ -165,7 +216,10 @@ namespace System.ServiceModel.Channels
                 bool lockHeld = false;
                 try
                 {
-                    Msmq.EnterXPSendLock(out lockHeld, this.factory.MsmqTransportSecurity.MsmqProtectionLevel);
+                    Msmq.EnterXPSendLock(
+                        out lockHeld,
+                        this.factory.MsmqTransportSecurity.MsmqProtectionLevel
+                    );
                     this.msmqQueue.Send(msmqMessage, this.transactionMode);
                     MsmqDiagnostics.DatagramSent(msmqMessage.MessageId, message);
                 }

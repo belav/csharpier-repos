@@ -4,7 +4,6 @@
 using System;
 using System.Runtime;
 using System.Runtime.CompilerServices;
-
 using Internal.Runtime;
 
 namespace Internal.Runtime.CompilerHelpers
@@ -53,8 +52,10 @@ namespace Internal.Runtime.CompilerHelpers
             int sign = (int)(Hi32Bits(i) ^ Hi32Bits(j));
 
             // Convert to unsigned multiplication
-            if (i < 0) i = -i;
-            if (j < 0) j = -j;
+            if (i < 0)
+                i = -i;
+            if (j < 0)
+                j = -j;
 
             // Get the upper 32 bits of the numbers
             uint val1High = Hi32Bits(i);
@@ -100,7 +101,7 @@ namespace Internal.Runtime.CompilerHelpers
             }
             return ret;
 
-        ThrowExcep:
+            ThrowExcep:
             return ThrowLngOvf();
         }
 
@@ -141,7 +142,7 @@ namespace Internal.Runtime.CompilerHelpers
                 goto ThrowExcep;
             return ret;
 
-        ThrowExcep:
+            ThrowExcep:
             return ThrowULngOvf();
         }
 

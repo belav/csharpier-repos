@@ -11,7 +11,8 @@ namespace System.IO
     // (and optionally Flush), as well as any additional ctor/Dispose logic necessary.
     internal abstract class ConsoleStream : Stream
     {
-        private bool _canRead, _canWrite;
+        private bool _canRead,
+            _canWrite;
 
         internal ConsoleStream(FileAccess access)
         {
@@ -66,7 +67,8 @@ namespace System.IO
 
         public sealed override void SetLength(long value) => throw Error.GetSeekNotSupported();
 
-        public sealed override long Seek(long offset, SeekOrigin origin) => throw Error.GetSeekNotSupported();
+        public sealed override long Seek(long offset, SeekOrigin origin) =>
+            throw Error.GetSeekNotSupported();
 
         protected void ValidateRead(byte[] buffer, int offset, int count)
         {

@@ -32,22 +32,29 @@ public class Startup
             options.Headers.Add("X-BetaFeatures");
 
             // Generate a new X-BetaFeatures if not present.
-            options.Headers.Add("X-BetaFeatures", context =>
-            {
-                return GenerateBetaFeatureOptions();
-            });
+            options.Headers.Add(
+                "X-BetaFeatures",
+                context =>
+                {
+                    return GenerateBetaFeatureOptions();
+                }
+            );
         });
 
-        services
-            .AddHttpClient("test")
-            .AddHeaderPropagation();
+        services.AddHttpClient("test").AddHeaderPropagation();
 
         services
             .AddHttpClient("another")
-            .AddHeaderPropagation(options => options.Headers.Add("X-BetaFeatures", "X-Experiments"));
+            .AddHeaderPropagation(options =>
+                options.Headers.Add("X-BetaFeatures", "X-Experiments")
+            );
     }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHttpClientFactory clientFactory)
+    public void Configure(
+        IApplicationBuilder app,
+        IWebHostEnvironment env,
+        IHttpClientFactory clientFactory
+    )
     {
         if (env.IsDevelopment())
         {
@@ -60,50 +67,64 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapGet("/", async context =>
-            {
-                foreach (var header in context.Request.Headers)
+            endpoints.MapGet(
+                "/",
+                async context =>
                 {
-                    await context.Response.WriteAsync($"'/' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n");
-                }
-
-                var clientNames = new[] { "test", "another" };
-                foreach (var clientName in clientNames)
-                {
-                    await context.Response.WriteAsync("Sending request to /forwarded\r\n");
-
-                    var uri = UriHelper.BuildAbsolute(context.Request.Scheme, context.Request.Host, context.Request.PathBase, "/forwarded");
-                    var client = clientFactory.CreateClient(clientName);
-                    var response = await client.GetAsync(uri);
-
-                    foreach (var header in response.RequestMessage.Headers)
+                    foreach (var header in context.Request.Headers)
                     {
-                        await context.Response.WriteAsync($"Sent Header '{header.Key}': {string.Join(", ", header.Value)}\r\n");
+                        await context.Response.WriteAsync(
+                            $"'/' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
+                        );
                     }
 
-                    await context.Response.WriteAsync("Got response\r\n");
-                    await context.Response.WriteAsync(await response.Content.ReadAsStringAsync());
-                }
-            });
+                    var clientNames = new[] { "test", "another" };
+                    foreach (var clientName in clientNames)
+                    {
+                        await context.Response.WriteAsync("Sending request to /forwarded\r\n");
 
-            endpoints.MapGet("/forwarded", async context =>
-            {
-                foreach (var header in context.Request.Headers)
-                {
-                    await context.Response.WriteAsync($"'/forwarded' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n");
+                        var uri = UriHelper.BuildAbsolute(
+                            context.Request.Scheme,
+                            context.Request.Host,
+                            context.Request.PathBase,
+                            "/forwarded"
+                        );
+                        var client = clientFactory.CreateClient(clientName);
+                        var response = await client.GetAsync(uri);
+
+                        foreach (var header in response.RequestMessage.Headers)
+                        {
+                            await context.Response.WriteAsync(
+                                $"Sent Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
+                            );
+                        }
+
+                        await context.Response.WriteAsync("Got response\r\n");
+                        await context.Response.WriteAsync(
+                            await response.Content.ReadAsStringAsync()
+                        );
+                    }
                 }
-            });
+            );
+
+            endpoints.MapGet(
+                "/forwarded",
+                async context =>
+                {
+                    foreach (var header in context.Request.Headers)
+                    {
+                        await context.Response.WriteAsync(
+                            $"'/forwarded' Got Header '{header.Key}': {string.Join(", ", header.Value)}\r\n"
+                        );
+                    }
+                }
+            );
         });
     }
 
     private static StringValues GenerateBetaFeatureOptions()
     {
-        var features = new string[]
-        {
-                "Widgets",
-                "Social",
-                "Speedy-Checkout",
-        };
+        var features = new string[] { "Widgets", "Social", "Speedy-Checkout" };
 
         var threshold = 0.80; // 20% chance for each feature in beta.
 

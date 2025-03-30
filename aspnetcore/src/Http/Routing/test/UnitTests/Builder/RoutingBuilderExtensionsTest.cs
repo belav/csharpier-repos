@@ -22,14 +22,16 @@ public class RoutingBuilderExtensionsTest
         var router = Mock.Of<IRouter>();
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => applicationBuilderMock.Object.UseRouter(router));
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            applicationBuilderMock.Object.UseRouter(router)
+        );
 
         Assert.Equal(
-            "Unable to find the required services. Please add all the required services by calling " +
-            "'IServiceCollection.AddRouting' inside the call to 'ConfigureServices(...)'" +
-            " in the application startup code.",
-            exception.Message);
+            "Unable to find the required services. Please add all the required services by calling "
+                + "'IServiceCollection.AddRouting' inside the call to 'ConfigureServices(...)'"
+                + " in the application startup code.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -43,10 +45,11 @@ public class RoutingBuilderExtensionsTest
 
         // Assert
         Assert.Equal(
-            "Unable to find the required services. " +
-            "Please add all the required services by calling 'IServiceCollection.AddRouting' " +
-            "inside the call to 'ConfigureServices(...)' in the application startup code.",
-            ex.Message);
+            "Unable to find the required services. "
+                + "Please add all the required services by calling 'IServiceCollection.AddRouting' "
+                + "inside the call to 'ConfigureServices(...)' in the application startup code.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -60,10 +63,11 @@ public class RoutingBuilderExtensionsTest
 
         // Assert
         Assert.Equal(
-            "Unable to find the required services. " +
-            "Please add all the required services by calling 'IServiceCollection.AddRouting' " +
-            "inside the call to 'ConfigureServices(...)' in the application startup code.",
-            ex.Message);
+            "Unable to find the required services. "
+                + "Please add all the required services by calling 'IServiceCollection.AddRouting' "
+                + "inside the call to 'ConfigureServices(...)' in the application startup code.",
+            ex.Message
+        );
     }
 
     [Fact]

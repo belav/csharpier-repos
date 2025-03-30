@@ -10,7 +10,8 @@ namespace System.Security.Cryptography.X509Certificates
     [EventSource(Name = "System.Security.Cryptography.X509Certificates.X509Chain.OpenSsl")]
     internal sealed class OpenSslX509ChainEventSource : EventSource
     {
-        internal static readonly OpenSslX509ChainEventSource Log = new OpenSslX509ChainEventSource();
+        internal static readonly OpenSslX509ChainEventSource Log =
+            new OpenSslX509ChainEventSource();
 
         private const int EventId_ChainStart = 1;
         private const int EventId_ChainStop = 2;
@@ -69,7 +70,9 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 // Ensure that certHandle stays alive while we use an interior pointer.
                 certHandle.DangerousAddRef(ref addedRef);
-                X500DistinguishedName dn = Interop.Crypto.LoadX500Name(Interop.Crypto.X509GetSubjectName(certHandle));
+                X500DistinguishedName dn = Interop.Crypto.LoadX500Name(
+                    Interop.Crypto.X509GetSubjectName(certHandle)
+                );
                 return dn.Name;
             }
             finally
@@ -90,7 +93,8 @@ namespace System.Security.Cryptography.X509Certificates
             EventId_ChainStart,
             Message = "Starting X.509 chain build.",
             Opcode = EventOpcode.Start,
-            Level = EventLevel.Informational)]
+            Level = EventLevel.Informational
+        )]
         internal void ChainStart()
         {
             if (IsEnabled())
@@ -99,10 +103,7 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        [Event(
-            EventId_ChainStop,
-            Opcode = EventOpcode.Stop,
-            Level = EventLevel.Informational)]
+        [Event(EventId_ChainStop, Opcode = EventOpcode.Stop, Level = EventLevel.Informational)]
         internal void ChainStop()
         {
             if (IsEnabled())
@@ -111,7 +112,11 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        [Event(EventId_FlushStores, Level = EventLevel.Informational, Message = "Manual store flush triggered.")]
+        [Event(
+            EventId_FlushStores,
+            Level = EventLevel.Informational,
+            Message = "Manual store flush triggered."
+        )]
         internal void FlushStores()
         {
             if (IsEnabled())
@@ -132,14 +137,18 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_FindFirstChainFinished,
             Level = EventLevel.Verbose,
-            Message = "First build finished with status {0}.")]
+            Message = "First build finished with status {0}."
+        )]
         private void FindFirstChainFinished(int code)
         {
             WriteEvent(EventId_FindFirstChainFinished, code);
         }
 
         [NonEvent]
-        internal void FindChainViaAiaFinished(Interop.Crypto.X509VerifyStatusCode code, int downloadCount)
+        internal void FindChainViaAiaFinished(
+            Interop.Crypto.X509VerifyStatusCode code,
+            int downloadCount
+        )
         {
             if (IsEnabled())
             {
@@ -150,7 +159,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_FindChainViaAiaFinished,
             Level = EventLevel.Verbose,
-            Message = "AIA-based build retrieved {1} certificate(s) and finished with status {0}.")]
+            Message = "AIA-based build retrieved {1} certificate(s) and finished with status {0}."
+        )]
         private void FindChainViaAiaFinished(int code, int downloadCount)
         {
             WriteEvent(EventId_FindChainViaAiaFinished, code, downloadCount);
@@ -159,7 +169,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_AiaDisabled,
             Level = EventLevel.Informational,
-            Message = "The chain is incomplete, but AIA is disabled.")]
+            Message = "The chain is incomplete, but AIA is disabled."
+        )]
         internal void AiaDisabled()
         {
             if (IsEnabled())
@@ -180,7 +191,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_NoAiaFound,
             Level = EventLevel.Informational,
-            Message = "Certificate '{0}' does not have an AuthorityInformationAccess extension.")]
+            Message = "Certificate '{0}' does not have an AuthorityInformationAccess extension."
+        )]
         private void NoAiaFound(string subjectName)
         {
             WriteEvent(EventId_NoAiaFound, subjectName);
@@ -189,7 +201,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_InvalidAia,
             Level = EventLevel.Informational,
-            Message = "The AuthorityInformationAccess extension could not be read.")]
+            Message = "The AuthorityInformationAccess extension could not be read."
+        )]
         internal void InvalidAia()
         {
             if (IsEnabled())
@@ -201,7 +214,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_NonHttpAiaEntry,
             Level = EventLevel.Verbose,
-            Message = "Skipping AIA entry '{0}' because the protocol is not HTTP.")]
+            Message = "Skipping AIA entry '{0}' because the protocol is not HTTP."
+        )]
         internal void NonHttpAiaEntry(string uri)
         {
             if (IsEnabled())
@@ -223,7 +237,8 @@ namespace System.Security.Cryptography.X509Certificates
             EventId_AssetDownloadStart,
             Message = "Starting download of certificate asset uri '{1}' with a {0}ms timeout.",
             Opcode = EventOpcode.Start,
-            Level = EventLevel.Informational)]
+            Level = EventLevel.Informational
+        )]
         private void AssetDownloadStart(int timeoutMs, string uri)
         {
             WriteEvent(EventId_AssetDownloadStart, timeoutMs, uri);
@@ -233,7 +248,8 @@ namespace System.Security.Cryptography.X509Certificates
             EventId_AssetDownloadStop,
             Opcode = EventOpcode.Stop,
             Level = EventLevel.Informational,
-            Message = "Asset download finished with a {0}-byte response.")]
+            Message = "Asset download finished with a {0}-byte response."
+        )]
         internal void AssetDownloadStop(int downloadSize)
         {
             if (IsEnabled())
@@ -242,7 +258,11 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        [Event(EventId_HttpClientNotAvailable, Level = EventLevel.Error, Message = "HttpClient is not available.")]
+        [Event(
+            EventId_HttpClientNotAvailable,
+            Level = EventLevel.Error,
+            Message = "HttpClient is not available."
+        )]
         internal void HttpClientNotAvailable()
         {
             if (IsEnabled())
@@ -254,7 +274,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_DownloadTimeExceeded,
             Level = EventLevel.Informational,
-            Message = "Not attempting further downloads as the available download time has been exceeded.")]
+            Message = "Not attempting further downloads as the available download time has been exceeded."
+        )]
         internal void DownloadTimeExceeded()
         {
             if (IsEnabled())
@@ -266,7 +287,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_InvalidDownloadedCertificate,
             Level = EventLevel.Informational,
-            Message = "The downloaded asset did not successfully decode as an X.509 certificate.")]
+            Message = "The downloaded asset did not successfully decode as an X.509 certificate."
+        )]
         internal void InvalidDownloadedCertificate()
         {
             if (IsEnabled())
@@ -278,7 +300,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_InvalidDownloadedCrl,
             Level = EventLevel.Informational,
-            Message = "The downloaded asset did not successfully decode as an X.509 CRL.")]
+            Message = "The downloaded asset did not successfully decode as an X.509 CRL."
+        )]
         internal void InvalidDownloadedCrl()
         {
             if (IsEnabled())
@@ -290,7 +313,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_InvalidDownloadedOcsp,
             Level = EventLevel.Informational,
-            Message = "The downloaded asset did not successfully decode as an OCSP Response.")]
+            Message = "The downloaded asset did not successfully decode as an OCSP Response."
+        )]
         internal void InvalidDownloadedOcsp()
         {
             if (IsEnabled())
@@ -302,7 +326,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_DownloadCompleteStatusCode,
             Level = EventLevel.Verbose,
-            Message = "The download completed with status code '{0}'.")]
+            Message = "The download completed with status code '{0}'."
+        )]
         private void DownloadCompleteStatusCode(int statusCode)
         {
             if (IsEnabled())
@@ -323,7 +348,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_DownloadRedirected,
             Level = EventLevel.Informational,
-            Message = "Following redirect to new URL: {0}")]
+            Message = "Following redirect to new URL: {0}"
+        )]
         private void DownloadRedirected(string redirectUri)
         {
             WriteEvent(EventId_DownloadRedirected, redirectUri);
@@ -332,7 +358,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_DownloadRedirectsExceeded,
             Level = EventLevel.Informational,
-            Message = "Redirect limit exceeded, aborting download.")]
+            Message = "Redirect limit exceeded, aborting download."
+        )]
         internal void DownloadRedirectsExceeded()
         {
             if (IsEnabled())
@@ -353,7 +380,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_DownloadRedirectNotFollowed,
             Level = EventLevel.Informational,
-            Message = "Not following redirect because the scheme is not supported: {0}")]
+            Message = "Not following redirect because the scheme is not supported: {0}"
+        )]
         private void DownloadRedirectNotFollowed(string redirectUri)
         {
             WriteEvent(EventId_DownloadRedirectNotFollowed, redirectUri);
@@ -362,7 +390,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_UntrustedChainWithRevocation,
             Level = EventLevel.Informational,
-            Message = "The certificate chain is untrusted, marking revocation status as Unknown.")]
+            Message = "The certificate chain is untrusted, marking revocation status as Unknown."
+        )]
         internal void UntrustedChainWithRevocation()
         {
             if (IsEnabled())
@@ -374,7 +403,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_NonHttpCdpEntry,
             Level = EventLevel.Verbose,
-            Message = "Skipping CDP entry '{0}' because the protocol is not HTTP.")]
+            Message = "Skipping CDP entry '{0}' because the protocol is not HTTP."
+        )]
         internal void NonHttpCdpEntry(string uri)
         {
             if (IsEnabled())
@@ -395,7 +425,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_NoCdpFound,
             Level = EventLevel.Informational,
-            Message = "Certificate '{0}' does not have a CRL Distribution Point extension.")]
+            Message = "Certificate '{0}' does not have a CRL Distribution Point extension."
+        )]
         private void NoCdpFound(string subjectName)
         {
             WriteEvent(EventId_NoCdpFound, subjectName);
@@ -404,7 +435,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_NoMatchingAiaEntry,
             Level = EventLevel.Informational,
-            Message = "The certificate has an Authority Information Access extension, but no appropriate entry for record type '{0}'")]
+            Message = "The certificate has an Authority Information Access extension, but no appropriate entry for record type '{0}'"
+        )]
         internal void NoMatchingAiaEntry(string recordTypeOid)
         {
             if (IsEnabled())
@@ -416,7 +448,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_NoMatchingCdpEntry,
             Level = EventLevel.Informational,
-            Message = "The certificate has a CRL Distribution Point extension, but the extension has no appropriate entries.")]
+            Message = "The certificate has a CRL Distribution Point extension, but the extension has no appropriate entries."
+        )]
         internal void NoMatchingCdpEntry()
         {
             if (IsEnabled())
@@ -429,7 +462,8 @@ namespace System.Security.Cryptography.X509Certificates
             EventId_CrlCacheCheckStart,
             Level = EventLevel.Verbose,
             Opcode = EventOpcode.Start,
-            Message = "Checking for a cached CRL.")]
+            Message = "Checking for a cached CRL."
+        )]
         internal void CrlCacheCheckStart()
         {
             if (IsEnabled())
@@ -438,10 +472,7 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        [Event(
-            EventId_CrlCacheCheckStop,
-            Level = EventLevel.Verbose,
-            Opcode = EventOpcode.Stop)]
+        [Event(EventId_CrlCacheCheckStop, Level = EventLevel.Verbose, Opcode = EventOpcode.Stop)]
         internal void CrlCacheCheckStop()
         {
             if (IsEnabled())
@@ -453,7 +484,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_CrlCacheOpenError,
             Level = EventLevel.Verbose,
-            Message = "Could not open the CRL cache file, it likely does not exist.")]
+            Message = "Could not open the CRL cache file, it likely does not exist."
+        )]
         internal void CrlCacheOpenError()
         {
             if (IsEnabled())
@@ -465,7 +497,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_CrlCacheDecodeError,
             Level = EventLevel.Warning,
-            Message = "The CRL cache file did not successfully decode.")]
+            Message = "The CRL cache file did not successfully decode."
+        )]
         internal void CrlCacheDecodeError()
         {
             if (IsEnabled())
@@ -477,7 +510,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_CrlCacheExpired,
             Level = EventLevel.Verbose,
-            Message = "The cached CRL's nextUpdate value ({1:O}) is not after the verification time ({0:O}).")]
+            Message = "The cached CRL's nextUpdate value ({1:O}) is not after the verification time ({0:O})."
+        )]
         internal void CrlCacheExpired(DateTime verificationTime, DateTime nextUpdate)
         {
             if (IsEnabled())
@@ -489,7 +523,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_CrlCacheFileBasedExpiry,
             Level = EventLevel.Verbose,
-            Message = "The cached crl has no nextUpdate value, basing nextUpdate on the file write time.")]
+            Message = "The cached crl has no nextUpdate value, basing nextUpdate on the file write time."
+        )]
         internal void CrlCacheFileBasedExpiry()
         {
             if (IsEnabled())
@@ -501,7 +536,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_CrlCacheAcceptedFile,
             Level = EventLevel.Verbose,
-            Message = "The cached crl nextUpdate value ({0:O}) is acceptable, using the cached file.")]
+            Message = "The cached crl nextUpdate value ({0:O}) is acceptable, using the cached file."
+        )]
         internal void CrlCacheAcceptedFile(DateTime nextUpdate)
         {
             if (IsEnabled())
@@ -513,7 +549,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_CrlCacheWriteFailed,
             Level = EventLevel.Informational,
-            Message = "Failed to write the downloaded CRL to the cache at path '{0}'. Further use of this CRL will repeat the download.")]
+            Message = "Failed to write the downloaded CRL to the cache at path '{0}'. Further use of this CRL will repeat the download."
+        )]
         internal void CrlCacheWriteFailed(string cacheFile)
         {
             if (IsEnabled())
@@ -525,7 +562,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_CrlCacheWriteSucceeded,
             Level = EventLevel.Verbose,
-            Message = "The downloaded CRL was successfully written to the cache.")]
+            Message = "The downloaded CRL was successfully written to the cache."
+        )]
         internal void CrlCacheWriteSucceeded()
         {
             if (IsEnabled())
@@ -537,7 +575,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_CrlCheckOffline,
             Level = EventLevel.Verbose,
-            Message = "Skipping CRL download because the revocation mode is Offline.")]
+            Message = "Skipping CRL download because the revocation mode is Offline."
+        )]
         internal void CrlCheckOffline()
         {
             if (IsEnabled())
@@ -558,7 +597,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_CrlChainFinished,
             Level = EventLevel.Verbose,
-            Message = "With CRLs applied, the chain build finished with status {0}.")]
+            Message = "With CRLs applied, the chain build finished with status {0}."
+        )]
         private void CrlChainFinished(int code)
         {
             WriteEvent(EventId_CrlChainFinished, code);
@@ -567,7 +607,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_AllRevocationErrorsIgnored,
             Level = EventLevel.Verbose,
-            Message = "The chain error details only included ignored status codes.")]
+            Message = "The chain error details only included ignored status codes."
+        )]
         internal void AllRevocationErrorsIgnored()
         {
             if (IsEnabled())
@@ -577,7 +618,10 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         [NonEvent]
-        internal void OcspResponseFromCache(int chainDepth, Interop.Crypto.X509VerifyStatusCode code)
+        internal void OcspResponseFromCache(
+            int chainDepth,
+            Interop.Crypto.X509VerifyStatusCode code
+        )
         {
             if (IsEnabled())
             {
@@ -588,14 +632,18 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_OcspResponseFromCache,
             Level = EventLevel.Verbose,
-            Message = "The OCSP cache result for the certificate at depth {0} is {1}.")]
+            Message = "The OCSP cache result for the certificate at depth {0} is {1}."
+        )]
         private void OcspResponseFromCache(int chainDepth, int code)
         {
             WriteEvent(EventId_OcspResponseFromCache, chainDepth, code);
         }
 
         [NonEvent]
-        internal void OcspResponseFromDownload(int chainDepth, Interop.Crypto.X509VerifyStatusCode code)
+        internal void OcspResponseFromDownload(
+            int chainDepth,
+            Interop.Crypto.X509VerifyStatusCode code
+        )
         {
             if (IsEnabled())
             {
@@ -606,14 +654,19 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_OcspResponseFromDownload,
             Level = EventLevel.Verbose,
-            Message = "The OCSP retrieval result for the certificate at depth {0} is {1}.")]
+            Message = "The OCSP retrieval result for the certificate at depth {0} is {1}."
+        )]
         private void OcspResponseFromDownload(int chainDepth, int code)
         {
             WriteEvent(EventId_OcspResponseFromDownload, chainDepth, code);
         }
 
         [NonEvent]
-        internal void RawElementStatus(int chainDepth, object errorCollection, Func<object, string> toString)
+        internal void RawElementStatus(
+            int chainDepth,
+            object errorCollection,
+            Func<object, string> toString
+        )
         {
             if (ShouldLogElementStatuses())
             {
@@ -625,14 +678,19 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_RawElementStatus,
             Level = EventLevel.Verbose,
-            Message = "The reported errors for the chain element at depth {0} are {1}.")]
+            Message = "The reported errors for the chain element at depth {0} are {1}."
+        )]
         private void RawElementStatus(int chainDepth, string statusCodes)
         {
             WriteEvent(EventId_RawElementStatus, chainDepth, statusCodes);
         }
 
         [NonEvent]
-        internal void FinalElementStatus(int chainDepth, object errorCollection, Func<object, string> toString)
+        internal void FinalElementStatus(
+            int chainDepth,
+            object errorCollection,
+            Func<object, string> toString
+        )
         {
             if (ShouldLogElementStatuses())
             {
@@ -644,7 +702,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_FinalElementStatus,
             Level = EventLevel.Verbose,
-            Message = "After OCSP and code normalization, the errors for the chain element at depth {0} are {1}.")]
+            Message = "After OCSP and code normalization, the errors for the chain element at depth {0} are {1}."
+        )]
         private void FinalElementStatus(int chainDepth, string statusCodes)
         {
             WriteEvent(EventId_FinalElementStatus, chainDepth, statusCodes);
@@ -653,7 +712,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_CouldNotOpenCAStore,
             Level = EventLevel.Warning,
-            Message = "Not caching downloaded intermediate certificates because the CurrentUser\\CA store failed to open.")]
+            Message = "Not caching downloaded intermediate certificates because the CurrentUser\\CA store failed to open."
+        )]
         internal void CouldNotOpenCAStore()
         {
             if (IsEnabled())
@@ -674,7 +734,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_CachingIntermediate,
             Level = EventLevel.Verbose,
-            Message = "Caching the intermediate certificate ('{0}') to the CurrentUser\\CA store.")]
+            Message = "Caching the intermediate certificate ('{0}') to the CurrentUser\\CA store."
+        )]
         private void CachingIntermediate(string subjectName)
         {
             WriteEvent(EventId_CachingIntermediate, subjectName);
@@ -692,7 +753,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_CachingIntermediateFailed,
             Level = EventLevel.Warning,
-            Message = "Adding the downloaded intermediate '{0}' to the CurrentUser\\CA store failed.")]
+            Message = "Adding the downloaded intermediate '{0}' to the CurrentUser\\CA store failed."
+        )]
         private void CachingIntermediateFailed()
         {
             WriteEvent(EventId_CachingIntermediateFailed);
@@ -702,8 +764,13 @@ namespace System.Security.Cryptography.X509Certificates
             EventId_RevocationCheckStart,
             Message = "Starting revocation check in mode '{0}' with scope '{1}' on a {2}-element chain.",
             Opcode = EventOpcode.Start,
-            Level = EventLevel.Informational)]
-        internal void RevocationCheckStart(X509RevocationMode revocationMode, X509RevocationFlag revocationFlag, int chainSize)
+            Level = EventLevel.Informational
+        )]
+        internal void RevocationCheckStart(
+            X509RevocationMode revocationMode,
+            X509RevocationFlag revocationFlag,
+            int chainSize
+        )
         {
             if (IsEnabled())
             {
@@ -714,7 +781,8 @@ namespace System.Security.Cryptography.X509Certificates
         [Event(
             EventId_RevocationCheckStop,
             Opcode = EventOpcode.Stop,
-            Level = EventLevel.Informational)]
+            Level = EventLevel.Informational
+        )]
         internal void RevocationCheckStop()
         {
             if (IsEnabled())
@@ -724,27 +792,46 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         [NonEvent]
-        internal void CrlIdentifiersDetermined(SafeX509Handle cert, string crlDistributionPoint, string cacheFileName)
+        internal void CrlIdentifiersDetermined(
+            SafeX509Handle cert,
+            string crlDistributionPoint,
+            string cacheFileName
+        )
         {
             if (IsEnabled())
             {
-                CrlIdentifiersDetermined(GetCertificateSubject(cert), crlDistributionPoint, cacheFileName);
+                CrlIdentifiersDetermined(
+                    GetCertificateSubject(cert),
+                    crlDistributionPoint,
+                    cacheFileName
+                );
             }
         }
 
         [Event(
             EventId_CrlIdentifiersDetermined,
             Level = EventLevel.Verbose,
-            Message = "Certificate '{0}' has a CRL Distribution Point of '{1}', will use '{2}' as the cache file.")]
-        private void CrlIdentifiersDetermined(string subjectName, string crlDistributionPoint, string cacheFileName)
+            Message = "Certificate '{0}' has a CRL Distribution Point of '{1}', will use '{2}' as the cache file."
+        )]
+        private void CrlIdentifiersDetermined(
+            string subjectName,
+            string crlDistributionPoint,
+            string cacheFileName
+        )
         {
-            WriteEvent(EventId_CrlIdentifiersDetermined, subjectName, crlDistributionPoint, cacheFileName);
+            WriteEvent(
+                EventId_CrlIdentifiersDetermined,
+                subjectName,
+                crlDistributionPoint,
+                cacheFileName
+            );
         }
 
         [Event(
             EventId_StapledOcspPresent,
             Level = EventLevel.Verbose,
-            Message = "The target certificate has a stapled OCSP request, skipping the CRL check.")]
+            Message = "The target certificate has a stapled OCSP request, skipping the CRL check."
+        )]
         internal void StapledOcspPresent()
         {
             if (IsEnabled())

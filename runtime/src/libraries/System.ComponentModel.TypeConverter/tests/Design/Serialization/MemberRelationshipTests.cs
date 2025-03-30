@@ -33,13 +33,19 @@ namespace System.ComponentModel.Design.Serialization.Tests
         [Fact]
         public void Ctor_NullOwner_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("owner", () => new MemberRelationship(null, new MockPropertyDescriptor()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "owner",
+                () => new MemberRelationship(null, new MockPropertyDescriptor())
+            );
         }
 
         [Fact]
         public void Ctor_NullMember_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("member", () => new MemberRelationship(1, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "member",
+                () => new MemberRelationship(1, null)
+            );
         }
 
         [Fact]
@@ -61,9 +67,24 @@ namespace System.ComponentModel.Design.Serialization.Tests
             var memberRelationship = new MemberRelationship(owner1, member1);
 
             yield return new object[] { memberRelationship, memberRelationship, true };
-            yield return new object[] { memberRelationship, new MemberRelationship(owner1, member1), true };
-            yield return new object[] { memberRelationship, new MemberRelationship(owner2, member1), false };
-            yield return new object[] { memberRelationship, new MemberRelationship(owner1, member2), false };
+            yield return new object[]
+            {
+                memberRelationship,
+                new MemberRelationship(owner1, member1),
+                true,
+            };
+            yield return new object[]
+            {
+                memberRelationship,
+                new MemberRelationship(owner2, member1),
+                false,
+            };
+            yield return new object[]
+            {
+                memberRelationship,
+                new MemberRelationship(owner1, member2),
+                false,
+            };
 
             yield return new object[] { memberRelationship, new object(), false };
             yield return new object[] { memberRelationship, null, false };
@@ -71,7 +92,11 @@ namespace System.ComponentModel.Design.Serialization.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Other_ReturnsExpected(MemberRelationship memberRelationship, object other, bool expected)
+        public void Equals_Other_ReturnsExpected(
+            MemberRelationship memberRelationship,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, memberRelationship.Equals(other));
             if (other is MemberRelationship otherMemberRelationship)
@@ -84,7 +109,10 @@ namespace System.ComponentModel.Design.Serialization.Tests
         [Fact]
         public void GetHashCode_InvokeMultipleTimesWithOwner_ReturnsEqual()
         {
-            var memberRelationship = new MemberRelationship(new object(), TypeDescriptor.GetProperties(typeof(TestClass))[0]);
+            var memberRelationship = new MemberRelationship(
+                new object(),
+                TypeDescriptor.GetProperties(typeof(TestClass))[0]
+            );
             Assert.Equal(memberRelationship.GetHashCode(), memberRelationship.GetHashCode());
         }
 

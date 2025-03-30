@@ -10,10 +10,7 @@ using Microsoft.Win32;
 
 namespace System.Diagnostics
 {
-    [
-    ToolboxItem(false),
-    DesignTimeVisible(false),
-    ]
+    [ToolboxItem(false), DesignTimeVisible(false)]
     public sealed class EventLogEntry : Component, ISerializable
     {
         internal byte[] dataBuf;
@@ -65,8 +62,13 @@ namespace System.Diagnostics
             {
                 int dataLen = IntFrom(dataBuf, bufOffset + FieldOffsets.DATALENGTH);
                 byte[] data = new byte[dataLen];
-                Array.Copy(dataBuf, bufOffset + IntFrom(dataBuf, bufOffset + FieldOffsets.DATAOFFSET),
-                           data, 0, dataLen);
+                Array.Copy(
+                    dataBuf,
+                    bufOffset + IntFrom(dataBuf, bufOffset + FieldOffsets.DATAOFFSET),
+                    data,
+                    0,
+                    dataLen
+                );
                 return data;
             }
         }
@@ -76,10 +78,7 @@ namespace System.Diagnostics
         /// </summary>
         public int Index
         {
-            get
-            {
-                return IntFrom(dataBuf, bufOffset + FieldOffsets.RECORDNUMBER);
-            }
+            get { return IntFrom(dataBuf, bufOffset + FieldOffsets.RECORDNUMBER); }
         }
 
         /// <summary>
@@ -108,22 +107,18 @@ namespace System.Diagnostics
         /// </summary>
         public short CategoryNumber
         {
-            get
-            {
-                return ShortFrom(dataBuf, bufOffset + FieldOffsets.EVENTCATEGORY);
-            }
+            get { return ShortFrom(dataBuf, bufOffset + FieldOffsets.EVENTCATEGORY); }
         }
 
         /// <summary>
         /// The number identifying the message for this source.
         /// </summary>
-        [Obsolete("EventLogEntry.EventID has been deprecated. Use System.Diagnostics.EventLogEntry.InstanceId instead.")]
+        [Obsolete(
+            "EventLogEntry.EventID has been deprecated. Use System.Diagnostics.EventLogEntry.InstanceId instead."
+        )]
         public int EventID
         {
-            get
-            {
-                return IntFrom(dataBuf, bufOffset + FieldOffsets.EVENTID) & 0x3FFFFFFF;
-            }
+            get { return IntFrom(dataBuf, bufOffset + FieldOffsets.EVENTID) & 0x3FFFFFFF; }
         }
 
         /// <summary>
@@ -140,8 +135,10 @@ namespace System.Diagnostics
         /// <summary>
         /// The text of the message for this entry.
         /// </summary>
-        [Editor("System.ComponentModel.Design.BinaryEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-                "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+        [Editor(
+            "System.ComponentModel.Design.BinaryEditor, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+        )]
         public string Message
         {
             get
@@ -150,10 +147,16 @@ namespace System.Diagnostics
                 {
                     string dllNames = GetMessageLibraryNames("EventMessageFile");
                     int msgId = IntFrom(dataBuf, bufOffset + FieldOffsets.EVENTID);
-                    string msg = owner.FormatMessageWrapper(dllNames, (uint)msgId, ReplacementStrings);
+                    string msg = owner.FormatMessageWrapper(
+                        dllNames,
+                        (uint)msgId,
+                        ReplacementStrings
+                    );
                     if (msg == null)
                     {
-                        StringBuilder msgBuf = new StringBuilder(SR.Format(SR.MessageNotFormatted, msgId, Source));
+                        StringBuilder msgBuf = new StringBuilder(
+                            SR.Format(SR.MessageNotFormatted, msgId, Source)
+                        );
                         string[] strings = ReplacementStrings;
                         for (int i = 0; i < strings.Length; i++)
                         {
@@ -205,7 +208,9 @@ namespace System.Diagnostics
         {
             get
             {
-                string[] strings = new string[ShortFrom(dataBuf, bufOffset + FieldOffsets.NUMSTRINGS)];
+                string[] strings = new string[
+                    ShortFrom(dataBuf, bufOffset + FieldOffsets.NUMSTRINGS)
+                ];
                 int i = 0;
                 int bufpos = bufOffset + IntFrom(dataBuf, bufOffset + FieldOffsets.STRINGOFFSET);
                 StringBuilder buf = new StringBuilder();
@@ -233,10 +238,7 @@ namespace System.Diagnostics
         /// </summary>
         public long InstanceId
         {
-            get
-            {
-                return (uint)IntFrom(dataBuf, bufOffset + FieldOffsets.EVENTID);
-            }
+            get { return (uint)IntFrom(dataBuf, bufOffset + FieldOffsets.EVENTID); }
         }
 
         /// <summary>
@@ -246,7 +248,9 @@ namespace System.Diagnostics
         {
             get
             {
-                return beginningOfTime.AddSeconds(IntFrom(dataBuf, bufOffset + FieldOffsets.TIMEGENERATED)).ToLocalTime();
+                return beginningOfTime
+                    .AddSeconds(IntFrom(dataBuf, bufOffset + FieldOffsets.TIMEGENERATED))
+                    .ToLocalTime();
             }
         }
 
@@ -257,7 +261,9 @@ namespace System.Diagnostics
         {
             get
             {
-                return beginningOfTime.AddSeconds(IntFrom(dataBuf, bufOffset + FieldOffsets.TIMEWRITTEN)).ToLocalTime();
+                return beginningOfTime
+                    .AddSeconds(IntFrom(dataBuf, bufOffset + FieldOffsets.TIMEWRITTEN))
+                    .ToLocalTime();
             }
         }
 
@@ -272,8 +278,13 @@ namespace System.Diagnostics
                 if (sidLen == 0)
                     return null;
                 byte[] sid = new byte[sidLen];
-                Array.Copy(dataBuf, bufOffset + IntFrom(dataBuf, bufOffset + FieldOffsets.USERSIDOFFSET),
-                           sid, 0, sid.Length);
+                Array.Copy(
+                    dataBuf,
+                    bufOffset + IntFrom(dataBuf, bufOffset + FieldOffsets.USERSIDOFFSET),
+                    sid,
+                    0,
+                    sid.Length
+                );
 
                 int userNameLen = 256;
                 int domainNameLen = 256;
@@ -282,7 +293,17 @@ namespace System.Diagnostics
                     fixed (char* bufUserName = new char[userNameLen])
                     fixed (char* bufDomainName = new char[domainNameLen])
                     {
-                        if (Interop.Advapi32.LookupAccountSid(MachineName, sid, bufUserName, ref userNameLen, bufDomainName, ref domainNameLen, out int sidNameUse) != 0)
+                        if (
+                            Interop.Advapi32.LookupAccountSid(
+                                MachineName,
+                                sid,
+                                bufUserName,
+                                ref userNameLen,
+                                bufDomainName,
+                                ref domainNameLen,
+                                out int sidNameUse
+                            ) != 0
+                        )
                         {
                             return new string(bufDomainName) + "\\" + new string(bufUserName);
                         }
@@ -323,8 +344,10 @@ namespace System.Diagnostics
         private static int IntFrom(byte[] buf, int offset)
         {
             // assumes Little Endian byte order.
-            return (unchecked((int)0xFF000000) & (buf[offset + 3] << 24)) | (0xFF0000 & (buf[offset + 2] << 16)) |
-            (0xFF00 & (buf[offset + 1] << 8)) | (0xFF & (buf[offset]));
+            return (unchecked((int)0xFF000000) & (buf[offset + 3] << 24))
+                | (0xFF0000 & (buf[offset + 2] << 16))
+                | (0xFF00 & (buf[offset + 1] << 8))
+                | (0xFF & (buf[offset]));
         }
 
         internal string ReplaceMessageParameters(string msg, string[] insertionStrings)
@@ -348,7 +371,10 @@ namespace System.Diagnostics
                 uint paramMsgID = 0;
 
                 if (lasNumIdx != percentIdx + 1)
-                    uint.TryParse(msg.Substring(percentIdx + 1, lasNumIdx - percentIdx - 1), out paramMsgID);
+                    uint.TryParse(
+                        msg.Substring(percentIdx + 1, lasNumIdx - percentIdx - 1),
+                        out paramMsgID
+                    );
 
                 if (paramMsgID != 0)
                     param = owner.FormatMessageWrapper(paramDLLNames, paramMsgID, insertionStrings);
@@ -356,7 +382,7 @@ namespace System.Diagnostics
                 if (param != null)
                 {
                     if (percentIdx > startCopyIdx)
-                        buf.Append(msg, startCopyIdx, percentIdx - startCopyIdx);    // original chars from msg
+                        buf.Append(msg, startCopyIdx, percentIdx - startCopyIdx); // original chars from msg
                     buf.Append(param);
                     startCopyIdx = lasNumIdx;
                 }
@@ -365,11 +391,15 @@ namespace System.Diagnostics
             }
 
             if (msgLength - startCopyIdx > 0)
-                buf.Append(msg, startCopyIdx, msgLength - startCopyIdx);          // last span of original msg
+                buf.Append(msg, startCopyIdx, msgLength - startCopyIdx); // last span of original msg
             return buf.ToString();
         }
 
-        private static RegistryKey GetSourceRegKey(string logName, string source, string machineName)
+        private static RegistryKey GetSourceRegKey(
+            string logName,
+            string source,
+            string machineName
+        )
         {
             RegistryKey eventKey = null;
             RegistryKey logKey = null;
@@ -377,7 +407,15 @@ namespace System.Diagnostics
             try
             {
                 eventKey = EventLog.GetEventLogRegKey(machineName, false);
-                return eventKey?.OpenSubKey(logName ?? "Application", /*writable*/false)?.OpenSubKey(source, /*writeable*/false);
+                return eventKey
+                    ?.OpenSubKey(
+                        logName ?? "Application", /*writable*/
+                        false
+                    )
+                    ?.OpenSubKey(
+                        source, /*writeable*/
+                        false
+                    );
             }
             finally
             {
