@@ -33,13 +33,7 @@ namespace Mono.Linker.Tests.Cases.LinkXml
 
             [Kept]
             [KeptBackingField]
-            public int Property
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public int Property { [Kept] get; [Kept] set; }
         }
 
         [KeptMember(".ctor()")]
@@ -53,13 +47,7 @@ namespace Mono.Linker.Tests.Cases.LinkXml
 
             [Kept]
             [KeptBackingField]
-            public int Property
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public int Property { [Kept] get; [Kept] set; }
         }
     }
 }

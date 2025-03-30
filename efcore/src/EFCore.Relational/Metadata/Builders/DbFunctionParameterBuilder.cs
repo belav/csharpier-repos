@@ -27,11 +27,7 @@ public class DbFunctionParameterBuilder : IInfrastructure<IConventionDbFunctionP
         Builder = ((DbFunctionParameter)parameter).Builder;
     }
 
-    private InternalDbFunctionParameterBuilder Builder
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    private InternalDbFunctionParameterBuilder Builder { [DebuggerStepThrough] get; }
 
     /// <inheritdoc />
     IConventionDbFunctionParameterBuilder IInfrastructure<IConventionDbFunctionParameterBuilder>.Instance

@@ -447,11 +447,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [KeptBackingField]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicMethods)]
-            public virtual string DAMVirtualProperty
-            {
-                [Kept]
-                get;
-            }
+            public virtual string DAMVirtualProperty { [Kept] get; }
         }
 
         [KeptBaseType(typeof(Base))]

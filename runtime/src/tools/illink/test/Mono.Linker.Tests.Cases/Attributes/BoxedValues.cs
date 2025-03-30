@@ -48,12 +48,7 @@ namespace Mono.Linker.Tests.Cases.Attributes
 
         [KeptBackingField]
         [Kept]
-        public object TestProperty
-        {
-            get;
-            [Kept]
-            set;
-        }
+        public object TestProperty { get; [Kept] set; }
 
         [Kept]
         public object TestField;

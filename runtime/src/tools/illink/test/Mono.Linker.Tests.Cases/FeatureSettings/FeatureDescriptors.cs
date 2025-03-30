@@ -52,13 +52,7 @@ namespace Mono.Linker.Tests.Cases.FeatureSettings
 
         [Kept]
         [KeptBackingField]
-        static bool PropertyConditionFalse
-        {
-            [Kept]
-            get;
-            [Kept]
-            set;
-        }
+        static bool PropertyConditionFalse { [Kept] get; [Kept] set; }
 
         [Kept]
         [KeptBackingField]

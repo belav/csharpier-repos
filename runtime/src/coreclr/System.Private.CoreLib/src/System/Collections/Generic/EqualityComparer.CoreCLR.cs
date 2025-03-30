@@ -10,11 +10,8 @@ namespace System.Collections.Generic
     {
         // To minimize generic instantiation overhead of creating the comparer per type, we keep the generic portion of the code as small
         // as possible and define most of the creation logic in a non-generic class.
-        public static EqualityComparer<T> Default
-        {
-            [Intrinsic]
-            get;
-        } = (EqualityComparer<T>)ComparerHelpers.CreateDefaultEqualityComparer(typeof(T));
+        public static EqualityComparer<T> Default { [Intrinsic] get; } =
+            (EqualityComparer<T>)ComparerHelpers.CreateDefaultEqualityComparer(typeof(T));
     }
 
     public sealed partial class GenericEqualityComparer<T> : EqualityComparer<T>

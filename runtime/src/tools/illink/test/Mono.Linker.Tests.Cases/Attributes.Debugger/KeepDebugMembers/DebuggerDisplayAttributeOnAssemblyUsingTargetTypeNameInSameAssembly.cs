@@ -40,13 +40,7 @@ namespace Mono.Linker.Tests.Cases.Attributes.Debugger.KeepDebugMembers
         {
             [Kept]
             [KeptBackingField]
-            public int Property
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public int Property { [Kept] get; [Kept] set; }
         }
     }
 }

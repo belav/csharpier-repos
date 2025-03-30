@@ -18,12 +18,7 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.BasePro
         interface IFoo<T>
         {
             [Kept]
-            GenericType<T> Property
-            {
-                get;
-                [Kept]
-                set;
-            }
+            GenericType<T> Property { get; [Kept] set; }
         }
 
         [Kept]
@@ -32,12 +27,7 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.BasePro
         {
             [Kept]
             [KeptBackingField]
-            public GenericType<object> Property
-            {
-                get;
-                [Kept]
-                set;
-            }
+            public GenericType<object> Property { get; [Kept] set; }
         }
 
         [Kept]

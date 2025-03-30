@@ -35,12 +35,7 @@ namespace Mono.Linker.Tests.Cases.ComponentModel
         [Kept]
         [KeptAttributeAttribute(typeof(TypeConverterAttribute))]
         [KeptBackingField]
-        public string Foo
-        {
-            [Kept]
-            get;
-            set;
-        }
+        public string Foo { [Kept] get; set; }
 
         [TypeConverter("NonExistentType")]
         [Kept]
@@ -51,12 +46,7 @@ namespace Mono.Linker.Tests.Cases.ComponentModel
             "Type 'NonExistentType' was not found in the caller assembly nor in the base library. "
                 + "Type name strings used for dynamically accessing a type should be assembly qualified."
         )]
-        public string Bar
-        {
-            [Kept]
-            get;
-            set;
-        }
+        public string Bar { [Kept] get; set; }
 
         [Kept]
         [KeptBaseType(typeof(TypeConverter))]

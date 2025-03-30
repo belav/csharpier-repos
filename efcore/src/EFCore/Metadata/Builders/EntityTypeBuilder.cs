@@ -38,11 +38,7 @@ public class EntityTypeBuilder : IInfrastructure<IConventionEntityTypeBuilder>
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalEntityTypeBuilder Builder
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    protected virtual InternalEntityTypeBuilder Builder { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     Gets the internal builder being used to configure the entity type.

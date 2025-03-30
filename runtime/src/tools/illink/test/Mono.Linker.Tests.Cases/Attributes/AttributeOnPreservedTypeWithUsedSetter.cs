@@ -15,12 +15,7 @@ namespace Mono.Linker.Tests.Cases.Attributes
         {
             [Kept]
             [KeptBackingField]
-            public int Val
-            {
-                get;
-                [Kept]
-                set;
-            }
+            public int Val { get; [Kept] set; }
         }
     }
 }

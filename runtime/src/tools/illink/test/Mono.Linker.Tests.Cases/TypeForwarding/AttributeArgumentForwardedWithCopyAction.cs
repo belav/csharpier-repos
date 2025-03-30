@@ -77,13 +77,7 @@ namespace Mono.Linker.Tests.Cases.TypeForwarding
 
         [KeptBackingField]
         [Kept]
-        public object TestProperty
-        {
-            [Kept]
-            get;
-            [Kept]
-            set;
-        }
+        public object TestProperty { [Kept] get; [Kept] set; }
 
         [Kept]
         public object TestField;

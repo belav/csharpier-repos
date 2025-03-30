@@ -19,13 +19,7 @@ namespace Mono.Linker.Tests.Cases.Attributes.Debugger.KeepDebugMembers
 
             [Kept]
             [KeptBackingField]
-            public T PropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public T PropertyOnBase { [Kept] get; [Kept] set; }
 
             public void MethodOnBase() { }
         }

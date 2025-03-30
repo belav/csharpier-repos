@@ -75,18 +75,10 @@ namespace System.IO
         }
 #endif
 
-        public abstract bool CanRead
-        {
-            [Pure]
-            get;
-        }
+        public abstract bool CanRead { [Pure] get; }
 
         // If CanSeek is false, Position, Seek, Length, and SetLength should throw.
-        public abstract bool CanSeek
-        {
-            [Pure]
-            get;
-        }
+        public abstract bool CanSeek { [Pure] get; }
 
         [ComVisible(false)]
         public virtual bool CanTimeout
@@ -95,11 +87,7 @@ namespace System.IO
             get { return false; }
         }
 
-        public abstract bool CanWrite
-        {
-            [Pure]
-            get;
-        }
+        public abstract bool CanWrite { [Pure] get; }
 
         public abstract long Length { get; }
 

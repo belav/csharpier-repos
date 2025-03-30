@@ -16,17 +16,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     [WindowsRuntimeImport]
     internal interface ICustomProperty
     {
-        Type Type
-        {
-            [Pure]
-            get;
-        }
+        Type Type { [Pure] get; }
 
-        string Name
-        {
-            [Pure]
-            get;
-        }
+        string Name { [Pure] get; }
 
         [Pure]
         object GetValue(object target);
@@ -38,16 +30,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
         void SetValue(object target, object value, object indexValue);
 
-        bool CanWrite
-        {
-            [Pure]
-            get;
-        }
+        bool CanWrite { [Pure] get; }
 
-        bool CanRead
-        {
-            [Pure]
-            get;
-        }
+        bool CanRead { [Pure] get; }
     }
 }

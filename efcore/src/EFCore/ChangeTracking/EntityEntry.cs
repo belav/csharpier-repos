@@ -36,11 +36,7 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalEntityEntry InternalEntry
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    protected virtual InternalEntityEntry InternalEntry { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

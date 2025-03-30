@@ -303,23 +303,11 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
 
             [Kept]
             [KeptBackingField]
-            public int PublicProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public int PublicProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            int NonPublicProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            int NonPublicProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]

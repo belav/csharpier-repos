@@ -29,13 +29,7 @@ namespace Mono.Linker.Tests.Cases.LinkXml
 
             [Kept]
             [KeptBackingField]
-            public int Property1
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public int Property1 { [Kept] get; [Kept] set; }
 
             public int Property2 { get; set; }
 

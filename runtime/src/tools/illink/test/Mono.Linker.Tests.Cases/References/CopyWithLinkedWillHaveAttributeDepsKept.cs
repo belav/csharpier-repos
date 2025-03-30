@@ -36,13 +36,7 @@ namespace Mono.Linker.Tests.Cases.References
             [KeptBackingField]
             [KeptAttributeAttribute(typeof(WithLinked_Attrs.PropertyAttribute))]
             [WithLinked_Attrs.Property]
-            private static int Property
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            private static int Property { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptAttributeAttribute(typeof(WithLinked_Attrs.EventAttribute))]

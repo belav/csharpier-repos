@@ -18,17 +18,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     [WindowsRuntimeImport]
     internal interface IPropertyValue
     {
-        PropertyType Type
-        {
-            [Pure]
-            get;
-        }
+        PropertyType Type { [Pure] get; }
 
-        bool IsNumericScalar
-        {
-            [Pure]
-            get;
-        }
+        bool IsNumericScalar { [Pure] get; }
 
         [Pure]
         Byte GetUInt8();

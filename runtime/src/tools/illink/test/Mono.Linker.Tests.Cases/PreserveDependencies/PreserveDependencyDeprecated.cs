@@ -128,12 +128,7 @@ namespace Mono.Linker.Tests.Cases.PreserveDependencies
 
         [Kept]
         [KeptBackingField]
-        internal string Property
-        {
-            [Kept]
-            get;
-            set;
-        }
+        internal string Property { [Kept] get; set; }
 
         internal void ConditionalTest() { }
     }

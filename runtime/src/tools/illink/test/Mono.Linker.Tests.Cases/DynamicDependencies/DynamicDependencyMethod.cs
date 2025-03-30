@@ -163,21 +163,11 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
 
         [Kept]
         [KeptBackingField]
-        internal string Property
-        {
-            [Kept]
-            get;
-            set;
-        }
+        internal string Property { [Kept] get; set; }
 
         [Kept]
         [KeptBackingField]
-        internal string Property2
-        {
-            [Kept]
-            get;
-            set;
-        }
+        internal string Property2 { [Kept] get; set; }
 
         // For now, Condition has no effect: https://github.com/dotnet/linker/issues/1231
         [Kept]

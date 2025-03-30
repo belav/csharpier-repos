@@ -71,11 +71,7 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalForeignKeyBuilder Builder
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    protected virtual InternalForeignKeyBuilder Builder { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -84,11 +80,7 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual string? ReferenceName
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    protected virtual string? ReferenceName { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -97,11 +89,7 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual MemberInfo? ReferenceMember
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    protected virtual MemberInfo? ReferenceMember { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -110,11 +98,7 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual IMutableEntityType RelatedEntityType
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    protected virtual IMutableEntityType RelatedEntityType { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -123,11 +107,7 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual IMutableEntityType DeclaringEntityType
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    protected virtual IMutableEntityType DeclaringEntityType { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     Gets the internal builder being used to configure the relationship.

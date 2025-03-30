@@ -415,11 +415,7 @@ namespace System
 #endif
 
         // Assembly Property associated with a class.
-        public abstract Assembly Assembly
-        {
-            [Pure]
-            get;
-        }
+        public abstract Assembly Assembly { [Pure] get; }
 
         // Assembly Property associated with a class.
         // A class handle is a unique integer value associated with
@@ -462,24 +458,12 @@ namespace System
 #endif
 
         // Return the fully qualified name.  The name does contain the namespace.
-        public abstract String FullName
-        {
-            [Pure]
-            get;
-        }
+        public abstract String FullName { [Pure] get; }
 
         // Return the name space of the class.
-        public abstract String Namespace
-        {
-            [Pure]
-            get;
-        }
+        public abstract String Namespace { [Pure] get; }
 
-        public abstract String AssemblyQualifiedName
-        {
-            [Pure]
-            get;
-        }
+        public abstract String AssemblyQualifiedName { [Pure] get; }
 
         [Pure]
         public virtual int GetArrayRank()
@@ -493,11 +477,7 @@ namespace System
         // Returns the base class for a class.  If this is an interface or has
         // no base class null is returned.  Object is the only Type that does not
         // have a base class.
-        public abstract Type BaseType
-        {
-            [Pure]
-            get;
-        }
+        public abstract Type BaseType { [Pure] get; }
 
         // GetConstructor
         // This method will search for the specified constructor.  For constructors,

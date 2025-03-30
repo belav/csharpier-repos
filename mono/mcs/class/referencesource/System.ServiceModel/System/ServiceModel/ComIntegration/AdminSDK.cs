@@ -377,12 +377,7 @@ namespace System.ServiceModel.ComIntegration
         [return: MarshalAs(UnmanagedType.VariantBool)]
         bool IsPropertyReadOnly([In, MarshalAs(UnmanagedType.BStr)] String bstrPropName);
 
-        bool Valid
-        {
-            [DispId(0x00000005)]
-            [return: MarshalAs(UnmanagedType.VariantBool)]
-            get;
-        }
+        bool Valid { [DispId(0x00000005)] [return: MarshalAs(UnmanagedType.VariantBool)] get; }
 
         [DispId(0x00000006)]
         [return: MarshalAs(UnmanagedType.VariantBool)]
@@ -445,17 +440,9 @@ namespace System.ServiceModel.ComIntegration
         [return: MarshalAs(UnmanagedType.Interface)]
         Object GetUtilInterface();
 
-        int DataStoreMajorVersion
-        {
-            [DispId(0x0000000a)]
-            get;
-        }
+        int DataStoreMajorVersion { [DispId(0x0000000a)] get; }
 
-        int DataStoreMinorVersion
-        {
-            [DispId(0x0000000b)]
-            get;
-        }
+        int DataStoreMinorVersion { [DispId(0x0000000b)] get; }
 
         void PopulateByKey(
             [In, MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_VARIANT)]

@@ -38,12 +38,7 @@ namespace Mono.Linker.Tests.Cases.Attributes.Csc
             [KeptBackingField]
             [KeptAttributeAttribute(typeof(AttributeDefinedInReference))]
             [AttributeDefinedInReference(PropertyType = typeof(TypeDefinedInReference))]
-            public int Property
-            {
-                get;
-                [Kept]
-                set;
-            }
+            public int Property { get; [Kept] set; }
         }
     }
 }

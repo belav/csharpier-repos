@@ -23,11 +23,7 @@ public class SequenceBuilder : IInfrastructure<IConventionSequenceBuilder>
         Builder = ((Sequence)sequence).Builder;
     }
 
-    private InternalSequenceBuilder Builder
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    private InternalSequenceBuilder Builder { [DebuggerStepThrough] get; }
 
     /// <inheritdoc />
     IConventionSequenceBuilder IInfrastructure<IConventionSequenceBuilder>.Instance

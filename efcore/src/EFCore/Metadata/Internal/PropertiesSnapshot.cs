@@ -30,23 +30,9 @@ public class PropertiesSnapshot
         Relationships = relationships;
     }
 
-    private List<InternalPropertyBuilder>? Properties
-    {
-        [DebuggerStepThrough]
-        get;
-    }
-    private List<RelationshipSnapshot>? Relationships
-    {
-        [DebuggerStepThrough]
-        get;
-        set;
-    }
-    private List<InternalIndexBuilder>? Indexes
-    {
-        [DebuggerStepThrough]
-        get;
-        set;
-    }
+    private List<InternalPropertyBuilder>? Properties { [DebuggerStepThrough] get; }
+    private List<RelationshipSnapshot>? Relationships { [DebuggerStepThrough] get; set; }
+    private List<InternalIndexBuilder>? Indexes { [DebuggerStepThrough] get; set; }
     private List<(InternalKeyBuilder, ConfigurationSource?)>? Keys
     {
         [DebuggerStepThrough]

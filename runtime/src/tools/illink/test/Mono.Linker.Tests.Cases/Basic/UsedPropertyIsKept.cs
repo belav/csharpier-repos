@@ -16,13 +16,7 @@ namespace Mono.Linker.Tests.Cases.Basic
         {
             [Kept]
             [KeptBackingField]
-            public int Prop
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public int Prop { [Kept] get; [Kept] set; }
         }
     }
 }

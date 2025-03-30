@@ -44,16 +44,8 @@ public class ComplexPropertySnapshot
         }
     }
 
-    private InternalComplexPropertyBuilder ComplexPropertyBuilder
-    {
-        [DebuggerStepThrough]
-        get;
-    }
-    private InternalComplexTypeBuilder ComplexTypeBuilder
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    private InternalComplexPropertyBuilder ComplexPropertyBuilder { [DebuggerStepThrough] get; }
+    private InternalComplexTypeBuilder ComplexTypeBuilder { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -65,11 +57,7 @@ public class ComplexPropertySnapshot
 
     private ComplexType ComplexType => ComplexTypeBuilder.Metadata;
 
-    private PropertiesSnapshot Properties
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    private PropertiesSnapshot Properties { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -135,11 +135,7 @@ namespace Mono.Linker.Tests.Cases.Serialization
             [KeptBackingField]
             [KeptAttributeAttribute(typeof(DataMemberAttribute))]
             [DataMember]
-            public int P
-            {
-                [Kept]
-                get;
-            }
+            public int P { [Kept] get; }
 
             [Kept]
             public int f1;

@@ -15,11 +15,7 @@ public partial class ConventionDispatcher
             _children = children;
         }
 
-        public override ConventionScope Parent
-        {
-            [DebuggerStepThrough]
-            get;
-        }
+        public override ConventionScope Parent { [DebuggerStepThrough] get; }
 
         public override IReadOnlyList<ConventionNode>? Children
         {

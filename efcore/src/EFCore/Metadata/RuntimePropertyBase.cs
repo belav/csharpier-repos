@@ -50,11 +50,7 @@ public abstract class RuntimePropertyBase : RuntimeAnnotatableBase, IRuntimeProp
     /// <summary>
     ///     Gets the name of this property-like object.
     /// </summary>
-    public virtual string Name
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    public virtual string Name { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     Gets the type that this property-like object belongs to.

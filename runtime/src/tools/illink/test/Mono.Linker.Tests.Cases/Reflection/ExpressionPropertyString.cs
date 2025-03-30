@@ -51,11 +51,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
 
         [Kept]
         [KeptBackingField]
-        private static int StaticProperty
-        {
-            [Kept]
-            get;
-        }
+        private static int StaticProperty { [Kept] get; }
 
         private int UnusedProperty { get; }
 
@@ -70,19 +66,10 @@ namespace Mono.Linker.Tests.Cases.Reflection
         {
             [Kept]
             [KeptBackingField]
-            public static int Property1
-            {
-                [Kept]
-                get;
-            }
+            public static int Property1 { [Kept] get; }
 
             [Kept]
-            private int Property2
-            {
-                [Kept]
-                [ExpectBodyModified]
-                get;
-            }
+            private int Property2 { [Kept] [ExpectBodyModified] get; }
 
             [Kept]
             public static void Test()
@@ -122,19 +109,10 @@ namespace Mono.Linker.Tests.Cases.Reflection
         {
             [Kept]
             [KeptBackingField]
-            private static int Property1
-            {
-                [Kept]
-                get;
-            }
+            private static int Property1 { [Kept] get; }
 
             [Kept]
-            public int Property2
-            {
-                [Kept]
-                [ExpectBodyModified]
-                get;
-            }
+            public int Property2 { [Kept] [ExpectBodyModified] get; }
 
             [Kept]
             public static void Test()
@@ -176,13 +154,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [KeptBackingField]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-            protected static Type ProtectedPropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            protected static Type ProtectedPropertyOnBase { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]

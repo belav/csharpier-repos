@@ -69,44 +69,16 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         }
 
         [DispId(2)]
-        DataTypeEnum Type
-        {
-            [DispId(2)]
-            get;
-            [DispId(2)]
-            [param: In]
-            set;
-        }
+        DataTypeEnum Type { [DispId(2)] get; [DispId(2)] [param: In] set; }
 
         [DispId(3)]
-        ParameterDirectionEnum Direction
-        {
-            [DispId(3)]
-            [param: In]
-            set;
-            [DispId(3)]
-            get;
-        }
+        ParameterDirectionEnum Direction { [DispId(3)] [param: In] set; [DispId(3)] get; }
 
         [DispId(4)]
-        byte Precision
-        {
-            [DispId(4)]
-            [param: In]
-            set;
-            [DispId(4)]
-            get;
-        }
+        byte Precision { [DispId(4)] [param: In] set; [DispId(4)] get; }
 
         [DispId(5)]
-        byte NumericScale
-        {
-            [DispId(5)]
-            [param: In]
-            set;
-            [DispId(5)]
-            get;
-        }
+        byte NumericScale { [DispId(5)] [param: In] set; [DispId(5)] get; }
 
         [ComAliasName("ADODB.ADO_LONGPTR")]
         [DispId(6)]
@@ -125,13 +97,6 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         void AppendChunk([In] [MarshalAs(UnmanagedType.Struct)] object Val);
 
         [DispId(8)]
-        int Attributes
-        {
-            [DispId(8)]
-            get;
-            [DispId(8)]
-            [param: In]
-            set;
-        }
+        int Attributes { [DispId(8)] get; [DispId(8)] [param: In] set; }
     }
 }

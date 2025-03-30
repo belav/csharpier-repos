@@ -884,11 +884,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
 
                 [Kept]
                 [KeptBackingField]
-                public int AnotherProperty
-                {
-                    [Kept]
-                    get;
-                }
+                public int AnotherProperty { [Kept] get; }
 
                 [Kept]
                 [KeptEventAddMethod]

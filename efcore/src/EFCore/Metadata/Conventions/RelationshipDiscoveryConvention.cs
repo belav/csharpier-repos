@@ -1854,26 +1854,10 @@ public class RelationshipDiscoveryConvention
             IsOwnership = ownership;
         }
 
-        public IConventionEntityTypeBuilder TargetTypeBuilder
-        {
-            [DebuggerStepThrough]
-            get;
-        }
-        public List<PropertyInfo> NavigationProperties
-        {
-            [DebuggerStepThrough]
-            get;
-        }
-        public List<PropertyInfo> InverseProperties
-        {
-            [DebuggerStepThrough]
-            get;
-        }
-        public bool IsOwnership
-        {
-            [DebuggerStepThrough]
-            get;
-        }
+        public IConventionEntityTypeBuilder TargetTypeBuilder { [DebuggerStepThrough] get; }
+        public List<PropertyInfo> NavigationProperties { [DebuggerStepThrough] get; }
+        public List<PropertyInfo> InverseProperties { [DebuggerStepThrough] get; }
+        public bool IsOwnership { [DebuggerStepThrough] get; }
 
         private string DebuggerDisplay() =>
             TargetTypeBuilder.Metadata.ToDebugString(MetadataDebugStringOptions.SingleLineDefault)

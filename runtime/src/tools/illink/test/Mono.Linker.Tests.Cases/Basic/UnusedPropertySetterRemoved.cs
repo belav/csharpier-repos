@@ -14,12 +14,7 @@ namespace Mono.Linker.Tests.Cases.Basic
         {
             [Kept] // FIXME: Should be removed
             [KeptBackingField]
-            public int PartiallyUsed
-            {
-                [Kept]
-                get;
-                set;
-            }
+            public int PartiallyUsed { [Kept] get; set; }
         }
     }
 }

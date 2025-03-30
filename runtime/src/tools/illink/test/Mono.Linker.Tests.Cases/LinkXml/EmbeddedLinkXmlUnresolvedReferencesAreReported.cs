@@ -65,13 +65,7 @@ namespace Mono.Linker.Tests.Cases.LinkXml
 
             [Kept]
             [KeptBackingField]
-            public int PropertyWithSignature
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public int PropertyWithSignature { [Kept] get; [Kept] set; }
         }
     }
 }

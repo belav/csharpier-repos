@@ -16,11 +16,7 @@ namespace Test
 
     public interface ITest
     {
-        string TestProperty
-        {
-            [My("testifaceproperty")]
-            get;
-        }
+        string TestProperty { [My("testifaceproperty")] get; }
     }
 
     [My("testclass")]

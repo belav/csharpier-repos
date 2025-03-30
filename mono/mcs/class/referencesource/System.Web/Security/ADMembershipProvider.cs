@@ -6010,12 +6010,7 @@ namespace System.Web.Security
                 [In, MarshalAs(UnmanagedType.BStr)] string bstrInStr
             );
 
-            int EscapedMode
-            {
-                get;
-                [SuppressUnmanagedCodeSecurityAttribute()]
-                set;
-            }
+            int EscapedMode { get; [SuppressUnmanagedCodeSecurityAttribute()] set; }
         }
 
         //

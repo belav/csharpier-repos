@@ -33,11 +33,7 @@ public abstract class DbFunctionBuilderBase : IInfrastructure<IConventionDbFunct
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalDbFunctionBuilder Builder
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    protected virtual InternalDbFunctionBuilder Builder { [DebuggerStepThrough] get; }
 
     /// <inheritdoc />
     IConventionDbFunctionBuilder IInfrastructure<IConventionDbFunctionBuilder>.Instance

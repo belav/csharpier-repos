@@ -75,11 +75,7 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     /// <summary>
     ///     Gets the name of this type.
     /// </summary>
-    public virtual string Name
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    public virtual string Name { [DebuggerStepThrough] get; }
 
     /// <inheritdoc />
     [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)]

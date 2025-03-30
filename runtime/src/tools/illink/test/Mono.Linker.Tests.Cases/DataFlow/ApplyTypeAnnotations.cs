@@ -46,13 +46,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            public bool PublicProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public bool PublicProperty { [Kept] get; [Kept] set; }
             private bool PrivateProperty { get; set; }
         }
 
@@ -85,13 +79,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            public bool PublicProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public bool PublicProperty { [Kept] get; [Kept] set; }
             private bool PrivateProperty { get; set; }
         }
 
@@ -122,13 +110,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            public bool PublicProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public bool PublicProperty { [Kept] get; [Kept] set; }
             private bool PrivateProperty { get; set; }
         }
 

@@ -75,24 +75,10 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         }
 
         [DispId(3)]
-        int CommandTimeout
-        {
-            [DispId(3)]
-            get;
-            [DispId(3)]
-            [param: In]
-            set;
-        }
+        int CommandTimeout { [DispId(3)] get; [DispId(3)] [param: In] set; }
 
         [DispId(4)]
-        bool Prepared
-        {
-            [DispId(4)]
-            get;
-            [DispId(4)]
-            [param: In]
-            set;
-        }
+        bool Prepared { [DispId(4)] get; [DispId(4)] [param: In] set; }
 
         [DispId(5)]
         [return: MarshalAs(UnmanagedType.Interface)]
@@ -121,14 +107,7 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         }
 
         [DispId(7)]
-        CommandTypeEnum CommandType
-        {
-            [DispId(7)]
-            [param: In]
-            set;
-            [DispId(7)]
-            get;
-        }
+        CommandTypeEnum CommandType { [DispId(7)] [param: In] set; [DispId(7)] get; }
 
         [DispId(8)]
         string Name
@@ -143,11 +122,7 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         }
 
         [DispId(9)]
-        int State
-        {
-            [DispId(9)]
-            get;
-        }
+        int State { [DispId(9)] get; }
 
         [DispId(10)]
         void Cancel();
@@ -177,13 +152,6 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         }
 
         [DispId(13)]
-        bool NamedParameters
-        {
-            [DispId(13)]
-            [param: In]
-            set;
-            [DispId(13)]
-            get;
-        }
+        bool NamedParameters { [DispId(13)] [param: In] set; [DispId(13)] get; }
     }
 }

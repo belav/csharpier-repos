@@ -5079,21 +5079,9 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
             ServiceProperties = serviceProperties;
         }
 
-        private EntityType EntityType
-        {
-            [DebuggerStepThrough]
-            get;
-        }
-        private PropertiesSnapshot Properties
-        {
-            [DebuggerStepThrough]
-            get;
-        }
-        private List<InternalSkipNavigationBuilder>? SkipNavigations
-        {
-            [DebuggerStepThrough]
-            get;
-        }
+        private EntityType EntityType { [DebuggerStepThrough] get; }
+        private PropertiesSnapshot Properties { [DebuggerStepThrough] get; }
+        private List<InternalSkipNavigationBuilder>? SkipNavigations { [DebuggerStepThrough] get; }
         private List<InternalServicePropertyBuilder>? ServiceProperties
         {
             [DebuggerStepThrough]

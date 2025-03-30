@@ -140,41 +140,17 @@ namespace System.DirectoryServices.AccountManagement
         ]
         public interface IADs
         {
-            string Name
-            {
-                [return: MarshalAs(UnmanagedType.BStr)]
-                get;
-            }
+            string Name { [return: MarshalAs(UnmanagedType.BStr)] get; }
 
-            string Class
-            {
-                [return: MarshalAs(UnmanagedType.BStr)]
-                get;
-            }
+            string Class { [return: MarshalAs(UnmanagedType.BStr)] get; }
 
-            string GUID
-            {
-                [return: MarshalAs(UnmanagedType.BStr)]
-                get;
-            }
+            string GUID { [return: MarshalAs(UnmanagedType.BStr)] get; }
 
-            string ADsPath
-            {
-                [return: MarshalAs(UnmanagedType.BStr)]
-                get;
-            }
+            string ADsPath { [return: MarshalAs(UnmanagedType.BStr)] get; }
 
-            string Parent
-            {
-                [return: MarshalAs(UnmanagedType.BStr)]
-                get;
-            }
+            string Parent { [return: MarshalAs(UnmanagedType.BStr)] get; }
 
-            string Schema
-            {
-                [return: MarshalAs(UnmanagedType.BStr)]
-                get;
-            }
+            string Schema { [return: MarshalAs(UnmanagedType.BStr)] get; }
 
             void GetInfo();
 
@@ -210,41 +186,17 @@ namespace System.DirectoryServices.AccountManagement
         ]
         public interface IADsGroup
         {
-            string Name
-            {
-                [return: MarshalAs(UnmanagedType.BStr)]
-                get;
-            }
+            string Name { [return: MarshalAs(UnmanagedType.BStr)] get; }
 
-            string Class
-            {
-                [return: MarshalAs(UnmanagedType.BStr)]
-                get;
-            }
+            string Class { [return: MarshalAs(UnmanagedType.BStr)] get; }
 
-            string GUID
-            {
-                [return: MarshalAs(UnmanagedType.BStr)]
-                get;
-            }
+            string GUID { [return: MarshalAs(UnmanagedType.BStr)] get; }
 
-            string ADsPath
-            {
-                [return: MarshalAs(UnmanagedType.BStr)]
-                get;
-            }
+            string ADsPath { [return: MarshalAs(UnmanagedType.BStr)] get; }
 
-            string Parent
-            {
-                [return: MarshalAs(UnmanagedType.BStr)]
-                get;
-            }
+            string Parent { [return: MarshalAs(UnmanagedType.BStr)] get; }
 
-            string Schema
-            {
-                [return: MarshalAs(UnmanagedType.BStr)]
-                get;
-            }
+            string Schema { [return: MarshalAs(UnmanagedType.BStr)] get; }
 
             void GetInfo();
 
@@ -296,17 +248,9 @@ namespace System.DirectoryServices.AccountManagement
         ]
         public interface IADsMembers
         {
-            int Count
-            {
-                [return: MarshalAs(UnmanagedType.U4)]
-                get;
-            }
+            int Count { [return: MarshalAs(UnmanagedType.U4)] get; }
 
-            object _NewEnum
-            {
-                [return: MarshalAs(UnmanagedType.Interface)]
-                get;
-            }
+            object _NewEnum { [return: MarshalAs(UnmanagedType.Interface)] get; }
 
             object Filter
             {

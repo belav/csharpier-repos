@@ -27,11 +27,7 @@ public class TriggerBuilder : IInfrastructure<IConventionTriggerBuilder>
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalTriggerBuilder InternalBuilder
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    protected virtual InternalTriggerBuilder InternalBuilder { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     Gets the builder that can be used to configure this trigger.

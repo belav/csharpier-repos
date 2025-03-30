@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Routing;
 #if !COMPONENTS
 [assembly: MetadataUpdateHandler(typeof(RouteValueDictionary.MetadataUpdateHandler))]
 
+
 #endif
 
 #if COMPONENTS

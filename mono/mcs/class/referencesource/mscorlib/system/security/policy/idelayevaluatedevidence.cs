@@ -19,11 +19,7 @@ namespace System.Security.Policy
         /// <summary>
         ///     Is this evidence object verified yet?
         /// </summary>
-        bool IsVerified
-        {
-            [System.Security.SecurityCritical]
-            get;
-        }
+        bool IsVerified { [System.Security.SecurityCritical] get; }
 
         /// <summary>
         ///     Was this evidence object used during the course of policy evaluation?

@@ -166,13 +166,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [KeptAttributeAttribute(typeof(KeepsPublicMethodsAttribute))]
             [ExpectedWarning("IL2026", "--ClassWithKeptPublicMethods--")]
             [KeepsPublicMethods(Type = typeof(ClassWithKeptPublicMethods))]
-            public static bool Property
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool Property { [Kept] get; [Kept] set; }
 
             [Kept]
             public static void Test()
@@ -310,12 +304,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [Kept]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-            public Type Type
-            {
-                get;
-                [Kept]
-                set;
-            }
+            public Type Type { get; [Kept] set; }
         }
 
         [Kept]
@@ -329,23 +318,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [Kept]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-            public Type Type
-            {
-                get;
-                [Kept]
-                set;
-            }
+            public Type Type { get; [Kept] set; }
 
             [field: Kept]
             [Kept]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-            public string TypeName
-            {
-                get;
-                [Kept]
-                set;
-            }
+            public string TypeName { get; [Kept] set; }
         }
 
         // Used to test null values
@@ -360,23 +339,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [Kept]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
-            public Type Type
-            {
-                get;
-                [Kept]
-                set;
-            }
+            public Type Type { get; [Kept] set; }
 
             [field: Kept]
             [Kept]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicFields)]
-            public string TypeName
-            {
-                get;
-                [Kept]
-                set;
-            }
+            public string TypeName { get; [Kept] set; }
         }
 
         [Kept]
@@ -390,12 +359,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [Kept]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
-            public Type Type
-            {
-                get;
-                [Kept]
-                set;
-            }
+            public Type Type { get; [Kept] set; }
         }
 
         [Kept]
@@ -409,12 +373,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [Kept]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicEvents)]
-            public Type Type
-            {
-                get;
-                [Kept]
-                set;
-            }
+            public Type Type { get; [Kept] set; }
         }
 
         [Kept]
@@ -426,12 +385,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [field: Kept]
             [Kept]
-            public Type[] Types
-            {
-                get;
-                [Kept]
-                set;
-            }
+            public Type[] Types { get; [Kept] set; }
         }
 
         [Kept]
@@ -441,13 +395,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [Kept]
             [KeptAttributeAttribute(typeof(KeepsPublicPropertiesAttribute))]
             [KeepsPublicProperties(Type = typeof(RecursivePropertyDataFlow))]
-            public static int Property
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static int Property { [Kept] get; [Kept] set; }
 
             [Kept]
             public static void Test()

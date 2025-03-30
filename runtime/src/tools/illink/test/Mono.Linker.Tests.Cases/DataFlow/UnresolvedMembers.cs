@@ -89,12 +89,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [KeptBackingField]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
-            public Type PropertyWithRequirements
-            {
-                get;
-                [Kept]
-                set;
-            }
+            public Type PropertyWithRequirements { get; [Kept] set; }
 
             [Kept]
             [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]

@@ -31,12 +31,7 @@ namespace System.Windows.Interop
 {
     public interface IKeyboardInputSink
     {
-        IKeyboardInputSite KeyboardInputSite
-        {
-            get;
-            [SecurityCritical]
-            set;
-        }
+        IKeyboardInputSite KeyboardInputSite { get; [SecurityCritical] set; }
 
         bool TabInto(TraversalRequest request);
         bool HasFocusWithin();

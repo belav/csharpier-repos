@@ -353,25 +353,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            public static bool PublicStaticPropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool PublicStaticPropertyOnBase { [Kept] get; [Kept] set; }
             protected static bool ProtectedStaticPropertyOnBase { get; set; }
             private static bool PrivateStaticPropertyOnBase { get; set; }
 
             [Kept]
             [KeptBackingField]
-            public static bool HideStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool HideStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
@@ -464,25 +452,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            public static bool PublicStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool PublicStaticProperty { [Kept] get; [Kept] set; }
             protected static bool ProtectedStaticProperty { get; set; }
             private static bool PrivateStaticProperty { get; set; }
 
             [Kept]
             [KeptBackingField]
-            public static bool HideStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool HideStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
@@ -557,13 +533,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            protected static bool ProtectedStaticPropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            protected static bool ProtectedStaticPropertyOnBase { [Kept] get; [Kept] set; }
             private static bool PrivateStaticPropertyOnBase { get; set; }
             public static bool HideStaticProperty { get; set; }
 
@@ -658,23 +628,11 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            protected static bool ProtectedStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            protected static bool ProtectedStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            private static bool PrivateStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            private static bool PrivateStaticProperty { [Kept] get; [Kept] set; }
             public static bool HideStaticProperty { get; set; }
 
             public static event EventHandler<EventArgs> PublicStaticEvent;
@@ -788,34 +746,16 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            public static bool PublicStaticPropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool PublicStaticPropertyOnBase { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            protected static bool ProtectedStaticPropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            protected static bool ProtectedStaticPropertyOnBase { [Kept] get; [Kept] set; }
             private static bool PrivateStaticPropertyOnBase { get; set; }
 
             [Kept]
             [KeptBackingField]
-            public static bool HideStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool HideStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
@@ -950,43 +890,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            public static bool PublicStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool PublicStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            protected static bool ProtectedStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            protected static bool ProtectedStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            private static bool PrivateStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            private static bool PrivateStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            public static bool HideStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool HideStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
@@ -1601,25 +1517,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            public static bool PublicStaticPropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool PublicStaticPropertyOnBase { [Kept] get; [Kept] set; }
             protected static bool ProtectedStaticPropertyOnBase { get; set; }
             private static bool PrivateStaticPropertyOnBase { get; set; }
 
             [Kept]
             [KeptBackingField]
-            public static bool HideStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool HideStaticProperty { [Kept] get; [Kept] set; }
         }
 
         [Kept]
@@ -1684,25 +1588,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            public static bool PublicStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool PublicStaticProperty { [Kept] get; [Kept] set; }
             protected static bool ProtectedStaticProperty { get; set; }
             private static bool PrivateStaticProperty { get; set; }
 
             [Kept]
             [KeptBackingField]
-            public static bool HideStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool HideStaticProperty { [Kept] get; [Kept] set; }
         }
 
         [Kept]
@@ -1752,13 +1644,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            protected static bool ProtectedStaticPropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            protected static bool ProtectedStaticPropertyOnBase { [Kept] get; [Kept] set; }
             private static bool PrivateStaticPropertyOnBase { get; set; }
             public static bool HideStaticProperty { get; set; }
         }
@@ -1814,23 +1700,11 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            protected static bool ProtectedStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            protected static bool ProtectedStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            private static bool PrivateStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            private static bool PrivateStaticProperty { [Kept] get; [Kept] set; }
             public static bool HideStaticProperty { get; set; }
         }
 
@@ -1915,34 +1789,16 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            public static bool PublicStaticPropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool PublicStaticPropertyOnBase { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            protected static bool ProtectedStaticPropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            protected static bool ProtectedStaticPropertyOnBase { [Kept] get; [Kept] set; }
             private static bool PrivateStaticPropertyOnBase { get; set; }
 
             [Kept]
             [KeptBackingField]
-            public static bool HideStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool HideStaticProperty { [Kept] get; [Kept] set; }
         }
 
         [Kept]
@@ -2027,43 +1883,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            public static bool PublicStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool PublicStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            protected static bool ProtectedStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            protected static bool ProtectedStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            private static bool PrivateStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            private static bool PrivateStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            public static bool HideStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool HideStaticProperty { [Kept] get; [Kept] set; }
         }
 
         [Kept]
@@ -2460,43 +2292,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            public bool PublicPropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public bool PublicPropertyOnBase { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            protected bool ProtectedPropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            protected bool ProtectedPropertyOnBase { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            private bool PrivatePropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            private bool PrivatePropertyOnBase { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            public bool HideProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public bool HideProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
@@ -2542,43 +2350,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            public static bool PublicStaticPropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool PublicStaticPropertyOnBase { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            protected static bool ProtectedStaticPropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            protected static bool ProtectedStaticPropertyOnBase { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            private static bool PrivateStaticPropertyOnBase
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            private static bool PrivateStaticPropertyOnBase { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            public static bool HideStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool HideStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
@@ -2702,43 +2486,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            public bool PublicProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public bool PublicProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            protected bool ProtectedProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            protected bool ProtectedProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            private bool PrivateProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            private bool PrivateProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            public bool HideProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public bool HideProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
@@ -2778,43 +2538,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             [Kept]
             [KeptBackingField]
-            public static bool PublicStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool PublicStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            protected static bool ProtectedStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            protected static bool ProtectedStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            private static bool PrivateStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            private static bool PrivateStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            public static bool HideStaticProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static bool HideStaticProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]

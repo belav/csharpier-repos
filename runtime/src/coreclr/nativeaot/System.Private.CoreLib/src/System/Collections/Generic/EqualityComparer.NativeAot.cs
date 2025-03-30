@@ -31,11 +31,7 @@ namespace System.Collections.Generic
             return new ObjectEqualityComparer<T>();
         }
 
-        public static EqualityComparer<T> Default
-        {
-            [Intrinsic]
-            get;
-        } = Create();
+        public static EqualityComparer<T> Default { [Intrinsic] get; } = Create();
     }
 
     public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T>

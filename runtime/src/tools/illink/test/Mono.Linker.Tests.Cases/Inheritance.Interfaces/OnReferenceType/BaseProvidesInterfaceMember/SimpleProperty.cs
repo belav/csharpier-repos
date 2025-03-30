@@ -14,12 +14,7 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.BasePro
         interface IFoo
         {
             [Kept]
-            int Property
-            {
-                get;
-                [Kept]
-                set;
-            }
+            int Property { get; [Kept] set; }
         }
 
         [Kept]
@@ -28,12 +23,7 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.BasePro
         {
             [Kept]
             [KeptBackingField]
-            public int Property
-            {
-                get;
-                [Kept]
-                set;
-            }
+            public int Property { get; [Kept] set; }
         }
 
         [Kept]

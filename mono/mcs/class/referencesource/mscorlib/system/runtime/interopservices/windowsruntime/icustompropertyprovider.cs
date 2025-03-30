@@ -32,11 +32,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         [Pure]
         string GetStringRepresentation();
 
-        Type Type
-        {
-            [Pure]
-            get;
-        }
+        Type Type { [Pure] get; }
     }
 
     //

@@ -101,11 +101,7 @@ namespace Interop
     public interface IBar
     {
         [DispId(10)]
-        long MarshalAsGetProperty
-        {
-            [return: MarshalAs(UnmanagedType.I8)]
-            get;
-        }
+        long MarshalAsGetProperty { [return: MarshalAs(UnmanagedType.I8)] get; }
 
         [DispId(20), IndexerNameAttribute("MyIndex")]
         int this[int idx] { get; set; }

@@ -25,12 +25,7 @@ namespace Mono.Linker.Tests.Cases.Attributes.Debugger
         {
             [Kept]
             [KeptBackingField]
-            public int Property
-            {
-                get;
-                [Kept]
-                set;
-            }
+            public int Property { get; [Kept] set; }
 
             internal class FooDebugView
             {

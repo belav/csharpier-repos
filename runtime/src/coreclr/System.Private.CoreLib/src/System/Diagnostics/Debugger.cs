@@ -57,11 +57,7 @@ namespace System.Diagnostics
 
         // Returns whether or not a debugger is attached to the process.
         //
-        public static extern bool IsAttached
-        {
-            [MethodImpl(MethodImplOptions.InternalCall)]
-            get;
-        }
+        public static extern bool IsAttached { [MethodImpl(MethodImplOptions.InternalCall)] get; }
 
         // Constants representing the importance level of messages to be logged.
         //

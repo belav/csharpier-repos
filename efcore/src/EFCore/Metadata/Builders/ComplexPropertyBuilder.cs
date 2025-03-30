@@ -41,11 +41,7 @@ public class ComplexPropertyBuilder
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalComplexPropertyBuilder PropertyBuilder
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    protected virtual InternalComplexPropertyBuilder PropertyBuilder { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -54,11 +50,7 @@ public class ComplexPropertyBuilder
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalComplexTypeBuilder TypeBuilder
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    protected virtual InternalComplexTypeBuilder TypeBuilder { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     Gets the internal builder being used to configure the complex property.

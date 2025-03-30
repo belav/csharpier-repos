@@ -18,13 +18,7 @@ namespace Mono.Linker.Tests.Cases.LinkXml
 
             [Kept]
             [KeptBackingField]
-            public int UnusedProperty
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public int UnusedProperty { [Kept] get; [Kept] set; }
 
             [Kept]
             public void UnusedMethod() { }

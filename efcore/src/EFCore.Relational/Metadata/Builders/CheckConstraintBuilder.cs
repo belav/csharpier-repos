@@ -33,11 +33,7 @@ public class CheckConstraintBuilder : IInfrastructure<IConventionCheckConstraint
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalCheckConstraintBuilder Builder
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    protected virtual InternalCheckConstraintBuilder Builder { [DebuggerStepThrough] get; }
 
     /// <inheritdoc />
     IConventionCheckConstraintBuilder IInfrastructure<IConventionCheckConstraintBuilder>.Instance

@@ -62,20 +62,12 @@ public abstract class EventDefinitionBase
     /// <summary>
     ///     The <see cref="EventId" />.
     /// </summary>
-    public virtual EventId EventId
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    public virtual EventId EventId { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     The <see cref="LogLevel" /> at which the event will be logged.
     /// </summary>
-    public virtual LogLevel Level
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    public virtual LogLevel Level { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     A string representing the code that should be passed to <see cref="DbContextOptionsBuilder.ConfigureWarnings" /> to suppress this event

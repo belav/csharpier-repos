@@ -5981,12 +5981,7 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// Gets the related activity ID if one was specified when the event was written.
         /// </summary>
-        public Guid RelatedActivityId
-        {
-            [System.Security.SecurityCritical]
-            get;
-            internal set;
-        }
+        public Guid RelatedActivityId { [System.Security.SecurityCritical] get; internal set; }
 
         /// <summary>
         /// Gets the payload for the event.

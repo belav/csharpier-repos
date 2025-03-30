@@ -29,23 +29,11 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         {
             [Kept]
             [KeptBackingField]
-            public string FirstName
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public string FirstName { [Kept] get; [Kept] set; }
 
             [Kept]
             [KeptBackingField]
-            public string LastName
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public string LastName { [Kept] get; [Kept] set; }
         }
 
         [Kept]

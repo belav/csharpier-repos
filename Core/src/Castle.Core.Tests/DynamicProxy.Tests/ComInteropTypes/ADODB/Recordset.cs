@@ -50,14 +50,7 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         }
 
         [DispId(1000)]
-        PositionEnum AbsolutePosition
-        {
-            [DispId(1000)]
-            get;
-            [DispId(1000)]
-            [param: In]
-            set;
-        }
+        PositionEnum AbsolutePosition { [DispId(1000)] get; [DispId(1000)] [param: In] set; }
 
         [DispId(1001)]
         object set_ActiveConnection([In] [MarshalAs(UnmanagedType.IDispatch)] object value);
@@ -70,11 +63,7 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         object get_ActiveConnection();
 
         [DispId(1002)]
-        bool BOF
-        {
-            [DispId(1002)]
-            get;
-        }
+        bool BOF { [DispId(1002)] get; }
 
         [DispId(1003)]
         object Bookmark
@@ -89,31 +78,13 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         }
 
         [DispId(1004)]
-        int CacheSize
-        {
-            [DispId(1004)]
-            get;
-            [DispId(1004)]
-            [param: In]
-            set;
-        }
+        int CacheSize { [DispId(1004)] get; [DispId(1004)] [param: In] set; }
 
         [DispId(1005)]
-        CursorTypeEnum CursorType
-        {
-            [DispId(1005)]
-            get;
-            [DispId(1005)]
-            [param: In]
-            set;
-        }
+        CursorTypeEnum CursorType { [DispId(1005)] get; [DispId(1005)] [param: In] set; }
 
         [DispId(1006)]
-        bool EOF
-        {
-            [DispId(1006)]
-            get;
-        }
+        bool EOF { [DispId(1006)] get; }
 
         [DispId(0)]
         Fields Fields
@@ -124,14 +95,7 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         }
 
         [DispId(1008)]
-        LockTypeEnum LockType
-        {
-            [DispId(1008)]
-            get;
-            [DispId(1008)]
-            [param: In]
-            set;
-        }
+        LockTypeEnum LockType { [DispId(1008)] get; [DispId(1008)] [param: In] set; }
 
         [ComAliasName("ADODB.ADO_LONGPTR")]
         [DispId(1009)]
@@ -148,12 +112,7 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
 
         [ComAliasName("ADODB.ADO_LONGPTR")]
         [DispId(1010)]
-        int RecordCount
-        {
-            [DispId(1010)]
-            [return: ComAliasName("ADODB.ADO_LONGPTR")]
-            get;
-        }
+        int RecordCount { [DispId(1010)] [return: ComAliasName("ADODB.ADO_LONGPTR")] get; }
 
         [DispId(1011)]
         void set_Source([In] [MarshalAs(UnmanagedType.IDispatch)] object value);
@@ -231,21 +190,10 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         );
 
         [DispId(1047)]
-        PositionEnum AbsolutePage
-        {
-            [DispId(1047)]
-            get;
-            [DispId(1047)]
-            [param: In]
-            set;
-        }
+        PositionEnum AbsolutePage { [DispId(1047)] get; [DispId(1047)] [param: In] set; }
 
         [DispId(1026)]
-        EditModeEnum EditMode
-        {
-            [DispId(1026)]
-            get;
-        }
+        EditModeEnum EditMode { [DispId(1026)] get; }
 
         [DispId(1030)]
         object Filter
@@ -261,22 +209,10 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
 
         [DispId(1050)]
         [ComAliasName("ADODB.ADO_LONGPTR")]
-        int PageCount
-        {
-            [DispId(1050)]
-            [return: ComAliasName("ADODB.ADO_LONGPTR")]
-            get;
-        }
+        int PageCount { [DispId(1050)] [return: ComAliasName("ADODB.ADO_LONGPTR")] get; }
 
         [DispId(1048)]
-        int PageSize
-        {
-            [DispId(1048)]
-            get;
-            [DispId(1048)]
-            [param: In]
-            set;
-        }
+        int PageSize { [DispId(1048)] get; [DispId(1048)] [param: In] set; }
 
         [DispId(1031)]
         string Sort
@@ -291,18 +227,10 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         }
 
         [DispId(1029)]
-        int Status
-        {
-            [DispId(1029)]
-            get;
-        }
+        int Status { [DispId(1029)] get; }
 
         [DispId(1054)]
-        int State
-        {
-            [DispId(1054)]
-            get;
-        }
+        int State { [DispId(1054)] get; }
 
         [DispId(1610809392)]
         [TypeLibFunc(TypeLibFuncFlags.FHidden)]
@@ -316,14 +244,7 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         void CancelBatch([In] AffectEnum AffectRecords = AffectEnum.adAffectAll);
 
         [DispId(1051)]
-        CursorLocationEnum CursorLocation
-        {
-            [DispId(1051)]
-            get;
-            [DispId(1051)]
-            [param: In]
-            set;
-        }
+        CursorLocationEnum CursorLocation { [DispId(1051)] get; [DispId(1051)] [param: In] set; }
 
         [DispId(1052)]
         [return: MarshalAs(UnmanagedType.Interface)]
@@ -349,14 +270,7 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         }
 
         [DispId(1053)]
-        MarshalOptionsEnum MarshalOptions
-        {
-            [DispId(1053)]
-            get;
-            [DispId(1053)]
-            [param: In]
-            set;
-        }
+        MarshalOptionsEnum MarshalOptions { [DispId(1053)] get; [DispId(1053)] [param: In] set; }
 
         [DispId(1058)]
         void Find(
@@ -394,22 +308,10 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         );
 
         [DispId(1061)]
-        object ActiveCommand
-        {
-            [DispId(1061)]
-            [return: MarshalAs(UnmanagedType.IDispatch)]
-            get;
-        }
+        object ActiveCommand { [DispId(1061)] [return: MarshalAs(UnmanagedType.IDispatch)] get; }
 
         [DispId(1063)]
-        bool StayInSync
-        {
-            [DispId(1063)]
-            [param: In]
-            set;
-            [DispId(1063)]
-            get;
-        }
+        bool StayInSync { [DispId(1063)] [param: In] set; [DispId(1063)] get; }
 
         [DispId(1062)]
         [return: MarshalAs(UnmanagedType.BStr)]

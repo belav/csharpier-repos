@@ -7,11 +7,7 @@ namespace System.Runtime
 {
     public static partial class GCSettings
     {
-        public static extern bool IsServerGC
-        {
-            [MethodImpl(MethodImplOptions.InternalCall)]
-            get;
-        }
+        public static extern bool IsServerGC { [MethodImpl(MethodImplOptions.InternalCall)] get; }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern GCLatencyMode GetGCLatencyMode();

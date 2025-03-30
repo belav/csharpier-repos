@@ -49,44 +49,22 @@ namespace Mono.Linker.Tests.Cases.Serialization
 
         [Kept]
         [KeptBackingField]
-        public GetPropertyType p1
-        {
-            [Kept]
-            get;
-        }
+        public GetPropertyType p1 { [Kept] get; }
 
         [Kept]
         [KeptBackingField]
-        public GetSetPropertyType p2
-        {
-            [Kept]
-            get;
-            [Kept]
-            set;
-        }
+        public GetSetPropertyType p2 { [Kept] get; [Kept] set; }
 
         // removed
         PrivatePropertyType p3 { get; set; }
 
         [Kept]
         [KeptBackingField]
-        public PublicGetPrivateSetPropertyType p4
-        {
-            [Kept]
-            get;
-            [Kept]
-            private set;
-        }
+        public PublicGetPrivateSetPropertyType p4 { [Kept] get; [Kept] private set; }
 
         [Kept]
         [KeptBackingField]
-        public PrivateGetPublicSetPropertyType p5
-        {
-            [Kept]
-            private get;
-            [Kept]
-            set;
-        }
+        public PrivateGetPublicSetPropertyType p5 { [Kept] private get; [Kept] set; }
 
         [Kept]
         public RecursiveType f4;
@@ -205,11 +183,7 @@ namespace Mono.Linker.Tests.Cases.Serialization
     {
         [Kept]
         [KeptBackingField]
-        public int P1
-        {
-            [Kept]
-            get;
-        }
+        public int P1 { [Kept] get; }
 
         [Kept]
         public int f1;
@@ -305,11 +279,7 @@ namespace Mono.Linker.Tests.Cases.Serialization
 
         [Kept]
         [KeptBackingField]
-        public GenericPropertyType<GenericPropertyParameterType> p1
-        {
-            [Kept]
-            get;
-        }
+        public GenericPropertyType<GenericPropertyParameterType> p1 { [Kept] get; }
 
         [Kept]
         [KeptMember(".ctor()")]
@@ -320,11 +290,7 @@ namespace Mono.Linker.Tests.Cases.Serialization
 
             [Kept]
             [KeptBackingField]
-            public U p1
-            {
-                [Kept]
-                get;
-            }
+            public U p1 { [Kept] get; }
         }
 
         [Kept]
@@ -347,11 +313,7 @@ namespace Mono.Linker.Tests.Cases.Serialization
 
             [Kept]
             [KeptBackingField]
-            public U p1
-            {
-                [Kept]
-                get;
-            }
+            public U p1 { [Kept] get; }
 
             [Kept]
             public V f2;

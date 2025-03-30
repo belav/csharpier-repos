@@ -43,11 +43,7 @@ public abstract class PropertyValues
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalEntityEntry InternalEntry
-    {
-        [DebuggerStepThrough]
-        get;
-    }
+    protected virtual InternalEntityEntry InternalEntry { [DebuggerStepThrough] get; }
 
     /// <summary>
     ///     Creates an instance of the entity type and sets all its properties using the

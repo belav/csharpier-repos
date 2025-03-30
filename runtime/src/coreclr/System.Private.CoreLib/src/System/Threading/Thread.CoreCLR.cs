@@ -192,11 +192,7 @@ namespace System.Threading
         private static partial void InformThreadNameChange(ThreadHandle t, string? name, int len);
 
         /// <summary>Returns true if the thread has been started and is not dead.</summary>
-        public extern bool IsAlive
-        {
-            [MethodImpl(MethodImplOptions.InternalCall)]
-            get;
-        }
+        public extern bool IsAlive { [MethodImpl(MethodImplOptions.InternalCall)] get; }
 
         /// <summary>
         /// Return whether or not this thread is a background thread.  Background

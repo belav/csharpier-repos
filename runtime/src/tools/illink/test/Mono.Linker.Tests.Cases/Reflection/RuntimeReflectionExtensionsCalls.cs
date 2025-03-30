@@ -207,13 +207,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
         {
             [Kept]
             [KeptBackingField]
-            public static long Property
-            {
-                [Kept]
-                get;
-                [Kept]
-                set;
-            }
+            public static long Property { [Kept] get; [Kept] set; }
         }
 
         [Kept]
