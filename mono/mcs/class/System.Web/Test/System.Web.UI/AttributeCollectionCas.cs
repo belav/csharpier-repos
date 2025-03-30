@@ -1,5 +1,5 @@
 //
-// AttributeCollectionCas.cs 
+// AttributeCollectionCas.cs
 //	- CAS unit tests for System.Web.UI.AttributeCollection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,8 +27,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Reflection;
@@ -36,54 +34,59 @@ using System.Security;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI {
+namespace MonoCasTests.System.Web.UI
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class AttributeCollectionCas : AspNetHostingMinimal
+    {
+        private StateBag bag;
+        private HtmlTextWriter writer;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class AttributeCollectionCas : AspNetHostingMinimal {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            bag = new StateBag();
+            writer = new HtmlTextWriter(new StringWriter());
+        }
 
-		private StateBag bag;
-		private HtmlTextWriter writer;
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            // nothing else is required
+            AttributeCollection ac = new AttributeCollection(bag);
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			bag = new StateBag ();
-			writer = new HtmlTextWriter (new StringWriter ());
-		}
+            Assert.AreEqual(0, ac.Count, "Count");
+            Assert.IsNotNull(ac.CssStyle, "CssStyle");
+            ac["mono"] = "monkey";
+            Assert.AreEqual("monkey", ac["mono"], "this");
+            Assert.IsNotNull(ac.Keys, "Keys");
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			// nothing else is required
-			AttributeCollection ac = new AttributeCollection (bag);
+            ac.Add("monkey", "mono");
+            ac.AddAttributes(writer);
+            ac.Clear();
+            ac.Remove("mono");
+            ac.Render(writer);
+        }
 
-			Assert.AreEqual (0, ac.Count, "Count");
-			Assert.IsNotNull (ac.CssStyle, "CssStyle");
-			ac["mono"] = "monkey";
-			Assert.AreEqual ("monkey", ac["mono"], "this");
-			Assert.IsNotNull (ac.Keys, "Keys");
+        // LinkDemand
 
-			ac.Add ("monkey", "mono");
-			ac.AddAttributes (writer);
-			ac.Clear ();
-			ac.Remove ("mono");
-			ac.Render (writer);
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(StateBag) });
+            Assert.IsNotNull(ci, ".ctor(StateBag)");
+            return ci.Invoke(new object[1] { bag });
+        }
 
-		// LinkDemand
-
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (StateBag) });
-			Assert.IsNotNull (ci, ".ctor(StateBag)");
-			return ci.Invoke (new object[1] { bag });
-		}
-
-		public override Type Type {
-			get { return typeof (AttributeCollection); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(AttributeCollection); }
+        }
+    }
 }

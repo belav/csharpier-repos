@@ -24,7 +24,10 @@ public class JsonPatchExtensionsTest
 
         // Assert
         var error = Assert.Single(modelState["Customer"].Errors);
-        Assert.Equal("The target location specified by path segment 'CustomerId' was not found.", error.ErrorMessage);
+        Assert.Equal(
+            "The target location specified by path segment 'CustomerId' was not found.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -42,7 +45,10 @@ public class JsonPatchExtensionsTest
 
         // Assert
         var error = Assert.Single(modelState["jsonpatch.Customer"].Errors);
-        Assert.Equal("The target location specified by path segment 'CustomerId' was not found.", error.ErrorMessage);
+        Assert.Equal(
+            "The target location specified by path segment 'CustomerId' was not found.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -63,15 +69,28 @@ public class JsonPatchExtensionsTest
     }
 
     [Theory]
-    [InlineData("test", "/CustomerName", null, "James", "The current value '' at path 'CustomerName' is not equal to the test value 'James'.")]
-    [InlineData("invalid", "/CustomerName", null, "James", "Invalid JsonPatch operation 'invalid'.")]
+    [InlineData(
+        "test",
+        "/CustomerName",
+        null,
+        "James",
+        "The current value '' at path 'CustomerName' is not equal to the test value 'James'."
+    )]
+    [InlineData(
+        "invalid",
+        "/CustomerName",
+        null,
+        "James",
+        "Invalid JsonPatch operation 'invalid'."
+    )]
     [InlineData("", "/CustomerName", null, "James", "Invalid JsonPatch operation ''.")]
     public void ApplyTo_InvalidPatchOperations_AddsModelStateError(
         string op,
         string path,
         string from,
         string value,
-        string error)
+        string error
+    )
     {
         // Arrange
         var patch = new JsonPatchDocument<Customer>();

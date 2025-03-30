@@ -2,7 +2,6 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -34,9 +33,7 @@ namespace Moq.Tests
 
             bool called = false;
 
-            mock.As<IFoo>().SetupGet(x => x.Value)
-                .Callback(() => called = true)
-                .Returns(25);
+            mock.As<IFoo>().SetupGet(x => x.Value).Callback(() => called = true).Returns(25);
 
             Assert.Equal(25, ((IFoo)mock.Object).Value);
             Assert.True(called);
@@ -57,7 +54,13 @@ namespace Moq.Tests
             bool called = false;
             int value = 0;
             var mock = new Mock<IBag>();
-            mock.As<IFoo>().SetupSet(x => x.Value = 100).Callback<int>(i => { value = i; called = true; });
+            mock.As<IFoo>()
+                .SetupSet(x => x.Value = 100)
+                .Callback<int>(i =>
+                {
+                    value = i;
+                    called = true;
+                });
 
             ((IFoo)mock.Object).Value = 100;
 
@@ -204,6 +207,7 @@ namespace Moq.Tests
         }
 
         public interface A { }
+
         public interface B : A { }
 
         public class Service : IService
@@ -256,9 +260,7 @@ namespace Moq.Tests
 
             public abstract int Value { get; set; }
 
-            void IBag.Add(string key, object o)
-            {
-            }
+            void IBag.Add(string key, object o) { }
 
             object IBag.Get(string key)
             {

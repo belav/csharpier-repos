@@ -50,9 +50,21 @@ using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 
-[SuppressMessage("Design", "CA1066:Implement IEquatable when overriding Object.Equals", Justification = "This type is not equatable.")]
-[SuppressMessage("Performance", "CA1815:Override equals and operator equals on value types", Justification = "This type is not equatable.")]
-[SuppressMessage("Usage", "CA2231:Overload operator equals on overriding value type Equals", Justification = "This type is not equatable.")]
+[SuppressMessage(
+    "Design",
+    "CA1066:Implement IEquatable when overriding Object.Equals",
+    Justification = "This type is not equatable."
+)]
+[SuppressMessage(
+    "Performance",
+    "CA1815:Override equals and operator equals on value types",
+    Justification = "This type is not equatable."
+)]
+[SuppressMessage(
+    "Usage",
+    "CA2231:Overload operator equals on overriding value type Equals",
+    Justification = "This type is not equatable."
+)]
 internal struct HashCode
 {
     private static readonly uint s_seed = GenerateGlobalSeed();
@@ -63,8 +75,13 @@ internal struct HashCode
     private const uint Prime4 = 668265263U;
     private const uint Prime5 = 374761393U;
 
-    private uint _v1, _v2, _v3, _v4;
-    private uint _queue1, _queue2, _queue3;
+    private uint _v1,
+        _v2,
+        _v3,
+        _v4;
+    private uint _queue1,
+        _queue2,
+        _queue3;
     private uint _length;
 
     private static uint GenerateGlobalSeed()
@@ -148,7 +165,13 @@ internal struct HashCode
         return (int)hash;
     }
 
-    public static int Combine<T1, T2, T3, T4, T5>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5)
+    public static int Combine<T1, T2, T3, T4, T5>(
+        T1 value1,
+        T2 value2,
+        T3 value3,
+        T4 value4,
+        T5 value5
+    )
     {
         var hc1 = (uint)(value1?.GetHashCode() ?? 0);
         var hc2 = (uint)(value2?.GetHashCode() ?? 0);
@@ -172,7 +195,14 @@ internal struct HashCode
         return (int)hash;
     }
 
-    public static int Combine<T1, T2, T3, T4, T5, T6>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6)
+    public static int Combine<T1, T2, T3, T4, T5, T6>(
+        T1 value1,
+        T2 value2,
+        T3 value3,
+        T4 value4,
+        T5 value5,
+        T6 value6
+    )
     {
         var hc1 = (uint)(value1?.GetHashCode() ?? 0);
         var hc2 = (uint)(value2?.GetHashCode() ?? 0);
@@ -198,7 +228,15 @@ internal struct HashCode
         return (int)hash;
     }
 
-    public static int Combine<T1, T2, T3, T4, T5, T6, T7>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7)
+    public static int Combine<T1, T2, T3, T4, T5, T6, T7>(
+        T1 value1,
+        T2 value2,
+        T3 value3,
+        T4 value4,
+        T5 value5,
+        T6 value6,
+        T7 value7
+    )
     {
         var hc1 = (uint)(value1?.GetHashCode() ?? 0);
         var hc2 = (uint)(value2?.GetHashCode() ?? 0);
@@ -226,7 +264,16 @@ internal struct HashCode
         return (int)hash;
     }
 
-    public static int Combine<T1, T2, T3, T4, T5, T6, T7, T8>(T1 value1, T2 value2, T3 value3, T4 value4, T5 value5, T6 value6, T7 value7, T8 value8)
+    public static int Combine<T1, T2, T3, T4, T5, T6, T7, T8>(
+        T1 value1,
+        T2 value2,
+        T3 value3,
+        T4 value4,
+        T5 value5,
+        T6 value6,
+        T7 value7,
+        T8 value8
+    )
     {
         var hc1 = (uint)(value1?.GetHashCode() ?? 0);
         var hc2 = (uint)(value2?.GetHashCode() ?? 0);
@@ -280,7 +327,10 @@ internal struct HashCode
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static uint MixState(uint v1, uint v2, uint v3, uint v4)
     {
-        return BitOperations.RotateLeft(v1, 1) + BitOperations.RotateLeft(v2, 7) + BitOperations.RotateLeft(v3, 12) + BitOperations.RotateLeft(v4, 18);
+        return BitOperations.RotateLeft(v1, 1)
+            + BitOperations.RotateLeft(v2, 7)
+            + BitOperations.RotateLeft(v3, 12)
+            + BitOperations.RotateLeft(v4, 18);
     }
 
     private static uint MixEmptyState()
@@ -425,30 +475,40 @@ internal struct HashCode
     //   implementation has to change in the future we don't want to worry
     //   about people who might have incorrectly used this type.
 
-    [Obsolete("HashCode is a mutable struct and should not be compared with other HashCodes. Use ToHashCode to retrieve the computed hash code.", error: true)]
+    [Obsolete(
+        "HashCode is a mutable struct and should not be compared with other HashCodes. Use ToHashCode to retrieve the computed hash code.",
+        error: true
+    )]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override int GetHashCode() => throw new NotSupportedException(SR.HashCode_HashCodeNotSupported);
+    public override int GetHashCode() =>
+        throw new NotSupportedException(SR.HashCode_HashCodeNotSupported);
 
-    [Obsolete("HashCode is a mutable struct and should not be compared with other HashCodes.", error: true)]
+    [Obsolete(
+        "HashCode is a mutable struct and should not be compared with other HashCodes.",
+        error: true
+    )]
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override bool Equals(object? obj) => throw new NotSupportedException(SR.HashCode_EqualityNotSupported);
+    public override bool Equals(object? obj) =>
+        throw new NotSupportedException(SR.HashCode_EqualityNotSupported);
 #pragma warning restore CA1065 // Do not raise exceptions in unexpected locations
 #pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
 
     private static class SR
     {
-        public static string HashCode_HashCodeNotSupported = "HashCode is a mutable struct and should not be compared with other HashCodes. Use ToHashCode to retrieve the computed hash code.";
-        public static string HashCode_EqualityNotSupported = "HashCode is a mutable struct and should not be compared with other HashCodes.";
+        public static string HashCode_HashCodeNotSupported =
+            "HashCode is a mutable struct and should not be compared with other HashCodes. Use ToHashCode to retrieve the computed hash code.";
+        public static string HashCode_EqualityNotSupported =
+            "HashCode is a mutable struct and should not be compared with other HashCodes.";
     }
 
     private static class BitOperations
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint RotateLeft(uint value, int offset)
-            => (value << offset) | (value >> (32 - offset));
+        public static uint RotateLeft(uint value, int offset) =>
+            (value << offset) | (value >> (32 - offset));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ulong RotateLeft(ulong value, int offset)
-            => (value << offset) | (value >> (64 - offset));
+        public static ulong RotateLeft(ulong value, int offset) =>
+            (value << offset) | (value >> (64 - offset));
     }
 }

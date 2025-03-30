@@ -14,26 +14,37 @@ namespace Microsoft.AspNetCore.Mvc;
 
 public class MvcCoreLoggerExtensionsTest
 {
-    public static object[][] RouteValuesTestData { get; } = new object[][]
-    {
-        new object[]{ "{}" },
-        new object[]{ "{foo = \"bar\"}", new KeyValuePair<string, string>("foo", "bar") },
-        new object[]{ "{foo = \"bar\", other = \"value\"}",
-            new KeyValuePair<string, string>("foo", "bar"),
-            new KeyValuePair<string, string>("other", "value") },
-    };
+    public static object[][] RouteValuesTestData { get; } =
+        new object[][]
+        {
+            new object[] { "{}" },
+            new object[] { "{foo = \"bar\"}", new KeyValuePair<string, string>("foo", "bar") },
+            new object[]
+            {
+                "{foo = \"bar\", other = \"value\"}",
+                new KeyValuePair<string, string>("foo", "bar"),
+                new KeyValuePair<string, string>("other", "value"),
+            },
+        };
 
-    public static object[][] PageRouteValuesTestData { get; } = new object[][]
-    {
-        new object[]{ "{page = \"bar\"}", new KeyValuePair<string, string>("page", "bar") },
-        new object[]{ "{page = \"bar\", other = \"value\"}",
-            new KeyValuePair<string, string>("page", "bar"),
-            new KeyValuePair<string, string>("other", "value") },
-    };
+    public static object[][] PageRouteValuesTestData { get; } =
+        new object[][]
+        {
+            new object[] { "{page = \"bar\"}", new KeyValuePair<string, string>("page", "bar") },
+            new object[]
+            {
+                "{page = \"bar\", other = \"value\"}",
+                new KeyValuePair<string, string>("page", "bar"),
+                new KeyValuePair<string, string>("other", "value"),
+            },
+        };
 
     [Theory]
     [MemberData(nameof(RouteValuesTestData))]
-    public void ExecutingAction_ForControllerAction_WithGivenRouteValues_LogsActionAndRouteData(string expectedRouteValuesLogMessage, params KeyValuePair<string, string>[] routeValues)
+    public void ExecutingAction_ForControllerAction_WithGivenRouteValues_LogsActionAndRouteData(
+        string expectedRouteValuesLogMessage,
+        params KeyValuePair<string, string>[] routeValues
+    )
     {
         // Arrange
         var testSink = new TestSink();
@@ -58,24 +69,25 @@ public class MvcCoreLoggerExtensionsTest
         // Assert
         var write = Assert.Single(testSink.Writes);
         Assert.Equal(
-            $"Route matched with {expectedRouteValuesLogMessage}. " +
-            "Executing controller action with signature System.String ToString() on controller System.ValueTuple<int, string> (System.Private.CoreLib).",
-            write.State.ToString());
+            $"Route matched with {expectedRouteValuesLogMessage}. "
+                + "Executing controller action with signature System.String ToString() on controller System.ValueTuple<int, string> (System.Private.CoreLib).",
+            write.State.ToString()
+        );
     }
 
     [Theory]
     [MemberData(nameof(RouteValuesTestData))]
-    public void ExecutingAction_ForAction_WithGivenRouteValues_LogsActionAndRouteData(string expectedRouteValuesLogMessage, params KeyValuePair<string, string>[] routeValues)
+    public void ExecutingAction_ForAction_WithGivenRouteValues_LogsActionAndRouteData(
+        string expectedRouteValuesLogMessage,
+        params KeyValuePair<string, string>[] routeValues
+    )
     {
         // Arrange
         var testSink = new TestSink();
         var loggerFactory = new TestLoggerFactory(testSink, enabled: true);
         var logger = loggerFactory.CreateLogger("test");
 
-        var action = new ActionDescriptor
-        {
-            DisplayName = "foobar",
-        };
+        var action = new ActionDescriptor { DisplayName = "foobar" };
 
         foreach (var routeValue in routeValues)
         {
@@ -89,22 +101,23 @@ public class MvcCoreLoggerExtensionsTest
         var write = Assert.Single(testSink.Writes);
         Assert.Equal(
             $"Route matched with {expectedRouteValuesLogMessage}. Executing action {action.DisplayName}",
-            write.State.ToString());
+            write.State.ToString()
+        );
     }
 
     [Theory]
     [MemberData(nameof(PageRouteValuesTestData))]
-    public void ExecutingAction_ForPage_WithGivenRouteValues_LogsPageAndRouteData(string expectedRouteValuesLogMessage, params KeyValuePair<string, string>[] routeValues)
+    public void ExecutingAction_ForPage_WithGivenRouteValues_LogsPageAndRouteData(
+        string expectedRouteValuesLogMessage,
+        params KeyValuePair<string, string>[] routeValues
+    )
     {
         // Arrange
         var testSink = new TestSink();
         var loggerFactory = new TestLoggerFactory(testSink, enabled: true);
         var logger = loggerFactory.CreateLogger("test");
 
-        var action = new ActionDescriptor
-        {
-            DisplayName = "/Pages/Foo",
-        };
+        var action = new ActionDescriptor { DisplayName = "/Pages/Foo" };
 
         foreach (var routeValue in routeValues)
         {
@@ -118,7 +131,8 @@ public class MvcCoreLoggerExtensionsTest
         var write = Assert.Single(testSink.Writes);
         Assert.Equal(
             $"Route matched with {expectedRouteValuesLogMessage}. Executing page {action.DisplayName}",
-            write.State.ToString());
+            write.State.ToString()
+        );
     }
 
     [Fact]
@@ -137,16 +151,16 @@ public class MvcCoreLoggerExtensionsTest
         var asyncResourceFilter = Mock.Of<IAsyncResourceFilter>();
         var filters = new IFilterMetadata[]
         {
-                actionFilter,
-                asyncActionFilter,
-                authFilter,
-                asyncAuthFilter,
-                exceptionFilter,
-                asyncExceptionFilter,
-                resultFilter,
-                asyncResultFilter,
-                resourceFilter,
-                asyncResourceFilter
+            actionFilter,
+            asyncActionFilter,
+            authFilter,
+            asyncAuthFilter,
+            exceptionFilter,
+            asyncExceptionFilter,
+            resultFilter,
+            asyncResultFilter,
+            resourceFilter,
+            asyncResourceFilter,
         };
         var testSink = new TestSink();
         var loggerFactory = new TestLoggerFactory(testSink, enabled: false);
@@ -182,17 +196,17 @@ public class MvcCoreLoggerExtensionsTest
         var asyncResourceFilter = Mock.Of<IAsyncResourceFilter>();
         var filters = new IFilterMetadata[]
         {
-                actionFilter,
-                asyncActionFilter,
-                authFilter,
-                asyncAuthFilter,
-                orderedAuthFilter,
-                exceptionFilter,
-                asyncExceptionFilter,
-                resultFilter,
-                asyncResultFilter,
-                resourceFilter,
-                asyncResourceFilter
+            actionFilter,
+            asyncActionFilter,
+            authFilter,
+            asyncAuthFilter,
+            orderedAuthFilter,
+            exceptionFilter,
+            asyncExceptionFilter,
+            resultFilter,
+            asyncResultFilter,
+            resourceFilter,
+            asyncResourceFilter,
         };
         var testSink = new TestSink();
         var loggerFactory = new TestLoggerFactory(testSink, enabled: true);
@@ -204,9 +218,10 @@ public class MvcCoreLoggerExtensionsTest
         // Assert
         var write = Assert.Single(testSink.Writes);
         Assert.Equal(
-            "Execution plan of authorization filters (in the following order): " +
-            $"{authFilter.GetType()}, {asyncAuthFilter.GetType()}, {orderedAuthFilter.GetType()} (Order: -100)",
-            write.State.ToString());
+            "Execution plan of authorization filters (in the following order): "
+                + $"{authFilter.GetType()}, {asyncAuthFilter.GetType()}, {orderedAuthFilter.GetType()} (Order: -100)",
+            write.State.ToString()
+        );
     }
 
     [Fact]
@@ -228,17 +243,17 @@ public class MvcCoreLoggerExtensionsTest
         var orderedResourceFilter = orderedResourceFilterMock.Object;
         var filters = new IFilterMetadata[]
         {
-                actionFilter,
-                asyncActionFilter,
-                authFilter,
-                asyncAuthFilter,
-                exceptionFilter,
-                asyncExceptionFilter,
-                resultFilter,
-                asyncResultFilter,
-                resourceFilter,
-                asyncResourceFilter,
-                orderedResourceFilter,
+            actionFilter,
+            asyncActionFilter,
+            authFilter,
+            asyncAuthFilter,
+            exceptionFilter,
+            asyncExceptionFilter,
+            resultFilter,
+            asyncResultFilter,
+            resourceFilter,
+            asyncResourceFilter,
+            orderedResourceFilter,
         };
         var testSink = new TestSink();
         var loggerFactory = new TestLoggerFactory(testSink, enabled: true);
@@ -250,9 +265,10 @@ public class MvcCoreLoggerExtensionsTest
         // Assert
         var write = Assert.Single(testSink.Writes);
         Assert.Equal(
-            "Execution plan of resource filters (in the following order): " +
-            $"{resourceFilter.GetType()}, {asyncResourceFilter.GetType()}, {orderedResourceFilter.GetType()} (Order: -100)",
-            write.State.ToString());
+            "Execution plan of resource filters (in the following order): "
+                + $"{resourceFilter.GetType()}, {asyncResourceFilter.GetType()}, {orderedResourceFilter.GetType()} (Order: -100)",
+            write.State.ToString()
+        );
     }
 
     [Fact]
@@ -274,17 +290,17 @@ public class MvcCoreLoggerExtensionsTest
         var asyncResourceFilter = Mock.Of<IAsyncResourceFilter>();
         var filters = new IFilterMetadata[]
         {
-                actionFilter,
-                asyncActionFilter,
-                orderedActionFilter,
-                authFilter,
-                asyncAuthFilter,
-                exceptionFilter,
-                asyncExceptionFilter,
-                resultFilter,
-                asyncResultFilter,
-                resourceFilter,
-                asyncResourceFilter,
+            actionFilter,
+            asyncActionFilter,
+            orderedActionFilter,
+            authFilter,
+            asyncAuthFilter,
+            exceptionFilter,
+            asyncExceptionFilter,
+            resultFilter,
+            asyncResultFilter,
+            resourceFilter,
+            asyncResourceFilter,
         };
         var testSink = new TestSink();
         var loggerFactory = new TestLoggerFactory(testSink, enabled: true);
@@ -296,9 +312,10 @@ public class MvcCoreLoggerExtensionsTest
         // Assert
         var write = Assert.Single(testSink.Writes);
         Assert.Equal(
-            "Execution plan of action filters (in the following order): " +
-            $"{actionFilter.GetType()}, {asyncActionFilter.GetType()}, {orderedActionFilter.GetType()} (Order: -100)",
-            write.State.ToString());
+            "Execution plan of action filters (in the following order): "
+                + $"{actionFilter.GetType()}, {asyncActionFilter.GetType()}, {orderedActionFilter.GetType()} (Order: -100)",
+            write.State.ToString()
+        );
     }
 
     [Fact]
@@ -320,17 +337,17 @@ public class MvcCoreLoggerExtensionsTest
         var asyncResourceFilter = Mock.Of<IAsyncResourceFilter>();
         var filters = new IFilterMetadata[]
         {
-                actionFilter,
-                asyncActionFilter,
-                authFilter,
-                asyncAuthFilter,
-                exceptionFilter,
-                asyncExceptionFilter,
-                orderedExceptionFilter,
-                resultFilter,
-                asyncResultFilter,
-                resourceFilter,
-                asyncResourceFilter,
+            actionFilter,
+            asyncActionFilter,
+            authFilter,
+            asyncAuthFilter,
+            exceptionFilter,
+            asyncExceptionFilter,
+            orderedExceptionFilter,
+            resultFilter,
+            asyncResultFilter,
+            resourceFilter,
+            asyncResourceFilter,
         };
         var testSink = new TestSink();
         var loggerFactory = new TestLoggerFactory(testSink, enabled: true);
@@ -342,9 +359,10 @@ public class MvcCoreLoggerExtensionsTest
         // Assert
         var write = Assert.Single(testSink.Writes);
         Assert.Equal(
-            "Execution plan of exception filters (in the following order): " +
-            $"{exceptionFilter.GetType()}, {asyncExceptionFilter.GetType()}, {orderedExceptionFilter.GetType()} (Order: -100)",
-            write.State.ToString());
+            "Execution plan of exception filters (in the following order): "
+                + $"{exceptionFilter.GetType()}, {asyncExceptionFilter.GetType()}, {orderedExceptionFilter.GetType()} (Order: -100)",
+            write.State.ToString()
+        );
     }
 
     [Fact]
@@ -366,17 +384,17 @@ public class MvcCoreLoggerExtensionsTest
         var asyncResourceFilter = Mock.Of<IAsyncResourceFilter>();
         var filters = new IFilterMetadata[]
         {
-                actionFilter,
-                asyncActionFilter,
-                authFilter,
-                asyncAuthFilter,
-                exceptionFilter,
-                asyncExceptionFilter,
-                resultFilter,
-                asyncResultFilter,
-                orderedResultFilter,
-                resourceFilter,
-                asyncResourceFilter,
+            actionFilter,
+            asyncActionFilter,
+            authFilter,
+            asyncAuthFilter,
+            exceptionFilter,
+            asyncExceptionFilter,
+            resultFilter,
+            asyncResultFilter,
+            orderedResultFilter,
+            resourceFilter,
+            asyncResourceFilter,
         };
         var testSink = new TestSink();
         var loggerFactory = new TestLoggerFactory(testSink, enabled: true);
@@ -388,9 +406,10 @@ public class MvcCoreLoggerExtensionsTest
         // Assert
         var write = Assert.Single(testSink.Writes);
         Assert.Equal(
-            "Execution plan of result filters (in the following order): " +
-            $"{resultFilter.GetType()}, {asyncResultFilter.GetType()}, {orderedResultFilter.GetType()} (Order: -100)",
-            write.State.ToString());
+            "Execution plan of result filters (in the following order): "
+                + $"{resultFilter.GetType()}, {asyncResultFilter.GetType()}, {orderedResultFilter.GetType()} (Order: -100)",
+            write.State.ToString()
+        );
     }
 
     [Fact]
@@ -402,10 +421,10 @@ public class MvcCoreLoggerExtensionsTest
         var logger = loggerFactory.CreateLogger("test");
 
         var mediaTypes = new MediaTypeCollection
-            {
-                "application/problem+json",
-                "application/problem+xml",
-            };
+        {
+            "application/problem+json",
+            "application/problem+xml",
+        };
 
         var httpContext = Mock.Of<HttpContext>();
         var context = new Mock<OutputFormatterCanWriteContext>(httpContext);
@@ -418,10 +437,11 @@ public class MvcCoreLoggerExtensionsTest
         // Assert
         var write = Assert.Single(testSink.Writes);
         Assert.Equal(
-            "No output formatter was found for content types " +
-            "'application/problem+json, application/problem+xml, application/json'" +
-            " to write the response.",
-            write.State.ToString());
+            "No output formatter was found for content types "
+                + "'application/problem+json, application/problem+xml, application/json'"
+                + " to write the response.",
+            write.State.ToString()
+        );
     }
 
     [Fact]
@@ -437,8 +457,8 @@ public class MvcCoreLoggerExtensionsTest
             ActionDescriptor = new Controllers.ControllerActionDescriptor
             {
                 // Using a generic type to verify the use of a clean name
-                ControllerTypeInfo = typeof(ValueTuple<int, string>).GetTypeInfo()
-            }
+                ControllerTypeInfo = typeof(ValueTuple<int, string>).GetTypeInfo(),
+            },
         };
 
         // Act
@@ -447,9 +467,10 @@ public class MvcCoreLoggerExtensionsTest
         // Assert
         var write = Assert.Single(testSink.Writes);
         Assert.Equal(
-            "Executing controller factory for controller " +
-            "System.ValueTuple<int, string> (System.Private.CoreLib)",
-            write.State.ToString());
+            "Executing controller factory for controller "
+                + "System.ValueTuple<int, string> (System.Private.CoreLib)",
+            write.State.ToString()
+        );
     }
 
     [Fact]
@@ -465,8 +486,8 @@ public class MvcCoreLoggerExtensionsTest
             ActionDescriptor = new Controllers.ControllerActionDescriptor
             {
                 // Using a generic type to verify the use of a clean name
-                ControllerTypeInfo = typeof(ValueTuple<int, string>).GetTypeInfo()
-            }
+                ControllerTypeInfo = typeof(ValueTuple<int, string>).GetTypeInfo(),
+            },
         };
 
         // Act
@@ -475,18 +496,28 @@ public class MvcCoreLoggerExtensionsTest
         // Assert
         var write = Assert.Single(testSink.Writes);
         Assert.Equal(
-            "Executed controller factory for controller " +
-            "System.ValueTuple<int, string> (System.Private.CoreLib)",
-            write.State.ToString());
+            "Executed controller factory for controller "
+                + "System.ValueTuple<int, string> (System.Private.CoreLib)",
+            write.State.ToString()
+        );
     }
 
-    public interface IOrderedAuthorizeFilter : IAuthorizationFilter, IAsyncAuthorizationFilter, IOrderedFilter { }
+    public interface IOrderedAuthorizeFilter
+        : IAuthorizationFilter,
+            IAsyncAuthorizationFilter,
+            IOrderedFilter { }
 
-    public interface IOrderedResourceFilter : IResourceFilter, IAsyncResourceFilter, IOrderedFilter { }
+    public interface IOrderedResourceFilter
+        : IResourceFilter,
+            IAsyncResourceFilter,
+            IOrderedFilter { }
 
     public interface IOrderedActionFilter : IActionFilter, IAsyncActionFilter, IOrderedFilter { }
 
-    public interface IOrderedExceptionFilter : IExceptionFilter, IAsyncExceptionFilter, IOrderedFilter { }
+    public interface IOrderedExceptionFilter
+        : IExceptionFilter,
+            IAsyncExceptionFilter,
+            IOrderedFilter { }
 
     public interface IOrderedResultFilter : IResultFilter, IAsyncResultFilter, IOrderedFilter { }
 }

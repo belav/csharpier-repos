@@ -173,7 +173,19 @@ namespace System.Linq.Expressions.Tests
 
         #region Test verifiers
 
-        private static int[] s_shifts = new[] { int.MinValue, -1, 0, 1, 2, 31, 32, 63, 64, int.MaxValue };
+        private static int[] s_shifts = new[]
+        {
+            int.MinValue,
+            -1,
+            0,
+            1,
+            2,
+            31,
+            32,
+            63,
+            64,
+            int.MaxValue,
+        };
 
         private static void VerifyByteShift(byte a, bool useInterpreter)
         {
@@ -189,35 +201,33 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteShift(byte a, int b, bool left, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(byte)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(byte)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte)(left ? a << b : a >> b)), f());
 
-            Expression<Func<byte?>> en =
-                Expression.Lambda<Func<byte?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<byte?>> en = Expression.Lambda<Func<byte?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(byte)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(byte)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             Func<byte?> fn = en.Compile(useInterpreter);
 
@@ -238,35 +248,33 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableByteShift(byte? a, int b, bool left, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(byte?)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(byte?)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte?)(left ? a << b : a >> b)), f());
 
-            e =
-                Expression.Lambda<Func<byte?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            e = Expression.Lambda<Func<byte?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(byte?)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(byte?)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             f = e.Compile(useInterpreter);
 
@@ -287,35 +295,33 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteShift(sbyte a, int b, bool left, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(sbyte)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(sbyte)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte)(left ? a << b : a >> b)), f());
 
-            Expression<Func<sbyte?>> en =
-                Expression.Lambda<Func<sbyte?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<sbyte?>> en = Expression.Lambda<Func<sbyte?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(sbyte)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(sbyte)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             Func<sbyte?> fn = en.Compile(useInterpreter);
 
@@ -334,37 +340,40 @@ namespace System.Linq.Expressions.Tests
             VerifyNullableNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyNullableSByteShift(sbyte? a, int b, bool left, bool useInterpreter)
+        private static void VerifyNullableSByteShift(
+            sbyte? a,
+            int b,
+            bool left,
+            bool useInterpreter
+        )
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(sbyte?)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(sbyte?)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte?)(left ? a << b : a >> b)), f());
 
-            e =
-                Expression.Lambda<Func<sbyte?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            e = Expression.Lambda<Func<sbyte?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(sbyte?)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(sbyte?)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             f = e.Compile(useInterpreter);
 
@@ -385,35 +394,33 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortShift(ushort a, int b, bool left, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ushort)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ushort)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort)(left ? a << b : a >> b)), f());
 
-            Expression<Func<ushort?>> en =
-                Expression.Lambda<Func<ushort?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<ushort?>> en = Expression.Lambda<Func<ushort?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ushort)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ushort)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             Func<ushort?> fn = en.Compile(useInterpreter);
 
@@ -432,37 +439,40 @@ namespace System.Linq.Expressions.Tests
             VerifyNullableNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyNullableUShortShift(ushort? a, int b, bool left, bool useInterpreter)
+        private static void VerifyNullableUShortShift(
+            ushort? a,
+            int b,
+            bool left,
+            bool useInterpreter
+        )
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ushort?)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ushort?)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort?)(left ? a << b : a >> b)), f());
 
-            e =
-                Expression.Lambda<Func<ushort?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            e = Expression.Lambda<Func<ushort?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ushort?)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ushort?)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             f = e.Compile(useInterpreter);
 
@@ -483,35 +493,33 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortShift(short a, int b, bool left, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(short)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(short)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short)(left ? a << b : a >> b)), f());
 
-            Expression<Func<short?>> en =
-                Expression.Lambda<Func<short?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<short?>> en = Expression.Lambda<Func<short?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(short)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(short)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             Func<short?> fn = en.Compile(useInterpreter);
 
@@ -530,37 +538,40 @@ namespace System.Linq.Expressions.Tests
             VerifyNullableNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyNullableShortShift(short? a, int b, bool left, bool useInterpreter)
+        private static void VerifyNullableShortShift(
+            short? a,
+            int b,
+            bool left,
+            bool useInterpreter
+        )
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(short?)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(short?)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short?)(left ? a << b : a >> b)), f());
 
-            e =
-                Expression.Lambda<Func<short?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            e = Expression.Lambda<Func<short?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(short?)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(short?)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             f = e.Compile(useInterpreter);
 
@@ -581,35 +592,33 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntShift(uint a, int b, bool left, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(uint)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(uint)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(left ? a << b : a >> b, f());
 
-            Expression<Func<uint?>> en =
-                Expression.Lambda<Func<uint?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<uint?>> en = Expression.Lambda<Func<uint?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(uint)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(uint)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             Func<uint?> fn = en.Compile(useInterpreter);
 
@@ -630,35 +639,33 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntShift(uint? a, int b, bool left, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(uint?)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(uint?)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(left ? a << b : a >> b, f());
 
-            e =
-                Expression.Lambda<Func<uint?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            e = Expression.Lambda<Func<uint?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(uint?)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(uint?)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             f = e.Compile(useInterpreter);
 
@@ -679,35 +686,33 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntShift(int a, int b, bool left, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(int)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(int)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal(left ? a << b : a >> b, f());
 
-            Expression<Func<int?>> en =
-                Expression.Lambda<Func<int?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<int?>> en = Expression.Lambda<Func<int?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(int)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(int)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             Func<int?> fn = en.Compile(useInterpreter);
 
@@ -728,35 +733,33 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntShift(int? a, int b, bool left, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(int?)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(int?)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(left ? a << b : a >> b, f());
 
-            e =
-                Expression.Lambda<Func<int?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            e = Expression.Lambda<Func<int?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(int?)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(int?)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             f = e.Compile(useInterpreter);
 
@@ -777,35 +780,33 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongShift(ulong a, int b, bool left, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ulong)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ulong)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(left ? a << b : a >> b, f());
 
-            Expression<Func<ulong?>> en =
-                Expression.Lambda<Func<ulong?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<ulong?>> en = Expression.Lambda<Func<ulong?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ulong)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ulong)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             Func<ulong?> fn = en.Compile(useInterpreter);
 
@@ -824,37 +825,40 @@ namespace System.Linq.Expressions.Tests
             VerifyNullableNullShift(a, false, useInterpreter);
         }
 
-        private static void VerifyNullableULongShift(ulong? a, int b, bool left, bool useInterpreter)
+        private static void VerifyNullableULongShift(
+            ulong? a,
+            int b,
+            bool left,
+            bool useInterpreter
+        )
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ulong?)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ulong?)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(left ? a << b : a >> b, f());
 
-            e =
-                Expression.Lambda<Func<ulong?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            e = Expression.Lambda<Func<ulong?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(ulong?)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(ulong?)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             f = e.Compile(useInterpreter);
 
@@ -875,35 +879,33 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongShift(long a, int b, bool left, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(long)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(long)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal(left ? a << b : a >> b, f());
 
-            Expression<Func<long?>> en =
-                Expression.Lambda<Func<long?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<long?>> en = Expression.Lambda<Func<long?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(long)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(long)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             Func<long?> fn = en.Compile(useInterpreter);
 
@@ -924,55 +926,53 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongShift(long? a, int b, bool left, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(long?)),
-                        Expression.Constant(b, typeof(int)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(long?)),
-                        Expression.Constant(b, typeof(int)))
-                    );
+                        Expression.Constant(b, typeof(int))
+                    )
+            );
 
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(left ? a << b : a >> b, f());
 
-            e =
-                Expression.Lambda<Func<long?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            e = Expression.Lambda<Func<long?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(long?)),
-                        Expression.Constant(b, typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Constant(b, typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(long?)),
-                        Expression.Constant(b, typeof(int?)))
-                    );
+                        Expression.Constant(b, typeof(int?))
+                    )
+            );
 
             f = e.Compile(useInterpreter);
 
             Assert.Equal(left ? a << b : a >> b, f());
         }
 
-        private static void VerifyNullShift<T>(T a, bool left, bool useInterpreter) where T : struct
+        private static void VerifyNullShift<T>(T a, bool left, bool useInterpreter)
+            where T : struct
         {
-            Expression<Func<T?>> e =
-                Expression.Lambda<Func<T?>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<T?>> e = Expression.Lambda<Func<T?>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(T)),
-                        Expression.Default(typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Default(typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(T)),
-                        Expression.Default(typeof(int?)))
-                    );
+                        Expression.Default(typeof(int?))
+                    )
+            );
 
             Func<T?> f = e.Compile(useInterpreter);
 
@@ -981,18 +981,17 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableNullShift<T>(T a, bool left, bool useInterpreter)
         {
-            Expression<Func<T>> e =
-                Expression.Lambda<Func<T>>(
-                    left
-                    ?
-                    Expression.LeftShift(
+            Expression<Func<T>> e = Expression.Lambda<Func<T>>(
+                left
+                    ? Expression.LeftShift(
                         Expression.Constant(a, typeof(T)),
-                        Expression.Default(typeof(int?)))
-                    :
-                    Expression.RightShift(
+                        Expression.Default(typeof(int?))
+                    )
+                    : Expression.RightShift(
                         Expression.Constant(a, typeof(T)),
-                        Expression.Default(typeof(int?)))
-                    );
+                        Expression.Default(typeof(int?))
+                    )
+            );
 
             Func<T> f = e.Compile(useInterpreter);
 
@@ -1022,25 +1021,37 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void LeftThrowsOnLeftNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.LeftShift(null, Expression.Constant("")));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "left",
+                () => Expression.LeftShift(null, Expression.Constant(""))
+            );
         }
 
         [Fact]
         public static void LeftThrowsOnRightNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("right", () => Expression.LeftShift(Expression.Constant(""), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "right",
+                () => Expression.LeftShift(Expression.Constant(""), null)
+            );
         }
 
         [Fact]
         public static void RightThrowsOnLeftNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.RightShift(null, Expression.Constant("")));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "left",
+                () => Expression.RightShift(null, Expression.Constant(""))
+            );
         }
 
         [Fact]
         public static void RightThrowsOnRightNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("right", () => Expression.RightShift(Expression.Constant(""), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "right",
+                () => Expression.RightShift(Expression.Constant(""), null)
+            );
         }
 
         private static class Unreadable<T>
@@ -1055,37 +1066,55 @@ namespace System.Linq.Expressions.Tests
         public static void LeftThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>("left", () => Expression.LeftShift(value, Expression.Constant(1)));
+            AssertExtensions.Throws<ArgumentException>(
+                "left",
+                () => Expression.LeftShift(value, Expression.Constant(1))
+            );
         }
 
         [Fact]
         public static void LeftThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>("right", () => Expression.LeftShift(Expression.Constant(1), value));
+            AssertExtensions.Throws<ArgumentException>(
+                "right",
+                () => Expression.LeftShift(Expression.Constant(1), value)
+            );
         }
 
         [Fact]
         public static void RightThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>("left", () => Expression.RightShift(value, Expression.Constant(1)));
+            AssertExtensions.Throws<ArgumentException>(
+                "left",
+                () => Expression.RightShift(value, Expression.Constant(1))
+            );
         }
 
         [Fact]
         public static void RightThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>("right", () => Expression.RightShift(Expression.Constant(1), value));
+            AssertExtensions.Throws<ArgumentException>(
+                "right",
+                () => Expression.RightShift(Expression.Constant(1), value)
+            );
         }
 
         [Fact]
         public static void ToStringTest()
         {
-            BinaryExpression e1 = Expression.LeftShift(Expression.Parameter(typeof(int), "a"), Expression.Parameter(typeof(int), "b"));
+            BinaryExpression e1 = Expression.LeftShift(
+                Expression.Parameter(typeof(int), "a"),
+                Expression.Parameter(typeof(int), "b")
+            );
             Assert.Equal("(a << b)", e1.ToString());
 
-            BinaryExpression e2 = Expression.RightShift(Expression.Parameter(typeof(int), "a"), Expression.Parameter(typeof(int), "b"));
+            BinaryExpression e2 = Expression.RightShift(
+                Expression.Parameter(typeof(int), "a"),
+                Expression.Parameter(typeof(int), "b")
+            );
             Assert.Equal("(a >> b)", e2.ToString());
         }
 
@@ -1098,8 +1127,15 @@ namespace System.Linq.Expressions.Tests
             Assert.Throws<InvalidOperationException>(() => Expression.RightShift(lhs, rhs));
         }
 
-        [Theory, InlineData(typeof(E)), InlineData(typeof(El)), InlineData(typeof(string)), InlineData(typeof(long)),
-         InlineData(typeof(short)), InlineData(typeof(uint))]
+        [
+            Theory,
+            InlineData(typeof(E)),
+            InlineData(typeof(El)),
+            InlineData(typeof(string)),
+            InlineData(typeof(long)),
+            InlineData(typeof(short)),
+            InlineData(typeof(uint))
+        ]
         public static void IncorrectRHSTypes(Type type)
         {
             ConstantExpression lhs = Expression.Constant(0);

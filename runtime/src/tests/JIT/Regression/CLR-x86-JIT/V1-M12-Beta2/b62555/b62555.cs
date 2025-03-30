@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -27,6 +28,7 @@ namespace Test
                 return 100;
             }
         }
+
         public static void Main1()
         {
             do

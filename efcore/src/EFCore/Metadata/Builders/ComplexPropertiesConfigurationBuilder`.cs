@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
 /// </remarks>
-public class ComplexPropertiesConfigurationBuilder<TProperty> : ComplexPropertiesConfigurationBuilder
+public class ComplexPropertiesConfigurationBuilder<TProperty>
+    : ComplexPropertiesConfigurationBuilder
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -25,7 +26,5 @@ public class ComplexPropertiesConfigurationBuilder<TProperty> : ComplexPropertie
     /// </summary>
     [EntityFrameworkInternal]
     public ComplexPropertiesConfigurationBuilder(ComplexPropertyConfiguration property)
-        : base(property)
-    {
-    }
+        : base(property) { }
 }

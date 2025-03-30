@@ -4,16 +4,14 @@
 
 namespace System.IdentityModel
 {
-    using System.Diagnostics;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Security.Cryptography;
 
     class RijndaelCryptoServiceProvider : Rijndael
     {
-        public RijndaelCryptoServiceProvider()
-        {
-        }
+        public RijndaelCryptoServiceProvider() { }
 
         public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[] rgbIV)
         {
@@ -22,9 +20,19 @@ namespace System.IdentityModel
             if (rgbIV == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("rgbIV");
             if (this.ModeValue != CipherMode.CBC)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.AESCipherModeNotSupported, this.ModeValue)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.AESCipherModeNotSupported, this.ModeValue)
+                    )
+                );
 
-            return new RijndaelCryptoTransform(rgbKey, rgbIV, this.PaddingValue, this.BlockSizeValue, true);
+            return new RijndaelCryptoTransform(
+                rgbKey,
+                rgbIV,
+                this.PaddingValue,
+                this.BlockSizeValue,
+                true
+            );
         }
 
         public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[] rgbIV)
@@ -34,9 +42,19 @@ namespace System.IdentityModel
             if (rgbIV == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("rgbIV");
             if (this.ModeValue != CipherMode.CBC)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.AESCipherModeNotSupported, this.ModeValue)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(SR.AESCipherModeNotSupported, this.ModeValue)
+                    )
+                );
 
-            return new RijndaelCryptoTransform(rgbKey, rgbIV, this.PaddingValue, this.BlockSizeValue, false);
+            return new RijndaelCryptoTransform(
+                rgbKey,
+                rgbIV,
+                this.PaddingValue,
+                this.BlockSizeValue,
+                false
+            );
         }
 
         public override void GenerateKey()
@@ -61,17 +79,38 @@ namespace System.IdentityModel
             int blockSize;
             bool encrypt;
 
-            public unsafe RijndaelCryptoTransform(byte[] rgbKey, byte[] rgbIV, PaddingMode paddingMode, int blockSizeBits, bool encrypt)
+            public unsafe RijndaelCryptoTransform(
+                byte[] rgbKey,
+                byte[] rgbIV,
+                PaddingMode paddingMode,
+                int blockSizeBits,
+                bool encrypt
+            )
             {
                 if (rgbKey.Length != 16 && rgbKey.Length != 24 && rgbKey.Length != 32)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.AESKeyLengthNotSupported, rgbKey.Length * 8)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.AESKeyLengthNotSupported, rgbKey.Length * 8)
+                        )
+                    );
                 if (rgbIV.Length != 16)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.AESIVLengthNotSupported, rgbIV.Length * 8)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.AESIVLengthNotSupported, rgbIV.Length * 8)
+                        )
+                    );
                 if (paddingMode != PaddingMode.PKCS7 && paddingMode != PaddingMode.ISO10126)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.AESPaddingModeNotSupported, paddingMode)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.AESPaddingModeNotSupported, paddingMode)
+                        )
+                    );
 
                 this.paddingMode = paddingMode;
-                DiagnosticUtility.DebugAssert((blockSizeBits % 8) == 0, "Bits must be byte aligned.");
+                DiagnosticUtility.DebugAssert(
+                    (blockSizeBits % 8) == 0,
+                    "Bits must be byte aligned."
+                );
                 this.blockSize = blockSizeBits / 8;
                 this.encrypt = encrypt;
 
@@ -80,12 +119,27 @@ namespace System.IdentityModel
                 try
                 {
 #pragma warning suppress 56523
-                    ThrowIfFalse(SR.AESCryptAcquireContextFailed, NativeMethods.CryptAcquireContextW(out provHandle, null, null, NativeMethods.PROV_RSA_AES, NativeMethods.CRYPT_VERIFYCONTEXT));
+                    ThrowIfFalse(
+                        SR.AESCryptAcquireContextFailed,
+                        NativeMethods.CryptAcquireContextW(
+                            out provHandle,
+                            null,
+                            null,
+                            NativeMethods.PROV_RSA_AES,
+                            NativeMethods.CRYPT_VERIFYCONTEXT
+                        )
+                    );
 
                     // (BLOBHEADER + keyLen) + Key
                     int cbData = PLAINTEXTKEYBLOBHEADER.SizeOf + rgbKey.Length;
                     byte[] pbData = new byte[cbData];
-                    Buffer.BlockCopy(rgbKey, 0, pbData, PLAINTEXTKEYBLOBHEADER.SizeOf, rgbKey.Length);
+                    Buffer.BlockCopy(
+                        rgbKey,
+                        0,
+                        pbData,
+                        PLAINTEXTKEYBLOBHEADER.SizeOf,
+                        rgbKey.Length
+                    );
                     fixed (void* pbDataPtr = &pbData[0])
                     {
                         PLAINTEXTKEYBLOBHEADER* pbhdr = (PLAINTEXTKEYBLOBHEADER*)pbDataPtr;
@@ -105,13 +159,30 @@ namespace System.IdentityModel
 #if DEBUG
                     uint ivLen = 0;
 #pragma warning suppress 56523 // win32 error checked in ThrowIfFalse() method
-                    ThrowIfFalse(SR.AESCryptGetKeyParamFailed, NativeMethods.CryptGetKeyParam(keyHandle, NativeMethods.KP_IV, IntPtr.Zero, ref ivLen, 0));
+                    ThrowIfFalse(
+                        SR.AESCryptGetKeyParamFailed,
+                        NativeMethods.CryptGetKeyParam(
+                            keyHandle,
+                            NativeMethods.KP_IV,
+                            IntPtr.Zero,
+                            ref ivLen,
+                            0
+                        )
+                    );
                     DiagnosticUtility.DebugAssert(rgbIV.Length == ivLen, "Mismatch iv size");
 #endif
                     fixed (void* pbIVPtr = &rgbIV[0])
                     {
 #pragma warning suppress 56523
-                        ThrowIfFalse(SR.AESCryptSetKeyParamFailed, NativeMethods.CryptSetKeyParam(keyHandle, NativeMethods.KP_IV, pbIVPtr, 0));
+                        ThrowIfFalse(
+                            SR.AESCryptSetKeyParamFailed,
+                            NativeMethods.CryptSetKeyParam(
+                                keyHandle,
+                                NativeMethods.KP_IV,
+                                pbIVPtr,
+                                0
+                            )
+                        );
                     }
 
                     // Save
@@ -129,24 +200,24 @@ namespace System.IdentityModel
                 }
             }
 
-            public bool CanReuseTransform  
-            { 
-                get { return true; } 
+            public bool CanReuseTransform
+            {
+                get { return true; }
             }
 
-            public bool CanTransformMultipleBlocks 
-            { 
-                get { return true; } 
+            public bool CanTransformMultipleBlocks
+            {
+                get { return true; }
             }
 
-            public int InputBlockSize 
-            { 
-                get { return this.blockSize; } 
+            public int InputBlockSize
+            {
+                get { return this.blockSize; }
             }
 
             public int OutputBlockSize
-            { 
-                get { return this.blockSize; } 
+            {
+                get { return this.blockSize; }
             }
 
             public void Dispose()
@@ -161,34 +232,89 @@ namespace System.IdentityModel
                 }
             }
 
-            public int TransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset)
+            public int TransformBlock(
+                byte[] inputBuffer,
+                int inputOffset,
+                int inputCount,
+                byte[] outputBuffer,
+                int outputOffset
+            )
             {
                 if (inputBuffer == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("inputBuffer");
                 if (outputBuffer == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("outputBuffer");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "outputBuffer"
+                    );
                 if (inputOffset < 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("inputOffset", SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "inputOffset",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 if (inputCount <= 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("inputCount", SR.GetString(SR.ValueMustBeGreaterThanZero)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "inputCount",
+                            SR.GetString(SR.ValueMustBeGreaterThanZero)
+                        )
+                    );
                 if (outputOffset < 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("outputOffset", SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "outputOffset",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 if ((inputCount % this.blockSize) != 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.AESInvalidInputBlockSize, inputCount, this.blockSize)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(
+                            SR.GetString(SR.AESInvalidInputBlockSize, inputCount, this.blockSize)
+                        )
+                    );
                 if ((inputBuffer.Length - inputCount) < inputOffset)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("inputOffset", SR.GetString(SR.ValueMustBeInRange, 0, inputBuffer.Length - inputCount - 1)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "inputOffset",
+                            SR.GetString(
+                                SR.ValueMustBeInRange,
+                                0,
+                                inputBuffer.Length - inputCount - 1
+                            )
+                        )
+                    );
                 if (outputBuffer.Length < outputOffset)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("outputOffset", SR.GetString(SR.ValueMustBeInRange, 0, outputBuffer.Length - 1)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "outputOffset",
+                            SR.GetString(SR.ValueMustBeInRange, 0, outputBuffer.Length - 1)
+                        )
+                    );
 
                 if (this.encrypt)
                 {
-                    return EncryptData(inputBuffer, inputOffset, inputCount, outputBuffer, outputOffset, false);
+                    return EncryptData(
+                        inputBuffer,
+                        inputOffset,
+                        inputCount,
+                        outputBuffer,
+                        outputOffset,
+                        false
+                    );
                 }
                 else
                 {
                     if (this.paddingMode == PaddingMode.PKCS7)
                     {
-                        return DecryptData(inputBuffer, inputOffset, inputCount, outputBuffer, outputOffset, false);
+                        return DecryptData(
+                            inputBuffer,
+                            inputOffset,
+                            inputCount,
+                            outputBuffer,
+                            outputOffset,
+                            false
+                        );
                     }
                     else
                     {
@@ -199,17 +325,59 @@ namespace System.IdentityModel
                             this.depadBuffer = new byte[this.blockSize];
                             // copy the last InputBlockSize bytes to m_depadBuffer everything else gets processed and returned
                             int inputToProcess = inputCount - this.blockSize;
-                            Buffer.BlockCopy(inputBuffer, inputOffset + inputToProcess, this.depadBuffer, 0, this.blockSize);
-                            return ((inputToProcess <= 0) ? 0 : DecryptData(inputBuffer, inputOffset, inputToProcess, outputBuffer, outputOffset, false));
+                            Buffer.BlockCopy(
+                                inputBuffer,
+                                inputOffset + inputToProcess,
+                                this.depadBuffer,
+                                0,
+                                this.blockSize
+                            );
+                            return (
+                                (inputToProcess <= 0)
+                                    ? 0
+                                    : DecryptData(
+                                        inputBuffer,
+                                        inputOffset,
+                                        inputToProcess,
+                                        outputBuffer,
+                                        outputOffset,
+                                        false
+                                    )
+                            );
                         }
                         else
                         {
                             // we already have a depad buffer, so we need to decrypt that info first & copy it out
-                            int dwCount = DecryptData(this.depadBuffer, 0, this.depadBuffer.Length, outputBuffer, outputOffset, false);
+                            int dwCount = DecryptData(
+                                this.depadBuffer,
+                                0,
+                                this.depadBuffer.Length,
+                                outputBuffer,
+                                outputOffset,
+                                false
+                            );
                             outputOffset += dwCount;
                             int inputToProcess = inputCount - this.blockSize;
-                            Buffer.BlockCopy(inputBuffer, inputOffset + inputToProcess, this.depadBuffer, 0, this.blockSize);
-                            return dwCount + ((inputToProcess <= 0) ? 0 : DecryptData(inputBuffer, inputOffset, inputToProcess, outputBuffer, outputOffset, false));
+                            Buffer.BlockCopy(
+                                inputBuffer,
+                                inputOffset + inputToProcess,
+                                this.depadBuffer,
+                                0,
+                                this.blockSize
+                            );
+                            return dwCount
+                                + (
+                                    (inputToProcess <= 0)
+                                        ? 0
+                                        : DecryptData(
+                                            inputBuffer,
+                                            inputOffset,
+                                            inputToProcess,
+                                            outputBuffer,
+                                            outputOffset,
+                                            false
+                                        )
+                                );
                         }
                     }
                 }
@@ -220,11 +388,30 @@ namespace System.IdentityModel
                 if (inputBuffer == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("inputBuffer");
                 if (inputOffset < 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("inputOffset", SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "inputOffset",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 if (inputCount < 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("inputCount", SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "inputCount",
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 if ((inputBuffer.Length - inputCount) < inputOffset)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("inputOffset", SR.GetString(SR.ValueMustBeInRange, 0, inputBuffer.Length - inputCount - 1)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "inputOffset",
+                            SR.GetString(
+                                SR.ValueMustBeInRange,
+                                0,
+                                inputBuffer.Length - inputCount - 1
+                            )
+                        )
+                    );
 
                 if (this.encrypt)
                 {
@@ -234,7 +421,14 @@ namespace System.IdentityModel
                         outputCount += this.blockSize;
 
                     byte[] outputBuffer = new byte[outputCount];
-                    int dwCount = EncryptData(inputBuffer, inputOffset, inputCount, outputBuffer, 0, true);
+                    int dwCount = EncryptData(
+                        inputBuffer,
+                        inputOffset,
+                        inputCount,
+                        outputBuffer,
+                        0,
+                        true
+                    );
                     return TruncateBuffer(outputBuffer, dwCount);
                 }
                 else
@@ -242,7 +436,14 @@ namespace System.IdentityModel
                     if (this.paddingMode == PaddingMode.PKCS7)
                     {
                         byte[] outputBuffer = new byte[inputCount];
-                        int dwCount = DecryptData(inputBuffer, inputOffset, inputCount, outputBuffer, 0, true);
+                        int dwCount = DecryptData(
+                            inputBuffer,
+                            inputOffset,
+                            inputCount,
+                            outputBuffer,
+                            0,
+                            true
+                        );
                         return TruncateBuffer(outputBuffer, dwCount);
                     }
                     else
@@ -252,25 +453,62 @@ namespace System.IdentityModel
                         if (this.depadBuffer == null)
                         {
                             byte[] outputBuffer = new byte[inputCount];
-                            int dwCount = DecryptData(inputBuffer, inputOffset, inputCount, outputBuffer, 0, true);
+                            int dwCount = DecryptData(
+                                inputBuffer,
+                                inputOffset,
+                                inputCount,
+                                outputBuffer,
+                                0,
+                                true
+                            );
                             return TruncateBuffer(outputBuffer, dwCount);
                         }
                         else
                         {
                             byte[] outputBuffer = new byte[this.depadBuffer.Length + inputCount];
                             // we already have a depad buffer, so we need to decrypt that info first & copy it out
-                            int dwCount = DecryptData(this.depadBuffer, 0, this.depadBuffer.Length, outputBuffer, 0, false);
-                            dwCount += DecryptData(inputBuffer, inputOffset, inputCount, outputBuffer, dwCount, true);
+                            int dwCount = DecryptData(
+                                this.depadBuffer,
+                                0,
+                                this.depadBuffer.Length,
+                                outputBuffer,
+                                0,
+                                false
+                            );
+                            dwCount += DecryptData(
+                                inputBuffer,
+                                inputOffset,
+                                inputCount,
+                                outputBuffer,
+                                dwCount,
+                                true
+                            );
                             return TruncateBuffer(outputBuffer, dwCount);
                         }
                     }
                 }
             }
 
-            unsafe int EncryptData(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset, bool final)
+            unsafe int EncryptData(
+                byte[] inputBuffer,
+                int inputOffset,
+                int inputCount,
+                byte[] outputBuffer,
+                int outputOffset,
+                bool final
+            )
             {
                 if ((outputBuffer.Length - outputOffset) < inputCount)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("outputBuffer", SR.GetString(SR.AESInsufficientOutputBuffer, outputBuffer.Length - outputOffset, inputCount)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "outputBuffer",
+                            SR.GetString(
+                                SR.AESInsufficientOutputBuffer,
+                                outputBuffer.Length - outputOffset,
+                                inputCount
+                            )
+                        )
+                    );
 
                 bool doPadding = final && (this.paddingMode == PaddingMode.ISO10126);
                 byte[] tempBuffer = outputBuffer;
@@ -286,7 +524,18 @@ namespace System.IdentityModel
                     fixed (void* tempBufferPtr = &tempBuffer[tempOffset])
                     {
 #pragma warning suppress 56523
-                        ThrowIfFalse(SR.AESCryptEncryptFailed, NativeMethods.CryptEncrypt(keyHandle, IntPtr.Zero, final, 0, tempBufferPtr, ref dwCount, tempBuffer.Length - tempOffset));
+                        ThrowIfFalse(
+                            SR.AESCryptEncryptFailed,
+                            NativeMethods.CryptEncrypt(
+                                keyHandle,
+                                IntPtr.Zero,
+                                final,
+                                0,
+                                tempBufferPtr,
+                                ref dwCount,
+                                tempBuffer.Length - tempOffset
+                            )
+                        );
                     }
                     throwing = false;
                 }
@@ -305,24 +554,50 @@ namespace System.IdentityModel
                 return dwCount;
             }
 
-            unsafe int DecryptData(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset, bool final)
+            unsafe int DecryptData(
+                byte[] inputBuffer,
+                int inputOffset,
+                int inputCount,
+                byte[] outputBuffer,
+                int outputOffset,
+                bool final
+            )
             {
                 bool bFinal = final && (this.paddingMode == PaddingMode.PKCS7);
                 int dwCount = inputCount;
                 if (dwCount > 0)
                 {
-                    Buffer.BlockCopy(inputBuffer, inputOffset, outputBuffer, outputOffset, inputCount);
+                    Buffer.BlockCopy(
+                        inputBuffer,
+                        inputOffset,
+                        outputBuffer,
+                        outputOffset,
+                        inputCount
+                    );
                     fixed (void* outputBufferPtr = &outputBuffer[outputOffset])
                     {
 #pragma warning suppress 56523
-                        ThrowIfFalse(SR.AESCryptDecryptFailed, NativeMethods.CryptDecrypt(keyHandle, IntPtr.Zero, bFinal, 0, outputBufferPtr, ref dwCount));
+                        ThrowIfFalse(
+                            SR.AESCryptDecryptFailed,
+                            NativeMethods.CryptDecrypt(
+                                keyHandle,
+                                IntPtr.Zero,
+                                bFinal,
+                                0,
+                                outputBufferPtr,
+                                ref dwCount
+                            )
+                        );
                     }
                 }
 
                 if (!bFinal && final)
                 {
                     byte padSize = outputBuffer[outputOffset + dwCount - 1];
-                    DiagnosticUtility.DebugAssert(padSize <= this.blockSize, "Invalid padding size.");
+                    DiagnosticUtility.DebugAssert(
+                        padSize <= this.blockSize,
+                        "Invalid padding size."
+                    );
                     dwCount -= padSize;
                 }
                 return dwCount;
@@ -376,7 +651,9 @@ namespace System.IdentityModel
                 {
                     int err = Marshal.GetLastWin32Error();
                     string reason = (err != 0) ? new Win32Exception(err).Message : String.Empty;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(SR.GetString(sr, reason)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CryptographicException(SR.GetString(sr, reason))
+                    );
                 }
             }
         }

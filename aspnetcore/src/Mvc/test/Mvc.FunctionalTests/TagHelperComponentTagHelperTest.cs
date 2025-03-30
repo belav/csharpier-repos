@@ -9,7 +9,9 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public class TagHelperComponentTagHelperTest : IClassFixture<MvcTestFixture<RazorWebSite.Startup>>
 {
-    private static readonly Assembly _resourcesAssembly = typeof(TagHelperComponentTagHelperTest).GetTypeInfo().Assembly;
+    private static readonly Assembly _resourcesAssembly = typeof(TagHelperComponentTagHelperTest)
+        .GetTypeInfo()
+        .Assembly;
 
     public TagHelperComponentTagHelperTest(MvcTestFixture<RazorWebSite.Startup> fixture)
     {
@@ -25,8 +27,11 @@ public class TagHelperComponentTagHelperTest : IClassFixture<MvcTestFixture<Razo
         var url = "http://localhost/TagHelperComponent/GetHead";
         var request = new HttpRequestMessage(HttpMethod.Get, url);
         var outputFile = "compiler/resources/RazorWebSite.TagHelperComponent.Head.html";
-        var expectedContent =
-            await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+        var expectedContent = await ResourceFile.ReadResourceAsync(
+            _resourcesAssembly,
+            outputFile,
+            sourceFile: false
+        );
 
         // Act
         var response = await Client.SendAsync(request);
@@ -35,7 +40,12 @@ public class TagHelperComponentTagHelperTest : IClassFixture<MvcTestFixture<Razo
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-        ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent);
+        ResourceFile.UpdateOrVerify(
+            _resourcesAssembly,
+            outputFile,
+            expectedContent,
+            responseContent
+        );
     }
 
     [Fact]
@@ -45,8 +55,11 @@ public class TagHelperComponentTagHelperTest : IClassFixture<MvcTestFixture<Razo
         var url = "http://localhost/TagHelperComponent/GetBody";
         var request = new HttpRequestMessage(HttpMethod.Get, url);
         var outputFile = "compiler/resources/RazorWebSite.TagHelperComponent.Body.html";
-        var expectedContent =
-            await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+        var expectedContent = await ResourceFile.ReadResourceAsync(
+            _resourcesAssembly,
+            outputFile,
+            sourceFile: false
+        );
 
         // Act
         var response = await Client.SendAsync(request);
@@ -55,7 +68,12 @@ public class TagHelperComponentTagHelperTest : IClassFixture<MvcTestFixture<Razo
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-        ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent);
+        ResourceFile.UpdateOrVerify(
+            _resourcesAssembly,
+            outputFile,
+            expectedContent,
+            responseContent
+        );
     }
 
     [Fact]
@@ -65,8 +83,11 @@ public class TagHelperComponentTagHelperTest : IClassFixture<MvcTestFixture<Razo
         var url = "http://localhost/AddTagHelperComponent/AddComponent";
         var request = new HttpRequestMessage(HttpMethod.Get, url);
         var outputFile = "compiler/resources/RazorWebSite.AddTagHelperComponent.AddComponent.html";
-        var expectedContent =
-            await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+        var expectedContent = await ResourceFile.ReadResourceAsync(
+            _resourcesAssembly,
+            outputFile,
+            sourceFile: false
+        );
 
         // Act
         var response = await Client.SendAsync(request);
@@ -75,6 +96,11 @@ public class TagHelperComponentTagHelperTest : IClassFixture<MvcTestFixture<Razo
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-        ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent);
+        ResourceFile.UpdateOrVerify(
+            _resourcesAssembly,
+            outputFile,
+            expectedContent,
+            responseContent
+        );
     }
 }

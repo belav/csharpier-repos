@@ -3,7 +3,6 @@
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal interface IInterceptor

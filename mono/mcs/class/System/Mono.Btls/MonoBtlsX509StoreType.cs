@@ -26,15 +26,15 @@
 #if SECURITY_DEP && MONO_FEATURE_BTLS
 namespace Mono.Btls
 {
-	enum MonoBtlsX509StoreType
-	{
-		Custom,
-		MachineTrustedRoots,
-		MachineIntermediateCA,
-		MachineUntrusted,
-		UserTrustedRoots,
-		UserIntermediateCA,
-		UserUntrusted
-	}
+    enum MonoBtlsX509StoreType
+    {
+        Custom,
+        MachineTrustedRoots,
+        MachineIntermediateCA,
+        MachineUntrusted,
+        UserTrustedRoots,
+        UserIntermediateCA,
+        UserUntrusted,
+    }
 }
 #endif

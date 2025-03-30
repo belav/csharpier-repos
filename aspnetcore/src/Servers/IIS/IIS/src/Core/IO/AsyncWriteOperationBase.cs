@@ -27,7 +27,9 @@ internal abstract class AsyncWriteOperationBase : AsyncIOOperation
 
         if (_buffer.Length > int.MaxValue)
         {
-            throw new InvalidOperationException($"Writes larger then {int.MaxValue} are not supported.");
+            throw new InvalidOperationException(
+                $"Writes larger then {int.MaxValue} are not supported."
+            );
         }
 
         bool completionExpected;
@@ -40,7 +42,13 @@ internal abstract class AsyncWriteOperationBase : AsyncIOOperation
             // To avoid stackoverflows, we will only stackalloc if the write size is less than the StackChunkLimit
             // The stack size is IIS is by default 128/256 KB, so we are generous with this threshold.
             var chunks = stackalloc HTTP_DATA_CHUNK[chunkCount];
-            hr = WriteSequence(_requestHandler, chunkCount, _buffer, chunks, out completionExpected);
+            hr = WriteSequence(
+                _requestHandler,
+                chunkCount,
+                _buffer,
+                chunks,
+                out completionExpected
+            );
         }
         else
         {
@@ -48,7 +56,13 @@ internal abstract class AsyncWriteOperationBase : AsyncIOOperation
             var chunks = new HTTP_DATA_CHUNK[chunkCount];
             fixed (HTTP_DATA_CHUNK* pDataChunks = chunks)
             {
-                hr = WriteSequence(_requestHandler, chunkCount, _buffer, pDataChunks, out completionExpected);
+                hr = WriteSequence(
+                    _requestHandler,
+                    chunkCount,
+                    _buffer,
+                    pDataChunks,
+                    out completionExpected
+                );
             }
         }
 
@@ -94,7 +108,13 @@ internal abstract class AsyncWriteOperationBase : AsyncIOOperation
         return count;
     }
 
-    private unsafe int WriteSequence(NativeSafeHandle requestHandler, int nChunks, ReadOnlySequence<byte> buffer, HTTP_DATA_CHUNK* pDataChunks, out bool fCompletionExpected)
+    private unsafe int WriteSequence(
+        NativeSafeHandle requestHandler,
+        int nChunks,
+        ReadOnlySequence<byte> buffer,
+        HTTP_DATA_CHUNK* pDataChunks,
+        out bool fCompletionExpected
+    )
     {
         var currentChunk = 0;
 
@@ -119,5 +139,10 @@ internal abstract class AsyncWriteOperationBase : AsyncIOOperation
         return WriteChunks(requestHandler, nChunks, pDataChunks, out fCompletionExpected);
     }
 
-    protected abstract unsafe int WriteChunks(NativeSafeHandle requestHandler, int chunkCount, HTTP_DATA_CHUNK* dataChunks, out bool completionExpected);
+    protected abstract unsafe int WriteChunks(
+        NativeSafeHandle requestHandler,
+        int chunkCount,
+        HTTP_DATA_CHUNK* dataChunks,
+        out bool completionExpected
+    );
 }

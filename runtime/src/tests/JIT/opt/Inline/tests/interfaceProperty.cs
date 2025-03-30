@@ -8,16 +8,9 @@ namespace JitInliningTest
 {
     internal interface IEmployee
     {
-        string Name
-        {
-            get;
-            set;
-        }
+        string Name { get; set; }
 
-        int Counter
-        {
-            get;
-        }
+        int Counter { get; }
     }
 
     public class Employee : IEmployee
@@ -27,22 +20,14 @@ namespace JitInliningTest
         private string _name;
         public string Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
+            get { return _name; }
+            set { _name = value; }
         }
         public int Counter
         {
-            get
-            {
-                return _counter;
-            }
+            get { return _counter; }
         }
+
         public Employee()
         {
             _counter = ++_counter + numberOfEmployees;
@@ -65,4 +50,3 @@ namespace JitInliningTest
         }
     }
 }
-

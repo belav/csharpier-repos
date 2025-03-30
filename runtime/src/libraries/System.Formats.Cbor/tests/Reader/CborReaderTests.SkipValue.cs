@@ -64,7 +64,9 @@ namespace System.Formats.Cbor.Tests
 
         [Theory]
         [MemberData(nameof(SkipTestInvalidCborInputs))]
-        public static void SkipValue_InvalidFormat_ShouldThrowCborContentException(string hexEncoding)
+        public static void SkipValue_InvalidFormat_ShouldThrowCborContentException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -88,7 +90,9 @@ namespace System.Formats.Cbor.Tests
 
         [Theory]
         [InlineData(CborConformanceMode.Lax)]
-        public static void SkipValue_ValidationEnabled_InvalidUtf8_LaxConformance_ShouldSucceed(CborConformanceMode conformanceMode)
+        public static void SkipValue_ValidationEnabled_InvalidUtf8_LaxConformance_ShouldSucceed(
+            CborConformanceMode conformanceMode
+        )
         {
             byte[] encoding = "62f090".HexToByteArray();
             var reader = new CborReader(encoding, conformanceMode);
@@ -101,12 +105,15 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Strict)]
         [InlineData(CborConformanceMode.Canonical)]
         [InlineData(CborConformanceMode.Ctap2Canonical)]
-        public static void SkipValue_ValidationEnabled_InvalidUtf8_StrictConformance_ShouldThrowCborContentException(CborConformanceMode conformanceMode)
+        public static void SkipValue_ValidationEnabled_InvalidUtf8_StrictConformance_ShouldThrowCborContentException(
+            CborConformanceMode conformanceMode
+        )
         {
             byte[] encoding = "62f090".HexToByteArray();
             var reader = new CborReader(encoding, conformanceMode);
 
-            CborContentException exn = Assert.Throws<CborContentException>(() => reader.SkipValue());
+            CborContentException exn = Assert.Throws<CborContentException>(() => reader.SkipValue()
+            );
             Assert.NotNull(exn.InnerException);
             Assert.IsType<DecoderFallbackException>(exn.InnerException);
 
@@ -115,7 +122,10 @@ namespace System.Formats.Cbor.Tests
 
         [Theory]
         [MemberData(nameof(NonConformingSkipValueEncodings))]
-        public static void SkipValue_ValidationDisabled_NonConformingValues_ShouldSucceed(CborConformanceMode mode, string hexEncoding)
+        public static void SkipValue_ValidationDisabled_NonConformingValues_ShouldSucceed(
+            CborConformanceMode mode,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
@@ -126,7 +136,10 @@ namespace System.Formats.Cbor.Tests
 
         [Theory]
         [MemberData(nameof(NonConformingSkipValueEncodings))]
-        public static void SkipValue_ValidationEnabled_NonConformingValues_ShouldThrowCborContentException(CborConformanceMode mode, string hexEncoding)
+        public static void SkipValue_ValidationEnabled_NonConformingValues_ShouldThrowCborContentException(
+            CborConformanceMode mode,
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding, mode);
@@ -276,7 +289,9 @@ namespace System.Formats.Cbor.Tests
             Assert.Equal(CborReaderState.Finished, reader.PeekState());
         }
 
-        public static IEnumerable<object[]> SkipTestInputs => SampleCborValues.Select(x => new [] { x });
-        public static IEnumerable<object[]> SkipTestInvalidCborInputs => InvalidCborValues.Select(x => new[] { x });
+        public static IEnumerable<object[]> SkipTestInputs =>
+            SampleCborValues.Select(x => new[] { x });
+        public static IEnumerable<object[]> SkipTestInvalidCborInputs =>
+            InvalidCborValues.Select(x => new[] { x });
     }
 }

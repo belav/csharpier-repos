@@ -8,7 +8,20 @@ namespace Microsoft.AspNetCore.Routing.Matching;
 
 public class HttpMethodMatcherPolicyBenchmark
 {
-    private static string[] TestHttpMethods = ["*", HttpMethods.Get, HttpMethods.Connect, HttpMethods.Delete, HttpMethods.Head, HttpMethods.Options, HttpMethods.Patch, HttpMethods.Put, HttpMethods.Post, HttpMethods.Trace, "MERGE"];
+    private static string[] TestHttpMethods =
+    [
+        "*",
+        HttpMethods.Get,
+        HttpMethods.Connect,
+        HttpMethods.Delete,
+        HttpMethods.Head,
+        HttpMethods.Options,
+        HttpMethods.Patch,
+        HttpMethods.Put,
+        HttpMethods.Post,
+        HttpMethods.Trace,
+        "MERGE",
+    ];
     private HttpMethodMatcherPolicy _jumpTableBuilder = new();
     private List<PolicyJumpTableEdge> _edges = new();
 
@@ -20,7 +33,12 @@ public class HttpMethodMatcherPolicyBenchmark
     {
         for (int i = 0; i < DestinationCount; i++)
         {
-            _edges.Add(new PolicyJumpTableEdge(new HttpMethodMatcherPolicy.EdgeKey(TestHttpMethods[i], false), i + 1));
+            _edges.Add(
+                new PolicyJumpTableEdge(
+                    new HttpMethodMatcherPolicy.EdgeKey(TestHttpMethods[i], false),
+                    i + 1
+                )
+            );
         }
     }
 

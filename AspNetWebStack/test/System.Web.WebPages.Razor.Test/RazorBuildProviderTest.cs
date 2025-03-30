@@ -15,9 +15,7 @@ using Moq;
 
 namespace ASP
 {
-    public class _Page_Foo_Test_cshtml
-    {
-    }
+    public class _Page_Foo_Test_cshtml { }
 }
 
 namespace System.Web.WebPages.Razor.Test
@@ -76,7 +74,10 @@ namespace System.Web.WebPages.Razor.Test
         public void GetGeneratedTypeUsesNameAndNamespaceFromHostToExtractType()
         {
             // Arrange
-            WebPageRazorHost host = new WebPageRazorHost("~/Foo/Test.cshtml", @"C:\Foo\Test.cshtml");
+            WebPageRazorHost host = new WebPageRazorHost(
+                "~/Foo/Test.cshtml",
+                @"C:\Foo\Test.cshtml"
+            );
             RazorBuildProvider provider = new RazorBuildProvider() { Host = host };
             CompilerResults results = new CompilerResults(new TempFileCollection());
             results.CompiledAssembly = typeof(_Page_Foo_Test_cshtml).Assembly;
@@ -134,10 +135,16 @@ namespace System.Web.WebPages.Razor.Test
 
             // Set up the base dependency
             MockAssemblyBuilder builder = new MockAssemblyBuilder();
-            typeof(BuildProvider).GetField("_virtualPath", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(provider, CreateVirtualPath("/Samples/Foo/Baz.cshtml"));
+            typeof(BuildProvider)
+                .GetField("_virtualPath", BindingFlags.NonPublic | BindingFlags.Instance)
+                .SetValue(provider, CreateVirtualPath("/Samples/Foo/Baz.cshtml"));
 
             // Test that VirtualPathDependencies returns the original dependency before GenerateCode is called
-            Assert.True(baseDependencies.OfType<string>().SequenceEqual(provider.VirtualPathDependencies.OfType<string>()));
+            Assert.True(
+                baseDependencies
+                    .OfType<string>()
+                    .SequenceEqual(provider.VirtualPathDependencies.OfType<string>())
+            );
 
             // Act
             provider.GenerateCodeCore(builder);
@@ -145,7 +152,11 @@ namespace System.Web.WebPages.Razor.Test
             // Assert
             Assert.NotNull(provider.AssemblyBuilderInternal);
             Assert.Equal(builder, provider.AssemblyBuilderInternal);
-            Assert.True(dependencies.OfType<string>().SequenceEqual(provider.VirtualPathDependencies.OfType<string>()));
+            Assert.True(
+                dependencies
+                    .OfType<string>()
+                    .SequenceEqual(provider.VirtualPathDependencies.OfType<string>())
+            );
             Assert.Equal("/Samples/Foo/Baz.cshtml", provider.VirtualPath);
         }
 
@@ -167,9 +178,11 @@ namespace System.Web.WebPages.Razor.Test
             CodeCompileUnit generated = provider.GeneratedCode;
 
             // Assert
-            Assert.NotNull(generated.Namespaces
-                               .OfType<CodeNamespace>()
-                               .SingleOrDefault(ns => String.Equals(ns.Name, "DummyNamespace")));
+            Assert.NotNull(
+                generated
+                    .Namespaces.OfType<CodeNamespace>()
+                    .SingleOrDefault(ns => String.Equals(ns.Name, "DummyNamespace"))
+            );
         }
 
         [Fact]
@@ -181,7 +194,10 @@ namespace System.Web.WebPages.Razor.Test
             provider.Host = host;
 
             // Act
-            Assert.Throws<HttpParseException>(() => { CodeCompileUnit ccu = provider.GeneratedCode; });
+            Assert.Throws<HttpParseException>(() =>
+            {
+                CodeCompileUnit ccu = provider.GeneratedCode;
+            });
         }
 
         [Fact]
@@ -189,9 +205,14 @@ namespace System.Web.WebPages.Razor.Test
         {
             // Arrange
             WebPageRazorHost expected = new TestHost("~/Foo/Boz.cshtml", @"C:\Foo\Boz.cshtml");
-            WebPageRazorHost expectedBefore = new WebPageRazorHost("~/Foo/Baz.cshtml", @"C:\Foo\Baz.cshtml");
+            WebPageRazorHost expectedBefore = new WebPageRazorHost(
+                "~/Foo/Baz.cshtml",
+                @"C:\Foo\Baz.cshtml"
+            );
             RazorBuildProvider provider = CreateBuildProvider("foo");
-            typeof(BuildProvider).GetField("_virtualPath", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(provider, CreateVirtualPath("/Samples/Foo/Baz.cshtml"));
+            typeof(BuildProvider)
+                .GetField("_virtualPath", BindingFlags.NonPublic | BindingFlags.Instance)
+                .SetValue(provider, CreateVirtualPath("/Samples/Foo/Baz.cshtml"));
             Mock.Get(provider).Setup(p => p.GetHostFromConfig()).Returns(expectedBefore);
             bool called = false;
             EventHandler<CompilingPathEventArgs> handler = (sender, args) =>
@@ -222,7 +243,10 @@ namespace System.Web.WebPages.Razor.Test
         private static object CreateVirtualPath(string path)
         {
             var vPath = typeof(BuildProvider).Assembly.GetType("System.Web.VirtualPath");
-            var method = vPath.GetMethod("CreateNonRelative", BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+            var method = vPath.GetMethod(
+                "CreateNonRelative",
+                BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public
+            );
             return method.Invoke(null, new object[] { path });
         }
 
@@ -230,18 +254,22 @@ namespace System.Web.WebPages.Razor.Test
         {
             Mock<RazorBuildProvider> mockProvider = new Mock<RazorBuildProvider>()
             {
-                CallBase = true
+                CallBase = true,
             };
-            mockProvider.Setup(p => p.InternalOpenReader())
+            mockProvider
+                .Setup(p => p.InternalOpenReader())
                 .Returns(() => new StringReader(razorContent));
             return mockProvider.Object;
         }
 
         private class TestHost : WebPageRazorHost
         {
-            public TestHost(string virtualPath, string physicalPath) : base(virtualPath, physicalPath) { }
+            public TestHost(string virtualPath, string physicalPath)
+                : base(virtualPath, physicalPath) { }
 
-            public override void PostProcessGeneratedCode(Web.Razor.Generator.CodeGeneratorContext context)
+            public override void PostProcessGeneratedCode(
+                Web.Razor.Generator.CodeGeneratorContext context
+            )
             {
                 context.CompileUnit.Namespaces.Insert(0, new CodeNamespace("Test"));
             }

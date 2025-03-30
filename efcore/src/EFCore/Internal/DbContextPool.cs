@@ -35,13 +35,19 @@ public class DbContextPool<TContext> : IDbContextPool<TContext>, IDisposable, IA
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public DbContextPool(DbContextOptions<TContext> options, IServiceProvider? serviceProvider = default)
+    public DbContextPool(
+        DbContextOptions<TContext> options,
+        IServiceProvider? serviceProvider = default
+    )
     {
         _maxSize = options.FindExtension<CoreOptionsExtension>()?.MaxPoolSize ?? DefaultPoolSize;
 
         if (_maxSize <= 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(CoreOptionsExtension.MaxPoolSize), CoreStrings.InvalidPoolSize);
+            throw new ArgumentOutOfRangeException(
+                nameof(CoreOptionsExtension.MaxPoolSize),
+                CoreStrings.InvalidPoolSize
+            );
         }
 
         options.Freeze();
@@ -49,29 +55,49 @@ public class DbContextPool<TContext> : IDbContextPool<TContext>, IDisposable, IA
         _activator = CreateActivator(options, serviceProvider);
     }
 
-    private static Func<DbContext> CreateActivator(DbContextOptions<TContext> options, IServiceProvider? serviceProvider)
+    private static Func<DbContext> CreateActivator(
+        DbContextOptions<TContext> options,
+        IServiceProvider? serviceProvider
+    )
     {
-        var constructors = typeof(TContext).GetTypeInfo().DeclaredConstructors
-            .Where(c => c is { IsStatic: false, IsPublic: true } && c.GetParameters().Length > 0).ToArray();
+        var constructors = typeof(TContext)
+            .GetTypeInfo()
+            .DeclaredConstructors.Where(c =>
+                c is { IsStatic: false, IsPublic: true } && c.GetParameters().Length > 0
+            )
+            .ToArray();
 
-        if (constructors.Length == 1
+        if (
+            constructors.Length == 1
             && constructors[0].GetParameters() is { } parameters
-            && parameters.Any(p => p.ParameterType == typeof(DbContextOptions) || p.ParameterType == typeof(DbContextOptions<TContext>)))
+            && parameters.Any(p =>
+                p.ParameterType == typeof(DbContextOptions)
+                || p.ParameterType == typeof(DbContextOptions<TContext>)
+            )
+        )
         {
             if (parameters.Length == 1)
             {
-                return Expression.Lambda<Func<TContext>>(Expression.New(constructors[0], Expression.Constant(options))).Compile();
+                return Expression
+                    .Lambda<Func<TContext>>(
+                        Expression.New(constructors[0], Expression.Constant(options))
+                    )
+                    .Compile();
             }
 
             if (serviceProvider is not null)
             {
-                var factory = ActivatorUtilities.CreateFactory<TContext>(new[] { typeof(DbContextOptions<TContext>) });
+                var factory = ActivatorUtilities.CreateFactory<TContext>(
+                    new[] { typeof(DbContextOptions<TContext>) }
+                );
                 var activatorParameters = new object[] { options };
                 return () => factory.Invoke(serviceProvider, activatorParameters);
             }
         }
 
-        throw new InvalidOperationException(CoreStrings.PoolingContextCtorError(typeof(TContext).ShortDisplayName()));
+        throw new InvalidOperationException(
+            CoreStrings.PoolingContextCtorError(typeof(TContext).ShortDisplayName())
+        );
     }
 
     /// <summary>
@@ -124,7 +150,10 @@ public class DbContextPool<TContext> : IDbContextPool<TContext>, IDisposable, IA
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual async ValueTask ReturnAsync(IDbContextPoolable context, CancellationToken cancellationToken = default)
+    public virtual async ValueTask ReturnAsync(
+        IDbContextPoolable context,
+        CancellationToken cancellationToken = default
+    )
     {
         if (Interlocked.Increment(ref _count) <= _maxSize)
         {

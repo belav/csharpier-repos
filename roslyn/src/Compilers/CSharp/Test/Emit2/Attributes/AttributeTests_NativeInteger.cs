@@ -20,15 +20,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class AttributeTests_NativeInteger : CSharpTestBase
     {
-        private static readonly SymbolDisplayFormat FormatWithSpecialTypes = SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+        private static readonly SymbolDisplayFormat FormatWithSpecialTypes =
+            SymbolDisplayFormat.TestFormat.WithMiscellaneousOptions(
+                SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
         [Fact]
         public void EmptyProject()
         {
             var source = @"";
             var comp = CreateCompilation(source);
-            var expected =
-@"";
+            var expected = @"";
             AssertNativeIntegerAttributes(comp, expected);
         }
 
@@ -36,23 +38,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void ExplicitAttribute_FromSource()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     public nint F1;
     public nuint[] F2;
 }";
             var comp = CreateCompilation(new[] { NativeIntegerAttributeDefinition, source });
             var expected =
-@"Program
+                @"Program
     [NativeInteger] System.IntPtr F1
     [NativeInteger] System.UIntPtr[] F2
 ";
-            CompileAndVerify(comp, symbolValidator: module =>
-            {
-                var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>("System.Runtime.CompilerServices.NativeIntegerAttribute");
-                Assert.NotNull(attributeType);
-                AssertNativeIntegerAttributes(module, expected);
-            });
+            CompileAndVerify(
+                comp,
+                symbolValidator: module =>
+                {
+                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                        "System.Runtime.CompilerServices.NativeIntegerAttribute"
+                    );
+                    Assert.NotNull(attributeType);
+                    AssertNativeIntegerAttributes(module, expected);
+                }
+            );
         }
 
         [Fact]
@@ -63,30 +70,39 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var ref0 = comp.EmitToImageReference();
 
             var source =
-@"public class Program
+                @"public class Program
 {
     public nint F1;
     public nuint[] F2;
 }";
-            comp = CreateCompilation(source, references: new[] { ref0 }, parseOptions: TestOptions.Regular9);
+            comp = CreateCompilation(
+                source,
+                references: new[] { ref0 },
+                parseOptions: TestOptions.Regular9
+            );
             var expected =
-@"Program
+                @"Program
     [NativeInteger] System.IntPtr F1
     [NativeInteger] System.UIntPtr[] F2
 ";
-            CompileAndVerify(comp, symbolValidator: module =>
-            {
-                var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>("System.Runtime.CompilerServices.NativeIntegerAttribute");
-                Assert.Null(attributeType);
-                AssertNativeIntegerAttributes(module, expected);
-            });
+            CompileAndVerify(
+                comp,
+                symbolValidator: module =>
+                {
+                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                        "System.Runtime.CompilerServices.NativeIntegerAttribute"
+                    );
+                    Assert.Null(attributeType);
+                    AssertNativeIntegerAttributes(module, expected);
+                }
+            );
         }
 
         [Fact]
         public void ExplicitAttribute_MissingEmptyConstructor()
         {
             var source1 =
-@"namespace System.Runtime.CompilerServices
+                @"namespace System.Runtime.CompilerServices
 {
     public sealed class NativeIntegerAttribute : Attribute
     {
@@ -94,52 +110,80 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     }
 }";
             var source2 =
-@"public class Program
+                @"public class Program
 {
     public nint F1;
     public nuint[] F2;
 }";
-            var comp = CreateCompilation(new[] { source1, source2 }, parseOptions: TestOptions.Regular9);
+            var comp = CreateCompilation(
+                new[] { source1, source2 },
+                parseOptions: TestOptions.Regular9
+            );
             comp.VerifyEmitDiagnostics(
                 // (3,17): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NativeIntegerAttribute..ctor'
                 //     public nint F1;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F1").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute", ".ctor").WithLocation(3, 17),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F1")
+                    .WithArguments(
+                        "System.Runtime.CompilerServices.NativeIntegerAttribute",
+                        ".ctor"
+                    )
+                    .WithLocation(3, 17),
                 // (4,20): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NativeIntegerAttribute..ctor'
                 //     public nuint[] F2;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F2").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute", ".ctor").WithLocation(4, 20));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F2")
+                    .WithArguments(
+                        "System.Runtime.CompilerServices.NativeIntegerAttribute",
+                        ".ctor"
+                    )
+                    .WithLocation(4, 20)
+            );
         }
 
         [Fact]
         public void ExplicitAttribute_MissingConstructor()
         {
             var source1 =
-@"namespace System.Runtime.CompilerServices
+                @"namespace System.Runtime.CompilerServices
 {
     public sealed class NativeIntegerAttribute : Attribute
     {
     }
 }";
             var source2 =
-@"public class Program
+                @"public class Program
 {
     public nint F1;
     public nuint[] F2;
 }";
-            var comp = CreateCompilation(new[] { source1, source2 }, parseOptions: TestOptions.Regular9);
+            var comp = CreateCompilation(
+                new[] { source1, source2 },
+                parseOptions: TestOptions.Regular9
+            );
             comp.VerifyEmitDiagnostics(
                 // (3,17): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NativeIntegerAttribute..ctor'
                 //     public nint F1;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F1").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute", ".ctor").WithLocation(3, 17),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F1")
+                    .WithArguments(
+                        "System.Runtime.CompilerServices.NativeIntegerAttribute",
+                        ".ctor"
+                    )
+                    .WithLocation(3, 17),
                 // (4,20): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NativeIntegerAttribute..ctor'
                 //     public nuint[] F2;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F2").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute", ".ctor").WithLocation(4, 20));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "F2")
+                    .WithArguments(
+                        "System.Runtime.CompilerServices.NativeIntegerAttribute",
+                        ".ctor"
+                    )
+                    .WithLocation(4, 20)
+            );
         }
 
         [Fact]
         public void ExplicitAttribute_ReferencedInSource()
         {
             var sourceAttribute =
-@"namespace System.Runtime.CompilerServices
+                @"namespace System.Runtime.CompilerServices
 {
     internal class NativeIntegerAttribute : Attribute
     {
@@ -148,7 +192,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     }
 }";
             var source =
-@"#pragma warning disable 67
+                @"#pragma warning disable 67
 #pragma warning disable 169
 using System;
 using System.Runtime.CompilerServices;
@@ -162,10 +206,16 @@ using System.Runtime.CompilerServices;
     static void M3([NativeInteger]object arg) { }
 }";
 
-            var comp = CreateCompilation(new[] { sourceAttribute, source }, parseOptions: TestOptions.Regular8);
+            var comp = CreateCompilation(
+                new[] { sourceAttribute, source },
+                parseOptions: TestOptions.Regular8
+            );
             verifyDiagnostics(comp);
 
-            comp = CreateCompilation(new[] { sourceAttribute, source }, parseOptions: TestOptions.Regular9);
+            comp = CreateCompilation(
+                new[] { sourceAttribute, source },
+                parseOptions: TestOptions.Regular9
+            );
             verifyDiagnostics(comp);
 
             static void verifyDiagnostics(CSharpCompilation comp)
@@ -173,22 +223,38 @@ using System.Runtime.CompilerServices;
                 comp.VerifyDiagnostics(
                     // (5,2): error CS8335: Do not use 'System.Runtime.CompilerServices.NativeIntegerAttribute'. This is reserved for compiler usage.
                     // [NativeInteger] class Program
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NativeInteger").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute").WithLocation(5, 2),
+                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NativeInteger")
+                        .WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute")
+                        .WithLocation(5, 2),
                     // (7,6): error CS8335: Do not use 'System.Runtime.CompilerServices.NativeIntegerAttribute'. This is reserved for compiler usage.
                     //     [NativeInteger] IntPtr F;
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NativeInteger").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute").WithLocation(7, 6),
+                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NativeInteger")
+                        .WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute")
+                        .WithLocation(7, 6),
                     // (8,6): error CS8335: Do not use 'System.Runtime.CompilerServices.NativeIntegerAttribute'. This is reserved for compiler usage.
                     //     [NativeInteger] event EventHandler E;
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NativeInteger").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute").WithLocation(8, 6),
+                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NativeInteger")
+                        .WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute")
+                        .WithLocation(8, 6),
                     // (9,6): error CS8335: Do not use 'System.Runtime.CompilerServices.NativeIntegerAttribute'. This is reserved for compiler usage.
                     //     [NativeInteger] object P { get; }
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NativeInteger").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute").WithLocation(9, 6),
+                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NativeInteger")
+                        .WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute")
+                        .WithLocation(9, 6),
                     // (11,14): error CS8335: Do not use 'System.Runtime.CompilerServices.NativeIntegerAttribute'. This is reserved for compiler usage.
                     //     [return: NativeInteger(new[] { false, true })] static UIntPtr[] M2() => throw null;
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NativeInteger(new[] { false, true })").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute").WithLocation(11, 14),
+                    Diagnostic(
+                            ErrorCode.ERR_ExplicitReservedAttr,
+                            "NativeInteger(new[] { false, true })"
+                        )
+                        .WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute")
+                        .WithLocation(11, 14),
                     // (12,21): error CS8335: Do not use 'System.Runtime.CompilerServices.NativeIntegerAttribute'. This is reserved for compiler usage.
                     //     static void M3([NativeInteger]object arg) { }
-                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NativeInteger").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute").WithLocation(12, 21));
+                    Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NativeInteger")
+                        .WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute")
+                        .WithLocation(12, 21)
+                );
             }
         }
 
@@ -196,7 +262,7 @@ using System.Runtime.CompilerServices;
         public void MissingAttributeUsageAttribute()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     public nint F1;
     public nuint[] F2;
@@ -205,18 +271,25 @@ using System.Runtime.CompilerServices;
             comp.MakeTypeMissing(WellKnownType.System_AttributeUsageAttribute);
             comp.VerifyEmitDiagnostics(
                 // error CS0656: Missing compiler required member 'System.AttributeUsageAttribute..ctor'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember).WithArguments("System.AttributeUsageAttribute", ".ctor").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                    .WithArguments("System.AttributeUsageAttribute", ".ctor")
+                    .WithLocation(1, 1),
                 // error CS0656: Missing compiler required member 'System.AttributeUsageAttribute.AllowMultiple'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember).WithArguments("System.AttributeUsageAttribute", "AllowMultiple").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                    .WithArguments("System.AttributeUsageAttribute", "AllowMultiple")
+                    .WithLocation(1, 1),
                 // error CS0656: Missing compiler required member 'System.AttributeUsageAttribute.Inherited'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember).WithArguments("System.AttributeUsageAttribute", "Inherited").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                    .WithArguments("System.AttributeUsageAttribute", "Inherited")
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]
         public void Metadata_ZeroElements()
         {
             var source0 =
-@".class private System.Runtime.CompilerServices.NativeIntegerAttribute extends [mscorlib]System.Attribute
+                @".class private System.Runtime.CompilerServices.NativeIntegerAttribute extends [mscorlib]System.Attribute
 {
   .method public hidebysig specialname rtspecialname instance void .ctor() cil managed { ret }
   .method public hidebysig specialname rtspecialname instance void .ctor(bool[] b) cil managed { ret }
@@ -244,7 +317,7 @@ using System.Runtime.CompilerServices;
 }";
             var ref0 = CompileIL(source0);
             var source1 =
-@"class Program
+                @"class Program
 {
     static void F()
     {
@@ -253,34 +326,54 @@ using System.Runtime.CompilerServices;
     }
 }";
 
-            var comp = CreateCompilation(source1, new[] { ref0 }, parseOptions: TestOptions.Regular8);
+            var comp = CreateCompilation(
+                source1,
+                new[] { ref0 },
+                parseOptions: TestOptions.Regular8
+            );
             comp.VerifyDiagnostics(
                 // (5,11): error CS0570: 'B.F0(?, ?)' is not supported by the language
                 //         B.F0(default, default);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F0").WithArguments("B.F0(?, ?)").WithLocation(5, 11),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F0")
+                    .WithArguments("B.F0(?, ?)")
+                    .WithLocation(5, 11),
                 // (6,11): error CS0570: 'B.F1(?)' is not supported by the language
                 //         B.F1(new A<System.IntPtr, System.UIntPtr>());
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F1").WithArguments("B.F1(?)").WithLocation(6, 11));
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F1")
+                    .WithArguments("B.F1(?)")
+                    .WithLocation(6, 11)
+            );
             verify(comp);
 
             comp = CreateCompilation(source1, new[] { ref0 }, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(
                 // (5,11): error CS0570: 'B.F0(?, ?)' is not supported by the language
                 //         B.F0(default, default);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F0").WithArguments("B.F0(?, ?)").WithLocation(5, 11),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F0")
+                    .WithArguments("B.F0(?, ?)")
+                    .WithLocation(5, 11),
                 // (6,11): error CS0570: 'B.F1(?)' is not supported by the language
                 //         B.F1(new A<System.IntPtr, System.UIntPtr>());
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F1").WithArguments("B.F1(?)").WithLocation(6, 11));
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F1")
+                    .WithArguments("B.F1(?)")
+                    .WithLocation(6, 11)
+            );
             verify(comp);
 
             static void verify(CSharpCompilation comp)
             {
                 var type = comp.GetTypeByMetadataName("B");
-                Assert.Equal("void B.F0( x,  y)", type.GetMember("F0").ToDisplayString(FormatWithSpecialTypes));
-                Assert.Equal("void B.F1( a)", type.GetMember("F1").ToDisplayString(FormatWithSpecialTypes));
+                Assert.Equal(
+                    "void B.F0( x,  y)",
+                    type.GetMember("F0").ToDisplayString(FormatWithSpecialTypes)
+                );
+                Assert.Equal(
+                    "void B.F1( a)",
+                    type.GetMember("F1").ToDisplayString(FormatWithSpecialTypes)
+                );
 
                 var expected =
-    @"B
+                    @"B
     void F0(? x, ? y)
         [NativeInteger({  })] ? x
         [NativeInteger({  })] ? y
@@ -295,7 +388,7 @@ using System.Runtime.CompilerServices;
         public void Metadata_OneElementFalse()
         {
             var source0 =
-@".class private System.Runtime.CompilerServices.NativeIntegerAttribute extends [mscorlib]System.Attribute
+                @".class private System.Runtime.CompilerServices.NativeIntegerAttribute extends [mscorlib]System.Attribute
 {
   .method public hidebysig specialname rtspecialname instance void .ctor() cil managed { ret }
   .method public hidebysig specialname rtspecialname instance void .ctor(bool[] b) cil managed { ret }
@@ -329,7 +422,7 @@ using System.Runtime.CompilerServices;
 }";
             var ref0 = CompileIL(source0);
             var source1 =
-@"class Program
+                @"class Program
 {
     static void F()
     {
@@ -339,7 +432,11 @@ using System.Runtime.CompilerServices;
     }
 }";
 
-            var comp = CreateCompilation(source1, new[] { ref0 }, parseOptions: TestOptions.Regular8);
+            var comp = CreateCompilation(
+                source1,
+                new[] { ref0 },
+                parseOptions: TestOptions.Regular8
+            );
             comp.VerifyDiagnostics();
             verify(comp);
 
@@ -350,12 +447,21 @@ using System.Runtime.CompilerServices;
             static void verify(CSharpCompilation comp)
             {
                 var type = comp.GetTypeByMetadataName("B");
-                Assert.Equal("void B.F0(System.IntPtr x, System.UIntPtr y)", type.GetMember("F0").ToDisplayString(FormatWithSpecialTypes));
-                Assert.Equal("void B.F1(A<int, System.UIntPtr> a)", type.GetMember("F1").ToDisplayString(FormatWithSpecialTypes));
-                Assert.Equal("void B.F2(A<System.IntPtr, uint> a)", type.GetMember("F2").ToDisplayString(FormatWithSpecialTypes));
+                Assert.Equal(
+                    "void B.F0(System.IntPtr x, System.UIntPtr y)",
+                    type.GetMember("F0").ToDisplayString(FormatWithSpecialTypes)
+                );
+                Assert.Equal(
+                    "void B.F1(A<int, System.UIntPtr> a)",
+                    type.GetMember("F1").ToDisplayString(FormatWithSpecialTypes)
+                );
+                Assert.Equal(
+                    "void B.F2(A<System.IntPtr, uint> a)",
+                    type.GetMember("F2").ToDisplayString(FormatWithSpecialTypes)
+                );
 
                 var expected =
-    @"B
+                    @"B
     void F0(System.IntPtr x, System.UIntPtr y)
         [NativeInteger({ False })] System.IntPtr x
         [NativeInteger({ False })] System.UIntPtr y
@@ -372,7 +478,7 @@ using System.Runtime.CompilerServices;
         public void Metadata_OneElementTrue()
         {
             var source0 =
-@".class private System.Runtime.CompilerServices.NativeIntegerAttribute extends [mscorlib]System.Attribute
+                @".class private System.Runtime.CompilerServices.NativeIntegerAttribute extends [mscorlib]System.Attribute
 {
   .method public hidebysig specialname rtspecialname instance void .ctor() cil managed { ret }
   .method public hidebysig specialname rtspecialname instance void .ctor(bool[] b) cil managed { ret }
@@ -406,7 +512,7 @@ using System.Runtime.CompilerServices;
 }";
             var ref0 = CompileIL(source0);
             var source1 =
-@"class Program
+                @"class Program
 {
     static void F()
     {
@@ -416,14 +522,23 @@ using System.Runtime.CompilerServices;
     }
 }";
 
-            var comp = CreateCompilation(source1, new[] { ref0 }, parseOptions: TestOptions.Regular8);
+            var comp = CreateCompilation(
+                source1,
+                new[] { ref0 },
+                parseOptions: TestOptions.Regular8
+            );
             comp.VerifyDiagnostics(
                 // (6,25): error CS8400: Feature 'native-sized integers' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //         B.F1(new A<int, nuint>());
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "nuint").WithArguments("native-sized integers", "9.0").WithLocation(6, 25),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "nuint")
+                    .WithArguments("native-sized integers", "9.0")
+                    .WithLocation(6, 25),
                 // (7,20): error CS8400: Feature 'native-sized integers' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //         B.F2(new A<nint, uint>());
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "nint").WithArguments("native-sized integers", "9.0").WithLocation(7, 20));
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "nint")
+                    .WithArguments("native-sized integers", "9.0")
+                    .WithLocation(7, 20)
+            );
             verify(comp);
 
             comp = CreateCompilation(source1, new[] { ref0 }, parseOptions: TestOptions.Regular9);
@@ -433,12 +548,21 @@ using System.Runtime.CompilerServices;
             static void verify(CSharpCompilation comp)
             {
                 var type = comp.GetTypeByMetadataName("B");
-                Assert.Equal("void B.F0(nint x, nuint y)", type.GetMember("F0").ToDisplayString(FormatWithSpecialTypes));
-                Assert.Equal("void B.F1(A<int, nuint> a)", type.GetMember("F1").ToDisplayString(FormatWithSpecialTypes));
-                Assert.Equal("void B.F2(A<nint, uint> a)", type.GetMember("F2").ToDisplayString(FormatWithSpecialTypes));
+                Assert.Equal(
+                    "void B.F0(nint x, nuint y)",
+                    type.GetMember("F0").ToDisplayString(FormatWithSpecialTypes)
+                );
+                Assert.Equal(
+                    "void B.F1(A<int, nuint> a)",
+                    type.GetMember("F1").ToDisplayString(FormatWithSpecialTypes)
+                );
+                Assert.Equal(
+                    "void B.F2(A<nint, uint> a)",
+                    type.GetMember("F2").ToDisplayString(FormatWithSpecialTypes)
+                );
 
                 var expected =
-    @"B
+                    @"B
     void F0(System.IntPtr x, System.UIntPtr y)
         [NativeInteger({ True })] System.IntPtr x
         [NativeInteger({ True })] System.UIntPtr y
@@ -455,7 +579,7 @@ using System.Runtime.CompilerServices;
         public void Metadata_AllFalse()
         {
             var source0 =
-@".class private System.Runtime.CompilerServices.NativeIntegerAttribute extends [mscorlib]System.Attribute
+                @".class private System.Runtime.CompilerServices.NativeIntegerAttribute extends [mscorlib]System.Attribute
 {
   .method public hidebysig specialname rtspecialname instance void .ctor() cil managed { ret }
   .method public hidebysig specialname rtspecialname instance void .ctor(bool[] b) cil managed { ret }
@@ -489,7 +613,7 @@ using System.Runtime.CompilerServices;
 }";
             var ref0 = CompileIL(source0);
             var source1 =
-@"class Program
+                @"class Program
 {
     static void F()
     {
@@ -499,7 +623,11 @@ using System.Runtime.CompilerServices;
     }
 }";
 
-            var comp = CreateCompilation(source1, new[] { ref0 }, parseOptions: TestOptions.Regular8);
+            var comp = CreateCompilation(
+                source1,
+                new[] { ref0 },
+                parseOptions: TestOptions.Regular8
+            );
             comp.VerifyDiagnostics();
             verify(comp);
 
@@ -510,12 +638,21 @@ using System.Runtime.CompilerServices;
             static void verify(CSharpCompilation comp)
             {
                 var type = comp.GetTypeByMetadataName("B");
-                Assert.Equal("void B.F0(System.IntPtr x, System.UIntPtr y)", type.GetMember("F0").ToDisplayString(FormatWithSpecialTypes));
-                Assert.Equal("void B.F1(A<int, System.UIntPtr> a)", type.GetMember("F1").ToDisplayString(FormatWithSpecialTypes));
-                Assert.Equal("void B.F2(A<System.IntPtr, System.UIntPtr> a)", type.GetMember("F2").ToDisplayString(FormatWithSpecialTypes));
+                Assert.Equal(
+                    "void B.F0(System.IntPtr x, System.UIntPtr y)",
+                    type.GetMember("F0").ToDisplayString(FormatWithSpecialTypes)
+                );
+                Assert.Equal(
+                    "void B.F1(A<int, System.UIntPtr> a)",
+                    type.GetMember("F1").ToDisplayString(FormatWithSpecialTypes)
+                );
+                Assert.Equal(
+                    "void B.F2(A<System.IntPtr, System.UIntPtr> a)",
+                    type.GetMember("F2").ToDisplayString(FormatWithSpecialTypes)
+                );
 
                 var expected =
-    @"B
+                    @"B
     void F0(System.IntPtr x, System.UIntPtr y)
         [NativeInteger({ False })] System.IntPtr x
         [NativeInteger({ False })] System.UIntPtr y
@@ -532,7 +669,7 @@ using System.Runtime.CompilerServices;
         public void Metadata_TooFewAndTooManyTransformFlags()
         {
             var source0 =
-@".class private System.Runtime.CompilerServices.NativeIntegerAttribute extends [mscorlib]System.Attribute
+                @".class private System.Runtime.CompilerServices.NativeIntegerAttribute extends [mscorlib]System.Attribute
 {
   .method public hidebysig specialname rtspecialname instance void .ctor() cil managed { ret }
   .method public hidebysig specialname rtspecialname instance void .ctor(bool[] b) cil managed { ret }
@@ -575,7 +712,7 @@ using System.Runtime.CompilerServices;
 }";
             var ref0 = CompileIL(source0);
             var source1 =
-@"class Program
+                @"class Program
 {
     static void F(A<nint, nuint> a)
     {
@@ -587,55 +724,96 @@ using System.Runtime.CompilerServices;
     }
 }";
 
-            var comp = CreateCompilation(source1, new[] { ref0 }, parseOptions: TestOptions.Regular8);
+            var comp = CreateCompilation(
+                source1,
+                new[] { ref0 },
+                parseOptions: TestOptions.Regular8
+            );
             comp.VerifyDiagnostics(
                 // (3,21): error CS8400: Feature 'native-sized integers' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //     static void F(A<nint, nuint> a)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "nint").WithArguments("native-sized integers", "9.0").WithLocation(3, 21),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "nint")
+                    .WithArguments("native-sized integers", "9.0")
+                    .WithLocation(3, 21),
                 // (3,27): error CS8400: Feature 'native-sized integers' is not available in C# 8.0. Please use language version 9.0 or greater.
                 //     static void F(A<nint, nuint> a)
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "nuint").WithArguments("native-sized integers", "9.0").WithLocation(3, 27),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "nuint")
+                    .WithArguments("native-sized integers", "9.0")
+                    .WithLocation(3, 27),
                 // (5,11): error CS0570: 'B.F(?)' is not supported by the language
                 //         B.F(a);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F").WithArguments("B.F(?)").WithLocation(5, 11),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F")
+                    .WithArguments("B.F(?)")
+                    .WithLocation(5, 11),
                 // (6,11): error CS0570: 'B.F0(?)' is not supported by the language
                 //         B.F0(a);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F0").WithArguments("B.F0(?)").WithLocation(6, 11),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F0")
+                    .WithArguments("B.F0(?)")
+                    .WithLocation(6, 11),
                 // (7,11): error CS0570: 'B.F1(?)' is not supported by the language
                 //         B.F1(a);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F1").WithArguments("B.F1(?)").WithLocation(7, 11),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F1")
+                    .WithArguments("B.F1(?)")
+                    .WithLocation(7, 11),
                 // (9,11): error CS0570: 'B.F3(?)' is not supported by the language
                 //         B.F3(a);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F3").WithArguments("B.F3(?)").WithLocation(9, 11));
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F3")
+                    .WithArguments("B.F3(?)")
+                    .WithLocation(9, 11)
+            );
             verify(comp);
 
             comp = CreateCompilation(source1, new[] { ref0 }, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(
                 // (5,11): error CS0570: 'B.F(?)' is not supported by the language
                 //         B.F(a);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F").WithArguments("B.F(?)").WithLocation(5, 11),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F")
+                    .WithArguments("B.F(?)")
+                    .WithLocation(5, 11),
                 // (6,11): error CS0570: 'B.F0(?)' is not supported by the language
                 //         B.F0(a);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F0").WithArguments("B.F0(?)").WithLocation(6, 11),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F0")
+                    .WithArguments("B.F0(?)")
+                    .WithLocation(6, 11),
                 // (7,11): error CS0570: 'B.F1(?)' is not supported by the language
                 //         B.F1(a);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F1").WithArguments("B.F1(?)").WithLocation(7, 11),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F1")
+                    .WithArguments("B.F1(?)")
+                    .WithLocation(7, 11),
                 // (9,11): error CS0570: 'B.F3(?)' is not supported by the language
                 //         B.F3(a);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F3").WithArguments("B.F3(?)").WithLocation(9, 11));
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F3")
+                    .WithArguments("B.F3(?)")
+                    .WithLocation(9, 11)
+            );
             verify(comp);
 
             static void verify(CSharpCompilation comp)
             {
                 var type = comp.GetTypeByMetadataName("B");
-                Assert.Equal("void B.F( a)", type.GetMember("F").ToDisplayString(FormatWithSpecialTypes));
-                Assert.Equal("void B.F0( a)", type.GetMember("F0").ToDisplayString(FormatWithSpecialTypes));
-                Assert.Equal("void B.F1( a)", type.GetMember("F1").ToDisplayString(FormatWithSpecialTypes));
-                Assert.Equal("void B.F2(A<System.IntPtr, nuint> a)", type.GetMember("F2").ToDisplayString(FormatWithSpecialTypes));
-                Assert.Equal("void B.F3( a)", type.GetMember("F3").ToDisplayString(FormatWithSpecialTypes));
+                Assert.Equal(
+                    "void B.F( a)",
+                    type.GetMember("F").ToDisplayString(FormatWithSpecialTypes)
+                );
+                Assert.Equal(
+                    "void B.F0( a)",
+                    type.GetMember("F0").ToDisplayString(FormatWithSpecialTypes)
+                );
+                Assert.Equal(
+                    "void B.F1( a)",
+                    type.GetMember("F1").ToDisplayString(FormatWithSpecialTypes)
+                );
+                Assert.Equal(
+                    "void B.F2(A<System.IntPtr, nuint> a)",
+                    type.GetMember("F2").ToDisplayString(FormatWithSpecialTypes)
+                );
+                Assert.Equal(
+                    "void B.F3( a)",
+                    type.GetMember("F3").ToDisplayString(FormatWithSpecialTypes)
+                );
 
                 var expected =
-    @"B
+                    @"B
     void F(? a)
         [NativeInteger] ? a
     void F0(? a)
@@ -655,7 +833,7 @@ using System.Runtime.CompilerServices;
         public void Metadata_UnexpectedTarget()
         {
             var source0 =
-@".class private System.Runtime.CompilerServices.NativeIntegerAttribute extends [mscorlib]System.Attribute
+                @".class private System.Runtime.CompilerServices.NativeIntegerAttribute extends [mscorlib]System.Attribute
 {
   .method public hidebysig specialname rtspecialname instance void .ctor() cil managed { ret }
   .method public hidebysig specialname rtspecialname instance void .ctor(bool[] b) cil managed { ret }
@@ -692,7 +870,7 @@ using System.Runtime.CompilerServices;
 }";
             var ref0 = CompileIL(source0);
             var source1 =
-@"class Program
+                @"class Program
 {
     static void F()
     {
@@ -703,46 +881,78 @@ using System.Runtime.CompilerServices;
     }
 }";
 
-            var comp = CreateCompilation(source1, new[] { ref0 }, parseOptions: TestOptions.Regular8);
+            var comp = CreateCompilation(
+                source1,
+                new[] { ref0 },
+                parseOptions: TestOptions.Regular8
+            );
             comp.VerifyDiagnostics(
                 // (5,11): error CS0570: 'B.F1(?)' is not supported by the language
                 //         B.F1(default);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F1").WithArguments("B.F1(?)").WithLocation(5, 11),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F1")
+                    .WithArguments("B.F1(?)")
+                    .WithLocation(5, 11),
                 // (6,11): error CS0570: 'B.F2(?)' is not supported by the language
                 //         B.F2(default);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F2").WithArguments("B.F2(?)").WithLocation(6, 11),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F2")
+                    .WithArguments("B.F2(?)")
+                    .WithLocation(6, 11),
                 // (7,11): error CS0570: 'B.F3(?)' is not supported by the language
                 //         B.F3(default);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F3").WithArguments("B.F3(?)").WithLocation(7, 11),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F3")
+                    .WithArguments("B.F3(?)")
+                    .WithLocation(7, 11),
                 // (8,11): error CS0570: 'B.F4(?)' is not supported by the language
                 //         B.F4(default);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F4").WithArguments("B.F4(?)").WithLocation(8, 11)
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F4")
+                    .WithArguments("B.F4(?)")
+                    .WithLocation(8, 11)
             );
 
             comp = CreateCompilation(source1, new[] { ref0 }, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(
                 // (5,11): error CS0570: 'B.F1(?)' is not supported by the language
                 //         B.F1(default);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F1").WithArguments("B.F1(?)").WithLocation(5, 11),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F1")
+                    .WithArguments("B.F1(?)")
+                    .WithLocation(5, 11),
                 // (6,11): error CS0570: 'B.F2(?)' is not supported by the language
                 //         B.F2(default);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F2").WithArguments("B.F2(?)").WithLocation(6, 11),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F2")
+                    .WithArguments("B.F2(?)")
+                    .WithLocation(6, 11),
                 // (7,11): error CS0570: 'B.F3(?)' is not supported by the language
                 //         B.F3(default);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F3").WithArguments("B.F3(?)").WithLocation(7, 11),
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F3")
+                    .WithArguments("B.F3(?)")
+                    .WithLocation(7, 11),
                 // (8,11): error CS0570: 'B.F4(?)' is not supported by the language
                 //         B.F4(default);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "F4").WithArguments("B.F4(?)").WithLocation(8, 11)
+                Diagnostic(ErrorCode.ERR_BindToBogus, "F4")
+                    .WithArguments("B.F4(?)")
+                    .WithLocation(8, 11)
             );
 
             var type = comp.GetTypeByMetadataName("B");
-            Assert.Equal("void B.F1( w)", type.GetMember("F1").ToDisplayString(FormatWithSpecialTypes));
-            Assert.Equal("void B.F2( x)", type.GetMember("F2").ToDisplayString(FormatWithSpecialTypes));
-            Assert.Equal("void B.F3( y)", type.GetMember("F3").ToDisplayString(FormatWithSpecialTypes));
-            Assert.Equal("void B.F4( z)", type.GetMember("F4").ToDisplayString(FormatWithSpecialTypes));
+            Assert.Equal(
+                "void B.F1( w)",
+                type.GetMember("F1").ToDisplayString(FormatWithSpecialTypes)
+            );
+            Assert.Equal(
+                "void B.F2( x)",
+                type.GetMember("F2").ToDisplayString(FormatWithSpecialTypes)
+            );
+            Assert.Equal(
+                "void B.F3( y)",
+                type.GetMember("F3").ToDisplayString(FormatWithSpecialTypes)
+            );
+            Assert.Equal(
+                "void B.F4( z)",
+                type.GetMember("F4").ToDisplayString(FormatWithSpecialTypes)
+            );
 
             var expected =
-@"
+                @"
 B
     void F1(? w)
         [NativeInteger] ? w
@@ -761,7 +971,7 @@ B
         public void EmitAttribute_BaseClass()
         {
             var source =
-@"public class A<T, U>
+                @"public class A<T, U>
 {
 }
 public class B : A<nint, nuint[]>
@@ -769,7 +979,7 @@ public class B : A<nint, nuint[]>
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             var expected =
-@"[NativeInteger({ True, True })] B
+                @"[NativeInteger({ True, True })] B
 ";
             AssertNativeIntegerAttributes(comp, expected);
         }
@@ -778,27 +988,36 @@ public class B : A<nint, nuint[]>
         public void EmitAttribute_Interface()
         {
             var source =
-@"public interface I<T>
+                @"public interface I<T>
 {
 }
 public class A : I<(nint, nuint[])>
 {
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
-            CompileAndVerify(comp, validator: assembly =>
-            {
-                var reader = assembly.GetMetadataReader();
-                var typeDef = GetTypeDefinitionByName(reader, "A");
-                var interfaceImpl = reader.GetInterfaceImplementation(typeDef.GetInterfaceImplementations().Single());
-                AssertAttributes(reader, interfaceImpl.GetCustomAttributes(), "MethodDefinition:Void System.Runtime.CompilerServices.NativeIntegerAttribute..ctor(Boolean[])");
-            });
+            CompileAndVerify(
+                comp,
+                validator: assembly =>
+                {
+                    var reader = assembly.GetMetadataReader();
+                    var typeDef = GetTypeDefinitionByName(reader, "A");
+                    var interfaceImpl = reader.GetInterfaceImplementation(
+                        typeDef.GetInterfaceImplementations().Single()
+                    );
+                    AssertAttributes(
+                        reader,
+                        interfaceImpl.GetCustomAttributes(),
+                        "MethodDefinition:Void System.Runtime.CompilerServices.NativeIntegerAttribute..ctor(Boolean[])"
+                    );
+                }
+            );
         }
 
         [Fact]
         public void EmitAttribute_AllTypes()
         {
             var source =
-@"public enum E { }
+                @"public enum E { }
 public class C<T>
 {
     public delegate void D<T>();
@@ -814,7 +1033,7 @@ public class C<T>
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             var expected =
-@"C<T>
+                @"C<T>
     [NativeInteger] C<T>.S<System.IntPtr> F1
     [NativeInteger] C<System.UIntPtr>.I<T> F2
     [NativeInteger] C<E>.D<System.IntPtr> F3
@@ -829,23 +1048,30 @@ public class C<T>
         public void EmitAttribute_ErrorType()
         {
             var source1 =
-@"public class A { }
+                @"public class A { }
 public class B<T> { }";
-            var comp = CreateCompilation(source1, assemblyName: "95d36b13-f2e1-495d-9ab6-62e8cc63ac22");
+            var comp = CreateCompilation(
+                source1,
+                assemblyName: "95d36b13-f2e1-495d-9ab6-62e8cc63ac22"
+            );
             var ref1 = comp.EmitToImageReference();
 
             var source2 =
-@"public class C<T, U> { }
+                @"public class C<T, U> { }
 public class D
 {
     public B<nint> F1;
     public C<nint, A> F2;
 }";
-            comp = CreateCompilation(source2, references: new[] { ref1 }, parseOptions: TestOptions.Regular9);
+            comp = CreateCompilation(
+                source2,
+                references: new[] { ref1 },
+                parseOptions: TestOptions.Regular9
+            );
             var ref2 = comp.EmitToImageReference();
 
             var source3 =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -854,28 +1080,43 @@ public class D
         _ = d.F2;
     }
 }";
-            comp = CreateCompilation(source3, references: new[] { ref2 }, parseOptions: TestOptions.Regular9);
+            comp = CreateCompilation(
+                source3,
+                references: new[] { ref2 },
+                parseOptions: TestOptions.Regular9
+            );
             comp.VerifyDiagnostics(
                 // (6,15): error CS0012: The type 'B<>' is defined in an assembly that is not referenced. You must add a reference to assembly '95d36b13-f2e1-495d-9ab6-62e8cc63ac22, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         _ = d.F1;
-                Diagnostic(ErrorCode.ERR_NoTypeDef, "F1").WithArguments("B<>", "95d36b13-f2e1-495d-9ab6-62e8cc63ac22, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null").WithLocation(6, 15),
+                Diagnostic(ErrorCode.ERR_NoTypeDef, "F1")
+                    .WithArguments(
+                        "B<>",
+                        "95d36b13-f2e1-495d-9ab6-62e8cc63ac22, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+                    .WithLocation(6, 15),
                 // (7,15): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly '95d36b13-f2e1-495d-9ab6-62e8cc63ac22, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         _ = d.F2;
-                Diagnostic(ErrorCode.ERR_NoTypeDef, "F2").WithArguments("A", "95d36b13-f2e1-495d-9ab6-62e8cc63ac22, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null").WithLocation(7, 15));
+                Diagnostic(ErrorCode.ERR_NoTypeDef, "F2")
+                    .WithArguments(
+                        "A",
+                        "95d36b13-f2e1-495d-9ab6-62e8cc63ac22, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                    )
+                    .WithLocation(7, 15)
+            );
         }
 
         [Fact]
         public void EmitAttribute_Fields()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     public nint F1;
     public (System.IntPtr, nuint[]) F2;
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             var expected =
-@"Program
+                @"Program
     [NativeInteger] System.IntPtr F1
     [NativeInteger({ False, True })] (System.IntPtr, System.UIntPtr[]) F2
 ";
@@ -886,13 +1127,13 @@ public class D
         public void EmitAttribute_MethodReturnType()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     public (System.IntPtr, nuint[]) F() => default;
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             var expected =
-@"Program
+                @"Program
     [NativeInteger({ False, True })] (System.IntPtr, System.UIntPtr[]) F()
 ";
             AssertNativeIntegerAttributes(comp, expected);
@@ -902,13 +1143,13 @@ public class D
         public void EmitAttribute_MethodParameters()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     public void F(nint x, nuint y) { }
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             var expected =
-@"Program
+                @"Program
     void F(System.IntPtr x, System.UIntPtr y)
         [NativeInteger] System.IntPtr x
         [NativeInteger] System.UIntPtr y
@@ -920,13 +1161,13 @@ public class D
         public void EmitAttribute_PropertyType()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     public (System.IntPtr, nuint[]) P => default;
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             var expected =
-@"Program
+                @"Program
     [NativeInteger({ False, True })] (System.IntPtr, System.UIntPtr[]) P { get; }
         [NativeInteger({ False, True })] (System.IntPtr, System.UIntPtr[]) P.get
 ";
@@ -937,13 +1178,13 @@ public class D
         public void EmitAttribute_PropertyParameters()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     public object this[nint x, (nuint[], System.IntPtr) y] => null;
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             var expected =
-@"Program
+                @"Program
     System.Object this[System.IntPtr x, (System.UIntPtr[], System.IntPtr) y] { get; }
         [NativeInteger] System.IntPtr x
         [NativeInteger({ True, False })] (System.UIntPtr[], System.IntPtr) y
@@ -958,14 +1199,14 @@ public class D
         public void EmitAttribute_EventType()
         {
             var source =
-@"using System;
+                @"using System;
 public class Program
 {
     public event EventHandler<nuint[]> E;
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             var expected =
-@"Program
+                @"Program
     [NativeInteger] event System.EventHandler<System.UIntPtr[]> E
         void E.add
             [NativeInteger] System.EventHandler<System.UIntPtr[]> value
@@ -979,13 +1220,13 @@ public class Program
         public void EmitAttribute_OperatorReturnType()
         {
             var source =
-@"public class C
+                @"public class C
 {
     public static nint operator+(C a, C b) => 0;
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             var expected =
-@"C
+                @"C
     [NativeInteger] System.IntPtr operator +(C a, C b)
 ";
             AssertNativeIntegerAttributes(comp, expected);
@@ -995,13 +1236,13 @@ public class Program
         public void EmitAttribute_OperatorParameters()
         {
             var source =
-@"public class C
+                @"public class C
 {
     public static C operator+(C a, nuint[] b) => a;
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             var expected =
-@"C
+                @"C
     C operator +(C a, System.UIntPtr[] b)
         [NativeInteger] System.UIntPtr[] b
 ";
@@ -1011,11 +1252,10 @@ public class Program
         [Fact]
         public void EmitAttribute_DelegateReturnType()
         {
-            var source =
-@"public delegate nint D();";
+            var source = @"public delegate nint D();";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             var expected =
-@"D
+                @"D
     [NativeInteger] System.IntPtr Invoke()
     [NativeInteger] System.IntPtr EndInvoke(System.IAsyncResult result)
 ";
@@ -1025,11 +1265,10 @@ public class Program
         [Fact]
         public void EmitAttribute_DelegateParameters()
         {
-            var source =
-@"public delegate void D(nint x, nuint[] y);";
+            var source = @"public delegate void D(nint x, nuint[] y);";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             var expected =
-@"D
+                @"D
     void Invoke(System.IntPtr x, System.UIntPtr[] y)
         [NativeInteger] System.IntPtr x
         [NativeInteger] System.UIntPtr[] y
@@ -1044,7 +1283,7 @@ public class Program
         public void EmitAttribute_Constraint()
         {
             var source =
-@"public class A<T>
+                @"public class A<T>
 {
 }
 public class B<T> where T : A<nint>
@@ -1055,18 +1294,25 @@ public class C<T> where T : A<nuint[]>
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             var type = comp.GetMember<NamedTypeSymbol>("B");
-            Assert.Equal("A<nint>", getConstraintType(type).ToDisplayString(FormatWithSpecialTypes));
+            Assert.Equal(
+                "A<nint>",
+                getConstraintType(type).ToDisplayString(FormatWithSpecialTypes)
+            );
             type = comp.GetMember<NamedTypeSymbol>("C");
-            Assert.Equal("A<nuint[]>", getConstraintType(type).ToDisplayString(FormatWithSpecialTypes));
+            Assert.Equal(
+                "A<nuint[]>",
+                getConstraintType(type).ToDisplayString(FormatWithSpecialTypes)
+            );
 
-            static TypeWithAnnotations getConstraintType(NamedTypeSymbol type) => type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0];
+            static TypeWithAnnotations getConstraintType(NamedTypeSymbol type) =>
+                type.TypeParameters[0].ConstraintTypesNoUseSiteDiagnostics[0];
         }
 
         [Fact]
         public void EmitAttribute_LambdaReturnType()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static object M()
@@ -1081,16 +1327,19 @@ class Program
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module.ContainingAssembly.GetTypeByMetadataName("Program+<>c").GetMethod("<M>b__0_0");
+                    var method = module
+                        .ContainingAssembly.GetTypeByMetadataName("Program+<>c")
+                        .GetMethod("<M>b__0_0");
                     AssertNativeIntegerAttribute(method.GetReturnTypeAttributes());
-                });
+                }
+            );
         }
 
         [Fact]
         public void EmitAttribute_LambdaParameters()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void M()
@@ -1105,16 +1354,19 @@ class Program
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module.ContainingAssembly.GetTypeByMetadataName("Program+<>c").GetMethod("<M>b__0_0");
+                    var method = module
+                        .ContainingAssembly.GetTypeByMetadataName("Program+<>c")
+                        .GetMethod("<M>b__0_0");
                     AssertNativeIntegerAttribute(method.Parameters[0].GetAttributes());
-                });
+                }
+            );
         }
 
         [Fact]
         public void EmitAttribute_LocalFunctionReturnType()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static object M()
     {
@@ -1128,17 +1380,23 @@ class Program
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module.ContainingAssembly.GetTypeByMetadataName("Program").GetMethod("<M>g__L|0_0");
+                    var method = module
+                        .ContainingAssembly.GetTypeByMetadataName("Program")
+                        .GetMethod("<M>g__L|0_0");
                     AssertNativeIntegerAttribute(method.GetReturnTypeAttributes());
-                    AssertAttributes(method.GetAttributes(), "System.Runtime.CompilerServices.CompilerGeneratedAttribute");
-                });
+                    AssertAttributes(
+                        method.GetAttributes(),
+                        "System.Runtime.CompilerServices.CompilerGeneratedAttribute"
+                    );
+                }
+            );
         }
 
         [Fact]
         public void EmitAttribute_LocalFunctionParameters()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void M()
     {
@@ -1152,16 +1410,19 @@ class Program
                 options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
                 symbolValidator: module =>
                 {
-                    var method = module.ContainingAssembly.GetTypeByMetadataName("Program").GetMethod("<M>g__L|0_0");
+                    var method = module
+                        .ContainingAssembly.GetTypeByMetadataName("Program")
+                        .GetMethod("<M>g__L|0_0");
                     AssertNativeIntegerAttribute(method.Parameters[0].GetAttributes());
-                });
+                }
+            );
         }
 
         [Fact]
         public void EmitAttribute_Lambda_NetModule()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1175,17 +1436,22 @@ class Program
             comp.VerifyDiagnostics(
                 // (5,19): error CS0518: Predefined type 'System.Runtime.CompilerServices.NativeIntegerAttribute' is not defined or imported
                 //         var a1 = (nint n) => { };
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "nint n").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute").WithLocation(5, 19),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "nint n")
+                    .WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute")
+                    .WithLocation(5, 19),
                 // (7,29): error CS0518: Predefined type 'System.Runtime.CompilerServices.NativeIntegerAttribute' is not defined or imported
                 //         var a2 = nuint[] () => null;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "=>").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute").WithLocation(7, 29));
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "=>")
+                    .WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute")
+                    .WithLocation(7, 29)
+            );
         }
 
         [Fact]
         public void EmitAttribute_LocalFunction_NetModule()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1199,17 +1465,22 @@ class Program
             comp.VerifyDiagnostics(
                 // (5,17): error CS0518: Predefined type 'System.Runtime.CompilerServices.NativeIntegerAttribute' is not defined or imported
                 //         void L1(nint n) { };
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "nint n").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute").WithLocation(5, 17),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "nint n")
+                    .WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute")
+                    .WithLocation(5, 17),
                 // (7,9): error CS0518: Predefined type 'System.Runtime.CompilerServices.NativeIntegerAttribute' is not defined or imported
                 //         nuint[] L2() => null;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "nuint[]").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute").WithLocation(7, 9));
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "nuint[]")
+                    .WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute")
+                    .WithLocation(7, 9)
+            );
         }
 
         [Fact]
         public void EmitAttribute_Lambda_MissingAttributeConstructor()
         {
             var sourceA =
-@"namespace System.Runtime.CompilerServices
+                @"namespace System.Runtime.CompilerServices
 {
     public sealed class NativeIntegerAttribute : Attribute
     {
@@ -1217,7 +1488,7 @@ class Program
     }
 }";
             var sourceB =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1231,17 +1502,28 @@ class Program
             comp.VerifyDiagnostics(
                 // (5,19): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NativeIntegerAttribute..ctor'
                 //         var a1 = (nint n) => { };
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "nint n").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute", ".ctor").WithLocation(5, 19),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "nint n")
+                    .WithArguments(
+                        "System.Runtime.CompilerServices.NativeIntegerAttribute",
+                        ".ctor"
+                    )
+                    .WithLocation(5, 19),
                 // (7,29): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NativeIntegerAttribute..ctor'
                 //         var a2 = nuint[] () => null;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "=>").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute", ".ctor").WithLocation(7, 29));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "=>")
+                    .WithArguments(
+                        "System.Runtime.CompilerServices.NativeIntegerAttribute",
+                        ".ctor"
+                    )
+                    .WithLocation(7, 29)
+            );
         }
 
         [Fact]
         public void EmitAttribute_LocalFunction_MissingAttributeConstructor()
         {
             var sourceA =
-@"namespace System.Runtime.CompilerServices
+                @"namespace System.Runtime.CompilerServices
 {
     public sealed class NativeIntegerAttribute : Attribute
     {
@@ -1249,7 +1531,7 @@ class Program
     }
 }";
             var sourceB =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1263,17 +1545,28 @@ class Program
             comp.VerifyDiagnostics(
                 // (5,17): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NativeIntegerAttribute..ctor'
                 //         void L1(nint n) { };
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "nint n").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute", ".ctor").WithLocation(5, 17),
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "nint n")
+                    .WithArguments(
+                        "System.Runtime.CompilerServices.NativeIntegerAttribute",
+                        ".ctor"
+                    )
+                    .WithLocation(5, 17),
                 // (7,9): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NativeIntegerAttribute..ctor'
                 //         nuint[] L2() => null;
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "nuint[]").WithArguments("System.Runtime.CompilerServices.NativeIntegerAttribute", ".ctor").WithLocation(7, 9));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "nuint[]")
+                    .WithArguments(
+                        "System.Runtime.CompilerServices.NativeIntegerAttribute",
+                        ".ctor"
+                    )
+                    .WithLocation(7, 9)
+            );
         }
 
         [Fact]
         public void EmitAttribute_LocalFunctionConstraints()
         {
             var source =
-@"interface I<T>
+                @"interface I<T>
 {
 }
 class Program
@@ -1285,18 +1578,25 @@ class Program
     }
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
-            CompileAndVerify(comp, symbolValidator: module =>
-            {
-                var assembly = module.ContainingAssembly;
-                Assert.NotNull(assembly.GetTypeByMetadataName("System.Runtime.CompilerServices.NativeIntegerAttribute"));
-            });
+            CompileAndVerify(
+                comp,
+                symbolValidator: module =>
+                {
+                    var assembly = module.ContainingAssembly;
+                    Assert.NotNull(
+                        assembly.GetTypeByMetadataName(
+                            "System.Runtime.CompilerServices.NativeIntegerAttribute"
+                        )
+                    );
+                }
+            );
         }
 
         [Fact]
         public void EmitAttribute_InferredDelegate()
         {
             var source =
-@"using System;
+                @"using System;
 class Program
 {
     static void Main()
@@ -1307,7 +1607,7 @@ class Program
 }";
             var comp = CreateCompilation(source);
             var expected =
-@"Program
+                @"Program
     Program.<>c
         [NativeInteger] <>A{00000003}<System.IntPtr> <>9__0_0
 ";
@@ -1318,7 +1618,7 @@ class Program
         public void EmitAttribute_Nested()
         {
             var source =
-@"public class A<T>
+                @"public class A<T>
 {
     public class B<U> { }
 }
@@ -1330,9 +1630,13 @@ unsafe public class Program
     public A<nint>.B<nuint> F4;
     public (nint, nuint) F5;
 }";
-            var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9, options: TestOptions.UnsafeReleaseDll);
+            var comp = CreateCompilation(
+                source,
+                parseOptions: TestOptions.Regular9,
+                options: TestOptions.UnsafeReleaseDll
+            );
             var expected =
-@"Program
+                @"Program
     [NativeInteger] System.IntPtr F1
     [NativeInteger] System.UIntPtr[] F2
     [NativeInteger] System.IntPtr* F3
@@ -1346,7 +1650,7 @@ unsafe public class Program
         public void EmitAttribute_LongTuples_01()
         {
             var source =
-@"public class A<T>
+                @"public class A<T>
 {
 }
 unsafe public class B
@@ -1354,9 +1658,13 @@ unsafe public class B
     public A<(object, (nint, nuint, nint[], nuint, nint, nuint*[], nint, System.UIntPtr))> F1;
     public A<(nint, object, nuint[], object, nint, object, (System.IntPtr, nuint), object, nuint)> F2;
 }";
-            var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9, options: TestOptions.UnsafeReleaseDll);
+            var comp = CreateCompilation(
+                source,
+                parseOptions: TestOptions.Regular9,
+                options: TestOptions.UnsafeReleaseDll
+            );
             var expected =
-@"B
+                @"B
     [NativeInteger({ True, True, True, True, True, True, True, False })] A<(System.Object, (System.IntPtr, System.UIntPtr, System.IntPtr[], System.UIntPtr, System.IntPtr, System.UIntPtr*[], System.IntPtr, System.UIntPtr))> F1
     [NativeInteger({ True, True, True, False, True, True })] A<(System.IntPtr, System.Object, System.UIntPtr[], System.Object, System.IntPtr, System.Object, (System.IntPtr, System.UIntPtr), System.Object, System.UIntPtr)> F2
 ";
@@ -1367,26 +1675,42 @@ unsafe public class B
         public void EmitAttribute_LongTuples_02()
         {
             var source1 =
-@"public interface IA { }
+                @"public interface IA { }
 public interface IB<T> { }
 public class C : IA, IB<(nint, object, nuint[], object, nint, object, (System.IntPtr, nuint), object, nuint)>
 {
 }";
             var comp = CreateCompilation(source1, parseOptions: TestOptions.Regular9);
-            CompileAndVerify(comp, validator: assembly =>
-            {
-                var reader = assembly.GetMetadataReader();
-                var typeDef = GetTypeDefinitionByName(reader, "C");
-                var interfaceImpl = reader.GetInterfaceImplementation(typeDef.GetInterfaceImplementations().ElementAt(1));
-                var customAttributes = interfaceImpl.GetCustomAttributes();
-                AssertAttributes(reader, customAttributes, "MethodDefinition:Void System.Runtime.CompilerServices.NativeIntegerAttribute..ctor(Boolean[])");
-                var customAttribute = GetAttributeByConstructorName(reader, customAttributes, "MethodDefinition:Void System.Runtime.CompilerServices.NativeIntegerAttribute..ctor(Boolean[])");
-                AssertEx.Equal(ImmutableArray.Create(true, true, true, false, true, true), reader.ReadBoolArray(customAttribute.Value));
-            });
+            CompileAndVerify(
+                comp,
+                validator: assembly =>
+                {
+                    var reader = assembly.GetMetadataReader();
+                    var typeDef = GetTypeDefinitionByName(reader, "C");
+                    var interfaceImpl = reader.GetInterfaceImplementation(
+                        typeDef.GetInterfaceImplementations().ElementAt(1)
+                    );
+                    var customAttributes = interfaceImpl.GetCustomAttributes();
+                    AssertAttributes(
+                        reader,
+                        customAttributes,
+                        "MethodDefinition:Void System.Runtime.CompilerServices.NativeIntegerAttribute..ctor(Boolean[])"
+                    );
+                    var customAttribute = GetAttributeByConstructorName(
+                        reader,
+                        customAttributes,
+                        "MethodDefinition:Void System.Runtime.CompilerServices.NativeIntegerAttribute..ctor(Boolean[])"
+                    );
+                    AssertEx.Equal(
+                        ImmutableArray.Create(true, true, true, false, true, true),
+                        reader.ReadBoolArray(customAttribute.Value)
+                    );
+                }
+            );
             var ref1 = comp.EmitToImageReference();
 
             var source2 =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -1394,7 +1718,11 @@ public class C : IA, IB<(nint, object, nuint[], object, nint, object, (System.In
         _ = a;
     }
 }";
-            comp = CreateCompilation(source2, references: new[] { ref1 }, parseOptions: TestOptions.Regular9);
+            comp = CreateCompilation(
+                source2,
+                references: new[] { ref1 },
+                parseOptions: TestOptions.Regular9
+            );
             comp.VerifyDiagnostics();
         }
 
@@ -1403,29 +1731,44 @@ public class C : IA, IB<(nint, object, nuint[], object, nint, object, (System.In
         public void EmitAttribute_PartialMethods()
         {
             var source =
-@"public partial class Program
+                @"public partial class Program
 {
     static partial void F1(System.IntPtr x);
     static partial void F2(System.UIntPtr x) { }
     static partial void F1(nint x) { }
     static partial void F2(nuint x);
 }";
-            var comp = CreateCompilation(source, options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All), parseOptions: TestOptions.Regular9);
+            var comp = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
+                parseOptions: TestOptions.Regular9
+            );
             var expected =
-@"Program
+                @"Program
     void F2(System.UIntPtr x)
         [NativeInteger] System.UIntPtr x
 ";
             AssertNativeIntegerAttributes(comp, expected);
 
-            comp = CreateCompilation(source, options: TestOptions.ReleaseDll.WithWarningLevel(6), parseOptions: TestOptions.Regular9);
+            comp = CreateCompilation(
+                source,
+                options: TestOptions.ReleaseDll.WithWarningLevel(6),
+                parseOptions: TestOptions.Regular9
+            );
             comp.VerifyEmitDiagnostics(
                 // (4,25): warning CS8826: Partial method declarations 'void Program.F2(nuint x)' and 'void Program.F2(UIntPtr x)' have signature differences.
                 //     static partial void F2(System.UIntPtr x) { }
-                Diagnostic(ErrorCode.WRN_PartialMethodTypeDifference, "F2").WithArguments("void Program.F2(nuint x)", "void Program.F2(UIntPtr x)").WithLocation(4, 25),
+                Diagnostic(ErrorCode.WRN_PartialMethodTypeDifference, "F2")
+                    .WithArguments("void Program.F2(nuint x)", "void Program.F2(UIntPtr x)")
+                    .WithLocation(4, 25),
                 // (5,25): warning CS8826: Partial method declarations 'void Program.F1(IntPtr x)' and 'void Program.F1(nint x)' have signature differences.
                 //     static partial void F1(nint x) { }
-                Diagnostic(ErrorCode.WRN_PartialMethodTypeDifference, "F1").WithArguments("void Program.F1(IntPtr x)", "void Program.F1(nint x)").WithLocation(5, 25));
+                Diagnostic(ErrorCode.WRN_PartialMethodTypeDifference, "F1")
+                    .WithArguments("void Program.F1(IntPtr x)", "void Program.F1(nint x)")
+                    .WithLocation(5, 25)
+            );
         }
 
         // Shouldn't depend on [NullablePublicOnly].
@@ -1433,7 +1776,7 @@ public class C : IA, IB<(nint, object, nuint[], object, nint, object, (System.In
         public void NoPublicMembers()
         {
             var source =
-@"class A<T, U>
+                @"class A<T, U>
 {
 }
 class B : A<System.UIntPtr, nint>
@@ -1441,10 +1784,13 @@ class B : A<System.UIntPtr, nint>
 }";
             var comp = CreateCompilation(
                 source,
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All),
-                parseOptions: TestOptions.Regular9.WithNullablePublicOnly());
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.All
+                ),
+                parseOptions: TestOptions.Regular9.WithNullablePublicOnly()
+            );
             var expected =
-@"[NativeInteger({ False, True })] B
+                @"[NativeInteger({ False, True })] B
 ";
             AssertNativeIntegerAttributes(comp, expected);
         }
@@ -1453,55 +1799,71 @@ class B : A<System.UIntPtr, nint>
         public void AttributeUsage()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     public nint F;
 }";
-            var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9, options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All));
-            CompileAndVerify(comp, symbolValidator: module =>
-            {
-                var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>("System.Runtime.CompilerServices.NativeIntegerAttribute");
-                AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
-                Assert.False(attributeUsage.Inherited);
-                Assert.False(attributeUsage.AllowMultiple);
-                Assert.True(attributeUsage.HasValidAttributeTargets);
-                var expectedTargets =
-                    AttributeTargets.Class |
-                    AttributeTargets.Event |
-                    AttributeTargets.Field |
-                    AttributeTargets.GenericParameter |
-                    AttributeTargets.Parameter |
-                    AttributeTargets.Property |
-                    AttributeTargets.ReturnValue;
-                Assert.Equal(expectedTargets, attributeUsage.ValidTargets);
-            });
+            var comp = CreateCompilation(
+                source,
+                parseOptions: TestOptions.Regular9,
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
+            CompileAndVerify(
+                comp,
+                symbolValidator: module =>
+                {
+                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                        "System.Runtime.CompilerServices.NativeIntegerAttribute"
+                    );
+                    AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
+                    Assert.False(attributeUsage.Inherited);
+                    Assert.False(attributeUsage.AllowMultiple);
+                    Assert.True(attributeUsage.HasValidAttributeTargets);
+                    var expectedTargets =
+                        AttributeTargets.Class
+                        | AttributeTargets.Event
+                        | AttributeTargets.Field
+                        | AttributeTargets.GenericParameter
+                        | AttributeTargets.Parameter
+                        | AttributeTargets.Property
+                        | AttributeTargets.ReturnValue;
+                    Assert.Equal(expectedTargets, attributeUsage.ValidTargets);
+                }
+            );
         }
 
         [Fact]
         public void AttributeFieldExists()
         {
             var source =
-@"public class Program
+                @"public class Program
 {
     public nint F;
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
-            CompileAndVerify(comp, symbolValidator: module =>
-            {
-                var type = module.ContainingAssembly.GetTypeByMetadataName("Program");
-                var member = type.GetMembers("F").Single();
-                var attributes = member.GetAttributes();
-                AssertNativeIntegerAttribute(attributes);
-                var attribute = GetNativeIntegerAttribute(attributes);
-                var field = attribute.AttributeClass.GetField("TransformFlags");
-                Assert.Equal("System.Boolean[]", field.TypeWithAnnotations.ToTestDisplayString());
-            });
+            CompileAndVerify(
+                comp,
+                symbolValidator: module =>
+                {
+                    var type = module.ContainingAssembly.GetTypeByMetadataName("Program");
+                    var member = type.GetMembers("F").Single();
+                    var attributes = member.GetAttributes();
+                    AssertNativeIntegerAttribute(attributes);
+                    var attribute = GetNativeIntegerAttribute(attributes);
+                    var field = attribute.AttributeClass.GetField("TransformFlags");
+                    Assert.Equal(
+                        "System.Boolean[]",
+                        field.TypeWithAnnotations.ToTestDisplayString()
+                    );
+                }
+            );
         }
 
         [Fact]
         public void NestedNativeIntegerWithPrecedingType()
         {
-            var comp = CompileAndVerify(@"
+            var comp = CompileAndVerify(
+                @"
 class C<T, U, V>
 {
     public C<dynamic, T, nint> F0;
@@ -1510,11 +1872,16 @@ class C<T, U, V>
     public C<T, nint, System.IntPtr> F3;
     public C<T, nuint, System.UIntPtr> F4;
 }
-", options: TestOptions.ReleaseDll, parseOptions: TestOptions.Regular9, symbolValidator: symbolValidator);
+",
+                options: TestOptions.ReleaseDll,
+                parseOptions: TestOptions.Regular9,
+                symbolValidator: symbolValidator
+            );
 
             static void symbolValidator(ModuleSymbol module)
             {
-                var expectedAttributes = @"
+                var expectedAttributes =
+                    @"
 C<T, U, V>
     [NativeInteger] C<dynamic, T, System.IntPtr> F0
     [NativeInteger({ True, False })] C<dynamic, System.IntPtr, System.IntPtr> F1
@@ -1542,7 +1909,8 @@ C<T, U, V>
         [Fact]
         public void FunctionPointersWithNativeIntegerTypes()
         {
-            var comp = CompileAndVerify(@"
+            var comp = CompileAndVerify(
+                @"
 unsafe class C
 {
     public delegate*<nint, object, object> F0;
@@ -1555,11 +1923,16 @@ unsafe class C
     public delegate*<delegate*<System.IntPtr, System.IntPtr, nint>, System.IntPtr> F7;
     public delegate*<System.IntPtr, delegate*<System.IntPtr, nint, System.IntPtr>> F8;
 }
-", options: TestOptions.UnsafeReleaseDll, parseOptions: TestOptions.Regular9, symbolValidator: symbolValidator);
+",
+                options: TestOptions.UnsafeReleaseDll,
+                parseOptions: TestOptions.Regular9,
+                symbolValidator: symbolValidator
+            );
 
             static void symbolValidator(ModuleSymbol module)
             {
-                var expectedAttributes = @"
+                var expectedAttributes =
+                    @"
 C
     [NativeInteger] delegate*<System.IntPtr, System.Object, System.Object> F0
     [NativeInteger({ True, True, True })] delegate*<System.IntPtr, System.IntPtr, System.IntPtr> F1
@@ -1580,15 +1953,29 @@ C
                 assert("delegate*<System.IntPtr, System.IntPtr, nint>", "F2");
                 assert("delegate*<nint, System.IntPtr, System.IntPtr>", "F3");
                 assert("delegate*<System.IntPtr, nint, System.IntPtr>", "F4");
-                assert("delegate*<delegate*<System.IntPtr, System.IntPtr, System.IntPtr>, nint>", "F5");
-                assert("delegate*<nint, delegate*<System.IntPtr, System.IntPtr, System.IntPtr>>", "F6");
-                assert("delegate*<delegate*<System.IntPtr, System.IntPtr, nint>, System.IntPtr>", "F7");
-                assert("delegate*<System.IntPtr, delegate*<System.IntPtr, nint, System.IntPtr>>", "F8");
+                assert(
+                    "delegate*<delegate*<System.IntPtr, System.IntPtr, System.IntPtr>, nint>",
+                    "F5"
+                );
+                assert(
+                    "delegate*<nint, delegate*<System.IntPtr, System.IntPtr, System.IntPtr>>",
+                    "F6"
+                );
+                assert(
+                    "delegate*<delegate*<System.IntPtr, System.IntPtr, nint>, System.IntPtr>",
+                    "F7"
+                );
+                assert(
+                    "delegate*<System.IntPtr, delegate*<System.IntPtr, nint, System.IntPtr>>",
+                    "F8"
+                );
 
                 void assert(string expectedType, string fieldName)
                 {
                     var field = c.GetField(fieldName);
-                    FunctionPointerUtilities.CommonVerifyFunctionPointer((FunctionPointerTypeSymbol)field.Type);
+                    FunctionPointerUtilities.CommonVerifyFunctionPointer(
+                        (FunctionPointerTypeSymbol)field.Type
+                    );
                     Assert.Equal(expectedType, c.GetField(fieldName).Type.ToTestDisplayString());
                 }
             }
@@ -1596,39 +1983,66 @@ C
 
         private static TypeDefinition GetTypeDefinitionByName(MetadataReader reader, string name)
         {
-            return reader.GetTypeDefinition(reader.TypeDefinitions.Single(h => reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)));
+            return reader.GetTypeDefinition(
+                reader.TypeDefinitions.Single(h =>
+                    reader.StringComparer.Equals(reader.GetTypeDefinition(h).Name, name)
+                )
+            );
         }
 
-        private static string GetAttributeConstructorName(MetadataReader reader, CustomAttributeHandle handle)
+        private static string GetAttributeConstructorName(
+            MetadataReader reader,
+            CustomAttributeHandle handle
+        )
         {
             return reader.Dump(reader.GetCustomAttribute(handle).Constructor);
         }
 
-        private static CustomAttribute GetAttributeByConstructorName(MetadataReader reader, CustomAttributeHandleCollection handles, string name)
+        private static CustomAttribute GetAttributeByConstructorName(
+            MetadataReader reader,
+            CustomAttributeHandleCollection handles,
+            string name
+        )
         {
-            return reader.GetCustomAttribute(handles.FirstOrDefault(h => GetAttributeConstructorName(reader, h) == name));
+            return reader.GetCustomAttribute(
+                handles.FirstOrDefault(h => GetAttributeConstructorName(reader, h) == name)
+            );
         }
 
-        private static void AssertAttributes(MetadataReader reader, CustomAttributeHandleCollection handles, params string[] expectedNames)
+        private static void AssertAttributes(
+            MetadataReader reader,
+            CustomAttributeHandleCollection handles,
+            params string[] expectedNames
+        )
         {
             var actualNames = handles.Select(h => GetAttributeConstructorName(reader, h)).ToArray();
             AssertEx.Equal(expectedNames, actualNames);
         }
 
-        private static void AssertNativeIntegerAttribute(ImmutableArray<CSharpAttributeData> attributes)
+        private static void AssertNativeIntegerAttribute(
+            ImmutableArray<CSharpAttributeData> attributes
+        )
         {
             AssertAttributes(attributes, "System.Runtime.CompilerServices.NativeIntegerAttribute");
         }
 
-        private static void AssertAttributes(ImmutableArray<CSharpAttributeData> attributes, params string[] expectedNames)
+        private static void AssertAttributes(
+            ImmutableArray<CSharpAttributeData> attributes,
+            params string[] expectedNames
+        )
         {
-            var actualNames = attributes.Select(a => a.AttributeClass.ToTestDisplayString()).ToArray();
+            var actualNames = attributes
+                .Select(a => a.AttributeClass.ToTestDisplayString())
+                .ToArray();
             AssertEx.Equal(expectedNames, actualNames);
         }
 
         private void AssertNativeIntegerAttributes(CSharpCompilation comp, string expected)
         {
-            CompileAndVerify(comp, symbolValidator: module => AssertNativeIntegerAttributes(module, expected));
+            CompileAndVerify(
+                comp,
+                symbolValidator: module => AssertNativeIntegerAttributes(module, expected)
+            );
         }
 
         private static void AssertNativeIntegerAttributes(ModuleSymbol module, string expected)
@@ -1637,9 +2051,14 @@ C
             AssertEx.AssertEqualToleratingWhitespaceDifferences(expected, actual);
         }
 
-        private static CSharpAttributeData GetNativeIntegerAttribute(ImmutableArray<CSharpAttributeData> attributes)
+        private static CSharpAttributeData GetNativeIntegerAttribute(
+            ImmutableArray<CSharpAttributeData> attributes
+        )
         {
-            return attributes.Single(a => a.AttributeClass.ToTestDisplayString() == "System.Runtime.CompilerServices.NativeIntegerAttribute");
+            return attributes.Single(a =>
+                a.AttributeClass.ToTestDisplayString()
+                == "System.Runtime.CompilerServices.NativeIntegerAttribute"
+            );
         }
     }
 }

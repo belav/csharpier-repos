@@ -102,10 +102,19 @@ namespace Microsoft.CodeAnalysis
             bool isEnabledByDefault,
             string? description = null,
             string? helpLinkUri = null,
-            params string[] customTags)
-            : this(id, title, messageFormat, category, defaultSeverity, isEnabledByDefault, description, helpLinkUri, customTags.AsImmutableOrEmpty())
-        {
-        }
+            params string[] customTags
+        )
+            : this(
+                id,
+                title,
+                messageFormat,
+                category,
+                defaultSeverity,
+                isEnabledByDefault,
+                description,
+                helpLinkUri,
+                customTags.AsImmutableOrEmpty()
+            ) { }
 
         /// <summary>
         /// Create a DiagnosticDescriptor, which provides description about a <see cref="Diagnostic"/>.
@@ -143,10 +152,19 @@ namespace Microsoft.CodeAnalysis
             bool isEnabledByDefault,
             LocalizableString? description = null,
             string? helpLinkUri = null,
-            params string[] customTags)
-            : this(id, title, messageFormat, category, defaultSeverity, isEnabledByDefault, description, helpLinkUri, customTags.AsImmutableOrEmpty())
-        {
-        }
+            params string[] customTags
+        )
+            : this(
+                id,
+                title,
+                messageFormat,
+                category,
+                defaultSeverity,
+                isEnabledByDefault,
+                description,
+                helpLinkUri,
+                customTags.AsImmutableOrEmpty()
+            ) { }
 
         internal DiagnosticDescriptor(
             string id,
@@ -157,13 +175,17 @@ namespace Microsoft.CodeAnalysis
             bool isEnabledByDefault,
             LocalizableString? description,
             string? helpLinkUri,
-            ImmutableArray<string> customTags)
+            ImmutableArray<string> customTags
+        )
         {
             Debug.Assert(!customTags.IsDefault);
 
             if (string.IsNullOrWhiteSpace(id))
             {
-                throw new ArgumentException(CodeAnalysisResources.DiagnosticIdCantBeNullOrWhitespace, nameof(id));
+                throw new ArgumentException(
+                    CodeAnalysisResources.DiagnosticIdCantBeNullOrWhitespace,
+                    nameof(id)
+                );
             }
 
             if (messageFormat == null)
@@ -199,16 +221,15 @@ namespace Microsoft.CodeAnalysis
                 return true;
             }
 
-            return
-                other != null &&
-                this.Category == other.Category &&
-                this.DefaultSeverity == other.DefaultSeverity &&
-                this.Description.Equals(other.Description) &&
-                this.HelpLinkUri == other.HelpLinkUri &&
-                this.Id == other.Id &&
-                this.IsEnabledByDefault == other.IsEnabledByDefault &&
-                this.MessageFormat.Equals(other.MessageFormat) &&
-                this.Title.Equals(other.Title);
+            return other != null
+                && this.Category == other.Category
+                && this.DefaultSeverity == other.DefaultSeverity
+                && this.Description.Equals(other.Description)
+                && this.HelpLinkUri == other.HelpLinkUri
+                && this.Id == other.Id
+                && this.IsEnabledByDefault == other.IsEnabledByDefault
+                && this.MessageFormat.Equals(other.MessageFormat)
+                && this.Title.Equals(other.Title);
         }
 
         public override bool Equals(object? obj)
@@ -218,14 +239,28 @@ namespace Microsoft.CodeAnalysis
 
         public override int GetHashCode()
         {
-            return Hash.Combine(this.Category.GetHashCode(),
-                Hash.Combine(((int)this.DefaultSeverity).GetHashCode(),
-                Hash.Combine(this.Description.GetHashCode(),
-                Hash.Combine(this.HelpLinkUri.GetHashCode(),
-                Hash.Combine(this.Id.GetHashCode(),
-                Hash.Combine(this.IsEnabledByDefault.GetHashCode(),
-                Hash.Combine(this.MessageFormat.GetHashCode(),
-                    this.Title.GetHashCode())))))));
+            return Hash.Combine(
+                this.Category.GetHashCode(),
+                Hash.Combine(
+                    ((int)this.DefaultSeverity).GetHashCode(),
+                    Hash.Combine(
+                        this.Description.GetHashCode(),
+                        Hash.Combine(
+                            this.HelpLinkUri.GetHashCode(),
+                            Hash.Combine(
+                                this.Id.GetHashCode(),
+                                Hash.Combine(
+                                    this.IsEnabledByDefault.GetHashCode(),
+                                    Hash.Combine(
+                                        this.MessageFormat.GetHashCode(),
+                                        this.Title.GetHashCode()
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
         }
 
         /// <summary>
@@ -241,8 +276,13 @@ namespace Microsoft.CodeAnalysis
 
             // Create a dummy diagnostic to compute the effective diagnostic severity for given compilation options
             // TODO: Once https://github.com/dotnet/roslyn/issues/3650 is fixed, we can avoid creating a no-location diagnostic here.
-            var effectiveDiagnostic = compilationOptions.FilterDiagnostic(Diagnostic.Create(this, Location.None), CancellationToken.None);
-            return effectiveDiagnostic != null ? MapSeverityToReport(effectiveDiagnostic.Severity) : ReportDiagnostic.Suppress;
+            var effectiveDiagnostic = compilationOptions.FilterDiagnostic(
+                Diagnostic.Create(this, Location.None),
+                CancellationToken.None
+            );
+            return effectiveDiagnostic != null
+                ? MapSeverityToReport(effectiveDiagnostic.Severity)
+                : ReportDiagnostic.Suppress;
         }
 
         // internal for testing purposes.
@@ -306,7 +346,9 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal bool IsCompilerOrNotConfigurableOrCustomConfigurable()
         {
-            return AnalyzerManager.HasCompilerOrNotConfigurableTagOrCustomConfigurableTag(ImmutableCustomTags);
+            return AnalyzerManager.HasCompilerOrNotConfigurableTagOrCustomConfigurableTag(
+                ImmutableCustomTags
+            );
         }
     }
 }

@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -20,7 +21,7 @@ namespace Test
         {
             try
             {
-                bool b = m_abField2[10000];		//blow exception
+                bool b = m_abField2[10000]; //blow exception
                 object[] local5 = new object[7];
                 while (m_abField2[1000])
                 {
@@ -33,14 +34,17 @@ namespace Test
             }
             catch (Exception)
             {
-                bool bb = m_abField2[10000];	//blow another exception
+                bool bb = m_abField2[10000]; //blow another exception
             }
         }
 
         [Fact]
         public static void TestEntryPoint()
         {
-            try { Method1(); }
+            try
+            {
+                Method1();
+            }
             catch (Exception) { }
         }
     }

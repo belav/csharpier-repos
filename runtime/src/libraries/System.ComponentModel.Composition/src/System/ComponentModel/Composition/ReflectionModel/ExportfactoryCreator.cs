@@ -8,8 +8,16 @@ namespace System.ComponentModel.Composition.ReflectionModel
 {
     internal sealed partial class ExportFactoryCreator
     {
-        private static readonly MethodInfo _createStronglyTypedExportFactoryOfT = typeof(ExportFactoryCreator).GetMethod("CreateStronglyTypedExportFactoryOfT", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!;
-        private static readonly MethodInfo _createStronglyTypedExportFactoryOfTM = typeof(ExportFactoryCreator).GetMethod("CreateStronglyTypedExportFactoryOfTM", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!;
+        private static readonly MethodInfo _createStronglyTypedExportFactoryOfT =
+            typeof(ExportFactoryCreator).GetMethod(
+                "CreateStronglyTypedExportFactoryOfT",
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            )!;
+        private static readonly MethodInfo _createStronglyTypedExportFactoryOfTM =
+            typeof(ExportFactoryCreator).GetMethod(
+                "CreateStronglyTypedExportFactoryOfTM",
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            )!;
 
         private readonly Type _exportFactoryType;
 
@@ -20,7 +28,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             _exportFactoryType = exportFactoryType;
         }
 
-        public Func<Export, object> CreateStronglyTypedExportFactoryFactory(Type exportType, Type? metadataViewType)
+        public Func<Export, object> CreateStronglyTypedExportFactoryFactory(
+            Type exportType,
+            Type? metadataViewType
+        )
         {
             MethodInfo genericMethod;
             if (metadataViewType == null)
@@ -29,7 +40,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             }
             else
             {
-                genericMethod = _createStronglyTypedExportFactoryOfTM.MakeGenericMethod(exportType, metadataViewType);
+                genericMethod = _createStronglyTypedExportFactoryOfTM.MakeGenericMethod(
+                    exportType,
+                    metadataViewType
+                );
             }
 
             if (genericMethod == null)
@@ -37,7 +51,9 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 throw new Exception(SR.Diagnostic_InternalExceptionMessage);
             }
 
-            Func<Export, object> exportFactoryFactory = (Func<Export, object>)Delegate.CreateDelegate(typeof(Func<Export, object>), this, genericMethod);
+            Func<Export, object> exportFactoryFactory =
+                (Func<Export, object>)
+                    Delegate.CreateDelegate(typeof(Func<Export, object>), this, genericMethod);
             return exportFactoryFactory.Invoke;
         }
 
@@ -46,7 +62,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             Type[] typeArgs = { typeof(T) };
             Type constructed = _exportFactoryType.MakeGenericType(typeArgs);
 
-            Func<Tuple<T, Action>> exportLifetimeContextCreator = () => LifetimeContext.GetExportLifetimeContextFromExport<T>(export);
+            Func<Tuple<T, Action>> exportLifetimeContextCreator = () =>
+                LifetimeContext.GetExportLifetimeContextFromExport<T>(export);
             object[] args = { exportLifetimeContextCreator };
 
             var instance = Activator.CreateInstance(constructed, args);
@@ -59,7 +76,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             Type[] typeArgs = { typeof(T), typeof(M) };
             Type constructed = _exportFactoryType.MakeGenericType(typeArgs);
 
-            Func<Tuple<T, Action>> exportLifetimeContextCreator = () => LifetimeContext.GetExportLifetimeContextFromExport<T>(export);
+            Func<Tuple<T, Action>> exportLifetimeContextCreator = () =>
+                LifetimeContext.GetExportLifetimeContextFromExport<T>(export);
             var metadataView = AttributedModelServices.GetMetadataView<M>(export.Metadata);
             object?[] args = { exportLifetimeContextCreator, metadataView };
 
@@ -67,6 +85,5 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             return instance!;
         }
-
     }
 }

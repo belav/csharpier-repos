@@ -15,25 +15,35 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {
-    [SuppressMessage("Usage", "VSTHRD104:Offer async methods", Justification = "This class tests specific behavior of tasks.")]
+    [SuppressMessage(
+        "Usage",
+        "VSTHRD104:Offer async methods",
+        Justification = "This class tests specific behavior of tasks."
+    )]
     public class SpecializedTasksTests
     {
         private record StateType;
+
         private record IntermediateType;
+
         private record ResultType;
 
         [Fact]
         public void WhenAll_Null()
         {
 #pragma warning disable CA2012 // Use ValueTasks correctly (the instance is never created)
-            Assert.Throws<ArgumentNullException>(() => SpecializedTasks.WhenAll<int>((IEnumerable<ValueTask<int>>)null!));
+            Assert.Throws<ArgumentNullException>(() =>
+                SpecializedTasks.WhenAll<int>((IEnumerable<ValueTask<int>>)null!)
+            );
 #pragma warning restore CA2012 // Use ValueTasks correctly
         }
 
         [Fact]
         public void WhenAll_Empty()
         {
-            var whenAll = SpecializedTasks.WhenAll(SpecializedCollections.EmptyEnumerable<ValueTask<int>>());
+            var whenAll = SpecializedTasks.WhenAll(
+                SpecializedCollections.EmptyEnumerable<ValueTask<int>>()
+            );
             Debug.Assert(whenAll.IsCompleted);
             Assert.True(whenAll.IsCompletedSuccessfully);
             Assert.Same(Array.Empty<int>(), whenAll.Result);
@@ -42,7 +52,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void WhenAll_AllCompletedSuccessfully()
         {
-            var whenAll = SpecializedTasks.WhenAll(new[] { new ValueTask<int>(0), new ValueTask<int>(1) });
+            var whenAll = SpecializedTasks.WhenAll(
+                new[] { new ValueTask<int>(0), new ValueTask<int>(1) }
+            );
             Debug.Assert(whenAll.IsCompleted);
             Assert.True(whenAll.IsCompletedSuccessfully);
             Assert.Equal([0, 1], whenAll.Result);
@@ -51,7 +63,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void WhenAll_CompletedButCanceled()
         {
-            var whenAll = SpecializedTasks.WhenAll(new[] { new ValueTask<int>(Task.FromCanceled<int>(new CancellationToken(true))) });
+            var whenAll = SpecializedTasks.WhenAll(
+                new[] { new ValueTask<int>(Task.FromCanceled<int>(new CancellationToken(true))) }
+            );
             Assert.True(whenAll.IsCompleted);
             Assert.False(whenAll.IsCompletedSuccessfully);
             Assert.ThrowsAsync<OperationCanceledException>(async () => await whenAll);
@@ -61,7 +75,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void WhenAll_NotYetCompleted()
         {
             var completionSource = new TaskCompletionSource<int>();
-            var whenAll = SpecializedTasks.WhenAll(new[] { new ValueTask<int>(completionSource.Task) });
+            var whenAll = SpecializedTasks.WhenAll(
+                new[] { new ValueTask<int>(completionSource.Task) }
+            );
             Assert.False(whenAll.IsCompleted);
             completionSource.SetResult(0);
             Assert.True(whenAll.IsCompleted);
@@ -72,26 +88,52 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void Transform_ArgumentValidation()
         {
-            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) => new(new IntermediateType());
+            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) =>
+                new(new IntermediateType());
             Func<IntermediateType, StateType, ResultType> transform = (_, _) => new();
             var arg = new StateType();
             var cancellationToken = new CancellationToken(canceled: false);
 
 #pragma warning disable CA2012 // Use ValueTasks correctly (the instance is never created)
-            Assert.Throws<ArgumentNullException>("func", () => SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(null!, transform, arg, cancellationToken));
-            Assert.Throws<ArgumentNullException>("transform", () => SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync<StateType, IntermediateType, ResultType>(func, null!, arg, cancellationToken));
+            Assert.Throws<ArgumentNullException>(
+                "func",
+                () =>
+                    SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(
+                        null!,
+                        transform,
+                        arg,
+                        cancellationToken
+                    )
+            );
+            Assert.Throws<ArgumentNullException>(
+                "transform",
+                () =>
+                    SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync<
+                        StateType,
+                        IntermediateType,
+                        ResultType
+                    >(func, null!, arg, cancellationToken)
+            );
 #pragma warning restore CA2012 // Use ValueTasks correctly
         }
 
         [Fact]
         public void Transform_SyncCompletedFunction_CompletedTransform()
         {
-            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) => new(new IntermediateType());
+            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) =>
+                new(new IntermediateType());
             Func<IntermediateType, StateType, ResultType> transform = (_, _) => new();
             var arg = new StateType();
             var cancellationToken = new CancellationToken(canceled: false);
 
-            var task = SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken).Preserve();
+            var task = SpecializedTasks
+                .TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+                .Preserve();
             Assert.True(task.IsCompletedSuccessfully);
             Assert.NotNull(task.Result);
         }
@@ -105,7 +147,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var executedTransform = false;
 
             var cancellationToken = cts.Token;
-            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) => new(new IntermediateType());
+            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) =>
+                new(new IntermediateType());
             Func<IntermediateType, StateType, ResultType> transform = (_, _) =>
             {
                 executedTransform = true;
@@ -113,7 +156,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             };
             var arg = new StateType();
 
-            var task = SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken).Preserve();
+            var task = SpecializedTasks
+                .TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+                .Preserve();
             Assert.True(task.IsCanceled);
             var exception = Assert.Throws<TaskCanceledException>(() => task.Result);
             Assert.Equal(cancellationToken, exception.CancellationToken);
@@ -134,7 +184,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var arg = new StateType();
             var cancellationToken = new CancellationToken(canceled: false);
 
-            var task = SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken).Preserve();
+            var task = SpecializedTasks
+                .TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+                .Preserve();
             Assert.False(task.IsCompleted);
 
             gate.Set();
@@ -164,7 +221,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             };
             var arg = new StateType();
 
-            var task = SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken).Preserve();
+            var task = SpecializedTasks
+                .TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+                .Preserve();
             Assert.False(task.IsCompleted);
 
             gate.Set();
@@ -182,7 +246,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var executedTransform = false;
 
             var cancellationToken = cts.Token;
-            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) => new(Task.FromCanceled<IntermediateType>(cancellationToken));
+            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) =>
+                new(Task.FromCanceled<IntermediateType>(cancellationToken));
             Func<IntermediateType, StateType, ResultType> transform = (_, _) =>
             {
                 executedTransform = true;
@@ -190,7 +255,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             };
             var arg = new StateType();
 
-            var task = SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken).Preserve();
+            var task = SpecializedTasks
+                .TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+                .Preserve();
             Assert.True(task.IsCanceled);
             var exception = Assert.Throws<TaskCanceledException>(() => task.Result);
             Assert.Equal(cancellationToken, exception.CancellationToken);
@@ -221,7 +293,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             };
             var arg = new StateType();
 
-            var task = SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken).Preserve();
+            var task = SpecializedTasks
+                .TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+                .Preserve();
             Assert.False(task.IsCompleted);
 
             gate.Set();
@@ -239,7 +318,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var executedTransform = false;
 
             var cancellationToken = new CancellationToken(canceled: false);
-            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) => new(Task.FromCanceled<IntermediateType>(unexpectedCts.Token));
+            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) =>
+                new(Task.FromCanceled<IntermediateType>(unexpectedCts.Token));
             Func<IntermediateType, StateType, ResultType> transform = (_, _) =>
             {
                 executedTransform = true;
@@ -247,7 +327,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             };
             var arg = new StateType();
 
-            var task = SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken).Preserve();
+            var task = SpecializedTasks
+                .TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+                .Preserve();
             Assert.True(task.IsCanceled);
             var exception = Assert.Throws<TaskCanceledException>(() => task.Result);
 
@@ -281,7 +368,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             };
             var arg = new StateType();
 
-            var task = SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken).Preserve();
+            var task = SpecializedTasks
+                .TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+                .Preserve();
             Assert.False(task.IsCompleted);
 
             gate.Set();
@@ -306,7 +400,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var executedTransform = false;
 
             var cancellationToken = cts.Token;
-            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) => new(Task.FromCanceled<IntermediateType>(unexpectedCts.Token));
+            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) =>
+                new(Task.FromCanceled<IntermediateType>(unexpectedCts.Token));
             Func<IntermediateType, StateType, ResultType> transform = (_, _) =>
             {
                 executedTransform = true;
@@ -314,7 +409,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             };
             var arg = new StateType();
 
-            var task = SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken).Preserve();
+            var task = SpecializedTasks
+                .TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+                .Preserve();
             Assert.True(task.IsCanceled);
             var exception = Assert.Throws<TaskCanceledException>(() => task.Result);
             Assert.Equal(cancellationToken, exception.CancellationToken);
@@ -348,7 +450,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             };
             var arg = new StateType();
 
-            var task = SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken).Preserve();
+            var task = SpecializedTasks
+                .TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+                .Preserve();
             Assert.False(task.IsCompleted);
 
             gate.Set();
@@ -365,7 +474,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var fault = ExceptionUtilities.Unreachable();
             var cancellationToken = new CancellationToken(canceled: false);
-            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) => throw fault;
+            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) =>
+                throw fault;
             Func<IntermediateType, StateType, ResultType> transform = (_, _) =>
             {
                 executedTransform = true;
@@ -374,7 +484,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var arg = new StateType();
 
 #pragma warning disable CA2012 // Use ValueTasks correctly (the instance is never created)
-            var exception = Assert.Throws<InvalidOperationException>(() => SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken));
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+            );
 #pragma warning restore CA2012 // Use ValueTasks correctly
             Assert.Same(fault, exception);
             Assert.False(executedTransform);
@@ -387,7 +504,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var fault = ExceptionUtilities.Unreachable();
             var cancellationToken = new CancellationToken(canceled: false);
-            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) => new(Task.FromException<IntermediateType>(fault));
+            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) =>
+                new(Task.FromException<IntermediateType>(fault));
             Func<IntermediateType, StateType, ResultType> transform = (_, _) =>
             {
                 executedTransform = true;
@@ -395,7 +513,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             };
             var arg = new StateType();
 
-            var task = SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken).Preserve();
+            var task = SpecializedTasks
+                .TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+                .Preserve();
             Assert.True(task.IsFaulted);
             var exception = Assert.Throws<InvalidOperationException>(() => task.Result);
             Assert.Same(fault, exception);
@@ -423,11 +548,19 @@ namespace Microsoft.CodeAnalysis.UnitTests
             };
             var arg = new StateType();
 
-            var task = SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken).Preserve();
+            var task = SpecializedTasks
+                .TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+                .Preserve();
             Assert.False(task.IsCompleted);
 
             gate.Set();
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => task.AsTask());
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => task.AsTask()
+            );
             Assert.Same(fault, exception);
             Assert.False(executedTransform);
         }
@@ -442,7 +575,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var fault = ExceptionUtilities.Unreachable();
             var cancellationToken = cts.Token;
-            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) => throw fault;
+            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) =>
+                throw fault;
             Func<IntermediateType, StateType, ResultType> transform = (_, _) =>
             {
                 executedTransform = true;
@@ -451,7 +585,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var arg = new StateType();
 
 #pragma warning disable CA2012 // Use ValueTasks correctly (the instance is never created)
-            var exception = Assert.Throws<InvalidOperationException>(() => SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken));
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+            );
 #pragma warning restore CA2012 // Use ValueTasks correctly
             Assert.Same(fault, exception);
             Assert.False(executedTransform);
@@ -467,7 +608,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var fault = ExceptionUtilities.Unreachable();
             var cancellationToken = cts.Token;
-            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) => new(Task.FromException<IntermediateType>(fault));
+            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) =>
+                new(Task.FromException<IntermediateType>(fault));
             Func<IntermediateType, StateType, ResultType> transform = (_, _) =>
             {
                 executedTransform = true;
@@ -475,7 +617,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             };
             var arg = new StateType();
 
-            var task = SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken).Preserve();
+            var task = SpecializedTasks
+                .TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+                .Preserve();
             Assert.True(task.IsCanceled);
             var exception = Assert.Throws<TaskCanceledException>(() => task.Result);
             Assert.Equal(cancellationToken, exception.CancellationToken);
@@ -506,7 +655,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             };
             var arg = new StateType();
 
-            var task = SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken).Preserve();
+            var task = SpecializedTasks
+                .TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+                .Preserve();
             Assert.False(task.IsCompleted);
 
             gate.Set();
@@ -520,13 +676,21 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void Transform_SyncCompletedFunction_FaultedTransform()
         {
             var fault = ExceptionUtilities.Unreachable();
-            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) => new(new IntermediateType());
+            Func<StateType, CancellationToken, ValueTask<IntermediateType>> func = (_, _) =>
+                new(new IntermediateType());
             Func<IntermediateType, StateType, ResultType> transform = (_, _) => throw fault;
             var arg = new StateType();
             var cancellationToken = new CancellationToken(canceled: false);
 
 #pragma warning disable CA2012 // Use ValueTasks correctly (the instance is never created)
-            var exception = Assert.Throws<InvalidOperationException>(() => SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken));
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+                SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+            );
 #pragma warning restore CA2012 // Use ValueTasks correctly
             Assert.Same(fault, exception);
         }
@@ -546,11 +710,19 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var arg = new StateType();
             var cancellationToken = new CancellationToken(canceled: false);
 
-            var task = SpecializedTasks.TransformWithoutIntermediateCancellationExceptionAsync(func, transform, arg, cancellationToken).Preserve();
+            var task = SpecializedTasks
+                .TransformWithoutIntermediateCancellationExceptionAsync(
+                    func,
+                    transform,
+                    arg,
+                    cancellationToken
+                )
+                .Preserve();
             Assert.False(task.IsCompleted);
 
             gate.Set();
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => task.AsTask());
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => task.AsTask()
+            );
             Assert.Same(fault, exception);
         }
     }

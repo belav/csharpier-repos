@@ -25,13 +25,31 @@ public sealed class DefaultHttpContext : HttpContext
     private const int DefaultFeatureCollectionSize = 10;
 
     // Lambdas hoisted to static readonly fields to improve inlining https://github.com/dotnet/roslyn/issues/13624
-    private static readonly Func<IFeatureCollection, IItemsFeature> _newItemsFeature = f => new ItemsFeature();
-    private static readonly Func<DefaultHttpContext, IServiceProvidersFeature> _newServiceProvidersFeature = context => new RequestServicesFeature(context, context.ServiceScopeFactory);
-    private static readonly Func<IFeatureCollection, IHttpAuthenticationFeature> _newHttpAuthenticationFeature = f => new HttpAuthenticationFeature();
-    private static readonly Func<IFeatureCollection, IHttpRequestLifetimeFeature> _newHttpRequestLifetimeFeature = f => new HttpRequestLifetimeFeature();
-    private static readonly Func<IFeatureCollection, ISessionFeature> _newSessionFeature = f => new DefaultSessionFeature();
-    private static readonly Func<IFeatureCollection, ISessionFeature?> _nullSessionFeature = f => null;
-    private static readonly Func<IFeatureCollection, IHttpRequestIdentifierFeature> _newHttpRequestIdentifierFeature = f => new HttpRequestIdentifierFeature();
+    private static readonly Func<IFeatureCollection, IItemsFeature> _newItemsFeature =
+        f => new ItemsFeature();
+    private static readonly Func<
+        DefaultHttpContext,
+        IServiceProvidersFeature
+    > _newServiceProvidersFeature = context => new RequestServicesFeature(
+        context,
+        context.ServiceScopeFactory
+    );
+    private static readonly Func<
+        IFeatureCollection,
+        IHttpAuthenticationFeature
+    > _newHttpAuthenticationFeature = f => new HttpAuthenticationFeature();
+    private static readonly Func<
+        IFeatureCollection,
+        IHttpRequestLifetimeFeature
+    > _newHttpRequestLifetimeFeature = f => new HttpRequestLifetimeFeature();
+    private static readonly Func<IFeatureCollection, ISessionFeature> _newSessionFeature =
+        f => new DefaultSessionFeature();
+    private static readonly Func<IFeatureCollection, ISessionFeature?> _nullSessionFeature = f =>
+        null;
+    private static readonly Func<
+        IFeatureCollection,
+        IHttpRequestIdentifierFeature
+    > _newHttpRequestIdentifierFeature = f => new HttpRequestIdentifierFeature();
 
     private FeatureReferences<FeatureInterfaces> _features;
 
@@ -145,10 +163,12 @@ public sealed class DefaultHttpContext : HttpContext
     public override HttpResponse Response => _response;
 
     /// <inheritdoc/>
-    public override ConnectionInfo Connection => _connection ?? (_connection = new DefaultConnectionInfo(Features));
+    public override ConnectionInfo Connection =>
+        _connection ?? (_connection = new DefaultConnectionInfo(Features));
 
     /// <inheritdoc/>
-    public override WebSocketManager WebSockets => _websockets ?? (_websockets = new DefaultWebSocketManager(Features));
+    public override WebSocketManager WebSockets =>
+        _websockets ?? (_websockets = new DefaultWebSocketManager(Features));
 
     /// <inheritdoc/>
     public override ClaimsPrincipal User
@@ -202,15 +222,13 @@ public sealed class DefaultHttpContext : HttpContext
             var feature = SessionFeatureOrNull;
             if (feature == null)
             {
-                throw new InvalidOperationException("Session has not been configured for this application " +
-                    "or request.");
+                throw new InvalidOperationException(
+                    "Session has not been configured for this application " + "or request."
+                );
             }
             return feature.Session;
         }
-        set
-        {
-            SessionFeature.Session = value;
-        }
+        set { SessionFeature.Session = value; }
     }
 
     // This property exists because of backwards compatibility.
@@ -238,13 +256,19 @@ public sealed class DefaultHttpContext : HttpContext
     [DoesNotReturn]
     private static void ThrowContextDisposed()
     {
-        throw new ObjectDisposedException(nameof(HttpContext), $"Request has finished and {nameof(HttpContext)} disposed.");
+        throw new ObjectDisposedException(
+            nameof(HttpContext),
+            $"Request has finished and {nameof(HttpContext)} disposed."
+        );
     }
 
     private string DebuggerToString()
     {
         // DebuggerToString is also on this type because this project has access to ReasonPhrases.
-        return HttpContextDebugFormatter.ContextToString(this, ReasonPhrases.GetReasonPhrase(Response.StatusCode));
+        return HttpContextDebugFormatter.ContextToString(
+            this,
+            ReasonPhrases.GetReasonPhrase(Response.StatusCode)
+        );
     }
 
     struct FeatureInterfaces

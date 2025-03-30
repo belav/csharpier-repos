@@ -1,45 +1,49 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlCommandAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.MobileControls;
-using System.Drawing;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
-
     /*
      * HtmlCommandAdapter class.
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\HtmlCommandAdapter.uex' path='docs/doc[@for="HtmlCommandAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class HtmlCommandAdapter : HtmlControlAdapter
     {
         /// <include file='doc\HtmlCommandAdapter.uex' path='docs/doc[@for="HtmlCommandAdapter.Control"]/*' />
         protected new Command Control
         {
-            get
-            {
-                return (Command)base.Control;
-            }
+            get { return (Command)base.Control; }
         }
 
         /// <include file='doc\HtmlCommandAdapter.uex' path='docs/doc[@for="HtmlCommandAdapter.Render"]/*' />
@@ -50,17 +54,14 @@ namespace System.Web.UI.MobileControls.Adapters
 
             // If image is defined and renderable, just do it.  Otherwise,
             // render as a link if specified.
-            if (!String.IsNullOrEmpty(Control.ImageUrl) &&
-                Device.SupportsImageSubmit)
+            if (!String.IsNullOrEmpty(Control.ImageUrl) && Device.SupportsImageSubmit)
             {
                 renderImage = true;
             }
-            else if (Control.Format == CommandFormat.Link &&
-                     Device.JavaScript)
+            else if (Control.Format == CommandFormat.Link && Device.JavaScript)
             {
                 renderLink = true;
             }
-
 
             if (renderLink)
             {
@@ -108,31 +109,31 @@ namespace System.Web.UI.MobileControls.Adapters
                 writer.Write("/>");
                 writer.ExitLayout(Style, Control.BreakAfter);
             }
-
         }
 
         /// <include file='doc\HtmlCommandAdapter.uex' path='docs/doc[@for="HtmlCommandAdapter.LoadPostData"]/*' />
-        public override bool LoadPostData(String key,
-                                          NameValueCollection data,
-                                          Object controlPrivateData,
-                                          out bool dataChanged)
+        public override bool LoadPostData(
+            String key,
+            NameValueCollection data,
+            Object controlPrivateData,
+            out bool dataChanged
+        )
         {
             dataChanged = false;
-            
+
             // HTML input tags of type image postback with the coordinates
             // of the click rather than the name of the control.
             String name = Control.UniqueID;
             String postX = data[name + ".x"];
             String postY = data[name + ".y"];
-            if (postX != null && postY != null
-                && postX.Length > 0 && postY.Length > 0)
+            if (postX != null && postY != null && postX.Length > 0 && postY.Length > 0)
             {
                 // set dataChannged to cause RaisePostDataChangedEvent()
                 dataChanged = true;
                 return true;
             }
             // For other command control, defer to default logic in control.
-            return false;     
+            return false;
         }
     }
 }

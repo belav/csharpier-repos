@@ -12,10 +12,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Internal;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Diagnostics.Metrics.Testing;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
@@ -34,7 +34,9 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
         {
             return async connectionContext =>
             {
-                connectionContext.Features.Get<IConnectionMetricsTagsFeature>().Tags.Add(new KeyValuePair<string, object>("custom", "value!"));
+                connectionContext
+                    .Features.Get<IConnectionMetricsTagsFeature>()
+                    .Tags.Add(new KeyValuePair<string, object>("custom", "value!"));
 
                 // Wait for the test to verify the connection has started.
                 await sync.WaitToContinue();
@@ -44,11 +46,26 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
         });
 
         var testMeterFactory = new TestMeterFactory();
-        using var connectionDuration = new MetricCollector<double>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.connection.duration");
-        using var activeConnections = new MetricCollector<long>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.active_connections");
-        using var queuedConnections = new MetricCollector<long>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.queued_connections");
+        using var connectionDuration = new MetricCollector<double>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.connection.duration"
+        );
+        using var activeConnections = new MetricCollector<long>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.active_connections"
+        );
+        using var queuedConnections = new MetricCollector<long>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.queued_connections"
+        );
 
-        var serviceContext = new TestServiceContext(LoggerFactory, metrics: new KestrelMetrics(testMeterFactory));
+        var serviceContext = new TestServiceContext(
+            LoggerFactory,
+            metrics: new KestrelMetrics(testMeterFactory)
+        );
 
         var sendString = "POST / HTTP/1.0\r\nContent-Length: 12\r\n\r\nHello World?";
 
@@ -62,28 +79,45 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
             await sync.WaitForSyncPoint().DefaultTimeout();
 
             Assert.Empty(connectionDuration.GetMeasurementSnapshot());
-            Assert.Collection(activeConnections.GetMeasurementSnapshot(), m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"));
+            Assert.Collection(
+                activeConnections.GetMeasurementSnapshot(),
+                m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
+            );
 
             // Signal that connection can continue.
             sync.Continue();
 
-            await connection.ReceiveEnd(
-                "HTTP/1.1 200 OK",
-                "Connection: close",
-                $"Date: {serviceContext.DateHeaderValue}",
-                "",
-                "Hello World?").DefaultTimeout();
+            await connection
+                .ReceiveEnd(
+                    "HTTP/1.1 200 OK",
+                    "Connection: close",
+                    $"Date: {serviceContext.DateHeaderValue}",
+                    "",
+                    "Hello World?"
+                )
+                .DefaultTimeout();
 
             await connection.WaitForConnectionClose().DefaultTimeout();
         }
 
-        Assert.Collection(connectionDuration.GetMeasurementSnapshot(), m =>
-        {
-            AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", KestrelMetrics.Http11);
-            Assert.Equal("value!", (string)m.Tags["custom"]);
-        });
-        Assert.Collection(activeConnections.GetMeasurementSnapshot(), m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"), m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4"));
-        Assert.Collection(queuedConnections.GetMeasurementSnapshot(), m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"), m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4"));
+        Assert.Collection(
+            connectionDuration.GetMeasurementSnapshot(),
+            m =>
+            {
+                AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", KestrelMetrics.Http11);
+                Assert.Equal("value!", (string)m.Tags["custom"]);
+            }
+        );
+        Assert.Collection(
+            activeConnections.GetMeasurementSnapshot(),
+            m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"),
+            m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
+        );
+        Assert.Collection(
+            queuedConnections.GetMeasurementSnapshot(),
+            m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"),
+            m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
+        );
     }
 
     [Fact]
@@ -97,7 +131,8 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
         {
             return async connectionContext =>
             {
-                hasConnectionMetricsTagsFeature = connectionContext.Features.Get<IConnectionMetricsTagsFeature>() != null;
+                hasConnectionMetricsTagsFeature =
+                    connectionContext.Features.Get<IConnectionMetricsTagsFeature>() != null;
 
                 // Wait for the test to verify the connection has started.
                 await sync.WaitToContinue();
@@ -107,7 +142,10 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
         });
 
         var testMeterFactory = new TestMeterFactory();
-        var serviceContext = new TestServiceContext(LoggerFactory, metrics: new KestrelMetrics(testMeterFactory));
+        var serviceContext = new TestServiceContext(
+            LoggerFactory,
+            metrics: new KestrelMetrics(testMeterFactory)
+        );
 
         var sendString = "POST / HTTP/1.0\r\nContent-Length: 12\r\n\r\nHello World?";
 
@@ -120,9 +158,21 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
             // Wait for connection to start on the server.
             await sync.WaitForSyncPoint();
 
-            using var connectionDuration = new MetricCollector<double>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.connection.duration");
-            using var activeConnections = new MetricCollector<long>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.active_connections");
-            using var queuedConnections = new MetricCollector<long>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.queued_connections");
+            using var connectionDuration = new MetricCollector<double>(
+                testMeterFactory,
+                "Microsoft.AspNetCore.Server.Kestrel",
+                "kestrel.connection.duration"
+            );
+            using var activeConnections = new MetricCollector<long>(
+                testMeterFactory,
+                "Microsoft.AspNetCore.Server.Kestrel",
+                "kestrel.active_connections"
+            );
+            using var queuedConnections = new MetricCollector<long>(
+                testMeterFactory,
+                "Microsoft.AspNetCore.Server.Kestrel",
+                "kestrel.queued_connections"
+            );
 
             // Signal that connection can continue.
             sync.Continue();
@@ -132,7 +182,8 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
                 "Connection: close",
                 $"Date: {serviceContext.DateHeaderValue}",
                 "",
-                "Hello World?");
+                "Hello World?"
+            );
 
             await connection.WaitForConnectionClose();
 
@@ -157,7 +208,9 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
             {
                 currentConnectionContext = connectionContext;
 
-                connectionContext.Features.Get<IConnectionMetricsTagsFeature>().Tags.Add(new KeyValuePair<string, object>("custom", "value!"));
+                connectionContext
+                    .Features.Get<IConnectionMetricsTagsFeature>()
+                    .Tags.Add(new KeyValuePair<string, object>("custom", "value!"));
 
                 // Wait for the test to verify the connection has started.
                 await sync.WaitToContinue();
@@ -167,11 +220,26 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
         });
 
         var testMeterFactory = new TestMeterFactory();
-        using var connectionDuration = new MetricCollector<double>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.connection.duration");
-        using var activeConnections = new MetricCollector<long>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.active_connections");
-        using var queuedConnections = new MetricCollector<long>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.queued_connections");
+        using var connectionDuration = new MetricCollector<double>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.connection.duration"
+        );
+        using var activeConnections = new MetricCollector<long>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.active_connections"
+        );
+        using var queuedConnections = new MetricCollector<long>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.queued_connections"
+        );
 
-        var serviceContext = new TestServiceContext(LoggerFactory, metrics: new KestrelMetrics(testMeterFactory));
+        var serviceContext = new TestServiceContext(
+            LoggerFactory,
+            metrics: new KestrelMetrics(testMeterFactory)
+        );
 
         var sendString = "POST / HTTP/1.0\r\nContent-Length: 12\r\n\r\nHello World?";
 
@@ -181,20 +249,28 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
         var overridenFeature = new TestConnectionMetricsTagsFeature();
         overridenFeature.Tags.Add(new KeyValuePair<string, object>("test", "Value!"));
 
-        using (var connection = server.CreateConnection(featuresAction: features =>
-        {
-            features.Set<IConnectionMetricsTagsFeature>(overridenFeature);
-        }))
+        using (
+            var connection = server.CreateConnection(featuresAction: features =>
+            {
+                features.Set<IConnectionMetricsTagsFeature>(overridenFeature);
+            })
+        )
         {
             await connection.Send(sendString);
 
             // Wait for connection to start on the server.
             await sync.WaitForSyncPoint();
 
-            Assert.NotEqual(overridenFeature, currentConnectionContext.Features.Get<IConnectionMetricsTagsFeature>());
+            Assert.NotEqual(
+                overridenFeature,
+                currentConnectionContext.Features.Get<IConnectionMetricsTagsFeature>()
+            );
 
             Assert.Empty(connectionDuration.GetMeasurementSnapshot());
-            Assert.Collection(activeConnections.GetMeasurementSnapshot(), m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"));
+            Assert.Collection(
+                activeConnections.GetMeasurementSnapshot(),
+                m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
+            );
 
             // Signal that connection can continue.
             sync.Continue();
@@ -204,24 +280,37 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
                 "Connection: close",
                 $"Date: {serviceContext.DateHeaderValue}",
                 "",
-                "Hello World?");
+                "Hello World?"
+            );
 
             await connection.WaitForConnectionClose();
         }
 
-        Assert.Collection(connectionDuration.GetMeasurementSnapshot(), m =>
-        {
-            AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", KestrelMetrics.Http11);
-            Assert.Equal("value!", (string)m.Tags["custom"]);
-            Assert.False(m.Tags.ContainsKey("test"));
-        });
-        Assert.Collection(activeConnections.GetMeasurementSnapshot(), m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"), m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4"));
-        Assert.Collection(queuedConnections.GetMeasurementSnapshot(), m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"), m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4"));
+        Assert.Collection(
+            connectionDuration.GetMeasurementSnapshot(),
+            m =>
+            {
+                AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", KestrelMetrics.Http11);
+                Assert.Equal("value!", (string)m.Tags["custom"]);
+                Assert.False(m.Tags.ContainsKey("test"));
+            }
+        );
+        Assert.Collection(
+            activeConnections.GetMeasurementSnapshot(),
+            m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"),
+            m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
+        );
+        Assert.Collection(
+            queuedConnections.GetMeasurementSnapshot(),
+            m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"),
+            m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
+        );
     }
 
     private sealed class TestConnectionMetricsTagsFeature : IConnectionMetricsTagsFeature
     {
-        public ICollection<KeyValuePair<string, object>> Tags { get; } = new List<KeyValuePair<string, object>>();
+        public ICollection<KeyValuePair<string, object>> Tags { get; } =
+            new List<KeyValuePair<string, object>>();
     }
 
     [Fact]
@@ -242,11 +331,26 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
         });
 
         var testMeterFactory = new TestMeterFactory();
-        using var connectionDuration = new MetricCollector<double>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.connection.duration");
-        using var activeConnections = new MetricCollector<long>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.active_connections");
-        using var queuedConnections = new MetricCollector<long>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.queued_connections");
+        using var connectionDuration = new MetricCollector<double>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.connection.duration"
+        );
+        using var activeConnections = new MetricCollector<long>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.active_connections"
+        );
+        using var queuedConnections = new MetricCollector<long>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.queued_connections"
+        );
 
-        var serviceContext = new TestServiceContext(LoggerFactory, metrics: new KestrelMetrics(testMeterFactory));
+        var serviceContext = new TestServiceContext(
+            LoggerFactory,
+            metrics: new KestrelMetrics(testMeterFactory)
+        );
 
         var sendString = "POST / HTTP/1.0\r\nContent-Length: 12\r\n\r\nHello World?";
 
@@ -260,7 +364,10 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
             await sync.WaitForSyncPoint();
 
             Assert.Empty(connectionDuration.GetMeasurementSnapshot());
-            Assert.Collection(activeConnections.GetMeasurementSnapshot(), m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"));
+            Assert.Collection(
+                activeConnections.GetMeasurementSnapshot(),
+                m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
+            );
 
             // Signal that connection can continue.
             sync.Continue();
@@ -270,13 +377,24 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
             await connection.WaitForConnectionClose();
         }
 
-        Assert.Collection(connectionDuration.GetMeasurementSnapshot(), m =>
-        {
-            AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", httpVersion: null);
-            Assert.Equal("System.InvalidOperationException", (string)m.Tags["error.type"]);
-        });
-        Assert.Collection(activeConnections.GetMeasurementSnapshot(), m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"), m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4"));
-        Assert.Collection(queuedConnections.GetMeasurementSnapshot(), m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"), m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4"));
+        Assert.Collection(
+            connectionDuration.GetMeasurementSnapshot(),
+            m =>
+            {
+                AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", httpVersion: null);
+                Assert.Equal("System.InvalidOperationException", (string)m.Tags["error.type"]);
+            }
+        );
+        Assert.Collection(
+            activeConnections.GetMeasurementSnapshot(),
+            m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"),
+            m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
+        );
+        Assert.Collection(
+            queuedConnections.GetMeasurementSnapshot(),
+            m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"),
+            m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
+        );
     }
 
     [Fact]
@@ -285,27 +403,55 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
         var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
 
         var testMeterFactory = new TestMeterFactory();
-        using var connectionDuration = new MetricCollector<double>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.connection.duration");
-        using var activeConnections = new MetricCollector<long>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.active_connections");
-        using var currentUpgradedRequests = new MetricCollector<long>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.upgraded_connections");
+        using var connectionDuration = new MetricCollector<double>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.connection.duration"
+        );
+        using var activeConnections = new MetricCollector<long>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.active_connections"
+        );
+        using var currentUpgradedRequests = new MetricCollector<long>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.upgraded_connections"
+        );
 
-        var serviceContext = new TestServiceContext(LoggerFactory, metrics: new KestrelMetrics(testMeterFactory));
+        var serviceContext = new TestServiceContext(
+            LoggerFactory,
+            metrics: new KestrelMetrics(testMeterFactory)
+        );
 
         await using var server = new TestServer(UpgradeApp, serviceContext, listenOptions);
 
         using (var connection = server.CreateConnection())
         {
             await connection.SendEmptyGetWithUpgrade();
-            await connection.ReceiveEnd("HTTP/1.1 101 Switching Protocols",
+            await connection.ReceiveEnd(
+                "HTTP/1.1 101 Switching Protocols",
                 "Connection: Upgrade",
                 $"Date: {server.Context.DateHeaderValue}",
                 "",
-                "");
+                ""
+            );
         }
 
-        Assert.Collection(connectionDuration.GetMeasurementSnapshot(), m => AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", KestrelMetrics.Http11));
-        Assert.Collection(activeConnections.GetMeasurementSnapshot(), m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"), m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4"));
-        Assert.Collection(currentUpgradedRequests.GetMeasurementSnapshot(), m => Assert.Equal(1, m.Value), m => Assert.Equal(-1, m.Value));
+        Assert.Collection(
+            connectionDuration.GetMeasurementSnapshot(),
+            m => AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", KestrelMetrics.Http11)
+        );
+        Assert.Collection(
+            activeConnections.GetMeasurementSnapshot(),
+            m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"),
+            m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
+        );
+        Assert.Collection(
+            currentUpgradedRequests.GetMeasurementSnapshot(),
+            m => Assert.Equal(1, m.Value),
+            m => Assert.Equal(-1, m.Value)
+        );
 
         static async Task UpgradeApp(HttpContext context)
         {
@@ -329,28 +475,62 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
         var requestsReceived = 0;
 
         var testMeterFactory = new TestMeterFactory();
-        using var connectionDuration = new MetricCollector<double>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.connection.duration");
-        using var activeConnections = new MetricCollector<long>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.active_connections");
-        using var queuedConnections = new MetricCollector<long>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.queued_connections");
-        using var queuedRequests = new MetricCollector<long>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.queued_requests");
-        using var tlsHandshakeDuration = new MetricCollector<double>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.tls_handshake.duration");
-        using var activeTlsHandshakes = new MetricCollector<long>(testMeterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.active_tls_handshakes");
+        using var connectionDuration = new MetricCollector<double>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.connection.duration"
+        );
+        using var activeConnections = new MetricCollector<long>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.active_connections"
+        );
+        using var queuedConnections = new MetricCollector<long>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.queued_connections"
+        );
+        using var queuedRequests = new MetricCollector<long>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.queued_requests"
+        );
+        using var tlsHandshakeDuration = new MetricCollector<double>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.tls_handshake.duration"
+        );
+        using var activeTlsHandshakes = new MetricCollector<long>(
+            testMeterFactory,
+            "Microsoft.AspNetCore.Server.Kestrel",
+            "kestrel.active_tls_handshakes"
+        );
 
-        await using (var server = new TestServer(context =>
-        {
-            connectionId = context.Features.Get<IHttpConnectionFeature>().ConnectionId;
-            requestsReceived++;
-            return Task.CompletedTask;
-        },
-        new TestServiceContext(LoggerFactory, metrics: new KestrelMetrics(testMeterFactory)),
-        listenOptions =>
-        {
-            listenOptions.UseHttps(_x509Certificate2, options =>
-            {
-                options.SslProtocols = SslProtocols.Tls12;
-            });
-            listenOptions.Protocols = HttpProtocols.Http2;
-        }))
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    connectionId = context.Features.Get<IHttpConnectionFeature>().ConnectionId;
+                    requestsReceived++;
+                    return Task.CompletedTask;
+                },
+                new TestServiceContext(
+                    LoggerFactory,
+                    metrics: new KestrelMetrics(testMeterFactory)
+                ),
+                listenOptions =>
+                {
+                    listenOptions.UseHttps(
+                        _x509Certificate2,
+                        options =>
+                        {
+                            options.SslProtocols = SslProtocols.Tls12;
+                        }
+                    );
+                    listenOptions.Protocols = HttpProtocols.Http2;
+                }
+            )
+        )
         {
             using var connection = server.CreateConnection();
 
@@ -368,8 +548,8 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
                 },
                 SslOptions = new SslClientAuthenticationOptions
                 {
-                    RemoteCertificateValidationCallback = (_, _, _, _) => true
-                }
+                    RemoteCertificateValidationCallback = (_, _, _, _) => true,
+                },
             };
 
             using var httpClient = new HttpClient(socketsHandler);
@@ -391,24 +571,57 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
         Assert.NotNull(connectionId);
         Assert.Equal(2, requestsReceived);
 
-        Assert.Collection(connectionDuration.GetMeasurementSnapshot(), m => AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", KestrelMetrics.Http2, "1.2"));
-        Assert.Collection(activeConnections.GetMeasurementSnapshot(), m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"), m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4"));
-        Assert.Collection(queuedConnections.GetMeasurementSnapshot(), m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"), m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4"));
+        Assert.Collection(
+            connectionDuration.GetMeasurementSnapshot(),
+            m =>
+                AssertDuration(
+                    m,
+                    "127.0.0.1",
+                    localPort: 0,
+                    "tcp",
+                    "ipv4",
+                    KestrelMetrics.Http2,
+                    "1.2"
+                )
+        );
+        Assert.Collection(
+            activeConnections.GetMeasurementSnapshot(),
+            m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"),
+            m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
+        );
+        Assert.Collection(
+            queuedConnections.GetMeasurementSnapshot(),
+            m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"),
+            m => AssertCount(m, -1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
+        );
 
-        Assert.Collection(queuedRequests.GetMeasurementSnapshot(),
+        Assert.Collection(
+            queuedRequests.GetMeasurementSnapshot(),
             m => AssertRequestCount(m, 1, KestrelMetrics.Http2),
             m => AssertRequestCount(m, -1, KestrelMetrics.Http2),
             m => AssertRequestCount(m, 1, KestrelMetrics.Http2),
-            m => AssertRequestCount(m, -1, KestrelMetrics.Http2));
+            m => AssertRequestCount(m, -1, KestrelMetrics.Http2)
+        );
 
-        Assert.Collection(tlsHandshakeDuration.GetMeasurementSnapshot(), m =>
-        {
-            Assert.True(m.Value > 0);
-            Assert.Equal("1.2", (string)m.Tags["tls.protocol.version"]);
-        });
-        Assert.Collection(activeTlsHandshakes.GetMeasurementSnapshot(), m => Assert.Equal(1, m.Value), m => Assert.Equal(-1, m.Value));
+        Assert.Collection(
+            tlsHandshakeDuration.GetMeasurementSnapshot(),
+            m =>
+            {
+                Assert.True(m.Value > 0);
+                Assert.Equal("1.2", (string)m.Tags["tls.protocol.version"]);
+            }
+        );
+        Assert.Collection(
+            activeTlsHandshakes.GetMeasurementSnapshot(),
+            m => Assert.Equal(1, m.Value),
+            m => Assert.Equal(-1, m.Value)
+        );
 
-        static void AssertRequestCount(CollectedMeasurement<long> measurement, long expectedValue, string httpVersion)
+        static void AssertRequestCount(
+            CollectedMeasurement<long> measurement,
+            long expectedValue,
+            string httpVersion
+        )
         {
             Assert.Equal(expectedValue, measurement.Value);
             Assert.Equal("http", (string)measurement.Tags["network.protocol.name"]);
@@ -429,7 +642,15 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
         }
     }
 
-    private static void AssertDuration(CollectedMeasurement<double> measurement, string localAddress, int? localPort, string networkTransport, string networkType, string httpVersion, string tlsProtocolVersion = null)
+    private static void AssertDuration(
+        CollectedMeasurement<double> measurement,
+        string localAddress,
+        int? localPort,
+        string networkTransport,
+        string networkType,
+        string httpVersion,
+        string tlsProtocolVersion = null
+    )
     {
         Assert.True(measurement.Value > 0);
         Assert.Equal(networkTransport, (string)measurement.Tags["network.transport"]);
@@ -470,7 +691,14 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
         }
     }
 
-    private static void AssertCount(CollectedMeasurement<long> measurement, long expectedValue, string localAddress, int? localPort, string networkTransport, string networkType)
+    private static void AssertCount(
+        CollectedMeasurement<long> measurement,
+        long expectedValue,
+        string localAddress,
+        int? localPort,
+        string networkTransport,
+        string networkType
+    )
     {
         Assert.Equal(expectedValue, measurement.Value);
         Assert.Equal(networkTransport, (string)measurement.Tags["network.transport"]);

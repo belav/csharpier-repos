@@ -40,7 +40,19 @@ namespace System.Globalization
     public sealed class NumberFormatInfo : IFormatProvider, ICloneable
     {
         private static volatile NumberFormatInfo? s_invariantInfo;
-        internal static readonly string[] s_asciiDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+        internal static readonly string[] s_asciiDigits =
+        [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+        ];
         internal static readonly int[] s_intArrayWithElement3 = [3];
 
         internal int[] _numberGroupSizes = s_intArrayWithElement3; // default to [3]; only clones of this array are handed out
@@ -52,7 +64,7 @@ namespace System.Globalization
         internal string _numberGroupSeparator = ",";
         internal string _currencyGroupSeparator = ",";
         internal string _currencyDecimalSeparator = ".";
-        internal string _currencySymbol = "\x00a4";  // U+00a4 is the symbol for International Monetary Fund.
+        internal string _currencySymbol = "\x00a4"; // U+00a4 is the symbol for International Monetary Fund.
         internal string _nanSymbol = "NaN";
         internal string _positiveInfinitySymbol = "Infinity";
         internal string _negativeInfinitySymbol = "-Infinity";
@@ -97,9 +109,7 @@ namespace System.Globalization
         // negative sign is not the hyphen. For example, the Swedish culture (e.g. "sv-SE") has U+2212 as the negative sign.
         private bool _allowHyphenDuringParsing;
 
-        public NumberFormatInfo()
-        {
-        }
+        public NumberFormatInfo() { }
 
         private static void VerifyNativeDigits(string[] nativeDig, string propertyName)
         {
@@ -122,17 +132,26 @@ namespace System.Globalization
                     if (nativeDig[i].Length != 2)
                     {
                         // Not 1 or 2 UTF-16 code points
-                        throw new ArgumentException(SR.Argument_InvalidNativeDigitValue, propertyName);
+                        throw new ArgumentException(
+                            SR.Argument_InvalidNativeDigitValue,
+                            propertyName
+                        );
                     }
                     else if (!char.IsSurrogatePair(nativeDig[i][0], nativeDig[i][1]))
                     {
                         // 2 UTF-6 code points, but not a surrogate pair
-                        throw new ArgumentException(SR.Argument_InvalidNativeDigitValue, propertyName);
+                        throw new ArgumentException(
+                            SR.Argument_InvalidNativeDigitValue,
+                            propertyName
+                        );
                     }
                 }
 
-                if (CharUnicodeInfo.GetDecimalDigitValue(nativeDig[i], 0) != i &&
-                    CharUnicodeInfo.GetUnicodeCategory(nativeDig[i], 0) != UnicodeCategory.PrivateUse)
+                if (
+                    CharUnicodeInfo.GetDecimalDigitValue(nativeDig[i], 0) != i
+                    && CharUnicodeInfo.GetUnicodeCategory(nativeDig[i], 0)
+                        != UnicodeCategory.PrivateUse
+                )
                 {
                     // Not the appropriate digit according to the Unicode data properties
                     // (Digit 0 must be a 0, etc.).
@@ -166,17 +185,25 @@ namespace System.Globalization
             // The list of the Minus characters are picked up from the CLDR parse lenient data.
             // e.g. https://github.com/unicode-org/cldr/blob/feb602b06bd18ba7333464bd648b68292e8aa54d/common/main/sw.xml#L1001
 
-            _allowHyphenDuringParsing = _negativeSign.Length == 1 &&
-                                        _negativeSign[0] switch {
-                                            '\u2012' or         // Figure Dash
-                                            '\u207B' or         // Superscript Minus
-                                            '\u208B' or         // Subscript Minus
-                                            '\u2212' or         // Minus Sign
-                                            '\u2796' or         // Heavy Minus Sign
-                                            '\uFE63' or         // Small Hyphen-Minus
-                                            '\uFF0D' => true,   // Fullwidth Hyphen-Minus
-                                            _ => false
-                                        };
+            _allowHyphenDuringParsing =
+                _negativeSign.Length == 1
+                && _negativeSign[0] switch
+                {
+                    '\u2012'
+                    or // Figure Dash
+                    '\u207B'
+                    or // Superscript Minus
+                    '\u208B'
+                    or // Subscript Minus
+                    '\u2212'
+                    or // Minus Sign
+                    '\u2796'
+                    or // Heavy Minus Sign
+                    '\uFE63'
+                    or // Small Hyphen-Minus
+                    '\uFF0D' => true, // Fullwidth Hyphen-Minus
+                    _ => false,
+                };
         }
 
         internal NumberFormatInfo(CultureData? cultureData)
@@ -204,15 +231,17 @@ namespace System.Globalization
         /// supported and constant irrespective of the current culture.
         /// Used by FromString methods.
         /// </summary>
-        public static NumberFormatInfo InvariantInfo => s_invariantInfo ??=
-            // Lazy create the invariant info. This cannot be done in a .cctor because exceptions can
-            // be thrown out of a .cctor stack that will need this.
-            CultureInfo.InvariantCulture.NumberFormat;
+        public static NumberFormatInfo InvariantInfo =>
+            s_invariantInfo ??=
+                // Lazy create the invariant info. This cannot be done in a .cctor because exceptions can
+                // be thrown out of a .cctor stack that will need this.
+                CultureInfo.InvariantCulture.NumberFormat;
 
         public static NumberFormatInfo GetInstance(IFormatProvider? formatProvider)
         {
-            return formatProvider == null ?
-                CurrentInfo : // Fast path for a null provider
+            return formatProvider == null
+                ? CurrentInfo
+                : // Fast path for a null provider
                 GetProviderNonNull(formatProvider);
 
             static NumberFormatInfo GetProviderNonNull(IFormatProvider provider)
@@ -223,10 +252,10 @@ namespace System.Globalization
                     return cultureProvider._numInfo ?? cultureProvider.NumberFormat;
                 }
 
-                return
-                    provider as NumberFormatInfo ?? // Fast path for an NFI
-                    provider.GetFormat(typeof(NumberFormatInfo)) as NumberFormatInfo ??
-                    CurrentInfo;
+                return provider as NumberFormatInfo
+                    ?? // Fast path for an NFI
+                    provider.GetFormat(typeof(NumberFormatInfo)) as NumberFormatInfo
+                    ?? CurrentInfo;
             }
         }
 
@@ -265,12 +294,17 @@ namespace System.Globalization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ReadOnlySpan<TChar> CurrencyDecimalSeparatorTChar<TChar>() where TChar : unmanaged, IUtfChar<TChar>
+        internal ReadOnlySpan<TChar> CurrencyDecimalSeparatorTChar<TChar>()
+            where TChar : unmanaged, IUtfChar<TChar>
         {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-            return typeof(TChar) == typeof(char) ?
-                MemoryMarshal.Cast<char, TChar>(_currencyDecimalSeparator) :
-                MemoryMarshal.Cast<byte, TChar>(_currencyDecimalSeparatorUtf8 ??= Encoding.UTF8.GetBytes(_currencyDecimalSeparator));
+            return typeof(TChar) == typeof(char)
+                ? MemoryMarshal.Cast<char, TChar>(_currencyDecimalSeparator)
+                : MemoryMarshal.Cast<byte, TChar>(
+                    _currencyDecimalSeparatorUtf8 ??= Encoding.UTF8.GetBytes(
+                        _currencyDecimalSeparator
+                    )
+                );
         }
 
         public bool IsReadOnly => _isReadOnly;
@@ -357,12 +391,15 @@ namespace System.Globalization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ReadOnlySpan<TChar> CurrencyGroupSeparatorTChar<TChar>() where TChar : unmanaged, IUtfChar<TChar>
+        internal ReadOnlySpan<TChar> CurrencyGroupSeparatorTChar<TChar>()
+            where TChar : unmanaged, IUtfChar<TChar>
         {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-            return typeof(TChar) == typeof(char) ?
-                MemoryMarshal.Cast<char, TChar>(_currencyGroupSeparator) :
-                MemoryMarshal.Cast<byte, TChar>(_currencyGroupSeparatorUtf8 ??= Encoding.UTF8.GetBytes(_currencyGroupSeparator));
+            return typeof(TChar) == typeof(char)
+                ? MemoryMarshal.Cast<char, TChar>(_currencyGroupSeparator)
+                : MemoryMarshal.Cast<byte, TChar>(
+                    _currencyGroupSeparatorUtf8 ??= Encoding.UTF8.GetBytes(_currencyGroupSeparator)
+                );
         }
 
         public string CurrencySymbol
@@ -379,20 +416,23 @@ namespace System.Globalization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ReadOnlySpan<TChar> CurrencySymbolTChar<TChar>() where TChar : unmanaged, IUtfChar<TChar>
+        internal ReadOnlySpan<TChar> CurrencySymbolTChar<TChar>()
+            where TChar : unmanaged, IUtfChar<TChar>
         {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-            return typeof(TChar) == typeof(char) ?
-                MemoryMarshal.Cast<char, TChar>(_currencySymbol) :
-                MemoryMarshal.Cast<byte, TChar>(_currencySymbolUtf8 ??= Encoding.UTF8.GetBytes(_currencySymbol));
+            return typeof(TChar) == typeof(char)
+                ? MemoryMarshal.Cast<char, TChar>(_currencySymbol)
+                : MemoryMarshal.Cast<byte, TChar>(
+                    _currencySymbolUtf8 ??= Encoding.UTF8.GetBytes(_currencySymbol)
+                );
         }
 
-        internal byte[]? CurrencySymbolUtf8 => _currencySymbolUtf8 ??= Encoding.UTF8.GetBytes(_currencySymbol);
+        internal byte[]? CurrencySymbolUtf8 =>
+            _currencySymbolUtf8 ??= Encoding.UTF8.GetBytes(_currencySymbol);
 
         /// <summary>
         /// Returns the current culture's NumberFormatInfo. Used by Parse methods.
         /// </summary>
-
         public static NumberFormatInfo CurrentInfo
         {
             get
@@ -425,12 +465,15 @@ namespace System.Globalization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ReadOnlySpan<TChar> NaNSymbolTChar<TChar>() where TChar : unmanaged, IUtfChar<TChar>
+        internal ReadOnlySpan<TChar> NaNSymbolTChar<TChar>()
+            where TChar : unmanaged, IUtfChar<TChar>
         {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-            return typeof(TChar) == typeof(char) ?
-                MemoryMarshal.Cast<char, TChar>(_nanSymbol) :
-                MemoryMarshal.Cast<byte, TChar>(_nanSymbolUtf8 ??= Encoding.UTF8.GetBytes(_nanSymbol));
+            return typeof(TChar) == typeof(char)
+                ? MemoryMarshal.Cast<char, TChar>(_nanSymbol)
+                : MemoryMarshal.Cast<byte, TChar>(
+                    _nanSymbolUtf8 ??= Encoding.UTF8.GetBytes(_nanSymbol)
+                );
         }
 
         public int CurrencyNegativePattern
@@ -510,12 +553,15 @@ namespace System.Globalization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ReadOnlySpan<TChar> NegativeInfinitySymbolTChar<TChar>() where TChar : unmanaged, IUtfChar<TChar>
+        internal ReadOnlySpan<TChar> NegativeInfinitySymbolTChar<TChar>()
+            where TChar : unmanaged, IUtfChar<TChar>
         {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-            return typeof(TChar) == typeof(char) ?
-                MemoryMarshal.Cast<char, TChar>(_negativeInfinitySymbol) :
-                MemoryMarshal.Cast<byte, TChar>(_negativeInfinitySymbolUtf8 ??= Encoding.UTF8.GetBytes(_negativeInfinitySymbol));
+            return typeof(TChar) == typeof(char)
+                ? MemoryMarshal.Cast<char, TChar>(_negativeInfinitySymbol)
+                : MemoryMarshal.Cast<byte, TChar>(
+                    _negativeInfinitySymbolUtf8 ??= Encoding.UTF8.GetBytes(_negativeInfinitySymbol)
+                );
         }
 
         public string NegativeSign
@@ -533,12 +579,15 @@ namespace System.Globalization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ReadOnlySpan<TChar> NegativeSignTChar<TChar>() where TChar : unmanaged, IUtfChar<TChar>
+        internal ReadOnlySpan<TChar> NegativeSignTChar<TChar>()
+            where TChar : unmanaged, IUtfChar<TChar>
         {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-            return typeof(TChar) == typeof(char) ?
-                MemoryMarshal.Cast<char, TChar>(_negativeSign) :
-                MemoryMarshal.Cast<byte, TChar>(_negativeSignUtf8 ??= Encoding.UTF8.GetBytes(_negativeSign));
+            return typeof(TChar) == typeof(char)
+                ? MemoryMarshal.Cast<char, TChar>(_negativeSign)
+                : MemoryMarshal.Cast<byte, TChar>(
+                    _negativeSignUtf8 ??= Encoding.UTF8.GetBytes(_negativeSign)
+                );
         }
 
         public int NumberDecimalDigits
@@ -569,12 +618,15 @@ namespace System.Globalization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ReadOnlySpan<TChar> NumberDecimalSeparatorTChar<TChar>() where TChar : unmanaged, IUtfChar<TChar>
+        internal ReadOnlySpan<TChar> NumberDecimalSeparatorTChar<TChar>()
+            where TChar : unmanaged, IUtfChar<TChar>
         {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-            return typeof(TChar) == typeof(char) ?
-                MemoryMarshal.Cast<char, TChar>(_numberDecimalSeparator) :
-                MemoryMarshal.Cast<byte, TChar>(_numberDecimalSeparatorUtf8 ??= Encoding.UTF8.GetBytes(_numberDecimalSeparator));
+            return typeof(TChar) == typeof(char)
+                ? MemoryMarshal.Cast<char, TChar>(_numberDecimalSeparator)
+                : MemoryMarshal.Cast<byte, TChar>(
+                    _numberDecimalSeparatorUtf8 ??= Encoding.UTF8.GetBytes(_numberDecimalSeparator)
+                );
         }
 
         public string NumberGroupSeparator
@@ -590,12 +642,15 @@ namespace System.Globalization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ReadOnlySpan<TChar> NumberGroupSeparatorTChar<TChar>() where TChar : unmanaged, IUtfChar<TChar>
+        internal ReadOnlySpan<TChar> NumberGroupSeparatorTChar<TChar>()
+            where TChar : unmanaged, IUtfChar<TChar>
         {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-            return typeof(TChar) == typeof(char) ?
-                MemoryMarshal.Cast<char, TChar>(_numberGroupSeparator) :
-                MemoryMarshal.Cast<byte, TChar>(_numberGroupSeparatorUtf8 ??= Encoding.UTF8.GetBytes(_numberGroupSeparator));
+            return typeof(TChar) == typeof(char)
+                ? MemoryMarshal.Cast<char, TChar>(_numberGroupSeparator)
+                : MemoryMarshal.Cast<byte, TChar>(
+                    _numberGroupSeparatorUtf8 ??= Encoding.UTF8.GetBytes(_numberGroupSeparator)
+                );
         }
 
         public int CurrencyPositivePattern
@@ -627,12 +682,15 @@ namespace System.Globalization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ReadOnlySpan<TChar> PositiveInfinitySymbolTChar<TChar>() where TChar : unmanaged, IUtfChar<TChar>
+        internal ReadOnlySpan<TChar> PositiveInfinitySymbolTChar<TChar>()
+            where TChar : unmanaged, IUtfChar<TChar>
         {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-            return typeof(TChar) == typeof(char) ?
-                MemoryMarshal.Cast<char, TChar>(_positiveInfinitySymbol) :
-                MemoryMarshal.Cast<byte, TChar>(_positiveInfinitySymbolUtf8 ??= Encoding.UTF8.GetBytes(_positiveInfinitySymbol));
+            return typeof(TChar) == typeof(char)
+                ? MemoryMarshal.Cast<char, TChar>(_positiveInfinitySymbol)
+                : MemoryMarshal.Cast<byte, TChar>(
+                    _positiveInfinitySymbolUtf8 ??= Encoding.UTF8.GetBytes(_positiveInfinitySymbol)
+                );
         }
 
         public string PositiveSign
@@ -650,12 +708,15 @@ namespace System.Globalization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ReadOnlySpan<TChar> PositiveSignTChar<TChar>() where TChar : unmanaged, IUtfChar<TChar>
+        internal ReadOnlySpan<TChar> PositiveSignTChar<TChar>()
+            where TChar : unmanaged, IUtfChar<TChar>
         {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-            return typeof(TChar) == typeof(char) ?
-                MemoryMarshal.Cast<char, TChar>(_positiveSign) :
-                MemoryMarshal.Cast<byte, TChar>(_positiveSignUtf8 ??= Encoding.UTF8.GetBytes(_positiveSign));
+            return typeof(TChar) == typeof(char)
+                ? MemoryMarshal.Cast<char, TChar>(_positiveSign)
+                : MemoryMarshal.Cast<byte, TChar>(
+                    _positiveSignUtf8 ??= Encoding.UTF8.GetBytes(_positiveSign)
+                );
         }
 
         public int PercentDecimalDigits
@@ -686,12 +747,17 @@ namespace System.Globalization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ReadOnlySpan<TChar> PercentDecimalSeparatorTChar<TChar>() where TChar : unmanaged, IUtfChar<TChar>
+        internal ReadOnlySpan<TChar> PercentDecimalSeparatorTChar<TChar>()
+            where TChar : unmanaged, IUtfChar<TChar>
         {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-            return typeof(TChar) == typeof(char) ?
-                MemoryMarshal.Cast<char, TChar>(_percentDecimalSeparator) :
-                MemoryMarshal.Cast<byte, TChar>(_percentDecimalSeparatorUtf8 ??= Encoding.UTF8.GetBytes(_percentDecimalSeparator));
+            return typeof(TChar) == typeof(char)
+                ? MemoryMarshal.Cast<char, TChar>(_percentDecimalSeparator)
+                : MemoryMarshal.Cast<byte, TChar>(
+                    _percentDecimalSeparatorUtf8 ??= Encoding.UTF8.GetBytes(
+                        _percentDecimalSeparator
+                    )
+                );
         }
 
         public string PercentGroupSeparator
@@ -707,12 +773,15 @@ namespace System.Globalization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ReadOnlySpan<TChar> PercentGroupSeparatorTChar<TChar>() where TChar : unmanaged, IUtfChar<TChar>
+        internal ReadOnlySpan<TChar> PercentGroupSeparatorTChar<TChar>()
+            where TChar : unmanaged, IUtfChar<TChar>
         {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-            return typeof(TChar) == typeof(char) ?
-                MemoryMarshal.Cast<char, TChar>(_percentGroupSeparator) :
-                MemoryMarshal.Cast<byte, TChar>(_percentGroupSeparatorUtf8 ??= Encoding.UTF8.GetBytes(_percentGroupSeparator));
+            return typeof(TChar) == typeof(char)
+                ? MemoryMarshal.Cast<char, TChar>(_percentGroupSeparator)
+                : MemoryMarshal.Cast<byte, TChar>(
+                    _percentGroupSeparatorUtf8 ??= Encoding.UTF8.GetBytes(_percentGroupSeparator)
+                );
         }
 
         public string PercentSymbol
@@ -728,12 +797,15 @@ namespace System.Globalization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ReadOnlySpan<TChar> PercentSymbolTChar<TChar>() where TChar : unmanaged, IUtfChar<TChar>
+        internal ReadOnlySpan<TChar> PercentSymbolTChar<TChar>()
+            where TChar : unmanaged, IUtfChar<TChar>
         {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-            return typeof(TChar) == typeof(char) ?
-                MemoryMarshal.Cast<char, TChar>(_percentSymbol) :
-                MemoryMarshal.Cast<byte, TChar>(_percentSymbolUtf8 ??= Encoding.UTF8.GetBytes(_percentSymbol));
+            return typeof(TChar) == typeof(char)
+                ? MemoryMarshal.Cast<char, TChar>(_percentSymbol)
+                : MemoryMarshal.Cast<byte, TChar>(
+                    _percentSymbolUtf8 ??= Encoding.UTF8.GetBytes(_percentSymbol)
+                );
         }
 
         public string PerMilleSymbol
@@ -750,12 +822,15 @@ namespace System.Globalization
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal ReadOnlySpan<TChar> PerMilleSymbolTChar<TChar>() where TChar : unmanaged, IUtfChar<TChar>
+        internal ReadOnlySpan<TChar> PerMilleSymbolTChar<TChar>()
+            where TChar : unmanaged, IUtfChar<TChar>
         {
             Debug.Assert(typeof(TChar) == typeof(char) || typeof(TChar) == typeof(byte));
-            return typeof(TChar) == typeof(char) ?
-                MemoryMarshal.Cast<char, TChar>(_perMilleSymbol) :
-                MemoryMarshal.Cast<byte, TChar>(_perMilleSymbolUtf8 ??= Encoding.UTF8.GetBytes(_perMilleSymbol));
+            return typeof(TChar) == typeof(char)
+                ? MemoryMarshal.Cast<char, TChar>(_perMilleSymbol)
+                : MemoryMarshal.Cast<byte, TChar>(
+                    _perMilleSymbolUtf8 ??= Encoding.UTF8.GetBytes(_perMilleSymbol)
+                );
         }
 
         public string[] NativeDigits
@@ -800,28 +875,47 @@ namespace System.Globalization
         }
 
         // private const NumberStyles InvalidNumberStyles = unchecked((NumberStyles) 0xFFFFFC00);
-        private const NumberStyles InvalidNumberStyles = ~(NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite
-                                                           | NumberStyles.AllowLeadingSign | NumberStyles.AllowTrailingSign
-                                                           | NumberStyles.AllowParentheses | NumberStyles.AllowDecimalPoint
-                                                           | NumberStyles.AllowThousands | NumberStyles.AllowExponent
-                                                           | NumberStyles.AllowCurrencySymbol | NumberStyles.AllowHexSpecifier
-                                                           | NumberStyles.AllowBinarySpecifier);
+        private const NumberStyles InvalidNumberStyles = ~(
+            NumberStyles.AllowLeadingWhite
+            | NumberStyles.AllowTrailingWhite
+            | NumberStyles.AllowLeadingSign
+            | NumberStyles.AllowTrailingSign
+            | NumberStyles.AllowParentheses
+            | NumberStyles.AllowDecimalPoint
+            | NumberStyles.AllowThousands
+            | NumberStyles.AllowExponent
+            | NumberStyles.AllowCurrencySymbol
+            | NumberStyles.AllowHexSpecifier
+            | NumberStyles.AllowBinarySpecifier
+        );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void ValidateParseStyleInteger(NumberStyles style)
         {
             // Check for undefined flags or using AllowHexSpecifier/AllowBinarySpecifier each with anything other than AllowLeadingWhite/AllowTrailingWhite.
-            if ((style & (InvalidNumberStyles | NumberStyles.AllowHexSpecifier | NumberStyles.AllowBinarySpecifier)) != 0 &&
-                (style & ~NumberStyles.HexNumber) != 0 &&
-                (style & ~NumberStyles.BinaryNumber) != 0)
+            if (
+                (
+                    style
+                    & (
+                        InvalidNumberStyles
+                        | NumberStyles.AllowHexSpecifier
+                        | NumberStyles.AllowBinarySpecifier
+                    )
+                ) != 0
+                && (style & ~NumberStyles.HexNumber) != 0
+                && (style & ~NumberStyles.BinaryNumber) != 0
+            )
             {
                 ThrowInvalid(style);
 
                 static void ThrowInvalid(NumberStyles value)
                 {
                     throw new ArgumentException(
-                        (value & InvalidNumberStyles) != 0 ? SR.Argument_InvalidNumberStyles : SR.Arg_InvalidHexBinaryStyle,
-                        nameof(style));
+                        (value & InvalidNumberStyles) != 0
+                            ? SR.Argument_InvalidNumberStyles
+                            : SR.Arg_InvalidHexBinaryStyle,
+                        nameof(style)
+                    );
                 }
             }
         }
@@ -829,12 +923,26 @@ namespace System.Globalization
         internal static void ValidateParseStyleFloatingPoint(NumberStyles style)
         {
             // Check for undefined flags or hex number
-            if ((style & (InvalidNumberStyles | NumberStyles.AllowHexSpecifier | NumberStyles.AllowBinarySpecifier)) != 0)
+            if (
+                (
+                    style
+                    & (
+                        InvalidNumberStyles
+                        | NumberStyles.AllowHexSpecifier
+                        | NumberStyles.AllowBinarySpecifier
+                    )
+                ) != 0
+            )
             {
                 ThrowInvalid(style);
 
                 static void ThrowInvalid(NumberStyles value) =>
-                    throw new ArgumentException((value & InvalidNumberStyles) != 0 ? SR.Argument_InvalidNumberStyles : SR.Arg_HexBinaryStylesNotSupported, nameof(style));
+                    throw new ArgumentException(
+                        (value & InvalidNumberStyles) != 0
+                            ? SR.Argument_InvalidNumberStyles
+                            : SR.Arg_HexBinaryStylesNotSupported,
+                        nameof(style)
+                    );
             }
         }
     }

@@ -38,7 +38,6 @@ namespace System.Runtime
             }
         }
 
-
         public object? Dependent
         {
             get
@@ -77,7 +76,7 @@ namespace System.Runtime
                     ThrowHelper.ThrowInvalidOperationException();
                 }
 
-                object? target =  RuntimeImports.RhHandleGetDependent(handle, out object? dependent);
+                object? target = RuntimeImports.RhHandleGetDependent(handle, out object? dependent);
 
                 return (target, dependent);
             }

@@ -60,10 +60,18 @@ public class EntityEntryTest
     public void Composite_store_generated_key_is_set_only_if_non_sentinel_value_in_store_generated_part()
     {
         using var context = new KeySetContext();
-        Assert.False(context.Entry(new CompositeStoreGeneratedWithSentinel { Id2 = true }).IsKeySet);
-        Assert.False(context.Entry(new CompositeStoreGeneratedWithSentinel { Id1 = 1, Id2 = true }).IsKeySet);
-        Assert.True(context.Entry(new CompositeStoreGeneratedWithSentinel { Id2 = false }).IsKeySet);
-        Assert.True(context.Entry(new CompositeStoreGeneratedWithSentinel { Id1 = 1, Id2 = false }).IsKeySet);
+        Assert.False(
+            context.Entry(new CompositeStoreGeneratedWithSentinel { Id2 = true }).IsKeySet
+        );
+        Assert.False(
+            context.Entry(new CompositeStoreGeneratedWithSentinel { Id1 = 1, Id2 = true }).IsKeySet
+        );
+        Assert.True(
+            context.Entry(new CompositeStoreGeneratedWithSentinel { Id2 = false }).IsKeySet
+        );
+        Assert.True(
+            context.Entry(new CompositeStoreGeneratedWithSentinel { Id1 = 1, Id2 = false }).IsKeySet
+        );
         Assert.True(context.Entry(new CompositeStoreGeneratedWithSentinel()).IsKeySet);
         Assert.True(context.Entry(new CompositeStoreGeneratedWithSentinel { Id1 = 1 }).IsKeySet);
     }
@@ -138,68 +146,62 @@ public class EntityEntryTest
 
     private class KeySetContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(nameof(KeySetContext));
 
-        public DbSet<StoreGenerated> StoreGenerated
-            => Set<StoreGenerated>();
+        public DbSet<StoreGenerated> StoreGenerated => Set<StoreGenerated>();
 
-        public DbSet<StoreGeneratedWithSentinel> StoreGeneratedWithSentinel
-            => Set<StoreGeneratedWithSentinel>();
+        public DbSet<StoreGeneratedWithSentinel> StoreGeneratedWithSentinel =>
+            Set<StoreGeneratedWithSentinel>();
 
-        public DbSet<NotStoreGenerated> NotStoreGenerated
-            => Set<NotStoreGenerated>();
+        public DbSet<NotStoreGenerated> NotStoreGenerated => Set<NotStoreGenerated>();
 
-        public DbSet<CompositeStoreGenerated> CompositeStoreGenerated
-            => Set<CompositeStoreGenerated>();
+        public DbSet<CompositeStoreGenerated> CompositeStoreGenerated =>
+            Set<CompositeStoreGenerated>();
 
-        public DbSet<CompositeStoreGeneratedWithSentinel> CompositeStoreGeneratedWithSentinel
-            => Set<CompositeStoreGeneratedWithSentinel>();
+        public DbSet<CompositeStoreGeneratedWithSentinel> CompositeStoreGeneratedWithSentinel =>
+            Set<CompositeStoreGeneratedWithSentinel>();
 
-        public DbSet<CompositeNotStoreGenerated> CompositeNotStoreGenerated
-            => Set<CompositeNotStoreGenerated>();
+        public DbSet<CompositeNotStoreGenerated> CompositeNotStoreGenerated =>
+            Set<CompositeNotStoreGenerated>();
 
-        public DbSet<Dependent> Dependent
-            => Set<Dependent>();
+        public DbSet<Dependent> Dependent => Set<Dependent>();
 
         protected internal override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<StoreGenerated>()
+            modelBuilder
+                .Entity<StoreGenerated>()
                 .HasOne(e => e.Dependent)
                 .WithOne(e => e.Principal)
                 .HasForeignKey<Dependent>(e => e.Id);
 
-            modelBuilder.Entity<StoreGeneratedWithSentinel>(
-                b =>
-                {
-                    b.Property(e => e.Id).HasSentinel(667);
-                    b.HasOne(e => e.Dependent)
-                        .WithOne(e => e.Principal)
-                        .HasForeignKey<DependentWithSentinel>(e => e.Id);
-                });
+            modelBuilder.Entity<StoreGeneratedWithSentinel>(b =>
+            {
+                b.Property(e => e.Id).HasSentinel(667);
+                b.HasOne(e => e.Dependent)
+                    .WithOne(e => e.Principal)
+                    .HasForeignKey<DependentWithSentinel>(e => e.Id);
+            });
 
             modelBuilder.Entity<DependentWithSentinel>().Property(e => e.Id).HasSentinel(667);
 
             modelBuilder.Entity<NotStoreGenerated>().Property(e => e.Id).ValueGeneratedNever();
 
-            modelBuilder.Entity<CompositeNotStoreGenerated>().HasKey(
-                e => new { e.Id1, e.Id2 });
+            modelBuilder.Entity<CompositeNotStoreGenerated>().HasKey(e => new { e.Id1, e.Id2 });
 
-            modelBuilder.Entity<CompositeStoreGenerated>(
-                b =>
-                {
-                    b.HasKey(e => new { e.Id1, e.Id2 });
-                    b.Property(e => e.Id2).ValueGeneratedOnAdd();
-                });
+            modelBuilder.Entity<CompositeStoreGenerated>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+                b.Property(e => e.Id2).ValueGeneratedOnAdd();
+            });
 
-            modelBuilder.Entity<CompositeStoreGeneratedWithSentinel>(
-                b =>
-                {
-                    b.HasKey(e => new { e.Id1, e.Id2 });
-                    b.Property(e => e.Id2).ValueGeneratedOnAdd().HasSentinel(true);
-                });
+            modelBuilder.Entity<CompositeStoreGeneratedWithSentinel>(b =>
+            {
+                b.HasKey(e => new { e.Id1, e.Id2 });
+                b.Property(e => e.Id2).ValueGeneratedOnAdd().HasSentinel(true);
+            });
         }
     }
 
@@ -292,11 +294,17 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.InvalidEnumValue("-1", "value", typeof(EntityState).FullName),
-            Assert.Throws<ArgumentException>(() => context.Entry(entity).State = (EntityState)(-1)).Message);
+            Assert
+                .Throws<ArgumentException>(() => context.Entry(entity).State = (EntityState)(-1))
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.InvalidEnumValue("5", "value", typeof(EntityState).FullName),
-            Assert.Throws<ArgumentException>(() => context.Entry(entity).State = (EntityState)(5)).Message);
+            Assert
+                .Throws<ArgumentException>(() => context.Entry(entity).State = (EntityState)(5))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -407,8 +415,16 @@ public class EntityEntryTest
         var entity = context.Add(CreateChunky()).Entity;
 
         Assert.Equal(
-            CoreStrings.WrongGenericPropertyType("Monkey", entity.GetType().ShortDisplayName(), "int", "string"),
-            Assert.Throws<ArgumentException>(() => context.Entry(entity).Property<string>("Monkey")).Message);
+            CoreStrings.WrongGenericPropertyType(
+                "Monkey",
+                entity.GetType().ShortDisplayName(),
+                "int",
+                "string"
+            ),
+            Assert
+                .Throws<ArgumentException>(() => context.Entry(entity).Property<string>("Monkey"))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -428,13 +444,28 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Property("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Property("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Property("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Property("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Property<int>("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Property<int>("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -470,10 +501,14 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(CreateChunky()).Entity;
-        var navigationBase = (INavigationBase)context.Entry(entity).Metadata.FindNavigation("Garcia")!;
+        var navigationBase = (INavigationBase)
+            context.Entry(entity).Metadata.FindNavigation("Garcia")!;
 
         Assert.Same(navigationBase, context.Entry(entity).Reference(navigationBase).Metadata);
-        Assert.Same(navigationBase, context.Entry((object)entity).Reference(navigationBase).Metadata);
+        Assert.Same(
+            navigationBase,
+            context.Entry((object)entity).Reference(navigationBase).Metadata
+        );
     }
 
     [ConditionalFact]
@@ -481,9 +516,13 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(CreateChunky()).Entity;
-        var navigationBase = (INavigationBase)context.Entry(entity).Metadata.FindNavigation("Garcia")!;
+        var navigationBase = (INavigationBase)
+            context.Entry(entity).Metadata.FindNavigation("Garcia")!;
 
-        Assert.Same(navigationBase, context.Entry(entity).Reference<Cherry>(navigationBase).Metadata);
+        Assert.Same(
+            navigationBase,
+            context.Entry(entity).Reference<Cherry>(navigationBase).Metadata
+        );
     }
 
     [ConditionalFact]
@@ -494,13 +533,28 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Reference("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Reference("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference<Cherry>("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference<Cherry>("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -511,26 +565,60 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Monkey", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference("Monkey").Metadata.Name).Message);
+                "Monkey",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference("Monkey").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Monkey", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Reference("Monkey").Metadata.Name)
-                .Message);
+                "Monkey",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Reference("Monkey").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Monkey", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference<Random>("Monkey").Metadata.Name)
-                .Message);
+                "Monkey",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference<Random>("Monkey").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Nonkey", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference(e => e.Nonkey).Metadata.Name).Message);
+                "Nonkey",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference(e => e.Nonkey).Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -541,47 +629,101 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.ReferenceIsCollection(
-                "Monkeys", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference("Monkeys")).Message);
+                "Monkeys",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => context.Entry(entity).Reference("Monkeys"))
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ReferenceIsCollection(
-                "Monkeys", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Reference("Monkeys")).Message);
+                "Monkeys",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Reference("Monkeys")
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ReferenceIsCollection(
-                "Monkeys", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference<Random>("Monkeys")).Message);
+                "Monkeys",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference<Random>("Monkeys")
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ReferenceIsCollection(
-                "Monkeys", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference(e => e.Monkeys)).Message);
+                "Monkeys",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference(e => e.Monkeys)
+                )
+                .Message
+        );
 
         var navigationBase = context.Entry(entity).Navigation("Monkeys").Metadata;
 
         Assert.Equal(
             CoreStrings.ReferenceIsCollection(
-                "Monkeys", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference(navigationBase)).Message);
+                "Monkeys",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference(navigationBase)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ReferenceIsCollection(
-                "Monkeys", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Reference(navigationBase)).Message);
+                "Monkeys",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Reference(navigationBase)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ReferenceIsCollection(
-                "Monkeys", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference<Random>(navigationBase)).Message);
+                "Monkeys",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference<Random>(navigationBase)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -617,10 +759,14 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(CreateCherry()).Entity;
-        var navigationBase = (INavigationBase)context.Entry(entity).Metadata.FindNavigation("Monkeys")!;
+        var navigationBase = (INavigationBase)
+            context.Entry(entity).Metadata.FindNavigation("Monkeys")!;
 
         Assert.Same(navigationBase, context.Entry(entity).Collection(navigationBase).Metadata);
-        Assert.Same(navigationBase, context.Entry((object)entity).Collection(navigationBase).Metadata);
+        Assert.Same(
+            navigationBase,
+            context.Entry((object)entity).Collection(navigationBase).Metadata
+        );
     }
 
     [ConditionalFact]
@@ -628,9 +774,13 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(CreateCherry()).Entity;
-        var navigationBase = (INavigationBase)context.Entry(entity).Metadata.FindNavigation("Monkeys")!;
+        var navigationBase = (INavigationBase)
+            context.Entry(entity).Metadata.FindNavigation("Monkeys")!;
 
-        Assert.Same(navigationBase, context.Entry(entity).Collection<Chunky>(navigationBase).Metadata);
+        Assert.Same(
+            navigationBase,
+            context.Entry(entity).Collection<Chunky>(navigationBase).Metadata
+        );
     }
 
     [ConditionalFact]
@@ -641,15 +791,28 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Collection("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Collection("Chimp").Metadata.Name)
-                .Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Collection("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection<Cherry>("Chimp").Metadata.Name)
-                .Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Collection<Cherry>("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -660,21 +823,46 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection("Garcia").Metadata.Name).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Collection("Garcia").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Collection("Garcia").Metadata.Name)
-                .Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Collection("Garcia").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection<Random>("Garcia").Metadata.Name)
-                .Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Collection<Random>("Garcia").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -685,41 +873,87 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.CollectionIsReference(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Collection), nameof(EntityEntry.Reference)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection("Garcia")).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Reference)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => context.Entry(entity).Collection("Garcia"))
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.CollectionIsReference(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Collection), nameof(EntityEntry.Reference)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Collection("Garcia")).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Reference)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Collection("Garcia")
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.CollectionIsReference(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Collection), nameof(EntityEntry.Reference)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection<Cherry>("Garcia")).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Reference)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Collection<Cherry>("Garcia")
+                )
+                .Message
+        );
 
         var navigationBase = context.Entry(entity).Navigation("Garcia").Metadata;
 
         Assert.Equal(
             CoreStrings.CollectionIsReference(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Collection), nameof(EntityEntry.Reference)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection(navigationBase)).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Reference)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Collection(navigationBase)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.CollectionIsReference(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Collection), nameof(EntityEntry.Reference)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Collection(navigationBase)).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Reference)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Collection(navigationBase)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.CollectionIsReference(
-                "Garcia", entity.GetType().Name,
-                nameof(EntityEntry.Collection), nameof(EntityEntry.Reference)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection<Cherry>(navigationBase)).Message);
+                "Garcia",
+                entity.GetType().Name,
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Reference)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Collection<Cherry>(navigationBase)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -745,10 +979,20 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Member("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Member("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Member("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Member("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -837,11 +1081,20 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Navigation("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Navigation("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", entity.GetType().Name),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Navigation("Chimp").Metadata.Name)
-                .Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Navigation("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -879,7 +1132,8 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(CreateChunky()).Entity;
-        var navigationBase = (INavigationBase)context.Entry(entity).Metadata.FindNavigation("Garcia")!;
+        var navigationBase = (INavigationBase)
+            context.Entry(entity).Metadata.FindNavigation("Garcia")!;
 
         var entry = context.Entry(entity).Navigation(navigationBase);
         Assert.Same(navigationBase, entry.Metadata);
@@ -895,7 +1149,8 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(CreateCherry()).Entity;
-        var navigationBase = (INavigationBase)context.Entry(entity).Metadata.FindNavigation("Monkeys")!;
+        var navigationBase = (INavigationBase)
+            context.Entry(entity).Metadata.FindNavigation("Monkeys")!;
 
         var entry = context.Entry(entity).Navigation(navigationBase);
         Assert.Same(navigationBase, entry.Metadata);
@@ -914,15 +1169,32 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Monkey", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Navigation("Monkey").Metadata.Name).Message);
+                "Monkey",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Navigation("Monkey").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Monkey", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Navigation("Monkey").Metadata.Name)
-                .Message);
+                "Monkey",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Navigation("Monkey").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -931,8 +1203,11 @@ public class EntityEntryTest
         using var context = new FreezerContext();
         var entity = context.Attach(CreateChunky()).Entity;
 
-        var modified = context.Entry(entity).Properties
-            .Where(e => e.IsModified).Select(e => e.Metadata.Name).ToList();
+        var modified = context
+            .Entry(entity)
+            .Properties.Where(e => e.IsModified)
+            .Select(e => e.Metadata.Name)
+            .ToList();
 
         Assert.Empty(modified);
 
@@ -941,11 +1216,13 @@ public class EntityEntryTest
 
         context.ChangeTracker.DetectChanges();
 
-        modified = context.Entry(entity).Properties
-            .Where(e => e.IsModified).Select(e => e.Metadata.Name).ToList();
+        modified = context
+            .Entry(entity)
+            .Properties.Where(e => e.IsModified)
+            .Select(e => e.Metadata.Name)
+            .ToList();
 
-        Assert.Equal(
-            new List<string> { "GarciaId", "Nonkey" }, modified);
+        Assert.Equal(new List<string> { "GarciaId", "Nonkey" }, modified);
     }
 
     [ConditionalFact]
@@ -953,39 +1230,19 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         Assert.Equal(
-            new List<string>
-            {
-                "Id",
-                "GarciaId",
-                "Monkey",
-                "Nonkey",
-                "Culture",
-                "Milk",
-                "Garcia"
-            },
-            context.Attach(CreateChunky()).Members.Select(e => e.Metadata.Name).ToList());
+            new List<string> { "Id", "GarciaId", "Monkey", "Nonkey", "Culture", "Milk", "Garcia" },
+            context.Attach(CreateChunky()).Members.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
-            new List<string>
-            {
-                "Id",
-                "Garcia",
-                "Culture",
-                "Milk",
-                "Baked",
-                "Monkeys"
-            },
-            context.Attach(CreateCherry()).Members.Select(e => e.Metadata.Name).ToList());
+            new List<string> { "Id", "Garcia", "Culture", "Milk", "Baked", "Monkeys" },
+            context.Attach(CreateCherry()).Members.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
-            new List<string>
-            {
-                "Id",
-                "Baked",
-                "GarciaId",
-                "Garcia"
-            },
-            context.Attach(new Half()).Members.Select(e => e.Metadata.Name).ToList());
+            new List<string> { "Id", "Baked", "GarciaId", "Garcia" },
+            context.Attach(new Half()).Members.Select(e => e.Metadata.Name).ToList()
+        );
     }
 
     [ConditionalFact]
@@ -993,27 +1250,19 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         Assert.Equal(
-            new List<string>
-            {
-                "Id",
-                "GarciaId",
-                "Monkey",
-                "Nonkey"
-            },
-            context.Attach(CreateChunky()).Properties.Select(e => e.Metadata.Name).ToList());
+            new List<string> { "Id", "GarciaId", "Monkey", "Nonkey" },
+            context.Attach(CreateChunky()).Properties.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
             new List<string> { "Id", "Garcia" },
-            context.Attach(CreateCherry()).Properties.Select(e => e.Metadata.Name).ToList());
+            context.Attach(CreateCherry()).Properties.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
-            new List<string>
-            {
-                "Id",
-                "Baked",
-                "GarciaId"
-            },
-            context.Attach(new Half()).Properties.Select(e => e.Metadata.Name).ToList());
+            new List<string> { "Id", "Baked", "GarciaId" },
+            context.Attach(new Half()).Properties.Select(e => e.Metadata.Name).ToList()
+        );
     }
 
     [ConditionalFact]
@@ -1022,15 +1271,18 @@ public class EntityEntryTest
         using var context = new FreezerContext();
         Assert.Equal(
             new List<string> { "Garcia" },
-            context.Attach(CreateChunky()).Navigations.Select(e => e.Metadata.Name).ToList());
+            context.Attach(CreateChunky()).Navigations.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
             new List<string> { "Baked", "Monkeys" },
-            context.Attach(CreateCherry()).Navigations.Select(e => e.Metadata.Name).ToList());
+            context.Attach(CreateCherry()).Navigations.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
             new List<string> { "Garcia" },
-            context.Attach(new Half()).Navigations.Select(e => e.Metadata.Name).ToList());
+            context.Attach(new Half()).Navigations.Select(e => e.Metadata.Name).ToList()
+        );
     }
 
     [ConditionalFact]
@@ -1039,26 +1291,32 @@ public class EntityEntryTest
         using var context = new FreezerContext();
         Assert.Equal(
             new List<string> { "Garcia" },
-            context.Attach(CreateChunky()).References.Select(e => e.Metadata.Name).ToList());
+            context.Attach(CreateChunky()).References.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
             new List<string> { "Baked" },
-            context.Attach(CreateCherry()).References.Select(e => e.Metadata.Name).ToList());
+            context.Attach(CreateCherry()).References.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
             new List<string> { "Garcia" },
-            context.Attach(new Half()).References.Select(e => e.Metadata.Name).ToList());
+            context.Attach(new Half()).References.Select(e => e.Metadata.Name).ToList()
+        );
     }
 
     [ConditionalFact]
     public void Can_get_all_collection_entries()
     {
         using var context = new FreezerContext();
-        Assert.Empty(context.Attach(CreateChunky()).Collections.Select(e => e.Metadata.Name).ToList());
+        Assert.Empty(
+            context.Attach(CreateChunky()).Collections.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
             new List<string> { "Monkeys" },
-            context.Attach(CreateCherry()).Collections.Select(e => e.Metadata.Name).ToList());
+            context.Attach(CreateCherry()).Collections.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Empty(context.Attach(new Half()).Collections.Select(e => e.Metadata.Name).ToList());
     }
@@ -1071,7 +1329,10 @@ public class EntityEntryTest
 
         Assert.Equal("Culture", context.Entry(entity).ComplexProperty("Culture").Metadata.Name);
         Assert.Equal("Milk", context.Entry(entity).ComplexProperty("Milk").Metadata.Name);
-        Assert.Equal("Culture", context.Entry((object)entity).ComplexProperty("Culture").Metadata.Name);
+        Assert.Equal(
+            "Culture",
+            context.Entry((object)entity).ComplexProperty("Culture").Metadata.Name
+        );
         Assert.Equal("Milk", context.Entry((object)entity).ComplexProperty("Milk").Metadata.Name);
     }
 
@@ -1081,7 +1342,10 @@ public class EntityEntryTest
         using var context = new FreezerContext();
         var entity = context.Add(CreateChunky()).Entity;
 
-        Assert.Equal("Culture", context.Entry(entity).ComplexProperty<Culture>("Culture").Metadata.Name);
+        Assert.Equal(
+            "Culture",
+            context.Entry(entity).ComplexProperty<Culture>("Culture").Metadata.Name
+        );
         Assert.Equal("Milk", context.Entry(entity).ComplexProperty<Milk>("Milk").Metadata.Name);
     }
 
@@ -1093,8 +1357,14 @@ public class EntityEntryTest
         var cultureProperty = context.Entry(entity).Metadata.FindComplexProperty("Culture")!;
         var milkProperty = context.Entry(entity).Metadata.FindComplexProperty("Milk")!;
 
-        Assert.Same(cultureProperty, context.Entry(entity).ComplexProperty(cultureProperty).Metadata);
-        Assert.Same(milkProperty, context.Entry((object)entity).ComplexProperty(milkProperty).Metadata);
+        Assert.Same(
+            cultureProperty,
+            context.Entry(entity).ComplexProperty(cultureProperty).Metadata
+        );
+        Assert.Same(
+            milkProperty,
+            context.Entry((object)entity).ComplexProperty(milkProperty).Metadata
+        );
     }
 
     [ConditionalFact]
@@ -1105,8 +1375,14 @@ public class EntityEntryTest
         var cultureProperty = context.Entry(entity).Metadata.FindComplexProperty("Culture")!;
         var milkProperty = context.Entry(entity).Metadata.FindComplexProperty("Milk")!;
 
-        Assert.Same(cultureProperty, context.Entry(entity).ComplexProperty<Culture>(cultureProperty).Metadata);
-        Assert.Same(milkProperty, context.Entry(entity).ComplexProperty<Milk>(milkProperty).Metadata);
+        Assert.Same(
+            cultureProperty,
+            context.Entry(entity).ComplexProperty<Culture>(cultureProperty).Metadata
+        );
+        Assert.Same(
+            milkProperty,
+            context.Entry(entity).ComplexProperty<Milk>(milkProperty).Metadata
+        );
     }
 
     [ConditionalFact]
@@ -1116,12 +1392,32 @@ public class EntityEntryTest
         var entity = context.Add(CreateChunky()).Entity;
 
         Assert.Equal(
-            CoreStrings.WrongGenericPropertyType("Culture", entity.GetType().ShortDisplayName(), "Culture", "string"),
-            Assert.Throws<ArgumentException>(() => context.Entry(entity).ComplexProperty<string>("Culture")).Message);
+            CoreStrings.WrongGenericPropertyType(
+                "Culture",
+                entity.GetType().ShortDisplayName(),
+                "Culture",
+                "string"
+            ),
+            Assert
+                .Throws<ArgumentException>(() =>
+                    context.Entry(entity).ComplexProperty<string>("Culture")
+                )
+                .Message
+        );
 
         Assert.Equal(
-            CoreStrings.WrongGenericPropertyType("Milk", entity.GetType().ShortDisplayName(), "Milk", "string"),
-            Assert.Throws<ArgumentException>(() => context.Entry(entity).ComplexProperty<string>("Milk")).Message);
+            CoreStrings.WrongGenericPropertyType(
+                "Milk",
+                entity.GetType().ShortDisplayName(),
+                "Milk",
+                "string"
+            ),
+            Assert
+                .Throws<ArgumentException>(() =>
+                    context.Entry(entity).ComplexProperty<string>("Milk")
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1130,7 +1426,10 @@ public class EntityEntryTest
         using var context = new FreezerContext();
         var entity = context.Add(CreateChunky()).Entity;
 
-        Assert.Equal("Culture", context.Entry(entity).ComplexProperty(e => e.Culture).Metadata.Name);
+        Assert.Equal(
+            "Culture",
+            context.Entry(entity).ComplexProperty(e => e.Culture).Metadata.Name
+        );
         Assert.Equal("Milk", context.Entry(entity).ComplexProperty(e => e.Milk).Metadata.Name);
     }
 
@@ -1142,13 +1441,28 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.ComplexPropertyNotFound(entity.GetType().Name, "Chimp"),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).ComplexProperty("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).ComplexProperty("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.ComplexPropertyNotFound(entity.GetType().Name, "Chimp"),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).ComplexProperty("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).ComplexProperty("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.ComplexPropertyNotFound(entity.GetType().Name, "Chimp"),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).ComplexProperty<int>("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).ComplexProperty<int>("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1159,44 +1473,103 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Culture", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference("Culture").Metadata.Name).Message);
+                "Culture",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference("Culture").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Culture", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Reference("Culture").Metadata.Name)
-                .Message);
+                "Culture",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Reference("Culture").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Culture", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference<Random>("Culture").Metadata.Name)
-                .Message);
+                "Culture",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference<Random>("Culture").Metadata.Name
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Milk", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference("Milk").Metadata.Name).Message);
+                "Milk",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference("Milk").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Milk", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Reference("Milk").Metadata.Name)
-                .Message);
+                "Milk",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Reference("Milk").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Milk", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference<Random>("Milk").Metadata.Name)
-                .Message);
+                "Milk",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference<Random>("Milk").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Milk", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference(e => e.Milk).Metadata.Name).Message);
+                "Milk",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference(e => e.Milk).Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1207,39 +1580,89 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Culture", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection("Culture").Metadata.Name).Message);
+                "Culture",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Collection("Culture").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Culture", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Collection("Culture").Metadata.Name)
-                .Message);
+                "Culture",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Collection("Culture").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Culture", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection<Random>("Culture").Metadata.Name)
-                .Message);
+                "Culture",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Collection<Random>("Culture").Metadata.Name
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Milk", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection("Milk").Metadata.Name).Message);
+                "Milk",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Collection("Milk").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Milk", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Collection("Milk").Metadata.Name)
-                .Message);
+                "Milk",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Collection("Milk").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Milk", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Collection<Random>("Milk").Metadata.Name)
-                .Message);
+                "Milk",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Collection<Random>("Milk").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1270,7 +1693,8 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(CreateChunky()).Entity;
-        var cultureBase = (IPropertyBase)context.Entry(entity).Metadata.FindComplexProperty("Culture")!;
+        var cultureBase = (IPropertyBase)
+            context.Entry(entity).Metadata.FindComplexProperty("Culture")!;
         var milkBase = (IPropertyBase)context.Entry(entity).Metadata.FindComplexProperty("Milk")!;
 
         var entry = context.Entry(entity).Member(cultureBase);
@@ -1298,15 +1722,32 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Culture", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Navigation("Culture").Metadata.Name).Message);
+                "Culture",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Navigation("Culture").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Culture", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Navigation("Culture").Metadata.Name)
-                .Message);
+                "Culture",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Navigation("Culture").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1315,11 +1756,13 @@ public class EntityEntryTest
         using var context = new FreezerContext();
         Assert.Equal(
             new List<string> { "Culture", "Milk" },
-            context.Attach(CreateChunky()).ComplexProperties.Select(e => e.Metadata.Name).ToList());
+            context.Attach(CreateChunky()).ComplexProperties.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
             new List<string> { "Culture", "Milk" },
-            context.Attach(CreateCherry()).ComplexProperties.Select(e => e.Metadata.Name).ToList());
+            context.Attach(CreateCherry()).ComplexProperties.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Empty(context.Attach(new Half()).ComplexProperties);
     }
@@ -1332,7 +1775,10 @@ public class EntityEntryTest
 
         Assert.Equal("Culture", context.Entry(entity).ComplexProperty("Culture").Metadata.Name);
         Assert.Equal("Milk", context.Entry(entity).ComplexProperty("Milk").Metadata.Name);
-        Assert.Equal("Culture", context.Entry((object)entity).ComplexProperty("Culture").Metadata.Name);
+        Assert.Equal(
+            "Culture",
+            context.Entry((object)entity).ComplexProperty("Culture").Metadata.Name
+        );
         Assert.Equal("Milk", context.Entry((object)entity).ComplexProperty("Milk").Metadata.Name);
     }
 
@@ -1342,8 +1788,14 @@ public class EntityEntryTest
         using var context = new FreezerContext();
         var entity = context.Add(CreateCherry()).Entity;
 
-        Assert.Equal("Culture", context.Entry(entity).ComplexProperty<FieldCulture>("Culture").Metadata.Name);
-        Assert.Equal("Milk", context.Entry(entity).ComplexProperty<FieldMilk>("Milk").Metadata.Name);
+        Assert.Equal(
+            "Culture",
+            context.Entry(entity).ComplexProperty<FieldCulture>("Culture").Metadata.Name
+        );
+        Assert.Equal(
+            "Milk",
+            context.Entry(entity).ComplexProperty<FieldMilk>("Milk").Metadata.Name
+        );
     }
 
     [ConditionalFact]
@@ -1354,8 +1806,14 @@ public class EntityEntryTest
         var cultureProperty = context.Entry(entity).Metadata.FindComplexProperty("Culture")!;
         var milkProperty = context.Entry(entity).Metadata.FindComplexProperty("Milk")!;
 
-        Assert.Same(cultureProperty, context.Entry(entity).ComplexProperty(cultureProperty).Metadata);
-        Assert.Same(milkProperty, context.Entry((object)entity).ComplexProperty(milkProperty).Metadata);
+        Assert.Same(
+            cultureProperty,
+            context.Entry(entity).ComplexProperty(cultureProperty).Metadata
+        );
+        Assert.Same(
+            milkProperty,
+            context.Entry((object)entity).ComplexProperty(milkProperty).Metadata
+        );
     }
 
     [ConditionalFact]
@@ -1366,8 +1824,14 @@ public class EntityEntryTest
         var cultureProperty = context.Entry(entity).Metadata.FindComplexProperty("Culture")!;
         var milkProperty = context.Entry(entity).Metadata.FindComplexProperty("Milk")!;
 
-        Assert.Same(cultureProperty, context.Entry(entity).ComplexProperty<FieldCulture>(cultureProperty).Metadata);
-        Assert.Same(milkProperty, context.Entry(entity).ComplexProperty<FieldMilk>(milkProperty).Metadata);
+        Assert.Same(
+            cultureProperty,
+            context.Entry(entity).ComplexProperty<FieldCulture>(cultureProperty).Metadata
+        );
+        Assert.Same(
+            milkProperty,
+            context.Entry(entity).ComplexProperty<FieldMilk>(milkProperty).Metadata
+        );
     }
 
     [ConditionalFact]
@@ -1377,12 +1841,32 @@ public class EntityEntryTest
         var entity = context.Add(CreateCherry()).Entity;
 
         Assert.Equal(
-            CoreStrings.WrongGenericPropertyType("Culture", entity.GetType().ShortDisplayName(), "FieldCulture", "string"),
-            Assert.Throws<ArgumentException>(() => context.Entry(entity).ComplexProperty<string>("Culture")).Message);
+            CoreStrings.WrongGenericPropertyType(
+                "Culture",
+                entity.GetType().ShortDisplayName(),
+                "FieldCulture",
+                "string"
+            ),
+            Assert
+                .Throws<ArgumentException>(() =>
+                    context.Entry(entity).ComplexProperty<string>("Culture")
+                )
+                .Message
+        );
 
         Assert.Equal(
-            CoreStrings.WrongGenericPropertyType("Milk", entity.GetType().ShortDisplayName(), "FieldMilk", "string"),
-            Assert.Throws<ArgumentException>(() => context.Entry(entity).ComplexProperty<string>("Milk")).Message);
+            CoreStrings.WrongGenericPropertyType(
+                "Milk",
+                entity.GetType().ShortDisplayName(),
+                "FieldMilk",
+                "string"
+            ),
+            Assert
+                .Throws<ArgumentException>(() =>
+                    context.Entry(entity).ComplexProperty<string>("Milk")
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1391,7 +1875,10 @@ public class EntityEntryTest
         using var context = new FreezerContext();
         var entity = context.Add(CreateCherry()).Entity;
 
-        Assert.Equal("Culture", context.Entry(entity).ComplexProperty(e => e.Culture).Metadata.Name);
+        Assert.Equal(
+            "Culture",
+            context.Entry(entity).ComplexProperty(e => e.Culture).Metadata.Name
+        );
         Assert.Equal("Milk", context.Entry(entity).ComplexProperty(e => e.Milk).Metadata.Name);
     }
 
@@ -1403,13 +1890,28 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.ComplexPropertyNotFound(entity.GetType().Name, "Chimp"),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).ComplexProperty("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).ComplexProperty("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.ComplexPropertyNotFound(entity.GetType().Name, "Chimp"),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).ComplexProperty("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).ComplexProperty("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.ComplexPropertyNotFound(entity.GetType().Name, "Chimp"),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).ComplexProperty<int>("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).ComplexProperty<int>("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1420,44 +1922,103 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Culture", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference("Culture").Metadata.Name).Message);
+                "Culture",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference("Culture").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Culture", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Reference("Culture").Metadata.Name)
-                .Message);
+                "Culture",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Reference("Culture").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Culture", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference<Random>("Culture").Metadata.Name)
-                .Message);
+                "Culture",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference<Random>("Culture").Metadata.Name
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Milk", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference("Milk").Metadata.Name).Message);
+                "Milk",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference("Milk").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Milk", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Reference("Milk").Metadata.Name)
-                .Message);
+                "Milk",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Reference("Milk").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Milk", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference<Random>("Milk").Metadata.Name)
-                .Message);
+                "Milk",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference<Random>("Milk").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Milk", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Reference(e => e.Milk).Metadata.Name).Message);
+                "Milk",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Reference(e => e.Milk).Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1488,7 +2049,8 @@ public class EntityEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(CreateCherry()).Entity;
-        var cultureBase = (IPropertyBase)context.Entry(entity).Metadata.FindComplexProperty("Culture")!;
+        var cultureBase = (IPropertyBase)
+            context.Entry(entity).Metadata.FindComplexProperty("Culture")!;
         var milkBase = (IPropertyBase)context.Entry(entity).Metadata.FindComplexProperty("Milk")!;
 
         var entry = context.Entry(entity).Member(cultureBase);
@@ -1516,15 +2078,32 @@ public class EntityEntryTest
 
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Culture", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry(entity).Navigation("Culture").Metadata.Name).Message);
+                "Culture",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry(entity).Navigation("Culture").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.NavigationIsProperty(
-                "Culture", entity.GetType().Name,
-                nameof(EntityEntry.Reference), nameof(EntityEntry.Collection), nameof(EntityEntry.Property)),
-            Assert.Throws<InvalidOperationException>(() => context.Entry((object)entity).Navigation("Culture").Metadata.Name)
-                .Message);
+                "Culture",
+                entity.GetType().Name,
+                nameof(EntityEntry.Reference),
+                nameof(EntityEntry.Collection),
+                nameof(EntityEntry.Property)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Entry((object)entity).Navigation("Culture").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -1533,11 +2112,13 @@ public class EntityEntryTest
         using var context = new FreezerContext();
         Assert.Equal(
             new List<string> { "Culture", "Milk" },
-            context.Attach(CreateCherry(76)).ComplexProperties.Select(e => e.Metadata.Name).ToList());
+            context.Attach(CreateCherry(76)).ComplexProperties.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Equal(
             new List<string> { "Culture", "Milk" },
-            context.Attach(CreateCherry(77)).ComplexProperties.Select(e => e.Metadata.Name).ToList());
+            context.Attach(CreateCherry(77)).ComplexProperties.Select(e => e.Metadata.Name).ToList()
+        );
 
         Assert.Empty(context.Attach(new Half()).ComplexProperties);
     }
@@ -1555,8 +2136,8 @@ public class EntityEntryTest
         public Milk Milk { get; set; } = null!;
     }
 
-    private static Chunky CreateChunky(int id = 0)
-        => new()
+    private static Chunky CreateChunky(int id = 0) =>
+        new()
         {
             Id = id,
             Culture = new Culture
@@ -1566,18 +2147,18 @@ public class EntityEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -1586,23 +2167,23 @@ public class EntityEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
-    private static Cherry CreateCherry(int id = 0)
-        => new()
+    private static Cherry CreateCherry(int id = 0) =>
+        new()
         {
             Id = id,
             Culture = new FieldCulture
@@ -1612,18 +2193,18 @@ public class EntityEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new FieldMilk
             {
@@ -1632,19 +2213,19 @@ public class EntityEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
     private class Cherry
@@ -1763,95 +2344,116 @@ public class EntityEntryTest
 
     private class FreezerContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(nameof(FreezerContext));
 
-        public DbSet<Chunky> Icecream
-            => Set<Chunky>();
+        public DbSet<Chunky> Icecream => Set<Chunky>();
 
         protected internal override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Chunky>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
+            modelBuilder.Entity<Chunky>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
 
-                    b.ComplexProperty(
-                        e => e.Culture, b =>
-                        {
-                            b.ComplexProperty(
-                                e => e.License, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                            b.ComplexProperty(
-                                e => e.Manufacturer, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                        });
+                b.ComplexProperty(
+                    e => e.Culture,
+                    b =>
+                    {
+                        b.ComplexProperty(
+                            e => e.License,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                        b.ComplexProperty(
+                            e => e.Manufacturer,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                    }
+                );
 
-                    b.ComplexProperty(
-                        e => e.Milk, b =>
-                        {
-                            b.ComplexProperty(
-                                e => e.License, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                            b.ComplexProperty(
-                                e => e.Manufacturer, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                        });
-                });
+                b.ComplexProperty(
+                    e => e.Milk,
+                    b =>
+                    {
+                        b.ComplexProperty(
+                            e => e.License,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                        b.ComplexProperty(
+                            e => e.Manufacturer,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                    }
+                );
+            });
 
-            modelBuilder.Entity<Cherry>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
+            modelBuilder.Entity<Cherry>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
 
-                    b.ComplexProperty(
-                        e => e.Culture, b =>
-                        {
-                            b.ComplexProperty(
-                                e => e.License, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                            b.ComplexProperty(
-                                e => e.Manufacturer, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                        });
+                b.ComplexProperty(
+                    e => e.Culture,
+                    b =>
+                    {
+                        b.ComplexProperty(
+                            e => e.License,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                        b.ComplexProperty(
+                            e => e.Manufacturer,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                    }
+                );
 
-                    b.ComplexProperty(
-                        e => e.Milk, b =>
-                        {
-                            b.ComplexProperty(
-                                e => e.License, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                            b.ComplexProperty(
-                                e => e.Manufacturer, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                        });
-                });
+                b.ComplexProperty(
+                    e => e.Milk,
+                    b =>
+                    {
+                        b.ComplexProperty(
+                            e => e.License,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                        b.ComplexProperty(
+                            e => e.Manufacturer,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                    }
+                );
+            });
         }
     }
 }

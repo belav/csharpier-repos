@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using Xunit;
 
 internal class BufferState
@@ -12,7 +12,7 @@ internal class BufferState
     internal const int InUse = 1;
 
     private int currentState;
-    
+
     internal BufferState()
     {
         this.currentState = Idle;
@@ -22,26 +22,27 @@ internal class BufferState
     {
         get { return this.currentState == Idle; }
     }
-    
+
     internal bool EnterInUseState()
     {
         return this.TransitionState(Idle, InUse);
     }
-    
+
     internal bool EnterIdleState()
     {
         return this.TransitionState(InUse, Idle);
     }
-    
+
     private bool TransitionState(int expectedCurrentState, int desiredState)
     {
-        if (Interlocked.CompareExchange(ref this.currentState,
-                                        desiredState,
-                                        expectedCurrentState) == expectedCurrentState)
+        if (
+            Interlocked.CompareExchange(ref this.currentState, desiredState, expectedCurrentState)
+            == expectedCurrentState
+        )
         {
             return true;
         }
-        
+
         return false;
     }
 }
@@ -55,21 +56,17 @@ public class Program
     {
         this.forceUpload = false;
         this.currentState = new BufferState();
-        while(!this.currentState.EnterInUseState())
+        while (!this.currentState.EnterInUseState())
         {
             Console.WriteLine("Failed to enterInUseState");
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    internal void ThrowIfDisposed()
-    {
-    }
+    internal void ThrowIfDisposed() { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    internal void QueueCurrentBufferForUploadAndSetNewBuffer()
-    {
-    }
+    internal void QueueCurrentBufferForUploadAndSetNewBuffer() { }
 
     internal void Test()
     {

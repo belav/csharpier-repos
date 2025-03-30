@@ -10,6 +10,7 @@ using Xunit;
 public class Program
 {
     public static int ii;
+
     [Fact]
     public static int TestEntryPoint()
     {

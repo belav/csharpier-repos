@@ -175,7 +175,10 @@ public class ModelStateDictionaryExtensionsTest
         var dictionary = new ModelStateDictionary();
         var exception = new Exception();
         var provider = new TestModelMetadataProvider();
-        var metadata = provider.GetMetadataForProperty(typeof(ChildModel), nameof(ChildModel.Value));
+        var metadata = provider.GetMetadataForProperty(
+            typeof(ChildModel),
+            nameof(ChildModel.Value)
+        );
 
         // Act
         dictionary.AddModelError<TestModel>(model => model.Child.Value, exception, metadata);

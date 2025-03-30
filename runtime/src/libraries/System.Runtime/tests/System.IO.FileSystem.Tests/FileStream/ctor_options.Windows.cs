@@ -15,7 +15,14 @@ namespace System.IO.Tests
         {
             Interop.Kernel32.FILE_STANDARD_INFO info;
 
-            Assert.True(Interop.Kernel32.GetFileInformationByHandleEx(fileStream.SafeFileHandle, Interop.Kernel32.FileStandardInfo, &info, (uint)sizeof(Interop.Kernel32.FILE_STANDARD_INFO)));
+            Assert.True(
+                Interop.Kernel32.GetFileInformationByHandleEx(
+                    fileStream.SafeFileHandle,
+                    Interop.Kernel32.FileStandardInfo,
+                    &info,
+                    (uint)sizeof(Interop.Kernel32.FILE_STANDARD_INFO)
+                )
+            );
 
             return info.AllocationSize;
         }
@@ -34,7 +41,17 @@ namespace System.IO.Tests
 
             string filePath = prefix + Path.GetFullPath(GetTestFilePath());
 
-            using (var fs = CreateFileStream(filePath, FileMode.CreateNew, FileAccess.Write, FileShare.None, bufferSize: 4096, FileOptions.None, preallocationSize))
+            using (
+                var fs = CreateFileStream(
+                    filePath,
+                    FileMode.CreateNew,
+                    FileAccess.Write,
+                    FileShare.None,
+                    bufferSize: 4096,
+                    FileOptions.None,
+                    preallocationSize
+                )
+            )
             {
                 Assert.Equal(0, fs.Length);
                 Assert.True(GetAllocatedSize(fs) >= preallocationSize);
@@ -51,7 +68,17 @@ namespace System.IO.Tests
             string filePath = GetTestFilePath();
             Assert.StartsWith(Path.GetTempPath(), filePath); // this is what IsFat32 method relies on
 
-            IOException ex = Assert.Throws<IOException>(() => CreateFileStream(filePath, mode, FileAccess.Write, FileShare.None, bufferSize: 4096, FileOptions.None, tooMuch));
+            IOException ex = Assert.Throws<IOException>(() =>
+                CreateFileStream(
+                    filePath,
+                    mode,
+                    FileAccess.Write,
+                    FileShare.None,
+                    bufferSize: 4096,
+                    FileOptions.None,
+                    tooMuch
+                )
+            );
             Assert.Contains(filePath, ex.Message);
             Assert.Contains(tooMuch.ToString(), ex.Message);
 
@@ -67,18 +94,22 @@ namespace System.IO.Tests
                 var volumeNameBuffer = new StringBuilder(250);
                 var fileSystemNameBuffer = new StringBuilder(250);
 
-                if (GetVolumeInformation(
-                    Path.GetPathRoot(testDirectory),
-                    volumeNameBuffer,
-                    volumeNameBuffer.Capacity,
-                    out uint _,
-                    out uint _,
-                    out uint _,
-                    fileSystemNameBuffer,
-                    fileSystemNameBuffer.Capacity
-                    ))
+                if (
+                    GetVolumeInformation(
+                        Path.GetPathRoot(testDirectory),
+                        volumeNameBuffer,
+                        volumeNameBuffer.Capacity,
+                        out uint _,
+                        out uint _,
+                        out uint _,
+                        fileSystemNameBuffer,
+                        fileSystemNameBuffer.Capacity
+                    )
+                )
                 {
-                    return fileSystemNameBuffer.ToString().Equals("FAT32", StringComparison.OrdinalIgnoreCase);
+                    return fileSystemNameBuffer
+                        .ToString()
+                        .Equals("FAT32", StringComparison.OrdinalIgnoreCase);
                 }
 
                 return false;
@@ -86,14 +117,15 @@ namespace System.IO.Tests
         }
 
         [DllImport(Interop.Libraries.Kernel32, CharSet = CharSet.Auto, SetLastError = true)]
-        public extern static bool GetVolumeInformation(
-           string rootPathName,
-           StringBuilder volumeNameBuffer,
-           int volumeNameSize,
-           out uint volumeSerialNumber,
-           out uint maximumComponentLength,
-           out uint fileSystemFlags,
-           StringBuilder fileSystemNameBuffer,
-           int fileSystemNameSize);
+        public static extern bool GetVolumeInformation(
+            string rootPathName,
+            StringBuilder volumeNameBuffer,
+            int volumeNameSize,
+            out uint volumeSerialNumber,
+            out uint maximumComponentLength,
+            out uint fileSystemFlags,
+            StringBuilder fileSystemNameBuffer,
+            int fileSystemNameSize
+        );
     }
 }

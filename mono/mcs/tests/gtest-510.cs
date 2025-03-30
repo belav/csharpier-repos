@@ -1,19 +1,13 @@
-interface IA<T>
-{
-}
+interface IA<T> { }
 
-class CA<U, V>
-{
-}
+class CA<U, V> { }
 
-public class Map<K, T> : IA<CA<K, IA<T>>>, IA<T>
-{
-}
+public class Map<K, T> : IA<CA<K, IA<T>>>, IA<T> { }
 
 class S
 {
-	public static void Main ()
-	{
-		new Map<double, short> ();
-	}
+    public static void Main()
+    {
+        new Map<double, short>();
+    }
 }

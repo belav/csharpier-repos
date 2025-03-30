@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,43 +31,46 @@ using System.ServiceModel;
 
 namespace System.ServiceModel.Security
 {
-	[MonoTODO]
-	public abstract class IdentityVerifier
-	{
-		[MonoTODO]
-		public static IdentityVerifier CreateDefault ()
-		{
-			return new DefaultIdentityVerifier ();
-		}
+    [MonoTODO]
+    public abstract class IdentityVerifier
+    {
+        [MonoTODO]
+        public static IdentityVerifier CreateDefault()
+        {
+            return new DefaultIdentityVerifier();
+        }
 
-		protected IdentityVerifier ()
-		{
-		}
+        protected IdentityVerifier() { }
 
-		public abstract bool CheckAccess (EndpointIdentity identity,
-			AuthorizationContext authContext);
+        public abstract bool CheckAccess(
+            EndpointIdentity identity,
+            AuthorizationContext authContext
+        );
 
-		public abstract bool TryGetIdentity (EndpointAddress reference,
-			out EndpointIdentity identity);
+        public abstract bool TryGetIdentity(
+            EndpointAddress reference,
+            out EndpointIdentity identity
+        );
 
-		class DefaultIdentityVerifier : IdentityVerifier
-		{
-			public override bool CheckAccess (
-				EndpointIdentity identity,
-				AuthorizationContext authContext)
-			{
-				// FIXME: implement
-				throw new NotImplementedException ();
-			}
+        class DefaultIdentityVerifier : IdentityVerifier
+        {
+            public override bool CheckAccess(
+                EndpointIdentity identity,
+                AuthorizationContext authContext
+            )
+            {
+                // FIXME: implement
+                throw new NotImplementedException();
+            }
 
-			public override bool TryGetIdentity (
-				EndpointAddress reference,
-				out EndpointIdentity identity)
-			{
-				// FIXME: implement
-				throw new NotImplementedException ();
-			}
-		}
-
-	}
+            public override bool TryGetIdentity(
+                EndpointAddress reference,
+                out EndpointIdentity identity
+            )
+            {
+                // FIXME: implement
+                throw new NotImplementedException();
+            }
+        }
+    }
 }

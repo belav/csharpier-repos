@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -12,14 +12,13 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System.Collections.Generic;
-using System.Linq.Parallel;
 using System.Diagnostics.Contracts;
+using System.Linq.Parallel;
 
 namespace System.Linq
 {
     internal static class AggregationMinMaxHelpers<T>
     {
-
         //-----------------------------------------------------------------------------------
         // Helper method to find the minimum or maximum element in the source.
         //
@@ -29,13 +28,25 @@ namespace System.Linq
             Contract.Assert(source != null);
             Contract.Assert(sign == -1 || sign == 1);
 
-            Func<Pair<bool, T>, T, Pair<bool, T>> intermediateReduce = MakeIntermediateReduceFunction(sign);
-            Func<Pair<bool, T>, Pair<bool, T>, Pair<bool, T>> finalReduce = MakeFinalReduceFunction(sign);
+            Func<Pair<bool, T>, T, Pair<bool, T>> intermediateReduce =
+                MakeIntermediateReduceFunction(sign);
+            Func<Pair<bool, T>, Pair<bool, T>, Pair<bool, T>> finalReduce = MakeFinalReduceFunction(
+                sign
+            );
             Func<Pair<bool, T>, T> resultSelector = MakeResultSelectorFunction();
 
             AssociativeAggregationOperator<T, Pair<bool, T>, T> aggregation =
-                new AssociativeAggregationOperator<T, Pair<bool, T>, T>(source, new Pair<bool, T>(false, default(T)), null,
-                                                                        true, intermediateReduce, finalReduce, resultSelector, default(T) != null, QueryAggregationOptions.AssociativeCommutative);
+                new AssociativeAggregationOperator<T, Pair<bool, T>, T>(
+                    source,
+                    new Pair<bool, T>(false, default(T)),
+                    null,
+                    true,
+                    intermediateReduce,
+                    finalReduce,
+                    resultSelector,
+                    default(T) != null,
+                    QueryAggregationOptions.AssociativeCommutative
+                );
 
             return aggregation.Aggregate();
         }
@@ -62,7 +73,9 @@ namespace System.Linq
         // These methods are used to generate delegates to perform the comparisons.
         //
 
-        private static Func<Pair<bool, T>, T, Pair<bool, T>> MakeIntermediateReduceFunction(int sign)
+        private static Func<Pair<bool, T>, T, Pair<bool, T>> MakeIntermediateReduceFunction(
+            int sign
+        )
         {
             Comparer<T> comparer = Util.GetDefaultComparer<T>();
 
@@ -70,23 +83,30 @@ namespace System.Linq
             // compiler will transform this into an instance-based delegate, incurring an extra (hidden)
             // object allocation.
             return delegate(Pair<bool, T> accumulator, T element)
-                       {
-                           // If this is the first element, or the sign of the result of comparing the element with
-                           // the existing accumulated result is equal to the sign requested by the function factory,
-                           // we will return a new pair that contains the current element as the best item.  We will
-                           // ignore null elements (for reference and nullable types) in the input stream.
-                           if ((default(T) != null || element != null) &&
-                               (!accumulator.First || Util.Sign(comparer.Compare(element, accumulator.Second)) == sign))
-                           {
-                               return new Pair<bool, T>(true, element);
-                           }
+            {
+                // If this is the first element, or the sign of the result of comparing the element with
+                // the existing accumulated result is equal to the sign requested by the function factory,
+                // we will return a new pair that contains the current element as the best item.  We will
+                // ignore null elements (for reference and nullable types) in the input stream.
+                if (
+                    (default(T) != null || element != null)
+                    && (
+                        !accumulator.First
+                        || Util.Sign(comparer.Compare(element, accumulator.Second)) == sign
+                    )
+                )
+                {
+                    return new Pair<bool, T>(true, element);
+                }
 
-                           // Otherwise, just return the current accumulator result.
-                           return accumulator;
-                       };
+                // Otherwise, just return the current accumulator result.
+                return accumulator;
+            };
         }
 
-        private static Func<Pair<bool, T>, Pair<bool, T>, Pair<bool, T>> MakeFinalReduceFunction(int sign)
+        private static Func<Pair<bool, T>, Pair<bool, T>, Pair<bool, T>> MakeFinalReduceFunction(
+            int sign
+        )
         {
             Comparer<T> comparer = Util.GetDefaultComparer<T>();
 
@@ -94,21 +114,29 @@ namespace System.Linq
             // compiler will transform this into an instance-based delegate, incurring an extra (hidden)
             // object allocation.
             return delegate(Pair<bool, T> accumulator, Pair<bool, T> element)
-                       {
-                           // If the intermediate reduction is empty, we will ignore it. Otherwise, if this is the
-                           // first element, or the sign of the result of comparing the element with the existing
-                           // accumulated result is equal to the sign requested by the function factory, we will
-                           // return a new pair that contains the current element as the best item.
-                           if (element.First &&
-                               (!accumulator.First || Util.Sign(comparer.Compare(element.Second, accumulator.Second)) == sign))
-                           {
-                               Contract.Assert(default(T) != null || element.Second != null, "nulls unexpected in final reduce");
-                               return new Pair<bool, T>(true, element.Second);
-                           }
+            {
+                // If the intermediate reduction is empty, we will ignore it. Otherwise, if this is the
+                // first element, or the sign of the result of comparing the element with the existing
+                // accumulated result is equal to the sign requested by the function factory, we will
+                // return a new pair that contains the current element as the best item.
+                if (
+                    element.First
+                    && (
+                        !accumulator.First
+                        || Util.Sign(comparer.Compare(element.Second, accumulator.Second)) == sign
+                    )
+                )
+                {
+                    Contract.Assert(
+                        default(T) != null || element.Second != null,
+                        "nulls unexpected in final reduce"
+                    );
+                    return new Pair<bool, T>(true, element.Second);
+                }
 
-                           // Otherwise, just return the current accumulator result.
-                           return accumulator;
-                       };
+                // Otherwise, just return the current accumulator result.
+                return accumulator;
+            };
         }
 
         private static Func<Pair<bool, T>, T> MakeResultSelectorFunction()
@@ -118,11 +146,13 @@ namespace System.Linq
             // types, the aggregation API will have thrown an exception before calling us for
             // empty sequences.  Else, we will just return the element, which may be null for other types.
             return delegate(Pair<bool, T> accumulator)
-                       {
-                           Contract.Assert(accumulator.First || default(T) == null,
-                                           "for non-null types we expect an exception to be thrown before getting here");
-                           return accumulator.Second;
-                       };
+            {
+                Contract.Assert(
+                    accumulator.First || default(T) == null,
+                    "for non-null types we expect an exception to be thrown before getting here"
+                );
+                return accumulator.Second;
+            };
         }
     }
 }

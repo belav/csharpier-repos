@@ -17,8 +17,8 @@ public static class PropertyBaseExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static int GetShadowIndex(this IPropertyBase propertyBase)
-        => ((IRuntimePropertyBase)propertyBase).GetShadowIndex();
+    public static int GetShadowIndex(this IPropertyBase propertyBase) =>
+        ((IRuntimePropertyBase)propertyBase).GetShadowIndex();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -26,8 +26,8 @@ public static class PropertyBaseExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static int GetStoreGeneratedIndex(this IPropertyBase propertyBase)
-        => ((IRuntimePropertyBase)propertyBase).GetStoreGeneratedIndex();
+    public static int GetStoreGeneratedIndex(this IPropertyBase propertyBase) =>
+        ((IRuntimePropertyBase)propertyBase).GetStoreGeneratedIndex();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -35,8 +35,8 @@ public static class PropertyBaseExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static int GetRelationshipIndex(this IPropertyBase propertyBase)
-        => ((IRuntimePropertyBase)propertyBase).GetRelationshipIndex();
+    public static int GetRelationshipIndex(this IPropertyBase propertyBase) =>
+        ((IRuntimePropertyBase)propertyBase).GetRelationshipIndex();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,8 +44,8 @@ public static class PropertyBaseExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static int GetOriginalValueIndex(this IPropertyBase propertyBase)
-        => ((IRuntimePropertyBase)propertyBase).GetOriginalValueIndex();
+    public static int GetOriginalValueIndex(this IPropertyBase propertyBase) =>
+        ((IRuntimePropertyBase)propertyBase).GetOriginalValueIndex();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -53,8 +53,8 @@ public static class PropertyBaseExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static PropertyIndexes GetPropertyIndexes(this IPropertyBase propertyBase)
-        => ((IRuntimePropertyBase)propertyBase).PropertyIndexes;
+    public static PropertyIndexes GetPropertyIndexes(this IPropertyBase propertyBase) =>
+        ((IRuntimePropertyBase)propertyBase).PropertyIndexes;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -62,8 +62,8 @@ public static class PropertyBaseExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static PropertyAccessors GetPropertyAccessors(this IPropertyBase propertyBase)
-        => ((IRuntimePropertyBase)propertyBase).Accessors;
+    public static PropertyAccessors GetPropertyAccessors(this IPropertyBase propertyBase) =>
+        ((IRuntimePropertyBase)propertyBase).Accessors;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -71,8 +71,8 @@ public static class PropertyBaseExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool IsShadowProperty(this PropertyBase propertyBase)
-        => ((IReadOnlyPropertyBase)propertyBase).IsShadowProperty();
+    public static bool IsShadowProperty(this PropertyBase propertyBase) =>
+        ((IReadOnlyPropertyBase)propertyBase).IsShadowProperty();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -80,8 +80,8 @@ public static class PropertyBaseExtensions
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static bool IsIndexerProperty(this PropertyBase propertyBase)
-        => ((IReadOnlyPropertyBase)propertyBase).IsIndexerProperty();
+    public static bool IsIndexerProperty(this PropertyBase propertyBase) =>
+        ((IReadOnlyPropertyBase)propertyBase).IsIndexerProperty();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -91,8 +91,7 @@ public static class PropertyBaseExtensions
     /// </summary>
     // Note: only use this to find the property/field that defines the property in the model. Use
     // GetMemberInfo to get the property/field to use, which may be different.
-    public static MemberInfo? GetIdentifyingMemberInfo(
-        this IReadOnlyPropertyBase propertyBase)
+    public static MemberInfo? GetIdentifyingMemberInfo(this IReadOnlyPropertyBase propertyBase)
     {
         var indexerPropertyInfo = propertyBase.DeclaringType.FindIndexerPropertyInfo();
         return indexerPropertyInfo != null && propertyBase.PropertyInfo == indexerPropertyInfo
@@ -111,7 +110,8 @@ public static class PropertyBaseExtensions
         bool forMaterialization,
         bool forSet,
         out MemberInfo? memberInfo,
-        out string? errorMessage)
+        out string? errorMessage
+    )
     {
         memberInfo = null;
         errorMessage = null;
@@ -156,8 +156,16 @@ public static class PropertyBaseExtensions
                     return true;
                 case PropertyAccessMode.Property:
                     errorMessage = hasGetter
-                        ? CoreStrings.NoSetter(propertyBase.Name, propertyBase.DeclaringType.DisplayName(), nameof(PropertyAccessMode))
-                        : CoreStrings.NoProperty(fieldInfo?.Name, propertyBase.DeclaringType.DisplayName(), nameof(PropertyAccessMode));
+                        ? CoreStrings.NoSetter(
+                            propertyBase.Name,
+                            propertyBase.DeclaringType.DisplayName(),
+                            nameof(PropertyAccessMode)
+                        )
+                        : CoreStrings.NoProperty(
+                            fieldInfo?.Name,
+                            propertyBase.DeclaringType.DisplayName(),
+                            nameof(PropertyAccessMode)
+                        );
 
                     return false;
                 case PropertyAccessMode.PreferField:
@@ -190,7 +198,10 @@ public static class PropertyBaseExtensions
                 return true;
             }
 
-            errorMessage = CoreStrings.NoFieldOrSetter(propertyBase.Name, propertyBase.DeclaringType.DisplayName());
+            errorMessage = CoreStrings.NoFieldOrSetter(
+                propertyBase.Name,
+                propertyBase.DeclaringType.DisplayName()
+            );
             return false;
         }
 
@@ -227,8 +238,16 @@ public static class PropertyBaseExtensions
                 }
 
                 errorMessage = hasGetter
-                    ? CoreStrings.NoSetter(propertyBase.Name, propertyBase.DeclaringType.DisplayName(), nameof(PropertyAccessMode))
-                    : CoreStrings.NoProperty(fieldInfo?.Name, propertyBase.DeclaringType.DisplayName(), nameof(PropertyAccessMode));
+                    ? CoreStrings.NoSetter(
+                        propertyBase.Name,
+                        propertyBase.DeclaringType.DisplayName(),
+                        nameof(PropertyAccessMode)
+                    )
+                    : CoreStrings.NoProperty(
+                        fieldInfo?.Name,
+                        propertyBase.DeclaringType.DisplayName(),
+                        nameof(PropertyAccessMode)
+                    );
 
                 return false;
             }
@@ -248,9 +267,12 @@ public static class PropertyBaseExtensions
                 }
             }
 
-            if (mode is PropertyAccessMode.PreferProperty
-                or PropertyAccessMode.FieldDuringConstruction
-                or PropertyAccessMode.PreferFieldDuringConstruction)
+            if (
+                mode
+                is PropertyAccessMode.PreferProperty
+                    or PropertyAccessMode.FieldDuringConstruction
+                    or PropertyAccessMode.PreferFieldDuringConstruction
+            )
             {
                 if (hasSetter)
                 {
@@ -270,7 +292,10 @@ public static class PropertyBaseExtensions
                 return true;
             }
 
-            errorMessage = CoreStrings.NoFieldOrSetter(propertyBase.Name, propertyBase.DeclaringType.DisplayName());
+            errorMessage = CoreStrings.NoFieldOrSetter(
+                propertyBase.Name,
+                propertyBase.DeclaringType.DisplayName()
+            );
             return false;
         }
 
@@ -296,8 +321,16 @@ public static class PropertyBaseExtensions
             }
 
             errorMessage = hasSetter
-                ? CoreStrings.NoGetter(propertyBase.Name, propertyBase.DeclaringType.DisplayName(), nameof(PropertyAccessMode))
-                : CoreStrings.NoProperty(fieldInfo?.Name, propertyBase.DeclaringType.DisplayName(), nameof(PropertyAccessMode));
+                ? CoreStrings.NoGetter(
+                    propertyBase.Name,
+                    propertyBase.DeclaringType.DisplayName(),
+                    nameof(PropertyAccessMode)
+                )
+                : CoreStrings.NoProperty(
+                    fieldInfo?.Name,
+                    propertyBase.DeclaringType.DisplayName(),
+                    nameof(PropertyAccessMode)
+                );
 
             return false;
         }
@@ -317,9 +350,12 @@ public static class PropertyBaseExtensions
             }
         }
 
-        if (mode is PropertyAccessMode.PreferProperty
-            or PropertyAccessMode.FieldDuringConstruction
-            or PropertyAccessMode.PreferFieldDuringConstruction)
+        if (
+            mode
+            is PropertyAccessMode.PreferProperty
+                or PropertyAccessMode.FieldDuringConstruction
+                or PropertyAccessMode.PreferFieldDuringConstruction
+        )
         {
             if (hasGetter)
             {
@@ -334,19 +370,27 @@ public static class PropertyBaseExtensions
             }
         }
 
-        errorMessage = CoreStrings.NoFieldOrGetter(propertyBase.Name, propertyBase.DeclaringType.DisplayName());
+        errorMessage = CoreStrings.NoFieldOrGetter(
+            propertyBase.Name,
+            propertyBase.DeclaringType.DisplayName()
+        );
         return false;
     }
 
-    private static string GetNoFieldErrorMessage(IPropertyBase propertyBase)
-        => ((EntityType)propertyBase.DeclaringType).GetServiceProperties()
+    private static string GetNoFieldErrorMessage(IPropertyBase propertyBase) =>
+        ((EntityType)propertyBase.DeclaringType)
+            .GetServiceProperties()
             .Any(p => typeof(ILazyLoader).IsAssignableFrom(p.ClrType))
-            || ((EntityType)propertyBase.DeclaringType).ConstructorBinding?.ParameterBindings
-            .OfType<ServiceParameterBinding>()
-            .Any(b => b.ServiceType == typeof(ILazyLoader))
-            == true
-                ? CoreStrings.NoBackingFieldLazyLoading(
-                    propertyBase.Name, propertyBase.DeclaringType.DisplayName())
-                : CoreStrings.NoBackingField(
-                    propertyBase.Name, propertyBase.DeclaringType.DisplayName(), nameof(PropertyAccessMode));
+        || ((EntityType)propertyBase.DeclaringType)
+            .ConstructorBinding?.ParameterBindings.OfType<ServiceParameterBinding>()
+            .Any(b => b.ServiceType == typeof(ILazyLoader)) == true
+            ? CoreStrings.NoBackingFieldLazyLoading(
+                propertyBase.Name,
+                propertyBase.DeclaringType.DisplayName()
+            )
+            : CoreStrings.NoBackingField(
+                propertyBase.Name,
+                propertyBase.DeclaringType.DisplayName(),
+                nameof(PropertyAccessMode)
+            );
 }

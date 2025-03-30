@@ -1,18 +1,15 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
 using System.Reflection.Runtime.General;
 using System.Text;
-
 using Internal.Metadata.NativeFormat;
 using Internal.NativeFormat;
 using Internal.Runtime;
 using Internal.Runtime.Augments;
 using Internal.Runtime.TypeLoader;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem.NoMetadata
@@ -35,7 +32,13 @@ namespace Internal.TypeSystem.NoMetadata
         // "_baseType == this" means "base type was not initialized yet"
         private DefType _baseType;
 
-        public unsafe NoMetadataType(TypeSystemContext context, RuntimeTypeHandle genericTypeDefinition, int instantiationLength, ReadOnlySpan<Runtime.GenericVariance> runtimeVarianceData, int hashcode)
+        public unsafe NoMetadataType(
+            TypeSystemContext context,
+            RuntimeTypeHandle genericTypeDefinition,
+            int instantiationLength,
+            ReadOnlySpan<Runtime.GenericVariance> runtimeVarianceData,
+            int hashcode
+        )
         {
             TypeDesc[] genericParameters;
             if (instantiationLength == 0)
@@ -47,14 +50,24 @@ namespace Internal.TypeSystem.NoMetadata
                 genericParameters = new TypeDesc[instantiationLength];
                 for (int i = 0; i < genericParameters.Length; i++)
                 {
-                    GenericVariance variance = runtimeVarianceData.Length == 0 ? GenericVariance.None : runtimeVarianceData[i] switch
-                    {
-                        Runtime.GenericVariance.Contravariant => GenericVariance.Contravariant,
-                        Runtime.GenericVariance.Covariant => GenericVariance.Covariant,
-                        Runtime.GenericVariance.NonVariant or Runtime.GenericVariance.ArrayCovariant => GenericVariance.None,
-                        _ => throw new NotImplementedException()
-                    };
-                    genericParameters[i] = new RuntimeGenericParameterDesc(GenericParameterKind.Type, i, this, variance);
+                    GenericVariance variance =
+                        runtimeVarianceData.Length == 0
+                            ? GenericVariance.None
+                            : runtimeVarianceData[i] switch
+                            {
+                                Runtime.GenericVariance.Contravariant =>
+                                    GenericVariance.Contravariant,
+                                Runtime.GenericVariance.Covariant => GenericVariance.Covariant,
+                                Runtime.GenericVariance.NonVariant
+                                or Runtime.GenericVariance.ArrayCovariant => GenericVariance.None,
+                                _ => throw new NotImplementedException(),
+                            };
+                    genericParameters[i] = new RuntimeGenericParameterDesc(
+                        GenericParameterKind.Type,
+                        i,
+                        this,
+                        variance
+                    );
                 }
             }
 
@@ -62,12 +75,30 @@ namespace Internal.TypeSystem.NoMetadata
             Init(context, genericTypeDefinition, null, instantiation, hashcode);
         }
 
-        public unsafe NoMetadataType(TypeSystemContext context, RuntimeTypeHandle genericTypeDefinition, DefType genericTypeDefinitionAsDefType, Instantiation instantiation, int hashcode)
+        public unsafe NoMetadataType(
+            TypeSystemContext context,
+            RuntimeTypeHandle genericTypeDefinition,
+            DefType genericTypeDefinitionAsDefType,
+            Instantiation instantiation,
+            int hashcode
+        )
         {
-            Init(context, genericTypeDefinition, genericTypeDefinitionAsDefType, instantiation, hashcode);
+            Init(
+                context,
+                genericTypeDefinition,
+                genericTypeDefinitionAsDefType,
+                instantiation,
+                hashcode
+            );
         }
 
-        private void Init(TypeSystemContext context, RuntimeTypeHandle genericTypeDefinition, DefType genericTypeDefinitionAsDefType, Instantiation instantiation, int hashcode)
+        private void Init(
+            TypeSystemContext context,
+            RuntimeTypeHandle genericTypeDefinition,
+            DefType genericTypeDefinitionAsDefType,
+            Instantiation instantiation,
+            int hashcode
+        )
         {
             _hashcode = hashcode;
             _context = context;
@@ -82,8 +113,16 @@ namespace Internal.TypeSystem.NoMetadata
             // or Empty (if the type isn't a generic of any form)
             unsafe
             {
-                Debug.Assert(((_instantiation.Length > 0) && _genericTypeDefinition.ToEETypePtr()->IsGenericTypeDefinition) ||
-                             ((_instantiation.Length == 0) && !_genericTypeDefinition.ToEETypePtr()->IsGenericTypeDefinition));
+                Debug.Assert(
+                    (
+                        (_instantiation.Length > 0)
+                        && _genericTypeDefinition.ToEETypePtr()->IsGenericTypeDefinition
+                    )
+                        || (
+                            (_instantiation.Length == 0)
+                            && !_genericTypeDefinition.ToEETypePtr()->IsGenericTypeDefinition
+                        )
+                );
             }
 
             // Base type is not initialized
@@ -97,10 +136,7 @@ namespace Internal.TypeSystem.NoMetadata
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _context;
-            }
+            get { return _context; }
         }
 
         public override DefType BaseType
@@ -119,7 +155,9 @@ namespace Internal.TypeSystem.NoMetadata
                         Debug.Assert(false);
                     }
 
-                    DefType baseType = !baseTypeHandle.IsNull() ? (DefType)Context.ResolveRuntimeTypeHandle(baseTypeHandle) : null;
+                    DefType baseType = !baseTypeHandle.IsNull()
+                        ? (DefType)Context.ResolveRuntimeTypeHandle(baseTypeHandle)
+                        : null;
                     SetBaseType(baseType);
 
                     return baseType;
@@ -132,7 +170,9 @@ namespace Internal.TypeSystem.NoMetadata
 
                     ComputeTemplate();
                     NativeParser typeInfoParser = state.GetParserForNativeLayoutInfo();
-                    NativeParser baseTypeParser = typeInfoParser.GetParserForBagElementKind(BagElementKind.BaseType);
+                    NativeParser baseTypeParser = typeInfoParser.GetParserForBagElementKind(
+                        BagElementKind.BaseType
+                    );
 
                     ParseBaseType(state.NativeLayoutInfo.LoadContext, baseTypeParser);
                     Debug.Assert(_baseType != this);
@@ -141,7 +181,10 @@ namespace Internal.TypeSystem.NoMetadata
             }
         }
 
-        internal override void ParseBaseType(NativeLayoutInfoLoadContext nativeLayoutInfoLoadContext, NativeParser baseTypeParser)
+        internal override void ParseBaseType(
+            NativeLayoutInfoLoadContext nativeLayoutInfoLoadContext,
+            NativeParser baseTypeParser
+        )
         {
             if (!baseTypeParser.IsNull)
             {
@@ -179,8 +222,13 @@ namespace Internal.TypeSystem.NoMetadata
                         // System.Array is a regular class in the type system
                         flags |= TypeFlags.Class;
                     }
-                    else if (elementType <= EETypeElementType.Double &&
-                        (MethodTable->IsGenericTypeDefinition || MethodTable->BaseType == typeof(System.Enum).TypeHandle.ToEETypePtr()))
+                    else if (
+                        elementType <= EETypeElementType.Double
+                        && (
+                            MethodTable->IsGenericTypeDefinition
+                            || MethodTable->BaseType == typeof(System.Enum).TypeHandle.ToEETypePtr()
+                        )
+                    )
                     {
                         // Enums are represented as their underlying type in the runtime type system
                         // Note: we check for IsGenericDefinition above to cover generic enums (base types are not set
@@ -190,8 +238,11 @@ namespace Internal.TypeSystem.NoMetadata
                     else
                     {
                         // Paranoid check that we handled enums above
-                        Debug.Assert(MethodTable->IsGenericTypeDefinition ||
-                            MethodTable->BaseType != typeof(System.Enum).TypeHandle.ToEETypePtr());
+                        Debug.Assert(
+                            MethodTable->IsGenericTypeDefinition
+                                || MethodTable->BaseType
+                                    != typeof(System.Enum).TypeHandle.ToEETypePtr()
+                        );
 
                         // The rest of values should be directly castable to TypeFlags
                         Debug.Assert((int)EETypeElementType.Void == (int)TypeFlags.Void);
@@ -253,7 +304,11 @@ namespace Internal.TypeSystem.NoMetadata
         protected override TypeDesc ConvertToCanonFormImpl(CanonicalFormKind kind)
         {
             bool needsChange;
-            Instantiation canonInstantiation = Context.ConvertInstantiationToCanonForm(Instantiation, kind, out needsChange);
+            Instantiation canonInstantiation = Context.ConvertInstantiationToCanonForm(
+                Instantiation,
+                kind,
+                out needsChange
+            );
             if (needsChange)
             {
                 TypeDesc openType = GetTypeDefinition();
@@ -271,7 +326,10 @@ namespace Internal.TypeSystem.NoMetadata
                 return this;
         }
 
-        public override TypeDesc InstantiateSignature(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public override TypeDesc InstantiateSignature(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
             TypeDesc[] clone = null;
 
@@ -293,15 +351,17 @@ namespace Internal.TypeSystem.NoMetadata
                 }
             }
 
-            return (clone == null) ? this : _genericTypeDefinitionAsDefType.Context.ResolveGenericInstantiation(_genericTypeDefinitionAsDefType, new Instantiation(clone));
+            return (clone == null)
+                ? this
+                : _genericTypeDefinitionAsDefType.Context.ResolveGenericInstantiation(
+                    _genericTypeDefinitionAsDefType,
+                    new Instantiation(clone)
+                );
         }
 
         public override Instantiation Instantiation
         {
-            get
-            {
-                return _instantiation;
-            }
+            get { return _instantiation; }
         }
 
         public override TypeDesc UnderlyingType
@@ -335,11 +395,23 @@ namespace Internal.TypeSystem.NoMetadata
             string enclosingDummy;
 
             // Try to get the name from metadata
-            if (TypeLoaderEnvironment.TryGetMetadataForNamedType(genericDefinitionHandle, out qTypeDefinition))
+            if (
+                TypeLoaderEnvironment.TryGetMetadataForNamedType(
+                    genericDefinitionHandle,
+                    out qTypeDefinition
+                )
+            )
             {
                 TypeDefinitionHandle typeDefHandle = qTypeDefinition.NativeFormatHandle;
-                typeDefHandle.GetFullName(qTypeDefinition.NativeFormatReader, out name, out enclosingDummy, out nsName);
-                assemblyName = typeDefHandle.GetContainingModuleName(qTypeDefinition.NativeFormatReader);
+                typeDefHandle.GetFullName(
+                    qTypeDefinition.NativeFormatReader,
+                    out name,
+                    out enclosingDummy,
+                    out nsName
+                );
+                assemblyName = typeDefHandle.GetContainingModuleName(
+                    qTypeDefinition.NativeFormatReader
+                );
             }
             else
 #endif
@@ -399,7 +471,8 @@ namespace Internal.TypeSystem.NoMetadata
                     sb.Append(i == 0 ? "[" : ", ");
                     sb.Append(Instantiation[i].ToString());
                 }
-                if (Instantiation.Length > 0) sb.Append(']');
+                if (Instantiation.Length > 0)
+                    sb.Append(']');
             }
 
             _cachedToString = sb.ToString();

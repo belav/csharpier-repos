@@ -17,8 +17,19 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
 {
     internal interface IMoveTypeService : ILanguageService
     {
-        Task<ImmutableArray<CodeAction>> GetRefactoringAsync(Document document, TextSpan textSpan, CodeCleanupOptionsProvider fallbackOptions, CancellationToken cancellationToken);
+        Task<ImmutableArray<CodeAction>> GetRefactoringAsync(
+            Document document,
+            TextSpan textSpan,
+            CodeCleanupOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        );
 
-        Task<Solution> GetModifiedSolutionAsync(Document document, TextSpan textSpan, MoveTypeOperationKind operationKind, CodeCleanupOptionsProvider fallbackOptions, CancellationToken cancellationToken);
+        Task<Solution> GetModifiedSolutionAsync(
+            Document document,
+            TextSpan textSpan,
+            MoveTypeOperationKind operationKind,
+            CodeCleanupOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        );
     }
 }

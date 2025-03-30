@@ -54,20 +54,22 @@ public class ResendEmailConfirmationModel : PageModel
     public virtual Task<IActionResult> OnPostAsync() => throw new NotImplementedException();
 }
 
-internal sealed class ResendEmailConfirmationModel<TUser> : ResendEmailConfirmationModel where TUser : class
+internal sealed class ResendEmailConfirmationModel<TUser> : ResendEmailConfirmationModel
+    where TUser : class
 {
     private readonly UserManager<TUser> _userManager;
     private readonly IEmailSender<TUser> _emailSender;
 
-    public ResendEmailConfirmationModel(UserManager<TUser> userManager, IEmailSender<TUser> emailSender)
+    public ResendEmailConfirmationModel(
+        UserManager<TUser> userManager,
+        IEmailSender<TUser> emailSender
+    )
     {
         _userManager = userManager;
         _emailSender = emailSender;
     }
 
-    public override void OnGet()
-    {
-    }
+    public override void OnGet() { }
 
     public override async Task<IActionResult> OnPostAsync()
     {
@@ -79,7 +81,10 @@ internal sealed class ResendEmailConfirmationModel<TUser> : ResendEmailConfirmat
         var user = await _userManager.FindByEmailAsync(Input.Email);
         if (user == null)
         {
-            ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
+            ModelState.AddModelError(
+                string.Empty,
+                "Verification email sent. Please check your email."
+            );
             return Page();
         }
 
@@ -90,8 +95,13 @@ internal sealed class ResendEmailConfirmationModel<TUser> : ResendEmailConfirmat
             "/Account/ConfirmEmail",
             pageHandler: null,
             values: new { userId = userId, code = code },
-            protocol: Request.Scheme)!;
-        await _emailSender.SendConfirmationLinkAsync(user, Input.Email, HtmlEncoder.Default.Encode(callbackUrl));
+            protocol: Request.Scheme
+        )!;
+        await _emailSender.SendConfirmationLinkAsync(
+            user,
+            Input.Email,
+            HtmlEncoder.Default.Encode(callbackUrl)
+        );
 
         ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
         return Page();

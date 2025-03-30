@@ -26,10 +26,14 @@ namespace System.Runtime
 
 #if CORECLR
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe void RegisterForGCReporting(GCFrameRegistration* pRegistration);
+        internal static extern unsafe void RegisterForGCReporting(
+            GCFrameRegistration* pRegistration
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern unsafe void UnregisterForGCReporting(GCFrameRegistration* pRegistration);
+        internal static extern unsafe void UnregisterForGCReporting(
+            GCFrameRegistration* pRegistration
+        );
 #endif
     }
 }

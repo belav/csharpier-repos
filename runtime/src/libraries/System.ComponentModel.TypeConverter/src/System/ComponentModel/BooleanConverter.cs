@@ -25,7 +25,11 @@ namespace System.ComponentModel
         /// Converts the given value
         /// object to a Boolean object.
         /// </summary>
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object value
+        )
         {
             if (value is string text)
             {
@@ -36,7 +40,10 @@ namespace System.ComponentModel
                 }
                 catch (FormatException e)
                 {
-                    throw new FormatException(SR.Format(SR.ConvertInvalidPrimitive, (string)value, nameof(Boolean)), e);
+                    throw new FormatException(
+                        SR.Format(SR.ConvertInvalidPrimitive, (string)value, nameof(Boolean)),
+                        e
+                    );
                 }
             }
             return base.ConvertFrom(context, culture, value);

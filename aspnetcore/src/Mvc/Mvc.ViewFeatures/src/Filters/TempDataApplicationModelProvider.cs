@@ -20,9 +20,7 @@ internal sealed class TempDataApplicationModelProvider : IApplicationModelProvid
     public int Order => -1000 + 10;
 
     /// <inheritdoc />
-    public void OnProvidersExecuted(ApplicationModelProviderContext context)
-    {
-    }
+    public void OnProvidersExecuted(ApplicationModelProviderContext context) { }
 
     /// <inheritdoc />
     public void OnProvidersExecuting(ApplicationModelProviderContext context)
@@ -33,7 +31,10 @@ internal sealed class TempDataApplicationModelProvider : IApplicationModelProvid
         {
             var modelType = controllerModel.ControllerType.AsType();
 
-            var tempDataProperties = SaveTempDataPropertyFilterBase.GetTempDataProperties(_tempDataSerializer, modelType);
+            var tempDataProperties = SaveTempDataPropertyFilterBase.GetTempDataProperties(
+                _tempDataSerializer,
+                modelType
+            );
             if (tempDataProperties == null)
             {
                 continue;

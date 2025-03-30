@@ -61,7 +61,6 @@ namespace System.Xml.XmlWriterApiTests
             Assert.True(utils.CompareReader("<Root />"));
         }
 
-
         // Multiple EndDocument should error
         [Theory]
         [XmlWriterInlineData]
@@ -225,7 +224,6 @@ namespace System.Xml.XmlWriterApiTests
             CError.WriteLine("Did not throw exception");
             Assert.Fail();
         }
-
 
         // Top level atomic value should error - PROLOG
         [Theory]

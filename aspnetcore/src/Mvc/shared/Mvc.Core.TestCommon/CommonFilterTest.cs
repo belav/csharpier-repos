@@ -16,9 +16,12 @@ public class CommonFilterTest
     {
         // Arrange
         mock.As<IAsyncActionFilter>()
-            .Setup(f => f.OnActionExecutionAsync(
-                It.IsAny<ActionExecutingContext>(),
-                It.IsAny<ActionExecutionDelegate>()))
+            .Setup(f =>
+                f.OnActionExecutionAsync(
+                    It.IsAny<ActionExecutingContext>(),
+                    It.IsAny<ActionExecutionDelegate>()
+                )
+            )
             .CallBase();
 
         mock.As<IActionFilter>()
@@ -30,7 +33,9 @@ public class CommonFilterTest
             .Verifiable();
 
         var context = CreateActionExecutingContext(mock.As<IFilterMetadata>().Object);
-        var next = new ActionExecutionDelegate(() => Task.FromResult(CreateActionExecutedContext(context)));
+        var next = new ActionExecutionDelegate(() =>
+            Task.FromResult(CreateActionExecutedContext(context))
+        );
 
         // Act
         await mock.As<IAsyncActionFilter>().Object.OnActionExecutionAsync(context, next);
@@ -50,9 +55,12 @@ public class CommonFilterTest
     {
         // Arrange
         mock.As<IAsyncActionFilter>()
-            .Setup(f => f.OnActionExecutionAsync(
-                It.IsAny<ActionExecutingContext>(),
-                It.IsAny<ActionExecutionDelegate>()))
+            .Setup(f =>
+                f.OnActionExecutionAsync(
+                    It.IsAny<ActionExecutingContext>(),
+                    It.IsAny<ActionExecutionDelegate>()
+                )
+            )
             .CallBase();
 
         mock.As<IActionFilter>()
@@ -68,7 +76,10 @@ public class CommonFilterTest
             .Verifiable();
 
         var context = CreateActionExecutingContext(mock.As<IFilterMetadata>().Object);
-        var next = new ActionExecutionDelegate(() => { throw null; }); // This won't run
+        var next = new ActionExecutionDelegate(() =>
+        {
+            throw null;
+        }); // This won't run
 
         // Act
         await mock.As<IAsyncActionFilter>().Object.OnActionExecutionAsync(context, next);
@@ -85,9 +96,12 @@ public class CommonFilterTest
     {
         // Arrange
         mock.As<IAsyncResultFilter>()
-            .Setup(f => f.OnResultExecutionAsync(
-                It.IsAny<ResultExecutingContext>(),
-                It.IsAny<ResultExecutionDelegate>()))
+            .Setup(f =>
+                f.OnResultExecutionAsync(
+                    It.IsAny<ResultExecutingContext>(),
+                    It.IsAny<ResultExecutionDelegate>()
+                )
+            )
             .CallBase();
 
         mock.As<IResultFilter>()
@@ -99,7 +113,9 @@ public class CommonFilterTest
             .Verifiable();
 
         var context = CreateResultExecutingContext(mock.As<IFilterMetadata>().Object);
-        var next = new ResultExecutionDelegate(() => Task.FromResult(CreateResultExecutedContext(context)));
+        var next = new ResultExecutionDelegate(() =>
+            Task.FromResult(CreateResultExecutedContext(context))
+        );
 
         // Act
         await mock.As<IAsyncResultFilter>().Object.OnResultExecutionAsync(context, next);
@@ -119,9 +135,12 @@ public class CommonFilterTest
     {
         // Arrange
         mock.As<IAsyncResultFilter>()
-            .Setup(f => f.OnResultExecutionAsync(
-                It.IsAny<ResultExecutingContext>(),
-                It.IsAny<ResultExecutionDelegate>()))
+            .Setup(f =>
+                f.OnResultExecutionAsync(
+                    It.IsAny<ResultExecutingContext>(),
+                    It.IsAny<ResultExecutionDelegate>()
+                )
+            )
             .CallBase();
 
         mock.As<IResultFilter>()
@@ -137,7 +156,9 @@ public class CommonFilterTest
             .Verifiable();
 
         var context = CreateResultExecutingContext(mock.As<IFilterMetadata>().Object);
-        var next = new ResultExecutionDelegate(() => Task.FromResult(CreateResultExecutedContext(context)));
+        var next = new ResultExecutionDelegate(() =>
+            Task.FromResult(CreateResultExecutedContext(context))
+        );
 
         // Act
         await mock.As<IAsyncResultFilter>().Object.OnResultExecutionAsync(context, next);
@@ -157,9 +178,12 @@ public class CommonFilterTest
     {
         // Arrange
         mock.As<IAsyncResultFilter>()
-            .Setup(f => f.OnResultExecutionAsync(
-                It.IsAny<ResultExecutingContext>(),
-                It.IsAny<ResultExecutionDelegate>()))
+            .Setup(f =>
+                f.OnResultExecutionAsync(
+                    It.IsAny<ResultExecutingContext>(),
+                    It.IsAny<ResultExecutionDelegate>()
+                )
+            )
             .CallBase();
 
         mock.As<IResultFilter>()
@@ -175,7 +199,10 @@ public class CommonFilterTest
             .Verifiable();
 
         var context = CreateResultExecutingContext(mock.As<IFilterMetadata>().Object);
-        var next = new ResultExecutionDelegate(() => { throw null; }); // This won't run
+        var next = new ResultExecutionDelegate(() =>
+        {
+            throw null;
+        }); // This won't run
 
         // Act
         await mock.As<IAsyncResultFilter>().Object.OnResultExecutionAsync(context, next);
@@ -194,9 +221,10 @@ public class CommonFilterTest
     {
         return new ActionExecutingContext(
             CreateActionContext(),
-            new IFilterMetadata[] { filter, },
+            new IFilterMetadata[] { filter },
             new Dictionary<string, object>(),
-            controller: new object());
+            controller: new object()
+        );
     }
 
     private static ActionExecutedContext CreateActionExecutedContext(ActionExecutingContext context)
@@ -211,14 +239,20 @@ public class CommonFilterTest
     {
         return new ResultExecutingContext(
             CreateActionContext(),
-            new IFilterMetadata[] { filter, },
+            new IFilterMetadata[] { filter },
             new NoOpResult(),
-            controller: new object());
+            controller: new object()
+        );
     }
 
     private static ResultExecutedContext CreateResultExecutedContext(ResultExecutingContext context)
     {
-        return new ResultExecutedContext(context, context.Filters, context.Result, context.Controller);
+        return new ResultExecutedContext(
+            context,
+            context.Filters,
+            context.Result,
+            context.Controller
+        );
     }
 
     private static ActionContext CreateActionContext()

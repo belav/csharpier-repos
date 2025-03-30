@@ -22,10 +22,9 @@ public class WebAssemblyHostBuilderTest
         // Arrange
         var builder = new WebAssemblyHostBuilder(new TestInternalJSImportMethods(), JsonOptions);
 
-        builder.Configuration.AddInMemoryCollection(new[]
-        {
-            new KeyValuePair<string, string>("key", "value"),
-        });
+        builder.Configuration.AddInMemoryCollection(
+            new[] { new KeyValuePair<string, string>("key", "value") }
+        );
 
         // Act
         var host = builder.Build();
@@ -77,10 +76,13 @@ public class WebAssemblyHostBuilderTest
         builder.Services.AddScoped<StringBuilder>();
 
         var factory = new MyFakeServiceProviderFactory();
-        builder.ConfigureContainer(factory, builder =>
-        {
-            builder.ServiceCollection.AddScoped<List<string>>();
-        });
+        builder.ConfigureContainer(
+            factory,
+            builder =>
+            {
+                builder.ServiceCollection.AddScoped<List<string>>();
+            }
+        );
 
         // Act
         var host = builder.Build();
@@ -95,7 +97,10 @@ public class WebAssemblyHostBuilderTest
     public void Build_InDevelopment_ConfiguresWithServiceProviderWithScopeValidation()
     {
         // Arrange
-        var builder = new WebAssemblyHostBuilder(new TestInternalJSImportMethods(environment: "Development"), JsonOptions);
+        var builder = new WebAssemblyHostBuilder(
+            new TestInternalJSImportMethods(environment: "Development"),
+            JsonOptions
+        );
 
         builder.Services.AddScoped<StringBuilder>();
         builder.Services.AddSingleton<TestServiceThatTakesStringBuilder>();
@@ -105,7 +110,9 @@ public class WebAssemblyHostBuilderTest
 
         // Assert
         Assert.NotNull(host.Services.GetRequiredService<StringBuilder>());
-        Assert.Throws<InvalidOperationException>(() => host.Services.GetRequiredService<TestServiceThatTakesStringBuilder>());
+        Assert.Throws<InvalidOperationException>(() =>
+            host.Services.GetRequiredService<TestServiceThatTakesStringBuilder>()
+        );
     }
 
     [Fact]
@@ -129,7 +136,10 @@ public class WebAssemblyHostBuilderTest
     public void Builder_InDevelopment_SetsHostEnvironmentProperty()
     {
         // Arrange
-        var builder = new WebAssemblyHostBuilder(new TestInternalJSImportMethods(environment: "Development"), JsonOptions);
+        var builder = new WebAssemblyHostBuilder(
+            new TestInternalJSImportMethods(environment: "Development"),
+            JsonOptions
+        );
 
         // Assert
         Assert.NotNull(builder.HostEnvironment);
@@ -140,7 +150,10 @@ public class WebAssemblyHostBuilderTest
     public void Builder_CreatesNavigationManager()
     {
         // Arrange
-        var builder = new WebAssemblyHostBuilder(new TestInternalJSImportMethods(environment: "Development"), JsonOptions);
+        var builder = new WebAssemblyHostBuilder(
+            new TestInternalJSImportMethods(environment: "Development"),
+            JsonOptions
+        );
 
         // Act
         var host = builder.Build();
@@ -149,7 +162,10 @@ public class WebAssemblyHostBuilderTest
         var navigationManager = host.Services.GetRequiredService<NavigationManager>();
         Assert.NotNull(navigationManager);
         Assert.Equal("https://www.example.com/", navigationManager.BaseUri);
-        Assert.Equal("https://www.example.com/awesome-part-that-will-be-truncated-in-tests/cool", navigationManager.Uri);
+        Assert.Equal(
+            "https://www.example.com/awesome-part-that-will-be-truncated-in-tests/cool",
+            navigationManager.Uri
+        );
     }
 
     private class TestServiceThatTakesStringBuilder
@@ -192,10 +208,9 @@ public class WebAssemblyHostBuilderTest
         // Arrange
         var builder = new WebAssemblyHostBuilder(new TestInternalJSImportMethods(), JsonOptions);
 
-        builder.Configuration.AddInMemoryCollection(new[]
-        {
-                new KeyValuePair<string, string>("key", "value"),
-            });
+        builder.Configuration.AddInMemoryCollection(
+            new[] { new KeyValuePair<string, string>("key", "value") }
+        );
 
         // Act
         var host = builder.Build();
@@ -211,12 +226,12 @@ public class WebAssemblyHostBuilderTest
         {
             return new Type[]
             {
-                    typeof(IJSRuntime),
-                    typeof(NavigationManager),
-                    typeof(INavigationInterception),
-                    typeof(ILoggerFactory),
-                    typeof(ILogger<>),
-                    typeof(IWebAssemblyHostEnvironment),
+                typeof(IJSRuntime),
+                typeof(NavigationManager),
+                typeof(INavigationInterception),
+                typeof(ILoggerFactory),
+                typeof(ILogger<>),
+                typeof(IWebAssemblyHostEnvironment),
             };
         }
     }
@@ -248,6 +263,5 @@ public class WebAssemblyHostBuilderTest
         var loggerProvider = host.Services.GetRequiredService<ILoggerProvider>();
         Assert.NotNull(loggerProvider);
         Assert.Equal<ILoggerProvider>(provider.Object, loggerProvider);
-
     }
 }

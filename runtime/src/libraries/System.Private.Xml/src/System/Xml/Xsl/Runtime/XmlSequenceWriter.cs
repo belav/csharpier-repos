@@ -36,7 +36,11 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Start construction of a new Xml tree (document or fragment).
         /// </summary>
-        public abstract XmlRawWriter StartTree(XPathNodeType rootType, IXmlNamespaceResolver? nsResolver, XmlNameTable nameTable);
+        public abstract XmlRawWriter StartTree(
+            XPathNodeType rootType,
+            IXmlNamespaceResolver? nsResolver,
+            XmlNameTable nameTable
+        );
 
         /// <summary>
         /// End construction of a new Xml tree (document or fragment).
@@ -48,7 +52,6 @@ namespace System.Xml.Xsl.Runtime
         /// </summary>
         public abstract void WriteItem(XPathItem item);
     }
-
 
     /// <summary>
     /// An implementation of XmlSequenceWriter that builds a cached XPath/XQuery sequence.
@@ -78,12 +81,24 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Start construction of a new Xml tree (document or fragment).
         /// </summary>
-        public override XmlRawWriter StartTree(XPathNodeType rootType, IXmlNamespaceResolver? nsResolver, XmlNameTable nameTable)
+        public override XmlRawWriter StartTree(
+            XPathNodeType rootType,
+            IXmlNamespaceResolver? nsResolver,
+            XmlNameTable nameTable
+        )
         {
             // Build XPathDocument
             // If rootType != XPathNodeType.Root, then build an XQuery fragment
             _doc = new XPathDocument(nameTable);
-            _writer = _doc.LoadFromWriter(XPathDocument.LoadFlags.AtomizeNames | (rootType == XPathNodeType.Root ? XPathDocument.LoadFlags.None : XPathDocument.LoadFlags.Fragment), string.Empty);
+            _writer = _doc.LoadFromWriter(
+                XPathDocument.LoadFlags.AtomizeNames
+                    | (
+                        rootType == XPathNodeType.Root
+                            ? XPathDocument.LoadFlags.None
+                            : XPathDocument.LoadFlags.Fragment
+                    ),
+                string.Empty
+            );
             _writer.NamespaceResolver = nsResolver;
             return _writer;
         }
@@ -107,7 +122,6 @@ namespace System.Xml.Xsl.Runtime
             _seqTyped.AddClone(item);
         }
     }
-
 
     /// <summary>
     /// An implementation of XmlSequenceWriter that converts an instance of the XQuery data model into a series
@@ -135,7 +149,11 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Start construction of a new Xml tree (document or fragment).
         /// </summary>
-        public override XmlRawWriter StartTree(XPathNodeType rootType, IXmlNamespaceResolver? nsResolver, XmlNameTable nameTable)
+        public override XmlRawWriter StartTree(
+            XPathNodeType rootType,
+            IXmlNamespaceResolver? nsResolver,
+            XmlNameTable nameTable
+        )
         {
             if (rootType == XPathNodeType.Attribute || rootType == XPathNodeType.Namespace)
                 throw new XslTransformException(SR.XmlIl_TopLevelAttrNmsp, string.Empty);
@@ -163,7 +181,10 @@ namespace System.Xml.Xsl.Runtime
             {
                 XPathNavigator nav = (item as XPathNavigator)!;
 
-                if (nav.NodeType == XPathNodeType.Attribute || nav.NodeType == XPathNodeType.Namespace)
+                if (
+                    nav.NodeType == XPathNodeType.Attribute
+                    || nav.NodeType == XPathNodeType.Namespace
+                )
                     throw new XslTransformException(SR.XmlIl_TopLevelAttrNmsp, string.Empty);
 
                 // Copy navigator to raw writer
@@ -214,13 +235,15 @@ namespace System.Xml.Xsl.Runtime
                             do
                             {
                                 CopyShallowNode(nav);
-                            }
-                            while (nav.MoveToNextAttribute());
+                            } while (nav.MoveToNextAttribute());
                             nav.MoveToParent();
                         }
 
                         // Copy namespaces in document order (navigator returns them in reverse document order)
-                        XPathNamespaceScope nsScope = (iLevel == 0) ? XPathNamespaceScope.ExcludeXml : XPathNamespaceScope.Local;
+                        XPathNamespaceScope nsScope =
+                            (iLevel == 0)
+                                ? XPathNamespaceScope.ExcludeXml
+                                : XPathNamespaceScope.Local;
                         if (nav.MoveToFirstNamespace(nsScope))
                         {
                             CopyNamespaces(nav, nsScope);

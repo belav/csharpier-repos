@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Net.Sockets;
 using System.Net.Security;
+using System.Net.Sockets;
 using System.Runtime.ExceptionServices;
 using System.Security.Authentication;
+using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -17,49 +17,66 @@ namespace System.Net.Quic.Tests
     [ConditionalClass(typeof(QuicTestBase), nameof(QuicTestBase.IsSupported))]
     public sealed class QuicListenerTests : QuicTestBase
     {
-        public QuicListenerTests(ITestOutputHelper output) : base(output) { }
+        public QuicListenerTests(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public async Task Listener_Backlog_Success()
         {
             await Task.Run(async () =>
-            {
-                await using QuicListener listener = await CreateQuicListener();
+                {
+                    await using QuicListener listener = await CreateQuicListener();
 
-                var clientStreamTask = CreateQuicConnection(listener.LocalEndPoint);
-                await using QuicConnection serverConnection = await listener.AcceptConnectionAsync();
-                await using QuicConnection clientConnection = await clientStreamTask;
-            }).WaitAsync(TimeSpan.FromSeconds(6));
+                    var clientStreamTask = CreateQuicConnection(listener.LocalEndPoint);
+                    await using QuicConnection serverConnection =
+                        await listener.AcceptConnectionAsync();
+                    await using QuicConnection clientConnection = await clientStreamTask;
+                })
+                .WaitAsync(TimeSpan.FromSeconds(6));
         }
 
         [ConditionalFact(nameof(IsIPv6Available))]
         public async Task Listener_Backlog_Success_IPv6()
         {
             await Task.Run(async () =>
-            {
-                await using QuicListener listener = await CreateQuicListener(new IPEndPoint(IPAddress.IPv6Loopback, 0));
+                {
+                    await using QuicListener listener = await CreateQuicListener(
+                        new IPEndPoint(IPAddress.IPv6Loopback, 0)
+                    );
 
-                var clientStreamTask = CreateQuicConnection(listener.LocalEndPoint);
-                await using QuicConnection serverConnection = await listener.AcceptConnectionAsync();
-                await using QuicConnection clientConnection = await clientStreamTask;
-            }).WaitAsync(TimeSpan.FromSeconds(6));
+                    var clientStreamTask = CreateQuicConnection(listener.LocalEndPoint);
+                    await using QuicConnection serverConnection =
+                        await listener.AcceptConnectionAsync();
+                    await using QuicConnection clientConnection = await clientStreamTask;
+                })
+                .WaitAsync(TimeSpan.FromSeconds(6));
         }
 
         [Fact]
         public async Task Listener_IPv6Any_Accepts_IPv4()
         {
             await Task.Run(async () =>
-            {
-                // QuicListener has special behavior for IPv6Any (listening on all IP addresses, i.e. including IPv4).
-                // Use a copy of IPAddress.IPv6Any to make sure address detection doesn't rely on reference equality comparison.
-                IPAddress IPv6Any = new IPAddress((ReadOnlySpan<byte>)new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, 0);
+                {
+                    // QuicListener has special behavior for IPv6Any (listening on all IP addresses, i.e. including IPv4).
+                    // Use a copy of IPAddress.IPv6Any to make sure address detection doesn't rely on reference equality comparison.
+                    IPAddress IPv6Any = new IPAddress(
+                        (ReadOnlySpan<byte>)
+                            new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                        0
+                    );
 
-                await using QuicListener listener = await CreateQuicListener(new IPEndPoint(IPv6Any, 0));
+                    await using QuicListener listener = await CreateQuicListener(
+                        new IPEndPoint(IPv6Any, 0)
+                    );
 
-                var clientStreamTask = CreateQuicConnection(new IPEndPoint(IPAddress.Loopback, listener.LocalEndPoint.Port));
-                await using QuicConnection serverConnection = await listener.AcceptConnectionAsync();
-                await using QuicConnection clientConnection = await clientStreamTask;
-            }).WaitAsync(TimeSpan.FromSeconds(6));
+                    var clientStreamTask = CreateQuicConnection(
+                        new IPEndPoint(IPAddress.Loopback, listener.LocalEndPoint.Port)
+                    );
+                    await using QuicConnection serverConnection =
+                        await listener.AcceptConnectionAsync();
+                    await using QuicConnection clientConnection = await clientStreamTask;
+                })
+                .WaitAsync(TimeSpan.FromSeconds(6));
         }
 
         [Fact]
@@ -67,11 +84,14 @@ namespace System.Net.Quic.Tests
         {
             QuicListenerOptions listenerOptions = CreateQuicListenerOptions();
             // Do not set any options, which should throw an argument exception from accept.
-            listenerOptions.ConnectionOptionsCallback = (_, _, _) => ValueTask.FromResult(new QuicServerConnectionOptions());
+            listenerOptions.ConnectionOptionsCallback = (_, _, _) =>
+                ValueTask.FromResult(new QuicServerConnectionOptions());
             await using QuicListener listener = await CreateQuicListener(listenerOptions);
 
             ValueTask<QuicConnection> connectTask = CreateQuicConnection(listener.LocalEndPoint);
-            await Assert.ThrowsAnyAsync<ArgumentException>(async () => await listener.AcceptConnectionAsync());
+            await Assert.ThrowsAnyAsync<ArgumentException>(async () =>
+                await listener.AcceptConnectionAsync()
+            );
         }
 
         [Fact]
@@ -86,18 +106,28 @@ namespace System.Net.Quic.Tests
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task AcceptConnectionAsync_ThrowingOptionsCallback_Throws(bool useFromException)
+        public async Task AcceptConnectionAsync_ThrowingOptionsCallback_Throws(
+            bool useFromException
+        )
         {
             const string expectedMessage = "Expected Message";
 
             QuicListenerOptions listenerOptions = CreateQuicListenerOptions();
             // Throw an exception, which should throw the same from accept.
-            listenerOptions.ConnectionOptionsCallback = (_, _, _) => useFromException ? ValueTask.FromException<QuicServerConnectionOptions>(new Exception(expectedMessage)) : throw new Exception(expectedMessage);
+            listenerOptions.ConnectionOptionsCallback = (_, _, _) =>
+                useFromException
+                    ? ValueTask.FromException<QuicServerConnectionOptions>(
+                        new Exception(expectedMessage)
+                    )
+                    : throw new Exception(expectedMessage);
             await using QuicListener listener = await CreateQuicListener(listenerOptions);
 
             ValueTask<QuicConnection> connectTask = CreateQuicConnection(listener.LocalEndPoint);
 
-            Exception exception = await AssertThrowsQuicExceptionAsync(QuicError.CallbackError, async () => await listener.AcceptConnectionAsync());
+            Exception exception = await AssertThrowsQuicExceptionAsync(
+                QuicError.CallbackError,
+                async () => await listener.AcceptConnectionAsync()
+            );
             Assert.NotNull(exception.InnerException);
             Assert.Equal(expectedMessage, exception.InnerException.Message);
             await Assert.ThrowsAsync<AuthenticationException>(() => connectTask.AsTask());
@@ -124,14 +154,25 @@ namespace System.Net.Quic.Tests
 
             ValueTask<QuicConnection> connectTask = CreateQuicConnection(listener.LocalEndPoint);
 
-            Exception exception = await AssertThrowsQuicExceptionAsync(QuicError.CallbackError, async () => await listener.AcceptConnectionAsync().AsTask().WaitAsync(PassingTestTimeout));
+            Exception exception = await AssertThrowsQuicExceptionAsync(
+                QuicError.CallbackError,
+                async () =>
+                    await listener.AcceptConnectionAsync().AsTask().WaitAsync(PassingTestTimeout)
+            );
             Assert.IsType<ObjectDisposedException>(exception.InnerException);
-            await Assert.ThrowsAsync<AuthenticationException>(() => connectTask.AsTask().WaitAsync(PassingTestTimeout));
+            await Assert.ThrowsAsync<AuthenticationException>(() =>
+                connectTask.AsTask().WaitAsync(PassingTestTimeout)
+            );
 
             // Throwing ODE in callback should keep Listener running
             connectTask = CreateQuicConnection(listener.LocalEndPoint);
-            await using QuicConnection serverConnection = await listener.AcceptConnectionAsync().AsTask().WaitAsync(PassingTestTimeout);
-            await using QuicConnection clientConnection = await connectTask.AsTask().WaitAsync(PassingTestTimeout);
+            await using QuicConnection serverConnection = await listener
+                .AcceptConnectionAsync()
+                .AsTask()
+                .WaitAsync(PassingTestTimeout);
+            await using QuicConnection clientConnection = await connectTask
+                .AsTask()
+                .WaitAsync(PassingTestTimeout);
         }
 
         [Theory]
@@ -140,15 +181,27 @@ namespace System.Net.Quic.Tests
         [InlineData(true, false)]
         [InlineData(false, false)]
         [OuterLoop("Exercises several seconds long timeout.")]
-        public async Task AcceptConnectionAsync_SlowOptionsCallback_TimesOut(bool useCancellationToken, bool clientShorterTimeout)
+        public async Task AcceptConnectionAsync_SlowOptionsCallback_TimesOut(
+            bool useCancellationToken,
+            bool clientShorterTimeout
+        )
         {
             QuicListenerOptions listenerOptions = CreateQuicListenerOptions();
             // Stall the options callback to force the timeout.
-            listenerOptions.ConnectionOptionsCallback = async (connection, hello, cancellationToken) =>
+            listenerOptions.ConnectionOptionsCallback = async (
+                connection,
+                hello,
+                cancellationToken
+            ) =>
             {
                 if (useCancellationToken)
                 {
-                    var oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(() => Task.Delay(QuicDefaults.HandshakeTimeout + TimeSpan.FromSeconds(1), cancellationToken));
+                    var oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                        Task.Delay(
+                            QuicDefaults.HandshakeTimeout + TimeSpan.FromSeconds(1),
+                            cancellationToken
+                        )
+                    );
                     Assert.True(cancellationToken.IsCancellationRequested);
                     Assert.Equal(cancellationToken, oce.CancellationToken);
                     ExceptionDispatchInfo.Throw(oce);
@@ -158,8 +211,12 @@ namespace System.Net.Quic.Tests
             };
             await using QuicListener listener = await CreateQuicListener(listenerOptions);
 
-            QuicClientConnectionOptions clientOptions = CreateQuicClientOptions(listener.LocalEndPoint);
-            clientOptions.HandshakeTimeout = clientShorterTimeout ? TimeSpan.FromSeconds(2) : TimeSpan.FromSeconds(20);
+            QuicClientConnectionOptions clientOptions = CreateQuicClientOptions(
+                listener.LocalEndPoint
+            );
+            clientOptions.HandshakeTimeout = clientShorterTimeout
+                ? TimeSpan.FromSeconds(2)
+                : TimeSpan.FromSeconds(20);
 
             ValueTask<QuicConnection> connectTask = CreateQuicConnection(clientOptions);
 
@@ -167,20 +224,36 @@ namespace System.Net.Quic.Tests
             {
                 // Client gave up earlier than server and aborts the handshake, server should get UserCanceled
                 // TLS alert
-                var connectException = await Assert.ThrowsAsync<AuthenticationException>(async () => await listener.AcceptConnectionAsync());
+                var connectException = await Assert.ThrowsAsync<AuthenticationException>(async () =>
+                    await listener.AcceptConnectionAsync()
+                );
                 Assert.Contains(TlsAlertMessage.UserCanceled.ToString(), connectException.Message);
 
-                var exception = await AssertThrowsQuicExceptionAsync(QuicError.ConnectionTimeout, async () => await connectTask);
-                Assert.Equal(SR.Format(SR.net_quic_handshake_timeout, clientOptions.HandshakeTimeout), exception.Message);
+                var exception = await AssertThrowsQuicExceptionAsync(
+                    QuicError.ConnectionTimeout,
+                    async () => await connectTask
+                );
+                Assert.Equal(
+                    SR.Format(SR.net_quic_handshake_timeout, clientOptions.HandshakeTimeout),
+                    exception.Message
+                );
             }
             else
             {
                 // handshake timed out on server side, expect ConnectionTimeout
-                Exception exception = await AssertThrowsQuicExceptionAsync(QuicError.ConnectionTimeout, async () => await listener.AcceptConnectionAsync());
-                Assert.Equal(SR.Format(SR.net_quic_handshake_timeout, QuicDefaults.HandshakeTimeout), exception.Message);
+                Exception exception = await AssertThrowsQuicExceptionAsync(
+                    QuicError.ConnectionTimeout,
+                    async () => await listener.AcceptConnectionAsync()
+                );
+                Assert.Equal(
+                    SR.Format(SR.net_quic_handshake_timeout, QuicDefaults.HandshakeTimeout),
+                    exception.Message
+                );
 
                 // Server aborts the handshake while client is still waiting, so UserCanceled alert is expected
-                var connectException = await Assert.ThrowsAsync<AuthenticationException>(async () => await connectTask);
+                var connectException = await Assert.ThrowsAsync<AuthenticationException>(async () =>
+                    await connectTask
+                );
                 Assert.Contains(TlsAlertMessage.UserCanceled.ToString(), connectException.Message);
             }
         }
@@ -190,11 +263,17 @@ namespace System.Net.Quic.Tests
         public async Task AcceptConnectionAsync_ClientCancels_FiresOptionCallbackCancellationToken()
         {
             QuicListenerOptions listenerOptions = CreateQuicListenerOptions();
-            listenerOptions.ConnectionOptionsCallback = async (connection, hello, cancellationToken) =>
+            listenerOptions.ConnectionOptionsCallback = async (
+                connection,
+                hello,
+                cancellationToken
+            ) =>
             {
                 // default timeout for callback is 10s, wait for 5s for cancellation from client
                 // terminating the connection mid-handshake
-                var oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(() => Task.Delay(TimeSpan.FromSeconds(5), cancellationToken));
+                var oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                    Task.Delay(TimeSpan.FromSeconds(5), cancellationToken)
+                );
                 Assert.True(cancellationToken.IsCancellationRequested);
                 Assert.Equal(cancellationToken, oce.CancellationToken);
                 ExceptionDispatchInfo.Throw(oce);
@@ -202,16 +281,26 @@ namespace System.Net.Quic.Tests
             };
             await using QuicListener listener = await CreateQuicListener(listenerOptions);
 
-            QuicClientConnectionOptions clientOptions = CreateQuicClientOptions(listener.LocalEndPoint);
+            QuicClientConnectionOptions clientOptions = CreateQuicClientOptions(
+                listener.LocalEndPoint
+            );
             clientOptions.HandshakeTimeout = TimeSpan.FromSeconds(0.1);
 
             ValueTask<QuicConnection> connectTask = CreateQuicConnection(clientOptions);
 
-            var connectException = await Assert.ThrowsAsync<AuthenticationException>(async () => await listener.AcceptConnectionAsync());
+            var connectException = await Assert.ThrowsAsync<AuthenticationException>(async () =>
+                await listener.AcceptConnectionAsync()
+            );
             Assert.Contains(TlsAlertMessage.UserCanceled.ToString(), connectException.Message);
 
-            var exception = await AssertThrowsQuicExceptionAsync(QuicError.ConnectionTimeout, async () => await connectTask);
-            Assert.Equal(SR.Format(SR.net_quic_handshake_timeout, clientOptions.HandshakeTimeout), exception.Message);
+            var exception = await AssertThrowsQuicExceptionAsync(
+                QuicError.ConnectionTimeout,
+                async () => await connectTask
+            );
+            Assert.Equal(
+                SR.Format(SR.net_quic_handshake_timeout, clientOptions.HandshakeTimeout),
+                exception.Message
+            );
         }
 
         [Fact]
@@ -222,7 +311,11 @@ namespace System.Net.Quic.Tests
 
             QuicListenerOptions listenerOptions = CreateQuicListenerOptions();
             // Stall the options callback to force the timeout.
-            listenerOptions.ConnectionOptionsCallback = async (connection, hello, cancellationToken) =>
+            listenerOptions.ConnectionOptionsCallback = async (
+                connection,
+                hello,
+                cancellationToken
+            ) =>
             {
                 connectAttempted.SetResult();
                 await serverDisposed.Task;
@@ -245,11 +338,17 @@ namespace System.Net.Quic.Tests
             await listener.DisposeAsync();
             serverDisposed.SetResult();
 
-            var accept1Exception = await Assert.ThrowsAsync<ObjectDisposedException>(async () => await acceptTask1);
-            var accept2Exception = await Assert.ThrowsAsync<ObjectDisposedException>(async () => await acceptTask2);
+            var accept1Exception = await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+                await acceptTask1
+            );
+            var accept2Exception = await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+                await acceptTask2
+            );
 
             // Connect attempt should be stopped with "UserCanceled".
-            var connectException = await Assert.ThrowsAsync<AuthenticationException>(async () => await connectTask);
+            var connectException = await Assert.ThrowsAsync<AuthenticationException>(async () =>
+                await connectTask
+            );
             Assert.Contains(TlsAlertMessage.UserCanceled.ToString(), connectException.Message);
         }
 
@@ -263,13 +362,19 @@ namespace System.Net.Quic.Tests
             // The third connection attempt fails with ConnectionRefused.
             await using var clientConnection1 = await CreateQuicConnection(listener.LocalEndPoint);
             await using var clientConnection2 = await CreateQuicConnection(listener.LocalEndPoint);
-            await AssertThrowsQuicExceptionAsync(QuicError.ConnectionRefused, async () => await CreateQuicConnection(listener.LocalEndPoint));
+            await AssertThrowsQuicExceptionAsync(
+                QuicError.ConnectionRefused,
+                async () => await CreateQuicConnection(listener.LocalEndPoint)
+            );
 
             // Accept one connection and attempt another one.
             await using var serverConnection = await listener.AcceptConnectionAsync();
             await using var clientConnection3 = await CreateQuicConnection(listener.LocalEndPoint);
             // Third one again, should fail.
-            await AssertThrowsQuicExceptionAsync(QuicError.ConnectionRefused, async () => await CreateQuicConnection(listener.LocalEndPoint));
+            await AssertThrowsQuicExceptionAsync(
+                QuicError.ConnectionRefused,
+                async () => await CreateQuicConnection(listener.LocalEndPoint)
+            );
 
             // Accept the remaining connection to see that failure do not affect them.
             await using var serverConnection2 = await listener.AcceptConnectionAsync();
@@ -282,8 +387,14 @@ namespace System.Net.Quic.Tests
         [InlineData(15, 10)]
         [InlineData(10, 10)]
         [InlineData(10, 15)]
-        public Task Listener_BacklogLimitRefusesConnection_ParallelClients_ClientThrows(int backlogLimit, int connectCount)
-            => Listener_BacklogLimitRefusesConnection_ParallelClients_ClientThrows_Core(backlogLimit, connectCount);
+        public Task Listener_BacklogLimitRefusesConnection_ParallelClients_ClientThrows(
+            int backlogLimit,
+            int connectCount
+        ) =>
+            Listener_BacklogLimitRefusesConnection_ParallelClients_ClientThrows_Core(
+                backlogLimit,
+                connectCount
+            );
 
         [Theory]
         [InlineData(100, 250)]
@@ -294,10 +405,19 @@ namespace System.Net.Quic.Tests
         [InlineData(15, 100)]
         [InlineData(10, 1_000)]
         [OuterLoop("Higher number of connections slow the test down.")]
-        private Task Listener_BacklogLimitRefusesConnection_ParallelClients_ClientThrows_Slow(int backlogLimit, int connectCount)
-            => Listener_BacklogLimitRefusesConnection_ParallelClients_ClientThrows_Core(backlogLimit, connectCount);
+        private Task Listener_BacklogLimitRefusesConnection_ParallelClients_ClientThrows_Slow(
+            int backlogLimit,
+            int connectCount
+        ) =>
+            Listener_BacklogLimitRefusesConnection_ParallelClients_ClientThrows_Core(
+                backlogLimit,
+                connectCount
+            );
 
-        private async Task Listener_BacklogLimitRefusesConnection_ParallelClients_ClientThrows_Core(int backlogLimit, int connectCount)
+        private async Task Listener_BacklogLimitRefusesConnection_ParallelClients_ClientThrows_Core(
+            int backlogLimit,
+            int connectCount
+        )
         {
             QuicListenerOptions listenerOptions = CreateQuicListenerOptions();
             listenerOptions.ListenBacklog = backlogLimit;
@@ -313,18 +433,21 @@ namespace System.Net.Quic.Tests
             // Count the number of successful connections and refused connections.
             int success = 0;
             int failure = 0;
-            await Parallel.ForEachAsync(connectTasks, async (connectTask, cancellationToken) =>
-            {
-                try
+            await Parallel.ForEachAsync(
+                connectTasks,
+                async (connectTask, cancellationToken) =>
                 {
-                    await connectTask;
-                    Interlocked.Increment(ref success);
+                    try
+                    {
+                        await connectTask;
+                        Interlocked.Increment(ref success);
+                    }
+                    catch (QuicException qex) when (qex.QuicError == QuicError.ConnectionRefused)
+                    {
+                        Interlocked.Increment(ref failure);
+                    }
                 }
-                catch (QuicException qex) when (qex.QuicError == QuicError.ConnectionRefused)
-                {
-                    Interlocked.Increment(ref failure);
-                }
-            });
+            );
 
             // Check that the numbers correspond to backlog limit.
             int pendingConnections = 0;
@@ -353,7 +476,9 @@ namespace System.Net.Quic.Tests
             ValueTask<QuicConnection> acceptTask = listener.AcceptConnectionAsync(cts.Token);
             Assert.False(acceptTask.IsCompleted);
             cts.Cancel();
-            var oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await acceptTask);
+            var oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                await acceptTask
+            );
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
 
@@ -368,7 +493,9 @@ namespace System.Net.Quic.Tests
             var acceptTask = listener.AcceptConnectionAsync(token);
             cts.Cancel();
 
-            var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await acceptTask);
+            var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                await acceptTask
+            );
             Assert.Equal(token, exception.CancellationToken);
         }
 
@@ -396,11 +523,17 @@ namespace System.Net.Quic.Tests
         public async Task ListenOnAlreadyUsedPort_Throws_AddressInUse()
         {
             // bind a UDP socket to block a port
-            using Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            using Socket s = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
             s.Bind(new IPEndPoint(IPAddress.Any, 0));
 
             // Try to create a listener on the same port.
-            SocketException ex = await Assert.ThrowsAsync<SocketException>(() => CreateQuicListener((IPEndPoint)s.LocalEndPoint).AsTask());
+            SocketException ex = await Assert.ThrowsAsync<SocketException>(() =>
+                CreateQuicListener((IPEndPoint)s.LocalEndPoint).AsTask()
+            );
             Assert.Equal(SocketError.AddressAlreadyInUse, ((SocketException)ex).SocketErrorCode);
         }
 
@@ -415,7 +548,8 @@ namespace System.Net.Quic.Tests
             listenerOptions.ConnectionOptionsCallback = (_, _, _) =>
             {
                 var options = CreateQuicServerOptions();
-                options.ServerAuthenticationOptions.ApplicationProtocols[0] = listenerOptions.ApplicationProtocols[0];
+                options.ServerAuthenticationOptions.ApplicationProtocols[0] =
+                    listenerOptions.ApplicationProtocols[0];
                 return ValueTask.FromResult(options);
             };
             await using QuicListener listener2 = await CreateQuicListener(listenerOptions);
@@ -424,50 +558,72 @@ namespace System.Net.Quic.Tests
 
             // Test making a connection to first listener
             ValueTask<QuicConnection> connectTask1 = CreateQuicConnection(listener1.LocalEndPoint);
-            await using QuicConnection serverConnection1 = await listener1.AcceptConnectionAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(30));
-            await using QuicConnection clientConnection1 = await connectTask1.AsTask().WaitAsync(TimeSpan.FromSeconds(30));
+            await using QuicConnection serverConnection1 = await listener1
+                .AcceptConnectionAsync()
+                .AsTask()
+                .WaitAsync(TimeSpan.FromSeconds(30));
+            await using QuicConnection clientConnection1 = await connectTask1
+                .AsTask()
+                .WaitAsync(TimeSpan.FromSeconds(30));
 
             // Test making a connection to second listener
-            QuicClientConnectionOptions clientOptions = CreateQuicClientOptions(listener1.LocalEndPoint);
-            clientOptions.ClientAuthenticationOptions.ApplicationProtocols[0] = listenerOptions.ApplicationProtocols[0];
+            QuicClientConnectionOptions clientOptions = CreateQuicClientOptions(
+                listener1.LocalEndPoint
+            );
+            clientOptions.ClientAuthenticationOptions.ApplicationProtocols[0] =
+                listenerOptions.ApplicationProtocols[0];
             ValueTask<QuicConnection> connectTask2 = CreateQuicConnection(clientOptions);
-            await using QuicConnection serverConnection2 = await listener2.AcceptConnectionAsync().AsTask().WaitAsync(TimeSpan.FromSeconds(30));
-            await using QuicConnection clientConnection2 = await connectTask2.AsTask().WaitAsync(TimeSpan.FromSeconds(30));
+            await using QuicConnection serverConnection2 = await listener2
+                .AcceptConnectionAsync()
+                .AsTask()
+                .WaitAsync(TimeSpan.FromSeconds(30));
+            await using QuicConnection clientConnection2 = await connectTask2
+                .AsTask()
+                .WaitAsync(TimeSpan.FromSeconds(30));
         }
 
         [Fact]
         public async Task TwoListenersOnSamePort_SameAlpn_Throws()
         {
             await using QuicListener listener = await CreateQuicListener();
-            await AssertThrowsQuicExceptionAsync(QuicError.AlpnInUse, async () => await CreateQuicListener(listener.LocalEndPoint));
+            await AssertThrowsQuicExceptionAsync(
+                QuicError.AlpnInUse,
+                async () => await CreateQuicListener(listener.LocalEndPoint)
+            );
         }
 
         [Fact]
         public async Task Listener_AwaitsConnection_ListenerSurvivesGC()
         {
-            TaskCompletionSource<IPEndPoint> listenerEndpointTcs = new TaskCompletionSource<IPEndPoint>();
+            TaskCompletionSource<IPEndPoint> listenerEndpointTcs =
+                new TaskCompletionSource<IPEndPoint>();
             await Task.WhenAll(
                 Task.Run(async () =>
-                {
-                    await using var listener = await CreateQuicListener();
-                    listenerEndpointTcs.SetResult(listener.LocalEndPoint);
-                    var connection = await listener.AcceptConnectionAsync();
-                    await connection.DisposeAsync();
-                }).WaitAsync(TimeSpan.FromSeconds(5)),
+                    {
+                        await using var listener = await CreateQuicListener();
+                        listenerEndpointTcs.SetResult(listener.LocalEndPoint);
+                        var connection = await listener.AcceptConnectionAsync();
+                        await connection.DisposeAsync();
+                    })
+                    .WaitAsync(TimeSpan.FromSeconds(5)),
                 Task.Run(async () =>
-                {
-                    var endpoint = await listenerEndpointTcs.Task;
-                    await Task.Delay(TimeSpan.FromSeconds(0.5));
-                    GC.Collect();
-                    var connection = await CreateQuicConnection(endpoint);
-                    await connection.DisposeAsync();
-                }).WaitAsync(TimeSpan.FromSeconds(5)));
+                    {
+                        var endpoint = await listenerEndpointTcs.Task;
+                        await Task.Delay(TimeSpan.FromSeconds(0.5));
+                        GC.Collect();
+                        var connection = await CreateQuicConnection(endpoint);
+                        await connection.DisposeAsync();
+                    })
+                    .WaitAsync(TimeSpan.FromSeconds(5))
+            );
         }
 
         [Fact]
         public async Task Listener_AlpnNarrowingDown_Success()
         {
-            using CancellationTokenSource testTimeoutCts = new CancellationTokenSource(PassingTestTimeout);
+            using CancellationTokenSource testTimeoutCts = new CancellationTokenSource(
+                PassingTestTimeout
+            );
             CancellationToken timeoutToken = testTimeoutCts.Token;
 
             var listenerOptions = new QuicListenerOptions()
@@ -489,35 +645,55 @@ namespace System.Net.Quic.Tests
                         new SslApplicationProtocol("test"),
                     };
                     return ValueTask.FromResult(options);
-                }
+                },
             };
             await using QuicListener listener = await CreateQuicListener(listenerOptions);
 
             // Successful connection with bar ALPN
-            QuicClientConnectionOptions clientOptions1 = CreateQuicClientOptions(listener.LocalEndPoint);
+            QuicClientConnectionOptions clientOptions1 = CreateQuicClientOptions(
+                listener.LocalEndPoint
+            );
             clientOptions1.ClientAuthenticationOptions.ApplicationProtocols = new()
             {
                 new SslApplicationProtocol("foo"),
                 new SslApplicationProtocol("bar"),
             };
             ValueTask<QuicConnection> connectTask1 = CreateQuicConnection(clientOptions1);
-            await using QuicConnection serverConnection1 = await listener.AcceptConnectionAsync().AsTask().WaitAsync(timeoutToken);
-            await using QuicConnection clientConnection1 = await connectTask1.AsTask().WaitAsync(timeoutToken);
+            await using QuicConnection serverConnection1 = await listener
+                .AcceptConnectionAsync()
+                .AsTask()
+                .WaitAsync(timeoutToken);
+            await using QuicConnection clientConnection1 = await connectTask1
+                .AsTask()
+                .WaitAsync(timeoutToken);
 
-            Assert.Equal(new SslApplicationProtocol("bar"), clientConnection1.NegotiatedApplicationProtocol);
+            Assert.Equal(
+                new SslApplicationProtocol("bar"),
+                clientConnection1.NegotiatedApplicationProtocol
+            );
 
             // Successful connection with test ALPN
-            QuicClientConnectionOptions clientOptions2 = CreateQuicClientOptions(listener.LocalEndPoint);
+            QuicClientConnectionOptions clientOptions2 = CreateQuicClientOptions(
+                listener.LocalEndPoint
+            );
             clientOptions2.ClientAuthenticationOptions.ApplicationProtocols = new()
             {
                 new SslApplicationProtocol("foo"),
                 new SslApplicationProtocol("test"),
             };
             ValueTask<QuicConnection> connectTask2 = CreateQuicConnection(clientOptions2);
-            await using QuicConnection serverConnection2 = await listener.AcceptConnectionAsync().AsTask().WaitAsync(timeoutToken);
-            await using QuicConnection clientConnection2 = await connectTask2.AsTask().WaitAsync(timeoutToken);
+            await using QuicConnection serverConnection2 = await listener
+                .AcceptConnectionAsync()
+                .AsTask()
+                .WaitAsync(timeoutToken);
+            await using QuicConnection clientConnection2 = await connectTask2
+                .AsTask()
+                .WaitAsync(timeoutToken);
 
-            Assert.Equal(new SslApplicationProtocol("test"), clientConnection2.NegotiatedApplicationProtocol);
+            Assert.Equal(
+                new SslApplicationProtocol("test"),
+                clientConnection2.NegotiatedApplicationProtocol
+            );
         }
 
         [Theory]
@@ -525,7 +701,9 @@ namespace System.Net.Quic.Tests
         [InlineData("not_existing")]
         public async Task Listener_AlpnNarrowingDown_Failure(string alpn)
         {
-            using CancellationTokenSource testTimeoutCts = new CancellationTokenSource(PassingTestTimeout);
+            using CancellationTokenSource testTimeoutCts = new CancellationTokenSource(
+                PassingTestTimeout
+            );
             CancellationToken timeoutToken = testTimeoutCts.Token;
 
             var listenerOptions = new QuicListenerOptions()
@@ -547,11 +725,15 @@ namespace System.Net.Quic.Tests
                         new SslApplicationProtocol("test"),
                     };
                     return ValueTask.FromResult(options);
-                }
+                },
             };
-            bool isAlpnPresentOnInitialAlpnList = listenerOptions.ApplicationProtocols.Contains(new SslApplicationProtocol(alpn)); // If the ALPN is not present on initial list, AcceptConnectionAsync will not throw AuthenticationException.
+            bool isAlpnPresentOnInitialAlpnList = listenerOptions.ApplicationProtocols.Contains(
+                new SslApplicationProtocol(alpn)
+            ); // If the ALPN is not present on initial list, AcceptConnectionAsync will not throw AuthenticationException.
             await using QuicListener listener = await CreateQuicListener(listenerOptions);
-            QuicClientConnectionOptions clientOptions = CreateQuicClientOptions(listener.LocalEndPoint);
+            QuicClientConnectionOptions clientOptions = CreateQuicClientOptions(
+                listener.LocalEndPoint
+            );
             clientOptions.ClientAuthenticationOptions.ApplicationProtocols = new()
             {
                 new SslApplicationProtocol(alpn),
@@ -559,9 +741,13 @@ namespace System.Net.Quic.Tests
             ValueTask<QuicConnection> connectTask = CreateQuicConnection(clientOptions);
             if (isAlpnPresentOnInitialAlpnList)
             {
-                await Assert.ThrowsAsync<AuthenticationException>(() => listener.AcceptConnectionAsync().AsTask().WaitAsync(timeoutToken));
+                await Assert.ThrowsAsync<AuthenticationException>(() =>
+                    listener.AcceptConnectionAsync().AsTask().WaitAsync(timeoutToken)
+                );
             }
-            await Assert.ThrowsAsync<AuthenticationException>(() => connectTask.AsTask().WaitAsync(timeoutToken));
+            await Assert.ThrowsAsync<AuthenticationException>(() =>
+                connectTask.AsTask().WaitAsync(timeoutToken)
+            );
         }
     }
 }

@@ -20,7 +20,8 @@ namespace System.Security.Cryptography.Pkcs
             Oid algorithmId,
             ReadOnlyMemory<byte>? algorithmParameters,
             ReadOnlyMemory<byte> privateKey,
-            bool skipCopies = false)
+            bool skipCopies = false
+        )
         {
             if (algorithmId is null)
             {
@@ -43,7 +44,8 @@ namespace System.Security.Cryptography.Pkcs
             Oid algorithmId,
             ReadOnlyMemory<byte>? algorithmParameters,
             ReadOnlyMemory<byte> privateKey,
-            CryptographicAttributeObjectCollection attributes)
+            CryptographicAttributeObjectCollection attributes
+        )
         {
             Debug.Assert(algorithmId != null);
 
@@ -67,7 +69,8 @@ namespace System.Security.Cryptography.Pkcs
         public static Pkcs8PrivateKeyInfo Decode(
             ReadOnlyMemory<byte> source,
             out int bytesRead,
-            bool skipCopy = false)
+            bool skipCopy = false
+        )
         {
             try
             {
@@ -84,7 +87,8 @@ namespace System.Security.Cryptography.Pkcs
                     new Oid(privateKeyInfo.PrivateKeyAlgorithm.Algorithm, null),
                     privateKeyInfo.PrivateKeyAlgorithm.Parameters,
                     privateKeyInfo.PrivateKey,
-                    SignerInfo.MakeAttributeCollection(privateKeyInfo.Attributes));
+                    SignerInfo.MakeAttributeCollection(privateKeyInfo.Attributes)
+                );
             }
             catch (AsnContentException e)
             {
@@ -108,7 +112,8 @@ namespace System.Security.Cryptography.Pkcs
             PasswordBasedEncryption.ValidatePbeParameters(
                 pbeParameters,
                 password,
-                ReadOnlySpan<byte>.Empty);
+                ReadOnlySpan<byte>.Empty
+            );
 
             AsnWriter pkcs8 = WritePkcs8();
             AsnWriter writer = KeyFormatHelper.WriteEncryptedPkcs8(password, pkcs8, pbeParameters);
@@ -127,10 +132,15 @@ namespace System.Security.Cryptography.Pkcs
             PasswordBasedEncryption.ValidatePbeParameters(
                 pbeParameters,
                 ReadOnlySpan<char>.Empty,
-                passwordBytes);
+                passwordBytes
+            );
 
             AsnWriter pkcs8 = WritePkcs8();
-            AsnWriter writer = KeyFormatHelper.WriteEncryptedPkcs8(passwordBytes, pkcs8, pbeParameters);
+            AsnWriter writer = KeyFormatHelper.WriteEncryptedPkcs8(
+                passwordBytes,
+                pkcs8,
+                pbeParameters
+            );
             return writer.Encode();
         }
 
@@ -144,7 +154,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlySpan<char> password,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             if (pbeParameters is null)
             {
@@ -154,7 +165,8 @@ namespace System.Security.Cryptography.Pkcs
             PasswordBasedEncryption.ValidatePbeParameters(
                 pbeParameters,
                 password,
-                ReadOnlySpan<byte>.Empty);
+                ReadOnlySpan<byte>.Empty
+            );
 
             AsnWriter pkcs8 = WritePkcs8();
             AsnWriter writer = KeyFormatHelper.WriteEncryptedPkcs8(password, pkcs8, pbeParameters);
@@ -165,7 +177,8 @@ namespace System.Security.Cryptography.Pkcs
             ReadOnlySpan<byte> passwordBytes,
             PbeParameters pbeParameters,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             if (pbeParameters is null)
             {
@@ -175,22 +188,29 @@ namespace System.Security.Cryptography.Pkcs
             PasswordBasedEncryption.ValidatePbeParameters(
                 pbeParameters,
                 ReadOnlySpan<char>.Empty,
-                passwordBytes);
+                passwordBytes
+            );
 
             AsnWriter pkcs8 = WritePkcs8();
-            AsnWriter writer = KeyFormatHelper.WriteEncryptedPkcs8(passwordBytes, pkcs8, pbeParameters);
+            AsnWriter writer = KeyFormatHelper.WriteEncryptedPkcs8(
+                passwordBytes,
+                pkcs8,
+                pbeParameters
+            );
             return writer.TryEncode(destination, out bytesWritten);
         }
 
         public static Pkcs8PrivateKeyInfo DecryptAndDecode(
             ReadOnlySpan<char> password,
             ReadOnlyMemory<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             ArraySegment<byte> decrypted = KeyFormatHelper.DecryptPkcs8(
                 password,
                 source,
-                out int localRead);
+                out int localRead
+            );
 
             Memory<byte> decryptedMemory = decrypted;
 
@@ -216,12 +236,14 @@ namespace System.Security.Cryptography.Pkcs
         public static Pkcs8PrivateKeyInfo DecryptAndDecode(
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlyMemory<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             ArraySegment<byte> decrypted = KeyFormatHelper.DecryptPkcs8(
                 passwordBytes,
                 source,
-                out int localRead);
+                out int localRead
+            );
 
             Memory<byte> decryptedMemory = decrypted;
 
@@ -248,10 +270,7 @@ namespace System.Security.Cryptography.Pkcs
         {
             PrivateKeyInfoAsn info = new PrivateKeyInfoAsn
             {
-                PrivateKeyAlgorithm =
-                {
-                    Algorithm = AlgorithmId.Value!,
-                },
+                PrivateKeyAlgorithm = { Algorithm = AlgorithmId.Value! },
                 PrivateKey = PrivateKeyBytes,
             };
 
@@ -262,7 +281,9 @@ namespace System.Security.Cryptography.Pkcs
 
             if (Attributes.Count > 0)
             {
-                info.Attributes = PkcsHelpers.NormalizeAttributeSet(CmsSigner.BuildAttributes(Attributes).ToArray());
+                info.Attributes = PkcsHelpers.NormalizeAttributeSet(
+                    CmsSigner.BuildAttributes(Attributes).ToArray()
+                );
             }
 
             // Write in BER in case any of the provided fields was BER.

@@ -10,10 +10,15 @@ namespace System.Diagnostics.SymbolStore.Tests
     public class StackTraceSymbolsTests
     {
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51399", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51399",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public void StackTraceSymbolsDoNotLockFile()
         {
-            var asmPath = AssemblyPathHelper.GetAssemblyLocation(typeof(StackTraceSymbolsTests).Assembly);
+            var asmPath = AssemblyPathHelper.GetAssemblyLocation(
+                typeof(StackTraceSymbolsTests).Assembly
+            );
             var pdbPath = Path.ChangeExtension(asmPath, ".pdb");
 
             Assert.True(File.Exists(pdbPath));

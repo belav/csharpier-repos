@@ -110,7 +110,9 @@ namespace System.Buffers
                 // Improve throughput by setting it to the child character with the highest frequency.
                 foreach ((char childChar, int childIndex) in children)
                 {
-                    float newFrequency = char.IsAscii(childChar) ? CharacterFrequencyHelper.AsciiFrequency[childChar] : -1;
+                    float newFrequency = char.IsAscii(childChar)
+                        ? CharacterFrequencyHelper.AsciiFrequency[childChar]
+                        : -1;
 
                     if (newFrequency > frequency)
                     {
@@ -128,7 +130,10 @@ namespace System.Buffers
                 }
             }
 
-            static bool TryCreateJumpTable(Dictionary<char, int> children, [NotNullWhen(true)] out int[]? table)
+            static bool TryCreateJumpTable(
+                Dictionary<char, int> children,
+                [NotNullWhen(true)] out int[]? table
+            )
             {
                 // We can use either a Dictionary<char, int> or int[] to map child characters to node indexes.
                 // int[] is generally faster but consumes more memory for characters with high values.
@@ -183,7 +188,7 @@ namespace System.Buffers
                         < 4 => 192,
                         < 8 => 272,
                         < 12 => 352,
-                        _ => childCount * 25
+                        _ => childCount * 25,
                     };
                 }
             }

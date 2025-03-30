@@ -8,13 +8,9 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-public interface I0
-{
-}
+public interface I0 { }
 
-public interface I1
-{
-}
+public interface I1 { }
 
 public class C0 : I0, I1
 {
@@ -22,6 +18,7 @@ public class C0 : I0, I1
     public bool F1;
     public uint F2;
     public ushort F5;
+
     public C0(sbyte f0, bool f1, uint f2, ushort f5)
     {
         F0 = f0;
@@ -34,6 +31,7 @@ public class C0 : I0, I1
 public class Program2
 {
     public static I1[][] s_18;
+
     //= { new I1[] { null }, };
 
     public static ushort[][] s_43;
@@ -47,7 +45,8 @@ public class Program2
         try
         {
             M52(vr6);
-        } catch (NullReferenceException ex)
+        }
+        catch (NullReferenceException ex)
         {
             return 100;
         }

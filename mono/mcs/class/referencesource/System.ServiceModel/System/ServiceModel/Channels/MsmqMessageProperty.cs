@@ -40,8 +40,11 @@ namespace System.ServiceModel.Channels
                 if (!deliveryFailure.HasValue)
                     return null;
 
-                if (System.ServiceModel.Channels.DeliveryFailure.ReachQueueTimeout == deliveryFailure.Value
-                    || System.ServiceModel.Channels.DeliveryFailure.Unknown == deliveryFailure.Value)
+                if (
+                    System.ServiceModel.Channels.DeliveryFailure.ReachQueueTimeout
+                        == deliveryFailure.Value
+                    || System.ServiceModel.Channels.DeliveryFailure.Unknown == deliveryFailure.Value
+                )
                     return System.ServiceModel.Channels.DeliveryStatus.InDoubt;
                 else
                     return System.ServiceModel.Channels.DeliveryStatus.NotDelivered;
@@ -75,7 +78,9 @@ namespace System.ServiceModel.Channels
             if (null == message)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("message");
             if (null == message.Properties)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("message.Properties");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "message.Properties"
+                );
 
             return message.Properties[Name] as MsmqMessageProperty;
         }
@@ -89,8 +94,10 @@ namespace System.ServiceModel.Channels
             int bit14 = (1 << 14) & acknowledgment;
             int otherBits = ~((1 << 15) | (1 << 14)) & acknowledgment;
 
-            if ((0 == bit14 && otherBits >= 0 && otherBits <= 0x0A) ||
-                (0 != bit14 && otherBits >= 0 && otherBits <= 0x02))
+            if (
+                (0 == bit14 && otherBits >= 0 && otherBits <= 0x0A)
+                || (0 != bit14 && otherBits >= 0 && otherBits <= 0x02)
+            )
                 return (DeliveryFailure)acknowledgment;
             else
             {

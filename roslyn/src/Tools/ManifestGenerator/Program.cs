@@ -19,7 +19,7 @@ internal static class Program
         var options = new OptionSet()
         {
             { "dll=", "Path to assembly file", (string s) => dllPath = s },
-            { "pdb=", "Path to PDB file", (string s) => pdbPath = s }
+            { "pdb=", "Path to PDB file", (string s) => pdbPath = s },
         };
         options.Parse(args);
 

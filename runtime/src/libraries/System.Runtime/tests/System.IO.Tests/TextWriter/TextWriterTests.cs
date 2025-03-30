@@ -13,7 +13,8 @@ namespace System.IO.Tests
 {
     public class TextWriterTests
     {
-        protected static CharArrayTextWriter NewTextWriter => new CharArrayTextWriter() { NewLine = "---" };
+        protected static CharArrayTextWriter NewTextWriter =>
+            new CharArrayTextWriter() { NewLine = "---" };
 
         #region Write Overloads
 
@@ -117,7 +118,6 @@ namespace System.IO.Tests
                 tw.Clear();
                 tw.Write(ulong.MaxValue);
                 Assert.Equal(ulong.MaxValue.ToString(), tw.Text);
-
             }
         }
 
@@ -198,7 +198,13 @@ namespace System.IO.Tests
             using (CharArrayTextWriter tw = NewTextWriter)
             {
                 tw.Write(TestDataProvider.FormatStringOneObject, TestDataProvider.FirstObject);
-                Assert.Equal(string.Format(TestDataProvider.FormatStringOneObject, TestDataProvider.FirstObject), tw.Text);
+                Assert.Equal(
+                    string.Format(
+                        TestDataProvider.FormatStringOneObject,
+                        TestDataProvider.FirstObject
+                    ),
+                    tw.Text
+                );
             }
         }
 
@@ -207,8 +213,19 @@ namespace System.IO.Tests
         {
             using (CharArrayTextWriter tw = NewTextWriter)
             {
-                tw.Write(TestDataProvider.FormatStringTwoObjects, TestDataProvider.FirstObject, TestDataProvider.SecondObject);
-                Assert.Equal(string.Format(TestDataProvider.FormatStringTwoObjects, TestDataProvider.FirstObject, TestDataProvider.SecondObject), tw.Text);
+                tw.Write(
+                    TestDataProvider.FormatStringTwoObjects,
+                    TestDataProvider.FirstObject,
+                    TestDataProvider.SecondObject
+                );
+                Assert.Equal(
+                    string.Format(
+                        TestDataProvider.FormatStringTwoObjects,
+                        TestDataProvider.FirstObject,
+                        TestDataProvider.SecondObject
+                    ),
+                    tw.Text
+                );
             }
         }
 
@@ -217,8 +234,21 @@ namespace System.IO.Tests
         {
             using (CharArrayTextWriter tw = NewTextWriter)
             {
-                tw.Write(TestDataProvider.FormatStringThreeObjects, TestDataProvider.FirstObject, TestDataProvider.SecondObject, TestDataProvider.ThirdObject);
-                Assert.Equal(string.Format(TestDataProvider.FormatStringThreeObjects, TestDataProvider.FirstObject, TestDataProvider.SecondObject, TestDataProvider.ThirdObject), tw.Text);
+                tw.Write(
+                    TestDataProvider.FormatStringThreeObjects,
+                    TestDataProvider.FirstObject,
+                    TestDataProvider.SecondObject,
+                    TestDataProvider.ThirdObject
+                );
+                Assert.Equal(
+                    string.Format(
+                        TestDataProvider.FormatStringThreeObjects,
+                        TestDataProvider.FirstObject,
+                        TestDataProvider.SecondObject,
+                        TestDataProvider.ThirdObject
+                    ),
+                    tw.Text
+                );
             }
         }
 
@@ -227,8 +257,17 @@ namespace System.IO.Tests
         {
             using (CharArrayTextWriter tw = NewTextWriter)
             {
-                tw.Write(TestDataProvider.FormatStringMultipleObjects, TestDataProvider.MultipleObjects);
-                Assert.Equal(string.Format(TestDataProvider.FormatStringMultipleObjects, TestDataProvider.MultipleObjects), tw.Text);
+                tw.Write(
+                    TestDataProvider.FormatStringMultipleObjects,
+                    TestDataProvider.MultipleObjects
+                );
+                Assert.Equal(
+                    string.Format(
+                        TestDataProvider.FormatStringMultipleObjects,
+                        TestDataProvider.MultipleObjects
+                    ),
+                    tw.Text
+                );
             }
         }
 
@@ -255,7 +294,13 @@ namespace System.IO.Tests
                 {
                     tw.WriteLine(TestDataProvider.CharData[count]);
                 }
-                Assert.Equal(string.Join(tw.NewLine, TestDataProvider.CharData.Select(ch => ch.ToString()).ToArray()) + tw.NewLine, tw.Text);
+                Assert.Equal(
+                    string.Join(
+                        tw.NewLine,
+                        TestDataProvider.CharData.Select(ch => ch.ToString()).ToArray()
+                    ) + tw.NewLine,
+                    tw.Text
+                );
             }
         }
 
@@ -426,7 +471,13 @@ namespace System.IO.Tests
             using (CharArrayTextWriter tw = NewTextWriter)
             {
                 tw.WriteLine(TestDataProvider.FormatStringOneObject, TestDataProvider.FirstObject);
-                Assert.Equal(string.Format(TestDataProvider.FormatStringOneObject + tw.NewLine, TestDataProvider.FirstObject), tw.Text);
+                Assert.Equal(
+                    string.Format(
+                        TestDataProvider.FormatStringOneObject + tw.NewLine,
+                        TestDataProvider.FirstObject
+                    ),
+                    tw.Text
+                );
             }
         }
 
@@ -435,8 +486,19 @@ namespace System.IO.Tests
         {
             using (CharArrayTextWriter tw = NewTextWriter)
             {
-                tw.WriteLine(TestDataProvider.FormatStringTwoObjects, TestDataProvider.FirstObject, TestDataProvider.SecondObject);
-                Assert.Equal(string.Format(TestDataProvider.FormatStringTwoObjects + tw.NewLine, TestDataProvider.FirstObject, TestDataProvider.SecondObject), tw.Text);
+                tw.WriteLine(
+                    TestDataProvider.FormatStringTwoObjects,
+                    TestDataProvider.FirstObject,
+                    TestDataProvider.SecondObject
+                );
+                Assert.Equal(
+                    string.Format(
+                        TestDataProvider.FormatStringTwoObjects + tw.NewLine,
+                        TestDataProvider.FirstObject,
+                        TestDataProvider.SecondObject
+                    ),
+                    tw.Text
+                );
             }
         }
 
@@ -445,8 +507,21 @@ namespace System.IO.Tests
         {
             using (CharArrayTextWriter tw = NewTextWriter)
             {
-                tw.WriteLine(TestDataProvider.FormatStringThreeObjects, TestDataProvider.FirstObject, TestDataProvider.SecondObject, TestDataProvider.ThirdObject);
-                Assert.Equal(string.Format(TestDataProvider.FormatStringThreeObjects + tw.NewLine, TestDataProvider.FirstObject, TestDataProvider.SecondObject, TestDataProvider.ThirdObject), tw.Text);
+                tw.WriteLine(
+                    TestDataProvider.FormatStringThreeObjects,
+                    TestDataProvider.FirstObject,
+                    TestDataProvider.SecondObject,
+                    TestDataProvider.ThirdObject
+                );
+                Assert.Equal(
+                    string.Format(
+                        TestDataProvider.FormatStringThreeObjects + tw.NewLine,
+                        TestDataProvider.FirstObject,
+                        TestDataProvider.SecondObject,
+                        TestDataProvider.ThirdObject
+                    ),
+                    tw.Text
+                );
             }
         }
 
@@ -455,8 +530,17 @@ namespace System.IO.Tests
         {
             using (CharArrayTextWriter tw = NewTextWriter)
             {
-                tw.WriteLine(TestDataProvider.FormatStringMultipleObjects, TestDataProvider.MultipleObjects);
-                Assert.Equal(string.Format(TestDataProvider.FormatStringMultipleObjects + tw.NewLine, TestDataProvider.MultipleObjects), tw.Text);
+                tw.WriteLine(
+                    TestDataProvider.FormatStringMultipleObjects,
+                    TestDataProvider.MultipleObjects
+                );
+                Assert.Equal(
+                    string.Format(
+                        TestDataProvider.FormatStringMultipleObjects + tw.NewLine,
+                        TestDataProvider.MultipleObjects
+                    ),
+                    tw.Text
+                );
             }
         }
 
@@ -632,7 +716,10 @@ namespace System.IO.Tests
 
         [ConditionalTheory]
         [MemberData(nameof(GetStringBuilderTestData))]
-        public async Task WriteLineAsyncStringBuilderTest(bool isSynchronized, StringBuilder testData)
+        public async Task WriteLineAsyncStringBuilderTest(
+            bool isSynchronized,
+            StringBuilder testData
+        )
         {
             if (!isSynchronized && !PlatformDetection.IsThreadingSupported)
             {
@@ -652,7 +739,10 @@ namespace System.IO.Tests
         public void DisposeAsync_InvokesDisposeSynchronously()
         {
             bool disposeInvoked = false;
-            var tw = new InvokeActionOnDisposeTextWriter() { DisposeAction = () => disposeInvoked = true };
+            var tw = new InvokeActionOnDisposeTextWriter()
+            {
+                DisposeAction = () => disposeInvoked = true,
+            };
             Assert.False(disposeInvoked);
             Assert.True(tw.DisposeAsync().IsCompletedSuccessfully);
             Assert.True(disposeInvoked);
@@ -662,7 +752,13 @@ namespace System.IO.Tests
         public void DisposeAsync_ExceptionReturnedInTask()
         {
             Exception e = new FormatException();
-            var tw = new InvokeActionOnDisposeTextWriter() { DisposeAction = () => { throw e; } };
+            var tw = new InvokeActionOnDisposeTextWriter()
+            {
+                DisposeAction = () =>
+                {
+                    throw e;
+                },
+            };
             ValueTask vt = tw.DisposeAsync();
             Assert.True(vt.IsFaulted);
             Assert.Same(e, vt.AsTask().Exception.InnerException);
@@ -671,18 +767,33 @@ namespace System.IO.Tests
         [Fact]
         public async Task FlushAsync_Precanceled()
         {
-            Assert.Equal(TaskStatus.RanToCompletion, TextWriter.Null.FlushAsync(new CancellationToken(true)).Status);
-            Assert.Equal(TaskStatus.Canceled, TextWriter.Synchronized(TextWriter.Null).FlushAsync(new CancellationToken(true)).Status);
+            Assert.Equal(
+                TaskStatus.RanToCompletion,
+                TextWriter.Null.FlushAsync(new CancellationToken(true)).Status
+            );
+            Assert.Equal(
+                TaskStatus.Canceled,
+                TextWriter
+                    .Synchronized(TextWriter.Null)
+                    .FlushAsync(new CancellationToken(true))
+                    .Status
+            );
 
             var ttw = new TrackingTextWriter();
-            Assert.Equal(TaskStatus.RanToCompletion, ttw.FlushAsync(new CancellationTokenSource().Token).Status);
+            Assert.Equal(
+                TaskStatus.RanToCompletion,
+                ttw.FlushAsync(new CancellationTokenSource().Token).Status
+            );
             Assert.True(ttw.NonCancelableFlushAsyncCalled);
 
             var cts = new CancellationTokenSource();
             cts.Cancel();
             Task t = ttw.FlushAsync(cts.Token);
             Assert.Equal(TaskStatus.Canceled, t.Status);
-            Assert.Equal(cts.Token, (await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t)).CancellationToken);
+            Assert.Equal(
+                cts.Token,
+                (await Assert.ThrowsAnyAsync<OperationCanceledException>(() => t)).CancellationToken
+            );
         }
 
         private sealed class TrackingTextWriter : TextWriter
@@ -702,6 +813,7 @@ namespace System.IO.Tests
         {
             public Action DisposeAction;
             public override Encoding Encoding => Encoding.UTF8;
+
             protected override void Dispose(bool disposing) => DisposeAction?.Invoke();
         }
 
@@ -714,7 +826,14 @@ namespace System.IO.Tests
             for (int i = 0; i < 4000; i++)
                 complexStringBuilder.Append(TestDataProvider.CharData); // CharData ~ 25 chars
 
-            foreach (StringBuilder testData in new StringBuilder[] { new StringBuilder(""), new StringBuilder(new string(TestDataProvider.CharData)), complexStringBuilder })
+            foreach (
+                StringBuilder testData in new StringBuilder[]
+                {
+                    new StringBuilder(""),
+                    new StringBuilder(new string(TestDataProvider.CharData)),
+                    complexStringBuilder,
+                }
+            )
             {
                 foreach (bool isSynchronized in new bool[] { true, false })
                 {

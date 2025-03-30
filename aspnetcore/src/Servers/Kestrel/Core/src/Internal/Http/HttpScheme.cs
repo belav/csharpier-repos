@@ -25,5 +25,5 @@ public enum HttpScheme
     /// This API supports framework infrastructure and is not intended to be used
     /// directly from application code.
     /// </summary>
-    Https = 1
+    Https = 1,
 }

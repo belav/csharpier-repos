@@ -16,6 +16,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Xunit;
+
 //using BenchmarkDotNet.Attributes;
 //using MicroBenchmarks;
 
@@ -62,15 +63,19 @@ namespace BenchmarksGame
             var stretchTreeCheck = Task.Run(() =>
             {
                 int stretchDepth = maxDepth + 1;
-                return "stretch tree of depth " + stretchDepth + "\t check: " +
-                            TreeNode.Create(stretchDepth).Check();
+                return "stretch tree of depth "
+                    + stretchDepth
+                    + "\t check: "
+                    + TreeNode.Create(stretchDepth).Check();
             });
 
             var longLivedTree = TreeNode.Create(maxDepth);
             var longLivedText = Task.Run(() =>
             {
-                return "long lived tree of depth " + maxDepth +
-                            "\t check: " + longLivedTree.Check();
+                return "long lived tree of depth "
+                    + maxDepth
+                    + "\t check: "
+                    + longLivedTree.Check();
             });
 
             var results = new string[(maxDepth - MinDepth) / 2 + 1];
@@ -93,8 +98,7 @@ namespace BenchmarksGame
                 var check = tasks[0].Result;
                 for (int t = 1; t < tasks.Length; t++)
                     check += tasks[t].Result;
-                results[i] = (n * NoTasks) + "\t trees of depth " + depth +
-                                "\t check: " + check;
+                results[i] = (n * NoTasks) + "\t trees of depth " + depth + "\t check: " + check;
             }
 
             if (verbose)
@@ -119,7 +123,12 @@ namespace BenchmarksGame
 
         struct TreeNode
         {
-            class Next { public TreeNode left, right; }
+            class Next
+            {
+                public TreeNode left,
+                    right;
+            }
+
             readonly Next next;
 
             TreeNode(TreeNode left, TreeNode right) =>
@@ -127,8 +136,9 @@ namespace BenchmarksGame
 
             internal static TreeNode Create(int d)
             {
-                return d == 1 ? new TreeNode(new TreeNode(), new TreeNode())
-                              : new TreeNode(Create(d - 1), Create(d - 1));
+                return d == 1
+                    ? new TreeNode(new TreeNode(), new TreeNode())
+                    : new TreeNode(Create(d - 1), Create(d - 1));
             }
 
             internal int Check()

@@ -43,14 +43,19 @@ public class AdaptiveCapacityDictionaryTests
     public void CreateWithCapacityOverDefaultLimit()
     {
         // The default threshold between array and dictionary is 10. If we created one over that limit it should go directly to a dictionary.
-        var dict = new AdaptiveCapacityDictionary<string, string>(capacity: 12, StringComparer.OrdinalIgnoreCase);
+        var dict = new AdaptiveCapacityDictionary<string, string>(
+            capacity: 12,
+            StringComparer.OrdinalIgnoreCase
+        );
 
         Assert.Null(dict._arrayStorage);
         Assert.NotNull(dict._dictionaryStorage);
 
         for (var i = 0; i < 12; i++)
         {
-            dict[i.ToString(CultureInfo.InvariantCulture)] = i.ToString(CultureInfo.InvariantCulture);
+            dict[i.ToString(CultureInfo.InvariantCulture)] = i.ToString(
+                CultureInfo.InvariantCulture
+            );
         }
 
         Assert.Null(dict._arrayStorage);
@@ -63,13 +68,15 @@ public class AdaptiveCapacityDictionaryTests
     {
         // Arrange, Act & Assert
         ExceptionAssert.ThrowsArgument(
-            () => new AdaptiveCapacityDictionary<string, object?>(StringComparer.OrdinalIgnoreCase)
-            {
-                    {  "name", "Billy" },
-                    {  "Name", "Joey" }
-            },
+            () =>
+                new AdaptiveCapacityDictionary<string, object?>(StringComparer.OrdinalIgnoreCase)
+                {
+                    { "name", "Billy" },
+                    { "Name", "Joey" },
+                },
             "key",
-            $"An element with the key 'Name' already exists in the {nameof(AdaptiveCapacityDictionary<string, object?>)}.");
+            $"An element with the key 'Name' already exists in the {nameof(AdaptiveCapacityDictionary<string, object?>)}."
+        );
     }
 
     [Fact]
@@ -142,10 +149,7 @@ public class AdaptiveCapacityDictionaryTests
     public void IndexGet_ListStorage_Match_ReturnsValue()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         // Act
         var value = dict["key"];
@@ -160,9 +164,9 @@ public class AdaptiveCapacityDictionaryTests
     {
         // Arrange
         var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "key", "value" },
-            };
+        {
+            { "key", "value" },
+        };
 
         // Act
         var value = dict["kEy"];
@@ -195,7 +199,14 @@ public class AdaptiveCapacityDictionaryTests
         dict["key"] = "value";
 
         // Assert
-        Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+        Assert.Collection(
+            dict,
+            kvp =>
+            {
+                Assert.Equal("key", kvp.Key);
+                Assert.Equal("value", kvp.Value);
+            }
+        );
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -203,10 +214,7 @@ public class AdaptiveCapacityDictionaryTests
     public void IndexSet_ListStorage_NoMatch_AddsValue()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "age", 30 },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "age", 30 } };
 
         // Act
         dict["key"] = "value";
@@ -214,8 +222,17 @@ public class AdaptiveCapacityDictionaryTests
         // Assert
         Assert.Collection(
             dict.OrderBy(kvp => kvp.Key),
-            kvp => { Assert.Equal("age", kvp.Key); Assert.Equal(30, kvp.Value); },
-            kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("age", kvp.Key);
+                Assert.Equal(30, kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("key", kvp.Key);
+                Assert.Equal("value", kvp.Value);
+            }
+        );
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -223,16 +240,20 @@ public class AdaptiveCapacityDictionaryTests
     public void IndexSet_ListStorage_Match_SetsValue()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         // Act
         dict["key"] = "value";
 
         // Assert
-        Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+        Assert.Collection(
+            dict,
+            kvp =>
+            {
+                Assert.Equal("key", kvp.Key);
+                Assert.Equal("value", kvp.Value);
+            }
+        );
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -240,16 +261,20 @@ public class AdaptiveCapacityDictionaryTests
     public void IndexSet_ListStorage_MatchIgnoreCase_SetsValue()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         // Act
         dict["key"] = "value";
 
         // Assert
-        Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+        Assert.Collection(
+            dict,
+            kvp =>
+            {
+                Assert.Equal("key", kvp.Key);
+                Assert.Equal("value", kvp.Value);
+            }
+        );
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -270,10 +295,7 @@ public class AdaptiveCapacityDictionaryTests
     public void Count_ListStorage()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         // Act
         var count = dict.Count;
@@ -301,10 +323,7 @@ public class AdaptiveCapacityDictionaryTests
     public void Keys_ListStorage()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         // Act
         var keys = dict.Keys;
@@ -332,10 +351,7 @@ public class AdaptiveCapacityDictionaryTests
     public void Values_ListStorage()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         // Act
         var values = dict.Values;
@@ -355,7 +371,14 @@ public class AdaptiveCapacityDictionaryTests
         dict.Add("key", "value");
 
         // Assert
-        Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+        Assert.Collection(
+            dict,
+            kvp =>
+            {
+                Assert.Equal("key", kvp.Key);
+                Assert.Equal("value", kvp.Value);
+            }
+        );
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -376,10 +399,7 @@ public class AdaptiveCapacityDictionaryTests
     public void Add_ListStorage()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "age", 30 },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "age", 30 } };
 
         // Act
         dict.Add("key", "value");
@@ -387,8 +407,17 @@ public class AdaptiveCapacityDictionaryTests
         // Assert
         Assert.Collection(
             dict.OrderBy(kvp => kvp.Key),
-            kvp => { Assert.Equal("age", kvp.Key); Assert.Equal(30, kvp.Value); },
-            kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("age", kvp.Key);
+                Assert.Equal(30, kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("key", kvp.Key);
+                Assert.Equal("value", kvp.Value);
+            }
+        );
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -396,12 +425,10 @@ public class AdaptiveCapacityDictionaryTests
     public void Add_DuplicateKey()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
-        var message = $"An element with the key 'key' already exists in the {nameof(AdaptiveCapacityDictionary<string, string>)}";
+        var message =
+            $"An element with the key 'key' already exists in the {nameof(AdaptiveCapacityDictionary<string, string>)}";
 
         // Act & Assert
         ExceptionAssert.ThrowsArgument(() => dict.Add("key", "value2"), "key", message);
@@ -409,7 +436,12 @@ public class AdaptiveCapacityDictionaryTests
         // Assert
         Assert.Collection(
             dict.OrderBy(kvp => kvp.Key),
-            kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("key", kvp.Key);
+                Assert.Equal("value", kvp.Value);
+            }
+        );
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -418,11 +450,12 @@ public class AdaptiveCapacityDictionaryTests
     {
         // Arrange
         var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "key", "value" },
-            };
+        {
+            { "key", "value" },
+        };
 
-        var message = $"An element with the key 'kEy' already exists in the {nameof(AdaptiveCapacityDictionary<string, string>)}";
+        var message =
+            $"An element with the key 'kEy' already exists in the {nameof(AdaptiveCapacityDictionary<string, string>)}";
 
         // Act & Assert
         ExceptionAssert.ThrowsArgument(() => dict.Add("kEy", "value2"), "key", message);
@@ -430,7 +463,12 @@ public class AdaptiveCapacityDictionaryTests
         // Assert
         Assert.Collection(
             dict.OrderBy(kvp => kvp.Key),
-            kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("key", kvp.Key);
+                Assert.Equal("value", kvp.Value);
+            }
+        );
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -438,19 +476,27 @@ public class AdaptiveCapacityDictionaryTests
     public void Add_KeyValuePair()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "age", 30 },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "age", 30 } };
 
         // Act
-        ((ICollection<KeyValuePair<string, object?>>)dict).Add(new KeyValuePair<string, object?>("key", "value"));
+        ((ICollection<KeyValuePair<string, object?>>)dict).Add(
+            new KeyValuePair<string, object?>("key", "value")
+        );
 
         // Assert
         Assert.Collection(
             dict.OrderBy(kvp => kvp.Key),
-            kvp => { Assert.Equal("age", kvp.Key); Assert.Equal(30, kvp.Value); },
-            kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("age", kvp.Key);
+                Assert.Equal(30, kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("key", kvp.Key);
+                Assert.Equal("value", kvp.Value);
+            }
+        );
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -471,10 +517,7 @@ public class AdaptiveCapacityDictionaryTests
     public void Clear_ListStorage()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         // Act
         dict.Clear();
@@ -489,10 +532,7 @@ public class AdaptiveCapacityDictionaryTests
     public void Contains_ListStorage_KeyValuePair_True()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         var input = new KeyValuePair<string, object?>("key", "value");
 
@@ -509,9 +549,9 @@ public class AdaptiveCapacityDictionaryTests
     {
         // Arrange
         var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "key", "value" },
-            };
+        {
+            { "key", "value" },
+        };
 
         var input = new KeyValuePair<string, object?>("KEY", "value");
 
@@ -527,10 +567,7 @@ public class AdaptiveCapacityDictionaryTests
     public void Contains_ListStorage_KeyValuePair_False()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         var input = new KeyValuePair<string, object?>("other", "value");
 
@@ -547,10 +584,7 @@ public class AdaptiveCapacityDictionaryTests
     public void Contains_ListStorage_KeyValuePair_False_ValueComparisonIsDefault()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         var input = new KeyValuePair<string, object?>("key", "valUE");
 
@@ -592,10 +626,7 @@ public class AdaptiveCapacityDictionaryTests
     public void ContainsKey_ListStorage_False()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         // Act
         var result = dict.ContainsKey("other");
@@ -609,10 +640,7 @@ public class AdaptiveCapacityDictionaryTests
     public void ContainsKey_ListStorage_True()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         // Act
         var result = dict.ContainsKey("key");
@@ -627,9 +655,9 @@ public class AdaptiveCapacityDictionaryTests
     {
         // Arrange
         var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "key", "value" },
-            };
+        {
+            { "key", "value" },
+        };
 
         // Act
         var result = dict.ContainsKey("kEy");
@@ -643,10 +671,7 @@ public class AdaptiveCapacityDictionaryTests
     public void CopyTo()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         var array = new KeyValuePair<string, object?>[2];
 
@@ -657,10 +682,11 @@ public class AdaptiveCapacityDictionaryTests
         Assert.Equal(
             new KeyValuePair<string, object?>[]
             {
-                    default(KeyValuePair<string, object?>),
-                    new KeyValuePair<string, object?>("key", "value")
+                default(KeyValuePair<string, object?>),
+                new KeyValuePair<string, object?>("key", "value"),
             },
-            array);
+            array
+        );
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -668,10 +694,7 @@ public class AdaptiveCapacityDictionaryTests
     public void Remove_KeyValuePair_True()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         var input = new KeyValuePair<string, object?>("key", "value");
 
@@ -689,9 +712,9 @@ public class AdaptiveCapacityDictionaryTests
     {
         // Arrange
         var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "key", "value" },
-            };
+        {
+            { "key", "value" },
+        };
 
         var input = new KeyValuePair<string, object?>("KEY", "value");
 
@@ -708,10 +731,7 @@ public class AdaptiveCapacityDictionaryTests
     public void Remove_KeyValuePair_False()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         var input = new KeyValuePair<string, object?>("other", "value");
 
@@ -720,7 +740,14 @@ public class AdaptiveCapacityDictionaryTests
 
         // Assert
         Assert.False(result);
-        Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+        Assert.Collection(
+            dict,
+            kvp =>
+            {
+                Assert.Equal("key", kvp.Key);
+                Assert.Equal("value", kvp.Value);
+            }
+        );
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -729,10 +756,7 @@ public class AdaptiveCapacityDictionaryTests
     public void Remove_KeyValuePair_False_ValueComparisonIsDefault()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         var input = new KeyValuePair<string, object?>("key", "valUE");
 
@@ -741,7 +765,14 @@ public class AdaptiveCapacityDictionaryTests
 
         // Assert
         Assert.False(result);
-        Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+        Assert.Collection(
+            dict,
+            kvp =>
+            {
+                Assert.Equal("key", kvp.Key);
+                Assert.Equal("value", kvp.Value);
+            }
+        );
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -775,17 +806,21 @@ public class AdaptiveCapacityDictionaryTests
     public void Remove_ListStorage_False()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         // Act
         var result = dict.Remove("other");
 
         // Assert
         Assert.False(result);
-        Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+        Assert.Collection(
+            dict,
+            kvp =>
+            {
+                Assert.Equal("key", kvp.Key);
+                Assert.Equal("value", kvp.Value);
+            }
+        );
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -793,10 +828,7 @@ public class AdaptiveCapacityDictionaryTests
     public void Remove_ListStorage_True()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         // Act
         var result = dict.Remove("key");
@@ -812,9 +844,9 @@ public class AdaptiveCapacityDictionaryTests
     {
         // Arrange
         var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "key", "value" },
-            };
+        {
+            { "key", "value" },
+        };
 
         // Act
         var result = dict.Remove("kEy");
@@ -857,10 +889,7 @@ public class AdaptiveCapacityDictionaryTests
     public void Remove_KeyAndOutValue_ListStorage_False()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         // Act
         var result = dict.Remove("other", out var removedValue);
@@ -868,7 +897,14 @@ public class AdaptiveCapacityDictionaryTests
         // Assert
         Assert.False(result);
         Assert.Null(removedValue);
-        Assert.Collection(dict, kvp => { Assert.Equal("key", kvp.Key); Assert.Equal("value", kvp.Value); });
+        Assert.Collection(
+            dict,
+            kvp =>
+            {
+                Assert.Equal("key", kvp.Key);
+                Assert.Equal("value", kvp.Value);
+            }
+        );
         Assert.IsType<KeyValuePair<string, object?>[]>(dict._arrayStorage);
     }
 
@@ -877,10 +913,7 @@ public class AdaptiveCapacityDictionaryTests
     {
         // Arrange
         object value = "value";
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", value }
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", value } };
 
         // Act
         var result = dict.Remove("key", out var removedValue);
@@ -898,9 +931,9 @@ public class AdaptiveCapacityDictionaryTests
         // Arrange
         object value = "value";
         var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "key", value }
-            };
+        {
+            { "key", value },
+        };
 
         // Act
         var result = dict.Remove("kEy", out var removedValue);
@@ -918,11 +951,11 @@ public class AdaptiveCapacityDictionaryTests
         // Arrange
         object value = "value";
         var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", value },
-                { "other", 5 },
-                { "dotnet", "rocks" }
-            };
+        {
+            { "key", value },
+            { "other", 5 },
+            { "dotnet", "rocks" },
+        };
 
         // Act
         var result = dict.Remove("key", out var removedValue);
@@ -943,11 +976,11 @@ public class AdaptiveCapacityDictionaryTests
         // Arrange
         object value = "value";
         var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "other", 5 },
-                { "key", value },
-                { "dotnet", "rocks" }
-            };
+        {
+            { "other", 5 },
+            { "key", value },
+            { "dotnet", "rocks" },
+        };
 
         // Act
         var result = dict.Remove("key", out var removedValue);
@@ -968,11 +1001,11 @@ public class AdaptiveCapacityDictionaryTests
         // Arrange
         object value = "value";
         var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "other", 5 },
-                { "dotnet", "rocks" },
-                { "key", value }
-            };
+        {
+            { "other", 5 },
+            { "dotnet", "rocks" },
+            { "key", value },
+        };
 
         // Act
         var result = dict.Remove("key", out var removedValue);
@@ -1022,17 +1055,15 @@ public class AdaptiveCapacityDictionaryTests
             kvp => Assert.Equal(default, kvp),
             kvp => Assert.Equal(default, kvp),
             kvp => Assert.Equal(default, kvp),
-            kvp => Assert.Equal(default, kvp));
+            kvp => Assert.Equal(default, kvp)
+        );
     }
 
     [Fact]
     public void TryAdd_ArrayStorage_CanAdd()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key0", "value0" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key0", "value0" } };
 
         // Act
         var result = dict.TryAdd("key1", "value1");
@@ -1050,17 +1081,15 @@ public class AdaptiveCapacityDictionaryTests
             kvp => Assert.Equal(default, kvp),
             kvp => Assert.Equal(default, kvp),
             kvp => Assert.Equal(default, kvp),
-            kvp => Assert.Equal(default, kvp));
+            kvp => Assert.Equal(default, kvp)
+        );
     }
 
     [Fact]
     public void TryAdd_ArrayStorage_DoesNotAddWhenKeyIsPresent()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key0", "value0" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key0", "value0" } };
 
         // Act
         var result = dict.TryAdd("key0", "value1");
@@ -1078,7 +1107,8 @@ public class AdaptiveCapacityDictionaryTests
             kvp => Assert.Equal(default, kvp),
             kvp => Assert.Equal(default, kvp),
             kvp => Assert.Equal(default, kvp),
-            kvp => Assert.Equal(default, kvp));
+            kvp => Assert.Equal(default, kvp)
+        );
     }
 
     [Fact]
@@ -1113,10 +1143,7 @@ public class AdaptiveCapacityDictionaryTests
     public void TryGetValue_ListStorage_False()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         // Act
         var result = dict.TryGetValue("other", out var value);
@@ -1131,10 +1158,7 @@ public class AdaptiveCapacityDictionaryTests
     public void TryGetValue_ListStorage_True()
     {
         // Arrange
-        var dict = new AdaptiveCapacityDictionary<string, object>()
-            {
-                { "key", "value" },
-            };
+        var dict = new AdaptiveCapacityDictionary<string, object>() { { "key", "value" } };
 
         // Act
         var result = dict.TryGetValue("key", out var value);
@@ -1150,9 +1174,9 @@ public class AdaptiveCapacityDictionaryTests
     {
         // Arrange
         var dict = new AdaptiveCapacityDictionary<string, object>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "key", "value" },
-            };
+        {
+            { "key", "value" },
+        };
 
         // Act
         var result = dict.TryGetValue("kEy", out var value);
@@ -1303,7 +1327,10 @@ public class AdaptiveCapacityDictionaryTests
     {
         // Arrange
         var comparer = StringComparer.OrdinalIgnoreCase;
-        var dict = new AdaptiveCapacityDictionary<string, object>(11, StringComparer.OrdinalIgnoreCase);
+        var dict = new AdaptiveCapacityDictionary<string, object>(
+            11,
+            StringComparer.OrdinalIgnoreCase
+        );
 
         Assert.NotNull(dict._dictionaryStorage);
         Assert.Equal(comparer, dict._dictionaryStorage.Comparer);
@@ -1344,7 +1371,10 @@ public class AdaptiveCapacityDictionaryTests
     {
         private bool _coolSetOnly;
 
-        public bool CoolSetOnly { set { _coolSetOnly = value; } }
+        public bool CoolSetOnly
+        {
+            set { _coolSetOnly = value; }
+        }
     }
 
     private class Base

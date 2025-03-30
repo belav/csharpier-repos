@@ -14,7 +14,10 @@ namespace System.IO.Ports.Tests
 
         public DosDevices()
         {
-            _dosDevices = new Dictionary<string, string>(100, StringComparer.InvariantCultureIgnoreCase);
+            _dosDevices = new Dictionary<string, string>(
+                100,
+                StringComparer.InvariantCultureIgnoreCase
+            );
             Initialize();
         }
 
@@ -51,10 +54,7 @@ namespace System.IO.Ports.Tests
 
         public string this[string commonName]
         {
-            get
-            {
-                return _dosDevices[commonName];
-            }
+            get { return _dosDevices[commonName]; }
         }
 
         private void Initialize()
@@ -78,7 +78,9 @@ namespace System.IO.Ports.Tests
                 {
                     // We now have an MS-DOS name (the common name). We call QueryDosDevice again with
                     // this name to get the underlying system name mapped to the MS-DOS name.
-                    string currentName = TrimTrailingNull((new string(buffer, start, i - start)).Trim());
+                    string currentName = TrimTrailingNull(
+                        (new string(buffer, start, i - start)).Trim()
+                    );
                     int nameSize;
                     char[] nameBuffer = CallQueryDosDevice(currentName, out nameSize);
 
@@ -89,7 +91,9 @@ namespace System.IO.Ports.Tests
                         // internalName will include the trailing null chars as well as any additional
                         // names that may get returned.  This is ok, since we are only interested in the
                         // first name and we can use StartsWith.
-                        string internalName = TrimTrailingNull((new string(nameBuffer, 0, nameSize)).Trim());
+                        string internalName = TrimTrailingNull(
+                            (new string(nameBuffer, 0, nameSize)).Trim()
+                        );
                         _dosDevices.Add(currentName, internalName);
                     }
                     else
@@ -135,7 +139,9 @@ namespace System.IO.Ports.Tests
                 }
                 else
                 {
-                    throw new Exception($"Error {lastError} calling QueryDosDevice for '{name}' with buffer size {buffer.Length}. {new Win32Exception((int)lastError).Message}");
+                    throw new Exception(
+                        $"Error {lastError} calling QueryDosDevice for '{name}' with buffer size {buffer.Length}. {new Win32Exception((int)lastError).Message}"
+                    );
                 }
             }
             return buffer;
@@ -145,7 +151,16 @@ namespace System.IO.Ports.Tests
         public const int ERROR_INSUFFICIENT_BUFFER = 122;
         public const int ERROR_MORE_DATA = 234;
 
-        [DllImport("Kernel32.dll", SetLastError = true, EntryPoint = "QueryDosDeviceW", CharSet = CharSet.Unicode)]
-        private static extern int QueryDosDevice(string lpDeviceName, char[] lpTargetPath, int ucchMax);
+        [DllImport(
+            "Kernel32.dll",
+            SetLastError = true,
+            EntryPoint = "QueryDosDeviceW",
+            CharSet = CharSet.Unicode
+        )]
+        private static extern int QueryDosDevice(
+            string lpDeviceName,
+            char[] lpTargetPath,
+            int ucchMax
+        );
     }
 }

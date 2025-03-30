@@ -18,12 +18,15 @@ namespace System.IO.Tests
         public static object FirstObject { get; } = (object)1;
         public static object SecondObject { get; } = (object)"[second object]";
         public static object ThirdObject { get; } = (object)"<third object>";
-        public static object[] MultipleObjects { get; } = new object[] { FirstObject, SecondObject, ThirdObject };
+        public static object[] MultipleObjects { get; } =
+            new object[] { FirstObject, SecondObject, ThirdObject };
 
         public static string FormatStringOneObject { get; } = "Object is {0}";
         public static string FormatStringTwoObjects { get; } = $"Object are '{0}', {SecondObject}";
-        public static string FormatStringThreeObjects { get; } = $"Objects are {0}, {SecondObject}, {ThirdObject}";
-        public static string FormatStringMultipleObjects { get; } = "Multiple Objects are: {0}, {1}, {2}";
+        public static string FormatStringThreeObjects { get; } =
+            $"Objects are {0}, {SecondObject}, {ThirdObject}";
+        public static string FormatStringMultipleObjects { get; } =
+            "Multiple Objects are: {0}, {1}, {2}";
 
         static TestDataProvider()
         {
@@ -53,7 +56,7 @@ namespace System.IO.Tests
                 '3',
                 '\n',
                 'K',
-                '\u00E6'
+                '\u00E6',
             };
 
             s_smallData = "HELLO".ToCharArray();

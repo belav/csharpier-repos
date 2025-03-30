@@ -5,14 +5,16 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class ExpectedQueryRewritingVisitor : ExpressionVisitor
 {
-    private static readonly MethodInfo _maybeDefaultIfEmpty
-        = typeof(TestExtensions).GetMethod(nameof(TestExtensions.MaybeDefaultIfEmpty));
+    private static readonly MethodInfo _maybeDefaultIfEmpty = typeof(TestExtensions).GetMethod(
+        nameof(TestExtensions.MaybeDefaultIfEmpty)
+    );
 
-    private static readonly MethodInfo _maybeMethod
-        = typeof(TestExtensions).GetMethod(nameof(TestExtensions.Maybe));
+    private static readonly MethodInfo _maybeMethod = typeof(TestExtensions).GetMethod(
+        nameof(TestExtensions.Maybe)
+    );
 
-    private static readonly MethodInfo _getShadowPropertyValueMethodInfo
-        = typeof(ExpectedQueryRewritingVisitor).GetMethod(nameof(GetShadowPropertyValue));
+    private static readonly MethodInfo _getShadowPropertyValueMethodInfo =
+        typeof(ExpectedQueryRewritingVisitor).GetMethod(nameof(GetShadowPropertyValue));
 
     private static readonly MethodInfo _maybeScalarNullableMethod;
     private static readonly MethodInfo _maybeScalarNonNullableMethod;
@@ -23,47 +25,73 @@ public class ExpectedQueryRewritingVisitor : ExpressionVisitor
 
     static ExpectedQueryRewritingVisitor()
     {
-        var maybeScalarMethods = typeof(TestExtensions).GetMethods()
+        var maybeScalarMethods = typeof(TestExtensions)
+            .GetMethods()
             .Where(m => m.Name == nameof(TestExtensions.MaybeScalar))
-            .Select(m => new { method = m, argument = m.GetParameters()[1].ParameterType.GetGenericArguments()[1] });
+            .Select(m => new
+            {
+                method = m,
+                argument = m.GetParameters()[1].ParameterType.GetGenericArguments()[1],
+            });
 
-        _maybeScalarNullableMethod = maybeScalarMethods.Single(x => x.argument.IsNullableValueType()).method;
-        _maybeScalarNonNullableMethod = maybeScalarMethods.Single(x => !x.argument.IsNullableValueType()).method;
+        _maybeScalarNullableMethod = maybeScalarMethods
+            .Single(x => x.argument.IsNullableValueType())
+            .method;
+        _maybeScalarNonNullableMethod = maybeScalarMethods
+            .Single(x => !x.argument.IsNullableValueType())
+            .method;
     }
 
-    public ExpectedQueryRewritingVisitor(Dictionary<(Type, string), Func<object, object>> shadowPropertyMappings = null)
+    public ExpectedQueryRewritingVisitor(
+        Dictionary<(Type, string), Func<object, object>> shadowPropertyMappings = null
+    )
     {
-        _shadowPropertyMappings = shadowPropertyMappings ?? new Dictionary<(Type, string), Func<object, object>>();
+        _shadowPropertyMappings =
+            shadowPropertyMappings ?? new Dictionary<(Type, string), Func<object, object>>();
     }
 
     protected override Expression VisitMember(MemberExpression memberExpression)
     {
-        if (!memberExpression.Type.IsValueType
+        if (
+            !memberExpression.Type.IsValueType
             && !memberExpression.Type.IsNullableValueType()
-            && memberExpression.Expression != null)
+            && memberExpression.Expression != null
+        )
         {
             var expression = Visit(memberExpression.Expression);
 
             var lambdaParameter = Expression.Parameter(expression.Type, "x");
-            var lambda = Expression.Lambda(memberExpression.Update(lambdaParameter), lambdaParameter);
+            var lambda = Expression.Lambda(
+                memberExpression.Update(lambdaParameter),
+                lambdaParameter
+            );
             var method = _maybeMethod.MakeGenericMethod(expression.Type, memberExpression.Type);
 
             return Expression.Call(method, expression, lambda);
         }
 
-        if (memberExpression.Type == typeof(bool)
+        if (
+            memberExpression.Type == typeof(bool)
             && !_negated
-            && memberExpression.Expression != null)
+            && memberExpression.Expression != null
+        )
         {
             var expression = Visit(memberExpression.Expression);
 
             var lambdaParameter = Expression.Parameter(expression.Type, "x");
-            var lambda = Expression.Lambda(memberExpression.Update(lambdaParameter), lambdaParameter);
-            var method = _maybeScalarNonNullableMethod.MakeGenericMethod(expression.Type, memberExpression.Type);
+            var lambda = Expression.Lambda(
+                memberExpression.Update(lambdaParameter),
+                lambdaParameter
+            );
+            var method = _maybeScalarNonNullableMethod.MakeGenericMethod(
+                expression.Type,
+                memberExpression.Type
+            );
 
             return Expression.Equal(
                 Expression.Call(method, expression, lambda),
-                Expression.Constant(true, typeof(bool?)));
+                Expression.Constant(true, typeof(bool?))
+            );
         }
 
         return base.VisitMember(memberExpression);
@@ -71,10 +99,15 @@ public class ExpectedQueryRewritingVisitor : ExpressionVisitor
 
     protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
     {
-        if (methodCallExpression.Method.DeclaringType == typeof(Queryable)
+        if (
+            methodCallExpression.Method.DeclaringType == typeof(Queryable)
             && methodCallExpression.Method.IsGenericMethod
-            && (methodCallExpression.Method.GetGenericMethodDefinition() == QueryableMethods.Join
-                || methodCallExpression.Method.GetGenericMethodDefinition() == QueryableMethods.GroupJoin))
+            && (
+                methodCallExpression.Method.GetGenericMethodDefinition() == QueryableMethods.Join
+                || methodCallExpression.Method.GetGenericMethodDefinition()
+                    == QueryableMethods.GroupJoin
+            )
+        )
         {
             return RewriteJoinGroupJoin(methodCallExpression);
         }
@@ -86,15 +119,20 @@ public class ExpectedQueryRewritingVisitor : ExpressionVisitor
             return Visit(rewritten);
         }
 
-        if (methodCallExpression.Method.IsGenericMethod
-            && methodCallExpression.Method.GetGenericMethodDefinition() == EnumerableMethods.DefaultIfEmptyWithoutArgument)
+        if (
+            methodCallExpression.Method.IsGenericMethod
+            && methodCallExpression.Method.GetGenericMethodDefinition()
+                == EnumerableMethods.DefaultIfEmptyWithoutArgument
+        )
         {
             var source = Visit(methodCallExpression.Arguments[0]);
 
             return Expression.Call(
                 _maybeDefaultIfEmpty.MakeGenericMethod(
-                    methodCallExpression.Method.GetGenericArguments()[0]),
-                source);
+                    methodCallExpression.Method.GetGenericArguments()[0]
+                ),
+                source
+            );
         }
 
         return base.VisitMethodCall(methodCallExpression);
@@ -112,54 +150,86 @@ public class ExpectedQueryRewritingVisitor : ExpressionVisitor
         var inner = Visit(methodCallExpression.Arguments[1]);
         var resultSelector = Visit(methodCallExpression.Arguments[4]);
 
-        var originalLeftKeySelectorLambda = methodCallExpression.Arguments[2].UnwrapLambdaFromQuote();
-        var originalRightKeySelectorLambda = methodCallExpression.Arguments[3].UnwrapLambdaFromQuote();
-        var leftKeySelectorBody = AddNullProtectionForNonNullableMemberAccess(originalLeftKeySelectorLambda.Body);
-        var rightKeySelectorBody = AddNullProtectionForNonNullableMemberAccess(originalRightKeySelectorLambda.Body);
+        var originalLeftKeySelectorLambda = methodCallExpression
+            .Arguments[2]
+            .UnwrapLambdaFromQuote();
+        var originalRightKeySelectorLambda = methodCallExpression
+            .Arguments[3]
+            .UnwrapLambdaFromQuote();
+        var leftKeySelectorBody = AddNullProtectionForNonNullableMemberAccess(
+            originalLeftKeySelectorLambda.Body
+        );
+        var rightKeySelectorBody = AddNullProtectionForNonNullableMemberAccess(
+            originalRightKeySelectorLambda.Body
+        );
 
-        if (leftKeySelectorBody.Type.IsNullableValueType()
+        if (
+            leftKeySelectorBody.Type.IsNullableValueType()
             && rightKeySelectorBody.Type.IsValueType
-            && leftKeySelectorBody.Type.UnwrapNullableType() == rightKeySelectorBody.Type)
+            && leftKeySelectorBody.Type.UnwrapNullableType() == rightKeySelectorBody.Type
+        )
         {
-            rightKeySelectorBody = Expression.Convert(rightKeySelectorBody, leftKeySelectorBody.Type);
+            rightKeySelectorBody = Expression.Convert(
+                rightKeySelectorBody,
+                leftKeySelectorBody.Type
+            );
         }
 
-        if (rightKeySelectorBody.Type.IsNullableValueType()
+        if (
+            rightKeySelectorBody.Type.IsNullableValueType()
             && leftKeySelectorBody.Type.IsValueType
-            && rightKeySelectorBody.Type.UnwrapNullableType() == leftKeySelectorBody.Type)
+            && rightKeySelectorBody.Type.UnwrapNullableType() == leftKeySelectorBody.Type
+        )
         {
-            leftKeySelectorBody = Expression.Convert(leftKeySelectorBody, rightKeySelectorBody.Type);
+            leftKeySelectorBody = Expression.Convert(
+                leftKeySelectorBody,
+                rightKeySelectorBody.Type
+            );
         }
 
         var keySelectorTypeChanged = false;
         var joinMethodInfo = methodCallExpression.Method;
         var joinMethodInfoGenericArguments = methodCallExpression.Method.GetGenericArguments();
 
-        if ((leftKeySelectorBody.Type != methodCallExpression.Arguments[2].UnwrapLambdaFromQuote().Body.Type)
-            || (rightKeySelectorBody.Type != methodCallExpression.Arguments[3].UnwrapLambdaFromQuote().Body.Type))
+        if (
+            (
+                leftKeySelectorBody.Type
+                != methodCallExpression.Arguments[2].UnwrapLambdaFromQuote().Body.Type
+            )
+            || (
+                rightKeySelectorBody.Type
+                != methodCallExpression.Arguments[3].UnwrapLambdaFromQuote().Body.Type
+            )
+        )
         {
             joinMethodInfoGenericArguments[2] = leftKeySelectorBody.Type;
-            joinMethodInfo = joinMethodInfo.GetGenericMethodDefinition().MakeGenericMethod(joinMethodInfoGenericArguments);
+            joinMethodInfo = joinMethodInfo
+                .GetGenericMethodDefinition()
+                .MakeGenericMethod(joinMethodInfoGenericArguments);
             keySelectorTypeChanged = true;
         }
 
         var leftKeySelector = keySelectorTypeChanged
             ? Expression.Lambda(
                 leftKeySelectorBody,
-                methodCallExpression.Arguments[2].UnwrapLambdaFromQuote().Parameters)
+                methodCallExpression.Arguments[2].UnwrapLambdaFromQuote().Parameters
+            )
             : Expression.Lambda(
                 originalLeftKeySelectorLambda.Type,
                 leftKeySelectorBody,
-                methodCallExpression.Arguments[2].UnwrapLambdaFromQuote().Parameters);
+                methodCallExpression.Arguments[2].UnwrapLambdaFromQuote().Parameters
+            );
 
         var rightKeySelector = keySelectorTypeChanged
             ? Expression.Lambda(
                 rightKeySelectorBody,
-                methodCallExpression.Arguments[3].UnwrapLambdaFromQuote().Parameters)
+                methodCallExpression.Arguments[3].UnwrapLambdaFromQuote().Parameters
+            )
             : Expression.Lambda(
                 originalRightKeySelectorLambda.Type,
                 rightKeySelectorBody,
-                methodCallExpression.Arguments[3].UnwrapLambdaFromQuote().Parameters);
+                methodCallExpression.Arguments[3].UnwrapLambdaFromQuote().Parameters
+            );
 
         return Expression.Call(
             joinMethodInfo,
@@ -167,34 +237,57 @@ public class ExpectedQueryRewritingVisitor : ExpressionVisitor
             inner,
             leftKeySelector,
             rightKeySelector,
-            resultSelector);
+            resultSelector
+        );
     }
 
-    public static TResult GetShadowPropertyValue<TEntity, TResult>(TEntity entity, Func<object, object> shadowPropertyAccessor)
-        => (TResult)shadowPropertyAccessor(entity);
+    public static TResult GetShadowPropertyValue<TEntity, TResult>(
+        TEntity entity,
+        Func<object, object> shadowPropertyAccessor
+    ) => (TResult)shadowPropertyAccessor(entity);
 
     private Expression TryConvertEFPropertyToMemberAccess(Expression expression)
     {
-        if (expression is MethodCallExpression methodCallExpression
-            && methodCallExpression.Method.IsEFPropertyMethod())
+        if (
+            expression is MethodCallExpression methodCallExpression
+            && methodCallExpression.Method.IsEFPropertyMethod()
+        )
         {
             var caller = RemoveConvertToObject(methodCallExpression.Arguments[0]);
-            var propertyName = (methodCallExpression.Arguments[1] as ConstantExpression)?.Value as string
-                ?? Expression.Lambda<Func<string>>(methodCallExpression.Arguments[1]).Compile().Invoke();
+            var propertyName =
+                (methodCallExpression.Arguments[1] as ConstantExpression)?.Value as string
+                ?? Expression
+                    .Lambda<Func<string>>(methodCallExpression.Arguments[1])
+                    .Compile()
+                    .Invoke();
 
             if (propertyName != null)
             {
                 var shadowPropertyMapping = _shadowPropertyMappings
-                    .Where(m => caller.Type.GetTypesInHierarchy().Contains(m.Key.Item1) && m.Key.Item2 == propertyName)
-                    .Select(m => m.Value).SingleOrDefault();
+                    .Where(m =>
+                        caller.Type.GetTypesInHierarchy().Contains(m.Key.Item1)
+                        && m.Key.Item2 == propertyName
+                    )
+                    .Select(m => m.Value)
+                    .SingleOrDefault();
 
                 var result = default(Expression);
                 if (shadowPropertyMapping != null)
                 {
-                    var methodInfo = _getShadowPropertyValueMethodInfo.MakeGenericMethod(caller.Type, methodCallExpression.Type);
-                    result = Expression.Call(methodInfo, caller, Expression.Constant(shadowPropertyMapping));
+                    var methodInfo = _getShadowPropertyValueMethodInfo.MakeGenericMethod(
+                        caller.Type,
+                        methodCallExpression.Type
+                    );
+                    result = Expression.Call(
+                        methodInfo,
+                        caller,
+                        Expression.Constant(shadowPropertyMapping)
+                    );
                 }
-                else if (caller.Type.GetMembers().SingleOrDefault(m => m.Name == propertyName) is not null)
+                else if (
+                    caller.Type.GetMembers().SingleOrDefault(m => m.Name == propertyName)
+                    is not null
+                )
                 {
                     result = Expression.Property(caller, propertyName);
                 }
@@ -210,42 +303,53 @@ public class ExpectedQueryRewritingVisitor : ExpressionVisitor
             }
 
             throw new InvalidOperationException(
-                $"Couldn't convert EF.Property() method. Caller type: '{caller.Type.Name}'. Property name: '{propertyName}'.");
+                $"Couldn't convert EF.Property() method. Caller type: '{caller.Type.Name}'. Property name: '{propertyName}'."
+            );
         }
 
         return expression;
 
-        static Expression RemoveConvertToObject(Expression expression)
-            => expression is UnaryExpression { NodeType: ExpressionType.Convert or ExpressionType.ConvertChecked } unaryExpression
-                && expression.Type == typeof(object)
-                    ? RemoveConvertToObject(unaryExpression.Operand)
-                    : expression;
+        static Expression RemoveConvertToObject(Expression expression) =>
+            expression
+                is UnaryExpression
+                {
+                    NodeType: ExpressionType.Convert or ExpressionType.ConvertChecked
+                } unaryExpression
+            && expression.Type == typeof(object)
+                ? RemoveConvertToObject(unaryExpression.Operand)
+                : expression;
     }
 
     private Expression AddNullProtectionForNonNullableMemberAccess(Expression expression)
     {
         expression = TryConvertEFPropertyToMemberAccess(expression);
 
-        if (expression is MemberExpression memberExpression
+        if (
+            expression is MemberExpression memberExpression
             && (memberExpression.Type.IsValueType || memberExpression.Type.IsNullableValueType())
-            && memberExpression.Expression != null)
+            && memberExpression.Expression != null
+        )
         {
             var instance = Visit(memberExpression.Expression);
             var maybeLambdaParameter = Expression.Parameter(instance.Type, "x");
-            var maybeLambda = Expression.Lambda(memberExpression.Update(maybeLambdaParameter), maybeLambdaParameter);
+            var maybeLambda = Expression.Lambda(
+                memberExpression.Update(maybeLambdaParameter),
+                maybeLambdaParameter
+            );
 
-            var methodInfo = (memberExpression.Type.IsNullableValueType()
-                ? _maybeScalarNullableMethod
-                : _maybeScalarNonNullableMethod).MakeGenericMethod(
-                instance.Type,
-                memberExpression.Type.UnwrapNullableType());
+            var methodInfo = (
+                memberExpression.Type.IsNullableValueType()
+                    ? _maybeScalarNullableMethod
+                    : _maybeScalarNonNullableMethod
+            ).MakeGenericMethod(instance.Type, memberExpression.Type.UnwrapNullableType());
 
             var maybeMethodCall = Expression.Call(methodInfo, instance, maybeLambda);
 
-            return memberExpression.Member.DeclaringType.IsNullableType()
+            return
+                memberExpression.Member.DeclaringType.IsNullableType()
                 && memberExpression.Member.Name == "HasValue"
-                    ? Expression.Coalesce(maybeMethodCall, Expression.Constant(false))
-                    : maybeMethodCall;
+                ? Expression.Coalesce(maybeMethodCall, Expression.Constant(false))
+                : maybeMethodCall;
         }
 
         return Visit(expression);
@@ -253,27 +357,33 @@ public class ExpectedQueryRewritingVisitor : ExpressionVisitor
 
     protected override Expression VisitUnary(UnaryExpression unaryExpression)
     {
-        if (unaryExpression is
-            {
-                NodeType: ExpressionType.Convert or ExpressionType.ConvertChecked or ExpressionType.TypeAs,
-                Operand: MemberExpression
-                {
-                    Type.IsValueType: true,
-                    Expression: not null
-                } memberOperand
-            }
+        if (
+            unaryExpression
+                is {
+                    NodeType: ExpressionType.Convert
+                        or ExpressionType.ConvertChecked
+                        or ExpressionType.TypeAs,
+                    Operand: MemberExpression
+                    {
+                        Type.IsValueType: true,
+                        Expression: not null
+                    } memberOperand
+                }
             && !memberOperand.Type.IsNullableValueType()
             && unaryExpression.Type.IsNullableValueType()
-            && unaryExpression.Type.UnwrapNullableType() == memberOperand.Type)
+            && unaryExpression.Type.UnwrapNullableType() == memberOperand.Type
+        )
         {
             var expression = Visit(memberOperand.Expression);
 
             var lambdaParameter = Expression.Parameter(expression.Type, "x");
             var lambda = Expression.Lambda(memberOperand.Update(lambdaParameter), lambdaParameter);
-            var method = _maybeScalarNonNullableMethod.MakeGenericMethod(expression.Type, memberOperand.Type);
+            var method = _maybeScalarNonNullableMethod.MakeGenericMethod(
+                expression.Type,
+                memberOperand.Type
+            );
 
-            return unaryExpression.Update(
-                Expression.Call(method, expression, lambda));
+            return unaryExpression.Update(Expression.Call(method, expression, lambda));
         }
 
         if (unaryExpression.NodeType == ExpressionType.Not)
@@ -291,26 +401,33 @@ public class ExpectedQueryRewritingVisitor : ExpressionVisitor
 
     protected override Expression VisitBinary(BinaryExpression binaryExpression)
     {
-        if (binaryExpression.NodeType is ExpressionType.Equal
-            or ExpressionType.NotEqual
-            or ExpressionType.GreaterThan
-            or ExpressionType.GreaterThanOrEqual
-            or ExpressionType.LessThan
-            or ExpressionType.LessThanOrEqual)
+        if (
+            binaryExpression.NodeType
+            is ExpressionType.Equal
+                or ExpressionType.NotEqual
+                or ExpressionType.GreaterThan
+                or ExpressionType.GreaterThanOrEqual
+                or ExpressionType.LessThan
+                or ExpressionType.LessThanOrEqual
+        )
         {
             var left = AddNullProtectionForNonNullableMemberAccess(binaryExpression.Left);
             var right = AddNullProtectionForNonNullableMemberAccess(binaryExpression.Right);
 
-            if (left.Type.IsNullableValueType()
+            if (
+                left.Type.IsNullableValueType()
                 && right.Type.IsValueType
-                && left.Type.UnwrapNullableType() == right.Type)
+                && left.Type.UnwrapNullableType() == right.Type
+            )
             {
                 right = Expression.Convert(right, left.Type);
             }
 
-            if (right.Type.IsNullableValueType()
+            if (
+                right.Type.IsNullableValueType()
                 && left.Type.IsValueType
-                && right.Type.UnwrapNullableType() == left.Type)
+                && right.Type.UnwrapNullableType() == left.Type
+            )
             {
                 left = Expression.Convert(left, right.Type);
             }

@@ -10,9 +10,11 @@ namespace NetClient
     class ErrorTests
     {
         private readonly Server.Contract.Servers.ErrorMarshalTesting server;
+
         public ErrorTests()
         {
-            this.server = (Server.Contract.Servers.ErrorMarshalTesting)new Server.Contract.Servers.ErrorMarshalTestingClass();
+            this.server = (Server.Contract.Servers.ErrorMarshalTesting)
+                new Server.Contract.Servers.ErrorMarshalTestingClass();
         }
 
         public void Run()
@@ -26,13 +28,34 @@ namespace NetClient
         {
             Console.WriteLine($"Verify expected exception from HRESULT");
 
-            Assert.Throws<NotImplementedException>(() => { this.server.Throw_HResult(unchecked((int)0x80004001)); });
-            Assert.Throws<NullReferenceException>(() => { this.server.Throw_HResult(unchecked((int)0x80004003)); });
-            Assert.Throws<UnauthorizedAccessException>(() => { this.server.Throw_HResult(unchecked((int)0x80070005)); });
-            Assert.Throws<OutOfMemoryException>(() => { this.server.Throw_HResult(unchecked((int)0x8007000E)); });
-            Assert.Throws<ArgumentException>(() => { this.server.Throw_HResult(unchecked((int)0x80070057)); });
-            Assert.Throws<COMException>(() => { this.server.Throw_HResult(unchecked((int)0x8000ffff)); });
-            Assert.Throws<COMException>(() => { this.server.Throw_HResult(unchecked((int)-1)); });
+            Assert.Throws<NotImplementedException>(() =>
+            {
+                this.server.Throw_HResult(unchecked((int)0x80004001));
+            });
+            Assert.Throws<NullReferenceException>(() =>
+            {
+                this.server.Throw_HResult(unchecked((int)0x80004003));
+            });
+            Assert.Throws<UnauthorizedAccessException>(() =>
+            {
+                this.server.Throw_HResult(unchecked((int)0x80070005));
+            });
+            Assert.Throws<OutOfMemoryException>(() =>
+            {
+                this.server.Throw_HResult(unchecked((int)0x8007000E));
+            });
+            Assert.Throws<ArgumentException>(() =>
+            {
+                this.server.Throw_HResult(unchecked((int)0x80070057));
+            });
+            Assert.Throws<COMException>(() =>
+            {
+                this.server.Throw_HResult(unchecked((int)0x8000ffff));
+            });
+            Assert.Throws<COMException>(() =>
+            {
+                this.server.Throw_HResult(unchecked((int)-1));
+            });
         }
 
         private void VerifyReturnHResult()
@@ -48,7 +71,7 @@ namespace NetClient
                 unchecked((int)0x8000ffff),
                 -1,
                 1,
-                2
+                2,
             };
 
             foreach (var hr in hrs)
@@ -62,7 +85,10 @@ namespace NetClient
         {
             string helpLink = "X:\\NotA\\RealPath\\dummy.hlp";
             uint helpContext = 5678;
-            var ex = Assert.Throws<COMException>(() => { this.server.Throw_HResult_HelpLink(unchecked((int)-1), helpLink, helpContext); });
+            var ex = Assert.Throws<COMException>(() =>
+            {
+                this.server.Throw_HResult_HelpLink(unchecked((int)-1), helpLink, helpContext);
+            });
             Assert.Equal($"{helpLink}#{helpContext}", ex.HelpLink);
         }
     }

@@ -13,14 +13,15 @@ namespace System.Data
     /// This is the generic base class for TypedDataSet
     /// </summary>
     [Serializable]
-    public abstract class TypedTableBase<T> : DataTable, IEnumerable<T> where T : DataRow
+    public abstract class TypedTableBase<T> : DataTable, IEnumerable<T>
+        where T : DataRow
     {
-
         /// <summary>
         /// Default constructor for generic TypedTableBase.
         /// Will be called by generated Typed DataSet classes and is not for public use.
         /// </summary>
-        protected TypedTableBase() : base() { }
+        protected TypedTableBase()
+            : base() { }
 
         /// <summary>
         /// Constructor for the generic TypedTableBase with takes SerializationInfo and StreamingContext.
@@ -29,12 +30,22 @@ namespace System.Data
         /// </summary>
         /// <param name="info">SerializationInfo containing data to construct the object.</param>
         /// <param name="context">The streaming context for the object being deserialized.</param>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2112:ReflectionToRequiresUnreferencedCode",
-            Justification = "DataTable.CreateInstance's use of GetType uses only the parameterless constructor, not this serialization related constructor.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2112:ReflectionToRequiresUnreferencedCode",
+            Justification = "DataTable.CreateInstance's use of GetType uses only the parameterless constructor, not this serialization related constructor."
+        )]
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected TypedTableBase(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+        protected TypedTableBase(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        )
             : base(info, context) { }
 
         /// <summary>
@@ -60,6 +71,5 @@ namespace System.Data
             EnumerableRowCollection<T> erc = new EnumerableRowCollection<T>(this);
             return erc.Cast<TResult>();
         }
-
     }
 }

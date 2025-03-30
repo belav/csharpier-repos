@@ -22,13 +22,17 @@ public class RuntimeEntityTypeMappingFragment : AnnotatableBase, IEntityTypeMapp
     public RuntimeEntityTypeMappingFragment(
         RuntimeEntityType entityType,
         in StoreObjectIdentifier storeObject,
-        bool? isTableExcludedFromMigrations)
+        bool? isTableExcludedFromMigrations
+    )
     {
         EntityType = entityType;
         StoreObject = storeObject;
         if (isTableExcludedFromMigrations != null)
         {
-            SetAnnotation(RelationalAnnotationNames.IsTableExcludedFromMigrations, isTableExcludedFromMigrations.Value);
+            SetAnnotation(
+                RelationalAnnotationNames.IsTableExcludedFromMigrations,
+                isTableExcludedFromMigrations.Value
+            );
         }
     }
 
@@ -41,12 +45,14 @@ public class RuntimeEntityTypeMappingFragment : AnnotatableBase, IEntityTypeMapp
     public virtual StoreObjectIdentifier StoreObject { get; }
 
     /// <inheritdoc />
-    public virtual bool? IsTableExcludedFromMigrations
-        => (bool?)this[RelationalAnnotationNames.IsTableExcludedFromMigrations];
+    public virtual bool? IsTableExcludedFromMigrations =>
+        (bool?)this[RelationalAnnotationNames.IsTableExcludedFromMigrations];
 
     /// <inheritdoc />
-    public override string ToString()
-        => ((IEntityTypeMappingFragment)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IEntityTypeMappingFragment)this).ToDebugString(
+            MetadataDebugStringOptions.SingleLineDefault
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -55,10 +61,14 @@ public class RuntimeEntityTypeMappingFragment : AnnotatableBase, IEntityTypeMapp
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IEntityTypeMappingFragment)this).ToDebugString(),
-            () => ((IEntityTypeMappingFragment)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () =>
+                ((IEntityTypeMappingFragment)this).ToDebugString(
+                    MetadataDebugStringOptions.LongDefault
+                )
+        );
 
     /// <inheritdoc />
     IEntityType IEntityTypeMappingFragment.EntityType

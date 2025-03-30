@@ -33,40 +33,45 @@ using NUnit.Framework;
 namespace MonoTests.System
 {
 #if !MONODROID // Type load segfaults the runtime on ARM64 (https://gist.github.com/grendello/334d06c45376602a9afc)
-	[TestFixture]
-	// Currently causes the WASM runtime to abort
-	[Category("NotWasm")]
-	public class TypedReferenceTest
-	{
-		struct TestFields
-		{
-			public int MaxValue;
-		}
+    [TestFixture]
+    // Currently causes the WASM runtime to abort
+    [Category("NotWasm")]
+    public class TypedReferenceTest
+    {
+        struct TestFields
+        {
+            public int MaxValue;
+        }
 
-		[Test]
-		public void GetTargetType ()
-		{
-			TestFields fields = new TestFields { MaxValue = 1234 };
+        [Test]
+        public void GetTargetType()
+        {
+            TestFields fields = new TestFields { MaxValue = 1234 };
 
-			TypedReference ti = __makeref(fields);
-			Assert.AreEqual (typeof (TestFields), TypedReference.GetTargetType (ti));
-		}
+            TypedReference ti = __makeref(fields);
+            Assert.AreEqual(typeof(TestFields), TypedReference.GetTargetType(ti));
+        }
 
-		struct AStruct {
-			public string b;
-		}
+        struct AStruct
+        {
+            public string b;
+        }
 
-		class CClass {
-			public AStruct a;
-		}
+        class CClass
+        {
+            public AStruct a;
+        }
 
-		[Test]
-		public void MakeTypedReference ()
-		{
-			var o = new CClass () { a = new AStruct () { b = "5" }};
-			TypedReference r = TypedReference.MakeTypedReference (o, new FieldInfo[] { typeof (CClass).GetField ("a"), typeof (AStruct).GetField ("b") });
-			Assert.AreEqual ("5", TypedReference.ToObject (r));
-		}
-	}
+        [Test]
+        public void MakeTypedReference()
+        {
+            var o = new CClass() { a = new AStruct() { b = "5" } };
+            TypedReference r = TypedReference.MakeTypedReference(
+                o,
+                new FieldInfo[] { typeof(CClass).GetField("a"), typeof(AStruct).GetField("b") }
+            );
+            Assert.AreEqual("5", TypedReference.ToObject(r));
+        }
+    }
 #endif
 }

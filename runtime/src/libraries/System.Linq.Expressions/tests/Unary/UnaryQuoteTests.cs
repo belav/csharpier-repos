@@ -4,7 +4,6 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Xunit;
-
 using static System.Linq.Expressions.Expression;
 
 namespace System.Linq.Expressions.Tests
@@ -16,36 +15,31 @@ namespace System.Linq.Expressions.Tests
         {
             ParameterExpression x = Parameter(typeof(int));
 
-            Expression<Func<int, Type>> f1 =
-                Lambda<Func<int, Type>>(
-                    Call(
-                        typeof(UnaryQuoteTests).GetMethod(nameof(Quote1)),
-                        Lambda(
-                            Block(typeof(void), x)
-                        )
-                    ),
-                    x
-                );
+            Expression<Func<int, Type>> f1 = Lambda<Func<int, Type>>(
+                Call(
+                    typeof(UnaryQuoteTests).GetMethod(nameof(Quote1)),
+                    Lambda(Block(typeof(void), x))
+                ),
+                x
+            );
 
             Assert.Equal(typeof(void), f1.Compile(useInterpreter)(42));
 
             ParameterExpression s = Parameter(typeof(string));
 
-            Expression<Func<string, Type>> f2 =
-                Lambda<Func<string, Type>>(
-                    Call(
-                        typeof(UnaryQuoteTests).GetMethod(nameof(Quote2)),
-                        Lambda(
-                            Block(typeof(object), s)
-                        )
-                    ),
-                    s
-                );
+            Expression<Func<string, Type>> f2 = Lambda<Func<string, Type>>(
+                Call(
+                    typeof(UnaryQuoteTests).GetMethod(nameof(Quote2)),
+                    Lambda(Block(typeof(object), s))
+                ),
+                s
+            );
 
             Assert.Equal(typeof(object), f2.Compile(useInterpreter)("bar"));
         }
 
         public static Type Quote1(Expression<Action> e) => e.Body.Type;
+
         public static Type Quote2(Expression<Func<object>> e) => e.Body.Type;
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -104,7 +98,8 @@ namespace System.Linq.Expressions.Tests
         public void Quote_Lambda_Closure2(bool useInterpreter)
         {
             // Using an unchecked addition to ensure that an Add expression is used (and not AddChecked)
-            Expression<Func<int, Func<int, LambdaExpression>>> f = x => y => GetQuote<Func<int>>(() => unchecked(x + y));
+            Expression<Func<int, Func<int, LambdaExpression>>> f = x =>
+                y => GetQuote<Func<int>>(() => unchecked(x + y));
 
             var quote = f.Compile(useInterpreter)(1)(2);
 
@@ -120,10 +115,7 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public void Quote_Block_Action(bool useInterpreter)
         {
-            var expr =
-                Block(
-                    Call(typeof(UnaryQuoteTests).GetMethod(nameof(Nop)))
-                );
+            var expr = Block(Call(typeof(UnaryQuoteTests).GetMethod(nameof(Nop))));
 
             var f = BuildQuote<Func<LambdaExpression>, Action>(expr);
 
@@ -138,12 +130,7 @@ namespace System.Linq.Expressions.Tests
         {
             var x = Parameter(typeof(int));
 
-            var expr =
-                Block(
-                    new[] { x },
-                    Assign(x, Constant(42)),
-                    x
-                );
+            var expr = Block(new[] { x }, Assign(x, Constant(42)), x);
 
             var f = BuildQuote<Func<LambdaExpression>, Func<int>>(expr);
 
@@ -158,12 +145,7 @@ namespace System.Linq.Expressions.Tests
         {
             var x = Parameter(typeof(int));
 
-            var expr =
-                Block(
-                    new[] { x },
-                    Assign(x, Constant(42)),
-                    x
-                );
+            var expr = Block(new[] { x }, Assign(x, Constant(42)), x);
 
             var f = BuildQuote<Func<int, LambdaExpression>, Func<int>>(expr, x);
 
@@ -178,10 +160,7 @@ namespace System.Linq.Expressions.Tests
         {
             var x = Parameter(typeof(int));
 
-            var expr =
-                Block(
-                    x
-                );
+            var expr = Block(x);
 
             var f = BuildQuote<Func<int, LambdaExpression>, Func<int>>(expr, x);
 
@@ -203,15 +182,7 @@ namespace System.Linq.Expressions.Tests
             var x = Parameter(typeof(int));
             var y = Parameter(typeof(int));
 
-            var expr =
-                Block(
-                    new[] { y },
-                    Assign(y, Constant(2)),
-                    Add(
-                        x,
-                        y
-                    )
-                );
+            var expr = Block(new[] { y }, Assign(y, Constant(2)), Add(x, y));
 
             var f = BuildQuote<Func<int, LambdaExpression>, Func<int>>(expr, x);
 
@@ -242,14 +213,7 @@ namespace System.Linq.Expressions.Tests
         {
             var ex = Parameter(typeof(Exception));
 
-            var expr =
-                TryCatch(
-                    Empty(),
-                    Catch(
-                        ex,
-                        Empty()
-                    )
-                );
+            var expr = TryCatch(Empty(), Catch(ex, Empty()));
 
             var f = BuildQuote<Func<LambdaExpression>, Action>(expr);
 
@@ -265,14 +229,7 @@ namespace System.Linq.Expressions.Tests
             var x = Parameter(typeof(int));
             var ex = Parameter(typeof(Exception));
 
-            var expr =
-                TryCatch(
-                    x,
-                    Catch(
-                        ex,
-                        Constant(0)
-                    )
-                );
+            var expr = TryCatch(x, Catch(ex, Constant(0)));
 
             var f = BuildQuote<Func<int, LambdaExpression>, Func<int>>(expr, x);
 
@@ -300,14 +257,7 @@ namespace System.Linq.Expressions.Tests
             var x = Parameter(typeof(int));
             var ex = Parameter(typeof(Exception));
 
-            var expr =
-                TryCatch(
-                    Constant(0),
-                    Catch(
-                        ex,
-                        x
-                    )
-                );
+            var expr = TryCatch(Constant(0), Catch(ex, x));
 
             var f = BuildQuote<Func<int, LambdaExpression>, Func<int>>(expr, x);
 
@@ -336,14 +286,7 @@ namespace System.Linq.Expressions.Tests
         {
             var x = Parameter(typeof(int));
 
-            var expr =
-                TryCatch(
-                    x,
-                    Catch(
-                        typeof(Exception),
-                        Constant(0)
-                    )
-                );
+            var expr = TryCatch(x, Catch(typeof(Exception), Constant(0)));
 
             var f = BuildQuote<Func<int, LambdaExpression>, Func<int>>(expr, x);
 
@@ -370,14 +313,7 @@ namespace System.Linq.Expressions.Tests
         {
             var x = Parameter(typeof(int));
 
-            var expr =
-                TryCatch(
-                    Constant(0),
-                    Catch(
-                        typeof(Exception),
-                        x
-                    )
-                );
+            var expr = TryCatch(Constant(0), Catch(typeof(Exception), x));
 
             var f = BuildQuote<Func<int, LambdaExpression>, Func<int>>(expr, x);
 
@@ -406,12 +342,12 @@ namespace System.Linq.Expressions.Tests
         {
             var x = Parameter(typeof(int));
 
-            var expr =
-                RuntimeVariables(
-                    x
-                );
+            var expr = RuntimeVariables(x);
 
-            var f = BuildQuote<Func<int, Expression<Func<IRuntimeVariables>>>, Func<IRuntimeVariables>>(expr, x);
+            var f = BuildQuote<
+                Func<int, Expression<Func<IRuntimeVariables>>>,
+                Func<IRuntimeVariables>
+            >(expr, x);
 
             var quote = f.Compile(useInterpreter)(42);
 
@@ -428,16 +364,11 @@ namespace System.Linq.Expressions.Tests
         {
             var x = Parameter(typeof(int));
 
-            var expr =
-                Block(
-                    new[] { x },
-                    Assign(x, Constant(42)),
-                    RuntimeVariables(
-                        x
-                    )
-                );
+            var expr = Block(new[] { x }, Assign(x, Constant(42)), RuntimeVariables(x));
 
-            var f = BuildQuote<Func<Expression<Func<IRuntimeVariables>>>, Func<IRuntimeVariables>>(expr);
+            var f = BuildQuote<Func<Expression<Func<IRuntimeVariables>>>, Func<IRuntimeVariables>>(
+                expr
+            );
 
             var quote = f.Compile(useInterpreter)();
 
@@ -455,17 +386,12 @@ namespace System.Linq.Expressions.Tests
             var x = Parameter(typeof(int));
             var y = Parameter(typeof(int));
 
-            var expr =
-                Block(
-                    new[] { y },
-                    Assign(y, Constant(2)),
-                    RuntimeVariables(
-                        x,
-                        y
-                    )
-                );
+            var expr = Block(new[] { y }, Assign(y, Constant(2)), RuntimeVariables(x, y));
 
-            var f = BuildQuote<Func<int, Expression<Func<IRuntimeVariables>>>, Func<IRuntimeVariables>>(expr, x);
+            var f = BuildQuote<
+                Func<int, Expression<Func<IRuntimeVariables>>>,
+                Func<IRuntimeVariables>
+            >(expr, x);
 
             var quote = f.Compile(useInterpreter)(1);
 
@@ -550,18 +476,20 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(value, box.Value);
         }
 
-        private static Expression<TDelegate> BuildQuote<TDelegate, TQuoteType>(Expression body, params ParameterExpression[] parameters)
+        private static Expression<TDelegate> BuildQuote<TDelegate, TQuoteType>(
+            Expression body,
+            params ParameterExpression[] parameters
+        )
         {
-            var expr =
-                Lambda<TDelegate>(
-                    Call(
-                        typeof(UnaryQuoteTests).GetMethod(nameof(GetQuote)).MakeGenericMethod(typeof(TQuoteType)),
-                        Quote(
-                            Lambda<TQuoteType>(body)
-                        )
-                    ),
-                    parameters
-                );
+            var expr = Lambda<TDelegate>(
+                Call(
+                    typeof(UnaryQuoteTests)
+                        .GetMethod(nameof(GetQuote))
+                        .MakeGenericMethod(typeof(TQuoteType)),
+                    Quote(Lambda<TQuoteType>(body))
+                ),
+                parameters
+            );
 
             return expr;
         }

@@ -1,10 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
 using Xunit;
-
 
 namespace DefaultNamespace
 {
@@ -16,17 +14,11 @@ namespace DefaultNamespace
             {
                 throw new Exception();
             }
-            catch (Exception)
-            {
-            }
-            finally
-            {
-            }
-
+            catch (Exception) { }
+            finally { }
 
             return -1;
         }
-
 
         [Fact]
         public static void TestEntryPoint()

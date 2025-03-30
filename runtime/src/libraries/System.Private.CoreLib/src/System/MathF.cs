@@ -29,9 +29,7 @@ namespace System
 
         // This table is required for the Round function which can specify the number of digits to round to
         private static ReadOnlySpan<float> RoundPower10Single =>
-        [
-            1e0f, 1e1f, 1e2f, 1e3f, 1e4f, 1e5f, 1e6f
-        ];
+            [1e0f, 1e1f, 1e2f, 1e3f, 1e4f, 1e5f, 1e6f];
 
         private const float singleRoundLimit = 1e8f;
 
@@ -107,7 +105,13 @@ namespace System
         {
             if (Sse.IsSupported || AdvSimd.IsSupported)
             {
-                return VectorMath.ConditionalSelectBitwise(Vector128.CreateScalarUnsafe(-0.0f), Vector128.CreateScalarUnsafe(y), Vector128.CreateScalarUnsafe(x)).ToScalar();
+                return VectorMath
+                    .ConditionalSelectBitwise(
+                        Vector128.CreateScalarUnsafe(-0.0f),
+                        Vector128.CreateScalarUnsafe(y),
+                        Vector128.CreateScalarUnsafe(x)
+                    )
+                    .ToScalar();
             }
             else
             {
@@ -203,7 +207,8 @@ namespace System
                     return ILogB_Zero;
                 }
 
-                for (e = -0x7F; (i >> 31) == 0; e--, i <<= 1) ;
+                for (e = -0x7F; (i >> 31) == 0; e--, i <<= 1)
+                    ;
                 return e;
             }
 
@@ -321,7 +326,9 @@ namespace System
             }
             else if (AdvSimd.Arm64.IsSupported)
             {
-                return AdvSimd.Arm64.ReciprocalEstimateScalar(Vector64.CreateScalarUnsafe(x)).ToScalar();
+                return AdvSimd
+                    .Arm64.ReciprocalEstimateScalar(Vector64.CreateScalarUnsafe(x))
+                    .ToScalar();
             }
             else
             {
@@ -346,7 +353,9 @@ namespace System
             }
             else if (AdvSimd.Arm64.IsSupported)
             {
-                return AdvSimd.Arm64.ReciprocalSquareRootEstimateScalar(Vector64.CreateScalarUnsafe(x)).ToScalar();
+                return AdvSimd
+                    .Arm64.ReciprocalSquareRootEstimateScalar(Vector64.CreateScalarUnsafe(x))
+                    .ToScalar();
             }
             else
             {
@@ -379,7 +388,13 @@ namespace System
                 // and any value greater than 0.5 will always round to exactly one. However,
                 // we need to preserve the original sign for IEEE compliance.
 
-                float result = ((biasedExponent == 0x7E) && (float.ExtractTrailingSignificandFromBits(bits) != 0)) ? 1.0f : 0.0f;
+                float result =
+                    (
+                        (biasedExponent == 0x7E)
+                        && (float.ExtractTrailingSignificandFromBits(bits) != 0)
+                    )
+                        ? 1.0f
+                        : 0.0f;
                 return CopySign(result, x);
             }
 
@@ -443,7 +458,9 @@ namespace System
                 if (mode == MidpointRounding.AwayFromZero)
                 {
                     if (AdvSimd.IsSupported)
-                        return AdvSimd.RoundAwayFromZeroScalar(Vector64.CreateScalarUnsafe(x)).ToScalar();
+                        return AdvSimd
+                            .RoundAwayFromZeroScalar(Vector64.CreateScalarUnsafe(x))
+                            .ToScalar();
                     // manually fold BitDecrement(0.5f)
                     return Truncate(x + CopySign(0.49999997f, x));
                 }
@@ -456,12 +473,18 @@ namespace System
         {
             if ((digits < 0) || (digits > maxRoundingDigits))
             {
-                throw new ArgumentOutOfRangeException(nameof(digits), SR.ArgumentOutOfRange_RoundingDigits_MathF);
+                throw new ArgumentOutOfRangeException(
+                    nameof(digits),
+                    SR.ArgumentOutOfRange_RoundingDigits_MathF
+                );
             }
 
             if (mode < MidpointRounding.ToEven || mode > MidpointRounding.ToPositiveInfinity)
             {
-                throw new ArgumentException(SR.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)), nameof(mode));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)),
+                    nameof(mode)
+                );
             }
 
             if (Abs(x) < singleRoundLimit)
@@ -507,7 +530,10 @@ namespace System
                     }
                     default:
                     {
-                        throw new ArgumentException(SR.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)), nameof(mode));
+                        throw new ArgumentException(
+                            SR.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)),
+                            nameof(mode)
+                        );
                     }
                 }
 

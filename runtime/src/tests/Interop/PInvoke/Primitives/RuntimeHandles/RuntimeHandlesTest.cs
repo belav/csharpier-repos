@@ -1,32 +1,34 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Runtime.InteropServices;
 using System;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using Xunit;
 
 class TestClass
 {
     public int field;
 
-    public void Method()
-    {
-    }
+    public void Method() { }
 }
 
 public class RuntimeHandlesTest
 {
     [DllImport("RuntimeHandlesNative")]
     private static extern bool Marshal_In(RuntimeMethodHandle expected, IntPtr handle);
+
     [DllImport("RuntimeHandlesNative")]
     private static extern bool Marshal_In(RuntimeFieldHandle expected, IntPtr handle);
+
     [DllImport("RuntimeHandlesNative")]
     private static extern bool Marshal_In(RuntimeTypeHandle expected, IntPtr handle);
 
     private static void TestRuntimeMethodHandle()
     {
-        RuntimeMethodHandle handle = typeof(TestClass).GetMethod(nameof(TestClass.Method)).MethodHandle;
+        RuntimeMethodHandle handle = typeof(TestClass)
+            .GetMethod(nameof(TestClass.Method))
+            .MethodHandle;
         Assert.True(Marshal_In(handle, handle.Value));
     }
 

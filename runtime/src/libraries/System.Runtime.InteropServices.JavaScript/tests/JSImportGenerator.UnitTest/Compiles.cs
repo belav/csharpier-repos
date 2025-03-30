@@ -1,13 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.CodeAnalysis;
+using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.JavaScript;
 using System.Threading.Tasks;
-using System;
-using Xunit;
+using Microsoft.CodeAnalysis;
 using Microsoft.Interop.UnitTests;
+using Xunit;
 
 namespace JSImportGenerator.Unit.Tests
 {
@@ -27,7 +27,6 @@ namespace JSImportGenerator.Unit.Tests
             yield return new object[] { CodeSnippets.DefaultReturnMarshaler<Exception>() };
         }
 
-
         [Theory]
         [MemberData(nameof(CodeSnippetsToCompile))]
         public async Task ValidateSnippets(string source)
@@ -35,9 +34,12 @@ namespace JSImportGenerator.Unit.Tests
             Compilation comp = await TestUtils.CreateCompilation(source, allowUnsafe: true);
             TestUtils.AssertPreSourceGeneratorCompilation(comp);
 
-            var newComp = TestUtils.RunGenerators(comp, out var generatorDiags,
+            var newComp = TestUtils.RunGenerators(
+                comp,
+                out var generatorDiags,
                 new Microsoft.Interop.JavaScript.JSImportGenerator(),
-                new Microsoft.Interop.JavaScript.JSExportGenerator());
+                new Microsoft.Interop.JavaScript.JSExportGenerator()
+            );
 
             // uncomment for debugging JSTestUtils.DumpCode(source, newComp, generatorDiags);
 

@@ -2,12 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
-using Internal.IL;
-using Internal.TypeSystem;
-using Internal.Text;
 using ILCompiler.DependencyAnalysis;
-
+using Internal.IL;
+using Internal.Text;
+using Internal.TypeSystem;
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
@@ -36,10 +34,7 @@ namespace ILCompiler
         /// <summary>
         /// Gets the node corresponding to the method that initializes the delegate.
         /// </summary>
-        public IMethodNode Constructor
-        {
-            get;
-        }
+        public IMethodNode Constructor { get; }
 
         public MethodDesc TargetMethod
         {
@@ -54,18 +49,12 @@ namespace ILCompiler
         // The real target can be computed after resolving the constraint.
         public MethodDesc PossiblyUnresolvedTargetMethod
         {
-            get
-            {
-                return _targetMethod;
-            }
+            get { return _targetMethod; }
         }
 
         private bool TargetMethodIsUnboxingThunk
         {
-            get
-            {
-                return TargetMethod.OwningType.IsValueType && !TargetMethod.Signature.IsStatic;
-            }
+            get { return TargetMethod.OwningType.IsValueType && !TargetMethod.Signature.IsStatic; }
         }
 
         public bool TargetNeedsVTableLookup => _targetKind == TargetKind.VTableLookup;
@@ -74,7 +63,8 @@ namespace ILCompiler
         {
             get
             {
-                return _targetKind == TargetKind.VTableLookup || _targetKind == TargetKind.InterfaceDispatch;
+                return _targetKind == TargetKind.VTableLookup
+                    || _targetKind == TargetKind.InterfaceDispatch;
             }
         }
 
@@ -94,7 +84,10 @@ namespace ILCompiler
                         return TargetMethod.IsRuntimeDeterminedExactMethod;
 
                     case TargetKind.ConstrainedMethod:
-                        Debug.Assert(_targetMethod.IsRuntimeDeterminedExactMethod || _constrainedType.IsRuntimeDeterminedSubtype);
+                        Debug.Assert(
+                            _targetMethod.IsRuntimeDeterminedExactMethod
+                                || _constrainedType.IsRuntimeDeterminedSubtype
+                        );
                         return true;
 
                     default:
@@ -114,7 +107,10 @@ namespace ILCompiler
             switch (_targetKind)
             {
                 case TargetKind.ExactCallableAddress:
-                    return factory.GenericLookup.MethodEntry(TargetMethod, TargetMethodIsUnboxingThunk);
+                    return factory.GenericLookup.MethodEntry(
+                        TargetMethod,
+                        TargetMethodIsUnboxingThunk
+                    );
 
                 case TargetKind.InterfaceDispatch:
                     return factory.GenericLookup.VirtualDispatchCell(TargetMethod);
@@ -123,7 +119,11 @@ namespace ILCompiler
                     return factory.GenericLookup.MethodHandle(TargetMethod);
 
                 case TargetKind.ConstrainedMethod:
-                    return factory.GenericLookup.ConstrainedMethodUse(_targetMethod, _constrainedType, directCall: !_targetMethod.HasInstantiation);
+                    return factory.GenericLookup.ConstrainedMethodUse(
+                        _targetMethod,
+                        _constrainedType,
+                        directCall: !_targetMethod.HasInstantiation
+                    );
 
                 default:
                     Debug.Assert(false);
@@ -165,15 +165,22 @@ namespace ILCompiler
         /// <summary>
         /// Gets an optional node passed as an additional argument to the constructor.
         /// </summary>
-        public IMethodNode Thunk
-        {
-            get;
-        }
+        public IMethodNode Thunk { get; }
 
-        private DelegateCreationInfo(IMethodNode constructor, MethodDesc targetMethod, TypeDesc constrainedType, TargetKind targetKind, IMethodNode thunk = null)
+        private DelegateCreationInfo(
+            IMethodNode constructor,
+            MethodDesc targetMethod,
+            TypeDesc constrainedType,
+            TargetKind targetKind,
+            IMethodNode thunk = null
+        )
         {
-            Debug.Assert(targetKind != TargetKind.VTableLookup
-                || MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(targetMethod) == targetMethod);
+            Debug.Assert(
+                targetKind != TargetKind.VTableLookup
+                    || MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(
+                        targetMethod
+                    ) == targetMethod
+            );
             Constructor = constructor;
             _targetMethod = targetMethod;
             _constrainedType = constrainedType;
@@ -185,10 +192,18 @@ namespace ILCompiler
         /// Constructs a new instance of <see cref="DelegateCreationInfo"/> set up to construct a delegate of type
         /// '<paramref name="delegateType"/>' pointing to '<paramref name="targetMethod"/>'.
         /// </summary>
-        public static DelegateCreationInfo Create(TypeDesc delegateType, MethodDesc targetMethod, TypeDesc constrainedType, NodeFactory factory, bool followVirtualDispatch)
+        public static DelegateCreationInfo Create(
+            TypeDesc delegateType,
+            MethodDesc targetMethod,
+            TypeDesc constrainedType,
+            NodeFactory factory,
+            bool followVirtualDispatch
+        )
         {
             CompilerTypeSystemContext context = factory.TypeSystemContext;
-            DefType systemDelegate = context.GetWellKnownType(WellKnownType.MulticastDelegate).BaseType;
+            DefType systemDelegate = context
+                .GetWellKnownType(WellKnownType.MulticastDelegate)
+                .BaseType;
 
             int paramCountTargetMethod = targetMethod.Signature.Length;
             if (!targetMethod.Signature.IsStatic)
@@ -227,14 +242,20 @@ namespace ILCompiler
 
                 var instantiatedDelegateType = delegateType as InstantiatedType;
                 if (instantiatedDelegateType != null)
-                    invokeThunk = context.GetMethodForInstantiatedType(invokeThunk, instantiatedDelegateType);
+                    invokeThunk = context.GetMethodForInstantiatedType(
+                        invokeThunk,
+                        instantiatedDelegateType
+                    );
 
                 return new DelegateCreationInfo(
                     factory.MethodEntrypoint(initMethod),
                     targetMethod,
                     constrainedType,
-                    constrainedType == null ? TargetKind.ExactCallableAddress : TargetKind.ConstrainedMethod,
-                    factory.MethodEntrypoint(invokeThunk));
+                    constrainedType == null
+                        ? TargetKind.ExactCallableAddress
+                        : TargetKind.ConstrainedMethod,
+                    factory.MethodEntrypoint(invokeThunk)
+                );
             }
             else
             {
@@ -242,7 +263,9 @@ namespace ILCompiler
                     throw new NotImplementedException("Open instance delegates");
 
                 string initializeMethodName = "InitializeClosedInstance";
-                MethodDesc targetCanonMethod = targetMethod.GetCanonMethodTarget(CanonicalFormKind.Specific);
+                MethodDesc targetCanonMethod = targetMethod.GetCanonMethodTarget(
+                    CanonicalFormKind.Specific
+                );
                 TargetKind kind;
                 if (targetMethod.HasInstantiation)
                 {
@@ -277,22 +300,29 @@ namespace ILCompiler
                         else
                         {
                             kind = TargetKind.VTableLookup;
-                            targetMethod = targetMethod.GetCanonMethodTarget(CanonicalFormKind.Specific);
+                            targetMethod = targetMethod.GetCanonMethodTarget(
+                                CanonicalFormKind.Specific
+                            );
                         }
                     }
                     else
                     {
                         kind = TargetKind.CanonicalEntrypoint;
-                        targetMethod = targetMethod.GetCanonMethodTarget(CanonicalFormKind.Specific);
+                        targetMethod = targetMethod.GetCanonMethodTarget(
+                            CanonicalFormKind.Specific
+                        );
                     }
                 }
 
                 Debug.Assert(constrainedType == null);
                 return new DelegateCreationInfo(
-                    factory.MethodEntrypoint(systemDelegate.GetKnownMethod(initializeMethodName, null)),
+                    factory.MethodEntrypoint(
+                        systemDelegate.GetKnownMethod(initializeMethodName, null)
+                    ),
                     targetMethod,
                     constrainedType,
-                    kind);
+                    kind
+                );
             }
         }
 

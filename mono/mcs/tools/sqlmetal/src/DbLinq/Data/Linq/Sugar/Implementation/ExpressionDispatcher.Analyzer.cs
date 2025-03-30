@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -30,12 +30,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-
-#if MONO_STRICT
-using System.Data.Linq;
-#else
-using DbLinq.Data.Linq;
-#endif
 using DbLinq.Data.Linq.Implementation;
 using DbLinq.Data.Linq.Sugar;
 using DbLinq.Data.Linq.Sugar.ExpressionMutator;
@@ -43,17 +37,27 @@ using DbLinq.Data.Linq.Sugar.Expressions;
 using DbLinq.Data.Linq.Sugar.Implementation;
 using DbLinq.Factory;
 using DbLinq.Util;
+#if MONO_STRICT
+using System.Data.Linq;
+#else
+using DbLinq.Data.Linq;
+#endif
 
 namespace DbLinq.Data.Linq.Sugar.Implementation
 {
     partial class ExpressionDispatcher
     {
-        public Expression Analyze(ExpressionChain expressions, Expression parameter, BuilderContext builderContext)
+        public Expression Analyze(
+            ExpressionChain expressions,
+            Expression parameter,
+            BuilderContext builderContext
+        )
         {
             Expression tableExpression = parameter;
 
             Expression last = expressions.Last();
-            IExpressionLanguageParser languageParser = ObjectFactory.Get<IExpressionLanguageParser>();
+            IExpressionLanguageParser languageParser =
+                ObjectFactory.Get<IExpressionLanguageParser>();
             foreach (Expression e in expressions)
             {
                 if (e == last)
@@ -66,11 +70,15 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     log.WriteExpression(e);
 #endif
 
-                // Convert linq Expressions to QueryOperationExpressions and QueryConstantExpressions 
+                // Convert linq Expressions to QueryOperationExpressions and QueryConstantExpressions
                 // Query expressions language identification
                 var currentExpression = languageParser.Parse(e, builderContext);
-                // Query expressions query identification 
-                currentExpression = this.Analyze(currentExpression, tableExpression, builderContext);
+                // Query expressions query identification
+                currentExpression = this.Analyze(
+                    currentExpression,
+                    tableExpression,
+                    builderContext
+                );
 
                 if (!builderContext.IsExternalInExpressionChain)
                 {
@@ -91,7 +99,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameter"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression Analyze(Expression expression, Expression parameter, BuilderContext builderContext)
+        protected virtual Expression Analyze(
+            Expression expression,
+            Expression parameter,
+            BuilderContext builderContext
+        )
         {
             return Analyze(expression, new[] { parameter }, builderContext);
         }
@@ -101,12 +113,20 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return Analyze(expression, new Expression[0], builderContext);
         }
 
-        protected virtual Expression Analyze(Expression expression, IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression Analyze(
+            Expression expression,
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             switch (expression.NodeType)
             {
                 case ExpressionType.Call:
-                    return AnalyzeCall((MethodCallExpression)expression, parameters, builderContext);
+                    return AnalyzeCall(
+                        (MethodCallExpression)expression,
+                        parameters,
+                        builderContext
+                    );
                 case ExpressionType.Lambda:
                     return AnalyzeLambda(expression, parameters, builderContext);
                 case ExpressionType.Parameter:
@@ -168,22 +188,35 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeCall(MethodCallExpression expression, IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeCall(
+            MethodCallExpression expression,
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             var operands = expression.GetOperands().ToList();
             var operarandsToSkip = expression.Method.IsStatic ? 1 : 0;
             var originalParameters = operands.Skip(parameters.Count + operarandsToSkip);
             var newParameters = parameters.Union(originalParameters).ToList();
 
-            return AnalyzeQueryableCall(expression.Method, newParameters, builderContext) ??
-                AnalyzeStringCall(expression.Method, newParameters, builderContext) ??
-                AnalyzeMathCall(expression.Method, newParameters, builderContext) ??
-                AnalyzeUnknownCall(expression, newParameters, builderContext);
+            return AnalyzeQueryableCall(expression.Method, newParameters, builderContext)
+                ?? AnalyzeStringCall(expression.Method, newParameters, builderContext)
+                ?? AnalyzeMathCall(expression.Method, newParameters, builderContext)
+                ?? AnalyzeUnknownCall(expression, newParameters, builderContext);
         }
 
-        private Expression AnalyzeQueryableCall(MethodInfo method, IList<Expression> parameters, BuilderContext builderContext)
+        private Expression AnalyzeQueryableCall(
+            MethodInfo method,
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
-            if (!(method.DeclaringType == typeof(Queryable) || method.DeclaringType == typeof(Enumerable)))
+            if (
+                !(
+                    method.DeclaringType == typeof(Queryable)
+                    || method.DeclaringType == typeof(Enumerable)
+                )
+            )
                 return null;
             var popCallStack = PushCallStack(method, builderContext);
             // all methods to handle are listed here:
@@ -196,19 +229,43 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 case "Any":
                     return popCallStack(AnalyzeAny(parameters, builderContext));
                 case "Average":
-                    return popCallStack(AnalyzeProjectionQuery(SpecialExpressionType.Average, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeProjectionQuery(
+                            SpecialExpressionType.Average,
+                            parameters,
+                            builderContext
+                        )
+                    );
                 case "Concat":
-                    return popCallStack(AnalyzeSelectOperation(SelectOperatorType.UnionAll, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeSelectOperation(
+                            SelectOperatorType.UnionAll,
+                            parameters,
+                            builderContext
+                        )
+                    );
                 case "Contains":
                     return popCallStack(AnalyzeContains(parameters, builderContext));
                 case "Count":
-                    return popCallStack(AnalyzeProjectionQuery(SpecialExpressionType.Count, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeProjectionQuery(
+                            SpecialExpressionType.Count,
+                            parameters,
+                            builderContext
+                        )
+                    );
                 case "DefaultIfEmpty":
                     return popCallStack(AnalyzeOuterJoin(parameters, builderContext));
                 case "Distinct":
                     return popCallStack(AnalyzeDistinct(parameters, builderContext));
                 case "Except":
-                    return popCallStack(AnalyzeSelectOperation(SelectOperatorType.Exception, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeSelectOperation(
+                            SelectOperatorType.Exception,
+                            parameters,
+                            builderContext
+                        )
+                    );
                 case "First":
                 case "FirstOrDefault":
                     return popCallStack(AnalyzeScalar(methodName, 1, parameters, builderContext));
@@ -217,15 +274,35 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 case "GroupJoin":
                     return popCallStack(AnalyzeGroupJoin(parameters, builderContext));
                 case "Intersect":
-                    return popCallStack(AnalyzeSelectOperation(SelectOperatorType.Intersection, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeSelectOperation(
+                            SelectOperatorType.Intersection,
+                            parameters,
+                            builderContext
+                        )
+                    );
                 case "Join":
                     return popCallStack(AnalyzeJoin(parameters, builderContext));
                 case "Last":
-                    return popCallStack(AnalyzeScalar(methodName, null, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeScalar(methodName, null, parameters, builderContext)
+                    );
                 case "Max":
-                    return popCallStack(AnalyzeProjectionQuery(SpecialExpressionType.Max, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeProjectionQuery(
+                            SpecialExpressionType.Max,
+                            parameters,
+                            builderContext
+                        )
+                    );
                 case "Min":
-                    return popCallStack(AnalyzeProjectionQuery(SpecialExpressionType.Min, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeProjectionQuery(
+                            SpecialExpressionType.Min,
+                            parameters,
+                            builderContext
+                        )
+                    );
                 case "OrderBy":
                 case "ThenBy":
                     return popCallStack(AnalyzeOrderBy(parameters, false, builderContext));
@@ -242,23 +319,33 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 case "Skip":
                     return popCallStack(AnalyzeSkip(parameters, builderContext));
                 case "Sum":
-                    return popCallStack(AnalyzeProjectionQuery(SpecialExpressionType.Sum, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeProjectionQuery(
+                            SpecialExpressionType.Sum,
+                            parameters,
+                            builderContext
+                        )
+                    );
                 case "Take":
                     return popCallStack(AnalyzeTake(parameters, builderContext));
                 case "Union":
-                    return popCallStack(AnalyzeSelectOperation(SelectOperatorType.Union, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeSelectOperation(SelectOperatorType.Union, parameters, builderContext)
+                    );
                 case "Where":
                     return popCallStack(AnalyzeWhere(parameters, builderContext));
                 default:
                     if (method.DeclaringType == typeof(Queryable))
-                        throw Error.BadArgument("S0133: Implement QueryMethod Queryable.{0}.", methodName);
+                        throw Error.BadArgument(
+                            "S0133: Implement QueryMethod Queryable.{0}.",
+                            methodName
+                        );
                     return popCallStack(null);
             }
         }
 
         Func<Expression, Expression> PushCallStack(MethodInfo method, BuilderContext builderContext)
         {
-
             builderContext.CallStack.Push(method);
             Func<Expression, Expression> popCallStack = r =>
             {
@@ -268,7 +355,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return popCallStack;
         }
 
-        private Expression AnalyzeStringCall(MethodInfo method, IList<Expression> parameters, BuilderContext builderContext)
+        private Expression AnalyzeStringCall(
+            MethodInfo method,
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             if (method.DeclaringType != typeof(string))
                 return null;
@@ -280,13 +371,31 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 case "EndsWith":
                     return popCallStack(AnalyzeLikeEnd(parameters, builderContext));
                 case "IndexOf":
-                    return popCallStack(AnalyzeGenericSpecialExpressionType(SpecialExpressionType.IndexOf, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeGenericSpecialExpressionType(
+                            SpecialExpressionType.IndexOf,
+                            parameters,
+                            builderContext
+                        )
+                    );
                 case "Insert":
                     return popCallStack(AnalyzeStringInsert(parameters, builderContext));
                 case "Remove":
-                    return popCallStack(AnalyzeGenericSpecialExpressionType(SpecialExpressionType.Remove, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeGenericSpecialExpressionType(
+                            SpecialExpressionType.Remove,
+                            parameters,
+                            builderContext
+                        )
+                    );
                 case "Replace":
-                    return popCallStack(AnalyzeGenericSpecialExpressionType(SpecialExpressionType.Replace, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeGenericSpecialExpressionType(
+                            SpecialExpressionType.Replace,
+                            parameters,
+                            builderContext
+                        )
+                    );
                 case "StartsWith":
                     return popCallStack(AnalyzeLikeStart(parameters, builderContext));
                 case "Substring":
@@ -298,17 +407,42 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 case "ToUpper":
                     return popCallStack(AnalyzeToUpper(parameters, builderContext));
                 case "Trim":
-                    return popCallStack(AnalyzeGenericSpecialExpressionType(SpecialExpressionType.Trim, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeGenericSpecialExpressionType(
+                            SpecialExpressionType.Trim,
+                            parameters,
+                            builderContext
+                        )
+                    );
                 case "TrimEnd":
-                    return popCallStack(AnalyzeGenericSpecialExpressionType(SpecialExpressionType.RTrim, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeGenericSpecialExpressionType(
+                            SpecialExpressionType.RTrim,
+                            parameters,
+                            builderContext
+                        )
+                    );
                 case "TrimStart":
-                    return popCallStack(AnalyzeGenericSpecialExpressionType(SpecialExpressionType.LTrim, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeGenericSpecialExpressionType(
+                            SpecialExpressionType.LTrim,
+                            parameters,
+                            builderContext
+                        )
+                    );
                 default:
-                    throw Error.BadArgument("S0133: Implement QueryMethod String.{0}.", method.Name);
+                    throw Error.BadArgument(
+                        "S0133: Implement QueryMethod String.{0}.",
+                        method.Name
+                    );
             }
         }
 
-        private Expression AnalyzeMathCall(MethodInfo method, IList<Expression> parameters, BuilderContext builderContext)
+        private Expression AnalyzeMathCall(
+            MethodInfo method,
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             if (method.DeclaringType != typeof(System.Math))
                 return null;
@@ -322,17 +456,34 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 case "Round":
                 case "Sign":
                 case "Sqrt":
-                    return popCallStack(AnalyzeGenericSpecialExpressionType((SpecialExpressionType)Enum.Parse(typeof(SpecialExpressionType), method.Name), parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeGenericSpecialExpressionType(
+                            (SpecialExpressionType)
+                                Enum.Parse(typeof(SpecialExpressionType), method.Name),
+                            parameters,
+                            builderContext
+                        )
+                    );
                 case "Log":
                     return popCallStack(AnalyzeLog(parameters, builderContext));
                 case "Log10":
-                    return popCallStack(AnalyzeGenericSpecialExpressionType(SpecialExpressionType.Log, parameters, builderContext));
+                    return popCallStack(
+                        AnalyzeGenericSpecialExpressionType(
+                            SpecialExpressionType.Log,
+                            parameters,
+                            builderContext
+                        )
+                    );
                 default:
                     throw Error.BadArgument("S0133: Implement QueryMethod Math.{0}.", method.Name);
             }
         }
 
-        private Expression AnalyzeUnknownCall(MethodCallExpression expression, IList<Expression> parameters, BuilderContext builderContext)
+        private Expression AnalyzeUnknownCall(
+            MethodCallExpression expression,
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             var method = expression.Method;
             switch (method.Name)
@@ -353,7 +504,9 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 if (pe != null)
                 {
                     if (!builderContext.Parameters.TryGetValue(pe.Name, out newArg))
-                        throw new NotSupportedException("Do not currently support expression: " + expression);
+                        throw new NotSupportedException(
+                            "Do not currently support expression: " + expression
+                        );
                 }
                 else
                     newArg = Analyze(arg, builderContext);
@@ -362,45 +515,88 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return Expression.Call(expression.Object, expression.Method, args);
         }
 
-        private Expression AnalyzeStringInsert(IList<Expression> parameters, BuilderContext builderContext)
+        private Expression AnalyzeStringInsert(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
-            var startIndexExpression = new StartIndexOffsetExpression(builderContext.QueryContext.DataContext.Vendor.SqlProvider.StringIndexStartsAtOne, parameters.ElementAt(1));
+            var startIndexExpression = new StartIndexOffsetExpression(
+                builderContext.QueryContext.DataContext.Vendor.SqlProvider.StringIndexStartsAtOne,
+                parameters.ElementAt(1)
+            );
             var stringToInsertExpression = parameters.ElementAt(2);
-            return AnalyzeGenericSpecialExpressionType(SpecialExpressionType.StringInsert, new Expression[] { parameters.First(), startIndexExpression, stringToInsertExpression }, builderContext);
+            return AnalyzeGenericSpecialExpressionType(
+                SpecialExpressionType.StringInsert,
+                new Expression[]
+                {
+                    parameters.First(),
+                    startIndexExpression,
+                    stringToInsertExpression,
+                },
+                builderContext
+            );
         }
 
-        protected virtual Expression AnalyzeLog(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeLog(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             if (parameters.Count == 1)
-                return new SpecialExpression(SpecialExpressionType.Ln, parameters.Select(p => Analyze(p, builderContext)).ToList());
+                return new SpecialExpression(
+                    SpecialExpressionType.Ln,
+                    parameters.Select(p => Analyze(p, builderContext)).ToList()
+                );
             else if (parameters.Count == 2)
-                return new SpecialExpression(SpecialExpressionType.Log, parameters.Select(p => Analyze(p, builderContext)).ToList());
+                return new SpecialExpression(
+                    SpecialExpressionType.Log,
+                    parameters.Select(p => Analyze(p, builderContext)).ToList()
+                );
             else
                 throw new NotSupportedException();
         }
 
-        protected virtual Expression AnalyzeGenericSpecialExpressionType(SpecialExpressionType specialType, IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeGenericSpecialExpressionType(
+            SpecialExpressionType specialType,
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
-            return new SpecialExpression(specialType, parameters.Select(p => Analyze(p, builderContext)).ToList());
+            return new SpecialExpression(
+                specialType,
+                parameters.Select(p => Analyze(p, builderContext)).ToList()
+            );
         }
 
-        protected virtual Expression AnalyzeParse(MethodInfo method, IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeParse(
+            MethodInfo method,
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             if (method.IsStatic && parameters.Count == 1)
             {
                 Expression parsed = null;
                 Expression toParse = Analyze(parameters.First(), builderContext);
-                InputParameterExpression inputParameterToParse = toParse as InputParameterExpression;
+                InputParameterExpression inputParameterToParse =
+                    toParse as InputParameterExpression;
                 if (inputParameterToParse != null)
                 {
                     ExpressionTier tier = ExpressionQualifier.GetTier(parameters[0]);
                     if (tier == ExpressionTier.Clr)
                     {
-                        parsed = RegisterParameter(System.Linq.Expressions.Expression.Call(method, inputParameterToParse.Expression), inputParameterToParse.Alias, builderContext);
+                        parsed = RegisterParameter(
+                            System.Linq.Expressions.Expression.Call(
+                                method,
+                                inputParameterToParse.Expression
+                            ),
+                            inputParameterToParse.Alias,
+                            builderContext
+                        );
                         UnregisterParameter(inputParameterToParse, builderContext);
                     }
                 }
-                if(parsed == null)
+                if (parsed == null)
                 {
                     parsed = Expression.Convert(toParse, method.ReturnType, method);
                     ExpressionTier tier = ExpressionQualifier.GetTier(toParse);
@@ -420,10 +616,13 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             }
             else
                 throw new ArgumentException();
-
         }
 
-        protected virtual Expression AnalyzeToString(MethodInfo method, IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeToString(
+            MethodInfo method,
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             if (parameters.Count != 1)
                 throw new ArgumentException();
@@ -431,20 +630,27 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             Expression parameter = parameters.First();
             Expression parameterToHandle;
 
-            if(parameter.Type.IsNullable())
-                parameter = Analyze(Expression.Convert(parameter, parameter.Type.GetNullableType()), builderContext);
+            if (parameter.Type.IsNullable())
+                parameter = Analyze(
+                    Expression.Convert(parameter, parameter.Type.GetNullableType()),
+                    builderContext
+                );
 
             parameterToHandle = Analyze(parameter, builderContext);
 
             InputParameterExpression inputParameter = parameterToHandle as InputParameterExpression;
             if (inputParameter != null)
             {
-                parameterToHandle = RegisterParameter(System.Linq.Expressions.Expression.Call(inputParameter.Expression, method), inputParameter.Alias, builderContext);
+                parameterToHandle = RegisterParameter(
+                    System.Linq.Expressions.Expression.Call(inputParameter.Expression, method),
+                    inputParameter.Alias,
+                    builderContext
+                );
                 UnregisterParameter(inputParameter, builderContext);
 
                 return parameterToHandle;
             }
-            
+
             if (!parameter.Type.IsPrimitive && parameterToHandle.Type != typeof(string))
             {
                 //TODO: ExpressionDispacher.Analyze.AnalyzeToString is not complete
@@ -452,9 +658,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 //can be executed in the clr, ie: (where new StrangeObject().ToString()) should work. The problem is that
                 //we don't have a reference to the optimizer here.
                 //Working samples in: /Tests/Test_Nunit/ReadTests_Conversions.cs
-                string message = "Method ToString can only be translated to SQL for primitive types.";
+                string message =
+                    "Method ToString can only be translated to SQL for primitive types.";
                 int? select = FirstIndexOf(builderContext.CallStack, "Select");
-                int? where  = FirstIndexOf(builderContext.CallStack, "Where");
+                int? where = FirstIndexOf(builderContext.CallStack, "Where");
                 if ((where ?? int.MaxValue) < (select ?? int.MaxValue))
                     // Assume we're generating the .Where() clause, not .Select()
                     throw new NotSupportedException(message);
@@ -462,21 +669,29 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 throw new InvalidOperationException(message);
             }
 
-            return Expression.Convert(parameterToHandle, typeof(string), typeof(Convert).GetMethod("ToString", new[] { parameterToHandle.Type }));
+            return Expression.Convert(
+                parameterToHandle,
+                typeof(string),
+                typeof(Convert).GetMethod("ToString", new[] { parameterToHandle.Type })
+            );
         }
 
         static int? FirstIndexOf(Stack<MethodInfo> callStack, string methodName)
         {
             int? index = null;
-            callStack.Where((m, i) =>
-            {
-                if (m.Name == methodName)
-                {
-                    index = i;
-                    return true;
-                }
-                return false;
-            }).FirstOrDefault();
+            callStack
+                .Where(
+                    (m, i) =>
+                    {
+                        if (m.Name == methodName)
+                        {
+                            index = i;
+                            return true;
+                        }
+                        return false;
+                    }
+                )
+                .FirstOrDefault();
             return index;
         }
 
@@ -486,7 +701,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeTake(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeTake(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             AddLimit(Analyze(parameters[1], builderContext), builderContext);
             return Analyze(parameters[0], builderContext);
@@ -496,8 +714,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         {
             var previousLimit = builderContext.CurrentSelect.Limit;
             if (previousLimit != null)
-                builderContext.CurrentSelect.Limit = Expression.Condition(Expression.LessThan(previousLimit, limit),
-                                                                          previousLimit, limit);
+                builderContext.CurrentSelect.Limit = Expression.Condition(
+                    Expression.LessThan(previousLimit, limit),
+                    previousLimit,
+                    limit
+                );
             else
                 builderContext.CurrentSelect.Limit = limit;
         }
@@ -508,7 +729,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeSkip(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeSkip(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             AddOffset(Analyze(parameters[1], builderContext), builderContext);
             return Analyze(parameters[0], builderContext);
@@ -531,7 +755,12 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeScalar(string methodName, int? limit, IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeScalar(
+            string methodName,
+            int? limit,
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             builderContext.CurrentSelect.ExecuteMethodName = methodName;
             if (limit.HasValue)
@@ -552,10 +781,18 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="extraParameterIndex"></param>
         /// <param name="builderContext"></param>
-        private void CheckWhere(Expression table, IList<Expression> parameters, int extraParameterIndex, BuilderContext builderContext)
+        private void CheckWhere(
+            Expression table,
+            IList<Expression> parameters,
+            int extraParameterIndex,
+            BuilderContext builderContext
+        )
         {
             if (parameters.Count > extraParameterIndex) // a lambda can be specified here, this is a restriction
-                RegisterWhere(Analyze(parameters[extraParameterIndex], table, builderContext), builderContext);
+                RegisterWhere(
+                    Analyze(parameters[extraParameterIndex], table, builderContext),
+                    builderContext
+                );
         }
 
         /// <summary>
@@ -565,22 +802,29 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeProjectionQuery(SpecialExpressionType specialExpressionType, IList<Expression> parameters,
-                                                            BuilderContext builderContext)
+        protected virtual Expression AnalyzeProjectionQuery(
+            SpecialExpressionType specialExpressionType,
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
-
             if (builderContext.IsExternalInExpressionChain)
             {
                 var operand0 = Analyze(parameters[0], builderContext);
                 Expression projectionOperand;
 
-                if (    builderContext.CurrentSelect.NextSelectExpression != null 
-                    ||  builderContext.CurrentSelect.Operands.Count() > 0
-                    ||  builderContext.CurrentSelect.Group.Count > 0
-                   )
+                if (
+                    builderContext.CurrentSelect.NextSelectExpression != null
+                    || builderContext.CurrentSelect.Operands.Count() > 0
+                    || builderContext.CurrentSelect.Group.Count > 0
+                )
                 {
                     //BuildSelect(builderContext.CurrentSelect, builderContext);
-                    operand0 = new SubSelectExpression(builderContext.CurrentSelect, operand0.Type, "source");
+                    operand0 = new SubSelectExpression(
+                        builderContext.CurrentSelect,
+                        operand0.Type,
+                        "source"
+                    );
                     builderContext.NewParentSelect();
 
                     // In the new scope we should not have MaximumDatabaseLoad
@@ -598,11 +842,17 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 {
                     if (parameters.Count > 1)
                     {
-                        projectionOperand = Analyze(parameters[1], groupOperand0.GroupedExpression,
-                                                    builderContext);
+                        projectionOperand = Analyze(
+                            parameters[1],
+                            groupOperand0.GroupedExpression,
+                            builderContext
+                        );
                     }
                     else
-                        projectionOperand = Analyze(groupOperand0.GroupedExpression, builderContext);
+                        projectionOperand = Analyze(
+                            groupOperand0.GroupedExpression,
+                            builderContext
+                        );
                 }
                 else
                 {
@@ -611,10 +861,16 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 }
 
                 if (projectionOperand is TableExpression)
-                    projectionOperand = RegisterTable((TableExpression)projectionOperand, builderContext);
+                    projectionOperand = RegisterTable(
+                        (TableExpression)projectionOperand,
+                        builderContext
+                    );
 
                 if (groupOperand0 != null)
-                    projectionOperand = new GroupExpression(projectionOperand, groupOperand0.KeyExpression);
+                    projectionOperand = new GroupExpression(
+                        projectionOperand,
+                        groupOperand0.KeyExpression
+                    );
 
                 return new SpecialExpression(specialExpressionType, projectionOperand);
             }
@@ -624,7 +880,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
 
                 var tableExpression = Analyze(parameters[0], projectionQueryBuilderContext);
 
-                if (!(tableExpression is TableExpression) && !(tableExpression is EntitySetExpression))
+                if (
+                    !(tableExpression is TableExpression)
+                    && !(tableExpression is EntitySetExpression)
+                )
                     tableExpression = Analyze(tableExpression, projectionQueryBuilderContext);
                 EntitySetExpression setExpression = tableExpression as EntitySetExpression;
                 if (setExpression != null)
@@ -638,11 +897,18 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     setExpression = tableExpression as EntitySetExpression;
                     if (setExpression != null)
                         tableExpression = setExpression.TableExpression;
-                    var anyClause = Analyze(parameters[1], tableExpression, projectionQueryBuilderContext);
+                    var anyClause = Analyze(
+                        parameters[1],
+                        tableExpression,
+                        projectionQueryBuilderContext
+                    );
                     RegisterWhere(anyClause, projectionQueryBuilderContext);
                 }
 
-                projectionQueryBuilderContext.CurrentSelect = projectionQueryBuilderContext.CurrentSelect.ChangeOperands(new SpecialExpression(specialExpressionType, tableExpression));
+                projectionQueryBuilderContext.CurrentSelect =
+                    projectionQueryBuilderContext.CurrentSelect.ChangeOperands(
+                        new SpecialExpression(specialExpressionType, tableExpression)
+                    );
 
                 // we now switch back to current context, and compare the result with 0
                 return projectionQueryBuilderContext.CurrentSelect;
@@ -656,17 +922,25 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeSelect(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeSelect(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             // just call back the underlying lambda (or quote, whatever)
             Expression ex = Analyze(parameters[1], parameters[0], builderContext);
 
             // http://social.msdn.microsoft.com/Forums/en-US/linqprojectgeneral/thread/1ce25da3-44c6-407d-8395-4c146930004b
-            if (ex.NodeType == ExpressionType.MemberInit &&
-                    builderContext.QueryContext.DataContext.Mapping.GetMetaType(ex.Type) != null)
+            if (
+                ex.NodeType == ExpressionType.MemberInit
+                && builderContext.QueryContext.DataContext.Mapping.GetMetaType(ex.Type) != null
+            )
                 throw new NotSupportedException(
-                    string.Format("Explicit construction of entity type '{0}' in query is not allowed.",
-                        ex.Type.FullName));
+                    string.Format(
+                        "Explicit construction of entity type '{0}' in query is not allowed.",
+                        ex.Type.FullName
+                    )
+                );
             TableExpression tableExpression = parameters[0] as TableExpression;
             if (tableExpression != null && builderContext.CurrentSelect.Tables.Count == 0)
                 RegisterTable(tableExpression, builderContext);
@@ -680,9 +954,12 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeWhere(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeWhere(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
-			var tablePiece = parameters[0];
+            var tablePiece = parameters[0];
             RegisterWhere(Analyze(parameters[1], tablePiece, builderContext), builderContext);
             return tablePiece;
         }
@@ -696,17 +973,31 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeLambda(Expression expression, IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeLambda(
+            Expression expression,
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             var lambdaExpression = expression as LambdaExpression;
             if (lambdaExpression == null)
-                throw Error.BadArgument("S0227: Unknown type for AnalyzeLambda() ({0})", expression.GetType());
+                throw Error.BadArgument(
+                    "S0227: Unknown type for AnalyzeLambda() ({0})",
+                    expression.GetType()
+                );
             // for a lambda, first parameter is body, others are input parameters
             // so we create a parameters stack
-            for (int parameterIndex = 0; parameterIndex < lambdaExpression.Parameters.Count; parameterIndex++)
+            for (
+                int parameterIndex = 0;
+                parameterIndex < lambdaExpression.Parameters.Count;
+                parameterIndex++
+            )
             {
                 var parameterExpression = lambdaExpression.Parameters[parameterIndex];
-                builderContext.Parameters[parameterExpression.Name] = Analyze(parameters[parameterIndex], builderContext);
+                builderContext.Parameters[parameterExpression.Name] = Analyze(
+                    parameters[parameterIndex],
+                    builderContext
+                );
             }
             // we keep only the body, the header is now useless
             // and once the parameters have been substituted, we don't pass one anymore
@@ -719,7 +1010,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="expression"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeParameter(Expression expression, BuilderContext builderContext)
+        protected virtual Expression AnalyzeParameter(
+            Expression expression,
+            BuilderContext builderContext
+        )
         {
             Expression unaliasedExpression;
             var parameterName = GetParameterName(expression);
@@ -757,7 +1051,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         {
             entityType = memberType;
             // one check, a generic EntityRef<> or inherited
-            if (memberType.IsGenericType && typeof(EntitySet<>).IsAssignableFrom(memberType.GetGenericTypeDefinition()))
+            if (
+                memberType.IsGenericType
+                && typeof(EntitySet<>).IsAssignableFrom(memberType.GetGenericTypeDefinition())
+            )
             {
                 entityType = memberType.GetGenericArguments()[0];
                 return true;
@@ -765,7 +1062,12 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
 #if !MONO_STRICT
             // this is for compatibility with previously generated .cs files
             // TODO: remove in 2009
-            if (memberType.IsGenericType && typeof(System.Data.Linq.EntitySet<>).IsAssignableFrom(memberType.GetGenericTypeDefinition()))
+            if (
+                memberType.IsGenericType
+                && typeof(System.Data.Linq.EntitySet<>).IsAssignableFrom(
+                    memberType.GetGenericTypeDefinition()
+                )
+            )
             {
                 entityType = memberType.GetGenericArguments()[0];
                 return true;
@@ -781,7 +1083,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="expression"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeMember(Expression expression, BuilderContext builderContext)
+        protected virtual Expression AnalyzeMember(
+            Expression expression,
+            BuilderContext builderContext
+        )
         {
             var memberExpression = (MemberExpression)expression;
 
@@ -791,7 +1096,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
 
             var memberInfo = memberExpression.Member;
             if (!isStaticMemberAccess && memberInfo.Name == "Count")
-                return AnalyzeProjectionQuery(SpecialExpressionType.Count, new[] { memberExpression.Expression }, builderContext);
+                return AnalyzeProjectionQuery(
+                    SpecialExpressionType.Count,
+                    new[] { memberExpression.Expression },
+                    builderContext
+                );
 
             if (!isStaticMemberAccess)
                 // first parameter is object, second is member
@@ -813,7 +1122,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 var metaTableExpression = (MetaTableExpression)objectExpression;
                 var tableExpression = metaTableExpression.GetTableExpression(memberInfo);
                 if (tableExpression == null)
-                    throw Error.BadArgument("S0270: MemberInfo '{0}' not found in MetaTable", memberInfo.Name);
+                    throw Error.BadArgument(
+                        "S0270: MemberInfo '{0}' not found in MetaTable",
+                        memberInfo.Name
+                    );
                 return tableExpression;
             }
 
@@ -828,28 +1140,51 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             {
                 var tableExpression = (TableExpression)objectExpression;
 
-
                 // before finding an association, we check for an EntitySet<>
                 // this will be used in RegisterAssociation
                 Type entityType;
                 if (IsEntitySet(memberInfo.GetMemberType(), out entityType))
-                    return new EntitySetExpression(tableExpression, memberInfo, memberInfo.GetMemberType(), builderContext, this);
+                    return new EntitySetExpression(
+                        tableExpression,
+                        memberInfo,
+                        memberInfo.GetMemberType(),
+                        builderContext,
+                        this
+                    );
 
                 // first of all, then, try to find the association
-                var queryAssociationExpression = RegisterAssociation(tableExpression, memberInfo, entityType,
-                                                                     builderContext);
+                var queryAssociationExpression = RegisterAssociation(
+                    tableExpression,
+                    memberInfo,
+                    entityType,
+                    builderContext
+                );
                 if (queryAssociationExpression != null)
                 {
                     return queryAssociationExpression;
                 }
                 // then, try the column
-                ColumnExpression queryColumnExpression = RegisterColumn(tableExpression, memberInfo, builderContext);
+                ColumnExpression queryColumnExpression = RegisterColumn(
+                    tableExpression,
+                    memberInfo,
+                    builderContext
+                );
                 if (queryColumnExpression != null)
                 {
-                    Type storageType = queryColumnExpression.StorageInfo != null ? queryColumnExpression.StorageInfo.GetMemberType() : null;
+                    Type storageType =
+                        queryColumnExpression.StorageInfo != null
+                            ? queryColumnExpression.StorageInfo.GetMemberType()
+                            : null;
                     if (storageType != null && queryColumnExpression.Type != storageType)
                     {
-                        return Expression.Convert(queryColumnExpression, queryColumnExpression.Type, typeof(Convert).GetMethod("To" + queryColumnExpression.Type.Name, new Type[] { queryColumnExpression.Type }));
+                        return Expression.Convert(
+                            queryColumnExpression,
+                            queryColumnExpression.Type,
+                            typeof(Convert).GetMethod(
+                                "To" + queryColumnExpression.Type.Name,
+                                new Type[] { queryColumnExpression.Type }
+                            )
+                        );
                     }
                     else
                     {
@@ -857,21 +1192,34 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     }
                 }
                 // then, cry
-                throw Error.BadArgument("S0293: Column must be mapped. Non-mapped columns are not handled by now.");
+                throw Error.BadArgument(
+                    "S0293: Column must be mapped. Non-mapped columns are not handled by now."
+                );
             }
 
             // if object is still an object (== a constant), then we have an external parameter
             if (objectExpression is ConstantExpression)
             {
                 // the memberInfo.Name is provided here only to ease the SQL reading
-                var parameterExpression = RegisterParameter(expression, memberInfo.Name, builderContext);
+                var parameterExpression = RegisterParameter(
+                    expression,
+                    memberInfo.Name,
+                    builderContext
+                );
                 if (parameterExpression != null)
                     return parameterExpression;
-                throw Error.BadArgument("S0302: Can not created parameter from expression '{0}'", expression);
+                throw Error.BadArgument(
+                    "S0302: Can not created parameter from expression '{0}'",
+                    expression
+                );
             }
 
             // we have here a special cases for nullables
-            if (!isStaticMemberAccess && objectExpression.Type != null && objectExpression.Type.IsNullable())
+            if (
+                !isStaticMemberAccess
+                && objectExpression.Type != null
+                && objectExpression.Type.IsNullable()
+            )
             {
                 // Value means we convert the nullable to a value --> use Convert instead (works both on CLR and SQL, too)
                 if (memberInfo.Name == "Value")
@@ -881,23 +1229,33 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     return new SpecialExpression(SpecialExpressionType.IsNotNull, objectExpression);
             }
 
-
             if (memberInfo.DeclaringType == typeof(DateTime))
-                return AnalyzeDateTimeMemberAccess(objectExpression, memberInfo, isStaticMemberAccess);
+                return AnalyzeDateTimeMemberAccess(
+                    objectExpression,
+                    memberInfo,
+                    isStaticMemberAccess
+                );
 
             // TODO: make this expresion safe (objectExpression can be null here)
             if (objectExpression.Type == typeof(TimeSpan))
                 return AnalyzeTimeSpanMemberAccess(objectExpression, memberInfo);
 
-
             if (objectExpression is InputParameterExpression)
             {
-                return AnalyzeExternalParameterMember((InputParameterExpression)objectExpression, memberInfo, builderContext);
+                return AnalyzeExternalParameterMember(
+                    (InputParameterExpression)objectExpression,
+                    memberInfo,
+                    builderContext
+                );
             }
 
             if (objectExpression is MemberInitExpression)
             {
-                var foundExpression = AnalyzeMemberInit((MemberInitExpression)objectExpression, memberInfo, builderContext);
+                var foundExpression = AnalyzeMemberInit(
+                    (MemberInitExpression)objectExpression,
+                    memberInfo,
+                    builderContext
+                );
                 if (foundExpression != null)
                     return foundExpression;
             }
@@ -905,7 +1263,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return AnalyzeCommonMember(objectExpression, memberInfo, builderContext);
         }
 
-        protected Expression AnalyzeTimeSpanMemberAccess(Expression objectExpression, MemberInfo memberInfo)
+        protected Expression AnalyzeTimeSpanMemberAccess(
+            Expression objectExpression,
+            MemberInfo memberInfo
+        )
         {
             //A timespan expression can be only generated in a c# query as a DateTime difference, as a function call return or as a paramter
             //this case is for the DateTime difference operation
@@ -922,30 +1283,74 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             switch (operationKey)
             {
                 case "Milliseconds":
-                    currentExpression = Expression.Convert(new SpecialExpression(SpecialExpressionType.DateDiffInMilliseconds, operands.First(), operands.ElementAt(1)), typeof(double));
+                    currentExpression = Expression.Convert(
+                        new SpecialExpression(
+                            SpecialExpressionType.DateDiffInMilliseconds,
+                            operands.First(),
+                            operands.ElementAt(1)
+                        ),
+                        typeof(double)
+                    );
                     break;
                 case "Seconds":
                     currentExpression = Expression.Divide(
-                        Expression.Convert(new SpecialExpression(SpecialExpressionType.DateDiffInMilliseconds, operands.First(), operands.ElementAt(1)), typeof(double)),
-                        Expression.Constant(1000.0));
+                        Expression.Convert(
+                            new SpecialExpression(
+                                SpecialExpressionType.DateDiffInMilliseconds,
+                                operands.First(),
+                                operands.ElementAt(1)
+                            ),
+                            typeof(double)
+                        ),
+                        Expression.Constant(1000.0)
+                    );
                     break;
                 case "Minutes":
                     currentExpression = Expression.Divide(
-                            Expression.Convert(new SpecialExpression(SpecialExpressionType.DateDiffInMilliseconds, operands.First(), operands.ElementAt(1)), typeof(double)),
-                            Expression.Constant(60000.0));
+                        Expression.Convert(
+                            new SpecialExpression(
+                                SpecialExpressionType.DateDiffInMilliseconds,
+                                operands.First(),
+                                operands.ElementAt(1)
+                            ),
+                            typeof(double)
+                        ),
+                        Expression.Constant(60000.0)
+                    );
                     break;
                 case "Hours":
                     currentExpression = Expression.Divide(
-                            Expression.Convert(new SpecialExpression(SpecialExpressionType.DateDiffInMilliseconds, operands.First(), operands.ElementAt(1)), typeof(double)),
-                            Expression.Constant(3600000.0));
+                        Expression.Convert(
+                            new SpecialExpression(
+                                SpecialExpressionType.DateDiffInMilliseconds,
+                                operands.First(),
+                                operands.ElementAt(1)
+                            ),
+                            typeof(double)
+                        ),
+                        Expression.Constant(3600000.0)
+                    );
                     break;
                 case "Days":
                     currentExpression = Expression.Divide(
-                            Expression.Convert(new SpecialExpression(SpecialExpressionType.DateDiffInMilliseconds, operands.First(), operands.ElementAt(1)), typeof(double)),
-                            Expression.Constant(86400000.0));
+                        Expression.Convert(
+                            new SpecialExpression(
+                                SpecialExpressionType.DateDiffInMilliseconds,
+                                operands.First(),
+                                operands.ElementAt(1)
+                            ),
+                            typeof(double)
+                        ),
+                        Expression.Constant(86400000.0)
+                    );
                     break;
                 default:
-                    throw new NotSupportedException(string.Format("The operation {0} over the TimeSpan isn't currently supported", memberInfo.Name));
+                    throw new NotSupportedException(
+                        string.Format(
+                            "The operation {0} over the TimeSpan isn't currently supported",
+                            memberInfo.Name
+                        )
+                    );
             }
 
             if (!absoluteSpam)
@@ -953,38 +1358,63 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 switch (memberInfo.Name)
                 {
                     case "Milliseconds":
-                        currentExpression = Expression.Convert(Expression.Modulo(Expression.Convert(currentExpression, typeof(long)), Expression.Constant(1000L)), typeof(int));
+                        currentExpression = Expression.Convert(
+                            Expression.Modulo(
+                                Expression.Convert(currentExpression, typeof(long)),
+                                Expression.Constant(1000L)
+                            ),
+                            typeof(int)
+                        );
                         break;
                     case "Seconds":
-                        currentExpression = Expression.Convert(Expression.Modulo(Expression.Convert(currentExpression, typeof(long)),
-                                                              Expression.Constant(60L)), typeof(int));
+                        currentExpression = Expression.Convert(
+                            Expression.Modulo(
+                                Expression.Convert(currentExpression, typeof(long)),
+                                Expression.Constant(60L)
+                            ),
+                            typeof(int)
+                        );
                         break;
                     case "Minutes":
-                        currentExpression = Expression.Convert(Expression.Modulo(Expression.Convert(currentExpression, typeof(long)),
-                                                                Expression.Constant(60L)), typeof(int));
+                        currentExpression = Expression.Convert(
+                            Expression.Modulo(
+                                Expression.Convert(currentExpression, typeof(long)),
+                                Expression.Constant(60L)
+                            ),
+                            typeof(int)
+                        );
                         break;
                     case "Hours":
-                        currentExpression = Expression.Convert(Expression.Modulo(Expression.Convert(
-                                                                                        currentExpression, typeof(long)),
-                                                                Expression.Constant(24L)), typeof(int));
+                        currentExpression = Expression.Convert(
+                            Expression.Modulo(
+                                Expression.Convert(currentExpression, typeof(long)),
+                                Expression.Constant(24L)
+                            ),
+                            typeof(int)
+                        );
                         break;
                     case "Days":
                         currentExpression = Expression.Convert(currentExpression, typeof(int));
                         break;
                 }
-
             }
             return currentExpression;
         }
 
-        protected Expression AnalyzeDateTimeMemberAccess(Expression objectExpression, MemberInfo memberInfo, bool isStaticMemberAccess)
+        protected Expression AnalyzeDateTimeMemberAccess(
+            Expression objectExpression,
+            MemberInfo memberInfo,
+            bool isStaticMemberAccess
+        )
         {
             if (isStaticMemberAccess)
             {
                 if (memberInfo.Name == "Now")
                     return new SpecialExpression(SpecialExpressionType.Now);
                 else
-                    throw new NotSupportedException(string.Format("DateTime Member access {0} not supported", memberInfo.Name));
+                    throw new NotSupportedException(
+                        string.Format("DateTime Member access {0} not supported", memberInfo.Name)
+                    );
             }
             else
             {
@@ -999,15 +1429,29 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     case "Hour":
                         return new SpecialExpression(SpecialExpressionType.Hour, objectExpression);
                     case "Minute":
-                        return new SpecialExpression(SpecialExpressionType.Minute, objectExpression);
+                        return new SpecialExpression(
+                            SpecialExpressionType.Minute,
+                            objectExpression
+                        );
                     case "Second":
-                        return new SpecialExpression(SpecialExpressionType.Second, objectExpression);
+                        return new SpecialExpression(
+                            SpecialExpressionType.Second,
+                            objectExpression
+                        );
                     case "Millisecond":
-                        return new SpecialExpression(SpecialExpressionType.Millisecond, objectExpression);
+                        return new SpecialExpression(
+                            SpecialExpressionType.Millisecond,
+                            objectExpression
+                        );
                     case "Date":
                         return new SpecialExpression(SpecialExpressionType.Date, objectExpression);
                     default:
-                        throw new NotSupportedException(string.Format("DateTime Member access {0} not supported", memberInfo.Name));
+                        throw new NotSupportedException(
+                            string.Format(
+                                "DateTime Member access {0} not supported",
+                                memberInfo.Name
+                            )
+                        );
                 }
             }
         }
@@ -1021,8 +1465,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="memberInfo"></param>
         /// <param name="builderContext"></param>
         /// <returns>A member initializer or null</returns>
-        protected virtual Expression AnalyzeMemberInit(MemberInitExpression expression, MemberInfo memberInfo,
-                                                       BuilderContext builderContext)
+        protected virtual Expression AnalyzeMemberInit(
+            MemberInitExpression expression,
+            MemberInfo memberInfo,
+            BuilderContext builderContext
+        )
         {
             // TODO: a method for NewExpression that we will use directly from AnalyzeMember and indirectly from here
             foreach (var binding in expression.Bindings)
@@ -1037,20 +1484,35 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return null;
         }
 
-        protected virtual Expression AnalyzeExternalParameterMember(InputParameterExpression expression, MemberInfo memberInfo, BuilderContext builderContext)
+        protected virtual Expression AnalyzeExternalParameterMember(
+            InputParameterExpression expression,
+            MemberInfo memberInfo,
+            BuilderContext builderContext
+        )
         {
             UnregisterParameter(expression, builderContext);
-            return RegisterParameter(Expression.MakeMemberAccess(expression.Expression, memberInfo), memberInfo.Name, builderContext);
+            return RegisterParameter(
+                Expression.MakeMemberAccess(expression.Expression, memberInfo),
+                memberInfo.Name,
+                builderContext
+            );
         }
 
-        protected virtual Expression AnalyzeCommonMember(Expression objectExpression, MemberInfo memberInfo, BuilderContext builderContext)
+        protected virtual Expression AnalyzeCommonMember(
+            Expression objectExpression,
+            MemberInfo memberInfo,
+            BuilderContext builderContext
+        )
         {
             if (typeof(string).IsAssignableFrom(objectExpression.Type))
             {
                 switch (memberInfo.Name)
                 {
                     case "Length":
-                        return new SpecialExpression(SpecialExpressionType.StringLength, objectExpression);
+                        return new SpecialExpression(
+                            SpecialExpressionType.StringLength,
+                            objectExpression
+                        );
                 }
             }
             //throw Error.BadArgument("S0324: Don't know how to handle Piece");
@@ -1065,7 +1527,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeQuote(Expression piece, IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeQuote(
+            Expression piece,
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             var builderContextClone = builderContext.NewQuote();
             var firstExpression = piece.GetOperands().First();
@@ -1077,7 +1543,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="expression"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeOperatorSubstract(Expression expression, BuilderContext builderContext)
+        protected virtual Expression AnalyzeOperatorSubstract(
+            Expression expression,
+            BuilderContext builderContext
+        )
         {
             return AnalyzeOperator(expression, builderContext);
         }
@@ -1088,13 +1557,18 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="expression"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeOperator(Expression expression, BuilderContext builderContext)
+        protected virtual Expression AnalyzeOperator(
+            Expression expression,
+            BuilderContext builderContext
+        )
         {
             var u = expression as UnaryExpression;
             string parameterName;
-            if (expression.NodeType == ExpressionType.Convert && 
-                    u.Method == null &&
-                    (parameterName = GetParameterName(u.Operand)) != null)
+            if (
+                expression.NodeType == ExpressionType.Convert
+                && u.Method == null
+                && (parameterName = GetParameterName(u.Operand)) != null
+            )
             {
                 Expression unaliasedExpression;
                 builderContext.Parameters.TryGetValue(parameterName, out unaliasedExpression);
@@ -1112,13 +1586,20 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return expression.ChangeOperands(operands);
         }
 
-        protected virtual Expression AnalyzeNewOperator(Expression expression, BuilderContext builderContext)
+        protected virtual Expression AnalyzeNewOperator(
+            Expression expression,
+            BuilderContext builderContext
+        )
         {
             if (builderContext.ExpectMetaTableDefinition)
             {
                 // first, check if we have a MetaTable definition
                 Type metaType;
-                var typeInitializers = GetTypeInitializers<Expression>((NewExpression)expression, true, out metaType);
+                var typeInitializers = GetTypeInitializers<Expression>(
+                    (NewExpression)expression,
+                    true,
+                    out metaType
+                );
                 var aliases = new Dictionary<MemberInfo, MutableExpression>();
                 foreach (var memberInfo in typeInitializers.Keys)
                 {
@@ -1133,7 +1614,9 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     }
                     else
                     {
-                        aliases[memberInfo] = Analyze(typeInitializers[memberInfo], builderContext) as MetaTableExpression;
+                        aliases[memberInfo] =
+                            Analyze(typeInitializers[memberInfo], builderContext)
+                            as MetaTableExpression;
                     }
                 }
                 if (IsMetaTableDefinition(aliases))
@@ -1142,7 +1625,9 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return AnalyzeOperator(expression, builderContext);
         }
 
-        protected virtual bool IsMetaTableDefinition(IDictionary<MemberInfo, MutableExpression> aliases)
+        protected virtual bool IsMetaTableDefinition(
+            IDictionary<MemberInfo, MutableExpression> aliases
+        )
         {
             if (aliases.Count != 2)
                 return false;
@@ -1160,13 +1645,20 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeSelectMany(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeSelectMany(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             if (parameters.Count == 3)
             {
                 // ms-help://MS.VSCC.v90/MS.MSDNQTR.v90.en/fxref_system.core/html/3371348f-7811-b0bc-8c0a-2a595e08e086.htm
                 var tableExpression = parameters[0];
-                var projectionExpression = Analyze(parameters[1], new[] { tableExpression }, builderContext);
+                var projectionExpression = Analyze(
+                    parameters[1],
+                    new[] { tableExpression },
+                    builderContext
+                );
                 //var manyPiece = Analyze(parameters[2], new[] { tableExpression, projectionExpression }, builderContext);
                 // from here, our manyPiece is a MetaTable definition
                 //var newExpression = manyPiece as NewExpression;
@@ -1177,24 +1669,39 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 //return RegisterMetaTable(metaTableType, associations, builderContext);
                 var metaTableDefinitionBuilderContext = builderContext.Clone();
                 metaTableDefinitionBuilderContext.ExpectMetaTableDefinition = true;
-                var expression = Analyze(parameters[2], new[] { tableExpression, projectionExpression },
-                                         metaTableDefinitionBuilderContext);
+                var expression = Analyze(
+                    parameters[2],
+                    new[] { tableExpression, projectionExpression },
+                    metaTableDefinitionBuilderContext
+                );
                 return expression;
             }
-            throw Error.BadArgument("S0358: Don't know how to handle this SelectMany() overload ({0} parameters)", parameters.Count);
+            throw Error.BadArgument(
+                "S0358: Don't know how to handle this SelectMany() overload ({0} parameters)",
+                parameters.Count
+            );
         }
 
-        protected virtual IDictionary<MemberInfo, E> GetTypeInitializers<E>(NewExpression newExpression,
-                                                                            bool checkCast, out Type metaType)
+        protected virtual IDictionary<MemberInfo, E> GetTypeInitializers<E>(
+            NewExpression newExpression,
+            bool checkCast,
+            out Type metaType
+        )
             where E : Expression
         {
             var associations = new Dictionary<MemberInfo, E>();
             metaType = null;
-            for (int ctorParameterIndex = 0; ctorParameterIndex < newExpression.Arguments.Count; ctorParameterIndex++)
+            for (
+                int ctorParameterIndex = 0;
+                ctorParameterIndex < newExpression.Arguments.Count;
+                ctorParameterIndex++
+            )
             {
                 var aliasedExpression = newExpression.Arguments[ctorParameterIndex] as E;
                 if (aliasedExpression == null && checkCast)
-                    throw Error.BadArgument("S0541: Expected an specific Expression type for GetTypeInitializers()");
+                    throw Error.BadArgument(
+                        "S0541: Expected an specific Expression type for GetTypeInitializers()"
+                    );
                 var memberInfo = newExpression.Members[ctorParameterIndex];
                 metaType = memberInfo.ReflectedType;
                 // the property info is the reflecting property for the memberInfo, if memberInfo is a get_*
@@ -1220,7 +1727,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeJoin(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeJoin(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             return AnalyzeJoin(parameters, TableJoinType.Inner, builderContext);
         }
@@ -1231,12 +1741,18 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeGroupJoin(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeGroupJoin(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             return AnalyzeJoin(parameters, TableJoinType.Inner, builderContext);
         }
 
-        protected virtual Expression AnalyzeOuterJoin(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeOuterJoin(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             var expression = Analyze(parameters[0], builderContext);
             var tableExpression = expression as TableExpression;
@@ -1247,7 +1763,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return expression;
         }
 
-        private Expression AnalyzeJoin(IList<Expression> parameters, TableJoinType joinType, BuilderContext builderContext)
+        private Expression AnalyzeJoin(
+            IList<Expression> parameters,
+            TableJoinType joinType,
+            BuilderContext builderContext
+        )
         {
             if (parameters.Count == 5)
             {
@@ -1268,15 +1788,26 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                         throw Error.BadArgument("S0701: No way to find left table for Join");
                     leftTable = leftColumn.Table;
                 }
-                rightTable.Join(joinType, leftTable, Expression.Equal(leftJoin, rightJoin),
-                                string.Format("join{0}", builderContext.EnumerateAllTables().Count()));
+                rightTable.Join(
+                    joinType,
+                    leftTable,
+                    Expression.Equal(leftJoin, rightJoin),
+                    string.Format("join{0}", builderContext.EnumerateAllTables().Count())
+                );
                 // last part is lambda, with two tables as parameters
                 var metaTableDefinitionBuilderContext = builderContext.Clone();
                 metaTableDefinitionBuilderContext.ExpectMetaTableDefinition = true;
-                var expression = Analyze(parameters[4], new[] { leftExpression, rightTable }, metaTableDefinitionBuilderContext);
+                var expression = Analyze(
+                    parameters[4],
+                    new[] { leftExpression, rightTable },
+                    metaTableDefinitionBuilderContext
+                );
                 return expression;
             }
-            throw Error.BadArgument("S0530: Don't know how to handle GroupJoin() with {0} parameters", parameters.Count);
+            throw Error.BadArgument(
+                "S0530: Don't know how to handle GroupJoin() with {0} parameters",
+                parameters.Count
+            );
         }
 
         /// <summary>
@@ -1285,14 +1816,21 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeDistinct(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeDistinct(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             var expression = Analyze(parameters[0], builderContext);
             // we select and group by the same criterion
             var group = new GroupExpression(expression, expression);
             if (builderContext.CurrentSelect.NextSelectExpression != null)
             {
-                expression = new SubSelectExpression(builderContext.CurrentSelect, expression.Type, "source");
+                expression = new SubSelectExpression(
+                    builderContext.CurrentSelect,
+                    expression.Type,
+                    "source"
+                );
                 builderContext.NewParentSelect();
 
                 // In the new scope we should not have MaximumDatabaseLoad
@@ -1313,7 +1851,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeGroupBy(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeGroupBy(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             var table = Analyze(parameters[0], builderContext);
             var keyExpression = Analyze(parameters[1], table, builderContext);
@@ -1324,7 +1865,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             else if (parameters.Count == 3)
                 result = Analyze(parameters[2], table, builderContext); // 3 parameters for a projection expression
             else
-                throw Error.BadArgument("S0629: Don't know how to handle Expression to group by with {0} parameters", parameters.Count);
+                throw Error.BadArgument(
+                    "S0629: Don't know how to handle Expression to group by with {0} parameters",
+                    parameters.Count
+                );
 
             var group = new GroupExpression(result, keyExpression);
             builderContext.CurrentSelect.Group.Add(group);
@@ -1337,7 +1881,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeAll(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeAll(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             var allBuilderContext = builderContext.NewSelect();
             var tableExpression = Analyze(parameters[0], allBuilderContext);
@@ -1347,11 +1894,16 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             // TODO (later...): see if some vendors support native All operator and avoid this substitution
             var whereExpression = Expression.Not(allClause);
             RegisterWhere(whereExpression, allBuilderContext);
-            allBuilderContext.CurrentSelect = allBuilderContext.CurrentSelect.ChangeOperands(new SpecialExpression(SpecialExpressionType.Count, tableExpression));
+            allBuilderContext.CurrentSelect = allBuilderContext.CurrentSelect.ChangeOperands(
+                new SpecialExpression(SpecialExpressionType.Count, tableExpression)
+            );
             // TODO: see if we need to register the tablePiece here (we probably don't)
 
             // we now switch back to current context, and compare the result with 0
-            var allExpression = Expression.Equal(allBuilderContext.CurrentSelect, Expression.Constant(0));
+            var allExpression = Expression.Equal(
+                allBuilderContext.CurrentSelect,
+                Expression.Constant(0)
+            );
             return allExpression;
         }
 
@@ -1361,7 +1913,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeAny(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeAny(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             if (builderContext.IsExternalInExpressionChain)
             {
@@ -1371,7 +1926,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 if (builderContext.CurrentSelect.NextSelectExpression != null)
                 {
                     TableExpression currentTableExpression = tableExpression as TableExpression;
-                    tableExpression = new SubSelectExpression(builderContext.CurrentSelect, currentTableExpression.Type, "source");
+                    tableExpression = new SubSelectExpression(
+                        builderContext.CurrentSelect,
+                        currentTableExpression.Type,
+                        "source"
+                    );
                     builderContext.NewParentSelect();
 
                     // In the new scope we should not have MaximumDatabaseLoad
@@ -1389,11 +1948,17 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 {
                     if (parameters.Count > 1)
                     {
-                        projectionOperand = Analyze(parameters[1], groupOperand0.GroupedExpression,
-                                                    builderContext);
+                        projectionOperand = Analyze(
+                            parameters[1],
+                            groupOperand0.GroupedExpression,
+                            builderContext
+                        );
                     }
                     else
-                        projectionOperand = Analyze(groupOperand0.GroupedExpression, builderContext);
+                        projectionOperand = Analyze(
+                            groupOperand0.GroupedExpression,
+                            builderContext
+                        );
                 }
                 else
                 {
@@ -1402,19 +1967,31 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 }
 
                 if (projectionOperand is TableExpression)
-                    projectionOperand = RegisterTable((TableExpression)projectionOperand, builderContext);
+                    projectionOperand = RegisterTable(
+                        (TableExpression)projectionOperand,
+                        builderContext
+                    );
 
                 if (groupOperand0 != null)
-                    projectionOperand = new GroupExpression(projectionOperand, groupOperand0.KeyExpression);
+                    projectionOperand = new GroupExpression(
+                        projectionOperand,
+                        groupOperand0.KeyExpression
+                    );
 
-                return Expression.GreaterThan(new SpecialExpression(SpecialExpressionType.Count, projectionOperand), Expression.Constant(0));
+                return Expression.GreaterThan(
+                    new SpecialExpression(SpecialExpressionType.Count, projectionOperand),
+                    Expression.Constant(0)
+                );
             }
             else
             {
                 var anyBuilderContext = builderContext.NewSelect();
                 var tableExpression = Analyze(parameters[0], anyBuilderContext);
 
-                if (!(tableExpression is TableExpression) && !(tableExpression is EntitySetExpression))
+                if (
+                    !(tableExpression is TableExpression)
+                    && !(tableExpression is EntitySetExpression)
+                )
                     tableExpression = Analyze(tableExpression, anyBuilderContext);
                 EntitySetExpression setExpression = tableExpression as EntitySetExpression;
                 if (setExpression != null)
@@ -1431,54 +2008,103 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     var anyClause = Analyze(parameters[1], tableExpression, anyBuilderContext);
                     RegisterWhere(anyClause, anyBuilderContext);
                 }
-                anyBuilderContext.CurrentSelect = anyBuilderContext.CurrentSelect.ChangeOperands(new SpecialExpression(SpecialExpressionType.Count, tableExpression));
+                anyBuilderContext.CurrentSelect = anyBuilderContext.CurrentSelect.ChangeOperands(
+                    new SpecialExpression(SpecialExpressionType.Count, tableExpression)
+                );
                 // TODO: see if we need to register the tablePiece here (we probably don't)
 
                 // we now switch back to current context, and compare the result with 0
-                var anyExpression = Expression.GreaterThan(anyBuilderContext.CurrentSelect, Expression.Constant(0));
+                var anyExpression = Expression.GreaterThan(
+                    anyBuilderContext.CurrentSelect,
+                    Expression.Constant(0)
+                );
                 return anyExpression;
             }
         }
 
-        protected virtual Expression AnalyzeLikeStart(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeLikeStart(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             return AnalyzeLike(parameters[0], null, parameters[1], "%", builderContext);
         }
 
-        protected virtual Expression AnalyzeLikeEnd(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeLikeEnd(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             return AnalyzeLike(parameters[0], "%", parameters[1], null, builderContext);
         }
 
-        protected virtual Expression AnalyzeLike(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeLike(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             return AnalyzeLike(parameters[0], "%", parameters[1], "%", builderContext);
         }
 
-        protected virtual Expression AnalyzeLike(Expression value, string before, Expression operand, string after, BuilderContext builderContext)
+        protected virtual Expression AnalyzeLike(
+            Expression value,
+            string before,
+            Expression operand,
+            string after,
+            BuilderContext builderContext
+        )
         {
             operand = Analyze(operand, builderContext);
             if (before != null)
-                operand = new SpecialExpression(SpecialExpressionType.Concat, Expression.Constant(before), operand);
+                operand = new SpecialExpression(
+                    SpecialExpressionType.Concat,
+                    Expression.Constant(before),
+                    operand
+                );
             if (after != null)
-                operand = new SpecialExpression(SpecialExpressionType.Concat, operand, Expression.Constant(after));
-            return new SpecialExpression(SpecialExpressionType.Like, Analyze(value, builderContext), operand);
+                operand = new SpecialExpression(
+                    SpecialExpressionType.Concat,
+                    operand,
+                    Expression.Constant(after)
+                );
+            return new SpecialExpression(
+                SpecialExpressionType.Like,
+                Analyze(value, builderContext),
+                operand
+            );
         }
 
-        protected virtual Expression AnalyzeSubString(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeSubString(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             var stringExpression = Analyze(parameters[0], builderContext);
-            var startExpression = new StartIndexOffsetExpression(builderContext.QueryContext.DataContext.Vendor.SqlProvider.StringIndexStartsAtOne,
-                                                        Analyze(parameters[1], builderContext));
+            var startExpression = new StartIndexOffsetExpression(
+                builderContext.QueryContext.DataContext.Vendor.SqlProvider.StringIndexStartsAtOne,
+                Analyze(parameters[1], builderContext)
+            );
             if (parameters.Count > 2)
             {
                 var lengthExpression = parameters[2];
-                return new SpecialExpression(SpecialExpressionType.Substring, stringExpression, startExpression, lengthExpression);
+                return new SpecialExpression(
+                    SpecialExpressionType.Substring,
+                    stringExpression,
+                    startExpression,
+                    lengthExpression
+                );
             }
-            return new SpecialExpression(SpecialExpressionType.Substring, stringExpression, startExpression);
+            return new SpecialExpression(
+                SpecialExpressionType.Substring,
+                stringExpression,
+                startExpression
+            );
         }
 
-        protected virtual Expression AnalyzeContains(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeContains(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             if (parameters[0].Type.IsArray)
             {
@@ -1492,29 +2118,51 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 {
                     Expression p0 = Analyze(parameters[1], builderContext);
                     BuilderContext newContext = builderContext.NewSelect();
-                    InputParameterExpression ip1 = new InputParameterExpression(parameters[0], "dummy");
+                    InputParameterExpression ip1 = new InputParameterExpression(
+                        parameters[0],
+                        "dummy"
+                    );
 
-                    Expression p1 = AnalyzeQueryProvider(ip1.GetValue() as QueryProvider, newContext);
+                    Expression p1 = AnalyzeQueryProvider(
+                        ip1.GetValue() as QueryProvider,
+                        newContext
+                    );
                     ColumnExpression c = p1 as ColumnExpression;
                     if (!newContext.CurrentSelect.Tables.Contains(c.Table))
                     {
                         newContext.CurrentSelect.Tables.Add(c.Table);
                     }
                     // TODO: verify if this is the right place to work
-                    return new SpecialExpression(SpecialExpressionType.In, p0, newContext.CurrentSelect.Mutate(new Expression[] { p1 }));
+                    return new SpecialExpression(
+                        SpecialExpressionType.In,
+                        p0,
+                        newContext.CurrentSelect.Mutate(new Expression[] { p1 })
+                    );
                 }
             }
             throw Error.BadArgument("S0548: Can't analyze Contains() method");
         }
 
-        protected virtual Expression AnalyzeToUpper(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeToUpper(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
-            return new SpecialExpression(SpecialExpressionType.ToUpper, Analyze(parameters[0], builderContext));
+            return new SpecialExpression(
+                SpecialExpressionType.ToUpper,
+                Analyze(parameters[0], builderContext)
+            );
         }
 
-        protected virtual Expression AnalyzeToLower(IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeToLower(
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
-            return new SpecialExpression(SpecialExpressionType.ToLower, Analyze(parameters[0], builderContext));
+            return new SpecialExpression(
+                SpecialExpressionType.ToLower,
+                Analyze(parameters[0], builderContext)
+            );
         }
 
         /// <summary>
@@ -1524,7 +2172,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="descending"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeOrderBy(IList<Expression> parameters, bool descending, BuilderContext builderContext)
+        protected virtual Expression AnalyzeOrderBy(
+            IList<Expression> parameters,
+            bool descending,
+            BuilderContext builderContext
+        )
         {
             var table = Analyze(parameters[0], builderContext);
             // the column is related to table
@@ -1539,7 +2191,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="expression"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeConstant(Expression expression, BuilderContext builderContext)
+        protected virtual Expression AnalyzeConstant(
+            Expression expression,
+            BuilderContext builderContext
+        )
         {
             var constantExpression = expression as ConstantExpression;
             if (constantExpression != null)
@@ -1559,7 +2214,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                     QueryProvider queryProvider = constantExpression.Value as QueryProvider;
                     if (queryProvider != null)
                     {
-                        Expression tableExpression = AnalyzeQueryProvider(queryProvider, builderContext.NewQuote());
+                        Expression tableExpression = AnalyzeQueryProvider(
+                            queryProvider,
+                            builderContext.NewQuote()
+                        );
                         return tableExpression;
                     }
                 }
@@ -1567,19 +2225,29 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return expression;
         }
 
-        protected virtual Expression AnalyzeQueryProvider(QueryProvider queryProvider, BuilderContext builderContext)
+        protected virtual Expression AnalyzeQueryProvider(
+            QueryProvider queryProvider,
+            BuilderContext builderContext
+        )
         {
             // TODO: check if the QueryProvider queryProvider belong to DataContext present in builderContext.QueryContext.DataContext
             // otherwise strange things could happen in the future (I suppose)
 
             // Build a new Context for the query
             ExpressionChain expressions = queryProvider.ExpressionChain;
-            Expression tableExpression = CreateTableExpression(queryProvider.ExpressionChain.Expressions[0], builderContext);
+            Expression tableExpression = CreateTableExpression(
+                queryProvider.ExpressionChain.Expressions[0],
+                builderContext
+            );
 
             return this.Analyze(expressions, tableExpression, builderContext);
         }
 
-        protected virtual Expression AnalyzeSelectOperation(SelectOperatorType operatorType, IList<Expression> parameters, BuilderContext builderContext)
+        protected virtual Expression AnalyzeSelectOperation(
+            SelectOperatorType operatorType,
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             // a special case: if we have several SELECT expressions linked together,
             // we maximize the load to the database, since the result must use the same parameters
@@ -1598,7 +2266,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 // add the second select select to the chain
                 if (newContext.CurrentSelect.NextSelectExpression != null)
                 {
-                    var operand0 = new SubSelectExpression(newContext.CurrentSelect, tableExpression.Type, "source");
+                    var operand0 = new SubSelectExpression(
+                        newContext.CurrentSelect,
+                        tableExpression.Type,
+                        "source"
+                    );
                     newContext.NewParentSelect();
                     newContext.CurrentSelect.Tables.Add(operand0);
                 }
@@ -1625,8 +2297,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="parameters"></param>
         /// <param name="builderContext"></param>
         /// <returns></returns>
-        protected virtual Expression AnalyzeInvoke(Expression expression, IList<Expression> parameters,
-                                                   BuilderContext builderContext)
+        protected virtual Expression AnalyzeInvoke(
+            Expression expression,
+            IList<Expression> parameters,
+            BuilderContext builderContext
+        )
         {
             var invocationExpression = (InvocationExpression)expression;
             var lambda = invocationExpression.Expression as LambdaExpression;

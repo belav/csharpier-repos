@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for querying users in a User store.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IQueryableUserStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IQueryableUserStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Returns an <see cref="IQueryable{T}"/> collection of users.

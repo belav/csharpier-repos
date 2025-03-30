@@ -50,10 +50,13 @@ namespace System.ComponentModel.Composition.Hosting
         {
             var catalogs = new ComposablePartCatalog[] { null };
 
-            AssertExtensions.Throws<ArgumentException>("catalogs", () =>
-            {
-                new AggregateCatalog(catalogs);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                "catalogs",
+                () =>
+                {
+                    new AggregateCatalog(catalogs);
+                }
+            );
         }
 
         [Fact]
@@ -62,10 +65,13 @@ namespace System.ComponentModel.Composition.Hosting
             var catalog = CreateAggregateCatalog();
             catalog.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(catalog, () =>
-            {
-                var catalogs = catalog.Catalogs;
-            });
+            ExceptionAssert.ThrowsDisposed(
+                catalog,
+                () =>
+                {
+                    var catalogs = catalog.Catalogs;
+                }
+            );
         }
 
         [Fact]
@@ -74,10 +80,13 @@ namespace System.ComponentModel.Composition.Hosting
             var catalog = CreateAggregateCatalog();
             catalog.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(catalog, () =>
-            {
-                var parts = catalog.Parts;
-            });
+            ExceptionAssert.ThrowsDisposed(
+                catalog,
+                () =>
+                {
+                    var parts = catalog.Parts;
+                }
+            );
         }
 
         [Fact]
@@ -87,10 +96,13 @@ namespace System.ComponentModel.Composition.Hosting
             catalog.Dispose();
             var definition = ImportDefinitionFactory.Create();
 
-            ExceptionAssert.ThrowsDisposed(catalog, () =>
-            {
-                catalog.GetExports(definition);
-            });
+            ExceptionAssert.ThrowsDisposed(
+                catalog,
+                () =>
+                {
+                    catalog.GetExports(definition);
+                }
+            );
         }
 
         [Fact]
@@ -99,18 +111,19 @@ namespace System.ComponentModel.Composition.Hosting
         {
             var catalog = CreateAggregateCatalog();
 
-            AssertExtensions.Throws<ArgumentNullException>("definition", () =>
-            {
-                catalog.GetExports((ImportDefinition)null);
-            });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "definition",
+                () =>
+                {
+                    catalog.GetExports((ImportDefinition)null);
+                }
+            );
         }
 
         [Fact]
         public void Dispose_ShouldNotThrow()
         {
-            using (var catalog = CreateAggregateCatalog())
-            {
-            }
+            using (var catalog = CreateAggregateCatalog()) { }
         }
 
         [Fact]
@@ -125,13 +138,16 @@ namespace System.ComponentModel.Composition.Hosting
         [Fact]
         public void EnumeratePartsProperty_ShouldSucceed()
         {
-            using (var catalog = new AggregateCatalog(
-                new TypeCatalog(typeof(SharedPartStuff)),
-                new TypeCatalog(typeof(SharedPartStuff)),
-                new TypeCatalog(typeof(SharedPartStuff)),
-                new TypeCatalog(typeof(SharedPartStuff)),
-                new TypeCatalog(typeof(SharedPartStuff)),
-                new TypeCatalog(typeof(SharedPartStuff))))
+            using (
+                var catalog = new AggregateCatalog(
+                    new TypeCatalog(typeof(SharedPartStuff)),
+                    new TypeCatalog(typeof(SharedPartStuff)),
+                    new TypeCatalog(typeof(SharedPartStuff)),
+                    new TypeCatalog(typeof(SharedPartStuff)),
+                    new TypeCatalog(typeof(SharedPartStuff)),
+                    new TypeCatalog(typeof(SharedPartStuff))
+                )
+            )
             {
                 Assert.True(catalog.Catalogs.Count() == 6);
                 Assert.True(catalog.Parts.Count() == 6);
@@ -159,7 +175,7 @@ namespace System.ComponentModel.Composition.Hosting
             Assert.True(catalog.Catalogs.Count == 0);
 
             // Add notifications
-            catalog.Changed += delegate (object source, ComposablePartCatalogChangeEventArgs args)
+            catalog.Changed += delegate(object source, ComposablePartCatalogChangeEventArgs args)
             {
                 // Local code
                 ++step;
@@ -244,7 +260,7 @@ namespace System.ComponentModel.Composition.Hosting
             int step2 = 100;
             int changedStep2 = 0;
 
-            catalog.Changed += delegate (object source, ComposablePartCatalogChangeEventArgs args)
+            catalog.Changed += delegate(object source, ComposablePartCatalogChangeEventArgs args)
             {
                 // Local code
                 --step2;
@@ -271,7 +287,6 @@ namespace System.ComponentModel.Composition.Hosting
             Assert.True(catalog.Catalogs.Count == 0);
             Assert.True(changedStep == 8);
             Assert.True(changedStep2 == 92);
-
         }
 
         [Fact]
@@ -306,75 +321,105 @@ namespace System.ComponentModel.Composition.Hosting
                 catalog.Catalogs.Add(dirPartCatalog3);
 
                 // Add notifications
-                catalog.Changed += delegate (object source, ComposablePartCatalogChangeEventArgs args)
+                catalog.Changed += delegate(
+                    object source,
+                    ComposablePartCatalogChangeEventArgs args
+                )
                 {
                     // Local code
                     ++changedNotification;
                 };
-
             }
 
             Assert.True(changedNotification == 0);
 
             //Ensure that the other catalogs are
-            ExceptionAssert.ThrowsDisposed(typePartCatalog1, () =>
-            {
-                var iEnum = typePartCatalog1.Parts.GetEnumerator();
-            });
+            ExceptionAssert.ThrowsDisposed(
+                typePartCatalog1,
+                () =>
+                {
+                    var iEnum = typePartCatalog1.Parts.GetEnumerator();
+                }
+            );
 
-            ExceptionAssert.ThrowsDisposed(typePartCatalog2, () =>
-            {
-                var iEnum = typePartCatalog2.Parts.GetEnumerator();
-            });
+            ExceptionAssert.ThrowsDisposed(
+                typePartCatalog2,
+                () =>
+                {
+                    var iEnum = typePartCatalog2.Parts.GetEnumerator();
+                }
+            );
 
-            ExceptionAssert.ThrowsDisposed(typePartCatalog3, () =>
-            {
-                var iEnum = typePartCatalog3.Parts.GetEnumerator();
-            });
-
-            //Ensure that the other catalogs are
-            ExceptionAssert.ThrowsDisposed(assemblyPartCatalog1, () =>
-            {
-                var iEnum = assemblyPartCatalog1.Parts.GetEnumerator();
-            });
-
-            ExceptionAssert.ThrowsDisposed(assemblyPartCatalog2, () =>
-            {
-                var iEnum = assemblyPartCatalog2.Parts.GetEnumerator();
-            });
-
-            ExceptionAssert.ThrowsDisposed(assemblyPartCatalog3, () =>
-            {
-                var iEnum = assemblyPartCatalog3.Parts.GetEnumerator();
-            });
+            ExceptionAssert.ThrowsDisposed(
+                typePartCatalog3,
+                () =>
+                {
+                    var iEnum = typePartCatalog3.Parts.GetEnumerator();
+                }
+            );
 
             //Ensure that the other catalogs are
-            ExceptionAssert.ThrowsDisposed(dirPartCatalog1, () =>
-            {
-                var iEnum = dirPartCatalog1.Parts.GetEnumerator();
-            });
+            ExceptionAssert.ThrowsDisposed(
+                assemblyPartCatalog1,
+                () =>
+                {
+                    var iEnum = assemblyPartCatalog1.Parts.GetEnumerator();
+                }
+            );
 
-            ExceptionAssert.ThrowsDisposed(dirPartCatalog2, () =>
-            {
-                var iEnum = dirPartCatalog2.Parts.GetEnumerator();
-            });
+            ExceptionAssert.ThrowsDisposed(
+                assemblyPartCatalog2,
+                () =>
+                {
+                    var iEnum = assemblyPartCatalog2.Parts.GetEnumerator();
+                }
+            );
 
-            ExceptionAssert.ThrowsDisposed(dirPartCatalog3, () =>
-            {
-                var iEnum = dirPartCatalog3.Parts.GetEnumerator();
-            });
+            ExceptionAssert.ThrowsDisposed(
+                assemblyPartCatalog3,
+                () =>
+                {
+                    var iEnum = assemblyPartCatalog3.Parts.GetEnumerator();
+                }
+            );
+
+            //Ensure that the other catalogs are
+            ExceptionAssert.ThrowsDisposed(
+                dirPartCatalog1,
+                () =>
+                {
+                    var iEnum = dirPartCatalog1.Parts.GetEnumerator();
+                }
+            );
+
+            ExceptionAssert.ThrowsDisposed(
+                dirPartCatalog2,
+                () =>
+                {
+                    var iEnum = dirPartCatalog2.Parts.GetEnumerator();
+                }
+            );
+
+            ExceptionAssert.ThrowsDisposed(
+                dirPartCatalog3,
+                () =>
+                {
+                    var iEnum = dirPartCatalog3.Parts.GetEnumerator();
+                }
+            );
         }
 
         private static void CreateMainAndOtherChildren(
-                    out AggregateCatalog[] mainChildren,
-                    out AggregateCatalog[] otherChildren,
-                    out TypeCatalog[] componentCatalogs)
+            out AggregateCatalog[] mainChildren,
+            out AggregateCatalog[] otherChildren,
+            out TypeCatalog[] componentCatalogs
+        )
         {
             componentCatalogs = new TypeCatalog[]
             {
                 new TypeCatalog(typeof(SharedPartStuff)),
                 new TypeCatalog(typeof(SharedPartStuff)),
-                new TypeCatalog(typeof(SharedPartStuff))
+                new TypeCatalog(typeof(SharedPartStuff)),
             };
 
             // Create our child catalogs
@@ -439,7 +484,11 @@ namespace System.ComponentModel.Composition.Hosting
             var typePartCatalog3 = new TypeCatalog(typeof(SharedPartStuff));
 
             // Construct with three catalog parameters
-            var catalog = new AggregateCatalog(typePartCatalog1, assemblyCatalog2, typePartCatalog3);
+            var catalog = new AggregateCatalog(
+                typePartCatalog1,
+                assemblyCatalog2,
+                typePartCatalog3
+            );
             Assert.True(catalog.Catalogs.Count == 3);
         }
 
@@ -466,17 +515,14 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         public interface IFoo { }
+
         public interface IBar { }
 
         [Export(typeof(IFoo))]
-        public class FooExporter : IFoo
-        {
-        }
+        public class FooExporter : IFoo { }
 
         [Export(typeof(IBar))]
-        public class BarExporter : IBar
-        {
-        }
+        public class BarExporter : IBar { }
 
         public class CatalogListener
         {
@@ -495,7 +541,10 @@ namespace System.ComponentModel.Composition.Hosting
                 this._modifiedCatalog = modifiedCatalog;
             }
 
-            public void VerifyAdd(ComposablePartCatalog catalogToAdd, params Type[] expectedTypesAdded)
+            public void VerifyAdd(
+                ComposablePartCatalog catalogToAdd,
+                params Type[] expectedTypesAdded
+            )
             {
                 this._expectedAdds = GetDisplayNames(expectedTypesAdded);
 
@@ -507,7 +556,10 @@ namespace System.ComponentModel.Composition.Hosting
                 ResetState();
             }
 
-            public void VerifyRemove(ComposablePartCatalog catalogToRemove, params Type[] expectedTypesRemoved)
+            public void VerifyRemove(
+                ComposablePartCatalog catalogToRemove,
+                params Type[] expectedTypesRemoved
+            )
             {
                 this._expectedAdds = null;
                 this._expectedRemoves = GetDisplayNames(expectedTypesRemoved);
@@ -543,7 +595,10 @@ namespace System.ComponentModel.Composition.Hosting
                 }
                 else
                 {
-                    EqualityExtensions.CheckSequenceEquals(this._expectedAdds, GetDisplayNames(args.AddedDefinitions));
+                    EqualityExtensions.CheckSequenceEquals(
+                        this._expectedAdds,
+                        GetDisplayNames(args.AddedDefinitions)
+                    );
                 }
 
                 if (this._expectedRemoves == null)
@@ -552,7 +607,10 @@ namespace System.ComponentModel.Composition.Hosting
                 }
                 else
                 {
-                    EqualityExtensions.CheckSequenceEquals(this._expectedRemoves, GetDisplayNames(args.RemovedDefinitions));
+                    EqualityExtensions.CheckSequenceEquals(
+                        this._expectedRemoves,
+                        GetDisplayNames(args.RemovedDefinitions)
+                    );
                 }
 
                 Assert.False(ContainsChanges(), "The catalog should NOT contain the changes yet");
@@ -570,7 +628,10 @@ namespace System.ComponentModel.Composition.Hosting
                 }
                 else
                 {
-                    EqualityExtensions.CheckSequenceEquals(this._expectedAdds, GetDisplayNames(args.AddedDefinitions));
+                    EqualityExtensions.CheckSequenceEquals(
+                        this._expectedAdds,
+                        GetDisplayNames(args.AddedDefinitions)
+                    );
                 }
 
                 if (this._expectedRemoves == null)
@@ -579,7 +640,10 @@ namespace System.ComponentModel.Composition.Hosting
                 }
                 else
                 {
-                    EqualityExtensions.CheckSequenceEquals(this._expectedRemoves, GetDisplayNames(args.RemovedDefinitions));
+                    EqualityExtensions.CheckSequenceEquals(
+                        this._expectedRemoves,
+                        GetDisplayNames(args.RemovedDefinitions)
+                    );
                 }
 
                 Assert.Null(args.AtomicComposition);
@@ -625,14 +689,21 @@ namespace System.ComponentModel.Composition.Hosting
                 this._changingEventCount = 0;
             }
 
-            private static string[] GetDisplayNames(IEnumerable<ComposablePartDefinition> definitions)
+            private static string[] GetDisplayNames(
+                IEnumerable<ComposablePartDefinition> definitions
+            )
             {
-                return definitions.OfType<ICompositionElement>().Select(p => p.DisplayName).ToArray();
+                return definitions
+                    .OfType<ICompositionElement>()
+                    .Select(p => p.DisplayName)
+                    .ToArray();
             }
 
             private static string[] GetDisplayNames(IEnumerable<Type> types)
             {
-                return GetDisplayNames(types.Select(t => AttributedModelServices.CreatePartDefinition(t, null)));
+                return GetDisplayNames(
+                    types.Select(t => AttributedModelServices.CreatePartDefinition(t, null))
+                );
             }
         }
 

@@ -31,41 +31,47 @@ namespace Microsoft.CodeAnalysis
             CONFIG_MASK = 0x100,
             MVID = 0x200,
             CONTENT_TYPE = 0x400,
-            FULL = VERSION | CULTURE | PUBLIC_KEY_TOKEN | RETARGET | PROCESSORARCHITECTURE | CONTENT_TYPE
+            FULL =
+                VERSION
+                | CULTURE
+                | PUBLIC_KEY_TOKEN
+                | RETARGET
+                | PROCESSORARCHITECTURE
+                | CONTENT_TYPE,
         }
 
         internal enum PropertyId
         {
-            PUBLIC_KEY = 0,        // 0
-            PUBLIC_KEY_TOKEN,      // 1
-            HASH_VALUE,            // 2
-            NAME,                  // 3
-            MAJOR_VERSION,         // 4
-            MINOR_VERSION,         // 5
-            BUILD_NUMBER,          // 6
-            REVISION_NUMBER,       // 7
-            CULTURE,               // 8
-            PROCESSOR_ID_ARRAY,    // 9
-            OSINFO_ARRAY,          // 10
-            HASH_ALGID,            // 11
-            ALIAS,                 // 12
-            CODEBASE_URL,          // 13
-            CODEBASE_LASTMOD,      // 14
-            NULL_PUBLIC_KEY,       // 15
+            PUBLIC_KEY = 0, // 0
+            PUBLIC_KEY_TOKEN, // 1
+            HASH_VALUE, // 2
+            NAME, // 3
+            MAJOR_VERSION, // 4
+            MINOR_VERSION, // 5
+            BUILD_NUMBER, // 6
+            REVISION_NUMBER, // 7
+            CULTURE, // 8
+            PROCESSOR_ID_ARRAY, // 9
+            OSINFO_ARRAY, // 10
+            HASH_ALGID, // 11
+            ALIAS, // 12
+            CODEBASE_URL, // 13
+            CODEBASE_LASTMOD, // 14
+            NULL_PUBLIC_KEY, // 15
             NULL_PUBLIC_KEY_TOKEN, // 16
-            CUSTOM,                // 17
-            NULL_CUSTOM,           // 18
-            MVID,                  // 19
-            FILE_MAJOR_VERSION,    // 20
-            FILE_MINOR_VERSION,    // 21
-            FILE_BUILD_NUMBER,     // 22
-            FILE_REVISION_NUMBER,  // 23
-            RETARGET,              // 24
-            SIGNATURE_BLOB,        // 25
-            CONFIG_MASK,           // 26
-            ARCHITECTURE,          // 27
-            CONTENT_TYPE,          // 28
-            MAX_PARAMS             // 29
+            CUSTOM, // 17
+            NULL_CUSTOM, // 18
+            MVID, // 19
+            FILE_MAJOR_VERSION, // 20
+            FILE_MINOR_VERSION, // 21
+            FILE_BUILD_NUMBER, // 22
+            FILE_REVISION_NUMBER, // 23
+            RETARGET, // 24
+            SIGNATURE_BLOB, // 25
+            CONFIG_MASK, // 26
+            ARCHITECTURE, // 27
+            CONTENT_TYPE, // 28
+            MAX_PARAMS, // 29
         }
 
         private static class CANOF
@@ -74,7 +80,11 @@ namespace Microsoft.CodeAnalysis
             public const uint SET_DEFAULT_VALUES = 0x2;
         }
 
-        [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("CD193BC0-B4BC-11d2-9833-00C04FC31D2E")]
+        [
+            ComImport,
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            Guid("CD193BC0-B4BC-11d2-9833-00C04FC31D2E")
+        ]
         internal unsafe interface IAssemblyName
         {
             void SetProperty(PropertyId id, void* data, uint size);
@@ -89,10 +99,12 @@ namespace Microsoft.CodeAnalysis
             int GetDisplayName(byte* buffer, ref uint characterCount, ASM_DISPLAYF dwDisplayFlags);
 
             [PreserveSig]
-            int __BindToObject(/*...*/);
+            int __BindToObject( /*...*/
+            );
 
             [PreserveSig]
-            int __GetName(/*...*/);
+            int __GetName( /*...*/
+            );
 
             [PreserveSig]
             int GetVersion(out uint versionHi, out uint versionLow);
@@ -104,34 +116,64 @@ namespace Microsoft.CodeAnalysis
             int Clone(out IAssemblyName pName);
         }
 
-        [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("7c23ff90-33af-11d3-95da-00a024a85b51")]
-        internal interface IApplicationContext
-        {
-        }
+        [
+            ComImport,
+            InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+            Guid("7c23ff90-33af-11d3-95da-00a024a85b51")
+        ]
+        internal interface IApplicationContext { }
 
         // NOTE: The CLR caches assembly identities, but doesn't do so in a threadsafe manner.
         // Wrap all calls to this with a lock.
         private static readonly object s_assemblyIdentityGate = new object();
-        private static int CreateAssemblyNameObject(out IAssemblyName ppEnum, string szAssemblyName, uint dwFlags, IntPtr pvReserved)
+
+        private static int CreateAssemblyNameObject(
+            out IAssemblyName ppEnum,
+            string szAssemblyName,
+            uint dwFlags,
+            IntPtr pvReserved
+        )
         {
             lock (s_assemblyIdentityGate)
             {
-                return RealCreateAssemblyNameObject(out ppEnum, szAssemblyName, dwFlags, pvReserved);
+                return RealCreateAssemblyNameObject(
+                    out ppEnum,
+                    szAssemblyName,
+                    dwFlags,
+                    pvReserved
+                );
             }
         }
 
-        [DllImport("clr", EntryPoint = "CreateAssemblyNameObject", CharSet = CharSet.Unicode, PreserveSig = true)]
-        private static extern int RealCreateAssemblyNameObject(out IAssemblyName ppEnum, [MarshalAs(UnmanagedType.LPWStr)] string szAssemblyName, uint dwFlags, IntPtr pvReserved);
+        [DllImport(
+            "clr",
+            EntryPoint = "CreateAssemblyNameObject",
+            CharSet = CharSet.Unicode,
+            PreserveSig = true
+        )]
+        private static extern int RealCreateAssemblyNameObject(
+            out IAssemblyName ppEnum,
+            [MarshalAs(UnmanagedType.LPWStr)] string szAssemblyName,
+            uint dwFlags,
+            IntPtr pvReserved
+        );
 
         private const int ERROR_INSUFFICIENT_BUFFER = unchecked((int)0x8007007A);
         private const int FUSION_E_INVALID_NAME = unchecked((int)0x80131047);
 
-        internal static unsafe string GetDisplayName(IAssemblyName nameObject, ASM_DISPLAYF displayFlags)
+        internal static unsafe string GetDisplayName(
+            IAssemblyName nameObject,
+            ASM_DISPLAYF displayFlags
+        )
         {
             int hr;
             uint characterCountIncludingTerminator = 0;
 
-            hr = nameObject.GetDisplayName(null, ref characterCountIncludingTerminator, displayFlags);
+            hr = nameObject.GetDisplayName(
+                null,
+                ref characterCountIncludingTerminator,
+                displayFlags
+            );
             if (hr == 0)
             {
                 return String.Empty;
@@ -145,17 +187,27 @@ namespace Microsoft.CodeAnalysis
             byte[] data = new byte[(int)characterCountIncludingTerminator * 2];
             fixed (byte* p = data)
             {
-                hr = nameObject.GetDisplayName(p, ref characterCountIncludingTerminator, displayFlags);
+                hr = nameObject.GetDisplayName(
+                    p,
+                    ref characterCountIncludingTerminator,
+                    displayFlags
+                );
                 if (hr != 0)
                 {
                     throw Marshal.GetExceptionForHR(hr);
                 }
 
-                return Marshal.PtrToStringUni((IntPtr)p, (int)characterCountIncludingTerminator - 1);
+                return Marshal.PtrToStringUni(
+                    (IntPtr)p,
+                    (int)characterCountIncludingTerminator - 1
+                );
             }
         }
 
-        internal static unsafe byte[] GetPropertyBytes(IAssemblyName nameObject, PropertyId propertyId)
+        internal static unsafe byte[] GetPropertyBytes(
+            IAssemblyName nameObject,
+            PropertyId propertyId
+        )
         {
             int hr;
             uint size = 0;
@@ -184,7 +236,10 @@ namespace Microsoft.CodeAnalysis
             return data;
         }
 
-        internal static unsafe string GetPropertyString(IAssemblyName nameObject, PropertyId propertyId)
+        internal static unsafe string GetPropertyString(
+            IAssemblyName nameObject,
+            PropertyId propertyId
+        )
         {
             byte[] data = GetPropertyBytes(nameObject, propertyId);
             if (data == null)
@@ -198,9 +253,15 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        internal static unsafe bool IsKeyOrTokenEmpty(IAssemblyName nameObject, PropertyId propertyId)
+        internal static unsafe bool IsKeyOrTokenEmpty(
+            IAssemblyName nameObject,
+            PropertyId propertyId
+        )
         {
-            Debug.Assert(propertyId == PropertyId.NULL_PUBLIC_KEY_TOKEN || propertyId == PropertyId.NULL_PUBLIC_KEY);
+            Debug.Assert(
+                propertyId == PropertyId.NULL_PUBLIC_KEY_TOKEN
+                    || propertyId == PropertyId.NULL_PUBLIC_KEY
+            );
             uint size = 0;
             int hr = nameObject.GetProperty(propertyId, null, ref size);
             return hr == 0;
@@ -208,7 +269,8 @@ namespace Microsoft.CodeAnalysis
 
         internal static unsafe Version GetVersion(IAssemblyName nameObject)
         {
-            uint hi, lo;
+            uint hi,
+                lo;
             int hr = nameObject.GetVersion(out hi, out lo);
             if (hr != 0)
             {
@@ -216,7 +278,12 @@ namespace Microsoft.CodeAnalysis
                 return null;
             }
 
-            return new Version((int)(hi >> 16), (int)(hi & 0xffff), (int)(lo >> 16), (int)(lo & 0xffff));
+            return new Version(
+                (int)(hi >> 16),
+                (int)(hi & 0xffff),
+                (int)(lo >> 16),
+                (int)(lo & 0xffff)
+            );
         }
 
         internal static Version GetVersion(IAssemblyName name, out AssemblyIdentityParts parts)
@@ -248,7 +315,12 @@ namespace Microsoft.CodeAnalysis
                 parts |= AssemblyIdentityParts.VersionRevision;
             }
 
-            return new Version((int)(major ?? 0), (int)(minor ?? 0), (int)(build ?? 0), (int)(revision ?? 0));
+            return new Version(
+                (int)(major ?? 0),
+                (int)(minor ?? 0),
+                (int)(build ?? 0),
+                (int)(revision ?? 0)
+            );
         }
 
         internal static byte[] GetPublicKeyToken(IAssemblyName nameObject)
@@ -283,7 +355,10 @@ namespace Microsoft.CodeAnalysis
             return null;
         }
 
-        internal static unsafe uint? GetPropertyWord(IAssemblyName nameObject, PropertyId propertyId)
+        internal static unsafe uint? GetPropertyWord(
+            IAssemblyName nameObject,
+            PropertyId propertyId
+        )
         {
             uint result;
             uint size = sizeof(uint);
@@ -318,7 +393,9 @@ namespace Microsoft.CodeAnalysis
 
         internal static ProcessorArchitecture GetProcessorArchitecture(IAssemblyName nameObject)
         {
-            return (ProcessorArchitecture)(GetPropertyWord(nameObject, PropertyId.ARCHITECTURE) ?? 0);
+            return (ProcessorArchitecture)(
+                GetPropertyWord(nameObject, PropertyId.ARCHITECTURE) ?? 0
+            );
         }
 
         internal static unsafe AssemblyNameFlags GetFlags(IAssemblyName nameObject)
@@ -334,7 +411,11 @@ namespace Microsoft.CodeAnalysis
             return result;
         }
 
-        private static unsafe void SetProperty(IAssemblyName nameObject, PropertyId propertyId, string data)
+        private static unsafe void SetProperty(
+            IAssemblyName nameObject,
+            PropertyId propertyId,
+            string data
+        )
         {
             if (data == null)
             {
@@ -354,7 +435,11 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private static unsafe void SetProperty(IAssemblyName nameObject, PropertyId propertyId, byte[] data)
+        private static unsafe void SetProperty(
+            IAssemblyName nameObject,
+            PropertyId propertyId,
+            byte[] data
+        )
         {
             if (data == null)
             {
@@ -369,12 +454,20 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private static unsafe void SetProperty(IAssemblyName nameObject, PropertyId propertyId, ushort data)
+        private static unsafe void SetProperty(
+            IAssemblyName nameObject,
+            PropertyId propertyId,
+            ushort data
+        )
         {
             nameObject.SetProperty(propertyId, &data, sizeof(ushort));
         }
 
-        private static unsafe void SetProperty(IAssemblyName nameObject, PropertyId propertyId, uint data)
+        private static unsafe void SetProperty(
+            IAssemblyName nameObject,
+            PropertyId propertyId,
+            uint data
+        )
         {
             nameObject.SetProperty(propertyId, &data, sizeof(uint));
         }
@@ -420,7 +513,8 @@ namespace Microsoft.CodeAnalysis
                 (hasPublicKey ? publicKey : GetPublicKeyToken(nameObject)).AsImmutableOrNull(),
                 hasPublicKey: hasPublicKey,
                 isRetargetable: (flags & AssemblyNameFlags.Retargetable) != 0,
-                contentType: GetContentType(nameObject));
+                contentType: GetContentType(nameObject)
+            );
         }
 
         /// <summary>
@@ -442,11 +536,27 @@ namespace Microsoft.CodeAnalysis
                 if (assemblyName.IndexOf('\0') >= 0)
                 {
 #if SCRIPTING
-                    throw new ArgumentException(Scripting.ScriptingResources.InvalidCharactersInAssemblyName, nameof(name));
+                    throw new ArgumentException(
+                        Scripting.ScriptingResources.InvalidCharactersInAssemblyName,
+                        nameof(name)
+                    );
 #elif EDITOR_FEATURES
-                    throw new ArgumentException(Microsoft.CodeAnalysis.Editor.EditorFeaturesResources.Invalid_characters_in_assembly_name, nameof(name));
+                    throw new ArgumentException(
+                        Microsoft
+                            .CodeAnalysis
+                            .Editor
+                            .EditorFeaturesResources
+                            .Invalid_characters_in_assembly_name,
+                        nameof(name)
+                    );
 #else
-                    throw new ArgumentException(Microsoft.CodeAnalysis.CodeAnalysisResources.InvalidCharactersInAssemblyName, nameof(name));
+                    throw new ArgumentException(
+                        Microsoft
+                            .CodeAnalysis
+                            .CodeAnalysisResources
+                            .InvalidCharactersInAssemblyName,
+                        nameof(name)
+                    );
 #endif
                 }
 
@@ -455,10 +565,22 @@ namespace Microsoft.CodeAnalysis
 
             if (name.Version != null)
             {
-                SetProperty(result, PropertyId.MAJOR_VERSION, unchecked((ushort)name.Version.Major));
-                SetProperty(result, PropertyId.MINOR_VERSION, unchecked((ushort)name.Version.Minor));
+                SetProperty(
+                    result,
+                    PropertyId.MAJOR_VERSION,
+                    unchecked((ushort)name.Version.Major)
+                );
+                SetProperty(
+                    result,
+                    PropertyId.MINOR_VERSION,
+                    unchecked((ushort)name.Version.Minor)
+                );
                 SetProperty(result, PropertyId.BUILD_NUMBER, unchecked((ushort)name.Version.Build));
-                SetProperty(result, PropertyId.REVISION_NUMBER, unchecked((ushort)name.Version.Revision));
+                SetProperty(
+                    result,
+                    PropertyId.REVISION_NUMBER,
+                    unchecked((ushort)name.Version.Revision)
+                );
             }
 
             string cultureName = name.CultureName;
@@ -467,11 +589,31 @@ namespace Microsoft.CodeAnalysis
                 if (cultureName.IndexOf('\0') >= 0)
                 {
 #if SCRIPTING
-                    throw new ArgumentException(Microsoft.CodeAnalysis.Scripting.ScriptingResources.InvalidCharactersInAssemblyName, nameof(name));
+                    throw new ArgumentException(
+                        Microsoft
+                            .CodeAnalysis
+                            .Scripting
+                            .ScriptingResources
+                            .InvalidCharactersInAssemblyName,
+                        nameof(name)
+                    );
 #elif EDITOR_FEATURES
-                    throw new ArgumentException(Microsoft.CodeAnalysis.Editor.EditorFeaturesResources.Invalid_characters_in_assembly_name, nameof(name));
+                    throw new ArgumentException(
+                        Microsoft
+                            .CodeAnalysis
+                            .Editor
+                            .EditorFeaturesResources
+                            .Invalid_characters_in_assembly_name,
+                        nameof(name)
+                    );
 #else
-                    throw new ArgumentException(Microsoft.CodeAnalysis.CodeAnalysisResources.InvalidCharactersInAssemblyName, nameof(name));
+                    throw new ArgumentException(
+                        Microsoft
+                            .CodeAnalysis
+                            .CodeAnalysisResources
+                            .InvalidCharactersInAssemblyName,
+                        nameof(name)
+                    );
 #endif
                 }
 
@@ -506,7 +648,12 @@ namespace Microsoft.CodeAnalysis
 
             Debug.Assert(displayName != null);
             IAssemblyName result;
-            int hr = CreateAssemblyNameObject(out result, displayName, CANOF.PARSE_DISPLAY_NAME, IntPtr.Zero);
+            int hr = CreateAssemblyNameObject(
+                out result,
+                displayName,
+                CANOF.PARSE_DISPLAY_NAME,
+                IntPtr.Zero
+            );
             if (hr != 0)
             {
                 return null;
@@ -518,9 +665,12 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Selects the candidate assembly with the largest version number.  Uses culture as a tie-breaker if it is provided.
-        /// All candidates are assumed to have the same name and must include versions and cultures.  
+        /// All candidates are assumed to have the same name and must include versions and cultures.
         /// </summary>
-        internal static IAssemblyName GetBestMatch(IEnumerable<IAssemblyName> candidates, string preferredCultureOpt)
+        internal static IAssemblyName GetBestMatch(
+            IEnumerable<IAssemblyName> candidates,
+            string preferredCultureOpt
+        )
         {
             IAssemblyName bestCandidate = null;
             Version bestVersion = null;
@@ -552,10 +702,19 @@ namespace Microsoft.CodeAnalysis
                                 Debug.Assert(bestCulture != null);
                             }
 
-                            // we have exactly the preferred culture or 
+                            // we have exactly the preferred culture or
                             // we have neutral culture and the best candidate's culture isn't the preferred one:
-                            if (StringComparer.OrdinalIgnoreCase.Equals(candidateCulture, preferredCultureOpt) ||
-                                candidateCulture.Length == 0 && !StringComparer.OrdinalIgnoreCase.Equals(bestCulture, preferredCultureOpt))
+                            if (
+                                StringComparer.OrdinalIgnoreCase.Equals(
+                                    candidateCulture,
+                                    preferredCultureOpt
+                                )
+                                || candidateCulture.Length == 0
+                                    && !StringComparer.OrdinalIgnoreCase.Equals(
+                                        bestCulture,
+                                        preferredCultureOpt
+                                    )
+                            )
                             {
                                 bestCandidate = candidate;
                                 bestVersion = candidateVersion;

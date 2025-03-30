@@ -10,9 +10,7 @@ namespace System.DirectoryServices
         private DirectorySynchronizationOptions _option = DirectorySynchronizationOptions.None;
         private byte[] _cookie = Array.Empty<byte>();
 
-        public DirectorySynchronization()
-        {
-        }
+        public DirectorySynchronization() { }
 
         public DirectorySynchronization(DirectorySynchronizationOptions option)
         {
@@ -28,7 +26,8 @@ namespace System.DirectoryServices
             }
         }
 
-        public DirectorySynchronization(byte[]? cookie) => ResetDirectorySynchronizationCookie(cookie);
+        public DirectorySynchronization(byte[]? cookie) =>
+            ResetDirectorySynchronizationCookie(cookie);
 
         public DirectorySynchronization(DirectorySynchronizationOptions option, byte[]? cookie)
         {
@@ -42,12 +41,25 @@ namespace System.DirectoryServices
             get => _option;
             set
             {
-                long val = (long)(value & (~(DirectorySynchronizationOptions.None | DirectorySynchronizationOptions.ObjectSecurity |
-                                            DirectorySynchronizationOptions.ParentsFirst | DirectorySynchronizationOptions.PublicDataOnly |
-                                            DirectorySynchronizationOptions.IncrementalValues)));
+                long val = (long)(
+                    value
+                    & (
+                        ~(
+                            DirectorySynchronizationOptions.None
+                            | DirectorySynchronizationOptions.ObjectSecurity
+                            | DirectorySynchronizationOptions.ParentsFirst
+                            | DirectorySynchronizationOptions.PublicDataOnly
+                            | DirectorySynchronizationOptions.IncrementalValues
+                        )
+                    )
+                );
                 if (val != 0)
                 {
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(DirectorySynchronizationOptions));
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        (int)value,
+                        typeof(DirectorySynchronizationOptions)
+                    );
                 }
 
                 _option = value;

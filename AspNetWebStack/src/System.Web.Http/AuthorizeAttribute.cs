@@ -18,8 +18,16 @@ namespace System.Web.Http
     /// </summary>
     /// <remarks>You can declare multiple of these attributes per action. You can also use <see cref="AllowAnonymousAttribute"/>
     /// to disable authorization for a specific action.</remarks>
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "We want to support extensibility")]
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = true, AllowMultiple = true)]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "We want to support extensibility"
+    )]
+    [AttributeUsage(
+        AttributeTargets.Method | AttributeTargets.Class,
+        Inherited = true,
+        AllowMultiple = true
+    )]
     public class AuthorizeAttribute : AuthorizationFilterAttribute
     {
         private static readonly string[] _emptyArray = new string[0];
@@ -77,7 +85,7 @@ namespace System.Web.Http
         /// <summary>
         /// Determines whether access for this particular request is authorized. This method uses the user <see cref="IPrincipal"/>
         /// returned via <see cref="HttpRequestContext.Principal"/>. Authorization is denied if the user is not authenticated,
-        /// the user is not in the authorized group of <see cref="Users"/> (if defined), or if the user is not in any of the authorized 
+        /// the user is not in the authorized group of <see cref="Users"/> (if defined), or if the user is not in any of the authorized
         /// <see cref="Roles"/> (if defined).
         /// </summary>
         /// <param name="actionContext">The context.</param>
@@ -95,7 +103,10 @@ namespace System.Web.Http
                 return false;
             }
 
-            if (_usersSplit.Length > 0 && !_usersSplit.Contains(user.Identity.Name, StringComparer.OrdinalIgnoreCase))
+            if (
+                _usersSplit.Length > 0
+                && !_usersSplit.Contains(user.Identity.Name, StringComparer.OrdinalIgnoreCase)
+            )
             {
                 return false;
             }
@@ -115,7 +126,7 @@ namespace System.Web.Http
         /// - the user is not authenticated,
         /// - the user is authenticated but is not in the authorized group of <see cref="Users"/> (if defined), or if the user
         /// is not in any of the authorized <see cref="Roles"/> (if defined).
-        /// 
+        ///
         /// If authorization is denied then this method will invoke <see cref="HandleUnauthorizedRequest(HttpActionContext)"/> to process the unauthorized request.
         /// </summary>
         /// <remarks>You can use <see cref="AllowAnonymousAttribute"/> to cause authorization checks to be skipped for a particular
@@ -153,15 +164,22 @@ namespace System.Web.Http
                 throw Error.ArgumentNull("actionContext");
             }
 
-            actionContext.Response = actionContext.ControllerContext.Request.CreateErrorResponse(HttpStatusCode.Unauthorized, SRResources.RequestNotAuthorized);
+            actionContext.Response = actionContext.ControllerContext.Request.CreateErrorResponse(
+                HttpStatusCode.Unauthorized,
+                SRResources.RequestNotAuthorized
+            );
         }
 
         private static bool SkipAuthorization(HttpActionContext actionContext)
         {
             Contract.Assert(actionContext != null);
 
-            return actionContext.ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any()
-                   || actionContext.ControllerContext.ControllerDescriptor.GetCustomAttributes<AllowAnonymousAttribute>().Any();
+            return actionContext
+                    .ActionDescriptor.GetCustomAttributes<AllowAnonymousAttribute>()
+                    .Any()
+                || actionContext
+                    .ControllerContext.ControllerDescriptor.GetCustomAttributes<AllowAnonymousAttribute>()
+                    .Any();
         }
 
         /// <summary>
@@ -176,10 +194,11 @@ namespace System.Web.Http
                 return _emptyArray;
             }
 
-            var split = from piece in original.Split(',')
-                        let trimmed = piece.Trim()
-                        where !String.IsNullOrEmpty(trimmed)
-                        select trimmed;
+            var split =
+                from piece in original.Split(',')
+                let trimmed = piece.Trim()
+                where !String.IsNullOrEmpty(trimmed)
+                select trimmed;
             return split.ToArray();
         }
     }

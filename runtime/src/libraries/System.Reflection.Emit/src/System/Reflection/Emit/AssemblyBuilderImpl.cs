@@ -19,7 +19,11 @@ namespace System.Reflection.Emit
 
         internal List<CustomAttributeWrapper>? _customAttributes;
 
-        internal AssemblyBuilderImpl(AssemblyName name, Assembly coreAssembly, IEnumerable<CustomAttributeBuilder>? assemblyAttributes)
+        internal AssemblyBuilderImpl(
+            AssemblyName name,
+            Assembly coreAssembly,
+            IEnumerable<CustomAttributeBuilder>? assemblyAttributes
+        )
         {
             ArgumentNullException.ThrowIfNull(name);
 
@@ -40,20 +44,24 @@ namespace System.Reflection.Emit
             }
         }
 
-        internal static AssemblyBuilderImpl DefinePersistedAssembly(AssemblyName name, Assembly coreAssembly, IEnumerable<CustomAttributeBuilder>? assemblyAttributes)
-                => new AssemblyBuilderImpl(name, coreAssembly, assemblyAttributes);
+        internal static AssemblyBuilderImpl DefinePersistedAssembly(
+            AssemblyName name,
+            Assembly coreAssembly,
+            IEnumerable<CustomAttributeBuilder>? assemblyAttributes
+        ) => new AssemblyBuilderImpl(name, coreAssembly, assemblyAttributes);
 
         private void WritePEImage(Stream peStream, BlobBuilder ilBuilder)
         {
             // Create executable with the managed metadata from the specified MetadataBuilder.
             var peHeaderBuilder = new PEHeaderBuilder(
                 imageCharacteristics: Characteristics.Dll // Start off with a simple DLL
-                );
+            );
 
             var peBuilder = new ManagedPEBuilder(
                 peHeaderBuilder,
                 new MetadataRootBuilder(_metadataBuilder),
-                ilBuilder);
+                ilBuilder
+            );
 
             // Write executable into the specified stream.
             var peBlob = new BlobBuilder();
@@ -77,15 +85,22 @@ namespace System.Reflection.Emit
 
             // Add assembly metadata
             AssemblyDefinitionHandle assemblyHandle = _metadataBuilder.AddAssembly(
-               _metadataBuilder.GetOrAddString(value: _assemblyName.Name!),
-               version: _assemblyName.Version ?? new Version(0, 0, 0, 0),
-               culture: _assemblyName.CultureName == null ? default : _metadataBuilder.GetOrAddString(value: _assemblyName.CultureName),
-               publicKey: _assemblyName.GetPublicKey() is byte[] publicKey ? _metadataBuilder.GetOrAddBlob(value: publicKey) : default,
-               flags: AddContentType((AssemblyFlags)_assemblyName.Flags, _assemblyName.ContentType),
+                _metadataBuilder.GetOrAddString(value: _assemblyName.Name!),
+                version: _assemblyName.Version ?? new Version(0, 0, 0, 0),
+                culture: _assemblyName.CultureName == null
+                    ? default
+                    : _metadataBuilder.GetOrAddString(value: _assemblyName.CultureName),
+                publicKey: _assemblyName.GetPublicKey() is byte[] publicKey
+                    ? _metadataBuilder.GetOrAddBlob(value: publicKey)
+                    : default,
+                flags: AddContentType(
+                    (AssemblyFlags)_assemblyName.Flags,
+                    _assemblyName.ContentType
+                ),
 #pragma warning disable SYSLIB0037 // Type or member is obsolete
-               hashAlgorithm: (AssemblyHashAlgorithm)_assemblyName.HashAlgorithm
+                hashAlgorithm: (AssemblyHashAlgorithm)_assemblyName.HashAlgorithm
 #pragma warning restore SYSLIB0037
-               );
+            );
             _module.WriteCustomAttributes(_customAttributes, assemblyHandle);
 
             var ilBuilder = new BlobBuilder();
@@ -96,14 +111,20 @@ namespace System.Reflection.Emit
             _previouslySaved = true;
         }
 
-        private static AssemblyFlags AddContentType(AssemblyFlags flags, AssemblyContentType contentType)
-            => (AssemblyFlags)((int)contentType << 9) | flags;
+        private static AssemblyFlags AddContentType(
+            AssemblyFlags flags,
+            AssemblyContentType contentType
+        ) => (AssemblyFlags)((int)contentType << 9) | flags;
 
         internal void Save(string assemblyFileName)
         {
             ArgumentNullException.ThrowIfNull(assemblyFileName);
 
-            using var peStream = new FileStream(assemblyFileName, FileMode.Create, FileAccess.Write);
+            using var peStream = new FileStream(
+                assemblyFileName,
+                FileMode.Create,
+                FileAccess.Write
+            );
             Save(peStream);
         }
 
@@ -128,7 +149,10 @@ namespace System.Reflection.Emit
             return null;
         }
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             _customAttributes ??= new List<CustomAttributeWrapper>();
             _customAttributes.Add(new CustomAttributeWrapper(con, binaryAttribute));

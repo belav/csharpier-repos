@@ -14,9 +14,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
 {
     public class FormattingEngineTests_Venus : CSharpFormattingEngineTestBase
     {
-        public FormattingEngineTests_Venus(ITestOutputHelper output) : base(output) { }
+        public FormattingEngineTests_Venus(ITestOutputHelper output)
+            : base(output) { }
 
-        [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting), Trait(Traits.Feature, Traits.Features.Venus)]
+        [
+            WpfFact,
+            Trait(Traits.Feature, Traits.Features.Formatting),
+            Trait(Traits.Feature, Traits.Features.Venus)
+        ]
         public async Task SimpleOneLineNugget()
         {
             var code = """
@@ -48,7 +53,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
             await AssertFormatWithBaseIndentAsync(expected, code, baseIndentation: 7);
         }
 
-        [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting), Trait(Traits.Feature, Traits.Features.Venus)]
+        [
+            WpfFact,
+            Trait(Traits.Feature, Traits.Features.Formatting),
+            Trait(Traits.Feature, Traits.Features.Venus)
+        ]
         public async Task SimpleMultiLineNugget()
         {
             var code = """
@@ -85,7 +94,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
             await AssertFormatWithBaseIndentAsync(expected, code, baseIndentation: 3);
         }
 
-        [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting), Trait(Traits.Feature, Traits.Features.Venus)]
+        [
+            WpfFact,
+            Trait(Traits.Feature, Traits.Features.Formatting),
+            Trait(Traits.Feature, Traits.Features.Venus)
+        ]
         public async Task SimpleQueryWithinNugget()
         {
             var code = """
@@ -123,7 +136,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
             await AssertFormatWithBaseIndentAsync(expected, code, baseIndentation: 7);
         }
 
-        [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting), Trait(Traits.Feature, Traits.Features.Venus)]
+        [
+            WpfFact,
+            Trait(Traits.Feature, Traits.Features.Formatting),
+            Trait(Traits.Feature, Traits.Features.Venus)
+        ]
         public async Task LambdaExpressionInNugget()
         {
             var code = """
@@ -162,7 +179,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         }
 
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/576457")]
-        [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting), Trait(Traits.Feature, Traits.Features.Venus)]
+        [
+            WpfFact,
+            Trait(Traits.Feature, Traits.Features.Formatting),
+            Trait(Traits.Feature, Traits.Features.Venus)
+        ]
         public async Task StatementLambdaInNugget()
         {
             var code = """

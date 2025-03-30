@@ -26,158 +26,176 @@ namespace System.Reflection.Emit
         //
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name,
-                             Type? returnType,
-                             Type[]? parameterTypes)
+        public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes)
         {
-            Init(name,
+            Init(
+                name,
                 MethodAttributes.Public | MethodAttributes.Static,
                 CallingConventions.Standard,
                 returnType,
                 parameterTypes,
-                null,   // owner
-                null,   // m
-                false,  // skipVisibility
-                true);
+                null, // owner
+                null, // m
+                false, // skipVisibility
+                true
+            );
         }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name,
-                             Type? returnType,
-                             Type[]? parameterTypes,
-                             bool restrictedSkipVisibility)
+        public DynamicMethod(
+            string name,
+            Type? returnType,
+            Type[]? parameterTypes,
+            bool restrictedSkipVisibility
+        )
         {
-            Init(name,
+            Init(
+                name,
                 MethodAttributes.Public | MethodAttributes.Static,
                 CallingConventions.Standard,
                 returnType,
                 parameterTypes,
-                null,   // owner
-                null,   // m
+                null, // owner
+                null, // m
                 restrictedSkipVisibility,
-                true);
+                true
+            );
         }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name,
-                             Type? returnType,
-                             Type[]? parameterTypes,
-                             Module m)
+        public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes, Module m)
         {
             ArgumentNullException.ThrowIfNull(m);
 
-            Init(name,
+            Init(
+                name,
                 MethodAttributes.Public | MethodAttributes.Static,
                 CallingConventions.Standard,
                 returnType,
                 parameterTypes,
-                null,   // owner
-                m,      // m
-                false,  // skipVisibility
-                false);
+                null, // owner
+                m, // m
+                false, // skipVisibility
+                false
+            );
         }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name,
-                             Type? returnType,
-                             Type[]? parameterTypes,
-                             Module m,
-                             bool skipVisibility)
+        public DynamicMethod(
+            string name,
+            Type? returnType,
+            Type[]? parameterTypes,
+            Module m,
+            bool skipVisibility
+        )
         {
             ArgumentNullException.ThrowIfNull(m);
 
-            Init(name,
+            Init(
+                name,
                 MethodAttributes.Public | MethodAttributes.Static,
                 CallingConventions.Standard,
                 returnType,
                 parameterTypes,
-                null,   // owner
-                m,      // m
+                null, // owner
+                m, // m
                 skipVisibility,
-                false);
+                false
+            );
         }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name,
-                             MethodAttributes attributes,
-                             CallingConventions callingConvention,
-                             Type? returnType,
-                             Type[]? parameterTypes,
-                             Module m,
-                             bool skipVisibility)
+        public DynamicMethod(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes,
+            Module m,
+            bool skipVisibility
+        )
         {
             ArgumentNullException.ThrowIfNull(m);
 
-            Init(name,
+            Init(
+                name,
                 attributes,
                 callingConvention,
                 returnType,
                 parameterTypes,
-                null,   // owner
-                m,      // m
+                null, // owner
+                m, // m
                 skipVisibility,
-                false);
+                false
+            );
         }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name,
-                             Type? returnType,
-                             Type[]? parameterTypes,
-                             Type owner)
+        public DynamicMethod(string name, Type? returnType, Type[]? parameterTypes, Type owner)
         {
             ArgumentNullException.ThrowIfNull(owner);
 
-            Init(name,
+            Init(
+                name,
                 MethodAttributes.Public | MethodAttributes.Static,
                 CallingConventions.Standard,
                 returnType,
                 parameterTypes,
-                owner,  // owner
-                null,   // m
-                false,  // skipVisibility
-                false);
+                owner, // owner
+                null, // m
+                false, // skipVisibility
+                false
+            );
         }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name,
-                             Type? returnType,
-                             Type[]? parameterTypes,
-                             Type owner,
-                             bool skipVisibility)
+        public DynamicMethod(
+            string name,
+            Type? returnType,
+            Type[]? parameterTypes,
+            Type owner,
+            bool skipVisibility
+        )
         {
             ArgumentNullException.ThrowIfNull(owner);
 
-            Init(name,
+            Init(
+                name,
                 MethodAttributes.Public | MethodAttributes.Static,
                 CallingConventions.Standard,
                 returnType,
                 parameterTypes,
-                owner,  // owner
-                null,   // m
+                owner, // owner
+                null, // m
                 skipVisibility,
-                false);
+                false
+            );
         }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name,
-                             MethodAttributes attributes,
-                             CallingConventions callingConvention,
-                             Type? returnType,
-                             Type[]? parameterTypes,
-                             Type owner,
-                             bool skipVisibility)
+        public DynamicMethod(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? parameterTypes,
+            Type owner,
+            bool skipVisibility
+        )
         {
             ArgumentNullException.ThrowIfNull(owner);
 
-            Init(name,
+            Init(
+                name,
                 attributes,
                 callingConvention,
                 returnType,
                 parameterTypes,
-                owner,  // owner
-                null,   // m
+                owner, // owner
+                null, // m
                 skipVisibility,
-                false);
+                false
+            );
         }
 
         // We create a transparent assembly to host DynamicMethods. Since the assembly does not have any
@@ -194,10 +212,16 @@ namespace System.Reflection.Emit
                 if (s_anonymouslyHostedDynamicMethodsModule != null)
                     return s_anonymouslyHostedDynamicMethodsModule;
 
-                AssemblyName assemblyName = new AssemblyName("Anonymously Hosted DynamicMethods Assembly");
+                AssemblyName assemblyName = new AssemblyName(
+                    "Anonymously Hosted DynamicMethods Assembly"
+                );
 
-                var assembly = RuntimeAssemblyBuilder.InternalDefineDynamicAssembly(assemblyName,
-                    AssemblyBuilderAccess.Run, AssemblyLoadContext.Default, null);
+                var assembly = RuntimeAssemblyBuilder.InternalDefineDynamicAssembly(
+                    assemblyName,
+                    AssemblyBuilderAccess.Run,
+                    AssemblyLoadContext.Default,
+                    null
+                );
 
                 // this always gets the internal module.
                 s_anonymouslyHostedDynamicMethodsModule = assembly.ManifestModule!;
@@ -210,21 +234,26 @@ namespace System.Reflection.Emit
         [MemberNotNull(nameof(_returnType))]
         [MemberNotNull(nameof(_module))]
         [MemberNotNull(nameof(_name))]
-        private void Init(string name,
-                          MethodAttributes attributes,
-                          CallingConventions callingConvention,
-                          Type? returnType,
-                          Type[]? signature,
-                          Type? owner,
-                          Module? m,
-                          bool skipVisibility,
-                          bool transparentMethod)
+        private void Init(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type? returnType,
+            Type[]? signature,
+            Type? owner,
+            Module? m,
+            bool skipVisibility,
+            bool transparentMethod
+        )
         {
             ArgumentNullException.ThrowIfNull(name);
 
             AssemblyBuilder.EnsureDynamicCodeSupported();
 
-            if (attributes != (MethodAttributes.Static | MethodAttributes.Public) || callingConvention != CallingConventions.Standard)
+            if (
+                attributes != (MethodAttributes.Static | MethodAttributes.Public)
+                || callingConvention != CallingConventions.Standard
+            )
                 throw new NotSupportedException(SR.NotSupported_DynamicMethodFlags);
 
             // check and store the signature
@@ -246,20 +275,30 @@ namespace System.Reflection.Emit
             }
 
             // check and store the return value
-            _returnType = returnType is null ?
-                (RuntimeType)typeof(void) :
-                (returnType.UnderlyingSystemType as RuntimeType) ?? throw new NotSupportedException(SR.Arg_InvalidTypeInRetType);
+            _returnType = returnType is null
+                ? (RuntimeType)typeof(void)
+                : (returnType.UnderlyingSystemType as RuntimeType)
+                    ?? throw new NotSupportedException(SR.Arg_InvalidTypeInRetType);
 
             if (transparentMethod)
             {
-                Debug.Assert(owner == null && m == null, "owner and m cannot be set for transparent methods");
+                Debug.Assert(
+                    owner == null && m == null,
+                    "owner and m cannot be set for transparent methods"
+                );
                 _module = GetDynamicMethodsModule();
                 _restrictedSkipVisibility = skipVisibility;
             }
             else
             {
-                Debug.Assert(m != null || owner != null, "Constructor should ensure that either m or owner is set");
-                Debug.Assert(m == null || !m.Equals(s_anonymouslyHostedDynamicMethodsModule), "The user cannot explicitly use this assembly");
+                Debug.Assert(
+                    m != null || owner != null,
+                    "Constructor should ensure that either m or owner is set"
+                );
+                Debug.Assert(
+                    m == null || !m.Equals(s_anonymouslyHostedDynamicMethodsModule),
+                    "The user cannot explicitly use this assembly"
+                );
                 Debug.Assert(m == null || owner == null, "m and owner cannot both be set");
 
                 if (m != null)
@@ -268,8 +307,12 @@ namespace System.Reflection.Emit
                 {
                     if (owner?.UnderlyingSystemType is RuntimeType rtOwner)
                     {
-                        if (rtOwner.HasElementType || rtOwner.ContainsGenericParameters
-                            || rtOwner.IsGenericParameter || rtOwner.IsInterface)
+                        if (
+                            rtOwner.HasElementType
+                            || rtOwner.ContainsGenericParameters
+                            || rtOwner.IsGenericParameter
+                            || rtOwner.IsInterface
+                        )
                             throw new ArgumentException(SR.Argument_InvalidTypeForDynamicMethod);
 
                         _typeOwner = rtOwner;
@@ -321,7 +364,8 @@ namespace System.Reflection.Emit
         public override Module Module => _module;
 
         // we cannot return a MethodHandle because we cannot track it via GC so this method is off limits
-        public override RuntimeMethodHandle MethodHandle => throw new InvalidOperationException(SR.InvalidOperation_NotAllowedInDynamicMethod);
+        public override RuntimeMethodHandle MethodHandle =>
+            throw new InvalidOperationException(SR.InvalidOperation_NotAllowedInDynamicMethod);
 
         public override MethodAttributes Attributes => _attributes;
 
@@ -329,8 +373,7 @@ namespace System.Reflection.Emit
 
         public override MethodInfo GetBaseDefinition() => this;
 
-        public override ParameterInfo[] GetParameters() =>
-            GetParametersAsSpan().ToArray();
+        public override ParameterInfo[] GetParameters() => GetParametersAsSpan().ToArray();
 
         internal override ReadOnlySpan<ParameterInfo> GetParametersAsSpan() => LoadParameters();
 
@@ -350,11 +393,18 @@ namespace System.Reflection.Emit
             if (attributeType.UnderlyingSystemType is not RuntimeType attributeRuntimeType)
                 throw new ArgumentException(SR.Arg_MustBeType, nameof(attributeType));
 
-            bool includeMethodImplAttribute = attributeType.IsAssignableFrom(typeof(MethodImplAttribute));
-            object[] result = CustomAttribute.CreateAttributeArrayHelper(attributeRuntimeType, includeMethodImplAttribute ? 1 : 0);
+            bool includeMethodImplAttribute = attributeType.IsAssignableFrom(
+                typeof(MethodImplAttribute)
+            );
+            object[] result = CustomAttribute.CreateAttributeArrayHelper(
+                attributeRuntimeType,
+                includeMethodImplAttribute ? 1 : 0
+            );
             if (includeMethodImplAttribute)
             {
-                result[0] = new MethodImplAttribute((MethodImplOptions)GetMethodImplementationFlags());
+                result[0] = new MethodImplAttribute(
+                    (MethodImplOptions)GetMethodImplementationFlags()
+                );
             }
             return result;
         }
@@ -362,7 +412,10 @@ namespace System.Reflection.Emit
         public override object[] GetCustomAttributes(bool inherit)
         {
             // support for MethodImplAttribute PCA
-            return new object[] { new MethodImplAttribute((MethodImplOptions)GetMethodImplementationFlags()) };
+            return new object[]
+            {
+                new MethodImplAttribute((MethodImplOptions)GetMethodImplementationFlags()),
+            };
         }
 
         public override bool IsDefined(Type attributeType, bool inherit)
@@ -374,7 +427,8 @@ namespace System.Reflection.Emit
 
         public override Type ReturnType => _returnType;
 
-        public override ParameterInfo ReturnParameter => new RuntimeParameterInfo(this, null, _returnType, -1);
+        public override ParameterInfo ReturnParameter =>
+            new RuntimeParameterInfo(this, null, _returnType, -1);
 
         public override ICustomAttributeProvider ReturnTypeCustomAttributes => new EmptyCAHolder();
 
@@ -382,7 +436,11 @@ namespace System.Reflection.Emit
         // DynamicMethod specific methods
         //
 
-        public ParameterBuilder? DefineParameter(int position, ParameterAttributes attributes, string? parameterName)
+        public ParameterBuilder? DefineParameter(
+            int position,
+            ParameterAttributes attributes,
+            string? parameterName
+        )
         {
             if (position < 0 || position > _parameterTypes.Length)
                 throw new ArgumentOutOfRangeException(SR.ArgumentOutOfRange_ParamSequence);

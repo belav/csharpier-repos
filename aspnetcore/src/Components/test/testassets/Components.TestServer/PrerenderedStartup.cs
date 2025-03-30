@@ -37,19 +37,22 @@ public class PrerenderedStartup
             app.UseDeveloperExceptionPage();
         }
 
-        app.Map("/prerendered", app =>
-        {
-            app.UseStaticFiles();
-
-            app.UseAuthentication();
-
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
+        app.Map(
+            "/prerendered",
+            app =>
             {
-                endpoints.MapRazorPages();
-                endpoints.MapFallbackToPage("/PrerenderedHost");
-                endpoints.MapBlazorHub();
-            });
-        });
+                app.UseStaticFiles();
+
+                app.UseAuthentication();
+
+                app.UseRouting();
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapRazorPages();
+                    endpoints.MapFallbackToPage("/PrerenderedHost");
+                    endpoints.MapBlazorHub();
+                });
+            }
+        );
     }
 }

@@ -24,8 +24,18 @@ public partial class ResultsOfTTests
     public void GeneratedCodeIsUpToDate()
     {
         // This assumes the output is in the repo artifacts directory
-        var resultsOfTGeneratedPath = Path.Combine(AppContext.BaseDirectory, "Shared", "GeneratedContent", "ResultsOfT.Generated.cs");
-        var testsGeneratedPath = Path.Combine(AppContext.BaseDirectory, "Shared", "GeneratedContent", "ResultsOfTTests.Generated.cs");
+        var resultsOfTGeneratedPath = Path.Combine(
+            AppContext.BaseDirectory,
+            "Shared",
+            "GeneratedContent",
+            "ResultsOfT.Generated.cs"
+        );
+        var testsGeneratedPath = Path.Combine(
+            AppContext.BaseDirectory,
+            "Shared",
+            "GeneratedContent",
+            "ResultsOfTTests.Generated.cs"
+        );
 
         var testResultsOfTGeneratedPath = Path.GetTempFileName();
         var testTestsGeneratedPath = Path.GetTempFileName();
@@ -40,8 +50,16 @@ public partial class ResultsOfTTests
             var testResultsOfTGenerated = File.ReadAllText(testResultsOfTGeneratedPath);
             var testTestsGenerated = File.ReadAllText(testTestsGeneratedPath);
 
-            AssertFileContentEqual(currentResultsOfTGenerated, testResultsOfTGenerated, "ResultsOfT.Generated.cs");
-            AssertFileContentEqual(currentTestsGenerated, testTestsGenerated, "ResultsOfTTests.Generated.cs");
+            AssertFileContentEqual(
+                currentResultsOfTGenerated,
+                testResultsOfTGenerated,
+                "ResultsOfT.Generated.cs"
+            );
+            AssertFileContentEqual(
+                currentTestsGenerated,
+                testTestsGenerated,
+                "ResultsOfTTests.Generated.cs"
+            );
         }
         finally
         {
@@ -64,7 +82,7 @@ public partial class ResultsOfTTests
 
         var httpContext = new DefaultHttpContext
         {
-            RequestServices = services.BuildServiceProvider()
+            RequestServices = services.BuildServiceProvider(),
         };
 
         return httpContext;
@@ -87,7 +105,8 @@ public partial class ResultsOfTTests
         }
     }
 
-    private static void PopulateMetadata<TTarget>(MethodInfo method, EndpointBuilder builder) where TTarget : IEndpointMetadataProvider
+    private static void PopulateMetadata<TTarget>(MethodInfo method, EndpointBuilder builder)
+        where TTarget : IEndpointMetadataProvider
     {
         TTarget.PopulateMetadata(method, builder);
     }

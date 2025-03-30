@@ -24,10 +24,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1675665")]
         public async Task WithReferencesMethodCorrectlyUpdatesWithEqualReferences()
         {
-            using var workspace = CreateWorkspace(additionalParts: [typeof(TestSourceGeneratorTelemetryCollectorWorkspaceServiceFactory)]);
+            using var workspace = CreateWorkspace(
+                additionalParts:
+                [
+                    typeof(TestSourceGeneratorTelemetryCollectorWorkspaceServiceFactory),
+                ]
+            );
 
             var nonExistentFilePath = "Z:\\" + Guid.NewGuid().ToString();
-            var analyzerReference = new TestGeneratorReference(new SingleFileTestGenerator("// Hello World"), analyzerFilePath: nonExistentFilePath);
+            var analyzerReference = new TestGeneratorReference(
+                new SingleFileTestGenerator("// Hello World"),
+                analyzerFilePath: nonExistentFilePath
+            );
 
             var project = AddEmptyProject(workspace.CurrentSolution)
                 .AddAnalyzerReference(analyzerReference);
@@ -35,15 +43,19 @@ namespace Microsoft.CodeAnalysis.UnitTests
             _ = await project.GetCompilationAsync();
         }
 
-        [ExportWorkspaceServiceFactory(typeof(ISourceGeneratorTelemetryCollectorWorkspaceService)), Shared]
+        [
+            ExportWorkspaceServiceFactory(
+                typeof(ISourceGeneratorTelemetryCollectorWorkspaceService)
+            ),
+            Shared
+        ]
         [PartNotDiscoverable]
-        public class TestSourceGeneratorTelemetryCollectorWorkspaceServiceFactory : IWorkspaceServiceFactory
+        public class TestSourceGeneratorTelemetryCollectorWorkspaceServiceFactory
+            : IWorkspaceServiceFactory
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public TestSourceGeneratorTelemetryCollectorWorkspaceServiceFactory()
-            {
-            }
+            public TestSourceGeneratorTelemetryCollectorWorkspaceServiceFactory() { }
 
             public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
             {

@@ -28,10 +28,10 @@ namespace System.Net
         private long _contentLength;
         private Interop.HttpApi.HTTP_RESPONSE _nativeResponse;
 
-
         internal HttpListenerResponse()
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this);
             _nativeResponse = default;
             _nativeResponse.StatusCode = (ushort)HttpStatusCode.OK;
             _nativeResponse.Version.MajorVersion = 1;
@@ -39,13 +39,13 @@ namespace System.Net
             _responseState = ResponseState.Created;
         }
 
-        internal HttpListenerResponse(HttpListenerContext httpContext) : this()
+        internal HttpListenerResponse(HttpListenerContext httpContext)
+            : this()
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Associate(this, httpContext);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Associate(this, httpContext);
             _httpContext = httpContext;
         }
-
-
 
         public int StatusCode
         {
@@ -63,23 +63,33 @@ namespace System.Net
 
         public void CopyFrom(HttpListenerResponse templateResponse)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"templateResponse {templateResponse}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"templateResponse {templateResponse}");
             _nativeResponse = default;
             _responseState = ResponseState.Created;
             _webHeaders = templateResponse._webHeaders;
             _boundaryType = templateResponse._boundaryType;
             _contentLength = templateResponse._contentLength;
             _nativeResponse.StatusCode = templateResponse._nativeResponse.StatusCode;
-            _nativeResponse.Version.MajorVersion = templateResponse._nativeResponse.Version.MajorVersion;
-            _nativeResponse.Version.MinorVersion = templateResponse._nativeResponse.Version.MinorVersion;
+            _nativeResponse.Version.MajorVersion = templateResponse
+                ._nativeResponse
+                .Version
+                .MajorVersion;
+            _nativeResponse.Version.MinorVersion = templateResponse
+                ._nativeResponse
+                .Version
+                .MinorVersion;
             _statusDescription = templateResponse._statusDescription;
             _keepAlive = templateResponse._keepAlive;
         }
 
-
         public Version ProtocolVersion
         {
-            get => new Version(_nativeResponse.Version.MajorVersion, _nativeResponse.Version.MinorVersion);
+            get =>
+                new Version(
+                    _nativeResponse.Version.MajorVersion,
+                    _nativeResponse.Version.MinorVersion
+                );
             set
             {
                 CheckDisposed();
@@ -108,19 +118,22 @@ namespace System.Net
         {
             try
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this);
                 ((IDisposable)this).Dispose();
             }
-            finally
-            {
-            }
+            finally { }
         }
 
         public void Close(byte[] responseEntity, bool willBlock)
         {
             CheckDisposed();
             ArgumentNullException.ThrowIfNull(responseEntity);
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"ResponseState:{_responseState}, BoundaryType:{_boundaryType}, ContentLength:{_contentLength}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"ResponseState:{_responseState}, BoundaryType:{_boundaryType}, ContentLength:{_contentLength}"
+                );
             if (!SentHeaders && _boundaryType != BoundaryType.Chunked)
             {
                 ContentLength64 = responseEntity.Length;
@@ -133,9 +146,7 @@ namespace System.Net
                 {
                     _responseStream.Write(responseEntity, 0, responseEntity.Length);
                 }
-                catch (Win32Exception)
-                {
-                }
+                catch (Win32Exception) { }
                 finally
                 {
                     _responseStream.Close();
@@ -145,7 +156,13 @@ namespace System.Net
             }
             else
             {
-                _responseStream.BeginWrite(responseEntity, 0, responseEntity.Length, new AsyncCallback(NonBlockingCloseCallback), null);
+                _responseStream.BeginWrite(
+                    responseEntity,
+                    0,
+                    responseEntity.Length,
+                    new AsyncCallback(NonBlockingCloseCallback),
+                    null
+                );
             }
         }
 
@@ -177,9 +194,7 @@ namespace System.Net
             {
                 _responseStream!.EndWrite(asyncResult);
             }
-            catch (Win32Exception)
-            {
-            }
+            catch (Win32Exception) { }
             finally
             {
                 _responseStream!.Close();
@@ -211,12 +226,18 @@ namespace System.Net
             This flag should be passed on the first call to HttpSendResponseEntityBody, and
             not after. Thus, flag is not applicable to HttpSendHttpResponse.
         */
-        internal unsafe uint SendHeaders(Interop.HttpApi.HTTP_DATA_CHUNK* pDataChunk,
+        internal unsafe uint SendHeaders(
+            Interop.HttpApi.HTTP_DATA_CHUNK* pDataChunk,
             HttpResponseStreamAsyncResult? asyncResult,
             Interop.HttpApi.HTTP_FLAGS flags,
-            bool isWebSocketHandshake)
+            bool isWebSocketHandshake
+        )
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"pDataChunk: { ((IntPtr)pDataChunk)}, asyncResult: {asyncResult}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"pDataChunk: {((IntPtr)pDataChunk)}, asyncResult: {asyncResult}"
+                );
             Debug.Assert(!SentHeaders, "SentHeaders is true.");
 
             if (StatusCode == (int)HttpStatusCode.Unauthorized)
@@ -240,13 +261,17 @@ namespace System.Net
                     sb.Append(Headers.Get(i));
                     sb.Append('\n');
                 }
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, sb.ToString());
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, sb.ToString());
             }
             _responseState = ResponseState.SentHeaders;
 
             uint statusCode;
             uint bytesSent;
-            List<GCHandle>? pinnedHeaders = SerializeHeaders(ref _nativeResponse.Headers, isWebSocketHandshake);
+            List<GCHandle>? pinnedHeaders = SerializeHeaders(
+                ref _nativeResponse.Headers,
+                isWebSocketHandshake
+            );
             try
             {
                 if (pDataChunk != null)
@@ -264,33 +289,47 @@ namespace System.Net
                     _nativeResponse.EntityChunkCount = 0;
                     _nativeResponse.pEntityChunks = null;
                 }
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "Calling Interop.HttpApi.HttpSendHttpResponse flags:" + flags);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        this,
+                        "Calling Interop.HttpApi.HttpSendHttpResponse flags:" + flags
+                    );
                 if (StatusDescription.Length > 0)
                 {
-                    byte[] statusDescriptionBytes = new byte[WebHeaderEncoding.GetByteCount(StatusDescription)];
+                    byte[] statusDescriptionBytes = new byte[
+                        WebHeaderEncoding.GetByteCount(StatusDescription)
+                    ];
                     fixed (byte* pStatusDescription = &statusDescriptionBytes[0])
                     {
                         _nativeResponse.ReasonLength = (ushort)statusDescriptionBytes.Length;
-                        WebHeaderEncoding.GetBytes(StatusDescription, 0, statusDescriptionBytes.Length, statusDescriptionBytes, 0);
+                        WebHeaderEncoding.GetBytes(
+                            StatusDescription,
+                            0,
+                            statusDescriptionBytes.Length,
+                            statusDescriptionBytes,
+                            0
+                        );
                         _nativeResponse.pReason = (sbyte*)pStatusDescription;
                         fixed (Interop.HttpApi.HTTP_RESPONSE* pResponse = &_nativeResponse)
                         {
-                            statusCode =
-                                Interop.HttpApi.HttpSendHttpResponse(
-                                    HttpListenerContext.RequestQueueHandle,
-                                    HttpListenerRequest.RequestId,
-                                    (uint)flags,
-                                    pResponse,
-                                    null,
-                                    &bytesSent,
-                                    null,
-                                    0,
-                                    asyncResult == null ? null : asyncResult._pOverlapped,
-                                    null);
+                            statusCode = Interop.HttpApi.HttpSendHttpResponse(
+                                HttpListenerContext.RequestQueueHandle,
+                                HttpListenerRequest.RequestId,
+                                (uint)flags,
+                                pResponse,
+                                null,
+                                &bytesSent,
+                                null,
+                                0,
+                                asyncResult == null ? null : asyncResult._pOverlapped,
+                                null
+                            );
 
-                            if (asyncResult != null &&
-                                statusCode == Interop.HttpApi.ERROR_SUCCESS &&
-                                HttpListener.SkipIOCPCallbackOnSuccess)
+                            if (
+                                asyncResult != null
+                                && statusCode == Interop.HttpApi.ERROR_SUCCESS
+                                && HttpListener.SkipIOCPCallbackOnSuccess
+                            )
                             {
                                 asyncResult.IOCompleted(statusCode, bytesSent);
                                 // IO operation completed synchronously - callback won't be called to signal completion.
@@ -302,29 +341,35 @@ namespace System.Net
                 {
                     fixed (Interop.HttpApi.HTTP_RESPONSE* pResponse = &_nativeResponse)
                     {
-                        statusCode =
-                            Interop.HttpApi.HttpSendHttpResponse(
-                                HttpListenerContext.RequestQueueHandle,
-                                HttpListenerRequest.RequestId,
-                                (uint)flags,
-                                pResponse,
-                                null,
-                                &bytesSent,
-                                null,
-                                0,
-                                asyncResult == null ? null : asyncResult._pOverlapped,
-                                null);
+                        statusCode = Interop.HttpApi.HttpSendHttpResponse(
+                            HttpListenerContext.RequestQueueHandle,
+                            HttpListenerRequest.RequestId,
+                            (uint)flags,
+                            pResponse,
+                            null,
+                            &bytesSent,
+                            null,
+                            0,
+                            asyncResult == null ? null : asyncResult._pOverlapped,
+                            null
+                        );
 
-                        if (asyncResult != null &&
-                            statusCode == Interop.HttpApi.ERROR_SUCCESS &&
-                            HttpListener.SkipIOCPCallbackOnSuccess)
+                        if (
+                            asyncResult != null
+                            && statusCode == Interop.HttpApi.ERROR_SUCCESS
+                            && HttpListener.SkipIOCPCallbackOnSuccess
+                        )
                         {
                             asyncResult.IOCompleted(statusCode, bytesSent);
                             // IO operation completed synchronously - callback won't be called to signal completion.
                         }
                     }
                 }
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "Call to Interop.HttpApi.HttpSendHttpResponse returned:" + statusCode);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        this,
+                        "Call to Interop.HttpApi.HttpSendHttpResponse returned:" + statusCode
+                    );
             }
             finally
             {
@@ -336,15 +381,18 @@ namespace System.Net
         internal Interop.HttpApi.HTTP_FLAGS ComputeHeaders()
         {
             Interop.HttpApi.HTTP_FLAGS flags = Interop.HttpApi.HTTP_FLAGS.NONE;
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this);
             Debug.Assert(!ComputedHeaders, "ComputedHeaders is true.");
             _responseState = ResponseState.ComputedHeaders;
 
             ComputeCoreHeaders();
 
             if (NetEventSource.Log.IsEnabled())
-                NetEventSource.Info(this,
-$"flags: {flags} _boundaryType: {_boundaryType} _contentLength: {_contentLength} _keepAlive: {_keepAlive}");
+                NetEventSource.Info(
+                    this,
+                    $"flags: {flags} _boundaryType: {_boundaryType} _contentLength: {_contentLength} _keepAlive: {_keepAlive}"
+                );
             if (_boundaryType == BoundaryType.None)
             {
                 if (HttpListenerRequest.ProtocolVersion.Minor == 0)
@@ -365,10 +413,17 @@ $"flags: {flags} _boundaryType: {_boundaryType} _contentLength: {_contentLength}
                 }
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"flags:{flags} _BoundaryType:{_boundaryType} _contentLength:{_contentLength} _keepAlive: {_keepAlive}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"flags:{flags} _BoundaryType:{_boundaryType} _contentLength:{_contentLength} _keepAlive: {_keepAlive}"
+                );
             if (_boundaryType == BoundaryType.ContentLength)
             {
-                Headers[HttpResponseHeader.ContentLength] = _contentLength.ToString("D", NumberFormatInfo.InvariantInfo);
+                Headers[HttpResponseHeader.ContentLength] = _contentLength.ToString(
+                    "D",
+                    NumberFormatInfo.InvariantInfo
+                );
                 if (_contentLength == 0)
                 {
                     flags = Interop.HttpApi.HTTP_FLAGS.NONE;
@@ -401,28 +456,39 @@ $"flags: {flags} _boundaryType: {_boundaryType} _contentLength: {_contentLength}
                     Headers[HttpResponseHeader.KeepAlive] = "true";
                 }
             }
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"flags:{flags} _BoundaryType:{_boundaryType} _contentLength:{_contentLength} _keepAlive: {_keepAlive}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"flags:{flags} _BoundaryType:{_boundaryType} _contentLength:{_contentLength} _keepAlive: {_keepAlive}"
+                );
             return flags;
         }
 
         // This method handles the shared response header processing between normal HTTP responses and WebSocket responses.
         internal void ComputeCoreHeaders()
         {
-            if (HttpListenerContext.MutualAuthentication != null && HttpListenerContext.MutualAuthentication.Length > 0)
+            if (
+                HttpListenerContext.MutualAuthentication != null
+                && HttpListenerContext.MutualAuthentication.Length > 0
+            )
             {
-                Headers[HttpResponseHeader.WwwAuthenticate] = HttpListenerContext.MutualAuthentication;
+                Headers[HttpResponseHeader.WwwAuthenticate] =
+                    HttpListenerContext.MutualAuthentication;
             }
             ComputeCookies();
         }
 
-        private List<GCHandle>? SerializeHeaders(ref Interop.HttpApi.HTTP_RESPONSE_HEADERS headers,
-            bool isWebSocketHandshake)
+        private List<GCHandle>? SerializeHeaders(
+            ref Interop.HttpApi.HTTP_RESPONSE_HEADERS headers,
+            bool isWebSocketHandshake
+        )
         {
             Interop.HttpApi.HTTP_UNKNOWN_HEADER[]? unknownHeaders = null;
             List<GCHandle> pinnedHeaders;
             GCHandle gcHandle;
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "SerializeHeaders(HTTP_RESPONSE_HEADERS)");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, "SerializeHeaders(HTTP_RESPONSE_HEADERS)");
             if (Headers.Count == 0)
             {
                 return null;
@@ -477,8 +543,10 @@ $"flags: {flags} _boundaryType: {_boundaryType} _contentLength: {_contentLength}
                 lookup = Interop.HttpApi.HTTP_RESPONSE_HEADER_ID.IndexOfKnownHeader(headerName);
 
                 //Treat Set-Cookie as well as Connection header in Websocket mode as unknown
-                if (lookup == (int)HttpResponseHeader.SetCookie ||
-                    isWebSocketHandshake && lookup == (int)HttpResponseHeader.Connection)
+                if (
+                    lookup == (int)HttpResponseHeader.SetCookie
+                    || isWebSocketHandshake && lookup == (int)HttpResponseHeader.Connection
+                )
                 {
                     lookup = -1;
                 }
@@ -498,23 +566,32 @@ $"flags: {flags} _boundaryType: {_boundaryType} _contentLength: {_contentLength}
                     {
                         headerName = Headers.GetKey(index) as string;
                         headerValue = (Headers.Get(index) as string)!;
-                        lookup = Interop.HttpApi.HTTP_RESPONSE_HEADER_ID.IndexOfKnownHeader(headerName);
-                        if (lookup == (int)HttpResponseHeader.SetCookie ||
-                            isWebSocketHandshake && lookup == (int)HttpResponseHeader.Connection)
+                        lookup = Interop.HttpApi.HTTP_RESPONSE_HEADER_ID.IndexOfKnownHeader(
+                            headerName
+                        );
+                        if (
+                            lookup == (int)HttpResponseHeader.SetCookie
+                            || isWebSocketHandshake && lookup == (int)HttpResponseHeader.Connection
+                        )
                         {
                             lookup = -1;
                         }
                         if (NetEventSource.Log.IsEnabled())
-                            NetEventSource.Info(this,
-  $"index={index},headers.count={Headers.Count},headerName:{headerName},lookup:{lookup} headerValue:{headerValue}");
+                            NetEventSource.Info(
+                                this,
+                                $"index={index},headers.count={Headers.Count},headerName:{headerName},lookup:{lookup} headerValue:{headerValue}"
+                            );
                         if (lookup == -1)
                         {
                             if (unknownHeaders == null)
                             {
-                                unknownHeaders = new Interop.HttpApi.HTTP_UNKNOWN_HEADER[numUnknownHeaders];
+                                unknownHeaders = new Interop.HttpApi.HTTP_UNKNOWN_HEADER[
+                                    numUnknownHeaders
+                                ];
                                 gcHandle = GCHandle.Alloc(unknownHeaders, GCHandleType.Pinned);
                                 pinnedHeaders.Add(gcHandle);
-                                headers.pUnknownHeaders = (Interop.HttpApi.HTTP_UNKNOWN_HEADER*)gcHandle.AddrOfPinnedObject();
+                                headers.pUnknownHeaders = (Interop.HttpApi.HTTP_UNKNOWN_HEADER*)
+                                    gcHandle.AddrOfPinnedObject();
                             }
 
                             //----------------------------------------
@@ -522,31 +599,47 @@ $"flags: {flags} _boundaryType: {_boundaryType} _contentLength: {_contentLength}
                             //ALLOW MULTIPLE HEADERS to be added
                             //---------------------------------------
                             string[] headerValues = Headers.GetValues(index)!;
-                            for (int headerValueIndex = 0; headerValueIndex < headerValues.Length; headerValueIndex++)
+                            for (
+                                int headerValueIndex = 0;
+                                headerValueIndex < headerValues.Length;
+                                headerValueIndex++
+                            )
                             {
                                 //Add Name
                                 bytes = new byte[WebHeaderEncoding.GetByteCount(headerName)];
-                                unknownHeaders[headers.UnknownHeaderCount].NameLength = (ushort)bytes.Length;
+                                unknownHeaders[headers.UnknownHeaderCount].NameLength = (ushort)
+                                    bytes.Length;
                                 WebHeaderEncoding.GetBytes(headerName, 0, bytes.Length, bytes, 0);
                                 gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                                 pinnedHeaders.Add(gcHandle);
-                                unknownHeaders[headers.UnknownHeaderCount].pName = (sbyte*)gcHandle.AddrOfPinnedObject();
+                                unknownHeaders[headers.UnknownHeaderCount].pName = (sbyte*)
+                                    gcHandle.AddrOfPinnedObject();
 
                                 //Add Value
                                 headerValue = headerValues[headerValueIndex];
                                 bytes = new byte[WebHeaderEncoding.GetByteCount(headerValue)];
-                                unknownHeaders[headers.UnknownHeaderCount].RawValueLength = (ushort)bytes.Length;
+                                unknownHeaders[headers.UnknownHeaderCount].RawValueLength = (ushort)
+                                    bytes.Length;
                                 WebHeaderEncoding.GetBytes(headerValue, 0, bytes.Length, bytes, 0);
                                 gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                                 pinnedHeaders.Add(gcHandle);
-                                unknownHeaders[headers.UnknownHeaderCount].pRawValue = (sbyte*)gcHandle.AddrOfPinnedObject();
+                                unknownHeaders[headers.UnknownHeaderCount].pRawValue = (sbyte*)
+                                    gcHandle.AddrOfPinnedObject();
                                 headers.UnknownHeaderCount++;
-                                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "UnknownHeaderCount:" + headers.UnknownHeaderCount);
+                                if (NetEventSource.Log.IsEnabled())
+                                    NetEventSource.Info(
+                                        this,
+                                        "UnknownHeaderCount:" + headers.UnknownHeaderCount
+                                    );
                             }
                         }
                         else
                         {
-                            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"HttpResponseHeader[{lookup}]:{((HttpResponseHeader)lookup)} headerValue:{headerValue}");
+                            if (NetEventSource.Log.IsEnabled())
+                                NetEventSource.Info(
+                                    this,
+                                    $"HttpResponseHeader[{lookup}]:{((HttpResponseHeader)lookup)} headerValue:{headerValue}"
+                                );
                             if (headerValue != null)
                             {
                                 bytes = new byte[WebHeaderEncoding.GetByteCount(headerValue)];
@@ -554,10 +647,14 @@ $"flags: {flags} _boundaryType: {_boundaryType} _contentLength: {_contentLength}
                                 WebHeaderEncoding.GetBytes(headerValue, 0, bytes.Length, bytes, 0);
                                 gcHandle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
                                 pinnedHeaders.Add(gcHandle);
-                                pKnownHeaders[lookup].pRawValue = (sbyte*)gcHandle.AddrOfPinnedObject();
+                                pKnownHeaders[lookup].pRawValue = (sbyte*)
+                                    gcHandle.AddrOfPinnedObject();
                                 if (NetEventSource.Log.IsEnabled())
                                 {
-                                    NetEventSource.Info(this, $"pRawValue:{((IntPtr)(pKnownHeaders[lookup].pRawValue))} RawValueLength:{pKnownHeaders[lookup].RawValueLength} lookup: {lookup}");
+                                    NetEventSource.Info(
+                                        this,
+                                        $"pRawValue:{((IntPtr)(pKnownHeaders[lookup].pRawValue))} RawValueLength:{pKnownHeaders[lookup].RawValueLength} lookup: {lookup}"
+                                    );
                                 }
                             }
                         }

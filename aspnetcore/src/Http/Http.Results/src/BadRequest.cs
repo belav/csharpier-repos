@@ -19,9 +19,7 @@ public sealed class BadRequest : IResult, IEndpointMetadataProvider, IStatusCode
     /// Initializes a new instance of the <see cref="BadRequest"/> class with the values
     /// provided.
     /// </summary>
-    internal BadRequest()
-    {
-    }
+    internal BadRequest() { }
 
     /// <summary>
     /// Gets the HTTP status code: <see cref="StatusCodes.Status400BadRequest"/>
@@ -37,7 +35,9 @@ public sealed class BadRequest : IResult, IEndpointMetadataProvider, IStatusCode
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.BadRequestObjectResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.BadRequestObjectResult"
+        );
 
         HttpResultsHelper.Log.WritingResultAsStatusCode(logger, StatusCode);
         httpContext.Response.StatusCode = StatusCode;
@@ -46,11 +46,16 @@ public sealed class BadRequest : IResult, IEndpointMetadataProvider, IStatusCode
     }
 
     /// <inheritdoc/>
-    static void IEndpointMetadataProvider.PopulateMetadata(MethodInfo method, EndpointBuilder builder)
+    static void IEndpointMetadataProvider.PopulateMetadata(
+        MethodInfo method,
+        EndpointBuilder builder
+    )
     {
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder.Metadata.Add(new ProducesResponseTypeMetadata(StatusCodes.Status400BadRequest, typeof(void)));
+        builder.Metadata.Add(
+            new ProducesResponseTypeMetadata(StatusCodes.Status400BadRequest, typeof(void))
+        );
     }
 }

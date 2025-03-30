@@ -17,14 +17,13 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
         protected override string LanguageName => LanguageNames.VisualBasic;
 
         public BasicOutlining()
-            : base(nameof(BasicOutlining))
-        {
-        }
+            : base(nameof(BasicOutlining)) { }
 
         [IdeFact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task Outlining()
         {
-            var input = @"
+            var input =
+                @"
 [|Imports System
 Imports System.Text|]
 
@@ -37,7 +36,9 @@ Imports System.Text|]
 End Namespace|]";
             MarkupTestFile.GetSpans(input, out var text, out var spans);
             await TestServices.Editor.SetTextAsync(text, HangMitigatingCancellationToken);
-            var actualSpansWithState = await TestServices.Editor.GetOutliningSpansAsync(HangMitigatingCancellationToken);
+            var actualSpansWithState = await TestServices.Editor.GetOutliningSpansAsync(
+                HangMitigatingCancellationToken
+            );
             var actualSpans = actualSpansWithState.Select(span => span.Span);
             Assert.Equal(spans.OrderBy(s => s.Start), actualSpans);
         }

@@ -21,7 +21,10 @@ public class HeaderPropagationMessageHandler : DelegatingHandler
     /// <param name="options">The options that define which headers are propagated.</param>
     /// <param name="values">The values of the headers to be propagated populated by the
     /// <see cref="HeaderPropagationMiddleware"/>.</param>
-    public HeaderPropagationMessageHandler(HeaderPropagationMessageHandlerOptions options, HeaderPropagationValues values)
+    public HeaderPropagationMessageHandler(
+        HeaderPropagationMessageHandlerOptions options,
+        HeaderPropagationValues values
+    )
     {
         _options = options ?? throw new ArgumentNullException(nameof(options));
         _values = values ?? throw new ArgumentNullException(nameof(values));
@@ -38,15 +41,18 @@ public class HeaderPropagationMessageHandler : DelegatingHandler
     /// <param name="request">The HTTP request message to send to the server.</param>
     /// <param name="cancellationToken">A cancellation token to cancel operation.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+    protected override Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
         var captured = _values.Headers;
         if (captured == null)
         {
             var message =
-                $"The {nameof(HeaderPropagationValues)}.{nameof(HeaderPropagationValues.Headers)} property has not been " +
-                $"initialized. Register the header propagation middleware by adding 'app.{nameof(HeaderPropagationApplicationBuilderExtensions.UseHeaderPropagation)}()' " +
-                $"in the 'Configure(...)' method. Header propagation can only be used within the context of an HTTP request.";
+                $"The {nameof(HeaderPropagationValues)}.{nameof(HeaderPropagationValues.Headers)} property has not been "
+                + $"initialized. Register the header propagation middleware by adding 'app.{nameof(HeaderPropagationApplicationBuilderExtensions.UseHeaderPropagation)}()' "
+                + $"in the 'Configure(...)' method. Header propagation can only be used within the context of an HTTP request.";
             throw new InvalidOperationException(message);
         }
 
@@ -58,26 +64,49 @@ public class HeaderPropagationMessageHandler : DelegatingHandler
             var entry = entries[i];
             var hasContent = request.Content != null;
 
-            if (!request.Headers.TryGetValues(entry.OutboundHeaderName, out var _) &&
-                !(hasContent && request.Content!.Headers.TryGetValues(entry.OutboundHeaderName, out var _)))
+            if (
+                !request.Headers.TryGetValues(entry.OutboundHeaderName, out var _)
+                && !(
+                    hasContent
+                    && request.Content!.Headers.TryGetValues(entry.OutboundHeaderName, out var _)
+                )
+            )
             {
-                if (captured.TryGetValue(entry.CapturedHeaderName, out var stringValues) &&
-                    !StringValues.IsNullOrEmpty(stringValues))
+                if (
+                    captured.TryGetValue(entry.CapturedHeaderName, out var stringValues)
+                    && !StringValues.IsNullOrEmpty(stringValues)
+                )
                 {
                     if (stringValues.Count == 1)
                     {
                         var value = stringValues.ToString();
-                        if (!request.Headers.TryAddWithoutValidation(entry.OutboundHeaderName, value) && hasContent)
+                        if (
+                            !request.Headers.TryAddWithoutValidation(
+                                entry.OutboundHeaderName,
+                                value
+                            ) && hasContent
+                        )
                         {
-                            request.Content!.Headers.TryAddWithoutValidation(entry.OutboundHeaderName, value);
+                            request.Content!.Headers.TryAddWithoutValidation(
+                                entry.OutboundHeaderName,
+                                value
+                            );
                         }
                     }
                     else
                     {
                         var values = stringValues.ToArray();
-                        if (!request.Headers.TryAddWithoutValidation(entry.OutboundHeaderName, values) && hasContent)
+                        if (
+                            !request.Headers.TryAddWithoutValidation(
+                                entry.OutboundHeaderName,
+                                values
+                            ) && hasContent
+                        )
                         {
-                            request.Content!.Headers.TryAddWithoutValidation(entry.OutboundHeaderName, values);
+                            request.Content!.Headers.TryAddWithoutValidation(
+                                entry.OutboundHeaderName,
+                                values
+                            );
                         }
                     }
                 }

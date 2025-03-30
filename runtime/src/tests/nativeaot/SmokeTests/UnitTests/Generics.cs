@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Reflection;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 
 class Generics
@@ -91,13 +91,9 @@ class Generics
             }
         }
 
-        struct ValueGen<T>
-        {
-        }
+        struct ValueGen<T> { }
 
-        class ClassGen<T>
-        {
-        }
+        class ClassGen<T> { }
 
         public static void Run()
         {
@@ -112,7 +108,9 @@ class Generics
     class TestStaticBaseLookups
     {
         class C1 { }
+
         class C2 { }
+
         class C3 { }
 
         class GenHolder<T>
@@ -171,7 +169,10 @@ class Generics
 
         struct MediumStruct
         {
-            public int X, Y, Z, W;
+            public int X,
+                Y,
+                Z,
+                W;
         }
 
         unsafe struct BigStruct
@@ -180,18 +181,21 @@ class Generics
             public fixed byte Bytes[Length];
         }
 
-        T Generic<T>(object o) where T : class
+        T Generic<T>(object o)
+            where T : class
         {
             Func<object, T> f = OtherGeneric<T>;
             return f(o);
         }
 
-        T OtherGeneric<T>(object o) where T : class
+        T OtherGeneric<T>(object o)
+            where T : class
         {
             return o as T;
         }
 
         delegate void VoidGenericDelegate<T>(ref T x, T val);
+
         void VoidGeneric<T>(ref T x, T val)
         {
             x = val;
@@ -240,7 +244,13 @@ class Generics
 
             {
                 Func<MediumStruct, MediumStruct> f = o.MediumStructGeneric<object>;
-                MediumStruct x = new MediumStruct { X = 12, Y = 34, Z = 56, W = 78 };
+                MediumStruct x = new MediumStruct
+                {
+                    X = 12,
+                    Y = 34,
+                    Z = 56,
+                    W = 78,
+                };
                 MediumStruct result = f(x);
                 if (result.X != x.X || result.Y != x.Y || result.Z != x.Z || result.W != x.W)
                     throw new Exception();
@@ -267,6 +277,7 @@ class Generics
         class Foo
         {
             public readonly int Value;
+
             public Foo(int value)
             {
                 Value = value;
@@ -281,6 +292,7 @@ class Generics
         class Bar
         {
             public readonly int Value;
+
             public Bar(int value)
             {
                 Value = value;
@@ -295,6 +307,7 @@ class Generics
         class FooShared
         {
             public readonly int Value;
+
             public FooShared(int value)
             {
                 Value = value;
@@ -309,6 +322,7 @@ class Generics
         class BarShared
         {
             public readonly int Value;
+
             public BarShared(int value)
             {
                 Value = value;
@@ -338,8 +352,11 @@ class Generics
             public string MakeGenString<U>()
             {
                 // Use a constructed type that is not used elsewhere
-                return typeof(T[,,]).GetElementType().Name + ", " +
-                    typeof(U[,,,]).GetElementType().Name + ": " + X.ToString();
+                return typeof(T[,,]).GetElementType().Name
+                    + ", "
+                    + typeof(U[,,,]).GetElementType().Name
+                    + ": "
+                    + X.ToString();
             }
         }
 
@@ -361,8 +378,11 @@ class Generics
             public string MakeGenString<U>()
             {
                 // Use a constructed type that is not used elsewhere
-                return typeof(T[,,]).GetElementType().Name + ", " +
-                    typeof(U[,,,]).GetElementType().Name + ": " + X.ToString();
+                return typeof(T[,,]).GetElementType().Name
+                    + ", "
+                    + typeof(U[,,,]).GetElementType().Name
+                    + ": "
+                    + X.ToString();
             }
         }
 
@@ -538,7 +558,8 @@ class Generics
     /// </summary>
     class TestInitThisClass
     {
-        class Gen1<T> where T : class
+        class Gen1<T>
+            where T : class
         {
             static string s_str1;
             static string s_str2;
@@ -560,7 +581,8 @@ class Generics
             }
         }
 
-        class Gen2<T> where T : class
+        class Gen2<T>
+            where T : class
         {
             public static string GetFromClassParam()
             {
@@ -630,7 +652,9 @@ class Generics
         }
 
         static Type s_genReflectedType = typeof(GenReflected<>);
-        static MethodInfo s_nonGenReflectedSynchronizeMethod = typeof(NonGenReflected).GetMethod("Synchronize");
+        static MethodInfo s_nonGenReflectedSynchronizeMethod = typeof(NonGenReflected).GetMethod(
+            "Synchronize"
+        );
 
         public static void Run()
         {
@@ -640,7 +664,12 @@ class Generics
             NonGen.Synchronize<int>();
 
             {
-                var mi = (MethodInfo)s_genReflectedType.MakeGenericType(typeof(object)).GetMemberWithSameMetadataDefinitionAs(typeof(GenReflected<>).GetMethod("Synchronize"));
+                var mi = (MethodInfo)
+                    s_genReflectedType
+                        .MakeGenericType(typeof(object))
+                        .GetMemberWithSameMetadataDefinitionAs(
+                            typeof(GenReflected<>).GetMethod("Synchronize")
+                        );
                 mi.Invoke(null, Array.Empty<object>());
             }
 
@@ -657,9 +686,11 @@ class Generics
     class TestVirtualMethodUseTracking
     {
         class C1 { }
+
         class C2 { }
 
-        class Base1<T> where T : class
+        class Base1<T>
+            where T : class
         {
             public virtual T As(object o)
             {
@@ -667,7 +698,8 @@ class Generics
             }
         }
 
-        class Derived1<T> : Base1<T> where T : class
+        class Derived1<T> : Base1<T>
+            where T : class
         {
             public T AsToo(object o)
             {
@@ -678,12 +710,14 @@ class Generics
         class Base2<T>
         {
             public virtual string Method1() => "Base2.Method1";
+
             public virtual string Method2() => "Base2.Method2";
         }
 
         class Derived2<T> : Base2<T>
         {
             public override string Method1() => "Derived2.Method1";
+
             public override string Method2() => "Derived2.Method2";
         }
 
@@ -736,7 +770,8 @@ class Generics
             }
         }
 
-        class Derived<T> : Base<T, string> where T : class
+        class Derived<T> : Base<T, string>
+            where T : class
         {
             public T Cast(object v)
             {
@@ -781,32 +816,99 @@ class Generics
 
         public class BaseClass<T> : IFace<T>
         {
-            public virtual string Method1(T t) { return "BaseClass.Method1"; }
-            public virtual string Method2(T t) { return "BaseClass.Method2"; }
-            public virtual string Method3(T t) { return "BaseClass.Method3"; }
-            public virtual string Method4(T t) { return "BaseClass.Method4"; }
-            public virtual string GVMethod1<U>(T t, U u) { return "BaseClass.GVMethod1"; }
-            public virtual string GVMethod2<U>(T t, U u) { return "BaseClass.GVMethod2"; }
-            public virtual string GVMethod3<U>(T t, U u) { return "BaseClass.GVMethod3"; }
-            public virtual string GVMethod4<U>(T t, U u) { return "BaseClass.GVMethod4"; }
+            public virtual string Method1(T t)
+            {
+                return "BaseClass.Method1";
+            }
 
-            public virtual string IFaceMethod1(T t) { return "BaseClass.IFaceMethod1"; }
-            public virtual string IFaceGVMethod1<U>(T t, U u) { return "BaseClass.IFaceGVMethod1"; }
+            public virtual string Method2(T t)
+            {
+                return "BaseClass.Method2";
+            }
+
+            public virtual string Method3(T t)
+            {
+                return "BaseClass.Method3";
+            }
+
+            public virtual string Method4(T t)
+            {
+                return "BaseClass.Method4";
+            }
+
+            public virtual string GVMethod1<U>(T t, U u)
+            {
+                return "BaseClass.GVMethod1";
+            }
+
+            public virtual string GVMethod2<U>(T t, U u)
+            {
+                return "BaseClass.GVMethod2";
+            }
+
+            public virtual string GVMethod3<U>(T t, U u)
+            {
+                return "BaseClass.GVMethod3";
+            }
+
+            public virtual string GVMethod4<U>(T t, U u)
+            {
+                return "BaseClass.GVMethod4";
+            }
+
+            public virtual string IFaceMethod1(T t)
+            {
+                return "BaseClass.IFaceMethod1";
+            }
+
+            public virtual string IFaceGVMethod1<U>(T t, U u)
+            {
+                return "BaseClass.IFaceGVMethod1";
+            }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            public virtual string VirtualButNotUsedVirtuallyMethod(T t) { return "BaseClass.VirtualButNotUsedVirtuallyMethod"; }
+            public virtual string VirtualButNotUsedVirtuallyMethod(T t)
+            {
+                return "BaseClass.VirtualButNotUsedVirtuallyMethod";
+            }
         }
 
         public class DerivedClass1<T> : BaseClass<T>, IFace<T>
         {
-            public override sealed string Method1(T t) { return "DerivedClass1.Method1"; }
-            public override string Method2(T t) { return "DerivedClass1.Method2"; }
-            public new virtual string Method3(T t) { return "DerivedClass1.Method3"; }
-            public override sealed string GVMethod1<U>(T t, U u) { return "DerivedClass1.GVMethod1"; }
-            public override string GVMethod2<U>(T t, U u) { return "DerivedClass1.GVMethod2"; }
-            public new virtual string GVMethod3<U>(T t, U u) { return "DerivedClass1.GVMethod3"; }
+            public sealed override string Method1(T t)
+            {
+                return "DerivedClass1.Method1";
+            }
 
-            public override string IFaceMethod1(T t) { return "DerivedClass1.IFaceMethod1"; }
+            public override string Method2(T t)
+            {
+                return "DerivedClass1.Method2";
+            }
+
+            public new virtual string Method3(T t)
+            {
+                return "DerivedClass1.Method3";
+            }
+
+            public sealed override string GVMethod1<U>(T t, U u)
+            {
+                return "DerivedClass1.GVMethod1";
+            }
+
+            public override string GVMethod2<U>(T t, U u)
+            {
+                return "DerivedClass1.GVMethod2";
+            }
+
+            public new virtual string GVMethod3<U>(T t, U u)
+            {
+                return "DerivedClass1.GVMethod3";
+            }
+
+            public override string IFaceMethod1(T t)
+            {
+                return "DerivedClass1.IFaceMethod1";
+            }
 
             public string UseVirtualButNotUsedVirtuallyMethod(T t)
             {
@@ -817,13 +919,35 @@ class Generics
 
         public class DerivedClass2<T> : DerivedClass1<T>, IFace<T>
         {
-            public override string Method3(T t) { return "DerivedClass2.Method3"; }
-            public override string Method4(T t) { return "DerivedClass2.Method4"; }
-            public override string GVMethod3<U>(T t, U u) { return "DerivedClass2.GVMethod3"; }
-            public override string GVMethod4<U>(T t, U u) { return "DerivedClass2.GVMethod4"; }
+            public override string Method3(T t)
+            {
+                return "DerivedClass2.Method3";
+            }
 
-            string IFace<T>.IFaceMethod1(T t) { return "DerivedClass2.IFaceMethod1"; }
-            public override string IFaceGVMethod1<U>(T t, U u) { return "DerivedClass2.IFaceGVMethod1"; }
+            public override string Method4(T t)
+            {
+                return "DerivedClass2.Method4";
+            }
+
+            public override string GVMethod3<U>(T t, U u)
+            {
+                return "DerivedClass2.GVMethod3";
+            }
+
+            public override string GVMethod4<U>(T t, U u)
+            {
+                return "DerivedClass2.GVMethod4";
+            }
+
+            string IFace<T>.IFaceMethod1(T t)
+            {
+                return "DerivedClass2.IFaceMethod1";
+            }
+
+            public override string IFaceGVMethod1<U>(T t, U u)
+            {
+                return "DerivedClass2.IFaceGVMethod1";
+            }
         }
 
         private static void Verify<T>(T expected, T actual)
@@ -848,7 +972,10 @@ class Generics
             object o = new Foo<string>();
 
             {
-                MethodInfo mi = typeof(Foo<string>).GetTypeInfo().GetDeclaredMethod("SetAndCheck").MakeGenericMethod(typeof(string));
+                MethodInfo mi = typeof(Foo<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("SetAndCheck")
+                    .MakeGenericMethod(typeof(string));
                 if (!(bool)mi.Invoke(o, new object[] { 123, "hello" }))
                     s_NumErrors++;
 
@@ -862,7 +989,10 @@ class Generics
 
             // Uncomment when we have the type loader to build invoke stub dictionaries.
             {
-                MethodInfo mi = typeof(Foo<string>).GetTypeInfo().GetDeclaredMethod("SetAndCheck").MakeGenericMethod(typeof(object));
+                MethodInfo mi = typeof(Foo<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("SetAndCheck")
+                    .MakeGenericMethod(typeof(object));
                 if ((bool)mi.Invoke(o, new object[] { 123, new object() }))
                     s_NumErrors++;
             }
@@ -897,93 +1027,271 @@ class Generics
                 new DerivedClass2<string>().GVMethod4<string>("string", "string2");
                 Func<IFace<string>> f = () => new BaseClass<string>(); // Hack to prevent devirtualization
                 f().IFaceMethod1("string");
-                ((IFace<string>)new BaseClass<string>()).IFaceGVMethod1<string>("string1", "string2");
+                ((IFace<string>)new BaseClass<string>()).IFaceGVMethod1<string>(
+                    "string1",
+                    "string2"
+                );
 
-                MethodInfo m1 = typeof(BaseClass<string>).GetTypeInfo().GetDeclaredMethod("Method1");
-                MethodInfo m2 = typeof(BaseClass<string>).GetTypeInfo().GetDeclaredMethod("Method2");
-                MethodInfo m3 = typeof(BaseClass<string>).GetTypeInfo().GetDeclaredMethod("Method3");
-                MethodInfo m4 = typeof(BaseClass<string>).GetTypeInfo().GetDeclaredMethod("Method4");
-                MethodInfo unusedMethod = typeof(BaseClass<string>).GetTypeInfo().GetDeclaredMethod("VirtualButNotUsedVirtuallyMethod");
-                MethodInfo gvm1 = typeof(BaseClass<string>).GetTypeInfo().GetDeclaredMethod("GVMethod1").MakeGenericMethod(typeof(string));
-                MethodInfo gvm2 = typeof(BaseClass<string>).GetTypeInfo().GetDeclaredMethod("GVMethod2").MakeGenericMethod(typeof(string));
-                MethodInfo gvm3 = typeof(BaseClass<string>).GetTypeInfo().GetDeclaredMethod("GVMethod3").MakeGenericMethod(typeof(string));
-                MethodInfo gvm4 = typeof(BaseClass<string>).GetTypeInfo().GetDeclaredMethod("GVMethod4").MakeGenericMethod(typeof(string));
+                MethodInfo m1 = typeof(BaseClass<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("Method1");
+                MethodInfo m2 = typeof(BaseClass<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("Method2");
+                MethodInfo m3 = typeof(BaseClass<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("Method3");
+                MethodInfo m4 = typeof(BaseClass<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("Method4");
+                MethodInfo unusedMethod = typeof(BaseClass<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("VirtualButNotUsedVirtuallyMethod");
+                MethodInfo gvm1 = typeof(BaseClass<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GVMethod1")
+                    .MakeGenericMethod(typeof(string));
+                MethodInfo gvm2 = typeof(BaseClass<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GVMethod2")
+                    .MakeGenericMethod(typeof(string));
+                MethodInfo gvm3 = typeof(BaseClass<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GVMethod3")
+                    .MakeGenericMethod(typeof(string));
+                MethodInfo gvm4 = typeof(BaseClass<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GVMethod4")
+                    .MakeGenericMethod(typeof(string));
                 Verify("BaseClass.Method1", m1.Invoke(new BaseClass<string>(), new[] { "" }));
                 Verify("BaseClass.Method2", m2.Invoke(new BaseClass<string>(), new[] { "" }));
                 Verify("BaseClass.Method3", m3.Invoke(new BaseClass<string>(), new[] { "" }));
                 Verify("BaseClass.Method4", m4.Invoke(new BaseClass<string>(), new[] { "" }));
-                Verify("BaseClass.VirtualButNotUsedVirtuallyMethod", unusedMethod.Invoke(new BaseClass<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method1", m1.Invoke(new DerivedClass1<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method2", m2.Invoke(new DerivedClass1<string>(), new[] { "" }));
+                Verify(
+                    "BaseClass.VirtualButNotUsedVirtuallyMethod",
+                    unusedMethod.Invoke(new BaseClass<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.Method1",
+                    m1.Invoke(new DerivedClass1<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.Method2",
+                    m2.Invoke(new DerivedClass1<string>(), new[] { "" })
+                );
                 Verify("BaseClass.Method3", m3.Invoke(new DerivedClass1<string>(), new[] { "" }));
                 Verify("BaseClass.Method4", m4.Invoke(new DerivedClass1<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method1", m1.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method2", m2.Invoke(new DerivedClass2<string>(), new[] { "" }));
+                Verify(
+                    "DerivedClass1.Method1",
+                    m1.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.Method2",
+                    m2.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
                 Verify("BaseClass.Method3", m3.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass2.Method4", m4.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("BaseClass.GVMethod1", gvm1.Invoke(new BaseClass<string>(), new[] { "", "" }));
-                Verify("BaseClass.GVMethod2", gvm2.Invoke(new BaseClass<string>(), new[] { "", "" }));
-                Verify("BaseClass.GVMethod3", gvm3.Invoke(new BaseClass<string>(), new[] { "", "" }));
-                Verify("BaseClass.GVMethod4", gvm4.Invoke(new BaseClass<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod1", gvm1.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod2", gvm2.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("BaseClass.GVMethod3", gvm3.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("BaseClass.GVMethod4", gvm4.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod1", gvm1.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod2", gvm2.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
-                Verify("BaseClass.GVMethod3", gvm3.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
-                Verify("DerivedClass2.GVMethod4", gvm4.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
+                Verify(
+                    "DerivedClass2.Method4",
+                    m4.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "BaseClass.GVMethod1",
+                    gvm1.Invoke(new BaseClass<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "BaseClass.GVMethod2",
+                    gvm2.Invoke(new BaseClass<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "BaseClass.GVMethod3",
+                    gvm3.Invoke(new BaseClass<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "BaseClass.GVMethod4",
+                    gvm4.Invoke(new BaseClass<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod1",
+                    gvm1.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod2",
+                    gvm2.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "BaseClass.GVMethod3",
+                    gvm3.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "BaseClass.GVMethod4",
+                    gvm4.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod1",
+                    gvm1.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod2",
+                    gvm2.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "BaseClass.GVMethod3",
+                    gvm3.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass2.GVMethod4",
+                    gvm4.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
 
                 m1 = typeof(DerivedClass1<string>).GetTypeInfo().GetDeclaredMethod("Method1");
                 m2 = typeof(DerivedClass1<string>).GetTypeInfo().GetDeclaredMethod("Method2");
                 m3 = typeof(DerivedClass1<string>).GetTypeInfo().GetDeclaredMethod("Method3");
-                gvm1 = typeof(DerivedClass1<string>).GetTypeInfo().GetDeclaredMethod("GVMethod1").MakeGenericMethod(typeof(string));
-                gvm2 = typeof(DerivedClass1<string>).GetTypeInfo().GetDeclaredMethod("GVMethod2").MakeGenericMethod(typeof(string));
-                gvm3 = typeof(DerivedClass1<string>).GetTypeInfo().GetDeclaredMethod("GVMethod3").MakeGenericMethod(typeof(string));
-                Verify("DerivedClass1.Method1", m1.Invoke(new DerivedClass1<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method2", m2.Invoke(new DerivedClass1<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method3", m3.Invoke(new DerivedClass1<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method1", m1.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass1.Method2", m2.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass2.Method3", m3.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass1.GVMethod1", gvm1.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod2", gvm2.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod3", gvm3.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod1", gvm1.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.GVMethod2", gvm2.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
-                Verify("DerivedClass2.GVMethod3", gvm3.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
+                gvm1 = typeof(DerivedClass1<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GVMethod1")
+                    .MakeGenericMethod(typeof(string));
+                gvm2 = typeof(DerivedClass1<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GVMethod2")
+                    .MakeGenericMethod(typeof(string));
+                gvm3 = typeof(DerivedClass1<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GVMethod3")
+                    .MakeGenericMethod(typeof(string));
+                Verify(
+                    "DerivedClass1.Method1",
+                    m1.Invoke(new DerivedClass1<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.Method2",
+                    m2.Invoke(new DerivedClass1<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.Method3",
+                    m3.Invoke(new DerivedClass1<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.Method1",
+                    m1.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.Method2",
+                    m2.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass2.Method3",
+                    m3.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod1",
+                    gvm1.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod2",
+                    gvm2.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod3",
+                    gvm3.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod1",
+                    gvm1.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.GVMethod2",
+                    gvm2.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass2.GVMethod3",
+                    gvm3.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
 
                 m3 = typeof(DerivedClass2<string>).GetTypeInfo().GetDeclaredMethod("Method3");
                 m4 = typeof(DerivedClass2<string>).GetTypeInfo().GetDeclaredMethod("Method4");
-                gvm3 = typeof(DerivedClass2<string>).GetTypeInfo().GetDeclaredMethod("GVMethod3").MakeGenericMethod(typeof(string));
-                gvm4 = typeof(DerivedClass2<string>).GetTypeInfo().GetDeclaredMethod("GVMethod4").MakeGenericMethod(typeof(string));
-                Verify("DerivedClass2.Method3", m3.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass2.Method4", m4.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass2.GVMethod3", gvm3.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
-                Verify("DerivedClass2.GVMethod4", gvm4.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
+                gvm3 = typeof(DerivedClass2<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GVMethod3")
+                    .MakeGenericMethod(typeof(string));
+                gvm4 = typeof(DerivedClass2<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GVMethod4")
+                    .MakeGenericMethod(typeof(string));
+                Verify(
+                    "DerivedClass2.Method3",
+                    m3.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass2.Method4",
+                    m4.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass2.GVMethod3",
+                    gvm3.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass2.GVMethod4",
+                    gvm4.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
 
                 // BaseClass<int>.Method1 has the same slot as BaseClass<float>.Method3 on CoreRT, because vtable entries
                 // get populated on demand (the first type won't get a Method3 entry, and the latter won't get a Method1 entry)
                 new BaseClass<int>().Method1(1);
                 m1 = typeof(BaseClass<int>).GetTypeInfo().GetDeclaredMethod("Method1");
-                Verify("BaseClass.Method1", m1.Invoke(new BaseClass<int>(), new object[] { (int)1 }));
-                Verify("DerivedClass1.Method1", m1.Invoke(new DerivedClass1<int>(), new object[] { (int)1 }));
-                Verify("DerivedClass1.Method1", m1.Invoke(new DerivedClass2<int>(), new object[] { (int)1 }));
+                Verify(
+                    "BaseClass.Method1",
+                    m1.Invoke(new BaseClass<int>(), new object[] { (int)1 })
+                );
+                Verify(
+                    "DerivedClass1.Method1",
+                    m1.Invoke(new DerivedClass1<int>(), new object[] { (int)1 })
+                );
+                Verify(
+                    "DerivedClass1.Method1",
+                    m1.Invoke(new DerivedClass2<int>(), new object[] { (int)1 })
+                );
 
                 new BaseClass<float>().Method3(1);
                 m3 = typeof(BaseClass<float>).GetTypeInfo().GetDeclaredMethod("Method3");
-                Verify("BaseClass.Method3", m3.Invoke(new BaseClass<float>(), new object[] { 1.1f }));
-                Verify("BaseClass.Method3", m3.Invoke(new DerivedClass1<float>(), new object[] { 1.1f }));
-                Verify("BaseClass.Method3", m3.Invoke(new DerivedClass2<float>(), new object[] { 1.1f }));
+                Verify(
+                    "BaseClass.Method3",
+                    m3.Invoke(new BaseClass<float>(), new object[] { 1.1f })
+                );
+                Verify(
+                    "BaseClass.Method3",
+                    m3.Invoke(new DerivedClass1<float>(), new object[] { 1.1f })
+                );
+                Verify(
+                    "BaseClass.Method3",
+                    m3.Invoke(new DerivedClass2<float>(), new object[] { 1.1f })
+                );
 
                 m1 = typeof(IFace<string>).GetTypeInfo().GetDeclaredMethod("IFaceMethod1");
-                gvm1 = typeof(IFace<string>).GetTypeInfo().GetDeclaredMethod("IFaceGVMethod1").MakeGenericMethod(typeof(string));
+                gvm1 = typeof(IFace<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("IFaceGVMethod1")
+                    .MakeGenericMethod(typeof(string));
                 Verify("BaseClass.IFaceMethod1", m1.Invoke(new BaseClass<string>(), new[] { "" }));
-                Verify("BaseClass.IFaceGVMethod1", gvm1.Invoke(new BaseClass<string>(), new[] { "", "" }));
-                Verify("DerivedClass1.IFaceMethod1", m1.Invoke(new DerivedClass1<string>(), new[] { "" }));
-                Verify("BaseClass.IFaceGVMethod1", gvm1.Invoke(new DerivedClass1<string>(), new[] { "", "" }));
-                Verify("DerivedClass2.IFaceMethod1", m1.Invoke(new DerivedClass2<string>(), new[] { "" }));
-                Verify("DerivedClass2.IFaceGVMethod1", gvm1.Invoke(new DerivedClass2<string>(), new[] { "", "" }));
+                Verify(
+                    "BaseClass.IFaceGVMethod1",
+                    gvm1.Invoke(new BaseClass<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass1.IFaceMethod1",
+                    m1.Invoke(new DerivedClass1<string>(), new[] { "" })
+                );
+                Verify(
+                    "BaseClass.IFaceGVMethod1",
+                    gvm1.Invoke(new DerivedClass1<string>(), new[] { "", "" })
+                );
+                Verify(
+                    "DerivedClass2.IFaceMethod1",
+                    m1.Invoke(new DerivedClass2<string>(), new[] { "" })
+                );
+                Verify(
+                    "DerivedClass2.IFaceGVMethod1",
+                    gvm1.Invoke(new DerivedClass2<string>(), new[] { "", "" })
+                );
             }
 
             if (s_NumErrors != 0)
@@ -1052,6 +1360,7 @@ class Generics
     class TestConstrainedMethodCalls
     {
         class Atom1 { }
+
         class Atom2 { }
 
         interface IFoo<T>
@@ -1073,11 +1382,13 @@ class Generics
         struct MyDisposableStruct<T> : IDisposable
         {
             public static Type TypeSeenWhenDisposed { get; private set; }
+
             void IDisposable.Dispose() => TypeSeenWhenDisposed = typeof(T);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool DoFrob<T, U>(ref T t, object o) where T : IFoo<U>
+        static bool DoFrob<T, U>(ref T t, object o)
+            where T : IFoo<U>
         {
             // Perform a constrained interface call from shared code.
             // This should have been resolved to a direct call at compile time.
@@ -1261,79 +1572,200 @@ class Generics
 
         class Base : IFoo<string>, IFoo<int>
         {
-            public virtual string GMethod1<T>(T t1, T t2) { return "Base.GMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-            public virtual string IMethod1<T>(T t1, T t2) { return "Base.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-        }
-        class Derived : Base, IFoo<string>, IFoo<int>
-        {
-            public override string GMethod1<T>(T t1, T t2) { return "Derived.GMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-            string IFoo<string>.IMethod1<T>(T t1, T t2) { return "Derived.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-        }
-        class SuperDerived : Derived, IFoo<string>, IFoo<int>
-        {
-            string IFoo<int>.IMethod1<T>(T t1, T t2) { return "SuperDerived.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            public virtual string GMethod1<T>(T t1, T t2)
+            {
+                return "Base.GMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
+
+            public virtual string IMethod1<T>(T t1, T t2)
+            {
+                return "Base.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
         }
 
+        class Derived : Base, IFoo<string>, IFoo<int>
+        {
+            public override string GMethod1<T>(T t1, T t2)
+            {
+                return "Derived.GMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
+
+            string IFoo<string>.IMethod1<T>(T t1, T t2)
+            {
+                return "Derived.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
+        }
+
+        class SuperDerived : Derived, IFoo<string>, IFoo<int>
+        {
+            string IFoo<int>.IMethod1<T>(T t1, T t2)
+            {
+                return "SuperDerived.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
+        }
 
         class GenBase<A> : IFoo<string>, IFoo<int>
         {
-            public virtual string GMethod1<T>(T t1, T t2) { return "GenBase<" + typeof(A) + ">.GMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-            public virtual string IMethod1<T>(T t1, T t2) { return "GenBase<" + typeof(A) + ">.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            public virtual string GMethod1<T>(T t1, T t2)
+            {
+                return "GenBase<"
+                    + typeof(A)
+                    + ">.GMethod1<"
+                    + typeof(T)
+                    + ">("
+                    + t1
+                    + ","
+                    + t2
+                    + ")";
+            }
+
+            public virtual string IMethod1<T>(T t1, T t2)
+            {
+                return "GenBase<"
+                    + typeof(A)
+                    + ">.IMethod1<"
+                    + typeof(T)
+                    + ">("
+                    + t1
+                    + ","
+                    + t2
+                    + ")";
+            }
         }
+
         class GenDerived<A> : GenBase<A>, IFoo<string>, IFoo<int>
         {
-            public override string GMethod1<T>(T t1, T t2) { return "GenDerived<" + typeof(A) + ">.GMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-            string IFoo<string>.IMethod1<T>(T t1, T t2) { return "GenDerived<" + typeof(A) + ">.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            public override string GMethod1<T>(T t1, T t2)
+            {
+                return "GenDerived<"
+                    + typeof(A)
+                    + ">.GMethod1<"
+                    + typeof(T)
+                    + ">("
+                    + t1
+                    + ","
+                    + t2
+                    + ")";
+            }
+
+            string IFoo<string>.IMethod1<T>(T t1, T t2)
+            {
+                return "GenDerived<"
+                    + typeof(A)
+                    + ">.IFoo<string>.IMethod1<"
+                    + typeof(T)
+                    + ">("
+                    + t1
+                    + ","
+                    + t2
+                    + ")";
+            }
         }
+
         class GenSuperDerived<A> : GenDerived<A>, IFoo<string>, IFoo<int>
         {
-            string IFoo<int>.IMethod1<T>(T t1, T t2) { return "GenSuperDerived<" + typeof(A) + ">.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            string IFoo<int>.IMethod1<T>(T t1, T t2)
+            {
+                return "GenSuperDerived<"
+                    + typeof(A)
+                    + ">.IFoo<int>.IMethod1<"
+                    + typeof(T)
+                    + ">("
+                    + t1
+                    + ","
+                    + t2
+                    + ")";
+            }
         }
 
         struct MyStruct1 : IFoo<string>, IFoo<int>
         {
-            string IFoo<string>.IMethod1<T>(T t1, T t2) { return "MyStruct1.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-            string IFoo<int>.IMethod1<T>(T t1, T t2) { return "MyStruct1.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            string IFoo<string>.IMethod1<T>(T t1, T t2)
+            {
+                return "MyStruct1.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
+
+            string IFoo<int>.IMethod1<T>(T t1, T t2)
+            {
+                return "MyStruct1.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
         }
+
         struct MyStruct2 : IFoo<string>, IFoo<int>
         {
-            string IFoo<string>.IMethod1<T>(T t1, T t2) { return "MyStruct2.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-            public string IMethod1<T>(T t1, T t2) { return "MyStruct2.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            string IFoo<string>.IMethod1<T>(T t1, T t2)
+            {
+                return "MyStruct2.IFoo<string>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
+
+            public string IMethod1<T>(T t1, T t2)
+            {
+                return "MyStruct2.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
         }
+
         struct MyStruct3 : IFoo<string>, IFoo<int>
         {
-            string IFoo<int>.IMethod1<T>(T t1, T t2) { return "MyStruct3.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
-            public string IMethod1<T>(T t1, T t2) { return "MyStruct3.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")"; }
+            string IFoo<int>.IMethod1<T>(T t1, T t2)
+            {
+                return "MyStruct3.IFoo<int>.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
+
+            public string IMethod1<T>(T t1, T t2)
+            {
+                return "MyStruct3.IMethod1<" + typeof(T) + ">(" + t1 + "," + t2 + ")";
+            }
         }
 
         public class AnotherBaseClass<T>
         {
-            public virtual string IFaceMethod1(T t) { return "AnotherBaseClass.IFaceMethod1"; }
-            public virtual string IFaceGVMethod1<U>(T t, U u) { return "AnotherBaseClass.IFaceGVMethod1"; }
+            public virtual string IFaceMethod1(T t)
+            {
+                return "AnotherBaseClass.IFaceMethod1";
+            }
+
+            public virtual string IFaceGVMethod1<U>(T t, U u)
+            {
+                return "AnotherBaseClass.IFaceGVMethod1";
+            }
         }
 
-        public class AnotherDerivedClass<T> : AnotherBaseClass<T>, IFace<T>
-        {
-        }
+        public class AnotherDerivedClass<T> : AnotherBaseClass<T>, IFace<T> { }
 
         public class BarImplementor : IBar<int>
         {
-            public virtual U IBarGVMethod<U>(Func<int, U> arg) { return arg(123); }
+            public virtual U IBarGVMethod<U>(Func<int, U> arg)
+            {
+                return arg(123);
+            }
         }
 
         public class Yahoo<T>
         {
-            public virtual U YahooGVM<U>(Func<T, U> arg) { return default(U); }
+            public virtual U YahooGVM<U>(Func<T, U> arg)
+            {
+                return default(U);
+            }
         }
 
         public class YahooDerived : Yahoo<int>
         {
-            public override U YahooGVM<U>(Func<int, U> arg) { return arg(456); }
+            public override U YahooGVM<U>(Func<int, U> arg)
+            {
+                return arg(456);
+            }
         }
 
         public class Covariant<T> : ICovariant<T>
         {
-            public string ICovariantGVM<U>() { return String.Format("Covariant<{0}>.ICovariantGVM<{1}>", typeof(T).Name, typeof(U).Name); }
+            public string ICovariantGVM<U>()
+            {
+                return String.Format(
+                    "Covariant<{0}>.ICovariantGVM<{1}>",
+                    typeof(T).Name,
+                    typeof(U).Name
+                );
+            }
         }
 
         static string s_GMethod1;
@@ -1343,7 +1775,11 @@ class Generics
 
         static int s_NumErrors = 0;
 
-        private static void TestWithStruct(IFoo<string> ifooStr, IFoo<object> ifooObj, IFoo<int> ifooInt)
+        private static void TestWithStruct(
+            IFoo<string> ifooStr,
+            IFoo<object> ifooObj,
+            IFoo<int> ifooInt
+        )
         {
             var res = ifooStr.IMethod1<int>(1, 2);
             WriteLineWithVerification(res, s_IFooString);
@@ -1417,14 +1853,12 @@ class Generics
                 TestWithClass(new Base());
                 Console.WriteLine("====================");
 
-
                 s_GMethod1 = "Derived.GMethod1<System.Int32>(1,2)";
                 s_IFooString = "Derived.IFoo<string>.IMethod1<System.Int32>(3,4)";
                 s_IFooObject = "Derived.IFoo<string>.IMethod1<System.Int32>(5,6)";
                 s_IFooInt = "Base.IMethod1<System.Int32>(7,8)";
                 TestWithClass(new Derived());
                 Console.WriteLine("====================");
-
 
                 s_GMethod1 = "Derived.GMethod1<System.Int32>(1,2)";
                 s_IFooString = "Derived.IFoo<string>.IMethod1<System.Int32>(3,4)";
@@ -1442,7 +1876,6 @@ class Generics
                 TestWithGenClass<byte>(new GenBase<byte>());
                 Console.WriteLine("====================");
 
-
                 s_GMethod1 = "GenDerived<System.Byte>.GMethod1<System.Int32>(1,2)";
                 s_IFooString = "GenDerived<System.Byte>.IFoo<string>.IMethod1<System.Int32>(3,4)";
                 s_IFooObject = "GenDerived<System.Byte>.IFoo<string>.IMethod1<System.Int32>(5,6)";
@@ -1450,14 +1883,12 @@ class Generics
                 TestWithGenClass<byte>(new GenDerived<byte>());
                 Console.WriteLine("====================");
 
-
                 s_GMethod1 = "GenDerived<System.String>.GMethod1<System.Int32>(1,2)";
                 s_IFooString = "GenDerived<System.String>.IFoo<string>.IMethod1<System.Int32>(3,4)";
                 s_IFooObject = "GenDerived<System.String>.IFoo<string>.IMethod1<System.Int32>(5,6)";
                 s_IFooInt = "GenBase<System.String>.IMethod1<System.Int32>(7,8)";
                 TestWithGenClass<String>(new GenDerived<String>());
                 Console.WriteLine("====================");
-
 
                 s_GMethod1 = "GenDerived<System.Byte>.GMethod1<System.Int32>(1,2)";
                 s_IFooString = "GenDerived<System.Byte>.IFoo<string>.IMethod1<System.Int32>(3,4)";
@@ -1474,13 +1905,11 @@ class Generics
                 TestWithStruct(new MyStruct1(), new MyStruct1(), new MyStruct1());
                 Console.WriteLine("====================");
 
-
                 s_IFooString = "MyStruct2.IFoo<string>.IMethod1<System.Int32>(1,2)";
                 s_IFooObject = "MyStruct2.IFoo<string>.IMethod1<System.Int32>(3,4)";
                 s_IFooInt = "MyStruct2.IMethod1<System.Int32>(5,6)";
                 TestWithStruct(new MyStruct2(), new MyStruct2(), new MyStruct2());
                 Console.WriteLine("====================");
-
 
                 s_IFooString = "MyStruct3.IMethod1<System.Int32>(1,2)";
                 s_IFooObject = "MyStruct3.IMethod1<System.Int32>(3,4)";
@@ -1490,17 +1919,27 @@ class Generics
             }
 
             {
-                string res = ((IFace<string>)new AnotherDerivedClass<string>()).IFaceGVMethod1<string>("string1", "string2");
+                string res = (
+                    (IFace<string>)new AnotherDerivedClass<string>()
+                ).IFaceGVMethod1<string>("string1", "string2");
                 WriteLineWithVerification("AnotherBaseClass.IFaceGVMethod1", res);
 
-                res = ((IBar<int>)new BarImplementor()).IBarGVMethod<string>((i) => "BarImplementor:" + i.ToString());
+                res = ((IBar<int>)new BarImplementor()).IBarGVMethod<string>(
+                    (i) => "BarImplementor:" + i.ToString()
+                );
                 WriteLineWithVerification("BarImplementor:123", res);
 
                 Yahoo<int> y = new YahooDerived();
-                WriteLineWithVerification("YahooDerived:456", y.YahooGVM<string>((i) => "YahooDerived:" + i.ToString()));
+                WriteLineWithVerification(
+                    "YahooDerived:456",
+                    y.YahooGVM<string>((i) => "YahooDerived:" + i.ToString())
+                );
 
                 ICovariant<object> cov = new Covariant<string>();
-                WriteLineWithVerification("Covariant<String>.ICovariantGVM<Exception>", cov.ICovariantGVM<Exception>());
+                WriteLineWithVerification(
+                    "Covariant<String>.ICovariantGVM<Exception>",
+                    cov.ICovariantGVM<Exception>()
+                );
             }
 
             if (s_NumErrors != 0)
@@ -1631,7 +2070,9 @@ class Generics
     class TestGvmLookups
     {
         class Gen<T> { }
+
         class Atom1 { }
+
         class Atom2 { }
 
         class GenericBase<T>
@@ -1641,12 +2082,14 @@ class Generics
 
         class NonGenericDerivedWithGenericBase : GenericBase<Atom1>
         {
-            public override (Type, Type) GenericMethod<U>() => (typeof(NonGenericDerivedWithGenericBase), typeof(U));
+            public override (Type, Type) GenericMethod<U>() =>
+                (typeof(NonGenericDerivedWithGenericBase), typeof(U));
         }
 
         class GenericDerivedWithGenericBase<T> : GenericBase<T>
         {
-            public override (Type, Type) GenericMethod<U>() => (typeof(GenericDerivedWithGenericBase<T>), typeof(U));
+            public override (Type, Type) GenericMethod<U>() =>
+                (typeof(GenericDerivedWithGenericBase<T>), typeof(U));
         }
 
         class NonGenericBase
@@ -1656,7 +2099,8 @@ class Generics
 
         class GenericDerivedWithNonGenericBase<T> : NonGenericBase
         {
-            public override (Type, Type) GenericMethod<U>() => (typeof(GenericDerivedWithNonGenericBase<T>), typeof(U));
+            public override (Type, Type) GenericMethod<U>() =>
+                (typeof(GenericDerivedWithNonGenericBase<T>), typeof(U));
         }
 
         static void TestInContext<T>()
@@ -1698,7 +2142,9 @@ class Generics
             }
 
             {
-                (var t1, var t2) = new GenericDerivedWithNonGenericBase<T>().GenericMethod<Gen<T>>();
+                (var t1, var t2) = new GenericDerivedWithNonGenericBase<T>().GenericMethod<
+                    Gen<T>
+                >();
                 if (t1 != typeof(GenericDerivedWithNonGenericBase<T>) || t2 != typeof(Gen<T>))
                     throw new Exception();
             }
@@ -1723,15 +2169,29 @@ class Generics
         {
             static abstract int StaticAbstractGvm<T>();
             int InstanceGvm<T>();
-            int InstanceDefaultGvm<T>() { return 0; }
+            int InstanceDefaultGvm<T>()
+            {
+                return 0;
+            }
             static void StaticGeneric<T>() { }
         }
 
         class BaseWithInterface : IGvmMethods
         {
-            public static int StaticAbstractGvm<T>() { return 1; }
-            public int InstanceGvm<T>() { return 1; }
-            int IGvmMethods.InstanceDefaultGvm<T>() { return 1; }
+            public static int StaticAbstractGvm<T>()
+            {
+                return 1;
+            }
+
+            public int InstanceGvm<T>()
+            {
+                return 1;
+            }
+
+            int IGvmMethods.InstanceDefaultGvm<T>()
+            {
+                return 1;
+            }
         }
 
         static void TestInContext<T>()
@@ -1752,7 +2212,8 @@ class Generics
                 throw new Exception();
         }
 
-        static void TestStaticAbstractGvm<T, TMethods>() where TMethods : IGvmMethods
+        static void TestStaticAbstractGvm<T, TMethods>()
+            where TMethods : IGvmMethods
         {
             if (TMethods.StaticAbstractGvm<T>() != 1)
                 throw new Exception();
@@ -1770,12 +2231,18 @@ class Generics
     class TestSharedAndUnsharedGvmAnalysisRegression
     {
         interface IAtom { }
+
         interface IPhantom { }
+
         class Atom : IAtom, IPhantom { }
 
-        class Lol<TLeft> where TLeft : IAtom, IPhantom
+        class Lol<TLeft>
+            where TLeft : IAtom, IPhantom
         {
-            public static void Run() => ((IPartitionedStreamRecipient<int>)new RightChildResultsRecipient<TLeft, int>()).ReceivePackage<int>();
+            public static void Run() =>
+                (
+                    (IPartitionedStreamRecipient<int>)new RightChildResultsRecipient<TLeft, int>()
+                ).ReceivePackage<int>();
         }
 
         interface IPartitionedStreamRecipient<T>
@@ -1783,7 +2250,8 @@ class Generics
             void ReceivePackage<U>();
         }
 
-        sealed class RightChildResultsRecipient<TLeftInput, TRightInput> : IPartitionedStreamRecipient<TRightInput>
+        sealed class RightChildResultsRecipient<TLeftInput, TRightInput>
+            : IPartitionedStreamRecipient<TRightInput>
         {
             public void ReceivePackage<U>() => Console.WriteLine("Accepted");
         }
@@ -1793,14 +2261,19 @@ class Generics
         public static void Run()
         {
             // Make sure the compiler never saw anything more concrete than Lol<__Canon>.
-            typeof(Lol<>).MakeGenericType(s_atom).GetMethod("Run").Invoke(null, Array.Empty<object>());
+            typeof(Lol<>)
+                .MakeGenericType(s_atom)
+                .GetMethod("Run")
+                .Invoke(null, Array.Empty<object>());
         }
     }
 
     class TestFieldAccess
     {
         class ClassType { }
+
         class ClassType2 { }
+
         struct StructType { }
 
         class Foo<T>
@@ -1952,8 +2425,12 @@ class Generics
             Foo<object>.s_floatField = 12.34f;
             Foo<object>.s_longField1 = 0x1111;
 
-            var fooDynamicOfClassType = typeof(Foo<>).MakeGenericType(typeof(ClassType)).GetTypeInfo();
-            var fooDynamicOfClassType2 = typeof(Foo<>).MakeGenericType(typeof(ClassType2)).GetTypeInfo();
+            var fooDynamicOfClassType = typeof(Foo<>)
+                .MakeGenericType(typeof(ClassType))
+                .GetTypeInfo();
+            var fooDynamicOfClassType2 = typeof(Foo<>)
+                .MakeGenericType(typeof(ClassType2))
+                .GetTypeInfo();
 
             FieldInfo fi = fooDynamicOfClassType.GetDeclaredField("s_intField");
             FieldInfo fi2 = fooDynamicOfClassType2.GetDeclaredField("s_intField");
@@ -2010,36 +2487,50 @@ class Generics
             var dynamicBaseOfString = typeof(DynamicBase<>).MakeGenericType(typeof(string));
             object obj = Activator.CreateInstance(dynamicBaseOfString);
             {
-                var simpleMethod = dynamicBaseOfString.GetTypeInfo().GetDeclaredMethod("SimpleMethod");
+                var simpleMethod = dynamicBaseOfString
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("SimpleMethod");
                 int result = (int)simpleMethod.Invoke(obj, null);
                 Verify((int)123, result);
             }
 
             // Method with T in the signature
             {
-                var methodWithTInSig = dynamicBaseOfString.GetTypeInfo().GetDeclaredMethod("MethodWithTInSig");
+                var methodWithTInSig = dynamicBaseOfString
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("MethodWithTInSig");
                 int result = (int)methodWithTInSig.Invoke(obj, new[] { "fad" });
                 Verify((int)234, result);
             }
 
             // Test virtual method invocation
             {
-                var virtualMethodDynamicBase = dynamicBaseOfString.GetTypeInfo().GetDeclaredMethod("VirtualMethod");
+                var virtualMethodDynamicBase = dynamicBaseOfString
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("VirtualMethod");
                 string result = (string)virtualMethodDynamicBase.Invoke(obj, new[] { "fad" });
                 Verify("DynamicBase<T>.VirtualMethod", result);
             }
 
             {
-                var dynamicDerivedOfString = typeof(DynamicDerived<>).MakeGenericType(typeof(string));
+                var dynamicDerivedOfString = typeof(DynamicDerived<>).MakeGenericType(
+                    typeof(string)
+                );
                 object dynamicDerivedObj = Activator.CreateInstance(dynamicDerivedOfString);
-                var virtualMethodDynamicDerived = dynamicDerivedOfString.GetTypeInfo().GetDeclaredMethod("VirtualMethod");
-                string result = (string)virtualMethodDynamicDerived.Invoke(dynamicDerivedObj, new[] { "fad" });
+                var virtualMethodDynamicDerived = dynamicDerivedOfString
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("VirtualMethod");
+                string result = (string)
+                    virtualMethodDynamicDerived.Invoke(dynamicDerivedObj, new[] { "fad" });
                 Verify("DynamicDerived<T>.VirtualMethod", result);
             }
 
             // Test generic method invocation
             {
-                var genericMethod = dynamicBaseOfString.GetTypeInfo().GetDeclaredMethod("GenericMethod").MakeGenericMethod(new[] { typeof(string) });
+                var genericMethod = dynamicBaseOfString
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GenericMethod")
+                    .MakeGenericMethod(new[] { typeof(string) });
                 string result = (string)genericMethod.Invoke(obj, new[] { "hey", "hello" });
 
                 Verify("System.Stringhello", result);
@@ -2047,17 +2538,25 @@ class Generics
 
             // Test GVM invocation
             {
-                var genericMethod = dynamicBaseOfString.GetTypeInfo().GetDeclaredMethod("GenericVirtualMethod");
+                var genericMethod = dynamicBaseOfString
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GenericVirtualMethod");
                 genericMethod = genericMethod.MakeGenericMethod(new[] { typeof(string) });
                 string result = (string)genericMethod.Invoke(obj, new[] { "hey", "hello" });
                 Verify("DynamicBaseSystem.Stringhello", result);
             }
 
             {
-                var dynamicDerivedOfString = typeof(DynamicDerived<>).MakeGenericType(typeof(string));
+                var dynamicDerivedOfString = typeof(DynamicDerived<>).MakeGenericType(
+                    typeof(string)
+                );
                 object dynamicDerivedObj = Activator.CreateInstance(dynamicDerivedOfString);
-                var virtualMethodDynamicDerived = dynamicDerivedOfString.GetTypeInfo().GetDeclaredMethod("GenericVirtualMethod").MakeGenericMethod(new[] { typeof(string) });
-                string result = (string)virtualMethodDynamicDerived.Invoke(dynamicDerivedObj, new[] { "hey", "fad" });
+                var virtualMethodDynamicDerived = dynamicDerivedOfString
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GenericVirtualMethod")
+                    .MakeGenericMethod(new[] { typeof(string) });
+                string result = (string)
+                    virtualMethodDynamicDerived.Invoke(dynamicDerivedObj, new[] { "hey", "fad" });
                 Verify("DynamicDerivedSystem.Stringfad", result);
             }
         }
@@ -2075,7 +2574,6 @@ class Generics
             Foo<StructType>.s_floatField = 43.21f;
             Foo<StructType>.s_objectField = "321";
             Foo<StructType>.s_kvp = new KeyValuePair<string, string>("4433", "2211");
-
 
             Bar.s_intField = 778899;
             Bar.s_stringField = "xxyyzz";
@@ -2123,9 +2621,18 @@ class Generics
                 Verify("1122", result.Key);
                 Verify("3344", result.Value);
 
-                typeof(Foo<ClassType>).GetTypeInfo().GetDeclaredField("s_stringField").SetValue(null, "ThisIsAString1");
-                typeof(Foo<ClassType>).GetTypeInfo().GetDeclaredField("s_objectField").SetValue(null, "ThisIsAString2");
-                typeof(Foo<ClassType>).GetTypeInfo().GetDeclaredField("s_kvp").SetValue(null, new KeyValuePair<string, string>("ThisIs", "AString"));
+                typeof(Foo<ClassType>)
+                    .GetTypeInfo()
+                    .GetDeclaredField("s_stringField")
+                    .SetValue(null, "ThisIsAString1");
+                typeof(Foo<ClassType>)
+                    .GetTypeInfo()
+                    .GetDeclaredField("s_objectField")
+                    .SetValue(null, "ThisIsAString2");
+                typeof(Foo<ClassType>)
+                    .GetTypeInfo()
+                    .GetDeclaredField("s_kvp")
+                    .SetValue(null, new KeyValuePair<string, string>("ThisIs", "AString"));
                 Verify("ThisIsAString1", (string)Foo<ClassType>.s_stringField);
                 Verify("ThisIsAString2", (string)Foo<ClassType>.s_objectField);
                 Verify("ThisIs", (string)Foo<ClassType>.s_kvp.Key);
@@ -2151,9 +2658,18 @@ class Generics
                 Verify("4433", result.Key);
                 Verify("2211", result.Value);
 
-                typeof(Foo<StructType>).GetTypeInfo().GetDeclaredField("s_stringField").SetValue(null, "ThisIsAString3");
-                typeof(Foo<StructType>).GetTypeInfo().GetDeclaredField("s_objectField").SetValue(null, "ThisIsAString4");
-                typeof(Foo<StructType>).GetTypeInfo().GetDeclaredField("s_kvp").SetValue(null, new KeyValuePair<string, string>("ThisIs1", "AString1"));
+                typeof(Foo<StructType>)
+                    .GetTypeInfo()
+                    .GetDeclaredField("s_stringField")
+                    .SetValue(null, "ThisIsAString3");
+                typeof(Foo<StructType>)
+                    .GetTypeInfo()
+                    .GetDeclaredField("s_objectField")
+                    .SetValue(null, "ThisIsAString4");
+                typeof(Foo<StructType>)
+                    .GetTypeInfo()
+                    .GetDeclaredField("s_kvp")
+                    .SetValue(null, new KeyValuePair<string, string>("ThisIs1", "AString1"));
                 Verify("ThisIsAString3", (string)Foo<StructType>.s_stringField);
                 Verify("ThisIsAString4", (string)Foo<StructType>.s_objectField);
                 Verify("ThisIs1", (string)Foo<StructType>.s_kvp.Key);
@@ -2179,9 +2695,18 @@ class Generics
                 Verify("7788", result.Key);
                 Verify("8899", result.Value);
 
-                typeof(Bar).GetTypeInfo().GetDeclaredField("s_stringField").SetValue(null, "ThisIsAString5");
-                typeof(Bar).GetTypeInfo().GetDeclaredField("s_objectField").SetValue(null, "ThisIsAString6");
-                typeof(Bar).GetTypeInfo().GetDeclaredField("s_kvp").SetValue(null, new KeyValuePair<string, string>("ThisIs2", "AString2"));
+                typeof(Bar)
+                    .GetTypeInfo()
+                    .GetDeclaredField("s_stringField")
+                    .SetValue(null, "ThisIsAString5");
+                typeof(Bar)
+                    .GetTypeInfo()
+                    .GetDeclaredField("s_objectField")
+                    .SetValue(null, "ThisIsAString6");
+                typeof(Bar)
+                    .GetTypeInfo()
+                    .GetDeclaredField("s_kvp")
+                    .SetValue(null, new KeyValuePair<string, string>("ThisIs2", "AString2"));
                 Verify("ThisIsAString5", (string)Bar.s_stringField);
                 Verify("ThisIsAString6", (string)Bar.s_objectField);
                 Verify("ThisIs2", (string)Bar.s_kvp.Key);
@@ -2229,8 +2754,14 @@ class Generics
                 fi = typeof(Foo<ClassType>).GetTypeInfo().GetDeclaredField("m_objectField");
                 Verify("4545", fi.GetValue(fooClassType));
 
-                typeof(Foo<ClassType>).GetTypeInfo().GetDeclaredField("m_stringField").SetValue(fooClassType, "ThisIsAString7");
-                typeof(Foo<ClassType>).GetTypeInfo().GetDeclaredField("m_objectField").SetValue(fooClassType, "ThisIsAString8");
+                typeof(Foo<ClassType>)
+                    .GetTypeInfo()
+                    .GetDeclaredField("m_stringField")
+                    .SetValue(fooClassType, "ThisIsAString7");
+                typeof(Foo<ClassType>)
+                    .GetTypeInfo()
+                    .GetDeclaredField("m_objectField")
+                    .SetValue(fooClassType, "ThisIsAString8");
                 Verify("ThisIsAString7", (string)fooClassType.m_stringField);
                 Verify("ThisIsAString8", (string)fooClassType.m_objectField);
             }
@@ -2249,8 +2780,14 @@ class Generics
                 fi = typeof(Foo<StructType>).GetTypeInfo().GetDeclaredField("m_objectField");
                 Verify("5656", fi.GetValue(fooStructType));
 
-                typeof(Foo<StructType>).GetTypeInfo().GetDeclaredField("m_stringField").SetValue(fooStructType, "ThisIsAString9");
-                typeof(Foo<StructType>).GetTypeInfo().GetDeclaredField("m_objectField").SetValue(fooStructType, "ThisIsAString10");
+                typeof(Foo<StructType>)
+                    .GetTypeInfo()
+                    .GetDeclaredField("m_stringField")
+                    .SetValue(fooStructType, "ThisIsAString9");
+                typeof(Foo<StructType>)
+                    .GetTypeInfo()
+                    .GetDeclaredField("m_objectField")
+                    .SetValue(fooStructType, "ThisIsAString10");
                 Verify("ThisIsAString9", (string)fooStructType.m_stringField);
                 Verify("ThisIsAString10", (string)fooStructType.m_objectField);
             }
@@ -2269,8 +2806,14 @@ class Generics
                 fi = typeof(Bar).GetTypeInfo().GetDeclaredField("m_objectField");
                 Verify("6767", fi.GetValue(bar));
 
-                typeof(Bar).GetTypeInfo().GetDeclaredField("m_stringField").SetValue(bar, "ThisIsAString11");
-                typeof(Bar).GetTypeInfo().GetDeclaredField("m_objectField").SetValue(bar, "ThisIsAString12");
+                typeof(Bar)
+                    .GetTypeInfo()
+                    .GetDeclaredField("m_stringField")
+                    .SetValue(bar, "ThisIsAString11");
+                typeof(Bar)
+                    .GetTypeInfo()
+                    .GetDeclaredField("m_objectField")
+                    .SetValue(bar, "ThisIsAString12");
                 Verify("ThisIsAString11", (string)bar.m_stringField);
                 Verify("ThisIsAString12", (string)bar.m_objectField);
             }
@@ -2280,8 +2823,10 @@ class Generics
         {
             // Testing for compilation failures due to references to unused static bases
             // See: https://github.com/dotnet/corert/issues/3211
-            var a = typeof(UnconstructedTypeInstantiator<UnconstructedTypeWithGCStatics>).ToString();
-            var b = typeof(UnconstructedTypeInstantiator<UnconstructedTypeWithNonGCStatics>).ToString();
+            var a =
+                typeof(UnconstructedTypeInstantiator<UnconstructedTypeWithGCStatics>).ToString();
+            var b =
+                typeof(UnconstructedTypeInstantiator<UnconstructedTypeWithNonGCStatics>).ToString();
         }
 
         public static void Run()
@@ -2322,9 +2867,7 @@ class Generics
             }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
-            public void Blagh()
-            {
-            }
+            public void Blagh() { }
         }
 
         public static void Run()
@@ -2363,9 +2906,7 @@ class Generics
             }
         }
 
-        class Derived<T> : GenericBase<Gen<T>>
-        {
-        }
+        class Derived<T> : GenericBase<Gen<T>> { }
 
         static volatile IFoo<Gen<string>> s_foo;
 
@@ -2442,6 +2983,7 @@ class Generics
         private delegate T GenericDelegate<out T>();
 
         class Base { }
+
         class Derived : Base { }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2465,6 +3007,7 @@ class Generics
         ref struct RefStruct<T>
         {
             public override bool Equals(object o) => o is Atom<T[]>;
+
             public override int GetHashCode() => 0;
 
             public override string ToString()
@@ -2502,15 +3045,25 @@ class Generics
 
         unsafe class Gen<T> : IFace
         {
-            public Type GrabManagedFnptr() => typeof(delegate*<T>);
-            public Type GrabManagedRefFnptr() => typeof(delegate*<ref T>);
+            public Type GrabManagedFnptr() => typeof(delegate* <T>);
+
+            public Type GrabManagedRefFnptr() => typeof(delegate* <ref T>);
+
             public Type GrabUnmanagedFnptr() => typeof(delegate* unmanaged<T>);
+
             public Type GrabUnmanagedStdcallFnptr() => typeof(delegate* unmanaged[Stdcall]<T>);
-            public Type GrabUnmanagedStdcallSuppressGCFnptr() => typeof(delegate* unmanaged[Stdcall, SuppressGCTransition]<T>);
-            public Array GetFunctionPointerArray() => new delegate*<T[,]>[1];
-            public Array GetFunctionPointerMdArray() => new delegate*<T[,]>[1, 1];
-            public Type GrabManagedFnptrOverAlsoGen() => typeof(delegate*<MyGen<T>, AlsoGen<T>>);
-            public Type GrabManagedFnptrOverAlsoAlsoGen() => typeof(delegate*<AlsoAlsoGen<T>, MyGen<T>>);
+
+            public Type GrabUnmanagedStdcallSuppressGCFnptr() =>
+                typeof(delegate* unmanaged[Stdcall, SuppressGCTransition]<T>);
+
+            public Array GetFunctionPointerArray() => new delegate* <T[,]>[1];
+
+            public Array GetFunctionPointerMdArray() => new delegate* <T[,]>[1, 1];
+
+            public Type GrabManagedFnptrOverAlsoGen() => typeof(delegate* <MyGen<T>, AlsoGen<T>>);
+
+            public Type GrabManagedFnptrOverAlsoAlsoGen() =>
+                typeof(delegate* <AlsoAlsoGen<T>, MyGen<T>>);
         }
 
         class MyGen<T> { }
@@ -2529,22 +3082,37 @@ class Generics
 
             {
                 Type t = o.GrabManagedFnptr();
-                if (!t.IsFunctionPointer || t.GetFunctionPointerReturnType() != typeof(Atom) || t.IsUnmanagedFunctionPointer)
+                if (
+                    !t.IsFunctionPointer
+                    || t.GetFunctionPointerReturnType() != typeof(Atom)
+                    || t.IsUnmanagedFunctionPointer
+                )
                     throw new Exception();
             }
 
             {
                 Type t = o.GrabManagedRefFnptr();
-                if (!t.IsFunctionPointer || t.GetFunctionPointerReturnType() != typeof(Atom).MakeByRefType() || t.IsUnmanagedFunctionPointer)
+                if (
+                    !t.IsFunctionPointer
+                    || t.GetFunctionPointerReturnType() != typeof(Atom).MakeByRefType()
+                    || t.IsUnmanagedFunctionPointer
+                )
                     throw new Exception();
             }
 
             {
                 Type t = o.GrabUnmanagedFnptr();
-                if (!t.IsFunctionPointer || t.GetFunctionPointerReturnType() != typeof(Atom) || !t.IsUnmanagedFunctionPointer)
+                if (
+                    !t.IsFunctionPointer
+                    || t.GetFunctionPointerReturnType() != typeof(Atom)
+                    || !t.IsUnmanagedFunctionPointer
+                )
                     throw new Exception();
 
-                if (t != o.GrabUnmanagedStdcallFnptr() || t != o.GrabUnmanagedStdcallSuppressGCFnptr())
+                if (
+                    t != o.GrabUnmanagedStdcallFnptr()
+                    || t != o.GrabUnmanagedStdcallSuppressGCFnptr()
+                )
                     throw new Exception();
             }
 
@@ -2562,15 +3130,22 @@ class Generics
 
             {
                 Type t = o.GrabManagedFnptrOverAlsoGen();
-                if (!t.IsFunctionPointer
-                    || t.GetFunctionPointerReturnType().GetGenericTypeDefinition() != typeof(AlsoGen<>)
-                    || t.GetFunctionPointerReturnType().GetGenericArguments()[0] != typeof(Atom))
+                if (
+                    !t.IsFunctionPointer
+                    || t.GetFunctionPointerReturnType().GetGenericTypeDefinition()
+                        != typeof(AlsoGen<>)
+                    || t.GetFunctionPointerReturnType().GetGenericArguments()[0] != typeof(Atom)
+                )
                     throw new Exception();
             }
 
             {
                 Type t = o.GrabManagedFnptrOverAlsoAlsoGen();
-                if (!t.TypeHandle.Equals(typeof(delegate*<AlsoAlsoGen<Atom>, MyGen<Atom>>).TypeHandle))
+                if (
+                    !t.TypeHandle.Equals(
+                        typeof(delegate* <AlsoAlsoGen<Atom>, MyGen<Atom>>).TypeHandle
+                    )
+                )
                     throw new Exception();
             }
         }
@@ -2735,8 +3310,11 @@ class Generics
     {
         class Generic<T> { }
 
-        [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Explicit)]
+        [System.Runtime.InteropServices.StructLayout(
+            System.Runtime.InteropServices.LayoutKind.Explicit
+        )]
         class Unloadable<T> { }
+
         class Unloadable : Unloadable<object> { }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -2782,6 +3360,7 @@ class Generics
             static NeverAllocatedIndirection<T, object> s_indirection = null;
 
             public string GetString() => new NeverSeenInstantiated<T>().ToString();
+
             public string GetStringIndirect() => s_indirection.GetString();
         }
 
@@ -2795,7 +3374,9 @@ class Generics
             {
                 _arr = (T)(object)new string[1] { "ohai" };
             }
+
             T _arr;
+
             public T GetArr() => _arr;
         }
 
@@ -2875,6 +3456,7 @@ class Generics
         class Foo : IFoo
         {
             public virtual string Frob<T>() => $"Foo.Frob<{typeof(T)}>()";
+
             public virtual string FrobToo<T>() => Frob<T>();
 
             // RyuJIT doesn't inline, but futureproofing
@@ -2958,25 +3540,35 @@ class Generics
 
         class Derived<T, U> : Base<T>, IInterface<U>
         {
-            string IInterface<U>.Method<X>() => $"Derived<{typeof(T)},{typeof(U)}>.Method<{typeof(X)}>()";
+            string IInterface<U>.Method<X>() =>
+                $"Derived<{typeof(T)},{typeof(U)}>.Method<{typeof(X)}>()";
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static string ConstrainedCall<T, U, X>(ref T instance) where T : IInterface<U>
+        static string ConstrainedCall<T, U, X>(ref T instance)
+            where T : IInterface<U>
         {
             return instance.Method<X>();
         }
 
         class Atom1 { }
+
         class Atom2 { }
+
         class Atom3 { }
 
         public static void Run()
         {
             var derived = new Derived<Atom1, Atom2>();
-            if (ConstrainedCall<Derived<Atom1, Atom2>, Atom2, Atom3>(ref derived) != "Derived<Generics+TestConstrainedGvmCalls+Atom1,Generics+TestConstrainedGvmCalls+Atom2>.Method<Generics+TestConstrainedGvmCalls+Atom3>()")
+            if (
+                ConstrainedCall<Derived<Atom1, Atom2>, Atom2, Atom3>(ref derived)
+                != "Derived<Generics+TestConstrainedGvmCalls+Atom1,Generics+TestConstrainedGvmCalls+Atom2>.Method<Generics+TestConstrainedGvmCalls+Atom3>()"
+            )
                 throw new Exception();
-            if (ConstrainedCall<Derived<Atom1, Atom2>, Atom1, Atom3>(ref derived) != "Base<Generics+TestConstrainedGvmCalls+Atom1>.Method<Generics+TestConstrainedGvmCalls+Atom3>()")
+            if (
+                ConstrainedCall<Derived<Atom1, Atom2>, Atom1, Atom3>(ref derived)
+                != "Base<Generics+TestConstrainedGvmCalls+Atom1>.Method<Generics+TestConstrainedGvmCalls+Atom3>()"
+            )
                 throw new Exception();
         }
     }
@@ -2984,6 +3576,7 @@ class Generics
     class TestConstrainedGvmValueTypeCalls
     {
         class Atom1 { }
+
         class Atom2 { }
 
         interface IFoo<T>
@@ -3019,7 +3612,8 @@ class Generics
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool DoFrob1<T, U>(ref T t, object o) where T : IFoo<U>
+        static bool DoFrob1<T, U>(ref T t, object o)
+            where T : IFoo<U>
         {
             // Perform a constrained interface call from shared code.
             // This should have been resolved to a direct call at compile time.
@@ -3027,7 +3621,8 @@ class Generics
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool DoFrob2<T, U>(ref T t, object o) where T : IBar<U>
+        static bool DoFrob2<T, U>(ref T t, object o)
+            where T : IBar<U>
         {
             // Perform a constrained interface call from shared code.
             // This should have been resolved to a direct call at compile time.
@@ -3079,7 +3674,9 @@ class Generics
     class TestDefaultGenericVirtualInterfaceMethods
     {
         class Atom1 { }
+
         class Atom2 { }
+
         struct SAtom1 { }
 
         interface IFoo
@@ -3095,8 +3692,10 @@ class Generics
         interface IBar<T> : IFoo, IFoo<T[]>, IFoo<T>
         {
             string IFoo.Foo<U>() => $"Hello from IBar<{typeof(T).Name}>.IFoo.Foo<{typeof(U).Name}>";
-            string IFoo<T[]>.Foo<U>() => $"Hello from IBar<{typeof(T).Name}>.IFoo<T[]>.Foo<{typeof(U).Name}>";
-            string IFoo<T>.Foo<U>() => $"Hello from IBar<{typeof(T).Name}>.IFoo<T>.Foo<{typeof(U).Name}>";
+            string IFoo<T[]>.Foo<U>() =>
+                $"Hello from IBar<{typeof(T).Name}>.IFoo<T[]>.Foo<{typeof(U).Name}>";
+            string IFoo<T>.Foo<U>() =>
+                $"Hello from IBar<{typeof(T).Name}>.IFoo<T>.Foo<{typeof(U).Name}>";
         }
 
         class Foo : IFoo, IFoo<Atom1>, IFoo<Atom2>, IFoo<SAtom1>
@@ -3113,7 +3712,8 @@ class Generics
         class DerivedSBar : Bar<SAtom1> { }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static string ConstrainedCall<T, U, X>(ref T instance) where T : IFoo<U>
+        static string ConstrainedCall<T, U, X>(ref T instance)
+            where T : IFoo<U>
         {
             return instance.Foo<X>();
         }
@@ -3170,7 +3770,9 @@ class Generics
 
             {
                 Foo f = new Foo();
-                if (ConstrainedCall<Foo, Atom1, Atom1>(ref f) != "Hello from IFoo<Atom1>.Foo<Atom1>")
+                if (
+                    ConstrainedCall<Foo, Atom1, Atom1>(ref f) != "Hello from IFoo<Atom1>.Foo<Atom1>"
+                )
                     throw new Exception();
                 if (ConstrainedCall<Foo, Atom2, Atom1>(ref f) != "Hello from Foo.Foo<Atom1>")
                     throw new Exception();
@@ -3232,7 +3834,8 @@ class Generics
 
         class GenClass<T> { }
 
-        private static object RecurseOverStruct<T>(int count) where T : new()
+        private static object RecurseOverStruct<T>(int count)
+            where T : new()
         {
             if (count > 0)
                 RecurseOverStruct<GenStruct<T>>(count - 1);
@@ -3240,7 +3843,8 @@ class Generics
             return new T();
         }
 
-        private static object RecurseOverClass<T>(int count) where T : new()
+        private static object RecurseOverClass<T>(int count)
+            where T : new()
         {
             if (count > 0)
                 RecurseOverClass<GenClass<T>>(count - 1);
@@ -3258,7 +3862,10 @@ class Generics
             {
                 RecurseOverStruct<int>(100);
             }
-            catch (TypeLoadException) { caughtException = true; }
+            catch (TypeLoadException)
+            {
+                caughtException = true;
+            }
 
             if (!caughtException)
                 throw new Exception();
@@ -3268,7 +3875,10 @@ class Generics
             {
                 RecurseOverClass<int>(100);
             }
-            catch (TypeLoadException) { caughtException = true; }
+            catch (TypeLoadException)
+            {
+                caughtException = true;
+            }
 
             if (!caughtException)
                 throw new Exception();
@@ -3277,16 +3887,16 @@ class Generics
 
     class TestGenericRecursionFromNpgsql
     {
-        [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        [System.Runtime.InteropServices.StructLayout(
+            System.Runtime.InteropServices.LayoutKind.Sequential
+        )]
         struct SqlRange<T>
         {
             private T Value1;
             private T Value2;
         }
 
-        class ChunkingTypeHandler<T> : TypeHandler<T>
-        {
-        }
+        class ChunkingTypeHandler<T> : TypeHandler<T> { }
 
         class RangeHandler<T> : ChunkingTypeHandler<SqlRange<T>>
         {
@@ -3331,7 +3941,9 @@ class Generics
         class Derived : Base
         {
             private Base _b = new Base();
+
             public override Getter<T> Get<T>() => Make<T>();
+
             private Getter<T> Make<T>() => _b.Get<Buffer<T>>() as Getter<T>;
         }
 
@@ -3395,17 +4007,23 @@ class Generics
 
         class RangeHandler<T> : Handler<Gen<T>>
         {
-            public override void Write(object val) { if (val is ArrayHandler<Gen<T>> h) h.Write(default); }
+            public override void Write(object val)
+            {
+                if (val is ArrayHandler<Gen<T>> h)
+                    h.Write(default);
+            }
         }
 
         class ArrayHandler<T>
         {
-            public virtual void Write(object val) { if (val is RangeHandler<T> h) h.Write(default); }
+            public virtual void Write(object val)
+            {
+                if (val is RangeHandler<T> h)
+                    h.Write(default);
+            }
         }
 
-        struct Gen<T>
-        {
-        }
+        struct Gen<T> { }
 
         public static void Run()
         {
@@ -3420,6 +4038,7 @@ class Generics
         class Chunk<T>
         {
             public Chunk<T[]> TheChunk;
+
             public Chunk()
             {
                 if (typeof(T).ToString().Length < 100)
@@ -3439,12 +4058,14 @@ class Generics
 
         interface ITechnique
         {
-            void CatSlaps<T>() { /* Cannot reference T or it stops testing the thing it should */ }
+            void CatSlaps<T>() { /* Cannot reference T or it stops testing the thing it should */
+            }
         }
 
         struct Technique : ITechnique { }
 
-        static void CatConcepts<T, U>() where T : ITechnique => default(T).CatSlaps<SmallCat<U>>();
+        static void CatConcepts<T, U>()
+            where T : ITechnique => default(T).CatSlaps<SmallCat<U>>();
 
         public static void Run()
         {
@@ -3471,7 +4092,15 @@ class Generics
 
             // Regression test for https://github.com/dotnet/runtime/issues/65612
             // This requires MethodTable for "Atom[]" - just make sure the compiler didn't crash and we can invoke
-            typeof(Generic<>).MakeGenericType(s_atomType).InvokeMember("Method", BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.Instance, null, s_instance, new object[] { new Atom() });
+            typeof(Generic<>)
+                .MakeGenericType(s_atomType)
+                .InvokeMember(
+                    "Method",
+                    BindingFlags.Public | BindingFlags.InvokeMethod | BindingFlags.Instance,
+                    null,
+                    s_instance,
+                    new object[] { new Atom() }
+                );
         }
     }
 

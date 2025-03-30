@@ -12,7 +12,10 @@ internal sealed class PageHandlerPageFilter : IAsyncPageFilter, IOrderedFilter
     /// </remarks>t
     public int Order => int.MinValue;
 
-    public Task OnPageHandlerExecutionAsync(PageHandlerExecutingContext context, PageHandlerExecutionDelegate next)
+    public Task OnPageHandlerExecutionAsync(
+        PageHandlerExecutingContext context,
+        PageHandlerExecutionDelegate next
+    )
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(next);
@@ -20,9 +23,12 @@ internal sealed class PageHandlerPageFilter : IAsyncPageFilter, IOrderedFilter
         var handlerInstance = context.HandlerInstance;
         if (handlerInstance == null)
         {
-            throw new InvalidOperationException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(context.HandlerInstance),
-                nameof(PageHandlerExecutedContext)));
+            throw new InvalidOperationException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(context.HandlerInstance),
+                    nameof(PageHandlerExecutedContext)
+                )
+            );
         }
 
         if (handlerInstance is IAsyncPageFilter asyncPageFilter)
@@ -58,7 +64,8 @@ internal sealed class PageHandlerPageFilter : IAsyncPageFilter, IOrderedFilter
     private static async Task ExecuteSyncFilter(
         PageHandlerExecutingContext context,
         PageHandlerExecutionDelegate next,
-        IPageFilter pageFilter)
+        IPageFilter pageFilter
+    )
     {
         pageFilter.OnPageHandlerExecuting(context);
         if (context.Result == null)

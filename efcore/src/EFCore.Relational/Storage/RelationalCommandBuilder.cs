@@ -19,8 +19,7 @@ public class RelationalCommandBuilder : IRelationalCommandBuilder
     ///     </para>
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
-    public RelationalCommandBuilder(
-        RelationalCommandBuilderDependencies dependencies)
+    public RelationalCommandBuilder(RelationalCommandBuilderDependencies dependencies)
     {
         Dependencies = dependencies;
     }
@@ -31,23 +30,22 @@ public class RelationalCommandBuilder : IRelationalCommandBuilder
     protected virtual RelationalCommandBuilderDependencies Dependencies { get; }
 
     /// <inheritdoc />
-    [Obsolete("Code trying to add parameter should add type mapped parameter using TypeMappingSource directly.")]
-    public virtual IRelationalTypeMappingSource TypeMappingSource
-        => Dependencies.TypeMappingSource;
+    [Obsolete(
+        "Code trying to add parameter should add type mapped parameter using TypeMappingSource directly."
+    )]
+    public virtual IRelationalTypeMappingSource TypeMappingSource => Dependencies.TypeMappingSource;
 
     /// <inheritdoc />
-    public virtual IRelationalCommand Build()
-        => new RelationalCommand(Dependencies, _commandTextBuilder.ToString(), Parameters);
+    public virtual IRelationalCommand Build() =>
+        new RelationalCommand(Dependencies, _commandTextBuilder.ToString(), Parameters);
 
     /// <summary>
     ///     Gets the command text.
     /// </summary>
-    public override string ToString()
-        => _commandTextBuilder.ToString();
+    public override string ToString() => _commandTextBuilder.ToString();
 
     /// <inheritdoc />
-    public virtual IReadOnlyList<IRelationalParameter> Parameters
-        => _parameters;
+    public virtual IReadOnlyList<IRelationalParameter> Parameters => _parameters;
 
     /// <inheritdoc />
     public virtual IRelationalCommandBuilder AddParameter(IRelationalParameter parameter)
@@ -98,6 +96,5 @@ public class RelationalCommandBuilder : IRelationalCommandBuilder
     }
 
     /// <inheritdoc />
-    public virtual int CommandTextLength
-        => _commandTextBuilder.Length;
+    public virtual int CommandTextLength => _commandTextBuilder.Length;
 }

@@ -22,11 +22,11 @@ using System.Text;
 unsafe class ControlFlowGuardTests
 {
     static Func<int>[] s_scenarios =
-        {
-            TestFunctionPointer.Run,
-            TestDelegate.Run,
-            TestCorruptingVTable.Run,
-        };
+    {
+        TestFunctionPointer.Run,
+        TestDelegate.Run,
+        TestCorruptingVTable.Run,
+    };
 
     static bool s_armed;
 
@@ -48,7 +48,9 @@ unsafe class ControlFlowGuardTests
             for (int i = 0; i < s_scenarios.Length; i++)
             {
                 Console.WriteLine($"*** Scenario {i} ***");
-                Process p = Process.Start(new ProcessStartInfo(Environment.ProcessPath, i.ToString()));
+                Process p = Process.Start(
+                    new ProcessStartInfo(Environment.ProcessPath, i.ToString())
+                );
                 p.WaitForExit();
                 if ((p.ExitCode != -1073740791) && (p.ExitCode != 57005))
                 {
@@ -71,7 +73,9 @@ unsafe class ControlFlowGuardTests
         static extern uint SetErrorMode(uint uMode);
 
         // Don't pop the WER dialog box that blocks the process until someone clicks Close.
-        SetErrorMode(GetErrorMode() | 0x0002 /* NOGPFAULTERRORBOX */);
+        SetErrorMode(
+            GetErrorMode() | 0x0002 /* NOGPFAULTERRORBOX */
+        );
 
         // VirtualAlloc should specify TARGETS_INVALID
         s_armed = true;
@@ -88,7 +92,7 @@ unsafe class ControlFlowGuardTests
     {
         public static int Run()
         {
-            var target = (delegate*<void>)CreateNewMethod();
+            var target = (delegate* <void>)CreateNewMethod();
             target();
             Console.WriteLine("Was able to call the pointer");
             return 1;
@@ -107,8 +111,11 @@ unsafe class ControlFlowGuardTests
             Func<int> del = Run;
 
             // Replace the delegate destination
-            Span<IntPtr> delegateMemory = MemoryMarshal.CreateSpan(ref Unsafe.As<RawData>(del).FirstField, 4);
-            int slotIndex = delegateMemory.IndexOf((IntPtr)(delegate*<int>)&Run);
+            Span<IntPtr> delegateMemory = MemoryMarshal.CreateSpan(
+                ref Unsafe.As<RawData>(del).FirstField,
+                4
+            );
+            int slotIndex = delegateMemory.IndexOf((IntPtr)(delegate* <int>)&Run);
             if (slotIndex < 0)
             {
                 Console.WriteLine("Target not found in the delegate?");
@@ -130,21 +137,31 @@ unsafe class ControlFlowGuardTests
             public override string ToString() => "TotallyUniqueString";
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2057:UnrecognizedReflectionPattern",
-            Justification = "Hiding the parameter to Type.GetType on purpose")]
-        [UnconditionalSuppressMessage("AotAnalysis", "IL3050:UnrecognizedReflectionPattern",
-            Justification = "MakeGenericType is over a reference type")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2057:UnrecognizedReflectionPattern",
+            Justification = "Hiding the parameter to Type.GetType on purpose"
+        )]
+        [UnconditionalSuppressMessage(
+            "AotAnalysis",
+            "IL3050:UnrecognizedReflectionPattern",
+            Justification = "MakeGenericType is over a reference type"
+        )]
         public static int Run()
         {
             // Obscure `typeof(string)` so that dataflow analysis can't see it and the MakeGenericType
             // call produces a freshly allocated vtable (not a vtable in the readonly data segment of
             // the executable that we wouldn't be able to overwrite).
-            Type stringType = Type.GetType(new StringBuilder("System.").Append("String").ToString());
+            Type stringType = Type.GetType(
+                new StringBuilder("System.").Append("String").ToString()
+            );
             Type testOfString = typeof(Test<>).MakeGenericType(stringType);
 
             // Patch the MethodTable of Test<string>: find the vtable slot with the ToString method
             // and replace it with a new value that is not in the control flow guard bitmask.
-            IntPtr toStringMethod = testOfString.GetMethod("ToString").MethodHandle.GetFunctionPointer();
+            IntPtr toStringMethod = testOfString
+                .GetMethod("ToString")
+                .MethodHandle.GetFunctionPointer();
             var methodTableMemory = new Span<IntPtr>((void*)testOfString.TypeHandle.Value, 64);
             int slotIndex = methodTableMemory.IndexOf(toStringMethod);
             if (slotIndex < 0)
@@ -167,20 +184,32 @@ unsafe class ControlFlowGuardTests
     static IntPtr CreateNewMethod()
     {
         [DllImport("kernel32", ExactSpelling = true, SetLastError = true)]
-        static extern IntPtr VirtualAlloc(IntPtr lpAddress, nuint dwSize, int flAllocationType, int flProtect);
+        static extern IntPtr VirtualAlloc(
+            IntPtr lpAddress,
+            nuint dwSize,
+            int flAllocationType,
+            int flProtect
+        );
 
-        int flProtect = 0x40 /* EXEC_READWRITE */;
+        int flProtect =
+            0x40 /* EXEC_READWRITE */
+        ;
 
         if (s_armed)
-            flProtect |= 0x40000000 /* TARGETS_INVALID */;
+            flProtect |=
+                0x40000000 /* TARGETS_INVALID */
+            ;
 
         uint allocSize = 4096;
 
         IntPtr address = VirtualAlloc(
             lpAddress: IntPtr.Zero,
             dwSize: allocSize,
-            flAllocationType: 0x00001000 | 0x00002000 /* COMMIT+RESERVE*/,
-            flProtect: flProtect);
+            flAllocationType: 0x00001000
+                | 0x00002000 /* COMMIT+RESERVE*/
+            ,
+            flProtect: flProtect
+        );
 
         switch (RuntimeInformation.ProcessArchitecture)
         {
@@ -202,7 +231,11 @@ unsafe class ControlFlowGuardTests
         static extern IntPtr GetCurrentProcess();
 
         [DllImport("kernel32", ExactSpelling = true, SetLastError = true)]
-        static extern int FlushInstructionCache(IntPtr hProcess, IntPtr lpBaseAddress, nuint dwSize);
+        static extern int FlushInstructionCache(
+            IntPtr hProcess,
+            IntPtr lpBaseAddress,
+            nuint dwSize
+        );
 
         if (FlushInstructionCache(GetCurrentProcess(), address, allocSize) == 0)
             Console.WriteLine("FlushInstructionCache failed");

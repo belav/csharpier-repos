@@ -12,15 +12,23 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
 {
-    internal abstract class AbstractOrdinaryMethodSignatureHelpProvider : AbstractCSharpSignatureHelpProvider
+    internal abstract class AbstractOrdinaryMethodSignatureHelpProvider
+        : AbstractCSharpSignatureHelpProvider
     {
         internal static SignatureHelpItem ConvertMethodGroupMethod(
             Document document,
             IMethodSymbol method,
             int position,
-            SemanticModel semanticModel)
+            SemanticModel semanticModel
+        )
         {
-            return ConvertMethodGroupMethod(document, method, position, semanticModel, descriptionParts: null);
+            return ConvertMethodGroupMethod(
+                document,
+                method,
+                position,
+                semanticModel,
+                descriptionParts: null
+            );
         }
 
         internal static SignatureHelpItem ConvertMethodGroupMethod(
@@ -28,31 +36,50 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             IMethodSymbol method,
             int position,
             SemanticModel semanticModel,
-            IList<SymbolDisplayPart>? descriptionParts)
+            IList<SymbolDisplayPart>? descriptionParts
+        )
         {
-            var structuralTypeDisplayService = document.GetRequiredLanguageService<IStructuralTypeDisplayService>();
-            var documentationCommentFormattingService = document.GetRequiredLanguageService<IDocumentationCommentFormattingService>();
+            var structuralTypeDisplayService =
+                document.GetRequiredLanguageService<IStructuralTypeDisplayService>();
+            var documentationCommentFormattingService =
+                document.GetRequiredLanguageService<IDocumentationCommentFormattingService>();
 
             return CreateItemImpl(
-                method, semanticModel, position,
+                method,
+                semanticModel,
+                position,
                 structuralTypeDisplayService,
                 method.IsParams(),
-                c => method.OriginalDefinition.GetDocumentationParts(semanticModel, position, documentationCommentFormattingService, c),
+                c =>
+                    method.OriginalDefinition.GetDocumentationParts(
+                        semanticModel,
+                        position,
+                        documentationCommentFormattingService,
+                        c
+                    ),
                 GetMethodGroupPreambleParts(method, semanticModel, position),
                 GetSeparatorParts(),
                 GetMethodGroupPostambleParts(),
-                method.Parameters.Select(p => Convert(p, semanticModel, position, documentationCommentFormattingService)).ToList(),
-                descriptionParts: descriptionParts);
+                method
+                    .Parameters.Select(p =>
+                        Convert(p, semanticModel, position, documentationCommentFormattingService)
+                    )
+                    .ToList(),
+                descriptionParts: descriptionParts
+            );
         }
 
         private static IList<SymbolDisplayPart> GetMethodGroupPreambleParts(
             IMethodSymbol method,
             SemanticModel semanticModel,
-            int position)
+            int position
+        )
         {
             var result = new List<SymbolDisplayPart>();
 
-            var awaitable = method.GetOriginalUnreducedDefinition().IsAwaitableNonDynamic(semanticModel, position);
+            var awaitable = method
+                .GetOriginalUnreducedDefinition()
+                .IsAwaitableNonDynamic(semanticModel, position);
             var extension = method.GetOriginalUnreducedDefinition().IsExtensionMethod();
 
             if (awaitable && extension)
@@ -79,13 +106,19 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
                 result.Add(Space());
             }
 
-            result.AddRange(method.ToMinimalDisplayParts(semanticModel, position, MinimallyQualifiedWithoutParametersFormat));
+            result.AddRange(
+                method.ToMinimalDisplayParts(
+                    semanticModel,
+                    position,
+                    MinimallyQualifiedWithoutParametersFormat
+                )
+            );
             result.Add(Punctuation(SyntaxKind.OpenParenToken));
 
             return result;
         }
 
-        private static IList<SymbolDisplayPart> GetMethodGroupPostambleParts()
-            => SpecializedCollections.SingletonList(Punctuation(SyntaxKind.CloseParenToken));
+        private static IList<SymbolDisplayPart> GetMethodGroupPostambleParts() =>
+            SpecializedCollections.SingletonList(Punctuation(SyntaxKind.CloseParenToken));
     }
 }

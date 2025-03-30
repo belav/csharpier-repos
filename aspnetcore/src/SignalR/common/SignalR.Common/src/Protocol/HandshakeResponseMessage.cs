@@ -11,7 +11,9 @@ public class HandshakeResponseMessage : HubMessage
     /// <summary>
     /// An empty response message with no error.
     /// </summary>
-    public static readonly HandshakeResponseMessage Empty = new HandshakeResponseMessage(error: null);
+    public static readonly HandshakeResponseMessage Empty = new HandshakeResponseMessage(
+        error: null
+    );
 
     /// <summary>
     /// Gets the optional error message.

@@ -7,10 +7,10 @@
 #region Using directives
 
 using System;
-using System.Diagnostics;
-using System.Transactions;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Threading;
+using System.Transactions;
 
 #endregion
 
@@ -20,7 +20,7 @@ namespace System.Workflow.Runtime.Hosting
     /// This class keeps the following associated with a Transaction
     /// - a connection that participates in the transaction.
     /// - an optional local transaction (DbTransaction) generated from the single-phase-committed Transaction.
-    /// The connection and the local transaction are passed around to different host components to 
+    /// The connection and the local transaction are passed around to different host components to
     /// do transacted DB work using the shared connection.
     /// </summary>
     internal sealed class SharedConnectionInfo : IDisposable
@@ -34,7 +34,7 @@ namespace System.Workflow.Runtime.Hosting
 
         /// <summary>
         /// Instantiate an opened connection enlisted to the Transaction
-        /// if promotable is false, the Transaction wraps a local 
+        /// if promotable is false, the Transaction wraps a local
         /// transaction inside and can never be promoted
         /// </summary>
         /// <param name="dbResourceAllocator"></param>
@@ -44,7 +44,8 @@ namespace System.Workflow.Runtime.Hosting
             DbResourceAllocator dbResourceAllocator,
             Transaction transaction,
             bool wantPromotable,
-            ManualResetEvent handle)
+            ManualResetEvent handle
+        )
         {
             Debug.Assert((transaction != null), "Null Transaction!");
 
@@ -61,10 +62,13 @@ namespace System.Workflow.Runtime.Hosting
             }
             else
             {
-                // Make this transaction no longer promotable by attaching our 
+                // Make this transaction no longer promotable by attaching our
                 // IPromotableSinglePhaseNotification implementation (LocalTranscaction)
                 // and track the DbConnection and DbTransaction associated with the LocalTranscaction
-                LocalTransaction localTransaction = new LocalTransaction(dbResourceAllocator, handle);
+                LocalTransaction localTransaction = new LocalTransaction(
+                    dbResourceAllocator,
+                    handle
+                );
                 transaction.EnlistPromotableSinglePhase(localTransaction);
                 this.connection = localTransaction.Connection;
                 this.localTransaction = localTransaction.Transaction;

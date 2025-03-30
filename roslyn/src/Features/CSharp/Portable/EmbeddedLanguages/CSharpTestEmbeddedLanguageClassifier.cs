@@ -17,19 +17,23 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Features.EmbeddedLanguages;
 
-[ExportEmbeddedLanguageClassifier(
-    PredefinedEmbeddedLanguageNames.CSharpTest, new[] { LanguageNames.CSharp }, supportsUnannotatedAPIs: false,
-    PredefinedEmbeddedLanguageNames.CSharpTest), Shared]
+[
+    ExportEmbeddedLanguageClassifier(
+        PredefinedEmbeddedLanguageNames.CSharpTest,
+        new[] { LanguageNames.CSharp },
+        supportsUnannotatedAPIs: false,
+        PredefinedEmbeddedLanguageNames.CSharpTest
+    ),
+    Shared
+]
 internal sealed class CSharpTestEmbeddedLanguageClassifier : IEmbeddedLanguageClassifier
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public CSharpTestEmbeddedLanguageClassifier()
-    {
-    }
+    public CSharpTestEmbeddedLanguageClassifier() { }
 
-    private static TextSpan FromBounds(VirtualChar vc1, VirtualChar vc2)
-        => TextSpan.FromBounds(vc1.Span.Start, vc2.Span.End);
+    private static TextSpan FromBounds(VirtualChar vc1, VirtualChar vc2) =>
+        TextSpan.FromBounds(vc1.Span.Start, vc2.Span.End);
 
     public void RegisterClassifications(EmbeddedLanguageClassificationContext context)
     {
@@ -39,10 +43,19 @@ internal sealed class CSharpTestEmbeddedLanguageClassifier : IEmbeddedLanguageCl
         var semanticModel = context.SemanticModel;
         var compilation = semanticModel.Compilation;
 
-        if (token.Kind() is not (SyntaxKind.StringLiteralToken or SyntaxKind.SingleLineRawStringLiteralToken or SyntaxKind.MultiLineRawStringLiteralToken))
+        if (
+            token.Kind()
+            is not (
+                SyntaxKind.StringLiteralToken
+                or SyntaxKind.SingleLineRawStringLiteralToken
+                or SyntaxKind.MultiLineRawStringLiteralToken
+            )
+        )
             return;
 
-        var virtualCharsWithMarkup = CSharpVirtualCharService.Instance.TryConvertToVirtualChars(token);
+        var virtualCharsWithMarkup = CSharpVirtualCharService.Instance.TryConvertToVirtualChars(
+            token
+        );
         if (virtualCharsWithMarkup.IsDefaultOrEmpty)
             return;
 
@@ -59,7 +72,11 @@ internal sealed class CSharpTestEmbeddedLanguageClassifier : IEmbeddedLanguageCl
         using var _ = ArrayBuilder<TextSpan>.GetInstance(out var markdownSpans);
 
         // First, add all the markdown components (`$$`, `[|`, etc.) into the result.
-        var virtualCharsWithoutMarkup = StripMarkupCharacters(virtualCharsWithMarkup, markdownSpans, cancellationToken);
+        var virtualCharsWithoutMarkup = StripMarkupCharacters(
+            virtualCharsWithMarkup,
+            markdownSpans,
+            cancellationToken
+        );
         foreach (var span in markdownSpans)
             context.AddClassification(ClassificationTypeNames.TestCodeMarkdown, span);
 
@@ -84,9 +101,8 @@ internal sealed class CSharpTestEmbeddedLanguageClassifier : IEmbeddedLanguageCl
                 {
                     context.AddClassification(
                         ClassificationTypeNames.TestCode,
-                        TextSpan.FromBounds(
-                            currentLine.Start + whitespaceCount,
-                            currentLine.End));
+                        TextSpan.FromBounds(currentLine.Start + whitespaceCount, currentLine.End)
+                    );
                 }
             }
         }
@@ -96,27 +112,47 @@ internal sealed class CSharpTestEmbeddedLanguageClassifier : IEmbeddedLanguageCl
                 ClassificationTypeNames.TestCode,
                 TextSpan.FromBounds(
                     virtualCharsWithoutMarkup.First().Span.Start,
-                    virtualCharsWithoutMarkup.Last().Span.End));
+                    virtualCharsWithoutMarkup.Last().Span.End
+                )
+            );
         }
 
         // Next, get all the embedded language classifications for the test file.  Combine these with the markdown
         // components. Note: markdown components may be in between individual language components.  For example
         // `ret$$urn`.  This will break the `return` classification into two individual classifications around the
         // `$$` classification.
-        var testFileClassifiedSpans = GetTestFileClassifiedSpans(context.SolutionServices, semanticModel, virtualCharsWithoutMarkup, cancellationToken);
+        var testFileClassifiedSpans = GetTestFileClassifiedSpans(
+            context.SolutionServices,
+            semanticModel,
+            virtualCharsWithoutMarkup,
+            cancellationToken
+        );
         foreach (var testClassifiedSpan in testFileClassifiedSpans)
             AddClassifications(context, virtualCharsWithoutMarkup, testClassifiedSpan);
     }
 
     private static IEnumerable<ClassifiedSpan> GetTestFileClassifiedSpans(
-        Host.SolutionServices solutionServices, SemanticModel semanticModel, VirtualCharSequence virtualCharsWithoutMarkup, CancellationToken cancellationToken)
+        Host.SolutionServices solutionServices,
+        SemanticModel semanticModel,
+        VirtualCharSequence virtualCharsWithoutMarkup,
+        CancellationToken cancellationToken
+    )
     {
         var compilation = semanticModel.Compilation;
         var encoding = semanticModel.SyntaxTree.Encoding;
-        var testFileSourceText = new VirtualCharSequenceSourceText(virtualCharsWithoutMarkup, encoding);
+        var testFileSourceText = new VirtualCharSequenceSourceText(
+            virtualCharsWithoutMarkup,
+            encoding
+        );
 
-        var testFileTree = SyntaxFactory.ParseSyntaxTree(testFileSourceText, semanticModel.SyntaxTree.Options, cancellationToken: cancellationToken);
-        var compilationWithTestFile = compilation.RemoveAllSyntaxTrees().AddSyntaxTrees(testFileTree);
+        var testFileTree = SyntaxFactory.ParseSyntaxTree(
+            testFileSourceText,
+            semanticModel.SyntaxTree.Options,
+            cancellationToken: cancellationToken
+        );
+        var compilationWithTestFile = compilation
+            .RemoveAllSyntaxTrees()
+            .AddSyntaxTrees(testFileTree);
         var semanticModeWithTestFile = compilationWithTestFile.GetSemanticModel(testFileTree);
 
         var testFileClassifiedSpans = Classifier.GetClassifiedSpans(
@@ -125,7 +161,8 @@ internal sealed class CSharpTestEmbeddedLanguageClassifier : IEmbeddedLanguageCl
             semanticModeWithTestFile,
             new TextSpan(0, virtualCharsWithoutMarkup.Length),
             ClassificationOptions.Default,
-            cancellationToken);
+            cancellationToken
+        );
         return testFileClassifiedSpans;
     }
 
@@ -138,14 +175,17 @@ internal sealed class CSharpTestEmbeddedLanguageClassifier : IEmbeddedLanguageCl
     /// document for classification.
     /// </summary>
     private static VirtualCharSequence StripMarkupCharacters(
-        VirtualCharSequence virtualChars, ArrayBuilder<TextSpan> markdownSpans, CancellationToken cancellationToken)
+        VirtualCharSequence virtualChars,
+        ArrayBuilder<TextSpan> markdownSpans,
+        CancellationToken cancellationToken
+    )
     {
         var builder = ImmutableSegmentedList.CreateBuilder<VirtualChar>();
 
         var nestedAnonymousSpanCount = 0;
         var nestedNamedSpanCount = 0;
 
-        for (int i = 0, n = virtualChars.Length; i < n;)
+        for (int i = 0, n = virtualChars.Length; i < n; )
         {
             var vc1 = virtualChars[i];
             var vc2 = i + 1 < n ? virtualChars[i + 1] : default;
@@ -182,8 +222,10 @@ internal sealed class CSharpTestEmbeddedLanguageClassifier : IEmbeddedLanguageCl
 
                 case ('[', '|'):
                     var vc3 = i + 2 < n ? virtualChars[i + 2] : default;
-                    if ((vc3.Value == ']' && nestedAnonymousSpanCount > 0) ||
-                        (vc3.Value == '}' && nestedNamedSpanCount > 0))
+                    if (
+                        (vc3.Value == ']' && nestedAnonymousSpanCount > 0)
+                        || (vc3.Value == '}' && nestedNamedSpanCount > 0)
+                    )
                     {
                         // not the start of a span, don't classify this '[' specially.
                         break;
@@ -235,7 +277,8 @@ internal sealed class CSharpTestEmbeddedLanguageClassifier : IEmbeddedLanguageCl
     private static void AddClassifications(
         EmbeddedLanguageClassificationContext context,
         VirtualCharSequence virtualChars,
-        ClassifiedSpan classifiedSpan)
+        ClassifiedSpan classifiedSpan
+    )
     {
         if (classifiedSpan.TextSpan.IsEmpty)
             return;
@@ -254,15 +297,22 @@ internal sealed class CSharpTestEmbeddedLanguageClassifier : IEmbeddedLanguageCl
         {
             var currentEndIndexExclusive = currentStartIndexInclusive + 1;
 
-            while (currentEndIndexExclusive < endIndexExclusive &&
-                   virtualChars[currentEndIndexExclusive - 1].Span.End == virtualChars[currentEndIndexExclusive].Span.Start)
+            while (
+                currentEndIndexExclusive < endIndexExclusive
+                && virtualChars[currentEndIndexExclusive - 1].Span.End
+                    == virtualChars[currentEndIndexExclusive].Span.Start
+            )
             {
                 currentEndIndexExclusive++;
             }
 
             context.AddClassification(
                 classificationType,
-                FromBounds(virtualChars[currentStartIndexInclusive], virtualChars[currentEndIndexExclusive - 1]));
+                FromBounds(
+                    virtualChars[currentStartIndexInclusive],
+                    virtualChars[currentEndIndexExclusive - 1]
+                )
+            );
             currentStartIndexInclusive = currentEndIndexExclusive;
         }
     }
@@ -292,7 +342,12 @@ internal sealed class CSharpTestEmbeddedLanguageClassifier : IEmbeddedLanguageCl
             get => (char)_virtualChars[position].Value;
         }
 
-        public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
+        public override void CopyTo(
+            int sourceIndex,
+            char[] destination,
+            int destinationIndex,
+            int count
+        )
         {
             for (int i = sourceIndex, n = sourceIndex + count; i < n; i++)
                 destination[destinationIndex + i] = this[i];

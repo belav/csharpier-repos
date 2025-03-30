@@ -20,8 +20,16 @@ internal sealed class AddFileCommand : BaseCommand
     public AddFileCommand(AddCommand parent, IHttpClientWrapper httpClient)
         : base(parent, CommandName, httpClient)
     {
-        _codeGeneratorOption = Option("-c|--code-generator", "The code generator to use. Defaults to 'NSwagCSharp'.", CommandOptionType.SingleValue);
-        _sourceFileArg = Argument(SourceFileArgName, $"The OpenAPI file to add. This must be a path to local OpenAPI file(s)", multipleValues: true);
+        _codeGeneratorOption = Option(
+            "-c|--code-generator",
+            "The code generator to use. Defaults to 'NSwagCSharp'.",
+            CommandOptionType.SingleValue
+        );
+        _sourceFileArg = Argument(
+            SourceFileArgName,
+            $"The OpenAPI file to add. This must be a path to local OpenAPI file(s)",
+            multipleValues: true
+        );
     }
 
     internal readonly CommandArgument _sourceFileArg;
@@ -40,8 +48,12 @@ internal sealed class AddFileCommand : BaseCommand
         {
             if (!ApprovedExtensions.Any(e => sourceFile.EndsWith(e, StringComparison.Ordinal)))
             {
-                await Warning.WriteLineAsync($"The extension for the given file '{sourceFile}' should have been one of: {string.Join(",", ApprovedExtensions)}.");
-                await Warning.WriteLineAsync($"The reference has been added, but may fail at build-time if the format is not correct.");
+                await Warning.WriteLineAsync(
+                    $"The extension for the given file '{sourceFile}' should have been one of: {string.Join(",", ApprovedExtensions)}."
+                );
+                await Warning.WriteLineAsync(
+                    $"The reference has been added, but may fail at build-time if the format is not correct."
+                );
             }
             await AddOpenAPIReference(OpenApiReference, projectFilePath, sourceFile, codeGenerator);
         }

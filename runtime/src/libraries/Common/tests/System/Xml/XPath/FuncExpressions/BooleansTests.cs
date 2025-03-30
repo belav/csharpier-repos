@@ -26,7 +26,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"child::Para[1] = child::Para[2]";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -44,7 +50,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"child::Para[1] != child::Para[2]";
             var expected = false;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -62,7 +74,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"child::Para[1] <= child::Para[2]";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -80,7 +98,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"child::Para[1] >= child::Para[2]";
             var expected = false;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -98,7 +122,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"child::Para[1] > child::Para[2]";
             var expected = false;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -116,7 +146,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"child::Para[1] < child::Para[2]";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -131,10 +167,17 @@ namespace XPathTests.FunctionalTests.Expressions
         {
             var xml = "xp004.xml";
             var startingNodePath = "/Doc/Test2";
-            var testExpression = @"child::Para[1] < child::Para[2] and child::Para[2] < child::Para[3]";
+            var testExpression =
+                @"child::Para[1] < child::Para[2] and child::Para[2] < child::Para[3]";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -149,10 +192,17 @@ namespace XPathTests.FunctionalTests.Expressions
         {
             var xml = "xp004.xml";
             var startingNodePath = "/Doc/Test2";
-            var testExpression = @"child::Para[1] < child::Para[2] or child::Para[2] > child::Para[3]";
+            var testExpression =
+                @"child::Para[1] < child::Para[2] or child::Para[2] > child::Para[3]";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -170,7 +220,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"child::* = child::*[1]";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -188,7 +244,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"child::Para[1] = 10";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -206,7 +268,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"10 = child::Para[1]";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -224,7 +292,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"child::Para[1] = ""Test""";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -242,7 +316,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"""Test"" = child::Para[1]";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -260,7 +340,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"child::Para[1] = ""Test"" or child::Para[1] = ""test""";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -278,7 +364,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"child::Para[1] = true()";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -296,7 +388,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"true() = child::Para[1]";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -2249,7 +2347,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"true() < book/price";
             var expected = false;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -2266,7 +2370,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"book > false()";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -2283,7 +2393,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"book/price > magazine/price";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -2300,7 +2416,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"book/price < magazine/price";
             var expected = false;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -2317,7 +2439,13 @@ namespace XPathTests.FunctionalTests.Expressions
             var testExpression = @"""1"" > false()";
             var expected = true;
 
-            Utils.XPathBooleanTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathBooleanTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>

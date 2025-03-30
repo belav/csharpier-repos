@@ -25,7 +25,7 @@ internal sealed class MemoryResponseCache : IResponseCache
                 Created = memoryCachedResponse.Created,
                 StatusCode = memoryCachedResponse.StatusCode,
                 Headers = memoryCachedResponse.Headers,
-                Body = memoryCachedResponse.Body
+                Body = memoryCachedResponse.Body,
             };
         }
         else
@@ -45,13 +45,14 @@ internal sealed class MemoryResponseCache : IResponseCache
                     Created = cachedResponse.Created,
                     StatusCode = cachedResponse.StatusCode,
                     Headers = cachedResponse.Headers,
-                    Body = cachedResponse.Body
+                    Body = cachedResponse.Body,
                 },
                 new MemoryCacheEntryOptions
                 {
                     AbsoluteExpirationRelativeToNow = validFor,
-                    Size = CacheEntryHelpers.EstimateCachedResponseSize(cachedResponse)
-                });
+                    Size = CacheEntryHelpers.EstimateCachedResponseSize(cachedResponse),
+                }
+            );
         }
         else
         {
@@ -61,8 +62,11 @@ internal sealed class MemoryResponseCache : IResponseCache
                 new MemoryCacheEntryOptions
                 {
                     AbsoluteExpirationRelativeToNow = validFor,
-                    Size = CacheEntryHelpers.EstimateCachedVaryByRulesySize(entry as CachedVaryByRules)
-                });
+                    Size = CacheEntryHelpers.EstimateCachedVaryByRulesySize(
+                        entry as CachedVaryByRules
+                    ),
+                }
+            );
         }
     }
 }

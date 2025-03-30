@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
+
 public class EmptyNullSubstituteBug : NonValidatingSpecBase
 {
     private Entity _destination;
@@ -17,27 +18,24 @@ public class EmptyNullSubstituteBug : NonValidatingSpecBase
         public string NotifyEmail { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Model, Entity>()
-                        .ForMember(e => e.ClientIPAddress, opts => opts.NullSubstitute(""))
-                        .ForMember(e => e.NotifyEmail, opts => opts.NullSubstitute(""));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Model, Entity>()
+                .ForMember(e => e.ClientIPAddress, opts => opts.NullSubstitute(""))
+                .ForMember(e => e.NotifyEmail, opts => opts.NullSubstitute(""));
+        });
 
     protected override void Because_of()
     {
-        var model = new Model
-        {
-            Name = "Eric Cartman",
-            Age = 12
-        };
+        var model = new Model { Name = "Eric Cartman", Age = 12 };
 
         _destination = new Entity
         {
             Name = "Eric Cartman",
             Age = 12,
             ClientIPAddress = "192.22.2.1",
-            NotifyEmail = "stan@gmail.com"
+            NotifyEmail = "stan@gmail.com",
         };
 
         _destination = Mapper.Map(model, _destination);

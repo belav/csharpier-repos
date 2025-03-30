@@ -41,7 +41,8 @@ public class CommandEndEventData : CommandEventData
         bool logParameterValues,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
         : base(
             eventDefinition,
             messageGenerator,
@@ -54,7 +55,8 @@ public class CommandEndEventData : CommandEventData
             async,
             logParameterValues,
             startTime,
-            commandSource)
+            commandSource
+        )
     {
         Duration = duration;
     }

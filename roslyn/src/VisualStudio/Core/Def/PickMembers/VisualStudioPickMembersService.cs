@@ -20,29 +20,37 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PickMembers
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioPickMembersService(IGlyphService glyphService)
-            => _glyphService = glyphService;
+        public VisualStudioPickMembersService(IGlyphService glyphService) =>
+            _glyphService = glyphService;
 
         public PickMembersResult PickMembers(
             string title,
             ImmutableArray<ISymbol> members,
             ImmutableArray<PickMembersOption> options,
-            bool selectAll)
+            bool selectAll
+        )
         {
             options = options.NullToEmpty();
 
-            var viewModel = new PickMembersDialogViewModel(_glyphService, members, options, selectAll);
+            var viewModel = new PickMembersDialogViewModel(
+                _glyphService,
+                members,
+                options,
+                selectAll
+            );
             var dialog = new PickMembersDialog(viewModel, title);
             var result = dialog.ShowModal();
 
             if (result == true)
             {
                 return new PickMembersResult(
-                    viewModel.MemberContainers.Where(c => c.IsChecked)
-                                              .Select(c => c.Symbol)
-                                              .ToImmutableArray(),
+                    viewModel
+                        .MemberContainers.Where(c => c.IsChecked)
+                        .Select(c => c.Symbol)
+                        .ToImmutableArray(),
                     options,
-                    viewModel.SelectedAll);
+                    viewModel.SelectedAll
+                );
             }
             else
             {

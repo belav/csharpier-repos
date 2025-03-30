@@ -11,28 +11,37 @@ namespace System.IdentityModel.Tokens
     using System.IdentityModel.Claims;
     using System.IdentityModel.Selectors;
     using System.Runtime.Serialization;
-    using System.Xml.Serialization;
     using System.Xml;
+    using System.Xml.Serialization;
 
     public class SamlAttributeStatement : SamlSubjectStatement
     {
-        readonly ImmutableCollection<SamlAttribute> attributes = new ImmutableCollection<SamlAttribute>();
+        readonly ImmutableCollection<SamlAttribute> attributes =
+            new ImmutableCollection<SamlAttribute>();
         bool isReadOnly = false;
 
-        public SamlAttributeStatement()
-        {
-        }
+        public SamlAttributeStatement() { }
 
-        public SamlAttributeStatement(SamlSubject samlSubject, IEnumerable<SamlAttribute> attributes)
+        public SamlAttributeStatement(
+            SamlSubject samlSubject,
+            IEnumerable<SamlAttribute> attributes
+        )
             : base(samlSubject)
         {
             if (attributes == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("attributes"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("attributes")
+                );
 
             foreach (SamlAttribute attribute in attributes)
             {
                 if (attribute == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SAMLEntityCannotBeNullOrEmpty, XD.SamlDictionary.Attribute.Value));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(
+                            SR.SAMLEntityCannotBeNullOrEmpty,
+                            XD.SamlDictionary.Attribute.Value
+                        )
+                    );
 
                 this.attributes.Add(attribute);
             }
@@ -68,19 +77,32 @@ namespace System.IdentityModel.Tokens
         void CheckObjectValidity()
         {
             if (this.SamlSubject == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.SAMLSubjectStatementRequiresSubject)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.SAMLSubjectStatementRequiresSubject))
+                );
 
             if (this.attributes.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.SAMLAttributeShouldHaveOneValue)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(SR.GetString(SR.SAMLAttributeShouldHaveOneValue))
+                );
         }
 
-        public override void ReadXml(XmlDictionaryReader reader, SamlSerializer samlSerializer, SecurityTokenSerializer keyInfoSerializer, SecurityTokenResolver outOfBandTokenResolver)
+        public override void ReadXml(
+            XmlDictionaryReader reader,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer,
+            SecurityTokenResolver outOfBandTokenResolver
+        )
         {
             if (reader == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("reader"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("reader")
+                );
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("samlSerializer"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("samlSerializer")
+                );
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;
@@ -97,18 +119,28 @@ namespace System.IdentityModel.Tokens
             else
             {
                 // SAML Subject is a required Attribute Statement clause.
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.SAMLAttributeStatementMissingSubjectOnRead)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(
+                        SR.GetString(SR.SAMLAttributeStatementMissingSubjectOnRead)
+                    )
+                );
             }
 
             while (reader.IsStartElement())
             {
                 if (reader.IsStartElement(dictionary.Attribute, dictionary.Namespace))
                 {
-                    // SAML Attribute is a extensibility point. So ask the SAML serializer 
+                    // SAML Attribute is a extensibility point. So ask the SAML serializer
                     // to load this part.
-                    SamlAttribute attribute = samlSerializer.LoadAttribute(reader, keyInfoSerializer, outOfBandTokenResolver);
+                    SamlAttribute attribute = samlSerializer.LoadAttribute(
+                        reader,
+                        keyInfoSerializer,
+                        outOfBandTokenResolver
+                    );
                     if (attribute == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadAttribute)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityTokenException(SR.GetString(SR.SAMLUnableToLoadAttribute))
+                        );
                     this.attributes.Add(attribute);
                 }
                 else
@@ -120,27 +152,43 @@ namespace System.IdentityModel.Tokens
             if (this.attributes.Count == 0)
             {
                 // Each Attribute statement should have at least one attribute.
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.SAMLAttributeStatementMissingAttributeOnRead)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(
+                        SR.GetString(SR.SAMLAttributeStatementMissingAttributeOnRead)
+                    )
+                );
             }
 
             reader.MoveToContent();
             reader.ReadEndElement();
         }
 
-        public override void WriteXml(XmlDictionaryWriter writer, SamlSerializer samlSerializer, SecurityTokenSerializer keyInfoSerializer)
+        public override void WriteXml(
+            XmlDictionaryWriter writer,
+            SamlSerializer samlSerializer,
+            SecurityTokenSerializer keyInfoSerializer
+        )
         {
             CheckObjectValidity();
 
             if (writer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("writer"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("writer")
+                );
 
             if (samlSerializer == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("samlSerializer"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("samlSerializer")
+                );
 
 #pragma warning suppress 56506 // samlSerializer.DictionaryManager is never null.
             SamlDictionary dictionary = samlSerializer.DictionaryManager.SamlDictionary;
 
-            writer.WriteStartElement(dictionary.PreferredPrefix.Value, dictionary.AttributeStatement, dictionary.Namespace);
+            writer.WriteStartElement(
+                dictionary.PreferredPrefix.Value,
+                dictionary.AttributeStatement,
+                dictionary.Namespace
+            );
 
             this.SamlSubject.WriteXml(writer, samlSerializer, keyInfoSerializer);
 

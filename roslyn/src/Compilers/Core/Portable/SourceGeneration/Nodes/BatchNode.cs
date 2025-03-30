@@ -17,24 +17,40 @@ namespace Microsoft.CodeAnalysis
         private readonly IEqualityComparer<ImmutableArray<TInput>> _comparer;
         private readonly string? _name;
 
-        public BatchNode(IIncrementalGeneratorNode<TInput> sourceNode, IEqualityComparer<ImmutableArray<TInput>>? comparer = null, string? name = null)
+        public BatchNode(
+            IIncrementalGeneratorNode<TInput> sourceNode,
+            IEqualityComparer<ImmutableArray<TInput>>? comparer = null,
+            string? name = null
+        )
         {
             _sourceNode = sourceNode;
             _comparer = comparer ?? EqualityComparer<ImmutableArray<TInput>>.Default;
             _name = name;
         }
 
-        public IIncrementalGeneratorNode<ImmutableArray<TInput>> WithComparer(IEqualityComparer<ImmutableArray<TInput>> comparer) => new BatchNode<TInput>(_sourceNode, comparer, _name);
+        public IIncrementalGeneratorNode<ImmutableArray<TInput>> WithComparer(
+            IEqualityComparer<ImmutableArray<TInput>> comparer
+        ) => new BatchNode<TInput>(_sourceNode, comparer, _name);
 
-        public IIncrementalGeneratorNode<ImmutableArray<TInput>> WithTrackingName(string name) => new BatchNode<TInput>(_sourceNode, _comparer, name);
+        public IIncrementalGeneratorNode<ImmutableArray<TInput>> WithTrackingName(string name) =>
+            new BatchNode<TInput>(_sourceNode, _comparer, name);
 
-        private (ImmutableArray<TInput>, ImmutableArray<(IncrementalGeneratorRunStep InputStep, int OutputIndex)>) GetValuesAndInputs(
+        private (
+            ImmutableArray<TInput>,
+            ImmutableArray<(IncrementalGeneratorRunStep InputStep, int OutputIndex)>
+        ) GetValuesAndInputs(
             NodeStateTable<TInput> sourceTable,
             NodeStateTable<ImmutableArray<TInput>>? previousTable,
-            NodeStateTable<ImmutableArray<TInput>>.Builder newTable)
+            NodeStateTable<ImmutableArray<TInput>>.Builder newTable
+        )
         {
             // Do an initial pass to both get the steps, and determine how many entries we'll have.
-            var sourceInputsBuilder = newTable.TrackIncrementalSteps ? ArrayBuilder<(IncrementalGeneratorRunStep InputStep, int OutputIndex)>.GetInstance() : null;
+            var sourceInputsBuilder = newTable.TrackIncrementalSteps
+                ? ArrayBuilder<(
+                    IncrementalGeneratorRunStep InputStep,
+                    int OutputIndex
+                )>.GetInstance()
+                : null;
 
             var entryCount = 0;
             foreach (var entry in sourceTable)
@@ -47,11 +63,13 @@ namespace Microsoft.CodeAnalysis
                     entryCount++;
             }
 
-            var sourceInputs = sourceInputsBuilder != null ? sourceInputsBuilder.ToImmutableAndFree() : default;
+            var sourceInputs =
+                sourceInputsBuilder != null ? sourceInputsBuilder.ToImmutableAndFree() : default;
 
             // First, see if we can reuse the entries from previousTable.
             // If not, produce the actual values we need from sourceTable.
-            var result = tryReusePreviousTableValues(entryCount) ?? computeCurrentTableValues(entryCount);
+            var result =
+                tryReusePreviousTableValues(entryCount) ?? computeCurrentTableValues(entryCount);
             return (result, sourceInputs);
 
             ImmutableArray<TInput>? tryReusePreviousTableValues(int entryCount)
@@ -75,7 +93,12 @@ namespace Microsoft.CodeAnalysis
                         continue;
 
                     // If the entries aren't the same, we can't reuse.
-                    if (!EqualityComparer<TInput>.Default.Equals(entry.Item, previousItems[indexInPrevious]))
+                    if (
+                        !EqualityComparer<TInput>.Default.Equals(
+                            entry.Item,
+                            previousItems[indexInPrevious]
+                        )
+                    )
                         return null;
 
                     indexInPrevious++;
@@ -106,7 +129,11 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public NodeStateTable<ImmutableArray<TInput>> UpdateStateTable(DriverStateTable.Builder builder, NodeStateTable<ImmutableArray<TInput>>? previousTable, CancellationToken cancellationToken)
+        public NodeStateTable<ImmutableArray<TInput>> UpdateStateTable(
+            DriverStateTable.Builder builder,
+            NodeStateTable<ImmutableArray<TInput>>? previousTable,
+            CancellationToken cancellationToken
+        )
         {
             // grab the source inputs
             var sourceTable = builder.GetLatestStateTableForNode(_sourceNode);
@@ -122,21 +149,51 @@ namespace Microsoft.CodeAnalysis
             var tableBuilder = builder.CreateTableBuilder(previousTable, _name, _comparer);
 
             // If this execution is tracking steps, then the source table should have also tracked steps or be the empty table.
-            Debug.Assert(!tableBuilder.TrackIncrementalSteps || (sourceTable.HasTrackedSteps || sourceTable.IsEmpty));
+            Debug.Assert(
+                !tableBuilder.TrackIncrementalSteps
+                    || (sourceTable.HasTrackedSteps || sourceTable.IsEmpty)
+            );
 
             var stopwatch = SharedStopwatch.StartNew();
 
-            var (sourceValues, sourceInputs) = GetValuesAndInputs(sourceTable, previousTable, tableBuilder);
+            var (sourceValues, sourceInputs) = GetValuesAndInputs(
+                sourceTable,
+                previousTable,
+                tableBuilder
+            );
 
             if (previousTable is null || previousTable.IsEmpty)
             {
-                tableBuilder.AddEntry(sourceValues, EntryState.Added, stopwatch.Elapsed, sourceInputs, EntryState.Added);
+                tableBuilder.AddEntry(
+                    sourceValues,
+                    EntryState.Added,
+                    stopwatch.Elapsed,
+                    sourceInputs,
+                    EntryState.Added
+                );
             }
-            else if (!sourceTable.IsCached || !tableBuilder.TryUseCachedEntries(stopwatch.Elapsed, sourceInputs))
+            else if (
+                !sourceTable.IsCached
+                || !tableBuilder.TryUseCachedEntries(stopwatch.Elapsed, sourceInputs)
+            )
             {
-                if (!tableBuilder.TryModifyEntry(sourceValues, _comparer, stopwatch.Elapsed, sourceInputs, EntryState.Modified))
+                if (
+                    !tableBuilder.TryModifyEntry(
+                        sourceValues,
+                        _comparer,
+                        stopwatch.Elapsed,
+                        sourceInputs,
+                        EntryState.Modified
+                    )
+                )
                 {
-                    tableBuilder.AddEntry(sourceValues, EntryState.Added, stopwatch.Elapsed, sourceInputs, EntryState.Added);
+                    tableBuilder.AddEntry(
+                        sourceValues,
+                        EntryState.Added,
+                        stopwatch.Elapsed,
+                        sourceInputs,
+                        EntryState.Added
+                    );
                 }
             }
 
@@ -145,6 +202,7 @@ namespace Microsoft.CodeAnalysis
             return newTable;
         }
 
-        public void RegisterOutput(IIncrementalGeneratorOutputNode output) => _sourceNode.RegisterOutput(output);
+        public void RegisterOutput(IIncrementalGeneratorOutputNode output) =>
+            _sourceNode.RegisterOutput(output);
     }
 }

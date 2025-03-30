@@ -10,7 +10,9 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.Internal;
 
-internal sealed class NamedPipeTransportFactory : IConnectionListenerFactory, IConnectionListenerFactorySelector
+internal sealed class NamedPipeTransportFactory
+    : IConnectionListenerFactory,
+        IConnectionListenerFactorySelector
 {
     private const string LocalComputerServerName = ".";
 
@@ -21,18 +23,25 @@ internal sealed class NamedPipeTransportFactory : IConnectionListenerFactory, IC
     public NamedPipeTransportFactory(
         ILoggerFactory loggerFactory,
         IOptions<NamedPipeTransportOptions> options,
-        ObjectPoolProvider objectPoolProvider)
+        ObjectPoolProvider objectPoolProvider
+    )
     {
         ArgumentNullException.ThrowIfNull(loggerFactory);
 
-        Debug.Assert(OperatingSystem.IsWindows(), "Named pipes transport requires a Windows operating system.");
+        Debug.Assert(
+            OperatingSystem.IsWindows(),
+            "Named pipes transport requires a Windows operating system."
+        );
 
         _loggerFactory = loggerFactory;
         _objectPoolProvider = objectPoolProvider;
         _options = options.Value;
     }
 
-    public ValueTask<IConnectionListener> BindAsync(EndPoint endpoint, CancellationToken cancellationToken = default)
+    public ValueTask<IConnectionListener> BindAsync(
+        EndPoint endpoint,
+        CancellationToken cancellationToken = default
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoint);
 
@@ -42,10 +51,17 @@ internal sealed class NamedPipeTransportFactory : IConnectionListenerFactory, IC
         }
         if (namedPipeEndPoint.ServerName != LocalComputerServerName)
         {
-            throw new NotSupportedException($@"Server name '{namedPipeEndPoint.ServerName}' is invalid. The server name must be ""{LocalComputerServerName}"".");
+            throw new NotSupportedException(
+                $@"Server name '{namedPipeEndPoint.ServerName}' is invalid. The server name must be ""{LocalComputerServerName}""."
+            );
         }
 
-        var listener = new NamedPipeConnectionListener(namedPipeEndPoint, _options, _loggerFactory, _objectPoolProvider);
+        var listener = new NamedPipeConnectionListener(
+            namedPipeEndPoint,
+            _options,
+            _loggerFactory,
+            _objectPoolProvider
+        );
 
         // Start the listener and create NamedPipeServerStream instances immediately.
         // The first server stream is created with the FirstPipeInstance flag. The FirstPipeInstance flag ensures
@@ -59,7 +75,10 @@ internal sealed class NamedPipeTransportFactory : IConnectionListenerFactory, IC
         }
         catch (UnauthorizedAccessException ex)
         {
-            throw new AddressInUseException($"Named pipe '{namedPipeEndPoint.PipeName}' is already in use.", ex);
+            throw new AddressInUseException(
+                $"Named pipe '{namedPipeEndPoint.PipeName}' is already in use.",
+                ex
+            );
         }
 
         return new ValueTask<IConnectionListener>(listener);

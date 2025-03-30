@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             VariableDeclaratorSyntax declarator,
             DeclarationModifiers modifiers,
             bool modifierErrors,
-            BindingDiagnosticBag diagnostics)
+            BindingDiagnosticBag diagnostics
+        )
             : base(containingType, declarator, modifiers, modifierErrors, diagnostics)
         {
             // Checked in parser: a fixed field declaration requires a length in square brackets
@@ -37,18 +38,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(this.IsFixedSizeBuffer);
         }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             var compilation = this.DeclaringCompilation;
             var systemType = compilation.GetWellKnownType(WellKnownType.System_Type);
             var intType = compilation.GetSpecialType(SpecialType.System_Int32);
-            var item1 = new TypedConstant(systemType, TypedConstantKind.Type, ((PointerTypeSymbol)this.Type).PointedAtType);
+            var item1 = new TypedConstant(
+                systemType,
+                TypedConstantKind.Type,
+                ((PointerTypeSymbol)this.Type).PointedAtType
+            );
             var item2 = new TypedConstant(intType, TypedConstantKind.Primitive, this.FixedSize);
-            AddSynthesizedAttribute(ref attributes, compilation.TrySynthesizeAttribute(
-                WellKnownMember.System_Runtime_CompilerServices_FixedBufferAttribute__ctor,
-                ImmutableArray.Create<TypedConstant>(item1, item2)));
+            AddSynthesizedAttribute(
+                ref attributes,
+                compilation.TrySynthesizeAttribute(
+                    WellKnownMember.System_Runtime_CompilerServices_FixedBufferAttribute__ctor,
+                    ImmutableArray.Create<TypedConstant>(item1, item2)
+                )
+            );
         }
 
         public sealed override int FixedSize
@@ -67,37 +79,75 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                     else
                     {
-                        SeparatedSyntaxList<ArgumentSyntax> arguments = declarator.ArgumentList.Arguments;
+                        SeparatedSyntaxList<ArgumentSyntax> arguments = declarator
+                            .ArgumentList
+                            .Arguments;
 
-                        if (arguments.Count == 0 || arguments[0].Expression.Kind() == SyntaxKind.OmittedArraySizeExpression)
+                        if (
+                            arguments.Count == 0
+                            || arguments[0].Expression.Kind()
+                                == SyntaxKind.OmittedArraySizeExpression
+                        )
                         {
-                            Debug.Assert(declarator.ArgumentList.ContainsDiagnostics, "The parser should have caught this.");
+                            Debug.Assert(
+                                declarator.ArgumentList.ContainsDiagnostics,
+                                "The parser should have caught this."
+                            );
                         }
                         else
                         {
                             if (arguments.Count > 1)
                             {
-                                diagnostics.Add(ErrorCode.ERR_FixedBufferTooManyDimensions, declarator.ArgumentList.Location);
+                                diagnostics.Add(
+                                    ErrorCode.ERR_FixedBufferTooManyDimensions,
+                                    declarator.ArgumentList.Location
+                                );
                             }
 
                             ExpressionSyntax sizeExpression = arguments[0].Expression;
 
-                            BinderFactory binderFactory = this.DeclaringCompilation.GetBinderFactory(SyntaxTree);
+                            BinderFactory binderFactory =
+                                this.DeclaringCompilation.GetBinderFactory(SyntaxTree);
                             Binder binder = binderFactory.GetBinder(sizeExpression);
-                            binder = new ExecutableCodeBinder(sizeExpression, binder.ContainingMemberOrLambda, binder).GetBinder(sizeExpression);
+                            binder = new ExecutableCodeBinder(
+                                sizeExpression,
+                                binder.ContainingMemberOrLambda,
+                                binder
+                            ).GetBinder(sizeExpression);
 
-                            TypeSymbol intType = binder.GetSpecialType(SpecialType.System_Int32, diagnostics, sizeExpression);
-                            BoundExpression boundSizeExpression = binder.GenerateConversionForAssignment(
-                                intType,
-                                binder.BindValue(sizeExpression, diagnostics, Binder.BindValueKind.RValue),
-                                diagnostics);
+                            TypeSymbol intType = binder.GetSpecialType(
+                                SpecialType.System_Int32,
+                                diagnostics,
+                                sizeExpression
+                            );
+                            BoundExpression boundSizeExpression =
+                                binder.GenerateConversionForAssignment(
+                                    intType,
+                                    binder.BindValue(
+                                        sizeExpression,
+                                        diagnostics,
+                                        Binder.BindValueKind.RValue
+                                    ),
+                                    diagnostics
+                                );
 
                             // GetAndValidateConstantValue doesn't generate a very intuitive-reading diagnostic
                             // for this situation, but this is what the Dev10 compiler produces.
-                            ConstantValue sizeConstant = ConstantValueUtils.GetAndValidateConstantValue(boundSizeExpression, this, intType, sizeExpression, diagnostics);
+                            ConstantValue sizeConstant =
+                                ConstantValueUtils.GetAndValidateConstantValue(
+                                    boundSizeExpression,
+                                    this,
+                                    intType,
+                                    sizeExpression,
+                                    diagnostics
+                                );
 
                             Debug.Assert(sizeConstant != null);
-                            Debug.Assert(sizeConstant.IsIntegral || diagnostics.HasAnyErrors() || sizeExpression.HasErrors);
+                            Debug.Assert(
+                                sizeConstant.IsIntegral
+                                    || diagnostics.HasAnyErrors()
+                                    || sizeExpression.HasErrors
+                            );
 
                             if (sizeConstant.IsIntegral)
                             {
@@ -106,25 +156,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 {
                                     size = int32Value;
 
-                                    TypeSymbol elementType = ((PointerTypeSymbol)this.Type).PointedAtType;
+                                    TypeSymbol elementType = (
+                                        (PointerTypeSymbol)this.Type
+                                    ).PointedAtType;
                                     int elementSize = elementType.FixedBufferElementSizeInBytes();
                                     long totalSize = elementSize * 1L * int32Value;
                                     if (totalSize > int.MaxValue)
                                     {
                                         // Fixed size buffer of length '{0}' and type '{1}' is too big
-                                        diagnostics.Add(ErrorCode.ERR_FixedOverflow, sizeExpression.Location, int32Value, elementType);
+                                        diagnostics.Add(
+                                            ErrorCode.ERR_FixedOverflow,
+                                            sizeExpression.Location,
+                                            int32Value,
+                                            elementType
+                                        );
                                     }
                                 }
                                 else
                                 {
-                                    diagnostics.Add(ErrorCode.ERR_InvalidFixedArraySize, sizeExpression.Location);
+                                    diagnostics.Add(
+                                        ErrorCode.ERR_InvalidFixedArraySize,
+                                        sizeExpression.Location
+                                    );
                                 }
                             }
                         }
                     }
 
                     // Winner writes diagnostics.
-                    if (Interlocked.CompareExchange(ref _fixedSize, size, FixedSizeNotInitialized) == FixedSizeNotInitialized)
+                    if (
+                        Interlocked.CompareExchange(ref _fixedSize, size, FixedSizeNotInitialized)
+                        == FixedSizeNotInitialized
+                    )
                     {
                         this.AddDeclarationDiagnostics(diagnostics);
                         state.NotePartComplete(CompletionPart.FixedSize);
@@ -153,11 +216,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly FieldSymbol _internalField;
 
         public FixedFieldImplementationType(SourceMemberFieldSymbol field)
-            : base(GeneratedNames.MakeFixedFieldImplementationName(field.Name), typeParameters: ImmutableArray<TypeParameterSymbol>.Empty, typeMap: TypeMap.Empty)
+            : base(
+                GeneratedNames.MakeFixedFieldImplementationName(field.Name),
+                typeParameters: ImmutableArray<TypeParameterSymbol>.Empty,
+                typeMap: TypeMap.Empty
+            )
         {
             _field = field;
             _constructor = new SynthesizedInstanceConstructor(this);
-            _internalField = new SynthesizedFieldSymbol(this, ((PointerTypeSymbol)field.Type).PointedAtType, FixedElementFieldName, isPublic: true);
+            _internalField = new SynthesizedFieldSymbol(
+                this,
+                ((PointerTypeSymbol)field.Type).PointedAtType,
+                FixedElementFieldName,
+                isPublic: true
+            );
         }
 
         public override Symbol ContainingSymbol
@@ -203,11 +275,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return _internalField; }
         }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
             var compilation = ContainingSymbol.DeclaringCompilation;
-            AddSynthesizedAttribute(ref attributes, compilation.TrySynthesizeAttribute(WellKnownMember.System_Runtime_CompilerServices_UnsafeValueTypeAttribute__ctor));
+            AddSynthesizedAttribute(
+                ref attributes,
+                compilation.TrySynthesizeAttribute(
+                    WellKnownMember.System_Runtime_CompilerServices_UnsafeValueTypeAttribute__ctor
+                )
+            );
         }
 
         public override IEnumerable<string> MemberNames
@@ -222,10 +302,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<Symbol> GetMembers(string name)
         {
-            return
-                (name == _constructor.Name) ? ImmutableArray.Create<Symbol>(_constructor) :
-                (name == FixedElementFieldName) ? ImmutableArray.Create<Symbol>(_internalField) :
-                ImmutableArray<Symbol>.Empty;
+            return (name == _constructor.Name) ? ImmutableArray.Create<Symbol>(_constructor)
+                : (name == FixedElementFieldName) ? ImmutableArray.Create<Symbol>(_internalField)
+                : ImmutableArray<Symbol>.Empty;
         }
 
         public override Accessibility DeclaredAccessibility
@@ -233,14 +312,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return Accessibility.Public; }
         }
 
-        internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics
-            => ContainingAssembly.GetSpecialType(SpecialType.System_ValueType);
+        internal override NamedTypeSymbol BaseTypeNoUseSiteDiagnostics =>
+            ContainingAssembly.GetSpecialType(SpecialType.System_ValueType);
 
-        public sealed override bool AreLocalsZeroed
-            => throw ExceptionUtilities.Unreachable();
+        public sealed override bool AreLocalsZeroed => throw ExceptionUtilities.Unreachable();
 
         internal override bool IsRecord => false;
         internal override bool IsRecordStruct => false;
+
         internal override bool HasPossibleWellKnownCloneMethod() => false;
     }
 }

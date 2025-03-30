@@ -65,7 +65,8 @@ public class HeaderModelBinderTests
     [InlineData(typeof(LinkedList<string>))]
     [InlineData(typeof(StringList))]
     public async Task HeaderBinder_BindsHeaders_ForCollectionsItCanCreate_WithoutInnerModelBinder(
-        Type destinationType)
+        Type destinationType
+    )
     {
         // Arrange
         var header = "Accept";
@@ -110,23 +111,27 @@ public class HeaderModelBinderTests
             var guid = new Guid("3916A5B1-5FE4-4E09-9812-5CDC127FA5B1");
 
             return new TheoryData<string, Type, object>()
+            {
+                { "10", typeof(int), 10 },
+                { "10.50", typeof(double), 10.50 },
                 {
-                    { "10", typeof(int), 10 },
-                    { "10.50", typeof(double), 10.50 },
-                    { "10.50", typeof(IEnumerable<double>), new List<double>() { 10.50 } },
-                    { "Sedan", typeof(CarType), CarType.Sedan },
-                    { "", typeof(CarType?), null },
-                    { "", typeof(string[]), Array.Empty<string>() },
-                    { null, typeof(string[]), Array.Empty<string>() },
-                    { "", typeof(IEnumerable<string>), new List<string>() },
-                    { null, typeof(IEnumerable<string>), new List<string>() },
-                    { guid.ToString(), typeof(Guid), guid },
-                    { "foo", typeof(string), "foo" },
-                    { "foo, bar", typeof(string), "foo, bar" },
-                    { "foo, bar", typeof(string[]), new[]{ "foo", "bar" } },
-                    { "foo, \"bar\"", typeof(string[]), new[]{ "foo", "bar" } },
-                    { "\"foo,bar\"", typeof(string[]), new[]{ "foo,bar" } }
-                };
+                    "10.50",
+                    typeof(IEnumerable<double>),
+                    new List<double>() { 10.50 }
+                },
+                { "Sedan", typeof(CarType), CarType.Sedan },
+                { "", typeof(CarType?), null },
+                { "", typeof(string[]), Array.Empty<string>() },
+                { null, typeof(string[]), Array.Empty<string>() },
+                { "", typeof(IEnumerable<string>), new List<string>() },
+                { null, typeof(IEnumerable<string>), new List<string>() },
+                { guid.ToString(), typeof(Guid), guid },
+                { "foo", typeof(string), "foo" },
+                { "foo, bar", typeof(string), "foo, bar" },
+                { "foo, bar", typeof(string[]), new[] { "foo", "bar" } },
+                { "foo, \"bar\"", typeof(string[]), new[] { "foo", "bar" } },
+                { "\"foo,bar\"", typeof(string[]), new[] { "foo,bar" } },
+            };
         }
     }
 
@@ -135,7 +140,8 @@ public class HeaderModelBinderTests
     public async Task HeaderBinder_BindsHeaders_ToSimpleTypes(
         string headerValue,
         Type modelType,
-        object expectedModel)
+        object expectedModel
+    )
     {
         // Arrange
         var bindingContext = CreateContext(modelType);
@@ -174,7 +180,9 @@ public class HeaderModelBinderTests
     [Theory]
     [InlineData(typeof(string[]))]
     [InlineData(typeof(IEnumerable<string>))]
-    public async Task HeaderBinder_DoesNotCreateEmptyCollection_ForNonTopLevelObjects(Type modelType)
+    public async Task HeaderBinder_DoesNotCreateEmptyCollection_ForNonTopLevelObjects(
+        Type modelType
+    )
     {
         // Arrange
         var bindingContext = CreateContext(modelType);
@@ -235,7 +243,10 @@ public class HeaderModelBinderTests
     {
         // Arrange
         var expectedValueProvider = Mock.Of<IValueProvider>();
-        var bindingContext = CreateContext(GetMetadataForType(typeof(string)), expectedValueProvider);
+        var bindingContext = CreateContext(
+            GetMetadataForType(typeof(string)),
+            expectedValueProvider
+        );
         var binder = CreateBinder(bindingContext);
         bindingContext.HttpContext.Request.Headers.Add("Header", "application/json,text/json");
 
@@ -253,13 +264,14 @@ public class HeaderModelBinderTests
     {
         // Arrange
         var testValueProvider = new Mock<IValueProvider>();
-        testValueProvider
-            .Setup(vp => vp.ContainsPrefix(It.IsAny<string>()))
-            .Returns(true);
+        testValueProvider.Setup(vp => vp.ContainsPrefix(It.IsAny<string>())).Returns(true);
         testValueProvider
             .Setup(vp => vp.GetValue(It.IsAny<string>()))
             .Returns(new ValueProviderResult(new StringValues("foo,bar")));
-        var bindingContext = CreateContext(GetMetadataForType(typeof(string)), testValueProvider.Object);
+        var bindingContext = CreateContext(
+            GetMetadataForType(typeof(string)),
+            testValueProvider.Object
+        );
         var binder = CreateBinder(bindingContext);
         bindingContext.HttpContext.Request.Headers.Add("Header", "application/json,text/json");
 
@@ -278,7 +290,8 @@ public class HeaderModelBinderTests
     [InlineData(typeof(CarType?), "boo")]
     public async Task HeaderBinder_BindModelAsync_AddsErrorToModelState_OnInvalidInput(
         Type modelType,
-        string headerValue)
+        string headerValue
+    )
     {
         // Arrange
         var bindingContext = CreateContext(modelType);
@@ -301,7 +314,8 @@ public class HeaderModelBinderTests
     [InlineData(typeof(ICollection<CarType>), "a, b")]
     public async Task HeaderBinder_BindModelAsync_AddsErrorToModelState_OnInvalid_CollectionInput(
         Type modelType,
-        string headerValue)
+        string headerValue
+    )
     {
         // Arrange
         var headerValues = headerValue.Split(',').Select(s => s.Trim()).ToArray();
@@ -327,7 +341,8 @@ public class HeaderModelBinderTests
 
     private static DefaultModelBindingContext CreateContext(
         ModelMetadata metadata,
-        IValueProvider valueProvider = null)
+        IValueProvider valueProvider = null
+    )
     {
         if (valueProvider == null)
         {
@@ -361,10 +376,7 @@ public class HeaderModelBinderTests
             ModelState = new ModelStateDictionary(),
             ActionContext = new ActionContext()
             {
-                HttpContext = new DefaultHttpContext()
-                {
-                    RequestServices = serviceProvider
-                }
+                HttpContext = new DefaultHttpContext() { RequestServices = serviceProvider },
             },
         };
     }
@@ -373,23 +385,27 @@ public class HeaderModelBinderTests
     {
         var factory = TestModelBinderFactory.Create(bindingContext.HttpContext.RequestServices);
         var metadata = bindingContext.ModelMetadata;
-        return factory.CreateBinder(new ModelBinderFactoryContext()
-        {
-            Metadata = metadata,
-            BindingInfo = new BindingInfo()
+        return factory.CreateBinder(
+            new ModelBinderFactoryContext()
             {
-                BinderModelName = metadata.BinderModelName,
-                BinderType = metadata.BinderType,
-                BindingSource = metadata.BindingSource,
-                PropertyFilterProvider = metadata.PropertyFilterProvider,
-            },
-        });
+                Metadata = metadata,
+                BindingInfo = new BindingInfo()
+                {
+                    BinderModelName = metadata.BinderModelName,
+                    BinderType = metadata.BinderType,
+                    BindingSource = metadata.BindingSource,
+                    PropertyFilterProvider = metadata.PropertyFilterProvider,
+                },
+            }
+        );
     }
 
     private static ModelMetadata GetMetadataForType(Type modelType)
     {
         var metadataProvider = new TestModelMetadataProvider();
-        metadataProvider.ForType(modelType).BindingDetails(d => d.BindingSource = BindingSource.Header);
+        metadataProvider
+            .ForType(modelType)
+            .BindingDetails(d => d.BindingSource = BindingSource.Header);
         return metadataProvider.GetMetadataForType(modelType);
     }
 
@@ -401,7 +417,8 @@ public class HeaderModelBinderTests
             .BindingDetails(bd => bd.BindingSource = BindingSource.Header);
         return metadataProvider.GetMetadataForProperty(
             typeof(ModelWithReadOnlyArray),
-            nameof(ModelWithReadOnlyArray.ArrayProperty));
+            nameof(ModelWithReadOnlyArray.ArrayProperty)
+        );
     }
 
     private class ModelWithReadOnlyArray
@@ -409,13 +426,11 @@ public class HeaderModelBinderTests
         public string[] ArrayProperty { get; }
     }
 
-    private class StringList : List<string>
-    {
-    }
+    private class StringList : List<string> { }
 
     private enum CarType
     {
         Sedan,
-        Coupe
+        Coupe,
     }
 }

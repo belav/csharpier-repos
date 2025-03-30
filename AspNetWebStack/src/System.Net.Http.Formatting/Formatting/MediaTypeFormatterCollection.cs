@@ -28,9 +28,7 @@ namespace System.Net.Http.Formatting
         /// instances for Xml, JsonValue and Json.
         /// </remarks>
         public MediaTypeFormatterCollection()
-            : this(CreateDefaultFormatters())
-        {
-        }
+            : this(CreateDefaultFormatters()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MediaTypeFormatterCollection"/> class.
@@ -143,7 +141,9 @@ namespace System.Net.Http.Formatting
             {
                 if (formatter != null && formatter.CanReadType(type))
                 {
-                    foreach (MediaTypeHeaderValue supportedMediaType in formatter.SupportedMediaTypes)
+                    foreach (
+                        MediaTypeHeaderValue supportedMediaType in formatter.SupportedMediaTypes
+                    )
                     {
                         if (supportedMediaType != null && supportedMediaType.IsSubsetOf(mediaType))
                         {
@@ -177,7 +177,9 @@ namespace System.Net.Http.Formatting
             {
                 if (formatter != null && formatter.CanWriteType(type))
                 {
-                    foreach (MediaTypeHeaderValue supportedMediaType in formatter.SupportedMediaTypes)
+                    foreach (
+                        MediaTypeHeaderValue supportedMediaType in formatter.SupportedMediaTypes
+                    )
                     {
                         if (supportedMediaType != null && supportedMediaType.IsSubsetOf(mediaType))
                         {
@@ -197,13 +199,12 @@ namespace System.Net.Http.Formatting
         /// <returns><c>true</c> if the type should be excluded.</returns>
         public static bool IsTypeExcludedFromValidation(Type type)
         {
-            return
-                typeof(XmlNode).IsAssignableFrom(type) ||
-                typeof(FormDataCollection).IsAssignableFrom(type) ||
-                FormattingUtilities.IsJTokenType(type) ||
-                typeof(XObject).IsAssignableFrom(type) ||
-                typeof(Type).IsAssignableFrom(type) ||
-                type == typeof(byte[]);
+            return typeof(XmlNode).IsAssignableFrom(type)
+                || typeof(FormDataCollection).IsAssignableFrom(type)
+                || FormattingUtilities.IsJTokenType(type)
+                || typeof(XObject).IsAssignableFrom(type)
+                || typeof(Type).IsAssignableFrom(type)
+                || type == typeof(byte[]);
         }
 
         protected override void ClearItems()
@@ -243,7 +244,9 @@ namespace System.Net.Http.Formatting
 
         private MediaTypeFormatter[] GetWritingFormatters()
         {
-            return Items.Where((formatter) => formatter != null && formatter.CanWriteAnyTypes).ToArray();
+            return Items
+                .Where((formatter) => formatter != null && formatter.CanWriteAnyTypes)
+                .ToArray();
         }
 
         /// <summary>
@@ -260,7 +263,7 @@ namespace System.Net.Http.Formatting
                 { UseXmlSerializer = true }
 #endif
                 ,
-                new FormUrlEncodedMediaTypeFormatter()
+                new FormUrlEncodedMediaTypeFormatter(),
             };
         }
 
@@ -275,7 +278,11 @@ namespace System.Net.Http.Formatting
             {
                 if (formatter == null)
                 {
-                    throw Error.Argument("formatters", Properties.Resources.CannotHaveNullInList, _mediaTypeFormatterType.Name);
+                    throw Error.Argument(
+                        "formatters",
+                        Properties.Resources.CannotHaveNullInList,
+                        _mediaTypeFormatterType.Name
+                    );
                 }
 
                 Add(formatter);

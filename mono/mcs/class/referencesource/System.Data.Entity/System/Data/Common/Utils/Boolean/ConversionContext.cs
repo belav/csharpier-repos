@@ -9,9 +9,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
 
 namespace System.Data.Common.Utils.Boolean
 {
@@ -59,7 +59,8 @@ namespace System.Data.Common.Utils.Boolean
     /// </summary>
     internal sealed class GenericConversionContext<T_Identifier> : ConversionContext<T_Identifier>
     {
-        readonly Dictionary<TermExpr<T_Identifier>, int> _variableMap = new Dictionary<TermExpr<T_Identifier>, int>();
+        readonly Dictionary<TermExpr<T_Identifier>, int> _variableMap =
+            new Dictionary<TermExpr<T_Identifier>, int>();
         Dictionary<int, TermExpr<T_Identifier>> _inverseVariableMap;
 
         internal override Vertex TranslateTermToVertex(TermExpr<T_Identifier> term)
@@ -107,19 +108,25 @@ namespace System.Data.Common.Utils.Boolean
     /// <summary>
     /// Specialization of ConversionContext for DomainConstraint BoolExpr
     /// </summary>
-    internal sealed class DomainConstraintConversionContext<T_Variable, T_Element> : ConversionContext<DomainConstraint<T_Variable, T_Element>>
+    internal sealed class DomainConstraintConversionContext<T_Variable, T_Element>
+        : ConversionContext<DomainConstraint<T_Variable, T_Element>>
     {
         /// <summary>
         /// A map from domain variables to decision diagram variables.
         /// </summary>
-        readonly Dictionary<DomainVariable<T_Variable, T_Element>, int> _domainVariableToRobddVariableMap =
+        readonly Dictionary<
+            DomainVariable<T_Variable, T_Element>,
+            int
+        > _domainVariableToRobddVariableMap =
             new Dictionary<DomainVariable<T_Variable, T_Element>, int>();
         Dictionary<int, DomainVariable<T_Variable, T_Element>> _inverseMap;
 
         /// <summary>
-        /// Translates a domain constraint term to an N-ary DD vertex. 
+        /// Translates a domain constraint term to an N-ary DD vertex.
         /// </summary>
-        internal override Vertex TranslateTermToVertex(TermExpr<DomainConstraint<T_Variable, T_Element>> term)
+        internal override Vertex TranslateTermToVertex(
+            TermExpr<DomainConstraint<T_Variable, T_Element>> term
+        )
         {
             var range = term.Identifier.Range;
             var domainVariable = term.Identifier.Variable;
@@ -138,7 +145,9 @@ namespace System.Data.Common.Utils.Boolean
             }
 
             // determine assignments for this constraints (if the range contains a value in the domain, '1', else '0')
-            Vertex[] children = domain.Select(element => range.Contains(element) ? Vertex.One : Vertex.Zero).ToArray();
+            Vertex[] children = domain
+                .Select(element => range.Contains(element) ? Vertex.One : Vertex.Zero)
+                .ToArray();
 
             // see if we know this variable
             int robddVariable;
@@ -152,7 +161,9 @@ namespace System.Data.Common.Utils.Boolean
             return Solver.CreateLeafVertex(robddVariable, children);
         }
 
-        internal override IEnumerable<LiteralVertexPair<DomainConstraint<T_Variable, T_Element>>> GetSuccessors(Vertex vertex)
+        internal override IEnumerable<
+            LiteralVertexPair<DomainConstraint<T_Variable, T_Element>>
+        > GetSuccessors(Vertex vertex)
         {
             InitializeInverseMap();
             var domainVariable = _inverseMap[vertex.Variable];
@@ -161,7 +172,8 @@ namespace System.Data.Common.Utils.Boolean
             var domain = domainVariable.Domain.ToArray();
 
             // foreach unique successor vertex, build up range
-            Dictionary<Vertex, Set<T_Element>> vertexToRange = new Dictionary<Vertex, Set<T_Element>>();
+            Dictionary<Vertex, Set<T_Element>> vertexToRange =
+                new Dictionary<Vertex, Set<T_Element>>();
 
             for (int i = 0; i < vertex.Children.Length; i++)
             {
@@ -181,11 +193,19 @@ namespace System.Data.Common.Utils.Boolean
                 var range = vertexRange.Value;
 
                 // construct a DomainConstraint including the given range
-                var constraint = new DomainConstraint<T_Variable, T_Element>(domainVariable, range.MakeReadOnly());
+                var constraint = new DomainConstraint<T_Variable, T_Element>(
+                    domainVariable,
+                    range.MakeReadOnly()
+                );
                 var literal = new Literal<DomainConstraint<T_Variable, T_Element>>(
-                    new TermExpr<DomainConstraint<T_Variable, T_Element>>(constraint), true);
+                    new TermExpr<DomainConstraint<T_Variable, T_Element>>(constraint),
+                    true
+                );
 
-                yield return new LiteralVertexPair<DomainConstraint<T_Variable, T_Element>>(successorVertex, literal);
+                yield return new LiteralVertexPair<DomainConstraint<T_Variable, T_Element>>(
+                    successorVertex,
+                    literal
+                );
             }
         }
 
@@ -193,7 +213,10 @@ namespace System.Data.Common.Utils.Boolean
         {
             if (null == _inverseMap)
             {
-                _inverseMap = _domainVariableToRobddVariableMap.ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
+                _inverseMap = _domainVariableToRobddVariableMap.ToDictionary(
+                    kvp => kvp.Value,
+                    kvp => kvp.Key
+                );
             }
         }
     }

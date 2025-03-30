@@ -19,12 +19,12 @@ namespace System.Activities.DynamicUpdate
         // the following two fields are never to be serialized.
         private Type type;
         private bool HasGetTypeBeenAttempted;
-                
+
         string versionlessAssemblyQualifiedTypeName;
         string name;
         string fullAssemblyQualifiedTypeName;
         ArgumentDirection direction;
-                
+
         public ArgumentInfo(RuntimeArgument argument)
         {
             this.Name = argument.Name;
@@ -34,12 +34,13 @@ namespace System.Activities.DynamicUpdate
             this.HasGetTypeBeenAttempted = true;
 
             this.FullAssemblyQualifiedTypeName = this.Type.AssemblyQualifiedName;
-            
-            // this versionless assembly-qualified type name causes types of different versions 
+
+            // this versionless assembly-qualified type name causes types of different versions
             //  to be considered equal for the sake of argument matching.
             // Serializing the argument type info in a string format allows
             //  the map to be loaded into environment in which the types may not be available.
-            this.versionlessAssemblyQualifiedTypeName = GenerateVersionlessAssemblyQualifiedTypeName(argument.Type);
+            this.versionlessAssemblyQualifiedTypeName =
+                GenerateVersionlessAssemblyQualifiedTypeName(argument.Type);
 
             this.Direction = argument.Direction;
         }
@@ -54,11 +55,16 @@ namespace System.Activities.DynamicUpdate
                     this.HasGetTypeBeenAttempted = true;
                     try
                     {
-                        this.type = Type.GetType(this.FullAssemblyQualifiedTypeName, false);                    
+                        this.type = Type.GetType(this.FullAssemblyQualifiedTypeName, false);
                     }
                     catch (Exception e)
                     {
-                        if (e is TypeLoadException || e is FileNotFoundException || e is FileLoadException || e is ArgumentException)
+                        if (
+                            e is TypeLoadException
+                            || e is FileNotFoundException
+                            || e is FileLoadException
+                            || e is ArgumentException
+                        )
                         {
                             this.type = null;
                             FxTrace.Exception.AsWarning(e);
@@ -67,50 +73,29 @@ namespace System.Activities.DynamicUpdate
                         {
                             throw;
                         }
-                    }                    
+                    }
                 }
                 return this.type;
             }
-            set
-            {
-                this.type = value;
-            }
+            set { this.type = value; }
         }
-               
-        public string Name 
+
+        public string Name
         {
-            get
-            {
-                return this.name;
-            }
-            private set
-            {
-                this.name = value;
-            }
-        }               
-        
+            get { return this.name; }
+            private set { this.name = value; }
+        }
+
         public string FullAssemblyQualifiedTypeName
         {
-            get
-            {
-                return this.fullAssemblyQualifiedTypeName;
-            }
-            private set
-            {
-                this.fullAssemblyQualifiedTypeName = value;
-            }
-        }                
+            get { return this.fullAssemblyQualifiedTypeName; }
+            private set { this.fullAssemblyQualifiedTypeName = value; }
+        }
 
-        public ArgumentDirection Direction 
+        public ArgumentDirection Direction
         {
-            get
-            {
-                return this.direction;
-            }
-            private set
-            {
-                this.direction = value;
-            }
+            get { return this.direction; }
+            private set { this.direction = value; }
         }
 
         [DataMember(EmitDefaultValue = false, Name = "VersionlessAssemblyQualifiedTypeName")]
@@ -145,7 +130,10 @@ namespace System.Activities.DynamicUpdate
         {
             Fx.Assert(left != null && right != null, "both left and right must not be null.");
 
-            if (left.versionlessAssemblyQualifiedTypeName == right.versionlessAssemblyQualifiedTypeName)
+            if (
+                left.versionlessAssemblyQualifiedTypeName
+                == right.versionlessAssemblyQualifiedTypeName
+            )
             {
                 return true;
             }
@@ -154,7 +142,7 @@ namespace System.Activities.DynamicUpdate
             // Try to determine if the two argument types are in fact the same due to one being a TypeForwardedTo type to the other.
             // When forwarded types are used, it is expected that all the assemblies involved in type forwarding to be always available,
             //  whether during map calcuation, during implementation map rollup, or  during merging of multiple maps.
-            // 
+            //
             if (left.Type != null && right.Type != null && left.Type == right.Type)
             {
                 return true;
@@ -170,8 +158,10 @@ namespace System.Activities.DynamicUpdate
                 return right == null;
             }
 
-            return right != null &&
-                left.Name == right.Name && TypeEquals(left, right) && left.Direction == right.Direction;
+            return right != null
+                && left.Name == right.Name
+                && TypeEquals(left, right)
+                && left.Direction == right.Direction;
         }
 
         public static IList<ArgumentInfo> List(Activity activity)

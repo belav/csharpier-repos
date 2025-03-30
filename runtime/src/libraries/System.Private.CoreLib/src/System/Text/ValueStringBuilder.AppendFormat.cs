@@ -11,7 +11,11 @@ namespace System.Text
     {
         // Copied from StringBuilder, can't be done via generic extension
         // as ValueStringBuilder is a ref struct and cannot be used in a generic.
-        internal void AppendFormatHelper(IFormatProvider? provider, string format, ReadOnlySpan<object?> args)
+        internal void AppendFormatHelper(
+            IFormatProvider? provider,
+            string format,
+            ReadOnlySpan<object?> args
+        )
         {
             ArgumentNullException.ThrowIfNull(format);
 
@@ -64,7 +68,10 @@ namespace System.Text
                     // This wasn't an escape, so it must be an opening brace.
                     if (brace != '{')
                     {
-                        ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_UnexpectedClosingBrace);
+                        ThrowHelper.ThrowFormatInvalidString(
+                            pos,
+                            ExceptionResource.Format_UnexpectedClosingBrace
+                        );
                     }
 
                     // Proceed to parse the hole.
@@ -87,7 +94,10 @@ namespace System.Text
                 int index = ch - '0';
                 if ((uint)index >= 10u)
                 {
-                    ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_ExpectedAsciiDigit);
+                    ThrowHelper.ThrowFormatInvalidString(
+                        pos,
+                        ExceptionResource.Format_ExpectedAsciiDigit
+                    );
                 }
 
                 // Common case is a single digit index followed by a closing brace.  If it's not a closing brace,
@@ -120,8 +130,7 @@ namespace System.Text
                         do
                         {
                             ch = MoveNext(format, ref pos);
-                        }
-                        while (ch == ' ');
+                        } while (ch == ' ');
 
                         // Consume an optional minus sign indicating left alignment.
                         if (ch == '-')
@@ -134,7 +143,10 @@ namespace System.Text
                         width = ch - '0';
                         if ((uint)width >= 10u)
                         {
-                            ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_ExpectedAsciiDigit);
+                            ThrowHelper.ThrowFormatInvalidString(
+                                pos,
+                                ExceptionResource.Format_ExpectedAsciiDigit
+                            );
                         }
                         ch = MoveNext(format, ref pos);
                         while (char.IsAsciiDigit(ch) && width < WidthLimit)
@@ -157,7 +169,10 @@ namespace System.Text
                         if (ch != ':')
                         {
                             // Unexpected character
-                            ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_UnclosedFormatItem);
+                            ThrowHelper.ThrowFormatInvalidString(
+                                pos,
+                                ExceptionResource.Format_UnclosedFormatItem
+                            );
                         }
 
                         // Search for the closing brace; everything in between is the format,
@@ -176,7 +191,10 @@ namespace System.Text
                             if (ch == '{')
                             {
                                 // Braces inside the argument hole are not supported
-                                ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_UnclosedFormatItem);
+                                ThrowHelper.ThrowFormatInvalidString(
+                                    pos,
+                                    ExceptionResource.Format_UnclosedFormatItem
+                                );
                             }
                         }
 
@@ -211,9 +229,16 @@ namespace System.Text
                 {
                     // If arg is ISpanFormattable and the beginning doesn't need padding,
                     // try formatting it into the remaining current chunk.
-                    if ((leftJustify || width == 0) &&
-                        arg is ISpanFormattable spanFormattableArg &&
-                        spanFormattableArg.TryFormat(_chars.Slice(_pos), out int charsWritten, itemFormatSpan, provider))
+                    if (
+                        (leftJustify || width == 0)
+                        && arg is ISpanFormattable spanFormattableArg
+                        && spanFormattableArg.TryFormat(
+                            _chars.Slice(_pos),
+                            out int charsWritten,
+                            itemFormatSpan,
+                            provider
+                        )
+                    )
                     {
                         _pos += charsWritten;
 
@@ -269,7 +294,10 @@ namespace System.Text
                 pos++;
                 if ((uint)pos >= (uint)format.Length)
                 {
-                    ThrowHelper.ThrowFormatInvalidString(pos, ExceptionResource.Format_UnclosedFormatItem);
+                    ThrowHelper.ThrowFormatInvalidString(
+                        pos,
+                        ExceptionResource.Format_UnclosedFormatItem
+                    );
                 }
                 return format[pos];
             }

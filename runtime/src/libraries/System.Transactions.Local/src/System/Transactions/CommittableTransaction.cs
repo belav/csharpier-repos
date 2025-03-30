@@ -13,21 +13,19 @@ namespace System.Transactions
     public sealed class CommittableTransaction : Transaction, IAsyncResult
     {
         // Create a transaction with defaults
-        public CommittableTransaction() : this(TransactionManager.DefaultIsolationLevel, TransactionManager.DefaultTimeout)
-        {
-        }
+        public CommittableTransaction()
+            : this(TransactionManager.DefaultIsolationLevel, TransactionManager.DefaultTimeout) { }
 
         // Create a transaction with the given info
-        public CommittableTransaction(TimeSpan timeout) : this(TransactionManager.DefaultIsolationLevel, timeout)
-        {
-        }
+        public CommittableTransaction(TimeSpan timeout)
+            : this(TransactionManager.DefaultIsolationLevel, timeout) { }
 
         // Create a transaction with the given options
-        public CommittableTransaction(TransactionOptions options) : this(options.IsolationLevel, options.Timeout)
-        {
-        }
+        public CommittableTransaction(TransactionOptions options)
+            : this(options.IsolationLevel, options.Timeout) { }
 
-        internal CommittableTransaction(IsolationLevel isoLevel, TimeSpan timeout) : base(isoLevel, (InternalTransaction?)null)
+        internal CommittableTransaction(IsolationLevel isoLevel, TimeSpan timeout)
+            : base(isoLevel, (InternalTransaction?)null)
         {
             // object to use for synchronization rather than locking on a public object
             _internalTransaction = new InternalTransaction(timeout, this);
@@ -39,7 +37,11 @@ namespace System.Transactions
             TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
             if (etwLog.IsEnabled())
             {
-                etwLog.TransactionCreated(TraceSourceType.TraceSourceLtm, TransactionTraceId, "CommittableTransaction");
+                etwLog.TransactionCreated(
+                    TraceSourceType.TraceSourceLtm,
+                    TransactionTraceId,
+                    "CommittableTransaction"
+                );
             }
         }
 
@@ -49,7 +51,11 @@ namespace System.Transactions
             if (etwLog.IsEnabled())
             {
                 etwLog.MethodEnter(TraceSourceType.TraceSourceLtm, this);
-                etwLog.TransactionCommit(TraceSourceType.TraceSourceLtm, TransactionTraceId, "CommittableTransaction");
+                etwLog.TransactionCommit(
+                    TraceSourceType.TraceSourceLtm,
+                    TransactionTraceId,
+                    "CommittableTransaction"
+                );
             }
 
             ObjectDisposedException.ThrowIf(Disposed, this);
@@ -64,7 +70,12 @@ namespace System.Transactions
                 Debug.Assert(_internalTransaction.State != null);
                 // this.complete will get set to true when the transaction enters a state that is
                 // beyond Phase0.
-                _internalTransaction.State.BeginCommit(_internalTransaction, true, asyncCallback, asyncState);
+                _internalTransaction.State.BeginCommit(
+                    _internalTransaction,
+                    true,
+                    asyncCallback,
+                    asyncState
+                );
             }
 
             if (etwLog.IsEnabled())
@@ -83,7 +94,11 @@ namespace System.Transactions
             if (etwLog.IsEnabled())
             {
                 etwLog.MethodEnter(TraceSourceType.TraceSourceLtm, this);
-                etwLog.TransactionCommit(TraceSourceType.TraceSourceLtm, TransactionTraceId, "CommittableTransaction");
+                etwLog.TransactionCommit(
+                    TraceSourceType.TraceSourceLtm,
+                    TransactionTraceId,
+                    "CommittableTransaction"
+                );
             }
 
             ObjectDisposedException.ThrowIf(Disposed, this);
@@ -125,13 +140,19 @@ namespace System.Transactions
                 etwLog.MethodEnter(TraceSourceType.TraceSourceLtm, this);
             }
 
-            if (Interlocked.Exchange(ref _disposed, Transaction._disposedTrueValue) == Transaction._disposedTrueValue)
+            if (
+                Interlocked.Exchange(ref _disposed, Transaction._disposedTrueValue)
+                == Transaction._disposedTrueValue
+            )
             {
                 return;
             }
 
             Debug.Assert(_internalTransaction.State != null);
-            if (_internalTransaction.State.get_Status(_internalTransaction) == TransactionStatus.Active)
+            if (
+                _internalTransaction.State.get_Status(_internalTransaction)
+                == TransactionStatus.Active
+            )
             {
                 lock (_internalTransaction)
                 {
@@ -203,7 +224,9 @@ namespace System.Transactions
                             Debug.Assert(_internalTransaction.State != null);
                             // Demand create an event that is already signaled if the transaction has completed.
                             ManualResetEvent temp = new ManualResetEvent(
-                                _internalTransaction.State.get_Status(_internalTransaction) != TransactionStatus.Active);
+                                _internalTransaction.State.get_Status(_internalTransaction)
+                                    != TransactionStatus.Active
+                            );
 
                             _internalTransaction._asyncResultEvent = temp;
                         }
@@ -221,7 +244,8 @@ namespace System.Transactions
                 lock (_internalTransaction)
                 {
                     Debug.Assert(_internalTransaction.State != null);
-                    return _internalTransaction.State.get_Status(_internalTransaction) != TransactionStatus.Active;
+                    return _internalTransaction.State.get_Status(_internalTransaction)
+                        != TransactionStatus.Active;
                 }
             }
         }

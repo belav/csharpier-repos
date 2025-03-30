@@ -22,7 +22,8 @@ public static class RoutingEndpointConventionBuilderExtensions
     /// An empty collection means any host will be accepted.
     /// </param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
-    public static TBuilder RequireHost<TBuilder>(this TBuilder builder, params string[] hosts) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder RequireHost<TBuilder>(this TBuilder builder, params string[] hosts)
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(hosts);
@@ -41,7 +42,8 @@ public static class RoutingEndpointConventionBuilderExtensions
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <param name="displayName">The display name.</param>
     /// <returns>The <see cref="IEndpointConventionBuilder"/>.</returns>
-    public static TBuilder WithDisplayName<TBuilder>(this TBuilder builder, string displayName) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder WithDisplayName<TBuilder>(this TBuilder builder, string displayName)
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
 
@@ -60,7 +62,11 @@ public static class RoutingEndpointConventionBuilderExtensions
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <param name="func">A delegate that produces the display name for each <see cref="EndpointBuilder"/>.</param>
     /// <returns>The <see cref="IEndpointConventionBuilder"/>.</returns>
-    public static TBuilder WithDisplayName<TBuilder>(this TBuilder builder, Func<EndpointBuilder, string> func) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder WithDisplayName<TBuilder>(
+        this TBuilder builder,
+        Func<EndpointBuilder, string> func
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(func);
@@ -80,7 +86,8 @@ public static class RoutingEndpointConventionBuilderExtensions
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <param name="items">A collection of metadata items.</param>
     /// <returns>The <see cref="IEndpointConventionBuilder"/>.</returns>
-    public static TBuilder WithMetadata<TBuilder>(this TBuilder builder, params object[] items) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder WithMetadata<TBuilder>(this TBuilder builder, params object[] items)
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(items);
@@ -105,9 +112,13 @@ public static class RoutingEndpointConventionBuilderExtensions
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <param name="endpointName">The endpoint name.</param>
     /// <returns>The <see cref="IEndpointConventionBuilder"/>.</returns>
-    public static TBuilder WithName<TBuilder>(this TBuilder builder, string endpointName) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder WithName<TBuilder>(this TBuilder builder, string endpointName)
+        where TBuilder : IEndpointConventionBuilder
     {
-        builder.WithMetadata(new EndpointNameMetadata(endpointName), new RouteNameMetadata(endpointName));
+        builder.WithMetadata(
+            new EndpointNameMetadata(endpointName),
+            new RouteNameMetadata(endpointName)
+        );
         return builder;
     }
 
@@ -120,7 +131,8 @@ public static class RoutingEndpointConventionBuilderExtensions
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <param name="endpointGroupName">The endpoint group name.</param>
     /// <returns>The <see cref="IEndpointConventionBuilder"/>.</returns>
-    public static TBuilder WithGroupName<TBuilder>(this TBuilder builder, string endpointGroupName) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder WithGroupName<TBuilder>(this TBuilder builder, string endpointGroupName)
+        where TBuilder : IEndpointConventionBuilder
     {
         builder.WithMetadata(new EndpointGroupNameAttribute(endpointGroupName));
         return builder;
@@ -133,7 +145,8 @@ public static class RoutingEndpointConventionBuilderExtensions
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <param name="order">The order assigned to the endpoint.</param>
     /// <returns>The <see cref="IEndpointConventionBuilder"/>.</returns>
-    public static TBuilder WithOrder<TBuilder>(this TBuilder builder, int order) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder WithOrder<TBuilder>(this TBuilder builder, int order)
+        where TBuilder : IEndpointConventionBuilder
     {
         builder.Add(builder =>
         {
@@ -155,7 +168,8 @@ public static class RoutingEndpointConventionBuilderExtensions
     /// </summary>
     /// <param name="builder">The <see cref="IEndpointConventionBuilder"/>.</param>
     /// <returns>The <see cref="IEndpointConventionBuilder"/>.</returns>
-    public static TBuilder DisableAntiforgery<TBuilder>(this TBuilder builder) where TBuilder : IEndpointConventionBuilder
+    public static TBuilder DisableAntiforgery<TBuilder>(this TBuilder builder)
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
 
@@ -176,11 +190,15 @@ public static class RoutingEndpointConventionBuilderExtensions
         this TBuilder builder,
         int? maxCollectionSize = null,
         int? maxRecursionDepth = null,
-        int? maxKeySize = null) where TBuilder : IEndpointConventionBuilder
+        int? maxKeySize = null
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder.WithMetadata(new FormMappingOptionsMetadata(maxCollectionSize, maxRecursionDepth, maxKeySize));
+        builder.WithMetadata(
+            new FormMappingOptionsMetadata(maxCollectionSize, maxRecursionDepth, maxKeySize)
+        );
         return builder;
     }
 
@@ -211,11 +229,26 @@ public static class RoutingEndpointConventionBuilderExtensions
         int? multipartBoundaryLengthLimit = null,
         int? multipartHeadersCountLimit = null,
         int? multipartHeadersLengthLimit = null,
-        long? multipartBodyLengthLimit = null) where TBuilder : IEndpointConventionBuilder
+        long? multipartBodyLengthLimit = null
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder.WithMetadata(new FormOptionsMetadata(bufferBody, memoryBufferThreshold, bufferBodyLengthLimit, valueCountLimit, keyLengthLimit, valueLengthLimit, multipartBoundaryLengthLimit, multipartHeadersCountLimit, multipartHeadersLengthLimit, multipartBodyLengthLimit));
+        builder.WithMetadata(
+            new FormOptionsMetadata(
+                bufferBody,
+                memoryBufferThreshold,
+                bufferBodyLengthLimit,
+                valueCountLimit,
+                keyLengthLimit,
+                valueLengthLimit,
+                multipartBoundaryLengthLimit,
+                multipartHeadersCountLimit,
+                multipartHeadersLengthLimit,
+                multipartBodyLengthLimit
+            )
+        );
         return builder;
     }
 }

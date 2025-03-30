@@ -13,37 +13,91 @@ namespace System.Web.Razor.Test.Text
         [Fact]
         public void ConstructorRequiresNonNegativeOldPosition()
         {
-            Assert.ThrowsArgumentOutOfRange(() => new TextChange(-1, 0, new Mock<ITextBuffer>().Object, 0, 0, new Mock<ITextBuffer>().Object), "oldPosition", "Value must be greater than or equal to 0.");
+            Assert.ThrowsArgumentOutOfRange(
+                () =>
+                    new TextChange(
+                        -1,
+                        0,
+                        new Mock<ITextBuffer>().Object,
+                        0,
+                        0,
+                        new Mock<ITextBuffer>().Object
+                    ),
+                "oldPosition",
+                "Value must be greater than or equal to 0."
+            );
         }
 
         [Fact]
         public void ConstructorRequiresNonNegativeNewPosition()
         {
-            Assert.ThrowsArgumentOutOfRange(() => new TextChange(0, 0, new Mock<ITextBuffer>().Object, -1, 0, new Mock<ITextBuffer>().Object), "newPosition", "Value must be greater than or equal to 0.");
+            Assert.ThrowsArgumentOutOfRange(
+                () =>
+                    new TextChange(
+                        0,
+                        0,
+                        new Mock<ITextBuffer>().Object,
+                        -1,
+                        0,
+                        new Mock<ITextBuffer>().Object
+                    ),
+                "newPosition",
+                "Value must be greater than or equal to 0."
+            );
         }
 
         [Fact]
         public void ConstructorRequiresNonNegativeOldLength()
         {
-            Assert.ThrowsArgumentOutOfRange(() => new TextChange(0, -1, new Mock<ITextBuffer>().Object, 0, 0, new Mock<ITextBuffer>().Object), "oldLength", "Value must be greater than or equal to 0.");
+            Assert.ThrowsArgumentOutOfRange(
+                () =>
+                    new TextChange(
+                        0,
+                        -1,
+                        new Mock<ITextBuffer>().Object,
+                        0,
+                        0,
+                        new Mock<ITextBuffer>().Object
+                    ),
+                "oldLength",
+                "Value must be greater than or equal to 0."
+            );
         }
 
         [Fact]
         public void ConstructorRequiresNonNegativeNewLength()
         {
-            Assert.ThrowsArgumentOutOfRange(() => new TextChange(0, 0, new Mock<ITextBuffer>().Object, 0, -1, new Mock<ITextBuffer>().Object), "newLength", "Value must be greater than or equal to 0.");
+            Assert.ThrowsArgumentOutOfRange(
+                () =>
+                    new TextChange(
+                        0,
+                        0,
+                        new Mock<ITextBuffer>().Object,
+                        0,
+                        -1,
+                        new Mock<ITextBuffer>().Object
+                    ),
+                "newLength",
+                "Value must be greater than or equal to 0."
+            );
         }
 
         [Fact]
         public void ConstructorRequiresNonNullOldBuffer()
         {
-            Assert.ThrowsArgumentNull(() => new TextChange(0, 0, null, 0, 0, new Mock<ITextBuffer>().Object), "oldBuffer");
+            Assert.ThrowsArgumentNull(
+                () => new TextChange(0, 0, null, 0, 0, new Mock<ITextBuffer>().Object),
+                "oldBuffer"
+            );
         }
 
         [Fact]
         public void ConstructorRequiresNonNullNewBuffer()
         {
-            Assert.ThrowsArgumentNull(() => new TextChange(0, 0, new Mock<ITextBuffer>().Object, 0, 0, null), "newBuffer");
+            Assert.ThrowsArgumentNull(
+                () => new TextChange(0, 0, new Mock<ITextBuffer>().Object, 0, 0, null),
+                "newBuffer"
+            );
         }
 
         [Fact]
@@ -65,7 +119,7 @@ namespace System.Web.Razor.Test.Text
         [Fact]
         public void TestIsDelete()
         {
-            // Arrange 
+            // Arrange
             ITextBuffer oldBuffer = new Mock<ITextBuffer>().Object;
             ITextBuffer newBuffer = new Mock<ITextBuffer>().Object;
             TextChange change = new TextChange(0, 1, oldBuffer, 0, newBuffer);
@@ -77,7 +131,7 @@ namespace System.Web.Razor.Test.Text
         [Fact]
         public void TestDeleteCreatesTheRightSizeChange()
         {
-            // Arrange 
+            // Arrange
             ITextBuffer oldBuffer = new Mock<ITextBuffer>().Object;
             ITextBuffer newBuffer = new Mock<ITextBuffer>().Object;
             TextChange change = new TextChange(0, 1, oldBuffer, 0, newBuffer);
@@ -90,7 +144,7 @@ namespace System.Web.Razor.Test.Text
         [Fact]
         public void TestIsInsert()
         {
-            // Arrange 
+            // Arrange
             ITextBuffer oldBuffer = new Mock<ITextBuffer>().Object;
             ITextBuffer newBuffer = new Mock<ITextBuffer>().Object;
             TextChange change = new TextChange(0, 0, oldBuffer, 35, newBuffer);
@@ -102,7 +156,7 @@ namespace System.Web.Razor.Test.Text
         [Fact]
         public void TestInsertCreateTheRightSizeChange()
         {
-            // Arrange 
+            // Arrange
             ITextBuffer oldBuffer = new Mock<ITextBuffer>().Object;
             ITextBuffer newBuffer = new Mock<ITextBuffer>().Object;
             TextChange change = new TextChange(0, 0, oldBuffer, 1, newBuffer);
@@ -115,7 +169,7 @@ namespace System.Web.Razor.Test.Text
         [Fact]
         public void TestIsReplace()
         {
-            // Arrange 
+            // Arrange
             ITextBuffer oldBuffer = new Mock<ITextBuffer>().Object;
             ITextBuffer newBuffer = new Mock<ITextBuffer>().Object;
             TextChange change = new TextChange(0, 5, oldBuffer, 10, newBuffer);
@@ -127,7 +181,7 @@ namespace System.Web.Razor.Test.Text
         [Fact]
         public void ReplaceCreatesTheRightSizeChange()
         {
-            // Arrange 
+            // Arrange
             ITextBuffer oldBuffer = new Mock<ITextBuffer>().Object;
             ITextBuffer newBuffer = new Mock<ITextBuffer>().Object;
             TextChange change = new TextChange(0, 5, oldBuffer, 10, newBuffer);
@@ -140,7 +194,7 @@ namespace System.Web.Razor.Test.Text
         [Fact]
         public void ReplaceCreatesTheRightSizeChange1()
         {
-            // Arrange 
+            // Arrange
             ITextBuffer oldBuffer = new Mock<ITextBuffer>().Object;
             ITextBuffer newBuffer = new Mock<ITextBuffer>().Object;
             TextChange change = new TextChange(0, 5, oldBuffer, 1, newBuffer);

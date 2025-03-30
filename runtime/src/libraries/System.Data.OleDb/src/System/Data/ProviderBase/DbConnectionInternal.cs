@@ -25,7 +25,10 @@ namespace System.Data.ProviderBase
             PerformanceCounters!.NumberOfActiveConnections.Increment();
         }
 
-        internal virtual void CloseConnection(DbConnection owningObject, DbConnectionFactory connectionFactory)
+        internal virtual void CloseConnection(
+            DbConnection owningObject,
+            DbConnectionFactory connectionFactory
+        )
         {
             // The implementation here is the implementation required for the
             // "open" internal connections, since our own private "closed"
@@ -71,7 +74,13 @@ namespace System.Data.ProviderBase
             // block doesn't really help because a ThreadAbort during the finally block
             // would just revert the connection to a bad state.
             // Open->Closed: guarantee internal connection is returned to correct pool
-            if (connectionFactory.SetInnerConnectionFrom(owningObject, DbConnectionOpenBusy.SingletonInstance, this))
+            if (
+                connectionFactory.SetInnerConnectionFrom(
+                    owningObject,
+                    DbConnectionOpenBusy.SingletonInstance,
+                    this
+                )
+            )
             {
                 // Lock to prevent race condition with cancellation
                 lock (this)
@@ -91,14 +100,14 @@ namespace System.Data.ProviderBase
                         // into the pool.
                         if (null != connectionPool)
                         {
-                            connectionPool.PutObject(this, owningObject);   // PutObject calls Deactivate for us...
-                                                                            // NOTE: Before we leave the PutObject call, another
-                                                                            // thread may have already popped the connection from
-                                                                            // the pool, so don't expect to be able to verify it.
+                            connectionPool.PutObject(this, owningObject); // PutObject calls Deactivate for us...
+                            // NOTE: Before we leave the PutObject call, another
+                            // thread may have already popped the connection from
+                            // the pool, so don't expect to be able to verify it.
                         }
                         else
                         {
-                            Deactivate();   // ensure we de-activate non-pooled connections, or the data readers and transactions may not get cleaned up...
+                            Deactivate(); // ensure we de-activate non-pooled connections, or the data readers and transactions may not get cleaned up...
 
                             PerformanceCounters!.HardDisconnectsPerSecond.Increment();
 
@@ -127,7 +136,10 @@ namespace System.Data.ProviderBase
                         ReleaseAdditionalLocksForClose(lockToken);
                         // if a ThreadAbort puts us here then its possible the outer connection will not reference
                         // this and this will be orphaned, not reclaimed by object pool until outer connection goes out of scope.
-                        connectionFactory.SetInnerConnectionEvent(owningObject, DbConnectionClosedPreviouslyOpened.SingletonInstance);
+                        connectionFactory.SetInnerConnectionEvent(
+                            owningObject,
+                            DbConnectionClosedPreviouslyOpened.SingletonInstance
+                        );
                     }
                 }
             }

@@ -8,7 +8,8 @@
 
     internal static class XamlBuildTaskLeaseLifetimeHelper
     {
-        const string RemotingLeaseLifetimeInMinutesEnvironmentVariableName = "XamlBuildTaskTimeoutInMinutes";
+        const string RemotingLeaseLifetimeInMinutesEnvironmentVariableName =
+            "XamlBuildTaskTimeoutInMinutes";
 
         // In order to take advantage of the XamlBuildTaskRemotingLeaseLifetimeInMinutes environment variable from an MSBuild
         // project file (e.g. csproj file), the following needs to be added to that project file:
@@ -46,17 +47,31 @@
             {
                 try
                 {
-                    string remotingLeaseLifetimeInMinutesStringValue = Environment.GetEnvironmentVariable(RemotingLeaseLifetimeInMinutesEnvironmentVariableName);
+                    string remotingLeaseLifetimeInMinutesStringValue =
+                        Environment.GetEnvironmentVariable(
+                            RemotingLeaseLifetimeInMinutesEnvironmentVariableName
+                        );
                     if (!string.IsNullOrEmpty(remotingLeaseLifetimeInMinutesStringValue))
                     {
                         int remotingLeaseLifetimeInMinutes = -1;
-                        if (Int32.TryParse(remotingLeaseLifetimeInMinutesStringValue, NumberStyles.Integer, CultureInfo.InvariantCulture, out remotingLeaseLifetimeInMinutes))
+                        if (
+                            Int32.TryParse(
+                                remotingLeaseLifetimeInMinutesStringValue,
+                                NumberStyles.Integer,
+                                CultureInfo.InvariantCulture,
+                                out remotingLeaseLifetimeInMinutes
+                            )
+                        )
                         {
                             // revert to the defauilt if the number specified is less than or equal to 0.
                             if (remotingLeaseLifetimeInMinutes > 0)
                             {
-                                lease.InitialLeaseTime = TimeSpan.FromMinutes(remotingLeaseLifetimeInMinutes);
-                                lease.RenewOnCallTime = TimeSpan.FromMinutes(remotingLeaseLifetimeInMinutes);
+                                lease.InitialLeaseTime = TimeSpan.FromMinutes(
+                                    remotingLeaseLifetimeInMinutes
+                                );
+                                lease.RenewOnCallTime = TimeSpan.FromMinutes(
+                                    remotingLeaseLifetimeInMinutes
+                                );
                             }
                         }
                     }
@@ -74,4 +89,3 @@
         }
     }
 }
-

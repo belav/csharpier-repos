@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,71 +37,71 @@ using System.Xml.XPath;
 namespace Mono.Xml.XPath
 {
 #if OUTSIDE_SYSTEM_XML
-	public
+    public
 #else
-	internal
+    internal
 #endif
 #if DTM_CLASS
-		class DTMXPathLinkedNode
+    class DTMXPathLinkedNode
 #else
-		struct DTMXPathLinkedNode
+    struct DTMXPathLinkedNode
 #endif
-	{
-		public int FirstChild;
-		public int Parent;
-		public int PreviousSibling;
-		public int NextSibling;
-		public int FirstAttribute;
-		public int FirstNamespace;
-		public int Depth;
-		public XPathNodeType NodeType;
-		public string BaseURI;
-		public bool IsEmptyElement;
-		public string LocalName;
-		public string NamespaceURI;
-		public string Prefix;
-		public string Value;
-		public string XmlLang;
-		public int LineNumber;
-		public int LinePosition;
-	}
+    {
+        public int FirstChild;
+        public int Parent;
+        public int PreviousSibling;
+        public int NextSibling;
+        public int FirstAttribute;
+        public int FirstNamespace;
+        public int Depth;
+        public XPathNodeType NodeType;
+        public string BaseURI;
+        public bool IsEmptyElement;
+        public string LocalName;
+        public string NamespaceURI;
+        public string Prefix;
+        public string Value;
+        public string XmlLang;
+        public int LineNumber;
+        public int LinePosition;
+    }
 
 #if OUTSIDE_SYSTEM_XML
-	public
+    public
 #else
-	internal
+    internal
 #endif
 #if DTM_CLASS
-		class DTMXPathAttributeNode
+    class DTMXPathAttributeNode
 #else
-		struct DTMXPathAttributeNode
+    struct DTMXPathAttributeNode
 #endif
-	{
-		public int OwnerElement;
-		public int NextAttribute;
-		public string LocalName;
-		public string NamespaceURI;
-		public string Prefix;
-		public string Value;
-		public object SchemaType;
-		public int LineNumber;
-		public int LinePosition;
-	}
+    {
+        public int OwnerElement;
+        public int NextAttribute;
+        public string LocalName;
+        public string NamespaceURI;
+        public string Prefix;
+        public string Value;
+        public object SchemaType;
+        public int LineNumber;
+        public int LinePosition;
+    }
 
 #if OUTSIDE_SYSTEM_XML
-	public
+    public
 #else
-	internal
+    internal
 #endif
 #if DTM_CLASS
-		class DTMXPathNamespaceNode
+    class DTMXPathNamespaceNode
 #else
-		struct DTMXPathNamespaceNode
+    struct DTMXPathNamespaceNode
 #endif
-	{
-		public int DeclaredElement;
-		public int NextNamespace;
-		public string Name;
-		public string Namespace;
-	}
+    {
+        public int DeclaredElement;
+        public int NextNamespace;
+        public string Name;
+        public string Namespace;
+    }
 }

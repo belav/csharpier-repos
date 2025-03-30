@@ -10,11 +10,20 @@ public class TestExceptionFilter : ExceptionFilterAttribute
 {
     public override void OnException(ExceptionContext context)
     {
-        if (context.HttpContext.Request.Query.TryGetValue("handleException", out var handleException))
+        if (
+            context.HttpContext.Request.Query.TryGetValue(
+                "handleException",
+                out var handleException
+            )
+        )
         {
             if (handleException.Equals("true"))
             {
-                context.Result = new ContentResult() { Content = "Exception was handled in TestExceptionFilter", StatusCode = 200 };
+                context.Result = new ContentResult()
+                {
+                    Content = "Exception was handled in TestExceptionFilter",
+                    StatusCode = 200,
+                };
                 context.ExceptionHandled = true;
             }
         }

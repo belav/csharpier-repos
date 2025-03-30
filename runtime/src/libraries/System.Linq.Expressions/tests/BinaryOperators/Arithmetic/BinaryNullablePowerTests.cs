@@ -117,7 +117,19 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNullableFloatPowerTest(bool useInterpreter)
         {
-            float?[] array = new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
+            float?[] array = new float?[]
+            {
+                null,
+                0,
+                1,
+                -1,
+                float.MinValue,
+                float.MaxValue,
+                float.Epsilon,
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+                float.NaN,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length; j++)
@@ -130,7 +142,19 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNullableDoublePowerTest(bool useInterpreter)
         {
-            double?[] array = new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
+            double?[] array = new double?[]
+            {
+                null,
+                0,
+                1,
+                -1,
+                double.MinValue,
+                double.MaxValue,
+                double.Epsilon,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.NaN,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length; j++)
@@ -143,7 +167,15 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckNullableDecimalPowerTest(bool useInterpreter)
         {
-            decimal?[] array = new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
+            decimal?[] array = new decimal?[]
+            {
+                null,
+                decimal.Zero,
+                decimal.One,
+                decimal.MinusOne,
+                decimal.MinValue,
+                decimal.MaxValue,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length; j++)
@@ -172,13 +204,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableBytePower(byte? a, byte? b, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(byte?)),
-                        Expression.Constant(b, typeof(byte?)),
-                        typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerByte")
-                    ));
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(byte?)),
+                    Expression.Constant(b, typeof(byte?)),
+                    typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerByte")
+                )
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             if (a.HasValue & b.HasValue)
@@ -189,13 +221,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableSBytePower(sbyte? a, sbyte? b, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(sbyte?)),
-                        Expression.Constant(b, typeof(sbyte?)),
-                        typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerSByte")
-                    ));
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(sbyte?)),
+                    Expression.Constant(b, typeof(sbyte?)),
+                    typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerSByte")
+                )
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             if (a.HasValue & b.HasValue)
@@ -206,13 +238,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUShortPower(ushort? a, ushort? b, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(ushort?)),
-                        Expression.Constant(b, typeof(ushort?)),
-                        typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerUShort")
-                    ));
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(ushort?)),
+                    Expression.Constant(b, typeof(ushort?)),
+                    typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerUShort")
+                )
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             if (a.HasValue & b.HasValue)
@@ -223,13 +255,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableShortPower(short? a, short? b, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(short?)),
-                        Expression.Constant(b, typeof(short?)),
-                        typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerShort")
-                    ));
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(short?)),
+                    Expression.Constant(b, typeof(short?)),
+                    typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerShort")
+                )
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             if (a.HasValue & b.HasValue)
@@ -240,13 +272,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableUIntPower(uint? a, uint? b, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(uint?)),
-                        Expression.Constant(b, typeof(uint?)),
-                        typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerUInt")
-                    ));
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(uint?)),
+                    Expression.Constant(b, typeof(uint?)),
+                    typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerUInt")
+                )
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             if (a.HasValue & b.HasValue)
@@ -257,13 +289,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableIntPower(int? a, int? b, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(int?)),
-                        Expression.Constant(b, typeof(int?)),
-                        typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerInt")
-                    ));
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(int?)),
+                    Expression.Constant(b, typeof(int?)),
+                    typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerInt")
+                )
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             if (a.HasValue & b.HasValue)
@@ -274,13 +306,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableULongPower(ulong? a, ulong? b, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(ulong?)),
-                        Expression.Constant(b, typeof(ulong?)),
-                        typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerULong")
-                    ));
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(ulong?)),
+                    Expression.Constant(b, typeof(ulong?)),
+                    typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerULong")
+                )
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             if (a.HasValue & b.HasValue)
@@ -291,13 +323,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableLongPower(long? a, long? b, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(long?)),
-                        Expression.Constant(b, typeof(long?)),
-                        typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerLong")
-                    ));
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(long?)),
+                    Expression.Constant(b, typeof(long?)),
+                    typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerLong")
+                )
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             if (a.HasValue & b.HasValue)
@@ -308,13 +340,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableFloatPower(float? a, float? b, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(float?)),
-                        Expression.Constant(b, typeof(float?)),
-                        typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerFloat")
-                    ));
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(float?)),
+                    Expression.Constant(b, typeof(float?)),
+                    typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerFloat")
+                )
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             if (a.HasValue & b.HasValue)
@@ -325,13 +357,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDoublePower(double? a, double? b, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(double?)),
-                        Expression.Constant(b, typeof(double?)),
-                        typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerDouble")
-                    ));
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(double?)),
+                    Expression.Constant(b, typeof(double?)),
+                    typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerDouble")
+                )
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             if (a.HasValue & b.HasValue)
@@ -342,13 +374,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableDecimalPower(decimal? a, decimal? b, bool useInterpreter)
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(decimal?)),
-                        Expression.Constant(b, typeof(decimal?)),
-                        typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerDecimal")
-                    ));
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(decimal?)),
+                    Expression.Constant(b, typeof(decimal?)),
+                    typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerDecimal")
+                )
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             if (a.HasValue & b.HasValue)
@@ -372,13 +404,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyNullableCharPower(char? a, char? b, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Power(
-                        Expression.Constant(a, typeof(char?)),
-                        Expression.Constant(b, typeof(char?)),
-                        typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerChar")
-                    ));
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Power(
+                    Expression.Constant(a, typeof(char?)),
+                    Expression.Constant(b, typeof(char?)),
+                    typeof(BinaryNullablePowerTests).GetTypeInfo().GetDeclaredMethod("PowerChar")
+                )
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             if (a.HasValue & b.HasValue)

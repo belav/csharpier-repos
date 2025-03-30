@@ -8,21 +8,25 @@ public class OneSourceWithMultipleDestinationsWithoutPR : AutoMapperSpecBase
     {
         public string Address1 { get; set; }
     }
+
     public class AddressModel
     {
         public string Address1 { get; set; }
     }
+
     public class ClientModel
     {
         public AddressModel Address { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(mapConfig =>
-    {
-        mapConfig.CreateMap<Client, ClientModel>()
-            .ForMember(m => m.Address, opt => opt.MapFrom(x => x));
-        mapConfig.CreateMap<Client, AddressModel>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(mapConfig =>
+        {
+            mapConfig
+                .CreateMap<Client, ClientModel>()
+                .ForMember(m => m.Address, opt => opt.MapFrom(x => x));
+            mapConfig.CreateMap<Client, AddressModel>();
+        });
 
     protected override void Because_of()
     {

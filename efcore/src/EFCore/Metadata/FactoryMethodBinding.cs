@@ -23,7 +23,8 @@ public class FactoryMethodBinding : InstantiationBinding
     public FactoryMethodBinding(
         MethodInfo factoryMethod,
         IReadOnlyList<ParameterBinding> parameterBindings,
-        Type runtimeType)
+        Type runtimeType
+    )
         : base(parameterBindings)
     {
         Check.NotNull(factoryMethod, nameof(factoryMethod));
@@ -44,7 +45,8 @@ public class FactoryMethodBinding : InstantiationBinding
         object factoryInstance,
         MethodInfo factoryMethod,
         IReadOnlyList<ParameterBinding> parameterBindings,
-        Type runtimeType)
+        Type runtimeType
+    )
         : this(factoryMethod, parameterBindings, runtimeType)
     {
         Check.NotNull(factoryInstance, nameof(factoryInstance));
@@ -61,15 +63,10 @@ public class FactoryMethodBinding : InstantiationBinding
     {
         var arguments = ParameterBindings.Select(b => b.BindToParameter(bindingInfo));
 
-        Expression expression
-            = _factoryInstance == null
-                ? Expression.Call(
-                    _factoryMethod,
-                    arguments)
-                : Expression.Call(
-                    Expression.Constant(_factoryInstance),
-                    _factoryMethod,
-                    arguments);
+        Expression expression =
+            _factoryInstance == null
+                ? Expression.Call(_factoryMethod, arguments)
+                : Expression.Call(Expression.Constant(_factoryInstance), _factoryMethod, arguments);
 
         if (_factoryMethod.ReturnType != RuntimeType)
         {
@@ -89,8 +86,13 @@ public class FactoryMethodBinding : InstantiationBinding
     /// </summary>
     /// <param name="parameterBindings">The new parameter bindings.</param>
     /// <returns>A copy with replaced parameter bindings.</returns>
-    public override InstantiationBinding With(IReadOnlyList<ParameterBinding> parameterBindings)
-        => _factoryInstance == null
+    public override InstantiationBinding With(IReadOnlyList<ParameterBinding> parameterBindings) =>
+        _factoryInstance == null
             ? new FactoryMethodBinding(_factoryMethod, parameterBindings, RuntimeType)
-            : new FactoryMethodBinding(_factoryInstance, _factoryMethod, parameterBindings, RuntimeType);
+            : new FactoryMethodBinding(
+                _factoryInstance,
+                _factoryMethod,
+                parameterBindings,
+                RuntimeType
+            );
 }

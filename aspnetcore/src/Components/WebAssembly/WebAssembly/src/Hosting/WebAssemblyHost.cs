@@ -44,7 +44,8 @@ public sealed class WebAssemblyHost : IAsyncDisposable
         WebAssemblyHostBuilder builder,
         IServiceProvider services,
         AsyncServiceScope scope,
-        string? persistedState)
+        string? persistedState
+    )
     {
         // To ensure JS-invoked methods don't get linked out, have a reference to their enclosing types
         GC.KeepAlive(typeof(JSInteropMethods));
@@ -113,7 +114,10 @@ public sealed class WebAssemblyHost : IAsyncDisposable
     }
 
     // Internal for testing.
-    internal async Task RunAsyncCore(CancellationToken cancellationToken, WebAssemblyCultureProvider? cultureProvider = null)
+    internal async Task RunAsyncCore(
+        CancellationToken cancellationToken,
+        WebAssemblyCultureProvider? cultureProvider = null
+    )
     {
         if (_started)
         {
@@ -131,9 +135,9 @@ public sealed class WebAssemblyHost : IAsyncDisposable
         await cultureProvider.LoadCurrentCultureResourcesAsync();
 
         var manager = Services.GetRequiredService<ComponentStatePersistenceManager>();
-        var store = !string.IsNullOrEmpty(_persistedState) ?
-            new PrerenderComponentApplicationStore(_persistedState) :
-            new PrerenderComponentApplicationStore();
+        var store = !string.IsNullOrEmpty(_persistedState)
+            ? new PrerenderComponentApplicationStore(_persistedState)
+            : new PrerenderComponentApplicationStore();
 
         await manager.RestoreStateAsync(store);
 
@@ -153,7 +157,10 @@ public sealed class WebAssemblyHost : IAsyncDisposable
             WebAssemblyNavigationManager.Instance.CreateLogger(loggerFactory);
 
             RootComponentOperationBatch? initialOperationBatch = null;
-            if (Environment.GetEnvironmentVariable("__BLAZOR_WEBASSEMBLY_WAIT_FOR_ROOT_COMPONENTS") == "true")
+            if (
+                Environment.GetEnvironmentVariable("__BLAZOR_WEBASSEMBLY_WAIT_FOR_ROOT_COMPONENTS")
+                == "true"
+            )
             {
                 // In Blazor web, we wait for the JS side to tell us about the components available
                 // before we render the initial set of components. Any additional update goes through
@@ -165,40 +172,46 @@ public sealed class WebAssemblyHost : IAsyncDisposable
             }
 
             var initializationTcs = new TaskCompletionSource();
-            WebAssemblyCallQueue.Schedule((_rootComponents, _renderer, initializationTcs), async state =>
-            {
-                var (rootComponents, renderer, initializationTcs) = state;
-                try
+            WebAssemblyCallQueue.Schedule(
+                (_rootComponents, _renderer, initializationTcs),
+                async state =>
                 {
-                    // Here, we add each root component but don't await the returned tasks so that the
-                    // components can be processed in parallel.
-                    var count = rootComponents.Count;
-                    var initialOperationCount = initialOperationBatch?.Operations.Length ?? 0;
-                    var pendingRenders = new List<Task>(count + initialOperationCount);
-                    for (var i = 0; i < count; i++)
+                    var (rootComponents, renderer, initializationTcs) = state;
+                    try
                     {
-                        var rootComponent = rootComponents[i];
-                        pendingRenders.Add(renderer.AddComponentAsync(
-                            rootComponent.ComponentType,
-                            rootComponent.Parameters,
-                            rootComponent.Selector));
-                    }
+                        // Here, we add each root component but don't await the returned tasks so that the
+                        // components can be processed in parallel.
+                        var count = rootComponents.Count;
+                        var initialOperationCount = initialOperationBatch?.Operations.Length ?? 0;
+                        var pendingRenders = new List<Task>(count + initialOperationCount);
+                        for (var i = 0; i < count; i++)
+                        {
+                            var rootComponent = rootComponents[i];
+                            pendingRenders.Add(
+                                renderer.AddComponentAsync(
+                                    rootComponent.ComponentType,
+                                    rootComponent.Parameters,
+                                    rootComponent.Selector
+                                )
+                            );
+                        }
 
-                    if (initialOperationBatch is not null)
+                        if (initialOperationBatch is not null)
+                        {
+                            AddWebRootComponents(renderer, initialOperationBatch, pendingRenders);
+                        }
+
+                        // Now we wait for all components to finish rendering.
+                        await Task.WhenAll(pendingRenders);
+
+                        initializationTcs.SetResult();
+                    }
+                    catch (Exception ex)
                     {
-                        AddWebRootComponents(renderer, initialOperationBatch, pendingRenders);
+                        initializationTcs.SetException(ex);
                     }
-
-                    // Now we wait for all components to finish rendering.
-                    await Task.WhenAll(pendingRenders);
-
-                    initializationTcs.SetResult();
                 }
-                catch (Exception ex)
-                {
-                    initializationTcs.SetException(ex);
-                }
-            });
+            );
 
             await initializationTcs.Task;
             store.ExistingState.Clear();
@@ -207,8 +220,16 @@ public sealed class WebAssemblyHost : IAsyncDisposable
         }
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2072", Justification = "These are root components which belong to the user and are in assemblies that don't get trimmed.")]
-    private static void AddWebRootComponents(WebAssemblyRenderer renderer, RootComponentOperationBatch operationBatch, List<Task> pendingRenders)
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2072",
+        Justification = "These are root components which belong to the user and are in assemblies that don't get trimmed."
+    )]
+    private static void AddWebRootComponents(
+        WebAssemblyRenderer renderer,
+        RootComponentOperationBatch operationBatch,
+        List<Task> pendingRenders
+    )
     {
         var webRootComponentManager = renderer.GetOrCreateWebRootComponentManager();
         var operations = operationBatch.Operations;
@@ -220,11 +241,14 @@ public sealed class WebAssemblyHost : IAsyncDisposable
                 throw new InvalidOperationException("All initial operations must be additions.");
             }
 
-            pendingRenders.Add(webRootComponentManager.AddRootComponentAsync(
-                operation.SsrComponentId,
-                operation.Descriptor!.ComponentType,
-                operation.Marker?.Key,
-                operation.Descriptor!.Parameters));
+            pendingRenders.Add(
+                webRootComponentManager.AddRootComponentAsync(
+                    operation.SsrComponentId,
+                    operation.Descriptor!.ComponentType,
+                    operation.Marker?.Key,
+                    operation.Descriptor!.Parameters
+                )
+            );
         }
 
         WebAssemblyRenderer.NotifyEndUpdateRootComponents(operationBatch.BatchId);

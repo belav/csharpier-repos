@@ -22,7 +22,12 @@ public static class ConnectionsDependencyInjectionExtensions
     {
         services.AddRouting();
         services.AddAuthorization();
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<ConnectionOptions>, ConnectionOptionsSetup>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IConfigureOptions<ConnectionOptions>,
+                ConnectionOptionsSetup
+            >()
+        );
         services.TryAddSingleton<HttpConnectionDispatcher>();
         services.TryAddSingleton<HttpConnectionManager>();
         services.TryAddSingleton<HttpConnectionsMetrics>();
@@ -35,9 +40,11 @@ public static class ConnectionsDependencyInjectionExtensions
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
     /// <param name="options">A callback to configure  <see cref="ConnectionOptions" /></param>
     /// <returns>The same instance of the <see cref="IServiceCollection"/> for chaining.</returns>
-    public static IServiceCollection AddConnections(this IServiceCollection services, Action<ConnectionOptions> options)
+    public static IServiceCollection AddConnections(
+        this IServiceCollection services,
+        Action<ConnectionOptions> options
+    )
     {
-        return services.Configure(options)
-            .AddConnections();
+        return services.Configure(options).AddConnections();
     }
 }

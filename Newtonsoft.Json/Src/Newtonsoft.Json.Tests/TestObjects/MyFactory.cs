@@ -34,7 +34,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 ID = 123,
                 Name = "ABC",
                 P1 = true,
-                P2 = 44
+                P2 = 44,
             };
         }
 
@@ -44,7 +44,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
             {
                 ID = 567,
                 Name = "XYZ",
-                Subclass = InstantiateSubclass()
+                Subclass = InstantiateSubclass(),
             };
         }
     }

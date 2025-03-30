@@ -31,7 +31,13 @@ internal readonly struct PrefixResolver : IDisposable
         {
             return _length > 0 && !(_length == 1 && _sortedKeys[0].Value.Length == 0);
         }
-        return Array.BinarySearch(_sortedKeys, 0, _length, new FormKey(currentPrefixBuffer), FormKeyComparer.PrefixCriteria) >= 0;
+        return Array.BinarySearch(
+                _sortedKeys,
+                0,
+                _length,
+                new FormKey(currentPrefixBuffer),
+                FormKeyComparer.PrefixCriteria
+            ) >= 0;
     }
 
     public void Dispose()
@@ -62,7 +68,11 @@ internal readonly struct PrefixResolver : IDisposable
                 if (separatorX == -1 && separatorY == -1)
                 {
                     // no more segments, compare the remaining substrings
-                    return MemoryExtensions.CompareTo(x.Value.Span[currentXPos..], y.Value.Span[currentYPos..], StringComparison.Ordinal);
+                    return MemoryExtensions.CompareTo(
+                        x.Value.Span[currentXPos..],
+                        y.Value.Span[currentYPos..],
+                        StringComparison.Ordinal
+                    );
                 }
                 else if (separatorX == -1)
                 {
@@ -79,7 +89,9 @@ internal readonly struct PrefixResolver : IDisposable
 
                     var match = MemoryExtensions.CompareTo(
                         x.Value.Span[currentXPos..][..separatorX],
-                        y.Value.Span[currentYPos..], StringComparison.Ordinal);
+                        y.Value.Span[currentYPos..],
+                        StringComparison.Ordinal
+                    );
 
                     return match;
                 }
@@ -87,7 +99,11 @@ internal readonly struct PrefixResolver : IDisposable
                 // both have segments, compare the segments
                 var segmentX = x.Value.Span[currentXPos..][..separatorX];
                 var segmentY = y.Value.Span[currentYPos..][..separatorY];
-                var compareResult = MemoryExtensions.CompareTo(segmentX, segmentY, StringComparison.Ordinal);
+                var compareResult = MemoryExtensions.CompareTo(
+                    segmentX,
+                    segmentY,
+                    StringComparison.Ordinal
+                );
                 if (compareResult != 0)
                 {
                     return compareResult;

@@ -48,12 +48,10 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             {
                 return null;
             }
-
             else if (count == prefixes.Length)
             {
                 return prefixes;
             }
-
             else
             {
                 string[] result = new string[count];
@@ -223,7 +221,12 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             }
         }
 
-        public void EncodeWithTranslation(char[] buffer, int offset, int count, XmlStringType valueType)
+        public void EncodeWithTranslation(
+            char[] buffer,
+            int offset,
+            int count,
+            XmlStringType valueType
+        )
         {
             ValidateBufferBounds(buffer, offset, count);
 
@@ -387,7 +390,9 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 {
                     if (unescapedSegmentStart < i)
                     {
-                        writer.WriteString(s.Substring(unescapedSegmentStart, i - unescapedSegmentStart));
+                        writer.WriteString(
+                            s.Substring(unescapedSegmentStart, i - unescapedSegmentStart)
+                        );
                     }
 
                     writer.WriteCharEntity(Char13);
@@ -397,7 +402,9 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
 
             if (unescapedSegmentStart < s.Length)
             {
-                writer.WriteString(s.Substring(unescapedSegmentStart, s.Length - unescapedSegmentStart));
+                writer.WriteString(
+                    s.Substring(unescapedSegmentStart, s.Length - unescapedSegmentStart)
+                );
             }
         }
 

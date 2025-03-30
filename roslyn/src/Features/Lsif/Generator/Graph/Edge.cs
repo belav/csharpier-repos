@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         [JsonProperty("inVs", NullValueHandling = NullValueHandling.Ignore)]
         public Id<Vertex>[]? InVertices { get; }
 
-        public IEnumerable<Id<Vertex>> GetInVerticies() => InVertices ?? SpecializedCollections.SingletonEnumerable(InVertex!.Value);
+        public IEnumerable<Id<Vertex>> GetInVerticies() =>
+            InVertices ?? SpecializedCollections.SingletonEnumerable(InVertex!.Value);
 
         public Edge(string label, Id<Vertex> outVertex, Id<Vertex> inVertex, IdFactory idFactory)
             : base(type: "edge", label: label, idFactory)
@@ -36,7 +37,12 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
             InVertex = inVertex;
         }
 
-        public Edge(string label, Id<Vertex> outVertex, Id<Vertex>[] inVertices, IdFactory idFactory)
+        public Edge(
+            string label,
+            Id<Vertex> outVertex,
+            Id<Vertex>[] inVertices,
+            IdFactory idFactory
+        )
             : base(type: "edge", label: label, idFactory)
         {
             Contract.ThrowIfFalse(IsEdgeLabelOneToMany(label));
@@ -46,12 +52,31 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
 
         private static bool IsEdgeLabelOneToMany(string label) => label is "contains" or "item";
 
-        public static Edge Create<TOutVertex, TInVertex>(string label, Id<TOutVertex> outVertex, Id<TInVertex> inVertex, IdFactory idFactory) where TOutVertex : Vertex where TInVertex : Vertex
+        public static Edge Create<TOutVertex, TInVertex>(
+            string label,
+            Id<TOutVertex> outVertex,
+            Id<TInVertex> inVertex,
+            IdFactory idFactory
+        )
+            where TOutVertex : Vertex
+            where TInVertex : Vertex
         {
-            return new Edge(label, outVertex.As<TOutVertex, Vertex>(), inVertex.As<TInVertex, Vertex>(), idFactory);
+            return new Edge(
+                label,
+                outVertex.As<TOutVertex, Vertex>(),
+                inVertex.As<TInVertex, Vertex>(),
+                idFactory
+            );
         }
 
-        public static Edge Create<TOutVertex, TInVertex>(string label, Id<TOutVertex> outVertex, IList<Id<TInVertex>> inVertices, IdFactory idFactory) where TOutVertex : Vertex where TInVertex : Vertex
+        public static Edge Create<TOutVertex, TInVertex>(
+            string label,
+            Id<TOutVertex> outVertex,
+            IList<Id<TInVertex>> inVertices,
+            IdFactory idFactory
+        )
+            where TOutVertex : Vertex
+            where TInVertex : Vertex
         {
             var inVerticesArray = new Id<Vertex>[inVertices.Count];
 

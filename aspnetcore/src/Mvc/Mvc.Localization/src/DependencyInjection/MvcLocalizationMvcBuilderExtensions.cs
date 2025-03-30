@@ -33,7 +33,8 @@ public static class MvcLocalizationMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddViewLocalization(
         this IMvcBuilder builder,
-        LanguageViewLocationExpanderFormat format)
+        LanguageViewLocationExpanderFormat format
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
 
@@ -49,7 +50,8 @@ public static class MvcLocalizationMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddViewLocalization(
         this IMvcBuilder builder,
-        Action<LocalizationOptions>? setupAction)
+        Action<LocalizationOptions>? setupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
 
@@ -67,7 +69,8 @@ public static class MvcLocalizationMvcBuilderExtensions
     public static IMvcBuilder AddViewLocalization(
         this IMvcBuilder builder,
         LanguageViewLocationExpanderFormat format,
-        Action<LocalizationOptions>? setupAction)
+        Action<LocalizationOptions>? setupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
 
@@ -93,7 +96,8 @@ public static class MvcLocalizationMvcBuilderExtensions
             builder,
             localizationOptionsSetupAction: null,
             format: LanguageViewLocationExpanderFormat.Suffix,
-            dataAnnotationsLocalizationOptionsSetupAction: null);
+            dataAnnotationsLocalizationOptionsSetupAction: null
+        );
     }
 
     /// <summary>
@@ -109,7 +113,8 @@ public static class MvcLocalizationMvcBuilderExtensions
     /// </remarks>
     public static IMvcBuilder AddMvcLocalization(
         this IMvcBuilder builder,
-        Action<LocalizationOptions>? localizationOptionsSetupAction)
+        Action<LocalizationOptions>? localizationOptionsSetupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
 
@@ -117,7 +122,8 @@ public static class MvcLocalizationMvcBuilderExtensions
             builder,
             localizationOptionsSetupAction,
             LanguageViewLocationExpanderFormat.Suffix,
-            dataAnnotationsLocalizationOptionsSetupAction: null);
+            dataAnnotationsLocalizationOptionsSetupAction: null
+        );
     }
 
     /// <summary>
@@ -133,7 +139,8 @@ public static class MvcLocalizationMvcBuilderExtensions
     /// </remarks>
     public static IMvcBuilder AddMvcLocalization(
         this IMvcBuilder builder,
-        LanguageViewLocationExpanderFormat format)
+        LanguageViewLocationExpanderFormat format
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
 
@@ -141,7 +148,8 @@ public static class MvcLocalizationMvcBuilderExtensions
             builder,
             localizationOptionsSetupAction: null,
             format: format,
-            dataAnnotationsLocalizationOptionsSetupAction: null);
+            dataAnnotationsLocalizationOptionsSetupAction: null
+        );
     }
 
     /// <summary>
@@ -160,7 +168,8 @@ public static class MvcLocalizationMvcBuilderExtensions
     public static IMvcBuilder AddMvcLocalization(
         this IMvcBuilder builder,
         Action<LocalizationOptions>? localizationOptionsSetupAction,
-        LanguageViewLocationExpanderFormat format)
+        LanguageViewLocationExpanderFormat format
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
 
@@ -168,7 +177,8 @@ public static class MvcLocalizationMvcBuilderExtensions
             builder,
             localizationOptionsSetupAction: localizationOptionsSetupAction,
             format: format,
-            dataAnnotationsLocalizationOptionsSetupAction: null);
+            dataAnnotationsLocalizationOptionsSetupAction: null
+        );
     }
 
     /// <summary>
@@ -185,7 +195,8 @@ public static class MvcLocalizationMvcBuilderExtensions
     /// </remarks>
     public static IMvcBuilder AddMvcLocalization(
         this IMvcBuilder builder,
-        Action<MvcDataAnnotationsLocalizationOptions>? dataAnnotationsLocalizationOptionsSetupAction)
+        Action<MvcDataAnnotationsLocalizationOptions>? dataAnnotationsLocalizationOptionsSetupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
 
@@ -193,7 +204,8 @@ public static class MvcLocalizationMvcBuilderExtensions
             builder,
             localizationOptionsSetupAction: null,
             format: LanguageViewLocationExpanderFormat.Suffix,
-            dataAnnotationsLocalizationOptionsSetupAction: dataAnnotationsLocalizationOptionsSetupAction);
+            dataAnnotationsLocalizationOptionsSetupAction: dataAnnotationsLocalizationOptionsSetupAction
+        );
     }
 
     /// <summary>
@@ -213,7 +225,8 @@ public static class MvcLocalizationMvcBuilderExtensions
     public static IMvcBuilder AddMvcLocalization(
         this IMvcBuilder builder,
         Action<LocalizationOptions>? localizationOptionsSetupAction,
-        Action<MvcDataAnnotationsLocalizationOptions>? dataAnnotationsLocalizationOptionsSetupAction)
+        Action<MvcDataAnnotationsLocalizationOptions>? dataAnnotationsLocalizationOptionsSetupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
 
@@ -221,7 +234,8 @@ public static class MvcLocalizationMvcBuilderExtensions
             builder,
             localizationOptionsSetupAction: localizationOptionsSetupAction,
             format: LanguageViewLocationExpanderFormat.Suffix,
-            dataAnnotationsLocalizationOptionsSetupAction: dataAnnotationsLocalizationOptionsSetupAction);
+            dataAnnotationsLocalizationOptionsSetupAction: dataAnnotationsLocalizationOptionsSetupAction
+        );
     }
 
     /// <summary>
@@ -240,7 +254,8 @@ public static class MvcLocalizationMvcBuilderExtensions
     public static IMvcBuilder AddMvcLocalization(
         this IMvcBuilder builder,
         LanguageViewLocationExpanderFormat format,
-        Action<MvcDataAnnotationsLocalizationOptions>? dataAnnotationsLocalizationOptionsSetupAction)
+        Action<MvcDataAnnotationsLocalizationOptions>? dataAnnotationsLocalizationOptionsSetupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
 
@@ -248,7 +263,8 @@ public static class MvcLocalizationMvcBuilderExtensions
             builder,
             localizationOptionsSetupAction: null,
             format: format,
-            dataAnnotationsLocalizationOptionsSetupAction: dataAnnotationsLocalizationOptionsSetupAction);
+            dataAnnotationsLocalizationOptionsSetupAction: dataAnnotationsLocalizationOptionsSetupAction
+        );
     }
 
     /// <summary>
@@ -270,7 +286,8 @@ public static class MvcLocalizationMvcBuilderExtensions
         this IMvcBuilder builder,
         Action<LocalizationOptions>? localizationOptionsSetupAction,
         LanguageViewLocationExpanderFormat format,
-        Action<MvcDataAnnotationsLocalizationOptions>? dataAnnotationsLocalizationOptionsSetupAction)
+        Action<MvcDataAnnotationsLocalizationOptions>? dataAnnotationsLocalizationOptionsSetupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
 

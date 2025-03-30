@@ -7,10 +7,11 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class OwnedEntityQuerySqlServerTest : OwnedEntityQueryRelationalTestBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-    public override async Task Multiple_single_result_in_projection_containing_owned_types(bool async)
+    public override async Task Multiple_single_result_in_projection_containing_owned_types(
+        bool async
+    )
     {
         await base.Multiple_single_result_in_projection_containing_owned_types(async);
 
@@ -36,12 +37,17 @@ LEFT JOIN (
     ) AS [t2]
     WHERE [t2].[row] <= 1
 ) AS [t1] ON [e].[Id] = [t1].[Entity20277Id]
-""");
+"""
+        );
     }
 
-    public override async Task Multiple_owned_reference_mapped_to_own_table_containing_owned_collection_in_split_query(bool async)
+    public override async Task Multiple_owned_reference_mapped_to_own_table_containing_owned_collection_in_split_query(
+        bool async
+    )
     {
-        await base.Multiple_owned_reference_mapped_to_own_table_containing_owned_collection_in_split_query(async);
+        await base.Multiple_owned_reference_mapped_to_own_table_containing_owned_collection_in_split_query(
+            async
+        );
 
         AssertSql(
             """
@@ -64,7 +70,8 @@ FROM (
 ) AS [t]
 INNER JOIN [Leaf24777] AS [l] ON [t].[Id1] = [l].[ModdleAId]
 ORDER BY [t].[Id], [t].[Id0], [t].[Id1]
-""");
+"""
+        );
     }
 
     public override async Task Projecting_owned_collection_and_aggregate(bool async)
@@ -80,10 +87,13 @@ SELECT [b].[Id], (
 FROM [Blog24133] AS [b]
 LEFT JOIN [Post24133] AS [p0] ON [b].[Id] = [p0].[BlogId]
 ORDER BY [b].[Id], [p0].[BlogId]
-""");
+"""
+        );
     }
 
-    public override async Task Projecting_correlated_collection_property_for_owned_entity(bool async)
+    public override async Task Projecting_correlated_collection_property_for_owned_entity(
+        bool async
+    )
     {
         await base.Projecting_correlated_collection_property_for_owned_entity(async);
 
@@ -93,7 +103,8 @@ SELECT [w].[WarehouseCode], [w].[Id], [w0].[CountryCode], [w0].[WarehouseCode], 
 FROM [Warehouses] AS [w]
 LEFT JOIN [WarehouseDestinationCountry] AS [w0] ON [w].[WarehouseCode] = [w0].[WarehouseCode]
 ORDER BY [w].[Id], [w0].[WarehouseCode]
-""");
+"""
+        );
     }
 
     public override async Task Owned_collection_basic_split_query(bool async)
@@ -108,12 +119,17 @@ SELECT TOP(1) [l].[Id]
 FROM [Location25680] AS [l]
 WHERE [l].[Id] = @__id_0
 ORDER BY [l].[Id]
-""");
+"""
+        );
     }
 
-    public override async Task Owned_reference_mapped_to_different_table_updated_correctly_after_subquery_pushdown(bool async)
+    public override async Task Owned_reference_mapped_to_different_table_updated_correctly_after_subquery_pushdown(
+        bool async
+    )
     {
-        await base.Owned_reference_mapped_to_different_table_updated_correctly_after_subquery_pushdown(async);
+        await base.Owned_reference_mapped_to_different_table_updated_correctly_after_subquery_pushdown(
+            async
+        );
 
         AssertSql(
             """
@@ -125,12 +141,17 @@ LEFT JOIN [CustomerData] AS [c0] ON [c].[Id] = [c0].[CompanyId]
 LEFT JOIN [SupplierData] AS [s] ON [c].[Id] = [s].[CompanyId]
 WHERE [c0].[CompanyId] IS NOT NULL
 ORDER BY [c].[Id]
-""");
+"""
+        );
     }
 
-    public override async Task Owned_reference_mapped_to_different_table_nested_updated_correctly_after_subquery_pushdown(bool async)
+    public override async Task Owned_reference_mapped_to_different_table_nested_updated_correctly_after_subquery_pushdown(
+        bool async
+    )
     {
-        await base.Owned_reference_mapped_to_different_table_nested_updated_correctly_after_subquery_pushdown(async);
+        await base.Owned_reference_mapped_to_different_table_nested_updated_correctly_after_subquery_pushdown(
+            async
+        );
 
         AssertSql(
             """
@@ -143,36 +164,51 @@ LEFT JOIN [IM_CustomerData] AS [i0] ON [i].[OwnerId] = [i0].[IntermediateOwnedEn
 LEFT JOIN [IM_SupplierData] AS [i1] ON [i].[OwnerId] = [i1].[IntermediateOwnedEntityOwnerId]
 WHERE [i0].[IntermediateOwnedEntityOwnerId] IS NOT NULL
 ORDER BY [o].[Id]
-""");
+"""
+        );
     }
 
-    public override async Task Owned_entity_with_all_null_properties_materializes_when_not_containing_another_owned_entity(bool async)
+    public override async Task Owned_entity_with_all_null_properties_materializes_when_not_containing_another_owned_entity(
+        bool async
+    )
     {
-        await base.Owned_entity_with_all_null_properties_materializes_when_not_containing_another_owned_entity(async);
+        await base.Owned_entity_with_all_null_properties_materializes_when_not_containing_another_owned_entity(
+            async
+        );
 
         AssertSql(
             """
 SELECT [r].[Id], [r].[Buyer], [r].[Rot_ApartmentNo], [r].[Rot_ServiceType], [r].[Rut_Value]
 FROM [RotRutCases] AS [r]
 ORDER BY [r].[Buyer]
-""");
+"""
+        );
     }
 
-    public override async Task Owned_entity_with_all_null_properties_entity_equality_when_not_containing_another_owned_entity(bool async)
+    public override async Task Owned_entity_with_all_null_properties_entity_equality_when_not_containing_another_owned_entity(
+        bool async
+    )
     {
-        await base.Owned_entity_with_all_null_properties_entity_equality_when_not_containing_another_owned_entity(async);
+        await base.Owned_entity_with_all_null_properties_entity_equality_when_not_containing_another_owned_entity(
+            async
+        );
 
         AssertSql(
             """
 SELECT [r].[Id], [r].[Rot_ApartmentNo], [r].[Rot_ServiceType]
 FROM [RotRutCases] AS [r]
 WHERE [r].[Rot_ApartmentNo] IS NOT NULL OR [r].[Rot_ServiceType] IS NOT NULL
-""");
+"""
+        );
     }
 
-    public override async Task Owned_entity_with_all_null_properties_in_compared_to_null_in_conditional_projection(bool async)
+    public override async Task Owned_entity_with_all_null_properties_in_compared_to_null_in_conditional_projection(
+        bool async
+    )
     {
-        await base.Owned_entity_with_all_null_properties_in_compared_to_null_in_conditional_projection(async);
+        await base.Owned_entity_with_all_null_properties_in_compared_to_null_in_conditional_projection(
+            async
+        );
 
         AssertSql(
             """
@@ -182,38 +218,53 @@ SELECT CASE
 END, [r].[Rot_ApartmentNo], [r].[Rot_ServiceType]
 FROM [RotRutCases] AS [r]
 ORDER BY [r].[Id]
-""");
+"""
+        );
     }
 
-    public override async Task Owned_entity_with_all_null_properties_in_compared_to_non_null_in_conditional_projection(bool async)
+    public override async Task Owned_entity_with_all_null_properties_in_compared_to_non_null_in_conditional_projection(
+        bool async
+    )
     {
-        await base.Owned_entity_with_all_null_properties_in_compared_to_non_null_in_conditional_projection(async);
+        await base.Owned_entity_with_all_null_properties_in_compared_to_non_null_in_conditional_projection(
+            async
+        );
 
         AssertSql(
-"""
+            """
 SELECT CASE
     WHEN [r].[Rot_ApartmentNo] IS NOT NULL OR [r].[Rot_ServiceType] IS NOT NULL THEN CAST(1 AS bit)
     ELSE CAST(0 AS bit)
 END, [r].[Rot_ApartmentNo], [r].[Rot_ServiceType]
 FROM [RotRutCases] AS [r]
 ORDER BY [r].[Id]
-""");
+"""
+        );
     }
 
-    public override async Task Owned_entity_with_all_null_properties_property_access_when_not_containing_another_owned_entity(bool async)
+    public override async Task Owned_entity_with_all_null_properties_property_access_when_not_containing_another_owned_entity(
+        bool async
+    )
     {
-        await base.Owned_entity_with_all_null_properties_property_access_when_not_containing_another_owned_entity(async);
+        await base.Owned_entity_with_all_null_properties_property_access_when_not_containing_another_owned_entity(
+            async
+        );
 
         AssertSql(
             """
 SELECT [r].[Rot_ApartmentNo]
 FROM [RotRutCases] AS [r]
-""");
+"""
+        );
     }
 
-    public override async Task Join_selects_with_duplicating_aliases_and_owned_expansion_uniquifies_correctly(bool async)
+    public override async Task Join_selects_with_duplicating_aliases_and_owned_expansion_uniquifies_correctly(
+        bool async
+    )
     {
-        await base.Join_selects_with_duplicating_aliases_and_owned_expansion_uniquifies_correctly(async);
+        await base.Join_selects_with_duplicating_aliases_and_owned_expansion_uniquifies_correctly(
+            async
+        );
 
         AssertSql(
             """
@@ -225,6 +276,7 @@ INNER JOIN (
     LEFT JOIN [MagicTools] AS [m1] ON [m0].[Id] = [m1].[Magus30358Id]
     WHERE [m0].[Name] LIKE N'%Bayaz%'
 ) AS [t] ON [m].[RulerOf] = [t].[Affiliation]
-""");
+"""
+        );
     }
 }

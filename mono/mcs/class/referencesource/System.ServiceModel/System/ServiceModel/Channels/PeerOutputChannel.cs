@@ -19,8 +19,14 @@ namespace System.ServiceModel.Channels
         bool released;
         ChannelManagerBase channelManager;
 
-        public PeerOutputChannel(PeerNodeImplementation peerNode, PeerNodeImplementation.Registration registration, ChannelManagerBase channelManager,
-            EndpointAddress localAddress, Uri via, MessageVersion messageVersion)
+        public PeerOutputChannel(
+            PeerNodeImplementation peerNode,
+            PeerNodeImplementation.Registration registration,
+            ChannelManagerBase channelManager,
+            EndpointAddress localAddress,
+            Uri via,
+            MessageVersion messageVersion
+        )
             : base(channelManager, localAddress, via, false, messageVersion)
         {
             PeerNodeImplementation.ValidateVia(via);
@@ -50,7 +56,11 @@ namespace System.ServiceModel.Channels
             }
             else if (typeof(T) == typeof(FaultConverter))
             {
-                return (T)(object)FaultConverter.GetDefaultFaultConverter(MessageVersion.Soap12WSAddressing10);
+                return (T)
+                    (object)
+                        FaultConverter.GetDefaultFaultConverter(
+                            MessageVersion.Soap12WSAddressing10
+                        );
             }
             return base.GetProperty<T>();
         }
@@ -65,18 +75,27 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                 }
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.peerNode.InnerNode.BeginClose(timeout, callback, state);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             IAsyncResult result = this.peerNode.InnerNode.BeginOpen(timeout, callback, state, true);
             return result;
@@ -139,7 +158,12 @@ namespace System.ServiceModel.Channels
             EndSend(BeginSend(message, timeout, null, null));
         }
 
-        protected override IAsyncResult OnBeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
 
@@ -149,11 +173,25 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.securityProtocol == null)
                     {
-                        this.securityProtocol = ((IPeerFactory)channelManager).SecurityManager.CreateSecurityProtocol<IOutputChannel>(this.to, timeoutHelper.RemainingTime());
+                        this.securityProtocol = (
+                            (IPeerFactory)channelManager
+                        ).SecurityManager.CreateSecurityProtocol<IOutputChannel>(
+                            this.to,
+                            timeoutHelper.RemainingTime()
+                        );
                     }
                 }
             }
-            return this.peerNode.InnerNode.BeginSend(this, message, this.via, (ITransportFactorySettings)Manager, timeoutHelper.RemainingTime(), callback, state, this.securityProtocol);
+            return this.peerNode.InnerNode.BeginSend(
+                this,
+                message,
+                this.via,
+                (ITransportFactorySettings)Manager,
+                timeoutHelper.RemainingTime(),
+                callback,
+                state,
+                this.securityProtocol
+            );
         }
 
         protected override void OnEndSend(IAsyncResult result)

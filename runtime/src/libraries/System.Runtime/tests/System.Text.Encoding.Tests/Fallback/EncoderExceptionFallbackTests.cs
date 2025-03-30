@@ -18,7 +18,12 @@ namespace System.Text.Tests
 
         public static IEnumerable<object[]> Equals_TestData()
         {
-            yield return new object[] { new EncoderExceptionFallback(), new EncoderExceptionFallback(), true };
+            yield return new object[]
+            {
+                new EncoderExceptionFallback(),
+                new EncoderExceptionFallback(),
+                true,
+            };
             yield return new object[] { new EncoderExceptionFallback(), new object(), false };
             yield return new object[] { new EncoderExceptionFallback(), null, false };
         }
@@ -39,10 +44,14 @@ namespace System.Text.Tests
             Assert.False(buffer.MovePrevious());
             Assert.Equal(0, buffer.Remaining);
 
-            EncoderFallbackException ex = Assert.Throws<EncoderFallbackException>(() => buffer.Fallback('a', 0));
+            EncoderFallbackException ex = Assert.Throws<EncoderFallbackException>(() =>
+                buffer.Fallback('a', 0)
+            );
             Assert.Equal('a', ex.CharUnknown);
 
-            ex = Assert.Throws<EncoderFallbackException>(() => buffer.Fallback('\uD800', '\uDC00', 0));
+            ex = Assert.Throws<EncoderFallbackException>(() =>
+                buffer.Fallback('\uD800', '\uDC00', 0)
+            );
             Assert.Equal('\uD800', ex.CharUnknownHigh);
             Assert.Equal('\uDC00', ex.CharUnknownLow);
         }
@@ -52,8 +61,14 @@ namespace System.Text.Tests
         {
             EncoderFallbackBuffer buffer = new EncoderExceptionFallback().CreateFallbackBuffer();
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("charUnknownHigh", () => buffer.Fallback('a', '\uDC00', 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("charUnknownLow", () => buffer.Fallback('\uD800', 'a', 0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "charUnknownHigh",
+                () => buffer.Fallback('a', '\uDC00', 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "charUnknownLow",
+                () => buffer.Fallback('\uD800', 'a', 0)
+            );
         }
     }
 }

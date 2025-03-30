@@ -26,13 +26,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             using var ws = new AdhocWorkspace();
             var commandLine = @"CSharpClass.cs /out:goo.dll /target:library";
-            var info = CommandLineProject.CreateProjectInfo("TestProject", LanguageNames.CSharp, commandLine, tempDirectory.Path, ws);
+            var info = CommandLineProject.CreateProjectInfo(
+                "TestProject",
+                LanguageNames.CSharp,
+                commandLine,
+                tempDirectory.Path,
+                ws
+            );
             ws.AddProject(info);
             var project = ws.CurrentSolution.GetProject(info.Id);
 
             Assert.Equal("TestProject", project.Name);
             Assert.Equal("goo", project.AssemblyName);
-            Assert.Equal(OutputKind.DynamicallyLinkedLibrary, project.CompilationOptions.OutputKind);
+            Assert.Equal(
+                OutputKind.DynamicallyLinkedLibrary,
+                project.CompilationOptions.OutputKind
+            );
 
             Assert.Equal(1, project.Documents.Count());
 
@@ -53,14 +62,22 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void TestLoadProjectFromCommandLine()
         {
             var commandLine = @"goo.cs subdir\bar.cs /out:goo.dll /target:library";
-            var info = CommandLineProject.CreateProjectInfo("TestProject", LanguageNames.CSharp, commandLine, @"C:\ProjectDirectory");
+            var info = CommandLineProject.CreateProjectInfo(
+                "TestProject",
+                LanguageNames.CSharp,
+                commandLine,
+                @"C:\ProjectDirectory"
+            );
             var ws = new AdhocWorkspace();
             ws.AddProject(info);
             var project = ws.CurrentSolution.GetProject(info.Id);
 
             Assert.Equal("TestProject", project.Name);
             Assert.Equal("goo", project.AssemblyName);
-            Assert.Equal(OutputKind.DynamicallyLinkedLibrary, project.CompilationOptions.OutputKind);
+            Assert.Equal(
+                OutputKind.DynamicallyLinkedLibrary,
+                project.CompilationOptions.OutputKind
+            );
 
             Assert.Equal(2, project.Documents.Count());
 

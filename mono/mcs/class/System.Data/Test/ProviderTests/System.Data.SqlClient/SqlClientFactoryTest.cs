@@ -27,32 +27,30 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
+using System.Collections;
 using System.Data;
 using System.Data.SqlClient;
 using System.Net;
-using NUnit.Framework;
-using System.Collections;
-using System.Security.Permissions;
-
 using System.Security;
+using System.Security.Permissions;
+using NUnit.Framework;
 
 namespace MonoTests.System.Data.Connected.SqlClient
 {
-	[TestFixture]
-	[Category ("CAS")]
-	public class SqlClientFactoryTest
-	{
-		[Test]
-		public void CreatePermissionTest ()
-		{
-			SqlClientFactory factory = SqlClientFactory.Instance;
-			CodeAccessPermission permission, perm;
-			permission = factory.CreatePermission (PermissionState.None);
-			perm = factory.CreatePermission (PermissionState.Unrestricted);
-			Assert.AreEqual (false, perm.IsSubsetOf (permission), "#1");
-		}
-	}
+    [TestFixture]
+    [Category("CAS")]
+    public class SqlClientFactoryTest
+    {
+        [Test]
+        public void CreatePermissionTest()
+        {
+            SqlClientFactory factory = SqlClientFactory.Instance;
+            CodeAccessPermission permission,
+                perm;
+            permission = factory.CreatePermission(PermissionState.None);
+            perm = factory.CreatePermission(PermissionState.Unrestricted);
+            Assert.AreEqual(false, perm.IsSubsetOf(permission), "#1");
+        }
+    }
 }
-

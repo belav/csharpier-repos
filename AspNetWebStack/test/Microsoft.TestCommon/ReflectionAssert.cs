@@ -15,29 +15,53 @@ namespace Microsoft.TestCommon
             {
                 return (PropertyInfo)((MemberExpression)property.Body).Member;
             }
-            else if (property.Body is UnaryExpression && property.Body.NodeType == ExpressionType.Convert)
+            else if (
+                property.Body is UnaryExpression
+                && property.Body.NodeType == ExpressionType.Convert
+            )
             {
-                return (PropertyInfo)((MemberExpression)((UnaryExpression)property.Body).Operand).Member;
+                return (PropertyInfo)
+                    ((MemberExpression)((UnaryExpression)property.Body).Operand).Member;
             }
             else
             {
-                throw new InvalidOperationException("Could not determine property from lambda expression.");
+                throw new InvalidOperationException(
+                    "Could not determine property from lambda expression."
+                );
             }
         }
 
-        private static void TestPropertyValue<TInstance, TValue>(TInstance instance, Func<TInstance, TValue> getFunc, Action<TInstance, TValue> setFunc, TValue valueToSet, TValue valueToCheck)
+        private static void TestPropertyValue<TInstance, TValue>(
+            TInstance instance,
+            Func<TInstance, TValue> getFunc,
+            Action<TInstance, TValue> setFunc,
+            TValue valueToSet,
+            TValue valueToCheck
+        )
         {
             setFunc(instance, valueToSet);
             TValue newValue = getFunc(instance);
             Assert.Equal(valueToCheck, newValue);
         }
 
-        private static void TestPropertyValue<TInstance, TValue>(TInstance instance, Func<TInstance, TValue> getFunc, Action<TInstance, TValue> setFunc, TValue value)
+        private static void TestPropertyValue<TInstance, TValue>(
+            TInstance instance,
+            Func<TInstance, TValue> getFunc,
+            Action<TInstance, TValue> setFunc,
+            TValue value
+        )
         {
             TestPropertyValue(instance, getFunc, setFunc, value, value);
         }
 
-        public void Property<T, TResult>(T instance, Expression<Func<T, TResult>> propertyGetter, TResult expectedDefaultValue, bool allowNull = false, TResult roundTripTestValue = null) where TResult : class
+        public void Property<T, TResult>(
+            T instance,
+            Expression<Func<T, TResult>> propertyGetter,
+            TResult expectedDefaultValue,
+            bool allowNull = false,
+            TResult roundTripTestValue = null
+        )
+            where TResult : class
         {
             PropertyInfo property = GetPropertyInfo(propertyGetter);
             Func<T, TResult> getFunc = (obj) => (TResult)property.GetValue(obj, index: null);
@@ -51,10 +75,13 @@ namespace Microsoft.TestCommon
             }
             else
             {
-                Assert.ThrowsArgumentNull(() =>
-                {
-                    setFunc(instance, null);
-                }, "value");
+                Assert.ThrowsArgumentNull(
+                    () =>
+                    {
+                        setFunc(instance, null);
+                    },
+                    "value"
+                );
             }
 
             if (roundTripTestValue != null)
@@ -63,10 +90,17 @@ namespace Microsoft.TestCommon
             }
         }
 
-        public void IntegerProperty<T, TResult>(T instance, Expression<Func<T, TResult>> propertyGetter, TResult expectedDefaultValue,
-            TResult? minLegalValue, TResult? illegalLowerValue,
-            TResult? maxLegalValue, TResult? illegalUpperValue,
-            TResult roundTripTestValue) where TResult : struct
+        public void IntegerProperty<T, TResult>(
+            T instance,
+            Expression<Func<T, TResult>> propertyGetter,
+            TResult expectedDefaultValue,
+            TResult? minLegalValue,
+            TResult? illegalLowerValue,
+            TResult? maxLegalValue,
+            TResult? illegalUpperValue,
+            TResult roundTripTestValue
+        )
+            where TResult : struct
         {
             PropertyInfo property = GetPropertyInfo(propertyGetter);
             Func<T, TResult> getFunc = (obj) => (TResult)property.GetValue(obj, index: null);
@@ -86,25 +120,49 @@ namespace Microsoft.TestCommon
 
             if (illegalLowerValue.HasValue)
             {
-                Assert.ThrowsArgumentGreaterThanOrEqualTo(() => { setFunc(instance, illegalLowerValue.Value); }, "value", minLegalValue.Value.ToString(), illegalLowerValue.Value);
+                Assert.ThrowsArgumentGreaterThanOrEqualTo(
+                    () =>
+                    {
+                        setFunc(instance, illegalLowerValue.Value);
+                    },
+                    "value",
+                    minLegalValue.Value.ToString(),
+                    illegalLowerValue.Value
+                );
             }
 
             if (illegalUpperValue.HasValue)
             {
-                Assert.ThrowsArgumentLessThanOrEqualTo(() => { setFunc(instance, illegalLowerValue.Value); }, "value", maxLegalValue.Value.ToString(), illegalUpperValue.Value);
+                Assert.ThrowsArgumentLessThanOrEqualTo(
+                    () =>
+                    {
+                        setFunc(instance, illegalLowerValue.Value);
+                    },
+                    "value",
+                    maxLegalValue.Value.ToString(),
+                    illegalUpperValue.Value
+                );
             }
 
             TestPropertyValue(instance, getFunc, setFunc, roundTripTestValue);
         }
 
-        public void NullableIntegerProperty<T, TResult>(T instance, Expression<Func<T, TResult?>> propertyGetter, TResult? expectedDefaultValue,
-            TResult? minLegalValue, TResult? illegalLowerValue,
-            TResult? maxLegalValue, TResult? illegalUpperValue,
-            TResult roundTripTestValue) where TResult : struct
+        public void NullableIntegerProperty<T, TResult>(
+            T instance,
+            Expression<Func<T, TResult?>> propertyGetter,
+            TResult? expectedDefaultValue,
+            TResult? minLegalValue,
+            TResult? illegalLowerValue,
+            TResult? maxLegalValue,
+            TResult? illegalUpperValue,
+            TResult roundTripTestValue
+        )
+            where TResult : struct
         {
             PropertyInfo property = GetPropertyInfo(propertyGetter);
             Func<T, TResult?> getFunc = (obj) => (TResult?)property.GetValue(obj, index: null);
-            Action<T, TResult?> setFunc = (obj, value) => property.SetValue(obj, value, index: null);
+            Action<T, TResult?> setFunc = (obj, value) =>
+                property.SetValue(obj, value, index: null);
 
             Assert.Equal(expectedDefaultValue, getFunc(instance));
 
@@ -122,18 +180,38 @@ namespace Microsoft.TestCommon
 
             if (illegalLowerValue.HasValue)
             {
-                Assert.ThrowsArgumentGreaterThanOrEqualTo(() => { setFunc(instance, illegalLowerValue.Value); }, "value", minLegalValue.Value.ToString(), illegalLowerValue.Value);
+                Assert.ThrowsArgumentGreaterThanOrEqualTo(
+                    () =>
+                    {
+                        setFunc(instance, illegalLowerValue.Value);
+                    },
+                    "value",
+                    minLegalValue.Value.ToString(),
+                    illegalLowerValue.Value
+                );
             }
 
             if (illegalUpperValue.HasValue)
             {
-                Assert.ThrowsArgumentLessThanOrEqualTo(() => { setFunc(instance, illegalLowerValue.Value); }, "value", maxLegalValue.Value.ToString(), illegalUpperValue.Value);
+                Assert.ThrowsArgumentLessThanOrEqualTo(
+                    () =>
+                    {
+                        setFunc(instance, illegalLowerValue.Value);
+                    },
+                    "value",
+                    maxLegalValue.Value.ToString(),
+                    illegalUpperValue.Value
+                );
             }
 
             TestPropertyValue(instance, getFunc, setFunc, roundTripTestValue);
         }
 
-        public void BooleanProperty<T>(T instance, Expression<Func<T, bool>> propertyGetter, bool expectedDefaultValue)
+        public void BooleanProperty<T>(
+            T instance,
+            Expression<Func<T, bool>> propertyGetter,
+            bool expectedDefaultValue
+        )
         {
             PropertyInfo property = GetPropertyInfo(propertyGetter);
             Func<T, bool> getFunc = (obj) => (bool)property.GetValue(obj, index: null);
@@ -144,7 +222,14 @@ namespace Microsoft.TestCommon
             TestPropertyValue(instance, getFunc, setFunc, !expectedDefaultValue);
         }
 
-        public void EnumProperty<T, TResult>(T instance, Expression<Func<T, TResult>> propertyGetter, TResult expectedDefaultValue, TResult illegalValue, TResult roundTripTestValue) where TResult : struct
+        public void EnumProperty<T, TResult>(
+            T instance,
+            Expression<Func<T, TResult>> propertyGetter,
+            TResult expectedDefaultValue,
+            TResult illegalValue,
+            TResult roundTripTestValue
+        )
+            where TResult : struct
         {
             PropertyInfo property = GetPropertyInfo(propertyGetter);
             Func<T, TResult> getFunc = (obj) => (TResult)property.GetValue(obj, index: null);
@@ -152,12 +237,26 @@ namespace Microsoft.TestCommon
 
             Assert.Equal(expectedDefaultValue, getFunc(instance));
 
-            Assert.ThrowsInvalidEnumArgument(() => { setFunc(instance, illegalValue); }, "value", Convert.ToInt32(illegalValue), typeof(TResult));
+            Assert.ThrowsInvalidEnumArgument(
+                () =>
+                {
+                    setFunc(instance, illegalValue);
+                },
+                "value",
+                Convert.ToInt32(illegalValue),
+                typeof(TResult)
+            );
 
             TestPropertyValue(instance, getFunc, setFunc, roundTripTestValue);
         }
 
-        public void EnumPropertyWithoutIllegalValueCheck<T, TResult>(T instance, Expression<Func<T, TResult>> propertyGetter, TResult expectedDefaultValue, TResult roundTripTestValue) where TResult : struct
+        public void EnumPropertyWithoutIllegalValueCheck<T, TResult>(
+            T instance,
+            Expression<Func<T, TResult>> propertyGetter,
+            TResult expectedDefaultValue,
+            TResult roundTripTestValue
+        )
+            where TResult : struct
         {
             PropertyInfo property = GetPropertyInfo(propertyGetter);
             Func<T, TResult> getFunc = (obj) => (TResult)property.GetValue(obj, index: null);
@@ -168,8 +267,13 @@ namespace Microsoft.TestCommon
             TestPropertyValue(instance, getFunc, setFunc, roundTripTestValue);
         }
 
-        public void StringProperty<T>(T instance, Expression<Func<T, string>> propertyGetter, string expectedDefaultValue,
-                                      bool allowNullAndEmpty = true, bool treatNullAsEmpty = true)
+        public void StringProperty<T>(
+            T instance,
+            Expression<Func<T, string>> propertyGetter,
+            string expectedDefaultValue,
+            bool allowNullAndEmpty = true,
+            bool treatNullAsEmpty = true
+        )
         {
             PropertyInfo property = GetPropertyInfo(propertyGetter);
             Func<T, string> getFunc = (obj) => (string)property.GetValue(obj, index: null);
@@ -180,7 +284,13 @@ namespace Microsoft.TestCommon
             if (allowNullAndEmpty)
             {
                 // Assert get/set works for null
-                TestPropertyValue(instance, getFunc, setFunc, null, treatNullAsEmpty ? String.Empty : null);
+                TestPropertyValue(
+                    instance,
+                    getFunc,
+                    setFunc,
+                    null,
+                    treatNullAsEmpty ? String.Empty : null
+                );
 
                 // Assert get/set works for String.Empty
                 TestPropertyValue(instance, getFunc, setFunc, String.Empty, String.Empty);
@@ -199,7 +309,8 @@ namespace Microsoft.TestCommon
                             throw e.InnerException;
                         }
                     },
-                    "value");
+                    "value"
+                );
                 Assert.ThrowsArgumentNullOrEmpty(
                     delegate()
                     {
@@ -212,7 +323,8 @@ namespace Microsoft.TestCommon
                             throw e.InnerException;
                         }
                     },
-                    "value");
+                    "value"
+                );
             }
 
             // Assert get/set works for arbitrary value

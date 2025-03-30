@@ -19,13 +19,21 @@ public class ControllerViewDataAttributeFilterTest
         var controller = new object();
         var httpContext = new DefaultHttpContext();
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
-        var context = new ActionExecutingContext(actionContext, new IFilterMetadata[0], new Dictionary<string, object>(), controller);
+        var context = new ActionExecutingContext(
+            actionContext,
+            new IFilterMetadata[0],
+            new Dictionary<string, object>(),
+            controller
+        );
 
         // Act
         filter.OnActionExecuting(context);
 
         // Assert
-        var feature = Assert.Single(httpContext.Features, f => f.Key == typeof(IViewDataValuesProviderFeature));
+        var feature = Assert.Single(
+            httpContext.Features,
+            f => f.Key == typeof(IViewDataValuesProviderFeature)
+        );
         Assert.Same(filter, feature.Value);
     }
 
@@ -37,7 +45,12 @@ public class ControllerViewDataAttributeFilterTest
         var controller = new object();
         var httpContext = new DefaultHttpContext();
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
-        var context = new ActionExecutingContext(actionContext, new IFilterMetadata[0], new Dictionary<string, object>(), controller);
+        var context = new ActionExecutingContext(
+            actionContext,
+            new IFilterMetadata[0],
+            new Dictionary<string, object>(),
+            controller
+        );
 
         // Act
         filter.OnActionExecuting(context);
@@ -53,17 +66,17 @@ public class ControllerViewDataAttributeFilterTest
         var type = typeof(TestController);
         var properties = new[]
         {
-                new LifecycleProperty(type.GetProperty(nameof(TestController.Prop1)), "Prop1"),
-                new LifecycleProperty(type.GetProperty(nameof(TestController.Prop2)), "Prop2"),
-                new LifecycleProperty(type.GetProperty(nameof(TestController.Prop3)), "Prop3"),
-            };
+            new LifecycleProperty(type.GetProperty(nameof(TestController.Prop1)), "Prop1"),
+            new LifecycleProperty(type.GetProperty(nameof(TestController.Prop2)), "Prop2"),
+            new LifecycleProperty(type.GetProperty(nameof(TestController.Prop3)), "Prop3"),
+        };
 
         var controller = new TestController();
-        var filter = new ControllerViewDataAttributeFilter(properties)
-        {
-            Subject = controller,
-        };
-        var viewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary());
+        var filter = new ControllerViewDataAttributeFilter(properties) { Subject = controller };
+        var viewData = new ViewDataDictionary(
+            new EmptyModelMetadataProvider(),
+            new ModelStateDictionary()
+        );
 
         // Act
         controller.Prop1 = "New-Value";
@@ -81,7 +94,8 @@ public class ControllerViewDataAttributeFilterTest
             {
                 Assert.Equal("Prop2", kvp.Key);
                 Assert.Equal("Test", kvp.Value);
-            });
+            }
+        );
     }
 
     public class TestController
