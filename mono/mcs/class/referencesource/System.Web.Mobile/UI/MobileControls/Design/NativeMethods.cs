@@ -2232,8 +2232,7 @@ namespace System.Web.UI.Design.MobileControls
                 int nCmdID,
                 int nCmdexecopt,
                 // we need to have this an array because callers need to be able to specify NULL or VT_NULL
-                [In, MarshalAs(UnmanagedType.LPArray)]
-                    Object[] pvaIn,
+                [In, MarshalAs(UnmanagedType.LPArray)] Object[] pvaIn,
                 IntPtr pvaOut
             );
         }

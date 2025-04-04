@@ -20,10 +20,18 @@ namespace System.Deployment.Internal.Isolation
     ]
     internal interface ISection
     {
-        object _NewEnum { [return: MarshalAs(UnmanagedType.Interface)] get; }
+        object _NewEnum
+        {
+            [return: MarshalAs(UnmanagedType.Interface)]
+            get;
+        }
         uint Count { get; }
         uint SectionID { get; }
-        string SectionName { [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string SectionName
+        {
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
     }
 
     [
@@ -98,7 +106,11 @@ namespace System.Deployment.Internal.Isolation
     {
         ISection GetRootSection(uint SectionId);
         ISectionEntry GetRootSectionEntry(uint SectionId);
-        object _NewEnum { [return: MarshalAs(UnmanagedType.Interface)] get; }
+        object _NewEnum
+        {
+            [return: MarshalAs(UnmanagedType.Interface)]
+            get;
+        }
         uint Count { get; }
         object GetItem(uint SectionId);
     }

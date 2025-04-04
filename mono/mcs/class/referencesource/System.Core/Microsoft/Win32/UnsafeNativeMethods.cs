@@ -1348,8 +1348,7 @@ namespace Microsoft.Win32
         internal static extern bool EvtGetEventInfo(
             EventLogHandle eventHandle,
             //int propertyId
-            [MarshalAs(UnmanagedType.I4)]
-                EvtEventPropertyId propertyId,
+            [MarshalAs(UnmanagedType.I4)] EvtEventPropertyId propertyId,
             int bufferSize,
             IntPtr bufferPtr,
             out int bufferUsed
@@ -1453,8 +1452,7 @@ namespace Microsoft.Win32
             EventLogHandle channelEnum,
             int channelPathBufferSize,
             //StringBuilder channelPathBuffer,
-            [Out, MarshalAs(UnmanagedType.LPWStr)]
-                StringBuilder channelPathBuffer,
+            [Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder channelPathBuffer,
             out int channelPathBufferUsed
         );
 

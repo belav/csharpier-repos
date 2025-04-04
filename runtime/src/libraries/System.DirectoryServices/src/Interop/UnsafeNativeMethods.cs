@@ -79,17 +79,41 @@ namespace System.DirectoryServices
         [ComImport, Guid("FD8256D0-FD15-11CE-ABC4-02608C9E7553")]
         public interface IAds
         {
-            string Name { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string Name
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
-            string Class { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string Class
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
-            string GUID { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string GUID
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
-            string ADsPath { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string ADsPath
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
-            string Parent { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string Parent
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
-            string Schema { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string Schema
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
             void GetInfo();
 
@@ -117,9 +141,17 @@ namespace System.DirectoryServices
         [ComImport, Guid("001677D0-FD16-11CE-ABC4-02608C9E7553")]
         public interface IAdsContainer
         {
-            int Count { [return: MarshalAs(UnmanagedType.U4)] get; }
+            int Count
+            {
+                [return: MarshalAs(UnmanagedType.U4)]
+                get;
+            }
 
-            object _NewEnum { [return: MarshalAs(UnmanagedType.Interface)] get; }
+            object _NewEnum
+            {
+                [return: MarshalAs(UnmanagedType.Interface)]
+                get;
+            }
 
             object? Filter { get; set; }
 
@@ -263,7 +295,11 @@ namespace System.DirectoryServices
         [ComImport, Guid("C6F602B6-8F69-11D0-8528-00C04FD8D503")]
         public interface IAdsPropertyList
         {
-            int PropertyCount { [return: MarshalAs(UnmanagedType.U4)] get; }
+            int PropertyCount
+            {
+                [return: MarshalAs(UnmanagedType.U4)]
+                get;
+            }
 
             [return: MarshalAs(UnmanagedType.I4)]
             [PreserveSig]

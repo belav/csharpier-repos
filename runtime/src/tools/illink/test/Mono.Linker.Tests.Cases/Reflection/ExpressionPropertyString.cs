@@ -69,7 +69,12 @@ namespace Mono.Linker.Tests.Cases.Reflection
             public static int Property1 { [Kept] get; }
 
             [Kept]
-            private int Property2 { [Kept] [ExpectBodyModified] get; }
+            private int Property2
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+            }
 
             [Kept]
             public static void Test()
@@ -112,7 +117,12 @@ namespace Mono.Linker.Tests.Cases.Reflection
             private static int Property1 { [Kept] get; }
 
             [Kept]
-            public int Property2 { [Kept] [ExpectBodyModified] get; }
+            public int Property2
+            {
+                [Kept]
+                [ExpectBodyModified]
+                get;
+            }
 
             [Kept]
             public static void Test()

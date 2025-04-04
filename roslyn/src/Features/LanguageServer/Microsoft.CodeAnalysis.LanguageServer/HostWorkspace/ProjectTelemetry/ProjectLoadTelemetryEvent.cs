@@ -14,8 +14,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.HostWorkspace.ProjectTelemetry;
 [DataContract]
 internal record ProjectLoadTelemetryEvent(
     // The project guid (if it came from a solution), or a hash representing the file path and contents.
-    [property: DataMember(Name = "ProjectId")]
-        string ProjectId,
+    [property: DataMember(Name = "ProjectId")] string ProjectId,
     [property: DataMember(Name = "SessionId")] string SessionId,
     [property: DataMember(Name = "OutputKind")] int OutputKind,
     [property: DataMember(Name = "ProjectCapabilities")] IEnumerable<string> ProjectCapabilities,

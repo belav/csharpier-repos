@@ -1984,8 +1984,7 @@ namespace System.Net
                 [In] IntPtr hStore, // HCERTSTORE
                 [Out] out int pcSelection, // PDWORD
                 // **PCCERT_CHAIN_CONTEXT, Array of ptrs to contexts
-                [Out]
-                    out SafeFreeCertChainList pprgpSelection
+                [Out] out SafeFreeCertChainList pprgpSelection
             );
 
             // See WinCrypt.h

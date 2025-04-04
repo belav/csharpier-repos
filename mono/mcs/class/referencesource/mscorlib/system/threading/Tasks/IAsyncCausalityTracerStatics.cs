@@ -81,7 +81,11 @@ namespace Windows.Foundation.Diagnostics
     [WindowsRuntimeImport]
     internal sealed class TracingStatusChangedEventArgs : ITracingStatusChangedEventArgs
     {
-        public extern bool Enabled { [MethodImpl(MethodImplOptions.InternalCall)] get; }
+        public extern bool Enabled
+        {
+            [MethodImpl(MethodImplOptions.InternalCall)]
+            get;
+        }
 
         public extern CausalityTraceLevel TraceLevel
         {

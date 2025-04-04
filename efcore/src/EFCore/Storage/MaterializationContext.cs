@@ -46,10 +46,18 @@ public readonly struct MaterializationContext
     /// <summary>
     ///     The <see cref="ValueBuffer" /> to use to materialize an entity.
     /// </summary>
-    public ValueBuffer ValueBuffer { [MethodImpl(MethodImplOptions.AggressiveInlining)] get; }
+    public ValueBuffer ValueBuffer
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get;
+    }
 
     /// <summary>
     ///     The current <see cref="DbContext" /> instance being used.
     /// </summary>
-    public DbContext Context { [MethodImpl(MethodImplOptions.AggressiveInlining)] get; }
+    public DbContext Context
+    {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        get;
+    }
 }

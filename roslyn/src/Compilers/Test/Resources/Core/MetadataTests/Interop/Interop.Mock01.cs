@@ -104,7 +104,12 @@ namespace MockInterop01
         ComplexStruct MethodForStruct(ref UnionStruct p1, out InteropDeleWithStructArray p2);
 
         [DispId(1012)]
-        string this[string p, IGoo p2] { [return: MarshalAs(UnmanagedType.BStr)] get; set; }
+        string this[string p, IGoo p2]
+        {
+            [return: MarshalAs(UnmanagedType.BStr)]
+            get;
+            set;
+        }
 
         [DispId(1013)]
         event InteropDeleWithStructArray IGooEvent;

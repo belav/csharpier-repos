@@ -236,7 +236,11 @@ namespace System
 
         String FriendlyName { get; }
 #if FEATURE_FUSION
-        String BaseDirectory { [ResourceExposure(ResourceScope.Machine)] get; }
+        String BaseDirectory
+        {
+            [ResourceExposure(ResourceScope.Machine)]
+            get;
+        }
 
         String RelativeSearchPath { get; }
 

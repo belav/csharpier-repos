@@ -6,7 +6,11 @@ struct A
     [MethodImplAttribute(MethodImplOptions.InternalCall)]
     public extern A(float value);
 
-    public extern int Foo { [MethodImplAttribute(MethodImplOptions.InternalCall)] get; }
+    public extern int Foo
+    {
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        get;
+    }
 }
 
 struct C

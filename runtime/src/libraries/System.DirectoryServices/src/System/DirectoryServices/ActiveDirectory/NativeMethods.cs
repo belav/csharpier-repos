@@ -577,17 +577,41 @@ namespace System.DirectoryServices.ActiveDirectory
             // Need to also include the IAds interface definition here
             //
 
-            string Name { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string Name
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
-            string Class { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string Class
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
-            string GUID { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string GUID
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
-            string ADsPath { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string ADsPath
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
-            string Parent { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string Parent
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
-            string Schema { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string Schema
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
             void GetInfo();
 
@@ -657,17 +681,41 @@ namespace System.DirectoryServices.ActiveDirectory
             // Need to also include the IAds interface definition here
             //
 
-            string Name { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string Name
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
-            string Class { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string Class
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
-            string GUID { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string GUID
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
-            string ADsPath { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string ADsPath
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
-            string Parent { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string Parent
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
-            string Schema { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string Schema
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
             void GetInfo();
 
@@ -694,7 +742,11 @@ namespace System.DirectoryServices.ActiveDirectory
             // IAdsClass definition starts here
             //
 
-            string PrimaryInterface { [return: MarshalAs(UnmanagedType.BStr)] get; }
+            string PrimaryInterface
+            {
+                [return: MarshalAs(UnmanagedType.BStr)]
+                get;
+            }
 
             string CLSID
             {

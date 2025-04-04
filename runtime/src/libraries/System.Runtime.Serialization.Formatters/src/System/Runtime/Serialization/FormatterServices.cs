@@ -30,8 +30,7 @@ namespace System.Runtime.Serialization
         )]
         private static FieldInfo[] InternalGetSerializableMembers(
             // currently the only way to preserve base, non-public fields is to use All
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-                Type type
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type
         )
         {
             Debug.Assert(type != null);
@@ -244,8 +243,7 @@ namespace System.Runtime.Serialization
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicConstructors
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
-            )]
-                Type type
+            )] Type type
         ) => RuntimeHelpers.GetUninitializedObject(type);
 
         public static object GetSafeUninitializedObject(

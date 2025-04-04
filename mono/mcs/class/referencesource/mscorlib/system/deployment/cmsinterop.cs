@@ -317,8 +317,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         MuiResourceTypeIdStringEntry AllData { [SecurityCritical] get; }
 
-        object StringIds { [SecurityCritical] [return: MarshalAs(UnmanagedType.Interface)] get; }
-        object IntegerIds { [SecurityCritical] [return: MarshalAs(UnmanagedType.Interface)] get; }
+        object StringIds
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.Interface)]
+            get;
+        }
+        object IntegerIds
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.Interface)]
+            get;
+        }
     };
 
     //++! end object [MuiResourceTypeIdString]
@@ -380,8 +390,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         MuiResourceTypeIdIntEntry AllData { [SecurityCritical] get; }
 
-        object StringIds { [SecurityCritical] [return: MarshalAs(UnmanagedType.Interface)] get; }
-        object IntegerIds { [SecurityCritical] [return: MarshalAs(UnmanagedType.Interface)] get; }
+        object StringIds
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.Interface)]
+            get;
+        }
+        object IntegerIds
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.Interface)]
+            get;
+        }
     };
 
     //++! end object [MuiResourceTypeIdInt]
@@ -536,8 +556,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
             get;
         }
         byte DigestMethod { [SecurityCritical] get; }
-        object DigestValue { [SecurityCritical] [return: MarshalAs(UnmanagedType.Interface)] get; }
-        string Xml { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        object DigestValue
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.Interface)]
+            get;
+        }
+        string Xml
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
     };
 
     //++! end object [HashElement]
@@ -636,16 +666,56 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         FileEntry AllData { [SecurityCritical] get; }
 
-        string Name { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string Name
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         uint HashAlgorithm { [SecurityCritical] get; }
-        string LoadFrom { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string SourcePath { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string ImportPath { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string SourceName { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string Location { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        object HashValue { [SecurityCritical] [return: MarshalAs(UnmanagedType.Interface)] get; }
+        string LoadFrom
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string SourcePath
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string ImportPath
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string SourceName
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string Location
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        object HashValue
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.Interface)]
+            get;
+        }
         ulong Size { [SecurityCritical] get; }
-        string Group { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string Group
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         uint Flags { [SecurityCritical] get; }
         IMuiResourceMapEntry MuiMapping { [SecurityCritical] get; }
         uint WritableType { [SecurityCritical] get; }
@@ -690,11 +760,36 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         FileAssociationEntry AllData { [SecurityCritical] get; }
 
-        string Extension { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string Description { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string ProgID { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string DefaultIcon { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string Parameter { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string Extension
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string Description
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string ProgID
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string DefaultIcon
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string Parameter
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
     };
 
     //++! end object [FileAssociation]
@@ -727,8 +822,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
         CategoryMembershipDataEntry AllData { [SecurityCritical] get; }
 
         uint index { [SecurityCritical] get; }
-        string Xml { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string Description { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string Xml
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string Description
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
     };
 
     //++! end object [CategoryMembershipData]
@@ -755,7 +860,12 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         SubcategoryMembershipEntry AllData { [SecurityCritical] get; }
 
-        string Subcategory { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string Subcategory
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         ISection CategoryMembershipData { [SecurityCritical] get; }
     };
 
@@ -831,8 +941,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
         Guid ImplementedClsid { [SecurityCritical] get; }
         Guid TypeLibrary { [SecurityCritical] get; }
         uint ThreadingModel { [SecurityCritical] get; }
-        string RuntimeVersion { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string HostFile { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string RuntimeVersion
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string HostFile
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
     };
 
     //++! end object [COMServer]
@@ -859,7 +979,12 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         ProgIdRedirectionEntry AllData { [SecurityCritical] get; }
 
-        string ProgId { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string ProgId
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         Guid RedirectedGuid { [SecurityCritical] get; }
     };
 
@@ -893,8 +1018,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
         CLRSurrogateEntry AllData { [SecurityCritical] get; }
 
         Guid Clsid { [SecurityCritical] get; }
-        string RuntimeVersion { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string ClassName { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string RuntimeVersion
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string ClassName
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
     };
 
     //++! end object [CLRSurrogate]
@@ -974,10 +1109,25 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         AssemblyReferenceDependentAssemblyEntry AllData { [SecurityCritical] get; }
 
-        string Group { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string Codebase { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string Group
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string Codebase
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         ulong Size { [SecurityCritical] get; }
-        object HashValue { [SecurityCritical] [return: MarshalAs(UnmanagedType.Interface)] get; }
+        object HashValue
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.Interface)]
+            get;
+        }
         uint HashAlgorithm { [SecurityCritical] get; }
         uint Flags { [SecurityCritical] get; }
         string ResourceFallbackCulture
@@ -986,8 +1136,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
             [return: MarshalAs(UnmanagedType.LPWStr)]
             get;
         }
-        string Description { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string SupportUrl { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string Description
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string SupportUrl
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         ISection HashElements { [SecurityCritical] get; }
     };
 
@@ -1050,8 +1210,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         WindowClassEntry AllData { [SecurityCritical] get; }
 
-        string ClassName { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string HostDll { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string ClassName
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string HostDll
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         bool fVersioned { [SecurityCritical] get; }
     };
 
@@ -1081,7 +1251,12 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         ResourceTableMappingEntry AllData { [SecurityCritical] get; }
 
-        string id { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string id
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         string FinalStringMapped
         {
             [SecurityCritical]
@@ -1125,7 +1300,12 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         EntryPointEntry AllData { [SecurityCritical] get; }
 
-        string Name { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string Name
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         string CommandLine_File
         {
             [SecurityCritical]
@@ -1169,8 +1349,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         PermissionSetEntry AllData { [SecurityCritical] get; }
 
-        string Id { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string XmlSegment { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string Id
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string XmlSegment
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
     };
 
     //++! end object [PermissionSet]
@@ -1199,8 +1389,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         AssemblyRequestEntry AllData { [SecurityCritical] get; }
 
-        string Name { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string permissionSetID { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string Name
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string permissionSetID
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
     };
 
     //++! end object [AssemblyRequest]
@@ -1247,12 +1447,42 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         DescriptionMetadataEntry AllData { [SecurityCritical] get; }
 
-        string Publisher { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string Product { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string SupportUrl { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string IconFile { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string ErrorReportUrl { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string SuiteName { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string Publisher
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string Product
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string SupportUrl
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string IconFile
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string ErrorReportUrl
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string SuiteName
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
     };
 
     //++! end object [DescriptionMetadata]
@@ -1342,8 +1572,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         DependentOSMetadataEntry AllData { [SecurityCritical] get; }
 
-        string SupportUrl { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string Description { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string SupportUrl
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string Description
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         ushort MajorVersion { [SecurityCritical] get; }
         ushort MinorVersion { [SecurityCritical] get; }
         ushort BuildNumber { [SecurityCritical] get; }
@@ -1374,7 +1614,12 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         CompatibleFrameworksMetadataEntry AllData { [SecurityCritical] get; }
 
-        string SupportUrl { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string SupportUrl
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
     };
 
     //++! end object [CompatibleFrameworksMetadata]
@@ -1489,17 +1734,37 @@ namespace System.Deployment.Internal.Isolation.Manifest
         uint ManifestFlags { [SecurityCritical] get; }
         uint UsagePatterns { [SecurityCritical] get; }
         IDefinitionIdentity CdfIdentity { [SecurityCritical] get; }
-        string LocalPath { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string LocalPath
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         uint HashAlgorithm { [SecurityCritical] get; }
-        object ManifestHash { [SecurityCritical] [return: MarshalAs(UnmanagedType.Interface)] get; }
-        string ContentType { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        object ManifestHash
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.Interface)]
+            get;
+        }
+        string ContentType
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         string RuntimeImageVersion
         {
             [SecurityCritical]
             [return: MarshalAs(UnmanagedType.LPWStr)]
             get;
         }
-        object MvidValue { [SecurityCritical] [return: MarshalAs(UnmanagedType.Interface)] get; }
+        object MvidValue
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.Interface)]
+            get;
+        }
         IDescriptionMetadataEntry DescriptionData { [SecurityCritical] get; }
         IDeploymentMetadataEntry DeploymentData { [SecurityCritical] get; }
         IDependentOSMetadataEntry DependentOSData { [SecurityCritical] get; }
@@ -1518,7 +1783,12 @@ namespace System.Deployment.Internal.Isolation.Manifest
         bool RequestedExecutionLevelUIAccess { [SecurityCritical] get; }
         IReferenceIdentity ResourceTypeResourcesDependency { [SecurityCritical] get; }
         IReferenceIdentity ResourceTypeManifestResourcesDependency { [SecurityCritical] get; }
-        string KeyInfoElement { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string KeyInfoElement
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         ICompatibleFrameworksMetadataEntry CompatibleFrameworksData { [SecurityCritical] get; }
     };
 
@@ -1567,9 +1837,19 @@ namespace System.Deployment.Internal.Isolation.Manifest
         uint Level { [SecurityCritical] get; }
         uint Version { [SecurityCritical] get; }
         Guid Guid { [SecurityCritical] get; }
-        string SubTypeName { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string SubTypeName
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         uint SubTypeValue { [SecurityCritical] get; }
-        string DisplayName { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string DisplayName
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         uint EventNameMicrodomIndex { [SecurityCritical] get; }
     };
 
@@ -1603,8 +1883,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         EventMapEntry AllData { [SecurityCritical] get; }
 
-        string MapName { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string Name { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string MapName
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string Name
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         uint Value { [SecurityCritical] get; }
         bool IsValueMap { [SecurityCritical] get; }
     };
@@ -1633,7 +1923,12 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         EventTagEntry AllData { [SecurityCritical] get; }
 
-        string TagData { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string TagData
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         uint EventID { [SecurityCritical] get; }
     };
 
@@ -1674,8 +1969,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
         uint Flags { [SecurityCritical] get; }
         uint OperationHint { [SecurityCritical] get; }
         uint Type { [SecurityCritical] get; }
-        string Value { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string BuildFilter { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string Value
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string BuildFilter
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
     };
 
     //++! end object [RegistryValue]
@@ -1759,15 +2064,30 @@ namespace System.Deployment.Internal.Isolation.Manifest
 
         uint Flags { [SecurityCritical] get; }
         uint Protection { [SecurityCritical] get; }
-        string BuildFilter { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string BuildFilter
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         object SecurityDescriptor
         {
             [SecurityCritical]
             [return: MarshalAs(UnmanagedType.Interface)]
             get;
         }
-        object Values { [SecurityCritical] [return: MarshalAs(UnmanagedType.Interface)] get; }
-        object Keys { [SecurityCritical] [return: MarshalAs(UnmanagedType.Interface)] get; }
+        object Values
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.Interface)]
+            get;
+        }
+        object Keys
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.Interface)]
+            get;
+        }
     };
 
     //++! end object [RegistryKey]
@@ -1829,7 +2149,12 @@ namespace System.Deployment.Internal.Isolation.Manifest
 
         uint Flags { [SecurityCritical] get; }
         uint Protection { [SecurityCritical] get; }
-        string BuildFilter { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string BuildFilter
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         object SecurityDescriptor
         {
             [SecurityCritical]
@@ -1865,8 +2190,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
     {
         SecurityDescriptorReferenceEntry AllData { [SecurityCritical] get; }
 
-        string Name { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string BuildFilter { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string Name
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string BuildFilter
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
     };
 
     //++! end object [SecurityDescriptorReference]
@@ -1904,8 +2239,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
 
         Guid CounterSetGuid { [SecurityCritical] get; }
         Guid ProviderGuid { [SecurityCritical] get; }
-        string Name { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string Description { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string Name
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string Description
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         bool InstanceType { [SecurityCritical] get; }
     };
 
@@ -1950,8 +2295,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
 
         Guid CounterSetGuid { [SecurityCritical] get; }
         uint CounterId { [SecurityCritical] get; }
-        string Name { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string Description { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string Name
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string Description
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         uint CounterType { [SecurityCritical] get; }
         ulong Attributes { [SecurityCritical] get; }
         uint BaseId { [SecurityCritical] get; }
@@ -1992,8 +2347,18 @@ namespace System.Deployment.Internal.Isolation.Manifest
         CompatibleFrameworkEntry AllData { [SecurityCritical] get; }
 
         uint index { [SecurityCritical] get; }
-        string TargetVersion { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
-        string Profile { [SecurityCritical] [return: MarshalAs(UnmanagedType.LPWStr)] get; }
+        string TargetVersion
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
+        string Profile
+        {
+            [SecurityCritical]
+            [return: MarshalAs(UnmanagedType.LPWStr)]
+            get;
+        }
         string SupportedRuntime
         {
             [SecurityCritical]
