@@ -9,8 +9,6 @@ internal static partial class Interop
     internal static partial class Winsock
     {
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static partial SocketError listen(
-            SafeSocketHandle socketHandle,
-            int backlog);
+        internal static partial SocketError listen(SafeSocketHandle socketHandle, int backlog);
     }
 }

@@ -32,9 +32,9 @@ internal class ComponentBuilder : IEquatable<ComponentBuilder?>
     /// <inheritdoc/>
     public bool Equals(ComponentBuilder? other)
     {
-        return other is not null &&
-               AssemblyName == other.AssemblyName &&
-               EqualityComparer<Type>.Default.Equals(ComponentType, other.ComponentType);
+        return other is not null
+            && AssemblyName == other.AssemblyName
+            && EqualityComparer<Type>.Default.Equals(ComponentType, other.ComponentType);
     }
 
     /// <inheritdoc/>
@@ -52,10 +52,7 @@ internal class ComponentBuilder : IEquatable<ComponentBuilder?>
     {
         if (RenderMode != null)
         {
-            return new ComponentInfo(ComponentType)
-            {
-                RenderMode = RenderMode.Mode,
-            };
+            return new ComponentInfo(ComponentType) { RenderMode = RenderMode.Mode };
         }
         else
         {

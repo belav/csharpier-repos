@@ -10,10 +10,13 @@ internal sealed class AnonymousAsynchronousCliAction : AsynchronousCliAction
 {
     private readonly Func<ParseResult, CancellationToken, Task<int>> _asyncAction;
 
-    internal AnonymousAsynchronousCliAction(Func<ParseResult, CancellationToken, Task<int>> action)
-        => _asyncAction = action;
+    internal AnonymousAsynchronousCliAction(
+        Func<ParseResult, CancellationToken, Task<int>> action
+    ) => _asyncAction = action;
 
     /// <inheritdoc />
-    public override Task<int> InvokeAsync(ParseResult parseResult, CancellationToken cancellationToken = default) =>
-        _asyncAction(parseResult, cancellationToken);
+    public override Task<int> InvokeAsync(
+        ParseResult parseResult,
+        CancellationToken cancellationToken = default
+    ) => _asyncAction(parseResult, cancellationToken);
 }

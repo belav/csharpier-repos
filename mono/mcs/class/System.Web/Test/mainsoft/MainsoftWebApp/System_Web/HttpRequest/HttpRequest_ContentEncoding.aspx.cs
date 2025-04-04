@@ -35,93 +35,96 @@ using System.Drawing;
 using System.Web;
 using System.Web.SessionState;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-	public class HttpRequest_ContentEncoding
-		: GHTBaseWeb 
-	{
+    public class HttpRequest_ContentEncoding : GHTBaseWeb
+    {
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
+            GHTTestBegin(frm);
+            // ===================================
+            // testing if the Browser object is set
+            // ===================================
+            GHTSubTestBegin("Request.ContentEncoding1");
+            try
+            {
+                if (Request.ContentEncoding == null)
+                    GHTSubTestAddResult("Failed");
+                else
+                    GHTSubTestAddResult("Success");
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
-			GHTTestBegin(frm);
-			// ===================================
-			// testing if the Browser object is set
-			// ===================================
-			GHTSubTestBegin("Request.ContentEncoding1");
-			try
-			{
-				if (Request.ContentEncoding == null)
-					GHTSubTestAddResult("Failed");
-				else
-					GHTSubTestAddResult("Success");
-			}
-			catch (Exception ex)
-			{
-				GHTSubTestAddResult("unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-			}
-            
+            GHTSubTestEnd();
 
-			GHTSubTestEnd();
+            // ===================================
+            // testing if the objects return is from the
+            // correct type
+            // ===================================
+            GHTSubTestBegin("Request.ContentEncoding2");
+            try
+            {
+                System.Text.Encoding enc = this.Request.ContentEncoding;
+                GHTSubTestAddResult("success");
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
 
-			// ===================================
-			// testing if the objects return is from the 
-			// correct type
-			// ===================================
-			GHTSubTestBegin("Request.ContentEncoding2");
-			try
-			{
-				System.Text.Encoding enc = this.Request.ContentEncoding;
-				GHTSubTestAddResult("success");
-			}
-			catch (Exception ex)
-			{
-				GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-			}
-            
-			GHTSubTestEnd();
+            GHTSubTestEnd();
 
-			// ===================================
-			// testing if the Request object returns the 
-			// correct encoding
-			// ===================================
-			GHTSubTestBegin("Request.ContentEncoding3");
-			try
-			{
-				System.Text.Encoding enc = this.Request.ContentEncoding;
-				GHTSubTestAddResult(enc.EncodingName);
-			}
-			catch (Exception ex)
-			{
-				GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-			}
-            
-			GHTSubTestEnd();
+            // ===================================
+            // testing if the Request object returns the
+            // correct encoding
+            // ===================================
+            GHTSubTestBegin("Request.ContentEncoding3");
+            try
+            {
+                System.Text.Encoding enc = this.Request.ContentEncoding;
+                GHTSubTestAddResult(enc.EncodingName);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
 
-			GHTTestEnd();
-		}
+            GHTSubTestEnd();
 
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e)
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
-	}
+            GHTTestEnd();
+        }
+
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
+    }
 }

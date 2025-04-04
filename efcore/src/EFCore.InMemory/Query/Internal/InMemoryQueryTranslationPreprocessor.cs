@@ -21,10 +21,9 @@ public class InMemoryQueryTranslationPreprocessor : QueryTranslationPreprocessor
     /// </summary>
     public InMemoryQueryTranslationPreprocessor(
         QueryTranslationPreprocessorDependencies dependencies,
-        QueryCompilationContext queryCompilationContext)
-        : base(dependencies, queryCompilationContext)
-    {
-    }
+        QueryCompilationContext queryCompilationContext
+    )
+        : base(dependencies, queryCompilationContext) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -36,12 +35,22 @@ public class InMemoryQueryTranslationPreprocessor : QueryTranslationPreprocessor
     {
         var result = base.Process(query);
 
-        if (result is MethodCallExpression { Method.IsGenericMethod: true } methodCallExpression
-            && (methodCallExpression.Method.GetGenericMethodDefinition() == QueryableMethods.GroupByWithKeySelector
-                || methodCallExpression.Method.GetGenericMethodDefinition() == QueryableMethods.GroupByWithKeyElementSelector))
+        if (
+            result is MethodCallExpression { Method.IsGenericMethod: true } methodCallExpression
+            && (
+                methodCallExpression.Method.GetGenericMethodDefinition()
+                    == QueryableMethods.GroupByWithKeySelector
+                || methodCallExpression.Method.GetGenericMethodDefinition()
+                    == QueryableMethods.GroupByWithKeyElementSelector
+            )
+        )
         {
             throw new InvalidOperationException(
-                CoreStrings.TranslationFailedWithDetails(methodCallExpression.Print(), InMemoryStrings.NonComposedGroupByNotSupported));
+                CoreStrings.TranslationFailedWithDetails(
+                    methodCallExpression.Print(),
+                    InMemoryStrings.NonComposedGroupByNotSupported
+                )
+            );
         }
 
         return result;

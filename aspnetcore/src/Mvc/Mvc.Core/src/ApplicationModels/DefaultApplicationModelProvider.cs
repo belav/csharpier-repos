@@ -26,7 +26,8 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
 
     public DefaultApplicationModelProvider(
         IOptions<MvcOptions> mvcOptionsAccessor,
-        IModelMetadataProvider modelMetadataProvider)
+        IModelMetadataProvider modelMetadataProvider
+    )
     {
         _mvcOptions = mvcOptionsAccessor.Value;
         _modelMetadataProvider = modelMetadataProvider;
@@ -132,8 +133,7 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
             }
 
             currentTypeInfo = currentTypeInfo.BaseType!.GetTypeInfo();
-        }
-        while (currentTypeInfo != objectTypeInfo);
+        } while (currentTypeInfo != objectTypeInfo);
 
         var attributes = typeInfo.GetCustomAttributes(inherit: true);
 
@@ -160,16 +160,21 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
 
         AddRange(controllerModel.Selectors, CreateSelectors(attributes));
 
-        controllerModel.ControllerName =
-            typeInfo.Name.EndsWith("Controller", StringComparison.OrdinalIgnoreCase) ?
-                typeInfo.Name.Substring(0, typeInfo.Name.Length - "Controller".Length) :
-                typeInfo.Name;
+        controllerModel.ControllerName = typeInfo.Name.EndsWith(
+            "Controller",
+            StringComparison.OrdinalIgnoreCase
+        )
+            ? typeInfo.Name.Substring(0, typeInfo.Name.Length - "Controller".Length)
+            : typeInfo.Name;
 
         AddRange(controllerModel.Filters, attributes.OfType<IFilterMetadata>());
 
         foreach (var routeValueProvider in attributes.OfType<IRouteValueProvider>())
         {
-            controllerModel.RouteValues.Add(routeValueProvider.RouteKey, routeValueProvider.RouteValue);
+            controllerModel.RouteValues.Add(
+                routeValueProvider.RouteKey,
+                routeValueProvider.RouteValue
+            );
         }
 
         var apiVisibility = attributes.OfType<IApiDescriptionVisibilityProvider>().FirstOrDefault();
@@ -188,13 +193,17 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
         // a special delegating filter implementation to the pipeline to handle it.
         //
         // This is needed because filters are instantiated before the controller.
-        if (typeof(IAsyncActionFilter).GetTypeInfo().IsAssignableFrom(typeInfo) ||
-            typeof(IActionFilter).GetTypeInfo().IsAssignableFrom(typeInfo))
+        if (
+            typeof(IAsyncActionFilter).GetTypeInfo().IsAssignableFrom(typeInfo)
+            || typeof(IActionFilter).GetTypeInfo().IsAssignableFrom(typeInfo)
+        )
         {
             controllerModel.Filters.Add(new ControllerActionFilter());
         }
-        if (typeof(IAsyncResultFilter).GetTypeInfo().IsAssignableFrom(typeInfo) ||
-            typeof(IResultFilter).GetTypeInfo().IsAssignableFrom(typeInfo))
+        if (
+            typeof(IAsyncResultFilter).GetTypeInfo().IsAssignableFrom(typeInfo)
+            || typeof(IResultFilter).GetTypeInfo().IsAssignableFrom(typeInfo)
+        )
         {
             controllerModel.Filters.Add(new ControllerResultFilter());
         }
@@ -216,21 +225,25 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
         // BindingInfo for properties can be either specified by decorating the property with binding specific attributes.
         // ModelMetadata also adds information from the property's type and any configured IBindingMetadataProvider.
         var declaringType = propertyInfo.DeclaringType!;
-        var modelMetadata = _modelMetadataProvider.GetMetadataForProperty(declaringType, propertyInfo.Name);
+        var modelMetadata = _modelMetadataProvider.GetMetadataForProperty(
+            declaringType,
+            propertyInfo.Name
+        );
         var bindingInfo = BindingInfo.GetBindingInfo(attributes, modelMetadata);
 
         if (bindingInfo == null)
         {
             // Look for BindPropertiesAttribute on the handler type if no BindingInfo was inferred for the property.
             // This allows a user to enable model binding on properties by decorating the controller type with BindPropertiesAttribute.
-            var bindPropertiesAttribute = declaringType.GetCustomAttribute<BindPropertiesAttribute>(inherit: true);
+            var bindPropertiesAttribute = declaringType.GetCustomAttribute<BindPropertiesAttribute>(
+                inherit: true
+            );
             if (bindPropertiesAttribute != null)
             {
-                var requestPredicate = bindPropertiesAttribute.SupportsGet ? _supportsAllRequests : _supportsNonGetRequests;
-                bindingInfo = new BindingInfo
-                {
-                    RequestPredicate = requestPredicate,
-                };
+                var requestPredicate = bindPropertiesAttribute.SupportsGet
+                    ? _supportsAllRequests
+                    : _supportsNonGetRequests;
+                bindingInfo = new BindingInfo { RequestPredicate = requestPredicate };
             }
         }
 
@@ -252,9 +265,7 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
     /// An <see cref="ActionModel"/> instance for the given action <see cref="MethodInfo"/> or
     /// <c>null</c> if the <paramref name="methodInfo"/> does not represent an action.
     /// </returns>
-    internal ActionModel? CreateActionModel(
-        TypeInfo typeInfo,
-        MethodInfo methodInfo)
+    internal ActionModel? CreateActionModel(TypeInfo typeInfo, MethodInfo methodInfo)
     {
         ArgumentNullException.ThrowIfNull(typeInfo);
         ArgumentNullException.ThrowIfNull(methodInfo);
@@ -356,8 +367,10 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
     {
         const string Suffix = "Async";
 
-        if (_mvcOptions.SuppressAsyncSuffixInActionNames &&
-            actionName.EndsWith(Suffix, StringComparison.Ordinal))
+        if (
+            _mvcOptions.SuppressAsyncSuffixInActionNames
+            && actionName.EndsWith(Suffix, StringComparison.Ordinal)
+        )
         {
             actionName = actionName.Substring(0, actionName.Length - Suffix.Length);
         }
@@ -567,8 +580,9 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
                         // [Route("template/{id}")]
                     }
                     else if (
-                        routeProvider is IActionHttpMethodProvider &&
-                        attribute is IActionHttpMethodProvider)
+                        routeProvider is IActionHttpMethodProvider
+                        && attribute is IActionHttpMethodProvider
+                    )
                     {
                         // Example:
                         // [HttpGet("template")]
@@ -597,14 +611,19 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
                     }
                 }
 
-                selectorModels.Add(CreateSelectorModel(route: null, attributes: filteredAttributes));
+                selectorModels.Add(
+                    CreateSelectorModel(route: null, attributes: filteredAttributes)
+                );
             }
         }
 
         return selectorModels;
     }
 
-    private static bool InRouteProviders(List<IRouteTemplateProvider> routeProviders, object attribute)
+    private static bool InRouteProviders(
+        List<IRouteTemplateProvider> routeProviders,
+        object attribute
+    )
     {
         foreach (var rp in routeProviders)
         {
@@ -617,7 +636,10 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
         return false;
     }
 
-    private static SelectorModel CreateSelectorModel(IRouteTemplateProvider? route, IList<object> attributes)
+    private static SelectorModel CreateSelectorModel(
+        IRouteTemplateProvider? route,
+        IList<object> attributes
+    )
     {
         var selectorModel = new SelectorModel();
         if (route != null)
@@ -655,17 +677,17 @@ internal class DefaultApplicationModelProvider : IApplicationModelProvider
         var baseMethodInfo = methodInfo.GetBaseDefinition();
         var declaringType = baseMethodInfo.DeclaringType;
 
-        return
-            (typeof(IDisposable).IsAssignableFrom(declaringType) &&
-             declaringType.GetInterfaceMap(typeof(IDisposable)).TargetMethods[0] == baseMethodInfo);
+        return (
+            typeof(IDisposable).IsAssignableFrom(declaringType)
+            && declaringType.GetInterfaceMap(typeof(IDisposable)).TargetMethods[0] == baseMethodInfo
+        );
     }
 
     private static bool IsSilentRouteAttribute(IRouteTemplateProvider routeTemplateProvider)
     {
-        return
-            routeTemplateProvider.Template == null &&
-            routeTemplateProvider.Order == null &&
-            routeTemplateProvider.Name == null;
+        return routeTemplateProvider.Template == null
+            && routeTemplateProvider.Order == null
+            && routeTemplateProvider.Name == null;
     }
 
     private static void AddRange<T>(IList<T> list, IEnumerable<T> items)

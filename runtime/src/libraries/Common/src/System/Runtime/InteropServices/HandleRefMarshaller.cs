@@ -5,7 +5,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Runtime.InteropServices.Marshalling
 {
-    [CustomMarshaller(typeof(HandleRef), MarshalMode.ManagedToUnmanagedIn, typeof(KeepAliveMarshaller))]
+    [CustomMarshaller(
+        typeof(HandleRef),
+        MarshalMode.ManagedToUnmanagedIn,
+        typeof(KeepAliveMarshaller)
+    )]
     internal static class HandleRefMarshaller
     {
         internal struct KeepAliveMarshaller

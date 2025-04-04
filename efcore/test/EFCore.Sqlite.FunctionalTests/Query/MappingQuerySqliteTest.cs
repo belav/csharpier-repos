@@ -3,20 +3,22 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class MappingQuerySqliteTest : MappingQueryTestBase<MappingQuerySqliteTest.MappingQuerySqliteFixture>
+public class MappingQuerySqliteTest
+    : MappingQueryTestBase<MappingQuerySqliteTest.MappingQuerySqliteFixture>
 {
     public MappingQuerySqliteTest(MappingQuerySqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public override void All_customers()
     {
         base.All_customers();
 
         Assert.Contains(
-            @"SELECT ""c"".""CustomerID"", ""c"".""CompanyName""" + EOL + @"FROM ""Customers"" AS ""c""",
-            Sql);
+            @"SELECT ""c"".""CustomerID"", ""c"".""CompanyName"""
+                + EOL
+                + @"FROM ""Customers"" AS ""c""",
+            Sql
+        );
     }
 
     public override void All_employees()
@@ -25,7 +27,8 @@ public class MappingQuerySqliteTest : MappingQueryTestBase<MappingQuerySqliteTes
 
         Assert.Contains(
             @"SELECT ""e"".""EmployeeID"", ""e"".""City""" + EOL + @"FROM ""Employees"" AS ""e""",
-            Sql);
+            Sql
+        );
     }
 
     public override void All_orders()
@@ -34,27 +37,25 @@ public class MappingQuerySqliteTest : MappingQueryTestBase<MappingQuerySqliteTes
 
         Assert.Contains(
             @"SELECT ""o"".""OrderID"", ""o"".""ShipVia""" + EOL + @"FROM ""Orders"" AS ""o""",
-            Sql);
+            Sql
+        );
     }
 
     public override void Project_nullable_enum()
     {
         base.Project_nullable_enum();
 
-        Assert.Contains(
-            @"SELECT ""o"".""ShipVia""" + EOL + @"FROM ""Orders"" AS ""o""",
-            Sql);
+        Assert.Contains(@"SELECT ""o"".""ShipVia""" + EOL + @"FROM ""Orders"" AS ""o""", Sql);
     }
 
     private static readonly string EOL = Environment.NewLine;
 
-    private string Sql
-        => Fixture.TestSqlLoggerFactory.Sql;
+    private string Sql => Fixture.TestSqlLoggerFactory.Sql;
 
     public class MappingQuerySqliteFixture : MappingQueryFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteNorthwindTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory =>
+            SqliteNorthwindTestStoreFactory.Instance;
 
         protected override string DatabaseSchema { get; } = null;
 
@@ -62,12 +63,11 @@ public class MappingQuerySqliteTest : MappingQueryTestBase<MappingQuerySqliteTes
         {
             base.OnModelCreating(modelBuilder, context);
 
-            modelBuilder.Entity<MappedCustomer>(
-                e =>
-                {
-                    e.Property(c => c.CompanyName2).Metadata.SetColumnName("CompanyName");
-                    e.Metadata.SetTableName("Customers");
-                });
+            modelBuilder.Entity<MappedCustomer>(e =>
+            {
+                e.Property(c => c.CompanyName2).Metadata.SetColumnName("CompanyName");
+                e.Metadata.SetTableName("Customers");
+            });
         }
     }
 }

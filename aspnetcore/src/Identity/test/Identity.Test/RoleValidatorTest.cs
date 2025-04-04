@@ -14,8 +14,14 @@ public class RoleValidatorTest
 
         // Act
         // Assert
-        await Assert.ThrowsAsync<ArgumentNullException>("manager", async () => await validator.ValidateAsync(null, null));
-        await Assert.ThrowsAsync<ArgumentNullException>("role", async () => await validator.ValidateAsync(manager, null));
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "manager",
+            async () => await validator.ValidateAsync(null, null)
+        );
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            "role",
+            async () => await validator.ValidateAsync(manager, null)
+        );
     }
 
     [Theory]

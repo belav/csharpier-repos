@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.ApplicationNameAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,52 +32,54 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-	[AttributeUsage (AttributeTargets.Assembly)]
-	[ComVisible(false)]
-	public sealed class ApplicationNameAttribute : Attribute, IConfigurationAttribute {
+namespace System.EnterpriseServices
+{
+    [AttributeUsage(AttributeTargets.Assembly)]
+    [ComVisible(false)]
+    public sealed class ApplicationNameAttribute : Attribute, IConfigurationAttribute
+    {
+        #region Fields
 
-		#region Fields
+        string name;
 
-		string name;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
+        public ApplicationNameAttribute(string name)
+        {
+            this.name = name;
+        }
 
-		public ApplicationNameAttribute (string name)
-		{
-			this.name = name;
-		}
+        #endregion // Constructors
 
-		#endregion // Constructors
+        #region Implementation of IConfigurationAttribute
 
-		#region Implementation of IConfigurationAttribute
+        bool IConfigurationAttribute.AfterSaveChanges(Hashtable info)
+        {
+            return false;
+        }
 
-		bool IConfigurationAttribute.AfterSaveChanges (Hashtable info)
-		{
-			return false;
-		}
+        [MonoTODO]
+        bool IConfigurationAttribute.Apply(Hashtable cache)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		bool IConfigurationAttribute.Apply (Hashtable cache)
-		{
-			throw new NotImplementedException ();
-		}
+        bool IConfigurationAttribute.IsValidTarget(string s)
+        {
+            return (s == "Application");
+        }
 
-		bool IConfigurationAttribute.IsValidTarget (string s)
-		{
-			return (s == "Application");
-		}
+        #endregion Implementation of IConfigurationAttribute
 
-		#endregion Implementation of IConfigurationAttribute
+        #region Properties
 
-		#region Properties
+        public string Value
+        {
+            get { return name; }
+        }
 
-		public string Value {	
-			get { return name; }
-		}
-
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

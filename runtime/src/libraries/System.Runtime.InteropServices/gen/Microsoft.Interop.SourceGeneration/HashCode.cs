@@ -15,7 +15,10 @@ namespace Microsoft.Interop
     {
         public static int Combine<T1, T2>(T1 t1, T2 t2)
         {
-            return Hash.Combine(t1 != null ? t1.GetHashCode() : 0, t2 != null ? t2.GetHashCode() : 0);
+            return Hash.Combine(
+                t1 != null ? t1.GetHashCode() : 0,
+                t2 != null ? t2.GetHashCode() : 0
+            );
         }
 
         public static int Combine<T1, T2, T3>(T1 t1, T2 t2, T3 t3)
@@ -52,7 +55,15 @@ namespace Microsoft.Interop
             return Hash.Combine(combinedHash, t6 != null ? t6.GetHashCode() : 0);
         }
 
-        public static int Combine<T1, T2, T3, T4, T5, T6, T7>(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7)
+        public static int Combine<T1, T2, T3, T4, T5, T6, T7>(
+            T1 t1,
+            T2 t2,
+            T3 t3,
+            T4 t4,
+            T5 t5,
+            T6 t6,
+            T7 t7
+        )
         {
             int combinedHash = t1 != null ? t1.GetHashCode() : 0;
             combinedHash = Hash.Combine(combinedHash, t2 != null ? t2.GetHashCode() : 0);
@@ -63,7 +74,16 @@ namespace Microsoft.Interop
             return Hash.Combine(combinedHash, t7 != null ? t7.GetHashCode() : 0);
         }
 
-        public static int Combine<T1, T2, T3, T4, T5, T6, T7, T8>(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8)
+        public static int Combine<T1, T2, T3, T4, T5, T6, T7, T8>(
+            T1 t1,
+            T2 t2,
+            T3 t3,
+            T4 t4,
+            T5 t5,
+            T6 t6,
+            T7 t7,
+            T8 t8
+        )
         {
             int combinedHash = t1 != null ? t1.GetHashCode() : 0;
             combinedHash = Hash.Combine(combinedHash, t2 != null ? t2.GetHashCode() : 0);

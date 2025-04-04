@@ -25,17 +25,21 @@ namespace System.Data.Common.EntitySql
         private string _query;
         private ParserOptions _parserOptions;
         private const string _internalYaccSyntaxErrorMessage = "syntax error";
+
         /// <summary>
         /// Contains inclusive count of method expressions.
         /// </summary>
         private uint _methodExprCounter;
         private Stack<uint> _methodExprCounterStack;
-        
-        private string _version = YYMAJOR.ToString(NumberFormatInfo.InvariantInfo) + '.' + YYMINOR.ToString(NumberFormatInfo.InvariantInfo);
+
+        private string _version =
+            YYMAJOR.ToString(NumberFormatInfo.InvariantInfo)
+            + '.'
+            + YYMINOR.ToString(NumberFormatInfo.InvariantInfo);
 
         internal CqlParser(ParserOptions parserOptions, bool debug)
         {
-            // The common practice is to make the null check at the public surface, 
+            // The common practice is to make the null check at the public surface,
             // however this method is a convergence zone from multiple public entry points and it makes sense to
             // check for null once, here.
             EntityUtil.CheckArgumentNull(parserOptions, "parserOptions");
@@ -52,7 +56,7 @@ namespace System.Data.Common.EntitySql
         /// <returns>Abstract Syntax Tree</returns>
         internal Node Parse(string query)
         {
-            // The common practice is to make the null check at the public surface, 
+            // The common practice is to make the null check at the public surface,
             // however this method is a convergence zone from multiple public entry points and it makes sense to
             // check for null once, here.
             EntityUtil.CheckArgumentNull(query, "query");
@@ -117,11 +121,31 @@ namespace System.Data.Common.EntitySql
         //
         // Conversion/Cast/Helpers
         //
-        private static Node AstNode(object o) { return ((Node)o); }
-        private static int AstNodePos( object o ) { return ((Node)o).ErrCtx.InputPosition; }
-        private static CqlLexer.TerminalToken Terminal( object o ) { return ((CqlLexer.TerminalToken)o); }
-        private static int TerminalPos( object o ) { return ((CqlLexer.TerminalToken)o).IPos; }
-        private static NodeList<T> ToNodeList<T>(object o) where T : Node { return ((NodeList<T>)o); }
+        private static Node AstNode(object o)
+        {
+            return ((Node)o);
+        }
+
+        private static int AstNodePos(object o)
+        {
+            return ((Node)o).ErrCtx.InputPosition;
+        }
+
+        private static CqlLexer.TerminalToken Terminal(object o)
+        {
+            return ((CqlLexer.TerminalToken)o);
+        }
+
+        private static int TerminalPos(object o)
+        {
+            return ((CqlLexer.TerminalToken)o).IPos;
+        }
+
+        private static NodeList<T> ToNodeList<T>(object o)
+            where T : Node
+        {
+            return ((NodeList<T>)o);
+        }
 
         private short yylex()
         {
@@ -141,7 +165,7 @@ namespace System.Data.Common.EntitySql
             yyerror(System.Data.Entity.Strings.StackOverflowInParser);
         }
 
-        private void yyerror( string s )
+        private void yyerror(string s)
         {
             if (s.Equals(_internalYaccSyntaxErrorMessage, StringComparison.Ordinal))
             {
@@ -153,13 +177,21 @@ namespace System.Data.Common.EntitySql
                     syntaxContextInfo = System.Data.Entity.Strings.LocalizedTerm;
                     ErrorContext errCtx = null;
                     Node astNode = yylval as Node;
-                    if (null != astNode && (null != astNode.ErrCtx) && (!String.IsNullOrEmpty(astNode.ErrCtx.ErrorContextInfo)))
+                    if (
+                        null != astNode
+                        && (null != astNode.ErrCtx)
+                        && (!String.IsNullOrEmpty(astNode.ErrCtx.ErrorContextInfo))
+                    )
                     {
                         errCtx = astNode.ErrCtx;
-                        errorPosition = Math.Min(errorPosition, errorPosition - term.Length); 
+                        errorPosition = Math.Min(errorPosition, errorPosition - term.Length);
                     }
 
-                    if ((yylval is CqlLexer.TerminalToken) && CqlLexer.IsReservedKeyword(term) && !(astNode is Identifier))
+                    if (
+                        (yylval is CqlLexer.TerminalToken)
+                        && CqlLexer.IsReservedKeyword(term)
+                        && !(astNode is Identifier)
+                    )
                     {
                         syntaxContextInfo = System.Data.Entity.Strings.LocalizedKeyword;
                         term = term.ToUpperInvariant();
@@ -170,14 +202,21 @@ namespace System.Data.Common.EntitySql
                         syntaxContextInfo = EntityRes.GetString(errCtx.ErrorContextInfo);
                     }
 
-                    syntaxContextInfo = String.Format(CultureInfo.CurrentCulture, "{0} '{1}'", syntaxContextInfo, term);
+                    syntaxContextInfo = String.Format(
+                        CultureInfo.CurrentCulture,
+                        "{0} '{1}'",
+                        syntaxContextInfo,
+                        term
+                    );
                 }
 
-                throw EntityUtil.EntitySqlError(_query, 
-                                     System.Data.Entity.Strings.GenericSyntaxError, 
-                                     errorPosition, 
-                                     syntaxContextInfo, 
-                                     false /* loadErrorContextInfoFromResource */);
+                throw EntityUtil.EntitySqlError(
+                    _query,
+                    System.Data.Entity.Strings.GenericSyntaxError,
+                    errorPosition,
+                    syntaxContextInfo,
+                    false /* loadErrorContextInfoFromResource */
+                );
             }
             throw EntityUtil.EntitySqlError(_query, s, _lexer.IPos);
         }

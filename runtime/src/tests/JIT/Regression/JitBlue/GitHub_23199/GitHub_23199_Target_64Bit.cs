@@ -1,13 +1,12 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-
+using Xunit;
 // The test revealed some problems of GCStress infrastructure on platforms with multi reg returns (arm64, amd64 Unix).
 // It required GCStress=0xc and GcStressOnDirectCalls=1 to hit issues. The issues were with saving GC pointers in the return registers.
 // The GC infra has to correctly mark registers with pointers as alive and must not report registers without pointers.
 
 using nint = System.Int64;
-using Xunit;
 
 namespace GitHub_23199_64Bit
 {
@@ -61,7 +60,7 @@ namespace GitHub_23199_64Bit
         [MethodImpl(MethodImplOptions.NoInlining)]
         static Object TestOnePointer()
         {
-            var a = GetOnePointer();  // Report one.
+            var a = GetOnePointer(); // Report one.
             Console.WriteLine(a.a);
             return a;
         }
@@ -84,7 +83,7 @@ namespace GitHub_23199_64Bit
         [MethodImpl(MethodImplOptions.NoInlining)]
         static Object TestFirstPointer()
         {
-            var a = GetFirstPointer();  // Report the first field, do not report the second.
+            var a = GetFirstPointer(); // Report the first field, do not report the second.
             Console.WriteLine(a.a);
             return a;
         }
@@ -151,7 +150,7 @@ namespace GitHub_23199_64Bit
         [MethodImpl(MethodImplOptions.NoInlining)]
         static Object TestNoPointer2()
         {
-            NoPointer2 a = GetNoPointer2();  // Do not report anything.
+            NoPointer2 a = GetNoPointer2(); // Do not report anything.
             Console.WriteLine("TestNoPointer2 Passed");
             return a;
         }
@@ -176,11 +175,10 @@ namespace GitHub_23199_64Bit
         [MethodImpl(MethodImplOptions.NoInlining)]
         static Object TestThirdPointer()
         {
-            ThirdPointer a = GetThirdPointer();  // Do not return in registers.
+            ThirdPointer a = GetThirdPointer(); // Do not return in registers.
             Console.WriteLine(a.c);
             return a;
         }
-
 
         [Fact]
         public static void TestEntryPoint()

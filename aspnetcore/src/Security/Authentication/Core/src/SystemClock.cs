@@ -14,7 +14,8 @@ public class SystemClock : ISystemClock
     /// <summary>
     /// Creates a new SystemClock that reads the current system time.
     /// </summary>
-    public SystemClock() : this(TimeProvider.System) { }
+    public SystemClock()
+        : this(TimeProvider.System) { }
 
     internal SystemClock(TimeProvider timeProvider)
     {
@@ -34,7 +35,11 @@ public class SystemClock : ISystemClock
         {
             // the clock measures whole seconds only, to have integral expires_in results, and
             // because milliseconds do not round-trip serialization formats
-            var utcNowPrecisionSeconds = new DateTime((_timeProvider.GetUtcNow().Ticks / TimeSpan.TicksPerSecond) * TimeSpan.TicksPerSecond, DateTimeKind.Utc);
+            var utcNowPrecisionSeconds = new DateTime(
+                (_timeProvider.GetUtcNow().Ticks / TimeSpan.TicksPerSecond)
+                    * TimeSpan.TicksPerSecond,
+                DateTimeKind.Utc
+            );
             return new DateTimeOffset(utcNowPrecisionSeconds);
         }
     }

@@ -20,10 +20,18 @@ namespace System.Formats.Cbor
         public void WriteHalf(Half value)
         {
             EnsureWriteCapacity(1 + sizeof(short));
-            WriteInitialByte(new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional16BitData));
-            if (Half.IsNaN(value) && !CborConformanceModeHelpers.RequiresPreservingFloatPrecision(ConformanceMode))
+            WriteInitialByte(
+                new CborInitialByte(CborMajorType.Simple, CborAdditionalInfo.Additional16BitData)
+            );
+            if (
+                Half.IsNaN(value)
+                && !CborConformanceModeHelpers.RequiresPreservingFloatPrecision(ConformanceMode)
+            )
             {
-                BinaryPrimitives.WriteUInt16BigEndian(_buffer.AsSpan(_offset), PositiveQNaNBitsHalf);
+                BinaryPrimitives.WriteUInt16BigEndian(
+                    _buffer.AsSpan(_offset),
+                    PositiveQNaNBitsHalf
+                );
             }
             else
             {
@@ -37,7 +45,9 @@ namespace System.Formats.Cbor
         internal static bool TryConvertSingleToHalf(float value, out Half result)
         {
             result = (Half)value;
-            return float.IsNaN(value) || BitConverter.SingleToInt32Bits((float)result) == BitConverter.SingleToInt32Bits(value);
+            return float.IsNaN(value)
+                || BitConverter.SingleToInt32Bits((float)result)
+                    == BitConverter.SingleToInt32Bits(value);
         }
     }
 }

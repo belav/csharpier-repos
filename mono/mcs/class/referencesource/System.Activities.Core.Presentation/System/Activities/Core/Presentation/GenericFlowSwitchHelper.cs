@@ -15,45 +15,49 @@ namespace System.Activities.Core.Presentation
 
     internal static class GenericFlowSwitchHelper
     {
-        static readonly MethodInfo genericCopy = typeof(GenericFlowSwitchHelper).GetMethod("GenericCopy");
-        static readonly MethodInfo genericCreateGenericFlowSwitchLink = typeof(GenericFlowSwitchHelper).GetMethod("CreateGenericFlowSwitchLink");
-        static readonly MethodInfo genericGetCaseName = typeof(GenericFlowSwitchHelper).GetMethod("GenericGetCaseName");
-        static readonly MethodInfo genericRemapFlowSwitch = typeof(GenericFlowSwitchHelper).GetMethod("GenericRemapFlowSwitch");
+        static readonly MethodInfo genericCopy = typeof(GenericFlowSwitchHelper).GetMethod(
+            "GenericCopy"
+        );
+        static readonly MethodInfo genericCreateGenericFlowSwitchLink =
+            typeof(GenericFlowSwitchHelper).GetMethod("CreateGenericFlowSwitchLink");
+        static readonly MethodInfo genericGetCaseName = typeof(GenericFlowSwitchHelper).GetMethod(
+            "GenericGetCaseName"
+        );
+        static readonly MethodInfo genericRemapFlowSwitch =
+            typeof(GenericFlowSwitchHelper).GetMethod("GenericRemapFlowSwitch");
         const string flowSwitchCasesKeyIdentifier = "key";
         const string flowSwitchNullCaseKeyIdentifier = "(null)";
         const string flowSwitchEmptyCaseKeyIdentifier = "(empty)";
 
         public static string FlowSwitchCasesKeyIdentifier
         {
-            get
-            {
-                return flowSwitchCasesKeyIdentifier;
-            }
+            get { return flowSwitchCasesKeyIdentifier; }
         }
 
         public static string FlowSwitchNullCaseKeyIdentifier
         {
-            get
-            {
-                return flowSwitchNullCaseKeyIdentifier;
-            }
+            get { return flowSwitchNullCaseKeyIdentifier; }
         }
 
         public static string FlowSwitchEmptyCaseKeyIdentifier
         {
-            get
-            {
-                return flowSwitchEmptyCaseKeyIdentifier;
-            }
+            get { return flowSwitchEmptyCaseKeyIdentifier; }
         }
 
-        public static void Copy(Type genericType, FlowNode currentFlowElement, Dictionary<FlowNode, FlowNode> clonedFlowElements)
+        public static void Copy(
+            Type genericType,
+            FlowNode currentFlowElement,
+            Dictionary<FlowNode, FlowNode> clonedFlowElements
+        )
         {
             MethodInfo copy = genericCopy.MakeGenericMethod(new Type[] { genericType });
             copy.Invoke(null, new object[] { currentFlowElement, clonedFlowElements });
         }
 
-        public static void GenericCopy<T>(FlowNode currentFlowElement, Dictionary<FlowNode, FlowNode> clonedFlowElements)
+        public static void GenericCopy<T>(
+            FlowNode currentFlowElement,
+            Dictionary<FlowNode, FlowNode> clonedFlowElements
+        )
         {
             FlowSwitch<T> currentFlowSwitch = (FlowSwitch<T>)currentFlowElement;
             FlowSwitch<T> clonedFlowSwitch = (FlowSwitch<T>)clonedFlowElements[currentFlowElement];
@@ -74,24 +78,34 @@ namespace System.Activities.Core.Presentation
             {
                 if (clonedFlowElements.ContainsKey(currentFlowSwitch.Cases[key]))
                 {
-                    clonedFlowSwitch.Cases.Add(key, clonedFlowElements[currentFlowSwitch.Cases[key]]);
+                    clonedFlowSwitch.Cases.Add(
+                        key,
+                        clonedFlowElements[currentFlowSwitch.Cases[key]]
+                    );
                 }
             }
         }
 
         // This is different from GenericCopy because all the reference shuold be set
-        // from property: swtich.Default = SomeValue should be 
+        // from property: swtich.Default = SomeValue should be
         // switch.Properties["Default"] = SomeValue.
-        public static void ReferenceCopy(Type genericType,
-                FlowNode currentFlowElement,
-                Dictionary<FlowNode, ModelItem> modelItems,
-                Dictionary<FlowNode, FlowNode> clonedFlowElements)
+        public static void ReferenceCopy(
+            Type genericType,
+            FlowNode currentFlowElement,
+            Dictionary<FlowNode, ModelItem> modelItems,
+            Dictionary<FlowNode, FlowNode> clonedFlowElements
+        )
         {
             ModelItem modelItem = null;
             if (modelItems.TryGetValue(currentFlowElement, out modelItem))
             {
-                MethodInfo copy = genericRemapFlowSwitch.MakeGenericMethod(new Type[] { genericType });
-                copy.Invoke(null, new object[] { currentFlowElement, modelItem, clonedFlowElements });
+                MethodInfo copy = genericRemapFlowSwitch.MakeGenericMethod(
+                    new Type[] { genericType }
+                );
+                copy.Invoke(
+                    null,
+                    new object[] { currentFlowElement, modelItem, clonedFlowElements }
+                );
             }
             else
             {
@@ -102,8 +116,11 @@ namespace System.Activities.Core.Presentation
         // oldNewFlowNodeMap: <OldFlowNode, NewFlowNode>
         //    sometimes, OldFlowNode == NewFlowNode, say, FlowNode is a FlowDecesion.
         //    if FlowNode is FlowStep, OldFlowNode != NewFlowNode
-        public static void GenericRemapFlowSwitch<T>(FlowNode currentFlowElement,
-            ModelItem modelItem, Dictionary<FlowNode, FlowNode> oldNewFlowNodeMap)
+        public static void GenericRemapFlowSwitch<T>(
+            FlowNode currentFlowElement,
+            ModelItem modelItem,
+            Dictionary<FlowNode, FlowNode> oldNewFlowNodeMap
+        )
         {
             FlowSwitch<T> currentFlowSwitch = (FlowSwitch<T>)currentFlowElement;
 
@@ -117,7 +134,6 @@ namespace System.Activities.Core.Presentation
             {
                 modelItem.Properties["Default"].SetValue(null);
             }
-
 
             // collect all the cases that should be update
             Dictionary<object, object> keyValueMap = new Dictionary<object, object>();
@@ -149,7 +165,12 @@ namespace System.Activities.Core.Presentation
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(FlowSwitch<>);
         }
 
-        public static IFlowSwitchLink CreateFlowSwitchLink(Type flowSwitchType, ModelItem currentMI, object caseValue, bool isDefault)
+        public static IFlowSwitchLink CreateFlowSwitchLink(
+            Type flowSwitchType,
+            ModelItem currentMI,
+            object caseValue,
+            bool isDefault
+        )
         {
             Type genericType = null;
             object key = null;
@@ -163,10 +184,15 @@ namespace System.Activities.Core.Presentation
                 key = caseValue;
             }
             MethodInfo method = genericCreateGenericFlowSwitchLink.MakeGenericMethod(genericType);
-            return method.Invoke(null, new object[] { currentMI, key, isDefault }) as IFlowSwitchLink;
+            return method.Invoke(null, new object[] { currentMI, key, isDefault })
+                as IFlowSwitchLink;
         }
 
-        public static IFlowSwitchLink CreateGenericFlowSwitchLink<T>(ModelItem currentMI, T caseValue, bool isDefault)
+        public static IFlowSwitchLink CreateGenericFlowSwitchLink<T>(
+            ModelItem currentMI,
+            T caseValue,
+            bool isDefault
+        )
         {
             if (isDefault)
             {
@@ -178,10 +204,17 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        public static string GetCaseName(ModelProperty casesProperties, Type type, out string errorMessage)
+        public static string GetCaseName(
+            ModelProperty casesProperties,
+            Type type,
+            out string errorMessage
+        )
         {
             object casesDict = casesProperties.Dictionary.GetCurrentValue();
-            ModelItemCollection collection = casesProperties.Value.Properties["ItemsCollection"].Collection;
+            ModelItemCollection collection = casesProperties
+                .Value
+                .Properties["ItemsCollection"]
+                .Collection;
             MethodInfo method = genericGetCaseName.MakeGenericMethod(type);
             object[] parameters = new object[] { collection, null };
             string result = (string)method.Invoke(null, parameters);
@@ -189,7 +222,10 @@ namespace System.Activities.Core.Presentation
             return result;
         }
 
-        public static string GenericGetCaseName<T>(ModelItemCollection collection, out string errorMessage)
+        public static string GenericGetCaseName<T>(
+            ModelItemCollection collection,
+            out string errorMessage
+        )
         {
             int maxName = 100000;
             Type type = typeof(T);
@@ -338,8 +374,17 @@ namespace System.Activities.Core.Presentation
 
         public static bool IsIntegralType(Type type)
         {
-            if (type == typeof(sbyte) || type == typeof(byte) || type == typeof(char) || type == typeof(short) ||
-                type == typeof(ushort) || type == typeof(int) || type == typeof(uint) || type == typeof(long) || type == typeof(ulong))
+            if (
+                type == typeof(sbyte)
+                || type == typeof(byte)
+                || type == typeof(char)
+                || type == typeof(short)
+                || type == typeof(ushort)
+                || type == typeof(int)
+                || type == typeof(uint)
+                || type == typeof(long)
+                || type == typeof(ulong)
+            )
             {
                 return true;
             }
@@ -354,7 +399,10 @@ namespace System.Activities.Core.Presentation
             string result = null;
             if (key == null)
             {
-                Fx.Assert(type == null || !type.IsValueType, "Value type should not have null value");
+                Fx.Assert(
+                    type == null || !type.IsValueType,
+                    "Value type should not have null value"
+                );
                 result = FlowSwitchNullCaseKeyIdentifier;
             }
             else
@@ -379,7 +427,9 @@ namespace System.Activities.Core.Presentation
             }
             if (!(caseObject is string))
             {
-                result = XamlUtilities.GetConverter(caseObject.GetType()).ConvertToString(caseObject);
+                result = XamlUtilities
+                    .GetConverter(caseObject.GetType())
+                    .ConvertToString(caseObject);
             }
             else
             {
@@ -417,7 +467,10 @@ namespace System.Activities.Core.Presentation
 
         public static bool ContainsCaseKey(ModelProperty casesProp, object key)
         {
-            ModelItemCollection itemsCollection = casesProp.Value.Properties["ItemsCollection"].Collection;
+            ModelItemCollection itemsCollection = casesProp
+                .Value
+                .Properties["ItemsCollection"]
+                .Collection;
             return ContainsCaseKey(itemsCollection, key);
         }
 
@@ -431,7 +484,10 @@ namespace System.Activities.Core.Presentation
             foreach (ModelItem item in itemsCollection)
             {
                 object value = item.Properties["Key"].ComputedValue;
-                if (value == key || ((value != null) && item.Properties["Key"].ComputedValue.Equals(key)))
+                if (
+                    value == key
+                    || ((value != null) && item.Properties["Key"].ComputedValue.Equals(key))
+                )
                 {
                     return true;
                 }
@@ -441,7 +497,10 @@ namespace System.Activities.Core.Presentation
 
         public static ModelItem GetCaseModelItem(ModelProperty casesProp, object key)
         {
-            ModelItemCollection itemsCollection = casesProp.Value.Properties["ItemsCollection"].Collection;
+            ModelItemCollection itemsCollection = casesProp
+                .Value
+                .Properties["ItemsCollection"]
+                .Collection;
             return GenericFlowSwitchHelper.GetCaseModelItem(itemsCollection, key);
         }
 
@@ -455,7 +514,10 @@ namespace System.Activities.Core.Presentation
             foreach (ModelItem item in itemsCollection)
             {
                 object value = item.Properties["Key"].ComputedValue;
-                if (value == key || (value != null && item.Properties["Key"].ComputedValue.Equals(key)))
+                if (
+                    value == key
+                    || (value != null && item.Properties["Key"].ComputedValue.Equals(key))
+                )
                 {
                     return item.Properties["Value"].Value;
                 }
@@ -471,19 +533,25 @@ namespace System.Activities.Core.Presentation
 
         public static ModelItem[] GetCaseKeys(ModelProperty casesProp)
         {
-            ModelItemCollection itemsCollection = casesProp.Value.Properties["ItemsCollection"].Collection;
+            ModelItemCollection itemsCollection = casesProp
+                .Value
+                .Properties["ItemsCollection"]
+                .Collection;
             ModelItem[] keys = new ModelItem[itemsCollection.Count];
             for (int i = 0; i < itemsCollection.Count; i++)
             {
-                keys[i] = (ModelItem) itemsCollection[i].Properties["Key"].Value;
+                keys[i] = (ModelItem)itemsCollection[i].Properties["Key"].Value;
             }
             return keys;
         }
 
         public static void RemoveCase(ModelProperty casesProp, object key)
         {
-            ModelItemCollection itemsCollection = casesProp.Value.Properties["ItemsCollection"].Collection;
-            
+            ModelItemCollection itemsCollection = casesProp
+                .Value
+                .Properties["ItemsCollection"]
+                .Collection;
+
             if (GenericFlowSwitchHelper.FlowSwitchNullCaseKeyIdentifier.Equals(key))
             {
                 key = null;
@@ -491,33 +559,49 @@ namespace System.Activities.Core.Presentation
             foreach (ModelItem item in itemsCollection)
             {
                 object value = item.Properties["Key"].ComputedValue;
-                if (value == key || (value != null && item.Properties["Key"].ComputedValue.Equals(key)))
+                if (
+                    value == key
+                    || (value != null && item.Properties["Key"].ComputedValue.Equals(key))
+                )
                 {
                     itemsCollection.Remove(item);
                     return;
                 }
-                
             }
             string caseName = GetString(key, itemsCollection.ItemType.GetGenericArguments()[0]);
             throw FxTrace.Exception.AsError(new KeyNotFoundException(caseName));
         }
-        
+
         public static void AddCase(ModelProperty casesPropperties, object newKey, object newCase)
         {
             Type propertyType = casesPropperties.PropertyType;
-            Fx.Assert(propertyType.IsGenericType && propertyType.GetGenericTypeDefinition() == typeof(IDictionary<,>), "Property type should be IDictonary<T, FlowNode>");
+            Fx.Assert(
+                propertyType.IsGenericType
+                    && propertyType.GetGenericTypeDefinition() == typeof(IDictionary<,>),
+                "Property type should be IDictonary<T, FlowNode>"
+            );
             Type keyType = propertyType.GetGenericArguments()[0];
-            ModelItemCollection itemsCollection = casesPropperties.Value.Properties["ItemsCollection"].Collection;
-             
-            Type caseType = typeof(ModelItemKeyValuePair<,>).MakeGenericType(new Type[] { keyType, typeof(FlowNode) });
-            object mutableKVPair = Activator.CreateInstance(caseType, new object[] { newKey, newCase });
+            ModelItemCollection itemsCollection = casesPropperties
+                .Value
+                .Properties["ItemsCollection"]
+                .Collection;
+
+            Type caseType = typeof(ModelItemKeyValuePair<,>).MakeGenericType(
+                new Type[] { keyType, typeof(FlowNode) }
+            );
+            object mutableKVPair = Activator.CreateInstance(
+                caseType,
+                new object[] { newKey, newCase }
+            );
             itemsCollection.Add(mutableKVPair);
         }
 
         public static bool CanBeGeneratedUniquely(Type typeArgument)
         {
-            return typeArgument.IsEnum || typeof(string).IsAssignableFrom(typeArgument)
-                || GenericFlowSwitchHelper.IsIntegralType(typeArgument) || typeof(bool) == typeArgument;
+            return typeArgument.IsEnum
+                || typeof(string).IsAssignableFrom(typeArgument)
+                || GenericFlowSwitchHelper.IsIntegralType(typeArgument)
+                || typeof(bool) == typeArgument;
         }
 
         public static bool CheckEquality(object value, Type targetType)
@@ -534,7 +618,12 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        public static bool ValidateCaseKey(object obj, ModelProperty casesProp, Type genericType, out string reason)
+        public static bool ValidateCaseKey(
+            object obj,
+            ModelProperty casesProp,
+            Type genericType,
+            out string reason
+        )
         {
             reason = string.Empty;
             string key = GenericFlowSwitchHelper.GetString(obj, genericType);
@@ -549,7 +638,11 @@ namespace System.Activities.Core.Presentation
             }
             else
             {
-                reason = string.Format(CultureInfo.CurrentUICulture, SR.EqualityError, genericType.Name);
+                reason = string.Format(
+                    CultureInfo.CurrentUICulture,
+                    SR.EqualityError,
+                    genericType.Name
+                );
                 return false;
             }
         }

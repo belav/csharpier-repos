@@ -5,15 +5,14 @@
 namespace System.ServiceModel.Security
 {
     using System;
-    using System.ServiceModel;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.Runtime.Serialization;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Xml;
     using System.Security.Principal;
-    
+    using System.ServiceModel;
+    using System.Xml;
 
     abstract class SecureConversationDriver
     {
@@ -22,8 +21,12 @@ namespace System.ServiceModel.Security
             get
             {
                 // PreSharp Bug: Property get methods should not throw exceptions.
-                #pragma warning suppress 56503
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecureConversationDriverVersionDoesNotSupportSession)));
+#pragma warning suppress 56503
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SecureConversationDriverVersionDoesNotSupportSession)
+                    )
+                );
             }
         }
 
@@ -32,19 +35,20 @@ namespace System.ServiceModel.Security
             get
             {
                 // PreSharp Bug: Property get methods should not throw exceptions.
-                #pragma warning suppress 56503
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecureConversationDriverVersionDoesNotSupportSession)));
+#pragma warning suppress 56503
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SecureConversationDriverVersionDoesNotSupportSession)
+                    )
+                );
             }
         }
 
         public virtual bool IsSessionSupported
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
-        
+
         public abstract XmlDictionaryString IssueAction { get; }
 
         public abstract XmlDictionaryString IssueResponseAction { get; }
@@ -54,8 +58,12 @@ namespace System.ServiceModel.Security
             get
             {
                 // PreSharp Bug: Property get methods should not throw exceptions.
-                #pragma warning suppress 56503
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecureConversationDriverVersionDoesNotSupportSession)));
+#pragma warning suppress 56503
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SecureConversationDriverVersionDoesNotSupportSession)
+                    )
+                );
             }
         }
 
@@ -64,8 +72,12 @@ namespace System.ServiceModel.Security
             get
             {
                 // PreSharp Bug: Property get methods should not throw exceptions.
-                #pragma warning suppress 56503
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecureConversationDriverVersionDoesNotSupportSession)));
+#pragma warning suppress 56503
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SecureConversationDriverVersionDoesNotSupportSession)
+                    )
+                );
             }
         }
 

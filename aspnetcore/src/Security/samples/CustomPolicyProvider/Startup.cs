@@ -26,7 +26,8 @@ public class Startup
 
         // Add cookie authentication so that it's possible to sign-in to test the
         // custom authorization policy behavior of the sample
-        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+        services
+            .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options =>
             {
                 options.AccessDeniedPath = "/account/denied";

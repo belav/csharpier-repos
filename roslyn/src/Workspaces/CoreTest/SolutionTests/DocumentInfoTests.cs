@@ -8,10 +8,10 @@ using System;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
-using Roslyn.Test.Utilities;
 using Microsoft.CodeAnalysis.Host;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
+using Roslyn.Test.Utilities;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests
@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Throws<ArgumentNullException>(() => DocumentInfo.Create(id: null, "doc"));
             Assert.Throws<ArgumentNullException>(() => DocumentInfo.Create(documentId, name: null));
 
-            Assert.Throws<ArgumentNullException>(() => DocumentInfo.Create(documentId, "doc", folders: new[] { "folder", null }));
+            Assert.Throws<ArgumentNullException>(() =>
+                DocumentInfo.Create(documentId, "doc", folders: new[] { "folder", null })
+            );
         }
 
         [Fact]
@@ -40,7 +42,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 name: "doc",
                 sourceCodeKind: SourceCodeKind.Script,
                 loader: loader,
-                isGenerated: true);
+                isGenerated: true
+            );
 
             Assert.Equal(id, info.Id);
             Assert.Equal("doc", info.Name);
@@ -59,7 +62,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 name: "doc",
                 sourceCodeKind: SourceCodeKind.Script,
                 loader: null,
-                isGenerated: true);
+                isGenerated: true
+            );
 
             Assert.Equal(id, info.Id);
             Assert.Equal("doc", info.Name);
@@ -82,7 +86,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var info3 = DocumentInfo.Create(documentId, "doc", folders: new string[0]);
             Assert.True(((ImmutableArray<string>)info3.Folders).IsEmpty);
 
-            var info4 = DocumentInfo.Create(documentId, "doc", folders: ImmutableArray<string>.Empty);
+            var info4 = DocumentInfo.Create(
+                documentId,
+                "doc",
+                folders: ImmutableArray<string>.Empty
+            );
             Assert.True(((ImmutableArray<string>)info4.Folders).IsEmpty);
         }
 
@@ -93,9 +101,18 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [InlineData(SourceCodeKind.Regular, null, "doc_name")]
         [InlineData(SourceCodeKind.Regular, "", "")]
         [InlineData(SourceCodeKind.Regular, "path", "path")]
-        public void Create_FilePath(SourceCodeKind kind, string path, string expectedSyntaxTreeFilePath)
+        public void Create_FilePath(
+            SourceCodeKind kind,
+            string path,
+            string expectedSyntaxTreeFilePath
+        )
         {
-            var info = DocumentInfo.Create(DocumentId.CreateNewId(ProjectId.CreateNewId()), "doc_name", filePath: path, sourceCodeKind: kind);
+            var info = DocumentInfo.Create(
+                DocumentId.CreateNewId(ProjectId.CreateNewId()),
+                "doc_name",
+                filePath: path,
+                sourceCodeKind: kind
+            );
             Assert.Equal(path, info.FilePath);
             Assert.Equal(expectedSyntaxTreeFilePath, info.Attributes.SyntaxTreeFilePath);
         }
@@ -105,16 +122,52 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             var projectId = ProjectId.CreateNewId();
             var documentId = DocumentId.CreateNewId(projectId);
-            var instance = DocumentInfo.Create(DocumentId.CreateNewId(ProjectId.CreateNewId()), "doc");
+            var instance = DocumentInfo.Create(
+                DocumentId.CreateNewId(ProjectId.CreateNewId()),
+                "doc"
+            );
             var serviceProvider = (IDocumentServiceProvider)new TestDocumentServiceProvider();
 
-            SolutionTestHelpers.TestProperty(instance, (old, value) => old.WithId(value), opt => opt.Id, documentId, defaultThrows: true);
-            SolutionTestHelpers.TestProperty(instance, (old, value) => old.WithName(value), opt => opt.Name, "New", defaultThrows: true);
-            SolutionTestHelpers.TestProperty(instance, (old, value) => old.WithTextLoader(value), opt => opt.TextLoader, (TextLoader)new TestTextLoader("text"));
-            SolutionTestHelpers.TestProperty(instance, (old, value) => old.WithDesignTimeOnly(value), opt => opt.Attributes.DesignTimeOnly, true);
-            SolutionTestHelpers.TestProperty(instance, (old, value) => old.WithDocumentServiceProvider(value), opt => opt.DocumentServiceProvider, serviceProvider);
+            SolutionTestHelpers.TestProperty(
+                instance,
+                (old, value) => old.WithId(value),
+                opt => opt.Id,
+                documentId,
+                defaultThrows: true
+            );
+            SolutionTestHelpers.TestProperty(
+                instance,
+                (old, value) => old.WithName(value),
+                opt => opt.Name,
+                "New",
+                defaultThrows: true
+            );
+            SolutionTestHelpers.TestProperty(
+                instance,
+                (old, value) => old.WithTextLoader(value),
+                opt => opt.TextLoader,
+                (TextLoader)new TestTextLoader("text")
+            );
+            SolutionTestHelpers.TestProperty(
+                instance,
+                (old, value) => old.WithDesignTimeOnly(value),
+                opt => opt.Attributes.DesignTimeOnly,
+                true
+            );
+            SolutionTestHelpers.TestProperty(
+                instance,
+                (old, value) => old.WithDocumentServiceProvider(value),
+                opt => opt.DocumentServiceProvider,
+                serviceProvider
+            );
 
-            SolutionTestHelpers.TestListProperty(instance, (old, value) => old.WithFolders(value), opt => opt.Folders, "folder", allowDuplicates: true);
+            SolutionTestHelpers.TestListProperty(
+                instance,
+                (old, value) => old.WithFolders(value),
+                opt => opt.Folders,
+                "folder",
+                allowDuplicates: true
+            );
         }
     }
 }

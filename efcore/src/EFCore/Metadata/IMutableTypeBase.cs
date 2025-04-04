@@ -29,8 +29,7 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
     /// <summary>
     ///     Gets this entity type or the one on which the complex property chain is declared.
     /// </summary>
-    new IMutableEntityType ContainingEntityType
-        => (IMutableEntityType)this;
+    new IMutableEntityType ContainingEntityType => (IMutableEntityType)this;
 
     /// <summary>
     ///     Marks the given member name as ignored, preventing conventions from adding a matching property
@@ -66,8 +65,8 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
     /// <param name="memberInfo">The corresponding member on the CLR type.</param>
     /// <returns>The newly created property.</returns>
     [RequiresUnreferencedCode("Currently used only in tests")]
-    IMutableProperty AddProperty(MemberInfo memberInfo)
-        => AddProperty(memberInfo.GetSimpleMemberName(), memberInfo.GetMemberType(), memberInfo);
+    IMutableProperty AddProperty(MemberInfo memberInfo) =>
+        AddProperty(memberInfo.GetSimpleMemberName(), memberInfo.GetMemberType(), memberInfo);
 
     /// <summary>
     ///     Adds a property to this type.
@@ -82,7 +81,10 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
     /// <param name="name">The name of the property to add.</param>
     /// <param name="propertyType">The type of value the property will hold.</param>
     /// <returns>The newly created property.</returns>
-    IMutableProperty AddProperty(string name, [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType);
+    IMutableProperty AddProperty(
+        string name,
+        [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType
+    );
 
     /// <summary>
     ///     Adds a property to this type.
@@ -101,7 +103,8 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
     IMutableProperty AddProperty(
         string name,
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType,
-        MemberInfo memberInfo);
+        MemberInfo memberInfo
+    );
 
     /// <summary>
     ///     Adds a property backed up by an indexer to this type.
@@ -111,13 +114,19 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
     /// <returns>The newly created property.</returns>
     IMutableProperty AddIndexerProperty(
         string name,
-        [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType)
+        [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType
+    )
     {
         var indexerPropertyInfo = FindIndexerPropertyInfo();
         if (indexerPropertyInfo == null)
         {
             throw new InvalidOperationException(
-                CoreStrings.NonIndexerEntityType(name, DisplayName(), typeof(string).ShortDisplayName()));
+                CoreStrings.NonIndexerEntityType(
+                    name,
+                    DisplayName(),
+                    typeof(string).ShortDisplayName()
+                )
+            );
         }
 
         return AddProperty(name, propertyType, indexerPropertyInfo);
@@ -131,8 +140,8 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
     /// </remarks>
     /// <param name="memberInfo">The property on the class.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
-    new IMutableProperty? FindProperty(MemberInfo memberInfo)
-        => (IMutableProperty?)((IReadOnlyTypeBase)this).FindProperty(memberInfo);
+    new IMutableProperty? FindProperty(MemberInfo memberInfo) =>
+        (IMutableProperty?)((IReadOnlyTypeBase)this).FindProperty(memberInfo);
 
     /// <summary>
     ///     Gets the property with a given name. Returns <see langword="null" /> if no property with the given name is defined.
@@ -153,8 +162,8 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
     /// </remarks>
     /// <param name="propertyNames">The property names.</param>
     /// <returns>The properties, or <see langword="null" /> if any property is not found.</returns>
-    new IReadOnlyList<IMutableProperty>? FindProperties(IReadOnlyList<string> propertyNames)
-        => (IReadOnlyList<IMutableProperty>?)((IReadOnlyTypeBase)this).FindProperties(propertyNames);
+    new IReadOnlyList<IMutableProperty>? FindProperties(IReadOnlyList<string> propertyNames) =>
+        (IReadOnlyList<IMutableProperty>?)((IReadOnlyTypeBase)this).FindProperties(propertyNames);
 
     /// <summary>
     ///     Finds a property declared on the type with the given name.
@@ -162,8 +171,8 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
     /// </summary>
     /// <param name="name">The property name.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
-    new IMutableProperty? FindDeclaredProperty(string name)
-        => (IMutableProperty?)((IReadOnlyTypeBase)this).FindDeclaredProperty(name);
+    new IMutableProperty? FindDeclaredProperty(string name) =>
+        (IMutableProperty?)((IReadOnlyTypeBase)this).FindDeclaredProperty(name);
 
     /// <summary>
     ///     Gets a property with the given name.
@@ -173,8 +182,8 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
     /// </remarks>
     /// <param name="name">The property name.</param>
     /// <returns>The property.</returns>
-    new IMutableProperty GetProperty(string name)
-        => (IMutableProperty)((IReadOnlyTypeBase)this).GetProperty(name);
+    new IMutableProperty GetProperty(string name) =>
+        (IMutableProperty)((IReadOnlyTypeBase)this).GetProperty(name);
 
     /// <summary>
     ///     Gets all scalar properties declared on this type.
@@ -196,8 +205,8 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
     ///     and base typed types.
     /// </remarks>
     /// <returns>Derived scalar properties.</returns>
-    new IEnumerable<IMutableProperty> GetDerivedProperties()
-        => ((IReadOnlyTypeBase)this).GetDerivedProperties().Cast<IMutableProperty>();
+    new IEnumerable<IMutableProperty> GetDerivedProperties() =>
+        ((IReadOnlyTypeBase)this).GetDerivedProperties().Cast<IMutableProperty>();
 
     /// <summary>
     ///     Gets all scalar properties defined on this  type.
@@ -231,10 +240,18 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
     /// <param name="collection">Indicates whether the property represents a collection.</param>
     /// <returns>The newly created property.</returns>
     [RequiresUnreferencedCode("Currently used only in tests")]
-    IMutableComplexProperty AddComplexProperty(MemberInfo memberInfo, string? complexTypeName = null, bool collection = false)
-        => AddComplexProperty(
-            memberInfo.GetSimpleMemberName(), memberInfo.GetMemberType(),
-            collection ? memberInfo.GetMemberType().GetSequenceType() : memberInfo.GetMemberType(), complexTypeName, collection);
+    IMutableComplexProperty AddComplexProperty(
+        MemberInfo memberInfo,
+        string? complexTypeName = null,
+        bool collection = false
+    ) =>
+        AddComplexProperty(
+            memberInfo.GetSimpleMemberName(),
+            memberInfo.GetMemberType(),
+            collection ? memberInfo.GetMemberType().GetSequenceType() : memberInfo.GetMemberType(),
+            complexTypeName,
+            collection
+        );
 
     /// <summary>
     ///     Adds a complex property to this type.
@@ -258,7 +275,8 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType,
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type complexType,
         string? complexTypeName = null,
-        bool collection = false);
+        bool collection = false
+    );
 
     /// <summary>
     ///     Adds a complex property to this type.
@@ -283,7 +301,8 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
         MemberInfo memberInfo,
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type complexType,
         string? complexTypeName = null,
-        bool collection = false);
+        bool collection = false
+    );
 
     /// <summary>
     ///     Adds a complex property backed up by an indexer to this type.
@@ -299,16 +318,29 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType,
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type complexType,
         string? complexTypeName = null,
-        bool collection = false)
+        bool collection = false
+    )
     {
         var indexerPropertyInfo = FindIndexerPropertyInfo();
         if (indexerPropertyInfo == null)
         {
             throw new InvalidOperationException(
-                CoreStrings.NonIndexerEntityType(name, DisplayName(), typeof(string).ShortDisplayName()));
+                CoreStrings.NonIndexerEntityType(
+                    name,
+                    DisplayName(),
+                    typeof(string).ShortDisplayName()
+                )
+            );
         }
 
-        return AddComplexProperty(name, propertyType, indexerPropertyInfo, complexType, complexTypeName, collection);
+        return AddComplexProperty(
+            name,
+            propertyType,
+            indexerPropertyInfo,
+            complexType,
+            complexTypeName,
+            collection
+        );
     }
 
     /// <summary>
@@ -319,8 +351,8 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
     /// </remarks>
     /// <param name="memberInfo">The member on the CLR type.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
-    new IMutableComplexProperty? FindComplexProperty(MemberInfo memberInfo)
-        => (IMutableComplexProperty?)((IReadOnlyEntityType)this).FindComplexProperty(memberInfo);
+    new IMutableComplexProperty? FindComplexProperty(MemberInfo memberInfo) =>
+        (IMutableComplexProperty?)((IReadOnlyEntityType)this).FindComplexProperty(memberInfo);
 
     /// <summary>
     ///     Gets the complex property with a given name. Returns <see langword="null" /> if no property with the given name is defined.
@@ -341,8 +373,8 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
     /// </remarks>
     /// <param name="name">The property name.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
-    new IMutableComplexProperty? FindDeclaredComplexProperty(string name)
-        => (IMutableComplexProperty?)((IReadOnlyEntityType)this).FindDeclaredComplexProperty(name);
+    new IMutableComplexProperty? FindDeclaredComplexProperty(string name) =>
+        (IMutableComplexProperty?)((IReadOnlyEntityType)this).FindDeclaredComplexProperty(name);
 
     /// <summary>
     ///     Gets all complex properties declared on this type.
@@ -364,8 +396,8 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
     ///     and base typed types.
     /// </remarks>
     /// <returns>Derived complex properties.</returns>
-    new IEnumerable<IMutableComplexProperty> GetDerivedComplexProperties()
-        => ((IReadOnlyEntityType)this).GetDerivedComplexProperties().Cast<IMutableComplexProperty>();
+    new IEnumerable<IMutableComplexProperty> GetDerivedComplexProperties() =>
+        ((IReadOnlyEntityType)this).GetDerivedComplexProperties().Cast<IMutableComplexProperty>();
 
     /// <summary>
     ///     Gets the properties defined on this type.
@@ -433,6 +465,6 @@ public interface IMutableTypeBase : IReadOnlyTypeBase, IMutableAnnotatable
     ///     be used for any property or navigation for which no override has been specified.
     /// </remarks>
     /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" />, or <see langword="null" /> to clear the mode set.</param>
-    void SetPropertyAccessMode(PropertyAccessMode? propertyAccessMode)
-        => SetOrRemoveAnnotation(CoreAnnotationNames.PropertyAccessMode, propertyAccessMode);
+    void SetPropertyAccessMode(PropertyAccessMode? propertyAccessMode) =>
+        SetOrRemoveAnnotation(CoreAnnotationNames.PropertyAccessMode, propertyAccessMode);
 }

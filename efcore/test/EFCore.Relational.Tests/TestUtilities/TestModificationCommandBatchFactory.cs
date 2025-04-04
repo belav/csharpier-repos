@@ -12,7 +12,8 @@ public class TestModificationCommandBatchFactory : IModificationCommandBatchFact
 
     public TestModificationCommandBatchFactory(
         ModificationCommandBatchFactoryDependencies dependencies,
-        IDbContextOptions options)
+        IDbContextOptions options
+    )
     {
         _dependencies = dependencies;
         _options = options;
@@ -24,7 +25,9 @@ public class TestModificationCommandBatchFactory : IModificationCommandBatchFact
     {
         CreateCount++;
 
-        var optionsExtension = _options.Extensions.OfType<FakeRelationalOptionsExtension>().FirstOrDefault();
+        var optionsExtension = _options
+            .Extensions.OfType<FakeRelationalOptionsExtension>()
+            .FirstOrDefault();
 
         return new TestModificationCommandBatch(_dependencies, optionsExtension?.MaxBatchSize);
     }

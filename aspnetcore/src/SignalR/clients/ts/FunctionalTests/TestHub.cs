@@ -39,7 +39,10 @@ public class TestHub : Hub
 
     public int GetNumRedirects()
     {
-        return int.Parse(Context.GetHttpContext().Request.Query["numRedirects"], CultureInfo.InvariantCulture);
+        return int.Parse(
+            Context.GetHttpContext().Request.Query["numRedirects"],
+            CultureInfo.InvariantCulture
+        );
     }
 
     public void ThrowException(string message)
@@ -72,10 +75,15 @@ public class TestHub : Hub
         var channel = Channel.CreateUnbounded<string>();
         var connectionId = Context.ConnectionId;
 
-        token.Register(async (state) =>
-        {
-            await ((IHubContext<TestHub>)state).Clients.Client(connectionId).SendAsync("StreamCanceled");
-        }, _context);
+        token.Register(
+            async (state) =>
+            {
+                await ((IHubContext<TestHub>)state)
+                    .Clients.Client(connectionId)
+                    .SendAsync("StreamCanceled");
+            },
+            _context
+        );
 
         return channel.Reader;
     }

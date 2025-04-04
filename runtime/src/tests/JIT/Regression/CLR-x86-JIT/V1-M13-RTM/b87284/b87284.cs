@@ -4,6 +4,7 @@
 
 using System;
 using Xunit;
+
 public class test1
 {
     public struct VT
@@ -11,13 +12,29 @@ public class test1
         public short a1;
         public double a5;
     }
-    static float[, ,] arr3d = new float[5, 20, 4];
+
+    static float[,,] arr3d = new float[5, 20, 4];
+
     public static double Func(VT vt, short a4, double a6)
     {
         arr3d[4, 0, 3] = 16.0F;
-        double retval = Convert.ToDouble(Convert.ToInt16(Convert.ToInt16(a4 / Convert.ToSingle(-1.582702F)) % Convert.ToInt16(vt.a1 * Convert.ToSingle(Convert.ToInt64(16L / 4L) * 0.12312290072441101))) / ((Convert.ToInt32(arr3d[4, 0, 3] + Convert.ToSingle(4UL * vt.a5)) / (vt.a5 + Convert.ToDouble(Convert.ToUInt64(4UL - 0UL) * -62.99951171875))) + (a6 - (a6 + arr3d[4, 0, 3] / -2.68274906263726E-07))));
+        double retval = Convert.ToDouble(
+            Convert.ToInt16(
+                Convert.ToInt16(a4 / Convert.ToSingle(-1.582702F))
+                    % Convert.ToInt16(
+                        vt.a1 * Convert.ToSingle(Convert.ToInt64(16L / 4L) * 0.12312290072441101)
+                    )
+            )
+                / (
+                    (
+                        Convert.ToInt32(arr3d[4, 0, 3] + Convert.ToSingle(4UL * vt.a5))
+                        / (vt.a5 + Convert.ToDouble(Convert.ToUInt64(4UL - 0UL) * -62.99951171875))
+                    ) + (a6 - (a6 + arr3d[4, 0, 3] / -2.68274906263726E-07))
+                )
+        );
         return retval;
     }
+
     [Fact]
     public static void TestEntryPoint()
     {
@@ -31,6 +48,3 @@ public class test1
         Console.WriteLine("The actual result is {0}", val);
     }
 }
-
-
-

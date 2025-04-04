@@ -4,22 +4,21 @@
 
 namespace Microsoft.Build.Tasks.Xaml
 {
-
     using System;
     using System.CodeDom;
     using System.CodeDom.Compiler;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
+    using System.Reflection;
     using System.Runtime;
+    using System.Runtime.Remoting.Lifetime;
     using System.Xaml;
     using System.Xaml.Schema;
     using System.Xml;
-    using System.Reflection;
-    using System.Globalization;
-    using System.Runtime.Remoting.Lifetime;
+    using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
     using XamlBuildTask;
-    using Microsoft.Build.Framework;
 
     internal class PartialClassGenerationTaskInternal : MarshalByRefObject
     {
@@ -56,17 +55,12 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 return this.applicationMarkup;
             }
-            set
-            {
-                this.applicationMarkup = value;
-            }
+            set { this.applicationMarkup = value; }
         }
 
-        public string AssemblyName
-        { get; set; }
+        public string AssemblyName { get; set; }
 
-        public TaskLoggingHelper BuildLogger
-        { get; set; }
+        public TaskLoggingHelper BuildLogger { get; set; }
 
         public XamlBuildTypeGenerationExtensionContext BuildContextForExtensions
         {
@@ -74,7 +68,8 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 if (this.buildContextForExtensions == null)
                 {
-                    XamlBuildTypeGenerationExtensionContext local = new XamlBuildTypeGenerationExtensionContext();
+                    XamlBuildTypeGenerationExtensionContext local =
+                        new XamlBuildTypeGenerationExtensionContext();
                     local.AssemblyName = this.AssemblyName;
                     local.IsInProcessXamlMarkupCompile = this.IsInProcessXamlMarkupCompile;
                     local.Language = this.Language;
@@ -113,12 +108,10 @@ namespace Microsoft.Build.Tasks.Xaml
                 return generatedCodeFiles;
             }
         }
-        
-        public string GeneratedSourceExtension
-        { get; set; }
 
-        public string Language
-        { get; set; }
+        public string GeneratedSourceExtension { get; set; }
+
+        public string Language { get; set; }
 
         public IList<LogData> LogData
         {
@@ -132,8 +125,7 @@ namespace Microsoft.Build.Tasks.Xaml
             }
         }
 
-        public string OutputPath
-        { get; set; }
+        public string OutputPath { get; set; }
 
         public IList<ITaskItem> References
         {
@@ -145,10 +137,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 return this.references;
             }
-            set
-            {
-                this.references = value;
-            }
+            set { this.references = value; }
         }
 
         public IList<Assembly> LoadedAssemblyList
@@ -178,16 +167,13 @@ namespace Microsoft.Build.Tasks.Xaml
             }
         }
 
-        public string MSBuildProjectDirectory
-        { get; set; }
+        public string MSBuildProjectDirectory { get; set; }
 
         private static IList<Assembly> cachedAssemblyList = null;
 
-        public bool IsInProcessXamlMarkupCompile
-        { get; set; }
+        public bool IsInProcessXamlMarkupCompile { get; set; }
 
-        public string RootNamespace
-        { get; set; }
+        public string RootNamespace { get; set; }
 
         public IList<string> SourceCodeFiles
         {
@@ -199,17 +185,12 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 return this.sourceCodeFiles;
             }
-            set
-            {
-                this.sourceCodeFiles = value;
-            }
+            set { this.sourceCodeFiles = value; }
         }
 
-        public bool RequiresCompilationPass2
-        { get; set; }
+        public bool RequiresCompilationPass2 { get; set; }
 
-        public bool SupportExtensions
-        { get; set; }
+        public bool SupportExtensions { get; set; }
 
         HashSet<string> SourceFilePaths
         {
@@ -228,10 +209,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 return sourceFilePaths;
             }
-            set
-            {
-                this.sourceFilePaths = value;
-            }
+            set { this.sourceFilePaths = value; }
         }
 
         public XamlSchemaContext SchemaContext
@@ -253,20 +231,13 @@ namespace Microsoft.Build.Tasks.Xaml
             }
         }
 
-        public string HelperClassFullName
-        { get; set; }
+        public string HelperClassFullName { get; set; }
 
-        public IList<Tuple<string, string, string>> XamlBuildTaskTypeGenerationExtensionNames
-        {
-            get;
-            set;
-        }
+        public IList<
+            Tuple<string, string, string>
+        > XamlBuildTaskTypeGenerationExtensionNames { get; set; }
 
-        public bool MarkupCompilePass2ExtensionsPresent
-        {
-            get;
-            set;
-        } 
+        public bool MarkupCompilePass2ExtensionsPresent { get; set; }
 
         public bool Execute()
         {
@@ -278,18 +249,25 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 if (!CodeDomProvider.IsDefinedLanguage(this.Language))
                 {
-                    throw FxTrace.Exception.Argument("Language", SR.UnrecognizedLanguage(this.Language));
+                    throw FxTrace.Exception.Argument(
+                        "Language",
+                        SR.UnrecognizedLanguage(this.Language)
+                    );
                 }
 
                 if (this.SupportExtensions)
                 {
-                    this.xamlBuildTypeGenerationExtensions = XamlBuildTaskServices.GetXamlBuildTaskExtensions<IXamlBuildTypeGenerationExtension>(
-                        this.XamlBuildTaskTypeGenerationExtensionNames,
-                        this.BuildLogger,
-                        this.MSBuildProjectDirectory);
+                    this.xamlBuildTypeGenerationExtensions =
+                        XamlBuildTaskServices.GetXamlBuildTaskExtensions<IXamlBuildTypeGenerationExtension>(
+                            this.XamlBuildTaskTypeGenerationExtensionNames,
+                            this.BuildLogger,
+                            this.MSBuildProjectDirectory
+                        );
                 }
 
-                AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += new ResolveEventHandler(XamlBuildTaskServices.ReflectionOnlyAssemblyResolve);
+                AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += new ResolveEventHandler(
+                    XamlBuildTaskServices.ReflectionOnlyAssemblyResolve
+                );
                 bool retVal = true;
                 // We load the assemblies for the real builds
                 // For intellisense builds, we load them the first time only
@@ -299,11 +277,20 @@ namespace Microsoft.Build.Tasks.Xaml
                     {
                         try
                         {
-                            this.LoadedAssemblyList = XamlBuildTaskServices.Load(this.References, IsInProcessXamlMarkupCompile);
+                            this.LoadedAssemblyList = XamlBuildTaskServices.Load(
+                                this.References,
+                                IsInProcessXamlMarkupCompile
+                            );
                         }
                         catch (FileNotFoundException e)
                         {
-                            XamlBuildTaskServices.LogException(this.BuildLogger, e.Message, e.FileName, 0, 0);
+                            XamlBuildTaskServices.LogException(
+                                this.BuildLogger,
+                                e.Message,
+                                e.FileName,
+                                0,
+                                0
+                            );
                             retVal = false;
                         }
                     }
@@ -311,7 +298,7 @@ namespace Microsoft.Build.Tasks.Xaml
 
                 CodeDomProvider codeDomProvider = CodeDomProvider.CreateProvider(this.Language);
 
-                ProcessHelperClassGeneration(codeDomProvider); 
+                ProcessHelperClassGeneration(codeDomProvider);
                 foreach (ITaskItem app in ApplicationMarkup)
                 {
                     string inputMarkupFile = app.ItemSpec;
@@ -325,7 +312,13 @@ namespace Microsoft.Build.Tasks.Xaml
                         {
                             throw;
                         }
-                        XamlBuildTaskServices.LogException(this.BuildLogger, e.Message, e.Source, e.LineNumber, e.LinePosition);
+                        XamlBuildTaskServices.LogException(
+                            this.BuildLogger,
+                            e.Message,
+                            e.Source,
+                            e.LineNumber,
+                            e.LinePosition
+                        );
                         retVal = false;
                     }
                     catch (FileLoadException e)
@@ -335,7 +328,13 @@ namespace Microsoft.Build.Tasks.Xaml
                             throw;
                         }
 
-                        XamlBuildTaskServices.LogException(this.BuildLogger, SR.AssemblyCannotBeResolved(XamlBuildTaskServices.FileNotLoaded), inputMarkupFile, 0, 0);
+                        XamlBuildTaskServices.LogException(
+                            this.BuildLogger,
+                            SR.AssemblyCannotBeResolved(XamlBuildTaskServices.FileNotLoaded),
+                            inputMarkupFile,
+                            0,
+                            0
+                        );
                         retVal = false;
                     }
                     catch (Exception e)
@@ -344,7 +343,13 @@ namespace Microsoft.Build.Tasks.Xaml
                         {
                             throw;
                         }
-                        XamlBuildTaskServices.LogException(this.BuildLogger, e.Message, inputMarkupFile, 0, 0);
+                        XamlBuildTaskServices.LogException(
+                            this.BuildLogger,
+                            e.Message,
+                            inputMarkupFile,
+                            0,
+                            0
+                        );
                         retVal = false;
                     }
                 }
@@ -359,7 +364,9 @@ namespace Microsoft.Build.Tasks.Xaml
                             this.GeneratedCodeFiles.Add(fileName);
                         }
 
-                        foreach (string fileName in this.BuildContextForExtensions.GeneratedResourceFiles)
+                        foreach (
+                            string fileName in this.BuildContextForExtensions.GeneratedResourceFiles
+                        )
                         {
                             this.GeneratedResources.Add(fileName);
                         }
@@ -387,15 +394,19 @@ namespace Microsoft.Build.Tasks.Xaml
 
         void ProcessHelperClassGeneration(CodeDomProvider codeDomProvider)
         {
-            string codeFileName = "_" + this.AssemblyName + GetGeneratedSourceExtension(codeDomProvider);
+            string codeFileName =
+                "_" + this.AssemblyName + GetGeneratedSourceExtension(codeDomProvider);
             codeFileName = Path.Combine(this.OutputPath, codeFileName);
-
 
             string namespaceName = "XamlStaticHelperNamespace";
             string className = "_XamlStaticHelper";
 
             // Generate code file
-            CodeCompileUnit codeUnit = new ClassGenerator(this.BuildLogger, codeDomProvider, this.Language).GenerateHelperClass(namespaceName, className, this.LoadedAssemblyList);
+            CodeCompileUnit codeUnit = new ClassGenerator(
+                this.BuildLogger,
+                codeDomProvider,
+                this.Language
+            ).GenerateHelperClass(namespaceName, className, this.LoadedAssemblyList);
             WriteCode(codeDomProvider, codeUnit, codeFileName);
             this.GeneratedCodeFiles.Add(codeFileName);
 
@@ -416,13 +427,22 @@ namespace Microsoft.Build.Tasks.Xaml
             ClassData classData = ReadClassData(xamlNodes, markupItemFileName);
 
             string outputFileName = GetFileName(markupItemFileName);
-            string codeFileName = Path.ChangeExtension(outputFileName, GetGeneratedSourceExtension(codeDomProvider));
-            string markupFileName = Path.ChangeExtension(outputFileName, GeneratedSourceExtension + XamlBuildTaskServices.XamlExtension);
+            string codeFileName = Path.ChangeExtension(
+                outputFileName,
+                GetGeneratedSourceExtension(codeDomProvider)
+            );
+            string markupFileName = Path.ChangeExtension(
+                outputFileName,
+                GeneratedSourceExtension + XamlBuildTaskServices.XamlExtension
+            );
             classData.EmbeddedResourceFileName = Path.GetFileName(markupFileName);
             classData.HelperClassFullName = this.HelperClassFullName;
 
             // Check if code file with partial class exists
-            classData.SourceFileExists = UserProvidedFileExists(markupItemFileName, codeDomProvider);
+            classData.SourceFileExists = UserProvidedFileExists(
+                markupItemFileName,
+                codeDomProvider
+            );
 
             // Store the full type name as metadata on the markup item
             string rootNamespacePrefix = null;
@@ -473,7 +493,11 @@ namespace Microsoft.Build.Tasks.Xaml
             }
 
             // Generate code file
-            CodeCompileUnit codeUnit = new ClassGenerator(this.BuildLogger, codeDomProvider, this.Language).Generate(classData);         
+            CodeCompileUnit codeUnit = new ClassGenerator(
+                this.BuildLogger,
+                codeDomProvider,
+                this.Language
+            ).Generate(classData);
             WriteCode(codeDomProvider, codeUnit, codeFileName);
             this.GeneratedCodeFiles.Add(codeFileName);
 
@@ -481,11 +505,24 @@ namespace Microsoft.Build.Tasks.Xaml
             if (!string.IsNullOrEmpty(this.AssemblyName))
             {
                 // Generate xaml "implementation" file
-                XmlWriterSettings xmlSettings = new XmlWriterSettings { Indent = true, IndentChars = "  ", CloseOutput = true };
-                using (XmlWriter xmlWriter = XmlWriter.Create(File.Open(markupFileName, FileMode.Create), xmlSettings))
+                XmlWriterSettings xmlSettings = new XmlWriterSettings
                 {
-                    XamlXmlWriterSettings xamlSettings = new XamlXmlWriterSettings() { CloseOutput = true };
-                    
+                    Indent = true,
+                    IndentChars = "  ",
+                    CloseOutput = true,
+                };
+                using (
+                    XmlWriter xmlWriter = XmlWriter.Create(
+                        File.Open(markupFileName, FileMode.Create),
+                        xmlSettings
+                    )
+                )
+                {
+                    XamlXmlWriterSettings xamlSettings = new XamlXmlWriterSettings()
+                    {
+                        CloseOutput = true,
+                    };
+
                     // Process EmbeddedResourceXaml to remove xml:space="preserve"
                     // due to a bug in XamlXmlWriter. XamlXmlWriter throws
                     // if there are duplicate xml:space attributes.
@@ -496,9 +533,15 @@ namespace Microsoft.Build.Tasks.Xaml
 
                     using (XamlReader reader = classData.EmbeddedResourceXaml.GetReader())
                     {
-                        using (XamlXmlWriter xamlWriter = new XamlXmlWriter(xmlWriter, reader.SchemaContext, xamlSettings))
+                        using (
+                            XamlXmlWriter xamlWriter = new XamlXmlWriter(
+                                xmlWriter,
+                                reader.SchemaContext,
+                                xamlSettings
+                            )
+                        )
                         {
-                            XamlServices.Transform(reader, xamlWriter);                                                     
+                            XamlServices.Transform(reader, xamlWriter);
                         }
                     }
                 }
@@ -521,9 +564,12 @@ namespace Microsoft.Build.Tasks.Xaml
                 else
                 {
                     // skip validation if we are doing in-proc compile
-                    // OR if we have pass 2 extensions hooked up 
+                    // OR if we have pass 2 extensions hooked up
                     // as we anyway need to run pass 2 in that case
-                    if (!this.IsInProcessXamlMarkupCompile && !this.MarkupCompilePass2ExtensionsPresent)
+                    if (
+                        !this.IsInProcessXamlMarkupCompile
+                        && !this.MarkupCompilePass2ExtensionsPresent
+                    )
                     {
                         if (!ValidateXaml(xamlNodes, markupItemFileName))
                         {
@@ -537,12 +583,14 @@ namespace Microsoft.Build.Tasks.Xaml
 
         bool ExecuteExtensions(ClassData classData, ITaskItem markupItem)
         {
-            // Execute pass1 extensions only 
+            // Execute pass1 extensions only
             // we skip pass1 extensions if we are doing in-proc compile
             if (!this.IsInProcessXamlMarkupCompile)
             {
                 bool extensionExecutedSuccessfully = true;
-                foreach (IXamlBuildTypeGenerationExtension extension in this.xamlBuildTypeGenerationExtensions)
+                foreach (
+                    IXamlBuildTypeGenerationExtension extension in this.xamlBuildTypeGenerationExtensions
+                )
                 {
                     if (extension == null)
                     {
@@ -552,7 +600,9 @@ namespace Microsoft.Build.Tasks.Xaml
                     this.BuildContextForExtensions.InputTaskItem = markupItem;
                     try
                     {
-                        extensionExecutedSuccessfully = extension.Execute(classData, this.BuildContextForExtensions) && extensionExecutedSuccessfully;
+                        extensionExecutedSuccessfully =
+                            extension.Execute(classData, this.BuildContextForExtensions)
+                            && extensionExecutedSuccessfully;
                     }
                     catch (Exception e)
                     {
@@ -560,7 +610,15 @@ namespace Microsoft.Build.Tasks.Xaml
                         {
                             throw;
                         }
-                        throw FxTrace.Exception.AsError(new LoggableException(SR.ExceptionThrownInExtension(extension.ToString(), e.GetType().ToString(), e.Message)));
+                        throw FxTrace.Exception.AsError(
+                            new LoggableException(
+                                SR.ExceptionThrownInExtension(
+                                    extension.ToString(),
+                                    e.GetType().ToString(),
+                                    e.Message
+                                )
+                            )
+                        );
                     }
                 }
 
@@ -585,14 +643,16 @@ namespace Microsoft.Build.Tasks.Xaml
             int i = 0;
             while (this.markupFileNames.Contains(markupItemName))
             {
-                markupItemName = originalMarkupItemName + "." + (++i).ToString(CultureInfo.InvariantCulture);
+                markupItemName =
+                    originalMarkupItemName + "." + (++i).ToString(CultureInfo.InvariantCulture);
             }
             this.markupFileNames.Add(markupItemName);
             markupItemName = markupItemName + Path.GetExtension(markupItem);
             if (this.OutputPath == null)
             {
                 throw FxTrace.Exception.AsError(
-                        new InvalidOperationException(SR.OutputPathCannotBeNull));
+                    new InvalidOperationException(SR.OutputPathCannotBeNull)
+                );
             }
             return Path.Combine(this.OutputPath, markupItemName);
         }
@@ -606,26 +666,42 @@ namespace Microsoft.Build.Tasks.Xaml
                 XamlXmlReaderSettings settings = new XamlXmlReaderSettings
                 {
                     AllowProtectedMembersOnRoot = true,
-                    ProvideLineInfo = true
+                    ProvideLineInfo = true,
                 };
 
                 using (StreamReader streamReader = new StreamReader(xamlFileName))
                 {
-                    XamlReader reader = new XamlXmlReader(XmlReader.Create(streamReader), this.SchemaContext, settings);
+                    XamlReader reader = new XamlXmlReader(
+                        XmlReader.Create(streamReader),
+                        this.SchemaContext,
+                        settings
+                    );
                     XamlServices.Transform(reader, nodeList.Writer);
                 }
             }
             catch (XmlException e)
             {
-                XamlBuildTaskServices.LogException(this.BuildLogger, e.Message, xamlFileName, e.LineNumber, e.LinePosition); 
+                XamlBuildTaskServices.LogException(
+                    this.BuildLogger,
+                    e.Message,
+                    xamlFileName,
+                    e.LineNumber,
+                    e.LinePosition
+                );
                 return null;
             }
             catch (XamlException e)
             {
-                XamlBuildTaskServices.LogException(this.BuildLogger, e.Message, xamlFileName, e.LineNumber, e.LinePosition);
+                XamlBuildTaskServices.LogException(
+                    this.BuildLogger,
+                    e.Message,
+                    xamlFileName,
+                    e.LineNumber,
+                    e.LinePosition
+                );
                 return null;
             }
-            
+
             if (nodeList.Count > 0)
             {
                 return nodeList;
@@ -638,7 +714,11 @@ namespace Microsoft.Build.Tasks.Xaml
 
         ClassData ReadClassData(XamlNodeList xamlNodes, string xamlFileName)
         {
-            ClassImporter importer = new ClassImporter(xamlFileName, this.AssemblyName, this.Language.Equals("VB") ? this.RootNamespace : null);
+            ClassImporter importer = new ClassImporter(
+                xamlFileName,
+                this.AssemblyName,
+                this.Language.Equals("VB") ? this.RootNamespace : null
+            );
             ClassData classData = importer.ReadFromXaml(xamlNodes);
             return classData;
         }
@@ -652,8 +732,11 @@ namespace Microsoft.Build.Tasks.Xaml
                 {
                     bool nodesAvailable = reader.Read();
                     while (nodesAvailable)
-                    {                        
-                        if (reader.NodeType == XamlNodeType.StartMember && reader.Member == XamlLanguage.Space)
+                    {
+                        if (
+                            reader.NodeType == XamlNodeType.StartMember
+                            && reader.Member == XamlLanguage.Space
+                        )
                         {
                             reader.Skip();
                         }
@@ -674,7 +757,12 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 IList<LogData> validationErrors = null;
                 ClassValidator validator = new ClassValidator(xamlFileName, null, null);
-                return validator.ValidateXaml(xamlReader, true, this.AssemblyName, out validationErrors);
+                return validator.ValidateXaml(
+                    xamlReader,
+                    true,
+                    this.AssemblyName,
+                    out validationErrors
+                );
             }
         }
 
@@ -705,7 +793,10 @@ namespace Microsoft.Build.Tasks.Xaml
 
         bool UserProvidedFileExists(string markupItemPath, CodeDomProvider codeDomProvider)
         {
-            string desiredSourceFilePath = Path.ChangeExtension(markupItemPath, "xaml." + codeDomProvider.FileExtension);
+            string desiredSourceFilePath = Path.ChangeExtension(
+                markupItemPath,
+                "xaml." + codeDomProvider.FileExtension
+            );
             return SourceFilePaths.Contains(desiredSourceFilePath);
         }
     }

@@ -6,25 +6,31 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
-using System.Security.Claims;
 using System.Runtime;
+using System.Security.Claims;
 
 namespace System.ServiceModel.Security.Tokens
 {
     static class SecurityContextSecurityTokenHelper
     {
-        static public SessionSecurityToken ConvertSctToSessionToken(SecurityContextSecurityToken sct)
+        public static SessionSecurityToken ConvertSctToSessionToken(
+            SecurityContextSecurityToken sct
+        )
         {
             return ConvertSctToSessionToken(sct, SecureConversationVersion.Default);
         }
 
-        static public SessionSecurityToken ConvertSctToSessionToken(SecurityContextSecurityToken sct, SecureConversationVersion version)
+        public static SessionSecurityToken ConvertSctToSessionToken(
+            SecurityContextSecurityToken sct,
+            SecureConversationVersion version
+        )
         {
             string endpointId = String.Empty;
 
             for (int i = 0; i < sct.AuthorizationPolicies.Count; ++i)
             {
-                EndpointAuthorizationPolicy epAuthPolicy = sct.AuthorizationPolicies[i] as EndpointAuthorizationPolicy;
+                EndpointAuthorizationPolicy epAuthPolicy =
+                    sct.AuthorizationPolicies[i] as EndpointAuthorizationPolicy;
                 if (epAuthPolicy != null)
                 {
                     endpointId = epAuthPolicy.EndpointId;
@@ -38,7 +44,7 @@ namespace System.ServiceModel.Security.Tokens
                 IAuthorizationPolicy authPolicy = sct.AuthorizationPolicies[i];
 
                 // The WCF SCT will have a SctAuthorizationPolicy that wraps the Primary Identity
-                // of the bootstrap token. This is required for SCT renewal scenarios. Write the 
+                // of the bootstrap token. This is required for SCT renewal scenarios. Write the
                 // SctAuthorizationPolicy if one is available.
                 sctAuthPolicy = authPolicy as SctAuthorizationPolicy;
                 if (sctAuthPolicy != null)
@@ -78,20 +84,36 @@ namespace System.ServiceModel.Security.Tokens
                 // So return an empty ClaimsPrincipal so that when written on wire in cookie mode we DO NOT write an empty identity.
                 // If we did, then when the actual bootstrap token, such as a SAML token arrives, we will add the bootstrap AND the SAML identities to the ClaimsPrincipal
                 // and end up with multiple, one of them anonymous.
-                // 
+                //
                 claimsPrincipal = new ClaimsPrincipal();
             }
 
-            return new SessionSecurityToken(claimsPrincipal, sct.ContextId, sct.Id, String.Empty, sct.GetKeyBytes(), endpointId, sct.ValidFrom, sct.ValidTo, sct.KeyGeneration, sct.KeyEffectiveTime, sct.KeyExpirationTime, sctAuthPolicy, new Uri(version.Namespace.Value));
+            return new SessionSecurityToken(
+                claimsPrincipal,
+                sct.ContextId,
+                sct.Id,
+                String.Empty,
+                sct.GetKeyBytes(),
+                endpointId,
+                sct.ValidFrom,
+                sct.ValidTo,
+                sct.KeyGeneration,
+                sct.KeyEffectiveTime,
+                sct.KeyExpirationTime,
+                sctAuthPolicy,
+                new Uri(version.Namespace.Value)
+            );
         }
 
-        static public SecurityContextSecurityToken ConvertSessionTokenToSecurityContextSecurityToken(SessionSecurityToken token)
+        public static SecurityContextSecurityToken ConvertSessionTokenToSecurityContextSecurityToken(
+            SessionSecurityToken token
+        )
         {
             if (token == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("token");
             }
-            
+
             List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>();
             if (token.SctAuthorizationPolicy != null)
             {
@@ -112,14 +134,15 @@ namespace System.ServiceModel.Security.Tokens
 
             SecurityContextSecurityToken sct = new SecurityContextSecurityToken(
                 token.ContextId,
-                 token.Id,
-                 key, 
-                 token.ValidFrom, 
-                 token.ValidTo, 
-                 token.KeyGeneration, 
-                 token.KeyEffectiveTime, 
-                 token.KeyExpirationTime,
-                 policies.AsReadOnly());
+                token.Id,
+                key,
+                token.ValidFrom,
+                token.ValidTo,
+                token.KeyGeneration,
+                token.KeyEffectiveTime,
+                token.KeyExpirationTime,
+                policies.AsReadOnly()
+            );
 
             return sct;
         }

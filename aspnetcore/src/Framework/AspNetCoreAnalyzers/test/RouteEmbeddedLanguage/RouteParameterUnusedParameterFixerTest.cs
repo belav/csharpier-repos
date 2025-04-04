@@ -4,7 +4,8 @@
 using Microsoft.CodeAnalysis.Testing;
 using VerifyCS = Microsoft.AspNetCore.Analyzers.Verifiers.CSharpCodeFixVerifier<
     Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.RoutePatternAnalyzer,
-    Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Fixers.RouteParameterUnusedParameterFixer>;
+    Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Fixers.RouteParameterUnusedParameterFixer
+>;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage;
 
@@ -14,7 +15,8 @@ public class RouteParameterUnusedParameterFixerTest
     public async Task Controller_UnusedParameter_AddToAction()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -36,7 +38,8 @@ public class TestController
     }
 }";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -58,7 +61,11 @@ public class TestController
     }
 }";
 
-        var expectedDiagnostics = new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0);
+        var expectedDiagnostics = new DiagnosticResult(
+            DiagnosticDescriptors.RoutePatternUnusedParameter
+        )
+            .WithArguments("id")
+            .WithLocation(0);
 
         // Act & Assert
         await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource);
@@ -68,7 +75,8 @@ public class TestController
     public async Task Controller_UnusedParameter_HasCancellationToken_AddToActionBeforeToken()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
@@ -91,7 +99,8 @@ public class TestController
     }
 }";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
@@ -114,7 +123,11 @@ public class TestController
     }
 }";
 
-        var expectedDiagnostics = new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0);
+        var expectedDiagnostics = new DiagnosticResult(
+            DiagnosticDescriptors.RoutePatternUnusedParameter
+        )
+            .WithArguments("id")
+            .WithLocation(0);
 
         // Act & Assert
         await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource);
@@ -124,7 +137,8 @@ public class TestController
     public async Task Controller_UnusedParameter_BeforeExistingParameter_AddToActionBeforeExisting()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -146,7 +160,8 @@ public class TestController
     }
 }";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -168,7 +183,11 @@ public class TestController
     }
 }";
 
-        var expectedDiagnostics = new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0);
+        var expectedDiagnostics = new DiagnosticResult(
+            DiagnosticDescriptors.RoutePatternUnusedParameter
+        )
+            .WithArguments("id")
+            .WithLocation(0);
 
         // Act & Assert
         await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource);
@@ -178,7 +197,8 @@ public class TestController
     public async Task Controller_MultipleUnusedParameters_AddToAction()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -200,7 +220,8 @@ public class TestController
     }
 }";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -224,19 +245,29 @@ public class TestController
 
         var expectedDiagnostics = new[]
         {
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("bookId").WithLocation(1)
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("id")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("bookId")
+                .WithLocation(1),
         };
 
         // Act & Assert
-        await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource, expectedIterations: 2);
+        await VerifyCS.VerifyCodeFixAsync(
+            source,
+            expectedDiagnostics,
+            fixedSource,
+            expectedIterations: 2
+        );
     }
 
     [Fact]
     public async Task Controller_MultipleUnusedParameters_WithConstraints_AddToAction()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -258,7 +289,8 @@ public class TestController
     }
 }";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -282,19 +314,29 @@ public class TestController
 
         var expectedDiagnostics = new[]
         {
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("bookId").WithLocation(1)
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("id")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("bookId")
+                .WithLocation(1),
         };
 
         // Act & Assert
-        await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource, expectedIterations: 2);
+        await VerifyCS.VerifyCodeFixAsync(
+            source,
+            expectedDiagnostics,
+            fixedSource,
+            expectedIterations: 2
+        );
     }
 
     [Fact]
     public async Task Controller_DuplicateUnusedParameters_AddToAction()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -316,7 +358,8 @@ public class TestController
     }
 }";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -340,19 +383,31 @@ public class TestController
 
         var expectedDiagnostics = new[]
         {
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternIssue).WithArguments("The route parameter name 'id' appears more than one time in the route template.").WithLocation(1),
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("id")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternIssue)
+                .WithArguments(
+                    "The route parameter name 'id' appears more than one time in the route template."
+                )
+                .WithLocation(1),
         };
 
         // Act & Assert
-        await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource, expectedIterations: 1);
+        await VerifyCS.VerifyCodeFixAsync(
+            source,
+            expectedDiagnostics,
+            fixedSource,
+            expectedIterations: 1
+        );
     }
 
     [Fact]
     public async Task MapGet_UnusedParameter_AddToLambda()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -366,7 +421,8 @@ class Program
 }
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -382,18 +438,26 @@ class Program
 
         var expectedDiagnostics = new[]
         {
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0)
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("id")
+                .WithLocation(0),
         };
 
         // Act & Assert
-        await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource, expectedIterations: 1);
+        await VerifyCS.VerifyCodeFixAsync(
+            source,
+            expectedDiagnostics,
+            fixedSource,
+            expectedIterations: 1
+        );
     }
 
     [Fact]
     public async Task MapGet_UnusedParameter_AddToRequestDelegateLambda()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
@@ -409,7 +473,8 @@ class Program
 }
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
@@ -427,18 +492,26 @@ class Program
 
         var expectedDiagnostics = new[]
         {
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0)
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("id")
+                .WithLocation(0),
         };
 
         // Act & Assert
-        await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource, expectedIterations: 1);
+        await VerifyCS.VerifyCodeFixAsync(
+            source,
+            expectedDiagnostics,
+            fixedSource,
+            expectedIterations: 1
+        );
     }
 
     [Fact]
     public async Task MapGet_UnusedParameter_IntPolicy_AddIntToLambda()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -452,7 +525,8 @@ class Program
 }
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -468,18 +542,26 @@ class Program
 
         var expectedDiagnostics = new[]
         {
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0)
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("id")
+                .WithLocation(0),
         };
 
         // Act & Assert
-        await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource, expectedIterations: 1);
+        await VerifyCS.VerifyCodeFixAsync(
+            source,
+            expectedDiagnostics,
+            fixedSource,
+            expectedIterations: 1
+        );
     }
 
     [Fact]
     public async Task MapGet_UnusedParameter_IntPolicy_IsOptional_AddNullableIntToLambda()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -493,7 +575,8 @@ class Program
 }
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -509,18 +592,26 @@ class Program
 
         var expectedDiagnostics = new[]
         {
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0)
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("id")
+                .WithLocation(0),
         };
 
         // Act & Assert
-        await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource, expectedIterations: 1);
+        await VerifyCS.VerifyCodeFixAsync(
+            source,
+            expectedDiagnostics,
+            fixedSource,
+            expectedIterations: 1
+        );
     }
 
     [Fact]
     public async Task MapGet_UnusedParameter_IsOptional_AddNullableStringToLambda()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -534,7 +625,8 @@ class Program
 }
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -550,18 +642,26 @@ class Program
 
         var expectedDiagnostics = new[]
         {
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0)
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("id")
+                .WithLocation(0),
         };
 
         // Act & Assert
-        await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource, expectedIterations: 1);
+        await VerifyCS.VerifyCodeFixAsync(
+            source,
+            expectedDiagnostics,
+            fixedSource,
+            expectedIterations: 1
+        );
     }
 
     [Fact]
     public async Task MapGet_UnusedParameter_IntAndDecimalPolicy_AddStringToLambda()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -575,7 +675,8 @@ class Program
 }
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -591,18 +692,26 @@ class Program
 
         var expectedDiagnostics = new[]
         {
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0)
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("id")
+                .WithLocation(0),
         };
 
         // Act & Assert
-        await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource, expectedIterations: 1);
+        await VerifyCS.VerifyCodeFixAsync(
+            source,
+            expectedDiagnostics,
+            fixedSource,
+            expectedIterations: 1
+        );
     }
 
     [Fact]
     public async Task MapGet_UnusedParameter_IntAndMinPolicy_AddStringToLambda()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -616,7 +725,8 @@ class Program
 }
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -632,18 +742,26 @@ class Program
 
         var expectedDiagnostics = new[]
         {
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0)
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("id")
+                .WithLocation(0),
         };
 
         // Act & Assert
-        await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource, expectedIterations: 1);
+        await VerifyCS.VerifyCodeFixAsync(
+            source,
+            expectedDiagnostics,
+            fixedSource,
+            expectedIterations: 1
+        );
     }
 
     [Fact]
     public async Task MapGet_UnusedParameter_BeforeExistingParameter_AddToLambdaBefore()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -657,7 +775,8 @@ class Program
 }
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -673,18 +792,26 @@ class Program
 
         var expectedDiagnostics = new[]
         {
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0)
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("id")
+                .WithLocation(0),
         };
 
         // Act & Assert
-        await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource, expectedIterations: 1);
+        await VerifyCS.VerifyCodeFixAsync(
+            source,
+            expectedDiagnostics,
+            fixedSource,
+            expectedIterations: 1
+        );
     }
 
     [Fact]
     public async Task MapGet_UnusedParameter_HasCancellationToken_AddToLambdaBeforeToken()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
@@ -699,7 +826,8 @@ class Program
 }
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
@@ -716,18 +844,26 @@ class Program
 
         var expectedDiagnostics = new[]
         {
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("bookId").WithLocation(0)
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("bookId")
+                .WithLocation(0),
         };
 
         // Act & Assert
-        await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource, expectedIterations: 1);
+        await VerifyCS.VerifyCodeFixAsync(
+            source,
+            expectedDiagnostics,
+            fixedSource,
+            expectedIterations: 1
+        );
     }
 
     [Fact]
     public async Task MapGet_UnusedParameter_Multiple_HasCancellationToken_AddToLambdaBeforeToken()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
@@ -742,7 +878,8 @@ class Program
 }
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
@@ -759,21 +896,35 @@ class Program
 
         var expectedDiagnostics = new[]
         {
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0),
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id2").WithLocation(1),
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("bookId").WithLocation(2),
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("after").WithLocation(3),
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("id")
+                .WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("id2")
+                .WithLocation(1),
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("bookId")
+                .WithLocation(2),
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("after")
+                .WithLocation(3),
         };
 
         // Act & Assert
-        await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource, expectedIterations: 4);
+        await VerifyCS.VerifyCodeFixAsync(
+            source,
+            expectedDiagnostics,
+            fixedSource,
+            expectedIterations: 4
+        );
     }
 
     [Fact]
     public async Task MapGet_UnusedParameter_AsParameters_HasCancellationToken_AddToLambdaBeforeToken()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
@@ -800,7 +951,8 @@ public class PageData
 }
 ";
 
-        var fixedSource = @"
+        var fixedSource =
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
@@ -829,10 +981,17 @@ public class PageData
 
         var expectedDiagnostics = new[]
         {
-            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter).WithArguments("id").WithLocation(0),
+            new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
+                .WithArguments("id")
+                .WithLocation(0),
         };
 
         // Act & Assert
-        await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource, expectedIterations: 1);
+        await VerifyCS.VerifyCodeFixAsync(
+            source,
+            expectedDiagnostics,
+            fixedSource,
+            expectedIterations: 1
+        );
     }
 }

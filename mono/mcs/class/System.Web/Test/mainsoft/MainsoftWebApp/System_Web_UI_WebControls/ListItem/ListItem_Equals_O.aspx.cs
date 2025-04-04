@@ -30,166 +30,170 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class ListItem_Equals_O
-		: GHTBaseWeb 
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+    public class ListItem_Equals_O : GHTBaseWeb
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			HtmlForm frm = (HtmlForm) (HtmlForm)this.FindControl("Form1");
-			this.GHTTestBegin(frm);
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)(HtmlForm)this.FindControl("Form1");
+            this.GHTTestBegin(frm);
 
-			// SubTest Reference equality
-			this.GHTSubTestBegin("Reference equality");
-			try 
-			{
-				System.Web.UI.WebControls.ListItem item1 = new System.Web.UI.WebControls.ListItem("Text", "Value");
-				System.Web.UI.WebControls.ListItem item2 = item1;
+            // SubTest Reference equality
+            this.GHTSubTestBegin("Reference equality");
+            try
+            {
+                System.Web.UI.WebControls.ListItem item1 = new System.Web.UI.WebControls.ListItem(
+                    "Text",
+                    "Value"
+                );
+                System.Web.UI.WebControls.ListItem item2 = item1;
 
-				Compare(item1.Equals(item2), true);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+                Compare(item1.Equals(item2), true);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			GHTTestBegin(frm);
+            GHTTestBegin(frm);
 
-			// SubTest Text & Value equal, but selected is not equal
-			GHTSubTestBegin("Text & Value equal, but selected is not equal");
-				try 
-				{
-					System.Web.UI.WebControls.ListItem item3 = new System.Web.UI.WebControls.ListItem("Text", "Value");
-					item3.Selected = true;
-					System.Web.UI.WebControls.ListItem item4 = new System.Web.UI.WebControls.ListItem("Text", "Value");
-					item4.Selected = false;
-					Compare(item3.Equals(item4), true);
-				}
-				catch (Exception ex) 
-				{
-					GHTSubTestUnexpectedExceptionCaught(ex);
-				}
-			GHTSubTestEnd();
+            // SubTest Text & Value equal, but selected is not equal
+            GHTSubTestBegin("Text & Value equal, but selected is not equal");
+            try
+            {
+                System.Web.UI.WebControls.ListItem item3 = new System.Web.UI.WebControls.ListItem(
+                    "Text",
+                    "Value"
+                );
+                item3.Selected = true;
+                System.Web.UI.WebControls.ListItem item4 = new System.Web.UI.WebControls.ListItem(
+                    "Text",
+                    "Value"
+                );
+                item4.Selected = false;
+                Compare(item3.Equals(item4), true);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// SubTest Values are not equal
-			GHTSubTestBegin("Values are not equal");
-			try 
-			{
-				System.Web.UI.WebControls.ListItem item5 = new System.Web.UI.WebControls.ListItem("Text", "Value1");
-				System.Web.UI.WebControls.ListItem item6 = new System.Web.UI.WebControls.ListItem("Text", "Value2");
-				Compare(item5.Equals(item6), false);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // SubTest Values are not equal
+            GHTSubTestBegin("Values are not equal");
+            try
+            {
+                System.Web.UI.WebControls.ListItem item5 = new System.Web.UI.WebControls.ListItem(
+                    "Text",
+                    "Value1"
+                );
+                System.Web.UI.WebControls.ListItem item6 = new System.Web.UI.WebControls.ListItem(
+                    "Text",
+                    "Value2"
+                );
+                Compare(item5.Equals(item6), false);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// SubTest Texts are not equal
-			GHTSubTestBegin("Texts are not equal");
-				try 
-				{
-					System.Web.UI.WebControls.ListItem item7 = new System.Web.UI.WebControls.ListItem("Text1", "Value");
-					System.Web.UI.WebControls.ListItem item8 = new System.Web.UI.WebControls.ListItem("Text2", "Value");
-					Compare(item7.Equals(item8), false);
-				}
-				catch (Exception ex) 
-				{
-					GHTSubTestUnexpectedExceptionCaught(ex);
-				}
-			GHTSubTestEnd();
+            // SubTest Texts are not equal
+            GHTSubTestBegin("Texts are not equal");
+            try
+            {
+                System.Web.UI.WebControls.ListItem item7 = new System.Web.UI.WebControls.ListItem(
+                    "Text1",
+                    "Value"
+                );
+                System.Web.UI.WebControls.ListItem item8 = new System.Web.UI.WebControls.ListItem(
+                    "Text2",
+                    "Value"
+                );
+                Compare(item7.Equals(item8), false);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			// SubTest FakeListItem
-			GHTSubTestBegin("FakeListItem");
-			try 
-			{
-				System.Web.UI.WebControls.ListItem item9 = new System.Web.UI.WebControls.ListItem("Text", "Value");
-				FakeListItem item10 = new FakeListItem("Text", "Value");
-				Compare(item9.Equals(item10), false);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			GHTSubTestEnd();
+            // SubTest FakeListItem
+            GHTSubTestBegin("FakeListItem");
+            try
+            {
+                System.Web.UI.WebControls.ListItem item9 = new System.Web.UI.WebControls.ListItem(
+                    "Text",
+                    "Value"
+                );
+                FakeListItem item10 = new FakeListItem("Text", "Value");
+                Compare(item9.Equals(item10), false);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            GHTSubTestEnd();
 
-			GHTTestEnd();
-		}
-	}
+            GHTTestEnd();
+        }
+    }
 
+    class FakeListItem
+    {
+        // Methods
+        public FakeListItem(string a_text, string a_value)
+        {
+            this.m_text = a_text;
+            this.m_value = a_value;
+        }
 
-	class FakeListItem
-	{
-		// Methods
-		public FakeListItem(string a_text, string a_value)
-		{
-			this.m_text = a_text;
-			this.m_value = a_value;
-		}
-		// Properties
-		public bool Selected
-		{
-			get
-			{
-				return this.m_selected;
-			}
-			set
-			{
-				this.m_selected = value;
-			}
-		}
-		public string Text
-		{
-			get
-			{
-				return this.m_text;
-			}
-			set
-			{
-				this.m_text = value;
-			}
-		}
-		public string Value
-		{
-			get
-			{
-				return this.m_value;
-			}
-			set
-			{
-				this.m_value = value;
-			}
-		}
-		// Fields
-		private bool m_selected;
-		private string m_text;
-		private string m_value;
-	}
+        // Properties
+        public bool Selected
+        {
+            get { return this.m_selected; }
+            set { this.m_selected = value; }
+        }
+        public string Text
+        {
+            get { return this.m_text; }
+            set { this.m_text = value; }
+        }
+        public string Value
+        {
+            get { return this.m_value; }
+            set { this.m_value = value; }
+        }
+
+        // Fields
+        private bool m_selected;
+        private string m_text;
+        private string m_value;
+    }
 }
-

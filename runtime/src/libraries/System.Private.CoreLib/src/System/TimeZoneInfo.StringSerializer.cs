@@ -20,7 +20,7 @@ namespace System
                 Escaped = 0,
                 NotEscaped = 1,
                 StartOfToken = 2,
-                EndOfLine = 3
+                EndOfLine = 3,
             }
 
             private readonly string _serializedText;
@@ -41,14 +41,20 @@ namespace System
             /// </summary>
             public static string GetSerializedString(TimeZoneInfo zone)
             {
-                var serializedText = new ValueStringBuilder(stackalloc char[InitialCapacityForString]);
+                var serializedText = new ValueStringBuilder(
+                    stackalloc char[InitialCapacityForString]
+                );
 
                 //
                 // <_id>;<_baseUtcOffset>;<_displayName>;<_standardDisplayName>;<_daylightDispayName>
                 //
                 SerializeSubstitute(zone.Id, ref serializedText);
                 serializedText.Append(Sep);
-                serializedText.AppendSpanFormattable(zone.BaseUtcOffset.TotalMinutes, format: default, CultureInfo.InvariantCulture);
+                serializedText.AppendSpanFormattable(
+                    zone.BaseUtcOffset.TotalMinutes,
+                    format: default,
+                    CultureInfo.InvariantCulture
+                );
                 serializedText.Append(Sep);
                 SerializeSubstitute(zone.DisplayName, ref serializedText);
                 serializedText.Append(Sep);
@@ -61,11 +67,23 @@ namespace System
                 foreach (AdjustmentRule rule in rules)
                 {
                     serializedText.Append(Lhs);
-                    serializedText.AppendSpanFormattable(rule.DateStart, DateTimeFormat, DateTimeFormatInfo.InvariantInfo);
+                    serializedText.AppendSpanFormattable(
+                        rule.DateStart,
+                        DateTimeFormat,
+                        DateTimeFormatInfo.InvariantInfo
+                    );
                     serializedText.Append(Sep);
-                    serializedText.AppendSpanFormattable(rule.DateEnd, DateTimeFormat, DateTimeFormatInfo.InvariantInfo);
+                    serializedText.AppendSpanFormattable(
+                        rule.DateEnd,
+                        DateTimeFormat,
+                        DateTimeFormatInfo.InvariantInfo
+                    );
                     serializedText.Append(Sep);
-                    serializedText.AppendSpanFormattable(rule.DaylightDelta.TotalMinutes, format: default, CultureInfo.InvariantCulture);
+                    serializedText.AppendSpanFormattable(
+                        rule.DaylightDelta.TotalMinutes,
+                        format: default,
+                        CultureInfo.InvariantCulture
+                    );
                     serializedText.Append(Sep);
                     // serialize the TransitionTime's
                     SerializeTransitionTime(rule.DaylightTransitionStart, ref serializedText);
@@ -75,7 +93,11 @@ namespace System
                     if (rule.BaseUtcOffsetDelta != TimeSpan.Zero)
                     {
                         // Serialize it only when BaseUtcOffsetDelta has a value to reduce the impact of adding rule.BaseUtcOffsetDelta
-                        serializedText.AppendSpanFormattable(rule.BaseUtcOffsetDelta.TotalMinutes, format: default, CultureInfo.InvariantCulture);
+                        serializedText.AppendSpanFormattable(
+                            rule.BaseUtcOffsetDelta.TotalMinutes,
+                            format: default,
+                            CultureInfo.InvariantCulture
+                        );
                         serializedText.Append(Sep);
                     }
                     if (rule.NoDaylightTransitions)
@@ -107,7 +129,15 @@ namespace System
 
                 try
                 {
-                    return new TimeZoneInfo(id, baseUtcOffset, displayName, standardName, daylightName, rules, disableDaylightSavingTime: false);
+                    return new TimeZoneInfo(
+                        id,
+                        baseUtcOffset,
+                        displayName,
+                        standardName,
+                        daylightName,
+                        rules,
+                        disableDaylightSavingTime: false
+                    );
                 }
                 catch (ArgumentException ex)
                 {
@@ -134,7 +164,10 @@ namespace System
             /// "]" -> "\]"
             /// "\" -> "\\"
             /// </summary>
-            private static void SerializeSubstitute(string text, ref ValueStringBuilder serializedText)
+            private static void SerializeSubstitute(
+                string text,
+                ref ValueStringBuilder serializedText
+            )
             {
                 foreach (char c in text)
                 {
@@ -149,25 +182,48 @@ namespace System
             /// <summary>
             /// Helper method to serialize a TimeZoneInfo.TransitionTime object.
             /// </summary>
-            private static void SerializeTransitionTime(TransitionTime time, ref ValueStringBuilder serializedText)
+            private static void SerializeTransitionTime(
+                TransitionTime time,
+                ref ValueStringBuilder serializedText
+            )
             {
                 serializedText.Append(Lhs);
                 serializedText.Append(time.IsFixedDateRule ? '1' : '0');
                 serializedText.Append(Sep);
-                serializedText.AppendSpanFormattable(time.TimeOfDay, TimeOfDayFormat, DateTimeFormatInfo.InvariantInfo);
+                serializedText.AppendSpanFormattable(
+                    time.TimeOfDay,
+                    TimeOfDayFormat,
+                    DateTimeFormatInfo.InvariantInfo
+                );
                 serializedText.Append(Sep);
-                serializedText.AppendSpanFormattable(time.Month, format: default, CultureInfo.InvariantCulture);
+                serializedText.AppendSpanFormattable(
+                    time.Month,
+                    format: default,
+                    CultureInfo.InvariantCulture
+                );
                 serializedText.Append(Sep);
                 if (time.IsFixedDateRule)
                 {
-                    serializedText.AppendSpanFormattable(time.Day, format: default, CultureInfo.InvariantCulture);
+                    serializedText.AppendSpanFormattable(
+                        time.Day,
+                        format: default,
+                        CultureInfo.InvariantCulture
+                    );
                     serializedText.Append(Sep);
                 }
                 else
                 {
-                    serializedText.AppendSpanFormattable(time.Week, format: default, CultureInfo.InvariantCulture);
+                    serializedText.AppendSpanFormattable(
+                        time.Week,
+                        format: default,
+                        CultureInfo.InvariantCulture
+                    );
                     serializedText.Append(Sep);
-                    serializedText.AppendSpanFormattable((int)time.DayOfWeek, format: default, CultureInfo.InvariantCulture);
+                    serializedText.AppendSpanFormattable(
+                        (int)time.DayOfWeek,
+                        format: default,
+                        CultureInfo.InvariantCulture
+                    );
                     serializedText.Append(Sep);
                 }
                 serializedText.Append(Rhs);
@@ -180,7 +236,9 @@ namespace System
             {
                 if (c != Esc && c != Sep && c != Lhs && c != Rhs)
                 {
-                    throw new SerializationException(SR.Format(SR.Serialization_InvalidEscapeSequence, c));
+                    throw new SerializationException(
+                        SR.Format(SR.Serialization_InvalidEscapeSequence, c)
+                    );
                 }
             }
 
@@ -189,9 +247,14 @@ namespace System
             /// current relative nested bracket depth that _currentTokenStartIndex is at. The function ends
             /// successfully when "depth" returns to zero (0).
             /// </summary>
-            private void SkipVersionNextDataFields(int depth /* starting depth in the nested brackets ('[', ']')*/)
+            private void SkipVersionNextDataFields(
+                int depth /* starting depth in the nested brackets ('[', ']')*/
+            )
             {
-                if (_currentTokenStartIndex < 0 || _currentTokenStartIndex >= _serializedText.Length)
+                if (
+                    _currentTokenStartIndex < 0
+                    || _currentTokenStartIndex >= _serializedText.Length
+                )
                 {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
@@ -259,7 +322,10 @@ namespace System
                 {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
-                if (_currentTokenStartIndex < 0 || _currentTokenStartIndex >= _serializedText.Length)
+                if (
+                    _currentTokenStartIndex < 0
+                    || _currentTokenStartIndex >= _serializedText.Length
+                )
                 {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
@@ -319,7 +385,9 @@ namespace System
                 if (tokenState == State.Escaped)
                 {
                     // we are at the end of the serialized text but we are in an escaped state
-                    throw new SerializationException(SR.Format(SR.Serialization_InvalidEscapeSequence, string.Empty));
+                    throw new SerializationException(
+                        SR.Format(SR.Serialization_InvalidEscapeSequence, string.Empty)
+                    );
                 }
 
                 throw new SerializationException(SR.Serialization_InvalidData);
@@ -331,7 +399,15 @@ namespace System
             private DateTime GetNextDateTimeValue(string format)
             {
                 string token = GetNextStringValue();
-                if (!DateTime.TryParseExact(token, format, DateTimeFormatInfo.InvariantInfo, DateTimeStyles.None, out DateTime time))
+                if (
+                    !DateTime.TryParseExact(
+                        token,
+                        format,
+                        DateTimeFormatInfo.InvariantInfo,
+                        DateTimeStyles.None,
+                        out DateTime time
+                    )
+                )
                 {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
@@ -360,7 +436,15 @@ namespace System
             private int GetNextInt32Value()
             {
                 string token = GetNextStringValue();
-                if (!int.TryParse(token, NumberStyles.AllowLeadingSign /* "[sign]digits" */, CultureInfo.InvariantCulture, out int value))
+                if (
+                    !int.TryParse(
+                        token,
+                        NumberStyles.AllowLeadingSign /* "[sign]digits" */
+                        ,
+                        CultureInfo.InvariantCulture,
+                        out int value
+                    )
+                )
                 {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
@@ -390,7 +474,10 @@ namespace System
                 {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
-                if (_currentTokenStartIndex < 0 || _currentTokenStartIndex >= _serializedText.Length)
+                if (
+                    _currentTokenStartIndex < 0
+                    || _currentTokenStartIndex >= _serializedText.Length
+                )
                 {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
@@ -409,7 +496,10 @@ namespace System
                     return null;
                 }
 
-                if (_currentTokenStartIndex < 0 || _currentTokenStartIndex >= _serializedText.Length)
+                if (
+                    _currentTokenStartIndex < 0
+                    || _currentTokenStartIndex >= _serializedText.Length
+                )
                 {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
@@ -443,7 +533,10 @@ namespace System
                 }
 
                 // Check if we have baseUtcOffsetDelta in the serialized string and then deserialize it
-                if (char.IsAsciiDigit(_serializedText[_currentTokenStartIndex]) || _serializedText[_currentTokenStartIndex] is '-' or '+')
+                if (
+                    char.IsAsciiDigit(_serializedText[_currentTokenStartIndex])
+                    || _serializedText[_currentTokenStartIndex] is '-' or '+'
+                )
                 {
                     baseUtcOffsetDelta = GetNextTimeSpanValue();
                 }
@@ -478,7 +571,15 @@ namespace System
                 AdjustmentRule rule;
                 try
                 {
-                    rule = AdjustmentRule.CreateAdjustmentRule(dateStart, dateEnd, daylightDelta, daylightStart, daylightEnd, baseUtcOffsetDelta, noDaylightTransitions > 0);
+                    rule = AdjustmentRule.CreateAdjustmentRule(
+                        dateStart,
+                        dateEnd,
+                        daylightDelta,
+                        daylightStart,
+                        daylightEnd,
+                        baseUtcOffsetDelta,
+                        noDaylightTransitions > 0
+                    );
                 }
                 catch (ArgumentException e)
                 {
@@ -504,8 +605,13 @@ namespace System
             {
                 // first verify the internal state of the object
 
-                if (_state == State.EndOfLine ||
-                    (_currentTokenStartIndex < _serializedText.Length && _serializedText[_currentTokenStartIndex] == Rhs))
+                if (
+                    _state == State.EndOfLine
+                    || (
+                        _currentTokenStartIndex < _serializedText.Length
+                        && _serializedText[_currentTokenStartIndex] == Rhs
+                    )
+                )
                 {
                     //
                     // we are at the end of the line or we are starting at a "]" character
@@ -513,7 +619,10 @@ namespace System
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
 
-                if (_currentTokenStartIndex < 0 || _currentTokenStartIndex >= _serializedText.Length)
+                if (
+                    _currentTokenStartIndex < 0
+                    || _currentTokenStartIndex >= _serializedText.Length
+                )
                 {
                     throw new SerializationException(SR.Serialization_InvalidData);
                 }
@@ -536,7 +645,15 @@ namespace System
                 TransitionTime transition;
 
                 DateTime timeOfDay = GetNextDateTimeValue(TimeOfDayFormat);
-                timeOfDay = new DateTime(1, 1, 1, timeOfDay.Hour, timeOfDay.Minute, timeOfDay.Second, timeOfDay.Millisecond);
+                timeOfDay = new DateTime(
+                    1,
+                    1,
+                    1,
+                    timeOfDay.Hour,
+                    timeOfDay.Minute,
+                    timeOfDay.Second,
+                    timeOfDay.Millisecond
+                );
 
                 int month = GetNextInt32Value();
 
@@ -560,7 +677,12 @@ namespace System
 
                     try
                     {
-                        transition = TransitionTime.CreateFloatingDateRule(timeOfDay, month, week, (DayOfWeek)dayOfWeek);
+                        transition = TransitionTime.CreateFloatingDateRule(
+                            timeOfDay,
+                            month,
+                            week,
+                            (DayOfWeek)dayOfWeek
+                        );
                     }
                     catch (ArgumentException e)
                     {
@@ -591,8 +713,10 @@ namespace System
 
                 // check to see if the string is now at the separator (";") ...
                 bool sepFound = false;
-                if (_currentTokenStartIndex < _serializedText.Length &&
-                    _serializedText[_currentTokenStartIndex] == Sep)
+                if (
+                    _currentTokenStartIndex < _serializedText.Length
+                    && _serializedText[_currentTokenStartIndex] == Sep
+                )
                 {
                     // handle the case where we ended on a ";"
                     _currentTokenStartIndex++;

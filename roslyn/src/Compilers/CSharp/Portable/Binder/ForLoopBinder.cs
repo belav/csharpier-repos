@@ -5,12 +5,12 @@
 #nullable disable
 
 using System.Collections.Immutable;
+using System.Diagnostics;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
-using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -32,20 +32,32 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Declaration and Initializers are mutually exclusive.
             if (_syntax.Declaration != null)
             {
-                _syntax.Declaration.Type.VisitRankSpecifiers((rankSpecifier, args) =>
-                {
-                    foreach (var size in rankSpecifier.Sizes)
+                _syntax.Declaration.Type.VisitRankSpecifiers(
+                    (rankSpecifier, args) =>
                     {
-                        if (size.Kind() != SyntaxKind.OmittedArraySizeExpression)
+                        foreach (var size in rankSpecifier.Sizes)
                         {
-                            ExpressionVariableFinder.FindExpressionVariables(args.binder, args.locals, size);
+                            if (size.Kind() != SyntaxKind.OmittedArraySizeExpression)
+                            {
+                                ExpressionVariableFinder.FindExpressionVariables(
+                                    args.binder,
+                                    args.locals,
+                                    size
+                                );
+                            }
                         }
-                    }
-                }, (binder: this, locals: locals));
+                    },
+                    (binder: this, locals: locals)
+                );
 
                 foreach (var vdecl in _syntax.Declaration.Variables)
                 {
-                    var localSymbol = MakeLocal(_syntax.Declaration, vdecl, LocalDeclarationKind.RegularVariable, allowScoped: true);
+                    var localSymbol = MakeLocal(
+                        _syntax.Declaration,
+                        vdecl,
+                        LocalDeclarationKind.RegularVariable,
+                        allowScoped: true
+                    );
                     locals.Add(localSymbol);
 
                     // also gather expression-declared variables from the bracketed argument lists and the initializers
@@ -54,19 +66,30 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                ExpressionVariableFinder.FindExpressionVariables(this, locals, _syntax.Initializers);
+                ExpressionVariableFinder.FindExpressionVariables(
+                    this,
+                    locals,
+                    _syntax.Initializers
+                );
             }
 
             return locals.ToImmutableAndFree();
         }
 
-        internal override BoundForStatement BindForParts(BindingDiagnosticBag diagnostics, Binder originalBinder)
+        internal override BoundForStatement BindForParts(
+            BindingDiagnosticBag diagnostics,
+            Binder originalBinder
+        )
         {
             BoundForStatement result = BindForParts(_syntax, originalBinder, diagnostics);
             return result;
         }
 
-        private BoundForStatement BindForParts(ForStatementSyntax node, Binder originalBinder, BindingDiagnosticBag diagnostics)
+        private BoundForStatement BindForParts(
+            ForStatementSyntax node,
+            Binder originalBinder,
+            BindingDiagnosticBag diagnostics
+        )
         {
             BoundStatement initializer;
             // Declaration and Initializers are mutually exclusive.
@@ -81,11 +104,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                     MessageID.IDS_FeatureRefFor.CheckFeatureAvailability(diagnostics, type);
                 }
 
-                initializer = originalBinder.BindForOrUsingOrFixedDeclarations(node.Declaration, LocalDeclarationKind.RegularVariable, diagnostics, out _);
+                initializer = originalBinder.BindForOrUsingOrFixedDeclarations(
+                    node.Declaration,
+                    LocalDeclarationKind.RegularVariable,
+                    diagnostics,
+                    out _
+                );
             }
             else
             {
-                initializer = originalBinder.BindStatementExpressionList(node.Initializers, diagnostics);
+                initializer = originalBinder.BindStatementExpressionList(
+                    node.Initializers,
+                    diagnostics
+                );
             }
 
             BoundExpression condition = null;
@@ -105,20 +136,35 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var scopeDesignator = incrementors.First();
                 var incrementBinder = originalBinder.GetBinder(scopeDesignator);
                 increment = incrementBinder.BindStatementExpressionList(incrementors, diagnostics);
-                Debug.Assert(increment.Kind != BoundKind.StatementList || ((BoundStatementList)increment).Statements.Length > 1);
+                Debug.Assert(
+                    increment.Kind != BoundKind.StatementList
+                        || ((BoundStatementList)increment).Statements.Length > 1
+                );
 
                 var locals = incrementBinder.GetDeclaredLocalsForScope(scopeDesignator);
                 if (!locals.IsEmpty)
                 {
                     if (increment.Kind == BoundKind.StatementList)
                     {
-                        increment = new BoundBlock(scopeDesignator, locals, ((BoundStatementList)increment).Statements)
-                        { WasCompilerGenerated = true };
+                        increment = new BoundBlock(
+                            scopeDesignator,
+                            locals,
+                            ((BoundStatementList)increment).Statements
+                        )
+                        {
+                            WasCompilerGenerated = true,
+                        };
                     }
                     else
                     {
-                        increment = new BoundBlock(increment.Syntax, locals, ImmutableArray.Create(increment))
-                        { WasCompilerGenerated = true };
+                        increment = new BoundBlock(
+                            increment.Syntax,
+                            locals,
+                            ImmutableArray.Create(increment)
+                        )
+                        {
+                            WasCompilerGenerated = true,
+                        };
                     }
                 }
             }
@@ -126,18 +172,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             var body = originalBinder.BindPossibleEmbeddedStatement(node.Statement, diagnostics);
 
             Debug.Assert(this.Locals == this.GetDeclaredLocalsForScope(node));
-            return new BoundForStatement(node,
-                                         this.Locals,
-                                         initializer,
-                                         innerLocals,
-                                         condition,
-                                         increment,
-                                         body,
-                                         this.BreakLabel,
-                                         this.ContinueLabel);
+            return new BoundForStatement(
+                node,
+                this.Locals,
+                initializer,
+                innerLocals,
+                condition,
+                increment,
+                body,
+                this.BreakLabel,
+                this.ContinueLabel
+            );
         }
 
-        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(SyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
+            SyntaxNode scopeDesignator
+        )
         {
             if (_syntax == scopeDesignator)
             {
@@ -147,17 +197,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(CSharpSyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
+            CSharpSyntaxNode scopeDesignator
+        )
         {
             throw ExceptionUtilities.Unreachable();
         }
 
         internal override SyntaxNode ScopeDesignator
         {
-            get
-            {
-                return _syntax;
-            }
+            get { return _syntax; }
         }
     }
 }

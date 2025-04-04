@@ -24,8 +24,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
 using Xunit;
 
 namespace System.Data.Tests
@@ -95,7 +93,6 @@ namespace System.Data.Tests
                 Assert.Equal(dt.Rows[1], _rowInAction_Changed);
                 Assert.Equal(DataRowAction.Change, _rowAction_Changed);
 
-
                 // Row State tests
                 // current - modified ; result - modified
                 ResetEventFlags();
@@ -109,7 +106,6 @@ namespace System.Data.Tests
                 Assert.True(_rowChanged);
                 Assert.Equal(dt.Rows[1], _rowInAction_Changed);
                 Assert.Equal(DataRowAction.Change, _rowAction_Changed);
-
 
                 // current - Unchanged; result - Unchanged if no new value
                 dt.AcceptChanges();
@@ -137,13 +133,13 @@ namespace System.Data.Tests
                 Assert.Equal(dt.Rows[1], _rowInAction_Changed);
                 Assert.Equal(DataRowAction.Change, _rowAction_Changed);
 
-
                 // current - added; result - added
                 dt.Rows.Add(new object[] { 4, "mono 4" });
                 ResetEventFlags();
                 dt.LoadDataRow(new object[] { 4, "mono 4" }, LoadOption.Upsert);
                 Assert.Equal("mono 4", dt.Rows[3][1]);
-                Assert.Throws<VersionNotFoundException>(() => dt.Rows[3][1, DataRowVersion.Original]);
+                Assert.Throws<VersionNotFoundException>(() => dt.Rows[3][1, DataRowVersion.Original]
+                );
                 Assert.Equal(DataRowState.Added, dt.Rows[3].RowState);
                 Assert.True(_rowChanging);
                 Assert.Equal(dt.Rows[3], _rowInAction_Changing);
@@ -152,12 +148,12 @@ namespace System.Data.Tests
                 Assert.Equal(dt.Rows[3], _rowInAction_Changed);
                 Assert.Equal(DataRowAction.Change, _rowAction_Changed);
 
-
                 // current - none; result - added
                 ResetEventFlags();
                 dt.LoadDataRow(new object[] { 5, "mono 5" }, LoadOption.Upsert);
                 Assert.Equal("mono 5", dt.Rows[4][1]);
-                Assert.Throws<VersionNotFoundException>(() => dt.Rows[4][1, DataRowVersion.Original]);
+                Assert.Throws<VersionNotFoundException>(() => dt.Rows[4][1, DataRowVersion.Original]
+                );
                 Assert.Equal(DataRowState.Added, dt.Rows[4].RowState);
                 Assert.True(_rowChanging);
                 Assert.Equal(dt.Rows[4], _rowInAction_Changing);
@@ -165,7 +161,6 @@ namespace System.Data.Tests
                 Assert.True(_rowChanged);
                 Assert.Equal(dt.Rows[4], _rowInAction_Changed);
                 Assert.Equal(DataRowAction.Add, _rowAction_Changed);
-
 
                 // current - deleted; result - added a new row
                 ResetEventFlags();
@@ -180,7 +175,8 @@ namespace System.Data.Tests
                 dt.LoadDataRow(new object[] { 5, "mono 5" }, LoadOption.Upsert);
                 Assert.Equal(6, dt.Rows.Count);
                 Assert.Equal("mono 5", dt.Rows[5][1]);
-                Assert.Throws<VersionNotFoundException>(() => dt.Rows[5][1, DataRowVersion.Original]);
+                Assert.Throws<VersionNotFoundException>(() => dt.Rows[5][1, DataRowVersion.Original]
+                );
                 Assert.Equal(DataRowState.Added, dt.Rows[5].RowState);
                 Assert.True(_rowChanging);
                 Assert.Equal(dt.Rows[5], _rowInAction_Changing);
@@ -248,7 +244,6 @@ namespace System.Data.Tests
                 Assert.Equal(dt.Rows[1], _rowInAction_Changed);
                 Assert.Equal(DataRowAction.ChangeCurrentAndOriginal, _rowAction_Changed);
 
-
                 // current - Unchanged; result - Unchanged
                 dt.AcceptChanges();
                 ResetEventFlags();
@@ -277,7 +272,6 @@ namespace System.Data.Tests
                 Assert.Equal(dt.Rows[3], _rowInAction_Changed);
                 Assert.Equal(DataRowAction.ChangeCurrentAndOriginal, _rowAction_Changed);
 
-
                 // current - new; result - added
                 ResetEventFlags();
                 dt.LoadDataRow(new object[] { 5, "mono 5" }, LoadOption.OverwriteChanges);
@@ -290,7 +284,6 @@ namespace System.Data.Tests
                 Assert.True(_rowChanged);
                 Assert.Equal(dt.Rows[4], _rowInAction_Changed);
                 Assert.Equal(DataRowAction.ChangeCurrentAndOriginal, _rowAction_Changed);
-
 
                 // current - deleted; result - added a new row
                 ResetEventFlags();
@@ -365,7 +358,6 @@ namespace System.Data.Tests
                 Assert.Equal(dt.Rows[3], _rowInAction_Changed);
                 Assert.Equal(DataRowAction.ChangeCurrentAndOriginal, _rowAction_Changed);
 
-
                 dt.RejectChanges();
 
                 // current - added; new - modified
@@ -382,7 +374,6 @@ namespace System.Data.Tests
                 Assert.True(_rowChanged);
                 Assert.Equal(dt.Rows[4], _rowInAction_Changed);
                 Assert.Equal(DataRowAction.ChangeOriginal, _rowAction_Changed);
-
 
                 dt.RejectChanges();
 
@@ -480,7 +471,6 @@ namespace System.Data.Tests
             dt.RowDeleting += new DataRowChangeEventHandler(dt_RowDeleting);
             //dt.TableNewRow += new DataTableNewRowEventHandler (dt_TableNewRow);
         }
-
 
         private void UnsubscribeEvents(DataTable dt)
         {

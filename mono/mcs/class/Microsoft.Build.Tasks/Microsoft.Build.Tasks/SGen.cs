@@ -25,122 +25,130 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
-using Microsoft.Build.Framework; 
+using Microsoft.Build.Framework;
 using Microsoft.Build.Tasks;
 using Mono.XBuild.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public class SGen : ToolTaskExtension {
-	
-		string buildAssemblyName;
-		string buildAssemblyPath;
-		bool delaySign;
-		string keyContainer;
-		string keyFile;
-		string [] references;
-		ITaskItem [] serializationAssembly;
-		string serializationAssemblyName;
-		bool shouldGenerateSerializer;
-		bool useProxyTypes;
+namespace Microsoft.Build.Tasks
+{
+    public class SGen : ToolTaskExtension
+    {
+        string buildAssemblyName;
+        string buildAssemblyPath;
+        bool delaySign;
+        string keyContainer;
+        string keyFile;
+        string[] references;
+        ITaskItem[] serializationAssembly;
+        string serializationAssemblyName;
+        bool shouldGenerateSerializer;
+        bool useProxyTypes;
 
-		public SGen ()
-		{
-		}
+        public SGen() { }
 
-		[MonoTODO]
-		[Required]
-		public string BuildAssemblyName {
-			get { return buildAssemblyName; }
-			set { buildAssemblyName = value; }
-		}
+        [MonoTODO]
+        [Required]
+        public string BuildAssemblyName
+        {
+            get { return buildAssemblyName; }
+            set { buildAssemblyName = value; }
+        }
 
-		[MonoTODO]
-		[Required]
-		public string BuildAssemblyPath {
-			get { return buildAssemblyPath; }
-			set { buildAssemblyPath = value; }
-		}
+        [MonoTODO]
+        [Required]
+        public string BuildAssemblyPath
+        {
+            get { return buildAssemblyPath; }
+            set { buildAssemblyPath = value; }
+        }
 
-		[MonoTODO]
-		public bool DelaySign {
-			get { return delaySign; }
-			set { delaySign = value; }
-		}
+        [MonoTODO]
+        public bool DelaySign
+        {
+            get { return delaySign; }
+            set { delaySign = value; }
+        }
 
-		[MonoTODO]
-		public string KeyContainer {
-			get { return keyContainer; }
-			set { keyContainer = value; }
-		}
+        [MonoTODO]
+        public string KeyContainer
+        {
+            get { return keyContainer; }
+            set { keyContainer = value; }
+        }
 
-		[MonoTODO]
-		public string KeyFile {
-			get { return keyFile; }
-			set { keyFile = value; }
-		}
+        [MonoTODO]
+        public string KeyFile
+        {
+            get { return keyFile; }
+            set { keyFile = value; }
+        }
 
-		[MonoTODO]
-		public string [] References {
-			get { return references; }
-			set { references = value; }
-		}
+        [MonoTODO]
+        public string[] References
+        {
+            get { return references; }
+            set { references = value; }
+        }
 
-		[MonoTODO]
-		[Output]
-		public ITaskItem [] SerializationAssembly {
-			get { return serializationAssembly; }
-			set { serializationAssembly = value; }
-		}
+        [MonoTODO]
+        [Output]
+        public ITaskItem[] SerializationAssembly
+        {
+            get { return serializationAssembly; }
+            set { serializationAssembly = value; }
+        }
 
-		[MonoTODO]
-		public string SerializationAssemblyName {
-			get { return serializationAssemblyName; }
-		}
+        [MonoTODO]
+        public string SerializationAssemblyName
+        {
+            get { return serializationAssemblyName; }
+        }
 
-		[MonoTODO]
-		[Required]
-		public bool ShouldGenerateSerializer {
-			get { return shouldGenerateSerializer; }
-			set { shouldGenerateSerializer = value; }
-		}
+        [MonoTODO]
+        [Required]
+        public bool ShouldGenerateSerializer
+        {
+            get { return shouldGenerateSerializer; }
+            set { shouldGenerateSerializer = value; }
+        }
 
-		[MonoTODO]
-		[Required]
-		public bool UseProxyTypes {
-			get { return useProxyTypes; }
-			set { useProxyTypes = value; }
-		}
+        [MonoTODO]
+        [Required]
+        public bool UseProxyTypes
+        {
+            get { return useProxyTypes; }
+            set { useProxyTypes = value; }
+        }
 
-		[MonoTODO]
-		protected override string ToolName {
-			get { return MSBuildUtils.RunningOnWindows ? "sgen.bat" : "sgen"; }
-		}
+        [MonoTODO]
+        protected override string ToolName
+        {
+            get { return MSBuildUtils.RunningOnWindows ? "sgen.bat" : "sgen"; }
+        }
 
-		[MonoTODO]
-		protected override string GenerateCommandLineCommands ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected override string GenerateCommandLineCommands()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		protected override string GenerateFullPathToTool ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected override string GenerateFullPathToTool()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		protected override bool SkipTaskExecution ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected override bool SkipTaskExecution()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		protected override bool ValidateParameters ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected override bool ValidateParameters()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
-

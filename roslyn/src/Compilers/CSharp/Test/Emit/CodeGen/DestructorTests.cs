@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         [ConditionalFact(typeof(DesktopOnly))]
         public void ClassDestructor()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 public class Base
@@ -48,16 +49,24 @@ public class Program
 }
 ";
             var validator = GetDestructorValidator("Base");
-            var compVerifier = CompileAndVerify(text,
+            var compVerifier = CompileAndVerify(
+                text,
                 sourceSymbolValidator: validator,
                 symbolValidator: validator,
                 expectedOutput: @"~Base",
                 expectedSignatures: new[]
                 {
-                    Signature("Base", "Finalize", ".method family hidebysig virtual instance System.Void Finalize() cil managed")
-                });
+                    Signature(
+                        "Base",
+                        "Finalize",
+                        ".method family hidebysig virtual instance System.Void Finalize() cil managed"
+                    ),
+                }
+            );
 
-            compVerifier.VerifyIL("Base.Finalize", @"
+            compVerifier.VerifyIL(
+                "Base.Finalize",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -75,14 +84,16 @@ public class Program
   }
   IL_0013:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
         [CompilerTrait(CompilerFeature.ExpressionBody)]
         public void ExpressionBodiedClassDestructor()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 public class Base
@@ -102,16 +113,24 @@ public class Program
 }
 ";
             var validator = GetDestructorValidator("Base");
-            var compVerifier = CompileAndVerify(text,
+            var compVerifier = CompileAndVerify(
+                text,
                 sourceSymbolValidator: validator,
                 symbolValidator: validator,
                 expectedOutput: @"~Base",
                 expectedSignatures: new[]
                 {
-                    Signature("Base", "Finalize", ".method family hidebysig virtual instance System.Void Finalize() cil managed")
-                });
+                    Signature(
+                        "Base",
+                        "Finalize",
+                        ".method family hidebysig virtual instance System.Void Finalize() cil managed"
+                    ),
+                }
+            );
 
-            compVerifier.VerifyIL("Base.Finalize", @"
+            compVerifier.VerifyIL(
+                "Base.Finalize",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -129,14 +148,16 @@ public class Program
   }
   IL_0013:  ret
 }
-");
+"
+            );
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
         [CompilerTrait(CompilerFeature.ExpressionBody)]
         public void ExpressionBodiedSubClassDestructor()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 public class Base
@@ -161,18 +182,30 @@ public class Program
 }
 ";
             var validator = GetDestructorValidator("Derived");
-            var compVerifier = CompileAndVerify(text,
+            var compVerifier = CompileAndVerify(
+                text,
                 sourceSymbolValidator: validator,
                 symbolValidator: validator,
                 expectedOutput: @"~Derived
 ~Base",
                 expectedSignatures: new[]
                 {
-                    Signature("Base", "Finalize", ".method family hidebysig virtual instance System.Void Finalize() cil managed"),
-                    Signature("Derived", "Finalize", ".method family hidebysig virtual instance System.Void Finalize() cil managed")
-                });
+                    Signature(
+                        "Base",
+                        "Finalize",
+                        ".method family hidebysig virtual instance System.Void Finalize() cil managed"
+                    ),
+                    Signature(
+                        "Derived",
+                        "Finalize",
+                        ".method family hidebysig virtual instance System.Void Finalize() cil managed"
+                    ),
+                }
+            );
 
-            compVerifier.VerifyIL("Base.Finalize", @"
+            compVerifier.VerifyIL(
+                "Base.Finalize",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -190,8 +223,11 @@ public class Program
   }
   IL_0013:  ret
 }
-");
-            compVerifier.VerifyIL("Derived.Finalize", @"
+"
+            );
+            compVerifier.VerifyIL(
+                "Derived.Finalize",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -209,14 +245,16 @@ public class Program
   }
   IL_0013:  ret
 }
-");
+"
+            );
             compVerifier.VerifyDiagnostics();
         }
 
         [ConditionalFact(typeof(DesktopOnly))]
         public void SubclassDestructor()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 public class Base
@@ -247,18 +285,30 @@ public class Program
 }
 ";
             var validator = GetDestructorValidator("Derived");
-            var compVerifier = CompileAndVerify(text,
+            var compVerifier = CompileAndVerify(
+                text,
                 sourceSymbolValidator: validator,
                 symbolValidator: validator,
                 expectedOutput: @"~Derived
 ~Base",
                 expectedSignatures: new[]
                 {
-                    Signature("Base", "Finalize", ".method family hidebysig virtual instance System.Void Finalize() cil managed"),
-                    Signature("Derived", "Finalize", ".method family hidebysig virtual instance System.Void Finalize() cil managed")
-                });
+                    Signature(
+                        "Base",
+                        "Finalize",
+                        ".method family hidebysig virtual instance System.Void Finalize() cil managed"
+                    ),
+                    Signature(
+                        "Derived",
+                        "Finalize",
+                        ".method family hidebysig virtual instance System.Void Finalize() cil managed"
+                    ),
+                }
+            );
 
-            compVerifier.VerifyIL("Base.Finalize", @"
+            compVerifier.VerifyIL(
+                "Base.Finalize",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -276,8 +326,11 @@ public class Program
   }
   IL_0013:  ret
 }
-");
-            compVerifier.VerifyIL("Derived.Finalize", @"
+"
+            );
+            compVerifier.VerifyIL(
+                "Derived.Finalize",
+                @"
 {
   // Code size       20 (0x14)
   .maxstack  1
@@ -295,14 +348,16 @@ public class Program
   }
   IL_0013:  ret
 }
-");
+"
+            );
             compVerifier.VerifyDiagnostics();
         }
 
         [ConditionalFact(typeof(WindowsDesktopOnly))]
         public void DestructorOverridesNonDestructor()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 public class Base
@@ -337,37 +392,50 @@ public class Program
     }
 }
 ";
-            var expectedOutput = @"
+            var expectedOutput =
+                @"
 ~Derived
 ~Base
 ";
 
-            // Destructors generated by Roslyn should still be destructors when they are loaded back in - 
+            // Destructors generated by Roslyn should still be destructors when they are loaded back in -
             // even in cases where the user creates their own Finalize methods (which is legal, but ill-advised).
             // This may not be the case for metadata from other C# compilers (which will likely not have
             // destructors explicitly override System.Object.Finalize).
             var validator = GetDestructorValidator("Derived");
 
-            var compVerifier = CompileAndVerify(text,
+            var compVerifier = CompileAndVerify(
+                text,
                 sourceSymbolValidator: validator,
                 symbolValidator: validator,
                 expectedOutput: expectedOutput,
                 expectedSignatures: new[]
                 {
-                Signature("Base", "Finalize", ".method family hidebysig newslot virtual instance System.Void Finalize() cil managed"),
-                    Signature("Derived", "Finalize", ".method family hidebysig virtual instance System.Void Finalize() cil managed")
-                });
+                    Signature(
+                        "Base",
+                        "Finalize",
+                        ".method family hidebysig newslot virtual instance System.Void Finalize() cil managed"
+                    ),
+                    Signature(
+                        "Derived",
+                        "Finalize",
+                        ".method family hidebysig virtual instance System.Void Finalize() cil managed"
+                    ),
+                }
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (6,28): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
-                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"));
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize")
+            );
         }
 
         [WorkItem(542828, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542828")]
         [ConditionalFact(typeof(WindowsDesktopOnly))]
         public void BaseTypeHasNonVirtualFinalize()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 public class Base
@@ -403,27 +471,39 @@ public class Program
 }
 ";
             var validator = GetDestructorValidator("Derived");
-            var compVerifier = CompileAndVerify(text,
+            var compVerifier = CompileAndVerify(
+                text,
                 sourceSymbolValidator: validator,
                 symbolValidator: validator,
                 expectedOutput: @"~Derived
 ~Base",
                 expectedSignatures: new[]
                 {
-                Signature("Base", "Finalize", ".method family hidebysig instance System.Void Finalize() cil managed"),
-                    Signature("Derived", "Finalize", ".method family hidebysig virtual instance System.Void Finalize() cil managed")
-                });
+                    Signature(
+                        "Base",
+                        "Finalize",
+                        ".method family hidebysig instance System.Void Finalize() cil managed"
+                    ),
+                    Signature(
+                        "Derived",
+                        "Finalize",
+                        ".method family hidebysig virtual instance System.Void Finalize() cil managed"
+                    ),
+                }
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (6,20): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
-                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"));
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize")
+            );
         }
 
         [WorkItem(542828, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542828")]
         [ConditionalFact(typeof(WindowsDesktopOnly))]
         public void GenericBaseTypeHasNonVirtualFinalize()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 
 public class Base<T>
@@ -460,26 +540,38 @@ public class Program
 ";
 
             var validator = GetDestructorValidator("Derived");
-            var compVerifier = CompileAndVerify(text,
+            var compVerifier = CompileAndVerify(
+                text,
                 sourceSymbolValidator: validator,
                 symbolValidator: validator,
                 expectedOutput: @"~Derived
 ~Base",
                 expectedSignatures: new[]
                 {
-                Signature("Base`1", "Finalize", ".method family hidebysig instance System.Void Finalize() cil managed"),
-                    Signature("Derived", "Finalize", ".method family hidebysig virtual instance System.Void Finalize() cil managed")
-                });
+                    Signature(
+                        "Base`1",
+                        "Finalize",
+                        ".method family hidebysig instance System.Void Finalize() cil managed"
+                    ),
+                    Signature(
+                        "Derived",
+                        "Finalize",
+                        ".method family hidebysig virtual instance System.Void Finalize() cil managed"
+                    ),
+                }
+            );
 
             compVerifier.VerifyDiagnostics(
                 // (6,20): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
-                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"));
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize")
+            );
         }
 
         [Fact]
         public void StructAndInterfaceHasNonVirtualFinalize()
         {
-            var text = @"
+            var text =
+                @"
 public interface I
 {
     void Finalize();
@@ -506,14 +598,16 @@ class C
                 Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
                 // (14,20): warning CS0169: The field 'C.Finalize' is never used
                 //     private string Finalize;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "Finalize").WithArguments("C.Finalize")
-                );
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "Finalize")
+                    .WithArguments("C.Finalize")
+            );
         }
 
         [Fact]
         public void IsRuntimeFinalizer1()
         {
-            var text = @"
+            var text =
+                @"
 public class A
 {
     ~A() { }
@@ -585,17 +679,67 @@ public class M<T> : L<T>
 
                 var mscorlib = module.ContainingAssembly.CorLibrary;
                 var systemNamespace = mscorlib.GlobalNamespace.GetMember<NamespaceSymbol>("System");
-                Assert.True(systemNamespace.GetMember<NamedTypeSymbol>("Object").GetMember<MethodSymbol>("Finalize").IsRuntimeFinalizer());
+                Assert.True(
+                    systemNamespace
+                        .GetMember<NamedTypeSymbol>("Object")
+                        .GetMember<MethodSymbol>("Finalize")
+                        .IsRuntimeFinalizer()
+                );
 
-                Assert.True(globalNamespace.GetMember<NamedTypeSymbol>("A").GetMember<MethodSymbol>("Finalize").IsRuntimeFinalizer());
-                Assert.False(globalNamespace.GetMember<NamedTypeSymbol>("B").GetMember<MethodSymbol>("Finalize").IsRuntimeFinalizer());
-                Assert.False(globalNamespace.GetMember<NamedTypeSymbol>("C").GetMember<MethodSymbol>("Finalize").IsRuntimeFinalizer());
-                Assert.False(globalNamespace.GetMember<NamedTypeSymbol>("D").GetMember<MethodSymbol>("Finalize").IsRuntimeFinalizer());
-                Assert.False(globalNamespace.GetMember<NamedTypeSymbol>("E").GetMember<MethodSymbol>("Finalize").IsRuntimeFinalizer());
-                Assert.False(globalNamespace.GetMember<NamedTypeSymbol>("F").GetMember<MethodSymbol>("Finalize").IsRuntimeFinalizer());
-                Assert.False(globalNamespace.GetMember<NamedTypeSymbol>("G").GetMember<MethodSymbol>("Finalize").IsRuntimeFinalizer());
-                Assert.True(globalNamespace.GetMember<NamedTypeSymbol>("H").GetMember<MethodSymbol>("Finalize").IsRuntimeFinalizer());
-                Assert.False(globalNamespace.GetMember<NamedTypeSymbol>("I").GetMember<MethodSymbol>("Finalize").IsRuntimeFinalizer());
+                Assert.True(
+                    globalNamespace
+                        .GetMember<NamedTypeSymbol>("A")
+                        .GetMember<MethodSymbol>("Finalize")
+                        .IsRuntimeFinalizer()
+                );
+                Assert.False(
+                    globalNamespace
+                        .GetMember<NamedTypeSymbol>("B")
+                        .GetMember<MethodSymbol>("Finalize")
+                        .IsRuntimeFinalizer()
+                );
+                Assert.False(
+                    globalNamespace
+                        .GetMember<NamedTypeSymbol>("C")
+                        .GetMember<MethodSymbol>("Finalize")
+                        .IsRuntimeFinalizer()
+                );
+                Assert.False(
+                    globalNamespace
+                        .GetMember<NamedTypeSymbol>("D")
+                        .GetMember<MethodSymbol>("Finalize")
+                        .IsRuntimeFinalizer()
+                );
+                Assert.False(
+                    globalNamespace
+                        .GetMember<NamedTypeSymbol>("E")
+                        .GetMember<MethodSymbol>("Finalize")
+                        .IsRuntimeFinalizer()
+                );
+                Assert.False(
+                    globalNamespace
+                        .GetMember<NamedTypeSymbol>("F")
+                        .GetMember<MethodSymbol>("Finalize")
+                        .IsRuntimeFinalizer()
+                );
+                Assert.False(
+                    globalNamespace
+                        .GetMember<NamedTypeSymbol>("G")
+                        .GetMember<MethodSymbol>("Finalize")
+                        .IsRuntimeFinalizer()
+                );
+                Assert.True(
+                    globalNamespace
+                        .GetMember<NamedTypeSymbol>("H")
+                        .GetMember<MethodSymbol>("Finalize")
+                        .IsRuntimeFinalizer()
+                );
+                Assert.False(
+                    globalNamespace
+                        .GetMember<NamedTypeSymbol>("I")
+                        .GetMember<MethodSymbol>("Finalize")
+                        .IsRuntimeFinalizer()
+                );
 
                 var intType = systemNamespace.GetMember<TypeSymbol>("Int32");
                 Assert.Equal(SpecialType.System_Int32, intType.SpecialType);
@@ -627,7 +771,8 @@ public class M<T> : L<T>
         [Fact]
         public void IsRuntimeFinalizer2()
         {
-            var text = @"
+            var text =
+                @"
 .class public auto ansi beforefieldinit C
        extends [mscorlib]System.Object
 {
@@ -670,15 +815,26 @@ public class M<T> : L<T>
 
             var globalNamespace = compilation.GlobalNamespace;
 
-            Assert.True(globalNamespace.GetMember<NamedTypeSymbol>("C").GetMember<MethodSymbol>("Finalize").IsRuntimeFinalizer()); //override of object.Finalize
-            Assert.False(globalNamespace.GetMember<NamedTypeSymbol>("D").GetMember<MethodSymbol>("Finalize").IsRuntimeFinalizer()); //same but has "newslot"
+            Assert.True(
+                globalNamespace
+                    .GetMember<NamedTypeSymbol>("C")
+                    .GetMember<MethodSymbol>("Finalize")
+                    .IsRuntimeFinalizer()
+            ); //override of object.Finalize
+            Assert.False(
+                globalNamespace
+                    .GetMember<NamedTypeSymbol>("D")
+                    .GetMember<MethodSymbol>("Finalize")
+                    .IsRuntimeFinalizer()
+            ); //same but has "newslot"
         }
 
         [WorkItem(528903, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528903")] // Won't fix - test just captures behavior.
         [Fact]
         public void DestructorOverridesPublicFinalize()
         {
-            var text = @"
+            var text =
+                @"
 public class A
 {
     public virtual void Finalize() { }
@@ -695,12 +851,14 @@ public class B : A
             compilation.VerifyDiagnostics(
                 // (4,25): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
                 //     public virtual void Finalize() { }
-                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"));
+                Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize")
+            );
 
             // We produce unverifiable code here as per bug resolution (compat concerns, not common case).
-            CompileAndVerify(compilation, verify: Verification.FailsPEVerify).VerifyIL("B.Finalize",
-
-                @"
+            CompileAndVerify(compilation, verify: Verification.FailsPEVerify)
+                .VerifyIL(
+                    "B.Finalize",
+                    @"
 {
   // Code size       10 (0xa)
   .maxstack  1
@@ -716,14 +874,16 @@ public class B : A
   }
   IL_0009:  ret
 }
-");
+"
+                );
         }
 
         [WorkItem(528907, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528907")]
         [Fact]
         public void BaseTypeHasGenericFinalize()
         {
-            var text = @"
+            var text =
+                @"
 public class A
 {
     protected void Finalize<T>() { }
@@ -737,7 +897,10 @@ public class B : A
             // NOTE: calling object.Finalize, since A.Finalize has the wrong arity.
             // (Dev11 called A.Finalize and failed at runtime, since it wasn't providing
             // a type argument.)
-            CompileAndVerify(text).VerifyIL("B.Finalize", @"
+            CompileAndVerify(text)
+                .VerifyIL(
+                    "B.Finalize",
+                    @"
 {
   // Code size       10 (0xa)
   .maxstack  1
@@ -753,61 +916,100 @@ public class B : A
   }
   IL_0009:  ret
 }
-");
+"
+                );
         }
 
         [WorkItem(528903, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528903")]
         [Fact]
         public void MethodImplEntry()
         {
-            var text = @"
+            var text =
+                @"
 public class A
 {
     ~A() { }
 }
 ";
-            CompileAndVerify(text, assemblyValidator: (assembly) =>
-            {
-                var peFileReader = assembly.GetMetadataReader();
+            CompileAndVerify(
+                text,
+                assemblyValidator: (assembly) =>
+                {
+                    var peFileReader = assembly.GetMetadataReader();
 
-                // Find the handle and row for A.
-                var pairA = peFileReader.TypeDefinitions.AsEnumerable().
-                    Select(handle => new { handle = handle, row = peFileReader.GetTypeDefinition(handle) }).
-                    Single(pair => peFileReader.GetString(pair.row.Name) == "A" &&
-                        string.IsNullOrEmpty(peFileReader.GetString(pair.row.Namespace)));
-                TypeDefinitionHandle handleA = pairA.handle;
-                TypeDefinition typeA = pairA.row;
+                    // Find the handle and row for A.
+                    var pairA = peFileReader
+                        .TypeDefinitions.AsEnumerable()
+                        .Select(handle => new
+                        {
+                            handle = handle,
+                            row = peFileReader.GetTypeDefinition(handle),
+                        })
+                        .Single(pair =>
+                            peFileReader.GetString(pair.row.Name) == "A"
+                            && string.IsNullOrEmpty(peFileReader.GetString(pair.row.Namespace))
+                        );
+                    TypeDefinitionHandle handleA = pairA.handle;
+                    TypeDefinition typeA = pairA.row;
 
-                // Find the handle for A's destructor.
-                MethodDefinitionHandle handleDestructorA = typeA.GetMethods().AsEnumerable().
-                    Single(handle => peFileReader.GetString(peFileReader.GetMethodDefinition(handle).Name) == WellKnownMemberNames.DestructorName);
+                    // Find the handle for A's destructor.
+                    MethodDefinitionHandle handleDestructorA = typeA
+                        .GetMethods()
+                        .AsEnumerable()
+                        .Single(handle =>
+                            peFileReader.GetString(peFileReader.GetMethodDefinition(handle).Name)
+                            == WellKnownMemberNames.DestructorName
+                        );
 
-                // Find the handle for System.Object.
-                TypeReferenceHandle handleObject = peFileReader.TypeReferences.AsEnumerable().
-                    Select(handle => new { handle = handle, row = peFileReader.GetTypeReference(handle) }).
-                    Single(pair => peFileReader.GetString(pair.row.Name) == "Object" &&
-                        peFileReader.GetString(pair.row.Namespace) == "System").handle;
+                    // Find the handle for System.Object.
+                    TypeReferenceHandle handleObject = peFileReader
+                        .TypeReferences.AsEnumerable()
+                        .Select(handle => new
+                        {
+                            handle = handle,
+                            row = peFileReader.GetTypeReference(handle),
+                        })
+                        .Single(pair =>
+                            peFileReader.GetString(pair.row.Name) == "Object"
+                            && peFileReader.GetString(pair.row.Namespace) == "System"
+                        )
+                        .handle;
 
-                // Find the handle for System.Object's destructor.
-                MemberReferenceHandle handleDestructorObject = peFileReader.MemberReferences.AsEnumerable().
-                    Select(handle => new { handle = handle, row = peFileReader.GetMemberReference(handle) }).
-                    Single(pair => pair.row.Parent == (EntityHandle)handleObject &&
-                        peFileReader.GetString(pair.row.Name) == WellKnownMemberNames.DestructorName).handle;
+                    // Find the handle for System.Object's destructor.
+                    MemberReferenceHandle handleDestructorObject = peFileReader
+                        .MemberReferences.AsEnumerable()
+                        .Select(handle => new
+                        {
+                            handle = handle,
+                            row = peFileReader.GetMemberReference(handle),
+                        })
+                        .Single(pair =>
+                            pair.row.Parent == (EntityHandle)handleObject
+                            && peFileReader.GetString(pair.row.Name)
+                                == WellKnownMemberNames.DestructorName
+                        )
+                        .handle;
 
-                // Find the MethodImpl row for A.
-                MethodImplementation methodImpl = typeA.GetMethodImplementations().AsEnumerable().
-                    Select(handle => peFileReader.GetMethodImplementation(handle)).
-                    Single();
+                    // Find the MethodImpl row for A.
+                    MethodImplementation methodImpl = typeA
+                        .GetMethodImplementations()
+                        .AsEnumerable()
+                        .Select(handle => peFileReader.GetMethodImplementation(handle))
+                        .Single();
 
-                // The Class column should point to A.
-                Assert.Equal(handleA, methodImpl.Type);
+                    // The Class column should point to A.
+                    Assert.Equal(handleA, methodImpl.Type);
 
-                // The MethodDeclaration column should point to System.Object.Finalize.
-                Assert.Equal((EntityHandle)handleDestructorObject, methodImpl.MethodDeclaration);
+                    // The MethodDeclaration column should point to System.Object.Finalize.
+                    Assert.Equal(
+                        (EntityHandle)handleDestructorObject,
+                        methodImpl.MethodDeclaration
+                    );
 
-                // The MethodDeclarationColumn should point to A's destructor.
-                Assert.Equal((EntityHandle)handleDestructorA, methodImpl.MethodBody);
-            });
+                    // The MethodDeclarationColumn should point to A's destructor.
+                    Assert.Equal((EntityHandle)handleDestructorA, methodImpl.MethodBody);
+                }
+            );
         }
 
         private static Action<ModuleSymbol> GetDestructorValidator(string typeName)

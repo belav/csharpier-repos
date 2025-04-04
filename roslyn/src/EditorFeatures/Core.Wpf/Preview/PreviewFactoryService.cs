@@ -40,28 +40,45 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             IDifferenceBufferFactoryService differenceBufferService,
             IEditorOperationsFactoryService editorOperationsFactoryService,
             ITextDocumentFactoryService textDocumentFactoryService,
-            IWpfDifferenceViewerFactoryService differenceViewerService)
-            : base(threadingContext,
-                  textBufferFactoryService,
-                  contentTypeRegistryService,
-                  projectionBufferFactoryService,
-                  editorOptionsService,
-                  differenceSelectorService,
-                  differenceBufferService,
-                  textDocumentFactoryService,
-                  textEditorFactoryService.CreateTextViewRoleSet(
-                      TextViewRoles.PreviewRole, PredefinedTextViewRoles.Analyzable, PredefinedTextViewRoles.Interactive, PredefinedTextViewRoles.ChangePreview))
+            IWpfDifferenceViewerFactoryService differenceViewerService
+        )
+            : base(
+                threadingContext,
+                textBufferFactoryService,
+                contentTypeRegistryService,
+                projectionBufferFactoryService,
+                editorOptionsService,
+                differenceSelectorService,
+                differenceBufferService,
+                textDocumentFactoryService,
+                textEditorFactoryService.CreateTextViewRoleSet(
+                    TextViewRoles.PreviewRole,
+                    PredefinedTextViewRoles.Analyzable,
+                    PredefinedTextViewRoles.Interactive,
+                    PredefinedTextViewRoles.ChangePreview
+                )
+            )
         {
             _editorOperationsFactoryService = editorOperationsFactoryService;
             _differenceViewerService = differenceViewerService;
         }
 
-        protected override IDifferenceViewerPreview<IWpfDifferenceViewer> CreateDifferenceViewerPreview(IWpfDifferenceViewer viewer)
-            => new DifferenceViewerPreview(viewer, _editorOperationsFactoryService);
+        protected override IDifferenceViewerPreview<IWpfDifferenceViewer> CreateDifferenceViewerPreview(
+            IWpfDifferenceViewer viewer
+        ) => new DifferenceViewerPreview(viewer, _editorOperationsFactoryService);
 
-        protected override async Task<IWpfDifferenceViewer> CreateDifferenceViewAsync(IDifferenceBuffer diffBuffer, ITextViewRoleSet previewRoleSet, DifferenceViewMode mode, double zoomLevel, CancellationToken cancellationToken)
+        protected override async Task<IWpfDifferenceViewer> CreateDifferenceViewAsync(
+            IDifferenceBuffer diffBuffer,
+            ITextViewRoleSet previewRoleSet,
+            DifferenceViewMode mode,
+            double zoomLevel,
+            CancellationToken cancellationToken
+        )
         {
-            var diffViewer = _differenceViewerService.CreateDifferenceView(diffBuffer, previewRoleSet);
+            var diffViewer = _differenceViewerService.CreateDifferenceView(
+                diffBuffer,
+                previewRoleSet
+            );
 
             const string DiffOverviewMarginName = "deltadifferenceViewerOverview";
 
@@ -95,8 +112,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 
             // Enable tab stop for the diff view host and collapse couple of unwanted margins.
             host.HostControl.IsTabStop = true;
-            host.GetTextViewMargin(DiffOverviewMarginName).VisualElement.Visibility = Visibility.Collapsed;
-            host.GetTextViewMargin(PredefinedMarginNames.Bottom).VisualElement.Visibility = Visibility.Collapsed;
+            host.GetTextViewMargin(DiffOverviewMarginName).VisualElement.Visibility =
+                Visibility.Collapsed;
+            host.GetTextViewMargin(PredefinedMarginNames.Bottom).VisualElement.Visibility =
+                Visibility.Collapsed;
 
             // Enable focus for the diff viewer.
             view.VisualElement.Focusable = true;

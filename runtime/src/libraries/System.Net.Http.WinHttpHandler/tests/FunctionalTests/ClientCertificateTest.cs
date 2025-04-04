@@ -14,34 +14,50 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
 {
     public class ClientCertificateTest : BaseCertificateTest
     {
-        public static bool DowngradeToHTTP1IfClientCertSet => PlatformDetection.WindowsVersion < 2004;
+        public static bool DowngradeToHTTP1IfClientCertSet =>
+            PlatformDetection.WindowsVersion < 2004;
 
-        public ClientCertificateTest(ITestOutputHelper output) : base(output)
-        { }
+        public ClientCertificateTest(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalFact(typeof(ServerCertificateTest), nameof(DowngradeToHTTP1IfClientCertSet))]
         public async Task UseClientCertOnHttp2_DowngradedToHttp1MutualAuth_Success()
         {
-            using X509Certificate2 clientCert = Test.Common.Configuration.Certificates.GetClientCertificate();
+            using X509Certificate2 clientCert =
+                Test.Common.Configuration.Certificates.GetClientCertificate();
             await LoopbackServer.CreateClientAndServerAsync(
                 async address =>
                 {
                     var handler = new WinHttpHandler();
-                    handler.ServerCertificateValidationCallback = CustomServerCertificateValidationCallback;
+                    handler.ServerCertificateValidationCallback =
+                        CustomServerCertificateValidationCallback;
                     handler.ClientCertificates.Add(clientCert);
                     handler.ClientCertificateOption = ClientCertificateOption.Manual;
                     using (var client = new HttpClient(handler))
-                    using (HttpResponseMessage response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, address) { Version = HttpVersion20.Value }))
+                    using (
+                        HttpResponseMessage response = await client.SendAsync(
+                            new HttpRequestMessage(HttpMethod.Get, address)
+                            {
+                                Version = HttpVersion20.Value,
+                            }
+                        )
+                    )
                     {
                         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                         Assert.True(_validationCallbackHistory.WasCalled);
                         Assert.NotEmpty(_validationCallbackHistory.CertificateChain);
-                        Assert.Equal(Test.Common.Configuration.Certificates.GetServerCertificate(), _validationCallbackHistory.CertificateChain[0]);
+                        Assert.Equal(
+                            Test.Common.Configuration.Certificates.GetServerCertificate(),
+                            _validationCallbackHistory.CertificateChain[0]
+                        );
                     }
                 },
                 async s =>
                 {
-                    await using (LoopbackServer.Connection connection = await s.EstablishConnectionAsync().ConfigureAwait(false))
+                    await using (
+                        LoopbackServer.Connection connection = await s.EstablishConnectionAsync()
+                            .ConfigureAwait(false)
+                    )
                     {
                         SslStream sslStream = connection.Stream as SslStream;
                         Assert.NotNull(sslStream);
@@ -49,34 +65,54 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                         Assert.Equal(clientCert, sslStream.RemoteCertificate);
                         await connection.ReadRequestHeaderAndSendResponseAsync(HttpStatusCode.OK);
                     }
-                }, new LoopbackServer.Options { UseSsl = true });
+                },
+                new LoopbackServer.Options { UseSsl = true }
+            );
         }
 
-// Disabling it for full .Net Framework due to a missing ALPN API which leads to a protocol downgrade
+        // Disabling it for full .Net Framework due to a missing ALPN API which leads to a protocol downgrade
 #if !NETFRAMEWORK
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsWindows10Version19573OrGreater))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWindows10Version19573OrGreater)
+        )]
         public async Task UseClientCertOnHttp2_OSSupportsIt_Success()
         {
-            using X509Certificate2 clientCert = Test.Common.Configuration.Certificates.GetClientCertificate();
+            using X509Certificate2 clientCert =
+                Test.Common.Configuration.Certificates.GetClientCertificate();
             await Http2LoopbackServer.CreateClientAndServerAsync(
                 async address =>
                 {
                     var handler = new WinHttpHandler();
-                    handler.ServerCertificateValidationCallback = CustomServerCertificateValidationCallback;
+                    handler.ServerCertificateValidationCallback =
+                        CustomServerCertificateValidationCallback;
                     handler.ClientCertificates.Add(clientCert);
                     handler.ClientCertificateOption = ClientCertificateOption.Manual;
                     using (var client = new HttpClient(handler))
-                    using (HttpResponseMessage response = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, address) { Version = HttpVersion20.Value }))
+                    using (
+                        HttpResponseMessage response = await client.SendAsync(
+                            new HttpRequestMessage(HttpMethod.Get, address)
+                            {
+                                Version = HttpVersion20.Value,
+                            }
+                        )
+                    )
                     {
                         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                         Assert.True(_validationCallbackHistory.WasCalled);
                         Assert.NotEmpty(_validationCallbackHistory.CertificateChain);
-                        Assert.Equal(Test.Common.Configuration.Certificates.GetServerCertificate(), _validationCallbackHistory.CertificateChain[0]);
+                        Assert.Equal(
+                            Test.Common.Configuration.Certificates.GetServerCertificate(),
+                            _validationCallbackHistory.CertificateChain[0]
+                        );
                     }
                 },
                 async s =>
                 {
-                    await using (Http2LoopbackConnection connection = await s.EstablishConnectionAsync().ConfigureAwait(false))
+                    await using (
+                        Http2LoopbackConnection connection = await s.EstablishConnectionAsync()
+                            .ConfigureAwait(false)
+                    )
                     {
                         SslStream sslStream = connection.Stream as SslStream;
                         Assert.NotNull(sslStream);
@@ -86,17 +122,29 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                         int streamId = await connection.ReadRequestHeaderAsync();
                         await connection.SendDefaultResponseAsync(streamId);
                     }
-                }, new Http2Options { ClientCertificateRequired = true });
+                },
+                new Http2Options { ClientCertificateRequired = true }
+            );
         }
 #endif
+
         [OuterLoop]
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsWindows10Version1607OrGreater))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWindows10Version1607OrGreater)
+        )]
         public async Task UseClientCertOnHttp2_OSSupportsItButCertNotSet_SuccessWithOneWayAuth()
         {
             WinHttpHandler handler = new WinHttpHandler();
             handler.ServerCertificateValidationCallback = CustomServerCertificateValidationCallback;
             string payload = "Mutual Authentication Test";
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, Test.Common.Configuration.Http.Http2RemoteEchoServer) { Version = HttpVersion20.Value };
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Post,
+                Test.Common.Configuration.Http.Http2RemoteEchoServer
+            )
+            {
+                Version = HttpVersion20.Value,
+            };
             request.Content = new StringContent(payload);
             using (var client = new HttpClient(handler))
             using (HttpResponseMessage response = await client.SendAsync(request))
@@ -104,7 +152,16 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 Assert.Equal(HttpVersion20.Value, response.Version);
                 string responsePayload = await response.Content.ReadAsStringAsync();
-                var responseContent = JsonConvert.DeserializeAnonymousType(responsePayload, new { Method = "_", BodyContent = "_", ClientCertificatePresent = "_", ClientCertificate = "_" });
+                var responseContent = JsonConvert.DeserializeAnonymousType(
+                    responsePayload,
+                    new
+                    {
+                        Method = "_",
+                        BodyContent = "_",
+                        ClientCertificatePresent = "_",
+                        ClientCertificate = "_",
+                    }
+                );
                 Assert.Equal("POST", responseContent.Method);
                 Assert.Equal(payload, responseContent.BodyContent);
                 Assert.Equal("false", responseContent.ClientCertificatePresent);
@@ -112,7 +169,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 Assert.True(_validationCallbackHistory.WasCalled);
                 Assert.NotEmpty(_validationCallbackHistory.CertificateChain);
                 ConfirmValidCertificate("*.azurewebsites.net");
-            };
+            }
+            ;
         }
     }
 }

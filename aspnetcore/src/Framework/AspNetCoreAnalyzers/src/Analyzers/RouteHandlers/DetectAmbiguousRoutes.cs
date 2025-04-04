@@ -19,7 +19,11 @@ using WellKnownType = WellKnownTypeData.WellKnownType;
 
 public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
 {
-    private static void DetectAmbiguousRoutes(in OperationBlockAnalysisContext context, WellKnownTypes wellKnownTypes, ConcurrentDictionary<MapOperation, byte> mapOperations)
+    private static void DetectAmbiguousRoutes(
+        in OperationBlockAnalysisContext context,
+        WellKnownTypes wellKnownTypes,
+        ConcurrentDictionary<MapOperation, byte> mapOperations
+    )
     {
         if (mapOperations.IsEmpty)
         {
@@ -27,9 +31,21 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         }
 
         var groupedByParent = mapOperations
-            .Select(kvp => new { MapOperation = kvp.Key, ResolvedOperation = ResolveOperation(kvp.Key.Operation, wellKnownTypes) })
-            .Where(u => u.ResolvedOperation != null && !u.MapOperation.RouteUsageModel.UsageContext.HttpMethods.IsDefault)
-            .GroupBy(u => new MapOperationGroupKey(u.MapOperation.Builder, u.ResolvedOperation!, u.MapOperation.RouteUsageModel.RoutePattern, u.MapOperation.RouteUsageModel.UsageContext.HttpMethods));
+            .Select(kvp => new
+            {
+                MapOperation = kvp.Key,
+                ResolvedOperation = ResolveOperation(kvp.Key.Operation, wellKnownTypes),
+            })
+            .Where(u =>
+                u.ResolvedOperation != null
+                && !u.MapOperation.RouteUsageModel.UsageContext.HttpMethods.IsDefault
+            )
+            .GroupBy(u => new MapOperationGroupKey(
+                u.MapOperation.Builder,
+                u.ResolvedOperation!,
+                u.MapOperation.RouteUsageModel.RoutePattern,
+                u.MapOperation.RouteUsageModel.UsageContext.HttpMethods
+            ));
 
         foreach (var ambiguousGroup in groupedByParent.Where(g => g.Count() >= 2))
         {
@@ -37,10 +53,13 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             {
                 var model = ambiguousMapOperation.MapOperation.RouteUsageModel;
 
-                context.ReportDiagnostic(Diagnostic.Create(
-                    DiagnosticDescriptors.AmbiguousRouteHandlerRoute,
-                    model.UsageContext.RouteToken.GetLocation(),
-                    model.RoutePattern.Root.ToString()));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        DiagnosticDescriptors.AmbiguousRouteHandlerRoute,
+                        model.UsageContext.RouteToken.GetLocation(),
+                        model.RoutePattern.Root.ToString()
+                    )
+                );
             }
         }
     }
@@ -59,8 +78,11 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         // - It's assigned to a variable.
         // - It's an argument to a method call, unless in a known safe method.
         var current = operation;
-        if (current.Parent is IArgumentOperation { Parent: IInvocationOperation invocationOperation } &&
-            IsAllowedEndpointBuilderMethod(invocationOperation, wellKnownTypes))
+        if (
+            current.Parent
+                is IArgumentOperation { Parent: IInvocationOperation invocationOperation }
+            && IsAllowedEndpointBuilderMethod(invocationOperation, wellKnownTypes)
+        )
         {
             return ResolveOperation(invocationOperation, wellKnownTypes);
         }
@@ -71,12 +93,15 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             {
                 return current.Parent;
             }
-            else if (current.Parent is IConditionalOperation or
-                ICoalesceOperation or
-                IAssignmentOperation or
-                IArgumentOperation or
-                IInvocationOperation or
-                ISwitchExpressionArmOperation)
+            else if (
+                current.Parent
+                is IConditionalOperation
+                    or ICoalesceOperation
+                    or IAssignmentOperation
+                    or IArgumentOperation
+                    or IInvocationOperation
+                    or ISwitchExpressionArmOperation
+            )
             {
                 return current;
             }
@@ -90,11 +115,21 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
     /// <summary>
     /// Test the invocation operation. Safe methods are those that we know don't add metadata that impacts metadata.
     /// </summary>
-    private static bool IsAllowedEndpointBuilderMethod(IInvocationOperation invocationOperation, WellKnownTypes wellKnownTypes)
+    private static bool IsAllowedEndpointBuilderMethod(
+        IInvocationOperation invocationOperation,
+        WellKnownTypes wellKnownTypes
+    )
     {
         var method = invocationOperation.TargetMethod;
 
-        if (SymbolEqualityComparer.Default.Equals(method.ContainingType, wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Builder_RoutingEndpointConventionBuilderExtensions)))
+        if (
+            SymbolEqualityComparer.Default.Equals(
+                method.ContainingType,
+                wellKnownTypes.Get(
+                    WellKnownType.Microsoft_AspNetCore_Builder_RoutingEndpointConventionBuilderExtensions
+                )
+            )
+        )
         {
             return method.Name switch
             {
@@ -103,14 +138,28 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                 "WithMetadata" => false, // Can add anything
                 "WithName" => true,
                 "WithGroupName" => true,
-                _ => false
+                _ => false,
             };
         }
-        else if (SymbolEqualityComparer.Default.Equals(method.ContainingType, wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Builder_AuthorizationEndpointConventionBuilderExtensions)))
+        else if (
+            SymbolEqualityComparer.Default.Equals(
+                method.ContainingType,
+                wellKnownTypes.Get(
+                    WellKnownType.Microsoft_AspNetCore_Builder_AuthorizationEndpointConventionBuilderExtensions
+                )
+            )
+        )
         {
             return method.Name is "RequireAuthorization" or "AllowAnonymous";
         }
-        else if (SymbolEqualityComparer.Default.Equals(method.ContainingType, wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_OpenApiRouteHandlerBuilderExtensions)))
+        else if (
+            SymbolEqualityComparer.Default.Equals(
+                method.ContainingType,
+                wellKnownTypes.Get(
+                    WellKnownType.Microsoft_AspNetCore_Http_OpenApiRouteHandlerBuilderExtensions
+                )
+            )
+        )
         {
             return method.Name switch
             {
@@ -122,18 +171,39 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                 "WithDescription" => true,
                 "WithSummary" => true,
                 "WithTags" => true,
-                _ => false
+                _ => false,
             };
         }
-        else if (SymbolEqualityComparer.Default.Equals(method.ContainingType, wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Builder_CorsEndpointConventionBuilderExtensions)))
+        else if (
+            SymbolEqualityComparer.Default.Equals(
+                method.ContainingType,
+                wellKnownTypes.Get(
+                    WellKnownType.Microsoft_AspNetCore_Builder_CorsEndpointConventionBuilderExtensions
+                )
+            )
+        )
         {
             return method.Name == "RequireCors";
         }
-        else if (SymbolEqualityComparer.Default.Equals(method.ContainingType, wellKnownTypes.Get(WellKnownType.Microsoft_Extensions_DependencyInjection_OutputCacheConventionBuilderExtensions)))
+        else if (
+            SymbolEqualityComparer.Default.Equals(
+                method.ContainingType,
+                wellKnownTypes.Get(
+                    WellKnownType.Microsoft_Extensions_DependencyInjection_OutputCacheConventionBuilderExtensions
+                )
+            )
+        )
         {
             return method.Name == "CacheOutput";
         }
-        else if (SymbolEqualityComparer.Default.Equals(method.ContainingType, wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Builder_RateLimiterEndpointConventionBuilderExtensions)))
+        else if (
+            SymbolEqualityComparer.Default.Equals(
+                method.ContainingType,
+                wellKnownTypes.Get(
+                    WellKnownType.Microsoft_AspNetCore_Builder_RateLimiterEndpointConventionBuilderExtensions
+                )
+            )
+        )
         {
             return method.Name is "RequireRateLimiting" or "DisableRateLimiting";
         }
@@ -148,7 +218,12 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         public RoutePatternTree RoutePattern { get; }
         public ImmutableArray<string> HttpMethods { get; }
 
-        public MapOperationGroupKey(IOperation? builder, IOperation parentOperation, RoutePatternTree routePattern, ImmutableArray<string> httpMethods)
+        public MapOperationGroupKey(
+            IOperation? builder,
+            IOperation parentOperation,
+            RoutePatternTree routePattern,
+            ImmutableArray<string> httpMethods
+        )
         {
             Debug.Assert(!httpMethods.IsDefault);
 
@@ -169,16 +244,21 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
 
         public bool Equals(MapOperationGroupKey other)
         {
-            return
-                ParentOperation != null &&
-                Equals(ParentOperation, other.ParentOperation) &&
-                Builder != null &&
-                SymbolEqualityComparer.Default.Equals((Builder as ILocalReferenceOperation)?.Local, (other.Builder as ILocalReferenceOperation)?.Local) &&
-                AmbiguousRoutePatternComparer.Instance.Equals(RoutePattern, other.RoutePattern) &&
-                HasMatchingHttpMethods(HttpMethods, other.HttpMethods);
+            return ParentOperation != null
+                && Equals(ParentOperation, other.ParentOperation)
+                && Builder != null
+                && SymbolEqualityComparer.Default.Equals(
+                    (Builder as ILocalReferenceOperation)?.Local,
+                    (other.Builder as ILocalReferenceOperation)?.Local
+                )
+                && AmbiguousRoutePatternComparer.Instance.Equals(RoutePattern, other.RoutePattern)
+                && HasMatchingHttpMethods(HttpMethods, other.HttpMethods);
         }
 
-        private static bool HasMatchingHttpMethods(ImmutableArray<string> httpMethods1, ImmutableArray<string> httpMethods2)
+        private static bool HasMatchingHttpMethods(
+            ImmutableArray<string> httpMethods1,
+            ImmutableArray<string> httpMethods2
+        )
         {
             if (httpMethods1.IsEmpty || httpMethods2.IsEmpty)
             {
@@ -201,7 +281,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
 
         public override int GetHashCode()
         {
-            return (ParentOperation?.GetHashCode() ?? 0) ^ AmbiguousRoutePatternComparer.Instance.GetHashCode(RoutePattern);
+            return (ParentOperation?.GetHashCode() ?? 0)
+                ^ AmbiguousRoutePatternComparer.Instance.GetHashCode(RoutePattern);
         }
     }
 }

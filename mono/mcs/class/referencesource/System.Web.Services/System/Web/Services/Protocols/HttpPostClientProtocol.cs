@@ -1,31 +1,33 @@
 //------------------------------------------------------------------------------
 // <copyright file="HttpPostClientProtocol.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
-    using System.Net;
+namespace System.Web.Services.Protocols
+{
     using System.IO;
+    using System.Net;
 
     /// <include file='doc\HttpPostClientProtocol.uex' path='docs/doc[@for="HttpPostClientProtocol"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class HttpPostClientProtocol : HttpSimpleClientProtocol {
+    public class HttpPostClientProtocol : HttpSimpleClientProtocol
+    {
         /// <include file='doc\HttpPostClientProtocol.uex' path='docs/doc[@for="HttpPostClientProtocol.HttpPostClientProtocol"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public HttpPostClientProtocol() 
-            : base() {
-        }
+        public HttpPostClientProtocol()
+            : base() { }
 
         /// <include file='doc\HttpPostClientProtocol.uex' path='docs/doc[@for="HttpPostClientProtocol.GetWebRequest"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override WebRequest GetWebRequest(Uri uri) {
+        protected override WebRequest GetWebRequest(Uri uri)
+        {
             WebRequest request = base.GetWebRequest(uri);
             request.Method = "POST";
             return request;

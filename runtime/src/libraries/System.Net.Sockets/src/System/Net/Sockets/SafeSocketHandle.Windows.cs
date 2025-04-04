@@ -13,21 +13,22 @@ namespace System.Net.Sockets
         private bool _skipCompletionPortOnSuccess;
 
 #pragma warning disable CA1822
-        internal void SetExposed() { /* nop */ }
+        internal void SetExposed() { /* nop */
+        }
 #pragma warning restore CA1822
 
         internal ThreadPoolBoundHandle? IOCPBoundHandle
         {
-            get
-            {
-                return _iocpBoundHandle;
-            }
+            get { return _iocpBoundHandle; }
         }
 
-        internal ThreadPoolBoundHandle? GetThreadPoolBoundHandle() => !_released ? _iocpBoundHandle : null;
+        internal ThreadPoolBoundHandle? GetThreadPoolBoundHandle() =>
+            !_released ? _iocpBoundHandle : null;
 
         // Binds the Socket Win32 Handle to the ThreadPool's CompletionPort.
-        internal ThreadPoolBoundHandle GetOrAllocateThreadPoolBoundHandle(bool trySkipCompletionPortOnSuccess)
+        internal ThreadPoolBoundHandle GetOrAllocateThreadPoolBoundHandle(
+            bool trySkipCompletionPortOnSuccess
+        )
         {
             if (_released)
             {
@@ -46,7 +47,8 @@ namespace System.Net.Sockets
                 if (boundHandle == null)
                 {
                     // Bind the socket native _handle to the ThreadPool.
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "calling ThreadPool.BindHandle()");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(this, "calling ThreadPool.BindHandle()");
 
                     try
                     {
@@ -59,7 +61,8 @@ namespace System.Net.Sockets
                     catch (Exception exception) when (!ExceptionCheck.IsFatal(exception))
                     {
                         bool closed = IsClosed;
-                        bool alreadyBound = !IsInvalid && !IsClosed && (exception is ArgumentException);
+                        bool alreadyBound =
+                            !IsInvalid && !IsClosed && (exception is ArgumentException);
                         CloseAsIs(abortive: false);
                         if (closed)
                         {
@@ -71,15 +74,20 @@ namespace System.Net.Sockets
 
                         if (alreadyBound)
                         {
-                            throw new InvalidOperationException(SR.net_sockets_asyncoperations_notallowed, exception);
+                            throw new InvalidOperationException(
+                                SR.net_sockets_asyncoperations_notallowed,
+                                exception
+                            );
                         }
 
                         throw;
                     }
 
                     // Try to disable completions for synchronous success, if requested
-                    if (trySkipCompletionPortOnSuccess &&
-                        CompletionPortHelper.SkipCompletionPortOnSuccess(boundHandle.Handle))
+                    if (
+                        trySkipCompletionPortOnSuccess
+                        && CompletionPortHelper.SkipCompletionPortOnSuccess(boundHandle.Handle)
+                    )
                     {
                         _skipCompletionPortOnSuccess = true;
                     }
@@ -126,7 +134,9 @@ namespace System.Net.Sockets
         }
 
         /// <returns>Returns whether operations were canceled.</returns>
-        private unsafe bool TryUnblockSocket(bool _ /*abortive*/)
+        private unsafe bool TryUnblockSocket(
+            bool _ /*abortive*/
+        )
         {
             // Try to cancel all pending IO.
             return Interop.Kernel32.CancelIoEx(handle, null);
@@ -141,14 +151,17 @@ namespace System.Net.Sockets
             // WSAEWOULDBLOCK, in which case we need to do some recovery.
             if (!abortive)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"handle:{handle}, Following 'blockable' branch");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"handle:{handle}, Following 'blockable' branch");
                 errorCode = Interop.Winsock.closesocket(handle);
 #if DEBUG
                 _closeSocketResult = errorCode;
 #endif
-                if (errorCode == SocketError.SocketError) errorCode = (SocketError)Marshal.GetLastPInvokeError();
+                if (errorCode == SocketError.SocketError)
+                    errorCode = (SocketError)Marshal.GetLastPInvokeError();
 
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"handle:{handle}, closesocket()#1:{errorCode}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"handle:{handle}, closesocket()#1:{errorCode}");
 
                 // If it's not WSAEWOULDBLOCK, there's no more recourse - we either succeeded or failed.
                 if (errorCode != SocketError.WouldBlock)
@@ -162,10 +175,13 @@ namespace System.Net.Sockets
                 errorCode = Interop.Winsock.ioctlsocket(
                     handle,
                     Interop.Winsock.IoctlSocketConstants.FIONBIO,
-                    ref nonBlockCmd);
-                if (errorCode == SocketError.SocketError) errorCode = (SocketError)Marshal.GetLastPInvokeError();
+                    ref nonBlockCmd
+                );
+                if (errorCode == SocketError.SocketError)
+                    errorCode = (SocketError)Marshal.GetLastPInvokeError();
 
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"handle:{handle}, ioctlsocket()#1:{errorCode}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"handle:{handle}, ioctlsocket()#1:{errorCode}");
 
                 // If that succeeded, try again.
                 if (errorCode == SocketError.Success)
@@ -174,8 +190,10 @@ namespace System.Net.Sockets
 #if DEBUG
                     _closeSocketResult = errorCode;
 #endif
-                    if (errorCode == SocketError.SocketError) errorCode = (SocketError)Marshal.GetLastPInvokeError();
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"handle:{handle}, closesocket#2():{errorCode}");
+                    if (errorCode == SocketError.SocketError)
+                        errorCode = (SocketError)Marshal.GetLastPInvokeError();
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(this, $"handle:{handle}, closesocket#2():{errorCode}");
 
                     // If it's not WSAEWOULDBLOCK, there's no more recourse - we either succeeded or failed.
                     if (errorCode != SocketError.WouldBlock)
@@ -197,14 +215,21 @@ namespace System.Net.Sockets
                 SocketOptionLevel.Socket,
                 SocketOptionName.Linger,
                 ref lingerStruct,
-                4);
+                4
+            );
 #if DEBUG
             _closeSocketLinger = errorCode;
 #endif
-            if (errorCode == SocketError.SocketError) errorCode = (SocketError)Marshal.GetLastPInvokeError();
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"handle:{handle}, setsockopt():{errorCode}");
+            if (errorCode == SocketError.SocketError)
+                errorCode = (SocketError)Marshal.GetLastPInvokeError();
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"handle:{handle}, setsockopt():{errorCode}");
 
-            if (errorCode != SocketError.Success && errorCode != SocketError.InvalidArgument && errorCode != SocketError.ProtocolOption)
+            if (
+                errorCode != SocketError.Success
+                && errorCode != SocketError.InvalidArgument
+                && errorCode != SocketError.ProtocolOption
+            )
             {
                 // Too dangerous to try closesocket() - it might block!
                 return errorCode;
@@ -214,7 +239,11 @@ namespace System.Net.Sockets
 #if DEBUG
             _closeSocketResult = errorCode;
 #endif
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"handle:{handle}, closesocket#3():{(errorCode == SocketError.SocketError ? (SocketError)Marshal.GetLastPInvokeError() : errorCode)}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"handle:{handle}, closesocket#3():{(errorCode == SocketError.SocketError ? (SocketError)Marshal.GetLastPInvokeError() : errorCode)}"
+                );
 
             return errorCode;
         }

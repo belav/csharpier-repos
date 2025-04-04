@@ -1,30 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeConditionStatement.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
     ///       Represents a basic if statement.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeConditionStatement : CodeStatement {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeConditionStatement : CodeStatement
+    {
         private CodeExpression condition;
         private CodeStatementCollection trueStatments = new CodeStatementCollection();
         private CodeStatementCollection falseStatments = new CodeStatementCollection();
@@ -34,15 +31,18 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeConditionStatement'/>.
         ///    </para>
         /// </devdoc>
-        public CodeConditionStatement() {
-        }
+        public CodeConditionStatement() { }
 
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeConditionStatement'/>.
         ///    </para>
         /// </devdoc>
-        public CodeConditionStatement(CodeExpression condition, params CodeStatement[] trueStatements) {
+        public CodeConditionStatement(
+            CodeExpression condition,
+            params CodeStatement[] trueStatements
+        )
+        {
             Condition = condition;
             TrueStatements.AddRange(trueStatements);
         }
@@ -53,7 +53,12 @@ namespace System.CodeDom {
         ///       else statement.
         ///    </para>
         /// </devdoc>
-        public CodeConditionStatement(CodeExpression condition, CodeStatement[] trueStatements, CodeStatement[] falseStatements) {
+        public CodeConditionStatement(
+            CodeExpression condition,
+            CodeStatement[] trueStatements,
+            CodeStatement[] falseStatements
+        )
+        {
             Condition = condition;
             TrueStatements.AddRange(trueStatements);
             FalseStatements.AddRange(falseStatements);
@@ -65,13 +70,10 @@ namespace System.CodeDom {
         ///       the condition to test for <see langword='true'/>.
         ///    </para>
         /// </devdoc>
-        public CodeExpression Condition {
-            get {
-                return condition;
-            }
-            set {
-                condition = value;
-            }
+        public CodeExpression Condition
+        {
+            get { return condition; }
+            set { condition = value; }
         }
 
         /// <devdoc>
@@ -80,10 +82,9 @@ namespace System.CodeDom {
         ///       the statements to execute if test condition is <see langword='true'/>.
         ///    </para>
         /// </devdoc>
-        public CodeStatementCollection TrueStatements {
-            get {
-                return trueStatments;
-            }
+        public CodeStatementCollection TrueStatements
+        {
+            get { return trueStatments; }
         }
 
         /// <devdoc>
@@ -94,10 +95,9 @@ namespace System.CodeDom {
         ///       clause.
         ///    </para>
         /// </devdoc>
-        public CodeStatementCollection FalseStatements {
-            get {
-                return falseStatments;
-            }
+        public CodeStatementCollection FalseStatements
+        {
+            get { return falseStatments; }
         }
     }
 }

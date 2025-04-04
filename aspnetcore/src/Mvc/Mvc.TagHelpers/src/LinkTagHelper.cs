@@ -22,15 +22,51 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 /// <remarks>
 /// The tag helper won't process for cases with just the 'href' attribute.
 /// </remarks>
-[HtmlTargetElement("link", Attributes = HrefIncludeAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-[HtmlTargetElement("link", Attributes = HrefExcludeAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-[HtmlTargetElement("link", Attributes = FallbackHrefAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-[HtmlTargetElement("link", Attributes = FallbackHrefIncludeAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-[HtmlTargetElement("link", Attributes = FallbackHrefExcludeAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-[HtmlTargetElement("link", Attributes = FallbackTestClassAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-[HtmlTargetElement("link", Attributes = FallbackTestPropertyAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-[HtmlTargetElement("link", Attributes = FallbackTestValueAttributeName, TagStructure = TagStructure.WithoutEndTag)]
-[HtmlTargetElement("link", Attributes = AppendVersionAttributeName, TagStructure = TagStructure.WithoutEndTag)]
+[HtmlTargetElement(
+    "link",
+    Attributes = HrefIncludeAttributeName,
+    TagStructure = TagStructure.WithoutEndTag
+)]
+[HtmlTargetElement(
+    "link",
+    Attributes = HrefExcludeAttributeName,
+    TagStructure = TagStructure.WithoutEndTag
+)]
+[HtmlTargetElement(
+    "link",
+    Attributes = FallbackHrefAttributeName,
+    TagStructure = TagStructure.WithoutEndTag
+)]
+[HtmlTargetElement(
+    "link",
+    Attributes = FallbackHrefIncludeAttributeName,
+    TagStructure = TagStructure.WithoutEndTag
+)]
+[HtmlTargetElement(
+    "link",
+    Attributes = FallbackHrefExcludeAttributeName,
+    TagStructure = TagStructure.WithoutEndTag
+)]
+[HtmlTargetElement(
+    "link",
+    Attributes = FallbackTestClassAttributeName,
+    TagStructure = TagStructure.WithoutEndTag
+)]
+[HtmlTargetElement(
+    "link",
+    Attributes = FallbackTestPropertyAttributeName,
+    TagStructure = TagStructure.WithoutEndTag
+)]
+[HtmlTargetElement(
+    "link",
+    Attributes = FallbackTestValueAttributeName,
+    TagStructure = TagStructure.WithoutEndTag
+)]
+[HtmlTargetElement(
+    "link",
+    Attributes = AppendVersionAttributeName,
+    TagStructure = TagStructure.WithoutEndTag
+)]
 public class LinkTagHelper : UrlResolutionTagHelper
 {
     private static readonly string FallbackJavaScriptResourceName =
@@ -51,45 +87,52 @@ public class LinkTagHelper : UrlResolutionTagHelper
     private const string IntegrityAttributeName = "integrity";
     private static readonly Func<Mode, Mode, int> Compare = (a, b) => a - b;
 
-    private static readonly ModeAttributes<Mode>[] ModeDetails = new[] {
-            // Regular src with file version alone
-            new ModeAttributes<Mode>(Mode.AppendVersion, new[] { AppendVersionAttributeName }),
-            // Globbed Href (include only) no static href
-            new ModeAttributes<Mode>(Mode.GlobbedHref, new [] { HrefIncludeAttributeName }),
-            // Globbed Href (include & exclude), no static href
-            new ModeAttributes<Mode>(Mode.GlobbedHref, new [] { HrefIncludeAttributeName, HrefExcludeAttributeName }),
-            // Fallback with static href
-            new ModeAttributes<Mode>(
-                Mode.Fallback,
-                new[]
-                {
-                    FallbackHrefAttributeName,
-                    FallbackTestClassAttributeName,
-                    FallbackTestPropertyAttributeName,
-                    FallbackTestValueAttributeName
-                }),
-            // Fallback with globbed href (include only)
-            new ModeAttributes<Mode>(
-                Mode.Fallback,
-                new[]
-                {
-                    FallbackHrefIncludeAttributeName,
-                    FallbackTestClassAttributeName,
-                    FallbackTestPropertyAttributeName,
-                    FallbackTestValueAttributeName
-                }),
-            // Fallback with globbed href (include & exclude)
-            new ModeAttributes<Mode>(
-                Mode.Fallback,
-                new[]
-                {
-                    FallbackHrefIncludeAttributeName,
-                    FallbackHrefExcludeAttributeName,
-                    FallbackTestClassAttributeName,
-                    FallbackTestPropertyAttributeName,
-                    FallbackTestValueAttributeName
-                }),
-        };
+    private static readonly ModeAttributes<Mode>[] ModeDetails = new[]
+    {
+        // Regular src with file version alone
+        new ModeAttributes<Mode>(Mode.AppendVersion, new[] { AppendVersionAttributeName }),
+        // Globbed Href (include only) no static href
+        new ModeAttributes<Mode>(Mode.GlobbedHref, new[] { HrefIncludeAttributeName }),
+        // Globbed Href (include & exclude), no static href
+        new ModeAttributes<Mode>(
+            Mode.GlobbedHref,
+            new[] { HrefIncludeAttributeName, HrefExcludeAttributeName }
+        ),
+        // Fallback with static href
+        new ModeAttributes<Mode>(
+            Mode.Fallback,
+            new[]
+            {
+                FallbackHrefAttributeName,
+                FallbackTestClassAttributeName,
+                FallbackTestPropertyAttributeName,
+                FallbackTestValueAttributeName,
+            }
+        ),
+        // Fallback with globbed href (include only)
+        new ModeAttributes<Mode>(
+            Mode.Fallback,
+            new[]
+            {
+                FallbackHrefIncludeAttributeName,
+                FallbackTestClassAttributeName,
+                FallbackTestPropertyAttributeName,
+                FallbackTestValueAttributeName,
+            }
+        ),
+        // Fallback with globbed href (include & exclude)
+        new ModeAttributes<Mode>(
+            Mode.Fallback,
+            new[]
+            {
+                FallbackHrefIncludeAttributeName,
+                FallbackHrefExcludeAttributeName,
+                FallbackTestClassAttributeName,
+                FallbackTestPropertyAttributeName,
+                FallbackTestValueAttributeName,
+            }
+        ),
+    };
     private StringWriter _stringWriter;
 
     /// <summary>
@@ -109,7 +152,8 @@ public class LinkTagHelper : UrlResolutionTagHelper
         IFileVersionProvider fileVersionProvider,
         HtmlEncoder htmlEncoder,
         JavaScriptEncoder javaScriptEncoder,
-        IUrlHelperFactory urlHelperFactory)
+        IUrlHelperFactory urlHelperFactory
+    )
         : base(urlHelperFactory, htmlEncoder)
     {
         HostingEnvironment = hostingEnvironment;
@@ -280,8 +324,12 @@ public class LinkTagHelper : UrlResolutionTagHelper
                 var existingAttribute = output.Attributes[index];
                 output.Attributes[index] = new TagHelperAttribute(
                     existingAttribute.Name,
-                    FileVersionProvider.AddFileVersionToPath(ViewContext.HttpContext.Request.PathBase, Href),
-                    existingAttribute.ValueStyle);
+                    FileVersionProvider.AddFileVersionToPath(
+                        ViewContext.HttpContext.Request.PathBase,
+                        Href
+                    ),
+                    existingAttribute.ValueStyle
+                );
             }
         }
 
@@ -339,7 +387,8 @@ public class LinkTagHelper : UrlResolutionTagHelper
         var fallbackHrefs = GlobbingUrlBuilder.BuildUrlList(
             FallbackHref,
             FallbackHrefInclude,
-            FallbackHrefExclude);
+            FallbackHrefExclude
+        );
 
         if (fallbackHrefs.Count == 0)
         {
@@ -376,12 +425,21 @@ public class LinkTagHelper : UrlResolutionTagHelper
         for (var i = 0; i < attributesCount; i++)
         {
             var attribute = attributes[i];
-            if (string.Equals(attribute.Name, HrefAttributeName, StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(attribute.Name, HrefAttributeName, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 continue;
             }
 
-            if (SuppressFallbackIntegrity && string.Equals(attribute.Name, IntegrityAttributeName, StringComparison.OrdinalIgnoreCase))
+            if (
+                SuppressFallbackIntegrity
+                && string.Equals(
+                    attribute.Name,
+                    IntegrityAttributeName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 continue;
             }
@@ -401,8 +459,10 @@ public class LinkTagHelper : UrlResolutionTagHelper
 
     private bool HasStyleSheetLinkType(TagHelperAttributeList attributes)
     {
-        if (!attributes.TryGetAttribute(RelAttributeName, out var relAttribute) ||
-            relAttribute.Value == null)
+        if (
+            !attributes.TryGetAttribute(RelAttributeName, out var relAttribute)
+            || relAttribute.Value == null
+        )
         {
             return false;
         }
@@ -452,7 +512,10 @@ public class LinkTagHelper : UrlResolutionTagHelper
             var valueToWrite = fallbackHrefs[i];
             if (AppendVersion == true)
             {
-                valueToWrite = FileVersionProvider.AddFileVersionToPath(ViewContext.HttpContext.Request.PathBase, fallbackHrefs[i]);
+                valueToWrite = FileVersionProvider.AddFileVersionToPath(
+                    ViewContext.HttpContext.Request.PathBase,
+                    fallbackHrefs[i]
+                );
             }
 
             // Must HTML-encode the href attribute value to ensure the written <link/> element is valid. Must also
@@ -473,7 +536,8 @@ public class LinkTagHelper : UrlResolutionTagHelper
             GlobbingUrlBuilder = new GlobbingUrlBuilder(
                 HostingEnvironment.WebRootFileProvider,
                 Cache,
-                ViewContext.HttpContext.Request.PathBase);
+                ViewContext.HttpContext.Request.PathBase
+            );
         }
     }
 
@@ -481,11 +545,16 @@ public class LinkTagHelper : UrlResolutionTagHelper
     {
         if (FileVersionProvider == null)
         {
-            FileVersionProvider = ViewContext.HttpContext.RequestServices.GetRequiredService<IFileVersionProvider>();
+            FileVersionProvider =
+                ViewContext.HttpContext.RequestServices.GetRequiredService<IFileVersionProvider>();
         }
     }
 
-    private void BuildLinkTag(string href, TagHelperAttributeList attributes, TagHelperContent builder)
+    private void BuildLinkTag(
+        string href,
+        TagHelperAttributeList attributes,
+        TagHelperContent builder
+    )
     {
         builder.AppendHtml("<link ");
 
@@ -497,7 +566,9 @@ public class LinkTagHelper : UrlResolutionTagHelper
         {
             var attribute = attributes[i];
 
-            if (string.Equals(attribute.Name, HrefAttributeName, StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(attribute.Name, HrefAttributeName, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 addHref = false;
 
@@ -522,14 +593,13 @@ public class LinkTagHelper : UrlResolutionTagHelper
     {
         if (AppendVersion == true)
         {
-            hrefValue = FileVersionProvider.AddFileVersionToPath(ViewContext.HttpContext.Request.PathBase, hrefValue);
+            hrefValue = FileVersionProvider.AddFileVersionToPath(
+                ViewContext.HttpContext.Request.PathBase,
+                hrefValue
+            );
         }
 
-        builder
-            .AppendHtml(hrefName)
-            .AppendHtml("=\"")
-            .Append(hrefValue)
-            .AppendHtml("\" ");
+        builder.AppendHtml(hrefName).AppendHtml("=\"").Append(hrefValue).AppendHtml("\" ");
     }
 
     private enum Mode

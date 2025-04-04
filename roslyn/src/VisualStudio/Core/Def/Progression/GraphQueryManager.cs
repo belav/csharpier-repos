@@ -30,14 +30,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         /// This gate locks manipulation of <see cref="_trackedQueries"/>.
         /// </summary>
         private readonly object _gate = new();
-        private ImmutableArray<(WeakReference<IGraphContext> context, ImmutableArray<IGraphQuery> queries)> _trackedQueries = ImmutableArray<(WeakReference<IGraphContext>, ImmutableArray<IGraphQuery>)>.Empty;
+        private ImmutableArray<(
+            WeakReference<IGraphContext> context,
+            ImmutableArray<IGraphQuery> queries
+        )> _trackedQueries = ImmutableArray<(
+            WeakReference<IGraphContext>,
+            ImmutableArray<IGraphQuery>
+        )>.Empty;
 
         private readonly AsyncBatchingWorkQueue _updateQueue;
 
         internal GraphQueryManager(
             Workspace workspace,
             IThreadingContext threadingContext,
-            IAsynchronousOperationListener asyncListener)
+            IAsynchronousOperationListener asyncListener
+        )
         {
             _workspace = workspace;
 
@@ -46,24 +53,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 DelayTimeSpan.Idle,
                 UpdateExistingQueriesAsync,
                 asyncListener,
-                threadingContext.DisposalToken);
+                threadingContext.DisposalToken
+            );
 
             // Note: this ends up always listening for workspace events, even if we have no active 'live' queries that
             // need updating.  But this should basically be practically no cost.  The queue just holds a single item
             // indicating a change happened.  And when UpdateExistingQueriesAsync fires, it will just see that there are
-            // no live queries and immediately return.  So it's just simple to do things this way instead of trying to 
+            // no live queries and immediately return.  So it's just simple to do things this way instead of trying to
             // have state management where we try to decide if we should listen or not.
             _workspace.WorkspaceChanged += (_, _) => _updateQueue.AddWork();
         }
 
-        public async Task AddQueriesAsync(IGraphContext context, ImmutableArray<IGraphQuery> graphQueries, CancellationToken disposalToken)
+        public async Task AddQueriesAsync(
+            IGraphContext context,
+            ImmutableArray<IGraphQuery> graphQueries,
+            CancellationToken disposalToken
+        )
         {
             try
             {
                 var solution = _workspace.CurrentSolution;
 
                 // Perform the actual graph query first.
-                await PopulateContextGraphAsync(solution, context, graphQueries, disposalToken).ConfigureAwait(false);
+                await PopulateContextGraphAsync(solution, context, graphQueries, disposalToken)
+                    .ConfigureAwait(false);
 
                 // If this context would like to be continuously updated with live changes to this query, then add the
                 // tracked query to our tracking list, keeping it alive as long as those is keeping the context alive.
@@ -71,7 +84,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 {
                     lock (_gate)
                     {
-                        _trackedQueries = _trackedQueries.Add((new WeakReference<IGraphContext>(context), graphQueries));
+                        _trackedQueries = _trackedQueries.Add(
+                            (new WeakReference<IGraphContext>(context), graphQueries)
+                        );
                     }
                 }
             }
@@ -84,7 +99,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
         private async ValueTask UpdateExistingQueriesAsync(CancellationToken disposalToken)
         {
-            ImmutableArray<(IGraphContext context, ImmutableArray<IGraphQuery> queries)> liveQueries;
+            ImmutableArray<(
+                IGraphContext context,
+                ImmutableArray<IGraphQuery> queries
+            )> liveQueries;
             lock (_gate)
             {
                 // First, grab the set of contexts that are still live.  We'll update them below.
@@ -104,7 +122,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             var solution = _workspace.CurrentSolution;
 
             // Update all the live queries in parallel.
-            var tasks = liveQueries.Select(t => PopulateContextGraphAsync(solution, t.context, t.queries, disposalToken)).ToArray();
+            var tasks = liveQueries
+                .Select(t =>
+                    PopulateContextGraphAsync(solution, t.context, t.queries, disposalToken)
+                )
+                .ToArray();
             await Task.WhenAll(tasks).ConfigureAwait(false);
         }
 
@@ -115,17 +137,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             Solution solution,
             IGraphContext context,
             ImmutableArray<IGraphQuery> graphQueries,
-            CancellationToken disposalToken)
+            CancellationToken disposalToken
+        )
         {
             try
             {
                 // Compute all queries in parallel.  Then as each finishes, update the graph.
 
                 // Cancel the work if either the context wants us to cancel, or our host is getting disposed.
-                using var source = CancellationTokenSource.CreateLinkedTokenSource(context.CancelToken, disposalToken);
+                using var source = CancellationTokenSource.CreateLinkedTokenSource(
+                    context.CancelToken,
+                    disposalToken
+                );
                 var cancellationToken = source.Token;
 
-                var tasks = graphQueries.Select(q => Task.Run(() => q.GetGraphAsync(solution, context, cancellationToken), cancellationToken)).ToHashSet();
+                var tasks = graphQueries
+                    .Select(q =>
+                        Task.Run(
+                            () => q.GetGraphAsync(solution, context, cancellationToken),
+                            cancellationToken
+                        )
+                    )
+                    .ToHashSet();
 
                 var first = true;
                 while (tasks.Count > 0)
@@ -164,7 +197,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 // token to make a final token that controls the work we do above.  We don't want any of the wrong
                 // cancellations leaking outwards.
             }
-            catch (Exception ex) when (FatalError.ReportAndPropagateUnlessCanceled(ex, ErrorSeverity.Diagnostic))
+            catch (Exception ex)
+                when (FatalError.ReportAndPropagateUnlessCanceled(ex, ErrorSeverity.Diagnostic))
             {
                 throw ExceptionUtilities.Unreachable();
             }

@@ -24,7 +24,8 @@ namespace System.ServiceModel.Channels
                     SR.GetString(SR.TraceCodeMsmqCannotPeekOnQueue),
                     new StringTraceRecord("QueueFormatName", formatName),
                     null,
-                    ex);
+                    ex
+                );
             }
         }
 
@@ -34,14 +35,18 @@ namespace System.ServiceModel.Channels
             {
                 Dictionary<string, string> dictionary = new Dictionary<string, string>(2);
                 dictionary["Host"] = host;
-                dictionary["PublicQueues"] = Convert.ToString(publicQueues, CultureInfo.InvariantCulture);
+                dictionary["PublicQueues"] = Convert.ToString(
+                    publicQueues,
+                    CultureInfo.InvariantCulture
+                );
                 TraceUtility.TraceEvent(
                     TraceEventType.Warning,
                     TraceCode.MsmqCannotReadQueues,
                     SR.GetString(SR.TraceCodeMsmqCannotReadQueues),
                     new DictionaryTraceRecord(dictionary),
                     null,
-                    ex);
+                    ex
+                );
             }
         }
 
@@ -55,7 +60,11 @@ namespace System.ServiceModel.Channels
                 {
                     FxTrace.Trace.TraceTransfer(activity.Id);
                 }
-                ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityListenAt, receiver.ListenUri.ToString()), ActivityType.ListenAt);
+                ServiceModelActivity.Start(
+                    activity,
+                    SR.GetString(SR.ActivityListenAt, receiver.ListenUri.ToString()),
+                    ActivityType.ListenAt
+                );
             }
             return activity;
         }
@@ -68,14 +77,19 @@ namespace System.ServiceModel.Channels
                     TraceEventType.Information,
                     TraceCode.TransportListen,
                     SR.GetString(SR.TraceCodeTransportListen, receiver.ListenUri.ToString()),
-                    receiver);
+                    receiver
+                );
             }
             return ServiceModelActivity.BoundOperation(receiver.Activity);
         }
 
         public static Activity BoundReceiveOperation(MsmqReceiveHelper receiver)
         {
-            if (DiagnosticUtility.ShouldUseActivity && null != ServiceModelActivity.Current && ActivityType.ProcessAction != ServiceModelActivity.Current.ActivityType)
+            if (
+                DiagnosticUtility.ShouldUseActivity
+                && null != ServiceModelActivity.Current
+                && ActivityType.ProcessAction != ServiceModelActivity.Current.ActivityType
+            )
             {
                 return ServiceModelActivity.BoundOperation(receiver.Activity);
             }
@@ -85,14 +99,20 @@ namespace System.ServiceModel.Channels
             }
         }
 
-
         public static ServiceModelActivity BoundDecodeOperation()
         {
             ServiceModelActivity activity = null;
             if (DiagnosticUtility.ShouldUseActivity)
             {
                 activity = ServiceModelActivity.CreateBoundedActivity(true);
-                ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityProcessingMessage, TraceUtility.RetrieveMessageNumber()), ActivityType.ProcessMessage);
+                ServiceModelActivity.Start(
+                    activity,
+                    SR.GetString(
+                        SR.ActivityProcessingMessage,
+                        TraceUtility.RetrieveMessageNumber()
+                    ),
+                    ActivityType.ProcessMessage
+                );
             }
             return activity;
         }
@@ -102,8 +122,14 @@ namespace System.ServiceModel.Channels
             ServiceModelActivity activity = null;
             if (DiagnosticUtility.ShouldUseActivity)
             {
-                activity = ServiceModelActivity.CreateBoundedActivityWithTransferInOnly(Guid.NewGuid());
-                ServiceModelActivity.Start(activity, SR.GetString(SR.ActivityReceiveBytes, TraceUtility.RetrieveMessageNumber()), ActivityType.ReceiveBytes);
+                activity = ServiceModelActivity.CreateBoundedActivityWithTransferInOnly(
+                    Guid.NewGuid()
+                );
+                ServiceModelActivity.Start(
+                    activity,
+                    SR.GetString(SR.ActivityReceiveBytes, TraceUtility.RetrieveMessageNumber()),
+                    ActivityType.ReceiveBytes
+                );
             }
             return activity;
         }
@@ -131,11 +157,17 @@ namespace System.ServiceModel.Channels
                     SR.GetString(SR.TraceCodeMsmqScanStarted),
                     null,
                     null,
-                    null);
+                    null
+                );
             }
         }
 
-        public static void MatchedApplicationFound(string host, string queueName, bool isPrivate, string canonicalPath)
+        public static void MatchedApplicationFound(
+            string host,
+            string queueName,
+            bool isPrivate,
+            string canonicalPath
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
@@ -150,7 +182,8 @@ namespace System.ServiceModel.Channels
                     SR.GetString(SR.TraceCodeMsmqMatchedApplicationFound),
                     new DictionaryTraceRecord(dictionary),
                     null,
-                    null);
+                    null
+                );
             }
         }
 
@@ -164,12 +197,17 @@ namespace System.ServiceModel.Channels
                     SR.GetString(SR.TraceCodeMsmqStartingApplication),
                     new StringTraceRecord("Application", application),
                     null,
-                    null);
+                    null
+                );
             }
         }
 
-
-        public static void StartingService(string host, string name, bool isPrivate, string processedVirtualPath)
+        public static void StartingService(
+            string host,
+            string name,
+            bool isPrivate,
+            string processedVirtualPath
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
@@ -184,7 +222,8 @@ namespace System.ServiceModel.Channels
                     SR.GetString(SR.TraceCodeMsmqStartingService),
                     new DictionaryTraceRecord(dictionary),
                     null,
-                    null);
+                    null
+                );
             }
         }
 
@@ -195,7 +234,7 @@ namespace System.ServiceModel.Channels
                 Dictionary<string, string> dictionary = new Dictionary<string, string>(2)
                 {
                     { "Uri", uri.ToString() },
-                    { "VirtualPath", virtualPath }
+                    { "VirtualPath", virtualPath },
                 };
                 TraceUtility.TraceEvent(
                     TraceEventType.Information,
@@ -203,11 +242,17 @@ namespace System.ServiceModel.Channels
                     SR.GetString(SR.TraceCodeMsmqFoundBaseAddress),
                     new DictionaryTraceRecord(dictionary),
                     null,
-                    null);
+                    null
+                );
             }
         }
 
-        static void DatagramSentOrReceived(NativeMsmqMessage.BufferProperty messageId, Message message, int traceCode, string traceDescription)
+        static void DatagramSentOrReceived(
+            NativeMsmqMessage.BufferProperty messageId,
+            Message message,
+            int traceCode,
+            string traceDescription
+        )
         {
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
@@ -223,22 +268,42 @@ namespace System.ServiceModel.Channels
                     Dictionary<string, string> dictionary = new Dictionary<string, string>(2)
                     {
                         { "MSMQMessageId", msmqId.ToString() },
-                        { "WCFMessageId", indigoId.ToString() }
+                        { "WCFMessageId", indigoId.ToString() },
                     };
                     record = new DictionaryTraceRecord(dictionary);
                 }
-                TraceUtility.TraceEvent(TraceEventType.Verbose, traceCode, traceDescription, record, null, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    traceCode,
+                    traceDescription,
+                    record,
+                    null,
+                    null
+                );
             }
         }
 
-        public static void DatagramReceived(NativeMsmqMessage.BufferProperty messageId, Message message)
+        public static void DatagramReceived(
+            NativeMsmqMessage.BufferProperty messageId,
+            Message message
+        )
         {
-            DatagramSentOrReceived(messageId, message, TraceCode.MsmqDatagramReceived, SR.GetString(SR.TraceCodeMsmqDatagramReceived));
+            DatagramSentOrReceived(
+                messageId,
+                message,
+                TraceCode.MsmqDatagramReceived,
+                SR.GetString(SR.TraceCodeMsmqDatagramReceived)
+            );
         }
 
         public static void DatagramSent(NativeMsmqMessage.BufferProperty messageId, Message message)
         {
-            DatagramSentOrReceived(messageId, message, TraceCode.MsmqDatagramSent, SR.GetString(SR.TraceCodeMsmqDatagramSent));
+            DatagramSentOrReceived(
+                messageId,
+                message,
+                TraceCode.MsmqDatagramSent,
+                SR.GetString(SR.TraceCodeMsmqDatagramSent)
+            );
         }
 
         static Guid MessageIdToGuid(NativeMsmqMessage.BufferProperty messageId)
@@ -258,10 +323,13 @@ namespace System.ServiceModel.Channels
                 TraceUtility.TraceEvent(
                     TraceEventType.Warning,
                     rejected ? TraceCode.MsmqMessageRejected : TraceCode.MsmqMessageDropped,
-                    rejected ? SR.GetString(SR.TraceCodeMsmqMessageRejected) : SR.GetString(SR.TraceCodeMsmqMessageDropped),
+                    rejected
+                        ? SR.GetString(SR.TraceCodeMsmqMessageRejected)
+                        : SR.GetString(SR.TraceCodeMsmqMessageDropped),
                     new StringTraceRecord("MSMQMessageId", messageId),
                     null,
-                    null);
+                    null
+                );
             }
 
             if (PerformanceCounters.PerformanceCountersEnabled)
@@ -285,9 +353,13 @@ namespace System.ServiceModel.Channels
                     TraceEventType.Warning,
                     TraceCode.MsmqMessageLockedUnderTheTransaction,
                     SR.GetString(SR.TraceCodeMsmqMessageLockedUnderTheTransaction),
-                    new StringTraceRecord("MSMQMessageLookupId", Convert.ToString(lookupId, CultureInfo.InvariantCulture)),
+                    new StringTraceRecord(
+                        "MSMQMessageLookupId",
+                        Convert.ToString(lookupId, CultureInfo.InvariantCulture)
+                    ),
                     null,
-                    null);
+                    null
+                );
             }
         }
 
@@ -299,9 +371,13 @@ namespace System.ServiceModel.Channels
                     TraceEventType.Warning,
                     TraceCode.MsmqMoveOrDeleteAttemptFailed,
                     SR.GetString(SR.TraceCodeMsmqMoveOrDeleteAttemptFailed),
-                    new StringTraceRecord("MSMQMessageLookupId", Convert.ToString(lookupId, CultureInfo.InvariantCulture)),
+                    new StringTraceRecord(
+                        "MSMQMessageLookupId",
+                        Convert.ToString(lookupId, CultureInfo.InvariantCulture)
+                    ),
                     null,
-                    null);
+                    null
+                );
             }
         }
 
@@ -315,7 +391,8 @@ namespace System.ServiceModel.Channels
                     SR.GetString(SR.TraceCodeMsmqDetected),
                     new StringTraceRecord("MSMQVersion", version.ToString()),
                     null,
-                    null);
+                    null
+                );
             }
         }
 
@@ -325,11 +402,16 @@ namespace System.ServiceModel.Channels
             {
                 TraceUtility.TraceEvent(
                     TraceEventType.Warning,
-                    poisonQueue ? TraceCode.MsmqPoisonMessageMovedPoison : TraceCode.MsmqPoisonMessageMovedRetry,
-                    poisonQueue ? SR.GetString(SR.TraceCodeMsmqPoisonMessageMovedPoison) : SR.GetString(SR.TraceCodeMsmqPoisonMessageMovedRetry),
+                    poisonQueue
+                        ? TraceCode.MsmqPoisonMessageMovedPoison
+                        : TraceCode.MsmqPoisonMessageMovedRetry,
+                    poisonQueue
+                        ? SR.GetString(SR.TraceCodeMsmqPoisonMessageMovedPoison)
+                        : SR.GetString(SR.TraceCodeMsmqPoisonMessageMovedRetry),
                     new StringTraceRecord("MSMQMessageId", messageId),
                     null,
-                    null);
+                    null
+                );
             }
             if (poisonQueue && PerformanceCounters.PerformanceCountersEnabled)
             {
@@ -347,7 +429,8 @@ namespace System.ServiceModel.Channels
                     SR.GetString(SR.TraceCodeMsmqPoisonMessageRejected),
                     new StringTraceRecord("MSMQMessageId", messageId),
                     null,
-                    null);
+                    null
+                );
             }
             if (PerformanceCounters.PerformanceCountersEnabled)
             {
@@ -367,7 +450,8 @@ namespace System.ServiceModel.Channels
                     SR.GetString(SR.TraceCodeMsmqPoolFull),
                     null,
                     null,
-                    null);
+                    null
+                );
 
                 poolFullReported = true;
             }
@@ -383,7 +467,8 @@ namespace System.ServiceModel.Channels
                     SR.GetString(SR.TraceCodeMsmqPotentiallyPoisonMessageDetected),
                     new StringTraceRecord("MSMQMessageId", messageId),
                     null,
-                    null);
+                    null
+                );
             }
         }
 
@@ -397,7 +482,8 @@ namespace System.ServiceModel.Channels
                     SR.GetString(SR.TraceCodeMsmqQueueClosed),
                     new StringTraceRecord("FormatName", formatName),
                     null,
-                    null);
+                    null
+                );
             }
         }
 
@@ -411,7 +497,8 @@ namespace System.ServiceModel.Channels
                     SR.GetString(SR.TraceCodeMsmqQueueOpened),
                     new StringTraceRecord("FormatName", formatName),
                     null,
-                    null);
+                    null
+                );
             }
         }
 
@@ -425,43 +512,60 @@ namespace System.ServiceModel.Channels
                     SR.GetString(SR.TraceCodeMsmqQueueTransactionalStatusUnknown),
                     new StringTraceRecord("FormatName", formatName),
                     null,
-                    null);
+                    null
+                );
             }
         }
 
-        public static void SessiongramSent(string sessionId, NativeMsmqMessage.BufferProperty messageId, int numberOfMessages)
+        public static void SessiongramSent(
+            string sessionId,
+            NativeMsmqMessage.BufferProperty messageId,
+            int numberOfMessages
+        )
         {
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
                 Dictionary<string, string> dictionary = new Dictionary<string, string>(3);
                 dictionary["SessionId"] = sessionId;
                 dictionary["MSMQMessageId"] = MsmqMessageId.ToString(messageId.Buffer);
-                dictionary["NumberOfMessages"] = Convert.ToString(numberOfMessages, CultureInfo.InvariantCulture);
+                dictionary["NumberOfMessages"] = Convert.ToString(
+                    numberOfMessages,
+                    CultureInfo.InvariantCulture
+                );
                 TraceUtility.TraceEvent(
                     TraceEventType.Verbose,
                     TraceCode.MsmqSessiongramSent,
                     SR.GetString(SR.TraceCodeMsmqSessiongramSent),
                     new DictionaryTraceRecord(dictionary),
                     null,
-                    null);
+                    null
+                );
             }
         }
 
-        public static void SessiongramReceived(string sessionId, NativeMsmqMessage.BufferProperty messageId, int numberOfMessages)
+        public static void SessiongramReceived(
+            string sessionId,
+            NativeMsmqMessage.BufferProperty messageId,
+            int numberOfMessages
+        )
         {
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
                 Dictionary<string, string> dictionary = new Dictionary<string, string>(3);
                 dictionary["SessionId"] = sessionId;
                 dictionary["MSMQMessageId"] = MsmqMessageId.ToString(messageId.Buffer);
-                dictionary["NumberOfMessages"] = Convert.ToString(numberOfMessages, CultureInfo.InvariantCulture);
+                dictionary["NumberOfMessages"] = Convert.ToString(
+                    numberOfMessages,
+                    CultureInfo.InvariantCulture
+                );
                 TraceUtility.TraceEvent(
                     TraceEventType.Verbose,
                     TraceCode.MsmqSessiongramReceived,
                     SR.GetString(SR.TraceCodeMsmqSessiongramReceived),
                     new DictionaryTraceRecord(dictionary),
                     null,
-                    null);
+                    null
+                );
             }
         }
 
@@ -471,14 +575,18 @@ namespace System.ServiceModel.Channels
             {
                 Dictionary<string, string> dictionary = new Dictionary<string, string>(2);
                 dictionary["MSMQMessageId"] = messageId;
-                dictionary["Acknowledgment"] = Convert.ToString(acknowledgment, CultureInfo.InvariantCulture);
+                dictionary["Acknowledgment"] = Convert.ToString(
+                    acknowledgment,
+                    CultureInfo.InvariantCulture
+                );
                 TraceUtility.TraceEvent(
                     TraceEventType.Verbose,
                     TraceCode.MsmqUnexpectedAcknowledgment,
                     SR.GetString(SR.TraceCodeMsmqUnexpectedAcknowledgment),
                     new DictionaryTraceRecord(dictionary),
                     null,
-                    null);
+                    null
+                );
             }
         }
     }

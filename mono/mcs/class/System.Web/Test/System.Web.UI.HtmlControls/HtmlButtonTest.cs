@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,99 +31,95 @@ using System;
 using System.IO;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.HtmlControls {
+namespace MonoTests.System.Web.UI.HtmlControls
+{
+    public class HtmlButtonPoker : HtmlButton
+    {
+        public HtmlButtonPoker()
+        {
+            TrackViewState();
+        }
 
-	public class HtmlButtonPoker : HtmlButton {
+        public object SaveState()
+        {
+            return SaveViewState();
+        }
 
-		public HtmlButtonPoker ()
-		{
-			TrackViewState ();
-		}
+        public void LoadState(object state)
+        {
+            LoadViewState(state);
+        }
 
-		public object SaveState ()
-		{
-			return SaveViewState ();
-		}
+        public void DoRenderAttributes(HtmlTextWriter writer)
+        {
+            RenderAttributes(writer);
+        }
+    }
 
-		public void LoadState (object state)
-		{
-			LoadViewState (state);
-		}
+    [TestFixture]
+    public class HtmlButtonTest
+    {
+        [Test]
+        public void Defaults()
+        {
+            HtmlButtonPoker p = new HtmlButtonPoker();
 
-		public void DoRenderAttributes (HtmlTextWriter writer)
-		{
-			RenderAttributes (writer);
-		}
-	}
+            Assert.IsTrue(p.CausesValidation, "A1");
+            Assert.AreEqual("", p.ValidationGroup, "A2");
+        }
 
-	[TestFixture]
-	public class HtmlButtonTest {
+        [Test]
+        public void CleanProperties()
+        {
+            HtmlButtonPoker p = new HtmlButtonPoker();
 
-		[Test]
-		public void Defaults ()
-		{
-			HtmlButtonPoker p = new HtmlButtonPoker ();
+            p.CausesValidation = false;
+            Assert.IsFalse(p.CausesValidation, "A1");
 
-			Assert.IsTrue (p.CausesValidation, "A1");
-			Assert.AreEqual ("", p.ValidationGroup, "A2");
-		}
+            p.CausesValidation = true;
+            Assert.IsTrue(p.CausesValidation, "A2");
 
-		[Test]
-		public void CleanProperties ()
-		{
-			HtmlButtonPoker p = new HtmlButtonPoker ();
+            p.CausesValidation = false;
+            Assert.IsFalse(p.CausesValidation, "A3");
+        }
 
-			p.CausesValidation = false;
-			Assert.IsFalse (p.CausesValidation, "A1");
+        [Test]
+        public void ViewState()
+        {
+            HtmlButtonPoker p = new HtmlButtonPoker();
+            p.CausesValidation = true;
+            p.ValidationGroup = "VG";
+            object state = p.SaveState();
 
-			p.CausesValidation = true;
-			Assert.IsTrue (p.CausesValidation, "A2");
+            HtmlButtonPoker copy = new HtmlButtonPoker();
+            copy.LoadState(state);
+            Assert.AreEqual("VG", copy.ValidationGroup, "A1");
+            Assert.IsTrue(copy.CausesValidation, "A2");
+        }
 
-			p.CausesValidation = false;
-			Assert.IsFalse (p.CausesValidation, "A3");
-		}
+        [Test]
+        public void RenderAttributes()
+        {
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter tw = new HtmlTextWriter(sw);
 
-		[Test]
-		public void ViewState ()
-		{
-			HtmlButtonPoker p = new HtmlButtonPoker ();
-			p.CausesValidation = true;
-			p.ValidationGroup = "VG";
-			object state = p.SaveState();
+            HtmlButtonPoker p = new HtmlButtonPoker();
 
-			HtmlButtonPoker copy = new HtmlButtonPoker ();
-			copy.LoadState (state);
-			Assert.AreEqual ("VG", copy.ValidationGroup, "A1");
-			Assert.IsTrue (copy.CausesValidation, "A2");
-		}
+            Assert.AreEqual(p.Attributes.Count, 0, "A1");
 
-		[Test]
-		public void RenderAttributes ()
-		{
-			StringWriter sw = new StringWriter ();
-			HtmlTextWriter tw = new HtmlTextWriter (sw);
+            p.DoRenderAttributes(tw);
+            Assert.AreEqual(sw.ToString(), String.Empty, "A2");
 
-			HtmlButtonPoker p = new HtmlButtonPoker ();
+            p.ServerClick += new EventHandler(EmptyHandler);
 
-			Assert.AreEqual (p.Attributes.Count, 0, "A1");
+            p.DoRenderAttributes(tw);
+            // This is empty because the control doesn't have
+            // its Page property initialized
+            Assert.AreEqual(sw.ToString(), String.Empty, "A3");
+        }
 
-			p.DoRenderAttributes (tw);
-			Assert.AreEqual (sw.ToString (), String.Empty, "A2");
-
-			p.ServerClick += new EventHandler (EmptyHandler);
-
-			p.DoRenderAttributes (tw);
-			// This is empty because the control doesn't have
-			// its Page property initialized
-			Assert.AreEqual (sw.ToString (), String.Empty, "A3");
-		}
-
-		private static void EmptyHandler (object sender, EventArgs e)
-		{
-		}
-	}	
+        private static void EmptyHandler(object sender, EventArgs e) { }
+    }
 }
-

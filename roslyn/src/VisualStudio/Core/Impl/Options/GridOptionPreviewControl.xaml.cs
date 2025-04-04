@@ -24,25 +24,37 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         private const string UseEditorConfigUrl = "https://go.microsoft.com/fwlink/?linkid=866541";
         internal AbstractOptionPreviewViewModel ViewModel;
         private readonly IServiceProvider _serviceProvider;
-        private readonly Func<OptionStore, IServiceProvider, AbstractOptionPreviewViewModel> _createViewModel;
-        private readonly ImmutableArray<(string feature, ImmutableArray<IOption2> options)> _groupedEditorConfigOptions;
+        private readonly Func<
+            OptionStore,
+            IServiceProvider,
+            AbstractOptionPreviewViewModel
+        > _createViewModel;
+        private readonly ImmutableArray<(
+            string feature,
+            ImmutableArray<IOption2> options
+        )> _groupedEditorConfigOptions;
         private readonly string _language;
 
         public static readonly Uri CodeStylePageHeaderLearnMoreUri = new Uri(UseEditorConfigUrl);
-        public static string CodeStylePageHeader => ServicesVSResources.Code_style_header_use_editor_config;
+        public static string CodeStylePageHeader =>
+            ServicesVSResources.Code_style_header_use_editor_config;
         public static string CodeStylePageHeaderLearnMoreText => ServicesVSResources.Learn_more;
         public static string DescriptionHeader => ServicesVSResources.Description;
         public static string PreferenceHeader => ServicesVSResources.Preference;
         public static string SeverityHeader => ServicesVSResources.Severity;
-        public static string GenerateEditorConfigFileFromSettingsText => ServicesVSResources.Generate_dot_editorconfig_file_from_settings;
+        public static string GenerateEditorConfigFileFromSettingsText =>
+            ServicesVSResources.Generate_dot_editorconfig_file_from_settings;
 
         internal GridOptionPreviewControl(
             IServiceProvider serviceProvider,
             OptionStore optionStore,
-            Func<OptionStore, IServiceProvider,
-            AbstractOptionPreviewViewModel> createViewModel,
-            ImmutableArray<(string feature, ImmutableArray<IOption2> options)> groupedEditorConfigOptions,
-            string language)
+            Func<OptionStore, IServiceProvider, AbstractOptionPreviewViewModel> createViewModel,
+            ImmutableArray<(
+                string feature,
+                ImmutableArray<IOption2> options
+            )> groupedEditorConfigOptions,
+            string language
+        )
             : base(optionStore)
         {
             InitializeComponent();
@@ -78,17 +90,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         private void Options_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             // TODO: make the combo to drop down on space or some key.
-            if (e.Key == Key.Space && e.KeyboardDevice.Modifiers == ModifierKeys.None)
-            {
-            }
+            if (e.Key == Key.Space && e.KeyboardDevice.Modifiers == ModifierKeys.None) { }
         }
 
         internal override void OnLoad()
         {
             this.ViewModel = _createViewModel(OptionStore, _serviceProvider);
 
-            var firstItem = this.ViewModel.CodeStyleItems.OfType<AbstractCodeStyleOptionViewModel>().First();
-            this.ViewModel.SetOptionAndUpdatePreview(firstItem.SelectedPreference.IsChecked, firstItem.Option, firstItem.GetPreview());
+            var firstItem = this
+                .ViewModel.CodeStyleItems.OfType<AbstractCodeStyleOptionViewModel>()
+                .First();
+            this.ViewModel.SetOptionAndUpdatePreview(
+                firstItem.SelectedPreference.IsChecked,
+                firstItem.Option,
+                firstItem.GetPreview()
+            );
 
             DataContext = ViewModel;
         }
@@ -104,14 +120,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         {
             Logger.Log(FunctionId.ToolsOptions_GenerateEditorconfig);
 
-            var editorconfig = EditorConfigFileGenerator.Generate(_groupedEditorConfigOptions, OptionStore, _language);
-            using (var sfd = new System.Windows.Forms.SaveFileDialog
-            {
-                Filter = "All files (*.*)|",
-                FileName = ".editorconfig",
-                Title = ServicesVSResources.Save_dot_editorconfig_file,
-                InitialDirectory = GetInitialDirectory()
-            })
+            var editorconfig = EditorConfigFileGenerator.Generate(
+                _groupedEditorConfigOptions,
+                OptionStore,
+                _language
+            );
+            using (
+                var sfd = new System.Windows.Forms.SaveFileDialog
+                {
+                    Filter = "All files (*.*)|",
+                    FileName = ".editorconfig",
+                    Title = ServicesVSResources.Save_dot_editorconfig_file,
+                    InitialDirectory = GetInitialDirectory(),
+                }
+            )
             {
                 if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
@@ -126,16 +148,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         private static string GetInitialDirectory()
         {
-            var solution = (IVsSolution)Shell.ServiceProvider.GlobalProvider.GetService(typeof(SVsSolution));
+            var solution = (IVsSolution)
+                Shell.ServiceProvider.GlobalProvider.GetService(typeof(SVsSolution));
             if (solution is object)
             {
-                if (!ErrorHandler.Failed(solution.GetSolutionInfo(out _, out var solutionFilePath, out _)))
+                if (
+                    !ErrorHandler.Failed(
+                        solution.GetSolutionInfo(out _, out var solutionFilePath, out _)
+                    )
+                )
                 {
                     return Path.GetDirectoryName(solutionFilePath);
                 }
             }
 
-            // returning an empty string will cause SaveFileDialog to use the directory from which 
+            // returning an empty string will cause SaveFileDialog to use the directory from which
             // the user last selected a file
             return string.Empty;
         }

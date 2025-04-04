@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,49 +32,50 @@ using System;
 using System.Collections;
 using System.Diagnostics;
 
-namespace System.Diagnostics {
+namespace System.Diagnostics
+{
+    public class InstanceDataCollectionCollection : DictionaryBase
+    {
+        private static void CheckNull(object value, string name)
+        {
+            if (value == null)
+                throw new ArgumentNullException(name);
+        }
 
-	public class InstanceDataCollectionCollection : DictionaryBase {
+        // may throw ArgumentNullException
+        [Obsolete("Use PerformanceCounterCategory.ReadCategory()")]
+        public InstanceDataCollectionCollection() { }
 
-		private static void CheckNull (object value, string name)
-		{
-			if (value == null)
-				throw new ArgumentNullException (name);
-		}
+        // may throw ArgumentNullException
+        public InstanceDataCollection this[string counterName]
+        {
+            get
+            {
+                CheckNull(counterName, "counterName");
+                return (InstanceDataCollection)Dictionary[counterName];
+            }
+        }
 
-		// may throw ArgumentNullException
-		[Obsolete ("Use PerformanceCounterCategory.ReadCategory()")]
-		public InstanceDataCollectionCollection ()
-		{
-		}
+        public ICollection Keys
+        {
+            get { return Dictionary.Keys; }
+        }
 
-		// may throw ArgumentNullException
-		public InstanceDataCollection this [string counterName] {
-			get {
-				CheckNull (counterName, "counterName");
-				return (InstanceDataCollection) Dictionary [counterName];
-			}
-		}
+        public ICollection Values
+        {
+            get { return Dictionary.Values; }
+        }
 
-		public ICollection Keys {
-			get {return Dictionary.Keys;}
-		}
+        // may throw ArgumentNullException
+        public bool Contains(string counterName)
+        {
+            CheckNull(counterName, "counterName");
+            return Dictionary.Contains(counterName);
+        }
 
-		public ICollection Values {
-			get {return Dictionary.Values;}
-		}
-
-		// may throw ArgumentNullException
-		public bool Contains (string counterName)
-		{
-			CheckNull (counterName, "counterName");
-			return Dictionary.Contains (counterName);
-		}
-
-		public void CopyTo (InstanceDataCollection[] counters, int index)
-		{
-			Dictionary.CopyTo (counters, index);
-		}
-	}
+        public void CopyTo(InstanceDataCollection[] counters, int index)
+        {
+            Dictionary.CopyTo(counters, index);
+        }
+    }
 }
-

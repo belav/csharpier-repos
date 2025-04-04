@@ -12,6 +12,7 @@ public class test
         x -= x * y;
         return x;
     }
+
     [Fact]
     public static int TestEntryPoint()
     {

@@ -16,7 +16,9 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 internal sealed unsafe partial class ClientCertLoader : IAsyncResult, IDisposable
 {
     private const uint CertBlobSize = 1500;
-    private static readonly IOCompletionCallback IOCallback = new IOCompletionCallback(WaitCallback);
+    private static readonly IOCompletionCallback IOCallback = new IOCompletionCallback(
+        WaitCallback
+    );
 
     private SafeNativeOverlapped? _overlapped;
     private byte[]? _backingBuffer;
@@ -75,34 +77,22 @@ internal sealed unsafe partial class ClientCertLoader : IAsyncResult, IDisposabl
 
     private RequestContext RequestContext
     {
-        get
-        {
-            return _requestContext;
-        }
+        get { return _requestContext; }
     }
 
     private Task Task
     {
-        get
-        {
-            return _tcs.Task;
-        }
+        get { return _tcs.Task; }
     }
 
     private SafeNativeOverlapped? NativeOverlapped
     {
-        get
-        {
-            return _overlapped;
-        }
+        get { return _overlapped; }
     }
 
     private HTTP_SSL_CLIENT_CERT_INFO* RequestBlob
     {
-        get
-        {
-            return _memoryBlob;
-        }
+        get { return _memoryBlob; }
     }
 
     private void Reset(uint size)
@@ -125,9 +115,12 @@ internal sealed unsafe partial class ClientCertLoader : IAsyncResult, IDisposabl
         }
         _backingBuffer = new byte[checked((int)size)];
         var boundHandle = RequestContext.Server.RequestQueue.BoundHandle;
-        _overlapped = new SafeNativeOverlapped(boundHandle,
-            boundHandle.AllocateNativeOverlapped(IOCallback, this, _backingBuffer));
-        _memoryBlob = (HTTP_SSL_CLIENT_CERT_INFO*)Marshal.UnsafeAddrOfPinnedArrayElement(_backingBuffer, 0);
+        _overlapped = new SafeNativeOverlapped(
+            boundHandle,
+            boundHandle.AllocateNativeOverlapped(IOCallback, this, _backingBuffer)
+        );
+        _memoryBlob = (HTTP_SSL_CLIENT_CERT_INFO*)
+            Marshal.UnsafeAddrOfPinnedArrayElement(_backingBuffer, 0);
     }
 
     // When you use netsh to configure HTTP.SYS with clientcertnegotiation = enable
@@ -157,15 +150,15 @@ internal sealed unsafe partial class ClientCertLoader : IAsyncResult, IDisposabl
             retry = false;
             uint bytesReceived = 0;
 
-            var statusCode =
-                HttpApi.HttpReceiveClientCertificate(
-                    RequestQueueHandle,
-                    RequestContext.Request.UConnectionId,
-                    0u,
-                    RequestBlob,
-                    size,
-                    &bytesReceived,
-                    NativeOverlapped!);
+            var statusCode = HttpApi.HttpReceiveClientCertificate(
+                RequestQueueHandle,
+                RequestContext.Request.UConnectionId,
+                0u,
+                RequestBlob,
+                size,
+                &bytesReceived,
+                NativeOverlapped!
+            );
 
             if (statusCode == ErrorCodes.ERROR_MORE_DATA)
             {
@@ -179,21 +172,24 @@ internal sealed unsafe partial class ClientCertLoader : IAsyncResult, IDisposabl
                 // The client did not send a cert.
                 Complete(0, null);
             }
-            else if (statusCode == ErrorCodes.ERROR_SUCCESS &&
-                HttpSysListener.SkipIOCPCallbackOnSuccess)
+            else if (
+                statusCode == ErrorCodes.ERROR_SUCCESS
+                && HttpSysListener.SkipIOCPCallbackOnSuccess
+            )
             {
                 IOCompleted(statusCode, bytesReceived);
             }
-            else if (statusCode != ErrorCodes.ERROR_SUCCESS &&
-                statusCode != ErrorCodes.ERROR_IO_PENDING)
+            else if (
+                statusCode != ErrorCodes.ERROR_SUCCESS
+                && statusCode != ErrorCodes.ERROR_IO_PENDING
+            )
             {
                 // Some other bad error, possible(?) return values are:
                 // ERROR_INVALID_HANDLE, ERROR_INSUFFICIENT_BUFFER, ERROR_OPERATION_ABORTED
                 // Also ERROR_BAD_DATA if we got it twice or it reported smaller size buffer required.
                 Fail(new HttpSysException((int)statusCode));
             }
-        }
-        while (retry);
+        } while (retry);
 
         return Task;
     }
@@ -220,8 +216,16 @@ internal sealed unsafe partial class ClientCertLoader : IAsyncResult, IDisposabl
         IOCompleted(this, errorCode, numBytes);
     }
 
-    [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Redirected to callback")]
-    private static unsafe void IOCompleted(ClientCertLoader asyncResult, uint errorCode, uint numBytes)
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1031:DoNotCatchGeneralExceptionTypes",
+        Justification = "Redirected to callback"
+    )]
+    private static unsafe void IOCompleted(
+        ClientCertLoader asyncResult,
+        uint errorCode,
+        uint numBytes
+    )
     {
         var requestContext = asyncResult.RequestContext;
         try
@@ -236,18 +240,23 @@ internal sealed unsafe partial class ClientCertLoader : IAsyncResult, IDisposabl
                 asyncResult.Reset(numBytes + pClientCertInfo->CertEncodedSize);
 
                 uint bytesReceived = 0;
-                errorCode =
-                    HttpApi.HttpReceiveClientCertificate(
-                        requestContext.Server.RequestQueue.Handle,
-                        requestContext.Request.UConnectionId,
-                        0u,
-                        asyncResult._memoryBlob,
-                        asyncResult._size,
-                        &bytesReceived,
-                        asyncResult._overlapped!);
+                errorCode = HttpApi.HttpReceiveClientCertificate(
+                    requestContext.Server.RequestQueue.Handle,
+                    requestContext.Request.UConnectionId,
+                    0u,
+                    asyncResult._memoryBlob,
+                    asyncResult._size,
+                    &bytesReceived,
+                    asyncResult._overlapped!
+                );
 
-                if (errorCode == ErrorCodes.ERROR_IO_PENDING ||
-                   (errorCode == ErrorCodes.ERROR_SUCCESS && !HttpSysListener.SkipIOCPCallbackOnSuccess))
+                if (
+                    errorCode == ErrorCodes.ERROR_IO_PENDING
+                    || (
+                        errorCode == ErrorCodes.ERROR_SUCCESS
+                        && !HttpSysListener.SkipIOCPCallbackOnSuccess
+                    )
+                )
                 {
                     return;
                 }
@@ -276,8 +285,16 @@ internal sealed unsafe partial class ClientCertLoader : IAsyncResult, IDisposabl
                         try
                         {
                             var certEncoded = new byte[pClientCertInfo->CertEncodedSize];
-                            Marshal.Copy((IntPtr)pClientCertInfo->pCertEncoded, certEncoded, 0, certEncoded.Length);
-                            asyncResult.Complete((int)pClientCertInfo->CertFlags, new X509Certificate2(certEncoded));
+                            Marshal.Copy(
+                                (IntPtr)pClientCertInfo->pCertEncoded,
+                                certEncoded,
+                                0,
+                                certEncoded.Length
+                            );
+                            asyncResult.Complete(
+                                (int)pClientCertInfo->CertFlags,
+                                new X509Certificate2(certEncoded)
+                            );
                         }
                         catch (CryptographicException exception)
                         {
@@ -299,9 +316,14 @@ internal sealed unsafe partial class ClientCertLoader : IAsyncResult, IDisposabl
         }
     }
 
-    private static unsafe void WaitCallback(uint errorCode, uint numBytes, NativeOverlapped* nativeOverlapped)
+    private static unsafe void WaitCallback(
+        uint errorCode,
+        uint numBytes,
+        NativeOverlapped* nativeOverlapped
+    )
     {
-        var asyncResult = (ClientCertLoader)ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
+        var asyncResult = (ClientCertLoader)
+            ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
         IOCompleted(asyncResult, errorCode, numBytes);
     }
 

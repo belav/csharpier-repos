@@ -14,49 +14,72 @@ namespace System.Web.Razor.Test.Parser.VB
         [Fact]
         public void InnerImplicitExpressionWithOnlySingleAtAcceptsSingleSpaceOrNewlineAtDesignTime()
         {
-            ParseBlockTest("Code" + Environment.NewLine
-                         + "    @" + Environment.NewLine
-                         + "End Code",
+            ParseBlockTest(
+                "Code" + Environment.NewLine + "    @" + Environment.NewLine + "End Code",
                 new StatementBlock(
                     Factory.MetaCode("Code").Accepts(AcceptedCharacters.None),
                     Factory.Code("\r\n    ").AsStatement(),
                     new ExpressionBlock(
                         Factory.CodeTransition(),
-                        Factory.EmptyVB()
-                               .AsImplicitExpression(VBCodeParser.DefaultKeywords, acceptTrailingDot: true)
-                               .Accepts(AcceptedCharacters.NonWhiteSpace)),
+                        Factory
+                            .EmptyVB()
+                            .AsImplicitExpression(
+                                VBCodeParser.DefaultKeywords,
+                                acceptTrailingDot: true
+                            )
+                            .Accepts(AcceptedCharacters.NonWhiteSpace)
+                    ),
                     Factory.Code("\r\n").AsStatement(),
-                    Factory.MetaCode("End Code").Accepts(AcceptedCharacters.None)),
+                    Factory.MetaCode("End Code").Accepts(AcceptedCharacters.None)
+                ),
                 designTimeParser: true,
                 expectedErrors: new[]
                 {
-                    new RazorError(RazorResources.ParseError_Unexpected_WhiteSpace_At_Start_Of_CodeBlock_VB, 11, 1, 5)
-                });
+                    new RazorError(
+                        RazorResources.ParseError_Unexpected_WhiteSpace_At_Start_Of_CodeBlock_VB,
+                        11,
+                        1,
+                        5
+                    ),
+                }
+            );
         }
 
         [Fact]
         public void InnerImplicitExpressionDoesNotAcceptDotAfterAt()
         {
-            ParseBlockTest("Code" + Environment.NewLine
-                         + "    @." + Environment.NewLine
-                         + "End Code",
+            ParseBlockTest(
+                "Code" + Environment.NewLine + "    @." + Environment.NewLine + "End Code",
                 new StatementBlock(
                     Factory.MetaCode("Code").Accepts(AcceptedCharacters.None),
                     Factory.Code("\r\n    ").AsStatement(),
                     new ExpressionBlock(
                         Factory.CodeTransition(),
-                        Factory.EmptyVB()
-                               .AsImplicitExpression(VBCodeParser.DefaultKeywords, acceptTrailingDot: true)
-                               .Accepts(AcceptedCharacters.NonWhiteSpace)),
+                        Factory
+                            .EmptyVB()
+                            .AsImplicitExpression(
+                                VBCodeParser.DefaultKeywords,
+                                acceptTrailingDot: true
+                            )
+                            .Accepts(AcceptedCharacters.NonWhiteSpace)
+                    ),
                     Factory.Code(".\r\n").AsStatement(),
-                    Factory.MetaCode("End Code").Accepts(AcceptedCharacters.None)),
+                    Factory.MetaCode("End Code").Accepts(AcceptedCharacters.None)
+                ),
                 designTimeParser: true,
                 expectedErrors: new[]
                 {
                     new RazorError(
-                        String.Format(RazorResources.ParseError_Unexpected_Character_At_Start_Of_CodeBlock_VB, "."), 
-                        11, 1, 5)
-                });
+                        String.Format(
+                            RazorResources.ParseError_Unexpected_Character_At_Start_Of_CodeBlock_VB,
+                            "."
+                        ),
+                        11,
+                        1,
+                        5
+                    ),
+                }
+            );
         }
 
         [Theory]
@@ -77,45 +100,55 @@ namespace System.Web.Razor.Test.Parser.VB
             ExpressionBlock expressionBlock;
             if (isImplicit)
             {
-                expressionBlock =
-                    new ExpressionBlock(
-                        Factory.CodeTransition(),
-                        Factory.Code(expression)
-                               .AsImplicitExpression(VBCodeParser.DefaultKeywords, acceptTrailingDot: true)
-                               .Accepts(AcceptedCharacters.NonWhiteSpace));
+                expressionBlock = new ExpressionBlock(
+                    Factory.CodeTransition(),
+                    Factory
+                        .Code(expression)
+                        .AsImplicitExpression(VBCodeParser.DefaultKeywords, acceptTrailingDot: true)
+                        .Accepts(AcceptedCharacters.NonWhiteSpace)
+                );
             }
             else
             {
-                expressionBlock =
-                    new ExpressionBlock(
-                        Factory.CodeTransition(),
-                        Factory.MetaCode("(").Accepts(AcceptedCharacters.None),
-                        Factory.Code(expression).AsExpression(),
-                        Factory.MetaCode(")").Accepts(AcceptedCharacters.None));
+                expressionBlock = new ExpressionBlock(
+                    Factory.CodeTransition(),
+                    Factory.MetaCode("(").Accepts(AcceptedCharacters.None),
+                    Factory.Code(expression).AsExpression(),
+                    Factory.MetaCode(")").Accepts(AcceptedCharacters.None)
+                );
             }
 
             string code;
             if (isImplicit)
             {
-                code = "If foo IsNot Nothing Then" + Environment.NewLine
-                     + "    @" + expression + Environment.NewLine
-                     + "End If";
+                code =
+                    "If foo IsNot Nothing Then"
+                    + Environment.NewLine
+                    + "    @"
+                    + expression
+                    + Environment.NewLine
+                    + "End If";
             }
             else
             {
-                code = "If foo IsNot Nothing Then" + Environment.NewLine
-                     + "    @(" + expression + ")" + Environment.NewLine
-                     + "End If";
+                code =
+                    "If foo IsNot Nothing Then"
+                    + Environment.NewLine
+                    + "    @("
+                    + expression
+                    + ")"
+                    + Environment.NewLine
+                    + "End If";
             }
 
-            ParseBlockTest(code,
+            ParseBlockTest(
+                code,
                 new StatementBlock(
-                    Factory.Code("If foo IsNot Nothing Then\r\n    ")
-                           .AsStatement(),
+                    Factory.Code("If foo IsNot Nothing Then\r\n    ").AsStatement(),
                     expressionBlock,
-                    Factory.Code("\r\nEnd If")
-                           .AsStatement()
-                           .Accepts(AcceptedCharacters.None)));
+                    Factory.Code("\r\nEnd If").AsStatement().Accepts(AcceptedCharacters.None)
+                )
+            );
         }
     }
 }

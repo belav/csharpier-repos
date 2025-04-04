@@ -4,7 +4,6 @@
 using System.Diagnostics;
 using System.Security.Cryptography.Apple;
 using Internal.Cryptography;
-
 using PAL_HashAlgorithm = Interop.AppleCrypto.PAL_HashAlgorithm;
 
 namespace System.Security.Cryptography
@@ -44,9 +43,11 @@ namespace System.Security.Cryptography
                 string hashAlgorithmId,
                 ReadOnlySpan<byte> key,
                 ReadOnlySpan<byte> source,
-                Span<byte> destination)
+                Span<byte> destination
+            )
             {
-                Interop.AppleCrypto.PAL_HashAlgorithm algorithm = HashAlgorithmNames.HashAlgorithmToPal(hashAlgorithmId);
+                Interop.AppleCrypto.PAL_HashAlgorithm algorithm =
+                    HashAlgorithmNames.HashAlgorithmToPal(hashAlgorithmId);
 
                 fixed (byte* pKey = key)
                 fixed (byte* pSource = source)
@@ -61,7 +62,8 @@ namespace System.Security.Cryptography
                         source.Length,
                         pDestination,
                         destination.Length,
-                        &digestSize);
+                        &digestSize
+                    );
 
                     if (ret != 1)
                     {
@@ -75,7 +77,11 @@ namespace System.Security.Cryptography
                 }
             }
 
-            public static void HashDataXof(string hashAlgorithmId, ReadOnlySpan<byte> source, Span<byte> destination)
+            public static void HashDataXof(
+                string hashAlgorithmId,
+                ReadOnlySpan<byte> source,
+                Span<byte> destination
+            )
             {
                 _ = hashAlgorithmId;
                 _ = source;
@@ -84,9 +90,14 @@ namespace System.Security.Cryptography
                 throw new UnreachableException();
             }
 
-            public static unsafe int HashData(string hashAlgorithmId, ReadOnlySpan<byte> source, Span<byte> destination)
+            public static unsafe int HashData(
+                string hashAlgorithmId,
+                ReadOnlySpan<byte> source,
+                Span<byte> destination
+            )
             {
-                Interop.AppleCrypto.PAL_HashAlgorithm algorithm = HashAlgorithmNames.HashAlgorithmToPal(hashAlgorithmId);
+                Interop.AppleCrypto.PAL_HashAlgorithm algorithm =
+                    HashAlgorithmNames.HashAlgorithmToPal(hashAlgorithmId);
 
                 fixed (byte* pSource = source)
                 fixed (byte* pDestination = destination)
@@ -98,7 +109,8 @@ namespace System.Security.Cryptography
                         source.Length,
                         pDestination,
                         destination.Length,
-                        &digestSize);
+                        &digestSize
+                    );
 
                     if (ret != 1)
                     {
@@ -170,7 +182,9 @@ namespace System.Security.Cryptography
 
             public AppleHmacProvider(string hashAlgorithmId, ReadOnlySpan<byte> key)
             {
-                PAL_HashAlgorithm algorithm = HashAlgorithmNames.HashAlgorithmToPal(hashAlgorithmId);
+                PAL_HashAlgorithm algorithm = HashAlgorithmNames.HashAlgorithmToPal(
+                    hashAlgorithmId
+                );
                 _liteHmac = new LiteHmac(algorithm, key, preinitialize: false);
                 _key = key.ToArray();
             }

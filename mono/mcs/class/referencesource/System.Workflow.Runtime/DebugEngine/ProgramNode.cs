@@ -2,9 +2,9 @@
 #region Using directives
 
 using System;
-using System.Threading;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 #endregion
 
@@ -19,15 +19,43 @@ namespace System.Workflow.Runtime.DebugEngine
             this.controller = controller;
         }
 
-        void IWDEProgramNode.Attach(ref Guid programId, int attachTimeout, int detachPingInterval, out string hostName, out string uri, out int controllerThreadId, out bool isSynchronousAttach)
+        void IWDEProgramNode.Attach(
+            ref Guid programId,
+            int attachTimeout,
+            int detachPingInterval,
+            out string hostName,
+            out string uri,
+            out int controllerThreadId,
+            out bool isSynchronousAttach
+        )
         {
-            this.controller.Attach(programId, attachTimeout, detachPingInterval, out hostName, out uri, out controllerThreadId, out isSynchronousAttach);
+            this.controller.Attach(
+                programId,
+                attachTimeout,
+                detachPingInterval,
+                out hostName,
+                out uri,
+                out controllerThreadId,
+                out isSynchronousAttach
+            );
         }
     }
 
-    [ComImport(), Guid(Guids.IID_IWDEProgramNode), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [
+        ComImport(),
+        Guid(Guids.IID_IWDEProgramNode),
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+    ]
     internal interface IWDEProgramNode
     {
-        void Attach(ref Guid programId, int attachTimeout, int detachPingInterval, [Out, MarshalAs(UnmanagedType.BStr)] out string hostName, [Out, MarshalAs(UnmanagedType.BStr)] out string uri, [Out] out int controllerThreadId, [Out, MarshalAs(UnmanagedType.Bool)] out bool isSynchronousAttach);
+        void Attach(
+            ref Guid programId,
+            int attachTimeout,
+            int detachPingInterval,
+            [Out, MarshalAs(UnmanagedType.BStr)] out string hostName,
+            [Out, MarshalAs(UnmanagedType.BStr)] out string uri,
+            [Out] out int controllerThreadId,
+            [Out, MarshalAs(UnmanagedType.Bool)] out bool isSynchronousAttach
+        );
     }
 }

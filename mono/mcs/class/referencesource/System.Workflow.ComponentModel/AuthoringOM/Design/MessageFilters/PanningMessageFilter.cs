@@ -1,17 +1,23 @@
 ﻿namespace System.Workflow.ComponentModel.Design
 {
     using System;
+    using System.ComponentModel.Design;
     using System.Drawing;
     using System.Windows.Forms;
-    using System.ComponentModel.Design;
 
     #region Class PanningMessageFilter
     /// This behavior needs and stores coordinates in client coordinates
     internal sealed class PanningMessageFilter : WorkflowDesignerMessageFilter
     {
         #region Members and Constructor
-        private static Cursor PanBeganCursor = new Cursor(typeof(WorkflowView), "Resources.panClosed.cur");
-        private static Cursor PanReadyCursor = new Cursor(typeof(WorkflowView), "Resources.panOpened.cur");
+        private static Cursor PanBeganCursor = new Cursor(
+            typeof(WorkflowView),
+            "Resources.panClosed.cur"
+        );
+        private static Cursor PanReadyCursor = new Cursor(
+            typeof(WorkflowView),
+            "Resources.panOpened.cur"
+        );
 
         private Point panPoint = Point.Empty;
         private bool panningActive = false;
@@ -19,9 +25,7 @@
         private CommandID previousCommand;
         private Cursor previousCursor = Cursors.Default;
 
-        internal PanningMessageFilter()
-        {
-        }
+        internal PanningMessageFilter() { }
         #endregion
 
         #region MessageFilter Overrides
@@ -47,9 +51,15 @@
 
         protected override bool OnShowContextMenu(Point menuPoint)
         {
-            IMenuCommandService menuCommandService = (IMenuCommandService)GetService(typeof(IMenuCommandService));
+            IMenuCommandService menuCommandService = (IMenuCommandService)GetService(
+                typeof(IMenuCommandService)
+            );
             if (menuCommandService != null)
-                menuCommandService.ShowContextMenu(WorkflowMenuCommands.ZoomMenu, menuPoint.X, menuPoint.Y);
+                menuCommandService.ShowContextMenu(
+                    WorkflowMenuCommands.ZoomMenu,
+                    menuPoint.X,
+                    menuPoint.Y
+                );
 
             return true;
         }
@@ -71,9 +81,15 @@
         {
             if (this.panningActive && (eventArgs.Button & MouseButtons.Left) > 0)
             {
-                Size panSize = new Size(eventArgs.X - this.panPoint.X, eventArgs.Y - this.panPoint.Y);
+                Size panSize = new Size(
+                    eventArgs.X - this.panPoint.X,
+                    eventArgs.Y - this.panPoint.Y
+                );
                 WorkflowView parentView = ParentView;
-                parentView.ScrollPosition = new Point(parentView.ScrollPosition.X - panSize.Width, parentView.ScrollPosition.Y - panSize.Height);
+                parentView.ScrollPosition = new Point(
+                    parentView.ScrollPosition.X - panSize.Width,
+                    parentView.ScrollPosition.Y - panSize.Height
+                );
                 SetPanPoint(new Point(eventArgs.X, eventArgs.Y));
             }
 
@@ -112,13 +128,23 @@
         private void RefreshUIState()
         {
             //Update the cursor
-            ParentView.Cursor = (this.panningActive) ? PanningMessageFilter.PanBeganCursor : PanningMessageFilter.PanReadyCursor;
+            ParentView.Cursor =
+                (this.panningActive)
+                    ? PanningMessageFilter.PanBeganCursor
+                    : PanningMessageFilter.PanReadyCursor;
 
             //Update the menu command
-            IMenuCommandService menuCommandService = GetService(typeof(IMenuCommandService)) as IMenuCommandService;
+            IMenuCommandService menuCommandService =
+                GetService(typeof(IMenuCommandService)) as IMenuCommandService;
             if (menuCommandService != null)
             {
-                CommandID[] affectedCommands = new CommandID[] { WorkflowMenuCommands.ZoomIn, WorkflowMenuCommands.ZoomOut, WorkflowMenuCommands.Pan, WorkflowMenuCommands.DefaultFilter };
+                CommandID[] affectedCommands = new CommandID[]
+                {
+                    WorkflowMenuCommands.ZoomIn,
+                    WorkflowMenuCommands.ZoomOut,
+                    WorkflowMenuCommands.Pan,
+                    WorkflowMenuCommands.DefaultFilter,
+                };
                 foreach (CommandID affectedCommand in affectedCommands)
                 {
                     MenuCommand menuCommand = menuCommandService.FindCommand(affectedCommand);
@@ -130,7 +156,8 @@
 
         private void StoreUIState()
         {
-            IMenuCommandService menuCommandService = GetService(typeof(IMenuCommandService)) as IMenuCommandService;
+            IMenuCommandService menuCommandService =
+                GetService(typeof(IMenuCommandService)) as IMenuCommandService;
             if (menuCommandService != null)
             {
                 foreach (CommandID affectedCommand in CommandSet.NavigationToolCommandIds)
@@ -149,7 +176,8 @@
 
         private void RestoreUIState()
         {
-            IMenuCommandService menuCommandService = GetService(typeof(IMenuCommandService)) as IMenuCommandService;
+            IMenuCommandService menuCommandService =
+                GetService(typeof(IMenuCommandService)) as IMenuCommandService;
             if (menuCommandService != null)
             {
                 foreach (CommandID affectedCommand in CommandSet.NavigationToolCommandIds)

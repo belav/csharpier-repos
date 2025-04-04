@@ -5,22 +5,20 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.SqlClient {
-
+namespace System.Data.SqlClient
+{
     using System;
     using System.Data.ProviderBase;
     using System.Diagnostics;
 
-    internal sealed class SqlConnectionPoolProviderInfo : DbConnectionPoolProviderInfo {
+    internal sealed class SqlConnectionPoolProviderInfo : DbConnectionPoolProviderInfo
+    {
         private string _instanceName;
 
-        internal string InstanceName {
-            get {
-                return _instanceName;
-            }
-            set {
-                _instanceName = value;
-            }
-        }        
+        internal string InstanceName
+        {
+            get { return _instanceName; }
+            set { _instanceName = value; }
+        }
     }
 }

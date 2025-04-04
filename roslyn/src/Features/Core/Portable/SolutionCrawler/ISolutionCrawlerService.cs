@@ -13,12 +13,18 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     internal interface ISolutionCrawlerService : IWorkspaceService
     {
         /// <summary>
-        /// Ask solution crawler to re-analyze given <see cref="ProjectId"/>s or/and <see cref="DocumentId"/>s 
+        /// Ask solution crawler to re-analyze given <see cref="ProjectId"/>s or/and <see cref="DocumentId"/>s
         /// in given <see cref="Workspace"/> with given <see cref="IIncrementalAnalyzer"/>.
         /// If both <paramref name="projectIds"/> and <paramref name="documentIds"/> are null, the entire
         /// <see cref="Workspace.CurrentSolution"/> for the given <paramref name="workspace"/> is re-analyzed.
         /// </summary>
-        void Reanalyze(Workspace workspace, IIncrementalAnalyzer analyzer, IEnumerable<ProjectId>? projectIds, IEnumerable<DocumentId>? documentIds, bool highPriority);
+        void Reanalyze(
+            Workspace workspace,
+            IIncrementalAnalyzer analyzer,
+            IEnumerable<ProjectId>? projectIds,
+            IEnumerable<DocumentId>? documentIds,
+            bool highPriority
+        );
 
         /// <summary>
         /// Get <see cref="ISolutionCrawlerProgressReporter"/> for the given <see cref="Workspace"/>

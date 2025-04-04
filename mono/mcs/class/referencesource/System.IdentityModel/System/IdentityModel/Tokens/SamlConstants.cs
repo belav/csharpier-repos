@@ -8,45 +8,74 @@ namespace System.IdentityModel.Tokens
 
     public static class SamlConstants
     {
-        static public int MajorVersionValue { get { return 1; } }
-        static public int MinorVersionValue { get { return 1; } }
-        static public string Namespace { get { return SamlStrings.Namespace; } }
-        static public string HolderOfKey { get { return SamlStrings.HolderOfKey; } }
-        static public string SenderVouches { get { return SamlStrings.SenderVouches; } }
-        static public string UserName { get { return SamlStrings.UserName; } }
-        static public string UserNameNamespace { get { return SamlStrings.UserNameNamespace; } }
-        static public string EmailName { get { return SamlStrings.EmailName; } }
-        static public string EmailNamespace { get { return SamlStrings.EmailNamespace; } }
+        public static int MajorVersionValue
+        {
+            get { return 1; }
+        }
+        public static int MinorVersionValue
+        {
+            get { return 1; }
+        }
+        public static string Namespace
+        {
+            get { return SamlStrings.Namespace; }
+        }
+        public static string HolderOfKey
+        {
+            get { return SamlStrings.HolderOfKey; }
+        }
+        public static string SenderVouches
+        {
+            get { return SamlStrings.SenderVouches; }
+        }
+        public static string UserName
+        {
+            get { return SamlStrings.UserName; }
+        }
+        public static string UserNameNamespace
+        {
+            get { return SamlStrings.UserNameNamespace; }
+        }
+        public static string EmailName
+        {
+            get { return SamlStrings.EmailName; }
+        }
+        public static string EmailNamespace
+        {
+            get { return SamlStrings.EmailNamespace; }
+        }
 
         public const string Prefix = "saml";
 
-        internal static string[] AcceptedDateTimeFormats = new string[] {
-                "yyyy-MM-ddTHH:mm:ss.fffffffZ",
-                "yyyy-MM-ddTHH:mm:ss.ffffffZ",
-                "yyyy-MM-ddTHH:mm:ss.fffffZ",
-                "yyyy-MM-ddTHH:mm:ss.ffffZ",
-                "yyyy-MM-ddTHH:mm:ss.fffZ",
-                "yyyy-MM-ddTHH:mm:ss.ffZ",
-                "yyyy-MM-ddTHH:mm:ss.fZ",
-                "yyyy-MM-ddTHH:mm:ssZ",
-                "yyyy-MM-ddTHH:mm:ss.fffffffzzz",
-                "yyyy-MM-ddTHH:mm:ss.ffffffzzz",
-                "yyyy-MM-ddTHH:mm:ss.fffffzzz",
-                "yyyy-MM-ddTHH:mm:ss.ffffzzz",
-                "yyyy-MM-ddTHH:mm:ss.fffzzz",
-                "yyyy-MM-ddTHH:mm:ss.ffzzz",
-                "yyyy-MM-ddTHH:mm:ss.fzzz",
-                "yyyy-MM-ddTHH:mm:sszzz" };
+        internal static string[] AcceptedDateTimeFormats = new string[]
+        {
+            "yyyy-MM-ddTHH:mm:ss.fffffffZ",
+            "yyyy-MM-ddTHH:mm:ss.ffffffZ",
+            "yyyy-MM-ddTHH:mm:ss.fffffZ",
+            "yyyy-MM-ddTHH:mm:ss.ffffZ",
+            "yyyy-MM-ddTHH:mm:ss.fffZ",
+            "yyyy-MM-ddTHH:mm:ss.ffZ",
+            "yyyy-MM-ddTHH:mm:ss.fZ",
+            "yyyy-MM-ddTHH:mm:ssZ",
+            "yyyy-MM-ddTHH:mm:ss.fffffffzzz",
+            "yyyy-MM-ddTHH:mm:ss.ffffffzzz",
+            "yyyy-MM-ddTHH:mm:ss.fffffzzz",
+            "yyyy-MM-ddTHH:mm:ss.ffffzzz",
+            "yyyy-MM-ddTHH:mm:ss.fffzzz",
+            "yyyy-MM-ddTHH:mm:ss.ffzzz",
+            "yyyy-MM-ddTHH:mm:ss.fzzz",
+            "yyyy-MM-ddTHH:mm:sszzz",
+        };
         internal const string AssertionIdPrefix = "SamlSecurityToken-";
         internal const string GeneratedDateTimeFormat = "yyyy-MM-ddTHH:mm:ss.fffZ";
-
 
         /// <summary>
         /// Known values for <see cref="System.IdentityModel.Tokens.SamlAuthenticationStatement"/>
         /// </summary>
         internal static class AuthenticationMethods
         {
-            public const string HardwareTokenString = "URI:urn:oasis:names:tc:SAML:1.0:am:HardwareToken";
+            public const string HardwareTokenString =
+                "URI:urn:oasis:names:tc:SAML:1.0:am:HardwareToken";
             public const string KerberosString = "urn:ietf:rfc:1510";
             public const string PasswordString = "urn:oasis:names:tc:SAML:1.0:am:password";
             public const string PgpString = "urn:oasis:names:tc:SAML:1.0:am:PGP";

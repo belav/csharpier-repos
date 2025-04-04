@@ -24,7 +24,10 @@ public interface INavigationExpansionExtensibilityHelper
     /// </summary>
     /// <param name="entityType">Entity type of the new <see cref="EntityQueryRootExpression" />.</param>
     /// <param name="source">Source expression.</param>
-    EntityQueryRootExpression CreateQueryRoot(IEntityType entityType, EntityQueryRootExpression? source);
+    EntityQueryRootExpression CreateQueryRoot(
+        IEntityType entityType,
+        EntityQueryRootExpression? source
+    );
 
     /// <summary>
     ///     Validates whether a new <see cref="EntityQueryRootExpression" /> can be created.
@@ -38,5 +41,8 @@ public interface INavigationExpansionExtensibilityHelper
     /// </summary>
     /// <param name="first">The first query root.</param>
     /// <param name="second">The second query root.</param>
-    bool AreQueryRootsCompatible(EntityQueryRootExpression? first, EntityQueryRootExpression? second);
+    bool AreQueryRootsCompatible(
+        EntityQueryRootExpression? first,
+        EntityQueryRootExpression? second
+    );
 }

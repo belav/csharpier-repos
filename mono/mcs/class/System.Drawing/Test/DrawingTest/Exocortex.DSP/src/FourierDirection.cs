@@ -4,13 +4,13 @@
  * Exocortex Technologies [ www.exocortex.org ]
  * All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- * 1. Redistributions of source code must retain the above copyright notice, 
+ * 1. Redistributions of source code must retain the above copyright notice,
  * this list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright 
- * notice, this list of conditions and the following disclaimer in the 
+ * 2. Redistributions in binary form must reproduce the above copyright
+ * notice, this list of conditions and the following disclaimer in the
  * documentation and/or other materials provided with the distribution.
  * 3. Neither the name of the <ORGANIZATION> nor the names of its contributors
  * may be used to endorse or promote products derived from this software
@@ -23,33 +23,34 @@
  * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
  * DAMAGE.
  */
 
-
 using System;
 
 namespace Exocortex.DSP
 {
-	// Comments? Questions? Bugs? Tell Ben Houston at ben@exocortex.org
-	// Version: May 4, 2002
+    // Comments? Questions? Bugs? Tell Ben Houston at ben@exocortex.org
+    // Version: May 4, 2002
 
-	/// <summary>
-	/// <p>The direction of the fourier transform.</p>
-	/// </summary>
-	public enum FourierDirection : int {
-		/// <summary>
-		/// Forward direction.  Usually in reference to moving from temporal
-		/// representation to frequency representation
-		/// </summary>
-		Forward = 1,
-		/// <summary>
-		/// Backward direction. Usually in reference to moving from frequency
-		/// representation to temporal representation
-		/// </summary>
-		Backward = -1,
-	}
+    /// <summary>
+    /// <p>The direction of the fourier transform.</p>
+    /// </summary>
+    public enum FourierDirection : int
+    {
+        /// <summary>
+        /// Forward direction.  Usually in reference to moving from temporal
+        /// representation to frequency representation
+        /// </summary>
+        Forward = 1,
+
+        /// <summary>
+        /// Backward direction. Usually in reference to moving from frequency
+        /// representation to temporal representation
+        /// </summary>
+        Backward = -1,
+    }
 }

@@ -8,11 +8,13 @@ using System.Net.Http.Headers;
 
 namespace System.Net.WebSockets
 {
-    internal sealed class HttpResponseHeadersReadOnlyCollection : IReadOnlyDictionary<string, IEnumerable<string>>
+    internal sealed class HttpResponseHeadersReadOnlyCollection
+        : IReadOnlyDictionary<string, IEnumerable<string>>
     {
         private readonly HttpHeadersNonValidated _headers;
 
-        public HttpResponseHeadersReadOnlyCollection(HttpResponseHeaders headers) => _headers = headers.NonValidated;
+        public HttpResponseHeadersReadOnlyCollection(HttpResponseHeaders headers) =>
+            _headers = headers.NonValidated;
 
         public IEnumerable<string> this[string key] => _headers[key];
 
@@ -46,7 +48,10 @@ namespace System.Net.WebSockets
         {
             foreach (KeyValuePair<string, HeaderStringValues> header in _headers)
             {
-                yield return new KeyValuePair<string, IEnumerable<string>>(header.Key, header.Value);
+                yield return new KeyValuePair<string, IEnumerable<string>>(
+                    header.Key,
+                    header.Value
+                );
             }
         }
 

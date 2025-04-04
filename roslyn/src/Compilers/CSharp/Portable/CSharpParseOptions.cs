@@ -50,37 +50,40 @@ namespace Microsoft.CodeAnalysis.CSharp
             LanguageVersion languageVersion = LanguageVersion.Default,
             DocumentationMode documentationMode = DocumentationMode.Parse,
             SourceCodeKind kind = SourceCodeKind.Regular,
-            IEnumerable<string>? preprocessorSymbols = null)
-            : this(languageVersion,
-                  documentationMode,
-                  kind,
-                  preprocessorSymbols.ToImmutableArrayOrEmpty(),
-                  ImmutableDictionary<string, string>.Empty)
-        {
-        }
+            IEnumerable<string>? preprocessorSymbols = null
+        )
+            : this(
+                languageVersion,
+                documentationMode,
+                kind,
+                preprocessorSymbols.ToImmutableArrayOrEmpty(),
+                ImmutableDictionary<string, string>.Empty
+            ) { }
 
         internal CSharpParseOptions(
             LanguageVersion languageVersion,
             DocumentationMode documentationMode,
             SourceCodeKind kind,
             ImmutableArray<string> preprocessorSymbols,
-            IReadOnlyDictionary<string, string>? features)
+            IReadOnlyDictionary<string, string>? features
+        )
             : base(kind, documentationMode)
         {
             this.SpecifiedLanguageVersion = languageVersion;
             this.LanguageVersion = languageVersion.MapSpecifiedToEffectiveVersion();
             this.PreprocessorSymbols = preprocessorSymbols.ToImmutableArrayOrEmpty();
-            _features = features?.ToImmutableDictionary() ?? ImmutableDictionary<string, string>.Empty;
+            _features =
+                features?.ToImmutableDictionary() ?? ImmutableDictionary<string, string>.Empty;
         }
 
-        private CSharpParseOptions(CSharpParseOptions other) : this(
-            languageVersion: other.SpecifiedLanguageVersion,
-            documentationMode: other.DocumentationMode,
-            kind: other.Kind,
-            preprocessorSymbols: other.PreprocessorSymbols,
-            features: other.Features)
-        {
-        }
+        private CSharpParseOptions(CSharpParseOptions other)
+            : this(
+                languageVersion: other.SpecifiedLanguageVersion,
+                documentationMode: other.DocumentationMode,
+                kind: other.Kind,
+                preprocessorSymbols: other.PreprocessorSymbols,
+                features: other.Features
+            ) { }
 
         public override string Language => LanguageNames.CSharp;
 
@@ -103,7 +106,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var effectiveLanguageVersion = version.MapSpecifiedToEffectiveVersion();
-            return new CSharpParseOptions(this) { SpecifiedLanguageVersion = version, LanguageVersion = effectiveLanguageVersion };
+            return new CSharpParseOptions(this)
+            {
+                SpecifiedLanguageVersion = version,
+                LanguageVersion = effectiveLanguageVersion,
+            };
         }
 
         public CSharpParseOptions WithPreprocessorSymbols(IEnumerable<string>? preprocessorSymbols)
@@ -146,12 +153,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             return WithKind(kind);
         }
 
-        protected override ParseOptions CommonWithDocumentationMode(DocumentationMode documentationMode)
+        protected override ParseOptions CommonWithDocumentationMode(
+            DocumentationMode documentationMode
+        )
         {
             return WithDocumentationMode(documentationMode);
         }
 
-        protected override ParseOptions CommonWithFeatures(IEnumerable<KeyValuePair<string, string>>? features)
+        protected override ParseOptions CommonWithFeatures(
+            IEnumerable<KeyValuePair<string, string>>? features
+        )
         {
             return WithFeatures(features);
         }
@@ -159,7 +170,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Enable some experimental language features for testing.
         /// </summary>
-        public new CSharpParseOptions WithFeatures(IEnumerable<KeyValuePair<string, string>>? features)
+        public new CSharpParseOptions WithFeatures(
+            IEnumerable<KeyValuePair<string, string>>? features
+        )
         {
             ImmutableDictionary<string, string> dictionary =
                 features?.ToImmutableDictionary(StringComparer.OrdinalIgnoreCase)
@@ -170,10 +183,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override IReadOnlyDictionary<string, string> Features
         {
-            get
-            {
-                return _features;
-            }
+            get { return _features; }
         }
 
         internal ImmutableArray<ImmutableArray<string>> InterceptorsPreviewNamespaces
@@ -197,7 +207,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     previewNamespaces = ImmutableArray<ImmutableArray<string>>.Empty;
                 }
-                ImmutableInterlocked.InterlockedInitialize(ref _interceptorsPreviewNamespaces, previewNamespaces);
+                ImmutableInterlocked.InterlockedInitialize(
+                    ref _interceptorsPreviewNamespaces,
+                    previewNamespaces
+                );
                 return previewNamespaces;
             }
         }
@@ -209,7 +222,13 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Validate LanguageVersion not SpecifiedLanguageVersion, after Latest/Default has been converted:
             if (!LanguageVersion.IsValid())
             {
-                builder.Add(Diagnostic.Create(MessageProvider.Instance, (int)ErrorCode.ERR_BadLanguageVersion, LanguageVersion.ToString()));
+                builder.Add(
+                    Diagnostic.Create(
+                        MessageProvider.Instance,
+                        (int)ErrorCode.ERR_BadLanguageVersion,
+                        LanguageVersion.ToString()
+                    )
+                );
             }
 
             if (!PreprocessorSymbols.IsDefaultOrEmpty)
@@ -218,11 +237,23 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (symbol == null)
                     {
-                        builder.Add(Diagnostic.Create(MessageProvider.Instance, (int)ErrorCode.ERR_InvalidPreprocessingSymbol, "null"));
+                        builder.Add(
+                            Diagnostic.Create(
+                                MessageProvider.Instance,
+                                (int)ErrorCode.ERR_InvalidPreprocessingSymbol,
+                                "null"
+                            )
+                        );
                     }
                     else if (!SyntaxFacts.IsValidIdentifier(symbol))
                     {
-                        builder.Add(Diagnostic.Create(MessageProvider.Instance, (int)ErrorCode.ERR_InvalidPreprocessingSymbol, symbol));
+                        builder.Add(
+                            Diagnostic.Create(
+                                MessageProvider.Instance,
+                                (int)ErrorCode.ERR_InvalidPreprocessingSymbol,
+                                symbol
+                            )
+                        );
                     }
                 }
             }
@@ -262,9 +293,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override int GetHashCode()
         {
-            return
-                Hash.Combine(base.GetHashCodeHelper(),
-                Hash.Combine((int)this.SpecifiedLanguageVersion, 0));
+            return Hash.Combine(
+                base.GetHashCodeHelper(),
+                Hash.Combine((int)this.SpecifiedLanguageVersion, 0)
+            );
         }
     }
 }

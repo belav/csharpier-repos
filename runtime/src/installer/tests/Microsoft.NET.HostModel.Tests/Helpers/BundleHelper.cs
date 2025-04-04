@@ -1,14 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.DotNet.CoreSetup.Test;
-using Microsoft.NET.HostModel.Bundle;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Xml.Linq;
+using Microsoft.DotNet.CoreSetup.Test;
+using Microsoft.NET.HostModel.Bundle;
 
 namespace BundleTests.Helpers
 {
@@ -91,10 +91,12 @@ namespace BundleTests.Helpers
 
         public static DirectoryInfo GetBundleDir(TestProjectFixture fixture)
         {
-            return Directory.CreateDirectory(Path.Combine(fixture.TestProject.ProjectDirectory, "bundle"));
+            return Directory.CreateDirectory(
+                Path.Combine(fixture.TestProject.ProjectDirectory, "bundle")
+            );
         }
 
-        public static string  GetExtractionRootPath(TestProjectFixture fixture)
+        public static string GetExtractionRootPath(TestProjectFixture fixture)
         {
             return Path.Combine(fixture.TestProject.ProjectDirectory, "extract");
         }
@@ -106,8 +108,11 @@ namespace BundleTests.Helpers
 
         public static string GetExtractionPath(TestProjectFixture fixture, Bundler bundler)
         {
-            return Path.Combine(GetExtractionRootPath(fixture), GetAppBaseName(fixture), bundler.BundleManifest.BundleID);
-
+            return Path.Combine(
+                GetExtractionRootPath(fixture),
+                GetAppBaseName(fixture),
+                bundler.BundleManifest.BundleID
+            );
         }
 
         public static DirectoryInfo GetExtractionDir(TestProjectFixture fixture, Bundler bundler)
@@ -117,32 +122,46 @@ namespace BundleTests.Helpers
 
         public static OSPlatform GetTargetOS(string runtimeIdentifier)
         {
-            return runtimeIdentifier.Split('-')[0] switch {
+            return runtimeIdentifier.Split('-')[0] switch
+            {
                 "win" => OSPlatform.Windows,
                 "osx" => OSPlatform.OSX,
                 "linux" => OSPlatform.Linux,
                 "freebsd" => OSPlatform.FreeBSD,
-                _ => throw new ArgumentException(nameof(runtimeIdentifier))
+                _ => throw new ArgumentException(nameof(runtimeIdentifier)),
             };
         }
 
         public static Architecture GetTargetArch(string runtimeIdentifier)
         {
-            return runtimeIdentifier.EndsWith("-x64") || runtimeIdentifier.Contains("-x64-") ? Architecture.X64 :
-                   runtimeIdentifier.EndsWith("-x86") || runtimeIdentifier.Contains("-x86-") ? Architecture.X86 :
-                   runtimeIdentifier.EndsWith("-arm64") || runtimeIdentifier.Contains("-arm64-") ? Architecture.Arm64 :
-                   runtimeIdentifier.EndsWith("-arm") || runtimeIdentifier.Contains("-arm-") ? Architecture.Arm :
-                   throw new ArgumentException(nameof (runtimeIdentifier));
+            return runtimeIdentifier.EndsWith("-x64") || runtimeIdentifier.Contains("-x64-")
+                    ? Architecture.X64
+                : runtimeIdentifier.EndsWith("-x86") || runtimeIdentifier.Contains("-x86-")
+                    ? Architecture.X86
+                : runtimeIdentifier.EndsWith("-arm64") || runtimeIdentifier.Contains("-arm64-")
+                    ? Architecture.Arm64
+                : runtimeIdentifier.EndsWith("-arm") || runtimeIdentifier.Contains("-arm-")
+                    ? Architecture.Arm
+                : throw new ArgumentException(nameof(runtimeIdentifier));
         }
 
         /// Generate a bundle containind the (embeddable) files in sourceDir
-        public static string GenerateBundle(Bundler bundler, string sourceDir, string outputDir, bool copyExcludedFiles=true)
+        public static string GenerateBundle(
+            Bundler bundler,
+            string sourceDir,
+            string outputDir,
+            bool copyExcludedFiles = true
+        )
         {
             // Convert sourceDir to absolute path
             sourceDir = Path.GetFullPath(sourceDir);
 
             // Get all files in the source directory and all sub-directories.
-            string[] sources = Directory.GetFiles(sourceDir, searchPattern: "*", searchOption: SearchOption.AllDirectories);
+            string[] sources = Directory.GetFiles(
+                sourceDir,
+                searchPattern: "*",
+                searchOption: SearchOption.AllDirectories
+            );
 
             // Sort the file names to keep the bundle construction deterministic.
             Array.Sort(sources, StringComparer.Ordinal);
@@ -176,11 +195,13 @@ namespace BundleTests.Helpers
         // instead of the SDK via /p:PublishSingleFile=true.
         // This is necessary when the test needs the latest changes in the AppHost,
         // which may not (yet) be available in the SDK.
-        public static Bundler BundleApp(TestProjectFixture fixture,
-                                        out string singleFile,
-                                        BundleOptions options = BundleOptions.None,
-                                        Version targetFrameworkVersion = null,
-                                        bool copyExcludedFiles = true)
+        public static Bundler BundleApp(
+            TestProjectFixture fixture,
+            out string singleFile,
+            BundleOptions options = BundleOptions.None,
+            Version targetFrameworkVersion = null,
+            bool copyExcludedFiles = true
+        )
         {
             var hostName = GetHostName(fixture);
             string publishPath = GetPublishPath(fixture);
@@ -188,25 +209,43 @@ namespace BundleTests.Helpers
             var targetOS = GetTargetOS(fixture.CurrentRid);
             var targetArch = GetTargetArch(fixture.CurrentRid);
 
-            var bundler = new Bundler(hostName, bundleDir.FullName, options, targetOS, targetArch, targetFrameworkVersion, macosCodesign: true);
-            singleFile = GenerateBundle(bundler, publishPath, bundleDir.FullName, copyExcludedFiles);
+            var bundler = new Bundler(
+                hostName,
+                bundleDir.FullName,
+                options,
+                targetOS,
+                targetArch,
+                targetFrameworkVersion,
+                macosCodesign: true
+            );
+            singleFile = GenerateBundle(
+                bundler,
+                publishPath,
+                bundleDir.FullName,
+                copyExcludedFiles
+            );
 
             return bundler;
         }
 
-        public static string BundleApp(TestProjectFixture fixture,
-                                       BundleOptions options = BundleOptions.None,
-                                       Version targetFrameworkVersion = null)
+        public static string BundleApp(
+            TestProjectFixture fixture,
+            BundleOptions options = BundleOptions.None,
+            Version targetFrameworkVersion = null
+        )
         {
             string singleFile;
             BundleApp(fixture, out singleFile, options, targetFrameworkVersion);
             return singleFile;
         }
 
-        public static Bundler Bundle(TestProjectFixture fixture, BundleOptions options = BundleOptions.None)
+        public static Bundler Bundle(
+            TestProjectFixture fixture,
+            BundleOptions options = BundleOptions.None
+        )
         {
             string singleFile;
-            return BundleApp(fixture, out singleFile, options, copyExcludedFiles:false);
+            return BundleApp(fixture, out singleFile, options, copyExcludedFiles: false);
         }
 
         public static void AddLongNameContentToAppWithSubDirs(string projectDirectory)
@@ -214,7 +253,8 @@ namespace BundleTests.Helpers
             // For tests using the AppWithSubDirs, One of the sub-directories with a really long name
             // is generated during test-runs rather than being checked in as a test asset.
             // This prevents git-clone of the repo from failing if long-file-name support is not enabled on windows.
-            var longDirName = "This is a really, really, really, really, really, really, really, really, really, really, really, really, really, really long file name for punctuation";
+            var longDirName =
+                "This is a really, really, really, really, really, really, really, really, really, really, really, really, really, really long file name for punctuation";
             var longDirPath = Path.Combine(projectDirectory, "Sentence", longDirName);
             Directory.CreateDirectory(longDirPath);
             using (var writer = File.CreateText(Path.Combine(longDirPath, "word")))
@@ -227,13 +267,20 @@ namespace BundleTests.Helpers
         {
             XDocument projectDoc = XDocument.Load(fixture.TestProject.ProjectFile);
             projectDoc.Root.Add(
-                new XElement("ItemGroup",
-                    new XElement("Content",
+                new XElement(
+                    "ItemGroup",
+                    new XElement(
+                        "Content",
                         new XAttribute("Include", "empty.txt"),
-                        new XElement("CopyToOutputDirectory", "PreserveNewest"))));
+                        new XElement("CopyToOutputDirectory", "PreserveNewest")
+                    )
+                )
+            );
             projectDoc.Save(fixture.TestProject.ProjectFile);
-            File.WriteAllBytes(Path.Combine(fixture.TestProject.Location, "empty.txt"), new byte[0]);
+            File.WriteAllBytes(
+                Path.Combine(fixture.TestProject.Location, "empty.txt"),
+                new byte[0]
+            );
         }
-
     }
 }

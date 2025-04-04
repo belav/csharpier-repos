@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.WebAssembly.AppHost.DevServer;
 
-internal sealed record DevServerOptions
-(
+internal sealed record DevServerOptions(
     Func<WebSocket, Task>? OnConsoleConnected,
     string? StaticWebAssetsPath,
     bool WebServerUseCors,

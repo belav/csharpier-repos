@@ -15,7 +15,11 @@ namespace Microsoft.Interop
     /// <param name="IndirectionDepth">The indirection depth that the info applies to.</param>
     /// <param name="CountInfo">Any collection count information provided.</param>
     /// <param name="AttributeData">The original attribute data.</param>
-    public sealed record UseSiteAttributeData(int IndirectionDepth, CountInfo CountInfo, AttributeData AttributeData);
+    public sealed record UseSiteAttributeData(
+        int IndirectionDepth,
+        CountInfo CountInfo,
+        AttributeData AttributeData
+    );
 
     /// <summary>
     /// A callback to get the marshalling info for a given type at the provided indirection depth with the provided attributes at its usage site.
@@ -24,7 +28,11 @@ namespace Microsoft.Interop
     /// <param name="useSiteAttributes">The attributes at the use site</param>
     /// <param name="indirectionDepth">The target indirection level</param>
     /// <returns>Marshalling info for provided information.</returns>
-    public delegate MarshallingInfo GetMarshallingInfoCallback(ITypeSymbol type, UseSiteAttributeProvider useSiteAttributes, int indirectionDepth);
+    public delegate MarshallingInfo GetMarshallingInfoCallback(
+        ITypeSymbol type,
+        UseSiteAttributeProvider useSiteAttributes,
+        int indirectionDepth
+    );
 
     /// <summary>
     /// A parser for an attribute used at the marshalling site, such as a parameter or return value attribute.
@@ -45,7 +53,11 @@ namespace Microsoft.Interop
         /// <param name="elementInfoProvider">The provider for information about other elements. This is used to retrieve information about other parameters that might be referenced by any count information.</param>
         /// <param name="marshallingInfoCallback">A callback to provide to the <paramref name="elementInfoProvider"/> when retrieving additional information.</param>
         /// <returns>The information about the attribute at the use site.</returns>
-        UseSiteAttributeData ParseAttribute(AttributeData attributeData, IElementInfoProvider elementInfoProvider, GetMarshallingInfoCallback marshallingInfoCallback);
+        UseSiteAttributeData ParseAttribute(
+            AttributeData attributeData,
+            IElementInfoProvider elementInfoProvider,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        );
     }
 
     /// <summary>
@@ -69,7 +81,13 @@ namespace Microsoft.Interop
         /// <param name="useSiteAttributes">Attributes provided at the usage site, such as for count information</param>
         /// <param name="marshallingInfoCallback">A callback to get marshalling info for nested elements, in the case of a collection of collections.</param>
         /// <returns>Marshalling information parsed from the attribute, or <c>null</c> if no information could be parsed from the attribute</returns>
-        MarshallingInfo? ParseAttribute(AttributeData attributeData, ITypeSymbol type, int indirectionDepth, UseSiteAttributeProvider useSiteAttributes, GetMarshallingInfoCallback marshallingInfoCallback);
+        MarshallingInfo? ParseAttribute(
+            AttributeData attributeData,
+            ITypeSymbol type,
+            int indirectionDepth,
+            UseSiteAttributeProvider useSiteAttributes,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        );
     }
 
     /// <summary>
@@ -83,6 +101,7 @@ namespace Microsoft.Interop
         /// <param name="type">The managed type</param>
         /// <returns><c>true</c> if the provider can provide info for the provided type; otherwise <c>false</c></returns>
         bool CanProvideMarshallingInfoForType(ITypeSymbol type);
+
         /// <summary>
         /// Get marshalling info for the provided type at the given indirection level.
         /// </summary>
@@ -91,7 +110,12 @@ namespace Microsoft.Interop
         /// <param name="useSiteAttributes">Attributes provided at the usage site, such as for count information</param>
         /// <param name="marshallingInfoCallback">A callback to get marshalling info for nested elements, in the case of a collection of collections.</param>
         /// <returns>Marshalling information for the provided type</returns>
-        MarshallingInfo GetMarshallingInfo(ITypeSymbol type, int indirectionDepth, UseSiteAttributeProvider useSiteAttributes, GetMarshallingInfoCallback marshallingInfoCallback);
+        MarshallingInfo GetMarshallingInfo(
+            ITypeSymbol type,
+            int indirectionDepth,
+            UseSiteAttributeProvider useSiteAttributes,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        );
     }
 
     /// <summary>
@@ -105,6 +129,7 @@ namespace Microsoft.Interop
         /// <param name="paramIndex">The index</param>
         /// <returns>The name associated with the provided index, or <see cref="string.Empty"/> if the index does not correspond to an element.</returns>
         string FindNameForParamIndex(int paramIndex);
+
         /// <summary>
         /// Get a <see cref="TypePositionInfo"/> instance for the given element name.
         /// </summary>
@@ -114,7 +139,14 @@ namespace Microsoft.Interop
         /// <param name="rootProvider">The <see cref="IElementInfoProvider"/> to pass to the <paramref name="marshallingInfoCallback"/>.</param>
         /// <param name="info">The produced info.</param>
         /// <returns><c>true</c> if a <see cref="TypePositionInfo"/> instance could be created for the type; otherwise <c>false</c></returns>
-        bool TryGetInfoForElementName(AttributeData attrData, string elementName, GetMarshallingInfoCallback marshallingInfoCallback, IElementInfoProvider rootProvider, out TypePositionInfo info);
+        bool TryGetInfoForElementName(
+            AttributeData attrData,
+            string elementName,
+            GetMarshallingInfoCallback marshallingInfoCallback,
+            IElementInfoProvider rootProvider,
+            out TypePositionInfo info
+        );
+
         /// <summary>
         /// Get a <see cref="TypePositionInfo"/> instance for the given element index.
         /// </summary>
@@ -124,7 +156,13 @@ namespace Microsoft.Interop
         /// <param name="rootProvider">The <see cref="IElementInfoProvider"/> to pass to the <paramref name="marshallingInfoCallback"/>.</param>
         /// <param name="info">The produced info.</param>
         /// <returns><c>true</c> if a <see cref="TypePositionInfo"/> instance could be created for the type; otherwise <c>false</c></returns>
-        bool TryGetInfoForParamIndex(AttributeData attrData, int paramIndex, GetMarshallingInfoCallback marshallingInfoCallback, IElementInfoProvider rootProvider, out TypePositionInfo info);
+        bool TryGetInfoForParamIndex(
+            AttributeData attrData,
+            int paramIndex,
+            GetMarshallingInfoCallback marshallingInfoCallback,
+            IElementInfoProvider rootProvider,
+            out TypePositionInfo info
+        );
     }
 
     /// <summary>
@@ -140,9 +178,21 @@ namespace Microsoft.Interop
         /// <param name="marshallingInfoCallback">A callback to retrieve marshalling info to put into the <see cref="TypePositionInfo"/>.</param>
         /// <param name="info">The produced info.</param>
         /// <returns><c>true</c> if a <see cref="TypePositionInfo"/> instance could be created for the type; otherwise <c>false</c></returns>
-        public static bool TryGetInfoForElementName(this IElementInfoProvider provider, AttributeData attrData, string elementName, GetMarshallingInfoCallback marshallingInfoCallback, out TypePositionInfo info)
+        public static bool TryGetInfoForElementName(
+            this IElementInfoProvider provider,
+            AttributeData attrData,
+            string elementName,
+            GetMarshallingInfoCallback marshallingInfoCallback,
+            out TypePositionInfo info
+        )
         {
-            return provider.TryGetInfoForElementName(attrData, elementName, marshallingInfoCallback, provider, out info);
+            return provider.TryGetInfoForElementName(
+                attrData,
+                elementName,
+                marshallingInfoCallback,
+                provider,
+                out info
+            );
         }
 
         /// <summary>
@@ -153,9 +203,21 @@ namespace Microsoft.Interop
         /// <param name="marshallingInfoCallback">A callback to retrieve marshalling info to put into the <see cref="TypePositionInfo"/>.</param>
         /// <param name="info">The produced info.</param>
         /// <returns><c>true</c> if a <see cref="TypePositionInfo"/> instance could be created for the type; otherwise <c>false</c></returns>
-        public static bool TryGetInfoForParamIndex(this IElementInfoProvider provider, AttributeData attrData, int paramIndex, GetMarshallingInfoCallback marshallingInfoCallback, out TypePositionInfo info)
+        public static bool TryGetInfoForParamIndex(
+            this IElementInfoProvider provider,
+            AttributeData attrData,
+            int paramIndex,
+            GetMarshallingInfoCallback marshallingInfoCallback,
+            out TypePositionInfo info
+        )
         {
-            return provider.TryGetInfoForParamIndex(attrData, paramIndex, marshallingInfoCallback, provider, out info);
+            return provider.TryGetInfoForParamIndex(
+                attrData,
+                paramIndex,
+                marshallingInfoCallback,
+                provider,
+                out info
+            );
         }
     }
 
@@ -193,11 +255,15 @@ namespace Microsoft.Interop
             IElementInfoProvider elementInfoProvider,
             ImmutableArray<IUseSiteAttributeParser> useSiteMarshallingAttributeParsers,
             ImmutableArray<IMarshallingInfoAttributeParser> marshallingAttributeParsers,
-            ImmutableArray<ITypeBasedMarshallingInfoProvider> typeBasedMarshallingInfoProviders)
+            ImmutableArray<ITypeBasedMarshallingInfoProvider> typeBasedMarshallingInfoProviders
+        )
         {
             _diagnostics = diagnostics;
             // Always support cycle detection. Otherwise we can get stack-overflows, which does not provide a good dev experience for any customer scenario.
-            _elementInfoProvider = new CycleDetectingElementInfoProvider(elementInfoProvider, diagnostics);
+            _elementInfoProvider = new CycleDetectingElementInfoProvider(
+                elementInfoProvider,
+                diagnostics
+            );
             _useSiteMarshallingAttributeParsers = useSiteMarshallingAttributeParsers;
             _marshallingAttributeParsers = marshallingAttributeParsers;
             _typeBasedMarshallingInfoProviders = typeBasedMarshallingInfoProviders;
@@ -211,14 +277,22 @@ namespace Microsoft.Interop
         /// <returns>The parsed marshalling information</returns>
         public MarshallingInfo ParseMarshallingInfo(
             ITypeSymbol managedType,
-            IEnumerable<AttributeData> useSiteAttributes)
+            IEnumerable<AttributeData> useSiteAttributes
+        )
         {
-            UseSiteAttributeProvider useSiteAttributeProvider = new UseSiteAttributeProvider(_useSiteMarshallingAttributeParsers, useSiteAttributes, _elementInfoProvider, _diagnostics, GetMarshallingInfo);
+            UseSiteAttributeProvider useSiteAttributeProvider = new UseSiteAttributeProvider(
+                _useSiteMarshallingAttributeParsers,
+                useSiteAttributes,
+                _elementInfoProvider,
+                _diagnostics,
+                GetMarshallingInfo
+            );
 
             MarshallingInfo info = GetMarshallingInfo(
                 managedType,
                 useSiteAttributeProvider,
-                indirectionDepth: 0);
+                indirectionDepth: 0
+            );
 
             useSiteAttributeProvider.OnAttributeUsageFinished();
             return info;
@@ -227,11 +301,26 @@ namespace Microsoft.Interop
         private MarshallingInfo GetMarshallingInfo(
             ITypeSymbol type,
             UseSiteAttributeProvider useSiteAttributes,
-            int indirectionDepth)
+            int indirectionDepth
+        )
         {
-            if (useSiteAttributes.TryGetUseSiteAttributeInfo(indirectionDepth, out UseSiteAttributeData useSiteAttribute))
+            if (
+                useSiteAttributes.TryGetUseSiteAttributeInfo(
+                    indirectionDepth,
+                    out UseSiteAttributeData useSiteAttribute
+                )
+            )
             {
-                if (GetMarshallingInfoForAttribute(useSiteAttribute.AttributeData, type, indirectionDepth, useSiteAttributes, GetMarshallingInfo) is MarshallingInfo marshallingInfo)
+                if (
+                    GetMarshallingInfoForAttribute(
+                        useSiteAttribute.AttributeData,
+                        type,
+                        indirectionDepth,
+                        useSiteAttributes,
+                        GetMarshallingInfo
+                    )
+                    is MarshallingInfo marshallingInfo
+                )
                 {
                     return marshallingInfo;
                 }
@@ -241,7 +330,16 @@ namespace Microsoft.Interop
             // then fall back to the information on the element type itself.
             foreach (AttributeData typeAttribute in type.GetAttributes())
             {
-                if (GetMarshallingInfoForAttribute(typeAttribute, type, indirectionDepth, useSiteAttributes, GetMarshallingInfo) is MarshallingInfo marshallingInfo)
+                if (
+                    GetMarshallingInfoForAttribute(
+                        typeAttribute,
+                        type,
+                        indirectionDepth,
+                        useSiteAttributes,
+                        GetMarshallingInfo
+                    )
+                    is MarshallingInfo marshallingInfo
+                )
                 {
                     return marshallingInfo;
                 }
@@ -249,30 +347,60 @@ namespace Microsoft.Interop
 
             // If the type doesn't have custom attributes that dictate marshalling,
             // then consider the type itself.
-            return GetMarshallingInfoForType(type, indirectionDepth, useSiteAttributes, GetMarshallingInfo) ?? NoMarshallingInfo.Instance;
+            return GetMarshallingInfoForType(
+                    type,
+                    indirectionDepth,
+                    useSiteAttributes,
+                    GetMarshallingInfo
+                ) ?? NoMarshallingInfo.Instance;
         }
 
-        private MarshallingInfo? GetMarshallingInfoForAttribute(AttributeData attribute, ITypeSymbol type, int indirectionDepth, UseSiteAttributeProvider useSiteAttributes, GetMarshallingInfoCallback marshallingInfoCallback)
+        private MarshallingInfo? GetMarshallingInfoForAttribute(
+            AttributeData attribute,
+            ITypeSymbol type,
+            int indirectionDepth,
+            UseSiteAttributeProvider useSiteAttributes,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        )
         {
             foreach (var parser in _marshallingAttributeParsers)
             {
                 // Automatically ignore invalid attributes.
                 // The compiler will already error on them.
-                if (attribute.AttributeConstructor is not null && parser.CanParseAttributeType(attribute.AttributeClass))
+                if (
+                    attribute.AttributeConstructor is not null
+                    && parser.CanParseAttributeType(attribute.AttributeClass)
+                )
                 {
-                    return parser.ParseAttribute(attribute, type, indirectionDepth, useSiteAttributes, marshallingInfoCallback);
+                    return parser.ParseAttribute(
+                        attribute,
+                        type,
+                        indirectionDepth,
+                        useSiteAttributes,
+                        marshallingInfoCallback
+                    );
                 }
             }
             return null;
         }
 
-        private MarshallingInfo? GetMarshallingInfoForType(ITypeSymbol type, int indirectionDepth, UseSiteAttributeProvider useSiteAttributes, GetMarshallingInfoCallback marshallingInfoCallback)
+        private MarshallingInfo? GetMarshallingInfoForType(
+            ITypeSymbol type,
+            int indirectionDepth,
+            UseSiteAttributeProvider useSiteAttributes,
+            GetMarshallingInfoCallback marshallingInfoCallback
+        )
         {
             foreach (var parser in _typeBasedMarshallingInfoProviders)
             {
                 if (parser.CanProvideMarshallingInfoForType(type))
                 {
-                    return parser.GetMarshallingInfo(type, indirectionDepth, useSiteAttributes, marshallingInfoCallback);
+                    return parser.GetMarshallingInfo(
+                        type,
+                        indirectionDepth,
+                        useSiteAttributes,
+                        marshallingInfoCallback
+                    );
                 }
             }
             return null;
@@ -288,14 +416,25 @@ namespace Microsoft.Interop
         private readonly IElementInfoProvider _innerProvider;
         private readonly GeneratorDiagnosticsBag _diagnostics;
 
-        public CycleDetectingElementInfoProvider(IElementInfoProvider innerProvider, GeneratorDiagnosticsBag diagnostics)
+        public CycleDetectingElementInfoProvider(
+            IElementInfoProvider innerProvider,
+            GeneratorDiagnosticsBag diagnostics
+        )
         {
             _innerProvider = innerProvider;
             _diagnostics = diagnostics;
         }
 
-        public string FindNameForParamIndex(int paramIndex) => _innerProvider.FindNameForParamIndex(paramIndex);
-        public bool TryGetInfoForElementName(AttributeData attrData, string elementName, GetMarshallingInfoCallback marshallingInfoCallback, IElementInfoProvider rootProvider, [NotNullWhen(true)] out TypePositionInfo? info)
+        public string FindNameForParamIndex(int paramIndex) =>
+            _innerProvider.FindNameForParamIndex(paramIndex);
+
+        public bool TryGetInfoForElementName(
+            AttributeData attrData,
+            string elementName,
+            GetMarshallingInfoCallback marshallingInfoCallback,
+            IElementInfoProvider rootProvider,
+            [NotNullWhen(true)] out TypePositionInfo? info
+        )
         {
             ImmutableHashSet<string> inspectedElements = _activeInspectingElements;
             if (inspectedElements.Contains(elementName))
@@ -305,13 +444,23 @@ namespace Microsoft.Interop
             try
             {
                 _activeInspectingElements = inspectedElements.Add(elementName);
-                return _innerProvider.TryGetInfoForElementName(attrData, elementName, marshallingInfoCallback, rootProvider, out info);
+                return _innerProvider.TryGetInfoForElementName(
+                    attrData,
+                    elementName,
+                    marshallingInfoCallback,
+                    rootProvider,
+                    out info
+                );
             }
             // Specifically catch the exception when we're trying to inspect the element that started the cycle.
             // This ensures that we've unwound the whole cycle so when we return, there will be no cycles in the count info.
             catch (CyclicalElementInfoException ex) when (ex.StartOfCycle == elementName)
             {
-                _diagnostics.ReportInvalidMarshallingAttributeInfo(attrData, nameof(SR.CyclicalCountInfo), elementName);
+                _diagnostics.ReportInvalidMarshallingAttributeInfo(
+                    attrData,
+                    nameof(SR.CyclicalCountInfo),
+                    elementName
+                );
                 // Create a dummy value for the invalid marshalling. We're already in an error state, so try to not report extraneous diagnostics.
                 info = new TypePositionInfo(SpecialTypeInfo.Void, NoMarshallingInfo.Instance);
                 return true;
@@ -322,7 +471,13 @@ namespace Microsoft.Interop
             }
         }
 
-        public bool TryGetInfoForParamIndex(AttributeData attrData, int paramIndex, GetMarshallingInfoCallback marshallingInfoCallback, IElementInfoProvider rootProvider, [NotNullWhen(true)] out TypePositionInfo? info)
+        public bool TryGetInfoForParamIndex(
+            AttributeData attrData,
+            int paramIndex,
+            GetMarshallingInfoCallback marshallingInfoCallback,
+            IElementInfoProvider rootProvider,
+            [NotNullWhen(true)] out TypePositionInfo? info
+        )
         {
             ImmutableHashSet<string> inspectedElements = _activeInspectingElements;
             string paramName = _innerProvider.FindNameForParamIndex(paramIndex);
@@ -334,13 +489,23 @@ namespace Microsoft.Interop
             try
             {
                 _activeInspectingElements = inspectedElements.Add(paramName);
-                return _innerProvider.TryGetInfoForParamIndex(attrData, paramIndex, marshallingInfoCallback, rootProvider, out info);
+                return _innerProvider.TryGetInfoForParamIndex(
+                    attrData,
+                    paramIndex,
+                    marshallingInfoCallback,
+                    rootProvider,
+                    out info
+                );
             }
             // Specifically catch the exception when we're trying to inspect the element that started the cycle.
             // This ensures that we've unwound the whole cycle so when we return, there will be no cycles in the count info.
             catch (CyclicalElementInfoException ex) when (ex.StartOfCycle == paramName)
             {
-                _diagnostics.ReportInvalidMarshallingAttributeInfo(attrData, nameof(SR.CyclicalCountInfo), paramName);
+                _diagnostics.ReportInvalidMarshallingAttributeInfo(
+                    attrData,
+                    nameof(SR.CyclicalCountInfo),
+                    paramName
+                );
                 // Create a dummy value for the invalid marshalling. We're already in an error state, so try to not report extraneous diagnostics.
                 info = new TypePositionInfo(SpecialTypeInfo.Void, NoMarshallingInfo.Instance);
                 return true;
@@ -353,7 +518,10 @@ namespace Microsoft.Interop
 
         private sealed class CyclicalElementInfoException : Exception
         {
-            public CyclicalElementInfoException(ImmutableHashSet<string> elementsInCycle, string startOfCycle)
+            public CyclicalElementInfoException(
+                ImmutableHashSet<string> elementsInCycle,
+                string startOfCycle
+            )
             {
                 ElementsInCycle = elementsInCycle;
                 StartOfCycle = startOfCycle;

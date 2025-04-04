@@ -59,7 +59,7 @@ public class EnumTypeModelBinderProviderTest
     enum CarType
     {
         Sedan,
-        Coupe
+        Coupe,
     }
 
     [Flags]

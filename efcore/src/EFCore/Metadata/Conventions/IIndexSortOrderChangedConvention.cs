@@ -18,5 +18,6 @@ public interface IIndexSortOrderChangedConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessIndexSortOrderChanged(
         IConventionIndexBuilder indexBuilder,
-        IConventionContext<IReadOnlyList<bool>?> context);
+        IConventionContext<IReadOnlyList<bool>?> context
+    );
 }

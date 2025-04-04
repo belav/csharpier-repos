@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         public EventDocumentationCommentTests()
         {
-            _compilation = CreateCompilation(@"namespace Acme
+            _compilation = CreateCompilation(
+                @"namespace Acme
 {
     class Widget: IProcess
     {
@@ -29,9 +30,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public event System.Action F { add { } remove { } }
     }
 }
-");
+"
+            );
 
-            _acmeNamespace = (NamespaceSymbol)_compilation.GlobalNamespace.GetMember<NamespaceSymbol>("Acme");
+            _acmeNamespace = (NamespaceSymbol)
+                _compilation.GlobalNamespace.GetMember<NamespaceSymbol>("Acme");
             _widgetClass = _acmeNamespace.GetMember<NamedTypeSymbol>("Widget");
         }
 
@@ -40,8 +43,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var eventSymbol = _widgetClass.GetMember<EventSymbol>("E");
             Assert.Equal("E:Acme.Widget.E", eventSymbol.GetDocumentationCommentId());
-            Assert.Equal("M:Acme.Widget.add_E(System.Action)", eventSymbol.AddMethod.GetDocumentationCommentId());
-            Assert.Equal("M:Acme.Widget.remove_E(System.Action)", eventSymbol.RemoveMethod.GetDocumentationCommentId());
+            Assert.Equal(
+                "M:Acme.Widget.add_E(System.Action)",
+                eventSymbol.AddMethod.GetDocumentationCommentId()
+            );
+            Assert.Equal(
+                "M:Acme.Widget.remove_E(System.Action)",
+                eventSymbol.RemoveMethod.GetDocumentationCommentId()
+            );
         }
 
         [Fact]
@@ -49,8 +58,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var eventSymbol = _widgetClass.GetMember<EventSymbol>("F");
             Assert.Equal("E:Acme.Widget.F", eventSymbol.GetDocumentationCommentId());
-            Assert.Equal("M:Acme.Widget.add_F(System.Action)", eventSymbol.AddMethod.GetDocumentationCommentId());
-            Assert.Equal("M:Acme.Widget.remove_F(System.Action)", eventSymbol.RemoveMethod.GetDocumentationCommentId());
+            Assert.Equal(
+                "M:Acme.Widget.add_F(System.Action)",
+                eventSymbol.AddMethod.GetDocumentationCommentId()
+            );
+            Assert.Equal(
+                "M:Acme.Widget.remove_F(System.Action)",
+                eventSymbol.RemoveMethod.GetDocumentationCommentId()
+            );
         }
     }
 }

@@ -21,18 +21,12 @@ namespace System.Net.Http.Headers
             _parameters ??= new UnvalidatedObjectCollection<NameValueHeaderValue>();
 
         public NameValueWithParametersHeaderValue(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public NameValueWithParametersHeaderValue(string name, string? value)
-            : base(name, value)
-        {
-        }
+            : base(name, value) { }
 
-        internal NameValueWithParametersHeaderValue()
-        {
-        }
+        internal NameValueWithParametersHeaderValue() { }
 
         protected NameValueWithParametersHeaderValue(NameValueWithParametersHeaderValue source)
             : base(source)
@@ -46,7 +40,8 @@ namespace System.Net.Http.Headers
 
             if (result)
             {
-                NameValueWithParametersHeaderValue? other = obj as NameValueWithParametersHeaderValue;
+                NameValueWithParametersHeaderValue? other =
+                    obj as NameValueWithParametersHeaderValue;
 
                 if (other == null)
                 {
@@ -75,17 +70,30 @@ namespace System.Net.Http.Headers
         public static new NameValueWithParametersHeaderValue Parse(string input)
         {
             int index = 0;
-            return (NameValueWithParametersHeaderValue)GenericHeaderParser.SingleValueNameValueWithParametersParser
-                .ParseValue(input, null, ref index);
+            return (NameValueWithParametersHeaderValue)
+                GenericHeaderParser.SingleValueNameValueWithParametersParser.ParseValue(
+                    input,
+                    null,
+                    ref index
+                );
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out NameValueWithParametersHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out NameValueWithParametersHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (GenericHeaderParser.SingleValueNameValueWithParametersParser.TryParseValue(input,
-                null, ref index, out object? output))
+            if (
+                GenericHeaderParser.SingleValueNameValueWithParametersParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (NameValueWithParametersHeaderValue)output!;
                 return true;
@@ -93,7 +101,11 @@ namespace System.Net.Http.Headers
             return false;
         }
 
-        internal static int GetNameValueWithParametersLength(string? input, int startIndex, out object? parsedValue)
+        internal static int GetNameValueWithParametersLength(
+            string? input,
+            int startIndex,
+            out object? parsedValue
+        )
         {
             Debug.Assert(input != null);
             Debug.Assert(startIndex >= 0);
@@ -105,8 +117,12 @@ namespace System.Net.Http.Headers
                 return 0;
             }
 
-            int nameValueLength = NameValueHeaderValue.GetNameValueLength(input, startIndex,
-                s_nameValueCreator, out NameValueHeaderValue? nameValue);
+            int nameValueLength = NameValueHeaderValue.GetNameValueLength(
+                input,
+                startIndex,
+                s_nameValueCreator,
+                out NameValueHeaderValue? nameValue
+            );
 
             if (nameValueLength == 0)
             {
@@ -124,8 +140,13 @@ namespace System.Net.Http.Headers
             if ((current < input.Length) && (input[current] == ';'))
             {
                 current++; // skip delimiter.
-                int parameterLength = NameValueHeaderValue.GetNameValueListLength(input, current, ';',
-                    (UnvalidatedObjectCollection<NameValueHeaderValue>)nameValueWithParameters.Parameters);
+                int parameterLength = NameValueHeaderValue.GetNameValueListLength(
+                    input,
+                    current,
+                    ';',
+                    (UnvalidatedObjectCollection<NameValueHeaderValue>)
+                        nameValueWithParameters.Parameters
+                );
 
                 if (parameterLength == 0)
                 {

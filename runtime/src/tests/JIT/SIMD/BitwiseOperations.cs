@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Collections.Generic;
-using Point = System.Numerics.Vector2;
 using Xunit;
+using Point = System.Numerics.Vector2;
 
 namespace VectorMathTests
 {
@@ -12,9 +12,10 @@ namespace VectorMathTests
         public const int DefaultSeed = 20010415;
         public static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
+                new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-            _ => DefaultSeed
+            _ => DefaultSeed,
         };
 
         static float NextFloat(Random random)
@@ -28,8 +29,20 @@ namespace VectorMathTests
         public static int TestDouble()
         {
             Random random = new Random(Seed);
-            double[] arr1 = new double[] { NextFloat(random), NextFloat(random), NextFloat(random), NextFloat(random) };
-            double[] arr2 = new double[] { NextFloat(random), NextFloat(random), NextFloat(random), NextFloat(random) };
+            double[] arr1 = new double[]
+            {
+                NextFloat(random),
+                NextFloat(random),
+                NextFloat(random),
+                NextFloat(random),
+            };
+            double[] arr2 = new double[]
+            {
+                NextFloat(random),
+                NextFloat(random),
+                NextFloat(random),
+                NextFloat(random),
+            };
             var a = new System.Numerics.Vector<double>(arr1);
             var b = new System.Numerics.Vector<double>(arr2);
             var xorR = a ^ b;

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,48 +30,59 @@ using System;
 
 namespace System.Web.UI
 {
-	public sealed class PageAsyncTask
-	{
-		public PageAsyncTask (BeginEventHandler beginHandler, EndEventHandler endHandler,
-			EndEventHandler timeoutHandler, Object state)
-			: this(beginHandler, endHandler, timeoutHandler, state, false)
-		{
-		}
+    public sealed class PageAsyncTask
+    {
+        public PageAsyncTask(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            EndEventHandler timeoutHandler,
+            Object state
+        )
+            : this(beginHandler, endHandler, timeoutHandler, state, false) { }
 
-		public PageAsyncTask (BeginEventHandler beginHandler, EndEventHandler endHandler,
-			EndEventHandler timeoutHandler, Object state, bool executeInParallel) 
-		{
-			this.beginHandler = beginHandler;
-			this.endHandler = endHandler;
-			this.timeoutHandler = timeoutHandler;
-			this.state = state;
-			this.executeInParallel = executeInParallel;
-		}
+        public PageAsyncTask(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            EndEventHandler timeoutHandler,
+            Object state,
+            bool executeInParallel
+        )
+        {
+            this.beginHandler = beginHandler;
+            this.endHandler = endHandler;
+            this.timeoutHandler = timeoutHandler;
+            this.state = state;
+            this.executeInParallel = executeInParallel;
+        }
 
-		BeginEventHandler beginHandler;
-		public BeginEventHandler BeginHandler {
-			get { return beginHandler; } 
-		}
+        BeginEventHandler beginHandler;
+        public BeginEventHandler BeginHandler
+        {
+            get { return beginHandler; }
+        }
 
-		EndEventHandler endHandler;
-		public EndEventHandler EndHandler {
-			get { return endHandler; } 
-		}
+        EndEventHandler endHandler;
+        public EndEventHandler EndHandler
+        {
+            get { return endHandler; }
+        }
 
-		EndEventHandler timeoutHandler;
-		public EndEventHandler TimeoutHandler {
-			get { return timeoutHandler; } 
-		}
+        EndEventHandler timeoutHandler;
+        public EndEventHandler TimeoutHandler
+        {
+            get { return timeoutHandler; }
+        }
 
-		bool executeInParallel;
-		public bool ExecuteInParallel {
-			get { return executeInParallel; } 
-		}
+        bool executeInParallel;
+        public bool ExecuteInParallel
+        {
+            get { return executeInParallel; }
+        }
 
-		object state;
-		public object State {
-			get { return state; } 
-		}
-	}
+        object state;
+        public object State
+        {
+            get { return state; }
+        }
+    }
 }
-

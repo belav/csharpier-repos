@@ -13,169 +13,148 @@ namespace System.Tests
         {
             object[] testValues =
             {
-            // Boolean
-            true,
-            false,
-
-            // Byte
-            byte.MinValue,
-            (byte)100,
-            byte.MaxValue,
-
-            // Decimal
-            decimal.Zero,
-            decimal.One,
-            decimal.MinusOne,
-            decimal.MaxValue,
-            decimal.MinValue,
-            1.234567890123456789012345678m,
-            1234.56m,
-            -1234.56m,
-
-            // Double
-            -12.2364,
-            -1.7753E-83,
-            +12.345e+234,
-            +12e+1,
-            double.NegativeInfinity,
-            double.PositiveInfinity,
-            double.NaN,
-
-            // Int16
-            short.MinValue,
-            0,
-            short.MaxValue,
-
-            // Int32
-            int.MinValue,
-            0,
-            int.MaxValue,
-
-            // Int64
-            long.MinValue,
-            (long)0,
-            long.MaxValue,
-
-            // SByte
-            sbyte.MinValue,
-            (sbyte)0,
-            sbyte.MaxValue,
-
-            // Single
-            -12.2364f,
-            (float)+12.345e+234,
-            +12e+1f,
-            float.NegativeInfinity,
-            float.PositiveInfinity,
-            float.NaN,
-
-            // TimeSpan
-            TimeSpan.Zero,
-            TimeSpan.Parse("1999.9:09:09"),
-            TimeSpan.Parse("-1111.1:11:11"),
-            TimeSpan.Parse("1:23:45"),
-            TimeSpan.Parse("-2:34:56"),
-
-            // UInt16
-            ushort.MinValue,
-            (ushort)100,
-            ushort.MaxValue,
-
-            // UInt32
-            uint.MinValue,
-            (uint)100,
-            uint.MaxValue,
-
-            // UInt64
-            ulong.MinValue,
-            (ulong)100,
-            ulong.MaxValue
-        };
+                // Boolean
+                true,
+                false,
+                // Byte
+                byte.MinValue,
+                (byte)100,
+                byte.MaxValue,
+                // Decimal
+                decimal.Zero,
+                decimal.One,
+                decimal.MinusOne,
+                decimal.MaxValue,
+                decimal.MinValue,
+                1.234567890123456789012345678m,
+                1234.56m,
+                -1234.56m,
+                // Double
+                -12.2364,
+                -1.7753E-83,
+                +12.345e+234,
+                +12e+1,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.NaN,
+                // Int16
+                short.MinValue,
+                0,
+                short.MaxValue,
+                // Int32
+                int.MinValue,
+                0,
+                int.MaxValue,
+                // Int64
+                long.MinValue,
+                (long)0,
+                long.MaxValue,
+                // SByte
+                sbyte.MinValue,
+                (sbyte)0,
+                sbyte.MaxValue,
+                // Single
+                -12.2364f,
+                (float)+12.345e+234,
+                +12e+1f,
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+                float.NaN,
+                // TimeSpan
+                TimeSpan.Zero,
+                TimeSpan.Parse("1999.9:09:09"),
+                TimeSpan.Parse("-1111.1:11:11"),
+                TimeSpan.Parse("1:23:45"),
+                TimeSpan.Parse("-2:34:56"),
+                // UInt16
+                ushort.MinValue,
+                (ushort)100,
+                ushort.MaxValue,
+                // UInt32
+                uint.MinValue,
+                (uint)100,
+                uint.MaxValue,
+                // UInt64
+                ulong.MinValue,
+                (ulong)100,
+                ulong.MaxValue,
+            };
 
             string[] expectedValues =
             {
-            // Boolean
-            "True",
-            "False",
-
-            // Byte
-            "0",
-            "100",
-            "255",
-
-            // Decimal
-            "0",
-            "1",
-            "-1",
-            "79228162514264337593543950335",
-            "-79228162514264337593543950335",
-            "1.234567890123456789012345678",
-            "1234.56",
-            "-1234.56",
-
-            // Double
-            "-12.2364",
-            "-1.7753E-83",
-            "1.2345E+235",
-            "120",
-            "-Infinity",
-            "Infinity",
-            "NaN",
-
-            // Int16
-            "-32768",
-            "0",
-            "32767",
-
-            // Int32
-            "-2147483648",
-            "0",
-            "2147483647",
-
-            // Int64
-            "-9223372036854775808",
-            "0",
-            "9223372036854775807",
-
-            // SByte
-            "-128",
-            "0",
-            "127",
-
-            // Single
-            "-12.2364",
-            "Infinity",
-            "120",
-            "-Infinity",
-            "Infinity",
-            "NaN",
-
-            // TimeSpan
-            "00:00:00",
-            "1999.09:09:09",
-            "-1111.01:11:11",
-            "01:23:45",
-            "-02:34:56",
-
-            // UInt16
-            "0",
-            "100",
-            "65535",
-
-            // UInt32
-            "0",
-            "100",
-            "4294967295",
-
-            // UInt64
-            "0",
-            "100",
-            "18446744073709551615",
-        };
+                // Boolean
+                "True",
+                "False",
+                // Byte
+                "0",
+                "100",
+                "255",
+                // Decimal
+                "0",
+                "1",
+                "-1",
+                "79228162514264337593543950335",
+                "-79228162514264337593543950335",
+                "1.234567890123456789012345678",
+                "1234.56",
+                "-1234.56",
+                // Double
+                "-12.2364",
+                "-1.7753E-83",
+                "1.2345E+235",
+                "120",
+                "-Infinity",
+                "Infinity",
+                "NaN",
+                // Int16
+                "-32768",
+                "0",
+                "32767",
+                // Int32
+                "-2147483648",
+                "0",
+                "2147483647",
+                // Int64
+                "-9223372036854775808",
+                "0",
+                "9223372036854775807",
+                // SByte
+                "-128",
+                "0",
+                "127",
+                // Single
+                "-12.2364",
+                "Infinity",
+                "120",
+                "-Infinity",
+                "Infinity",
+                "NaN",
+                // TimeSpan
+                "00:00:00",
+                "1999.09:09:09",
+                "-1111.01:11:11",
+                "01:23:45",
+                "-02:34:56",
+                // UInt16
+                "0",
+                "100",
+                "65535",
+                // UInt32
+                "0",
+                "100",
+                "4294967295",
+                // UInt64
+                "0",
+                "100",
+                "18446744073709551615",
+            };
 
             for (int i = 0; i < testValues.Length; i++)
             {
-                Assert.Equal(expectedValues[i], Convert.ToString(testValues[i], NumberFormatInfo.InvariantInfo));
+                Assert.Equal(
+                    expectedValues[i],
+                    Convert.ToString(testValues[i], NumberFormatInfo.InvariantInfo)
+                );
             }
         }
 
@@ -186,7 +165,6 @@ namespace System.Tests
             {
                 // Double
                 -12.236465923406483,
-
                 // Single
                 -1.7753e-83f,
                 -12.2364659234064826243f,
@@ -196,7 +174,6 @@ namespace System.Tests
             {
                 // Double
                 "-12.236465923406483",
-
                 // Single
                 "-0",
                 "-12.236465",
@@ -204,26 +181,39 @@ namespace System.Tests
 
             for (int i = 0; i < testValues.Length; i++)
             {
-                Assert.Equal(expectedValues[i], Convert.ToString(testValues[i], NumberFormatInfo.InvariantInfo));
+                Assert.Equal(
+                    expectedValues[i],
+                    Convert.ToString(testValues[i], NumberFormatInfo.InvariantInfo)
+                );
             }
         }
 
         [Fact]
         public static void FromObject()
         {
-            Assert.Equal("System.Tests.ConvertToStringTests", Convert.ToString(new ConvertToStringTests()));
+            Assert.Equal(
+                "System.Tests.ConvertToStringTests",
+                Convert.ToString(new ConvertToStringTests())
+            );
         }
 
         [Fact]
         public static void FromDateTime()
         {
-            DateTime[] testValues = { new DateTime(2000, 8, 15, 16, 59, 59), new DateTime(1, 1, 1, 1, 1, 1) };
+            DateTime[] testValues =
+            {
+                new DateTime(2000, 8, 15, 16, 59, 59),
+                new DateTime(1, 1, 1, 1, 1, 1),
+            };
             string[] expectedValues = { "08/15/2000 16:59:59", "01/01/0001 01:01:01" };
 
             for (int i = 0; i < testValues.Length; i++)
             {
                 Assert.Equal(testValues[i].ToString(), Convert.ToString(testValues[i]));
-                Assert.Equal(expectedValues[i], Convert.ToString(testValues[i], DateTimeFormatInfo.InvariantInfo));
+                Assert.Equal(
+                    expectedValues[i],
+                    Convert.ToString(testValues[i], DateTimeFormatInfo.InvariantInfo)
+                );
             }
         }
 
@@ -236,11 +226,20 @@ namespace System.Tests
             for (int i = 0; i < testValues.Length; i++)
             {
                 Assert.Equal(expectedValues[i], Convert.ToString(testValues[i]));
-                Assert.Equal(expectedValues[i], Convert.ToString(testValues[i], CultureInfo.InvariantCulture));
+                Assert.Equal(
+                    expectedValues[i],
+                    Convert.ToString(testValues[i], CultureInfo.InvariantCulture)
+                );
             }
         }
 
-        private static void Verify<TInput>(Func<TInput, string> convert, Func<TInput, IFormatProvider, string> convertWithFormatProvider, TInput[] testValues, string[] expectedValues, IFormatProvider formatProvider = null)
+        private static void Verify<TInput>(
+            Func<TInput, string> convert,
+            Func<TInput, IFormatProvider, string> convertWithFormatProvider,
+            TInput[] testValues,
+            string[] expectedValues,
+            IFormatProvider formatProvider = null
+        )
         {
             Assert.Equal(expectedValues.Length, testValues.Length);
 
@@ -252,7 +251,10 @@ namespace System.Tests
             for (int i = 0; i < testValues.Length; i++)
             {
                 Assert.Equal(expectedValues[i], convert(testValues[i]));
-                Assert.Equal(expectedValues[i], convertWithFormatProvider(testValues[i], formatProvider));
+                Assert.Equal(
+                    expectedValues[i],
+                    convertWithFormatProvider(testValues[i], formatProvider)
+                );
             }
         }
 
@@ -307,7 +309,10 @@ namespace System.Tests
         [Fact]
         public static void FromByteInvalidBase()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => Convert.ToString(byte.MaxValue, 13));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Convert.ToString(byte.MaxValue, 13)
+            );
         }
 
         [Fact]
@@ -361,14 +366,22 @@ namespace System.Tests
         [Fact]
         public static void FromInt16InvalidBase()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => Convert.ToString(short.MaxValue, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Convert.ToString(short.MaxValue, 0)
+            );
         }
 
         [Fact]
         public static void FromInt32Base2()
         {
             int[] testValues = { int.MinValue, 0, int.MaxValue };
-            string[] expectedValues = { "10000000000000000000000000000000", "0", "1111111111111111111111111111111" };
+            string[] expectedValues =
+            {
+                "10000000000000000000000000000000",
+                "0",
+                "1111111111111111111111111111111",
+            };
 
             for (int i = 0; i < testValues.Length; i++)
             {
@@ -415,14 +428,22 @@ namespace System.Tests
         [Fact]
         public static void FromInt32InvalidBase()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => Convert.ToString(int.MaxValue, 9));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Convert.ToString(int.MaxValue, 9)
+            );
         }
 
         [Fact]
         public static void FromInt64Base2()
         {
             long[] testValues = { long.MinValue, 0, long.MaxValue };
-            string[] expectedValues = { "1000000000000000000000000000000000000000000000000000000000000000", "0", "111111111111111111111111111111111111111111111111111111111111111" };
+            string[] expectedValues =
+            {
+                "1000000000000000000000000000000000000000000000000000000000000000",
+                "0",
+                "111111111111111111111111111111111111111111111111111111111111111",
+            };
 
             for (int i = 0; i < testValues.Length; i++)
             {
@@ -469,7 +490,10 @@ namespace System.Tests
         [Fact]
         public static void FromInt64InvalidBase()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => Convert.ToString(long.MaxValue, 1));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Convert.ToString(long.MaxValue, 1)
+            );
         }
 
         [Fact]
@@ -518,7 +542,16 @@ namespace System.Tests
         [Fact]
         public static void FromInt16Array()
         {
-            short[] testValues = new short[] { short.MinValue, -1000, -1, 0, 1, 1000, short.MaxValue };
+            short[] testValues = new short[]
+            {
+                short.MinValue,
+                -1000,
+                -1,
+                0,
+                1,
+                1000,
+                short.MaxValue,
+            };
 
             for (int i = 0; i < testValues.Length; i++)
             {
@@ -602,7 +635,18 @@ namespace System.Tests
         [Fact]
         public static void FromSingleArray()
         {
-            float[] testValues = new float[] { float.MinValue, 0.0f, 1.0f, 1000.0f, float.MaxValue, float.NegativeInfinity, float.PositiveInfinity, float.Epsilon, float.NaN };
+            float[] testValues = new float[]
+            {
+                float.MinValue,
+                0.0f,
+                1.0f,
+                1000.0f,
+                float.MaxValue,
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+                float.Epsilon,
+                float.NaN,
+            };
 
             for (int i = 0; i < testValues.Length; i++)
             {
@@ -616,7 +660,18 @@ namespace System.Tests
         [Fact]
         public static void FromDoubleArray()
         {
-            double[] testValues = new double[] { double.MinValue, 0.0, 1.0, 1000.0, double.MaxValue, double.NegativeInfinity, double.PositiveInfinity, double.Epsilon, double.NaN };
+            double[] testValues = new double[]
+            {
+                double.MinValue,
+                0.0,
+                1.0,
+                1000.0,
+                double.MaxValue,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.Epsilon,
+                double.NaN,
+            };
 
             // Vanilla Test Cases
             for (int i = 0; i < testValues.Length; i++)
@@ -631,7 +686,18 @@ namespace System.Tests
         [Fact]
         public static void FromDecimalArray()
         {
-            decimal[] testValues = new decimal[] { decimal.MinValue, decimal.Parse("-1.234567890123456789012345678", NumberFormatInfo.InvariantInfo), (decimal)0.0, (decimal)1.0, (decimal)1000.0, decimal.MaxValue, decimal.One, decimal.Zero, decimal.MinusOne };
+            decimal[] testValues = new decimal[]
+            {
+                decimal.MinValue,
+                decimal.Parse("-1.234567890123456789012345678", NumberFormatInfo.InvariantInfo),
+                (decimal)0.0,
+                (decimal)1.0,
+                (decimal)1000.0,
+                decimal.MaxValue,
+                decimal.One,
+                decimal.Zero,
+                decimal.MinusOne,
+            };
 
             for (int i = 0; i < testValues.Length; i++)
             {
@@ -645,11 +711,15 @@ namespace System.Tests
         [Fact]
         public static void FromDateTimeArray()
         {
-            DateTime[] testValues = new DateTime[] {
-            DateTime.Parse("08/15/2000 16:59:59", DateTimeFormatInfo.InvariantInfo),
-            DateTime.Parse("01/01/0001 01:01:01", DateTimeFormatInfo.InvariantInfo) };
+            DateTime[] testValues = new DateTime[]
+            {
+                DateTime.Parse("08/15/2000 16:59:59", DateTimeFormatInfo.InvariantInfo),
+                DateTime.Parse("01/01/0001 01:01:01", DateTimeFormatInfo.InvariantInfo),
+            };
 
-            IFormatProvider formatProvider = DateTimeFormatInfo.GetInstance(new CultureInfo("en-US"));
+            IFormatProvider formatProvider = DateTimeFormatInfo.GetInstance(
+                new CultureInfo("en-US")
+            );
 
             for (int i = 0; i < testValues.Length; i++)
             {
@@ -706,7 +776,11 @@ namespace System.Tests
         private class FooFormattable : IFormattable
         {
             private int _value;
-            public FooFormattable(int value) { _value = value; }
+
+            public FooFormattable(int value)
+            {
+                _value = value;
+            }
 
             public string ToString(string format, IFormatProvider formatProvider)
             {
@@ -724,7 +798,11 @@ namespace System.Tests
         private class Foo
         {
             private int _value;
-            public Foo(int value) { _value = value; }
+
+            public Foo(int value)
+            {
+                _value = value;
+            }
 
             public string ToString(IFormatProvider provider)
             {

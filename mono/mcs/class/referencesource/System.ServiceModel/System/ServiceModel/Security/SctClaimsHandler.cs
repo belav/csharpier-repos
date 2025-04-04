@@ -7,7 +7,6 @@ using System.Collections.ObjectModel;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
 using System.ServiceModel.Security.Tokens;
-
 using SysClaim = System.IdentityModel.Claims.Claim;
 using SystemAuthorizationContext = System.IdentityModel.Policy.AuthorizationContext;
 
@@ -23,16 +22,21 @@ namespace System.ServiceModel.Security
         /// </summary>
         public SctClaimsHandler(
             SecurityTokenHandlerCollection securityTokenHandlerCollection,
-            string endpointId)
+            string endpointId
+        )
         {
-            if ( securityTokenHandlerCollection == null )
+            if (securityTokenHandlerCollection == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "securityTokenHandlerCollection" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "securityTokenHandlerCollection"
+                );
             }
 
-            if ( endpointId == null )
+            if (endpointId == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString( "endpointId" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNullOrEmptyString(
+                    "endpointId"
+                );
             }
 
             _securityTokenHandlerCollection = securityTokenHandlerCollection;
@@ -59,18 +63,20 @@ namespace System.ServiceModel.Security
         /// The the purposes of this method are:
         /// 1. To enable layers above to get to the bootstrap tokens
         /// 2. To ensure an ClaimsPrincipal is inside the SCT authorization policies.  This is needed so that
-        ///    a CustomPrincipal will be created and can be set.  This is required as we set the principal permission mode to custom 
-        /// 3. To set the IAuthorizationPolicy collection on the SCT to be one of IDFx's Authpolicy.        
-        /// This allows SCT cookie and SCT cached to be treated the same, futher up the stack.  
-        /// 
+        ///    a CustomPrincipal will be created and can be set.  This is required as we set the principal permission mode to custom
+        /// 3. To set the IAuthorizationPolicy collection on the SCT to be one of IDFx's Authpolicy.
+        /// This allows SCT cookie and SCT cached to be treated the same, futher up the stack.
+        ///
         /// This method is call AFTER the final SCT has been created and the bootstrap tokens are around.  Itis not called during the SP/TLS nego bootstrap.
         /// </summary>
         /// <param name="sct"></param>
-        internal void SetPrincipalBootstrapTokensAndBindIdfxAuthPolicy( SecurityContextSecurityToken sct )
+        internal void SetPrincipalBootstrapTokensAndBindIdfxAuthPolicy(
+            SecurityContextSecurityToken sct
+        )
         {
-            if ( sct == null )
+            if (sct == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "sct" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("sct");
             }
 
             List<IAuthorizationPolicy> iaps = new List<IAuthorizationPolicy>();
@@ -78,11 +84,13 @@ namespace System.ServiceModel.Security
             //
             // The SecurityContextToken is cached first before the OnTokenIssued is called. So in the Session SCT
             // case the AuthorizationPolicies will have already been updated. So check the sct.AuthorizationPolicies
-            // policy to see if the first is a AuthorizationPolicy. 
+            // policy to see if the first is a AuthorizationPolicy.
             //
-            if ( ( sct.AuthorizationPolicies != null ) &&
-                ( sct.AuthorizationPolicies.Count > 0 ) &&
-                ( ContainsEndpointAuthPolicy(sct.AuthorizationPolicies) ) )
+            if (
+                (sct.AuthorizationPolicies != null)
+                && (sct.AuthorizationPolicies.Count > 0)
+                && (ContainsEndpointAuthPolicy(sct.AuthorizationPolicies))
+            )
             {
                 // We have already seen this sct and have fixed up the AuthorizationPolicy
                 // collection. Just return.
@@ -93,45 +101,51 @@ namespace System.ServiceModel.Security
             // Nego SCT just has a cookie, there are no IAuthorizationPolicy. In this case,
             // we want to add the EndpointAuthorizationPolicy alone to the SCT.
             //
-            if ( ( sct.AuthorizationPolicies != null ) &&
-                ( sct.AuthorizationPolicies.Count > 0 ) )
+            if ((sct.AuthorizationPolicies != null) && (sct.AuthorizationPolicies.Count > 0))
             {
                 //
                 // Create a principal with known policies.
                 //
-                AuthorizationPolicy sctAp = IdentityModelServiceAuthorizationManager.TransformAuthorizationPolicies( sct.AuthorizationPolicies,
-                                                                                                                     _securityTokenHandlerCollection,
-                                                                                                                     false );
-                // Replace the WCF authorization policies with our IDFx policies.  
+                AuthorizationPolicy sctAp =
+                    IdentityModelServiceAuthorizationManager.TransformAuthorizationPolicies(
+                        sct.AuthorizationPolicies,
+                        _securityTokenHandlerCollection,
+                        false
+                    );
+                // Replace the WCF authorization policies with our IDFx policies.
                 // The principal is needed later on to set the custom principal by WCF runtime.
-                iaps.Add( sctAp );
+                iaps.Add(sctAp);
 
                 //
                 // Convert the claim from WCF unconditional policy to an SctAuthorizationPolicy. The SctAuthorizationPolicy simply
-                // captures the primary identity claim from the WCF unconditional policy which IdFX will eventually throw away. 
-                // If we don't capture that claim, then in a token renewal scenario WCF will fail due to identities being different 
+                // captures the primary identity claim from the WCF unconditional policy which IdFX will eventually throw away.
+                // If we don't capture that claim, then in a token renewal scenario WCF will fail due to identities being different
                 // for the issuedToken and the renewedToken.
                 //
-                SysClaim claim = GetPrimaryIdentityClaim( SystemAuthorizationContext.CreateDefaultAuthorizationContext( sct.AuthorizationPolicies ) );
+                SysClaim claim = GetPrimaryIdentityClaim(
+                    SystemAuthorizationContext.CreateDefaultAuthorizationContext(
+                        sct.AuthorizationPolicies
+                    )
+                );
 
-                SctAuthorizationPolicy sctAuthPolicy = new SctAuthorizationPolicy( claim );
-                iaps.Add( sctAuthPolicy );
+                SctAuthorizationPolicy sctAuthPolicy = new SctAuthorizationPolicy(claim);
+                iaps.Add(sctAuthPolicy);
             }
 
-            iaps.Add( new EndpointAuthorizationPolicy( _endpointId ) );
+            iaps.Add(new EndpointAuthorizationPolicy(_endpointId));
             sct.AuthorizationPolicies = iaps.AsReadOnly();
         }
 
-        bool ContainsEndpointAuthPolicy( ReadOnlyCollection<IAuthorizationPolicy> policies )
+        bool ContainsEndpointAuthPolicy(ReadOnlyCollection<IAuthorizationPolicy> policies)
         {
-            if ( policies == null )
+            if (policies == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "policies" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("policies");
             }
 
-            for ( int i = 0; i < policies.Count; ++i )
+            for (int i = 0; i < policies.Count; ++i)
             {
-                if ( policies[i] is EndpointAuthorizationPolicy )
+                if (policies[i] is EndpointAuthorizationPolicy)
                 {
                     return true;
                 }
@@ -145,14 +159,19 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="authContext">The authorization context</param>
         /// <returns>The primary identity claim from the authorization context.</returns>
-        SysClaim GetPrimaryIdentityClaim( SystemAuthorizationContext authContext )
+        SysClaim GetPrimaryIdentityClaim(SystemAuthorizationContext authContext)
         {
-            if ( authContext != null )
+            if (authContext != null)
             {
-                for ( int i = 0; i < authContext.ClaimSets.Count; ++i )
+                for (int i = 0; i < authContext.ClaimSets.Count; ++i)
                 {
                     System.IdentityModel.Claims.ClaimSet claimSet = authContext.ClaimSets[i];
-                    foreach ( System.IdentityModel.Claims.Claim claim in claimSet.FindClaims( null, System.IdentityModel.Claims.Rights.Identity ) )
+                    foreach (
+                        System.IdentityModel.Claims.Claim claim in claimSet.FindClaims(
+                            null,
+                            System.IdentityModel.Claims.Rights.Identity
+                        )
+                    )
                     {
                         return claim;
                     }
@@ -161,14 +180,18 @@ namespace System.ServiceModel.Security
             return null;
         }
 
-        public void OnTokenIssued( SecurityToken issuedToken, EndpointAddress tokenRequestor )
+        public void OnTokenIssued(SecurityToken issuedToken, EndpointAddress tokenRequestor)
         {
-            SetPrincipalBootstrapTokensAndBindIdfxAuthPolicy( issuedToken as SecurityContextSecurityToken );
+            SetPrincipalBootstrapTokensAndBindIdfxAuthPolicy(
+                issuedToken as SecurityContextSecurityToken
+            );
         }
 
-        public void OnTokenRenewed( SecurityToken issuedToken, SecurityToken oldToken )
+        public void OnTokenRenewed(SecurityToken issuedToken, SecurityToken oldToken)
         {
-            SetPrincipalBootstrapTokensAndBindIdfxAuthPolicy( issuedToken as SecurityContextSecurityToken );
+            SetPrincipalBootstrapTokensAndBindIdfxAuthPolicy(
+                issuedToken as SecurityContextSecurityToken
+            );
         }
     }
 }

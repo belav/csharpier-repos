@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,70 +26,70 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Drawing;
-using System.IO;
 using System.Globalization;
+using System.IO;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.Adapters;
-using System.Web.Configuration;
 using MonoTests.SystemWeb.Framework;
-
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls.Adapters
 {
-	[TestFixture]
-	public class HierarchicalDataBoundControlAdapterTest
-	{
-		MyHierarchicalDataBoundControl c;
-		MyHierarchicalDataBoundControlAdapter a;
+    [TestFixture]
+    public class HierarchicalDataBoundControlAdapterTest
+    {
+        MyHierarchicalDataBoundControl c;
+        MyHierarchicalDataBoundControlAdapter a;
 
-		[SetUp]
-		public void SetUp ()
-		{
-			c = new MyHierarchicalDataBoundControl ();
-			a = new MyHierarchicalDataBoundControlAdapter (c);
-		}
-		
-		[Test]
-		public void PerformDataBinding ()
-		{
-			a.PerformDataBinding ();
-			Assert.IsTrue (c.perform_data_binding_called, "PerformDataBinding #1");
-		}
+        [SetUp]
+        public void SetUp()
+        {
+            c = new MyHierarchicalDataBoundControl();
+            a = new MyHierarchicalDataBoundControlAdapter(c);
+        }
 
-		[Test]
-		public void Control ()
-		{
-			Assert.AreEqual (c, a.Control, "Control #1");
-		}
-				
-#region Support classes
-		
-		class MyHierarchicalDataBoundControl : HierarchicalDataBoundControl
-		{
-			internal bool perform_data_binding_called;
-			
-			protected internal override void PerformDataBinding ()
-			{
-				perform_data_binding_called = true;
-			}
-		}
+        [Test]
+        public void PerformDataBinding()
+        {
+            a.PerformDataBinding();
+            Assert.IsTrue(c.perform_data_binding_called, "PerformDataBinding #1");
+        }
 
-		class MyHierarchicalDataBoundControlAdapter : SystemWebTestShim.HierarchicalDataBoundControlAdapter
-		{
-			internal MyHierarchicalDataBoundControlAdapter (HierarchicalDataBoundControl c) : base (c)
-			{
-			}
-			
-			new internal HierarchicalDataBoundControl Control {
-				get { return base.Control; }
-			}
-		}
-#endregion
-	}
+        [Test]
+        public void Control()
+        {
+            Assert.AreEqual(c, a.Control, "Control #1");
+        }
+
+        #region Support classes
+
+        class MyHierarchicalDataBoundControl : HierarchicalDataBoundControl
+        {
+            internal bool perform_data_binding_called;
+
+            protected internal override void PerformDataBinding()
+            {
+                perform_data_binding_called = true;
+            }
+        }
+
+        class MyHierarchicalDataBoundControlAdapter
+            : SystemWebTestShim.HierarchicalDataBoundControlAdapter
+        {
+            internal MyHierarchicalDataBoundControlAdapter(HierarchicalDataBoundControl c)
+                : base(c) { }
+
+            internal new HierarchicalDataBoundControl Control
+            {
+                get { return base.Control; }
+            }
+        }
+        #endregion
+    }
 }

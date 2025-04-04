@@ -6,8 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.Extensions.Primitives;
-using VerifyCS = Microsoft.AspNetCore.Analyzers.Verifiers.CSharpAnalyzerVerifier<
-    Microsoft.AspNetCore.Analyzers.Http.HeaderDictionaryIndexerAnalyzer>;
+using VerifyCS = Microsoft.AspNetCore.Analyzers.Verifiers.CSharpAnalyzerVerifier<Microsoft.AspNetCore.Analyzers.Http.HeaderDictionaryIndexerAnalyzer>;
 
 namespace Microsoft.AspNetCore.Analyzers.Http;
 
@@ -17,7 +16,8 @@ public class HeaderDictionaryIndexerAnalyzerTests
     public async Task IHeaderDictionary_Get_MismatchCase_ReturnDiagnostic()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -29,16 +29,25 @@ webApp.Use(async (HttpContext context, Func<Task> next) =>
     await next();
 });
 ",
-        new DiagnosticResult(DiagnosticDescriptors.UseHeaderDictionaryPropertiesInsteadOfIndexer)
-            .WithLocation(0)
-            .WithMessage(Resources.FormatAnalyzer_HeaderDictionaryIndexer_Message("content-type", "ContentType")));
+            new DiagnosticResult(
+                DiagnosticDescriptors.UseHeaderDictionaryPropertiesInsteadOfIndexer
+            )
+                .WithLocation(0)
+                .WithMessage(
+                    Resources.FormatAnalyzer_HeaderDictionaryIndexer_Message(
+                        "content-type",
+                        "ContentType"
+                    )
+                )
+        );
     }
 
     [Fact]
     public async Task IHeaderDictionary_Set_MismatchCase_ReturnDiagnostic()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -50,16 +59,25 @@ webApp.Use(async (HttpContext context, Func<Task> next) =>
     await next();
 });
 ",
-        new DiagnosticResult(DiagnosticDescriptors.UseHeaderDictionaryPropertiesInsteadOfIndexer)
-            .WithLocation(0)
-            .WithMessage(Resources.FormatAnalyzer_HeaderDictionaryIndexer_Message("content-type", "ContentType")));
+            new DiagnosticResult(
+                DiagnosticDescriptors.UseHeaderDictionaryPropertiesInsteadOfIndexer
+            )
+                .WithLocation(0)
+                .WithMessage(
+                    Resources.FormatAnalyzer_HeaderDictionaryIndexer_Message(
+                        "content-type",
+                        "ContentType"
+                    )
+                )
+        );
     }
 
     [Fact]
     public async Task IHeaderDictionary_Get_UnknownProperty_NoDiagnostic()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -70,14 +88,16 @@ webApp.Use(async (HttpContext context, Func<Task> next) =>
     context.Request.Headers[""content-type1""] = """";
     await next();
 });
-");
+"
+        );
     }
 
     [Fact]
     public async Task IHeaderDictionary_Get_NullProperty_NoDiagnostic()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -88,14 +108,16 @@ webApp.Use(async (HttpContext context, Func<Task> next) =>
     context.Request.Headers[null] = """";
     await next();
 });
-");
+"
+        );
     }
 
     [Fact]
     public async Task IHeaderDictionary_Get_StronglyTypeProperty_NoDiagnostic()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -106,14 +128,16 @@ webApp.Use(async (HttpContext context, Func<Task> next) =>
     context.Request.Headers.ContentType = """";
     await next();
 });
-");
+"
+        );
     }
 
     [Fact]
     public async Task IHeaderDictionary_Get_VariableProperty_NoDiagnostic()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -125,32 +149,44 @@ webApp.Use(async (HttpContext context, Func<Task> next) =>
     context.Request.Headers[s] = """";
     await next();
 });
-");
+"
+        );
     }
 
     [Fact]
     public async Task HeaderDictionary_Get_KnownProperty_NoDiagnostic()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using Microsoft.AspNetCore.Http;
 var headers = new HeaderDictionary();
 headers[""Content-Type""] = """";
-");
+"
+        );
     }
 
     [Fact]
     public async Task HeaderDictionary_CastToIHeaderDictionary_Get_KnownProperty_ReturnDiagnostic()
     {
         // Arrange & Act & Assert
-        await VerifyCS.VerifyAnalyzerAsync(@"
+        await VerifyCS.VerifyAnalyzerAsync(
+            @"
 using Microsoft.AspNetCore.Http;
 IHeaderDictionary headers = new HeaderDictionary();
 {|#0:headers[""Content-Type""]|} = """";
 ",
-        new DiagnosticResult(DiagnosticDescriptors.UseHeaderDictionaryPropertiesInsteadOfIndexer)
-            .WithLocation(0)
-            .WithMessage(Resources.FormatAnalyzer_HeaderDictionaryIndexer_Message("Content-Type", "ContentType")));
+            new DiagnosticResult(
+                DiagnosticDescriptors.UseHeaderDictionaryPropertiesInsteadOfIndexer
+            )
+                .WithLocation(0)
+                .WithMessage(
+                    Resources.FormatAnalyzer_HeaderDictionaryIndexer_Message(
+                        "Content-Type",
+                        "ContentType"
+                    )
+                )
+        );
     }
 
     [Fact]
@@ -162,14 +198,21 @@ IHeaderDictionary headers = new HeaderDictionary();
         // Arrange
         var headerDictionaryPropertyNames = typeof(IHeaderDictionary)
             .GetProperties()
-            .Where(p => p.CanWrite && p.CanRead && p.PropertyType == typeof(StringValues) && p.GetIndexParameters().Length == 0)
+            .Where(p =>
+                p.CanWrite
+                && p.CanRead
+                && p.PropertyType == typeof(StringValues)
+                && p.GetIndexParameters().Length == 0
+            )
             .Select(p => p.Name)
             .ToList();
 
         Assert.NotEmpty(headerDictionaryPropertyNames);
 
         // Make copy
-        var propertyMapping = new Dictionary<string, string>(HeaderDictionaryIndexerAnalyzer.PropertyMapping);
+        var propertyMapping = new Dictionary<string, string>(
+            HeaderDictionaryIndexerAnalyzer.PropertyMapping
+        );
 
         // Act
         foreach (var propertyName in headerDictionaryPropertyNames)
@@ -187,7 +230,9 @@ IHeaderDictionary headers = new HeaderDictionary();
             if (mapping.Key is null)
             {
                 // Assert
-                Assert.Fail($"A mapping for property '{propertyName}' on IHeaderDictionary must be added to {nameof(HeaderDictionaryIndexerAnalyzer)}.{nameof(HeaderDictionaryIndexerAnalyzer.PropertyMapping)}.");
+                Assert.Fail(
+                    $"A mapping for property '{propertyName}' on IHeaderDictionary must be added to {nameof(HeaderDictionaryIndexerAnalyzer)}.{nameof(HeaderDictionaryIndexerAnalyzer.PropertyMapping)}."
+                );
             }
 
             propertyMapping.Remove(mapping.Key);

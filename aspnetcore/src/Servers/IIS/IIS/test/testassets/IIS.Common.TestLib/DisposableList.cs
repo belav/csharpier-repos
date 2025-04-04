@@ -6,13 +6,17 @@ using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
-public class DisposableList<T> : List<T>, IDisposable where T : IDisposable
+public class DisposableList<T> : List<T>, IDisposable
+    where T : IDisposable
 {
-    public DisposableList() : base() { }
+    public DisposableList()
+        : base() { }
 
-    public DisposableList(IEnumerable<T> collection) : base(collection) { }
+    public DisposableList(IEnumerable<T> collection)
+        : base(collection) { }
 
-    public DisposableList(int capacity) : base(capacity) { }
+    public DisposableList(int capacity)
+        : base(capacity) { }
 
     public void Dispose()
     {

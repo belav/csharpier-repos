@@ -20,7 +20,10 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="builder">The <see cref="IConfigurationBuilder"/> to add to.</param>
         /// <param name="fileProvider">The default file provider instance.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder SetFileProvider(this IConfigurationBuilder builder, IFileProvider fileProvider)
+        public static IConfigurationBuilder SetFileProvider(
+            this IConfigurationBuilder builder,
+            IFileProvider fileProvider
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(fileProvider);
@@ -29,8 +32,12 @@ namespace Microsoft.Extensions.Configuration
             return builder;
         }
 
-        internal static IFileProvider? GetUserDefinedFileProvider(this IConfigurationBuilder builder)
-            => builder.Properties.TryGetValue(FileProviderKey, out object? provider) ? (IFileProvider)provider : null;
+        internal static IFileProvider? GetUserDefinedFileProvider(
+            this IConfigurationBuilder builder
+        ) =>
+            builder.Properties.TryGetValue(FileProviderKey, out object? provider)
+                ? (IFileProvider)provider
+                : null;
 
         /// <summary>
         /// Gets the default <see cref="IFileProvider"/> to be used for file-based providers.
@@ -41,7 +48,8 @@ namespace Microsoft.Extensions.Configuration
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            return GetUserDefinedFileProvider(builder) ?? new PhysicalFileProvider(AppContext.BaseDirectory ?? string.Empty);
+            return GetUserDefinedFileProvider(builder)
+                ?? new PhysicalFileProvider(AppContext.BaseDirectory ?? string.Empty);
         }
 
         /// <summary>
@@ -50,7 +58,10 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="builder">The <see cref="IConfigurationBuilder"/> to add to.</param>
         /// <param name="basePath">The absolute path of file-based providers.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder SetBasePath(this IConfigurationBuilder builder, string basePath)
+        public static IConfigurationBuilder SetBasePath(
+            this IConfigurationBuilder builder,
+            string basePath
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(basePath);
@@ -64,7 +75,10 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="builder">The <see cref="IConfigurationBuilder"/> to add to.</param>
         /// <param name="handler">The Action to be invoked on a file load exception.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
-        public static IConfigurationBuilder SetFileLoadExceptionHandler(this IConfigurationBuilder builder, Action<FileLoadExceptionContext> handler)
+        public static IConfigurationBuilder SetFileLoadExceptionHandler(
+            this IConfigurationBuilder builder,
+            Action<FileLoadExceptionContext> handler
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
 
@@ -77,7 +91,9 @@ namespace Microsoft.Extensions.Configuration
         /// </summary>
         /// <param name="builder">The <see cref="IConfigurationBuilder"/>.</param>
         /// <returns>The The Action to be invoked on a file load exception, if set.</returns>
-        public static Action<FileLoadExceptionContext>? GetFileLoadExceptionHandler(this IConfigurationBuilder builder)
+        public static Action<FileLoadExceptionContext>? GetFileLoadExceptionHandler(
+            this IConfigurationBuilder builder
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
 

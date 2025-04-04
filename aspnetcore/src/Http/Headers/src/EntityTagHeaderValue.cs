@@ -14,14 +14,15 @@ public class EntityTagHeaderValue
 {
     // Note that the ETag header does not allow a * but we're not that strict: We allow both '*' and ETag values in a single value.
     // We can't guarantee that a single parsed value will be used directly in an ETag header.
-    private static readonly HttpHeaderParser<EntityTagHeaderValue> SingleValueParser
-        = new GenericHeaderParser<EntityTagHeaderValue>(false, GetEntityTagLength);
+    private static readonly HttpHeaderParser<EntityTagHeaderValue> SingleValueParser =
+        new GenericHeaderParser<EntityTagHeaderValue>(false, GetEntityTagLength);
+
     // Note that if multiple ETag values are allowed (e.g. 'If-Match', 'If-None-Match'), according to the RFC
     // the value must either be '*' or a list of ETag values. It's not allowed to have both '*' and a list of
     // ETag values. We're not that strict: We allow both '*' and ETag values in a list. If the server sends such
     // an invalid list, we want to be able to represent it using the corresponding header property.
-    private static readonly HttpHeaderParser<EntityTagHeaderValue> MultipleValueParser
-        = new GenericHeaderParser<EntityTagHeaderValue>(true, GetEntityTagLength);
+    private static readonly HttpHeaderParser<EntityTagHeaderValue> MultipleValueParser =
+        new GenericHeaderParser<EntityTagHeaderValue>(true, GetEntityTagLength);
 
     private StringSegment _tag;
     private bool _isWeak;
@@ -36,9 +37,7 @@ public class EntityTagHeaderValue
     /// </summary>
     /// <param name="tag">A <see cref="StringSegment"/> that contains an <see cref="EntityTagHeaderValue"/>.</param>
     public EntityTagHeaderValue(StringSegment tag)
-        : this(tag, isWeak: false)
-    {
-    }
+        : this(tag, isWeak: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="EntityTagHeaderValue"/>.
@@ -57,8 +56,10 @@ public class EntityTagHeaderValue
             // * is valid, but W/* isn't.
             _tag = tag;
         }
-        else if ((HttpRuleParser.GetQuotedStringLength(tag, 0, out var length) != HttpParseResult.Parsed) ||
-            (length != tag.Length))
+        else if (
+            (HttpRuleParser.GetQuotedStringLength(tag, 0, out var length) != HttpParseResult.Parsed)
+            || (length != tag.Length)
+        )
         {
             // Note that we don't allow 'W/' prefixes for weak ETags in the 'tag' parameter. If the user wants to
             // add a weak ETag, they can set 'isWeak' to true.
@@ -106,7 +107,9 @@ public class EntityTagHeaderValue
     public override bool Equals(object? obj)
     {
         // Since the tag is a quoted-string we treat it case-sensitive.
-        return obj is EntityTagHeaderValue other && _isWeak == other._isWeak && StringSegment.Equals(_tag, other._tag, StringComparison.Ordinal);
+        return obj is EntityTagHeaderValue other
+            && _isWeak == other._isWeak
+            && StringSegment.Equals(_tag, other._tag, StringComparison.Ordinal);
     }
 
     /// <inheritdoc />
@@ -134,7 +137,9 @@ public class EntityTagHeaderValue
 
         if (useStrongComparison)
         {
-            return !IsWeak && !other.IsWeak && StringSegment.Equals(Tag, other.Tag, StringComparison.Ordinal);
+            return !IsWeak
+                && !other.IsWeak
+                && StringSegment.Equals(Tag, other.Tag, StringComparison.Ordinal);
         }
         else
         {
@@ -159,7 +164,10 @@ public class EntityTagHeaderValue
     /// <param name="input">The value to parse.</param>
     /// <param name="parsedValue">The parsed value.</param>
     /// <returns><see langword="true"/> if input is a valid <see cref="EntityTagHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-    public static bool TryParse(StringSegment input, [NotNullWhen(true)] out EntityTagHeaderValue? parsedValue)
+    public static bool TryParse(
+        StringSegment input,
+        [NotNullWhen(true)] out EntityTagHeaderValue? parsedValue
+    )
     {
         var index = 0;
         return SingleValueParser.TryParseValue(input, ref index, out parsedValue);
@@ -191,7 +199,10 @@ public class EntityTagHeaderValue
     /// <param name="inputs">The values to parse.</param>
     /// <param name="parsedValues">The parsed values.</param>
     /// <returns><see langword="true"/> if all inputs are valid <see cref="EntityTagHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-    public static bool TryParseList(IList<string>? inputs, [NotNullWhen(true)] out IList<EntityTagHeaderValue>? parsedValues)
+    public static bool TryParseList(
+        IList<string>? inputs,
+        [NotNullWhen(true)] out IList<EntityTagHeaderValue>? parsedValues
+    )
     {
         return MultipleValueParser.TryParseValues(inputs, out parsedValues);
     }
@@ -202,12 +213,19 @@ public class EntityTagHeaderValue
     /// <param name="inputs">The values to parse.</param>
     /// <param name="parsedValues">The parsed values.</param>
     /// <returns><see langword="true"/> if all inputs are valid <see cref="EntityTagHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-    public static bool TryParseStrictList(IList<string>? inputs, [NotNullWhen(true)] out IList<EntityTagHeaderValue>? parsedValues)
+    public static bool TryParseStrictList(
+        IList<string>? inputs,
+        [NotNullWhen(true)] out IList<EntityTagHeaderValue>? parsedValues
+    )
     {
         return MultipleValueParser.TryParseStrictValues(inputs, out parsedValues);
     }
 
-    internal static int GetEntityTagLength(StringSegment input, int startIndex, out EntityTagHeaderValue? parsedValue)
+    internal static int GetEntityTagLength(
+        StringSegment input,
+        int startIndex,
+        out EntityTagHeaderValue? parsedValue
+    )
     {
         Contract.Requires(startIndex >= 0);
 
@@ -246,7 +264,10 @@ public class EntityTagHeaderValue
             }
 
             var tagStartIndex = current;
-            if (HttpRuleParser.GetQuotedStringLength(input, current, out var tagLength) != HttpParseResult.Parsed)
+            if (
+                HttpRuleParser.GetQuotedStringLength(input, current, out var tagLength)
+                != HttpParseResult.Parsed
+            )
             {
                 return 0;
             }

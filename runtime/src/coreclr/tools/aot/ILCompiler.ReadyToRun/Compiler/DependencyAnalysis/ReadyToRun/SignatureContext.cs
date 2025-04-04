@@ -6,7 +6,6 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
-
 using Internal.JitInterface;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
@@ -41,7 +40,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             Resolver = resolver;
         }
 
-        private SignatureContext(IEcmaModule globalContext, IEcmaModule localContext, ModuleTokenResolver resolver)
+        private SignatureContext(
+            IEcmaModule globalContext,
+            IEcmaModule localContext,
+            ModuleTokenResolver resolver
+        )
         {
             GlobalContext = globalContext;
             LocalContext = localContext;
@@ -55,7 +58,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public IEcmaModule GetTargetModule(TypeDesc type)
         {
-            if (type.IsPrimitive || type.IsString || type.IsObject || type.IsWellKnownType(WellKnownType.TypedReference))
+            if (
+                type.IsPrimitive
+                || type.IsString
+                || type.IsObject
+                || type.IsWellKnownType(WellKnownType.TypedReference)
+            )
             {
                 return LocalContext;
             }
@@ -73,18 +81,25 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public ModuleToken GetModuleTokenForType(EcmaType type, bool throwIfNotFound = true)
         {
-            return Resolver.GetModuleTokenForType(type, allowDynamicallyCreatedReference:true, throwIfNotFound: throwIfNotFound);
+            return Resolver.GetModuleTokenForType(
+                type,
+                allowDynamicallyCreatedReference: true,
+                throwIfNotFound: throwIfNotFound
+            );
         }
 
         public ModuleToken GetModuleTokenForMethod(MethodDesc method)
         {
-            return Resolver.GetModuleTokenForMethod(method, throwIfNotFound: false, allowDynamicallyCreatedReference: false);
+            return Resolver.GetModuleTokenForMethod(
+                method,
+                throwIfNotFound: false,
+                allowDynamicallyCreatedReference: false
+            );
         }
 
         public bool Equals(SignatureContext other)
         {
-            return GlobalContext == other.GlobalContext
-                && LocalContext == other.LocalContext;
+            return GlobalContext == other.GlobalContext && LocalContext == other.LocalContext;
         }
 
         public override bool Equals(object obj)
@@ -101,7 +116,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if (GlobalContext == null || other.GlobalContext == null)
             {
-                return (GlobalContext != null ? 1 : other.GlobalContext != null ? -1 : 0);
+                return (
+                    GlobalContext != null ? 1
+                    : other.GlobalContext != null ? -1
+                    : 0
+                );
             }
 
             int result = GlobalContext.CompareTo(other.GlobalContext);
@@ -110,7 +129,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             if (LocalContext == null || other.LocalContext == null)
             {
-                return (LocalContext != null ? 1 : other.LocalContext != null ? -1 : 0);
+                return (
+                    LocalContext != null ? 1
+                    : other.LocalContext != null ? -1
+                    : 0
+                );
             }
 
             return LocalContext.CompareTo(other.LocalContext);

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,34 +30,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mono.CodeContracts.Rewrite.Ast;
 using Mono.Cecil.Cil;
+using Mono.CodeContracts.Rewrite.Ast;
 
-namespace Mono.CodeContracts.Rewrite.AstVisitors {
-	class InstructionExtentVisitor : ExprVisitor {
+namespace Mono.CodeContracts.Rewrite.AstVisitors
+{
+    class InstructionExtentVisitor : ExprVisitor
+    {
+        public InstructionExtentVisitor(Dictionary<Expr, Instruction> instructionLookup)
+        {
+            this.instructionLookup = instructionLookup;
+        }
 
-		public InstructionExtentVisitor (Dictionary<Expr, Instruction> instructionLookup)
-		{
-			this.instructionLookup = instructionLookup;
-		}
+        private Dictionary<Expr, Instruction> instructionLookup;
+        private List<Instruction> instructions = new List<Instruction>();
 
-		private Dictionary<Expr, Instruction> instructionLookup;
-		private List<Instruction> instructions = new List<Instruction> ();
+        public IEnumerable<Instruction> Instructions
+        {
+            get { return this.instructions.OrderBy(x => x.Offset); }
+        }
 
-		public IEnumerable<Instruction> Instructions {
-			get {
-				return this.instructions.OrderBy (x => x.Offset);
-			}
-		}
-
-		public override Expr Visit (Expr e)
-		{
-			Instruction inst;
-			if (this.instructionLookup.TryGetValue (e, out inst)) {
-				this.instructions.Add (inst);
-			}
-			return base.Visit (e);
-		}
-
-	}
+        public override Expr Visit(Expr e)
+        {
+            Instruction inst;
+            if (this.instructionLookup.TryGetValue(e, out inst))
+            {
+                this.instructions.Add(inst);
+            }
+            return base.Visit(e);
+        }
+    }
 }

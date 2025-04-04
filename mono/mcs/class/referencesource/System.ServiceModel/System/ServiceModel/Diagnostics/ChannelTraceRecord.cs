@@ -17,7 +17,10 @@ namespace System.ServiceModel.Diagnostics
             this.channelType = channel == null ? null : channel.ToString();
         }
 
-        internal override string EventId { get { return BuildEventId("Channel"); } }
+        internal override string EventId
+        {
+            get { return BuildEventId("Channel"); }
+        }
 
         internal override void WriteTo(XmlWriter xml)
         {

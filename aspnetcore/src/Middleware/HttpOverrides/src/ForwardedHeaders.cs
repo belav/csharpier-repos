@@ -13,24 +13,29 @@ public enum ForwardedHeaders
     /// Do not process any forwarders
     /// </summary>
     None = 0,
+
     /// <summary>
     /// Process X-Forwarded-For, which identifies the originating IP address of the client.
     /// </summary>
     XForwardedFor = 1 << 0,
+
     /// <summary>
     /// Process X-Forwarded-Host, which identifies the original host requested by the client.
     /// </summary>
     XForwardedHost = 1 << 1,
+
     /// <summary>
     /// Process X-Forwarded-Proto, which identifies the protocol (HTTP or HTTPS) the client used to connect.
     /// </summary>
     XForwardedProto = 1 << 2,
+
     /// <summary>
     /// Process X-Forwarded-Prefix, which identifies the original path base used by the client.
     /// </summary>
     XForwardedPrefix = 1 << 3,
+
     /// <summary>
     /// Process X-Forwarded-For, X-Forwarded-Host, X-Forwarded-Proto and X-Forwarded-Prefix.
     /// </summary>
-    All = XForwardedFor | XForwardedHost | XForwardedProto | XForwardedPrefix
+    All = XForwardedFor | XForwardedHost | XForwardedProto | XForwardedPrefix,
 }

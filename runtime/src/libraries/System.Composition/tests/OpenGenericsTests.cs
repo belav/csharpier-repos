@@ -26,7 +26,10 @@ namespace System.Composition.UnitTests
             private readonly IRepository<T> _repository = new BasicRepository<T>();
 
             [Export(typeof(IRepository<>))]
-            public IRepository<T> Repository { get { return _repository; } }
+            public IRepository<T> Repository
+            {
+                get { return _repository; }
+            }
         }
 
         [Shared]
@@ -35,13 +38,20 @@ namespace System.Composition.UnitTests
             private readonly BasicRepository<T> _repository = new BasicRepository<T>();
 
             [Export(typeof(IRepository<>))]
-            public IRepository<T> Repository { get { return _repository; } }
+            public IRepository<T> Repository
+            {
+                get { return _repository; }
+            }
 
             [Export(typeof(BasicRepository<>))]
-            public BasicRepository<T> Repository2 { get { return _repository; } }
+            public BasicRepository<T> Repository2
+            {
+                get { return _repository; }
+            }
         }
 
         private interface IFirst<T> { }
+
         private interface ISecond<T> { }
 
         [Export(typeof(IFirst<>)), Export(typeof(ISecond<>))]
@@ -125,15 +135,25 @@ namespace System.Composition.UnitTests
         [Fact]
         public void TypesWithMismatchedGenericParameterListsAreDetectedDuringDiscovery()
         {
-            var x = Assert.Throws<CompositionFailedException>(() => CreateContainer(typeof(RepositoryWithKey<,>)));
-            Assert.Equal("Exported contract 'IRepository`1' of open generic part 'RepositoryWithKey`2' does not match the generic arguments of the class.", x.Message);
+            var x = Assert.Throws<CompositionFailedException>(() =>
+                CreateContainer(typeof(RepositoryWithKey<,>))
+            );
+            Assert.Equal(
+                "Exported contract 'IRepository`1' of open generic part 'RepositoryWithKey`2' does not match the generic arguments of the class.",
+                x.Message
+            );
         }
 
         [Fact]
         public void TypesWithNonGenericExportsAreDetectedDuringDiscovery()
         {
-            var x = Assert.Throws<CompositionFailedException>(() => CreateContainer(typeof(RepositoryWithNonGenericExport<>)));
-            Assert.Equal("Open generic part 'RepositoryWithNonGenericExport`1' cannot export non-generic contract 'IRepository'.", x.Message);
+            var x = Assert.Throws<CompositionFailedException>(() =>
+                CreateContainer(typeof(RepositoryWithNonGenericExport<>))
+            );
+            Assert.Equal(
+                "Open generic part 'RepositoryWithNonGenericExport`1' cannot export non-generic contract 'IRepository'.",
+                x.Message
+            );
         }
 
         [Fact]

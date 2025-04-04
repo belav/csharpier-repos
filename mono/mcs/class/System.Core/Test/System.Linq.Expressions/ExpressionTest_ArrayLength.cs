@@ -28,62 +28,71 @@
 //
 
 using System;
-using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using NUnit.Framework;
 
 namespace MonoTests.System.Linq.Expressions
 {
-	[TestFixture]
-	[Category("SRE")]
-	public class ExpressionTest_ArrayLength
-	{
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Arg1Null ()
-		{
-			Expression.ArrayLength (null);
-		}
+    [TestFixture]
+    [Category("SRE")]
+    public class ExpressionTest_ArrayLength
+    {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Arg1Null()
+        {
+            Expression.ArrayLength(null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Arg1NotArray ()
-		{
-			Expression.ArrayLength (Expression.Constant ("This is not an array!"));
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Arg1NotArray()
+        {
+            Expression.ArrayLength(Expression.Constant("This is not an array!"));
+        }
 
-		[Test]
-		public void Rank1String ()
-		{
-			string[] array = { "a", "b", "c" };
+        [Test]
+        public void Rank1String()
+        {
+            string[] array = { "a", "b", "c" };
 
-			UnaryExpression expr = Expression.ArrayLength (Expression.Constant (array));
-			Assert.AreEqual (ExpressionType.ArrayLength, expr.NodeType, "ArrayLength#01");
-			Assert.AreEqual (typeof (int), expr.Type, "ArrayLength#02");
-			Assert.IsNull (expr.Method, "ArrayLength#03");
-			Assert.AreEqual ("ArrayLength(value(System.String[]))", expr.ToString(), "ArrayLength#04");
-		}
+            UnaryExpression expr = Expression.ArrayLength(Expression.Constant(array));
+            Assert.AreEqual(ExpressionType.ArrayLength, expr.NodeType, "ArrayLength#01");
+            Assert.AreEqual(typeof(int), expr.Type, "ArrayLength#02");
+            Assert.IsNull(expr.Method, "ArrayLength#03");
+            Assert.AreEqual(
+                "ArrayLength(value(System.String[]))",
+                expr.ToString(),
+                "ArrayLength#04"
+            );
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Rank2String ()
-		{
-			string[,] array = {{ }, { }};
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Rank2String()
+        {
+            string[,] array =
+            {
+                { },
+                { },
+            };
 
-			Expression.ArrayLength (Expression.Constant (array));
-		}
+            Expression.ArrayLength(Expression.Constant(array));
+        }
 
-		[Test]
-		public void CompileArrayLength ()
-		{
-			var p = Expression.Parameter (typeof (object []), "ary");
-			var len = Expression.Lambda<Func<object [], int>> (
-				Expression.ArrayLength (p), p).Compile ();
+        [Test]
+        public void CompileArrayLength()
+        {
+            var p = Expression.Parameter(typeof(object[]), "ary");
+            var len = Expression
+                .Lambda<Func<object[], int>>(Expression.ArrayLength(p), p)
+                .Compile();
 
-			Assert.AreEqual (0, len (new string [0]));
-			Assert.AreEqual (2, len (new [] { "jb", "evain" }));
-		}
-	}
+            Assert.AreEqual(0, len(new string[0]));
+            Assert.AreEqual(2, len(new[] { "jb", "evain" }));
+        }
+    }
 }

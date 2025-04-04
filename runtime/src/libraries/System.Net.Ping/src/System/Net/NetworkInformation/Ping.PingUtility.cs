@@ -15,10 +15,17 @@ namespace System.Net.NetworkInformation
 {
     public partial class Ping
     {
-        private Process GetPingProcess(IPAddress address, byte[] buffer, int timeout, PingOptions? options)
+        private Process GetPingProcess(
+            IPAddress address,
+            byte[] buffer,
+            int timeout,
+            PingOptions? options
+        )
         {
             bool isIpv4 = address.AddressFamily == AddressFamily.InterNetwork;
-            string? pingExecutable = isIpv4 ? UnixCommandLinePing.Ping4UtilityPath : UnixCommandLinePing.Ping6UtilityPath;
+            string? pingExecutable = isIpv4
+                ? UnixCommandLinePing.Ping4UtilityPath
+                : UnixCommandLinePing.Ping6UtilityPath;
             if (pingExecutable == null)
             {
                 throw new PlatformNotSupportedException(SR.net_ping_utility_not_found);
@@ -32,13 +39,24 @@ namespace System.Net.NetworkInformation
                 throw new PlatformNotSupportedException(SR.net_ping_utility_custom_payload);
             }
 
-            UnixCommandLinePing.PingFragmentOptions fragmentOption = UnixCommandLinePing.PingFragmentOptions.Default;
+            UnixCommandLinePing.PingFragmentOptions fragmentOption = UnixCommandLinePing
+                .PingFragmentOptions
+                .Default;
             if (options != null && address.AddressFamily == AddressFamily.InterNetwork)
             {
-                fragmentOption = options.DontFragment ? UnixCommandLinePing.PingFragmentOptions.Do : UnixCommandLinePing.PingFragmentOptions.Dont;
+                fragmentOption = options.DontFragment
+                    ? UnixCommandLinePing.PingFragmentOptions.Do
+                    : UnixCommandLinePing.PingFragmentOptions.Dont;
             }
 
-            string processArgs = UnixCommandLinePing.ConstructCommandLine(buffer.Length, timeout, address.ToString(), isIpv4, options?.Ttl ?? 0, fragmentOption);
+            string processArgs = UnixCommandLinePing.ConstructCommandLine(
+                buffer.Length,
+                timeout,
+                address.ToString(),
+                isIpv4,
+                options?.Ttl ?? 0,
+                fragmentOption
+            );
 
             ProcessStartInfo psi = new ProcessStartInfo(pingExecutable, processArgs);
             psi.RedirectStandardOutput = true;
@@ -48,7 +66,12 @@ namespace System.Net.NetworkInformation
             return new Process() { StartInfo = psi };
         }
 
-        private PingReply SendWithPingUtility(IPAddress address, byte[] buffer, int timeout, PingOptions? options)
+        private PingReply SendWithPingUtility(
+            IPAddress address,
+            byte[] buffer,
+            int timeout,
+            PingOptions? options
+        )
         {
             using (Process p = GetPingProcess(address, buffer, timeout, options))
             {
@@ -71,7 +94,12 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        private async Task<PingReply> SendWithPingUtilityAsync(IPAddress address, byte[] buffer, int timeout, PingOptions? options)
+        private async Task<PingReply> SendWithPingUtilityAsync(
+            IPAddress address,
+            byte[] buffer,
+            int timeout,
+            PingOptions? options
+        )
         {
             CancellationToken timeoutOrCancellationToken = _timeoutOrCancellationSource!.Token;
 
@@ -80,13 +108,18 @@ namespace System.Net.NetworkInformation
 
             try
             {
-                await pingProcess.WaitForExitAsync(timeoutOrCancellationToken).ConfigureAwait(false);
+                await pingProcess
+                    .WaitForExitAsync(timeoutOrCancellationToken)
+                    .ConfigureAwait(false);
 
-                string stdout = await pingProcess.StandardOutput.ReadToEndAsync(timeoutOrCancellationToken).ConfigureAwait(false);
+                string stdout = await pingProcess
+                    .StandardOutput.ReadToEndAsync(timeoutOrCancellationToken)
+                    .ConfigureAwait(false);
 
                 return ParsePingUtilityOutput(address, pingProcess.ExitCode, stdout);
             }
-            catch (OperationCanceledException) when (timeoutOrCancellationToken.IsCancellationRequested)
+            catch (OperationCanceledException)
+                when (timeoutOrCancellationToken.IsCancellationRequested)
             {
                 if (!pingProcess.HasExited)
                 {
@@ -105,7 +138,11 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        private static PingReply ParsePingUtilityOutput(IPAddress address, int exitCode, string stdout)
+        private static PingReply ParsePingUtilityOutput(
+            IPAddress address,
+            int exitCode,
+            string stdout
+        )
         {
             // Throw timeout for known failure return codes from ping functions.
             if (exitCode == 1 || exitCode == 2)
@@ -139,7 +176,11 @@ namespace System.Net.NetworkInformation
             int addressStart = stdout.IndexOf("From ", StringComparison.Ordinal) + 5;
             int addressLength = stdout.AsSpan(Math.Max(addressStart, 0)).IndexOfAny(' ', ':');
             IPAddress? address;
-            if (addressStart < 5 || addressLength <= 0 || !IPAddress.TryParse(stdout.AsSpan(addressStart, addressLength), out address))
+            if (
+                addressStart < 5
+                || addressLength <= 0
+                || !IPAddress.TryParse(stdout.AsSpan(addressStart, addressLength), out address)
+            )
             {
                 // failed to parse source address (which in case of TTL is different than the original
                 // destination address), fallback to all 0

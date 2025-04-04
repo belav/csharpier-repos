@@ -4,21 +4,19 @@
 
 #nullable disable
 
+using System;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
-using System;
 using Roslyn.Utilities;
-using System.Linq;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
     internal abstract partial class BoundTreeVisitor<A, R>
     {
-        protected BoundTreeVisitor()
-        {
-        }
+        protected BoundTreeVisitor() { }
 
         public virtual R Visit(BoundNode node, A arg)
         {
@@ -41,7 +39,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.BinaryOperator:
                     return VisitBinaryOperator(node as BoundBinaryOperator, arg);
                 case BoundKind.CompoundAssignmentOperator:
-                    return VisitCompoundAssignmentOperator(node as BoundCompoundAssignmentOperator, arg);
+                    return VisitCompoundAssignmentOperator(
+                        node as BoundCompoundAssignmentOperator,
+                        arg
+                    );
                 case BoundKind.AssignmentOperator:
                     return VisitAssignmentOperator(node as BoundAssignmentOperator, arg);
                 case BoundKind.NullCoalescingOperator:
@@ -73,7 +74,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.LocalDeclaration:
                     return VisitLocalDeclaration(node as BoundLocalDeclaration, arg);
                 case BoundKind.MultipleLocalDeclarations:
-                    return VisitMultipleLocalDeclarations(node as BoundMultipleLocalDeclarations, arg);
+                    return VisitMultipleLocalDeclarations(
+                        node as BoundMultipleLocalDeclarations,
+                        arg
+                    );
                 case BoundKind.Sequence:
                     return VisitSequence(node as BoundSequence, arg);
                 case BoundKind.NoOpStatement:
@@ -115,9 +119,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case BoundKind.Call:
                     return VisitCall(node as BoundCall, arg);
                 case BoundKind.ObjectCreationExpression:
-                    return VisitObjectCreationExpression(node as BoundObjectCreationExpression, arg);
+                    return VisitObjectCreationExpression(
+                        node as BoundObjectCreationExpression,
+                        arg
+                    );
                 case BoundKind.DelegateCreationExpression:
-                    return VisitDelegateCreationExpression(node as BoundDelegateCreationExpression, arg);
+                    return VisitDelegateCreationExpression(
+                        node as BoundDelegateCreationExpression,
+                        arg
+                    );
                 case BoundKind.FieldAccess:
                     return VisitFieldAccess(node as BoundFieldAccess, arg);
                 case BoundKind.PropertyAccess:
@@ -139,9 +149,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
     internal abstract partial class BoundTreeVisitor
     {
-        protected BoundTreeVisitor()
-        {
-        }
+        protected BoundTreeVisitor() { }
 
         [DebuggerHidden]
         public virtual BoundNode Visit(BoundNode node)
@@ -172,12 +180,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public void AddAnError(DiagnosticBag diagnostics)
             {
-                diagnostics.Add(ErrorCode.ERR_InsufficientStack, GetTooLongOrComplexExpressionErrorLocation(Node));
+                diagnostics.Add(
+                    ErrorCode.ERR_InsufficientStack,
+                    GetTooLongOrComplexExpressionErrorLocation(Node)
+                );
             }
 
             public void AddAnError(BindingDiagnosticBag diagnostics)
             {
-                diagnostics.Add(ErrorCode.ERR_InsufficientStack, GetTooLongOrComplexExpressionErrorLocation(Node));
+                diagnostics.Add(
+                    ErrorCode.ERR_InsufficientStack,
+                    GetTooLongOrComplexExpressionErrorLocation(Node)
+                );
             }
 
             public static Location GetTooLongOrComplexExpressionErrorLocation(BoundNode node)
@@ -186,7 +200,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (!(syntax is ExpressionSyntax))
                 {
-                    syntax = syntax.DescendantNodes(n => !(n is ExpressionSyntax)).OfType<ExpressionSyntax>().FirstOrDefault() ?? syntax;
+                    syntax =
+                        syntax
+                            .DescendantNodes(n => !(n is ExpressionSyntax))
+                            .OfType<ExpressionSyntax>()
+                            .FirstOrDefault() ?? syntax;
                 }
 
                 return syntax.GetFirstToken().GetLocation();
@@ -197,7 +215,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Consumers must provide implementation for <see cref="VisitExpressionWithoutStackGuard"/>.
         /// </summary>
         [DebuggerStepThrough]
-        protected BoundExpression VisitExpressionWithStackGuard(ref int recursionDepth, BoundExpression node)
+        protected BoundExpression VisitExpressionWithStackGuard(
+            ref int recursionDepth,
+            BoundExpression node
+        )
         {
             BoundExpression result;
             recursionDepth++;
@@ -205,7 +226,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             int saveRecursionDepth = recursionDepth;
 #endif
 
-            if (recursionDepth > 1 || !ConvertInsufficientExecutionStackExceptionToCancelledByStackGuardException())
+            if (
+                recursionDepth > 1
+                || !ConvertInsufficientExecutionStackExceptionToCancelledByStackGuardException()
+            )
             {
                 EnsureSufficientExecutionStack(recursionDepth);
 

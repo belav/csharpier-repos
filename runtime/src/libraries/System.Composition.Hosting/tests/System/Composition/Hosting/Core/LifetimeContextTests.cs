@@ -10,15 +10,27 @@ namespace System.Composition.Hosting.Core.Tests
         [Fact]
         public void AllocateSharingId_InvokeMultipleTimes_ReturnsDifferentValue()
         {
-            Assert.NotEqual(LifetimeContext.AllocateSharingId(), LifetimeContext.AllocateSharingId());
+            Assert.NotEqual(
+                LifetimeContext.AllocateSharingId(),
+                LifetimeContext.AllocateSharingId()
+            );
         }
 
         [Fact]
         public void AddBoundInstance_NonNullInstance_DisposesInstanceOnDisposal()
         {
-            using (CompositionHost host = CompositionHost.CreateCompositionHost(new ExportDescriptorProvider[0]))
+            using (
+                CompositionHost host = CompositionHost.CreateCompositionHost(
+                    new ExportDescriptorProvider[0]
+                )
+            )
             {
-                Assert.True(host.TryGetExport(new CompositionContract(typeof(CompositionContext)), out object export));
+                Assert.True(
+                    host.TryGetExport(
+                        new CompositionContract(typeof(CompositionContext)),
+                        out object export
+                    )
+                );
                 LifetimeContext context = Assert.IsType<LifetimeContext>(export);
 
                 var instance = new DisposableInstance();
@@ -36,8 +48,15 @@ namespace System.Composition.Hosting.Core.Tests
         [Fact]
         public void AddBoundInstance_NullInstance_ThrowsNullReferenceExceptionOnDisposal()
         {
-            CompositionHost host = CompositionHost.CreateCompositionHost(new ExportDescriptorProvider[0]);
-            Assert.True(host.TryGetExport(new CompositionContract(typeof(CompositionContext)), out object export));
+            CompositionHost host = CompositionHost.CreateCompositionHost(
+                new ExportDescriptorProvider[0]
+            );
+            Assert.True(
+                host.TryGetExport(
+                    new CompositionContract(typeof(CompositionContext)),
+                    out object export
+                )
+            );
             LifetimeContext context = Assert.IsType<LifetimeContext>(export);
 
             context.AddBoundInstance(null);
@@ -47,9 +66,18 @@ namespace System.Composition.Hosting.Core.Tests
         [Fact]
         public void AddBoundInstance_Disposed_ThrowsObjectDisposedException()
         {
-            using (CompositionHost host = CompositionHost.CreateCompositionHost(new ExportDescriptorProvider[0]))
+            using (
+                CompositionHost host = CompositionHost.CreateCompositionHost(
+                    new ExportDescriptorProvider[0]
+                )
+            )
             {
-                Assert.True(host.TryGetExport(new CompositionContract(typeof(CompositionContext)), out object export));
+                Assert.True(
+                    host.TryGetExport(
+                        new CompositionContract(typeof(CompositionContext)),
+                        out object export
+                    )
+                );
                 LifetimeContext context = Assert.IsType<LifetimeContext>(export);
                 context.Dispose();
 
@@ -60,15 +88,30 @@ namespace System.Composition.Hosting.Core.Tests
         [Fact]
         public void GetOrCreate_ValidActivatorDuringInitialization_Success()
         {
-            using (CompositionHost host = CompositionHost.CreateCompositionHost(new ExportDescriptorProvider[0]))
+            using (
+                CompositionHost host = CompositionHost.CreateCompositionHost(
+                    new ExportDescriptorProvider[0]
+                )
+            )
             {
-                Assert.True(host.TryGetExport(new CompositionContract(typeof(CompositionContext)), out object export));
+                Assert.True(
+                    host.TryGetExport(
+                        new CompositionContract(typeof(CompositionContext)),
+                        out object export
+                    )
+                );
                 LifetimeContext context = Assert.IsType<LifetimeContext>(export);
 
-                object Activator(LifetimeContext activatorContext, CompositionOperation activatorOperation)
+                object Activator(
+                    LifetimeContext activatorContext,
+                    CompositionOperation activatorOperation
+                )
                 {
                     var value = new object();
-                    object GetOrCreateActivate(LifetimeContext getOrCreateContext, CompositionOperation getOrCreateOperator)
+                    object GetOrCreateActivate(
+                        LifetimeContext getOrCreateContext,
+                        CompositionOperation getOrCreateOperator
+                    )
                     {
                         Assert.Same(activatorContext, getOrCreateContext);
                         Assert.Same(activatorOperation, getOrCreateOperator);
@@ -76,8 +119,14 @@ namespace System.Composition.Hosting.Core.Tests
                         return value;
                     }
 
-                    Assert.Same(value, activatorContext.GetOrCreate(1, activatorOperation, GetOrCreateActivate));
-                    Assert.Same(value, activatorContext.GetOrCreate(1, activatorOperation, GetOrCreateActivate));
+                    Assert.Same(
+                        value,
+                        activatorContext.GetOrCreate(1, activatorOperation, GetOrCreateActivate)
+                    );
+                    Assert.Same(
+                        value,
+                        activatorContext.GetOrCreate(1, activatorOperation, GetOrCreateActivate)
+                    );
                     return "Hi";
                 }
 
@@ -88,21 +137,36 @@ namespace System.Composition.Hosting.Core.Tests
         [Fact]
         public void GetOrCreate_ValidActivatorAfterInitialization_Success()
         {
-            using (CompositionHost host = CompositionHost.CreateCompositionHost(new ExportDescriptorProvider[0]))
+            using (
+                CompositionHost host = CompositionHost.CreateCompositionHost(
+                    new ExportDescriptorProvider[0]
+                )
+            )
             {
-                Assert.True(host.TryGetExport(new CompositionContract(typeof(CompositionContext)), out object export));
+                Assert.True(
+                    host.TryGetExport(
+                        new CompositionContract(typeof(CompositionContext)),
+                        out object export
+                    )
+                );
                 LifetimeContext context = Assert.IsType<LifetimeContext>(export);
 
                 CompositionOperation operation = null;
                 var value = new object();
-                object GetOrCreateActivate(LifetimeContext getOrCreateContext, CompositionOperation getOrCreateOperator)
+                object GetOrCreateActivate(
+                    LifetimeContext getOrCreateContext,
+                    CompositionOperation getOrCreateOperator
+                )
                 {
                     Assert.Same(context, getOrCreateContext);
                     Assert.Same(operation, getOrCreateOperator);
 
                     return value;
                 }
-                object Activator(LifetimeContext activatorContext, CompositionOperation activatorOperation)
+                object Activator(
+                    LifetimeContext activatorContext,
+                    CompositionOperation activatorOperation
+                )
                 {
                     operation = activatorOperation;
                     Assert.Same(value, context.GetOrCreate(1, operation, GetOrCreateActivate));
@@ -117,14 +181,28 @@ namespace System.Composition.Hosting.Core.Tests
         [Fact]
         public void GetOrCreate_NullActivator_ThrowsNullReferenceException()
         {
-            using (CompositionHost host = CompositionHost.CreateCompositionHost(new ExportDescriptorProvider[0]))
+            using (
+                CompositionHost host = CompositionHost.CreateCompositionHost(
+                    new ExportDescriptorProvider[0]
+                )
+            )
             {
-                Assert.True(host.TryGetExport(new CompositionContract(typeof(CompositionContext)), out object export));
+                Assert.True(
+                    host.TryGetExport(
+                        new CompositionContract(typeof(CompositionContext)),
+                        out object export
+                    )
+                );
                 LifetimeContext context = Assert.IsType<LifetimeContext>(export);
 
-                object Activator(LifetimeContext activatorContext, CompositionOperation activatorOperation)
+                object Activator(
+                    LifetimeContext activatorContext,
+                    CompositionOperation activatorOperation
+                )
                 {
-                    Assert.Throws<NullReferenceException>(() => activatorContext.GetOrCreate(1, activatorOperation, null));
+                    Assert.Throws<NullReferenceException>(() =>
+                        activatorContext.GetOrCreate(1, activatorOperation, null)
+                    );
                     return "Hi";
                 }
 
@@ -135,21 +213,40 @@ namespace System.Composition.Hosting.Core.Tests
         [Fact]
         public void GetOrCreate_NullOperation_ThrowsNullReferenceException()
         {
-            using (CompositionHost host = CompositionHost.CreateCompositionHost(new ExportDescriptorProvider[0]))
+            using (
+                CompositionHost host = CompositionHost.CreateCompositionHost(
+                    new ExportDescriptorProvider[0]
+                )
+            )
             {
-                Assert.True(host.TryGetExport(new CompositionContract(typeof(CompositionContext)), out object export));
+                Assert.True(
+                    host.TryGetExport(
+                        new CompositionContract(typeof(CompositionContext)),
+                        out object export
+                    )
+                );
                 LifetimeContext context = Assert.IsType<LifetimeContext>(export);
 
-                Assert.Throws<NullReferenceException>(() => context.GetOrCreate(1, null, Activator));
+                Assert.Throws<NullReferenceException>(() => context.GetOrCreate(1, null, Activator)
+                );
             }
         }
 
         [Fact]
         public void FindContextWithin_NullSharingBoundary_ReturnsRoot()
         {
-            using (CompositionHost host = CompositionHost.CreateCompositionHost(new ExportDescriptorProvider[0]))
+            using (
+                CompositionHost host = CompositionHost.CreateCompositionHost(
+                    new ExportDescriptorProvider[0]
+                )
+            )
             {
-                Assert.True(host.TryGetExport(new CompositionContract(typeof(CompositionContext)), out object export));
+                Assert.True(
+                    host.TryGetExport(
+                        new CompositionContract(typeof(CompositionContext)),
+                        out object export
+                    )
+                );
                 LifetimeContext context = Assert.IsType<LifetimeContext>(export);
 
                 Assert.Same(context, context.FindContextWithin(null));
@@ -159,21 +256,41 @@ namespace System.Composition.Hosting.Core.Tests
         [Fact]
         public void FindContextWithin_UnknownSharingBoundary_ThrowsCompositionFailedException()
         {
-            using (CompositionHost host = CompositionHost.CreateCompositionHost(new ExportDescriptorProvider[0]))
+            using (
+                CompositionHost host = CompositionHost.CreateCompositionHost(
+                    new ExportDescriptorProvider[0]
+                )
+            )
             {
-                Assert.True(host.TryGetExport(new CompositionContract(typeof(CompositionContext)), out object export));
+                Assert.True(
+                    host.TryGetExport(
+                        new CompositionContract(typeof(CompositionContext)),
+                        out object export
+                    )
+                );
                 LifetimeContext context = Assert.IsType<LifetimeContext>(export);
 
-                Assert.Throws<CompositionFailedException>(() => context.FindContextWithin("sharingBoundary"));
+                Assert.Throws<CompositionFailedException>(() =>
+                    context.FindContextWithin("sharingBoundary")
+                );
             }
         }
 
         [Fact]
         public void ToString_NoParent_ReturnsExpected()
         {
-            using (CompositionHost host = CompositionHost.CreateCompositionHost(new ExportDescriptorProvider[0]))
+            using (
+                CompositionHost host = CompositionHost.CreateCompositionHost(
+                    new ExportDescriptorProvider[0]
+                )
+            )
             {
-                Assert.True(host.TryGetExport(new CompositionContract(typeof(CompositionContext)), out object export));
+                Assert.True(
+                    host.TryGetExport(
+                        new CompositionContract(typeof(CompositionContext)),
+                        out object export
+                    )
+                );
                 LifetimeContext context = Assert.IsType<LifetimeContext>(export);
 
                 Assert.Equal("Root Lifetime Context", context.ToString());
@@ -187,6 +304,7 @@ namespace System.Composition.Hosting.Core.Tests
             public void Dispose() => CalledDisposed++;
         }
 
-        private static object Activator(LifetimeContext context, CompositionOperation operation) => "hi";
+        private static object Activator(LifetimeContext context, CompositionOperation operation) =>
+            "hi";
     }
 }

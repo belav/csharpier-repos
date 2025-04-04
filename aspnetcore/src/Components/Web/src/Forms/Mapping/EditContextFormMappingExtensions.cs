@@ -9,7 +9,10 @@ internal static class EditContextFormMappingExtensions
 {
     private static readonly object _key = new();
 
-    public static IDisposable EnableFormMappingContextExtensions(this EditContext context, FormMappingContext mappingContext)
+    public static IDisposable EnableFormMappingContextExtensions(
+        this EditContext context,
+        FormMappingContext mappingContext
+    )
     {
         ArgumentNullException.ThrowIfNull(context, nameof(context));
         ArgumentNullException.ThrowIfNull(mappingContext, nameof(mappingContext));
@@ -24,7 +27,10 @@ internal static class EditContextFormMappingExtensions
         ArgumentNullException.ThrowIfNull(context, nameof(context));
         ArgumentNullException.ThrowIfNull(fieldName, nameof(fieldName));
 
-        if (context.Properties.TryGetValue(_key, out var result) && result is FormMappingContext mappingContext)
+        if (
+            context.Properties.TryGetValue(_key, out var result)
+            && result is FormMappingContext mappingContext
+        )
         {
             return mappingContext.GetAttemptedValue(fieldName);
         }
@@ -39,7 +45,10 @@ internal static class EditContextFormMappingExtensions
         private ValidationMessageStore? _messages;
         private bool _hasmessages;
 
-        public MappingContextEventSubscriptions(EditContext editContext, FormMappingContext mappingContext)
+        public MappingContextEventSubscriptions(
+            EditContext editContext,
+            FormMappingContext mappingContext
+        )
         {
             _editContext = editContext;
             _mappingContext = mappingContext;
@@ -70,7 +79,10 @@ internal static class EditContextFormMappingExtensions
                 {
                     adddedMessages = true;
                     // TODO: We need to support localizing the error message.
-                    _messages.Add(fieldIdentifier, errorMessage.ToString(CultureInfo.CurrentCulture));
+                    _messages.Add(
+                        fieldIdentifier,
+                        errorMessage.ToString(CultureInfo.CurrentCulture)
+                    );
                     _hasmessages = true;
                 }
             }

@@ -16,7 +16,10 @@ public class BaseAddressAuthorizationMessageHandler : AuthorizationMessageHandle
     /// </summary>
     /// <param name="provider">The <see cref="IAccessTokenProvider"/> to use for requesting tokens.</param>
     /// <param name="navigationManager">The <see cref="NavigationManager"/> used to compute the base address.</param>
-    public BaseAddressAuthorizationMessageHandler(IAccessTokenProvider provider, NavigationManager navigationManager)
+    public BaseAddressAuthorizationMessageHandler(
+        IAccessTokenProvider provider,
+        NavigationManager navigationManager
+    )
         : base(provider, navigationManager)
     {
         ConfigureHandler(new[] { navigationManager.BaseUri });

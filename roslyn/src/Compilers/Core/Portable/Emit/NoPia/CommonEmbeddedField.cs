@@ -30,24 +30,27 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
         TEmbeddedEvent,
         TEmbeddedProperty,
         TEmbeddedParameter,
-        TEmbeddedTypeParameter>
+        TEmbeddedTypeParameter
+    >
     {
-        internal abstract class CommonEmbeddedField : CommonEmbeddedMember<TFieldSymbol>, Cci.IFieldDefinition
+        internal abstract class CommonEmbeddedField
+            : CommonEmbeddedMember<TFieldSymbol>,
+                Cci.IFieldDefinition
         {
             public readonly TEmbeddedType ContainingType;
 
-            protected CommonEmbeddedField(TEmbeddedType containingType, TFieldSymbol underlyingField) :
-                base(underlyingField)
+            protected CommonEmbeddedField(
+                TEmbeddedType containingType,
+                TFieldSymbol underlyingField
+            )
+                : base(underlyingField)
             {
                 this.ContainingType = containingType;
             }
 
             public TFieldSymbol UnderlyingField
             {
-                get
-                {
-                    return UnderlyingSymbol;
-                }
+                get { return UnderlyingSymbol; }
             }
 
             protected abstract MetadataConstant GetCompileTimeValue(EmitContext context);
@@ -71,106 +74,67 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             ImmutableArray<byte> Cci.IFieldDefinition.MappedData
             {
-                get
-                {
-                    return default(ImmutableArray<byte>);
-                }
+                get { return default(ImmutableArray<byte>); }
             }
 
             bool Cci.IFieldDefinition.IsCompileTimeConstant
             {
-                get
-                {
-                    return IsCompileTimeConstant;
-                }
+                get { return IsCompileTimeConstant; }
             }
 
             bool Cci.IFieldDefinition.IsNotSerialized
             {
-                get
-                {
-                    return IsNotSerialized;
-                }
+                get { return IsNotSerialized; }
             }
 
             bool Cci.IFieldDefinition.IsReadOnly
             {
-                get
-                {
-                    return IsReadOnly;
-                }
+                get { return IsReadOnly; }
             }
 
             bool Cci.IFieldDefinition.IsRuntimeSpecial
             {
-                get
-                {
-                    return IsRuntimeSpecial;
-                }
+                get { return IsRuntimeSpecial; }
             }
 
             bool Cci.IFieldDefinition.IsSpecialName
             {
-                get
-                {
-                    return IsSpecialName;
-                }
+                get { return IsSpecialName; }
             }
 
             bool Cci.IFieldDefinition.IsStatic
             {
-                get
-                {
-                    return IsStatic;
-                }
+                get { return IsStatic; }
             }
 
             bool Cci.IFieldDefinition.IsMarshalledExplicitly
             {
-                get
-                {
-                    return IsMarshalledExplicitly;
-                }
+                get { return IsMarshalledExplicitly; }
             }
 
             Cci.IMarshallingInformation Cci.IFieldDefinition.MarshallingInformation
             {
-                get
-                {
-                    return MarshallingInformation;
-                }
+                get { return MarshallingInformation; }
             }
 
             ImmutableArray<byte> Cci.IFieldDefinition.MarshallingDescriptor
             {
-                get
-                {
-                    return MarshallingDescriptor;
-                }
+                get { return MarshallingDescriptor; }
             }
 
             int Cci.IFieldDefinition.Offset
             {
-                get
-                {
-                    return TypeLayoutOffset ?? 0;
-                }
+                get { return TypeLayoutOffset ?? 0; }
             }
 
             Cci.ITypeDefinition Cci.ITypeDefinitionMember.ContainingTypeDefinition
             {
-                get
-                {
-                    return ContainingType;
-                }
+                get { return ContainingType; }
             }
 
             Cci.TypeMemberVisibility Cci.ITypeDefinitionMember.Visibility
             {
-                get
-                {
-                    return Visibility;
-                }
+                get { return Visibility; }
             }
 
             Cci.ITypeReference Cci.ITypeMemberReference.GetContainingType(EmitContext context)
@@ -190,10 +154,7 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             string Cci.INamedEntity.Name
             {
-                get
-                {
-                    return Name;
-                }
+                get { return Name; }
             }
 
             Cci.ITypeReference Cci.IFieldReference.GetType(EmitContext context)
@@ -201,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 return UnderlyingField.GetType(context);
             }
 
-            ImmutableArray<Cci.ICustomModifier> Cci.IFieldReference.RefCustomModifiers => UnderlyingField.RefCustomModifiers;
+            ImmutableArray<Cci.ICustomModifier> Cci.IFieldReference.RefCustomModifiers =>
+                UnderlyingField.RefCustomModifiers;
 
             bool Cci.IFieldReference.IsByReference => UnderlyingField.IsByReference;
 
@@ -212,18 +174,12 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             Cci.ISpecializedFieldReference Cci.IFieldReference.AsSpecializedFieldReference
             {
-                get
-                {
-                    return null;
-                }
+                get { return null; }
             }
 
             bool Cci.IFieldReference.IsContextualNamedEntity
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
         }
     }

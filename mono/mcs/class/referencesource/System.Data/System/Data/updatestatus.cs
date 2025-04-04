@@ -6,10 +6,10 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
-
-    public enum UpdateStatus {
-
+namespace System.Data
+{
+    public enum UpdateStatus
+    {
         Continue = 0,
 
         ErrorsOccurred = 1,

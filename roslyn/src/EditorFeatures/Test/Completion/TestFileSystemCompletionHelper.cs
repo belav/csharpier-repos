@@ -28,8 +28,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             ImmutableArray<string> allowableExtensions,
             IEnumerable<string> drives,
             IEnumerable<string> directories,
-            IEnumerable<string> files)
-            : base(Glyph.OpenFolder, Glyph.CSharpFile, searchPaths, baseDirectoryOpt, allowableExtensions, CompletionRules)
+            IEnumerable<string> files
+        )
+            : base(
+                Glyph.OpenFolder,
+                Glyph.CSharpFile,
+                searchPaths,
+                baseDirectoryOpt,
+                allowableExtensions,
+                CompletionRules
+            )
         {
             Assert.True(drives.All(d => d.EndsWith(PathUtilities.DirectorySeparatorStr)));
             Assert.True(directories.All(d => !d.EndsWith(PathUtilities.DirectorySeparatorStr)));
@@ -39,28 +47,35 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             _files = ImmutableArray.CreateRange(files);
         }
 
-        protected override string[] GetLogicalDrives()
-            => _drives.ToArray();
+        protected override string[] GetLogicalDrives() => _drives.ToArray();
 
-        protected override bool IsVisibleFileSystemEntry(string fullPath)
-            => !fullPath.Contains("hidden");
+        protected override bool IsVisibleFileSystemEntry(string fullPath) =>
+            !fullPath.Contains("hidden");
 
-        protected override bool DirectoryExists(string fullPath)
-            => _directories.Contains(fullPath.TrimEnd(PathUtilities.DirectorySeparatorChar));
+        protected override bool DirectoryExists(string fullPath) =>
+            _directories.Contains(fullPath.TrimEnd(PathUtilities.DirectorySeparatorChar));
 
-        protected override IEnumerable<string> EnumerateDirectories(string fullDirectoryPath)
-            => Enumerate(_directories, fullDirectoryPath);
+        protected override IEnumerable<string> EnumerateDirectories(string fullDirectoryPath) =>
+            Enumerate(_directories, fullDirectoryPath);
 
-        protected override IEnumerable<string> EnumerateFiles(string fullDirectoryPath)
-            => Enumerate(_files, fullDirectoryPath);
+        protected override IEnumerable<string> EnumerateFiles(string fullDirectoryPath) =>
+            Enumerate(_files, fullDirectoryPath);
 
-        private static IEnumerable<string> Enumerate(ImmutableArray<string> entries, string fullDirectoryPath)
+        private static IEnumerable<string> Enumerate(
+            ImmutableArray<string> entries,
+            string fullDirectoryPath
+        )
         {
-            var withTrailingSeparator = fullDirectoryPath.TrimEnd(PathUtilities.DirectorySeparatorChar) + PathUtilities.DirectorySeparatorChar;
+            var withTrailingSeparator =
+                fullDirectoryPath.TrimEnd(PathUtilities.DirectorySeparatorChar)
+                + PathUtilities.DirectorySeparatorChar;
             return from d in entries
-                   where d.StartsWith(withTrailingSeparator)
-                   let nextSeparator = d.IndexOf(PathUtilities.DirectorySeparatorChar, withTrailingSeparator.Length)
-                   select d[..((nextSeparator >= 0) ? nextSeparator : d.Length)];
+                where d.StartsWith(withTrailingSeparator)
+                let nextSeparator = d.IndexOf(
+                    PathUtilities.DirectorySeparatorChar,
+                    withTrailingSeparator.Length
+                )
+                select d[..((nextSeparator >= 0) ? nextSeparator : d.Length)];
         }
     }
 }

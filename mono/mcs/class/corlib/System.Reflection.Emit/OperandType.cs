@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,87 +27,86 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Reflection.Emit {
+namespace System.Reflection.Emit
+{
+    /// <summary>
+    ///  Describes the operand types of MSIL instructions.
+    /// </summary>
+    [ComVisible(true)]
+    [Serializable]
+    public enum OperandType
+    {
+        /// <summary>
+        /// </summary>
+        InlineBrTarget = 0,
 
-	/// <summary>
-	///  Describes the operand types of MSIL instructions.
-	/// </summary>
-	[ComVisible (true)]
-	[Serializable]
-	public enum OperandType {
+        /// <summary>
+        /// </summary>
+        InlineField = 1,
 
-		/// <summary>
-		/// </summary>
-		InlineBrTarget = 0,
+        /// <summary>
+        /// </summary>
+        InlineI = 2,
 
-		/// <summary>
-		/// </summary>
-		InlineField = 1,
+        /// <summary>
+        /// </summary>
+        InlineI8 = 3,
 
-		/// <summary>
-		/// </summary>
-		InlineI = 2,
+        /// <summary>
+        /// </summary>
+        InlineMethod = 4,
 
-		/// <summary>
-		/// </summary>
-		InlineI8 = 3,
+        /// <summary>
+        /// </summary>
+        InlineNone = 5,
 
-		/// <summary>
-		/// </summary>
-		InlineMethod = 4,
+        /// <summary>
+        /// </summary>
+        [Obsolete("This API has been deprecated.")]
+        InlinePhi = 6,
 
-		/// <summary>
-		/// </summary>
-		InlineNone = 5,
+        /// <summary>
+        /// </summary>
+        InlineR = 7,
 
-		/// <summary>
-		/// </summary>
-		[Obsolete ("This API has been deprecated.")]
-		InlinePhi = 6,
+        /// <summary>
+        /// </summary>
+        InlineSig = 9,
 
-		/// <summary>
-		/// </summary>
-		InlineR = 7,
+        /// <summary>
+        /// </summary>
+        InlineString = 0x0A,
 
-		/// <summary>
-		/// </summary>
-		InlineSig = 9,
+        /// <summary>
+        /// </summary>
+        InlineSwitch = 0x0B,
 
-		/// <summary>
-		/// </summary>
-		InlineString = 0x0A,
+        /// <summary>
+        /// </summary>
+        InlineTok = 0x0C,
 
-		/// <summary>
-		/// </summary>
-		InlineSwitch = 0x0B,
+        /// <summary>
+        /// </summary>
+        InlineType = 0x0D,
 
-		/// <summary>
-		/// </summary>
-		InlineTok = 0x0C,
+        /// <summary>
+        /// </summary>
+        InlineVar = 0x0E,
 
-		/// <summary>
-		/// </summary>
-		InlineType = 0x0D,
+        /// <summary>
+        /// </summary>
+        ShortInlineBrTarget = 0x0F,
 
-		/// <summary>
-		/// </summary>
-		InlineVar = 0x0E,
+        /// <summary>
+        /// </summary>
+        ShortInlineI = 0x10,
 
-		/// <summary>
-		/// </summary>
-		ShortInlineBrTarget = 0x0F,
+        /// <summary>
+        /// </summary>
+        ShortInlineR = 0x11,
 
-		/// <summary>
-		/// </summary>
-		ShortInlineI = 0x10,
-
-		/// <summary>
-		/// </summary>
-		ShortInlineR = 0x11,
-
-		/// <summary>
-		/// </summary>
-		ShortInlineVar = 0x12
-	}
-
+        /// <summary>
+        /// </summary>
+        ShortInlineVar = 0x12,
+    }
 }

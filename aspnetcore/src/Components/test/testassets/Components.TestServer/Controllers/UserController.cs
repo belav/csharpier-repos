@@ -24,13 +24,13 @@ public class UserController : Controller
         {
             IsAuthenticated = User.Identity.IsAuthenticated,
             UserName = User.Identity.Name,
-            ExposedClaims = User.Claims
-                .Where(c => c.Type == "test-claim" || IsExposedRole(c))
-                .Select(c => new ExposedClaim { Type = c.Type, Value = c.Value }).ToList()
+            ExposedClaims = User
+                .Claims.Where(c => c.Type == "test-claim" || IsExposedRole(c))
+                .Select(c => new ExposedClaim { Type = c.Type, Value = c.Value })
+                .ToList(),
         };
     }
 
-    private bool IsExposedRole(Claim claim)
-        => claim.Type == ClaimTypes.Role
-        && ExposedRoles.Contains(claim.Value);
+    private bool IsExposedRole(Claim claim) =>
+        claim.Type == ClaimTypes.Role && ExposedRoles.Contains(claim.Value);
 }

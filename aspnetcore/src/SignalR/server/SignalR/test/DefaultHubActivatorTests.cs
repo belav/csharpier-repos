@@ -11,15 +11,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class DefaultHubActivatorTests
 {
-    public class CreatableHub : Hub
-    {
-    }
+    public class CreatableHub : Hub { }
 
     [Fact]
     public void HubCreatedIfNotResolvedFromServiceProvider()
     {
-        Assert.NotNull(
-            new DefaultHubActivator<CreatableHub>(Mock.Of<IServiceProvider>()).Create());
+        Assert.NotNull(new DefaultHubActivator<CreatableHub>(Mock.Of<IServiceProvider>()).Create());
     }
 
     [Fact]
@@ -27,12 +24,9 @@ public class DefaultHubActivatorTests
     {
         var hub = Mock.Of<Hub>();
         var mockServiceProvider = new Mock<IServiceProvider>();
-        mockServiceProvider
-            .Setup(sp => sp.GetService(typeof(Hub)))
-            .Returns(hub);
+        mockServiceProvider.Setup(sp => sp.GetService(typeof(Hub))).Returns(hub);
 
-        Assert.Same(hub,
-            new DefaultHubActivator<Hub>(mockServiceProvider.Object).Create());
+        Assert.Same(hub, new DefaultHubActivator<Hub>(mockServiceProvider.Object).Create());
     }
 
     [Fact]
@@ -57,8 +51,13 @@ public class DefaultHubActivatorTests
     [Fact]
     public void CannotReleaseNullHub()
     {
-        Assert.Equal("hub",
-            Assert.Throws<ArgumentNullException>(
-                () => new DefaultHubActivator<Hub>(Mock.Of<IServiceProvider>()).Release(null)).ParamName);
+        Assert.Equal(
+            "hub",
+            Assert
+                .Throws<ArgumentNullException>(() =>
+                    new DefaultHubActivator<Hub>(Mock.Of<IServiceProvider>()).Release(null)
+                )
+                .ParamName
+        );
     }
 }

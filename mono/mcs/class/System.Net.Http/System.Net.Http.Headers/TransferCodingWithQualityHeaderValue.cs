@@ -30,76 +30,86 @@ using System.Collections.Generic;
 
 namespace System.Net.Http.Headers
 {
-	public sealed class TransferCodingWithQualityHeaderValue : TransferCodingHeaderValue
-	{
-		public TransferCodingWithQualityHeaderValue (string value)
-			: base (value)
-		{
-		}
+    public sealed class TransferCodingWithQualityHeaderValue : TransferCodingHeaderValue
+    {
+        public TransferCodingWithQualityHeaderValue(string value)
+            : base(value) { }
 
-		public TransferCodingWithQualityHeaderValue (string value, double quality)
-			: this (value)
-		{
-			Quality = quality;
-		}
+        public TransferCodingWithQualityHeaderValue(string value, double quality)
+            : this(value)
+        {
+            Quality = quality;
+        }
 
-		private TransferCodingWithQualityHeaderValue ()
-		{
-		}
+        private TransferCodingWithQualityHeaderValue() { }
 
-		public double? Quality {
-			get {
-				return QualityValue.GetValue (parameters);
-			}
-			set {
-				QualityValue.SetValue (ref parameters, value);
-			}
-		}
+        public double? Quality
+        {
+            get { return QualityValue.GetValue(parameters); }
+            set { QualityValue.SetValue(ref parameters, value); }
+        }
 
-		public new static TransferCodingWithQualityHeaderValue Parse (string input)
-		{
-			TransferCodingWithQualityHeaderValue value;
-			if (TryParse (input, out value))
-				return value;
+        public static new TransferCodingWithQualityHeaderValue Parse(string input)
+        {
+            TransferCodingWithQualityHeaderValue value;
+            if (TryParse(input, out value))
+                return value;
 
-			throw new FormatException ();
-		}
+            throw new FormatException();
+        }
 
-		public static bool TryParse (string input, out TransferCodingWithQualityHeaderValue parsedValue)
-		{
-			var lexer = new Lexer (input);
-			Token token;
-			if (TryParseElement (lexer, out parsedValue, out token) && token == Token.Type.End)
-				return true;
+        public static bool TryParse(
+            string input,
+            out TransferCodingWithQualityHeaderValue parsedValue
+        )
+        {
+            var lexer = new Lexer(input);
+            Token token;
+            if (TryParseElement(lexer, out parsedValue, out token) && token == Token.Type.End)
+                return true;
 
-			parsedValue = null;
-			return false;
-		}
+            parsedValue = null;
+            return false;
+        }
 
-		internal static bool TryParse (string input, int minimalCount, out List<TransferCodingWithQualityHeaderValue> result)
-		{
-			return CollectionParser.TryParse (input, minimalCount, TryParseElement, out result);
-		}
+        internal static bool TryParse(
+            string input,
+            int minimalCount,
+            out List<TransferCodingWithQualityHeaderValue> result
+        )
+        {
+            return CollectionParser.TryParse(input, minimalCount, TryParseElement, out result);
+        }
 
-		static bool TryParseElement (Lexer lexer, out TransferCodingWithQualityHeaderValue parsedValue, out Token t)
-		{
-			parsedValue = null;
+        static bool TryParseElement(
+            Lexer lexer,
+            out TransferCodingWithQualityHeaderValue parsedValue,
+            out Token t
+        )
+        {
+            parsedValue = null;
 
-			t = lexer.Scan ();
-			if (t != Token.Type.Token)
-				return false;
+            t = lexer.Scan();
+            if (t != Token.Type.Token)
+                return false;
 
-			var result = new TransferCodingWithQualityHeaderValue ();
-			result.value = lexer.GetStringValue (t);
+            var result = new TransferCodingWithQualityHeaderValue();
+            result.value = lexer.GetStringValue(t);
 
-			t = lexer.Scan ();
+            t = lexer.Scan();
 
-			// Parameters parsing
-			if (t == Token.Type.SeparatorSemicolon && (!NameValueHeaderValue.TryParseParameters (lexer, out result.parameters, out t) || t != Token.Type.End))
-				return false;
+            // Parameters parsing
+            if (
+                t == Token.Type.SeparatorSemicolon
+                && (
+                    !NameValueHeaderValue.TryParseParameters(lexer, out result.parameters, out t)
+                    || t != Token.Type.End
+                )
+            )
+                return false;
 
-			parsedValue = result;
-			return true;
-		}
-	}
+            parsedValue = result;
+            return true;
+        }
+    }
 }

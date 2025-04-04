@@ -3,7 +3,6 @@
 
 using System.Runtime;
 using System.Runtime.CompilerServices;
-
 using Internal.Runtime;
 
 namespace System
@@ -28,9 +27,9 @@ namespace System
         [Intrinsic]
         protected internal object MemberwiseClone()
         {
-            object clone = this.GetEETypePtr().IsArray ?
-                RuntimeImports.RhNewArray(this.GetEETypePtr(), Unsafe.As<Array>(this).Length) :
-                RuntimeImports.RhNewObject(this.GetEETypePtr());
+            object clone = this.GetEETypePtr().IsArray
+                ? RuntimeImports.RhNewArray(this.GetEETypePtr(), Unsafe.As<Array>(this).Length)
+                : RuntimeImports.RhNewObject(this.GetEETypePtr());
 
             // copy contents of "this" to the clone
 

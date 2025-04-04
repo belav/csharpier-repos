@@ -36,6 +36,5 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// The On&lt;Operation&gt;s defined for the End
         /// </summary>
         ICollection<OnOperation> Operations { get; }
-
     }
 }

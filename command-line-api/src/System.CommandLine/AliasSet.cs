@@ -24,8 +24,8 @@ namespace System.CommandLine
 
         public bool IsReadOnly => false;
 
-        public void Add(string item)
-            => _aliases.Add(CliSymbol.ThrowIfEmptyOrWithWhitespaces(item, nameof(item)));
+        public void Add(string item) =>
+            _aliases.Add(CliSymbol.ThrowIfEmptyOrWithWhitespaces(item, nameof(item)));
 
         internal bool Overlaps(AliasSet other) => _aliases.Overlaps(other._aliases);
 

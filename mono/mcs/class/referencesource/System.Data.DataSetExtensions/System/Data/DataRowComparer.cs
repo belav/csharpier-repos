@@ -6,11 +6,11 @@
 // <owner current="true" primary="false">spather</owner>
 //------------------------------------------------------------------------------
 using System;
-using System.Data;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Data;
 using System.Data.DataSetExtensions;
+using System.Diagnostics;
 
 namespace System.Data
 {
@@ -23,17 +23,24 @@ namespace System.Data
         /// <summary>
         /// Gets the singleton instance of the data row comparer.
         /// </summary>
-        public static DataRowComparer<DataRow> Default { get { return DataRowComparer<DataRow>.Default; } }
+        public static DataRowComparer<DataRow> Default
+        {
+            get { return DataRowComparer<DataRow>.Default; }
+        }
 
         internal static bool AreEqual(object a, object b)
         {
             if (Object.ReferenceEquals(a, b))
-            {   // same reference or (null, null) or (DBNull.Value, DBNull.Value)
+            { // same reference or (null, null) or (DBNull.Value, DBNull.Value)
                 return true;
             }
-            if (Object.ReferenceEquals(a, null) || Object.ReferenceEquals(a, DBNull.Value) ||
-                Object.ReferenceEquals(b, null) || Object.ReferenceEquals(b, DBNull.Value))
-            {   // (null, non-null) or (null, DBNull.Value) or vice versa
+            if (
+                Object.ReferenceEquals(a, null)
+                || Object.ReferenceEquals(a, DBNull.Value)
+                || Object.ReferenceEquals(b, null)
+                || Object.ReferenceEquals(b, DBNull.Value)
+            )
+            { // (null, non-null) or (null, DBNull.Value) or vice versa
                 return false;
             }
             return (a.Equals(b) || (a.GetType().IsArray && CompareArray((Array)a, b as Array)));
@@ -42,12 +49,16 @@ namespace System.Data
         private static bool AreElementEqual(object a, object b)
         {
             if (Object.ReferenceEquals(a, b))
-            {   // same reference or (null, null) or (DBNull.Value, DBNull.Value)
+            { // same reference or (null, null) or (DBNull.Value, DBNull.Value)
                 return true;
             }
-            if (Object.ReferenceEquals(a, null) || Object.ReferenceEquals(a, DBNull.Value) ||
-                Object.ReferenceEquals(b, null) || Object.ReferenceEquals(b, DBNull.Value))
-            {   // (null, non-null) or (null, DBNull.Value) or vice versa
+            if (
+                Object.ReferenceEquals(a, null)
+                || Object.ReferenceEquals(a, DBNull.Value)
+                || Object.ReferenceEquals(b, null)
+                || Object.ReferenceEquals(b, DBNull.Value)
+            )
+            { // (null, non-null) or (null, DBNull.Value) or vice versa
                 return false;
             }
             return a.Equals(b);
@@ -55,11 +66,8 @@ namespace System.Data
 
         private static bool CompareArray(Array a, Array b)
         {
-            if ((null == b) ||
-                (1 != a.Rank) ||
-                (1 != b.Rank) ||
-                (a.Length != b.Length))
-            {   // automatically consider array's with Rank>1 not-equal
+            if ((null == b) || (1 != a.Rank) || (1 != b.Rank) || (a.Length != b.Length))
+            { // automatically consider array's with Rank>1 not-equal
                 return false;
             }
 
@@ -78,7 +86,10 @@ namespace System.Data
                     case TypeCode.Int64:
                         return DataRowComparer.CompareEquatableArray<Int64>((Int64[])a, (Int64[])b);
                     case TypeCode.String:
-                        return DataRowComparer.CompareEquatableArray<String>((String[])a, (String[])b);
+                        return DataRowComparer.CompareEquatableArray<String>(
+                            (String[])a,
+                            (String[])b
+                        );
                 }
             }
 
@@ -94,14 +105,14 @@ namespace System.Data
             return true;
         }
 
-        private static bool CompareEquatableArray<TElem>(TElem[] a, TElem[] b) where TElem : IEquatable<TElem>
+        private static bool CompareEquatableArray<TElem>(TElem[] a, TElem[] b)
+            where TElem : IEquatable<TElem>
         {
             if (Object.ReferenceEquals(a, b))
             {
                 return true;
             }
-            if (Object.ReferenceEquals(a, null) ||
-                Object.ReferenceEquals(b, null))
+            if (Object.ReferenceEquals(a, null) || Object.ReferenceEquals(b, null))
             {
                 return false;
             }
@@ -125,7 +136,8 @@ namespace System.Data
     /// This class implements IEqualityComparer using value based semantics
     /// when comparing DataRows.
     /// </summary>
-    public sealed class DataRowComparer<TRow> : IEqualityComparer<TRow> where TRow : DataRow
+    public sealed class DataRowComparer<TRow> : IEqualityComparer<TRow>
+        where TRow : DataRow
     {
         /// <summary>
         /// Private constructor to prevent initialization outside of Default singleton instance.
@@ -137,7 +149,10 @@ namespace System.Data
         /// <summary>
         /// Gets the singleton instance of the data row comparer.
         /// </summary>
-        public static DataRowComparer<TRow> Default { get { return _instance; } }
+        public static DataRowComparer<TRow> Default
+        {
+            get { return _instance; }
+        }
 
         /// <summary>
         /// This method compares to DataRows by doing a column by column value based
@@ -158,13 +173,15 @@ namespace System.Data
             {
                 return true;
             }
-            if (Object.ReferenceEquals(leftRow, null) ||
-                Object.ReferenceEquals(rightRow, null))
+            if (Object.ReferenceEquals(leftRow, null) || Object.ReferenceEquals(rightRow, null))
             {
                 return false;
             }
 
-            if (leftRow.RowState == DataRowState.Deleted || rightRow.RowState == DataRowState.Deleted)
+            if (
+                leftRow.RowState == DataRowState.Deleted
+                || rightRow.RowState == DataRowState.Deleted
+            )
             {
                 throw DataSetUtil.InvalidOperation(Strings.DataSetLinq_CannotCompareDeletedRow);
             }

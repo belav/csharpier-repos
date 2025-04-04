@@ -17,5 +17,6 @@ public interface ITagHelperActivator
     /// <typeparam name="TTagHelper">The <see cref="ITagHelper"/> type.</typeparam>
     /// <param name="context">The <see cref="ViewContext"/> for the executing view.</param>
     /// <returns>The tag helper.</returns>
-    TTagHelper Create<TTagHelper>(ViewContext context) where TTagHelper : ITagHelper;
+    TTagHelper Create<TTagHelper>(ViewContext context)
+        where TTagHelper : ITagHelper;
 }

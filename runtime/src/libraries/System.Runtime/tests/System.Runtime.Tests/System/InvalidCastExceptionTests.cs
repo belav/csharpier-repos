@@ -13,7 +13,11 @@ namespace System.Tests
         public static void Ctor_Empty()
         {
             var exception = new InvalidCastException();
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_INVALIDCAST, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_INVALIDCAST,
+                validateMessage: false
+            );
         }
 
         [Fact]
@@ -21,7 +25,11 @@ namespace System.Tests
         {
             string message = "wrong type";
             var exception = new InvalidCastException(message);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_INVALIDCAST, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_INVALIDCAST,
+                message: message
+            );
         }
 
         [Fact]
@@ -30,7 +38,12 @@ namespace System.Tests
             string message = "wrong type";
             var innerException = new Exception("Inner exception");
             var exception = new InvalidCastException(message, innerException);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: COR_E_INVALIDCAST, innerException: innerException, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: COR_E_INVALIDCAST,
+                innerException: innerException,
+                message: message
+            );
         }
 
         [Fact]
@@ -39,8 +52,11 @@ namespace System.Tests
             string message = "wrong type";
             int errorCode = unchecked((int)0x80424242);
             var exception = new InvalidCastException(message, errorCode);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: errorCode, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: errorCode,
+                message: message
+            );
         }
-
     }
 }

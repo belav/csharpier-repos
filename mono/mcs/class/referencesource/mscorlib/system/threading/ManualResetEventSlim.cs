@@ -2,7 +2,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -16,14 +16,13 @@
 
 using System;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
+using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Threading;
-using System.Runtime.InteropServices;
-using System.Diagnostics.Contracts;
 
 namespace System.Threading
 {
-
     // ManualResetEventSlim wraps a manual-reset event internally with a little bit of
     // spinning. When an event will be set imminently, it is often advantageous to avoid
     // a 4k+ cycle context switch in favor of briefly spinning. Therefore we layer on to
@@ -57,20 +56,21 @@ namespace System.Threading
         private const int DEFAULT_SPIN_MP = SpinWait.YIELD_THRESHOLD;
 
         private volatile object m_lock;
+
         // A lock used for waiting and pulsing. Lazily initialized via EnsureLockObjectCreated()
 
         private volatile ManualResetEvent m_eventObj; // A true Win32 event used for waiting.
 
         // -- State -- //
         //For a packed word a uint would seem better, but Interlocked.* doesn't support them as uint isn't CLS-compliant.
-        private volatile int m_combinedState; //ie a UInt32. Used for the state items listed below. 
+        private volatile int m_combinedState; //ie a UInt32. Used for the state items listed below.
 
         //1-bit for  signalled state
-        private const int SignalledState_BitMask = unchecked((int)0x80000000);//1000 0000 0000 0000 0000 0000 0000 0000
+        private const int SignalledState_BitMask = unchecked((int)0x80000000); //1000 0000 0000 0000 0000 0000 0000 0000
         private const int SignalledState_ShiftCount = 31;
 
         //1-bit for disposed state
-        private const int Dispose_BitMask = unchecked((int)0x40000000);//0100 0000 0000 0000 0000 0000 0000 0000
+        private const int Dispose_BitMask = unchecked((int)0x40000000); //0100 0000 0000 0000 0000 0000 0000 0000
 
         //11-bits for m_spinCount
         private const int SpinCountState_BitMask = unchecked((int)0x3FF80000); //0011 1111 1111 1000 0000 0000 0000 0000
@@ -98,12 +98,11 @@ namespace System.Threading
         /// cref="ManualResetEventSlim"/>.</value>
         /// <remarks>
         /// Accessing this property forces initialization of an underlying event object if one hasn't
-        /// already been created.  To simply wait on this <see cref="ManualResetEventSlim"/>, 
+        /// already been created.  To simply wait on this <see cref="ManualResetEventSlim"/>,
         /// the public Wait methods should be preferred.
         /// </remarks>
         public WaitHandle WaitHandle
         {
-
             get
             {
                 ThrowIfDisposed();
@@ -123,14 +122,13 @@ namespace System.Threading
         /// <value>true if the event has is set; otherwise, false.</value>
         public bool IsSet
         {
-            get
-            {
-                return 0 != ExtractStatePortion(m_combinedState, SignalledState_BitMask);
-            }
-
+            get { return 0 != ExtractStatePortion(m_combinedState, SignalledState_BitMask); }
             private set
             {
-                UpdateStateAtomically(((value) ? 1 : 0) << SignalledState_ShiftCount, SignalledState_BitMask);
+                UpdateStateAtomically(
+                    ((value) ? 1 : 0) << SignalledState_ShiftCount,
+                    SignalledState_BitMask
+                );
             }
         }
 
@@ -141,15 +139,26 @@ namespace System.Threading
         {
             get
             {
-                return ExtractStatePortionAndShiftRight(m_combinedState, SpinCountState_BitMask, SpinCountState_ShiftCount);
+                return ExtractStatePortionAndShiftRight(
+                    m_combinedState,
+                    SpinCountState_BitMask,
+                    SpinCountState_ShiftCount
+                );
             }
-
             private set
             {
-                Contract.Assert(value >= 0, "SpinCount is a restricted-width integer. The value supplied is outside the legal range.");
-                Contract.Assert(value <= SpinCountState_MaxValue, "SpinCount is a restricted-width integer. The value supplied is outside the legal range.");
+                Contract.Assert(
+                    value >= 0,
+                    "SpinCount is a restricted-width integer. The value supplied is outside the legal range."
+                );
+                Contract.Assert(
+                    value <= SpinCountState_MaxValue,
+                    "SpinCount is a restricted-width integer. The value supplied is outside the legal range."
+                );
                 // Don't worry about thread safety because it's set one time from the constructor
-                m_combinedState = (m_combinedState & ~SpinCountState_BitMask) | (value << SpinCountState_ShiftCount);
+                m_combinedState =
+                    (m_combinedState & ~SpinCountState_BitMask)
+                    | (value << SpinCountState_ShiftCount);
             }
         }
 
@@ -160,21 +169,33 @@ namespace System.Threading
         {
             get
             {
-                return ExtractStatePortionAndShiftRight(m_combinedState, NumWaitersState_BitMask, NumWaitersState_ShiftCount);
+                return ExtractStatePortionAndShiftRight(
+                    m_combinedState,
+                    NumWaitersState_BitMask,
+                    NumWaitersState_ShiftCount
+                );
             }
-
             set
             {
                 //setting to <0 would indicate an internal flaw, hence Assert is appropriate.
-                Contract.Assert(value >= 0, "NumWaiters should never be less than zero. This indicates an internal error.");
+                Contract.Assert(
+                    value >= 0,
+                    "NumWaiters should never be less than zero. This indicates an internal error."
+                );
 
                 // it is possible for the max number of waiters to be exceeded via user-code, hence we use a real exception here.
                 if (value >= NumWaitersState_MaxValue)
-                    throw new InvalidOperationException(String.Format(Environment.GetResourceString("ManualResetEventSlim_ctor_TooManyWaiters"), NumWaitersState_MaxValue));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            Environment.GetResourceString(
+                                "ManualResetEventSlim_ctor_TooManyWaiters"
+                            ),
+                            NumWaitersState_MaxValue
+                        )
+                    );
 
                 UpdateStateAtomically(value << NumWaitersState_ShiftCount, NumWaitersState_BitMask);
             }
-
         }
 
         //-----------------------------------------------------------------------------------
@@ -187,10 +208,7 @@ namespace System.Threading
         /// class with an initial state of nonsignaled.
         /// </summary>
         public ManualResetEventSlim()
-            : this(false)
-        {
-
-        }
+            : this(false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualResetEventSlim"/>
@@ -227,7 +245,13 @@ namespace System.Threading
             {
                 throw new ArgumentOutOfRangeException(
                     "spinCount",
-                    String.Format(Environment.GetResourceString("ManualResetEventSlim_ctor_SpinCountOutOfRange"), SpinCountState_MaxValue));
+                    String.Format(
+                        Environment.GetResourceString(
+                            "ManualResetEventSlim_ctor_SpinCountOutOfRange"
+                        ),
+                        SpinCountState_MaxValue
+                    )
+                );
             }
 
             // We will suppress default spin  because the user specified a count.
@@ -244,11 +268,16 @@ namespace System.Threading
             this.m_combinedState = initialState ? (1 << SignalledState_ShiftCount) : 0;
             //the spinCount argument has been validated by the ctors.
             //but we now sanity check our predefined constants.
-            Contract.Assert(DEFAULT_SPIN_SP >= 0, "Internal error - DEFAULT_SPIN_SP is outside the legal range.");
-            Contract.Assert(DEFAULT_SPIN_SP <= SpinCountState_MaxValue, "Internal error - DEFAULT_SPIN_SP is outside the legal range.");
+            Contract.Assert(
+                DEFAULT_SPIN_SP >= 0,
+                "Internal error - DEFAULT_SPIN_SP is outside the legal range."
+            );
+            Contract.Assert(
+                DEFAULT_SPIN_SP <= SpinCountState_MaxValue,
+                "Internal error - DEFAULT_SPIN_SP is outside the legal range."
+            );
 
             SpinCount = PlatformHelper.IsSingleProcessor ? DEFAULT_SPIN_SP : spinCount;
-
         }
 
         /// <summary>
@@ -288,7 +317,6 @@ namespace System.Threading
             }
             else
             {
-
                 // Now that the event is published, verify that the state hasn't changed since
                 // we snapped the preInitializeState. Another thread could have done that
                 // between our initial observation above and here. The barrier incurred from
@@ -297,8 +325,10 @@ namespace System.Threading
                 bool currentIsSet = IsSet;
                 if (currentIsSet != preInitializeIsSet)
                 {
-                    Contract.Assert(currentIsSet,
-                        "The only safe concurrent transition is from unset->set: detected set->unset.");
+                    Contract.Assert(
+                        currentIsSet,
+                        "The only safe concurrent transition is from unset->set: detected set->unset."
+                    );
 
                     // We saw it as unsignaled, but it has since become set.
                     lock (newEventObj)
@@ -332,7 +362,7 @@ namespace System.Threading
         private void Set(bool duringCancellation)
         {
             // We need to ensure that IsSet=true does not get reordered past the read of m_eventObj
-            // This would be a legal movement according to the .NET memory model. 
+            // This would be a legal movement according to the .NET memory model.
             // The code is safe as IsSet involves an Interlocked.CompareExchange which provides a full memory barrier.
             IsSet = true;
 
@@ -342,7 +372,6 @@ namespace System.Threading
                 Contract.Assert(m_lock != null); //if waiters>0, then m_lock has already been created.
                 lock (m_lock)
                 {
-
                     Monitor.PulseAll(m_lock);
                 }
             }
@@ -557,7 +586,6 @@ namespace System.Threading
                     return false;
                 }
 
-
                 // We spin briefly before falling back to allocating and/or waiting on a true event.
                 uint startTime = 0;
                 bool bNeedTimeoutAdjustment = false;
@@ -587,7 +615,6 @@ namespace System.Threading
                     {
                         return true;
                     }
-
                     else if (i < HOW_MANY_SPIN_BEFORE_YIELD)
                     {
                         if (i == HOW_MANY_SPIN_BEFORE_YIELD / 2)
@@ -628,7 +655,9 @@ namespace System.Threading
                 EnsureLockObjectCreated();
 
                 // We must register and deregister the token outside of the lock, to avoid deadlocks.
-                using (cancellationToken.InternalRegisterWithoutEC(s_cancellationTokenCallback, this))
+                using (
+                    cancellationToken.InternalRegisterWithoutEC(s_cancellationTokenCallback, this)
+                )
                 {
                     lock (m_lock)
                     {
@@ -641,12 +670,15 @@ namespace System.Threading
                             //update timeout (delays in wait commencement are due to spinning and/or spurious wakeups from other waits being canceled)
                             if (bNeedTimeoutAdjustment)
                             {
-                                realMillisecondsTimeout = TimeoutHelper.UpdateTimeOut(startTime, millisecondsTimeout);
+                                realMillisecondsTimeout = TimeoutHelper.UpdateTimeOut(
+                                    startTime,
+                                    millisecondsTimeout
+                                );
                                 if (realMillisecondsTimeout <= 0)
                                     return false;
                             }
 
-                            // There is a ---- that Set will fail to see that there are waiters as Set does not take the lock, 
+                            // There is a ---- that Set will fail to see that there are waiters as Set does not take the lock,
                             // so after updating waiters, we must check IsSet again.
                             // Also, we must ensure there cannot be any reordering of the assignment to Waiters and the
                             // read from IsSet.  This is guaranteed as Waiters{set;} involves an Interlocked.CompareExchange
@@ -678,11 +710,10 @@ namespace System.Threading
                             // Now just loop back around, and the right thing will happen.  Either:
                             //     1. We had a spurious wake-up due to some other wait being canceled via a different cancellationToken (rewait)
                             // or  2. the wait was successful. (the loop will break)
-
                         }
                     }
                 }
-            } // automatically disposes (and deregisters) the callback 
+            } // automatically disposes (and deregisters) the callback
 
             return true; //done. The wait was satisfied.
         }
@@ -701,7 +732,7 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// When overridden in a derived class, releases the unmanaged resources used by the 
+        /// When overridden in a derived class, releases the unmanaged resources used by the
         /// <see cref="ManualResetEventSlim"/>, and optionally releases the managed resources.
         /// </summary>
         /// <param name="disposing">true to release both managed and unmanaged resources;
@@ -738,13 +769,18 @@ namespace System.Threading
         private void ThrowIfDisposed()
         {
             if ((m_combinedState & Dispose_BitMask) != 0)
-                throw new ObjectDisposedException(Environment.GetResourceString("ManualResetEventSlim_Disposed"));
+                throw new ObjectDisposedException(
+                    Environment.GetResourceString("ManualResetEventSlim_Disposed")
+                );
         }
 
         /// <summary>
         /// Private helper method to wake up waiters when a cancellationToken gets canceled.
         /// </summary>
-        private static Action<object> s_cancellationTokenCallback = new Action<object>(CancellationTokenCallback);
+        private static Action<object> s_cancellationTokenCallback = new Action<object>(
+            CancellationTokenCallback
+        );
+
         private static void CancellationTokenCallback(object obj)
         {
             ManualResetEventSlim mre = obj as ManualResetEventSlim;
@@ -769,7 +805,10 @@ namespace System.Threading
         {
             SpinWait sw = new SpinWait();
 
-            Contract.Assert((newBits | updateBitsMask) == updateBitsMask, "newBits do not fall within the updateBitsMask.");
+            Contract.Assert(
+                (newBits | updateBitsMask) == updateBitsMask,
+                "newBits do not fall within the updateBitsMask."
+            );
 
             do
             {
@@ -779,7 +818,9 @@ namespace System.Threading
                 //           then (2) map in the newBits. eg [11000111] newBits=00101000, newState=[11101111]
                 int newState = (oldState & ~updateBitsMask) | newBits;
 
-                if (Interlocked.CompareExchange(ref m_combinedState, newState, oldState) == oldState)
+                if (
+                    Interlocked.CompareExchange(ref m_combinedState, newState, oldState) == oldState
+                )
                 {
                     return;
                 }
@@ -790,15 +831,19 @@ namespace System.Threading
 
         /// <summary>
         /// Private helper method - performs Mask and shift, particular helpful to extract a field from a packed word.
-        /// eg ExtractStatePortionAndShiftRight(0x12345678, 0xFF000000, 24) => 0x12, ie extracting the top 8-bits as a simple integer 
-        /// 
+        /// eg ExtractStatePortionAndShiftRight(0x12345678, 0xFF000000, 24) => 0x12, ie extracting the top 8-bits as a simple integer
+        ///
         /// ?? is there a common place to put this rather than being private to MRES?
         /// </summary>
         /// <param name="state"></param>
         /// <param name="mask"></param>
         /// <param name="rightBitShiftCount"></param>
         /// <returns></returns>
-        private static int ExtractStatePortionAndShiftRight(int state, int mask, int rightBitShiftCount)
+        private static int ExtractStatePortionAndShiftRight(
+            int state,
+            int mask,
+            int rightBitShiftCount
+        )
         {
             //convert to uint before shifting so that right-shift does not replicate the sign-bit,
             //then convert back to int.
@@ -810,7 +855,7 @@ namespace System.Threading
         /// This is acceptable for boolean values for which the shift is unnecessary
         /// eg (val &amp; Mask) != 0 is an appropriate way to extract a boolean rather than using
         /// ((val &amp; Mask) &gt;&gt; shiftAmount) == 1
-        /// 
+        ///
         /// ?? is there a common place to put this rather than being private to MRES?
         /// </summary>
         /// <param name="state"></param>

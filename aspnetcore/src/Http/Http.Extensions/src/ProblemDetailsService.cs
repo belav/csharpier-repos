@@ -9,8 +9,7 @@ internal sealed class ProblemDetailsService : IProblemDetailsService
 {
     private readonly IProblemDetailsWriter[] _writers;
 
-    public ProblemDetailsService(
-        IEnumerable<IProblemDetailsWriter> writers)
+    public ProblemDetailsService(IEnumerable<IProblemDetailsWriter> writers)
     {
         _writers = writers.ToArray();
     }
@@ -19,7 +18,9 @@ internal sealed class ProblemDetailsService : IProblemDetailsService
     {
         if (!await TryWriteAsync(context))
         {
-            throw new InvalidOperationException("Unable to find a registered `IProblemDetailsWriter` that can write to the given context.");
+            throw new InvalidOperationException(
+                "Unable to find a registered `IProblemDetailsWriter` that can write to the given context."
+            );
         }
     }
 

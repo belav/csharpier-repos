@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 
 namespace IntelHardwareIntrinsicTest
 {
@@ -27,7 +27,9 @@ namespace IntelHardwareIntrinsicTest
 
                     if (!ulongTable.CheckResult((x, y) => (y[0] == 0xffffffff01ul) && (y[1] == 0)))
                     {
-                        Console.WriteLine("SSE2.X64 ConvertScalarToVector128Single failed on ulong:");
+                        Console.WriteLine(
+                            "SSE2.X64 ConvertScalarToVector128Single failed on ulong:"
+                        );
                         foreach (var item in ulongTable.outArray)
                         {
                             Console.Write(item + ", ");
@@ -42,16 +44,17 @@ namespace IntelHardwareIntrinsicTest
                     {
                         var vd = Sse2.X64.ConvertScalarToVector128UInt64((ulong)5);
                         testResult = Fail;
-                        Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.X64.ConvertScalarToVector128UInt64)} failed: expected PlatformNotSupportedException exception.");
+                        Console.WriteLine(
+                            $"{nameof(Sse2)}.{nameof(Sse2.X64.ConvertScalarToVector128UInt64)} failed: expected PlatformNotSupportedException exception."
+                        );
                     }
-                    catch (PlatformNotSupportedException)
-                    {
-
-                    }
+                    catch (PlatformNotSupportedException) { }
                     catch (Exception ex)
                     {
                         testResult = Fail;
-                        Console.WriteLine($"{nameof(Sse2)}.{nameof(Sse2.X64.ConvertScalarToVector128UInt64)}-{ex} failed: expected PlatformNotSupportedException exception.");
+                        Console.WriteLine(
+                            $"{nameof(Sse2)}.{nameof(Sse2.X64.ConvertScalarToVector128UInt64)}-{ex} failed: expected PlatformNotSupportedException exception."
+                        );
                     }
                 }
             }
@@ -59,7 +62,8 @@ namespace IntelHardwareIntrinsicTest
             return testResult;
         }
 
-        public unsafe struct TestTable<T> : IDisposable where T : struct
+        public unsafe struct TestTable<T> : IDisposable
+            where T : struct
         {
             public T[] inArray;
             public T[] outArray;
@@ -69,6 +73,7 @@ namespace IntelHardwareIntrinsicTest
 
             GCHandle inHandle;
             GCHandle outHandle;
+
             public TestTable(T[] a, T[] b)
             {
                 this.inArray = a;
@@ -77,6 +82,7 @@ namespace IntelHardwareIntrinsicTest
                 inHandle = GCHandle.Alloc(inArray, GCHandleType.Pinned);
                 outHandle = GCHandle.Alloc(outArray, GCHandleType.Pinned);
             }
+
             public bool CheckResult(Func<T[], T[], bool> check)
             {
                 return check(inArray, outArray);

@@ -11,9 +11,10 @@ namespace Microsoft.AspNetCore.OutputCaching.StackExchangeRedis.Tests;
 
 public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
 {
-    private const string SkipReason = "TODO: Disabled due to CI failure. " +
-    "These tests require Redis server to be started on the machine. Make sure to change the value of" +
-    "\"RedisTestConfig.RedisPort\" accordingly.";
+    private const string SkipReason =
+        "TODO: Disabled due to CI failure. "
+        + "These tests require Redis server to be started on the machine. Make sure to change the value of"
+        + "\"RedisTestConfig.RedisPort\" accordingly.";
 
     private readonly IOutputCacheBufferStore _cache;
     private readonly RedisConnectionFixture _fixture;
@@ -25,12 +26,14 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         _fixture = connection;
         Log = log;
         var services = new ServiceCollection();
-        services.AddStackExchangeRedisOutputCache(options => {
+        services.AddStackExchangeRedisOutputCache(options =>
+        {
             options.ConnectionMultiplexerFactory = () => Task.FromResult(_fixture.Connection);
             options.InstanceName = "TestPrefix";
         });
         var svc = Assert.IsAssignableFrom<RedisOutputCacheStore>(
-            services.BuildServiceProvider().GetService<IOutputCacheStore>());
+            services.BuildServiceProvider().GetService<IOutputCacheStore>()
+        );
         Assert.NotNull(svc);
         svc.GarbageCollectionEnabled = false;
         _cache = svc;
@@ -71,7 +74,14 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         RedisKey underlyingKey = "TestPrefix__MSOCV_" + key;
 
         // pre-check
-        await _fixture.Database.KeyDeleteAsync(new RedisKey[] { "TestPrefix__MSOCT", "TestPrefix__MSOCT_tagA", "TestPrefix__MSOCT_tagB" });
+        await _fixture.Database.KeyDeleteAsync(
+            new RedisKey[]
+            {
+                "TestPrefix__MSOCT",
+                "TestPrefix__MSOCT_tagA",
+                "TestPrefix__MSOCT_tagB",
+            }
+        );
         var timeout = await _fixture.Database.KeyTimeToLiveAsync(underlyingKey);
         Assert.Null(timeout); // means doesn't exist
         Assert.False(await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT"));
@@ -84,7 +94,13 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         var tags = withTags ? new[] { "tagA", "tagB" } : null;
         if (useReadOnlySequence)
         {
-            await cache.SetAsync(key, new ReadOnlySequence<byte>(storedValue), tags, ttl, CancellationToken.None);
+            await cache.SetAsync(
+                key,
+                new ReadOnlySequence<byte>(storedValue),
+                tags,
+                ttl,
+                CancellationToken.None
+            );
         }
         else
         {
@@ -97,17 +113,36 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         var seconds = timeout.Value.TotalSeconds;
         Assert.True(seconds >= 28 && seconds <= 32, "timeout should be in range");
         var redisValue = (byte[])(await _fixture.Database.StringGetAsync(underlyingKey));
-        Assert.True(((ReadOnlySpan<byte>)storedValue).SequenceEqual(redisValue), "payload should match");
+        Assert.True(
+            ((ReadOnlySpan<byte>)storedValue).SequenceEqual(redisValue),
+            "payload should match"
+        );
 
         double expected = (long)((actTime + ttl) - DateTime.UnixEpoch).TotalMilliseconds;
         if (withTags)
         {
             // we expect the tag structure to now exist, with the scores within a bit of a second
             const double Tolerance = 100.0;
-            Assert.Equal((await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT", "tagA")).Value, expected, Tolerance);
-            Assert.Equal((await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT", "tagB")).Value, expected, Tolerance);
-            Assert.Equal((await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_tagA", key)).Value, expected, Tolerance);
-            Assert.Equal((await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_tagB", key)).Value, expected, Tolerance);
+            Assert.Equal(
+                (await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT", "tagA")).Value,
+                expected,
+                Tolerance
+            );
+            Assert.Equal(
+                (await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT", "tagB")).Value,
+                expected,
+                Tolerance
+            );
+            Assert.Equal(
+                (await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_tagA", key)).Value,
+                expected,
+                Tolerance
+            );
+            Assert.Equal(
+                (await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_tagB", key)).Value,
+                expected,
+                Tolerance
+            );
         }
         else
         {
@@ -135,22 +170,39 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         // store and fetch via service
         if (useReadOnlySequence)
         {
-            await cache.SetAsync(key, new ReadOnlySequence<byte>(storedValue), null, TimeSpan.FromSeconds(30), CancellationToken.None);
+            await cache.SetAsync(
+                key,
+                new ReadOnlySequence<byte>(storedValue),
+                null,
+                TimeSpan.FromSeconds(30),
+                CancellationToken.None
+            );
         }
         else
         {
-            await cache.SetAsync(key, storedValue, null, TimeSpan.FromSeconds(30), CancellationToken.None);
+            await cache.SetAsync(
+                key,
+                storedValue,
+                null,
+                TimeSpan.FromSeconds(30),
+                CancellationToken.None
+            );
         }
         fetchedValue = await cache.GetAsync(key, CancellationToken.None);
         Assert.NotNull(fetchedValue);
 
-        Assert.True(((ReadOnlySpan<byte>)storedValue).SequenceEqual(fetchedValue), "payload should match");
+        Assert.True(
+            ((ReadOnlySpan<byte>)storedValue).SequenceEqual(fetchedValue),
+            "payload should match"
+        );
     }
 
     [Fact(Skip = SkipReason)]
     public async Task GetMissingKeyReturnsFalse_BufferWriter() // "true" result checked in MultiSegmentWriteWorksAsExpected_BufferWriter
     {
-        var cache = Assert.IsAssignableFrom<IOutputCacheBufferStore>(await Cache().ConfigureAwait(false));
+        var cache = Assert.IsAssignableFrom<IOutputCacheBufferStore>(
+            await Cache().ConfigureAwait(false)
+        );
         var key = Guid.NewGuid().ToString();
 
         var pipe = new Pipe();
@@ -172,18 +224,39 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         var tags = new[] { "gtonly" };
         await _fixture.Database.KeyDeleteAsync("TestPrefix__MSOCT"); // start from nil state
 
-        await cache.SetAsync(Guid.NewGuid().ToString(), storedValue, tags, TimeSpan.FromSeconds(30), CancellationToken.None);
-        var originalScore = await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT", "gtonly");
+        await cache.SetAsync(
+            Guid.NewGuid().ToString(),
+            storedValue,
+            tags,
+            TimeSpan.FromSeconds(30),
+            CancellationToken.None
+        );
+        var originalScore = await _fixture.Database.SortedSetScoreAsync(
+            "TestPrefix__MSOCT",
+            "gtonly"
+        );
         Assert.NotNull(originalScore);
 
         // now store something with a shorter ttl; the score should not change
-        await cache.SetAsync(Guid.NewGuid().ToString(), storedValue, tags, TimeSpan.FromSeconds(15), CancellationToken.None);
+        await cache.SetAsync(
+            Guid.NewGuid().ToString(),
+            storedValue,
+            tags,
+            TimeSpan.FromSeconds(15),
+            CancellationToken.None
+        );
         var newScore = await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT", "gtonly");
         Assert.NotNull(newScore);
         Assert.Equal(originalScore, newScore);
 
         // now store something with a longer ttl; the score should increase
-        await cache.SetAsync(Guid.NewGuid().ToString(), storedValue, tags, TimeSpan.FromSeconds(45), CancellationToken.None);
+        await cache.SetAsync(
+            Guid.NewGuid().ToString(),
+            storedValue,
+            tags,
+            TimeSpan.FromSeconds(45),
+            CancellationToken.None
+        );
         newScore = await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT", "gtonly");
         Assert.NotNull(newScore);
         Assert.True(newScore > originalScore, "should increase");
@@ -208,7 +281,13 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         await cache.SetAsync(bar, storedValue, new[] { "bar" }, ttl, CancellationToken.None);
 
         var fooBar = Guid.NewGuid().ToString();
-        await cache.SetAsync(fooBar, storedValue, new[] { "foo", "bar" }, ttl, CancellationToken.None);
+        await cache.SetAsync(
+            fooBar,
+            storedValue,
+            new[] { "foo", "bar" },
+            ttl,
+            CancellationToken.None
+        );
 
         // assert prior state
         Assert.NotNull(await cache.GetAsync(noTags, CancellationToken.None));
@@ -218,11 +297,15 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         Assert.Null(await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_foo", noTags));
         Assert.NotNull(await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_foo", foo));
         Assert.Null(await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_foo", bar));
-        Assert.NotNull(await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_foo", fooBar));
+        Assert.NotNull(
+            await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_foo", fooBar)
+        );
         Assert.Null(await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_bar", noTags));
         Assert.Null(await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_bar", foo));
         Assert.NotNull(await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_bar", bar));
-        Assert.NotNull(await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_bar", fooBar));
+        Assert.NotNull(
+            await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_bar", fooBar)
+        );
 
         // act
         for (int i = 0; i < 2; i++) // loop is to ensure no oddity when working on tags that *don't* have entries
@@ -240,7 +323,9 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         Assert.Null(await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_bar", noTags));
         Assert.Null(await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_bar", foo));
         Assert.NotNull(await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_bar", bar));
-        Assert.NotNull(await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_bar", fooBar));
+        Assert.NotNull(
+            await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT_bar", fooBar)
+        );
 
         for (int i = 0; i < 2; i++) // loop is to ensure no oddity when working on tags that *don't* have entries
         {
@@ -283,7 +368,13 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
 
         var cache = await Cache().ConfigureAwait(false);
         var key = Guid.NewGuid().ToString();
-        await cache.SetAsync(key, payload, default, TimeSpan.FromSeconds(30), CancellationToken.None);
+        await cache.SetAsync(
+            key,
+            payload,
+            default,
+            TimeSpan.FromSeconds(30),
+            CancellationToken.None
+        );
 
         var fetched = await cache.GetAsync(key, CancellationToken.None);
         Assert.NotNull(fetched);
@@ -306,9 +397,17 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         Assert.False(payload.IsSingleSegment, "multi-segment");
         Assert.Equal(1290, payload.Length); // partial from first and last
 
-        var cache = Assert.IsAssignableFrom<IOutputCacheBufferStore>(await Cache().ConfigureAwait(false));
+        var cache = Assert.IsAssignableFrom<IOutputCacheBufferStore>(
+            await Cache().ConfigureAwait(false)
+        );
         var key = Guid.NewGuid().ToString();
-        await cache.SetAsync(key, payload, default, TimeSpan.FromSeconds(30), CancellationToken.None);
+        await cache.SetAsync(
+            key,
+            payload,
+            default,
+            TimeSpan.FromSeconds(30),
+            CancellationToken.None
+        );
 
         var pipe = new Pipe();
         Assert.True(await cache.TryGetAsync(key, pipe.Writer, CancellationToken.None));
@@ -324,7 +423,10 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         }
         pipe.Reader.AdvanceTo(read.Buffer.End);
 
-        static IMemoryOwner<byte> Linearize(ReadOnlySequence<byte> payload, out ReadOnlyMemory<byte> linear)
+        static IMemoryOwner<byte> Linearize(
+            ReadOnlySequence<byte> payload,
+            out ReadOnlyMemory<byte> linear
+        )
         {
             if (payload.IsEmpty)
             {
@@ -350,7 +452,11 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
     {
         var cache = await Cache().ConfigureAwait(false);
         var impl = Assert.IsAssignableFrom<RedisOutputCacheStore>(cache);
-        await _fixture.Database.StringSetAsync("TestPrefix__MSOCTGC", "dummy", TimeSpan.FromMinutes(1));
+        await _fixture.Database.StringSetAsync(
+            "TestPrefix__MSOCTGC",
+            "dummy",
+            TimeSpan.FromMinutes(1)
+        );
         try
         {
             Assert.Null(await impl.ExecuteGarbageCollectionAsync(42));
@@ -372,25 +478,68 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         var impl = Assert.IsAssignableFrom<RedisOutputCacheStore>(cache);
 
         // start vanilla
-        await _fixture.Database.KeyDeleteAsync(new RedisKey[] { "TestPrefix__MSOCT",
-            "TestPrefix__MSOCT_a", "TestPrefix__MSOCT_b",
-            "TestPrefix__MSOCT_c", "TestPrefix__MSOCT_d" });
+        await _fixture.Database.KeyDeleteAsync(
+            new RedisKey[]
+            {
+                "TestPrefix__MSOCT",
+                "TestPrefix__MSOCT_a",
+                "TestPrefix__MSOCT_b",
+                "TestPrefix__MSOCT_c",
+                "TestPrefix__MSOCT_d",
+            }
+        );
 
-        await cache.SetAsync(Guid.NewGuid().ToString(), blob, new[] { "a", "b" }, TimeSpan.FromSeconds(5), CancellationToken.None); // a=b=5
-        await cache.SetAsync(Guid.NewGuid().ToString(), blob, new[] { "b", "c" }, TimeSpan.FromSeconds(10), CancellationToken.None); // a=5, b=c=10
-        await cache.SetAsync(Guid.NewGuid().ToString(), blob, new[] { "c", "d" }, TimeSpan.FromSeconds(15), CancellationToken.None); // a=5, b=10, c=d=15
+        await cache.SetAsync(
+            Guid.NewGuid().ToString(),
+            blob,
+            new[] { "a", "b" },
+            TimeSpan.FromSeconds(5),
+            CancellationToken.None
+        ); // a=b=5
+        await cache.SetAsync(
+            Guid.NewGuid().ToString(),
+            blob,
+            new[] { "b", "c" },
+            TimeSpan.FromSeconds(10),
+            CancellationToken.None
+        ); // a=5, b=c=10
+        await cache.SetAsync(
+            Guid.NewGuid().ToString(),
+            blob,
+            new[] { "c", "d" },
+            TimeSpan.FromSeconds(15),
+            CancellationToken.None
+        ); // a=5, b=10, c=d=15
 
         long aScore = (long)await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT", "a"),
-             bScore = (long)await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT", "b"),
-             cScore = (long)await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT", "c"),
-             dScore = (long)await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT", "d");
+            bScore = (long)await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT", "b"),
+            cScore = (long)await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT", "c"),
+            dScore = (long)await _fixture.Database.SortedSetScoreAsync("TestPrefix__MSOCT", "d");
 
-        Assert.False(await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCTGC"), "GC key should not exist");
-        Assert.True(await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT"), "master tag should exist");
-        Assert.True(await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_a"), "tag a should exist");
-        Assert.True(await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_b"), "tag b should exist");
-        Assert.True(await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_c"), "tag c should exist");
-        Assert.True(await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_d"), "tag d should exist");
+        Assert.False(
+            await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCTGC"),
+            "GC key should not exist"
+        );
+        Assert.True(
+            await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT"),
+            "master tag should exist"
+        );
+        Assert.True(
+            await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_a"),
+            "tag a should exist"
+        );
+        Assert.True(
+            await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_b"),
+            "tag b should exist"
+        );
+        Assert.True(
+            await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_c"),
+            "tag c should exist"
+        );
+        Assert.True(
+            await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_d"),
+            "tag d should exist"
+        );
 
         await CheckCounts(4, 1, 2, 2, 1);
         Assert.Equal(0, await impl.ExecuteGarbageCollectionAsync(0)); // should not change anything
@@ -407,20 +556,53 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
         await CheckCounts(0, 0, 0, 0, 0);
 
         // we should now not have any of these left
-        Assert.False(await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCTGC"), "GC key should not exist");
-        Assert.False(await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT"), "master tag still exists");
-        Assert.False(await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_a"), "tag a still exists");
-        Assert.False(await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_b"), "tag b still exists");
-        Assert.False(await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_c"), "tag c still exists");
-        Assert.False(await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_d"), "tag d still exists");
+        Assert.False(
+            await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCTGC"),
+            "GC key should not exist"
+        );
+        Assert.False(
+            await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT"),
+            "master tag still exists"
+        );
+        Assert.False(
+            await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_a"),
+            "tag a still exists"
+        );
+        Assert.False(
+            await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_b"),
+            "tag b still exists"
+        );
+        Assert.False(
+            await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_c"),
+            "tag c still exists"
+        );
+        Assert.False(
+            await _fixture.Database.KeyExistsAsync("TestPrefix__MSOCT_d"),
+            "tag d still exists"
+        );
 
         async Task CheckCounts(int master, int a, int b, int c, int d)
         {
-            Assert.Equal(master, (int)await _fixture.Database.SortedSetLengthAsync("TestPrefix__MSOCT"));
-            Assert.Equal(a, (int)await _fixture.Database.SortedSetLengthAsync("TestPrefix__MSOCT_a"));
-            Assert.Equal(b, (int)await _fixture.Database.SortedSetLengthAsync("TestPrefix__MSOCT_b"));
-            Assert.Equal(c, (int)await _fixture.Database.SortedSetLengthAsync("TestPrefix__MSOCT_c"));
-            Assert.Equal(d, (int)await _fixture.Database.SortedSetLengthAsync("TestPrefix__MSOCT_d"));
+            Assert.Equal(
+                master,
+                (int)await _fixture.Database.SortedSetLengthAsync("TestPrefix__MSOCT")
+            );
+            Assert.Equal(
+                a,
+                (int)await _fixture.Database.SortedSetLengthAsync("TestPrefix__MSOCT_a")
+            );
+            Assert.Equal(
+                b,
+                (int)await _fixture.Database.SortedSetLengthAsync("TestPrefix__MSOCT_b")
+            );
+            Assert.Equal(
+                c,
+                (int)await _fixture.Database.SortedSetLengthAsync("TestPrefix__MSOCT_c")
+            );
+            Assert.Equal(
+                d,
+                (int)await _fixture.Database.SortedSetLengthAsync("TestPrefix__MSOCT_d")
+            );
         }
     }
 
@@ -436,6 +618,7 @@ public class OutputCacheGetSetTests : IClassFixture<RedisConnectionFixture>
             Array = new byte[length];
             Memory = Array;
         }
+
         public byte[] Array { get; }
     }
 }

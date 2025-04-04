@@ -49,7 +49,7 @@ public class AddCheckConstraintOperation : MigrationOperation, ITableMigrationOp
             Name = checkConstraint.Name!,
             Sql = checkConstraint.Sql,
             Schema = checkConstraint.EntityType.GetSchema(),
-            Table = checkConstraint.EntityType.GetTableName()!
+            Table = checkConstraint.EntityType.GetTableName()!,
         };
 
         return operation;

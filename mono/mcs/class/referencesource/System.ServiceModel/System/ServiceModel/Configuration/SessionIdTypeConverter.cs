@@ -12,7 +12,12 @@ namespace System.ServiceModel.Configuration
 
     class SessionIdTypeConvertor : Int32Converter
     {
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo cultureInfo, object value, Type type)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo cultureInfo,
+            object value,
+            Type type
+        )
         {
             if (value == null)
             {
@@ -21,7 +26,10 @@ namespace System.ServiceModel.Configuration
 
             if (!(value is int))
             {
-                throw FxTrace.Exception.Argument("value", InternalSR.IncompatibleArgumentType(typeof(int), value.GetType()));
+                throw FxTrace.Exception.Argument(
+                    "value",
+                    InternalSR.IncompatibleArgumentType(typeof(int), value.GetType())
+                );
             }
 
             if ((int)value == 0)
@@ -38,13 +46,29 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo cultureInfo, object data)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo cultureInfo,
+            object data
+        )
         {
-            if (string.Equals((string)data, ApplicationContainerSettingsDefaults.CurrentUserSessionDefaultString, StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    (string)data,
+                    ApplicationContainerSettingsDefaults.CurrentUserSessionDefaultString,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return ApplicationContainerSettings.CurrentSession;
             }
-            else if (string.Equals((string)data, ApplicationContainerSettingsDefaults.Session0ServiceSessionString, StringComparison.OrdinalIgnoreCase))
+            else if (
+                string.Equals(
+                    (string)data,
+                    ApplicationContainerSettingsDefaults.Session0ServiceSessionString,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return ApplicationContainerSettings.ServiceSession;
             }

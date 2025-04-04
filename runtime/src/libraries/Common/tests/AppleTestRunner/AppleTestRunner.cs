@@ -2,15 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Linq;
-using System.Text;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 using Microsoft.DotNet.XHarness.TestRunners.Common;
 using Microsoft.DotNet.XHarness.TestRunners.Xunit;
 
@@ -18,10 +18,10 @@ public class SimpleTestRunner : iOSApplicationEntryPoint, IDevice
 {
     // to be wired once https://github.com/dotnet/xharness/pull/46 is merged
     [DllImport("__Internal")]
-    public extern static void mono_ios_append_output (string value);
+    public static extern void mono_ios_append_output(string value);
 
     [DllImport("__Internal")]
-    public extern static void mono_ios_set_summary (string value);
+    public static extern void mono_ios_set_summary(string value);
 
     private static List<string> s_testLibs = new List<string>();
     private static string? s_MainTestName;
@@ -51,7 +51,9 @@ public class SimpleTestRunner : iOSApplicationEntryPoint, IDevice
 
         if (s_testLibs.Count < 1)
         {
-            Console.WriteLine($"Test libs were not found (*.Tests.dll was not found in {Environment.CurrentDirectory})");
+            Console.WriteLine(
+                $"Test libs were not found (*.Tests.dll was not found in {Environment.CurrentDirectory})"
+            );
             return -1;
         }
 
@@ -70,7 +72,9 @@ public class SimpleTestRunner : iOSApplicationEntryPoint, IDevice
             mono_ios_append_output($"[STARTING] {e}\n");
         };
 
-        int failed = 0, passed = 0, skipped = 0;
+        int failed = 0,
+            passed = 0,
+            skipped = 0;
         simpleTestRunner.TestCompleted += (target, e) =>
         {
             if (e.Item2 == TestResult.Passed)
@@ -85,7 +89,9 @@ public class SimpleTestRunner : iOSApplicationEntryPoint, IDevice
             {
                 skipped++;
             }
-            mono_ios_set_summary($"{s_MainTestName}\nPassed:{passed}, Failed: {failed}, Skipped:{skipped}");
+            mono_ios_set_summary(
+                $"{s_MainTestName}\nPassed:{passed}, Failed: {failed}, Skipped:{skipped}"
+            );
         };
 
         await simpleTestRunner.RunAsync();

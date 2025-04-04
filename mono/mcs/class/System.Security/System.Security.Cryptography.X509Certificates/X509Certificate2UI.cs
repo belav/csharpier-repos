@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,65 +30,76 @@
 
 // Notes:
 //
-// We could P/Invoke both the display and selection under Windows. However 
-// this would show the wrong certificate chain and the install would be 
+// We could P/Invoke both the display and selection under Windows. However
+// this would show the wrong certificate chain and the install would be
 // worthless (wrong certificate store).
 //
 // The alternative is to display our own UI - but without making the System.
 // Security.dll assembly depends on SWF or GTK# (e.g. reflection). We should
-// also use a factory to select the best UI. E.g. SWF on Windows, Gtk# 
+// also use a factory to select the best UI. E.g. SWF on Windows, Gtk#
 // elsewhere (except if Gtk# isn't available then we fallback on SWF)
 //
 
 using System.Security.Permissions;
-
 using Mono.Security.X509;
 
-namespace System.Security.Cryptography.X509Certificates {
+namespace System.Security.Cryptography.X509Certificates
+{
+    public static class X509Certificate2UI
+    {
+        [MonoTODO]
+        public static void DisplayCertificate(X509Certificate2 certificate)
+        {
+            // note: the LinkDemand won't interfere (by design) as this caller is trusted (correct behaviour)
+            DisplayCertificate(certificate, IntPtr.Zero);
+        }
 
-	public static class X509Certificate2UI {
+        [MonoTODO]
+        [UIPermission(SecurityAction.Demand, Window = UIPermissionWindow.SafeTopLevelWindows)]
+        [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
+        public static void DisplayCertificate(X509Certificate2 certificate, IntPtr hwndParent)
+        {
+            if (certificate == null)
+                throw new ArgumentNullException("certificate");
 
-		[MonoTODO]
-		public static void DisplayCertificate (X509Certificate2 certificate)
-		{
-			// note: the LinkDemand won't interfere (by design) as this caller is trusted (correct behaviour)
-			DisplayCertificate (certificate, IntPtr.Zero);
-		}
+            /*byte[] raw = */certificate.GetRawCertData();
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		[UIPermission (SecurityAction.Demand, Window = UIPermissionWindow.SafeTopLevelWindows)]
-		[SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
-		public static void DisplayCertificate (X509Certificate2 certificate, IntPtr hwndParent) 
-		{
-			if (certificate == null)
-				throw new ArgumentNullException ("certificate");
+        [MonoTODO]
+        public static X509Certificate2Collection SelectFromCollection(
+            X509Certificate2Collection certificates,
+            string title,
+            string message,
+            X509SelectionFlag selectionFlag
+        )
+        {
+            // note: the LinkDemand won't interfere (by design) as this caller is trusted (correct behaviour)
+            return SelectFromCollection(certificates, title, message, selectionFlag, IntPtr.Zero);
+        }
 
-			/*byte[] raw = */ certificate.GetRawCertData ();
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        [UIPermission(SecurityAction.Demand, Window = UIPermissionWindow.SafeTopLevelWindows)]
+        [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
+        public static X509Certificate2Collection SelectFromCollection(
+            X509Certificate2Collection certificates,
+            string title,
+            string message,
+            X509SelectionFlag selectionFlag,
+            IntPtr hwndParent
+        )
+        {
+            if (certificates == null)
+                throw new ArgumentNullException("certificates");
+            if (
+                (selectionFlag < X509SelectionFlag.SingleSelection)
+                || (selectionFlag > X509SelectionFlag.MultiSelection)
+            )
+                throw new ArgumentException("selectionFlag");
 
-		[MonoTODO]
-		public static X509Certificate2Collection SelectFromCollection (X509Certificate2Collection certificates, 
-			string title, string message, X509SelectionFlag selectionFlag)
-		{
-			// note: the LinkDemand won't interfere (by design) as this caller is trusted (correct behaviour)
-			return SelectFromCollection (certificates, title, message, selectionFlag, IntPtr.Zero);
-		}
-
-		[MonoTODO]
-		[UIPermission (SecurityAction.Demand, Window = UIPermissionWindow.SafeTopLevelWindows)]
-		[SecurityPermission (SecurityAction.LinkDemand, UnmanagedCode = true)]
-		public static X509Certificate2Collection SelectFromCollection (X509Certificate2Collection certificates, 
-			string title, string message, X509SelectionFlag selectionFlag, IntPtr hwndParent)
-		{
-			if (certificates == null)
-				throw new ArgumentNullException ("certificates");
-			if ((selectionFlag < X509SelectionFlag.SingleSelection) || (selectionFlag > X509SelectionFlag.MultiSelection))
-				throw new ArgumentException ("selectionFlag");
-
-			throw new NotImplementedException ();
-		}
-	}
+            throw new NotImplementedException();
+        }
+    }
 }
 
 #endif

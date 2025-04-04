@@ -14,6 +14,6 @@ namespace Microsoft.CodeAnalysis.Rename
         /// <summary>
         /// mentions that the result is for the overloaded symbols of the rename
         /// </summary>
-        OverloadedSymbols = 1
+        OverloadedSymbols = 1,
     }
 }

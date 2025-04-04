@@ -41,7 +41,12 @@ namespace Internal.IL
             if (_currentOffset + 3 >= _ilBytes.Length)
                 ReportMethodEndInsideInstruction();
 
-            uint val = (uint)(_ilBytes[_currentOffset] + (_ilBytes[_currentOffset + 1] << 8) + (_ilBytes[_currentOffset + 2] << 16) + (_ilBytes[_currentOffset + 3] << 24));
+            uint val = (uint)(
+                _ilBytes[_currentOffset]
+                + (_ilBytes[_currentOffset + 1] << 8)
+                + (_ilBytes[_currentOffset + 2] << 16)
+                + (_ilBytes[_currentOffset + 3] << 24)
+            );
             _currentOffset += 4;
             return val;
         }
@@ -115,7 +120,7 @@ namespace Internal.IL
 
                 ILOpcode opCode = (ILOpcode)ReadILByte();
 
-            again:
+                again:
                 switch (opCode)
                 {
                     case ILOpcode.ldarg_s:
@@ -327,13 +332,13 @@ namespace Internal.IL
             _currentBasicBlock = basicBlock;
             _currentOffset = basicBlock.StartOffset;
 
-            for (;;)
+            for (; ; )
             {
                 StartImportingInstruction();
 
                 ILOpcode opCode = (ILOpcode)ReadILByte();
 
-            again:
+                again:
                 switch (opCode)
                 {
                     case ILOpcode.nop:
@@ -445,8 +450,11 @@ namespace Internal.IL
                     case ILOpcode.blt_un_s:
                         {
                             int delta = (sbyte)ReadILByte();
-                            ImportBranch(opCode + (ILOpcode.br - ILOpcode.br_s),
-                                _basicBlocks[_currentOffset + delta], (opCode != ILOpcode.br_s) ? _basicBlocks[_currentOffset] : null);
+                            ImportBranch(
+                                opCode + (ILOpcode.br - ILOpcode.br_s),
+                                _basicBlocks[_currentOffset + delta],
+                                (opCode != ILOpcode.br_s) ? _basicBlocks[_currentOffset] : null
+                            );
                         }
                         EndImportingInstruction();
                         return;
@@ -465,8 +473,11 @@ namespace Internal.IL
                     case ILOpcode.blt_un:
                         {
                             int delta = (int)ReadILUInt32();
-                            ImportBranch(opCode,
-                                _basicBlocks[_currentOffset + delta], (opCode != ILOpcode.br) ? _basicBlocks[_currentOffset] : null);
+                            ImportBranch(
+                                opCode,
+                                _basicBlocks[_currentOffset + delta],
+                                (opCode != ILOpcode.br) ? _basicBlocks[_currentOffset] : null
+                            );
                         }
                         EndImportingInstruction();
                         return;

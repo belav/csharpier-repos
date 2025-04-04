@@ -29,21 +29,33 @@ namespace System.ComponentModel.Composition.Diagnostics
             get { return Source.CanWriteError; }
         }
 
-        public static void WriteInformation(CompositionTraceId traceId, string format, params object[] arguments)
+        public static void WriteInformation(
+            CompositionTraceId traceId,
+            string format,
+            params object[] arguments
+        )
         {
             EnsureEnabled(CanWriteInformation);
 
             Source.WriteInformation(traceId, format, arguments);
         }
 
-        public static void WriteWarning(CompositionTraceId traceId, string format, params object[] arguments)
+        public static void WriteWarning(
+            CompositionTraceId traceId,
+            string format,
+            params object[] arguments
+        )
         {
             EnsureEnabled(CanWriteWarning);
 
             Source.WriteWarning(traceId, format, arguments);
         }
 
-        public static void WriteError(CompositionTraceId traceId, string format, params object[] arguments)
+        public static void WriteError(
+            CompositionTraceId traceId,
+            string format,
+            params object[] arguments
+        )
         {
             EnsureEnabled(CanWriteError);
 
@@ -52,7 +64,10 @@ namespace System.ComponentModel.Composition.Diagnostics
 
         private static void EnsureEnabled(bool condition)
         {
-            Assumes.IsTrue(condition, "To avoid unnecessary work when a trace level has not been enabled, check CanWriteXXX before calling this method.");
+            Assumes.IsTrue(
+                condition,
+                "To avoid unnecessary work when a trace level has not been enabled, check CanWriteXXX before calling this method."
+            );
         }
     }
 }

@@ -45,7 +45,7 @@ public class NullabilityTests
     public void NullOnly_aggregates_equalTo_null()
     {
         var hid = (HierarchyId)null;
-        var collection = new[] { null, (HierarchyId)null, };
+        var collection = new[] { null, (HierarchyId)null };
         var min = collection.Min();
         var max = collection.Max();
 
@@ -64,7 +64,7 @@ public class NullabilityTests
     public void Aggregates_including_nulls_equalTo_nonNull()
     {
         var hid = HierarchyId.GetRoot();
-        var collection = new[] { null, null, HierarchyId.GetRoot(), HierarchyId.GetRoot(), };
+        var collection = new[] { null, null, HierarchyId.GetRoot(), HierarchyId.GetRoot() };
         var min = collection.Min();
         var max = collection.Max();
 

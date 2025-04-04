@@ -3,17 +3,17 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel.Security
 {
-    using System.IdentityModel.Claims;
-    using System.IdentityModel.Tokens;
-    using System.ServiceModel;
-    using System.IdentityModel.Policy;
-    using System.Security.Principal;
-    using System.Security.Cryptography.X509Certificates;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IdentityModel.Claims;
+    using System.IdentityModel.Policy;
+    using System.IdentityModel.Tokens;
+    using System.Net;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Security.Principal;
+    using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security.Tokens;
-    using System.Net;
-    using System.Diagnostics;
 
     class IssuanceTokenProviderState : IDisposable
     {
@@ -27,10 +27,7 @@ namespace System.ServiceModel.Security
 
         public bool IsNegotiationCompleted
         {
-            get
-            {
-                return this.isNegotiationCompleted;
-            }
+            get { return this.isNegotiationCompleted; }
         }
 
         public GenericXmlSecurityToken ServiceToken
@@ -44,38 +41,20 @@ namespace System.ServiceModel.Security
 
         public EndpointAddress TargetAddress
         {
-            get
-            {
-                return this.targetAddress;
-            }
-            set
-            {
-                this.targetAddress = value;
-            }
+            get { return this.targetAddress; }
+            set { this.targetAddress = value; }
         }
 
         public EndpointAddress RemoteAddress
         {
-            get
-            {
-                return this.remoteAddress;
-            }
-            set
-            {
-                this.remoteAddress = value;
-            }
+            get { return this.remoteAddress; }
+            set { this.remoteAddress = value; }
         }
 
         public string Context
         {
-            get
-            {
-                return this.context;
-            }
-            set
-            {
-                this.context = value;
-            }
+            get { return this.context; }
+            set { this.context = value; }
         }
 
         public virtual void Dispose() { }
@@ -84,7 +63,9 @@ namespace System.ServiceModel.Security
         {
             if (this.IsNegotiationCompleted)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.NegotiationIsCompleted)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.NegotiationIsCompleted))
+                );
             }
             this.serviceToken = serviceToken;
             this.isNegotiationCompleted = true;
@@ -94,7 +75,9 @@ namespace System.ServiceModel.Security
         {
             if (!this.IsNegotiationCompleted)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.NegotiationIsNotCompleted)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.NegotiationIsNotCompleted))
+                );
             }
         }
     }

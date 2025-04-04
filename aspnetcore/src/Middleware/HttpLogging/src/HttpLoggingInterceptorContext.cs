@@ -30,7 +30,8 @@ public sealed class HttpLoggingInterceptorContext
     /// </remarks>
     public HttpContext HttpContext
     {
-        get => _httpContext ?? throw new InvalidOperationException("HttpContext was not initialized.");
+        get =>
+            _httpContext ?? throw new InvalidOperationException("HttpContext was not initialized.");
         // Public for 3rd party testing of interceptors.
         // We'd make this a required constructor/init parameter but ObjectPool requires a parameterless constructor.
         set => _httpContext = value ?? throw new ArgumentNullException(nameof(value));

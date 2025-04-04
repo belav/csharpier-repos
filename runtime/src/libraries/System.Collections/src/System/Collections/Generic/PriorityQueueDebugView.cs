@@ -18,7 +18,9 @@ namespace System.Collections.Generic
             _sort = true;
         }
 
-        public PriorityQueueDebugView(PriorityQueue<TElement, TPriority>.UnorderedItemsCollection collection)
+        public PriorityQueueDebugView(
+            PriorityQueue<TElement, TPriority>.UnorderedItemsCollection collection
+        )
         {
             _queue = collection?._queue ?? throw new ArgumentNullException(nameof(collection));
         }

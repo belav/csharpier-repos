@@ -21,7 +21,8 @@ internal sealed class ControllerActionEndpointDataSource : ActionEndpointDataSou
         ControllerActionEndpointDataSourceIdProvider dataSourceIdProvider,
         IActionDescriptorCollectionProvider actions,
         ActionEndpointFactory endpointFactory,
-        OrderedEndpointsSequenceProvider orderSequence)
+        OrderedEndpointsSequenceProvider orderSequence
+    )
         : base(actions)
     {
         _endpointFactory = endpointFactory;
@@ -31,7 +32,11 @@ internal sealed class ControllerActionEndpointDataSource : ActionEndpointDataSou
 
         _routes = new List<ConventionalRouteEntry>();
 
-        DefaultBuilder = new ControllerActionEndpointConventionBuilder(Lock, Conventions, FinallyConventions);
+        DefaultBuilder = new ControllerActionEndpointConventionBuilder(
+            Lock,
+            Conventions,
+            FinallyConventions
+        );
 
         // IMPORTANT: this needs to be the last thing we do in the constructor.
         // Change notifications can happen immediately!
@@ -51,14 +56,30 @@ internal sealed class ControllerActionEndpointDataSource : ActionEndpointDataSou
         string pattern,
         RouteValueDictionary? defaults,
         IDictionary<string, object?>? constraints,
-        RouteValueDictionary? dataTokens)
+        RouteValueDictionary? dataTokens
+    )
     {
         lock (Lock)
         {
             var conventions = new List<Action<EndpointBuilder>>();
             var finallyConventions = new List<Action<EndpointBuilder>>();
-            _routes.Add(new ConventionalRouteEntry(routeName, pattern, defaults, constraints, dataTokens, _orderSequence.GetNext(), conventions, finallyConventions));
-            return new ControllerActionEndpointConventionBuilder(Lock, conventions, finallyConventions);
+            _routes.Add(
+                new ConventionalRouteEntry(
+                    routeName,
+                    pattern,
+                    defaults,
+                    constraints,
+                    dataTokens,
+                    _orderSequence.GetNext(),
+                    conventions,
+                    finallyConventions
+                )
+            );
+            return new ControllerActionEndpointConventionBuilder(
+                Lock,
+                conventions,
+                finallyConventions
+            );
         }
     }
 
@@ -68,7 +89,8 @@ internal sealed class ControllerActionEndpointDataSource : ActionEndpointDataSou
         IReadOnlyList<Action<EndpointBuilder>> conventions,
         IReadOnlyList<Action<EndpointBuilder>> groupConventions,
         IReadOnlyList<Action<EndpointBuilder>> finallyConventions,
-        IReadOnlyList<Action<EndpointBuilder>> groupFinallyConventions)
+        IReadOnlyList<Action<EndpointBuilder>> groupFinallyConventions
+    )
     {
         var endpoints = new List<Endpoint>();
         var keys = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -88,16 +110,18 @@ internal sealed class ControllerActionEndpointDataSource : ActionEndpointDataSou
         {
             if (actions[i] is ControllerActionDescriptor action)
             {
-                _endpointFactory.AddEndpoints(endpoints,
-                                              routeNames,
-                                              action,
-                                              _routes,
-                                              conventions: conventions,
-                                              groupConventions: groupConventions,
-                                              finallyConventions: finallyConventions,
-                                              groupFinallyConventions: groupFinallyConventions,
-                                              CreateInertEndpoints,
-                                              groupPrefix: groupPrefix);
+                _endpointFactory.AddEndpoints(
+                    endpoints,
+                    routeNames,
+                    action,
+                    _routes,
+                    conventions: conventions,
+                    groupConventions: groupConventions,
+                    finallyConventions: finallyConventions,
+                    groupFinallyConventions: groupFinallyConventions,
+                    CreateInertEndpoints,
+                    groupPrefix: groupPrefix
+                );
 
                 if (_routes.Count > 0)
                 {
@@ -125,32 +149,44 @@ internal sealed class ControllerActionEndpointDataSource : ActionEndpointDataSou
                 conventions: conventions,
                 finallyConventions: finallyConventions,
                 groupFinallyConventions: groupFinallyConventions,
-                groupPrefix: groupPrefix);
+                groupPrefix: groupPrefix
+            );
         }
 
         return endpoints;
     }
 
-    internal void AddDynamicControllerEndpoint(IEndpointRouteBuilder endpoints, string pattern, Type transformerType, object? state, int? order = null)
+    internal void AddDynamicControllerEndpoint(
+        IEndpointRouteBuilder endpoints,
+        string pattern,
+        Type transformerType,
+        object? state,
+        int? order = null
+    )
     {
         CreateInertEndpoints = true;
         lock (Lock)
         {
             order ??= _orderSequence.GetNext();
 
-            endpoints.Map(
-                pattern,
-                context =>
-                {
-                    throw new InvalidOperationException("This endpoint is not expected to be executed directly.");
-                })
+            endpoints
+                .Map(
+                    pattern,
+                    context =>
+                    {
+                        throw new InvalidOperationException(
+                            "This endpoint is not expected to be executed directly."
+                        );
+                    }
+                )
                 .Add(b =>
                 {
                     ((RouteEndpointBuilder)b).Order = order.Value;
-                    b.Metadata.Add(new DynamicControllerRouteValueTransformerMetadata(transformerType, state));
+                    b.Metadata.Add(
+                        new DynamicControllerRouteValueTransformerMetadata(transformerType, state)
+                    );
                     b.Metadata.Add(new ControllerEndpointDataSourceIdMetadata(DataSourceId));
                 });
         }
     }
 }
-

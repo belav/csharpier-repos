@@ -1,5 +1,5 @@
 //
-// HttpRequestValidationExceptionCas.cs 
+// HttpRequestValidationExceptionCas.cs
 //	- CAS unit tests for System.Web.HttpRequestValidationException
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,10 +27,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 // Note: class exists in 1.1 but has no public ctor
-
-using NUnit.Framework;
 
 using System;
 using System.CodeDom.Compiler;
@@ -38,39 +35,40 @@ using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
 using System.Web;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web {
+namespace MonoCasTests.System.Web
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class HttpRequestValidationExceptionCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted()
+        {
+            new HttpRequestValidationException();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class HttpRequestValidationExceptionCas : AspNetHostingMinimal {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted()
+        {
+            new HttpRequestValidationException("message");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			new HttpRequestValidationException ();
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted()
+        {
+            new HttpRequestValidationException("message", new Exception());
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			new HttpRequestValidationException ("message");
-		}
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			new HttpRequestValidationException ("message", new Exception ());
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (HttpRequestValidationException); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(HttpRequestValidationException); }
+        }
+    }
 }
-

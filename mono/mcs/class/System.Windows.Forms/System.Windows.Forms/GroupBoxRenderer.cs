@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,126 +31,226 @@ using System.Windows.Forms.VisualStyles;
 
 namespace System.Windows.Forms
 {
-	public sealed class GroupBoxRenderer
-	{
-		private static bool always_use_visual_styles = false;
-		
-		#region Private Constructor
-		private GroupBoxRenderer () { }
-		#endregion
+    public sealed class GroupBoxRenderer
+    {
+        private static bool always_use_visual_styles = false;
 
-		#region Public Static Methods
-		public static void DrawGroupBox (Graphics g, Rectangle bounds, GroupBoxState state)
-		{
-			DrawGroupBox (g, bounds, String.Empty, null, Color.Empty, TextFormatFlags.Default, state);
-		}
+        #region Private Constructor
+        private GroupBoxRenderer() { }
+        #endregion
 
-		public static void DrawGroupBox (Graphics g, Rectangle bounds, string groupBoxText, Font font, GroupBoxState state)
-		{
-			DrawGroupBox (g, bounds, groupBoxText, font, Color.Empty, TextFormatFlags.Default, state);
-		}
+        #region Public Static Methods
+        public static void DrawGroupBox(Graphics g, Rectangle bounds, GroupBoxState state)
+        {
+            DrawGroupBox(
+                g,
+                bounds,
+                String.Empty,
+                null,
+                Color.Empty,
+                TextFormatFlags.Default,
+                state
+            );
+        }
 
-		public static void DrawGroupBox (Graphics g, Rectangle bounds, string groupBoxText, Font font, Color textColor, GroupBoxState state)
-		{
-			DrawGroupBox (g, bounds, groupBoxText, font, textColor, TextFormatFlags.Default, state);
-		}
+        public static void DrawGroupBox(
+            Graphics g,
+            Rectangle bounds,
+            string groupBoxText,
+            Font font,
+            GroupBoxState state
+        )
+        {
+            DrawGroupBox(
+                g,
+                bounds,
+                groupBoxText,
+                font,
+                Color.Empty,
+                TextFormatFlags.Default,
+                state
+            );
+        }
 
-		public static void DrawGroupBox (Graphics g, Rectangle bounds, string groupBoxText, Font font, TextFormatFlags flags, GroupBoxState state)
-		{
-			DrawGroupBox (g, bounds, groupBoxText, font, Color.Empty, flags, state);
-		}
+        public static void DrawGroupBox(
+            Graphics g,
+            Rectangle bounds,
+            string groupBoxText,
+            Font font,
+            Color textColor,
+            GroupBoxState state
+        )
+        {
+            DrawGroupBox(g, bounds, groupBoxText, font, textColor, TextFormatFlags.Default, state);
+        }
 
-		public static void DrawGroupBox (Graphics g, Rectangle bounds, string groupBoxText, Font font, Color textColor, TextFormatFlags flags, GroupBoxState state)
-		{
-			Size font_size = TextRenderer.MeasureText (groupBoxText, font);
+        public static void DrawGroupBox(
+            Graphics g,
+            Rectangle bounds,
+            string groupBoxText,
+            Font font,
+            TextFormatFlags flags,
+            GroupBoxState state
+        )
+        {
+            DrawGroupBox(g, bounds, groupBoxText, font, Color.Empty, flags, state);
+        }
 
-			if (Application.RenderWithVisualStyles || always_use_visual_styles == true) {
-				VisualStyleRenderer vsr;
-				Rectangle new_bounds;
+        public static void DrawGroupBox(
+            Graphics g,
+            Rectangle bounds,
+            string groupBoxText,
+            Font font,
+            Color textColor,
+            TextFormatFlags flags,
+            GroupBoxState state
+        )
+        {
+            Size font_size = TextRenderer.MeasureText(groupBoxText, font);
 
-				switch (state) {
-					case GroupBoxState.Normal:
-					default:
-						vsr = new VisualStyleRenderer (VisualStyleElement.Button.GroupBox.Normal);
-						new_bounds = new Rectangle (bounds.Left, bounds.Top + (int)(font_size.Height / 2) - 1, bounds.Width, bounds.Height - (int)(font_size.Height / 2) + 1);
-						break;
-					case GroupBoxState.Disabled:
-						vsr = new VisualStyleRenderer (VisualStyleElement.Button.GroupBox.Disabled);
-						new_bounds = new Rectangle (bounds.Left, bounds.Top + (int)(font_size.Height / 2) - 2, bounds.Width, bounds.Height - (int)(font_size.Height / 2) + 2);
-						break;
-				}
+            if (Application.RenderWithVisualStyles || always_use_visual_styles == true)
+            {
+                VisualStyleRenderer vsr;
+                Rectangle new_bounds;
 
-				if (groupBoxText == String.Empty)
-					vsr.DrawBackground (g, bounds);
-				else
-					vsr.DrawBackgroundExcludingArea (g, new_bounds, new Rectangle (bounds.Left + 9, bounds.Top, font_size.Width - 3, font_size.Height));
+                switch (state)
+                {
+                    case GroupBoxState.Normal:
+                    default:
+                        vsr = new VisualStyleRenderer(VisualStyleElement.Button.GroupBox.Normal);
+                        new_bounds = new Rectangle(
+                            bounds.Left,
+                            bounds.Top + (int)(font_size.Height / 2) - 1,
+                            bounds.Width,
+                            bounds.Height - (int)(font_size.Height / 2) + 1
+                        );
+                        break;
+                    case GroupBoxState.Disabled:
+                        vsr = new VisualStyleRenderer(VisualStyleElement.Button.GroupBox.Disabled);
+                        new_bounds = new Rectangle(
+                            bounds.Left,
+                            bounds.Top + (int)(font_size.Height / 2) - 2,
+                            bounds.Width,
+                            bounds.Height - (int)(font_size.Height / 2) + 2
+                        );
+                        break;
+                }
 
-				if (textColor == Color.Empty)
-					textColor = vsr.GetColor (ColorProperty.TextColor);
+                if (groupBoxText == String.Empty)
+                    vsr.DrawBackground(g, bounds);
+                else
+                    vsr.DrawBackgroundExcludingArea(
+                        g,
+                        new_bounds,
+                        new Rectangle(
+                            bounds.Left + 9,
+                            bounds.Top,
+                            font_size.Width - 3,
+                            font_size.Height
+                        )
+                    );
 
-				if (groupBoxText != String.Empty)
-					TextRenderer.DrawText (g, groupBoxText, font, new Point (bounds.Left + 8, bounds.Top), textColor, flags);
-			}
-			else {
-				// MS has a pretty big bug when rendering the non-visual styles group box.  Instead of using the height
-				// part of the bounds as height, they use it as the bottom, so the boxes are drawn in completely different
-				// places.  Rather than emulate this bug, we do it correctly.  After googling for a while, I don't think
-				// anyone has ever actually used this class for anything, so it should be fine.  :)
-				Rectangle new_bounds = new Rectangle (bounds.Left, bounds.Top + (int)(font_size.Height / 2), bounds.Width, bounds.Height - (int)(font_size.Height / 2));
-				
-				// Don't paint over the background where we are going to put the text
-				Region old_clip = g.Clip;
-				g.SetClip (new Rectangle (bounds.Left + 9, bounds.Top, font_size.Width - 3, font_size.Height), System.Drawing.Drawing2D.CombineMode.Exclude);
-				
-				ControlPaint.DrawBorder3D (g, new_bounds, Border3DStyle.Etched);
-				
-				g.Clip = old_clip;
+                if (textColor == Color.Empty)
+                    textColor = vsr.GetColor(ColorProperty.TextColor);
 
-				if (groupBoxText != String.Empty) {
-					if (textColor == Color.Empty)
-						textColor = state == GroupBoxState.Normal ? SystemColors.ControlText :
-							SystemColors.GrayText;
-					TextRenderer.DrawText (g, groupBoxText, font, new Point (bounds.Left + 8, bounds.Top), textColor, flags);
-				}
-			}
-		}
+                if (groupBoxText != String.Empty)
+                    TextRenderer.DrawText(
+                        g,
+                        groupBoxText,
+                        font,
+                        new Point(bounds.Left + 8, bounds.Top),
+                        textColor,
+                        flags
+                    );
+            }
+            else
+            {
+                // MS has a pretty big bug when rendering the non-visual styles group box.  Instead of using the height
+                // part of the bounds as height, they use it as the bottom, so the boxes are drawn in completely different
+                // places.  Rather than emulate this bug, we do it correctly.  After googling for a while, I don't think
+                // anyone has ever actually used this class for anything, so it should be fine.  :)
+                Rectangle new_bounds = new Rectangle(
+                    bounds.Left,
+                    bounds.Top + (int)(font_size.Height / 2),
+                    bounds.Width,
+                    bounds.Height - (int)(font_size.Height / 2)
+                );
 
-		public static bool IsBackgroundPartiallyTransparent (GroupBoxState state)
-		{
-			if (!VisualStyleRenderer.IsSupported)
-				return false;
+                // Don't paint over the background where we are going to put the text
+                Region old_clip = g.Clip;
+                g.SetClip(
+                    new Rectangle(
+                        bounds.Left + 9,
+                        bounds.Top,
+                        font_size.Width - 3,
+                        font_size.Height
+                    ),
+                    System.Drawing.Drawing2D.CombineMode.Exclude
+                );
 
-			VisualStyleRenderer vsr;
+                ControlPaint.DrawBorder3D(g, new_bounds, Border3DStyle.Etched);
 
-			switch (state) {
-				case GroupBoxState.Normal:
-				default:
-					vsr = new VisualStyleRenderer (VisualStyleElement.Button.GroupBox.Normal);
-					break;
-				case GroupBoxState.Disabled:
-					vsr = new VisualStyleRenderer (VisualStyleElement.Button.GroupBox.Disabled);
-					break;
-			}
+                g.Clip = old_clip;
 
-			return vsr.IsBackgroundPartiallyTransparent ();
-		}
+                if (groupBoxText != String.Empty)
+                {
+                    if (textColor == Color.Empty)
+                        textColor =
+                            state == GroupBoxState.Normal
+                                ? SystemColors.ControlText
+                                : SystemColors.GrayText;
+                    TextRenderer.DrawText(
+                        g,
+                        groupBoxText,
+                        font,
+                        new Point(bounds.Left + 8, bounds.Top),
+                        textColor,
+                        flags
+                    );
+                }
+            }
+        }
 
-		public static void DrawParentBackground (Graphics g, Rectangle bounds, Control childControl)
-		{
-			if (!VisualStyleRenderer.IsSupported)
-				return;
-			
-			VisualStyleRenderer vsr = new VisualStyleRenderer (VisualStyleElement.Button.GroupBox.Normal);
+        public static bool IsBackgroundPartiallyTransparent(GroupBoxState state)
+        {
+            if (!VisualStyleRenderer.IsSupported)
+                return false;
 
-			vsr.DrawParentBackground (g, bounds, childControl);
-		}
-		#endregion
+            VisualStyleRenderer vsr;
 
-		#region Public Static Properties
-		public static bool RenderMatchingApplicationState {
-			get { return !always_use_visual_styles; }
-			set { always_use_visual_styles = !value; }
-		}
-		#endregion
-	}
+            switch (state)
+            {
+                case GroupBoxState.Normal:
+                default:
+                    vsr = new VisualStyleRenderer(VisualStyleElement.Button.GroupBox.Normal);
+                    break;
+                case GroupBoxState.Disabled:
+                    vsr = new VisualStyleRenderer(VisualStyleElement.Button.GroupBox.Disabled);
+                    break;
+            }
+
+            return vsr.IsBackgroundPartiallyTransparent();
+        }
+
+        public static void DrawParentBackground(Graphics g, Rectangle bounds, Control childControl)
+        {
+            if (!VisualStyleRenderer.IsSupported)
+                return;
+
+            VisualStyleRenderer vsr = new VisualStyleRenderer(
+                VisualStyleElement.Button.GroupBox.Normal
+            );
+
+            vsr.DrawParentBackground(g, bounds, childControl);
+        }
+        #endregion
+
+        #region Public Static Properties
+        public static bool RenderMatchingApplicationState
+        {
+            get { return !always_use_visual_styles; }
+            set { always_use_visual_styles = !value; }
+        }
+        #endregion
+    }
 }

@@ -10,7 +10,12 @@ using Microsoft.Extensions.Tools.Internal;
 
 internal static class UserSecretsCreator
 {
-    public static string CreateUserSecretsId(IReporter reporter, string project, string workingDirectory, string overrideId = null)
+    public static string CreateUserSecretsId(
+        IReporter reporter,
+        string project,
+        string workingDirectory,
+        string overrideId = null
+    )
     {
         var projectPath = ResolveProjectPath(project, workingDirectory);
 
@@ -25,10 +30,14 @@ internal static class UserSecretsCreator
         // Confirm secret ID does not contain invalid characters
         if (Path.GetInvalidPathChars().Any(newSecretsId.Contains))
         {
-            throw new ArgumentException(SecretsHelpersResources.FormatError_InvalidSecretsId(newSecretsId));
+            throw new ArgumentException(
+                SecretsHelpersResources.FormatError_InvalidSecretsId(newSecretsId)
+            );
         }
 
-        var existingUserSecretsId = projectDocument.XPathSelectElements("//UserSecretsId").FirstOrDefault();
+        var existingUserSecretsId = projectDocument
+            .XPathSelectElements("//UserSecretsId")
+            .FirstOrDefault();
 
         // Check if a UserSecretsId is already set
         if (existingUserSecretsId is not null)
@@ -36,7 +45,9 @@ internal static class UserSecretsCreator
             // Only set the UserSecretsId if the user specified an explicit value
             if (string.IsNullOrWhiteSpace(overrideId))
             {
-                reporter.Output(SecretsHelpersResources.FormatMessage_ProjectAlreadyInitialized(projectPath));
+                reporter.Output(
+                    SecretsHelpersResources.FormatMessage_ProjectAlreadyInitialized(projectPath)
+                );
                 return existingUserSecretsId.Value;
             }
 
@@ -45,11 +56,14 @@ internal static class UserSecretsCreator
         else
         {
             // Find the first non-conditional PropertyGroup
-            var propertyGroup = projectDocument.Root.DescendantNodes()
-                .FirstOrDefault(node => node is XElement el
-                    && el.Name == "PropertyGroup"
-                    && el.Attributes().All(attr =>
-                        attr.Name != "Condition")) as XElement;
+            var propertyGroup =
+                projectDocument
+                    .Root.DescendantNodes()
+                    .FirstOrDefault(node =>
+                        node is XElement el
+                        && el.Name == "PropertyGroup"
+                        && el.Attributes().All(attr => attr.Name != "Condition")
+                    ) as XElement;
 
             // No valid property group, create a new one
             if (propertyGroup == null)
@@ -64,15 +78,17 @@ internal static class UserSecretsCreator
             propertyGroup.Add($"{Environment.NewLine}  ");
         }
 
-        var settings = new XmlWriterSettings
-        {
-            OmitXmlDeclaration = true,
-        };
+        var settings = new XmlWriterSettings { OmitXmlDeclaration = true };
 
         using var xw = XmlWriter.Create(projectPath, settings);
         projectDocument.Save(xw);
 
-        reporter.Output(SecretsHelpersResources.FormatMessage_SetUserSecretsIdForProject(newSecretsId, projectPath));
+        reporter.Output(
+            SecretsHelpersResources.FormatMessage_SetUserSecretsIdForProject(
+                newSecretsId,
+                projectPath
+            )
+        );
         return newSecretsId;
     }
 

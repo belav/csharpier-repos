@@ -3,10 +3,10 @@
 //------------------------------------------------------------
 namespace System.IdentityModel
 {
-    using System.IO;
-    using System.Xml;
-    using System.Text;
     using System.Diagnostics;
+    using System.IO;
+    using System.Text;
+    using System.Xml;
     using HexBinary = System.Runtime.Remoting.Metadata.W3cXsd2001.SoapHexBinary;
 
     sealed class WrappedReader : DelegatingXmlDictionaryReader, IXmlLineInfo
@@ -26,7 +26,9 @@ namespace System.IdentityModel
             }
             if (!reader.IsStartElement())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.InnerReaderMustBeAtElement)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.InnerReaderMustBeAtElement))
+                );
             }
             this.xmlTokens = new XmlTokenStream(32);
             base.InitializeInnerReader(reader);
@@ -180,7 +182,9 @@ namespace System.IdentityModel
                     encodedValue = fullText.ToString();
                 }
 
-                byte[] value = isBase64 ? Convert.FromBase64String(encodedValue) : HexBinary.Parse(encodedValue).Value;
+                byte[] value = isBase64
+                    ? Convert.FromBase64String(encodedValue)
+                    : HexBinary.Parse(encodedValue).Value;
                 this.contentStream = new MemoryStream(value);
             }
 
@@ -252,28 +256,37 @@ namespace System.IdentityModel
             switch (NodeType)
             {
                 case XmlNodeType.Element:
+                {
+                    bool isEmpty = base.InnerReader.IsEmptyElement;
+                    this.xmlTokens.AddElement(
+                        base.InnerReader.Prefix,
+                        base.InnerReader.LocalName,
+                        base.InnerReader.NamespaceURI,
+                        isEmpty
+                    );
+                    if (base.InnerReader.MoveToFirstAttribute())
                     {
-                        bool isEmpty = base.InnerReader.IsEmptyElement;
-                        this.xmlTokens.AddElement(base.InnerReader.Prefix, base.InnerReader.LocalName, base.InnerReader.NamespaceURI, isEmpty);
-                        if (base.InnerReader.MoveToFirstAttribute())
+                        do
                         {
-                            do
-                            {
-                                this.xmlTokens.AddAttribute(base.InnerReader.Prefix, base.InnerReader.LocalName, base.InnerReader.NamespaceURI, base.InnerReader.Value);
-                            }
-                            while (base.InnerReader.MoveToNextAttribute());
-                            base.InnerReader.MoveToElement();
-                        }
-                        if (!isEmpty)
-                        {
-                            this.depth++;
-                        }
-                        else if (this.depth == 0)
-                        {
-                            this.recordDone = true;
-                        }
-                        break;
+                            this.xmlTokens.AddAttribute(
+                                base.InnerReader.Prefix,
+                                base.InnerReader.LocalName,
+                                base.InnerReader.NamespaceURI,
+                                base.InnerReader.Value
+                            );
+                        } while (base.InnerReader.MoveToNextAttribute());
+                        base.InnerReader.MoveToElement();
                     }
+                    if (!isEmpty)
+                    {
+                        this.depth++;
+                    }
+                    else if (this.depth == 0)
+                    {
+                        this.recordDone = true;
+                    }
+                    break;
+                }
                 case XmlNodeType.CDATA:
                 case XmlNodeType.Comment:
                 case XmlNodeType.Text:
@@ -281,32 +294,36 @@ namespace System.IdentityModel
                 case XmlNodeType.EndEntity:
                 case XmlNodeType.SignificantWhitespace:
                 case XmlNodeType.Whitespace:
-                    {
-                        this.xmlTokens.Add(NodeType, Value);
-                        break;
-                    }
+                {
+                    this.xmlTokens.Add(NodeType, Value);
+                    break;
+                }
                 case XmlNodeType.EndElement:
+                {
+                    this.xmlTokens.Add(NodeType, Value);
+                    if (--this.depth == 0)
                     {
-                        this.xmlTokens.Add(NodeType, Value);
-                        if (--this.depth == 0)
-                        {
-                            this.recordDone = true;
-                        }
-                        break;
+                        this.recordDone = true;
                     }
+                    break;
+                }
                 case XmlNodeType.DocumentType:
                 case XmlNodeType.XmlDeclaration:
-                    {
-                        break;
-                    }
+                {
+                    break;
+                }
                 default:
-                    {
-                       
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.UnsupportedNodeTypeInReader,
-                     base.InnerReader.NodeType, base.InnerReader.Name)));
-                            
-                    }
-
+                {
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.UnsupportedNodeTypeInReader,
+                                base.InnerReader.NodeType,
+                                base.InnerReader.Name
+                            )
+                        )
+                    );
+                }
             }
         }
 
@@ -343,7 +360,7 @@ namespace System.IdentityModel
         }
     }
 
-    sealed internal class XmlTokenStream : ISecurityElement
+    internal sealed class XmlTokenStream : ISecurityElement
     {
         int count;
         XmlTokenEntry[] entries;
@@ -355,11 +372,16 @@ namespace System.IdentityModel
         {
             if (initialSize < 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("initialSize", SR.GetString(SR.ValueMustBeGreaterThanZero)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "initialSize",
+                        SR.GetString(SR.ValueMustBeGreaterThanZero)
+                    )
+                );
             }
             this.entries = new XmlTokenEntry[initialSize];
         }
-        
+
         // This constructor is used by the Trim method to reduce the size of the XmlTokenEntry array to the minimum required.
         public XmlTokenStream(XmlTokenStream other)
         {
@@ -370,7 +392,7 @@ namespace System.IdentityModel
             this.entries = new XmlTokenEntry[this.count];
             Array.Copy(other.entries, this.entries, this.count);
         }
-        
+
         public void Add(XmlNodeType type, string value)
         {
             EnsureCapacityToAdd();
@@ -383,7 +405,12 @@ namespace System.IdentityModel
             this.entries[this.count++].SetAttribute(prefix, localName, namespaceUri, value);
         }
 
-        public void AddElement(string prefix, string localName, string namespaceUri, bool isEmptyElement)
+        public void AddElement(
+            string prefix,
+            string localName,
+            string namespaceUri,
+            bool isEmptyElement
+        )
         {
             EnsureCapacityToAdd();
             this.entries[this.count++].SetElement(prefix, localName, namespaceUri, isEmptyElement);
@@ -404,7 +431,11 @@ namespace System.IdentityModel
             SetElementExclusion(excludedElement, excludedElementNamespace, null);
         }
 
-        public void SetElementExclusion(string excludedElement, string excludedElementNamespace, int? excludedElementDepth)
+        public void SetElementExclusion(
+            string excludedElement,
+            string excludedElementNamespace,
+            int? excludedElementDepth
+        )
         {
             this.excludedElement = excludedElement;
             this.excludedElementDepth = excludedElementDepth;
@@ -422,7 +453,13 @@ namespace System.IdentityModel
 
         public XmlTokenStreamWriter GetWriter()
         {
-            return new XmlTokenStreamWriter( entries, count, excludedElement, excludedElementDepth, excludedElementNamespace );
+            return new XmlTokenStreamWriter(
+                entries,
+                count,
+                excludedElement,
+                excludedElementDepth,
+                excludedElementNamespace
+            );
         }
 
         public void WriteTo(XmlDictionaryWriter writer, DictionaryManager dictionaryManager)
@@ -449,11 +486,13 @@ namespace System.IdentityModel
             int? excludedElementDepth;
             string excludedElementNamespace;
 
-            public XmlTokenStreamWriter(XmlTokenEntry[] entries,
-                                         int count,
-                                         string excludedElement,
-                                         int? excludedElementDepth,
-                                         string excludedElementNamespace)
+            public XmlTokenStreamWriter(
+                XmlTokenEntry[] entries,
+                int count,
+                string excludedElement,
+                int? excludedElementDepth,
+                string excludedElementNamespace
+            )
             {
                 if (entries == null)
                 {
@@ -534,7 +573,10 @@ namespace System.IdentityModel
             public bool MoveToFirstAttribute()
             {
                 DiagnosticUtility.DebugAssert(this.NodeType == XmlNodeType.Element, "");
-                if (this.position < this.Count - 1 && this.entries[this.position + 1].nodeType == XmlNodeType.Attribute)
+                if (
+                    this.position < this.Count - 1
+                    && this.entries[this.position + 1].nodeType == XmlNodeType.Attribute
+                )
                 {
                     this.position++;
                     return true;
@@ -558,7 +600,10 @@ namespace System.IdentityModel
             public bool MoveToNextAttribute()
             {
                 DiagnosticUtility.DebugAssert(this.NodeType == XmlNodeType.Attribute, "");
-                if (this.position < this.count - 1 && this.entries[this.position + 1].nodeType == XmlNodeType.Attribute)
+                if (
+                    this.position < this.count - 1
+                    && this.entries[this.position + 1].nodeType == XmlNodeType.Attribute
+                )
                 {
                     this.position++;
                     return true;
@@ -573,11 +618,15 @@ namespace System.IdentityModel
             {
                 if (writer == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("writer"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("writer")
+                    );
                 }
                 if (!MoveToFirst())
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.XmlTokenBufferIsEmpty)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.XmlTokenBufferIsEmpty))
+                    );
                 }
                 int depth = 0;
                 int recordedDepth = -1;
@@ -589,17 +638,26 @@ namespace System.IdentityModel
                         case XmlNodeType.Element:
                             bool isEmpty = this.IsEmptyElement;
                             depth++;
-                            if (include
-                                && (null == excludedElementDepth || excludedElementDepth == (depth - 1))
-                                && this.LocalName == this.excludedElement 
-                                && this.NamespaceUri == this.excludedElementNamespace)
+                            if (
+                                include
+                                && (
+                                    null == excludedElementDepth
+                                    || excludedElementDepth == (depth - 1)
+                                )
+                                && this.LocalName == this.excludedElement
+                                && this.NamespaceUri == this.excludedElementNamespace
+                            )
                             {
                                 include = false;
                                 recordedDepth = depth;
                             }
                             if (include)
                             {
-                                writer.WriteStartElement(this.Prefix, this.LocalName, this.NamespaceUri);
+                                writer.WriteStartElement(
+                                    this.Prefix,
+                                    this.LocalName,
+                                    this.NamespaceUri
+                                );
                             }
                             if (MoveToFirstAttribute())
                             {
@@ -607,10 +665,14 @@ namespace System.IdentityModel
                                 {
                                     if (include)
                                     {
-                                        writer.WriteAttributeString(this.Prefix, this.LocalName, this.NamespaceUri, this.Value);
+                                        writer.WriteAttributeString(
+                                            this.Prefix,
+                                            this.LocalName,
+                                            this.NamespaceUri,
+                                            this.Value
+                                        );
                                     }
-                                }
-                                while (MoveToNextAttribute());
+                                } while (MoveToNextAttribute());
                             }
                             if (isEmpty)
                             {
@@ -658,12 +720,10 @@ namespace System.IdentityModel
                         case XmlNodeType.XmlDeclaration:
                             break;
                     }
-                }
-                while (MoveToNext());
+                } while (MoveToNext());
             }
+        }
 
-        }       
-      
         internal struct XmlTokenEntry
         {
             internal XmlNodeType nodeType;
@@ -689,7 +749,12 @@ namespace System.IdentityModel
                 this.value = value;
             }
 
-            public void SetAttribute(string prefix, string localName, string namespaceUri, string value)
+            public void SetAttribute(
+                string prefix,
+                string localName,
+                string namespaceUri,
+                string value
+            )
             {
                 this.nodeType = XmlNodeType.Attribute;
                 this.prefix = prefix;
@@ -698,7 +763,12 @@ namespace System.IdentityModel
                 this.value = value;
             }
 
-            public void SetElement(string prefix, string localName, string namespaceUri, bool isEmptyElement)
+            public void SetElement(
+                string prefix,
+                string localName,
+                string namespaceUri,
+                bool isEmptyElement
+            )
             {
                 this.nodeType = XmlNodeType.Element;
                 this.prefix = prefix;

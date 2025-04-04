@@ -32,7 +32,7 @@ public class TemporaryCSharpProject
     public string Sdk { get; }
 
     protected virtual string Template =>
-@"<Project Sdk=""{2}"">
+        @"<Project Sdk=""{2}"">
   <PropertyGroup>
     {0}
     <OutputType>Exe</OutputType>
@@ -45,32 +45,42 @@ public class TemporaryCSharpProject
     public TemporaryCSharpProject WithTargetFrameworks(params string[] tfms)
     {
         Debug.Assert(tfms.Length > 0);
-        var propertySpec = new PropertySpec
-        {
-            Value = string.Join(";", tfms)
-        };
-        propertySpec.Name = tfms.Length == 1
-            ? "TargetFramework"
-            : "TargetFrameworks";
+        var propertySpec = new PropertySpec { Value = string.Join(";", tfms) };
+        propertySpec.Name = tfms.Length == 1 ? "TargetFramework" : "TargetFrameworks";
 
         return WithProperty(propertySpec);
     }
 
-    public TemporaryCSharpProject WithProperty(string name, string value)
-        => WithProperty(new PropertySpec { Name = name, Value = value });
+    public TemporaryCSharpProject WithProperty(string name, string value) =>
+        WithProperty(new PropertySpec { Name = name, Value = value });
 
     public TemporaryCSharpProject WithProperty(PropertySpec property)
     {
         var sb = new StringBuilder();
-        sb.Append('<').Append(property.Name).Append('>')
+        sb.Append('<')
+            .Append(property.Name)
+            .Append('>')
             .Append(property.Value)
-            .Append("</").Append(property.Name).Append('>');
+            .Append("</")
+            .Append(property.Name)
+            .Append('>');
         _properties.Add(sb.ToString());
         return this;
     }
 
-    public TemporaryCSharpProject WithItem(string itemName, string include, string condition = null)
-        => WithItem(new ItemSpec { Name = itemName, Include = include, Condition = condition });
+    public TemporaryCSharpProject WithItem(
+        string itemName,
+        string include,
+        string condition = null
+    ) =>
+        WithItem(
+            new ItemSpec
+            {
+                Name = itemName,
+                Include = include,
+                Condition = condition,
+            }
+        );
 
     public TemporaryCSharpProject WithItem(ItemSpec item)
     {
@@ -106,25 +116,42 @@ public class TemporaryCSharpProject
         return this;
     }
 
-    protected virtual void AddAdditionalAttributes(StringBuilder sb, ItemSpec item)
-    {
-    }
+    protected virtual void AddAdditionalAttributes(StringBuilder sb, ItemSpec item) { }
 
-    public TemporaryCSharpProject WithProjectReference(TemporaryCSharpProject reference, bool watch = true)
+    public TemporaryCSharpProject WithProjectReference(
+        TemporaryCSharpProject reference,
+        bool watch = true
+    )
     {
         if (ReferenceEquals(this, reference))
         {
             throw new InvalidOperationException("Can add project reference to self");
         }
 
-        return WithItem(new ItemSpec { Name = "ProjectReference", Include = reference.Path, Watch = watch });
+        return WithItem(
+            new ItemSpec
+            {
+                Name = "ProjectReference",
+                Include = reference.Path,
+                Watch = watch,
+            }
+        );
     }
 
     public TemporaryDirectory Dir() => _directory;
 
     public void Create()
     {
-        _directory.CreateFile(_filename, string.Format(CultureInfo.InvariantCulture, Template, string.Join("\r\n", _properties), string.Join("\r\n", _items), Sdk));
+        _directory.CreateFile(
+            _filename,
+            string.Format(
+                CultureInfo.InvariantCulture,
+                Template,
+                string.Join("\r\n", _properties),
+                string.Join("\r\n", _items),
+                Sdk
+            )
+        );
     }
 
     public class ItemSpec

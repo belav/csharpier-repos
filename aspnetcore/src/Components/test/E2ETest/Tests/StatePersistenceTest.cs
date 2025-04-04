@@ -15,21 +15,21 @@ namespace Microsoft.AspNetCore.Components.E2ETests.Tests;
 
 // These tests are for Blazor Web implementation
 // For Blazor Server and Webassembly, check SaveStateTest.cs
-public class StatePersistenceTest : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
+public class StatePersistenceTest
+    : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
 {
     static int _nextStreamingIdContext;
 
     public StatePersistenceTest(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     // Separate contexts to ensure that caches and other state don't interfere across tests.
-    public override Task InitializeAsync()
-        => InitializeAsync(BrowserFixture.StreamingContext + _nextStreamingIdContext++);
+    public override Task InitializeAsync() =>
+        InitializeAsync(BrowserFixture.StreamingContext + _nextStreamingIdContext++);
 
     // Validates that we can use persisted state across server, webasembly, and auto modes, with and without
     // streaming rendering.
@@ -52,14 +52,18 @@ public class StatePersistenceTest : ServerTestBase<BasicTestAppServerSiteFixture
     [InlineData(false, typeof(InteractiveWebAssemblyRenderMode), "WebAssemblyStreaming")]
     // [InlineData(false, typeof(InteractiveAutoRenderMode), (string)null)] https://github.com/dotnet/aspnetcore/issues/50810
     // [InlineData(false, typeof(InteractiveAutoRenderMode), "AutoStreaming")] https://github.com/dotnet/aspnetcore/issues/50810
-    public void CanRenderComponentWithPersistedState(bool suppressEnhancedNavigation, Type renderMode, string streaming)
+    public void CanRenderComponentWithPersistedState(
+        bool suppressEnhancedNavigation,
+        Type renderMode,
+        string streaming
+    )
     {
         var mode = renderMode switch
         {
             var t when t == typeof(InteractiveServerRenderMode) => "server",
             var t when t == typeof(InteractiveWebAssemblyRenderMode) => "wasm",
             var t when t == typeof(InteractiveAutoRenderMode) => "auto",
-            _ => throw new ArgumentException($"Unknown render mode: {renderMode.Name}")
+            _ => throw new ArgumentException($"Unknown render mode: {renderMode.Name}"),
         };
 
         if (!suppressEnhancedNavigation)
@@ -68,11 +72,15 @@ public class StatePersistenceTest : ServerTestBase<BasicTestAppServerSiteFixture
             // with enhanced navigation on.
             if (streaming == null)
             {
-                Navigate($"subdir/persistent-state/page-no-components?render-mode={mode}&suppress-autostart");
+                Navigate(
+                    $"subdir/persistent-state/page-no-components?render-mode={mode}&suppress-autostart"
+                );
             }
             else
             {
-                Navigate($"subdir/persistent-state/page-no-components?render-mode={mode}&streaming-id={streaming}&suppress-autostart");
+                Navigate(
+                    $"subdir/persistent-state/page-no-components?render-mode={mode}&streaming-id={streaming}&suppress-autostart"
+                );
             }
             if (mode == "auto")
             {
@@ -88,7 +96,12 @@ public class StatePersistenceTest : ServerTestBase<BasicTestAppServerSiteFixture
 
         if (mode != "auto")
         {
-            RenderComponentsWithPersistentStateAndValidate(suppressEnhancedNavigation, mode, renderMode, streaming);
+            RenderComponentsWithPersistentStateAndValidate(
+                suppressEnhancedNavigation,
+                mode,
+                renderMode,
+                streaming
+            );
         }
         else
         {
@@ -98,12 +111,24 @@ public class StatePersistenceTest : ServerTestBase<BasicTestAppServerSiteFixture
             }
             // For auto mode, validate that the state is persisted for both runtimes and is able
             // to be loaded on server and wasm.
-            RenderComponentsWithPersistentStateAndValidate(suppressEnhancedNavigation, mode, renderMode, streaming, interactiveRuntime: "server");
+            RenderComponentsWithPersistentStateAndValidate(
+                suppressEnhancedNavigation,
+                mode,
+                renderMode,
+                streaming,
+                interactiveRuntime: "server"
+            );
 
             UnblockWebAssemblyResourceLoad();
             Browser.Navigate().Refresh();
 
-            RenderComponentsWithPersistentStateAndValidate(suppressEnhancedNavigation, mode, renderMode, streaming, interactiveRuntime: "wasm");
+            RenderComponentsWithPersistentStateAndValidate(
+                suppressEnhancedNavigation,
+                mode,
+                renderMode,
+                streaming,
+                interactiveRuntime: "wasm"
+            );
         }
     }
 
@@ -119,24 +144,41 @@ public class StatePersistenceTest : ServerTestBase<BasicTestAppServerSiteFixture
         }
         else
         {
-            Navigate($"subdir/persistent-state/page-no-components?render-mode={mode}&streaming-id={streaming}");
+            Navigate(
+                $"subdir/persistent-state/page-no-components?render-mode={mode}&streaming-id={streaming}"
+            );
         }
         Browser.Click(By.Id("page-with-components-link"));
 
-        RenderComponentsWithPersistentStateAndValidate(suppresEnhancedNavigation: false, mode, typeof(InteractiveServerRenderMode), streaming);
+        RenderComponentsWithPersistentStateAndValidate(
+            suppresEnhancedNavigation: false,
+            mode,
+            typeof(InteractiveServerRenderMode),
+            streaming
+        );
         Browser.Click(By.Id("page-no-components-link"));
         // Ensure that the circuit is gone.
         await Task.Delay(1000);
         Browser.Click(By.Id("page-with-components-link-and-state"));
-        RenderComponentsWithPersistentStateAndValidate(suppresEnhancedNavigation: false, mode, typeof(InteractiveServerRenderMode), streaming, stateValue: "other");
+        RenderComponentsWithPersistentStateAndValidate(
+            suppresEnhancedNavigation: false,
+            mode,
+            typeof(InteractiveServerRenderMode),
+            streaming,
+            stateValue: "other"
+        );
     }
 
     private void BlockWebAssemblyResourceLoad()
     {
-        ((IJavaScriptExecutor)Browser).ExecuteScript("sessionStorage.setItem('block-load-boot-resource', 'true')");
+        ((IJavaScriptExecutor)Browser).ExecuteScript(
+            "sessionStorage.setItem('block-load-boot-resource', 'true')"
+        );
 
         // Clear caches so that we can block the resource load
-        ((IJavaScriptExecutor)Browser).ExecuteScript("caches.keys().then(keys => keys.forEach(key => caches.delete(key)))");
+        ((IJavaScriptExecutor)Browser).ExecuteScript(
+            "caches.keys().then(keys => keys.forEach(key => caches.delete(key)))"
+        );
     }
 
     private void UnblockWebAssemblyResourceLoad()
@@ -150,7 +192,8 @@ public class StatePersistenceTest : ServerTestBase<BasicTestAppServerSiteFixture
         Type renderMode,
         string streaming,
         string interactiveRuntime = null,
-        string stateValue = null)
+        string stateValue = null
+    )
     {
         stateValue ??= "restored";
         // No need to navigate if we are using enhanced navigation, the tests will have already navigated to the page via a link.
@@ -159,11 +202,15 @@ public class StatePersistenceTest : ServerTestBase<BasicTestAppServerSiteFixture
             // In this case we suppress auto start to check some server side state before we boot Blazor.
             if (streaming == null)
             {
-                Navigate($"subdir/persistent-state/page-with-components?render-mode={mode}&suppress-autostart");
+                Navigate(
+                    $"subdir/persistent-state/page-with-components?render-mode={mode}&suppress-autostart"
+                );
             }
             else
             {
-                Navigate($"subdir/persistent-state/page-with-components?render-mode={mode}&streaming-id={streaming}&suppress-autostart");
+                Navigate(
+                    $"subdir/persistent-state/page-with-components?render-mode={mode}&streaming-id={streaming}&suppress-autostart"
+                );
             }
 
             AssertPageState(
@@ -174,7 +221,8 @@ public class StatePersistenceTest : ServerTestBase<BasicTestAppServerSiteFixture
                 stateValue: stateValue,
                 streamingId: streaming,
                 streamingCompleted: false,
-                interactiveRuntime: interactiveRuntime);
+                interactiveRuntime: interactiveRuntime
+            );
 
             Browser.Click(By.Id("call-blazor-start"));
         }
@@ -187,7 +235,8 @@ public class StatePersistenceTest : ServerTestBase<BasicTestAppServerSiteFixture
             stateValue: stateValue,
             streamingId: streaming,
             streamingCompleted: false,
-            interactiveRuntime: interactiveRuntime);
+            interactiveRuntime: interactiveRuntime
+        );
 
         if (streaming != null)
         {
@@ -202,7 +251,8 @@ public class StatePersistenceTest : ServerTestBase<BasicTestAppServerSiteFixture
             stateValue: stateValue,
             streamingId: streaming,
             streamingCompleted: true,
-            interactiveRuntime: interactiveRuntime);
+            interactiveRuntime: interactiveRuntime
+        );
     }
 
     private void AssertPageState(
@@ -213,18 +263,45 @@ public class StatePersistenceTest : ServerTestBase<BasicTestAppServerSiteFixture
         string stateValue,
         string streamingId = null,
         bool streamingCompleted = false,
-        string interactiveRuntime = null)
+        string interactiveRuntime = null
+    )
     {
-        Browser.Equal($"Render mode: {renderMode}", () => Browser.FindElement(By.Id("render-mode")).Text);
-        Browser.Equal($"Streaming id:{streamingId}", () => Browser.FindElement(By.Id("streaming-id")).Text);
-        Browser.Equal($"Interactive: {interactive}", () => Browser.FindElement(By.Id("interactive")).Text);
+        Browser.Equal(
+            $"Render mode: {renderMode}",
+            () => Browser.FindElement(By.Id("render-mode")).Text
+        );
+        Browser.Equal(
+            $"Streaming id:{streamingId}",
+            () => Browser.FindElement(By.Id("streaming-id")).Text
+        );
+        Browser.Equal(
+            $"Interactive: {interactive}",
+            () => Browser.FindElement(By.Id("interactive")).Text
+        );
         if (streamingId == null || streamingCompleted)
         {
-            interactiveRuntime = !interactive ? "none" : mode == "server" || mode == "wasm" ? mode : (interactiveRuntime ?? throw new InvalidOperationException("Specify interactiveRuntime for auto mode"));
+            interactiveRuntime =
+                !interactive ? "none"
+                : mode == "server" || mode == "wasm" ? mode
+                : (
+                    interactiveRuntime
+                    ?? throw new InvalidOperationException(
+                        "Specify interactiveRuntime for auto mode"
+                    )
+                );
 
-            Browser.Equal($"Interactive runtime: {interactiveRuntime}", () => Browser.FindElement(By.Id("interactive-runtime")).Text);
-            Browser.Equal($"State found:{stateFound}", () => Browser.FindElement(By.Id("state-found")).Text);
-            Browser.Equal($"State value:{stateValue}", () => Browser.FindElement(By.Id("state-value")).Text);
+            Browser.Equal(
+                $"Interactive runtime: {interactiveRuntime}",
+                () => Browser.FindElement(By.Id("interactive-runtime")).Text
+            );
+            Browser.Equal(
+                $"State found:{stateFound}",
+                () => Browser.FindElement(By.Id("state-found")).Text
+            );
+            Browser.Equal(
+                $"State value:{stateValue}",
+                () => Browser.FindElement(By.Id("state-value")).Text
+            );
         }
         else
         {
@@ -232,6 +309,6 @@ public class StatePersistenceTest : ServerTestBase<BasicTestAppServerSiteFixture
         }
     }
 
-    private void SuppressEnhancedNavigation(bool shouldSuppress)
-        => EnhancedNavigationTestUtil.SuppressEnhancedNavigation(this, shouldSuppress);
+    private void SuppressEnhancedNavigation(bool shouldSuppress) =>
+        EnhancedNavigationTestUtil.SuppressEnhancedNavigation(this, shouldSuppress);
 }

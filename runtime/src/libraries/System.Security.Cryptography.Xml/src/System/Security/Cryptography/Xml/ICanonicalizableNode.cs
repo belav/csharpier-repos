@@ -9,13 +9,17 @@ namespace System.Security.Cryptography.Xml
     // that have to provide node subsetting and canonicalization features.
     internal interface ICanonicalizableNode
     {
-        bool IsInNodeSet
-        {
-            get;
-            set;
-        }
+        bool IsInNodeSet { get; set; }
 
-        void Write(StringBuilder strBuilder, DocPosition docPos, AncestralNamespaceContextManager anc);
-        void WriteHash(HashAlgorithm hash, DocPosition docPos, AncestralNamespaceContextManager anc);
+        void Write(
+            StringBuilder strBuilder,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        );
+        void WriteHash(
+            HashAlgorithm hash,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        );
     }
 }

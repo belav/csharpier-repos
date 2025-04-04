@@ -21,7 +21,10 @@ internal sealed class ParsableConverterFactory : IFormDataConverterFactory
     [RequiresUnreferencedCode(FormMappingHelpers.RequiresUnreferencedCodeMessage)]
     public FormDataConverter CreateConverter(Type type, FormDataMapperOptions options)
     {
-        return Activator.CreateInstance(typeof(ParsableConverter<>).MakeGenericType(type)) as FormDataConverter ??
-            throw new InvalidOperationException($"Unable to create converter for '{type.FullName}'.");
+        return Activator.CreateInstance(typeof(ParsableConverter<>).MakeGenericType(type))
+                as FormDataConverter
+            ?? throw new InvalidOperationException(
+                $"Unable to create converter for '{type.FullName}'."
+            );
     }
 }

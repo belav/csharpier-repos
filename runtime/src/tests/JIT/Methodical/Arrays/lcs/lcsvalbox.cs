@@ -8,7 +8,8 @@ namespace JitTest_lcsvalbox_lcs_cs
 {
     internal struct Data
     {
-        public int b, c;
+        public int b,
+            c;
     };
 
     public class LCS
@@ -18,7 +19,8 @@ namespace JitTest_lcsvalbox_lcs_cs
         private static String buildLCS(object[,,,] mtx, char[] X, int[] ind)
         {
             for (int i = 0; i < RANK; i++)
-                if (ind[i] == 0) return "";
+                if (ind[i] == 0)
+                    return "";
 
             int L = ((Data)mtx[ind[0], ind[1], ind[2], ind[3]]).b;
             if (L == RANK)
@@ -63,7 +65,11 @@ namespace JitTest_lcsvalbox_lcs_cs
                                 if (mtx[ind[0] - 1, ind[1] - 1, ind[2] - 1, ind[3] - 1] == null)
                                     d.c = 1;
                                 else
-                                    d.c = ((Data)mtx[ind[0] - 1, ind[1] - 1, ind[2] - 1, ind[3] - 1]).c + 1;
+                                    d.c =
+                                        (
+                                            (Data)
+                                                mtx[ind[0] - 1, ind[1] - 1, ind[2] - 1, ind[3] - 1]
+                                        ).c + 1;
                                 d.b = RANK;
                                 mtx[ind[0], ind[1], ind[2], ind[3]] = d;
                                 continue;
@@ -110,11 +116,12 @@ namespace JitTest_lcsvalbox_lcs_cs
         public static int TestEntryPoint()
         {
             Console.WriteLine("Test searches for longest common subsequence of 4 strings\n\n");
-            String[] str = new String[RANK] {
+            String[] str = new String[RANK]
+            {
                 "The Sun has left his blackness",
                 "and has found a fresher morning",
                 "and the fair Moon rejoices",
-                "in the clear and cloudless night"
+                "in the clear and cloudless night",
             };
 
             int[] len = new int[RANK];

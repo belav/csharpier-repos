@@ -77,7 +77,7 @@ namespace Newtonsoft.Json.Tests.Linq
             {
                 FirstName = "FirstNameValue",
                 RawContent = new JRaw("[1,2,3,4,5]"),
-                LastName = "LastNameValue"
+                LastName = "LastNameValue",
             };
 
             JObject o = JObject.FromObject(raw);
@@ -114,7 +114,8 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task LoadFromNestedObjectAsync()
         {
-            string jsonText = @"{
+            string jsonText =
+                @"{
   ""short"":
   {
     ""error"":
@@ -134,39 +135,47 @@ namespace Newtonsoft.Json.Tests.Linq
 
             JObject o = (JObject)await JToken.ReadFromAsync(reader);
             Assert.IsNotNull(o);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""code"": 0,
   ""msg"": ""No action taken""
-}", o.ToString(Formatting.Indented));
+}",
+                o.ToString(Formatting.Indented)
+            );
         }
 
         [Test]
         public async Task LoadFromNestedObjectIncompleteAsync()
         {
-            await ExceptionAssert.ThrowsAsync<JsonReaderException>(async () =>
-            {
-                string jsonText = @"{
+            await ExceptionAssert.ThrowsAsync<JsonReaderException>(
+                async () =>
+                {
+                    string jsonText =
+                        @"{
   ""short"":
   {
     ""error"":
     {
       ""code"":0";
 
-                JsonReader reader = new JsonTextReader(new StringReader(jsonText));
-                await reader.ReadAsync();
-                await reader.ReadAsync();
-                await reader.ReadAsync();
-                await reader.ReadAsync();
-                await reader.ReadAsync();
+                    JsonReader reader = new JsonTextReader(new StringReader(jsonText));
+                    await reader.ReadAsync();
+                    await reader.ReadAsync();
+                    await reader.ReadAsync();
+                    await reader.ReadAsync();
+                    await reader.ReadAsync();
 
-                await JToken.ReadFromAsync(reader);
-            }, "Unexpected end of content while loading JObject. Path 'short.error.code', line 6, position 14.");
+                    await JToken.ReadFromAsync(reader);
+                },
+                "Unexpected end of content while loading JObject. Path 'short.error.code', line 6, position 14."
+            );
         }
 
         [Test]
         public async Task ParseMultipleProperties_EmptySettingsAsync()
         {
-            string json = @"{
+            string json =
+                @"{
         ""Name"": ""Name1"",
         ""Name"": ""Name2""
       }";
@@ -181,16 +190,21 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public async Task ParseMultipleProperties_IgnoreDuplicateSettingAsync()
         {
-            string json = @"{
+            string json =
+                @"{
         ""Name"": ""Name1"",
         ""Name"": ""Name2""
       }";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
-            JObject o = (JObject)await JToken.ReadFromAsync(reader, new JsonLoadSettings
-            {
-                DuplicatePropertyNameHandling = DuplicatePropertyNameHandling.Ignore
-            });
+            JObject o = (JObject)
+                await JToken.ReadFromAsync(
+                    reader,
+                    new JsonLoadSettings
+                    {
+                        DuplicatePropertyNameHandling = DuplicatePropertyNameHandling.Ignore,
+                    }
+                );
             string value = (string)o["Name"];
 
             Assert.AreEqual("Name1", value);

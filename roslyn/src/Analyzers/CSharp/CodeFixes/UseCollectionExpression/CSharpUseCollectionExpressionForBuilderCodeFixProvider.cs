@@ -20,23 +20,30 @@ using Microsoft.CodeAnalysis.UseCollectionInitializer;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseCollectionExpression;
 
-using static CSharpUseCollectionExpressionForBuilderDiagnosticAnalyzer;
 using static CSharpCollectionExpressionRewriter;
+using static CSharpUseCollectionExpressionForBuilderDiagnosticAnalyzer;
 using static SyntaxFactory;
 
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseCollectionExpressionForBuilder), Shared]
+[
+    ExportCodeFixProvider(
+        LanguageNames.CSharp,
+        Name = PredefinedCodeFixProviderNames.UseCollectionExpressionForBuilder
+    ),
+    Shared
+]
 internal partial class CSharpUseCollectionExpressionForBuilderCodeFixProvider
     : ForkingSyntaxEditorBasedCodeFixProvider<InvocationExpressionSyntax>
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     public CSharpUseCollectionExpressionForBuilderCodeFixProvider()
-        : base(CSharpCodeFixesResources.Use_collection_expression,
-               IDEDiagnosticIds.UseCollectionExpressionForBuilderDiagnosticId)
-    {
-    }
+        : base(
+            CSharpCodeFixesResources.Use_collection_expression,
+            IDEDiagnosticIds.UseCollectionExpressionForBuilderDiagnosticId
+        ) { }
 
-    public override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(IDEDiagnosticIds.UseCollectionExpressionForBuilderDiagnosticId);
+    public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+        ImmutableArray.Create(IDEDiagnosticIds.UseCollectionExpressionForBuilderDiagnosticId);
 
     protected override async Task FixAsync(
         Document document,
@@ -44,10 +51,16 @@ internal partial class CSharpUseCollectionExpressionForBuilderCodeFixProvider
         CodeActionOptionsProvider fallbackOptions,
         InvocationExpressionSyntax invocationExpression,
         ImmutableDictionary<string, string?> properties,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-        if (AnalyzeInvocation(semanticModel, invocationExpression, cancellationToken) is not { } analysisResult)
+        var semanticModel = await document
+            .GetRequiredSemanticModelAsync(cancellationToken)
+            .ConfigureAwait(false);
+        if (
+            AnalyzeInvocation(semanticModel, invocationExpression, cancellationToken)
+            is not { } analysisResult
+        )
             return;
 
         // We want to replace the final invocation (`builder.ToImmutable()`) with `new()`.  That way we can call into
@@ -57,23 +70,35 @@ internal partial class CSharpUseCollectionExpressionForBuilderCodeFixProvider
         // object-creation expression.
         var dummyObjectAnnotation = new SyntaxAnnotation();
         var newDocument = await CreateTrackedDocumentAsync(
-            document, analysisResult, dummyObjectAnnotation, cancellationToken).ConfigureAwait(false);
+                document,
+                analysisResult,
+                dummyObjectAnnotation,
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
-        var root = await newDocument.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-        var dummyObjectCreation = (ImplicitObjectCreationExpressionSyntax)root.GetAnnotatedNodes(dummyObjectAnnotation).Single();
+        var root = await newDocument
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
+        var dummyObjectCreation = (ImplicitObjectCreationExpressionSyntax)
+            root.GetAnnotatedNodes(dummyObjectAnnotation).Single();
 
         // Move the original match over to this rewritten tree.
         analysisResult = TrackAnalysisResult(root, analysisResult);
 
         // Get the new collection expression.
         var collectionExpression = await CreateCollectionExpressionAsync(
-            newDocument,
-            fallbackOptions,
-            dummyObjectCreation,
-            analysisResult.Matches.SelectAsArray(m => new CollectionExpressionMatch<StatementSyntax>(m.Statement, m.UseSpread)),
-            static o => o.Initializer,
-            static (o, i) => o.WithInitializer(i),
-            cancellationToken).ConfigureAwait(false);
+                newDocument,
+                fallbackOptions,
+                dummyObjectCreation,
+                analysisResult.Matches.SelectAsArray(
+                    m => new CollectionExpressionMatch<StatementSyntax>(m.Statement, m.UseSpread)
+                ),
+                static o => o.Initializer,
+                static (o, i) => o.WithInitializer(i),
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 
         var subEditor = new SyntaxEditor(root, document.Project.Solution.Services);
 
@@ -92,11 +117,16 @@ internal partial class CSharpUseCollectionExpressionForBuilderCodeFixProvider
         return;
 
         // Move the nodes in analysisResult over to the tracked result in the root passed in.
-        static AnalysisResult TrackAnalysisResult(SyntaxNode root, AnalysisResult analysisResult)
-            => new(analysisResult.DiagnosticLocation,
-                   root.GetCurrentNode(analysisResult.LocalDeclarationStatement)!,
-                   root.GetCurrentNode(analysisResult.CreationExpression)!,
-                   analysisResult.Matches.SelectAsArray(m => new Match<StatementSyntax>(root.GetCurrentNode(m.Statement)!, m.UseSpread)));
+        static AnalysisResult TrackAnalysisResult(SyntaxNode root, AnalysisResult analysisResult) =>
+            new(
+                analysisResult.DiagnosticLocation,
+                root.GetCurrentNode(analysisResult.LocalDeclarationStatement)!,
+                root.GetCurrentNode(analysisResult.CreationExpression)!,
+                analysisResult.Matches.SelectAsArray(m => new Match<StatementSyntax>(
+                    root.GetCurrentNode(m.Statement)!,
+                    m.UseSpread
+                ))
+            );
 
         // Creates a new document with all of the relevant nodes in analysisResult tracked so that we can find them
         // across mutations we're making.
@@ -104,11 +134,14 @@ internal partial class CSharpUseCollectionExpressionForBuilderCodeFixProvider
             Document document,
             AnalysisResult analysisResult,
             SyntaxAnnotation annotation,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<SyntaxNode>.GetInstance(out var nodesToTrack);
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             nodesToTrack.Add(analysisResult.LocalDeclarationStatement);
             nodesToTrack.Add(analysisResult.CreationExpression);
@@ -122,7 +155,9 @@ internal partial class CSharpUseCollectionExpressionForBuilderCodeFixProvider
                 .WithTriviaFrom(creationExpression)
                 .WithAdditionalAnnotations(annotation);
 
-            var newDocument = document.WithSyntaxRoot(newRoot.ReplaceNode(creationExpression, dummyObjectCreation));
+            var newDocument = document.WithSyntaxRoot(
+                newRoot.ReplaceNode(creationExpression, dummyObjectCreation)
+            );
             return newDocument;
         }
     }

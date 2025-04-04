@@ -20,8 +20,10 @@ public static class EditContextFieldClassExtensions
     /// <param name="editContext">The <see cref="EditContext"/>.</param>
     /// <param name="accessor">An identifier for the field.</param>
     /// <returns>A string that indicates the status of the field.</returns>
-    public static string FieldCssClass<TField>(this EditContext editContext, Expression<Func<TField>> accessor)
-        => FieldCssClass(editContext, FieldIdentifier.Create(accessor));
+    public static string FieldCssClass<TField>(
+        this EditContext editContext,
+        Expression<Func<TField>> accessor
+    ) => FieldCssClass(editContext, FieldIdentifier.Create(accessor));
 
     /// <summary>
     /// Gets a string that indicates the status of the specified field as a CSS class.
@@ -29,9 +31,15 @@ public static class EditContextFieldClassExtensions
     /// <param name="editContext">The <see cref="EditContext"/>.</param>
     /// <param name="fieldIdentifier">An identifier for the field.</param>
     /// <returns>A string that indicates the status of the field.</returns>
-    public static string FieldCssClass(this EditContext editContext, in FieldIdentifier fieldIdentifier)
+    public static string FieldCssClass(
+        this EditContext editContext,
+        in FieldIdentifier fieldIdentifier
+    )
     {
-        var provider = editContext.Properties.TryGetValue(FieldCssClassProviderKey, out var customProvider)
+        var provider = editContext.Properties.TryGetValue(
+            FieldCssClassProviderKey,
+            out var customProvider
+        )
             ? (FieldCssClassProvider)customProvider
             : FieldCssClassProvider.Instance;
 
@@ -44,7 +52,10 @@ public static class EditContextFieldClassExtensions
     /// </summary>
     /// <param name="editContext">The <see cref="EditContext"/>.</param>
     /// <param name="fieldCssClassProvider">The <see cref="FieldCssClassProvider"/>.</param>
-    public static void SetFieldCssClassProvider(this EditContext editContext, FieldCssClassProvider fieldCssClassProvider)
+    public static void SetFieldCssClassProvider(
+        this EditContext editContext,
+        FieldCssClassProvider fieldCssClassProvider
+    )
     {
         ArgumentNullException.ThrowIfNull(fieldCssClassProvider);
 

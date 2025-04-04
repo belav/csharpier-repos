@@ -19,12 +19,21 @@ namespace ILCompiler.DependencyAnalysis
 
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
-            sb.Append(nameMangler.CompilationUnitPrefix).Append("__Str_").Append(nameMangler.GetMangledStringName(_data));
+            sb.Append(nameMangler.CompilationUnitPrefix)
+                .Append("__Str_")
+                .Append(nameMangler.GetMangledStringName(_data));
         }
 
-        protected override int ContentSize => _stringType.Context.Target.PointerSize + sizeof(int) + (_data.Length + 1) * sizeof(char);
+        protected override int ContentSize =>
+            _stringType.Context.Target.PointerSize
+            + sizeof(int)
+            + (_data.Length + 1) * sizeof(char);
 
-        public override void EncodeContents(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeContents(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             dataBuilder.EmitPointerReloc(factory.ConstructedTypeSymbol(ObjectType));
 
@@ -39,7 +48,8 @@ namespace ILCompiler.DependencyAnalysis
             dataBuilder.EmitShort(0);
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override int ClassCode => -1733946122;
 

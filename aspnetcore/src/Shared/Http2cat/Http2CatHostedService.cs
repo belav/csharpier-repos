@@ -28,8 +28,12 @@ internal sealed class Http2CatHostedService : IHostedService
     private readonly CancellationTokenSource _stopTokenSource = new CancellationTokenSource();
     private Task _backgroundTask;
 
-    public Http2CatHostedService(IConnectionFactory connectionFactory, ILogger<Http2CatHostedService> logger,
-        IOptions<Http2CatOptions> options, IHostApplicationLifetime hostApplicationLifetime)
+    public Http2CatHostedService(
+        IConnectionFactory connectionFactory,
+        ILogger<Http2CatHostedService> logger,
+        IOptions<Http2CatOptions> options,
+        IHostApplicationLifetime hostApplicationLifetime
+    )
     {
         _connectionFactory = connectionFactory;
         _logger = logger;
@@ -84,22 +88,40 @@ internal sealed class Http2CatHostedService : IHostedService
                 _logger.LogInformation("Starting TLS handshake.");
 
                 var memoryPool = context.Features.Get<IMemoryPoolFeature>()?.MemoryPool;
-                var inputPipeOptions = new StreamPipeReaderOptions(memoryPool, memoryPool.GetMinimumSegmentSize(), memoryPool.GetMinimumAllocSize(), leaveOpen: true);
-                var outputPipeOptions = new StreamPipeWriterOptions(pool: memoryPool, leaveOpen: true);
+                var inputPipeOptions = new StreamPipeReaderOptions(
+                    memoryPool,
+                    memoryPool.GetMinimumSegmentSize(),
+                    memoryPool.GetMinimumAllocSize(),
+                    leaveOpen: true
+                );
+                var outputPipeOptions = new StreamPipeWriterOptions(
+                    pool: memoryPool,
+                    leaveOpen: true
+                );
 
-                var sslDuplexPipe = new SslDuplexPipe(context.Transport, inputPipeOptions, outputPipeOptions);
+                var sslDuplexPipe = new SslDuplexPipe(
+                    context.Transport,
+                    inputPipeOptions,
+                    outputPipeOptions
+                );
                 var sslStream = sslDuplexPipe.Stream;
                 sslState = sslDuplexPipe;
 
                 context.Transport = sslDuplexPipe;
 
-                await sslStream.AuthenticateAsClientAsync(new SslClientAuthenticationOptions
-                {
-                    TargetHost = address.Host,
-                    RemoteCertificateValidationCallback = (_, __, ___, ____) => true,
-                    ApplicationProtocols = new List<SslApplicationProtocol> { SslApplicationProtocol.Http2 },
-                    EnabledSslProtocols = SslProtocols.Tls12,
-                }, CancellationToken.None);
+                await sslStream.AuthenticateAsClientAsync(
+                    new SslClientAuthenticationOptions
+                    {
+                        TargetHost = address.Host,
+                        RemoteCertificateValidationCallback = (_, __, ___, ____) => true,
+                        ApplicationProtocols = new List<SslApplicationProtocol>
+                        {
+                            SslApplicationProtocol.Http2,
+                        },
+                        EnabledSslProtocols = SslProtocols.Tls12,
+                    },
+                    CancellationToken.None
+                );
 
                 if (_logger.IsEnabled(LogLevel.Information))
                 {

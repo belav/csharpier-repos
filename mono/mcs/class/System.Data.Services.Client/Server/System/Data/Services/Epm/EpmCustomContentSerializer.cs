@@ -1,20 +1,19 @@
 ﻿//Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
-
 
 namespace System.Data.Services.Common
 {
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Data.Services.Client;
+    using System.Diagnostics;
     using System.Xml;
 
     internal sealed class EpmCustomContentSerializer : EpmContentSerializerBase, IDisposable
@@ -23,7 +22,11 @@ namespace System.Data.Services.Common
 
         private Dictionary<EpmTargetPathSegment, EpmCustomContentWriterNodeData> visitorContent;
 
-        internal EpmCustomContentSerializer(EpmTargetTree targetTree, object element, XmlWriter target)
+        internal EpmCustomContentSerializer(
+            EpmTargetTree targetTree,
+            object element,
+            XmlWriter target
+        )
             : base(targetTree, false, element, target)
         {
             this.InitializeVisitorContent();
@@ -44,12 +47,15 @@ namespace System.Data.Services.Common
 
                     c.Dispose();
                 }
-                
+
                 this.disposed = true;
             }
         }
 
-        protected override void Serialize(EpmTargetPathSegment targetSegment, EpmSerializationKind kind)
+        protected override void Serialize(
+            EpmTargetPathSegment targetSegment,
+            EpmSerializationKind kind
+        )
         {
             if (targetSegment.IsAttribute)
             {
@@ -67,10 +73,11 @@ namespace System.Data.Services.Common
 
             EpmCustomContentWriterNodeData currentContent = this.visitorContent[targetSegment];
             currentContent.XmlContentWriter.WriteAttributeString(
-                                    targetSegment.SegmentNamespacePrefix,
-                                    targetSegment.SegmentName.Substring(1),
-                                    targetSegment.SegmentNamespaceUri,
-                                    currentContent.Data);
+                targetSegment.SegmentNamespacePrefix,
+                targetSegment.SegmentName.Substring(1),
+                targetSegment.SegmentNamespaceUri,
+                currentContent.Data
+            );
         }
 
         private void WriteElement(EpmTargetPathSegment targetSegment)
@@ -80,13 +87,17 @@ namespace System.Data.Services.Common
             currentContent.XmlContentWriter.WriteStartElement(
                 targetSegment.SegmentNamespacePrefix,
                 targetSegment.SegmentName,
-                targetSegment.SegmentNamespaceUri);
+                targetSegment.SegmentNamespaceUri
+            );
 
             base.Serialize(targetSegment, EpmSerializationKind.Attributes);
 
             if (targetSegment.HasContent)
             {
-                Debug.Assert(currentContent.Data != null, "Must always have non-null data content value");
+                Debug.Assert(
+                    currentContent.Data != null,
+                    "Must always have non-null data content value"
+                );
                 currentContent.XmlContentWriter.WriteString(currentContent.Data);
             }
 
@@ -95,14 +106,19 @@ namespace System.Data.Services.Common
             currentContent.XmlContentWriter.WriteEndElement();
         }
 
-
         private void InitializeVisitorContent()
         {
-            this.visitorContent = new Dictionary<EpmTargetPathSegment, EpmCustomContentWriterNodeData>(ReferenceEqualityComparer<EpmTargetPathSegment>.Instance);
+            this.visitorContent = new Dictionary<
+                EpmTargetPathSegment,
+                EpmCustomContentWriterNodeData
+            >(ReferenceEqualityComparer<EpmTargetPathSegment>.Instance);
 
             foreach (EpmTargetPathSegment subSegmentOfRoot in this.Root.SubSegments)
             {
-                this.visitorContent.Add(subSegmentOfRoot, new EpmCustomContentWriterNodeData(subSegmentOfRoot, this.Element));
+                this.visitorContent.Add(
+                    subSegmentOfRoot,
+                    new EpmCustomContentWriterNodeData(subSegmentOfRoot, this.Element)
+                );
                 this.InitializeSubSegmentVisitorContent(subSegmentOfRoot);
             }
         }
@@ -111,10 +127,16 @@ namespace System.Data.Services.Common
         {
             foreach (EpmTargetPathSegment segment in subSegment.SubSegments)
             {
-                this.visitorContent.Add(segment, new EpmCustomContentWriterNodeData(this.visitorContent[subSegment], segment, this.Element));
+                this.visitorContent.Add(
+                    segment,
+                    new EpmCustomContentWriterNodeData(
+                        this.visitorContent[subSegment],
+                        segment,
+                        this.Element
+                    )
+                );
                 this.InitializeSubSegmentVisitorContent(segment);
             }
         }
-
     }
 }

@@ -15,43 +15,59 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Length_Open_Close()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.Close();
 
-                Debug.WriteLine("Verifying Length property throws exception After Open() then Close()");
+                Debug.WriteLine(
+                    "Verifying Length property throws exception After Open() then Close()"
+                );
 
                 VerifyLengthException(serialStream, typeof(NotSupportedException));
             }
         }
 
-
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Length_Open_BaseStreamClose()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 Stream serialStream = com.BaseStream;
                 com.BaseStream.Close();
 
-                Debug.WriteLine("Verifying Length property throws exception After Open() then BaseStream.Close()");
+                Debug.WriteLine(
+                    "Verifying Length property throws exception After Open() then BaseStream.Close()"
+                );
 
                 VerifyLengthException(serialStream, typeof(NotSupportedException));
             }
         }
 
-
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Length_AfterOpen()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
 
-                Debug.WriteLine("Verifying Length property throws exception after a call to Open()");
+                Debug.WriteLine(
+                    "Verifying Length property throws exception after a call to Open()"
+                );
 
                 VerifyLengthException(com.BaseStream, typeof(NotSupportedException));
             }
@@ -62,10 +78,13 @@ namespace System.IO.Ports.Tests
         #region Verification for Test Cases
         private void VerifyLengthException(Stream serialStream, Type expectedException)
         {
-            Assert.Throws(expectedException, () =>
-            {
-                _ = serialStream.Length;
-            });
+            Assert.Throws(
+                expectedException,
+                () =>
+                {
+                    _ = serialStream.Length;
+                }
+            );
         }
         #endregion
     }

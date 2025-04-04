@@ -36,10 +36,16 @@ namespace Microsoft.Extensions.Diagnostics.Tests
         {
             public string Name => "Fake";
             public int InitializeCount { get; private set; }
+
             public MeasurementHandlers GetMeasurementHandlers() => new MeasurementHandlers();
+
             public void Initialize(IObservableInstrumentsSource source) => InitializeCount++;
-            public bool InstrumentPublished(Instrument instrument, out object? userState) => throw new NotImplementedException();
-            public void MeasurementsCompleted(Instrument instrument, object? userState) => throw new NotImplementedException();
+
+            public bool InstrumentPublished(Instrument instrument, out object? userState) =>
+                throw new NotImplementedException();
+
+            public void MeasurementsCompleted(Instrument instrument, object? userState) =>
+                throw new NotImplementedException();
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
@@ -52,9 +58,9 @@ namespace Microsoft.Extensions.Diagnostics.Tests
 
             hostBuilder.ConfigureServices(services =>
             {
-                services.AddMetrics(metrics => metrics
-                    .EnableMetrics("TestMeter")
-                    .AddListener<TestMetricsListener>());
+                services.AddMetrics(metrics =>
+                    metrics.EnableMetrics("TestMeter").AddListener<TestMetricsListener>()
+                );
             });
 
             using (var host = hostBuilder.Build())

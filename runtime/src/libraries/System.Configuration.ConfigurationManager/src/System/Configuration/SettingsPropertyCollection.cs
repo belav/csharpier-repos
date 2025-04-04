@@ -51,15 +51,11 @@ namespace System.Configuration
                 _hashtable.Add(name, toRemove);
                 throw;
             }
-
         }
 
         public SettingsProperty this[string name]
         {
-            get
-            {
-                return _hashtable[name] as SettingsProperty;
-            }
+            get { return _hashtable[name] as SettingsProperty; }
         }
 
         public IEnumerator GetEnumerator()
@@ -106,9 +102,18 @@ namespace System.Configuration
         protected virtual void OnRemoveComplete(SettingsProperty property) { }
 
         // ICollection interface
-        public int Count { get { return _hashtable.Count; } }
-        public bool IsSynchronized { get { return false; } }
-        public object SyncRoot { get { return this; } }
+        public int Count
+        {
+            get { return _hashtable.Count; }
+        }
+        public bool IsSynchronized
+        {
+            get { return false; }
+        }
+        public object SyncRoot
+        {
+            get { return this; }
+        }
 
         public void CopyTo(Array array, int index)
         {

@@ -338,7 +338,9 @@ namespace System
                     TypeCode.Decimal => new Variant(ic.ToDecimal(provider)),
                     TypeCode.DateTime => new Variant(ic.ToDateTime(provider)),
                     TypeCode.String => new Variant(ic.ToString(provider)),
-                    _ => throw new NotSupportedException(SR.Format(SR.NotSupported_UnknownTypeCode, ic.GetTypeCode())),
+                    _ => throw new NotSupportedException(
+                        SR.Format(SR.NotSupported_UnknownTypeCode, ic.GetTypeCode())
+                    ),
                 };
             }
             else
@@ -400,34 +402,57 @@ namespace System
                 IFormatProvider provider = CultureInfo.InvariantCulture;
                 v = vt switch
                 {
-                    0 => /*VT_EMPTY*/ Empty,
-                    1 => /*VT_NULL*/ DBNull,
-                    2 => /*VT_I2*/ new Variant(iv.ToInt16(provider)),
-                    3 => /*VT_I4*/ new Variant(iv.ToInt32(provider)),
-                    4 => /*VT_R4*/ new Variant(iv.ToSingle(provider)),
-                    5 => /*VT_R8*/ new Variant(iv.ToDouble(provider)),
+                    0 => /*VT_EMPTY*/
+                    Empty,
+                    1 => /*VT_NULL*/
+                    DBNull,
+                    2 => /*VT_I2*/
+                    new Variant(iv.ToInt16(provider)),
+                    3 => /*VT_I4*/
+                    new Variant(iv.ToInt32(provider)),
+                    4 => /*VT_R4*/
+                    new Variant(iv.ToSingle(provider)),
+                    5 => /*VT_R8*/
+                    new Variant(iv.ToDouble(provider)),
 #pragma warning disable 0618 // CurrencyWrapper is obsolete
-                    6 => /*VT_CY*/ new Variant(new CurrencyWrapper(iv.ToDecimal(provider))),
+                    6 => /*VT_CY*/
+                    new Variant(new CurrencyWrapper(iv.ToDecimal(provider))),
 #pragma warning restore 0618
-                    7 => /*VT_DATE*/ new Variant(iv.ToDateTime(provider)),
-                    8 => /*VT_BSTR*/ new Variant(iv.ToString(provider)),
+                    7 => /*VT_DATE*/
+                    new Variant(iv.ToDateTime(provider)),
+                    8 => /*VT_BSTR*/
+                    new Variant(iv.ToString(provider)),
 #pragma warning disable CA1416 // Validate platform compatibility
-                    9 => /*VT_DISPATCH*/ new Variant(new DispatchWrapper((object)iv)),
+                    9 => /*VT_DISPATCH*/
+                    new Variant(new DispatchWrapper((object)iv)),
 #pragma warning restore CA1416
-                    10 => /*VT_ERROR*/ new Variant(new ErrorWrapper(iv.ToInt32(provider))),
-                    11 => /*VT_BOOL*/ new Variant(iv.ToBoolean(provider)),
-                    12 => /*VT_VARIANT*/ new Variant((object)iv),
-                    13 => /*VT_UNKNOWN*/ new Variant(new UnknownWrapper((object)iv)),
-                    14 => /*VT_DECIMAL*/ new Variant(iv.ToDecimal(provider)),
+                    10 => /*VT_ERROR*/
+                    new Variant(new ErrorWrapper(iv.ToInt32(provider))),
+                    11 => /*VT_BOOL*/
+                    new Variant(iv.ToBoolean(provider)),
+                    12 => /*VT_VARIANT*/
+                    new Variant((object)iv),
+                    13 => /*VT_UNKNOWN*/
+                    new Variant(new UnknownWrapper((object)iv)),
+                    14 => /*VT_DECIMAL*/
+                    new Variant(iv.ToDecimal(provider)),
                     // 15 => : /*unused*/ NOT SUPPORTED
-                    16 => /*VT_I1*/ new Variant(iv.ToSByte(provider)),
-                    17 => /*VT_UI1*/ new Variant(iv.ToByte(provider)),
-                    18 => /*VT_UI2*/ new Variant(iv.ToUInt16(provider)),
-                    19 => /*VT_UI4*/ new Variant(iv.ToUInt32(provider)),
-                    20 => /*VT_I8*/ new Variant(iv.ToInt64(provider)),
-                    21 => /*VT_UI8*/ new Variant(iv.ToUInt64(provider)),
-                    22 => /*VT_INT*/ new Variant(iv.ToInt32(provider)),
-                    23 => /*VT_UINT*/ new Variant(iv.ToUInt32(provider)),
+                    16 => /*VT_I1*/
+                    new Variant(iv.ToSByte(provider)),
+                    17 => /*VT_UI1*/
+                    new Variant(iv.ToByte(provider)),
+                    18 => /*VT_UI2*/
+                    new Variant(iv.ToUInt16(provider)),
+                    19 => /*VT_UI4*/
+                    new Variant(iv.ToUInt32(provider)),
+                    20 => /*VT_I8*/
+                    new Variant(iv.ToInt64(provider)),
+                    21 => /*VT_UI8*/
+                    new Variant(iv.ToUInt64(provider)),
+                    22 => /*VT_INT*/
+                    new Variant(iv.ToInt32(provider)),
+                    23 => /*VT_UINT*/
+                    new Variant(iv.ToUInt32(provider)),
                     _ => throw new InvalidCastException(SR.InvalidCast_CannotCoerceByRefVariant),
                 };
             }

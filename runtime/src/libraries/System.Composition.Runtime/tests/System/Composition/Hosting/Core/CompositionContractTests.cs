@@ -35,12 +35,21 @@ namespace System.Composition.Runtime.Tests
         public static IEnumerable<object[]> Ctor_ContractType_ContractName_MetadataConstraints_TestData()
         {
             yield return new object[] { typeof(int), null, null };
-            yield return new object[] { typeof(object), "contractName", new Dictionary<string, object> { { "key", "value" } } };
+            yield return new object[]
+            {
+                typeof(object),
+                "contractName",
+                new Dictionary<string, object> { { "key", "value" } },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_ContractType_ContractName_MetadataConstraints_TestData))]
-        public void Ctor_ContractType_MetadataConstraints(Type contractType, string contractName, IDictionary<string, object> metadataConstraints)
+        public void Ctor_ContractType_MetadataConstraints(
+            Type contractType,
+            string contractName,
+            IDictionary<string, object> metadataConstraints
+        )
         {
             var contract = new CompositionContract(contractType, contractName, metadataConstraints);
             Assert.Equal(contractType, contract.ContractType);
@@ -51,134 +60,320 @@ namespace System.Composition.Runtime.Tests
         [Fact]
         public void Ctor_NullContractType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("contractType", () => new CompositionContract(null));
-            AssertExtensions.Throws<ArgumentNullException>("contractType", () => new CompositionContract(null, "contractName"));
-            AssertExtensions.Throws<ArgumentNullException>("contractType", () => new CompositionContract(null, "contractName", new Dictionary<string, object>()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "contractType",
+                () => new CompositionContract(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "contractType",
+                () => new CompositionContract(null, "contractName")
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "contractType",
+                () =>
+                    new CompositionContract(null, "contractName", new Dictionary<string, object>())
+            );
         }
 
         [Fact]
         public void Ctor_EmptyMetadataConstraints_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("metadataConstraints", () => new CompositionContract(typeof(string), "contractName", new Dictionary<string, object>()));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "metadataConstraints",
+                () =>
+                    new CompositionContract(
+                        typeof(string),
+                        "contractName",
+                        new Dictionary<string, object>()
+                    )
+            );
         }
 
         public static IEnumerable<object[]> Equals_TestData()
         {
-            yield return new object[] { new CompositionContract(typeof(int)), new CompositionContract(typeof(int)), true };
-            yield return new object[] { new CompositionContract(typeof(int)), new CompositionContract(typeof(string)), false };
-            yield return new object[] { new CompositionContract(typeof(int)), new CompositionContract(typeof(int), "contractName"), false };
-            yield return new object[] { new CompositionContract(typeof(int)), new CompositionContract(typeof(int), null, new Dictionary<string, object> { { "key", "value" } }), false };
-
-            yield return new object[] { new CompositionContract(typeof(int), "contractName"), new CompositionContract(typeof(int), "contractName"), true };
-            yield return new object[] { new CompositionContract(typeof(int), "contractName"), new CompositionContract(typeof(int), "ContractName"), false };
-            yield return new object[] { new CompositionContract(typeof(int), "contractName"), new CompositionContract(typeof(int)), false };
-            yield return new object[] { new CompositionContract(typeof(int)), new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", "value" } }), false };
-
             yield return new object[]
             {
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", "value" } }),
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", "value" } }),
-                true
+                new CompositionContract(typeof(int)),
+                new CompositionContract(typeof(int)),
+                true,
+            };
+            yield return new object[]
+            {
+                new CompositionContract(typeof(int)),
+                new CompositionContract(typeof(string)),
+                false,
+            };
+            yield return new object[]
+            {
+                new CompositionContract(typeof(int)),
+                new CompositionContract(typeof(int), "contractName"),
+                false,
+            };
+            yield return new object[]
+            {
+                new CompositionContract(typeof(int)),
+                new CompositionContract(
+                    typeof(int),
+                    null,
+                    new Dictionary<string, object> { { "key", "value" } }
+                ),
+                false,
             };
 
             yield return new object[]
             {
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", 1 } }),
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", 1 } }),
-                true
+                new CompositionContract(typeof(int), "contractName"),
+                new CompositionContract(typeof(int), "contractName"),
+                true,
+            };
+            yield return new object[]
+            {
+                new CompositionContract(typeof(int), "contractName"),
+                new CompositionContract(typeof(int), "ContractName"),
+                false,
+            };
+            yield return new object[]
+            {
+                new CompositionContract(typeof(int), "contractName"),
+                new CompositionContract(typeof(int)),
+                false,
+            };
+            yield return new object[]
+            {
+                new CompositionContract(typeof(int)),
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", "value" } }
+                ),
+                false,
             };
 
             yield return new object[]
             {
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", new string[] { "1", null } } }),
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", new object[] { "1", null } } }),
-                true
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", "value" } }
+                ),
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", "value" } }
+                ),
+                true,
             };
 
             yield return new object[]
             {
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", new string[] { "1", null } } }),
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", new object[] { "1", new object() } } }),
-                false
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", 1 } }
+                ),
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", 1 } }
+                ),
+                true,
             };
 
             yield return new object[]
             {
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", "value" } }),
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", "value" }, { "key2", "value2" } }),
-                false
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", new string[] { "1", null } } }
+                ),
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", new object[] { "1", null } } }
+                ),
+                true,
             };
 
             yield return new object[]
             {
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", "value" }, { "key2", "value2" }  }),
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", "value" } }),
-                false
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", new string[] { "1", null } } }
+                ),
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", new object[] { "1", new object() } } }
+                ),
+                false,
             };
 
             yield return new object[]
             {
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", "value" } }),
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key2", "value" } }),
-                false
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", "value" } }
+                ),
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", "value" }, { "key2", "value2" } }
+                ),
+                false,
             };
 
             yield return new object[]
             {
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", "value" } }),
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", "value2" } }),
-                false
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", "value" }, { "key2", "value2" } }
+                ),
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", "value" } }
+                ),
+                false,
             };
 
             yield return new object[]
             {
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", new string[0] } }),
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", new string[1] } }),
-                false
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", "value" } }
+                ),
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key2", "value" } }
+                ),
+                false,
             };
 
             yield return new object[]
             {
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", new string[0] } }),
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", "value" } }),
-                false
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", "value" } }
+                ),
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", "value2" } }
+                ),
+                false,
             };
 
             yield return new object[]
             {
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", new string[0] } }),
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", new object() } }),
-                false
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", new string[0] } }
+                ),
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", new string[1] } }
+                ),
+                false,
             };
 
             yield return new object[]
             {
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", null } }),
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", "value" } }),
-                false
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", new string[0] } }
+                ),
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", "value" } }
+                ),
+                false,
             };
 
             yield return new object[]
             {
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", "value" } }),
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", null } }),
-                false
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", new string[0] } }
+                ),
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", new object() } }
+                ),
+                false,
             };
 
             yield return new object[]
             {
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", new object[0] } }),
-                new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", null } }),
-                false
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", null } }
+                ),
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", "value" } }
+                ),
+                false,
+            };
+
+            yield return new object[]
+            {
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", "value" } }
+                ),
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", null } }
+                ),
+                false,
+            };
+
+            yield return new object[]
+            {
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", new object[0] } }
+                ),
+                new CompositionContract(
+                    typeof(int),
+                    "contractName",
+                    new Dictionary<string, object> { { "key", null } }
+                ),
+                false,
             };
 
             if (!PlatformDetection.IsNetFramework)
             {
                 yield return new object[]
                 {
-                    new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", null } }),
-                    new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", null } }),
-                    true
+                    new CompositionContract(
+                        typeof(int),
+                        "contractName",
+                        new Dictionary<string, object> { { "key", null } }
+                    ),
+                    new CompositionContract(
+                        typeof(int),
+                        "contractName",
+                        new Dictionary<string, object> { { "key", null } }
+                    ),
+                    true,
                 };
             }
 
@@ -188,7 +383,11 @@ namespace System.Composition.Runtime.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(CompositionContract contract, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            CompositionContract contract,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, contract.Equals(other));
             Assert.Equal(contract.GetHashCode(), contract.GetHashCode());
@@ -211,14 +410,23 @@ namespace System.Composition.Runtime.Tests
         public void ChangeType_NullNewContractType_ThrowsArgumentNullException()
         {
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>("newContractType", () => contract.ChangeType(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "newContractType",
+                () => contract.ChangeType(null)
+            );
         }
 
         [Fact]
         public void TryUnwrapMetadataConstraint_NullConstraints_ReturnsFalse()
         {
             var contract = new CompositionContract(typeof(int));
-            Assert.False(contract.TryUnwrapMetadataConstraint("constraintName", out int constraintValue, out CompositionContract remainingContract));
+            Assert.False(
+                contract.TryUnwrapMetadataConstraint(
+                    "constraintName",
+                    out int constraintValue,
+                    out CompositionContract remainingContract
+                )
+            );
             Assert.Equal(0, constraintValue);
             Assert.Null(remainingContract);
         }
@@ -226,8 +434,18 @@ namespace System.Composition.Runtime.Tests
         [Fact]
         public void TryUnwrapMetadataConstraint_NoSuchConstraintName_ReturnsFalse()
         {
-            var contract = new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "constraint", 1 } });
-            Assert.False(contract.TryUnwrapMetadataConstraint("constraintName", out int constraintValue, out CompositionContract remainingContract));
+            var contract = new CompositionContract(
+                typeof(int),
+                "contractName",
+                new Dictionary<string, object> { { "constraint", 1 } }
+            );
+            Assert.False(
+                contract.TryUnwrapMetadataConstraint(
+                    "constraintName",
+                    out int constraintValue,
+                    out CompositionContract remainingContract
+                )
+            );
             Assert.Equal(0, constraintValue);
             Assert.Null(remainingContract);
         }
@@ -235,8 +453,18 @@ namespace System.Composition.Runtime.Tests
         [Fact]
         public void TryUnwrapMetadataConstraint_IncorrectConstraintNameType_ReturnsFalse()
         {
-            var contract = new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "constraintName", "value" } });
-            Assert.False(contract.TryUnwrapMetadataConstraint("constraintName", out int constraintValue, out CompositionContract remainingContract));
+            var contract = new CompositionContract(
+                typeof(int),
+                "contractName",
+                new Dictionary<string, object> { { "constraintName", "value" } }
+            );
+            Assert.False(
+                contract.TryUnwrapMetadataConstraint(
+                    "constraintName",
+                    out int constraintValue,
+                    out CompositionContract remainingContract
+                )
+            );
             Assert.Equal(0, constraintValue);
             Assert.Null(remainingContract);
         }
@@ -244,37 +472,94 @@ namespace System.Composition.Runtime.Tests
         [Fact]
         public void TryUnwrapMetadataConstraint_UnwrapAllConstraints_ReturnsTrue()
         {
-            var originalContract = new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "constraintName1", 1 }, { "constraintName2", 2 } });
-            Assert.True(originalContract.TryUnwrapMetadataConstraint("constraintName1", out int constraintValue1, out CompositionContract remainingContract1));
+            var originalContract = new CompositionContract(
+                typeof(int),
+                "contractName",
+                new Dictionary<string, object>
+                {
+                    { "constraintName1", 1 },
+                    { "constraintName2", 2 },
+                }
+            );
+            Assert.True(
+                originalContract.TryUnwrapMetadataConstraint(
+                    "constraintName1",
+                    out int constraintValue1,
+                    out CompositionContract remainingContract1
+                )
+            );
             Assert.Equal(1, constraintValue1);
 
             Assert.Equal(originalContract.ContractType, remainingContract1.ContractType);
             Assert.Equal(originalContract.ContractName, remainingContract1.ContractName);
-            Assert.Equal(new Dictionary<string, object> { { "constraintName2", 2 } }, remainingContract1.MetadataConstraints);
-            Assert.NotEqual(originalContract.MetadataConstraints, remainingContract1.MetadataConstraints);
+            Assert.Equal(
+                new Dictionary<string, object> { { "constraintName2", 2 } },
+                remainingContract1.MetadataConstraints
+            );
+            Assert.NotEqual(
+                originalContract.MetadataConstraints,
+                remainingContract1.MetadataConstraints
+            );
 
-            Assert.True(remainingContract1.TryUnwrapMetadataConstraint("constraintName2", out int constraintValue2, out CompositionContract remainingContract2));
+            Assert.True(
+                remainingContract1.TryUnwrapMetadataConstraint(
+                    "constraintName2",
+                    out int constraintValue2,
+                    out CompositionContract remainingContract2
+                )
+            );
             Assert.Equal(2, constraintValue2);
 
             Assert.Equal(originalContract.ContractType, remainingContract2.ContractType);
             Assert.Equal(originalContract.ContractName, remainingContract2.ContractName);
             Assert.Null(remainingContract2.MetadataConstraints);
-            Assert.NotEqual(originalContract.MetadataConstraints, remainingContract2.MetadataConstraints);
+            Assert.NotEqual(
+                originalContract.MetadataConstraints,
+                remainingContract2.MetadataConstraints
+            );
         }
 
         [Fact]
         public void TryUnwrapMetadataConstraint_NullContractName_ThrowsArgumentNullException()
         {
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>("constraintName", () => contract.TryUnwrapMetadataConstraint(null, out int unusedValue, out CompositionContract unusedContract));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "constraintName",
+                () =>
+                    contract.TryUnwrapMetadataConstraint(
+                        null,
+                        out int unusedValue,
+                        out CompositionContract unusedContract
+                    )
+            );
         }
 
         public static IEnumerable<object[]> ToString_TestData()
         {
             yield return new object[] { new CompositionContract(typeof(int)), "Int32" };
-            yield return new object[] { new CompositionContract(typeof(int), "contractName"), "Int32 \"contractName\"" };
-            yield return new object[] { new CompositionContract(typeof(List<>), "contractName", new Dictionary<string, object> { { "key1", "value" }, { "key2", 2 } }), "List`1 \"contractName\" { key1 = \"value\", key2 = 2 }" };
-            yield return new object[] { new CompositionContract(typeof(List<string>), "contractName", new Dictionary<string, object> { { "key1", "value" }, { "key2", 2 } }), "List<String> \"contractName\" { key1 = \"value\", key2 = 2 }" };
+            yield return new object[]
+            {
+                new CompositionContract(typeof(int), "contractName"),
+                "Int32 \"contractName\"",
+            };
+            yield return new object[]
+            {
+                new CompositionContract(
+                    typeof(List<>),
+                    "contractName",
+                    new Dictionary<string, object> { { "key1", "value" }, { "key2", 2 } }
+                ),
+                "List`1 \"contractName\" { key1 = \"value\", key2 = 2 }",
+            };
+            yield return new object[]
+            {
+                new CompositionContract(
+                    typeof(List<string>),
+                    "contractName",
+                    new Dictionary<string, object> { { "key1", "value" }, { "key2", 2 } }
+                ),
+                "List<String> \"contractName\" { key1 = \"value\", key2 = 2 }",
+            };
         }
 
         [Theory]
@@ -287,14 +572,20 @@ namespace System.Composition.Runtime.Tests
         [Fact]
         public void ToString_NullValueInDictionary_ThrowsArgumentNullException()
         {
-            var contract = new CompositionContract(typeof(int), "contractName", new Dictionary<string, object> { { "key", null } });
+            var contract = new CompositionContract(
+                typeof(int),
+                "contractName",
+                new Dictionary<string, object> { { "key", null } }
+            );
             AssertExtensions.Throws<ArgumentNullException>("value", () => contract.ToString());
         }
 
         [Fact]
         public void ToString_NullTypeInGenericTypeArguments_ThrowsArgumentNullException()
         {
-            var contract = new CompositionContract(new SubType() { GenericTypeArgumentsOverride = new Type[] { null } });
+            var contract = new CompositionContract(
+                new SubType() { GenericTypeArgumentsOverride = new Type[] { null } }
+            );
             AssertExtensions.Throws<ArgumentNullException>("type", () => contract.ToString());
         }
 
@@ -309,33 +600,102 @@ namespace System.Composition.Runtime.Tests
             public override string Namespace => throw new NotImplementedException();
             public override Type UnderlyingSystemType => throw new NotImplementedException();
 
-            public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr) => throw new NotImplementedException();
-            public override object[] GetCustomAttributes(bool inherit) => throw new NotImplementedException();
-            public override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw new NotImplementedException();
+            public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr) =>
+                throw new NotImplementedException();
+
+            public override object[] GetCustomAttributes(bool inherit) =>
+                throw new NotImplementedException();
+
+            public override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
+                throw new NotImplementedException();
+
             public override Type GetElementType() => throw new NotImplementedException();
-            public override EventInfo GetEvent(string name, BindingFlags bindingAttr) => throw new NotImplementedException();
-            public override EventInfo[] GetEvents(BindingFlags bindingAttr) => throw new NotImplementedException();
-            public override FieldInfo GetField(string name, BindingFlags bindingAttr) => throw new NotImplementedException();
-            public override FieldInfo[] GetFields(BindingFlags bindingAttr) => throw new NotImplementedException();
-            public override Type GetInterface(string name, bool ignoreCase) => throw new NotImplementedException();
+
+            public override EventInfo GetEvent(string name, BindingFlags bindingAttr) =>
+                throw new NotImplementedException();
+
+            public override EventInfo[] GetEvents(BindingFlags bindingAttr) =>
+                throw new NotImplementedException();
+
+            public override FieldInfo GetField(string name, BindingFlags bindingAttr) =>
+                throw new NotImplementedException();
+
+            public override FieldInfo[] GetFields(BindingFlags bindingAttr) =>
+                throw new NotImplementedException();
+
+            public override Type GetInterface(string name, bool ignoreCase) =>
+                throw new NotImplementedException();
+
             public override Type[] GetInterfaces() => throw new NotImplementedException();
-            public override MemberInfo[] GetMembers(BindingFlags bindingAttr) => throw new NotImplementedException();
-            public override MethodInfo[] GetMethods(BindingFlags bindingAttr) => throw new NotImplementedException();
-            public override Type GetNestedType(string name, BindingFlags bindingAttr) => throw new NotImplementedException();
-            public override Type[] GetNestedTypes(BindingFlags bindingAttr) => throw new NotImplementedException();
-            public override PropertyInfo[] GetProperties(BindingFlags bindingAttr) => throw new NotImplementedException();
-            public override object InvokeMember(string name, BindingFlags invokeAttr, Binder binder, object target, object[] args, ParameterModifier[] modifiers, CultureInfo culture, string[] namedParameters) => throw new NotImplementedException();
-            public override bool IsDefined(Type attributeType, bool inherit) => throw new NotImplementedException();
-            protected override TypeAttributes GetAttributeFlagsImpl() => throw new NotImplementedException();
-            protected override ConstructorInfo GetConstructorImpl(BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers) => throw new NotImplementedException();
-            protected override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers) => throw new NotImplementedException();
-            protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder binder, Type returnType, Type[] types, ParameterModifier[] modifiers) => throw new NotImplementedException();
+
+            public override MemberInfo[] GetMembers(BindingFlags bindingAttr) =>
+                throw new NotImplementedException();
+
+            public override MethodInfo[] GetMethods(BindingFlags bindingAttr) =>
+                throw new NotImplementedException();
+
+            public override Type GetNestedType(string name, BindingFlags bindingAttr) =>
+                throw new NotImplementedException();
+
+            public override Type[] GetNestedTypes(BindingFlags bindingAttr) =>
+                throw new NotImplementedException();
+
+            public override PropertyInfo[] GetProperties(BindingFlags bindingAttr) =>
+                throw new NotImplementedException();
+
+            public override object InvokeMember(
+                string name,
+                BindingFlags invokeAttr,
+                Binder binder,
+                object target,
+                object[] args,
+                ParameterModifier[] modifiers,
+                CultureInfo culture,
+                string[] namedParameters
+            ) => throw new NotImplementedException();
+
+            public override bool IsDefined(Type attributeType, bool inherit) =>
+                throw new NotImplementedException();
+
+            protected override TypeAttributes GetAttributeFlagsImpl() =>
+                throw new NotImplementedException();
+
+            protected override ConstructorInfo GetConstructorImpl(
+                BindingFlags bindingAttr,
+                Binder binder,
+                CallingConventions callConvention,
+                Type[] types,
+                ParameterModifier[] modifiers
+            ) => throw new NotImplementedException();
+
+            protected override MethodInfo GetMethodImpl(
+                string name,
+                BindingFlags bindingAttr,
+                Binder binder,
+                CallingConventions callConvention,
+                Type[] types,
+                ParameterModifier[] modifiers
+            ) => throw new NotImplementedException();
+
+            protected override PropertyInfo GetPropertyImpl(
+                string name,
+                BindingFlags bindingAttr,
+                Binder binder,
+                Type returnType,
+                Type[] types,
+                ParameterModifier[] modifiers
+            ) => throw new NotImplementedException();
 
             protected override bool HasElementTypeImpl() => throw new NotImplementedException();
+
             protected override bool IsArrayImpl() => throw new NotImplementedException();
+
             protected override bool IsByRefImpl() => throw new NotImplementedException();
+
             protected override bool IsCOMObjectImpl() => throw new NotImplementedException();
+
             protected override bool IsPointerImpl() => throw new NotImplementedException();
+
             protected override bool IsPrimitiveImpl() => throw new NotImplementedException();
 
             public override string Name => "Name`1";

@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using Internal.ReadyToRunConstants;
 using Internal.Text;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-using Internal.ReadyToRunConstants;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -31,7 +31,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 dataBuilder.AddSymbol(this);
 
                 IEcmaModule targetModule = factory.SignatureContext.GetTargetModule(_arrayType);
-                SignatureContext innerContext = dataBuilder.EmitFixup(factory, ReadyToRunFixupKind.NewArray, targetModule, factory.SignatureContext);
+                SignatureContext innerContext = dataBuilder.EmitFixup(
+                    factory,
+                    ReadyToRunFixupKind.NewArray,
+                    targetModule,
+                    factory.SignatureContext
+                );
                 dataBuilder.EmitTypeSignature(_arrayType, innerContext);
             }
 

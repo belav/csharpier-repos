@@ -46,7 +46,7 @@ public class AddUniqueConstraintOperation : MigrationOperation, ITableMigrationO
             Schema = uniqueConstraint.Table.Schema,
             Table = uniqueConstraint.Table.Name,
             Name = uniqueConstraint.Name,
-            Columns = uniqueConstraint.Columns.Select(c => c.Name).ToArray()
+            Columns = uniqueConstraint.Columns.Select(c => c.Name).ToArray(),
         };
         operation.AddAnnotations(uniqueConstraint.GetAnnotations());
 

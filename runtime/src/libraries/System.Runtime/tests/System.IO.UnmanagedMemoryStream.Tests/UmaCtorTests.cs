@@ -27,7 +27,14 @@ namespace System.IO.Tests
                 Assert.False(duma.IsOpen);
                 duma.Initialize(fakeBuffer, 0, (long)fakeBuffer.ByteLength, FileAccess.ReadWrite);
                 Assert.True(duma.IsOpen);
-                Assert.Throws<InvalidOperationException>(() => duma.Initialize(fakeBuffer, 0, (long)fakeBuffer.ByteLength, FileAccess.ReadWrite));
+                Assert.Throws<InvalidOperationException>(() =>
+                    duma.Initialize(
+                        fakeBuffer,
+                        0,
+                        (long)fakeBuffer.ByteLength,
+                        FileAccess.ReadWrite
+                    )
+                );
             }
         }
 
@@ -37,18 +44,39 @@ namespace System.IO.Tests
             FakeSafeBuffer fakeBuffer = new FakeSafeBuffer(99);
             FakeSafeBuffer nullBuffer = null;
 
-            Assert.Throws<ArgumentNullException>(() => new UnmanagedMemoryAccessor(nullBuffer, 0, 0));
+            Assert.Throws<ArgumentNullException>(() => new UnmanagedMemoryAccessor(nullBuffer, 0, 0)
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UnmanagedMemoryAccessor(fakeBuffer, 2, -1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UnmanagedMemoryAccessor(fakeBuffer, -1, 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UnmanagedMemoryAccessor(fakeBuffer, 1, 2, (FileAccess)(-1)));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new UnmanagedMemoryAccessor(fakeBuffer, 1, 2, (FileAccess)42));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new UnmanagedMemoryAccessor(fakeBuffer, 2, -1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new UnmanagedMemoryAccessor(fakeBuffer, -1, 1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new UnmanagedMemoryAccessor(fakeBuffer, 1, 2, (FileAccess)(-1))
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                new UnmanagedMemoryAccessor(fakeBuffer, 1, 2, (FileAccess)42)
+            );
 
-            AssertExtensions.Throws<ArgumentException>(null, () => new UnmanagedMemoryAccessor(fakeBuffer, 2, 999));
-            AssertExtensions.Throws<ArgumentException>(null, () => new UnmanagedMemoryAccessor(fakeBuffer, 999, 9));
-            AssertExtensions.Throws<ArgumentException>(null, () => new UnmanagedMemoryAccessor(fakeBuffer, 1, 100));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new UnmanagedMemoryAccessor(fakeBuffer, 2, 999)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new UnmanagedMemoryAccessor(fakeBuffer, 999, 9)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new UnmanagedMemoryAccessor(fakeBuffer, 1, 100)
+            );
 
-            AssertExtensions.Throws<ArgumentException>(null, () => new UnmanagedMemoryAccessor(fakeBuffer, int.MaxValue, 1));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new UnmanagedMemoryAccessor(fakeBuffer, int.MaxValue, 1)
+            );
         }
 
         // Derived class used to exercise protected members and to test behaviors before and after initialization
@@ -56,12 +84,20 @@ namespace System.IO.Tests
         {
             internal DerivedUnmanagedMemoryAccessor() { }
 
-            internal void Initialize(FakeSafeBuffer buffer, long offset, long capacity, FileAccess access)
+            internal void Initialize(
+                FakeSafeBuffer buffer,
+                long offset,
+                long capacity,
+                FileAccess access
+            )
             {
                 base.Initialize(buffer, offset, capacity, access);
             }
 
-            internal new bool IsOpen { get { return base.IsOpen; } }
+            internal new bool IsOpen
+            {
+                get { return base.IsOpen; }
+            }
         }
     }
 }

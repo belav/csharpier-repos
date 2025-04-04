@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         public FileSet(params (string fileName, object content)[] files)
         {
-            var builder = ImmutableDictionary.CreateBuilder<string, object>(StringComparer.OrdinalIgnoreCase);
+            var builder = ImmutableDictionary.CreateBuilder<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             foreach (var (fileName, fileContent) in files)
             {
@@ -59,16 +61,26 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 {
                     var elementStartTag = "<" + elementName;
                     var elementEndTag = "</" + elementName;
-                    var startTagStart = textContent.IndexOf(elementStartTag, StringComparison.Ordinal);
+                    var startTagStart = textContent.IndexOf(
+                        elementStartTag,
+                        StringComparison.Ordinal
+                    );
                     if (startTagStart >= -1)
                     {
                         var startTagEnd = textContent.IndexOf('>', startTagStart + 1);
                         if (startTagEnd >= startTagStart)
                         {
-                            var endTagStart = textContent.IndexOf(elementEndTag, startTagEnd + 1, StringComparison.Ordinal);
+                            var endTagStart = textContent.IndexOf(
+                                elementEndTag,
+                                startTagEnd + 1,
+                                StringComparison.Ordinal
+                            );
                             if (endTagStart >= startTagEnd)
                             {
-                                var newContent = textContent[..(startTagEnd + 1)] + elementValue + textContent[endTagStart..];
+                                var newContent =
+                                    textContent[..(startTagEnd + 1)]
+                                    + elementValue
+                                    + textContent[endTagStart..];
                                 return this.WithFile(fileName, newContent);
                             }
                         }

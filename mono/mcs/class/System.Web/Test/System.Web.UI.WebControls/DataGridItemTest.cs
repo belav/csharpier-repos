@@ -1,5 +1,5 @@
 //
-// Tests for System.Web.UI.WebControls.DataGridItem 
+// Tests for System.Web.UI.WebControls.DataGridItem
 //
 // Author:
 //	Peter Dennis Bartok (pbartok@novell.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,71 +28,73 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Drawing;
-using System.IO;
 using System.Globalization;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	[TestFixture]	
-	public class DataGridItemTest {
-		public class DataGridItemTestClass : DataGridItem {
-			public DataGridItemTestClass(int itemIndex, int dataSetIndex, ListItemType itemType) : base(itemIndex, dataSetIndex, itemType) {
-			}
+    [TestFixture]
+    public class DataGridItemTest
+    {
+        public class DataGridItemTestClass : DataGridItem
+        {
+            public DataGridItemTestClass(int itemIndex, int dataSetIndex, ListItemType itemType)
+                : base(itemIndex, dataSetIndex, itemType) { }
 
-			public void SetType (ListItemType type) {
-				base.SetItemType(type);
-			}
-		}
+            public void SetType(ListItemType type)
+            {
+                base.SetItemType(type);
+            }
+        }
 
-		[Test]
-		public void Defaults ()
-		{
-			DataGridItem	i;
-			string		s;
+        [Test]
+        public void Defaults()
+        {
+            DataGridItem i;
+            string s;
 
-			i = new DataGridItem(123, 456, ListItemType.Pager);
-			s = "blah";
+            i = new DataGridItem(123, 456, ListItemType.Pager);
+            s = "blah";
 
-			i.DataItem = s;
+            i.DataItem = s;
 
-			Assert.AreEqual(ListItemType.Pager, i.ItemType, "D1");
-			Assert.AreEqual(456, i.DataSetIndex, "D2");
-			Assert.AreEqual(123, i.ItemIndex, "D3");
-			Assert.AreEqual(s, i.DataItem, "D4");
-			Assert.AreEqual("blah", i.DataItem, "D5");
-		}
+            Assert.AreEqual(ListItemType.Pager, i.ItemType, "D1");
+            Assert.AreEqual(456, i.DataSetIndex, "D2");
+            Assert.AreEqual(123, i.ItemIndex, "D3");
+            Assert.AreEqual(s, i.DataItem, "D4");
+            Assert.AreEqual("blah", i.DataItem, "D5");
+        }
 
+        [Test]
+        public void Methods()
+        {
+            DataGridItemTestClass i;
+            string s;
 
-		[Test]
-		public void Methods () {
-			DataGridItemTestClass	i;
-			string			s;
+            i = new DataGridItemTestClass(123, 456, ListItemType.Pager);
+            s = "blah";
 
-			i = new DataGridItemTestClass(123, 456, ListItemType.Pager);
-			s = "blah";
+            i.DataItem = s;
 
-			i.DataItem = s;
+            Assert.AreEqual(ListItemType.Pager, i.ItemType, "M1");
+            i.SetType(ListItemType.Header);
+            Assert.AreEqual(ListItemType.Header, i.ItemType, "M2");
+        }
 
-			Assert.AreEqual(ListItemType.Pager, i.ItemType, "M1");
-			i.SetType(ListItemType.Header);
-			Assert.AreEqual(ListItemType.Header, i.ItemType, "M2");
+        [Test]
+        public void ValidEnum()
+        {
+            DataGridItemTestClass i;
+            string s;
 
-			
-		}
-
-		[Test]
-		public void ValidEnum () {
-			DataGridItemTestClass	i;
-			string			s;
-
-			i = new DataGridItemTestClass(123, 456, (ListItemType)27051977);
-		}
-	}
+            i = new DataGridItemTestClass(123, 456, (ListItemType)27051977);
+        }
+    }
 }

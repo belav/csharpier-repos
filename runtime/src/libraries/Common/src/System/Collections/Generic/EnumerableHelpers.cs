@@ -62,7 +62,8 @@ namespace System.Collections.Generic
                                 int newLength = count << 1;
                                 if ((uint)newLength > Array.MaxLength)
                                 {
-                                    newLength = Array.MaxLength <= count ? count + 1 : Array.MaxLength;
+                                    newLength =
+                                        Array.MaxLength <= count ? count + 1 : Array.MaxLength;
                                 }
 
                                 Array.Resize(ref arr, newLength);

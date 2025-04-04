@@ -10,8 +10,10 @@ using System.Threading.Tasks;
 
 #if AspNetCoreTesting
 namespace Microsoft.AspNetCore.InternalTesting;
+
 #else
 namespace System.Threading.Tasks.Extensions;
+
 #endif
 
 #if AspNetCoreTesting
@@ -29,52 +31,102 @@ static class TaskExtensions
     public const int DefaultTimeoutDuration = 30 * 1000;
 #endif
 
-    public static TimeSpan DefaultTimeoutTimeSpan { get; } = TimeSpan.FromMilliseconds(DefaultTimeoutDuration);
+    public static TimeSpan DefaultTimeoutTimeSpan { get; } =
+        TimeSpan.FromMilliseconds(DefaultTimeoutDuration);
 
-    public static Task DefaultTimeout(this Task task, int milliseconds = DefaultTimeoutDuration, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = default)
-    {
-        return task.TimeoutAfter(TimeSpan.FromMilliseconds(milliseconds), filePath, lineNumber);
-    }
-
-    public static Task DefaultTimeout(this Task task, TimeSpan timeout, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = default)
-    {
-        return task.TimeoutAfter(timeout, filePath, lineNumber);
-    }
-
-    public static Task DefaultTimeout(this ValueTask task, int milliseconds = DefaultTimeoutDuration, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = default)
-    {
-        return task.AsTask().TimeoutAfter(TimeSpan.FromMilliseconds(milliseconds), filePath, lineNumber);
-    }
-
-    public static Task DefaultTimeout(this ValueTask task, TimeSpan timeout, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = default)
-    {
-        return task.AsTask().TimeoutAfter(timeout, filePath, lineNumber);
-    }
-
-    public static Task<T> DefaultTimeout<T>(this Task<T> task, int milliseconds = DefaultTimeoutDuration, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = default)
-    {
-        return task.TimeoutAfter(TimeSpan.FromMilliseconds(milliseconds), filePath, lineNumber);
-    }
-
-    public static Task<T> DefaultTimeout<T>(this Task<T> task, TimeSpan timeout, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = default)
-    {
-        return task.TimeoutAfter(timeout, filePath, lineNumber);
-    }
-
-    public static Task<T> DefaultTimeout<T>(this ValueTask<T> task, int milliseconds = DefaultTimeoutDuration, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = default)
-    {
-        return task.AsTask().TimeoutAfter(TimeSpan.FromMilliseconds(milliseconds), filePath, lineNumber);
-    }
-
-    public static Task<T> DefaultTimeout<T>(this ValueTask<T> task, TimeSpan timeout, [CallerFilePath] string filePath = null, [CallerLineNumber] int lineNumber = default)
-    {
-        return task.AsTask().TimeoutAfter(timeout, filePath, lineNumber);
-    }
-
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static async Task<T> TimeoutAfter<T>(this Task<T> task, TimeSpan timeout,
+    public static Task DefaultTimeout(
+        this Task task,
+        int milliseconds = DefaultTimeoutDuration,
         [CallerFilePath] string filePath = null,
-        [CallerLineNumber] int lineNumber = default)
+        [CallerLineNumber] int lineNumber = default
+    )
+    {
+        return task.TimeoutAfter(TimeSpan.FromMilliseconds(milliseconds), filePath, lineNumber);
+    }
+
+    public static Task DefaultTimeout(
+        this Task task,
+        TimeSpan timeout,
+        [CallerFilePath] string filePath = null,
+        [CallerLineNumber] int lineNumber = default
+    )
+    {
+        return task.TimeoutAfter(timeout, filePath, lineNumber);
+    }
+
+    public static Task DefaultTimeout(
+        this ValueTask task,
+        int milliseconds = DefaultTimeoutDuration,
+        [CallerFilePath] string filePath = null,
+        [CallerLineNumber] int lineNumber = default
+    )
+    {
+        return task.AsTask()
+            .TimeoutAfter(TimeSpan.FromMilliseconds(milliseconds), filePath, lineNumber);
+    }
+
+    public static Task DefaultTimeout(
+        this ValueTask task,
+        TimeSpan timeout,
+        [CallerFilePath] string filePath = null,
+        [CallerLineNumber] int lineNumber = default
+    )
+    {
+        return task.AsTask().TimeoutAfter(timeout, filePath, lineNumber);
+    }
+
+    public static Task<T> DefaultTimeout<T>(
+        this Task<T> task,
+        int milliseconds = DefaultTimeoutDuration,
+        [CallerFilePath] string filePath = null,
+        [CallerLineNumber] int lineNumber = default
+    )
+    {
+        return task.TimeoutAfter(TimeSpan.FromMilliseconds(milliseconds), filePath, lineNumber);
+    }
+
+    public static Task<T> DefaultTimeout<T>(
+        this Task<T> task,
+        TimeSpan timeout,
+        [CallerFilePath] string filePath = null,
+        [CallerLineNumber] int lineNumber = default
+    )
+    {
+        return task.TimeoutAfter(timeout, filePath, lineNumber);
+    }
+
+    public static Task<T> DefaultTimeout<T>(
+        this ValueTask<T> task,
+        int milliseconds = DefaultTimeoutDuration,
+        [CallerFilePath] string filePath = null,
+        [CallerLineNumber] int lineNumber = default
+    )
+    {
+        return task.AsTask()
+            .TimeoutAfter(TimeSpan.FromMilliseconds(milliseconds), filePath, lineNumber);
+    }
+
+    public static Task<T> DefaultTimeout<T>(
+        this ValueTask<T> task,
+        TimeSpan timeout,
+        [CallerFilePath] string filePath = null,
+        [CallerLineNumber] int lineNumber = default
+    )
+    {
+        return task.AsTask().TimeoutAfter(timeout, filePath, lineNumber);
+    }
+
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static async Task<T> TimeoutAfter<T>(
+        this Task<T> task,
+        TimeSpan timeout,
+        [CallerFilePath] string filePath = null,
+        [CallerLineNumber] int lineNumber = default
+    )
     {
         // Don't create a timer if the task is already completed
         // or the debugger is attached
@@ -105,10 +157,17 @@ static class TaskExtensions
 #endif
     }
 
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static async Task TimeoutAfter(this Task task, TimeSpan timeout,
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static async Task TimeoutAfter(
+        this Task task,
+        TimeSpan timeout,
         [CallerFilePath] string filePath = null,
-        [CallerLineNumber] int lineNumber = default)
+        [CallerLineNumber] int lineNumber = default
+    )
     {
         // Don't create a timer if the task is already completed
         // or the debugger is attached
@@ -140,9 +199,8 @@ static class TaskExtensions
 #endif
     }
 
-    private static string CreateMessage(TimeSpan timeout, string filePath, int lineNumber)
-        => string.IsNullOrEmpty(filePath)
-        ? $"The operation timed out after reaching the limit of {timeout.TotalMilliseconds}ms."
-        : $"The operation at {filePath}:{lineNumber} timed out after reaching the limit of {timeout.TotalMilliseconds}ms.";
+    private static string CreateMessage(TimeSpan timeout, string filePath, int lineNumber) =>
+        string.IsNullOrEmpty(filePath)
+            ? $"The operation timed out after reaching the limit of {timeout.TotalMilliseconds}ms."
+            : $"The operation at {filePath}:{lineNumber} timed out after reaching the limit of {timeout.TotalMilliseconds}ms.";
 }
-

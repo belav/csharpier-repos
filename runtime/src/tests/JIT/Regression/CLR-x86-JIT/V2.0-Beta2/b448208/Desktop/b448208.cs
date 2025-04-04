@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Security;
+using System.Collections;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Collections;
+using System.Security;
+using System.Threading;
 using Xunit;
 
 public class GenType1<T>

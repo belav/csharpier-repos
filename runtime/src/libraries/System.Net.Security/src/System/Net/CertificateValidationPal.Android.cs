@@ -14,11 +14,13 @@ namespace System.Net
             X509Chain chain,
             X509Certificate2? remoteCertificate,
             bool checkCertName,
-            bool _ /*isServer*/,
-            string? hostName)
+            bool _ /*isServer*/
+            ,
+            string? hostName
+        )
         {
             if (remoteCertificate == null)
-                return  SslPolicyErrors.RemoteCertificateNotAvailable;
+                return SslPolicyErrors.RemoteCertificateNotAvailable;
 
             SslPolicyErrors errors = chain.Build(remoteCertificate)
                 ? SslPolicyErrors.None
@@ -28,7 +30,9 @@ namespace System.Net
             {
                 System.Diagnostics.Debug.Assert(hostName != null);
                 SafeDeleteSslContext sslContext = (SafeDeleteSslContext)securityContext;
-                if (!Interop.AndroidCrypto.SSLStreamVerifyHostname(sslContext.SslContext, hostName!))
+                if (
+                    !Interop.AndroidCrypto.SSLStreamVerifyHostname(sslContext.SslContext, hostName!)
+                )
                 {
                     errors |= SslPolicyErrors.RemoteCertificateNameMismatch;
                 }
@@ -45,7 +49,8 @@ namespace System.Net
             SafeDeleteContext? securityContext,
             bool retrieveChainCertificates,
             ref X509Chain? chain,
-            X509ChainPolicy? chainPolicy)
+            X509ChainPolicy? chainPolicy
+        )
         {
             SafeSslHandle? sslContext = ((SafeDeleteSslContext?)securityContext)?.SslContext;
             if (sslContext == null)
@@ -55,7 +60,11 @@ namespace System.Net
             if (!retrieveChainCertificates)
             {
                 // Constructing a new X509Certificate2 adds a global reference to the pointer, so we dispose this handle
-                using (SafeX509Handle handle = Interop.AndroidCrypto.SSLStreamGetPeerCertificate(sslContext))
+                using (
+                    SafeX509Handle handle = Interop.AndroidCrypto.SSLStreamGetPeerCertificate(
+                        sslContext
+                    )
+                )
                 {
                     if (!handle.IsInvalid)
                     {
@@ -81,10 +90,11 @@ namespace System.Net
                         // Constructing a new X509Certificate2 adds a global reference to the pointer, so we dispose this handle
                         using (var handle = new SafeX509Handle(ptr))
                         {
-                            chain.ChainPolicy.ExtraStore.Add(new X509Certificate2(handle.DangerousGetHandle()));
+                            chain.ChainPolicy.ExtraStore.Add(
+                                new X509Certificate2(handle.DangerousGetHandle())
+                            );
                         }
                     }
-
                 }
             }
 
@@ -92,7 +102,10 @@ namespace System.Net
         }
 
         // Check if the local certificate has been sent to the peer during the handshake.
-        internal static bool IsLocalCertificateUsed(SafeFreeCredentials? _, SafeDeleteContext? securityContext)
+        internal static bool IsLocalCertificateUsed(
+            SafeFreeCredentials? _,
+            SafeDeleteContext? securityContext
+        )
         {
             SafeSslHandle? sslContext = ((SafeDeleteSslContext?)securityContext)?.SslContext;
             if (sslContext == null)

@@ -19,9 +19,7 @@ public partial class SignInResult : ActionResult
     /// </summary>
     /// <param name="principal">The claims principal containing the user claims.</param>
     public SignInResult(ClaimsPrincipal principal)
-        : this(authenticationScheme: null, principal, properties: null)
-    {
-    }
+        : this(authenticationScheme: null, principal, properties: null) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignInResult"/> with the
@@ -30,9 +28,7 @@ public partial class SignInResult : ActionResult
     /// <param name="authenticationScheme">The authentication scheme to use when signing in the user.</param>
     /// <param name="principal">The claims principal containing the user claims.</param>
     public SignInResult(string? authenticationScheme, ClaimsPrincipal principal)
-        : this(authenticationScheme, principal, properties: null)
-    {
-    }
+        : this(authenticationScheme, principal, properties: null) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignInResult"/> with the
@@ -41,9 +37,7 @@ public partial class SignInResult : ActionResult
     /// <param name="principal">The claims principal containing the user claims.</param>
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-in operation.</param>
     public SignInResult(ClaimsPrincipal principal, AuthenticationProperties? properties)
-        : this(authenticationScheme: null, principal, properties)
-    {
-    }
+        : this(authenticationScheme: null, principal, properties) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignInResult"/> with the
@@ -52,7 +46,11 @@ public partial class SignInResult : ActionResult
     /// <param name="authenticationScheme">The authentication schemes to use when signing in the user.</param>
     /// <param name="principal">The claims principal containing the user claims.</param>
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-in operation.</param>
-    public SignInResult(string? authenticationScheme, ClaimsPrincipal principal, AuthenticationProperties? properties)
+    public SignInResult(
+        string? authenticationScheme,
+        ClaimsPrincipal principal,
+        AuthenticationProperties? properties
+    )
     {
         Principal = principal ?? throw new ArgumentNullException(nameof(principal));
         AuthenticationScheme = authenticationScheme;
@@ -89,7 +87,16 @@ public partial class SignInResult : ActionResult
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, $"Executing {nameof(SignInResult)} with authentication scheme ({{Scheme}}) and the following principal: {{Principal}}.", EventName = "SignInResultExecuting")]
-        public static partial void SignInResultExecuting(ILogger logger, string? scheme, ClaimsPrincipal principal);
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            $"Executing {nameof(SignInResult)} with authentication scheme ({{Scheme}}) and the following principal: {{Principal}}.",
+            EventName = "SignInResultExecuting"
+        )]
+        public static partial void SignInResultExecuting(
+            ILogger logger,
+            string? scheme,
+            ClaimsPrincipal principal
+        );
     }
 }

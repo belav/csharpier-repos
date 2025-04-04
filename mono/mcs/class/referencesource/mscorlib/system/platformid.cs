@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -12,23 +12,22 @@
 **
 **
 ===========================================================*/
-namespace System {
-
+namespace System
+{
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public enum PlatformID
     {
-        Win32S        = 0,
-        Win32Windows  = 1,
-        Win32NT       = 2,
-        WinCE         = 3,      
-        Unix          = 4,
-        Xbox          = 5,
+        Win32S = 0,
+        Win32Windows = 1,
+        Win32NT = 2,
+        WinCE = 3,
+        Unix = 4,
+        Xbox = 5,
 #if !FEATURE_LEGACYNETCF
-        MacOSX        = 6
+        MacOSX = 6
 #else // FEATURE_LEGACYNETCF
-        NokiaS60      = 6
+        NokiaS60 = 6
 #endif // FEATURE_LEGACYNETCF
     }
-
 }

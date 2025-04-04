@@ -22,19 +22,25 @@ namespace Microsoft.Android.Build.Ndk
         private string hostOS;
         private string apiLevel;
 
-        private static readonly Dictionary<string, string> validHosts = new Dictionary<string, string>()
+        private static readonly Dictionary<string, string> validHosts = new Dictionary<
+            string,
+            string
+        >()
         {
             { "osx", "darwin-x86_64" },
             { "linux", "linux-x86_64" },
-            { "windows", "windows-x86_64" }
+            { "windows", "windows-x86_64" },
         };
 
-        private static readonly Dictionary<string, AndroidArch> validArches = new Dictionary<string, AndroidArch>()
+        private static readonly Dictionary<string, AndroidArch> validArches = new Dictionary<
+            string,
+            AndroidArch
+        >()
         {
             { "arm", new AndroidArch("arm", "armeabi-v7a", "arm-linux-androideabi") },
             { "arm64", new AndroidArch("aarch64", "aarch64-v8a", "aarch64-linux-android") },
             { "x86", new AndroidArch("x86", "x86", "i686-linux-android") },
-            { "x64", new AndroidArch("x86_64", "x86_64", "x86_64-linux-android") }
+            { "x64", new AndroidArch("x86_64", "x86_64", "x86_64-linux-android") },
         };
 
         private string armClangPrefix = "armv7a";
@@ -58,7 +64,10 @@ namespace Microsoft.Android.Build.Ndk
             // arm clang prefix is not the triple, but armv7a instead
             if (netArch == "arm")
             {
-                clangPath = Path.Combine(ToolPrefixPath, $"{armClangPrefix}{apiLevel}-clang{cmdExt}");
+                clangPath = Path.Combine(
+                    ToolPrefixPath,
+                    $"{armClangPrefix}{apiLevel}-clang{cmdExt}"
+                );
             }
             else
             {
@@ -103,7 +112,9 @@ namespace Microsoft.Android.Build.Ndk
         {
             if (Ndk.NdkVersion.Main.Major != 23)
             {
-                throw new Exception($"NDK 23 is required. An unsupported NDK version was found ({Ndk.NdkVersion.Main.Major}).");
+                throw new Exception(
+                    $"NDK 23 is required. An unsupported NDK version was found ({Ndk.NdkVersion.Main.Major})."
+                );
             }
 
             try
@@ -112,16 +123,20 @@ namespace Microsoft.Android.Build.Ndk
             }
             catch (KeyNotFoundException)
             {
-                throw new Exception("An invalid target architecture was supplied. Only arm64, x64, arm, and x86 are supported.");
+                throw new Exception(
+                    "An invalid target architecture was supplied. Only arm64, x64, arm, and x86 are supported."
+                );
             }
 
             try
             {
                 string host = validHosts[hostOS];
             }
-            catch(KeyNotFoundException)
+            catch (KeyNotFoundException)
             {
-                throw new Exception("An invalid HostOS value was supplied. Only windows, osx, and linux are supported.");
+                throw new Exception(
+                    "An invalid HostOS value was supplied. Only windows, osx, and linux are supported."
+                );
             }
         }
     }

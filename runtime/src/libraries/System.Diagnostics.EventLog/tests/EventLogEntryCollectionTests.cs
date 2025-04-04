@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using Microsoft.DotNet.XUnitExtensions;
+using Xunit;
 
 namespace System.Diagnostics.Tests
 {
@@ -27,13 +27,18 @@ namespace System.Diagnostics.Tests
                     Helpers.Retry(() => eventLog.WriteEntry("Further Testing"));
 
                     EventLogEntryCollection entryCollection = eventLog.Entries;
-                    EventLogEntry[] entryCollectionCopied = new EventLogEntry[entryCollection.Count];
+                    EventLogEntry[] entryCollectionCopied = new EventLogEntry[
+                        entryCollection.Count
+                    ];
 
                     Helpers.Retry(() => entryCollection.CopyTo(entryCollectionCopied, 0));
                     int i = 0;
                     foreach (EventLogEntry entry in entryCollection)
                     {
-                        Assert.Equal(entry.Message, Helpers.Retry(() => entryCollectionCopied[i].Message));
+                        Assert.Equal(
+                            entry.Message,
+                            Helpers.Retry(() => entryCollectionCopied[i].Message)
+                        );
                         i += 1;
                     }
                 }
@@ -60,7 +65,9 @@ namespace System.Diagnostics.Tests
                     eventLog.Source = source;
                     Helpers.Retry(() => eventLog.WriteEntry(message));
                     Helpers.WaitForEventLog(eventLog, 1);
-                    EventLogEntry entry = Helpers.Retry(() => eventLog.Entries[eventLog.Entries.Count - 1]);
+                    EventLogEntry entry = Helpers.Retry(() =>
+                        eventLog.Entries[eventLog.Entries.Count - 1]
+                    );
                     Assert.False(entry.Equals(null));
                 }
             }
@@ -85,13 +92,17 @@ namespace System.Diagnostics.Tests
                 {
                     eventLog.Source = source;
                     Helpers.Retry(() => eventLog.WriteEntry(message));
-                    Helpers.WaitForEventLog(eventLog, 1);  //There is latency between writing and getting the entry
-                    EventLogEntry entry = Helpers.Retry(() => eventLog.Entries[eventLog.Entries.Count - 1]);
+                    Helpers.WaitForEventLog(eventLog, 1); //There is latency between writing and getting the entry
+                    EventLogEntry entry = Helpers.Retry(() =>
+                        eventLog.Entries[eventLog.Entries.Count - 1]
+                    );
                     Assert.True(entry.Equals(entry));
 
                     Helpers.Retry(() => eventLog.WriteEntry(message));
                     Helpers.WaitForEventLog(eventLog, 2);
-                    EventLogEntry secondEntry = Helpers.Retry(() => eventLog.Entries[eventLog.Entries.Count - 1]);
+                    EventLogEntry secondEntry = Helpers.Retry(() =>
+                        eventLog.Entries[eventLog.Entries.Count - 1]
+                    );
                     Assert.Equal(entry.Index + 1, secondEntry.Index);
                 }
             }
@@ -118,8 +129,12 @@ namespace System.Diagnostics.Tests
                     Helpers.Retry(() => eventLog.WriteEntry(message));
                     Helpers.Retry(() => eventLog.WriteEntry(message));
                     Helpers.WaitForEventLog(eventLog, 2);
-                    EventLogEntry entry = Helpers.Retry(() => eventLog.Entries[eventLog.Entries.Count - 1]);
-                    EventLogEntry secondEntry = Helpers.Retry(() => eventLog.Entries[eventLog.Entries.Count - 2]);
+                    EventLogEntry entry = Helpers.Retry(() =>
+                        eventLog.Entries[eventLog.Entries.Count - 1]
+                    );
+                    EventLogEntry secondEntry = Helpers.Retry(() =>
+                        eventLog.Entries[eventLog.Entries.Count - 2]
+                    );
                     Assert.False(entry.Equals(secondEntry));
                 }
             }

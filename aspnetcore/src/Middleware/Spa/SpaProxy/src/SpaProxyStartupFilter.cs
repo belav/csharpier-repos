@@ -17,9 +17,11 @@ internal sealed class SpaProxyStartupFilter : IStartupFilter
     public SpaProxyStartupFilter(
         SpaProxyLaunchManager spaProxyLaunchManager,
         IHostApplicationLifetime hostLifetime,
-        ILogger<SpaProxyStartupFilter> logger)
+        ILogger<SpaProxyStartupFilter> logger
+    )
     {
-        _spaProxyLaunchManager = spaProxyLaunchManager ?? throw new ArgumentNullException(nameof(spaProxyLaunchManager));
+        _spaProxyLaunchManager =
+            spaProxyLaunchManager ?? throw new ArgumentNullException(nameof(spaProxyLaunchManager));
         _hostLifetime = hostLifetime ?? throw new ArgumentNullException(nameof(hostLifetime));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
@@ -37,7 +39,11 @@ internal sealed class SpaProxyStartupFilter : IStartupFilter
         {
             try
             {
-                if (!await _spaProxyLaunchManager.IsSpaProxyRunning(_hostLifetime.ApplicationStopping))
+                if (
+                    !await _spaProxyLaunchManager.IsSpaProxyRunning(
+                        _hostLifetime.ApplicationStopping
+                    )
+                )
                 {
                     _spaProxyLaunchManager.StartInBackground(_hostLifetime.ApplicationStopping);
                 }

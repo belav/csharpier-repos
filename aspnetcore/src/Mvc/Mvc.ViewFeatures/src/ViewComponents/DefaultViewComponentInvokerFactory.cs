@@ -17,7 +17,8 @@ internal sealed class DefaultViewComponentInvokerFactory : IViewComponentInvoker
         IViewComponentFactory viewComponentFactory,
         ViewComponentInvokerCache viewComponentInvokerCache,
         DiagnosticListener diagnosticListener,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(viewComponentFactory);
         ArgumentNullException.ThrowIfNull(viewComponentInvokerCache);
@@ -43,6 +44,7 @@ internal sealed class DefaultViewComponentInvokerFactory : IViewComponentInvoker
             _viewComponentFactory,
             _viewComponentInvokerCache,
             _diagnosticListener,
-            _logger);
+            _logger
+        );
     }
 }

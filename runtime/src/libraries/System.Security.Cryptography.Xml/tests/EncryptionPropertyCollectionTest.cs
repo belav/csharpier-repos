@@ -207,7 +207,9 @@ namespace System.Security.Cryptography.Xml.Tests
             EncryptionPropertyCollection encPropertyCollection = new EncryptionPropertyCollection();
             EncryptionProperty encProperty = new EncryptionProperty();
             encPropertyCollection.Add(encProperty);
-            EncryptionProperty[] encPropertyArray = new EncryptionProperty[encPropertyCollection.Count];
+            EncryptionProperty[] encPropertyArray = new EncryptionProperty[
+                encPropertyCollection.Count
+            ];
             encPropertyCollection.CopyTo(encPropertyArray, 0);
             Assert.Equal(encProperty, encPropertyArray[0]);
         }
@@ -230,7 +232,11 @@ namespace System.Security.Cryptography.Xml.Tests
                 encPropertyCollection.Add(new EncryptionProperty());
             }
             EncryptionProperty[] encPropertyArray = new EncryptionProperty[1];
-            AssertExtensions.Throws<ArgumentException>("destinationArray", "", () => encPropertyCollection.CopyTo(encPropertyArray, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                "destinationArray",
+                "",
+                () => encPropertyCollection.CopyTo(encPropertyArray, 0)
+            );
         }
 
         [Fact]
@@ -242,7 +248,9 @@ namespace System.Security.Cryptography.Xml.Tests
                 encPropertyCollection.Add(new EncryptionProperty());
             }
             EncryptionProperty[] encPropertyArray = new EncryptionProperty[2];
-            Assert.Throws<ArgumentOutOfRangeException>(() => encPropertyCollection.CopyTo(encPropertyArray, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                encPropertyCollection.CopyTo(encPropertyArray, -1)
+            );
         }
 
         [Fact]

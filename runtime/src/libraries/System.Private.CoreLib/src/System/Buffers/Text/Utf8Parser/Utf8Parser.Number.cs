@@ -13,7 +13,13 @@ namespace System.Buffers.Text
             AllowExponent = 0x00000001,
         }
 
-        private static bool TryParseNumber(ReadOnlySpan<byte> source, ref Number.NumberBuffer number, out int bytesConsumed, ParseNumberOptions options, out bool textUsedExponentNotation)
+        private static bool TryParseNumber(
+            ReadOnlySpan<byte> source,
+            ref Number.NumberBuffer number,
+            out int bytesConsumed,
+            ParseNumberOptions options,
+            out bool textUsedExponentNotation
+        )
         {
             Debug.Assert(number.DigitsCount == 0);
             Debug.Assert(number.Scale == 0);
@@ -107,11 +113,20 @@ namespace System.Buffers.Text
             number.HasNonZeroTail = (hasNonZeroTail != 0);
 
             int numDigitsBeforeDecimal = srcIndex - startIndexDigitsBeforeDecimal;
-            int numNonLeadingDigitsBeforeDecimal = srcIndex - startIndexNonLeadingDigitsBeforeDecimal;
+            int numNonLeadingDigitsBeforeDecimal =
+                srcIndex - startIndexNonLeadingDigitsBeforeDecimal;
 
             Debug.Assert(dstIndex == 0);
-            int numNonLeadingDigitsBeforeDecimalToCopy = Math.Min(numNonLeadingDigitsBeforeDecimal, maxDigitCount);
-            source.Slice(startIndexNonLeadingDigitsBeforeDecimal, numNonLeadingDigitsBeforeDecimalToCopy).CopyTo(digits);
+            int numNonLeadingDigitsBeforeDecimalToCopy = Math.Min(
+                numNonLeadingDigitsBeforeDecimal,
+                maxDigitCount
+            );
+            source
+                .Slice(
+                    startIndexNonLeadingDigitsBeforeDecimal,
+                    numNonLeadingDigitsBeforeDecimalToCopy
+                )
+                .CopyTo(digits);
             dstIndex = numNonLeadingDigitsBeforeDecimalToCopy;
             number.Scale = numNonLeadingDigitsBeforeDecimal;
 
@@ -167,15 +182,23 @@ namespace System.Buffers.Text
                 if (dstIndex == 0)
                 {
                     // Not copied any digits to the Number struct yet. This means we must continue discarding leading zeroes even though they appeared after the decimal point.
-                    while (startIndexOfDigitsAfterDecimalToCopy < srcIndex && source[startIndexOfDigitsAfterDecimalToCopy] == '0')
+                    while (
+                        startIndexOfDigitsAfterDecimalToCopy < srcIndex
+                        && source[startIndexOfDigitsAfterDecimalToCopy] == '0'
+                    )
                     {
                         number.Scale--;
                         startIndexOfDigitsAfterDecimalToCopy++;
                     }
                 }
 
-                int numDigitsAfterDecimalToCopy = Math.Min(srcIndex - startIndexOfDigitsAfterDecimalToCopy, maxDigitCount - dstIndex);
-                source.Slice(startIndexOfDigitsAfterDecimalToCopy, numDigitsAfterDecimalToCopy).CopyTo(digits.Slice(dstIndex));
+                int numDigitsAfterDecimalToCopy = Math.Min(
+                    srcIndex - startIndexOfDigitsAfterDecimalToCopy,
+                    maxDigitCount - dstIndex
+                );
+                source
+                    .Slice(startIndexOfDigitsAfterDecimalToCopy, numDigitsAfterDecimalToCopy)
+                    .CopyTo(digits.Slice(dstIndex));
                 dstIndex += numDigitsAfterDecimalToCopy;
                 // We "should" really NUL terminate, but there are multiple places we'd have to do this and it is a precondition that the caller pass in a fully zero=initialized Number.
 
@@ -258,7 +281,13 @@ namespace System.Buffers.Text
                 return false;
             }
 
-            if (!TryParseUInt32D(source.Slice(srcIndex), out uint absoluteExponent, out int bytesConsumedByExponent))
+            if (
+                !TryParseUInt32D(
+                    source.Slice(srcIndex),
+                    out uint absoluteExponent,
+                    out int bytesConsumedByExponent
+                )
+            )
             {
                 // Since we found at least one digit, we know that any failure to parse means we had an
                 // exponent that was larger than uint.MaxValue, and we can just eat characters until the end

@@ -4,16 +4,15 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.Text;
     using System.Xml;
-
-    using QName = System.ServiceModel.Dispatcher.EndpointAddressProcessor.QName;
     using HeaderBit = System.ServiceModel.Dispatcher.EndpointAddressProcessor.HeaderBit;
+    using QName = System.ServiceModel.Dispatcher.EndpointAddressProcessor.QName;
 
     public class EndpointAddressMessageFilter : MessageFilter
     {
@@ -23,11 +22,12 @@ namespace System.ServiceModel.Dispatcher
         UriComparer comparer;
 
         public EndpointAddressMessageFilter(EndpointAddress address)
-            : this(address, false)
-        {
-        }
+            : this(address, false) { }
 
-        public EndpointAddressMessageFilter(EndpointAddress address, bool includeHostNameInComparison)
+        public EndpointAddressMessageFilter(
+            EndpointAddress address,
+            bool includeHostNameInComparison
+        )
         {
             if (address == null)
             {
@@ -50,10 +50,7 @@ namespace System.ServiceModel.Dispatcher
 
         public EndpointAddress Address
         {
-            get
-            {
-                return this.address;
-            }
+            get { return this.address; }
         }
 
         public bool IncludeHostNameInComparison
@@ -111,10 +108,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal bool ComparePort
         {
-            set
-            {
-                comparer.ComparePort = value;
-            }
+            set { comparer.ComparePort = value; }
         }
 
         internal abstract class UriComparer : EqualityComparer<Uri>
@@ -126,15 +120,18 @@ namespace System.ServiceModel.Dispatcher
 
             protected abstract bool CompareHost { get; }
 
-            internal bool ComparePort
-            {
-                get;
-                set;
-            }
+            internal bool ComparePort { get; set; }
 
             public override bool Equals(Uri u1, Uri u2)
             {
-                return EndpointAddress.UriEquals(u1, u2, true /* ignoreCase */, CompareHost, ComparePort);
+                return EndpointAddress.UriEquals(
+                    u1,
+                    u2,
+                    true /* ignoreCase */
+                    ,
+                    CompareHost,
+                    ComparePort
+                );
             }
 
             public override int GetHashCode(Uri uri)
@@ -147,16 +144,11 @@ namespace System.ServiceModel.Dispatcher
         {
             internal static readonly UriComparer Value = new HostUriComparer();
 
-            HostUriComparer()
-            {
-            }
+            HostUriComparer() { }
 
             protected override bool CompareHost
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
         }
 
@@ -164,16 +156,11 @@ namespace System.ServiceModel.Dispatcher
         {
             internal static readonly UriComparer Value = new NoHostUriComparer();
 
-            NoHostUriComparer()
-            {
-            }
+            NoHostUriComparer() { }
 
             protected override bool CompareHost
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
         }
     }
@@ -223,7 +210,6 @@ namespace System.ServiceModel.Dispatcher
                 else
                     builder.Remove(0, builder.Length);
 
-
                 key = this.address.Headers[i].GetComparableForm(builder);
                 if (this.headerLookup.TryGetValue(key, out bits))
                 {
@@ -233,7 +219,6 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else
                 {
-
                     this.headerLookup.Add(key, new HeaderBit[] { new HeaderBit(nextBit++) });
                     AddressHeader parameter = this.address.Headers[i];
 
@@ -324,6 +309,5 @@ namespace System.ServiceModel.Dispatcher
                 this.processorPool.Target = context;
             }
         }
-
     }
 }

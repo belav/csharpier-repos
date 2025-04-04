@@ -23,10 +23,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,41 +38,57 @@
 
 using System;
 
-namespace Mono.Security.Protocol.Ntlm {
+namespace Mono.Security.Protocol.Ntlm
+{
+    [Flags]
+    public enum NtlmFlags : int
+    {
+        // The client sets this flag to indicate that it supports Unicode strings.
+        NegotiateUnicode = 0x00000001,
 
-	[Flags]
-	public enum NtlmFlags : int {
-		// The client sets this flag to indicate that it supports Unicode strings.
-		NegotiateUnicode = 0x00000001,
-		// This is set to indicate that the client supports OEM strings.
-		NegotiateOem = 0x00000002,
-		// This requests that the server send the authentication target with the Type 2 reply.
-		RequestTarget = 0x00000004,
-		// Negotiate Sign
-		NegotiateSign = 0x00000010,
-		// Negotiate Seal
-		NegotiateSeal = 0x00000020,
-		// Negotiate DatagramStyle
-		NegotiateDatagramStyle = 0x00000040,
-		// Negotiate Lan Manager Key
-		NegotiateLm = 0x00000080,
-		// Indicates that NTLM authentication is supported.
-		NegotiateNtlm = 0x00000200,
-		// Indicates that NTLM authentication is supported.
-		NegotiateAnonymous = 0x00000800,
-		// When set, the client will send with the message the name of the domain in which the workstation has membership.
-		NegotiateDomainSupplied = 0x00001000,
-		// Indicates that the client is sending its workstation name with the message.  
-		NegotiateWorkstationSupplied = 0x00002000,
-		// Indicates that communication between the client and server after authentication should carry a "dummy" signature.
-		NegotiateAlwaysSign = 0x00008000,
-		// Indicates that this client supports the NTLM2 signing and sealing scheme; if negotiated, this can also affect the response calculations.
-		NegotiateNtlm2Key = 0x00080000,
-		// Indicates that this client supports strong (128-bit) encryption.
-		Negotiate128 = 0x20000000,
-		// Negotiate Key Exchange
-		NegotiateKeyExchange = 0x40000000,
-		// Indicates that this client supports medium (56-bit) encryption.
-		Negotiate56 = (unchecked ((int) 0x80000000))
-	}
+        // This is set to indicate that the client supports OEM strings.
+        NegotiateOem = 0x00000002,
+
+        // This requests that the server send the authentication target with the Type 2 reply.
+        RequestTarget = 0x00000004,
+
+        // Negotiate Sign
+        NegotiateSign = 0x00000010,
+
+        // Negotiate Seal
+        NegotiateSeal = 0x00000020,
+
+        // Negotiate DatagramStyle
+        NegotiateDatagramStyle = 0x00000040,
+
+        // Negotiate Lan Manager Key
+        NegotiateLm = 0x00000080,
+
+        // Indicates that NTLM authentication is supported.
+        NegotiateNtlm = 0x00000200,
+
+        // Indicates that NTLM authentication is supported.
+        NegotiateAnonymous = 0x00000800,
+
+        // When set, the client will send with the message the name of the domain in which the workstation has membership.
+        NegotiateDomainSupplied = 0x00001000,
+
+        // Indicates that the client is sending its workstation name with the message.
+        NegotiateWorkstationSupplied = 0x00002000,
+
+        // Indicates that communication between the client and server after authentication should carry a "dummy" signature.
+        NegotiateAlwaysSign = 0x00008000,
+
+        // Indicates that this client supports the NTLM2 signing and sealing scheme; if negotiated, this can also affect the response calculations.
+        NegotiateNtlm2Key = 0x00080000,
+
+        // Indicates that this client supports strong (128-bit) encryption.
+        Negotiate128 = 0x20000000,
+
+        // Negotiate Key Exchange
+        NegotiateKeyExchange = 0x40000000,
+
+        // Indicates that this client supports medium (56-bit) encryption.
+        Negotiate56 = (unchecked((int)0x80000000)),
+    }
 }

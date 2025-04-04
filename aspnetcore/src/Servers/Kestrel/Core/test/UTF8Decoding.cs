@@ -18,7 +18,12 @@ public class UTF8DecodingTests
     [InlineData(new byte[] { 0xef, 0xbf, 0xbd })] // 3 bytes: Replacement character, highest UTF-8 character currently encoded in the UTF-8 code page
     private void FullUTF8RangeSupported(byte[] encodedBytes)
     {
-        var s = HttpUtilities.GetRequestHeaderString(encodedBytes.AsSpan(), HeaderNames.Accept, KestrelServerOptions.DefaultHeaderEncodingSelector, checkForNewlineChars: false);
+        var s = HttpUtilities.GetRequestHeaderString(
+            encodedBytes.AsSpan(),
+            HeaderNames.Accept,
+            KestrelServerOptions.DefaultHeaderEncodingSelector,
+            checkForNewlineChars: false
+        );
 
         Assert.Equal(1, s.Length);
     }
@@ -37,7 +42,13 @@ public class UTF8DecodingTests
                 Array.Copy(bytes, 0, byteRange, position, bytes.Length);
 
                 Assert.Throws<InvalidOperationException>(() =>
-                    HttpUtilities.GetRequestHeaderString(byteRange.AsSpan(), HeaderNames.Accept, KestrelServerOptions.DefaultHeaderEncodingSelector, checkForNewlineChars: false));
+                    HttpUtilities.GetRequestHeaderString(
+                        byteRange.AsSpan(),
+                        HeaderNames.Accept,
+                        KestrelServerOptions.DefaultHeaderEncodingSelector,
+                        checkForNewlineChars: false
+                    )
+                );
             }
         }
     }

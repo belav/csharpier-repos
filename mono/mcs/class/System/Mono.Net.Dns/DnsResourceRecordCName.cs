@@ -22,24 +22,27 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Mono.Net.Dns {
-	class DnsResourceRecordCName : DnsResourceRecord {
-		string cname;
+namespace Mono.Net.Dns
+{
+    class DnsResourceRecordCName : DnsResourceRecord
+    {
+        string cname;
 
-		internal DnsResourceRecordCName (DnsResourceRecord rr)
-		{
-			CopyFrom (rr);
-			int offset = rr.Data.Offset;
-			cname = DnsPacket.ReadName (rr.Data.Array, ref offset);
-		}
+        internal DnsResourceRecordCName(DnsResourceRecord rr)
+        {
+            CopyFrom(rr);
+            int offset = rr.Data.Offset;
+            cname = DnsPacket.ReadName(rr.Data.Array, ref offset);
+        }
 
-		public string CName {
-			get { return cname; }
-		}
+        public string CName
+        {
+            get { return cname; }
+        }
 
-		public override string ToString ()
-		{
-			return base.ToString () + " CNAME: " + cname.ToString ();
-		}
-	}
+        public override string ToString()
+        {
+            return base.ToString() + " CNAME: " + cname.ToString();
+        }
+    }
 }

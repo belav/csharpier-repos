@@ -1,58 +1,70 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
+using System.Runtime.InteropServices;
+using Microsoft.Win32.SafeHandles;
 #if FEATURE_CORESYSTEM
 using System.Core;
 #endif
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.InteropServices;
-using System.Diagnostics.Contracts;
-using Microsoft.Win32.SafeHandles;
 
-namespace System.Security.Cryptography {
+namespace System.Security.Cryptography
+{
     /// <summary>
     ///     Flag to indicate if we're doing encryption or decryption
     /// </summary>
-    internal enum EncryptionMode {
+    internal enum EncryptionMode
+    {
         Encrypt,
-        Decrypt
+        Decrypt,
     }
 
     /// <summary>
     ///     Implementation of a generic CAPI symmetric encryption algorithm. Concrete SymmetricAlgorithm classes
     ///     which wrap CAPI implementations can use this class to perform the actual encryption work.
     /// </summary>
-    internal sealed class CapiSymmetricAlgorithm : ICryptoTransform {
+    internal sealed class CapiSymmetricAlgorithm : ICryptoTransform
+    {
         private int m_blockSize;
         private byte[] m_depadBuffer;
         private EncryptionMode m_encryptionMode;
+
         [SecurityCritical]
         private SafeCapiKeyHandle m_key;
         private PaddingMode m_paddingMode;
+
         [SecurityCritical]
         private SafeCspHandle m_provider;
 
         [System.Security.SecurityCritical]
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Reviewed")]
-        public CapiSymmetricAlgorithm(int blockSize,
-                                      int feedbackSize,
-                                      SafeCspHandle provider,
-                                      SafeCapiKeyHandle key,
-                                      byte[] iv,
-                                      CipherMode cipherMode,
-                                      PaddingMode paddingMode,
-                                      EncryptionMode encryptionMode) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
+            Justification = "Reviewed"
+        )]
+        public CapiSymmetricAlgorithm(
+            int blockSize,
+            int feedbackSize,
+            SafeCspHandle provider,
+            SafeCapiKeyHandle key,
+            byte[] iv,
+            CipherMode cipherMode,
+            PaddingMode paddingMode,
+            EncryptionMode encryptionMode
+        )
+        {
             Contract.Requires(0 < blockSize && blockSize % 8 == 0);
             Contract.Requires(0 <= feedbackSize);
             Contract.Requires(provider != null && !provider.IsInvalid && !provider.IsClosed);
             Contract.Requires(key != null && !key.IsInvalid && !key.IsClosed);
             Contract.Ensures(m_provider != null && !m_provider.IsInvalid && !m_provider.IsClosed);
-            
+
             m_blockSize = blockSize;
             m_encryptionMode = encryptionMode;
             m_paddingMode = paddingMode;
@@ -60,11 +72,13 @@ namespace System.Security.Cryptography {
             m_key = SetupKey(key, ProcessIV(iv, blockSize, cipherMode), cipherMode, feedbackSize);
         }
 
-        public bool CanReuseTransform {
+        public bool CanReuseTransform
+        {
             get { return true; }
         }
 
-        public bool CanTransformMultipleBlocks {
+        public bool CanTransformMultipleBlocks
+        {
             get { return true; }
         }
 
@@ -72,30 +86,36 @@ namespace System.Security.Cryptography {
         // Note: both input and output block size are in bytes rather than bits
         //
 
-        public int InputBlockSize {
+        public int InputBlockSize
+        {
             [Pure]
             get { return m_blockSize / 8; }
         }
 
-        public int OutputBlockSize {
+        public int OutputBlockSize
+        {
             get { return m_blockSize / 8; }
         }
 
         [SecuritySafeCritical]
-        public void Dispose() {
+        public void Dispose()
+        {
             Contract.Ensures(m_key == null || m_key.IsClosed);
             Contract.Ensures(m_provider == null || m_provider.IsClosed);
             Contract.Ensures(m_depadBuffer == null);
 
-            if (m_key != null) {
+            if (m_key != null)
+            {
                 m_key.Dispose();
             }
 
-            if (m_provider != null) {
+            if (m_provider != null)
+            {
                 m_provider.Dispose();
             }
 
-            if (m_depadBuffer != null) {
+            if (m_depadBuffer != null)
+            {
                 Array.Clear(m_depadBuffer, 0, m_depadBuffer.Length);
             }
 
@@ -103,14 +123,28 @@ namespace System.Security.Cryptography {
         }
 
         [SecuritySafeCritical]
-        private int DecryptBlocks(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset) {
+        private int DecryptBlocks(
+            byte[] inputBuffer,
+            int inputOffset,
+            int inputCount,
+            byte[] outputBuffer,
+            int outputOffset
+        )
+        {
             Contract.Requires(m_key != null);
-            Contract.Requires(inputBuffer != null && inputCount <= inputBuffer.Length - inputOffset);
+            Contract.Requires(
+                inputBuffer != null && inputCount <= inputBuffer.Length - inputOffset
+            );
             Contract.Requires(inputOffset >= 0);
             Contract.Requires(inputCount > 0 && inputCount % InputBlockSize == 0);
-            Contract.Requires(outputBuffer != null && inputCount <= outputBuffer.Length - outputOffset);
+            Contract.Requires(
+                outputBuffer != null && inputCount <= outputBuffer.Length - outputOffset
+            );
             Contract.Requires(inputOffset >= 0);
-            Contract.Requires(m_depadBuffer == null || (m_paddingMode != PaddingMode.None && m_paddingMode != PaddingMode.Zeros));
+            Contract.Requires(
+                m_depadBuffer == null
+                    || (m_paddingMode != PaddingMode.None && m_paddingMode != PaddingMode.Zeros)
+            );
             Contract.Ensures(Contract.Result<int>() >= 0);
 
             //
@@ -125,33 +159,55 @@ namespace System.Security.Cryptography {
             //
 
             int decryptedBytes = 0;
-            if (m_paddingMode != PaddingMode.None && m_paddingMode != PaddingMode.Zeros) {
+            if (m_paddingMode != PaddingMode.None && m_paddingMode != PaddingMode.Zeros)
+            {
                 // If we have data saved from a previous call, decrypt that into the output first
-                if (m_depadBuffer != null) {
-                    int depadDecryptLength = RawDecryptBlocks(m_depadBuffer, 0, m_depadBuffer.Length);
-                    Buffer.BlockCopy(m_depadBuffer, 0, outputBuffer, outputOffset, depadDecryptLength);
+                if (m_depadBuffer != null)
+                {
+                    int depadDecryptLength = RawDecryptBlocks(
+                        m_depadBuffer,
+                        0,
+                        m_depadBuffer.Length
+                    );
+                    Buffer.BlockCopy(
+                        m_depadBuffer,
+                        0,
+                        outputBuffer,
+                        outputOffset,
+                        depadDecryptLength
+                    );
                     Array.Clear(m_depadBuffer, 0, m_depadBuffer.Length);
                     outputOffset += depadDecryptLength;
                     decryptedBytes += depadDecryptLength;
                 }
-                else {
+                else
+                {
                     m_depadBuffer = new byte[InputBlockSize];
                 }
 
                 // Copy the last block of the input buffer into the depad buffer
-                Debug.Assert(inputCount >= m_depadBuffer.Length, "inputCount >= m_depadBuffer.Length");
-                Buffer.BlockCopy(inputBuffer,
-                                 inputOffset + inputCount - m_depadBuffer.Length,
-                                 m_depadBuffer,
-                                 0,
-                                 m_depadBuffer.Length);
+                Debug.Assert(
+                    inputCount >= m_depadBuffer.Length,
+                    "inputCount >= m_depadBuffer.Length"
+                );
+                Buffer.BlockCopy(
+                    inputBuffer,
+                    inputOffset + inputCount - m_depadBuffer.Length,
+                    m_depadBuffer,
+                    0,
+                    m_depadBuffer.Length
+                );
                 inputCount -= m_depadBuffer.Length;
-                Debug.Assert(inputCount % InputBlockSize == 0, "Did not remove whole blocks for depadding");
+                Debug.Assert(
+                    inputCount % InputBlockSize == 0,
+                    "Did not remove whole blocks for depadding"
+                );
             }
 
             // CryptDecrypt operates in place, so if after reserving the depad buffer there's still data to decrypt,
             // make a copy of that in the output buffer to work on.
-            if (inputCount > 0) {
+            if (inputCount > 0)
+            {
                 Buffer.BlockCopy(inputBuffer, inputOffset, outputBuffer, outputOffset, inputCount);
                 decryptedBytes += RawDecryptBlocks(outputBuffer, outputOffset, inputCount);
             }
@@ -162,29 +218,41 @@ namespace System.Security.Cryptography {
         /// <summary>
         ///     Remove the padding from the last blocks being decrypted
         /// </summary>
-        private byte[] DepadBlock(byte[] block, int offset, int count) {
+        private byte[] DepadBlock(byte[] block, int offset, int count)
+        {
             Contract.Requires(block != null && count >= block.Length - offset);
             Contract.Requires(0 <= offset);
             Contract.Requires(0 <= count);
-            Contract.Ensures(Contract.Result<byte[]>() != null && Contract.Result<byte[]>().Length <= block.Length);
+            Contract.Ensures(
+                Contract.Result<byte[]>() != null
+                    && Contract.Result<byte[]>().Length <= block.Length
+            );
 
             int padBytes = 0;
 
             // See code:System.Security.Cryptography.CapiSymmetricAlgorithm.PadBlock for a description of the
             // padding modes.
-            switch (m_paddingMode) {
+            switch (m_paddingMode)
+            {
                 case PaddingMode.ANSIX923:
                     padBytes = block[offset + count - 1];
 
                     // Verify the amount of padding is reasonable
-                    if (padBytes <= 0 || padBytes > InputBlockSize) {
-                        throw new CryptographicException(SR.GetString(SR.Cryptography_InvalidPadding));
+                    if (padBytes <= 0 || padBytes > InputBlockSize)
+                    {
+                        throw new CryptographicException(
+                            SR.GetString(SR.Cryptography_InvalidPadding)
+                        );
                     }
 
                     // Verify that all the padding bytes are 0s
-                    for (int i = offset + count - padBytes; i < offset + count - 1; i++) {
-                        if (block[i] != 0) {
-                            throw new CryptographicException(SR.GetString(SR.Cryptography_InvalidPadding));
+                    for (int i = offset + count - padBytes; i < offset + count - 1; i++)
+                    {
+                        if (block[i] != 0)
+                        {
+                            throw new CryptographicException(
+                                SR.GetString(SR.Cryptography_InvalidPadding)
+                            );
                         }
                     }
 
@@ -194,8 +262,11 @@ namespace System.Security.Cryptography {
                     padBytes = block[offset + count - 1];
 
                     // Verify the amount of padding is reasonable
-                    if (padBytes <= 0 || padBytes > InputBlockSize) {
-                        throw new CryptographicException(SR.GetString(SR.Cryptography_InvalidPadding));
+                    if (padBytes <= 0 || padBytes > InputBlockSize)
+                    {
+                        throw new CryptographicException(
+                            SR.GetString(SR.Cryptography_InvalidPadding)
+                        );
                     }
 
                     // Since the padding consists of random bytes, we cannot verify the actual pad bytes themselves
@@ -205,28 +276,37 @@ namespace System.Security.Cryptography {
                     padBytes = block[offset + count - 1];
 
                     // Verify the amount of padding is reasonable
-                    if (padBytes <= 0 || padBytes > InputBlockSize) {
-                        throw new CryptographicException(SR.GetString(SR.Cryptography_InvalidPadding));
+                    if (padBytes <= 0 || padBytes > InputBlockSize)
+                    {
+                        throw new CryptographicException(
+                            SR.GetString(SR.Cryptography_InvalidPadding)
+                        );
                     }
 
                     // Verify all the padding bytes match the amount of padding
-                    for (int i = offset + count - padBytes; i < offset + count; i++) {
-                        if (block[i] != padBytes) {
-                            throw new CryptographicException(SR.GetString(SR.Cryptography_InvalidPadding));
+                    for (int i = offset + count - padBytes; i < offset + count; i++)
+                    {
+                        if (block[i] != padBytes)
+                        {
+                            throw new CryptographicException(
+                                SR.GetString(SR.Cryptography_InvalidPadding)
+                            );
                         }
                     }
 
                     break;
 
-                    // We cannot remove Zeros padding because we don't know if the zeros at the end of the block
-                    // belong to the padding or the plaintext itself.
+                // We cannot remove Zeros padding because we don't know if the zeros at the end of the block
+                // belong to the padding or the plaintext itself.
                 case PaddingMode.Zeros:
                 case PaddingMode.None:
                     padBytes = 0;
                     break;
 
                 default:
-                    throw new CryptographicException(SR.GetString(SR.Cryptography_UnknownPaddingMode));
+                    throw new CryptographicException(
+                        SR.GetString(SR.Cryptography_UnknownPaddingMode)
+                    );
             }
 
             // Copy everything but the padding to the output
@@ -239,7 +319,8 @@ namespace System.Security.Cryptography {
         ///     Encrypt blocks of plaintext
         /// </summary>
         [SecurityCritical]
-        private int EncryptBlocks(byte[] buffer, int offset, int count) {
+        private int EncryptBlocks(byte[] buffer, int offset, int count)
+        {
             Contract.Requires(m_key != null);
             Contract.Requires(buffer != null && count <= buffer.Length - offset);
             Contract.Requires(offset >= 0);
@@ -253,15 +334,22 @@ namespace System.Security.Cryptography {
             //
 
             int dataLength = count;
-            unsafe {
-                fixed (byte* pData = &buffer[offset]) {
-                    if (!CapiNative.UnsafeNativeMethods.CryptEncrypt(m_key,
-                                                                     SafeCapiHashHandle.InvalidHandle,
-                                                                     false,
-                                                                     0,
-                                                                     new IntPtr(pData),
-                                                                     ref dataLength,
-                                                                     buffer.Length - offset)) {
+            unsafe
+            {
+                fixed (byte* pData = &buffer[offset])
+                {
+                    if (
+                        !CapiNative.UnsafeNativeMethods.CryptEncrypt(
+                            m_key,
+                            SafeCapiHashHandle.InvalidHandle,
+                            false,
+                            0,
+                            new IntPtr(pData),
+                            ref dataLength,
+                            buffer.Length - offset
+                        )
+                    )
+                    {
                         throw new CryptographicException(Marshal.GetLastWin32Error());
                     }
                 }
@@ -274,68 +362,82 @@ namespace System.Security.Cryptography {
         ///     Calculate the padding for a block of data
         /// </summary>
         [SecuritySafeCritical]
-        private byte[] PadBlock(byte[] block, int offset, int count) {
+        private byte[] PadBlock(byte[] block, int offset, int count)
+        {
             Contract.Requires(m_provider != null);
             Contract.Requires(block != null && count <= block.Length - offset);
             Contract.Requires(0 <= offset);
             Contract.Requires(0 <= count);
-            Contract.Ensures(Contract.Result<byte[]>() != null && Contract.Result<byte[]>().Length % InputBlockSize == 0);
+            Contract.Ensures(
+                Contract.Result<byte[]>() != null
+                    && Contract.Result<byte[]>().Length % InputBlockSize == 0
+            );
 
             byte[] result = null;
             int padBytes = InputBlockSize - (count % InputBlockSize);
-            
-            switch (m_paddingMode) {
-                    // ANSI padding fills the blocks with zeros and adds the total number of padding bytes as
-                    // the last pad byte, adding an extra block if the last block is complete.
-                    //
-                    // x 00 00 00 00 00 00 07
+
+            switch (m_paddingMode)
+            {
+                // ANSI padding fills the blocks with zeros and adds the total number of padding bytes as
+                // the last pad byte, adding an extra block if the last block is complete.
+                //
+                // x 00 00 00 00 00 00 07
                 case PaddingMode.ANSIX923:
                     result = new byte[count + padBytes];
                     Buffer.BlockCopy(block, 0, result, 0, count);
                     result[result.Length - 1] = (byte)padBytes;
                     break;
 
-                    // ISO padding fills the blocks up with random bytes and adds the total number of padding
-                    // bytes as the last pad byte, adding an extra block if the last block is complete.
-                    //
-                    // xx rr rr rr rr rr rr 07
+                // ISO padding fills the blocks up with random bytes and adds the total number of padding
+                // bytes as the last pad byte, adding an extra block if the last block is complete.
+                //
+                // xx rr rr rr rr rr rr 07
                 case PaddingMode.ISO10126:
                     result = new byte[count + padBytes];
-                    
-                    CapiNative.UnsafeNativeMethods.CryptGenRandom(m_provider, result.Length - 1, result);
+
+                    CapiNative.UnsafeNativeMethods.CryptGenRandom(
+                        m_provider,
+                        result.Length - 1,
+                        result
+                    );
                     Buffer.BlockCopy(block, 0, result, 0, count);
                     result[result.Length - 1] = (byte)padBytes;
                     break;
 
-                    // No padding requires that the input already be a multiple of the block size
+                // No padding requires that the input already be a multiple of the block size
                 case PaddingMode.None:
-                    if (count % InputBlockSize != 0) {
-                        throw new CryptographicException(SR.GetString(SR.Cryptography_PartialBlock));
+                    if (count % InputBlockSize != 0)
+                    {
+                        throw new CryptographicException(
+                            SR.GetString(SR.Cryptography_PartialBlock)
+                        );
                     }
 
                     result = new byte[count];
                     Buffer.BlockCopy(block, offset, result, 0, result.Length);
                     break;
 
-                    // PKCS padding fills the blocks up with bytes containing the total number of padding bytes
-                    // used, adding an extra block if the last block is complete.
-                    //
-                    // xx xx 06 06 06 06 06 06
+                // PKCS padding fills the blocks up with bytes containing the total number of padding bytes
+                // used, adding an extra block if the last block is complete.
+                //
+                // xx xx 06 06 06 06 06 06
                 case PaddingMode.PKCS7:
                     result = new byte[count + padBytes];
                     Buffer.BlockCopy(block, offset, result, 0, count);
 
-                    for (int i = count; i < result.Length; i++) {
+                    for (int i = count; i < result.Length; i++)
+                    {
                         result[i] = (byte)padBytes;
                     }
                     break;
 
-                    // Zeros padding fills the last partial block with zeros, and does not add a new block to
-                    // the end if the last block is already complete.
-                    //
-                    //  xx 00 00 00 00 00 00 00
+                // Zeros padding fills the last partial block with zeros, and does not add a new block to
+                // the end if the last block is already complete.
+                //
+                //  xx 00 00 00 00 00 00 00
                 case PaddingMode.Zeros:
-                    if (padBytes == InputBlockSize) {
+                    if (padBytes == InputBlockSize)
+                    {
                         padBytes = 0;
                     }
 
@@ -344,7 +446,9 @@ namespace System.Security.Cryptography {
                     break;
 
                 default:
-                    throw new CryptographicException(SR.GetString(SR.Cryptography_UnknownPaddingMode));
+                    throw new CryptographicException(
+                        SR.GetString(SR.Cryptography_UnknownPaddingMode)
+                    );
             }
 
             return result;
@@ -360,23 +464,33 @@ namespace System.Security.Cryptography {
         ///     For compatibility with v1.x, we accept IVs which are longer than the block size, and truncate
         ///     them back.  We will reject an IV which is smaller than the block size however.
         /// </summary>
-        private static byte[] ProcessIV(byte[] iv, int blockSize, CipherMode cipherMode) {
+        private static byte[] ProcessIV(byte[] iv, int blockSize, CipherMode cipherMode)
+        {
             Contract.Requires(blockSize % 8 == 0);
-            Contract.Ensures(cipherMode == CipherMode.ECB ||
-                             (Contract.Result<byte[]>() != null && Contract.Result<byte[]>().Length == blockSize / 8));
+            Contract.Ensures(
+                cipherMode == CipherMode.ECB
+                    || (
+                        Contract.Result<byte[]>() != null
+                        && Contract.Result<byte[]>().Length == blockSize / 8
+                    )
+            );
 
             byte[] realIV = null;
 
-            if (iv != null) {
-                if (blockSize / 8 <= iv.Length) {
+            if (iv != null)
+            {
+                if (blockSize / 8 <= iv.Length)
+                {
                     realIV = new byte[blockSize / 8];
                     Buffer.BlockCopy(iv, 0, realIV, 0, realIV.Length);
                 }
-                else {
+                else
+                {
                     throw new CryptographicException(SR.GetString(SR.Cryptography_InvalidIVSize));
                 }
             }
-            else if (cipherMode != CipherMode.ECB) {
+            else if (cipherMode != CipherMode.ECB)
+            {
                 throw new CryptographicException(SR.GetString(SR.Cryptography_MissingIV));
             }
 
@@ -389,7 +503,8 @@ namespace System.Security.Cryptography {
         ///     direct use could lead to incorrect decryption values.
         /// </summary>
         [SecurityCritical]
-        private int RawDecryptBlocks(byte[] buffer, int offset, int count) {
+        private int RawDecryptBlocks(byte[] buffer, int offset, int count)
+        {
             Contract.Requires(m_key != null);
             Contract.Requires(buffer != null && count <= buffer.Length - offset);
             Contract.Requires(offset >= 0);
@@ -403,14 +518,21 @@ namespace System.Security.Cryptography {
             //
 
             int dataLength = count;
-            unsafe {
-                fixed (byte* pData = &buffer[offset]) {
-                    if (!CapiNative.UnsafeNativeMethods.CryptDecrypt(m_key,
-                                                                     SafeCapiHashHandle.InvalidHandle,
-                                                                     false,
-                                                                     0,
-                                                                     new IntPtr(pData),
-                                                                     ref dataLength)) {
+            unsafe
+            {
+                fixed (byte* pData = &buffer[offset])
+                {
+                    if (
+                        !CapiNative.UnsafeNativeMethods.CryptDecrypt(
+                            m_key,
+                            SafeCapiHashHandle.InvalidHandle,
+                            false,
+                            0,
+                            new IntPtr(pData),
+                            ref dataLength
+                        )
+                    )
+                    {
                         throw new CryptographicException(Marshal.GetLastWin32Error());
                     }
                 }
@@ -423,7 +545,8 @@ namespace System.Security.Cryptography {
         ///     Reset the state of the algorithm so that it can begin processing a new message
         /// </summary>
         [SecuritySafeCritical]
-        private void Reset() {
+        private void Reset()
+        {
             Contract.Requires(m_key != null);
             Contract.Ensures(m_depadBuffer == null);
 
@@ -435,33 +558,45 @@ namespace System.Security.Cryptography {
 
             byte[] buffer = new byte[OutputBlockSize];
             int resetSize = 0;
-            unsafe {
-                fixed (byte* pBuffer = buffer) {
-                    if (m_encryptionMode == EncryptionMode.Encrypt) {
-                        CapiNative.UnsafeNativeMethods.CryptEncrypt(m_key,
-                                                                    SafeCapiHashHandle.InvalidHandle,
-                                                                    true,
-                                                                    0,
-                                                                    new IntPtr(pBuffer),
-                                                                    ref resetSize,
-                                                                    buffer.Length);
+            unsafe
+            {
+                fixed (byte* pBuffer = buffer)
+                {
+                    if (m_encryptionMode == EncryptionMode.Encrypt)
+                    {
+                        CapiNative.UnsafeNativeMethods.CryptEncrypt(
+                            m_key,
+                            SafeCapiHashHandle.InvalidHandle,
+                            true,
+                            0,
+                            new IntPtr(pBuffer),
+                            ref resetSize,
+                            buffer.Length
+                        );
                     }
-                    else {
-                        if (!LocalAppContextSwitches.AesCryptoServiceProviderDontCorrectlyResetDecryptor) {
+                    else
+                    {
+                        if (
+                            !LocalAppContextSwitches.AesCryptoServiceProviderDontCorrectlyResetDecryptor
+                        )
+                        {
                             resetSize = buffer.Length;
                         }
-                        CapiNative.UnsafeNativeMethods.CryptDecrypt(m_key,
-                                                                    SafeCapiHashHandle.InvalidHandle,
-                                                                    true,
-                                                                    0,
-                                                                    new IntPtr(pBuffer),
-                                                                    ref resetSize);
+                        CapiNative.UnsafeNativeMethods.CryptDecrypt(
+                            m_key,
+                            SafeCapiHashHandle.InvalidHandle,
+                            true,
+                            0,
+                            new IntPtr(pBuffer),
+                            ref resetSize
+                        );
                     }
                 }
             }
 
             // Also erase the depadding buffer so we don't cross data from the previous message into this one
-            if (m_depadBuffer != null) {
+            if (m_depadBuffer != null)
+            {
                 Array.Clear(m_depadBuffer, 0, m_depadBuffer.Length);
                 m_depadBuffer = null;
             }
@@ -471,39 +606,70 @@ namespace System.Security.Cryptography {
         ///     Encrypt or decrypt a single block of data
         /// </summary>
         [SecuritySafeCritical]
-        public int TransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset) {
+        public int TransformBlock(
+            byte[] inputBuffer,
+            int inputOffset,
+            int inputCount,
+            byte[] outputBuffer,
+            int outputOffset
+        )
+        {
             Contract.Ensures(Contract.Result<int>() >= 0);
 
-            if (inputBuffer == null) {
+            if (inputBuffer == null)
+            {
                 throw new ArgumentNullException("inputBuffer");
             }
-            if (inputOffset < 0) {
+            if (inputOffset < 0)
+            {
                 throw new ArgumentOutOfRangeException("inputOffset");
             }
-            if (inputCount <= 0) {
+            if (inputCount <= 0)
+            {
                 throw new ArgumentOutOfRangeException("inputCount");
             }
-            if (inputCount % InputBlockSize != 0) {
-                throw new ArgumentOutOfRangeException("inputCount", SR.GetString(SR.Cryptography_MustTransformWholeBlock));
+            if (inputCount % InputBlockSize != 0)
+            {
+                throw new ArgumentOutOfRangeException(
+                    "inputCount",
+                    SR.GetString(SR.Cryptography_MustTransformWholeBlock)
+                );
             }
-            if (inputCount > inputBuffer.Length - inputOffset) {
-                throw new ArgumentOutOfRangeException("inputCount", SR.GetString(SR.Cryptography_TransformBeyondEndOfBuffer));
+            if (inputCount > inputBuffer.Length - inputOffset)
+            {
+                throw new ArgumentOutOfRangeException(
+                    "inputCount",
+                    SR.GetString(SR.Cryptography_TransformBeyondEndOfBuffer)
+                );
             }
-            if (outputBuffer == null) {
+            if (outputBuffer == null)
+            {
                 throw new ArgumentNullException("outputBuffer");
             }
-            if (inputCount > outputBuffer.Length - outputOffset) {
-                throw new ArgumentOutOfRangeException("outputOffset", SR.GetString(SR.Cryptography_TransformBeyondEndOfBuffer));
+            if (inputCount > outputBuffer.Length - outputOffset)
+            {
+                throw new ArgumentOutOfRangeException(
+                    "outputOffset",
+                    SR.GetString(SR.Cryptography_TransformBeyondEndOfBuffer)
+                );
             }
 
-            if (m_encryptionMode == EncryptionMode.Encrypt) {
+            if (m_encryptionMode == EncryptionMode.Encrypt)
+            {
                 // CryptEncrypt operates in place, so make a copy of the original data in the output buffer for
                 // it to work on.
                 Buffer.BlockCopy(inputBuffer, inputOffset, outputBuffer, outputOffset, inputCount);
                 return EncryptBlocks(outputBuffer, outputOffset, inputCount);
             }
-            else {
-                return DecryptBlocks(inputBuffer, inputOffset, inputCount, outputBuffer, outputOffset);
+            else
+            {
+                return DecryptBlocks(
+                    inputBuffer,
+                    inputOffset,
+                    inputCount,
+                    outputBuffer,
+                    outputOffset
+                );
             }
         }
 
@@ -511,34 +677,46 @@ namespace System.Security.Cryptography {
         ///     Encrypt or decrypt the last block of data in the current message
         /// </summary>
         [SecuritySafeCritical]
-        public byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount) {
+        public byte[] TransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount)
+        {
             Contract.Ensures(Contract.Result<byte[]>() != null);
 
-            if (inputBuffer == null) {
+            if (inputBuffer == null)
+            {
                 throw new ArgumentNullException("inputBuffer");
             }
-            if (inputOffset < 0) {
+            if (inputOffset < 0)
+            {
                 throw new ArgumentOutOfRangeException("inputOffset");
             }
-            if (inputCount < 0) {
+            if (inputCount < 0)
+            {
                 throw new ArgumentOutOfRangeException("inputCount");
             }
-            if (inputCount > inputBuffer.Length - inputOffset) {
-                throw new ArgumentOutOfRangeException("inputCount", SR.GetString(SR.Cryptography_TransformBeyondEndOfBuffer));
+            if (inputCount > inputBuffer.Length - inputOffset)
+            {
+                throw new ArgumentOutOfRangeException(
+                    "inputCount",
+                    SR.GetString(SR.Cryptography_TransformBeyondEndOfBuffer)
+                );
             }
 
             byte[] outputData = null;
 
-            if (m_encryptionMode == EncryptionMode.Encrypt) {
+            if (m_encryptionMode == EncryptionMode.Encrypt)
+            {
                 // If we're encrypting, we need to pad the last block before encrypting it
                 outputData = PadBlock(inputBuffer, inputOffset, inputCount);
-                if (outputData.Length > 0) {
+                if (outputData.Length > 0)
+                {
                     EncryptBlocks(outputData, 0, outputData.Length);
                 }
             }
-            else {
+            else
+            {
                 // We can't complete decryption on a partial block
-                if (inputCount % InputBlockSize != 0) {
+                if (inputCount % InputBlockSize != 0)
+                {
                     throw new CryptographicException(SR.GetString(SR.Cryptography_PartialBlock));
                 }
 
@@ -549,27 +727,37 @@ namespace System.Security.Cryptography {
 
                 byte[] ciphertext = null;
 
-                if (m_depadBuffer == null) {
+                if (m_depadBuffer == null)
+                {
                     ciphertext = new byte[inputCount];
                     Buffer.BlockCopy(inputBuffer, inputOffset, ciphertext, 0, inputCount);
                 }
-                else {
+                else
+                {
                     ciphertext = new byte[m_depadBuffer.Length + inputCount];
                     Buffer.BlockCopy(m_depadBuffer, 0, ciphertext, 0, m_depadBuffer.Length);
-                    Buffer.BlockCopy(inputBuffer, inputOffset, ciphertext, m_depadBuffer.Length, inputCount);
+                    Buffer.BlockCopy(
+                        inputBuffer,
+                        inputOffset,
+                        ciphertext,
+                        m_depadBuffer.Length,
+                        inputCount
+                    );
                 }
 
                 // Decrypt the data, then strip the padding to get the final decrypted data.
-                if (ciphertext.Length > 0) {
+                if (ciphertext.Length > 0)
+                {
                     int decryptedBytes = RawDecryptBlocks(ciphertext, 0, ciphertext.Length);
                     outputData = DepadBlock(ciphertext, 0, decryptedBytes);
                 }
-                else {
+                else
+                {
                     outputData = new byte[0];
                 }
             }
 
-            Reset();            
+            Reset();
             return outputData;
         }
 
@@ -577,28 +765,46 @@ namespace System.Security.Cryptography {
         ///     Prepare the cryptographic key for use in the encryption / decryption operation
         /// </summary>
         [System.Security.SecurityCritical]
-        private static SafeCapiKeyHandle SetupKey(SafeCapiKeyHandle key, byte[] iv, CipherMode cipherMode, int feedbackSize) {
+        private static SafeCapiKeyHandle SetupKey(
+            SafeCapiKeyHandle key,
+            byte[] iv,
+            CipherMode cipherMode,
+            int feedbackSize
+        )
+        {
             Contract.Requires(key != null);
             Contract.Requires(cipherMode == CipherMode.ECB || iv != null);
             Contract.Requires(0 <= feedbackSize);
-            Contract.Ensures(Contract.Result<SafeCapiKeyHandle>() != null &&
-                             !Contract.Result<SafeCapiKeyHandle>().IsInvalid &&
-                             !Contract.Result<SafeCapiKeyHandle>().IsClosed);
+            Contract.Ensures(
+                Contract.Result<SafeCapiKeyHandle>() != null
+                    && !Contract.Result<SafeCapiKeyHandle>().IsInvalid
+                    && !Contract.Result<SafeCapiKeyHandle>().IsClosed
+            );
 
             // Make a copy of the key so that we don't modify the properties of the caller's copy
             SafeCapiKeyHandle encryptionKey = key.Duplicate();
 
             // Setup the cipher mode first
-            CapiNative.SetKeyParameter(encryptionKey, CapiNative.KeyParameter.Mode, (int)cipherMode);
+            CapiNative.SetKeyParameter(
+                encryptionKey,
+                CapiNative.KeyParameter.Mode,
+                (int)cipherMode
+            );
 
             // If we're not in ECB mode then setup the IV
-            if (cipherMode != CipherMode.ECB) {
+            if (cipherMode != CipherMode.ECB)
+            {
                 CapiNative.SetKeyParameter(encryptionKey, CapiNative.KeyParameter.IV, iv);
             }
 
             // OFB and CFB require a feedback loop size
-            if (cipherMode == CipherMode.CFB || cipherMode == CipherMode.OFB) {
-                CapiNative.SetKeyParameter(encryptionKey, CapiNative.KeyParameter.ModeBits, feedbackSize);
+            if (cipherMode == CipherMode.CFB || cipherMode == CipherMode.OFB)
+            {
+                CapiNative.SetKeyParameter(
+                    encryptionKey,
+                    CapiNative.KeyParameter.ModeBits,
+                    feedbackSize
+                );
             }
 
             return encryptionKey;

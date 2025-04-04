@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.OutputCaching;
 // allows capture of written payloads into a ReadOnlySequence<byte> based on RecyclableReadOnlySequenceSegment
 internal sealed class RecyclableSequenceBuilder : IDisposable
 {
-    private RecyclableReadOnlySequenceSegment? _firstSegment, _currentSegment;
+    private RecyclableReadOnlySequenceSegment? _firstSegment,
+        _currentSegment;
     private int _currentSegmentIndex;
     private readonly int _segmentSize;
     private bool _closed;
@@ -45,7 +46,12 @@ internal sealed class RecyclableSequenceBuilder : IDisposable
         }
 
         // use a segmented sequence
-        var payload = new ReadOnlySequence<byte>(_firstSegment, 0, _currentSegment!, _currentSegmentIndex);
+        var payload = new ReadOnlySequence<byte>(
+            _firstSegment,
+            0,
+            _currentSegment!,
+            _currentSegmentIndex
+        );
 
         // reset our local state for an abundance of caution
         _firstSegment = _currentSegment = null;
@@ -54,7 +60,8 @@ internal sealed class RecyclableSequenceBuilder : IDisposable
         return payload;
     }
 
-    public void Dispose() => RecyclableReadOnlySequenceSegment.RecycleChain(DetachAndReset(), recycleBuffers: true);
+    public void Dispose() =>
+        RecyclableReadOnlySequenceSegment.RecycleChain(DetachAndReset(), recycleBuffers: true);
 
     private Span<byte> GetBuffer()
     {
@@ -62,11 +69,18 @@ internal sealed class RecyclableSequenceBuilder : IDisposable
         {
             Throw();
         }
-        static void Throw() => throw new ObjectDisposedException(nameof(RecyclableSequenceBuilder), "The stream has been closed for writing.");
+        static void Throw() =>
+            throw new ObjectDisposedException(
+                nameof(RecyclableSequenceBuilder),
+                "The stream has been closed for writing."
+            );
 
         if (_firstSegment is null)
         {
-            _currentSegment = _firstSegment = RecyclableReadOnlySequenceSegment.Create(_segmentSize, null);
+            _currentSegment = _firstSegment = RecyclableReadOnlySequenceSegment.Create(
+                _segmentSize,
+                null
+            );
             _currentSegmentIndex = 0;
         }
 
@@ -76,7 +90,10 @@ internal sealed class RecyclableSequenceBuilder : IDisposable
 
         if (_currentSegmentIndex == current.Length)
         {
-            _currentSegment = RecyclableReadOnlySequenceSegment.Create(_segmentSize, _currentSegment);
+            _currentSegment = RecyclableReadOnlySequenceSegment.Create(
+                _segmentSize,
+                _currentSegment
+            );
             _currentSegmentIndex = 0;
             current = _currentSegment.Memory;
         }
@@ -84,6 +101,7 @@ internal sealed class RecyclableSequenceBuilder : IDisposable
         // have capacity in current chunk
         return MemoryMarshal.AsMemory(current).Span.Slice(_currentSegmentIndex);
     }
+
     public void Write(ReadOnlySpan<byte> buffer)
     {
         while (!buffer.IsEmpty)
@@ -107,7 +125,8 @@ internal sealed class RecyclableSequenceBuilder : IDisposable
                 buffer = buffer.Slice(toWrite);
             }
         }
-        static void Throw() => throw new InvalidOperationException("Unable to acquire non-empty write buffer");
+        static void Throw() =>
+            throw new InvalidOperationException("Unable to acquire non-empty write buffer");
     }
 
     private void Advance(int count)

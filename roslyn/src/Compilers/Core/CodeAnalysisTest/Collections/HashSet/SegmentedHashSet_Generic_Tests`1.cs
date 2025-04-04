@@ -27,9 +27,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected override bool ResetImplemented => true;
 
-        protected override ModifyOperation ModifyEnumeratorThrows => base.ModifyEnumeratorAllowed & ~(ModifyOperation.Remove | ModifyOperation.Clear);
+        protected override ModifyOperation ModifyEnumeratorThrows =>
+            base.ModifyEnumeratorAllowed & ~(ModifyOperation.Remove | ModifyOperation.Clear);
 
-        protected override ModifyOperation ModifyEnumeratorAllowed => ModifyOperation.Overwrite | ModifyOperation.Remove | ModifyOperation.Clear;
+        protected override ModifyOperation ModifyEnumeratorAllowed =>
+            ModifyOperation.Overwrite | ModifyOperation.Remove | ModifyOperation.Clear;
 
         protected override ISet<T> GenericISetFactory()
         {
@@ -81,11 +83,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void HashSet_Generic_Constructor_IEnumerable(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void HashSet_Generic_Constructor_IEnumerable(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             _ = setLength;
             _ = numberOfMatchingElements;
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, null, enumerableLength, 0, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                null,
+                enumerableLength,
+                0,
+                numberOfDuplicateElements
+            );
             SegmentedHashSet<T> set = new SegmentedHashSet<T>(enumerable);
             Assert.True(set.SetEquals(enumerable));
         }
@@ -95,7 +109,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void HashSet_Generic_Constructor_IEnumerable_WithManyDuplicates(int count)
         {
             IEnumerable<T> items = CreateEnumerable(EnumerableType.List, null, count, 0, 0);
-            SegmentedHashSet<T> hashSetFromDuplicates = new SegmentedHashSet<T>(Enumerable.Range(0, 40).SelectMany(i => items).ToArray());
+            SegmentedHashSet<T> hashSetFromDuplicates = new SegmentedHashSet<T>(
+                Enumerable.Range(0, 40).SelectMany(i => items).ToArray()
+            );
             SegmentedHashSet<T> hashSetFromNoDuplicates = new SegmentedHashSet<T>(items);
             Assert.True(hashSetFromNoDuplicates.SetEquals(hashSetFromDuplicates));
         }
@@ -104,10 +120,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [MemberData(nameof(ValidCollectionSizes))]
         public void HashSet_Generic_Constructor_HashSet_SparselyFilled(int count)
         {
-            SegmentedHashSet<T> source = (SegmentedHashSet<T>)CreateEnumerable(EnumerableType.SegmentedHashSet, null, count, 0, 0);
+            SegmentedHashSet<T> source =
+                (SegmentedHashSet<T>)
+                    CreateEnumerable(EnumerableType.SegmentedHashSet, null, count, 0, 0);
             List<T> sourceElements = source.ToList();
             foreach (int i in NonSquares(count))
-                source.Remove(sourceElements[i]);// Unevenly spaced survivors increases chance of catching any spacing-related bugs.
+                source.Remove(sourceElements[i]); // Unevenly spaced survivors increases chance of catching any spacing-related bugs.
 
             SegmentedHashSet<T> set = new SegmentedHashSet<T>(source, GetIEqualityComparer());
             Assert.True(set.SetEquals(source));
@@ -116,18 +134,34 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void HashSet_Generic_Constructor_IEnumerable_Null()
         {
-            Assert.Throws<ArgumentNullException>(() => new SegmentedHashSet<T>((IEnumerable<T>)null!));
-            Assert.Throws<ArgumentNullException>(() => new SegmentedHashSet<T>((IEnumerable<T>)null!, EqualityComparer<T>.Default));
+            Assert.Throws<ArgumentNullException>(() =>
+                new SegmentedHashSet<T>((IEnumerable<T>)null!)
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                new SegmentedHashSet<T>((IEnumerable<T>)null!, EqualityComparer<T>.Default)
+            );
         }
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void HashSet_Generic_Constructor_IEnumerable_IEqualityComparer(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void HashSet_Generic_Constructor_IEnumerable_IEqualityComparer(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             _ = setLength;
             _ = numberOfMatchingElements;
             _ = numberOfDuplicateElements;
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, null, enumerableLength, 0, 0);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                null,
+                enumerableLength,
+                0,
+                0
+            );
             SegmentedHashSet<T> set = new SegmentedHashSet<T>(enumerable, GetIEqualityComparer());
             Assert.True(set.SetEquals(enumerable));
         }
@@ -141,7 +175,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void HashSet_Generic_RemoveWhere_AllElements(int setLength)
         {
             SegmentedHashSet<T> set = (SegmentedHashSet<T>)GenericISetFactory(setLength);
-            int removedCount = set.RemoveWhere((value) => { return true; });
+            int removedCount = set.RemoveWhere(
+                (value) =>
+                {
+                    return true;
+                }
+            );
             Assert.Equal(setLength, removedCount);
         }
 
@@ -150,7 +189,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void HashSet_Generic_RemoveWhere_NoElements(int setLength)
         {
             SegmentedHashSet<T> set = (SegmentedHashSet<T>)GenericISetFactory(setLength);
-            int removedCount = set.RemoveWhere((value) => { return false; });
+            int removedCount = set.RemoveWhere(
+                (value) =>
+                {
+                    return false;
+                }
+            );
             Assert.Equal(0, removedCount);
             Assert.Equal(setLength, set.Count);
         }
@@ -166,7 +210,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             set.Remove(obj);
             foreach (object o in set) { }
             set.CopyTo(array, 0, 2);
-            set.RemoveWhere((element) => { return false; });
+            set.RemoveWhere(
+                (element) =>
+                {
+                    return false;
+                }
+            );
         }
 
         [Theory]
@@ -262,7 +311,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void HashSet_Generic_CopyTo_NegativeCount_ThrowsArgumentOutOfRangeException(int count)
+        public void HashSet_Generic_CopyTo_NegativeCount_ThrowsArgumentOutOfRangeException(
+            int count
+        )
         {
             SegmentedHashSet<T> set = (SegmentedHashSet<T>)GenericISetFactory(count);
             T[] arr = new T[count];
@@ -289,30 +340,42 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void SetComparer_SetEqualsTests()
         {
-            List<T> objects = new List<T>() { CreateT(1), CreateT(2), CreateT(3), CreateT(4), CreateT(5), CreateT(6) };
+            List<T> objects = new List<T>()
+            {
+                CreateT(1),
+                CreateT(2),
+                CreateT(3),
+                CreateT(4),
+                CreateT(5),
+                CreateT(6),
+            };
 
             var set = new SegmentedHashSet<SegmentedHashSet<T>>()
             {
                 new SegmentedHashSet<T> { objects[0], objects[1], objects[2] },
-                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] }
+                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] },
             };
 
             var noComparerSet = new SegmentedHashSet<SegmentedHashSet<T>>()
             {
                 new SegmentedHashSet<T> { objects[0], objects[1], objects[2] },
-                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] }
+                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] },
             };
 
-            var comparerSet1 = new SegmentedHashSet<SegmentedHashSet<T>>(SegmentedHashSet<T>.CreateSetComparer())
+            var comparerSet1 = new SegmentedHashSet<SegmentedHashSet<T>>(
+                SegmentedHashSet<T>.CreateSetComparer()
+            )
             {
                 new SegmentedHashSet<T> { objects[0], objects[1], objects[2] },
-                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] }
+                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] },
             };
 
-            var comparerSet2 = new SegmentedHashSet<SegmentedHashSet<T>>(SegmentedHashSet<T>.CreateSetComparer())
+            var comparerSet2 = new SegmentedHashSet<SegmentedHashSet<T>>(
+                SegmentedHashSet<T>.CreateSetComparer()
+            )
             {
                 new SegmentedHashSet<T> { objects[3], objects[4], objects[5] },
-                new SegmentedHashSet<T> { objects[0], objects[1], objects[2] }
+                new SegmentedHashSet<T> { objects[0], objects[1], objects[2] },
             };
 
             Assert.False(noComparerSet.SetEquals(set));
@@ -323,24 +386,34 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void SetComparer_SequenceEqualTests()
         {
-            List<T> objects = new List<T>() { CreateT(1), CreateT(2), CreateT(3), CreateT(4), CreateT(5), CreateT(6) };
+            List<T> objects = new List<T>()
+            {
+                CreateT(1),
+                CreateT(2),
+                CreateT(3),
+                CreateT(4),
+                CreateT(5),
+                CreateT(6),
+            };
 
             var set = new SegmentedHashSet<SegmentedHashSet<T>>()
             {
                 new SegmentedHashSet<T> { objects[0], objects[1], objects[2] },
-                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] }
+                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] },
             };
 
             var noComparerSet = new SegmentedHashSet<SegmentedHashSet<T>>()
             {
                 new SegmentedHashSet<T> { objects[0], objects[1], objects[2] },
-                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] }
+                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] },
             };
 
-            var comparerSet = new SegmentedHashSet<SegmentedHashSet<T>>(SegmentedHashSet<T>.CreateSetComparer())
+            var comparerSet = new SegmentedHashSet<SegmentedHashSet<T>>(
+                SegmentedHashSet<T>.CreateSetComparer()
+            )
             {
                 new SegmentedHashSet<T> { objects[0], objects[1], objects[2] },
-                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] }
+                new SegmentedHashSet<T> { objects[3], objects[4], objects[5] },
             };
 
             Assert.False(noComparerSet.SequenceEqual(set));
@@ -394,8 +467,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void HashSet_Generic_Constructor_int_Negative_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>("capacity", () => new SegmentedHashSet<T>(-1));
-            Assert.Throws<ArgumentOutOfRangeException>("capacity", () => new SegmentedHashSet<T>(int.MinValue));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => new SegmentedHashSet<T>(-1)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => new SegmentedHashSet<T>(int.MinValue)
+            );
         }
 
         [Theory]
@@ -413,7 +492,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void HashSet_Generic_Constructor_int_IEqualityComparer_AddUpToAndBeyondCapacity(int capacity)
+        public void HashSet_Generic_Constructor_int_IEqualityComparer_AddUpToAndBeyondCapacity(
+            int capacity
+        )
         {
             IEqualityComparer<T> comparer = GetIEqualityComparer();
             SegmentedHashSet<T> set = new SegmentedHashSet<T>(capacity, comparer);
@@ -429,8 +510,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void HashSet_Generic_Constructor_int_IEqualityComparer_Negative_ThrowsArgumentOutOfRangeException()
         {
             IEqualityComparer<T> comparer = GetIEqualityComparer();
-            Assert.Throws<ArgumentOutOfRangeException>("capacity", () => new SegmentedHashSet<T>(-1, comparer));
-            Assert.Throws<ArgumentOutOfRangeException>("capacity", () => new SegmentedHashSet<T>(int.MinValue, comparer));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => new SegmentedHashSet<T>(-1, comparer)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => new SegmentedHashSet<T>(int.MinValue, comparer)
+            );
         }
 
         #region TryGetValue
@@ -495,7 +582,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void EnsureCapacity_Generic_RequestingLargerCapacity_DoesNotInvalidateEnumeration(int setLength)
+        public void EnsureCapacity_Generic_RequestingLargerCapacity_DoesNotInvalidateEnumeration(
+            int setLength
+        )
         {
             SegmentedHashSet<T> set = (SegmentedHashSet<T>)(GenericISetFactory(setLength));
             var capacity = set.EnsureCapacity(0);
@@ -530,7 +619,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [InlineData(2)]
         [InlineData(3)]
         [InlineData(4)]
-        public void EnsureCapacity_Generic_HashsetNotInitialized_RequestedNonZero_CapacityIsSetToAtLeastTheRequested(int requestedCapacity)
+        public void EnsureCapacity_Generic_HashsetNotInitialized_RequestedNonZero_CapacityIsSetToAtLeastTheRequested(
+            int requestedCapacity
+        )
         {
             var set = new SegmentedHashSet<T>();
             Assert.InRange(set.EnsureCapacity(requestedCapacity), requestedCapacity, int.MaxValue);
@@ -539,7 +630,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Theory]
         [InlineData(3)]
         [InlineData(7)]
-        public void EnsureCapacity_Generic_RequestedCapacitySmallerThanCurrent_CapacityUnchanged(int currentCapacity)
+        public void EnsureCapacity_Generic_RequestedCapacitySmallerThanCurrent_CapacityUnchanged(
+            int currentCapacity
+        )
         {
             SegmentedHashSet<T> set;
 
@@ -589,7 +682,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [InlineData(5)]
         [InlineData(7)]
         [InlineData(8)]
-        public void EnsureCapacity_Generic_HashsetNotEmpty_RequestedSmallerThanCount_ReturnsAtLeastSizeOfCount(int setLength)
+        public void EnsureCapacity_Generic_HashsetNotEmpty_RequestedSmallerThanCount_ReturnsAtLeastSizeOfCount(
+            int setLength
+        )
         {
             SegmentedHashSet<T> set = (SegmentedHashSet<T>)GenericISetFactory(setLength);
             Assert.InRange(set.EnsureCapacity(setLength - 1), setLength, int.MaxValue);

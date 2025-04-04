@@ -6,22 +6,34 @@ using System.ComponentModel;
 namespace System.Data.Common
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public abstract class DbException : System.Runtime.InteropServices.ExternalException
     {
-        protected DbException() : base() { }
+        protected DbException()
+            : base() { }
 
-        protected DbException(string? message) : base(message) { }
+        protected DbException(string? message)
+            : base(message) { }
 
-        protected DbException(string? message, System.Exception? innerException) : base(message, innerException) { }
+        protected DbException(string? message, System.Exception? innerException)
+            : base(message, innerException) { }
 
-        protected DbException(string? message, int errorCode) : base(message, errorCode) { }
+        protected DbException(string? message, int errorCode)
+            : base(message, errorCode) { }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected DbException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context)
-        {
-        }
+        protected DbException(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        )
+            : base(info, context) { }
 
         /// <summary>
         /// Indicates whether the error represented by this <see cref="DbException" /> could be a transient error, i.e. if retrying the triggering

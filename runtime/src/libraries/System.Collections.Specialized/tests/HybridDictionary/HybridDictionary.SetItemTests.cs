@@ -16,7 +16,10 @@ namespace System.Collections.Specialized.Tests
         [InlineData(50, false)]
         public void Item_Set(int count, bool caseInsensitive)
         {
-            HybridDictionary hybridDictionary = Helpers.CreateHybridDictionary(count, caseInsensitive);
+            HybridDictionary hybridDictionary = Helpers.CreateHybridDictionary(
+                count,
+                caseInsensitive
+            );
 
             for (int i = 0; i < count; i++)
             {
@@ -50,7 +53,10 @@ namespace System.Collections.Specialized.Tests
         [InlineData(50, false)]
         public void Item_Set_CaseSensitivity(int count, bool caseInsensitive)
         {
-            HybridDictionary hybridDictionary = Helpers.CreateHybridDictionary(count, caseInsensitive);
+            HybridDictionary hybridDictionary = Helpers.CreateHybridDictionary(
+                count,
+                caseInsensitive
+            );
             hybridDictionary.Add("key", "value");
             if (caseInsensitive)
             {

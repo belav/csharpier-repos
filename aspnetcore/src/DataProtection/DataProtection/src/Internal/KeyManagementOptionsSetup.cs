@@ -17,21 +17,18 @@ internal sealed class KeyManagementOptionsSetup : IConfigureOptions<KeyManagemen
     private readonly ILoggerFactory _loggerFactory;
 
     public KeyManagementOptionsSetup()
-        : this(NullLoggerFactory.Instance, registryPolicyResolver: null)
-    {
-    }
+        : this(NullLoggerFactory.Instance, registryPolicyResolver: null) { }
 
     public KeyManagementOptionsSetup(ILoggerFactory loggerFactory)
-        : this(loggerFactory, registryPolicyResolver: null)
-    {
-    }
+        : this(loggerFactory, registryPolicyResolver: null) { }
 
     public KeyManagementOptionsSetup(IRegistryPolicyResolver registryPolicyResolver)
-        : this(NullLoggerFactory.Instance, registryPolicyResolver)
-    {
-    }
+        : this(NullLoggerFactory.Instance, registryPolicyResolver) { }
 
-    public KeyManagementOptionsSetup(ILoggerFactory loggerFactory, IRegistryPolicyResolver? registryPolicyResolver)
+    public KeyManagementOptionsSetup(
+        ILoggerFactory loggerFactory,
+        IRegistryPolicyResolver? registryPolicyResolver
+    )
     {
         _loggerFactory = loggerFactory;
         _registryPolicyResolver = registryPolicyResolver;
@@ -69,9 +66,17 @@ internal sealed class KeyManagementOptionsSetup : IConfigureOptions<KeyManagemen
             options.AuthenticatedEncryptorConfiguration = new AuthenticatedEncryptorConfiguration();
         }
 
-        options.AuthenticatedEncryptorFactories.Add(new CngGcmAuthenticatedEncryptorFactory(_loggerFactory));
-        options.AuthenticatedEncryptorFactories.Add(new CngCbcAuthenticatedEncryptorFactory(_loggerFactory));
-        options.AuthenticatedEncryptorFactories.Add(new ManagedAuthenticatedEncryptorFactory(_loggerFactory));
-        options.AuthenticatedEncryptorFactories.Add(new AuthenticatedEncryptorFactory(_loggerFactory));
+        options.AuthenticatedEncryptorFactories.Add(
+            new CngGcmAuthenticatedEncryptorFactory(_loggerFactory)
+        );
+        options.AuthenticatedEncryptorFactories.Add(
+            new CngCbcAuthenticatedEncryptorFactory(_loggerFactory)
+        );
+        options.AuthenticatedEncryptorFactories.Add(
+            new ManagedAuthenticatedEncryptorFactory(_loggerFactory)
+        );
+        options.AuthenticatedEncryptorFactories.Add(
+            new AuthenticatedEncryptorFactory(_loggerFactory)
+        );
     }
 }

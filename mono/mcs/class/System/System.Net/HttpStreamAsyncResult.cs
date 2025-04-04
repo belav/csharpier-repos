@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,67 +27,77 @@
 //
 using System.Threading;
 
-namespace System.Net {
-	class HttpStreamAsyncResult : IAsyncResult {
-		object locker = new object ();
-		ManualResetEvent handle;
-		bool completed;
+namespace System.Net
+{
+    class HttpStreamAsyncResult : IAsyncResult
+    {
+        object locker = new object();
+        ManualResetEvent handle;
+        bool completed;
 
-		internal byte [] Buffer;
-		internal int Offset;
-		internal int Count;
-		internal AsyncCallback Callback;
-		internal object State;
-		internal int SynchRead;
-		internal Exception Error;
+        internal byte[] Buffer;
+        internal int Offset;
+        internal int Count;
+        internal AsyncCallback Callback;
+        internal object State;
+        internal int SynchRead;
+        internal Exception Error;
 
-		public void Complete (Exception e)
-		{
-			Error = e;
-			Complete ();
-		}
+        public void Complete(Exception e)
+        {
+            Error = e;
+            Complete();
+        }
 
-		public void Complete ()
-		{
-			lock (locker) {
-				if (completed)
-					return;
+        public void Complete()
+        {
+            lock (locker)
+            {
+                if (completed)
+                    return;
 
-				completed = true;
-				if (handle != null)
-					handle.Set ();
+                completed = true;
+                if (handle != null)
+                    handle.Set();
 
-				if (Callback != null)
-					Callback.BeginInvoke (this, null, null);
-			}
-		}
-		
-		public object AsyncState {
-			get { return State; }
-		}
+                if (Callback != null)
+                    Callback.BeginInvoke(this, null, null);
+            }
+        }
 
-		public WaitHandle AsyncWaitHandle {
-			get {
-				lock (locker) {
-					if (handle == null)
-						handle = new ManualResetEvent (completed);
-				}
-				
-				return handle;
-			}
-		}
+        public object AsyncState
+        {
+            get { return State; }
+        }
 
-		public bool CompletedSynchronously {
-			get { return (SynchRead == Count); }
-		}
+        public WaitHandle AsyncWaitHandle
+        {
+            get
+            {
+                lock (locker)
+                {
+                    if (handle == null)
+                        handle = new ManualResetEvent(completed);
+                }
 
-		public bool IsCompleted {
-			get {
-				lock (locker) {
-					return completed;
-				}
-			}
-		}
-	}
+                return handle;
+            }
+        }
+
+        public bool CompletedSynchronously
+        {
+            get { return (SynchRead == Count); }
+        }
+
+        public bool IsCompleted
+        {
+            get
+            {
+                lock (locker)
+                {
+                    return completed;
+                }
+            }
+        }
+    }
 }
-

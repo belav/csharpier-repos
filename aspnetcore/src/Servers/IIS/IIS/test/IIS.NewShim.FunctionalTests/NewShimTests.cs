@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities;
-using Microsoft.AspNetCore.InternalTesting;
 using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
@@ -13,9 +13,8 @@ namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class NewShimTests : IISFunctionalTestBase
 {
-    public NewShimTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public NewShimTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task CheckNewShimIsUsed()
@@ -33,6 +32,8 @@ public class NewShimTests : IISFunctionalTestBase
             }
         }
 
-        throw new XunitException($"Could not find aspnetcorev2_inprocess.dll loaded in process {result.HostProcess.ProcessName}");
+        throw new XunitException(
+            $"Could not find aspnetcorev2_inprocess.dll loaded in process {result.HostProcess.ProcessName}"
+        );
     }
 }
