@@ -112,10 +112,8 @@ namespace System.Data.ProviderBase
             // will return the number of connections in the group after clearing has finished
 
             // First, note the old collection and create a new collection to be used
-            ConcurrentDictionary<
-                DbConnectionPoolIdentity,
-                DbConnectionPool
-            >? oldPoolCollection = null;
+            ConcurrentDictionary<DbConnectionPoolIdentity, DbConnectionPool>? oldPoolCollection =
+                null;
             lock (this)
             {
                 if (!_poolCollection.IsEmpty)

@@ -319,8 +319,7 @@ public class ProjectToInterface : IntegrationTest<ProjectToInterface.DatabaseIni
             //.ForMember(d => d.DayType, opt => opt.Ignore());
 
             //Include to mapping -> this causes the exception!
-            CreateMap<DataLayer.ValidityDayType, IValidityDayType>()
-                .As<ValidityDayType>();
+            CreateMap<DataLayer.ValidityDayType, IValidityDayType>().As<ValidityDayType>();
             CreateProjection<DataLayer.ValidityDayType, ValidityDayType>();
 
             CreateProjection<ICalendar, DataLayer.Calendar>();

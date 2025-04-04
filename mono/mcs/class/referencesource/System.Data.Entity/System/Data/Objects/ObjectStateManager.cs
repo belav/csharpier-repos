@@ -4433,10 +4433,7 @@ namespace System.Data.Objects
 
                         // find IEntityWrappers of objects deleted from relatedEnd by changes to navigation property
 
-                        Dictionary<
-                            RelatedEnd,
-                            HashSet<IEntityWrapper>
-                        > deletedRelationshipsByGraph;
+                        Dictionary<RelatedEnd, HashSet<IEntityWrapper>> deletedRelationshipsByGraph;
                         HashSet<IEntityWrapper> entitiesToDelete = null;
                         if (
                             tm.DeletedRelationshipsByGraph.TryGetValue(

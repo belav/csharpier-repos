@@ -15,7 +15,6 @@ using Npgsql;
 using System.Linq;
 #endif
 
-
 namespace BasicViews
 {
     public class Startup
