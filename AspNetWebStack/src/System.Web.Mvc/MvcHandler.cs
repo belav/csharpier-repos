@@ -62,13 +62,21 @@ namespace System.Web.Mvc
             }
         }
 
-        protected virtual IAsyncResult BeginProcessRequest(HttpContext httpContext, AsyncCallback callback, object state)
+        protected virtual IAsyncResult BeginProcessRequest(
+            HttpContext httpContext,
+            AsyncCallback callback,
+            object state
+        )
         {
             HttpContextBase httpContextBase = new HttpContextWrapper(httpContext);
             return BeginProcessRequest(httpContextBase, callback, state);
         }
 
-        protected internal virtual IAsyncResult BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, object state)
+        protected internal virtual IAsyncResult BeginProcessRequest(
+            HttpContextBase httpContext,
+            AsyncCallback callback,
+            object state
+        )
         {
             IController controller;
             IControllerFactory factory;
@@ -80,11 +88,19 @@ namespace System.Web.Mvc
                 // asynchronous controller
 
                 // Ensure delegates continue to use the C# Compiler static delegate caching optimization.
-                BeginInvokeDelegate<ProcessRequestState> beginDelegate = delegate(AsyncCallback asyncCallback, object asyncState, ProcessRequestState innerState)
+                BeginInvokeDelegate<ProcessRequestState> beginDelegate = delegate(
+                    AsyncCallback asyncCallback,
+                    object asyncState,
+                    ProcessRequestState innerState
+                )
                 {
                     try
                     {
-                        return innerState.AsyncController.BeginExecute(innerState.RequestContext, asyncCallback, asyncState);
+                        return innerState.AsyncController.BeginExecute(
+                            innerState.RequestContext,
+                            asyncCallback,
+                            asyncState
+                        );
                     }
                     catch
                     {
@@ -93,7 +109,10 @@ namespace System.Web.Mvc
                     }
                 };
 
-                EndInvokeVoidDelegate<ProcessRequestState> endDelegate = delegate(IAsyncResult asyncResult, ProcessRequestState innerState)
+                EndInvokeVoidDelegate<ProcessRequestState> endDelegate = delegate(
+                    IAsyncResult asyncResult,
+                    ProcessRequestState innerState
+                )
                 {
                     try
                     {
@@ -104,13 +123,24 @@ namespace System.Web.Mvc
                         innerState.ReleaseController();
                     }
                 };
-                ProcessRequestState outerState = new ProcessRequestState() 
+                ProcessRequestState outerState = new ProcessRequestState()
                 {
-                    AsyncController = asyncController, Factory = factory, RequestContext = RequestContext
+                    AsyncController = asyncController,
+                    Factory = factory,
+                    RequestContext = RequestContext,
                 };
-                
-                SynchronizationContext callbackSyncContext = SynchronizationContextUtil.GetSynchronizationContext();
-                return AsyncResultWrapper.Begin(callback, state, beginDelegate, endDelegate, outerState, _processRequestTag, callbackSyncContext: callbackSyncContext);
+
+                SynchronizationContext callbackSyncContext =
+                    SynchronizationContextUtil.GetSynchronizationContext();
+                return AsyncResultWrapper.Begin(
+                    callback,
+                    state,
+                    beginDelegate,
+                    endDelegate,
+                    outerState,
+                    _processRequestTag,
+                    callbackSyncContext: callbackSyncContext
+                );
             }
             else
             {
@@ -127,7 +157,12 @@ namespace System.Web.Mvc
                     }
                 };
 
-                return AsyncResultWrapper.BeginSynchronous(callback, state, action, _processRequestTag);
+                return AsyncResultWrapper.BeginSynchronous(
+                    callback,
+                    state,
+                    action,
+                    _processRequestTag
+                );
             }
         }
 
@@ -166,7 +201,11 @@ namespace System.Web.Mvc
             }
         }
 
-        private void ProcessRequestInit(HttpContextBase httpContext, out IController controller, out IControllerFactory factory)
+        private void ProcessRequestInit(
+            HttpContextBase httpContext,
+            out IController controller,
+            out IControllerFactory factory
+        )
         {
             // If request validation has already been enabled, make it lazy. This allows attributes like [HttpPost] (which looks
             // at Request.Form) to work correctly without triggering full validation.
@@ -174,7 +213,9 @@ namespace System.Web.Mvc
             HttpContext currentContext = HttpContext.Current;
             if (currentContext != null)
             {
-                bool? isRequestValidationEnabled = ValidationUtility.IsValidationEnabled(currentContext);
+                bool? isRequestValidationEnabled = ValidationUtility.IsValidationEnabled(
+                    currentContext
+                );
                 if (isRequestValidationEnabled == true)
                 {
                     ValidationUtility.EnableDynamicValidation(currentContext);
@@ -197,7 +238,9 @@ namespace System.Web.Mvc
                         CultureInfo.CurrentCulture,
                         MvcResources.ControllerBuilder_FactoryReturnedNull,
                         factory.GetType(),
-                        controllerName));
+                        controllerName
+                    )
+                );
             }
         }
 
@@ -225,7 +268,11 @@ namespace System.Web.Mvc
 
         #region IHttpAsyncHandler Members
 
-        IAsyncResult IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, object extraData)
+        IAsyncResult IHttpAsyncHandler.BeginProcessRequest(
+            HttpContext context,
+            AsyncCallback cb,
+            object extraData
+        )
         {
             return BeginProcessRequest(context, cb, extraData);
         }

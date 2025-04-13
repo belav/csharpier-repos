@@ -11,35 +11,23 @@ namespace Tests.Collections
 {
     public static class CollectionAssert
     {
-        public static void Equal(
-            IEnumerable expected,
-            IEnumerable actual)
+        public static void Equal(IEnumerable expected, IEnumerable actual)
         {
-            Assert.Equal(
-                expected.OfType<object>(),
-                actual.OfType<object>());
+            Assert.Equal(expected.OfType<object>(), actual.OfType<object>());
         }
 
         public static void Equal(IList expected, IList actual)
         {
-            Equal((IEnumerable) expected, actual);
+            Equal((IEnumerable)expected, actual);
             // explicitly test Count and the indexer
             Assert.Equal(expected.Count, actual.Count);
             for (var i = 0; i < expected.Count; i++)
             {
                 var expectedArray = expected as Array;
                 var actualArray = expected as Array;
-                int expectedLowerBound = expectedArray == null
-                                             ? 0
-                                             : expectedArray
-                                                   .GetLowerBound(0);
-                int actualLowerBound = actualArray == null
-                                           ? 0
-                                           : actualArray.GetLowerBound(
-                                               0);
-                Assert.Equal(
-                    expected[i + expectedLowerBound],
-                    actual[i + actualLowerBound]);
+                int expectedLowerBound = expectedArray == null ? 0 : expectedArray.GetLowerBound(0);
+                int actualLowerBound = actualArray == null ? 0 : actualArray.GetLowerBound(0);
+                Assert.Equal(expected[i + expectedLowerBound], actual[i + actualLowerBound]);
             }
         }
     }
@@ -64,7 +52,8 @@ namespace Tests.Collections
             int listStartIndex,
             object[] items,
             int startIndex,
-            int count)
+            int count
+        )
         {
             int numToInsert = items.Length - startIndex;
             if (count < numToInsert)
@@ -77,11 +66,7 @@ namespace Tests.Collections
             }
         }
 
-        public static void AddRange(
-            this IList list,
-            object[] items,
-            int startIndex,
-            int count)
+        public static void AddRange(this IList list, object[] items, int startIndex, int count)
         {
             int numToAdd = items.Length - startIndex;
             if (count < numToAdd)
@@ -101,10 +86,8 @@ namespace Tests.Collections
         private readonly bool _expectedIsReadOnly;
         private bool _searchingThrowsFromInvalidValue;
 
-        protected IListTest(
-            bool isSynchronized,
-            bool isReadOnly,
-            bool isFixedSize) : base(isSynchronized)
+        protected IListTest(bool isSynchronized, bool isReadOnly, bool isFixedSize)
+            : base(isSynchronized)
         {
             _expectedIsReadOnly = isReadOnly;
             _expectedIsFixedSize = isFixedSize;
@@ -133,11 +116,11 @@ namespace Tests.Collections
             {
                 return new[]
                 {
-                    new object[] {int.MinValue, 16},
-                    new object[] {-1, 16},
-                    new object[] {0, 0},
-                    new object[] {1, 1},
-                    new object[] {16, 16}
+                    new object[] { int.MinValue, 16 },
+                    new object[] { -1, 16 },
+                    new object[] { 0, 0 },
+                    new object[] { 1, 1 },
+                    new object[] { 16, 16 },
                 };
             }
         }
@@ -161,8 +144,7 @@ namespace Tests.Collections
         public void GetItemArgumentOutOfRange(int index)
         {
             IList list = GetList(null);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list[index]);
+            Assert.Throws<ArgumentOutOfRangeException>(() => list[index]);
             CollectionAssert.Equal(Array.Empty<object>(), list);
         }
 
@@ -171,8 +153,7 @@ namespace Tests.Collections
         {
             object[] items = GenerateItems(32);
             IList list = GetList(items);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list[list.Count]);
+            Assert.Throws<ArgumentOutOfRangeException>(() => list[list.Count]);
             CollectionAssert.Equal(items, list);
         }
 
@@ -206,12 +187,10 @@ namespace Tests.Collections
             {
                 object[] items = GenerateItems(10);
                 IList list = GetList(items);
-                Assert.Throws<NotSupportedException>(
-                    () => list[0] = GenerateItem());
+                Assert.Throws<NotSupportedException>(() => list[0] = GenerateItem());
                 CollectionAssert.Equal(items, list);
 
-                Assert.Throws<NotSupportedException>(
-                    () => list[list.Count - 1] = GenerateItem());
+                Assert.Throws<NotSupportedException>(() => list[list.Count - 1] = GenerateItem());
                 CollectionAssert.Equal(items, list);
             }
         }
@@ -224,46 +203,35 @@ namespace Tests.Collections
             {
                 expectedExceptions = new[]
                 {
-                    typeof (ArgumentOutOfRangeException),
-                    typeof (NotSupportedException)
+                    typeof(ArgumentOutOfRangeException),
+                    typeof(NotSupportedException),
                 };
             }
             else
             {
-                expectedExceptions = new[]
-                {
-                    typeof (ArgumentOutOfRangeException)
-                };
+                expectedExceptions = new[] { typeof(ArgumentOutOfRangeException) };
             }
             {
                 object[] items = GenerateItems(10);
                 IList list = GetList(items);
-                AssertThrows(
-                    expectedExceptions,
-                    () => list[int.MinValue] = GenerateItem());
+                AssertThrows(expectedExceptions, () => list[int.MinValue] = GenerateItem());
                 CollectionAssert.Equal(items, list);
 
-                AssertThrows(
-                    expectedExceptions,
-                    () => list[-1] = GenerateItem());
+                AssertThrows(expectedExceptions, () => list[-1] = GenerateItem());
                 CollectionAssert.Equal(items, list);
             }
 
             {
                 object[] items = GenerateItems(0);
                 IList list = GetList(items);
-                AssertThrows(
-                    expectedExceptions,
-                    () => list[0] = GenerateItem());
+                AssertThrows(expectedExceptions, () => list[0] = GenerateItem());
                 CollectionAssert.Equal(items, list);
 
                 if (!ExpectedIsFixedSize && !ExpectedIsReadOnly)
                 {
                     items = GenerateItems(32);
                     list.AddRange(items);
-                    AssertThrows(
-                        expectedExceptions,
-                        () => list[list.Count] = GenerateItem());
+                    AssertThrows(expectedExceptions, () => list[list.Count] = GenerateItem());
                     CollectionAssert.Equal(items, list);
                 }
             }
@@ -285,38 +253,30 @@ namespace Tests.Collections
                         {
                             expectedExceptions = new[]
                             {
-                                typeof (ArgumentNullException),
-                                typeof (NotSupportedException)
+                                typeof(ArgumentNullException),
+                                typeof(NotSupportedException),
                             };
                         }
                         else
                         {
-                            expectedExceptions = new[]
-                            {
-                                typeof (ArgumentNullException)
-                            };
+                            expectedExceptions = new[] { typeof(ArgumentNullException) };
                         }
                     }
                     else if (ExpectedIsReadOnly)
                     {
                         expectedExceptions = new[]
                         {
-                            typeof (ArgumentException),
-                            typeof (NotSupportedException)
+                            typeof(ArgumentException),
+                            typeof(NotSupportedException),
                         };
                     }
                     else
                     {
-                        expectedExceptions = new[]
-                        {
-                            typeof (ArgumentException)
-                        };
+                        expectedExceptions = new[] { typeof(ArgumentException) };
                     }
 
                     object invalid1 = invalid;
-                    AssertThrows(
-                        expectedExceptions,
-                        () => list[0] = invalid1);
+                    AssertThrows(expectedExceptions, () => list[0] = invalid1);
                     CollectionAssert.Equal(items, list);
                 }
             }
@@ -331,8 +291,7 @@ namespace Tests.Collections
                 {
                     object[] items = GenerateItems(32);
                     IList list = GetList(items);
-                    Assert.Throws<ArgumentNullException>(
-                        () => list[0] = null);
+                    Assert.Throws<ArgumentNullException>(() => list[0] = null);
                     CollectionAssert.Equal(items, list);
                 }
             }
@@ -369,8 +328,7 @@ namespace Tests.Collections
                 {
                     object[] items = GenerateItems(32);
                     IList list = GetList(items);
-                    Assert.Throws<ArgumentException>(
-                        () => list[0] = items[1]);
+                    Assert.Throws<ArgumentException>(() => list[0] = items[1]);
                     CollectionAssert.Equal(items, list);
                 }
             }
@@ -401,14 +359,14 @@ namespace Tests.Collections
             if (!ExpectedIsReadOnly)
             {
                 object[] items = GenerateItems(32);
-                var origItems = (object[]) items.Clone();
+                var origItems = (object[])items.Clone();
                 IList list = GetList(items);
 
                 // verify setting every item
                 // reverse list, setting items to new elements to maintain uniqueness.
                 for (var i = 0; i < items.Length; i++)
                 {
-                    if (i < items.Length/2)
+                    if (i < items.Length / 2)
                     {
                         list[items.Length - i - 1] = GenerateItem();
                     }
@@ -444,8 +402,7 @@ namespace Tests.Collections
             {
                 object[] items = GenerateItems(10);
                 IList list = GetList(items);
-                Assert.Throws<NotSupportedException>(
-                    () => list.Add(GenerateItem()));
+                Assert.Throws<NotSupportedException>(() => list.Add(GenerateItem()));
                 CollectionAssert.Equal(items, list);
             }
         }
@@ -459,7 +416,7 @@ namespace Tests.Collections
                 object[] items;
                 IList list = GetList(null);
                 object[] tempItems = GenerateItems(size);
-                for (var i = 0; i < tempItems.Length/2; i++)
+                for (var i = 0; i < tempItems.Length / 2; i++)
                 {
                     list.Add(tempItems[i]);
                 }
@@ -467,26 +424,26 @@ namespace Tests.Collections
                 if (ItemsMustBeNonNull)
                 {
                     items = tempItems;
-                    Assert.Throws<ArgumentNullException>(
-                        () => list.Add(null));
+                    Assert.Throws<ArgumentNullException>(() => list.Add(null));
                 }
                 else
                 {
                     const int sizeWithNull = size + 1;
                     items = new object[sizeWithNull];
                     list.Add(null);
-                    items[sizeWithNull/2] = null;
-                    Array.Copy(tempItems, items, sizeWithNull/2);
+                    items[sizeWithNull / 2] = null;
+                    Array.Copy(tempItems, items, sizeWithNull / 2);
                     Array.Copy(
                         tempItems,
-                        sizeWithNull/2,
+                        sizeWithNull / 2,
                         items,
-                        sizeWithNull/2 + 1,
-                        sizeWithNull/2);
+                        sizeWithNull / 2 + 1,
+                        sizeWithNull / 2
+                    );
                 }
-                for (var i = 0; i < size/2; i++)
+                for (var i = 0; i < size / 2; i++)
                 {
-                    list.Add(tempItems[size/2 + i]);
+                    list.Add(tempItems[size / 2 + i]);
                 }
                 CollectionAssert.Equal(items, list);
             }
@@ -501,8 +458,7 @@ namespace Tests.Collections
                 object[] items;
                 if (ItemsMustBeNonNull)
                 {
-                    Assert.Throws<ArgumentNullException>(
-                        () => list.Add(null));
+                    Assert.Throws<ArgumentNullException>(() => list.Add(null));
                     items = GenerateItems(16);
                     list.AddRange(items);
                 }
@@ -531,8 +487,7 @@ namespace Tests.Collections
 
                 if (ItemsMustBeNonNull)
                 {
-                    Assert.Throws<ArgumentNullException>(
-                        () => list.Add(null));
+                    Assert.Throws<ArgumentNullException>(() => list.Add(null));
                 }
                 else
                 {
@@ -556,8 +511,7 @@ namespace Tests.Collections
                 {
                     items = GenerateItems(16);
                     list.AddRange(items);
-                    Assert.Throws<ArgumentException>(
-                        () => list.Add(items[0]));
+                    Assert.Throws<ArgumentException>(() => list.Add(items[0]));
                 }
                 else
                 {
@@ -603,11 +557,11 @@ namespace Tests.Collections
                 {
                     if ((i & 1) == 0)
                     {
-                        list.RemoveAt(i/2);
+                        list.RemoveAt(i / 2);
                     }
                     else
                     {
-                        items[i/2] = tempItems[i];
+                        items[i / 2] = tempItems[i];
                     }
                 }
 
@@ -657,21 +611,16 @@ namespace Tests.Collections
                     {
                         expectedExceptions = new[]
                         {
-                            typeof (ArgumentException),
-                            typeof (NotSupportedException)
+                            typeof(ArgumentException),
+                            typeof(NotSupportedException),
                         };
                     }
                     else
                     {
-                        expectedExceptions = new[]
-                        {
-                            typeof (ArgumentException)
-                        };
+                        expectedExceptions = new[] { typeof(ArgumentException) };
                     }
                     object invalid1 = invalid;
-                    AssertThrows(
-                        expectedExceptions,
-                        () => list.Add(invalid1));
+                    AssertThrows(expectedExceptions, () => list.Add(invalid1));
                     CollectionAssert.Equal(items, list);
                 }
             }
@@ -729,7 +678,7 @@ namespace Tests.Collections
                 {
                     if ((i & 1) == 0)
                     {
-                        list.RemoveAt(i/2);
+                        list.RemoveAt(i / 2);
                     }
                 }
                 list.RemoveAt(list.Count - 1);
@@ -786,8 +735,7 @@ namespace Tests.Collections
             IList list = GetList(null);
             if (ItemsMustBeNonNull && SearchingThrowsFromInvalidValue)
             {
-                Assert.Throws<ArgumentException>(
-                    () => list.Contains(null));
+                Assert.Throws<ArgumentException>(() => list.Contains(null));
             }
             else
             {
@@ -827,11 +775,9 @@ namespace Tests.Collections
                 IList list = GetList(null);
                 object[] items = GenerateItems(1);
                 list.AddRange(items);
-                if (ItemsMustBeNonNull
-                    && SearchingThrowsFromInvalidValue)
+                if (ItemsMustBeNonNull && SearchingThrowsFromInvalidValue)
                 {
-                    Assert.Throws<ArgumentException>(
-                        () => list.Contains(null));
+                    Assert.Throws<ArgumentException>(() => list.Contains(null));
                 }
                 else
                 {
@@ -843,8 +789,7 @@ namespace Tests.Collections
         [Fact]
         public void AddAndContainsNullValue()
         {
-            if (!ExpectedIsFixedSize && !ExpectedIsReadOnly
-                && !ItemsMustBeNonNull)
+            if (!ExpectedIsFixedSize && !ExpectedIsReadOnly && !ItemsMustBeNonNull)
             {
                 IList list = GetList(null);
                 list.Add(null);
@@ -855,8 +800,12 @@ namespace Tests.Collections
         [Fact]
         public void ContainsValueThatExistsTwice()
         {
-            if (!ExpectedIsFixedSize && !ExpectedIsReadOnly
-                && !ItemsMustBeNonNull && !ItemsMustBeUnique)
+            if (
+                !ExpectedIsFixedSize
+                && !ExpectedIsReadOnly
+                && !ItemsMustBeNonNull
+                && !ItemsMustBeUnique
+            )
             {
                 IList list = GetList(null);
                 object[] items = GenerateItems(16);
@@ -875,12 +824,9 @@ namespace Tests.Collections
         [InlineData(32, 0)]
         [InlineData(32, 16)]
         [InlineData(32, 31)]
-        public void NullInMiddleContains(
-            int collectionSize,
-            int nullIndex)
+        public void NullInMiddleContains(int collectionSize, int nullIndex)
         {
-            if (!ExpectedIsFixedSize && !ExpectedIsReadOnly
-                && !ItemsMustBeNonNull)
+            if (!ExpectedIsFixedSize && !ExpectedIsReadOnly && !ItemsMustBeNonNull)
             {
                 IList list = GetList(null);
                 object[] items = GenerateItems(collectionSize);
@@ -919,8 +865,7 @@ namespace Tests.Collections
                     IList list = GetList(null);
                     if (SearchingThrowsFromInvalidValue)
                     {
-                        Assert.Throws<ArgumentException>(
-                            () => list.Contains(invalid1));
+                        Assert.Throws<ArgumentException>(() => list.Contains(invalid1));
                     }
                     else
                     {
@@ -943,8 +888,7 @@ namespace Tests.Collections
             IList list = GetList(null);
             if (ItemsMustBeNonNull && SearchingThrowsFromInvalidValue)
             {
-                Assert.Throws<ArgumentException>(
-                    () => list.IndexOf(null));
+                Assert.Throws<ArgumentException>(() => list.IndexOf(null));
             }
             else
             {
@@ -984,11 +928,9 @@ namespace Tests.Collections
                 IList list = GetList(null);
                 object[] items = GenerateItems(1);
                 list.AddRange(items);
-                if (ItemsMustBeNonNull
-                    && SearchingThrowsFromInvalidValue)
+                if (ItemsMustBeNonNull && SearchingThrowsFromInvalidValue)
                 {
-                    Assert.Throws<ArgumentException>(
-                        () => list.IndexOf(null));
+                    Assert.Throws<ArgumentException>(() => list.IndexOf(null));
                 }
                 else
                 {
@@ -1000,8 +942,7 @@ namespace Tests.Collections
         [Fact]
         public void AddNullIndexOfNull()
         {
-            if (!ExpectedIsReadOnly && !ExpectedIsFixedSize
-                && !ItemsMustBeNonNull)
+            if (!ExpectedIsReadOnly && !ExpectedIsFixedSize && !ItemsMustBeNonNull)
             {
                 IList list = GetList(null);
                 list.Add(null);
@@ -1012,8 +953,7 @@ namespace Tests.Collections
         [Fact]
         public void IndexOfNonUnique()
         {
-            if (!ExpectedIsReadOnly && !ExpectedIsFixedSize
-                && !ItemsMustBeUnique)
+            if (!ExpectedIsReadOnly && !ExpectedIsFixedSize && !ItemsMustBeUnique)
             {
                 IList list = GetList(null);
                 object[] items = GenerateItems(16);
@@ -1034,8 +974,7 @@ namespace Tests.Collections
         [InlineData(32, 31)]
         public void IndexOfNull(int collectionSize, int nullIndex)
         {
-            if (!ExpectedIsReadOnly && !ExpectedIsFixedSize
-                && !ItemsMustBeNonNull)
+            if (!ExpectedIsReadOnly && !ExpectedIsFixedSize && !ItemsMustBeNonNull)
             {
                 IList list = GetList(null);
                 object[] items = GenerateItems(collectionSize);
@@ -1078,14 +1017,13 @@ namespace Tests.Collections
             {
                 return;
             }
-            foreach (object invalid  in GetInvalidValues())
+            foreach (object invalid in GetInvalidValues())
             {
                 IList list = GetList(null);
                 object invalid1 = invalid;
                 if (SearchingThrowsFromInvalidValue)
                 {
-                    Assert.Throws<ArgumentException>(
-                        () => list.IndexOf(invalid1));
+                    Assert.Throws<ArgumentException>(() => list.IndexOf(invalid1));
                 }
                 else
                 {
@@ -1104,8 +1042,7 @@ namespace Tests.Collections
         {
             object[] items = GenerateItems(size);
             IList list = GetList(items);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.Insert(index, GenerateItem()));
+            Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(index, GenerateItem()));
             CollectionAssert.Equal(items, list);
         }
 
@@ -1123,13 +1060,11 @@ namespace Tests.Collections
                 object invalid = i;
                 if (invalid == null)
                 {
-                    Assert.Throws<ArgumentNullException>(
-                        () => list.Insert(0, null));
+                    Assert.Throws<ArgumentNullException>(() => list.Insert(0, null));
                 }
                 else
                 {
-                    Assert.Throws<ArgumentException>(
-                        () => list.Insert(0, invalid));
+                    Assert.Throws<ArgumentException>(() => list.Insert(0, invalid));
                 }
 
                 CollectionAssert.Equal(items, list);
@@ -1145,8 +1080,7 @@ namespace Tests.Collections
             }
             object[] items = GenerateItems(16);
             IList list = GetList(items);
-            Assert.Throws<NotSupportedException>(
-                () => list.Insert(0, GenerateItem()));
+            Assert.Throws<NotSupportedException>(() => list.Insert(0, GenerateItem()));
             CollectionAssert.Equal(items, list);
         }
 
@@ -1180,8 +1114,7 @@ namespace Tests.Collections
             IList list = GetList(items);
             if (ItemsMustBeNonNull)
             {
-                Assert.Throws<ArgumentNullException>(
-                    () => list.Insert(index, null));
+                Assert.Throws<ArgumentNullException>(() => list.Insert(index, null));
             }
             else
             {
@@ -1204,8 +1137,7 @@ namespace Tests.Collections
             IList list = GetList(items);
             if (ItemsMustBeUnique)
             {
-                Assert.Throws<ArgumentException>(
-                    () => list.Insert(0, items[0]));
+                Assert.Throws<ArgumentException>(() => list.Insert(0, items[0]));
             }
             else
             {
@@ -1244,7 +1176,7 @@ namespace Tests.Collections
             object[] items = GenerateItems(32);
             IList list = GetList(null);
             list.InsertRange(items);
-            var tempItems = (object[]) items.Clone();
+            var tempItems = (object[])items.Clone();
             for (var i = 0; i < 16; i++)
             {
                 list.RemoveAt(0);
@@ -1327,8 +1259,7 @@ namespace Tests.Collections
             }
             object[] items = GenerateItems(16);
             IList list = GetList(items);
-            Assert.Throws<NotSupportedException>(
-                () => list.Remove(GenerateItem()));
+            Assert.Throws<NotSupportedException>(() => list.Remove(GenerateItem()));
             CollectionAssert.Equal(items, list);
         }
 
@@ -1356,8 +1287,7 @@ namespace Tests.Collections
             IList list = GetList(items);
             if (ItemsMustBeNonNull && SearchingThrowsFromInvalidValue)
             {
-                Assert.Throws<ArgumentException>(
-                    () => list.Remove(null));
+                Assert.Throws<ArgumentException>(() => list.Remove(null));
             }
             else
             {
@@ -1411,8 +1341,7 @@ namespace Tests.Collections
             items = items.Push(item);
             if (ItemsMustBeNonNull && SearchingThrowsFromInvalidValue)
             {
-                Assert.Throws<ArgumentException>(
-                    () => list.Remove(null));
+                Assert.Throws<ArgumentException>(() => list.Remove(null));
             }
             else
             {
@@ -1471,15 +1400,13 @@ namespace Tests.Collections
             }
 
             object[] items = GenerateItems(16);
-            var tempItems = (object[]) items.Clone();
+            var tempItems = (object[])items.Clone();
             IList list = GetList(items);
             list.AddRange(items);
             for (var i = 0; i < items.Length; i++)
             {
                 int index = i + 1;
-                items =
-                    new object[
-                        tempItems.Length + tempItems.Length - index];
+                items = new object[tempItems.Length + tempItems.Length - index];
                 Array.Copy(tempItems, index, items, 0, 16 - index);
                 Array.Copy(tempItems, 0, items, 16 - index, 16);
 
@@ -1549,30 +1476,17 @@ namespace Tests.Collections
                 return;
             }
             Type[] expectedExceptions = ExpectedIsFixedSize
-                                            ? new[]
-                                            {
-                                                typeof (
-                                                  ArgumentException),
-                                                typeof (
-                                                  NotSupportedException)
-                                            }
-                                            : new[]
-                                            {
-                                                typeof (
-                                                  ArgumentException)
-                                            };
+                ? new[] { typeof(ArgumentException), typeof(NotSupportedException) }
+                : new[] { typeof(ArgumentException) };
 
             object[] items = GenerateItems(16);
             IList list = GetList(items);
             foreach (object i in GetInvalidValues())
             {
                 object invalid = i;
-                if (ExpectedIsFixedSize
-                    || SearchingThrowsFromInvalidValue)
+                if (ExpectedIsFixedSize || SearchingThrowsFromInvalidValue)
                 {
-                    AssertThrows(
-                        expectedExceptions,
-                        () => list.Remove(invalid));
+                    AssertThrows(expectedExceptions, () => list.Remove(invalid));
                 }
                 else
                 {
@@ -1592,8 +1506,7 @@ namespace Tests.Collections
             }
             object[] items = GenerateItems(size);
             IList list = GetList(items);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () => list.RemoveAt(index));
+            Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(index));
             CollectionAssert.Equal(items, list);
         }
 
@@ -1608,12 +1521,9 @@ namespace Tests.Collections
             object[] items = GenerateItems(size);
             IList list = GetList(items);
             AssertThrows(
-                new[]
-                {
-                    typeof (ArgumentOutOfRangeException),
-                    typeof (NotSupportedException)
-                },
-                () => list.RemoveAt(index));
+                new[] { typeof(ArgumentOutOfRangeException), typeof(NotSupportedException) },
+                () => list.RemoveAt(index)
+            );
             CollectionAssert.Equal(items, list);
         }
 
@@ -1624,8 +1534,7 @@ namespace Tests.Collections
             {
                 object[] items = GenerateItems(16);
                 IList list = GetList(items);
-                Assert.Throws<NotSupportedException>(
-                    () => list.RemoveAt(0));
+                Assert.Throws<NotSupportedException>(() => list.RemoveAt(0));
                 CollectionAssert.Equal(items, list);
             }
         }
@@ -1698,7 +1607,7 @@ namespace Tests.Collections
         {
             ICollection obj = GetCollection(items);
             Assert.IsAssignableFrom<IList>(obj);
-            return (IList) obj;
+            return (IList)obj;
         }
     }
 
@@ -1715,37 +1624,38 @@ namespace Tests.Collections
             bool isFixedSize,
             bool isResetNotSupported,
             bool isGenericCompatibility,
-            bool itemsMustBeUnique)
+            bool itemsMustBeUnique
+        )
             : base(isSynchronized, isReadOnly, isFixedSize)
         {
             _isResetNotSupported = isResetNotSupported;
             _isGenericCompatibility = isGenericCompatibility;
             _itemsMustBeUnique = itemsMustBeUnique;
-            ValidArrayTypes = new[] {typeof (object), typeof (T)};
+            ValidArrayTypes = new[] { typeof(object), typeof(T) };
             SearchingThrowsFromInvalidValue = false;
         }
 
-        protected override sealed bool IsResetNotSupported
+        protected sealed override bool IsResetNotSupported
         {
             get { return _isResetNotSupported; }
         }
 
-        protected override sealed bool IsGenericCompatibility
+        protected sealed override bool IsGenericCompatibility
         {
             get { return _isGenericCompatibility; }
         }
 
-        protected override sealed bool ItemsMustBeUnique
+        protected sealed override bool ItemsMustBeUnique
         {
             get { return _itemsMustBeUnique; }
         }
 
-        protected override sealed bool ItemsMustBeNonNull
+        protected sealed override bool ItemsMustBeNonNull
         {
             get { return default(T) != null; }
         }
 
-        protected override sealed object GenerateItem()
+        protected sealed override object GenerateItem()
         {
             return CreateItem();
         }
@@ -1768,14 +1678,9 @@ namespace Tests.Collections
         /// </summary>
         /// <param name="items">The items to initialize the enumerable with.</param>
         /// <returns>An instance of the enumerable under test containing the given items.</returns>
-        protected override sealed IEnumerable GetEnumerable(
-            object[] items)
+        protected override sealed IEnumerable GetEnumerable(object[] items)
         {
-            return
-                CreateList(
-                    items == null
-                        ? Enumerable.Empty<T>()
-                        : items.Cast<T>());
+            return CreateList(items == null ? Enumerable.Empty<T>() : items.Cast<T>());
         }
 
         /// <summary>
@@ -1783,21 +1688,16 @@ namespace Tests.Collections
         /// </summary>
         /// <param name="list">The list to invalidate enumerators for.</param>
         /// <returns>The new contents of the list.</returns>
-        protected abstract IEnumerable<T> InvalidateEnumerator(
-            TList list);
+        protected abstract IEnumerable<T> InvalidateEnumerator(TList list);
 
         /// <summary>
         ///     When overridden in a derived class, invalidates any enumerators for the given IEnumerable.
         /// </summary>
         /// <param name="enumerable">The <see cref="IEnumerable" /> to invalidate enumerators for.</param>
         /// <returns>The new set of items in the <see cref="IEnumerable" /></returns>
-        protected override sealed object[] InvalidateEnumerator(
-            IEnumerable enumerable)
+        protected override sealed object[] InvalidateEnumerator(IEnumerable enumerable)
         {
-            return
-                InvalidateEnumerator((TList) enumerable)
-                    .OfType<object>()
-                    .ToArray();
+            return InvalidateEnumerator((TList)enumerable).OfType<object>().ToArray();
         }
     }
 }

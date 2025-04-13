@@ -47,10 +47,7 @@ namespace Microsoft.AspNet.Facebook.Realtime
                 }
                 return _facebookConfiguration;
             }
-            set
-            {
-                _facebookConfiguration = value;
-            }
+            set { _facebookConfiguration = value; }
         }
 
         /// <summary>
@@ -64,14 +61,28 @@ namespace Microsoft.AspNet.Facebook.Realtime
         /// Handles the HTTP GET requests from Facebook for subscription verification.
         /// </summary>
         /// <param name="subscriptionVerification">The subscription verification.</param>
-        [SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Get", Justification = "Needs to be this name to follow routing conventions")]
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "HttpResponseMessage will be disposed by Web API")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1716:IdentifiersShouldNotMatchKeywords",
+            MessageId = "Get",
+            Justification = "Needs to be this name to follow routing conventions"
+        )]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "HttpResponseMessage will be disposed by Web API"
+        )]
         public virtual HttpResponseMessage Get(SubscriptionVerification subscriptionVerification)
         {
             try
             {
                 FacebookClient client = FacebookConfiguration.ClientProvider.CreateClient();
-                client.VerifyGetSubscription(subscriptionVerification.Mode, subscriptionVerification.Verify_Token, subscriptionVerification.Challenge, VerifyToken);
+                client.VerifyGetSubscription(
+                    subscriptionVerification.Mode,
+                    subscriptionVerification.Verify_Token,
+                    subscriptionVerification.Challenge,
+                    VerifyToken
+                );
             }
             catch (ArgumentException argumentException)
             {
@@ -80,7 +91,7 @@ namespace Microsoft.AspNet.Facebook.Realtime
 
             return new HttpResponseMessage
             {
-                Content = new StringContent(subscriptionVerification.Challenge)
+                Content = new StringContent(subscriptionVerification.Challenge),
             };
         }
 
@@ -97,12 +108,20 @@ namespace Microsoft.AspNet.Facebook.Realtime
                 {
                     string contentString = await Request.Content.ReadAsStringAsync();
                     FacebookClient client = FacebookConfiguration.ClientProvider.CreateClient();
-                    ChangeNotification notification = client.VerifyPostSubscription(signatureHeaderValue, contentString, typeof(ChangeNotification)) as ChangeNotification;
+                    ChangeNotification notification =
+                        client.VerifyPostSubscription(
+                            signatureHeaderValue,
+                            contentString,
+                            typeof(ChangeNotification)
+                        ) as ChangeNotification;
                     await HandleUpdateAsync(notification);
                 }
                 catch (ArgumentException argumentException)
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, argumentException);
+                    return Request.CreateErrorResponse(
+                        HttpStatusCode.BadRequest,
+                        argumentException
+                    );
                 }
                 catch (HttpResponseException responseException)
                 {
@@ -113,7 +132,12 @@ namespace Microsoft.AspNet.Facebook.Realtime
             {
                 return Request.CreateErrorResponse(
                     HttpStatusCode.BadRequest,
-                    String.Format(CultureInfo.CurrentCulture, Resources.MissingRequiredHeader, XHubSignatureHeaderName));
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.MissingRequiredHeader,
+                        XHubSignatureHeaderName
+                    )
+                );
             }
 
             return Request.CreateResponse(HttpStatusCode.OK);

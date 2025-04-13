@@ -29,7 +29,11 @@ public class KeyDiscoveryConventionTest
     public void Primary_key_is_set_when_shadow_property_not_defined_by_convention_matches()
     {
         var entityBuilder = CreateInternalEntityBuilder<EntityWithNoId>();
-        var propertyBuilder = entityBuilder.Property(typeof(int), "Id", ConfigurationSource.DataAnnotation);
+        var propertyBuilder = entityBuilder.Property(
+            typeof(int),
+            "Id",
+            ConfigurationSource.DataAnnotation
+        );
 
         RunConvention(propertyBuilder);
 
@@ -42,7 +46,11 @@ public class KeyDiscoveryConventionTest
     public void Primary_key_is_not_set_when_shadow_property_defined_by_convention_matches()
     {
         var entityBuilder = CreateInternalEntityBuilder<EntityWithNoId>();
-        var propertyBuilder = entityBuilder.Property(typeof(int), "Id", ConfigurationSource.Convention);
+        var propertyBuilder = entityBuilder.Property(
+            typeof(int),
+            "Id",
+            ConfigurationSource.Convention
+        );
 
         RunConvention(propertyBuilder);
 
@@ -121,11 +129,19 @@ public class KeyDiscoveryConventionTest
         var logEntry = ListLoggerFactory.Log.Single();
         Assert.Equal(LogLevel.Debug, logEntry.Level);
         Assert.Equal(
-            CoreResources.LogMultiplePrimaryKeyCandidates(new TestLogger<TestLoggingDefinitions>()).GenerateMessage(
-                nameof(EntityWithMultipleIds.ID), nameof(EntityWithMultipleIds.Id), nameof(EntityWithMultipleIds)), logEntry.Message);
+            CoreResources
+                .LogMultiplePrimaryKeyCandidates(new TestLogger<TestLoggingDefinitions>())
+                .GenerateMessage(
+                    nameof(EntityWithMultipleIds.ID),
+                    nameof(EntityWithMultipleIds.Id),
+                    nameof(EntityWithMultipleIds)
+                ),
+            logEntry.Message
+        );
 
         var context = new ConventionContext<string>(
-            entityBuilder.Metadata.Model.ConventionDispatcher);
+            entityBuilder.Metadata.Model.ConventionDispatcher
+        );
 
         entityBuilder.Ignore("ID", ConfigurationSource.DataAnnotation);
 
@@ -134,13 +150,14 @@ public class KeyDiscoveryConventionTest
         Assert.Equal("Id", entityBuilder.Metadata.FindPrimaryKey().Properties.Single().Name);
     }
 
-    public ListLoggerFactory ListLoggerFactory { get; }
-        = new(l => l == DbLoggerCategory.Model.Name);
+    public ListLoggerFactory ListLoggerFactory { get; } =
+        new(l => l == DbLoggerCategory.Model.Name);
 
     private void RunConvention(InternalEntityTypeBuilder entityTypeBuilder)
     {
         var context = new ConventionContext<IConventionEntityTypeBuilder>(
-            entityTypeBuilder.Metadata.Model.ConventionDispatcher);
+            entityTypeBuilder.Metadata.Model.ConventionDispatcher
+        );
 
         CreateKeyDiscoveryConvention().ProcessEntityTypeAdded(entityTypeBuilder, context);
     }
@@ -148,20 +165,21 @@ public class KeyDiscoveryConventionTest
     private void RunConvention(InternalPropertyBuilder propertyBuilder)
     {
         var context = new ConventionContext<IConventionPropertyBuilder>(
-            propertyBuilder.Metadata.DeclaringType.Model.ConventionDispatcher);
+            propertyBuilder.Metadata.DeclaringType.Model.ConventionDispatcher
+        );
 
         CreateKeyDiscoveryConvention().ProcessPropertyAdded(propertyBuilder, context);
     }
 
-    private KeyDiscoveryConvention CreateKeyDiscoveryConvention()
-        => new(CreateDependencies());
+    private KeyDiscoveryConvention CreateKeyDiscoveryConvention() => new(CreateDependencies());
 
-    private ProviderConventionSetBuilderDependencies CreateDependencies()
-        => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>()
-            with
-            {
-                Logger = CreateLogger()
-            };
+    private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+        InMemoryTestHelpers
+            .Instance.CreateContextServices()
+            .GetRequiredService<ProviderConventionSetBuilderDependencies>() with
+        {
+            Logger = CreateLogger(),
+        };
 
     private DiagnosticsLogger<DbLoggerCategory.Model> CreateLogger()
     {
@@ -173,7 +191,8 @@ public class KeyDiscoveryConventionTest
             options,
             new DiagnosticListener("Fake"),
             new TestLoggingDefinitions(),
-            new NullDbContextLogger());
+            new NullDbContextLogger()
+        );
         return modelLogger;
     }
 
@@ -182,9 +201,13 @@ public class KeyDiscoveryConventionTest
         var modelBuilder = new InternalModelBuilder(new Model());
         var entityBuilder = modelBuilder.Entity(typeof(T), ConfigurationSource.Convention);
 
-        var context = new ConventionContext<IConventionEntityTypeBuilder>(modelBuilder.Metadata.ConventionDispatcher);
-        new PropertyDiscoveryConvention(CreateDependencies())
-            .ProcessEntityTypeAdded(entityBuilder, context);
+        var context = new ConventionContext<IConventionEntityTypeBuilder>(
+            modelBuilder.Metadata.ConventionDispatcher
+        );
+        new PropertyDiscoveryConvention(CreateDependencies()).ProcessEntityTypeAdded(
+            entityBuilder,
+            context
+        );
 
         return entityBuilder;
     }

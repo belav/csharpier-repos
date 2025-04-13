@@ -16,7 +16,9 @@ public class RazorComponentsServiceCollectionExtensionsTest
     {
         // Arrange
         var services = new ServiceCollection();
-        services.AddSingleton<IConfiguration>(new ConfigurationBuilder().AddInMemoryCollection().Build());
+        services.AddSingleton<IConfiguration>(
+            new ConfigurationBuilder().AddInMemoryCollection().Build()
+        );
         services.AddSingleton<IWebHostEnvironment>(new TestWebHostEnvironment());
         // Act
         RazorComponentsServiceCollectionExtensions.AddRazorComponents(services);
@@ -43,7 +45,9 @@ public class RazorComponentsServiceCollectionExtensionsTest
     {
         // Arrange
         var services = new ServiceCollection();
-        services.AddSingleton<IConfiguration>(new ConfigurationBuilder().AddInMemoryCollection().Build());
+        services.AddSingleton<IConfiguration>(
+            new ConfigurationBuilder().AddInMemoryCollection().Build()
+        );
         services.AddSingleton<IWebHostEnvironment>(new TestWebHostEnvironment());
 
         // Act
@@ -91,7 +95,7 @@ public class RazorComponentsServiceCollectionExtensionsTest
                 {
                     typeof(SupplyParameterFromFormValueProvider),
                     typeof(SupplyParameterFromQueryProviderServiceCollectionExtensions.SupplyValueFromQueryValueProvider),
-                }
+                },
             };
         }
     }
@@ -99,53 +103,71 @@ public class RazorComponentsServiceCollectionExtensionsTest
     private void AssertServiceCountEquals(
         IServiceCollection services,
         Type serviceType,
-        int expectedServiceRegistrationCount)
+        int expectedServiceRegistrationCount
+    )
     {
-        var serviceDescriptors = services.Where(serviceDescriptor => serviceDescriptor.ServiceType == serviceType);
+        var serviceDescriptors = services.Where(serviceDescriptor =>
+            serviceDescriptor.ServiceType == serviceType
+        );
         var actual = serviceDescriptors.Count();
 
         Assert.True(
             (expectedServiceRegistrationCount == actual),
-            $"Expected service type '{serviceType}' to be registered {expectedServiceRegistrationCount}" +
-            $" time(s) but was actually registered {actual} time(s).");
+            $"Expected service type '{serviceType}' to be registered {expectedServiceRegistrationCount}"
+                + $" time(s) but was actually registered {actual} time(s)."
+        );
     }
 
     private void AssertAllImplementationTypesAreDistinct(
         IServiceCollection services,
-        Type serviceType)
+        Type serviceType
+    )
     {
         var serviceProvider = services.BuildServiceProvider();
         var implementationTypes = services
             .Where(sd => sd.ServiceType == serviceType)
-            .Select(service => service switch
-            {
-                { ImplementationType: { } type } => type,
-                { ImplementationInstance: { } instance } => instance.GetType(),
-                { ImplementationFactory: { } factory } => factory(serviceProvider).GetType(),
-            })
+            .Select(service =>
+                service switch
+                {
+                    { ImplementationType: { } type } => type,
+                    { ImplementationInstance: { } instance } => instance.GetType(),
+                    { ImplementationFactory: { } factory } => factory(serviceProvider).GetType(),
+                }
+            )
             .ToArray();
 
         if (implementationTypes.Length == 0)
         {
-            Assert.True(
-                false,
-                $"Could not find an implementation type for {serviceType}");
+            Assert.True(false, $"Could not find an implementation type for {serviceType}");
         }
         else if (implementationTypes.Length != implementationTypes.Distinct().Count())
         {
             Assert.True(
                 false,
-                $"Found duplicate implementation types for {serviceType}. Implementation types: {string.Join(", ", implementationTypes.Select(x => x.ToString()))}");
+                $"Found duplicate implementation types for {serviceType}. Implementation types: {string.Join(", ", implementationTypes.Select(x => x.ToString()))}"
+            );
         }
     }
 
     private class TestWebHostEnvironment : IWebHostEnvironment
     {
-        public string WebRootPath { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string WebRootPath
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
         public IFileProvider WebRootFileProvider { get; set; } = new NullFileProvider();
-        public string EnvironmentName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string EnvironmentName
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
         public string ApplicationName { get; set; } = "App";
-        public string ContentRootPath { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string ContentRootPath
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
         public IFileProvider ContentRootFileProvider { get; set; } = new NullFileProvider();
     }
 }

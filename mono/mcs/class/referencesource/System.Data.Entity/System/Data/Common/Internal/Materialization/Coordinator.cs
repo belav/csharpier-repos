@@ -7,15 +7,14 @@
 //------------------------------------------------------------------------------
 
 using System.Collections.Generic;
+using System.Data.Objects.Internal;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Globalization;
-using System.Data.Objects.Internal;
 
 namespace System.Data.Common.Internal.Materialization
 {
-
     /// <summary>
     /// A coordinator is responsible for tracking state and processing result in a root or nested query
     /// result collection. The coordinator exists within a graph, and knows its Parent, (First)Child,
@@ -41,7 +40,7 @@ namespace System.Data.Common.Internal.Materialization
         /// <summary>
         /// First coordinator for nested results below this collection. When reading a new row
         /// for this coordinator, we walk down to the Child.
-        /// 
+        ///
         /// NOTE:: this cannot be readonly because we can't know both the parent and the child
         /// at initialization time; we set the Child in the parent's constructor.
         /// </summary>
@@ -61,7 +60,7 @@ namespace System.Data.Common.Internal.Materialization
         /// <summary>
         /// Indicates whether data has been read for the collection being aggregated or yielded
         /// by this coordinator.
-        /// </summary> 
+        /// </summary>
         public bool IsEntered
         {
             get { return _isEntered; }
@@ -81,7 +80,11 @@ namespace System.Data.Common.Internal.Materialization
 
         #region constructor
 
-        protected Coordinator(CoordinatorFactory coordinatorFactory, Coordinator parent, Coordinator next)
+        protected Coordinator(
+            CoordinatorFactory coordinatorFactory,
+            Coordinator parent,
+            Coordinator next
+        )
         {
             this.CoordinatorFactory = coordinatorFactory;
             this.Parent = parent;
@@ -99,10 +102,10 @@ namespace System.Data.Common.Internal.Materialization
         {
             ResetCollection(shaper);
 
-            // Add this coordinator to the appropriate state slot in the 
+            // Add this coordinator to the appropriate state slot in the
             // shaper so that it is available to materialization delegates.
             shaper.State[this.CoordinatorFactory.StateSlot] = this;
-            
+
             if (null != this.Child)
             {
                 this.Child.Initialize(shaper);
@@ -143,7 +146,7 @@ namespace System.Data.Common.Internal.Materialization
         {
             // check if this row contains a new element for this coordinator
             bool result = false;
-            
+
             if (!this.IsEntered || !this.CoordinatorFactory.CheckKeys(shaper))
             {
                 // remember initial keys values
@@ -209,7 +212,11 @@ namespace System.Data.Common.Internal.Materialization
 
         #region constructors
 
-        internal Coordinator(CoordinatorFactory<T> coordinator, Coordinator parent, Coordinator next)
+        internal Coordinator(
+            CoordinatorFactory<T> coordinator,
+            Coordinator parent,
+            Coordinator next
+        )
             : base(coordinator, parent, next)
         {
             this.TypedCoordinatorFactory = coordinator;
@@ -313,12 +320,15 @@ namespace System.Data.Common.Internal.Materialization
         /// </summary>
         internal void RegisterCloseHandler(Action<Shaper, List<IEntityWrapper>> closeHandler)
         {
-            Debug.Assert(null == _handleClose, "more than one handler for a collection close 'event'");
+            Debug.Assert(
+                null == _handleClose,
+                "more than one handler for a collection close 'event'"
+            );
             _handleClose = closeHandler;
         }
 
         /// <summary>
-        /// Called when we're disposing the enumerator;         
+        /// Called when we're disposing the enumerator;
         /// </summary>
         internal void SetCurrentToDefault()
         {
@@ -328,8 +338,8 @@ namespace System.Data.Common.Internal.Materialization
         #endregion
 
         #region runtime callable code
-        
-        // Code in this section is called from the delegates produced by the Translator.  It may  
+
+        // Code in this section is called from the delegates produced by the Translator.  It may
         // not show up if you search using Find All References
 
         /// <summary>

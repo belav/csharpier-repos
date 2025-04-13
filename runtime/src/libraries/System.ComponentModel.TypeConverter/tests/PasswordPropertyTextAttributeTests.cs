@@ -60,9 +60,24 @@ namespace System.ComponentModel.Tests
 
             yield return new object[] { attribute, attribute, true };
             yield return new object[] { attribute, new PasswordPropertyTextAttribute(true), true };
-            yield return new object[] { attribute, new PasswordPropertyTextAttribute(false), false };
-            yield return new object[] { new PasswordPropertyTextAttribute(false), new PasswordPropertyTextAttribute(false), true };
-            yield return new object[] { new PasswordPropertyTextAttribute(false), new PasswordPropertyTextAttribute(true), false };
+            yield return new object[]
+            {
+                attribute,
+                new PasswordPropertyTextAttribute(false),
+                false,
+            };
+            yield return new object[]
+            {
+                new PasswordPropertyTextAttribute(false),
+                new PasswordPropertyTextAttribute(false),
+                true,
+            };
+            yield return new object[]
+            {
+                new PasswordPropertyTextAttribute(false),
+                new PasswordPropertyTextAttribute(true),
+                false,
+            };
 
             yield return new object[] { attribute, new object(), false };
             yield return new object[] { attribute, null, false };
@@ -70,7 +85,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(PasswordPropertyTextAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            PasswordPropertyTextAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is PasswordPropertyTextAttribute)

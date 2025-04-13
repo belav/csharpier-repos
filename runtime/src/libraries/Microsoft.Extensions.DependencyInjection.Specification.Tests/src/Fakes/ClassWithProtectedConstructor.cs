@@ -5,8 +5,6 @@ namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
 {
     public class ClassWithProtectedConstructor
     {
-        internal ClassWithProtectedConstructor()
-        {
-        }
+        internal ClassWithProtectedConstructor() { }
     }
 }

@@ -19,7 +19,9 @@ public class ViewComponentFeatureProvider : IApplicationFeatureProvider<ViewComp
 
         foreach (var type in parts.OfType<IApplicationPartTypeProvider>().SelectMany(p => p.Types))
         {
-            if (ViewComponentConventions.IsComponent(type) && !feature.ViewComponents.Contains(type))
+            if (
+                ViewComponentConventions.IsComponent(type) && !feature.ViewComponents.Contains(type)
+            )
             {
                 feature.ViewComponents.Add(type);
             }

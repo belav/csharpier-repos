@@ -28,90 +28,92 @@
 //
 
 using System;
+using System.Collections;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Collections;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class BaseDataList_DataKeys
-		: GHTDataListBase
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
-		private delegate void BuildDataListControl(BaseDataList ctl);
+    public class BaseDataList_DataKeys : GHTDataListBase
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
- 
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
+        private delegate void BuildDataListControl(BaseDataList ctl);
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			HtmlForm frm = (HtmlForm)FindControl("form1");
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            HtmlForm frm = (HtmlForm)FindControl("form1");
 
-			GHTTestBegin(frm);
+            GHTTestBegin(frm);
 
-			this.Test(typeof(DataGrid), new BaseDataList_DataKeys.BuildDataListControl(this.GHTBuildSampleDataGrid));
-			this.Test(typeof(DataList), new BaseDataList_DataKeys.BuildDataListControl(this.GHTBuildSampleDataList));
-			
-			GHTTestEnd();
+            this.Test(
+                typeof(DataGrid),
+                new BaseDataList_DataKeys.BuildDataListControl(this.GHTBuildSampleDataGrid)
+            );
+            this.Test(
+                typeof(DataList),
+                new BaseDataList_DataKeys.BuildDataListControl(this.GHTBuildSampleDataList)
+            );
 
-		}
-		private void Test(Type CtlType, BaseDataList_DataKeys.BuildDataListControl CtlBuilder)
-		{
-			try
-			{
-				string text1 = "";
-				IEnumerator enumerator1 = null;
-				this.GHTSubTestBegin("BaseDataList_" + CtlType.Name + "_DataKeys1");
-				BaseDataList list1 = (BaseDataList) this.GHTElementClone(CtlType);
-				list1.DataKeyField = "colA";
-				CtlBuilder(list1);
-				base.GHTActiveSubTest.Controls.Add(list1);
-				try
-				{
-					enumerator1 = list1.DataKeys.GetEnumerator();
-					while (enumerator1.MoveNext())
-					{
-						string text2 = (string)(enumerator1.Current);
-						text1 = text1 + text2 + "-";
-					}
-				}
-				finally
-				{
-					if (enumerator1 is IDisposable)
-					{
-						((IDisposable) enumerator1).Dispose();
-					}
-				}
-				this.GHTSubTestAddResult("DataKeys = " + text1);
-			}
-			catch (Exception exception2)
-			{
-				// ProjectData.SetProjectError(exception2);
-				Exception exception1 = exception2;
-				this.GHTSubTestUnexpectedExceptionCaught(exception1);
-				// ProjectData.ClearProjectError();
-			}
-			this.GHTSubTestEnd();
-		}
- 
-	}
+            GHTTestEnd();
+        }
+
+        private void Test(Type CtlType, BaseDataList_DataKeys.BuildDataListControl CtlBuilder)
+        {
+            try
+            {
+                string text1 = "";
+                IEnumerator enumerator1 = null;
+                this.GHTSubTestBegin("BaseDataList_" + CtlType.Name + "_DataKeys1");
+                BaseDataList list1 = (BaseDataList)this.GHTElementClone(CtlType);
+                list1.DataKeyField = "colA";
+                CtlBuilder(list1);
+                base.GHTActiveSubTest.Controls.Add(list1);
+                try
+                {
+                    enumerator1 = list1.DataKeys.GetEnumerator();
+                    while (enumerator1.MoveNext())
+                    {
+                        string text2 = (string)(enumerator1.Current);
+                        text1 = text1 + text2 + "-";
+                    }
+                }
+                finally
+                {
+                    if (enumerator1 is IDisposable)
+                    {
+                        ((IDisposable)enumerator1).Dispose();
+                    }
+                }
+                this.GHTSubTestAddResult("DataKeys = " + text1);
+            }
+            catch (Exception exception2)
+            {
+                // ProjectData.SetProjectError(exception2);
+                Exception exception1 = exception2;
+                this.GHTSubTestUnexpectedExceptionCaught(exception1);
+                // ProjectData.ClearProjectError();
+            }
+            this.GHTSubTestEnd();
+        }
+    }
 }

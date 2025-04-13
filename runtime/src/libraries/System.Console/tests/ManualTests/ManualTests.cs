@@ -3,18 +3,19 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace System
 {
     public class ConsoleManualTests
     {
-        public static bool ManualTestsEnabled => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("MANUAL_TESTS"));
+        public static bool ManualTestsEnabled =>
+            !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("MANUAL_TESTS"));
 
         [ConditionalTheory(nameof(ManualTestsEnabled))]
         [InlineData(false)]
@@ -34,13 +35,17 @@ namespace System
             string expectedLine = "aab";
 
             // Use Console.ReadLine
-            Console.WriteLine($"Please type 'a' 3 times, press 'Backspace' to erase 1, then type a single 'b' and press 'Enter'.");
+            Console.WriteLine(
+                $"Please type 'a' 3 times, press 'Backspace' to erase 1, then type a single 'b' and press 'Enter'."
+            );
             string result = Console.ReadLine();
             Assert.Equal(expectedLine, result);
             AssertUserExpectedResults("the characters you typed properly echoed as you typed");
 
             // ReadLine from Console.OpenStandardInput
-            Console.WriteLine($"Please type 'a' 3 times, press 'Backspace' to erase 1, then type a single 'b' and press 'Enter'.");
+            Console.WriteLine(
+                $"Please type 'a' 3 times, press 'Backspace' to erase 1, then type a single 'b' and press 'Enter'."
+            );
             using Stream inputStream = Console.OpenStandardInput();
             using StreamReader reader = new StreamReader(inputStream);
             result = reader.ReadLine();
@@ -70,7 +75,9 @@ namespace System
         {
             const string expectedLine = "aab\r";
 
-            Console.WriteLine($"Please type 'a' 3 times, press 'Backspace' to erase 1, then type a single 'b' and press 'Enter'.");
+            Console.WriteLine(
+                $"Please type 'a' 3 times, press 'Backspace' to erase 1, then type a single 'b' and press 'Enter'."
+            );
             foreach (char c in expectedLine)
             {
                 Assert.Equal((int)c, Console.Read());
@@ -81,7 +88,9 @@ namespace System
         [ConditionalFact(nameof(ManualTestsEnabled))]
         public static void ReadLine_BackSpaceCanMoveAcrossWrappedLines()
         {
-            Console.WriteLine("Please press 'a' until it wraps to the next terminal line, then press 'Backspace' until the input is erased, and then type a single 'a' and press 'Enter'.");
+            Console.WriteLine(
+                "Please press 'a' until it wraps to the next terminal line, then press 'Backspace' until the input is erased, and then type a single 'a' and press 'Enter'."
+            );
             Console.Write("Input: ");
             Console.Out.Flush();
 
@@ -94,7 +103,9 @@ namespace System
         [ActiveIssue("https://github.com/dotnet/runtime/issues/40735", TestPlatforms.Windows)]
         public static void InPeek()
         {
-            Console.WriteLine("Please type \"peek\" (without the quotes). You should see it as you type:");
+            Console.WriteLine(
+                "Please type \"peek\" (without the quotes). You should see it as you type:"
+            );
             foreach (char c in new[] { 'p', 'e', 'e', 'k' })
             {
                 Assert.Equal(c, Console.In.Peek());
@@ -115,8 +126,21 @@ namespace System
         [ConditionalFact(nameof(ManualTestsEnabled))]
         public static void ReadKey()
         {
-            Console.WriteLine("Please type \"console\" (without the quotes). You shouldn't see it as you type:");
-            foreach (ConsoleKey k in new[] { ConsoleKey.C, ConsoleKey.O, ConsoleKey.N, ConsoleKey.S, ConsoleKey.O, ConsoleKey.L, ConsoleKey.E })
+            Console.WriteLine(
+                "Please type \"console\" (without the quotes). You shouldn't see it as you type:"
+            );
+            foreach (
+                ConsoleKey k in new[]
+                {
+                    ConsoleKey.C,
+                    ConsoleKey.O,
+                    ConsoleKey.N,
+                    ConsoleKey.S,
+                    ConsoleKey.O,
+                    ConsoleKey.L,
+                    ConsoleKey.E,
+                }
+            )
             {
                 Assert.Equal(k, Console.ReadKey(intercept: true).Key);
             }
@@ -126,8 +150,21 @@ namespace System
         [ConditionalFact(nameof(ManualTestsEnabled))]
         public static void ReadKeyNoIntercept()
         {
-            Console.WriteLine("Please type \"console\" (without the quotes). You should see it as you type:");
-            foreach (ConsoleKey k in new[] { ConsoleKey.C, ConsoleKey.O, ConsoleKey.N, ConsoleKey.S, ConsoleKey.O, ConsoleKey.L, ConsoleKey.E })
+            Console.WriteLine(
+                "Please type \"console\" (without the quotes). You should see it as you type:"
+            );
+            foreach (
+                ConsoleKey k in new[]
+                {
+                    ConsoleKey.C,
+                    ConsoleKey.O,
+                    ConsoleKey.N,
+                    ConsoleKey.S,
+                    ConsoleKey.O,
+                    ConsoleKey.L,
+                    ConsoleKey.E,
+                }
+            )
             {
                 Assert.Equal(k, Console.ReadKey(intercept: false).Key);
             }
@@ -137,7 +174,9 @@ namespace System
         [ConditionalFact(nameof(ManualTestsEnabled))]
         public static void EnterKeyIsEnterAfterKeyAvailableCheck()
         {
-            Console.WriteLine("Please hold down the 'Enter' key for some time. You shouldn't see new lines appear:");
+            Console.WriteLine(
+                "Please hold down the 'Enter' key for some time. You shouldn't see new lines appear:"
+            );
             int keysRead = 0;
             while (keysRead < 50)
             {
@@ -172,28 +211,51 @@ namespace System
         public static IEnumerable<object[]> GetKeyChords()
         {
             yield return MkConsoleKeyInfo("Ctrl+B", '\x02', ConsoleKey.B, ConsoleModifiers.Control);
-            yield return MkConsoleKeyInfo("Ctrl+Alt+B", '\x00', ConsoleKey.B, ConsoleModifiers.Control | ConsoleModifiers.Alt);
+            yield return MkConsoleKeyInfo(
+                "Ctrl+Alt+B",
+                '\x00',
+                ConsoleKey.B,
+                ConsoleModifiers.Control | ConsoleModifiers.Alt
+            );
             yield return MkConsoleKeyInfo("Enter", '\r', ConsoleKey.Enter, default);
 
             if (OperatingSystem.IsWindows())
             {
-                yield return MkConsoleKeyInfo("Ctrl+J", '\n', ConsoleKey.J, ConsoleModifiers.Control);
+                yield return MkConsoleKeyInfo(
+                    "Ctrl+J",
+                    '\n',
+                    ConsoleKey.J,
+                    ConsoleModifiers.Control
+                );
             }
             else
             {
                 // Ctrl+J is mapped by every Unix Terminal as Ctrl+Enter with new line character
-                yield return MkConsoleKeyInfo("Ctrl+J", '\n', ConsoleKey.Enter, ConsoleModifiers.Control);
+                yield return MkConsoleKeyInfo(
+                    "Ctrl+J",
+                    '\n',
+                    ConsoleKey.Enter,
+                    ConsoleModifiers.Control
+                );
             }
 
-            static object[] MkConsoleKeyInfo (string requestedKeyChord, char keyChar, ConsoleKey consoleKey, ConsoleModifiers modifiers)
+            static object[] MkConsoleKeyInfo(
+                string requestedKeyChord,
+                char keyChar,
+                ConsoleKey consoleKey,
+                ConsoleModifiers modifiers
+            )
             {
                 return new object[]
                 {
                     requestedKeyChord,
-                    new ConsoleKeyInfo(keyChar, consoleKey,
+                    new ConsoleKeyInfo(
+                        keyChar,
+                        consoleKey,
                         control: modifiers.HasFlag(ConsoleModifiers.Control),
                         alt: modifiers.HasFlag(ConsoleModifiers.Alt),
-                        shift: modifiers.HasFlag(ConsoleModifiers.Shift))
+                        shift: modifiers.HasFlag(ConsoleModifiers.Shift)
+                    ),
                 };
             }
         }
@@ -233,7 +295,13 @@ namespace System
         public static void Colors()
         {
             const int squareSize = 20;
-            var colors = new[] { ConsoleColor.Red, ConsoleColor.Green, ConsoleColor.Blue, ConsoleColor.Yellow };
+            var colors = new[]
+            {
+                ConsoleColor.Red,
+                ConsoleColor.Green,
+                ConsoleColor.Blue,
+                ConsoleColor.Yellow,
+            };
             for (int row = 0; row < 2; row++)
             {
                 for (int i = 0; i < squareSize / 2; i++)
@@ -244,7 +312,8 @@ namespace System
                     {
                         Console.BackgroundColor = colors[row * 2 + col];
                         Console.ForegroundColor = colors[row * 2 + col];
-                        for (int j = 0; j < squareSize; j++) Console.Write('@');
+                        for (int j = 0; j < squareSize; j++)
+                            Console.Write('@');
                         Console.ResetColor();
                     }
                 }
@@ -257,7 +326,9 @@ namespace System
         [ConditionalFact(nameof(ManualTestsEnabled))]
         public static void CursorPositionAndArrowKeys()
         {
-            Console.WriteLine("Use the up, down, left, and right arrow keys to move around.  When done, press enter.");
+            Console.WriteLine(
+                "Use the up, down, left, and right arrow keys to move around.  When done, press enter."
+            );
 
             while (true)
             {
@@ -267,14 +338,17 @@ namespace System
                     break;
                 }
 
-                int left = Console.CursorLeft, top = Console.CursorTop;
+                int left = Console.CursorLeft,
+                    top = Console.CursorTop;
                 switch (k.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        if (top > 0) Console.CursorTop = top - 1;
+                        if (top > 0)
+                            Console.CursorTop = top - 1;
                         break;
                     case ConsoleKey.LeftArrow:
-                        if (left > 0) Console.CursorLeft = left - 1;
+                        if (left > 0)
+                            Console.CursorLeft = left - 1;
                         break;
                     case ConsoleKey.RightArrow:
                         Console.CursorLeft = left + 1;
@@ -285,7 +359,9 @@ namespace System
                 }
             }
 
-            AssertUserExpectedResults("the arrow keys move around the screen as expected with no other bad artifacts");
+            AssertUserExpectedResults(
+                "the arrow keys move around the screen as expected with no other bad artifacts"
+            );
         }
 
         [ConditionalFact(nameof(ManualTestsEnabled))]
@@ -298,11 +374,9 @@ namespace System
             AssertUserExpectedResults("the characters you typed properly echoed as you typed");
 
             Console.WriteLine($"Now type \"test\" without the quotes and press Ctrl+D twice.");
-            using Process p = Process.Start(new ProcessStartInfo
-            {
-                FileName = "cat",
-                RedirectStandardOutput = true,
-            });
+            using Process p = Process.Start(
+                new ProcessStartInfo { FileName = "cat", RedirectStandardOutput = true }
+            );
             string stdout = p.StandardOutput.ReadToEnd();
             p.WaitForExit();
             Assert.Equal("test", stdout);
@@ -335,19 +409,29 @@ namespace System
         }
 
         [ConditionalFact(nameof(ManualTestsEnabled))]
-        [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on Browser, iOS, MacCatalyst, or tvOS.")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser
+                | TestPlatforms.iOS
+                | TestPlatforms.MacCatalyst
+                | TestPlatforms.tvOS,
+            "Not supported on Browser, iOS, MacCatalyst, or tvOS."
+        )]
         public static void ResizeTest()
         {
             bool wasResized = false;
 
             using (ManualResetEvent manualResetEvent = new(false))
-            using (PosixSignalRegistration.Create(PosixSignal.SIGWINCH,
-                       ctx =>
-                       {
-                           wasResized = true;
-                           Assert.Equal(PosixSignal.SIGWINCH, ctx.Signal);
-                           manualResetEvent.Set();
-                       }))
+            using (
+                PosixSignalRegistration.Create(
+                    PosixSignal.SIGWINCH,
+                    ctx =>
+                    {
+                        wasResized = true;
+                        Assert.Equal(PosixSignal.SIGWINCH, ctx.Signal);
+                        manualResetEvent.Set();
+                    }
+                )
+            )
             {
                 int widthBefore = Console.WindowWidth;
                 int heightBefore = Console.WindowHeight;
@@ -358,8 +442,8 @@ namespace System
 
                 Assert.True(manualResetEvent.WaitOne(TimeSpan.FromMilliseconds(50)));
                 Assert.True(wasResized);
-                Assert.Equal(widthBefore / 2, Console.WindowWidth );
-                Assert.Equal(heightBefore / 2, Console.WindowHeight );
+                Assert.Equal(widthBefore / 2, Console.WindowWidth);
+                Assert.Equal(heightBefore / 2, Console.WindowHeight);
 
                 Console.SetWindowSize(widthBefore, heightBefore);
             }
@@ -373,14 +457,16 @@ namespace System
 
             switch (info.Key)
             {
-                case ConsoleKey.Y or ConsoleKey.N:
+                case ConsoleKey.Y
+                or ConsoleKey.N:
                     Assert.Equal(ConsoleKey.Y, info.Key);
                     break;
 
                 default:
                     AssertUserExpectedResults(expected);
                     break;
-            };
+            }
+            ;
         }
     }
 }

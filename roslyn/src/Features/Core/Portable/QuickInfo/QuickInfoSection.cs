@@ -34,8 +34,10 @@ namespace Microsoft.CodeAnalysis.QuickInfo
         /// </summary>
         /// <param name="kind">The kind of the section. Use <see cref="QuickInfoSectionKinds"/> for the most common kinds.</param>
         /// <param name="taggedParts">The individual tagged parts of the section.</param>
-        public static QuickInfoSection Create(string? kind, ImmutableArray<TaggedText> taggedParts)
-            => new(kind, taggedParts);
+        public static QuickInfoSection Create(
+            string? kind,
+            ImmutableArray<TaggedText> taggedParts
+        ) => new(kind, taggedParts);
 
         private string? _text;
 
@@ -54,7 +56,11 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                     }
                     else
                     {
-                        Interlocked.CompareExchange(ref _text, string.Concat(TaggedParts.Select(t => t.Text)), null);
+                        Interlocked.CompareExchange(
+                            ref _text,
+                            string.Concat(TaggedParts.Select(t => t.Text)),
+                            null
+                        );
                     }
                 }
 

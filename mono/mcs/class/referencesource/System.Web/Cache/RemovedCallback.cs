@@ -6,31 +6,37 @@ using System;
 using System.Runtime.Caching;
 using System.Web.Util;
 
-namespace System.Web.Caching {
-    internal sealed class RemovedCallback {
+namespace System.Web.Caching
+{
+    internal sealed class RemovedCallback
+    {
         CacheItemRemovedCallback _callback;
-        internal RemovedCallback(CacheItemRemovedCallback callback) {
+
+        internal RemovedCallback(CacheItemRemovedCallback callback)
+        {
             _callback = callback;
         }
 
-        internal void CacheEntryRemovedCallback(CacheEntryRemovedArguments arguments) {
+        internal void CacheEntryRemovedCallback(CacheEntryRemovedArguments arguments)
+        {
             string key = arguments.CacheItem.Key;
             object value = arguments.CacheItem.Value;
             CacheItemRemovedReason reason;
-            switch (arguments.RemovedReason) {
-                case CacheEntryRemovedReason.Removed :
+            switch (arguments.RemovedReason)
+            {
+                case CacheEntryRemovedReason.Removed:
                     reason = CacheItemRemovedReason.Removed;
                     break;
-                case CacheEntryRemovedReason.Expired :
+                case CacheEntryRemovedReason.Expired:
                     reason = CacheItemRemovedReason.Expired;
                     break;
-                case CacheEntryRemovedReason.Evicted :
+                case CacheEntryRemovedReason.Evicted:
                     reason = CacheItemRemovedReason.Underused;
                     break;
-                case CacheEntryRemovedReason.ChangeMonitorChanged :
+                case CacheEntryRemovedReason.ChangeMonitorChanged:
                     reason = CacheItemRemovedReason.DependencyChanged;
                     break;
-                default :
+                default:
                     reason = CacheItemRemovedReason.Removed;
                     break;
             }

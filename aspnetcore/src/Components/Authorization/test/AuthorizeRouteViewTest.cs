@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Components.Authorization;
 
 public class AuthorizeRouteViewTest
 {
-    private static readonly IReadOnlyDictionary<string, object> EmptyParametersDictionary = new Dictionary<string, object>();
+    private static readonly IReadOnlyDictionary<string, object> EmptyParametersDictionary =
+        new Dictionary<string, object>();
     private readonly TestAuthenticationStateProvider _authenticationStateProvider;
     private readonly TestRenderer _renderer;
     private readonly RouteView _authorizeRouteViewComponent;
@@ -23,287 +24,399 @@ public class AuthorizeRouteViewTest
     {
         _authenticationStateProvider = new TestAuthenticationStateProvider();
         _authenticationStateProvider.CurrentAuthStateTask = Task.FromResult(
-            new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity())));
+            new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity()))
+        );
 
         _testAuthorizationService = new TestAuthorizationService();
 
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton<AuthenticationStateProvider>(_authenticationStateProvider);
-        serviceCollection.AddSingleton<IAuthorizationPolicyProvider, TestAuthorizationPolicyProvider>();
+        serviceCollection.AddSingleton<
+            IAuthorizationPolicyProvider,
+            TestAuthorizationPolicyProvider
+        >();
         serviceCollection.AddSingleton<IAuthorizationService>(_testAuthorizationService);
         serviceCollection.AddSingleton<NavigationManager, TestNavigationManager>();
 
         var services = serviceCollection.BuildServiceProvider();
         _renderer = new TestRenderer(services);
         var componentFactory = new ComponentFactory(new DefaultComponentActivator(), _renderer);
-        _authorizeRouteViewComponent = (AuthorizeRouteView)componentFactory.InstantiateComponent(services, typeof(AuthorizeRouteView), null, null);
-        _authorizeRouteViewComponentId = _renderer.AssignRootComponentId(_authorizeRouteViewComponent);
+        _authorizeRouteViewComponent = (AuthorizeRouteView)
+            componentFactory.InstantiateComponent(services, typeof(AuthorizeRouteView), null, null);
+        _authorizeRouteViewComponentId = _renderer.AssignRootComponentId(
+            _authorizeRouteViewComponent
+        );
     }
 
     [Fact]
     public void WhenAuthorized_RendersPageInsideLayout()
     {
         // Arrange
-        var routeData = new RouteData(typeof(TestPageRequiringAuthorization), new Dictionary<string, object>
+        var routeData = new RouteData(
+            typeof(TestPageRequiringAuthorization),
+            new Dictionary<string, object>
             {
-                { nameof(TestPageRequiringAuthorization.Message), "Hello, world!" }
-            });
+                { nameof(TestPageRequiringAuthorization.Message), "Hello, world!" },
+            }
+        );
         _testAuthorizationService.NextResult = AuthorizationResult.Success();
 
         // Act
-        _renderer.RenderRootComponent(_authorizeRouteViewComponentId, ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(AuthorizeRouteView.RouteData), routeData },
-                { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
-            }));
+        _renderer.RenderRootComponent(
+            _authorizeRouteViewComponentId,
+            ParameterView.FromDictionary(
+                new Dictionary<string, object>
+                {
+                    { nameof(AuthorizeRouteView.RouteData), routeData },
+                    { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
+                }
+            )
+        );
 
         // Assert: renders layout
         var batch = _renderer.Batches.Single();
         var layoutDiff = batch.GetComponentDiffs<TestLayout>().Single();
-        Assert.Collection(layoutDiff.Edits,
+        Assert.Collection(
+            layoutDiff.Edits,
             edit => AssertPrependText(batch, edit, "Layout starts here"),
             edit =>
             {
                 Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Component<TestPageRequiringAuthorization>(batch.ReferenceFrames[edit.ReferenceFrameIndex]);
+                AssertFrame.Component<TestPageRequiringAuthorization>(
+                    batch.ReferenceFrames[edit.ReferenceFrameIndex]
+                );
             },
-            edit => AssertPrependText(batch, edit, "Layout ends here"));
+            edit => AssertPrependText(batch, edit, "Layout ends here")
+        );
 
         // Assert: renders page
         var pageDiff = batch.GetComponentDiffs<TestPageRequiringAuthorization>().Single();
-        Assert.Collection(pageDiff.Edits,
-            edit => AssertPrependText(batch, edit, "Hello from the page with message: Hello, world!"));
+        Assert.Collection(
+            pageDiff.Edits,
+            edit =>
+                AssertPrependText(batch, edit, "Hello from the page with message: Hello, world!")
+        );
     }
 
     [Fact]
     public void AuthorizesWhenResourceIsSet()
     {
         // Arrange
-        var routeData = new RouteData(typeof(TestPageRequiringAuthorization), new Dictionary<string, object>
+        var routeData = new RouteData(
+            typeof(TestPageRequiringAuthorization),
+            new Dictionary<string, object>
             {
-                { nameof(TestPageRequiringAuthorization.Message), "Hello, world!" }
-            });
+                { nameof(TestPageRequiringAuthorization.Message), "Hello, world!" },
+            }
+        );
         var resource = "foo";
         _testAuthorizationService.NextResult = AuthorizationResult.Success();
 
         // Act
-        _renderer.RenderRootComponent(_authorizeRouteViewComponentId, ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(AuthorizeRouteView.RouteData), routeData },
-                { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
-                { nameof(AuthorizeRouteView.Resource), resource }
-            }));
+        _renderer.RenderRootComponent(
+            _authorizeRouteViewComponentId,
+            ParameterView.FromDictionary(
+                new Dictionary<string, object>
+                {
+                    { nameof(AuthorizeRouteView.RouteData), routeData },
+                    { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
+                    { nameof(AuthorizeRouteView.Resource), resource },
+                }
+            )
+        );
 
         // Assert: renders layout
         var batch = _renderer.Batches.Single();
         var layoutDiff = batch.GetComponentDiffs<TestLayout>().Single();
-        Assert.Collection(layoutDiff.Edits,
+        Assert.Collection(
+            layoutDiff.Edits,
             edit => AssertPrependText(batch, edit, "Layout starts here"),
             edit =>
             {
                 Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Component<TestPageRequiringAuthorization>(batch.ReferenceFrames[edit.ReferenceFrameIndex]);
+                AssertFrame.Component<TestPageRequiringAuthorization>(
+                    batch.ReferenceFrames[edit.ReferenceFrameIndex]
+                );
             },
-            edit => AssertPrependText(batch, edit, "Layout ends here"));
+            edit => AssertPrependText(batch, edit, "Layout ends here")
+        );
 
         // Assert: renders page
         var pageDiff = batch.GetComponentDiffs<TestPageRequiringAuthorization>().Single();
-        Assert.Collection(pageDiff.Edits,
-            edit => AssertPrependText(batch, edit, "Hello from the page with message: Hello, world!"));
+        Assert.Collection(
+            pageDiff.Edits,
+            edit =>
+                AssertPrependText(batch, edit, "Hello from the page with message: Hello, world!")
+        );
 
         // Assert: Asserts that the Resource is present and set to "foo"
-        Assert.Collection(_testAuthorizationService.AuthorizeCalls, call =>
-        {
-            Assert.Equal(resource, call.resource.ToString());
-        });
+        Assert.Collection(
+            _testAuthorizationService.AuthorizeCalls,
+            call =>
+            {
+                Assert.Equal(resource, call.resource.ToString());
+            }
+        );
     }
 
     [Fact]
     public void NotAuthorizedWhenResourceMissing()
     {
         // Arrange
-        var routeData = new RouteData(typeof(TestPageRequiringAuthorization), EmptyParametersDictionary);
+        var routeData = new RouteData(
+            typeof(TestPageRequiringAuthorization),
+            EmptyParametersDictionary
+        );
         _testAuthorizationService.NextResult = AuthorizationResult.Failed();
 
         // Act
-        _renderer.RenderRootComponent(_authorizeRouteViewComponentId, ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(AuthorizeRouteView.RouteData), routeData },
-                { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
-            }));
+        _renderer.RenderRootComponent(
+            _authorizeRouteViewComponentId,
+            ParameterView.FromDictionary(
+                new Dictionary<string, object>
+                {
+                    { nameof(AuthorizeRouteView.RouteData), routeData },
+                    { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
+                }
+            )
+        );
 
         // Assert: renders layout containing "not authorized" message
         var batch = _renderer.Batches.Single();
         var layoutDiff = batch.GetComponentDiffs<TestLayout>().Single();
-        Assert.Collection(layoutDiff.Edits,
+        Assert.Collection(
+            layoutDiff.Edits,
             edit => AssertPrependText(batch, edit, "Layout starts here"),
             edit => AssertPrependText(batch, edit, "Not authorized"),
-            edit => AssertPrependText(batch, edit, "Layout ends here"));
+            edit => AssertPrependText(batch, edit, "Layout ends here")
+        );
 
         // Assert: Asserts that the Resource is Null
-        Assert.Collection(_testAuthorizationService.AuthorizeCalls, call =>
-        {
-            Assert.Null(call.resource);
-        });
+        Assert.Collection(
+            _testAuthorizationService.AuthorizeCalls,
+            call =>
+            {
+                Assert.Null(call.resource);
+            }
+        );
     }
 
     [Fact]
     public void WhenNotAuthorized_RendersDefaultNotAuthorizedContentInsideLayout()
     {
         // Arrange
-        var routeData = new RouteData(typeof(TestPageRequiringAuthorization), EmptyParametersDictionary);
+        var routeData = new RouteData(
+            typeof(TestPageRequiringAuthorization),
+            EmptyParametersDictionary
+        );
         _testAuthorizationService.NextResult = AuthorizationResult.Failed();
 
         // Act
-        _renderer.RenderRootComponent(_authorizeRouteViewComponentId, ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(AuthorizeRouteView.RouteData), routeData },
-                { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
-            }));
+        _renderer.RenderRootComponent(
+            _authorizeRouteViewComponentId,
+            ParameterView.FromDictionary(
+                new Dictionary<string, object>
+                {
+                    { nameof(AuthorizeRouteView.RouteData), routeData },
+                    { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
+                }
+            )
+        );
 
         // Assert: renders layout containing "not authorized" message
         var batch = _renderer.Batches.Single();
         var layoutDiff = batch.GetComponentDiffs<TestLayout>().Single();
-        Assert.Collection(layoutDiff.Edits,
+        Assert.Collection(
+            layoutDiff.Edits,
             edit => AssertPrependText(batch, edit, "Layout starts here"),
             edit => AssertPrependText(batch, edit, "Not authorized"),
-            edit => AssertPrependText(batch, edit, "Layout ends here"));
+            edit => AssertPrependText(batch, edit, "Layout ends here")
+        );
     }
 
     [Fact]
     public void WhenNotAuthorized_RendersCustomNotAuthorizedContentInsideLayout()
     {
         // Arrange
-        var routeData = new RouteData(typeof(TestPageRequiringAuthorization), EmptyParametersDictionary);
+        var routeData = new RouteData(
+            typeof(TestPageRequiringAuthorization),
+            EmptyParametersDictionary
+        );
         _testAuthorizationService.NextResult = AuthorizationResult.Failed();
-        _authenticationStateProvider.CurrentAuthStateTask = Task.FromResult(new AuthenticationState(
-            new ClaimsPrincipal(new TestIdentity { Name = "Bert" })));
+        _authenticationStateProvider.CurrentAuthStateTask = Task.FromResult(
+            new AuthenticationState(new ClaimsPrincipal(new TestIdentity { Name = "Bert" }))
+        );
 
         // Act
-        RenderFragment<AuthenticationState> customNotAuthorized =
-            state => builder => builder.AddContent(0, $"Go away, {state.User.Identity.Name}");
-        _renderer.RenderRootComponent(_authorizeRouteViewComponentId, ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(AuthorizeRouteView.RouteData), routeData },
-                { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
-                { nameof(AuthorizeRouteView.NotAuthorized), customNotAuthorized },
-            }));
+        RenderFragment<AuthenticationState> customNotAuthorized = state =>
+            builder => builder.AddContent(0, $"Go away, {state.User.Identity.Name}");
+        _renderer.RenderRootComponent(
+            _authorizeRouteViewComponentId,
+            ParameterView.FromDictionary(
+                new Dictionary<string, object>
+                {
+                    { nameof(AuthorizeRouteView.RouteData), routeData },
+                    { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
+                    { nameof(AuthorizeRouteView.NotAuthorized), customNotAuthorized },
+                }
+            )
+        );
 
         // Assert: renders layout containing "not authorized" message
         var batch = _renderer.Batches.Single();
         var layoutDiff = batch.GetComponentDiffs<TestLayout>().Single();
-        Assert.Collection(layoutDiff.Edits,
+        Assert.Collection(
+            layoutDiff.Edits,
             edit => AssertPrependText(batch, edit, "Layout starts here"),
             edit => AssertPrependText(batch, edit, "Go away, Bert"),
-            edit => AssertPrependText(batch, edit, "Layout ends here"));
+            edit => AssertPrependText(batch, edit, "Layout ends here")
+        );
     }
 
     [Fact]
     public async Task WhenAuthorizing_RendersDefaultAuthorizingContentInsideLayout()
     {
         // Arrange
-        var routeData = new RouteData(typeof(TestPageRequiringAuthorization), EmptyParametersDictionary);
+        var routeData = new RouteData(
+            typeof(TestPageRequiringAuthorization),
+            EmptyParametersDictionary
+        );
         var authStateTcs = new TaskCompletionSource<AuthenticationState>();
         _authenticationStateProvider.CurrentAuthStateTask = authStateTcs.Task;
-        RenderFragment<AuthenticationState> customNotAuthorized =
-            state => builder => builder.AddContent(0, $"Go away, {state.User.Identity.Name}");
+        RenderFragment<AuthenticationState> customNotAuthorized = state =>
+            builder => builder.AddContent(0, $"Go away, {state.User.Identity.Name}");
 
         // Act
-        var firstRenderTask = _renderer.RenderRootComponentAsync(_authorizeRouteViewComponentId, ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(AuthorizeRouteView.RouteData), routeData },
-                { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
-                { nameof(AuthorizeRouteView.NotAuthorized), customNotAuthorized },
-            }));
+        var firstRenderTask = _renderer.RenderRootComponentAsync(
+            _authorizeRouteViewComponentId,
+            ParameterView.FromDictionary(
+                new Dictionary<string, object>
+                {
+                    { nameof(AuthorizeRouteView.RouteData), routeData },
+                    { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
+                    { nameof(AuthorizeRouteView.NotAuthorized), customNotAuthorized },
+                }
+            )
+        );
 
         // Assert: renders layout containing "authorizing" message
         Assert.False(firstRenderTask.IsCompleted);
         var batch = _renderer.Batches.Single();
         var layoutDiff = batch.GetComponentDiffs<TestLayout>().Single();
-        Assert.Collection(layoutDiff.Edits,
+        Assert.Collection(
+            layoutDiff.Edits,
             edit => AssertPrependText(batch, edit, "Layout starts here"),
             edit => AssertPrependText(batch, edit, "Authorizing..."),
-            edit => AssertPrependText(batch, edit, "Layout ends here"));
+            edit => AssertPrependText(batch, edit, "Layout ends here")
+        );
 
         // Act 2: updates when authorization completes
-        authStateTcs.SetResult(new AuthenticationState(
-            new ClaimsPrincipal(new TestIdentity { Name = "Bert" })));
+        authStateTcs.SetResult(
+            new AuthenticationState(new ClaimsPrincipal(new TestIdentity { Name = "Bert" }))
+        );
         await firstRenderTask;
 
         // Assert 2: Only the layout is updated
         batch = _renderer.Batches.Skip(1).Single();
         var nonEmptyDiff = batch.DiffsInOrder.Where(d => d.Edits.Any()).Single();
         Assert.Equal(layoutDiff.ComponentId, nonEmptyDiff.ComponentId);
-        Assert.Collection(nonEmptyDiff.Edits, edit =>
-        {
-            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-            Assert.Equal(1, edit.SiblingIndex);
-            AssertFrame.Text(batch.ReferenceFrames[edit.ReferenceFrameIndex], "Go away, Bert");
-        });
+        Assert.Collection(
+            nonEmptyDiff.Edits,
+            edit =>
+            {
+                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+                Assert.Equal(1, edit.SiblingIndex);
+                AssertFrame.Text(batch.ReferenceFrames[edit.ReferenceFrameIndex], "Go away, Bert");
+            }
+        );
     }
 
     [Fact]
     public void WhenAuthorizing_RendersCustomAuthorizingContentInsideLayout()
     {
         // Arrange
-        var routeData = new RouteData(typeof(TestPageRequiringAuthorization), EmptyParametersDictionary);
+        var routeData = new RouteData(
+            typeof(TestPageRequiringAuthorization),
+            EmptyParametersDictionary
+        );
         var authStateTcs = new TaskCompletionSource<AuthenticationState>();
         _authenticationStateProvider.CurrentAuthStateTask = authStateTcs.Task;
-        RenderFragment customAuthorizing =
-            builder => builder.AddContent(0, "Hold on, we're checking your papers.");
+        RenderFragment customAuthorizing = builder =>
+            builder.AddContent(0, "Hold on, we're checking your papers.");
 
         // Act
-        var firstRenderTask = _renderer.RenderRootComponentAsync(_authorizeRouteViewComponentId, ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(AuthorizeRouteView.RouteData), routeData },
-                { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
-                { nameof(AuthorizeRouteView.Authorizing), customAuthorizing },
-            }));
+        var firstRenderTask = _renderer.RenderRootComponentAsync(
+            _authorizeRouteViewComponentId,
+            ParameterView.FromDictionary(
+                new Dictionary<string, object>
+                {
+                    { nameof(AuthorizeRouteView.RouteData), routeData },
+                    { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
+                    { nameof(AuthorizeRouteView.Authorizing), customAuthorizing },
+                }
+            )
+        );
 
         // Assert: renders layout containing "authorizing" message
         Assert.False(firstRenderTask.IsCompleted);
         var batch = _renderer.Batches.Single();
         var layoutDiff = batch.GetComponentDiffs<TestLayout>().Single();
-        Assert.Collection(layoutDiff.Edits,
+        Assert.Collection(
+            layoutDiff.Edits,
             edit => AssertPrependText(batch, edit, "Layout starts here"),
             edit => AssertPrependText(batch, edit, "Hold on, we're checking your papers."),
-            edit => AssertPrependText(batch, edit, "Layout ends here"));
+            edit => AssertPrependText(batch, edit, "Layout ends here")
+        );
     }
 
     [Fact]
     public void WithoutCascadedAuthenticationState_WrapsOutputInCascadingAuthenticationState()
     {
         // Arrange/Act
-        var routeData = new RouteData(typeof(TestPageWithNoAuthorization), EmptyParametersDictionary);
-        _renderer.RenderRootComponent(_authorizeRouteViewComponentId, ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(AuthorizeRouteView.RouteData), routeData }
-            }));
+        var routeData = new RouteData(
+            typeof(TestPageWithNoAuthorization),
+            EmptyParametersDictionary
+        );
+        _renderer.RenderRootComponent(
+            _authorizeRouteViewComponentId,
+            ParameterView.FromDictionary(
+                new Dictionary<string, object>
+                {
+                    { nameof(AuthorizeRouteView.RouteData), routeData },
+                }
+            )
+        );
 
         // Assert
         var batch = _renderer.Batches.Single();
-        var componentInstances = batch.ReferenceFrames
-            .Where(f => f.FrameType == RenderTreeFrameType.Component)
+        var componentInstances = batch
+            .ReferenceFrames.Where(f => f.FrameType == RenderTreeFrameType.Component)
             .Select(f => f.Component);
 
-        Assert.Collection(componentInstances,
+        Assert.Collection(
+            componentInstances,
             // This is the hierarchy inside the AuthorizeRouteView, which contains its
             // own CascadingAuthenticationState
             component => Assert.IsType<CascadingAuthenticationState>(component),
             component => Assert.IsType<CascadingValue<Task<AuthenticationState>>>(component),
             component => Assert.IsAssignableFrom<AuthorizeViewCore>(component),
             component => Assert.IsType<LayoutView>(component),
-            component => Assert.IsType<TestPageWithNoAuthorization>(component));
+            component => Assert.IsType<TestPageWithNoAuthorization>(component)
+        );
     }
 
     [Fact]
     public void WithCascadedAuthenticationState_DoesNotWrapOutputInCascadingAuthenticationState()
     {
         // Arrange
-        var routeData = new RouteData(typeof(TestPageWithNoAuthorization), EmptyParametersDictionary);
+        var routeData = new RouteData(
+            typeof(TestPageWithNoAuthorization),
+            EmptyParametersDictionary
+        );
         var rootComponent = new AuthorizeRouteViewWithExistingCascadedAuthenticationState(
             _authenticationStateProvider.CurrentAuthStateTask,
-            routeData);
+            routeData
+        );
         var rootComponentId = _renderer.AssignRootComponentId(rootComponent);
 
         // Act
@@ -311,20 +424,21 @@ public class AuthorizeRouteViewTest
 
         // Assert
         var batch = _renderer.Batches.Single();
-        var componentInstances = batch.ReferenceFrames
-            .Where(f => f.FrameType == RenderTreeFrameType.Component)
+        var componentInstances = batch
+            .ReferenceFrames.Where(f => f.FrameType == RenderTreeFrameType.Component)
             .Select(f => f.Component);
 
-        Assert.Collection(componentInstances,
+        Assert.Collection(
+            componentInstances,
             // This is the externally-supplied cascading value
             component => Assert.IsType<CascadingValue<Task<AuthenticationState>>>(component),
             component => Assert.IsType<AuthorizeRouteView>(component),
-
             // This is the hierarchy inside the AuthorizeRouteView. It doesn't contain a
             // further CascadingAuthenticationState
             component => Assert.IsAssignableFrom<AuthorizeViewCore>(component),
             component => Assert.IsType<LayoutView>(component),
-            component => Assert.IsType<TestPageWithNoAuthorization>(component));
+            component => Assert.IsType<TestPageWithNoAuthorization>(component)
+        );
     }
 
     [Fact]
@@ -332,39 +446,61 @@ public class AuthorizeRouteViewTest
     {
         // Arrange/Act 1: Start on some route
         // Not asserting about the initial output, as that is covered by other tests
-        var routeData = new RouteData(typeof(TestPageWithNoAuthorization), EmptyParametersDictionary);
-        _renderer.RenderRootComponent(_authorizeRouteViewComponentId, ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(AuthorizeRouteView.RouteData), routeData },
-                { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
-            }));
+        var routeData = new RouteData(
+            typeof(TestPageWithNoAuthorization),
+            EmptyParametersDictionary
+        );
+        _renderer.RenderRootComponent(
+            _authorizeRouteViewComponentId,
+            ParameterView.FromDictionary(
+                new Dictionary<string, object>
+                {
+                    { nameof(AuthorizeRouteView.RouteData), routeData },
+                    { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
+                }
+            )
+        );
 
         // Act 2: Move to another route
-        var routeData2 = new RouteData(typeof(TestPageRequiringAuthorization), EmptyParametersDictionary);
-        var render2Task = _renderer.Dispatcher.InvokeAsync(() => _authorizeRouteViewComponent.SetParametersAsync(ParameterView.FromDictionary(new Dictionary<string, object>
-            {
-                { nameof(AuthorizeRouteView.RouteData), routeData2 },
-            })));
+        var routeData2 = new RouteData(
+            typeof(TestPageRequiringAuthorization),
+            EmptyParametersDictionary
+        );
+        var render2Task = _renderer.Dispatcher.InvokeAsync(() =>
+            _authorizeRouteViewComponent.SetParametersAsync(
+                ParameterView.FromDictionary(
+                    new Dictionary<string, object>
+                    {
+                        { nameof(AuthorizeRouteView.RouteData), routeData2 },
+                    }
+                )
+            )
+        );
 
         // Assert: we retain the layout instance, and mutate its contents
         Assert.True(render2Task.IsCompletedSuccessfully);
         Assert.Equal(2, _renderer.Batches.Count);
         var batch2 = _renderer.Batches[1];
         var diff = batch2.DiffsInOrder.Where(d => d.Edits.Any()).Single();
-        Assert.Collection(diff.Edits,
+        Assert.Collection(
+            diff.Edits,
             edit =>
             {
                 // Inside the layout, we add the new content
                 Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
                 Assert.Equal(1, edit.SiblingIndex);
-                AssertFrame.Text(batch2.ReferenceFrames[edit.ReferenceFrameIndex], "Not authorized");
+                AssertFrame.Text(
+                    batch2.ReferenceFrames[edit.ReferenceFrameIndex],
+                    "Not authorized"
+                );
             },
             edit =>
             {
                 // ... and remove the old content
                 Assert.Equal(RenderTreeEditType.RemoveFrame, edit.Type);
                 Assert.Equal(2, edit.SiblingIndex);
-            });
+            }
+        );
     }
 
     private static void AssertPrependText(CapturedBatch batch, RenderTreeEdit edit, string text)
@@ -379,7 +515,8 @@ public class AuthorizeRouteViewTest
     [Authorize]
     class TestPageRequiringAuthorization : ComponentBase
     {
-        [Parameter] public string Message { get; set; }
+        [Parameter]
+        public string Message { get; set; }
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
@@ -404,7 +541,8 @@ public class AuthorizeRouteViewTest
 
         public AuthorizeRouteViewWithExistingCascadedAuthenticationState(
             Task<AuthenticationState> authenticationState,
-            RouteData routeData)
+            RouteData routeData
+        )
         {
             _authenticationState = authenticationState;
             _routeData = routeData;
@@ -413,13 +551,27 @@ public class AuthorizeRouteViewTest
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             builder.OpenComponent<CascadingValue<Task<AuthenticationState>>>(0);
-            builder.AddComponentParameter(1, nameof(CascadingValue<object>.Value), _authenticationState);
-            builder.AddComponentParameter(2, nameof(CascadingValue<object>.ChildContent), (RenderFragment)(builder =>
-            {
-                builder.OpenComponent<AuthorizeRouteView>(0);
-                builder.AddComponentParameter(1, nameof(AuthorizeRouteView.RouteData), _routeData);
-                builder.CloseComponent();
-            }));
+            builder.AddComponentParameter(
+                1,
+                nameof(CascadingValue<object>.Value),
+                _authenticationState
+            );
+            builder.AddComponentParameter(
+                2,
+                nameof(CascadingValue<object>.ChildContent),
+                (RenderFragment)(
+                    builder =>
+                    {
+                        builder.OpenComponent<AuthorizeRouteView>(0);
+                        builder.AddComponentParameter(
+                            1,
+                            nameof(AuthorizeRouteView.RouteData),
+                            _routeData
+                        );
+                        builder.CloseComponent();
+                    }
+                )
+            );
             builder.CloseComponent();
         }
     }
@@ -428,7 +580,10 @@ public class AuthorizeRouteViewTest
     {
         public TestNavigationManager()
         {
-            Initialize("https://localhost:85/subdir/", "https://localhost:85/subdir/path?query=value#hash");
+            Initialize(
+                "https://localhost:85/subdir/",
+                "https://localhost:85/subdir/path?query=value#hash"
+            );
         }
     }
 }

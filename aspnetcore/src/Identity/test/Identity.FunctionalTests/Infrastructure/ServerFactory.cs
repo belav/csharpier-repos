@@ -18,8 +18,7 @@ public class ServerFactory<TStartup, TContext> : WebApplicationFactory<TStartup>
     where TStartup : class
     where TContext : DbContext
 {
-    private readonly SqliteConnection _connection
-        = new SqliteConnection($"DataSource=:memory:");
+    private readonly SqliteConnection _connection = new SqliteConnection($"DataSource=:memory:");
 
     public ServerFactory()
     {
@@ -87,24 +86,29 @@ public class ServerFactory<TStartup, TContext> : WebApplicationFactory<TStartup>
 
     private static void AddRelatedParts(IServiceCollection services, string framework)
     {
-        var _assemblyMap =
-            new Dictionary<UIFramework, string>()
-            {
-                [UIFramework.Bootstrap5] = "Microsoft.AspNetCore.Identity.UI.Views.V5",
-                [UIFramework.Bootstrap4] = "Microsoft.AspNetCore.Identity.UI.Views.V4",
-            };
+        var _assemblyMap = new Dictionary<UIFramework, string>()
+        {
+            [UIFramework.Bootstrap5] = "Microsoft.AspNetCore.Identity.UI.Views.V5",
+            [UIFramework.Bootstrap4] = "Microsoft.AspNetCore.Identity.UI.Views.V4",
+        };
 
         var mvcBuilder = services
             .AddMvc()
             .ConfigureApplicationPartManager(partManager =>
             {
                 var thisAssembly = typeof(IdentityBuilderUIExtensions).Assembly;
-                var relatedAssemblies = RelatedAssemblyAttribute.GetRelatedAssemblies(thisAssembly, throwOnError: true);
+                var relatedAssemblies = RelatedAssemblyAttribute.GetRelatedAssemblies(
+                    thisAssembly,
+                    throwOnError: true
+                );
                 var relatedParts = relatedAssemblies.ToDictionary(
                     ra => ra,
-                    CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts);
+                    CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts
+                );
 
-                var selectedFrameworkAssembly = _assemblyMap[framework == "V4" ? UIFramework.Bootstrap4 : UIFramework.Bootstrap5];
+                var selectedFrameworkAssembly = _assemblyMap[
+                    framework == "V4" ? UIFramework.Bootstrap4 : UIFramework.Bootstrap5
+                ];
 
                 foreach (var kvp in relatedParts)
                 {
@@ -119,18 +123,24 @@ public class ServerFactory<TStartup, TContext> : WebApplicationFactory<TStartup>
                     }
                 }
                 bool IsAssemblyForFramework(string frameworkAssembly, string assemblyName) =>
-                    string.Equals(assemblyName, frameworkAssembly, StringComparison.OrdinalIgnoreCase);
+                    string.Equals(
+                        assemblyName,
+                        frameworkAssembly,
+                        StringComparison.OrdinalIgnoreCase
+                    );
                 void RemoveParts(
                     ApplicationPartManager manager,
-                    IEnumerable<ApplicationPart> partsToRemove)
+                    IEnumerable<ApplicationPart> partsToRemove
+                )
                 {
                     for (var i = 0; i < manager.ApplicationParts.Count; i++)
                     {
                         var part = manager.ApplicationParts[i];
-                        if (partsToRemove.Any(p => string.Equals(
-                                p.Name,
-                                part.Name,
-                                StringComparison.OrdinalIgnoreCase)))
+                        if (
+                            partsToRemove.Any(p =>
+                                string.Equals(p.Name, part.Name, StringComparison.OrdinalIgnoreCase)
+                            )
+                        )
                         {
                             manager.ApplicationParts.Remove(part);
                         }
@@ -138,12 +148,21 @@ public class ServerFactory<TStartup, TContext> : WebApplicationFactory<TStartup>
                 }
                 void AddParts(
                     ApplicationPartManager manager,
-                    IEnumerable<ApplicationPart> partsToAdd)
+                    IEnumerable<ApplicationPart> partsToAdd
+                )
                 {
                     foreach (var part in partsToAdd)
                     {
-                        if (!manager.ApplicationParts.Any(p => p.GetType() == part.GetType() &&
-                            string.Equals(p.Name, part.Name, StringComparison.OrdinalIgnoreCase)))
+                        if (
+                            !manager.ApplicationParts.Any(p =>
+                                p.GetType() == part.GetType()
+                                && string.Equals(
+                                    p.Name,
+                                    part.Name,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
+                        )
                         {
                             manager.ApplicationParts.Add(part);
                         }

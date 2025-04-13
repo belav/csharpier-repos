@@ -23,25 +23,29 @@ namespace System.Collections.Immutable.Tests
                 ImmutableHashSet<string>.Empty.WithComparer(StringComparer.Ordinal),
                 false,
                 new[] { "apple", "APPLE" },
-                new[] { "apple", "APPLE" });
+                new[] { "apple", "APPLE" }
+            );
             this.CustomSortTestHelper(
                 ImmutableHashSet<string>.Empty.WithComparer(StringComparer.OrdinalIgnoreCase),
                 false,
                 new[] { "apple", "APPLE" },
-                new[] { "apple" });
+                new[] { "apple" }
+            );
         }
 
         [Fact]
         public void ChangeUnorderedEqualityComparer()
         {
-            ImmutableHashSet<string> ordinalSet = ImmutableHashSet<string>.Empty
-                .WithComparer(StringComparer.Ordinal)
+            ImmutableHashSet<string> ordinalSet = ImmutableHashSet<string>
+                .Empty.WithComparer(StringComparer.Ordinal)
                 .Add("apple")
                 .Add("APPLE");
             Assert.Equal(2, ordinalSet.Count); // claimed count
             Assert.False(ordinalSet.Contains("aPpLe"));
 
-            ImmutableHashSet<string> ignoreCaseSet = ordinalSet.WithComparer(StringComparer.OrdinalIgnoreCase);
+            ImmutableHashSet<string> ignoreCaseSet = ordinalSet.WithComparer(
+                StringComparer.OrdinalIgnoreCase
+            );
             Assert.Equal(1, ignoreCaseSet.Count);
             Assert.True(ignoreCaseSet.Contains("aPpLe"));
         }
@@ -49,9 +53,7 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void ToSortTest()
         {
-            ImmutableHashSet<string> set = ImmutableHashSet<string>.Empty
-                .Add("apple")
-                .Add("APPLE");
+            ImmutableHashSet<string> set = ImmutableHashSet<string>.Empty.Add("apple").Add("APPLE");
             ImmutableSortedSet<string> sorted = set.ToImmutableSortedSet();
             CollectionAssertAreEquivalent(set.ToList(), sorted.ToList());
         }
@@ -59,14 +61,16 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void EnumeratorWithHashCollisionsTest()
         {
-            ImmutableHashSet<int> emptySet = this.EmptyTyped<int>().WithComparer(new BadHasher<int>());
+            ImmutableHashSet<int> emptySet = this.EmptyTyped<int>()
+                .WithComparer(new BadHasher<int>());
             this.EnumeratorTestHelper(emptySet, null, 3, 1, 5);
         }
 
         [Fact]
         public void EnumeratorWithHashCollisionsTest_RefType()
         {
-            ImmutableHashSet<string> emptySet = this.EmptyTyped<string>().WithComparer(new BadHasher<string>());
+            ImmutableHashSet<string> emptySet = this.EmptyTyped<string>()
+                .WithComparer(new BadHasher<string>());
             this.EnumeratorTestHelper(emptySet, null, "c", "a", "e");
         }
 
@@ -179,29 +183,44 @@ namespace System.Collections.Immutable.Tests
             Assert.Equal(new[] { "b" }, setAfterRemovingA);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public void DebuggerAttributesValid()
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableHashSet.Create<string>());
             ImmutableHashSet<int> set = ImmutableHashSet.Create(1, 2, 3);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(set);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                set
+            );
+            PropertyInfo itemProperty = info.Properties.Single(pr =>
+                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                == DebuggerBrowsableState.RootHidden
+            );
             int[] items = itemProperty.GetValue(info.Instance) as int[];
             Assert.Equal(set, items);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public static void TestDebuggerAttributes_Null()
         {
             Type proxyType = DebuggerAttributes.GetProxyType(ImmutableHashSet.Create<string>());
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object)null));
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
+                Activator.CreateInstance(proxyType, (object)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
         [Fact]
         public void SymmetricExceptWithComparerTests()
         {
-            ImmutableHashSet<string> set = ImmutableHashSet.Create<string>("a").WithComparer(StringComparer.OrdinalIgnoreCase);
+            ImmutableHashSet<string> set = ImmutableHashSet
+                .Create<string>("a")
+                .WithComparer(StringComparer.OrdinalIgnoreCase);
             var otherCollection = new[] { "A" };
 
             var expectedSet = new HashSet<string>(set, set.KeyComparer);

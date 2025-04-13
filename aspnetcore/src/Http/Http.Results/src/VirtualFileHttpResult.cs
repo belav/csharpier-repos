@@ -25,9 +25,7 @@ public sealed class VirtualFileHttpResult : IResult, IFileHttpResult, IContentTy
     /// <param name="fileName">The path to the file. The path must be an absolute path.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
     internal VirtualFileHttpResult(string fileName, string? contentType)
-        : this(fileName, contentType, fileDownloadName: null)
-    {
-    }
+        : this(fileName, contentType, fileDownloadName: null) { }
 
     /// <summary>
     /// Creates a new <see cref="VirtualFileHttpResult"/> instance with
@@ -37,13 +35,8 @@ public sealed class VirtualFileHttpResult : IResult, IFileHttpResult, IContentTy
     /// <param name="fileName">The path to the file. The path must be an absolute path.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
     /// <param name="fileDownloadName">The suggested file name.</param>
-    internal VirtualFileHttpResult(
-        string fileName,
-        string? contentType,
-        string? fileDownloadName)
-        : this(fileName, contentType, fileDownloadName, enableRangeProcessing: false)
-    {
-    }
+    internal VirtualFileHttpResult(string fileName, string? contentType, string? fileDownloadName)
+        : this(fileName, contentType, fileDownloadName, enableRangeProcessing: false) { }
 
     /// <summary>
     /// Creates a new <see cref="VirtualFileHttpResult"/> instance with the provided values.
@@ -60,7 +53,8 @@ public sealed class VirtualFileHttpResult : IResult, IFileHttpResult, IContentTy
         string? fileDownloadName,
         bool enableRangeProcessing,
         DateTimeOffset? lastModified = null,
-        EntityTagHeaderValue? entityTag = null)
+        EntityTagHeaderValue? entityTag = null
+    )
     {
         FileName = fileName;
         ContentType = contentType ?? "application/octet-stream";
@@ -103,7 +97,8 @@ public sealed class VirtualFileHttpResult : IResult, IFileHttpResult, IContentTy
     {
         ArgumentNullException.ThrowIfNull(httpContext);
 
-        var hostingEnvironment = httpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
+        var hostingEnvironment =
+            httpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
 
         var fileInfo = GetFileInformation(hostingEnvironment.WebRootFileProvider);
         if (!fileInfo.Exists)
@@ -115,7 +110,9 @@ public sealed class VirtualFileHttpResult : IResult, IFileHttpResult, IContentTy
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.VirtualFileResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.VirtualFileResult"
+        );
 
         var (range, rangeLength, completed) = HttpResultsHelper.WriteResultAsFileCore(
             httpContext,
@@ -125,14 +122,20 @@ public sealed class VirtualFileHttpResult : IResult, IFileHttpResult, IContentTy
             ContentType,
             EnableRangeProcessing,
             LastModified,
-            EntityTag);
+            EntityTag
+        );
 
-        return completed ?
-            Task.CompletedTask :
-            ExecuteCoreAsync(httpContext, range, rangeLength, fileInfo);
+        return completed
+            ? Task.CompletedTask
+            : ExecuteCoreAsync(httpContext, range, rangeLength, fileInfo);
     }
 
-    private static Task ExecuteCoreAsync(HttpContext httpContext, RangeItemHeaderValue? range, long rangeLength, IFileInfo fileInfo)
+    private static Task ExecuteCoreAsync(
+        HttpContext httpContext,
+        RangeItemHeaderValue? range,
+        long rangeLength,
+        IFileInfo fileInfo
+    )
     {
         var response = httpContext.Response;
         var offset = 0L;
@@ -143,10 +146,7 @@ public sealed class VirtualFileHttpResult : IResult, IFileHttpResult, IContentTy
             count = rangeLength;
         }
 
-        return response.SendFileAsync(
-            fileInfo!,
-            offset,
-            count);
+        return response.SendFileAsync(fileInfo!, offset, count);
     }
 
     internal IFileInfo GetFileInformation(IFileProvider fileProvider)

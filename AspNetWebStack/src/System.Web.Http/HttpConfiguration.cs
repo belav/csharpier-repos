@@ -26,9 +26,11 @@ namespace System.Web.Http
     public class HttpConfiguration : IDisposable
     {
         private readonly HttpRouteCollection _routes;
-        private readonly ConcurrentDictionary<object, object> _properties = new ConcurrentDictionary<object, object>();
+        private readonly ConcurrentDictionary<object, object> _properties =
+            new ConcurrentDictionary<object, object>();
         private readonly MediaTypeFormatterCollection _formatters;
-        private readonly Collection<DelegatingHandler> _messageHandlers = new Collection<DelegatingHandler>();
+        private readonly Collection<DelegatingHandler> _messageHandlers =
+            new Collection<DelegatingHandler>();
         private readonly HttpFilterCollection _filters = new HttpFilterCollection();
 
         private IDependencyResolver _dependencyResolver = EmptyResolver.Instance;
@@ -40,12 +42,13 @@ namespace System.Web.Http
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpConfiguration"/> class.
         /// </summary>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
-            Justification = "The route collection is disposed as part of this class.")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The route collection is disposed as part of this class."
+        )]
         public HttpConfiguration()
-            : this(new HttpRouteCollection(String.Empty))
-        {
-        }
+            : this(new HttpRouteCollection(String.Empty)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpConfiguration"/> class.
@@ -75,19 +78,33 @@ namespace System.Web.Http
             IncludeErrorDetailPolicy = configuration.IncludeErrorDetailPolicy;
 
             // per-controller settings
-            Services = settings.IsServiceCollectionInitialized ? settings.Services : configuration.Services;
-            _formatters = settings.IsFormatterCollectionInitialized ? settings.Formatters : configuration.Formatters;
-            ParameterBindingRules = settings.IsParameterBindingRuleCollectionInitialized ? settings.ParameterBindingRules : configuration.ParameterBindingRules;
+            Services = settings.IsServiceCollectionInitialized
+                ? settings.Services
+                : configuration.Services;
+            _formatters = settings.IsFormatterCollectionInitialized
+                ? settings.Formatters
+                : configuration.Formatters;
+            ParameterBindingRules = settings.IsParameterBindingRuleCollectionInitialized
+                ? settings.ParameterBindingRules
+                : configuration.ParameterBindingRules;
 
             // Use the original configuration's initializer so that its Initialize()
             // will perform the same logic on this clone as on the original.
             Initializer = configuration.Initializer;
 
             // create a new validator cache if the validator providers have changed
-            if (settings.IsServiceCollectionInitialized &&
-                !settings.Services.GetModelValidatorProviders().SequenceEqual(configuration.Services.GetModelValidatorProviders()))
+            if (
+                settings.IsServiceCollectionInitialized
+                && !settings
+                    .Services.GetModelValidatorProviders()
+                    .SequenceEqual(configuration.Services.GetModelValidatorProviders())
+            )
             {
-                ModelValidatorCache validatorCache = new ModelValidatorCache(new Lazy<IEnumerable<ModelValidatorProvider>>(() => Services.GetModelValidatorProviders()));
+                ModelValidatorCache validatorCache = new ModelValidatorCache(
+                    new Lazy<IEnumerable<ModelValidatorProvider>>(() =>
+                        Services.GetModelValidatorProviders()
+                    )
+                );
                 settings.Services.Replace(typeof(IModelValidatorCache), validatorCache);
             }
         }
@@ -107,10 +124,7 @@ namespace System.Web.Http
         /// </remarks>
         public Action<HttpConfiguration> Initializer
         {
-            get
-            {
-                return _initializer;
-            }
+            get { return _initializer; }
             set
             {
                 if (value == null)
@@ -133,8 +147,8 @@ namespace System.Web.Http
         /// <summary>
         /// Gets an ordered list of <see cref="DelegatingHandler"/> instances to be invoked as an
         /// <see cref="HttpRequestMessage"/> travels up the stack and an <see cref="HttpResponseMessage"/> travels down in
-        /// stack in return. The handlers are invoked in a top-down fashion in the incoming path and bottom-up in the outgoing 
-        /// path. That is, the first entry is invoked first for an incoming request message but last for an outgoing 
+        /// stack in return. The handlers are invoked in a top-down fashion in the incoming path and bottom-up in the outgoing
+        /// path. That is, the first entry is invoked first for an incoming request message but last for an outgoing
         /// response message.
         /// </summary>
         /// <value>
@@ -165,7 +179,7 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// Gets the root virtual path. The <see cref="VirtualPathRoot"/> property always returns 
+        /// Gets the root virtual path. The <see cref="VirtualPathRoot"/> property always returns
         /// "/" as the first character of the returned value.
         /// </summary>
         public string VirtualPathRoot
@@ -198,8 +212,8 @@ namespace System.Web.Http
         public ServicesContainer Services { get; internal set; }
 
         /// <summary>
-        /// Top level hook for how parameters should be bound. 
-        /// This should be respected by the IActionValueBinder. If a parameter is not claimed by the list, the IActionValueBinder still binds it. 
+        /// Top level hook for how parameters should be bound.
+        /// This should be respected by the IActionValueBinder. If a parameter is not claimed by the list, the IActionValueBinder still binds it.
         /// </summary>
         public ParameterBindingRulesCollection ParameterBindingRules { get; internal set; }
 
@@ -220,17 +234,28 @@ namespace System.Web.Http
         {
             var formatters = new MediaTypeFormatterCollection();
 
-            // Basic FormUrlFormatter does not support binding to a T. 
+            // Basic FormUrlFormatter does not support binding to a T.
             // Use our JQuery formatter instead.
             formatters.Add(new JQueryMvcFormUrlEncodedFormatter(config));
 
             return formatters;
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Caller owns the disposable object")]
-        internal static HttpConfiguration ApplyControllerSettings(HttpControllerSettings settings, HttpConfiguration configuration)
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Caller owns the disposable object"
+        )]
+        internal static HttpConfiguration ApplyControllerSettings(
+            HttpControllerSettings settings,
+            HttpConfiguration configuration
+        )
         {
-            if (!settings.IsFormatterCollectionInitialized && !settings.IsParameterBindingRuleCollectionInitialized && !settings.IsServiceCollectionInitialized)
+            if (
+                !settings.IsFormatterCollectionInitialized
+                && !settings.IsParameterBindingRuleCollectionInitialized
+                && !settings.IsServiceCollectionInitialized
+            )
             {
                 return configuration;
             }
@@ -245,9 +270,12 @@ namespace System.Web.Http
         private static void DefaultInitializer(HttpConfiguration configuration)
         {
             // Register the default IRequiredMemberSelector for formatters that haven't been assigned one
-            ModelMetadataProvider metadataProvider = configuration.Services.GetModelMetadataProvider();
-            IEnumerable<ModelValidatorProvider> validatorProviders = configuration.Services.GetModelValidatorProviders();
-            IRequiredMemberSelector defaultRequiredMemberSelector = new ModelValidationRequiredMemberSelector(metadataProvider, validatorProviders);
+            ModelMetadataProvider metadataProvider =
+                configuration.Services.GetModelMetadataProvider();
+            IEnumerable<ModelValidatorProvider> validatorProviders =
+                configuration.Services.GetModelValidatorProviders();
+            IRequiredMemberSelector defaultRequiredMemberSelector =
+                new ModelValidationRequiredMemberSelector(metadataProvider, validatorProviders);
 
             foreach (MediaTypeFormatter formatter in configuration.Formatters)
             {
@@ -269,16 +297,16 @@ namespace System.Web.Http
 
         /// <summary>
         /// Invoke the Intializer hook. It is considered immutable from this point forward.
-        /// It's safe to call this multiple times. 
+        /// It's safe to call this multiple times.
         /// </summary>
         public void EnsureInitialized()
-        { 
+        {
             if (_initialized)
             {
                 return;
             }
             _initialized = true;
-            Initializer(this);            
+            Initializer(this);
         }
 
         public void Dispose()

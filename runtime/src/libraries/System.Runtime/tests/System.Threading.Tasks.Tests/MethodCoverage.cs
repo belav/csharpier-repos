@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading.Tasks;
-using System.Threading;
-using Xunit;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
+using Xunit;
 
 namespace TaskCoverage
 {
@@ -40,34 +40,53 @@ namespace TaskCoverage
             }
 
             CancellationTokenSource cts2 = new CancellationTokenSource();
-            ConcurrentExclusiveSchedulerPair scheduler = new ConcurrentExclusiveSchedulerPair(TaskScheduler.Default, maxDOP, maxNumberExecutionsPerTask);
+            ConcurrentExclusiveSchedulerPair scheduler = new ConcurrentExclusiveSchedulerPair(
+                TaskScheduler.Default,
+                maxDOP,
+                maxNumberExecutionsPerTask
+            );
             for (int i = 0; i <= taskCount; i++)
             {
                 int j = i;
                 allTasks[i] = new Task(() =>
                 {
-                    new TaskFactory(TaskScheduler.Current).StartNew(() => { }).
-                    ContinueWith((task, o) =>
-                    {
-                        int d = (int)o;
-                        Interlocked.Add(ref data, d);
-                    }, j).
-                    ContinueWith((task, o) =>
-                    {
-                        int d = (int)o;
-                        Interlocked.Add(ref data, d);
-                        cts[d].Cancel();
-                        if (d <= taskCount)
-                        {
-                            throw new OperationCanceledException(cts[d].Token);
-                        }
-                        return "Done";
-                    }, j, cts[j].Token).
-                    ContinueWith((task, o) =>
-                        {
-                            int d = (int)o;
-                            Interlocked.Add(ref data, d);
-                        }, j, CancellationToken.None, TaskContinuationOptions.OnlyOnCanceled, TaskScheduler.Default).Wait(int.MaxValue - 1, cts2.Token);
+                    new TaskFactory(TaskScheduler.Current)
+                        .StartNew(() => { })
+                        .ContinueWith(
+                            (task, o) =>
+                            {
+                                int d = (int)o;
+                                Interlocked.Add(ref data, d);
+                            },
+                            j
+                        )
+                        .ContinueWith(
+                            (task, o) =>
+                            {
+                                int d = (int)o;
+                                Interlocked.Add(ref data, d);
+                                cts[d].Cancel();
+                                if (d <= taskCount)
+                                {
+                                    throw new OperationCanceledException(cts[d].Token);
+                                }
+                                return "Done";
+                            },
+                            j,
+                            cts[j].Token
+                        )
+                        .ContinueWith(
+                            (task, o) =>
+                            {
+                                int d = (int)o;
+                                Interlocked.Add(ref data, d);
+                            },
+                            j,
+                            CancellationToken.None,
+                            TaskContinuationOptions.OnlyOnCanceled,
+                            TaskScheduler.Default
+                        )
+                        .Wait(int.MaxValue - 1, cts2.Token);
                 });
 
                 allTasks[i].Start(scheduler.ConcurrentScheduler);
@@ -96,30 +115,79 @@ namespace TaskCoverage
             ManualResetEvent mreCont = new ManualResetEvent(false);
             CancellationTokenSource cts = new CancellationTokenSource();
 
-            int? taskId1 = 0; int? taskId2 = 0;
-            int? taskId12 = 0; int? taskId22 = 0;
+            int? taskId1 = 0;
+            int? taskId2 = 0;
+            int? taskId12 = 0;
+            int? taskId22 = 0;
 
-            Task t1 = Task.Factory.StartNew(() => { mre.WaitOne(); taskId1 = Task.CurrentId; });
-            Task t2 = Task.Factory.StartNew(() => { mre.WaitOne(); taskId2 = Task.CurrentId; cts.Cancel(); });
+            Task t1 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+                taskId1 = Task.CurrentId;
+            });
+            Task t2 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+                taskId2 = Task.CurrentId;
+                cts.Cancel();
+            });
 
             List<Task<int?>> whenAllTaskResult = new List<Task<int?>>();
             List<Task> whenAllTask = new List<Task>();
-            whenAllTask.Add(t1); whenAllTask.Add(t2);
-            Task<int> contTask = Task.WhenAll(whenAllTask).ContinueWith<int>(
+            whenAllTask.Add(t1);
+            whenAllTask.Add(t2);
+            Task<int> contTask = Task.WhenAll(whenAllTask)
+                .ContinueWith<int>(
+                    (task) =>
+                    {
+                        // when task1 ends, the token will be cancelled
+                        // move the continuation task in cancellation state
+                        if (cts.IsCancellationRequested)
+                        {
+                            throw new OperationCanceledException(cts.Token);
+                        }
+                        return 0;
+                    },
+                    cts.Token
+                );
+            contTask.ContinueWith(
                 (task) =>
                 {
-                    // when task1 ends, the token will be cancelled
-                    // move the continuation task in cancellation state
-                    if (cts.IsCancellationRequested) { throw new OperationCanceledException(cts.Token); }
-                    return 0;
-                }, cts.Token);
-            contTask.ContinueWith((task) => { mreCont.Set(); });
+                    mreCont.Set();
+                }
+            );
 
-            whenAllTaskResult.Add(Task<int?>.Factory.StartNew((o) => { mre.WaitOne((int)o); return Task.CurrentId; }, 10));
-            whenAllTaskResult.Add(Task<int?>.Factory.StartNew((o) => { mre.WaitOne((int)o); return Task.CurrentId; }, 10));
+            whenAllTaskResult.Add(
+                Task<int?>.Factory.StartNew(
+                    (o) =>
+                    {
+                        mre.WaitOne((int)o);
+                        return Task.CurrentId;
+                    },
+                    10
+                )
+            );
+            whenAllTaskResult.Add(
+                Task<int?>.Factory.StartNew(
+                    (o) =>
+                    {
+                        mre.WaitOne((int)o);
+                        return Task.CurrentId;
+                    },
+                    10
+                )
+            );
 
             t1.Wait(5, cts.Token);
-            Task.WhenAll(whenAllTaskResult).ContinueWith((task) => { taskId12 = task.Result[0]; taskId22 = task.Result[1]; mre.Set(); });
+            Task.WhenAll(whenAllTaskResult)
+                .ContinueWith(
+                    (task) =>
+                    {
+                        taskId12 = task.Result[0];
+                        taskId22 = task.Result[1];
+                        mre.Set();
+                    }
+                );
             // Task 2 calls CancellationTokenSource.Cancel. Thus, expect and not fail for System.OperationCanceledException being thrown.
             try
             {
@@ -130,7 +198,9 @@ namespace TaskCoverage
             Assert.NotEqual<int?>(taskId1, taskId2);
             Assert.NotEqual<int?>(taskId12, taskId22);
 
-            Debug.WriteLine("Waiting on continuation task that should move into the cancelled state.");
+            Debug.WriteLine(
+                "Waiting on continuation task that should move into the cancelled state."
+            );
             mreCont.WaitOne();
             Assert.True(contTask.Status == TaskStatus.Canceled, "Task status is not correct");
         }
@@ -146,26 +216,59 @@ namespace TaskCoverage
 
             CancellationTokenSource cts = new CancellationTokenSource();
 
-            Task t1 = Task.Factory.StartNew(() => { mre.WaitOne(); });
-            Task t2 = Task.Factory.StartNew(() => { mre.WaitOne(); });
+            Task t1 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+            });
+            Task t2 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+            });
 
-            Task<int?> t11 = Task.Factory.StartNew(() => { mre2.WaitOne(); return Task.CurrentId; });
-            Task<int?> t21 = Task.Factory.StartNew(() => { mre2.WaitOne(); return Task.CurrentId; });
-
+            Task<int?> t11 = Task.Factory.StartNew(() =>
+            {
+                mre2.WaitOne();
+                return Task.CurrentId;
+            });
+            Task<int?> t21 = Task.Factory.StartNew(() =>
+            {
+                mre2.WaitOne();
+                return Task.CurrentId;
+            });
 
             //waitAny with token and timeout
             Task[] waitAny = new Task[] { t1, t2 };
             int timeout = Task.WaitAny(waitAny, 1, cts.Token);
 
             //task whenany
-            Task.Factory.StartNew(() => { Task.Delay(20); mre.Set(); });
-            List<Task> whenAnyTask = new List<Task>(); whenAnyTask.Add(t1); whenAnyTask.Add(t2);
-            List<Task<int?>> whenAnyTaskResult = new List<Task<int?>>(); whenAnyTaskResult.Add(t11); whenAnyTaskResult.Add(t21);
+            Task.Factory.StartNew(() =>
+            {
+                Task.Delay(20);
+                mre.Set();
+            });
+            List<Task> whenAnyTask = new List<Task>();
+            whenAnyTask.Add(t1);
+            whenAnyTask.Add(t2);
+            List<Task<int?>> whenAnyTaskResult = new List<Task<int?>>();
+            whenAnyTaskResult.Add(t11);
+            whenAnyTaskResult.Add(t21);
 
             //task<tresult> whenany
             int? taskId = 0; //this will be set to the first task<int?> ID that ends
-            Task waitOnIt = Task.WhenAny(whenAnyTaskResult).ContinueWith((task) => { taskId = task.Result.Result; });
-            Task.WhenAny(whenAnyTask).ContinueWith((task) => { mre2.Set(); });
+            Task waitOnIt = Task.WhenAny(whenAnyTaskResult)
+                .ContinueWith(
+                    (task) =>
+                    {
+                        taskId = task.Result.Result;
+                    }
+                );
+            Task.WhenAny(whenAnyTask)
+                .ContinueWith(
+                    (task) =>
+                    {
+                        mre2.Set();
+                    }
+                );
 
             Debug.WriteLine("Wait on the scenario to finish");
             waitOnIt.Wait();
@@ -175,31 +278,90 @@ namespace TaskCoverage
 
             bool whenAnyVerification = taskId == t11.Id || taskId == t21.Id;
 
-            Assert.True(whenAnyVerification, string.Format("The id for whenAny is not correct expected to be {0} or {1} and it is {2}", t11.Id, t21.Id, taskId));
+            Assert.True(
+                whenAnyVerification,
+                string.Format(
+                    "The id for whenAny is not correct expected to be {0} or {1} and it is {2}",
+                    t11.Id,
+                    t21.Id,
+                    taskId
+                )
+            );
         }
 
         [Fact]
         public static void Task_WhenAny_TwoTasks_InvalidArgs_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>("task1", () => Task.WhenAny(null, Task.CompletedTask));
-            AssertExtensions.Throws<ArgumentNullException>("task2", () => Task.WhenAny(Task.CompletedTask, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "task1",
+                () => Task.WhenAny(null, Task.CompletedTask)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "task2",
+                () => Task.WhenAny(Task.CompletedTask, null)
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("task1", () => Task.WhenAny(null, Task.FromResult(1)));
-            AssertExtensions.Throws<ArgumentNullException>("task2", () => Task.WhenAny(Task.FromResult(2), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "task1",
+                () => Task.WhenAny(null, Task.FromResult(1))
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "task2",
+                () => Task.WhenAny(Task.FromResult(2), null)
+            );
         }
 
         [Fact]
         public static void Task_WhenAny_NoTasks_Throws()
         {
-            AssertExtensions.Throws<ArgumentException>("tasks", () => { Task.WhenAny(new Task[0]); });
-            AssertExtensions.Throws<ArgumentException>("tasks", () => { Task.WhenAny(new List<Task>()); });
-            AssertExtensions.Throws<ArgumentException>("tasks", () => { Task.WhenAny(EmptyIterator<Task>()); });
+            AssertExtensions.Throws<ArgumentException>(
+                "tasks",
+                () =>
+                {
+                    Task.WhenAny(new Task[0]);
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "tasks",
+                () =>
+                {
+                    Task.WhenAny(new List<Task>());
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "tasks",
+                () =>
+                {
+                    Task.WhenAny(EmptyIterator<Task>());
+                }
+            );
 
-            AssertExtensions.Throws<ArgumentException>("tasks", () => { Task.WhenAny(new Task<int>[0]); });
-            AssertExtensions.Throws<ArgumentException>("tasks", () => { Task.WhenAny(new List<Task<int>>()); });
-            AssertExtensions.Throws<ArgumentException>("tasks", () => { Task.WhenAny(EmptyIterator<Task<int>>()); });
+            AssertExtensions.Throws<ArgumentException>(
+                "tasks",
+                () =>
+                {
+                    Task.WhenAny(new Task<int>[0]);
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "tasks",
+                () =>
+                {
+                    Task.WhenAny(new List<Task<int>>());
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "tasks",
+                () =>
+                {
+                    Task.WhenAny(EmptyIterator<Task<int>>());
+                }
+            );
 
-            static IEnumerable<T> EmptyIterator<T>() { yield break; }
+            static IEnumerable<T> EmptyIterator<T>()
+            {
+                yield break;
+            }
         }
 
         [Fact]
@@ -279,14 +441,25 @@ namespace TaskCoverage
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91541", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91541",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public static void CancellationTokenRegitration()
         {
             ManualResetEvent mre = new ManualResetEvent(false);
             ManualResetEvent mre2 = new ManualResetEvent(false);
 
             CancellationTokenSource cts = new CancellationTokenSource();
-            cts.Token.Register((o) => { mre.Set(); }, 1, true);
+            cts.Token.Register(
+                (o) =>
+                {
+                    mre.Set();
+                },
+                1,
+                true
+            );
 
             cts.CancelAfter(5);
             Debug.WriteLine("Wait on the scenario to finish");
@@ -297,21 +470,41 @@ namespace TaskCoverage
         /// verify that the taskawaiter.UnsafeOnCompleted is invoked
         /// </summary>
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91541", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91541",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public static void TaskAwaiter()
         {
             ManualResetEvent mre = new ManualResetEvent(false);
             ManualResetEvent mre2 = new ManualResetEvent(false);
             ManualResetEvent mre3 = new ManualResetEvent(false);
 
-            Task t1 = Task.Factory.StartNew(() => { mre.WaitOne(); });
-            Task<int> t11 = Task.Factory.StartNew(() => { mre.WaitOne(); return 1; });
-            t1.GetAwaiter().UnsafeOnCompleted(() => { mre2.Set(); });
-            t11.GetAwaiter().UnsafeOnCompleted(() => { mre3.Set(); });
+            Task t1 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+            });
+            Task<int> t11 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+                return 1;
+            });
+            t1.GetAwaiter()
+                .UnsafeOnCompleted(() =>
+                {
+                    mre2.Set();
+                });
+            t11.GetAwaiter()
+                .UnsafeOnCompleted(() =>
+                {
+                    mre3.Set();
+                });
             mre.Set();
 
             Debug.WriteLine("Wait on the scenario to finish");
-            mre2.WaitOne(); mre3.WaitOne();
+            mre2.WaitOne();
+            mre3.WaitOne();
         }
 
         /// <summary>
@@ -324,14 +517,32 @@ namespace TaskCoverage
             ManualResetEvent mre2 = new ManualResetEvent(false);
             ManualResetEvent mre3 = new ManualResetEvent(false);
 
-            Task t1 = Task.Factory.StartNew(() => { mre.WaitOne(); });
-            Task<int> t11 = Task.Factory.StartNew(() => { mre.WaitOne(); return 1; });
-            t1.ConfigureAwait(false).GetAwaiter().UnsafeOnCompleted(() => { mre2.Set(); });
-            t11.ConfigureAwait(false).GetAwaiter().UnsafeOnCompleted(() => { mre3.Set(); });
+            Task t1 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+            });
+            Task<int> t11 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+                return 1;
+            });
+            t1.ConfigureAwait(false)
+                .GetAwaiter()
+                .UnsafeOnCompleted(() =>
+                {
+                    mre2.Set();
+                });
+            t11.ConfigureAwait(false)
+                .GetAwaiter()
+                .UnsafeOnCompleted(() =>
+                {
+                    mre3.Set();
+                });
             mre.Set();
 
             Debug.WriteLine("Wait on the scenario to finish");
-            mre2.WaitOne(); mre3.WaitOne();
+            mre2.WaitOne();
+            mre3.WaitOne();
         }
 
         /// <summary>
@@ -344,8 +555,25 @@ namespace TaskCoverage
             ManualResetEvent mre1 = new ManualResetEvent(false);
             ManualResetEvent mre2 = new ManualResetEvent(false);
 
-            Task.Factory.FromAsync(emptyTask, (iar) => { mre1.Set(); }, TaskCreationOptions.None, TaskScheduler.Current);
-            Task<int>.Factory.FromAsync(emptyTask, (iar) => { mre2.Set(); return 1; }, TaskCreationOptions.None, TaskScheduler.Current);
+            Task.Factory.FromAsync(
+                emptyTask,
+                (iar) =>
+                {
+                    mre1.Set();
+                },
+                TaskCreationOptions.None,
+                TaskScheduler.Current
+            );
+            Task<int>.Factory.FromAsync(
+                emptyTask,
+                (iar) =>
+                {
+                    mre2.Set();
+                    return 1;
+                },
+                TaskCreationOptions.None,
+                TaskScheduler.Current
+            );
             emptyTask.Start();
 
             Debug.WriteLine("Wait on the scenario to finish");

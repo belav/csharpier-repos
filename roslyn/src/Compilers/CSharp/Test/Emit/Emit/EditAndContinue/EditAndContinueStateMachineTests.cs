@@ -23,16 +23,22 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
     public class EditAndContinueStateMachineTests : EditAndContinueTestBase
     {
         [Fact]
-        [WorkItem(1068894, "DevDiv"), WorkItem(1137300, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1137300")]
+        [
+            WorkItem(1068894, "DevDiv"),
+            WorkItem(1137300, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1137300")
+        ]
         public void AddIteratorMethod()
         {
-            var source0 = WithWindowsLineBreaks(@"
+            var source0 = WithWindowsLineBreaks(
+                @"
 using System.Collections.Generic;
 class C
 {
 }
-");
-            var source1 = WithWindowsLineBreaks(@"
+"
+            );
+            var source1 = WithWindowsLineBreaks(
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -41,9 +47,13 @@ class C
         yield return 1;
     }
 }
-");
+"
+            );
             var parseOptions = TestOptions.Regular.WithNoRefSafetyRulesAttribute();
-            var compilation0 = CreateCompilation(Parse(source0, "a.cs", parseOptions), options: TestOptions.DebugDll);
+            var compilation0 = CreateCompilation(
+                Parse(source0, "a.cs", parseOptions),
+                options: TestOptions.DebugDll
+            );
             var compilation1 = compilation0.WithSource(Parse(source1, "a.cs", parseOptions));
 
             var g1 = compilation1.GetMember<MethodSymbol>("C.G");
@@ -57,7 +67,8 @@ class C
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
-                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Insert, null, g1)));
+                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Insert, null, g1))
+            );
 
             using var md1 = diff1.GetMetadata();
             var reader1 = md1.Reader;
@@ -66,7 +77,8 @@ class C
             CheckNames(readers, diff1.EmitResult.UpdatedMethods);
             CheckNames(readers, diff1.EmitResult.ChangedTypes, "C", "<G>d__0#1");
 
-            CheckEncLogDefinitions(reader1,
+            CheckEncLogDefinitions(
+                reader1,
                 Row(1, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(2, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(3, TableIndex.TypeDef, EditAndContinueOperation.Default),
@@ -124,9 +136,11 @@ class C
                 Row(2, TableIndex.InterfaceImpl, EditAndContinueOperation.Default),
                 Row(3, TableIndex.InterfaceImpl, EditAndContinueOperation.Default),
                 Row(4, TableIndex.InterfaceImpl, EditAndContinueOperation.Default),
-                Row(5, TableIndex.InterfaceImpl, EditAndContinueOperation.Default));
+                Row(5, TableIndex.InterfaceImpl, EditAndContinueOperation.Default)
+            );
 
-            CheckEncMapDefinitions(reader1,
+            CheckEncMapDefinitions(
+                reader1,
                 Handle(3, TableIndex.TypeDef),
                 Handle(1, TableIndex.Field),
                 Handle(2, TableIndex.Field),
@@ -169,9 +183,12 @@ class C
                 Handle(5, TableIndex.MethodImpl),
                 Handle(6, TableIndex.MethodImpl),
                 Handle(7, TableIndex.MethodImpl),
-                Handle(1, TableIndex.NestedClass));
+                Handle(1, TableIndex.NestedClass)
+            );
 
-            diff1.VerifyPdb(Enumerable.Range(0x06000001, 0x20), @"
+            diff1.VerifyPdb(
+                Enumerable.Range(0x06000001, 0x20),
+                @"
 <symbols>
   <files>
     <file id=""1"" name=""a.cs"" language=""C#"" checksumAlgorithm=""SHA1"" checksum=""66-9A-93-25-E7-42-DC-A9-DD-D1-61-3F-D9-45-A8-E1-39-8C-37-79"" />
@@ -200,20 +217,23 @@ class C
       </scope>
     </method>
   </methods>
-</symbols>");
+</symbols>"
+            );
         }
 
         [Theory]
         [MemberData(nameof(ExternalPdbFormats))]
         public void AddAsyncMethod(DebugInformationFormat format)
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Threading.Tasks;
 
 class C
 {
 }";
-            var source1 = @"
+            var source1 =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -224,10 +244,17 @@ class C
         return 20;
     }
 }";
-            var compilation0 = CreateCompilationWithMscorlib45(source0, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), options: TestOptions.DebugDll);
+            var compilation0 = CreateCompilationWithMscorlib45(
+                source0,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                options: TestOptions.DebugDll
+            );
             var compilation1 = compilation0.WithSource(source1);
 
-            var v0 = CompileAndVerify(compilation0, emitOptions: EmitOptions.Default.WithDebugInformationFormat(format));
+            var v0 = CompileAndVerify(
+                compilation0,
+                emitOptions: EmitOptions.Default.WithDebugInformationFormat(format)
+            );
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
             using var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
@@ -236,14 +263,22 @@ class C
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
-                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Insert, null, f1)));
+                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Insert, null, f1))
+            );
 
             using var md1 = diff1.GetMetadata();
             var reader1 = md1.Reader;
             var readers = new[] { reader0, reader1 };
 
             CheckNames(readers, reader1.GetTypeDefNames(), "<F>d__0#1");
-            CheckNames(readers, reader1.GetMethodDefNames(), "F", ".ctor", "MoveNext", "SetStateMachine");
+            CheckNames(
+                readers,
+                reader1.GetMethodDefNames(),
+                "F",
+                ".ctor",
+                "MoveNext",
+                "SetStateMachine"
+            );
             CheckNames(readers, reader1.GetFieldDefNames(), "<>1__state", "<>t__builder", "<>u__1");
 
             // Add state machine type and its members:
@@ -254,7 +289,8 @@ class C
             // - Field '<>t__builder'
             // - Field '<>u__1'
             // Add method F()
-            CheckEncLogDefinitions(reader1,
+            CheckEncLogDefinitions(
+                reader1,
                 Row(1, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(2, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(3, TableIndex.TypeDef, EditAndContinueOperation.Default),
@@ -281,9 +317,12 @@ class C
                 Row(1, TableIndex.MethodImpl, EditAndContinueOperation.Default),
                 Row(2, TableIndex.MethodImpl, EditAndContinueOperation.Default),
                 Row(1, TableIndex.NestedClass, EditAndContinueOperation.Default),
-                Row(1, TableIndex.InterfaceImpl, EditAndContinueOperation.Default));
+                Row(1, TableIndex.InterfaceImpl, EditAndContinueOperation.Default)
+            );
 
-            diff1.VerifyPdb(new[] { MetadataTokens.MethodDefinitionHandle(4) }, @"
+            diff1.VerifyPdb(
+                new[] { MetadataTokens.MethodDefinitionHandle(4) },
+                @"
     <symbols>
       <files>
         <file id=""1"" name="""" language=""C#"" />
@@ -315,13 +354,15 @@ class C
           </asyncInfo>
         </method>
       </methods>
-    </symbols>");
+    </symbols>"
+            );
         }
 
         [Fact]
         public void MethodToIteratorMethod()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Collections.Generic;
 
 class C
@@ -331,7 +372,8 @@ class C
         return new int[] { 1, 2, 3 };
     }
 }";
-            var source1 = @"
+            var source1 =
+                @"
 using System.Collections.Generic;
 
 class C
@@ -341,7 +383,11 @@ class C
         yield return 2;
     }
 }";
-            var compilation0 = CreateCompilationWithMscorlib45(source0, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), options: TestOptions.DebugDll);
+            var compilation0 = CreateCompilationWithMscorlib45(
+                source0,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                options: TestOptions.DebugDll
+            );
             var compilation1 = compilation0.WithSource(source1);
 
             var v0 = CompileAndVerify(compilation0);
@@ -353,14 +399,19 @@ class C
             var generation0 = CreateInitialBaseline(compilation0, md0, EmptyLocalsProvider);
             var diff1 = compilation1.EmitDifference(
                 generation0,
-                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, method0, method1)));
+                ImmutableArray.Create(
+                    SemanticEdit.Create(SemanticEditKind.Update, method0, method1)
+                )
+            );
 
             diff1.VerifySynthesizedMembers(
                 "C: {<F>d__0#1}",
-                "C.<F>d__0#1: {<>1__state, <>2__current, <>l__initialThreadId, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}");
+                "C.<F>d__0#1: {<>1__state, <>2__current, <>l__initialThreadId, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}"
+            );
 
             using var md1 = diff1.GetMetadata();
-            CheckEncLogDefinitions(md1.Reader,
+            CheckEncLogDefinitions(
+                md1.Reader,
                 Row(2, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(5, TableIndex.TypeDef, EditAndContinueOperation.Default),
@@ -417,13 +468,15 @@ class C
                 Row(2, TableIndex.InterfaceImpl, EditAndContinueOperation.Default),
                 Row(3, TableIndex.InterfaceImpl, EditAndContinueOperation.Default),
                 Row(4, TableIndex.InterfaceImpl, EditAndContinueOperation.Default),
-                Row(5, TableIndex.InterfaceImpl, EditAndContinueOperation.Default));
+                Row(5, TableIndex.InterfaceImpl, EditAndContinueOperation.Default)
+            );
         }
 
         [Fact]
         public void MethodToAsyncMethod()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -433,7 +486,8 @@ class C
         return Task.FromResult(1);
     }
 }";
-            var source1 = @"
+            var source1 =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -443,7 +497,11 @@ class C
         return await Task.FromResult(1);
     }
 }";
-            var compilation0 = CreateCompilationWithMscorlib45(source0, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), options: TestOptions.DebugDll);
+            var compilation0 = CreateCompilationWithMscorlib45(
+                source0,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                options: TestOptions.DebugDll
+            );
             var compilation1 = compilation0.WithSource(source1);
 
             var v0 = CompileAndVerify(compilation0);
@@ -452,17 +510,26 @@ class C
             var method0 = compilation0.GetMember<MethodSymbol>("C.F");
             var method1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
             var diff1 = compilation1.EmitDifference(
                 generation0,
-                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, method0, method1)));
+                ImmutableArray.Create(
+                    SemanticEdit.Create(SemanticEditKind.Update, method0, method1)
+                )
+            );
 
             diff1.VerifySynthesizedMembers(
                 "C.<F>d__0#1: {<>1__state, <>t__builder, <>s__1, <>u__1, MoveNext, SetStateMachine}",
-                "C: {<F>d__0#1}");
+                "C: {<F>d__0#1}"
+            );
 
             using var md1 = diff1.GetMetadata();
-            CheckEncLogDefinitions(md1.Reader,
+            CheckEncLogDefinitions(
+                md1.Reader,
                 Row(2, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(3, TableIndex.TypeDef, EditAndContinueOperation.Default),
@@ -490,13 +557,15 @@ class C
                 Row(1, TableIndex.MethodImpl, EditAndContinueOperation.Default),
                 Row(2, TableIndex.MethodImpl, EditAndContinueOperation.Default),
                 Row(1, TableIndex.NestedClass, EditAndContinueOperation.Default),
-                Row(1, TableIndex.InterfaceImpl, EditAndContinueOperation.Default));
+                Row(1, TableIndex.InterfaceImpl, EditAndContinueOperation.Default)
+            );
         }
 
         [Fact]
         public void IteratorMethodToMethod()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Collections.Generic;
 
 class C
@@ -506,7 +575,8 @@ class C
         yield return 2;
     }
 }";
-            var source1 = @"
+            var source1 =
+                @"
 using System.Collections.Generic;
 
 class C
@@ -516,7 +586,11 @@ class C
         return new int[] { 1, 2, 3 };
     }
 }";
-            var compilation0 = CreateCompilationWithMscorlib45(source0, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), options: TestOptions.DebugDll);
+            var compilation0 = CreateCompilationWithMscorlib45(
+                source0,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                options: TestOptions.DebugDll
+            );
             var compilation1 = compilation0.WithSource(source1);
 
             var v0 = CompileAndVerify(compilation0);
@@ -529,17 +603,27 @@ class C
                 var generation0 = CreateInitialBaseline(compilation0, md0, EmptyLocalsProvider);
                 var diff1 = compilation1.EmitDifference(
                     generation0,
-                    ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, method0, method1)));
+                    ImmutableArray.Create(
+                        SemanticEdit.Create(SemanticEditKind.Update, method0, method1)
+                    )
+                );
 
                 using (var md1 = diff1.GetMetadata())
                 {
-                    CheckAttributes(md1.Reader,
-                        new CustomAttributeRow(Handle(0, TableIndex.MethodDef), Handle(0, TableIndex.MemberRef)));  // row id 0 == delete
+                    CheckAttributes(
+                        md1.Reader,
+                        new CustomAttributeRow(
+                            Handle(0, TableIndex.MethodDef),
+                            Handle(0, TableIndex.MemberRef)
+                        )
+                    ); // row id 0 == delete
 
-                    CheckEncLogDefinitions(md1.Reader,
+                    CheckEncLogDefinitions(
+                        md1.Reader,
                         Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                         Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                        Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default)); // Delete IteratorStateMachineAttribute
+                        Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+                    ); // Delete IteratorStateMachineAttribute
                 }
             }
         }
@@ -547,7 +631,8 @@ class C
         [Fact]
         public void AsyncMethodToMethod()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -557,7 +642,8 @@ class C
         return await Task.FromResult(1);
     }
 }";
-            var source1 = @"
+            var source1 =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -567,7 +653,11 @@ class C
         return Task.FromResult(1);
     }
 }";
-            var compilation0 = CreateCompilationWithMscorlib45(source0, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), options: TestOptions.DebugDll);
+            var compilation0 = CreateCompilationWithMscorlib45(
+                source0,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                options: TestOptions.DebugDll
+            );
             var compilation1 = compilation0.WithSource(source1);
 
             var v0 = CompileAndVerify(compilation0);
@@ -579,19 +669,32 @@ class C
             var generation0 = CreateInitialBaseline(compilation0, md0, EmptyLocalsProvider);
             var diff1 = compilation1.EmitDifference(
                 generation0,
-                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, method0, method1)));
+                ImmutableArray.Create(
+                    SemanticEdit.Create(SemanticEditKind.Update, method0, method1)
+                )
+            );
 
             using (var md1 = diff1.GetMetadata())
             {
-                CheckAttributes(md1.Reader,
-                    new CustomAttributeRow(Handle(0, TableIndex.MethodDef), Handle(0, TableIndex.MemberRef)),  // row id 0 == delete
-                    new CustomAttributeRow(Handle(0, TableIndex.MethodDef), Handle(0, TableIndex.MemberRef))); // row id 0 == delete
+                CheckAttributes(
+                    md1.Reader,
+                    new CustomAttributeRow(
+                        Handle(0, TableIndex.MethodDef),
+                        Handle(0, TableIndex.MemberRef)
+                    ), // row id 0 == delete
+                    new CustomAttributeRow(
+                        Handle(0, TableIndex.MethodDef),
+                        Handle(0, TableIndex.MemberRef)
+                    )
+                ); // row id 0 == delete
 
-                CheckEncLogDefinitions(md1.Reader,
+                CheckEncLogDefinitions(
+                    md1.Reader,
                     Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                     Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                    Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default),  // Delete AsyncStateMachineAttribute
-                    Row(2, TableIndex.CustomAttribute, EditAndContinueOperation.Default));  // Delete DebuggerStepThroughAttribute
+                    Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default), // Delete AsyncStateMachineAttribute
+                    Row(2, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+                ); // Delete DebuggerStepThroughAttribute
             }
         }
 
@@ -602,7 +705,7 @@ class C
                 .AddBaseline(
                     """
                     using System.Threading.Tasks;
-                    
+
                     class C
                     {
                         static async Task<int> F(short a) 
@@ -614,29 +717,30 @@ class C
                         {
                             return <N:1>await Task.FromResult(1)</N:1>;
                         }
-                    
+
                         static async Task<int> F(int a) 
                         {
                             return <N:2>await Task.FromResult(1)</N:2>;
                         }
                     }
-                    """)
+                    """
+                )
                 .AddGeneration(
                     """
                     using System.Threading.Tasks;
-                
+
                     class C
                     {
                         static async Task<int> F(short a) 
                         {
                             return <N:0>await Task.FromResult(2)</N:0>;
                         }
-                
+
                         static async Task<int> F(long a) 
                         {
                             return <N:1>await Task.FromResult(3)</N:1>;
                         }
-                
+
                         static async Task<int> F(int a) 
                         {
                             return <N:2>await Task.FromResult(4)</N:2>;
@@ -645,38 +749,91 @@ class C
                     """,
                     edits:
                     [
-                        Edit(SemanticEditKind.Update, c => c.GetMembers<IMethodSymbol>("C.F").Single(m => m.ToTestDisplayString() == "System.Threading.Tasks.Task<System.Int32> C.F(System.Int16 a)"), preserveLocalVariables: true),
-                        Edit(SemanticEditKind.Update, c => c.GetMembers<IMethodSymbol>("C.F").Single(m => m.ToTestDisplayString() == "System.Threading.Tasks.Task<System.Int32> C.F(System.Int32 a)"), preserveLocalVariables: true),
-                        Edit(SemanticEditKind.Update, c => c.GetMembers<IMethodSymbol>("C.F").Single(m => m.ToTestDisplayString() == "System.Threading.Tasks.Task<System.Int32> C.F(System.Int64 a)"), preserveLocalVariables: true),
+                        Edit(
+                            SemanticEditKind.Update,
+                            c =>
+                                c.GetMembers<IMethodSymbol>("C.F")
+                                    .Single(m =>
+                                        m.ToTestDisplayString()
+                                        == "System.Threading.Tasks.Task<System.Int32> C.F(System.Int16 a)"
+                                    ),
+                            preserveLocalVariables: true
+                        ),
+                        Edit(
+                            SemanticEditKind.Update,
+                            c =>
+                                c.GetMembers<IMethodSymbol>("C.F")
+                                    .Single(m =>
+                                        m.ToTestDisplayString()
+                                        == "System.Threading.Tasks.Task<System.Int32> C.F(System.Int32 a)"
+                                    ),
+                            preserveLocalVariables: true
+                        ),
+                        Edit(
+                            SemanticEditKind.Update,
+                            c =>
+                                c.GetMembers<IMethodSymbol>("C.F")
+                                    .Single(m =>
+                                        m.ToTestDisplayString()
+                                        == "System.Threading.Tasks.Task<System.Int32> C.F(System.Int64 a)"
+                                    ),
+                            preserveLocalVariables: true
+                        ),
                     ],
                     validator: g =>
                     {
                         // notice no TypeDefs, FieldDefs
                         g.VerifyEncLogDefinitions(
-                        [
-                            Row(7, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                            Row(8, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                            Row(9, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                            Row(10, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                            Row(11, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                            Row(12, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                            Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                            Row(2, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                            Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                            Row(6, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                            Row(9, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                            Row(12, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                            Row(1, TableIndex.Param, EditAndContinueOperation.Default),
-                            Row(2, TableIndex.Param, EditAndContinueOperation.Default),
-                            Row(3, TableIndex.Param, EditAndContinueOperation.Default),
-                            Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                            Row(2, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                            Row(6, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                            Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                            Row(8, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                            Row(9, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
-                        ]);
-                    })
+                            [
+                                Row(7, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                                Row(8, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                                Row(9, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                                Row(10, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                                Row(11, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                                Row(12, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                                Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                                Row(2, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                                Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                                Row(6, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                                Row(9, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                                Row(12, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                                Row(1, TableIndex.Param, EditAndContinueOperation.Default),
+                                Row(2, TableIndex.Param, EditAndContinueOperation.Default),
+                                Row(3, TableIndex.Param, EditAndContinueOperation.Default),
+                                Row(
+                                    1,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
+                                Row(
+                                    2,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
+                                Row(
+                                    6,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
+                                Row(
+                                    7,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
+                                Row(
+                                    8,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
+                                Row(
+                                    9,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
+                            ]
+                        );
+                    }
+                )
                 .Verify();
         }
 
@@ -684,130 +841,156 @@ class C
         public void UpdateIterator_NoVariables()
         {
             using var _ = new EditAndContinueTest()
-                .AddBaseline("""
-                using System.Collections.Generic;
-                
-                class C
-                {
-                    static IEnumerable<int> F() 
-                    {
-                        <N:0>yield return 1;</N:0>
-                    }
-                }
-                """,
-                validator: g =>
-                {
-                    g.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext", """
-                    {
-                      // Code size       57 (0x39)
-                      .maxstack  2
-                      .locals init (int V_0)
-                      IL_0000:  ldarg.0
-                      IL_0001:  ldfld      "int C.<F>d__0.<>1__state"
-                      IL_0006:  stloc.0
-                      IL_0007:  ldloc.0
-                      IL_0008:  brfalse.s  IL_0012
-                      IL_000a:  br.s       IL_000c
-                      IL_000c:  ldloc.0
-                      IL_000d:  ldc.i4.1
-                      IL_000e:  beq.s      IL_0014
-                      IL_0010:  br.s       IL_0016
-                      IL_0012:  br.s       IL_0018
-                      IL_0014:  br.s       IL_0030
-                      IL_0016:  ldc.i4.0
-                      IL_0017:  ret
-                      IL_0018:  ldarg.0
-                      IL_0019:  ldc.i4.m1
-                      IL_001a:  stfld      "int C.<F>d__0.<>1__state"
-                      IL_001f:  nop
-                      IL_0020:  ldarg.0
-                      IL_0021:  ldc.i4.1
-                      IL_0022:  stfld      "int C.<F>d__0.<>2__current"
-                      IL_0027:  ldarg.0
-                      IL_0028:  ldc.i4.1
-                      IL_0029:  stfld      "int C.<F>d__0.<>1__state"
-                      IL_002e:  ldc.i4.1
-                      IL_002f:  ret
-                      IL_0030:  ldarg.0
-                      IL_0031:  ldc.i4.m1
-                      IL_0032:  stfld      "int C.<F>d__0.<>1__state"
-                      IL_0037:  ldc.i4.0
-                      IL_0038:  ret
-                    }
-                    """);
-                })
-                .AddGeneration("""
-                using System.Collections.Generic;
-                
-                class C
-                {
-                    static IEnumerable<int> F() 
-                    {
-                        <N:0>yield return 2;</N:0>
-                    }
-                }
-                """,
-                edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F"), preserveLocalVariables: true) },
-                validator: g =>
-                {
-                    // only methods with sequence points should be listed in UpdatedMethods:
-                    g.VerifyUpdatedMethodNames("MoveNext");
-                    g.VerifyChangedTypeNames("C", "<F>d__0");
+                .AddBaseline(
+                    """
+                    using System.Collections.Generic;
 
-                    // Verify that no new TypeDefs, FieldDefs or MethodDefs were added,
-                    // 3 methods were updated: 
-                    // - the kick-off method (might be changed if the method previously wasn't an iterator)
-                    // - Finally method
-                    // - MoveNext method
-                    g.VerifyEncLogDefinitions(
-                    [
-                        Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                        Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                        Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                        Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                        Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                        Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
-                    ]);
-
-                    g.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext", """
+                    class C
                     {
-                      // Code size       57 (0x39)
-                      .maxstack  2
-                      .locals init (int V_0)
-                      IL_0000:  ldarg.0
-                      IL_0001:  ldfld      "int C.<F>d__0.<>1__state"
-                      IL_0006:  stloc.0
-                      IL_0007:  ldloc.0
-                      IL_0008:  brfalse.s  IL_0012
-                      IL_000a:  br.s       IL_000c
-                      IL_000c:  ldloc.0
-                      IL_000d:  ldc.i4.1
-                      IL_000e:  beq.s      IL_0014
-                      IL_0010:  br.s       IL_0016
-                      IL_0012:  br.s       IL_0018
-                      IL_0014:  br.s       IL_0030
-                      IL_0016:  ldc.i4.0
-                      IL_0017:  ret
-                      IL_0018:  ldarg.0
-                      IL_0019:  ldc.i4.m1
-                      IL_001a:  stfld      "int C.<F>d__0.<>1__state"
-                      IL_001f:  nop
-                      IL_0020:  ldarg.0
-                      IL_0021:  ldc.i4.2
-                      IL_0022:  stfld      "int C.<F>d__0.<>2__current"
-                      IL_0027:  ldarg.0
-                      IL_0028:  ldc.i4.1
-                      IL_0029:  stfld      "int C.<F>d__0.<>1__state"
-                      IL_002e:  ldc.i4.1
-                      IL_002f:  ret
-                      IL_0030:  ldarg.0
-                      IL_0031:  ldc.i4.m1
-                      IL_0032:  stfld      "int C.<F>d__0.<>1__state"
-                      IL_0037:  ldc.i4.0
-                      IL_0038:  ret
+                        static IEnumerable<int> F() 
+                        {
+                            <N:0>yield return 1;</N:0>
+                        }
                     }
-                    """);
-                })
+                    """,
+                    validator: g =>
+                    {
+                        g.VerifyIL(
+                            "C.<F>d__0.System.Collections.IEnumerator.MoveNext",
+                            """
+                            {
+                              // Code size       57 (0x39)
+                              .maxstack  2
+                              .locals init (int V_0)
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      "int C.<F>d__0.<>1__state"
+                              IL_0006:  stloc.0
+                              IL_0007:  ldloc.0
+                              IL_0008:  brfalse.s  IL_0012
+                              IL_000a:  br.s       IL_000c
+                              IL_000c:  ldloc.0
+                              IL_000d:  ldc.i4.1
+                              IL_000e:  beq.s      IL_0014
+                              IL_0010:  br.s       IL_0016
+                              IL_0012:  br.s       IL_0018
+                              IL_0014:  br.s       IL_0030
+                              IL_0016:  ldc.i4.0
+                              IL_0017:  ret
+                              IL_0018:  ldarg.0
+                              IL_0019:  ldc.i4.m1
+                              IL_001a:  stfld      "int C.<F>d__0.<>1__state"
+                              IL_001f:  nop
+                              IL_0020:  ldarg.0
+                              IL_0021:  ldc.i4.1
+                              IL_0022:  stfld      "int C.<F>d__0.<>2__current"
+                              IL_0027:  ldarg.0
+                              IL_0028:  ldc.i4.1
+                              IL_0029:  stfld      "int C.<F>d__0.<>1__state"
+                              IL_002e:  ldc.i4.1
+                              IL_002f:  ret
+                              IL_0030:  ldarg.0
+                              IL_0031:  ldc.i4.m1
+                              IL_0032:  stfld      "int C.<F>d__0.<>1__state"
+                              IL_0037:  ldc.i4.0
+                              IL_0038:  ret
+                            }
+                            """
+                        );
+                    }
+                )
+                .AddGeneration(
+                    """
+                    using System.Collections.Generic;
+
+                    class C
+                    {
+                        static IEnumerable<int> F() 
+                        {
+                            <N:0>yield return 2;</N:0>
+                        }
+                    }
+                    """,
+                    edits: new[]
+                    {
+                        Edit(
+                            SemanticEditKind.Update,
+                            c => c.GetMember("C.F"),
+                            preserveLocalVariables: true
+                        ),
+                    },
+                    validator: g =>
+                    {
+                        // only methods with sequence points should be listed in UpdatedMethods:
+                        g.VerifyUpdatedMethodNames("MoveNext");
+                        g.VerifyChangedTypeNames("C", "<F>d__0");
+
+                        // Verify that no new TypeDefs, FieldDefs or MethodDefs were added,
+                        // 3 methods were updated:
+                        // - the kick-off method (might be changed if the method previously wasn't an iterator)
+                        // - Finally method
+                        // - MoveNext method
+                        g.VerifyEncLogDefinitions(
+                            [
+                                Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                                Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                                Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                                Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                                Row(
+                                    1,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
+                                Row(
+                                    7,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
+                            ]
+                        );
+
+                        g.VerifyIL(
+                            "C.<F>d__0.System.Collections.IEnumerator.MoveNext",
+                            """
+                            {
+                              // Code size       57 (0x39)
+                              .maxstack  2
+                              .locals init (int V_0)
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      "int C.<F>d__0.<>1__state"
+                              IL_0006:  stloc.0
+                              IL_0007:  ldloc.0
+                              IL_0008:  brfalse.s  IL_0012
+                              IL_000a:  br.s       IL_000c
+                              IL_000c:  ldloc.0
+                              IL_000d:  ldc.i4.1
+                              IL_000e:  beq.s      IL_0014
+                              IL_0010:  br.s       IL_0016
+                              IL_0012:  br.s       IL_0018
+                              IL_0014:  br.s       IL_0030
+                              IL_0016:  ldc.i4.0
+                              IL_0017:  ret
+                              IL_0018:  ldarg.0
+                              IL_0019:  ldc.i4.m1
+                              IL_001a:  stfld      "int C.<F>d__0.<>1__state"
+                              IL_001f:  nop
+                              IL_0020:  ldarg.0
+                              IL_0021:  ldc.i4.2
+                              IL_0022:  stfld      "int C.<F>d__0.<>2__current"
+                              IL_0027:  ldarg.0
+                              IL_0028:  ldc.i4.1
+                              IL_0029:  stfld      "int C.<F>d__0.<>1__state"
+                              IL_002e:  ldc.i4.1
+                              IL_002f:  ret
+                              IL_0030:  ldarg.0
+                              IL_0031:  ldc.i4.m1
+                              IL_0032:  stfld      "int C.<F>d__0.<>1__state"
+                              IL_0037:  ldc.i4.0
+                              IL_0038:  ret
+                            }
+                            """
+                        );
+                    }
+                )
                 .Verify();
         }
 
@@ -815,272 +998,303 @@ class C
         public void UpdateAsync_NoVariables()
         {
             using var _ = new EditAndContinueTest()
-                .AddBaseline("""
-                using System.Threading.Tasks;
-                
-                class C
-                {
-                    static async Task<int> F() 
-                    {
-                        <N:0>await Task.FromResult(1)</N:0>;
-                        return 2;
-                    }
-                }
-                """,
-                g =>
-                {
-                    g.VerifyMethodBody("C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", """
-                    {
-                      // Code size      160 (0xa0)
-                      .maxstack  3
-                      .locals init (int V_0,
-                                    int V_1,
-                                    System.Runtime.CompilerServices.TaskAwaiter<int> V_2,
-                                    C.<F>d__0 V_3,
-                                    System.Exception V_4)
-                      // sequence point: <hidden>
-                      IL_0000:  ldarg.0
-                      IL_0001:  ldfld      "int C.<F>d__0.<>1__state"
-                      IL_0006:  stloc.0
-                      .try
-                      {
-                        // sequence point: <hidden>
-                        IL_0007:  ldloc.0
-                        IL_0008:  brfalse.s  IL_000c
-                        IL_000a:  br.s       IL_000e
-                        IL_000c:  br.s       IL_0048
-                        // sequence point: {
-                        IL_000e:  nop
-                        // sequence point: await Task.FromResult(1)      ;
-                        IL_000f:  ldc.i4.1
-                        IL_0010:  call       "System.Threading.Tasks.Task<int> System.Threading.Tasks.Task.FromResult<int>(int)"
-                        IL_0015:  callvirt   "System.Runtime.CompilerServices.TaskAwaiter<int> System.Threading.Tasks.Task<int>.GetAwaiter()"
-                        IL_001a:  stloc.2
-                        // sequence point: <hidden>
-                        IL_001b:  ldloca.s   V_2
-                        IL_001d:  call       "bool System.Runtime.CompilerServices.TaskAwaiter<int>.IsCompleted.get"
-                        IL_0022:  brtrue.s   IL_0064
-                        IL_0024:  ldarg.0
-                        IL_0025:  ldc.i4.0
-                        IL_0026:  dup
-                        IL_0027:  stloc.0
-                        IL_0028:  stfld      "int C.<F>d__0.<>1__state"
-                        // async: yield
-                        IL_002d:  ldarg.0
-                        IL_002e:  ldloc.2
-                        IL_002f:  stfld      "System.Runtime.CompilerServices.TaskAwaiter<int> C.<F>d__0.<>u__1"
-                        IL_0034:  ldarg.0
-                        IL_0035:  stloc.3
-                        IL_0036:  ldarg.0
-                        IL_0037:  ldflda     "System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int> C.<F>d__0.<>t__builder"
-                        IL_003c:  ldloca.s   V_2
-                        IL_003e:  ldloca.s   V_3
-                        IL_0040:  call       "void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<int>, C.<F>d__0>(ref System.Runtime.CompilerServices.TaskAwaiter<int>, ref C.<F>d__0)"
-                        IL_0045:  nop
-                        IL_0046:  leave.s    IL_009f
-                        // async: resume
-                        IL_0048:  ldarg.0
-                        IL_0049:  ldfld      "System.Runtime.CompilerServices.TaskAwaiter<int> C.<F>d__0.<>u__1"
-                        IL_004e:  stloc.2
-                        IL_004f:  ldarg.0
-                        IL_0050:  ldflda     "System.Runtime.CompilerServices.TaskAwaiter<int> C.<F>d__0.<>u__1"
-                        IL_0055:  initobj    "System.Runtime.CompilerServices.TaskAwaiter<int>"
-                        IL_005b:  ldarg.0
-                        IL_005c:  ldc.i4.m1
-                        IL_005d:  dup
-                        IL_005e:  stloc.0
-                        IL_005f:  stfld      "int C.<F>d__0.<>1__state"
-                        IL_0064:  ldloca.s   V_2
-                        IL_0066:  call       "int System.Runtime.CompilerServices.TaskAwaiter<int>.GetResult()"
-                        IL_006b:  pop
-                        // sequence point: return 2;
-                        IL_006c:  ldc.i4.2
-                        IL_006d:  stloc.1
-                        IL_006e:  leave.s    IL_008a
-                      }
-                      catch System.Exception
-                      {
-                        // sequence point: <hidden>
-                        IL_0070:  stloc.s    V_4
-                        IL_0072:  ldarg.0
-                        IL_0073:  ldc.i4.s   -2
-                        IL_0075:  stfld      "int C.<F>d__0.<>1__state"
-                        IL_007a:  ldarg.0
-                        IL_007b:  ldflda     "System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int> C.<F>d__0.<>t__builder"
-                        IL_0080:  ldloc.s    V_4
-                        IL_0082:  call       "void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetException(System.Exception)"
-                        IL_0087:  nop
-                        IL_0088:  leave.s    IL_009f
-                      }
-                      // sequence point: }
-                      IL_008a:  ldarg.0
-                      IL_008b:  ldc.i4.s   -2
-                      IL_008d:  stfld      "int C.<F>d__0.<>1__state"
-                      // sequence point: <hidden>
-                      IL_0092:  ldarg.0
-                      IL_0093:  ldflda     "System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int> C.<F>d__0.<>t__builder"
-                      IL_0098:  ldloc.1
-                      IL_0099:  call       "void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)"
-                      IL_009e:  nop
-                      IL_009f:  ret
-                    }
-                    """);
+                .AddBaseline(
+                    """
+                    using System.Threading.Tasks;
 
-                    g.VerifyPdb("C+<F>d__0.MoveNext", """
-                    <symbols>
-                      <methods>
-                        <method containingType="C+&lt;F&gt;d__0" name="MoveNext">
-                          <customDebugInfo>
-                            <using>
-                              <namespace usingCount="1" />
-                            </using>
-                            <encLocalSlotMap>
-                              <slot kind="27" offset="0" />
-                              <slot kind="20" offset="0" />
-                              <slot kind="33" offset="16" />
-                              <slot kind="temp" />
-                              <slot kind="temp" />
-                            </encLocalSlotMap>
-                          </customDebugInfo>
-                          <scope startOffset="0x0" endOffset="0xa0">
-                            <namespace name="System.Threading.Tasks" />
-                          </scope>
-                          <asyncInfo>
-                            <kickoffMethod declaringType="C" methodName="F" />
-                            <await yield="0x2d" resume="0x48" declaringType="C+&lt;F&gt;d__0" methodName="MoveNext" />
-                          </asyncInfo>
-                        </method>
-                      </methods>
-                    </symbols>
-                    """, PdbValidationOptions.ExcludeSequencePoints | PdbValidationOptions.ExcludeDocuments);
-                })
+                    class C
+                    {
+                        static async Task<int> F() 
+                        {
+                            <N:0>await Task.FromResult(1)</N:0>;
+                            return 2;
+                        }
+                    }
+                    """,
+                    g =>
+                    {
+                        g.VerifyMethodBody(
+                            "C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                            """
+                            {
+                              // Code size      160 (0xa0)
+                              .maxstack  3
+                              .locals init (int V_0,
+                                            int V_1,
+                                            System.Runtime.CompilerServices.TaskAwaiter<int> V_2,
+                                            C.<F>d__0 V_3,
+                                            System.Exception V_4)
+                              // sequence point: <hidden>
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      "int C.<F>d__0.<>1__state"
+                              IL_0006:  stloc.0
+                              .try
+                              {
+                                // sequence point: <hidden>
+                                IL_0007:  ldloc.0
+                                IL_0008:  brfalse.s  IL_000c
+                                IL_000a:  br.s       IL_000e
+                                IL_000c:  br.s       IL_0048
+                                // sequence point: {
+                                IL_000e:  nop
+                                // sequence point: await Task.FromResult(1)      ;
+                                IL_000f:  ldc.i4.1
+                                IL_0010:  call       "System.Threading.Tasks.Task<int> System.Threading.Tasks.Task.FromResult<int>(int)"
+                                IL_0015:  callvirt   "System.Runtime.CompilerServices.TaskAwaiter<int> System.Threading.Tasks.Task<int>.GetAwaiter()"
+                                IL_001a:  stloc.2
+                                // sequence point: <hidden>
+                                IL_001b:  ldloca.s   V_2
+                                IL_001d:  call       "bool System.Runtime.CompilerServices.TaskAwaiter<int>.IsCompleted.get"
+                                IL_0022:  brtrue.s   IL_0064
+                                IL_0024:  ldarg.0
+                                IL_0025:  ldc.i4.0
+                                IL_0026:  dup
+                                IL_0027:  stloc.0
+                                IL_0028:  stfld      "int C.<F>d__0.<>1__state"
+                                // async: yield
+                                IL_002d:  ldarg.0
+                                IL_002e:  ldloc.2
+                                IL_002f:  stfld      "System.Runtime.CompilerServices.TaskAwaiter<int> C.<F>d__0.<>u__1"
+                                IL_0034:  ldarg.0
+                                IL_0035:  stloc.3
+                                IL_0036:  ldarg.0
+                                IL_0037:  ldflda     "System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int> C.<F>d__0.<>t__builder"
+                                IL_003c:  ldloca.s   V_2
+                                IL_003e:  ldloca.s   V_3
+                                IL_0040:  call       "void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<int>, C.<F>d__0>(ref System.Runtime.CompilerServices.TaskAwaiter<int>, ref C.<F>d__0)"
+                                IL_0045:  nop
+                                IL_0046:  leave.s    IL_009f
+                                // async: resume
+                                IL_0048:  ldarg.0
+                                IL_0049:  ldfld      "System.Runtime.CompilerServices.TaskAwaiter<int> C.<F>d__0.<>u__1"
+                                IL_004e:  stloc.2
+                                IL_004f:  ldarg.0
+                                IL_0050:  ldflda     "System.Runtime.CompilerServices.TaskAwaiter<int> C.<F>d__0.<>u__1"
+                                IL_0055:  initobj    "System.Runtime.CompilerServices.TaskAwaiter<int>"
+                                IL_005b:  ldarg.0
+                                IL_005c:  ldc.i4.m1
+                                IL_005d:  dup
+                                IL_005e:  stloc.0
+                                IL_005f:  stfld      "int C.<F>d__0.<>1__state"
+                                IL_0064:  ldloca.s   V_2
+                                IL_0066:  call       "int System.Runtime.CompilerServices.TaskAwaiter<int>.GetResult()"
+                                IL_006b:  pop
+                                // sequence point: return 2;
+                                IL_006c:  ldc.i4.2
+                                IL_006d:  stloc.1
+                                IL_006e:  leave.s    IL_008a
+                              }
+                              catch System.Exception
+                              {
+                                // sequence point: <hidden>
+                                IL_0070:  stloc.s    V_4
+                                IL_0072:  ldarg.0
+                                IL_0073:  ldc.i4.s   -2
+                                IL_0075:  stfld      "int C.<F>d__0.<>1__state"
+                                IL_007a:  ldarg.0
+                                IL_007b:  ldflda     "System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int> C.<F>d__0.<>t__builder"
+                                IL_0080:  ldloc.s    V_4
+                                IL_0082:  call       "void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetException(System.Exception)"
+                                IL_0087:  nop
+                                IL_0088:  leave.s    IL_009f
+                              }
+                              // sequence point: }
+                              IL_008a:  ldarg.0
+                              IL_008b:  ldc.i4.s   -2
+                              IL_008d:  stfld      "int C.<F>d__0.<>1__state"
+                              // sequence point: <hidden>
+                              IL_0092:  ldarg.0
+                              IL_0093:  ldflda     "System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int> C.<F>d__0.<>t__builder"
+                              IL_0098:  ldloc.1
+                              IL_0099:  call       "void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)"
+                              IL_009e:  nop
+                              IL_009f:  ret
+                            }
+                            """
+                        );
+
+                        g.VerifyPdb(
+                            "C+<F>d__0.MoveNext",
+                            """
+                            <symbols>
+                              <methods>
+                                <method containingType="C+&lt;F&gt;d__0" name="MoveNext">
+                                  <customDebugInfo>
+                                    <using>
+                                      <namespace usingCount="1" />
+                                    </using>
+                                    <encLocalSlotMap>
+                                      <slot kind="27" offset="0" />
+                                      <slot kind="20" offset="0" />
+                                      <slot kind="33" offset="16" />
+                                      <slot kind="temp" />
+                                      <slot kind="temp" />
+                                    </encLocalSlotMap>
+                                  </customDebugInfo>
+                                  <scope startOffset="0x0" endOffset="0xa0">
+                                    <namespace name="System.Threading.Tasks" />
+                                  </scope>
+                                  <asyncInfo>
+                                    <kickoffMethod declaringType="C" methodName="F" />
+                                    <await yield="0x2d" resume="0x48" declaringType="C+&lt;F&gt;d__0" methodName="MoveNext" />
+                                  </asyncInfo>
+                                </method>
+                              </methods>
+                            </symbols>
+                            """,
+                            PdbValidationOptions.ExcludeSequencePoints
+                                | PdbValidationOptions.ExcludeDocuments
+                        );
+                    }
+                )
                 .AddGeneration(
-                """
-                using System.Threading.Tasks;
-                
-                class C
-                {
-                    static async Task<int> F() 
-                    {
-                        <N:0>await Task.FromResult(10)</N:0>;
-                        return 20;
-                    }
-                }
-                """,
-                edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F"), preserveLocalVariables: true) },
-                validator: g =>
-                {
-                    // only methods with sequence points should be listed in UpdatedMethods:
-                    g.VerifyUpdatedMethodNames("MoveNext");
-                    g.VerifyChangedTypeNames("C", "<F>d__0");
+                    """
+                    using System.Threading.Tasks;
 
-                    // Verify that no new TypeDefs, FieldDefs or MethodDefs were added,
-                    // 2 methods were updated: 
-                    // - the kick-off method (might be changed if the method previously wasn't async)
-                    // - MoveNext method
-                    g.VerifyEncLogDefinitions(
-                    [
-                        Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                        Row(4, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                        Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                        Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                        Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                        Row(2, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
-                    ]);
-
-                    g.VerifyIL("C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", """
+                    class C
                     {
-                      // Code size      162 (0xa2)
-                      .maxstack  3
-                      .locals init (int V_0,
-                                    int V_1,
-                                    System.Runtime.CompilerServices.TaskAwaiter<int> V_2,
-                                    C.<F>d__0 V_3,
-                                    System.Exception V_4)
-                      IL_0000:  ldarg.0
-                      IL_0001:  ldfld      "int C.<F>d__0.<>1__state"
-                      IL_0006:  stloc.0
-                      .try
-                      {
-                        IL_0007:  ldloc.0
-                        IL_0008:  brfalse.s  IL_000c
-                        IL_000a:  br.s       IL_000e
-                        IL_000c:  br.s       IL_0049
-                        IL_000e:  nop
-                        IL_000f:  ldc.i4.s   10
-                        IL_0011:  call       "System.Threading.Tasks.Task<int> System.Threading.Tasks.Task.FromResult<int>(int)"
-                        IL_0016:  callvirt   "System.Runtime.CompilerServices.TaskAwaiter<int> System.Threading.Tasks.Task<int>.GetAwaiter()"
-                        IL_001b:  stloc.2
-                        IL_001c:  ldloca.s   V_2
-                        IL_001e:  call       "bool System.Runtime.CompilerServices.TaskAwaiter<int>.IsCompleted.get"
-                        IL_0023:  brtrue.s   IL_0065
-                        IL_0025:  ldarg.0
-                        IL_0026:  ldc.i4.0
-                        IL_0027:  dup
-                        IL_0028:  stloc.0
-                        IL_0029:  stfld      "int C.<F>d__0.<>1__state"
-                        IL_002e:  ldarg.0
-                        IL_002f:  ldloc.2
-                        IL_0030:  stfld      "System.Runtime.CompilerServices.TaskAwaiter<int> C.<F>d__0.<>u__1"
-                        IL_0035:  ldarg.0
-                        IL_0036:  stloc.3
-                        IL_0037:  ldarg.0
-                        IL_0038:  ldflda     "System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int> C.<F>d__0.<>t__builder"
-                        IL_003d:  ldloca.s   V_2
-                        IL_003f:  ldloca.s   V_3
-                        IL_0041:  call       "void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<int>, C.<F>d__0>(ref System.Runtime.CompilerServices.TaskAwaiter<int>, ref C.<F>d__0)"
-                        IL_0046:  nop
-                        IL_0047:  leave.s    IL_00a1
-                        IL_0049:  ldarg.0
-                        IL_004a:  ldfld      "System.Runtime.CompilerServices.TaskAwaiter<int> C.<F>d__0.<>u__1"
-                        IL_004f:  stloc.2
-                        IL_0050:  ldarg.0
-                        IL_0051:  ldflda     "System.Runtime.CompilerServices.TaskAwaiter<int> C.<F>d__0.<>u__1"
-                        IL_0056:  initobj    "System.Runtime.CompilerServices.TaskAwaiter<int>"
-                        IL_005c:  ldarg.0
-                        IL_005d:  ldc.i4.m1
-                        IL_005e:  dup
-                        IL_005f:  stloc.0
-                        IL_0060:  stfld      "int C.<F>d__0.<>1__state"
-                        IL_0065:  ldloca.s   V_2
-                        IL_0067:  call       "int System.Runtime.CompilerServices.TaskAwaiter<int>.GetResult()"
-                        IL_006c:  pop
-                        IL_006d:  ldc.i4.s   20
-                        IL_006f:  stloc.1
-                        IL_0070:  leave.s    IL_008c
-                      }
-                      catch System.Exception
-                      {
-                        IL_0072:  stloc.s    V_4
-                        IL_0074:  ldarg.0
-                        IL_0075:  ldc.i4.s   -2
-                        IL_0077:  stfld      "int C.<F>d__0.<>1__state"
-                        IL_007c:  ldarg.0
-                        IL_007d:  ldflda     "System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int> C.<F>d__0.<>t__builder"
-                        IL_0082:  ldloc.s    V_4
-                        IL_0084:  call       "void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetException(System.Exception)"
-                        IL_0089:  nop
-                        IL_008a:  leave.s    IL_00a1
-                      }
-                      IL_008c:  ldarg.0
-                      IL_008d:  ldc.i4.s   -2
-                      IL_008f:  stfld      "int C.<F>d__0.<>1__state"
-                      IL_0094:  ldarg.0
-                      IL_0095:  ldflda     "System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int> C.<F>d__0.<>t__builder"
-                      IL_009a:  ldloc.1
-                      IL_009b:  call       "void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)"
-                      IL_00a0:  nop
-                      IL_00a1:  ret
+                        static async Task<int> F() 
+                        {
+                            <N:0>await Task.FromResult(10)</N:0>;
+                            return 20;
+                        }
                     }
-                    """);
-                })
+                    """,
+                    edits: new[]
+                    {
+                        Edit(
+                            SemanticEditKind.Update,
+                            c => c.GetMember("C.F"),
+                            preserveLocalVariables: true
+                        ),
+                    },
+                    validator: g =>
+                    {
+                        // only methods with sequence points should be listed in UpdatedMethods:
+                        g.VerifyUpdatedMethodNames("MoveNext");
+                        g.VerifyChangedTypeNames("C", "<F>d__0");
+
+                        // Verify that no new TypeDefs, FieldDefs or MethodDefs were added,
+                        // 2 methods were updated:
+                        // - the kick-off method (might be changed if the method previously wasn't async)
+                        // - MoveNext method
+                        g.VerifyEncLogDefinitions(
+                            [
+                                Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                                Row(4, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
+                                Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                                Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
+                                Row(
+                                    1,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
+                                Row(
+                                    2,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
+                            ]
+                        );
+
+                        g.VerifyIL(
+                            "C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                            """
+                            {
+                              // Code size      162 (0xa2)
+                              .maxstack  3
+                              .locals init (int V_0,
+                                            int V_1,
+                                            System.Runtime.CompilerServices.TaskAwaiter<int> V_2,
+                                            C.<F>d__0 V_3,
+                                            System.Exception V_4)
+                              IL_0000:  ldarg.0
+                              IL_0001:  ldfld      "int C.<F>d__0.<>1__state"
+                              IL_0006:  stloc.0
+                              .try
+                              {
+                                IL_0007:  ldloc.0
+                                IL_0008:  brfalse.s  IL_000c
+                                IL_000a:  br.s       IL_000e
+                                IL_000c:  br.s       IL_0049
+                                IL_000e:  nop
+                                IL_000f:  ldc.i4.s   10
+                                IL_0011:  call       "System.Threading.Tasks.Task<int> System.Threading.Tasks.Task.FromResult<int>(int)"
+                                IL_0016:  callvirt   "System.Runtime.CompilerServices.TaskAwaiter<int> System.Threading.Tasks.Task<int>.GetAwaiter()"
+                                IL_001b:  stloc.2
+                                IL_001c:  ldloca.s   V_2
+                                IL_001e:  call       "bool System.Runtime.CompilerServices.TaskAwaiter<int>.IsCompleted.get"
+                                IL_0023:  brtrue.s   IL_0065
+                                IL_0025:  ldarg.0
+                                IL_0026:  ldc.i4.0
+                                IL_0027:  dup
+                                IL_0028:  stloc.0
+                                IL_0029:  stfld      "int C.<F>d__0.<>1__state"
+                                IL_002e:  ldarg.0
+                                IL_002f:  ldloc.2
+                                IL_0030:  stfld      "System.Runtime.CompilerServices.TaskAwaiter<int> C.<F>d__0.<>u__1"
+                                IL_0035:  ldarg.0
+                                IL_0036:  stloc.3
+                                IL_0037:  ldarg.0
+                                IL_0038:  ldflda     "System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int> C.<F>d__0.<>t__builder"
+                                IL_003d:  ldloca.s   V_2
+                                IL_003f:  ldloca.s   V_3
+                                IL_0041:  call       "void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.AwaitUnsafeOnCompleted<System.Runtime.CompilerServices.TaskAwaiter<int>, C.<F>d__0>(ref System.Runtime.CompilerServices.TaskAwaiter<int>, ref C.<F>d__0)"
+                                IL_0046:  nop
+                                IL_0047:  leave.s    IL_00a1
+                                IL_0049:  ldarg.0
+                                IL_004a:  ldfld      "System.Runtime.CompilerServices.TaskAwaiter<int> C.<F>d__0.<>u__1"
+                                IL_004f:  stloc.2
+                                IL_0050:  ldarg.0
+                                IL_0051:  ldflda     "System.Runtime.CompilerServices.TaskAwaiter<int> C.<F>d__0.<>u__1"
+                                IL_0056:  initobj    "System.Runtime.CompilerServices.TaskAwaiter<int>"
+                                IL_005c:  ldarg.0
+                                IL_005d:  ldc.i4.m1
+                                IL_005e:  dup
+                                IL_005f:  stloc.0
+                                IL_0060:  stfld      "int C.<F>d__0.<>1__state"
+                                IL_0065:  ldloca.s   V_2
+                                IL_0067:  call       "int System.Runtime.CompilerServices.TaskAwaiter<int>.GetResult()"
+                                IL_006c:  pop
+                                IL_006d:  ldc.i4.s   20
+                                IL_006f:  stloc.1
+                                IL_0070:  leave.s    IL_008c
+                              }
+                              catch System.Exception
+                              {
+                                IL_0072:  stloc.s    V_4
+                                IL_0074:  ldarg.0
+                                IL_0075:  ldc.i4.s   -2
+                                IL_0077:  stfld      "int C.<F>d__0.<>1__state"
+                                IL_007c:  ldarg.0
+                                IL_007d:  ldflda     "System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int> C.<F>d__0.<>t__builder"
+                                IL_0082:  ldloc.s    V_4
+                                IL_0084:  call       "void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetException(System.Exception)"
+                                IL_0089:  nop
+                                IL_008a:  leave.s    IL_00a1
+                              }
+                              IL_008c:  ldarg.0
+                              IL_008d:  ldc.i4.s   -2
+                              IL_008f:  stfld      "int C.<F>d__0.<>1__state"
+                              IL_0094:  ldarg.0
+                              IL_0095:  ldflda     "System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int> C.<F>d__0.<>t__builder"
+                              IL_009a:  ldloc.1
+                              IL_009b:  call       "void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)"
+                              IL_00a0:  nop
+                              IL_00a1:  ret
+                            }
+                            """
+                        );
+                    }
+                )
                 .Verify();
         }
 
         [Fact]
         public void UpdateAsync_Await_Add()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -1096,8 +1310,10 @@ class C
         <N:1>await M2()</N:1>;
         End();
     }
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -1114,8 +1330,13 @@ class C
         <N:1>await M2()</N:1>;
         End();
     }
-}");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, new[] { SystemCoreRef, CSharpRef }, options: ComSafeDebugDll);
+}"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                new[] { SystemCoreRef, CSharpRef },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             var v0 = CompileAndVerify(compilation0);
@@ -1125,14 +1346,27 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
-                 generation0,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                generation0,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
-            v0.VerifyPdb("C.F", @"
+            v0.VerifyPdb(
+                "C.F",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -1149,8 +1383,11 @@ class C
     </method>
   </methods>
 </symbols>
-");
-            v0.VerifyPdb("C+<F>d__4.MoveNext", @"
+"
+            );
+            v0.VerifyPdb(
+                "C+<F>d__4.MoveNext",
+                @"
   <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -1175,9 +1412,13 @@ class C
     </method>
   </methods>
 </symbols>
-", options: PdbValidationOptions.ExcludeSequencePoints);
+",
+                options: PdbValidationOptions.ExcludeSequencePoints
+            );
 
-            v0.VerifyIL("C.<F>d__4.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            v0.VerifyIL(
+                "C.<F>d__4.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      268 (0x10c)
   .maxstack  3
@@ -1308,9 +1549,12 @@ class C
   IL_010a:  nop
   IL_010b:  ret
 }
-");
+"
+            );
 
-            diff1.VerifyIL("C.<F>d__4.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__4.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      380 (0x17c)
   .maxstack  3
@@ -1482,13 +1726,15 @@ class C
   IL_017a:  nop
   IL_017b:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void UpdateAsync_Await_AddRemove_Lambda()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1513,8 +1759,10 @@ class C
         <N:3>await M2()</N:3>;
         End();
     }</N:5>);
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1539,8 +1787,13 @@ class C
         <N:3>await M2()</N:3>;
         End();
     }</N:5>);
-}");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, new[] { SystemCoreRef, CSharpRef }, options: ComSafeDebugDll);
+}"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                new[] { SystemCoreRef, CSharpRef },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             var v0 = CompileAndVerify(compilation0);
@@ -1550,14 +1803,27 @@ class C
             var ctor0 = compilation0.GetMember<NamedTypeSymbol>("C").InstanceConstructors.Single();
             var ctor1 = compilation1.GetMember<NamedTypeSymbol>("C").InstanceConstructors.Single();
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
-                 generation0,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, ctor0, ctor1, GetSyntaxMapFromMarkers(source0, source1))));
+                generation0,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        ctor0,
+                        ctor1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
-            v0.VerifyPdb("C..ctor", @"
+            v0.VerifyPdb(
+                "C..ctor",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -1579,8 +1845,11 @@ class C
     </method>
   </methods>
 </symbols>
-");
-            v0.VerifyPdb("C+<>c.<.ctor>b__7_0", @"
+"
+            );
+            v0.VerifyPdb(
+                "C+<>c.<.ctor>b__7_0",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -1596,9 +1865,12 @@ class C
       </customDebugInfo>
     </method>
   </methods>
-</symbols>");
+</symbols>"
+            );
 
-            v0.VerifyPdb("C+<>c.<.ctor>b__7_1", @"
+            v0.VerifyPdb(
+                "C+<>c.<.ctor>b__7_1",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -1614,9 +1886,12 @@ class C
       </customDebugInfo>
     </method>
   </methods>
-</symbols>");
+</symbols>"
+            );
 
-            v0.VerifyPdb("C+<>c+<<-ctor>b__7_0>d.MoveNext", @"
+            v0.VerifyPdb(
+                "C+<>c+<<-ctor>b__7_0>d.MoveNext",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -1641,9 +1916,13 @@ class C
     </method>
   </methods>
 </symbols>
-", options: PdbValidationOptions.ExcludeSequencePoints);
+",
+                options: PdbValidationOptions.ExcludeSequencePoints
+            );
 
-            v0.VerifyPdb("C+<>c+<<-ctor>b__7_1>d.MoveNext", @"
+            v0.VerifyPdb(
+                "C+<>c+<<-ctor>b__7_1>d.MoveNext",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -1668,9 +1947,13 @@ class C
     </method>
   </methods>
 </symbols>
-", options: PdbValidationOptions.ExcludeSequencePoints);
+",
+                options: PdbValidationOptions.ExcludeSequencePoints
+            );
 
-            diff1.VerifyIL("C.<>c.<<-ctor>b__7_0>d.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<>c.<<-ctor>b__7_0>d.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      380 (0x17c)
   .maxstack  3
@@ -1831,9 +2114,12 @@ class C
   IL_0175:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_017a:  nop
   IL_017b:  ret
-}");
+}"
+            );
 
-            diff1.VerifyIL("C.<>c.<<-ctor>b__7_1>d.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<>c.<<-ctor>b__7_1>d.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      176 (0xb0)
   .maxstack  3
@@ -1854,7 +2140,9 @@ class C
     IL_000f:  ldloc.0
     IL_0010:  ldc.i4.0
     IL_0011:  blt.s      IL_001e
-    IL_0013:  ldstr      """ + CodeAnalysisResources.EncCannotResumeSuspendedAsyncMethod + @"""
+    IL_0013:  ldstr      """
+                    + CodeAnalysisResources.EncCannotResumeSuspendedAsyncMethod
+                    + @"""
     IL_0018:  newobj     ""System.InvalidOperationException..ctor(string)""
     IL_001d:  throw
     IL_001e:  nop
@@ -1921,13 +2209,15 @@ class C
   IL_00ae:  nop
   IL_00af:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void UpdateAsync_Await_Remove_RemoveAdd()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -1944,8 +2234,10 @@ class C
         <N:2>await M2()</N:2>;
         End();
     }
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -1961,8 +2253,10 @@ class C
         <N:2>await M2()</N:2>;
         End();
     }
-}");
-            var source2 = MarkedSource(@"
+}"
+            );
+            var source2 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -1978,8 +2272,13 @@ class C
         <N:0>await M1()</N:0>;
         End();
     }
-}");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, new[] { SystemCoreRef, CSharpRef }, options: ComSafeDebugDll);
+}"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                new[] { SystemCoreRef, CSharpRef },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
             var compilation2 = compilation0.WithSource(source2.Tree);
 
@@ -1991,19 +2290,39 @@ class C
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
             var f2 = compilation2.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
-                 generation0,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                generation0,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             var diff2 = compilation2.EmitDifference(
-                 diff1.NextGeneration,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f1, f2, GetSyntaxMapFromMarkers(source1, source2))));
+                diff1.NextGeneration,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f1,
+                        f2,
+                        GetSyntaxMapFromMarkers(source1, source2)
+                    )
+                )
+            );
 
-            v0.VerifyPdb("C.F", @"
+            v0.VerifyPdb(
+                "C.F",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -2021,8 +2340,11 @@ class C
     </method>
   </methods>
 </symbols>
-");
-            v0.VerifyPdb("C+<F>d__4.MoveNext", @"
+"
+            );
+            v0.VerifyPdb(
+                "C+<F>d__4.MoveNext",
+                @"
   <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -2049,9 +2371,13 @@ class C
     </method>
   </methods>
 </symbols>
-", options: PdbValidationOptions.ExcludeSequencePoints);
+",
+                options: PdbValidationOptions.ExcludeSequencePoints
+            );
 
-            v0.VerifyIL("C.<F>d__4.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            v0.VerifyIL(
+                "C.<F>d__4.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      380 (0x17c)
   .maxstack  3
@@ -2223,9 +2549,12 @@ class C
   IL_017a:  nop
   IL_017b:  ret
 }
-");
+"
+            );
 
-            diff1.VerifyIL("C.<F>d__4.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__4.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      283 (0x11b)
   .maxstack  3
@@ -2251,7 +2580,9 @@ class C
     IL_0019:  ldloc.0
     IL_001a:  ldc.i4.0
     IL_001b:  blt.s      IL_0028
-    IL_001d:  ldstr      """ + CodeAnalysisResources.EncCannotResumeSuspendedAsyncMethod + @"""
+    IL_001d:  ldstr      """
+                    + CodeAnalysisResources.EncCannotResumeSuspendedAsyncMethod
+                    + @"""
     IL_0022:  newobj     ""System.InvalidOperationException..ctor(string)""
     IL_0027:  throw
 
@@ -2361,9 +2692,12 @@ class C
   IL_0119:  nop
   IL_011a:  ret
 }
-");
+"
+            );
             // note that CDI is not emitted to the delta since we already have the information captured in changed symbols:
-            diff1.VerifyPdb(Enumerable.Range(1, 20).Select(MetadataTokens.MethodDefinitionHandle), @"
+            diff1.VerifyPdb(
+                Enumerable.Range(1, 20).Select(MetadataTokens.MethodDefinitionHandle),
+                @"
 <symbols>
     <files>
       <file id=""1"" name="""" language=""C#"" />
@@ -2391,8 +2725,11 @@ class C
     </method>
     </methods>
 </symbols>
-");
-            diff2.VerifyIL("C.<F>d__4.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+"
+            );
+            diff2.VerifyIL(
+                "C.<F>d__4.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      283 (0x11b)
   .maxstack  3
@@ -2418,7 +2755,9 @@ class C
     IL_0019:  ldloc.0
     IL_001a:  ldc.i4.0
     IL_001b:  blt.s      IL_0028
-    IL_001d:  ldstr      """ + CodeAnalysisResources.EncCannotResumeSuspendedAsyncMethod + @"""
+    IL_001d:  ldstr      """
+                    + CodeAnalysisResources.EncCannotResumeSuspendedAsyncMethod
+                    + @"""
     IL_0022:  newobj     ""System.InvalidOperationException..ctor(string)""
     IL_0027:  throw
 
@@ -2529,13 +2868,15 @@ class C
   IL_0119:  nop
   IL_011a:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void UpdateAsync_Await_Remove_FirstAndLast()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -2552,8 +2893,10 @@ class C
         <N:2>await M3()</N:2>;
         End();
     }
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -2568,8 +2911,13 @@ class C
         <N:1>await M2()</N:1>;
         End();
     }
-}");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, new[] { SystemCoreRef, CSharpRef }, options: ComSafeDebugDll);
+}"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                new[] { SystemCoreRef, CSharpRef },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             var v0 = CompileAndVerify(compilation0);
@@ -2579,14 +2927,27 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
-                 generation0,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                generation0,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
-            diff1.VerifyIL("C.<F>d__4.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__4.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      176 (0xb0)
   .maxstack  3
@@ -2607,7 +2968,9 @@ class C
     IL_000f:  ldloc.0
     IL_0010:  ldc.i4.0
     IL_0011:  blt.s      IL_001e
-    IL_0013:  ldstr      """ + CodeAnalysisResources.EncCannotResumeSuspendedAsyncMethod + @"""
+    IL_0013:  ldstr      """
+                    + CodeAnalysisResources.EncCannotResumeSuspendedAsyncMethod
+                    + @"""
     IL_0018:  newobj     ""System.InvalidOperationException..ctor(string)""
     IL_001d:  throw
 
@@ -2678,13 +3041,15 @@ class C
   IL_00ae:  nop
   IL_00af:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void UpdateAsync_Await_Remove_TryBlock()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -2713,8 +3078,10 @@ class C
         }
         End();
     }
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -2740,8 +3107,13 @@ class C
         }
         End();
     }
-}");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, new[] { SystemCoreRef, CSharpRef }, options: ComSafeDebugDll);
+}"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                new[] { SystemCoreRef, CSharpRef },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             var v0 = CompileAndVerify(compilation0);
@@ -2751,14 +3123,27 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
-                 generation0,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                generation0,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
-            v0.VerifyIL("C.<F>d__7.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            v0.VerifyIL(
+                "C.<F>d__7.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      671 (0x29f)
   .maxstack  3
@@ -3067,9 +3452,12 @@ class C
   IL_029d:  nop
   IL_029e:  ret
 }
-");
+"
+            );
 
-            diff1.VerifyIL("C.<F>d__7.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__7.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      356 (0x164)
   .maxstack  3
@@ -3098,7 +3486,9 @@ class C
     IL_001a:  ldloc.0
     IL_001b:  ldc.i4.0
     IL_001c:  blt.s      IL_0029
-    IL_001e:  ldstr      """ + CodeAnalysisResources.EncCannotResumeSuspendedAsyncMethod + @"""
+    IL_001e:  ldstr      """
+                    + CodeAnalysisResources.EncCannotResumeSuspendedAsyncMethod
+                    + @"""
     IL_0023:  newobj     ""System.InvalidOperationException..ctor(string)""
     IL_0028:  throw
 
@@ -3253,13 +3643,15 @@ class C
   IL_0162:  nop
   IL_0163:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void UpdateAsync_AwaitDeclarationMappedToNonAwait()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -3272,8 +3664,10 @@ class C
     }
 
     static IAsyncDisposable G() => null; 
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -3286,10 +3680,17 @@ class C
     }
 
     static IAsyncDisposable G() => null; 
-}");
-            var asyncStreamsTree = Parse(AsyncStreamsTypes, options: (CSharpParseOptions)source0.Tree.Options);
+}"
+            );
+            var asyncStreamsTree = Parse(
+                AsyncStreamsTypes,
+                options: (CSharpParseOptions)source0.Tree.Options
+            );
 
-            var compilation0 = CreateCompilationWithTasksExtensions(new[] { source0.Tree, asyncStreamsTree }, options: ComSafeDebugDll);
+            var compilation0 = CreateCompilationWithTasksExtensions(
+                new[] { source0.Tree, asyncStreamsTree },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(new[] { source1.Tree, asyncStreamsTree });
 
             var v0 = CompileAndVerify(compilation0);
@@ -3299,18 +3700,31 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
-                 generation0,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                generation0,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             // Note that the CDI contains local variable declaration mapping to facilitate local variable slot allocation,
             // but these are not included in the state machine map since the V0 version of the local declaration statement does not have "await" keyword.
             // Therefore, the V1 version will not be able ot match the local declaration statements to their previous versions when emitting
             // state machine states and create new states for them as expected.
-            v0.VerifyPdb("C.F", @"
+            v0.VerifyPdb(
+                "C.F",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -3329,18 +3743,22 @@ class C
       </customDebugInfo>
     </method>
   </methods>
-</symbols>");
+</symbols>"
+            );
 
             // note preserved hoisted variables x, y:
 
-            v0.VerifySynthesizedFields("C.<F>d__0",
+            v0.VerifySynthesizedFields(
+                "C.<F>d__0",
                 "int <>1__state",
                 "System.Runtime.CompilerServices.AsyncTaskMethodBuilder <>t__builder",
                 "System.IAsyncDisposable <x>5__1",
                 "System.IAsyncDisposable <y>5__2",
-                "System.Runtime.CompilerServices.TaskAwaiter <>u__1");
+                "System.Runtime.CompilerServices.TaskAwaiter <>u__1"
+            );
 
-            diff1.VerifySynthesizedFields("C.<F>d__0",
+            diff1.VerifySynthesizedFields(
+                "C.<F>d__0",
                 "<>1__state: int",
                 "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder",
                 "<x>5__1: System.IAsyncDisposable",
@@ -3350,9 +3768,12 @@ class C
                 "<>s__5: object",
                 "<>s__6: int",
                 "<>u__1: System.Runtime.CompilerServices.TaskAwaiter",
-                "<>u__2: System.Runtime.CompilerServices.ValueTaskAwaiter");
+                "<>u__2: System.Runtime.CompilerServices.ValueTaskAwaiter"
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      678 (0x2a6)
   .maxstack  3
@@ -3656,13 +4077,15 @@ class C
   IL_029f:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_02a4:  nop
   IL_02a5:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void UpdateIterator_UserDefinedVariables_NoChange()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Collections.Generic;
 
 class C
@@ -3672,8 +4095,10 @@ class C
         int <N:0>x = p</N:0>;
         <N:1>yield return 1</N:1>;
     }
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Collections.Generic;
 
 class C
@@ -3683,8 +4108,12 @@ class C
         int <N:0>x = p</N:0>;
         <N:1>yield return 2</N:1>;
     }
-}");
-            var compilation0 = CreateCompilationWithMscorlib45(source0.Tree, options: ComSafeDebugDll);
+}"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                source0.Tree,
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             var v0 = CompileAndVerify(compilation0);
@@ -3694,30 +4123,46 @@ class C
             var method0 = compilation0.GetMember<MethodSymbol>("C.F");
             var method1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, symReader.GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                symReader.GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
-                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, method0, method1, GetSyntaxMapFromMarkers(source0, source1))));
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        method0,
+                        method1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             // Verify delta metadata contains expected rows.
             using var md1 = diff1.GetMetadata();
 
             // Verify that no new TypeDefs, FieldDefs or MethodDefs were added,
-            // 3 methods were updated: 
+            // 3 methods were updated:
             // - the kick-off method (might be changed if the method previously wasn't an iterator)
             // - Finally method
             // - MoveNext method
-            CheckEncLogDefinitions(md1.Reader,
+            CheckEncLogDefinitions(
+                md1.Reader,
                 Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(1, TableIndex.Param, EditAndContinueOperation.Default),
                 Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default));
+                Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext",
+                @"
 {
   // Code size       69 (0x45)
   .maxstack  2
@@ -3757,13 +4202,15 @@ class C
   IL_003e:  stfld      ""int C.<F>d__0.<>1__state""
   IL_0043:  ldc.i4.0
   IL_0044:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void UpdateIterator_UserDefinedVariables_AddVariable()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -3774,8 +4221,10 @@ class C
         int <N:0>x = p</N:0>;
         <N:1>yield return x;</N:1>
     }
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -3788,8 +4237,12 @@ class C
         <N:1>yield return y</N:1>;
         Console.WriteLine(x);
     }
-}");
-            var compilation0 = CreateCompilationWithMscorlib45(source0.Tree, options: ComSafeDebugDll);
+}"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                source0.Tree,
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             var v0 = CompileAndVerify(compilation0);
@@ -3799,16 +4252,29 @@ class C
             var method0 = compilation0.GetMember<MethodSymbol>("C.F");
             var method1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, symReader.GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                symReader.GetEncMethodDebugInfo
+            );
             var diff1 = compilation1.EmitDifference(
                 generation0,
-                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, method0, method1, GetSyntaxMapFromMarkers(source0, source1))));
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        method0,
+                        method1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             // Verify delta metadata contains expected rows.
             using var md1 = diff1.GetMetadata();
 
             // 1 field def added & 3 methods updated
-            CheckEncLogDefinitions(md1.Reader,
+            CheckEncLogDefinitions(
+                md1.Reader,
                 Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(3, TableIndex.TypeDef, EditAndContinueOperation.AddField),
                 Row(7, TableIndex.Field, EditAndContinueOperation.Default),
@@ -3817,9 +4283,12 @@ class C
                 Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(1, TableIndex.Param, EditAndContinueOperation.Default),
                 Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default));
+                Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext",
+                @"
 {
   // Code size       97 (0x61)
   .maxstack  2
@@ -3867,13 +4336,15 @@ class C
   IL_005e:  nop
   IL_005f:  ldc.i4.0
   IL_0060:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void UpdateIterator_UserDefinedVariables_AddAndRemoveVariable()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -3884,8 +4355,10 @@ class C
         int x = p;
         <N:0>yield return x;</N:0>
     }
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -3897,8 +4370,12 @@ class C
         <N:0>yield return y;</N:0>
         Console.WriteLine(p);
     }
-}");
-            var compilation0 = CreateCompilationWithMscorlib45(source0.Tree, options: ComSafeDebugDll);
+}"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                source0.Tree,
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             var v0 = CompileAndVerify(compilation0);
@@ -3908,16 +4385,29 @@ class C
             var method0 = compilation0.GetMember<MethodSymbol>("C.F");
             var method1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, symReader.GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                symReader.GetEncMethodDebugInfo
+            );
             var diff1 = compilation1.EmitDifference(
                 generation0,
-                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, method0, method1, GetSyntaxMapFromMarkers(source0, source1))));
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        method0,
+                        method1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             // Verify delta metadata contains expected rows.
             using var md1 = diff1.GetMetadata();
 
             // 1 field def added & 3 methods updated
-            CheckEncLogDefinitions(md1.Reader,
+            CheckEncLogDefinitions(
+                md1.Reader,
                 Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(3, TableIndex.TypeDef, EditAndContinueOperation.AddField),
                 Row(7, TableIndex.Field, EditAndContinueOperation.Default),
@@ -3926,9 +4416,12 @@ class C
                 Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(1, TableIndex.Param, EditAndContinueOperation.Default),
                 Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default));
+                Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext",
+                @"
 {
   // Code size       85 (0x55)
   .maxstack  2
@@ -3972,13 +4465,15 @@ class C
   IL_0052:  nop
   IL_0053:  ldc.i4.0
   IL_0054:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void UpdateIterator_UserDefinedVariables_ChangeVariableType()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -3990,8 +4485,10 @@ class C
         <N:1>yield return 1</N:1>;
         Console.WriteLine(x);
     }
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -4003,8 +4500,12 @@ class C
         <N:1>yield return 2</N:1>;
         Console.WriteLine(x);
     }
-}");
-            var compilation0 = CreateCompilationWithMscorlib45(source0.Tree, options: ComSafeDebugDll);
+}"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                source0.Tree,
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             var v0 = CompileAndVerify(compilation0);
@@ -4014,16 +4515,29 @@ class C
             var method0 = compilation0.GetMember<MethodSymbol>("C.F");
             var method1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, symReader.GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                symReader.GetEncMethodDebugInfo
+            );
             var diff1 = compilation1.EmitDifference(
                 generation0,
-                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, method0, method1, GetSyntaxMapFromMarkers(source0, source1))));
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        method0,
+                        method1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             // Verify delta metadata contains expected rows.
             using var md1 = diff1.GetMetadata();
 
             // 1 field def added & 3 methods updated
-            CheckEncLogDefinitions(md1.Reader,
+            CheckEncLogDefinitions(
+                md1.Reader,
                 Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(3, TableIndex.TypeDef, EditAndContinueOperation.AddField),
                 Row(5, TableIndex.Field, EditAndContinueOperation.Default),
@@ -4031,9 +4545,12 @@ class C
                 Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default));
+                Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext",
+                @"
 {
   // Code size       84 (0x54)
   .maxstack  2
@@ -4076,13 +4593,15 @@ class C
   IL_0051:  nop
   IL_0052:  ldc.i4.0
   IL_0053:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void UpdateIterator_SynthesizedVariables_ChangeVariableType()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -4092,8 +4611,10 @@ class C
     {
         <N:0>foreach</N:0> (object item in new[] { 1 }) { <N:1>yield return 1;</N:1> }
     }
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -4103,24 +4624,34 @@ class C
     {
         <N:0>foreach</N:0> (object item in new[] { 1.0 }) { <N:1>yield return 1;</N:1> }
     }
-}");
+}"
+            );
             // Rude edit but the compiler should handle it.
 
-            var compilation0 = CreateCompilationWithMscorlib45(source0.Tree, options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
+            var compilation0 = CreateCompilationWithMscorlib45(
+                source0.Tree,
+                options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
-            var v0 = CompileAndVerify(compilation0, symbolValidator: module =>
-            {
-                Assert.Equal(new[]
+            var v0 = CompileAndVerify(
+                compilation0,
+                symbolValidator: module =>
                 {
-                    "<>1__state: int",
-                    "<>2__current: int",
-                    "<>l__initialThreadId: int",
-                    "<>s__1: int[]",
-                    "<>s__2: int",
-                    "<item>5__3: object"
-                }, module.GetFieldNamesAndTypes("C.<F>d__0"));
-            });
+                    Assert.Equal(
+                        new[]
+                        {
+                            "<>1__state: int",
+                            "<>2__current: int",
+                            "<>l__initialThreadId: int",
+                            "<>s__1: int[]",
+                            "<>s__2: int",
+                            "<item>5__3: object",
+                        },
+                        module.GetFieldNamesAndTypes("C.<F>d__0")
+                    );
+                }
+            );
 
             var symReader = v0.CreateSymReader();
 
@@ -4128,16 +4659,29 @@ class C
             var method0 = compilation0.GetMember<MethodSymbol>("C.F");
             var method1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, symReader.GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                symReader.GetEncMethodDebugInfo
+            );
             var diff1 = compilation1.EmitDifference(
                 generation0,
-                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, method0, method1, GetSyntaxMapFromMarkers(source0, source1))));
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        method0,
+                        method1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             // Verify delta metadata contains expected rows.
             using var md1 = diff1.GetMetadata();
 
             // 1 field def added & 3 methods updated
-            CheckEncLogDefinitions(md1.Reader,
+            CheckEncLogDefinitions(
+                md1.Reader,
                 Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(3, TableIndex.TypeDef, EditAndContinueOperation.AddField),
                 Row(7, TableIndex.Field, EditAndContinueOperation.Default),
@@ -4145,9 +4689,12 @@ class C
                 Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default));
+                Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext",
+                @"
 {
   // Code size      161 (0xa1)
   .maxstack  5
@@ -4225,13 +4772,15 @@ class C
   IL_009a:  stfld      ""double[] C.<F>d__0.<>s__4""
   IL_009f:  ldc.i4.0
   IL_00a0:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void UpdateIterator_YieldReturn_Add()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Collections.Generic;
 
 class C
@@ -4248,8 +4797,10 @@ class C
         <N:1>yield return M2();</N:1>
         End();
     }
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Collections.Generic;
 
 class C
@@ -4268,8 +4819,13 @@ class C
         <N:1>yield return M2();</N:1>   
         End();
     }
-}");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, new[] { SystemCoreRef, CSharpRef }, options: ComSafeDebugDll);
+}"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                new[] { SystemCoreRef, CSharpRef },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             var v0 = CompileAndVerify(compilation0);
@@ -4279,14 +4835,27 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
-                 generation0,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                generation0,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
-            v0.VerifyPdb("C.F", @"
+            v0.VerifyPdb(
+                "C.F",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -4303,8 +4872,11 @@ class C
     </method>
   </methods>
 </symbols>
-");
-            v0.VerifyPdb("C+<F>d__5.MoveNext", @"
+"
+            );
+            v0.VerifyPdb(
+                "C+<F>d__5.MoveNext",
+                @"
   <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -4320,9 +4892,13 @@ class C
     </method>
   </methods>
 </symbols>
-", options: PdbValidationOptions.ExcludeSequencePoints);
+",
+                options: PdbValidationOptions.ExcludeSequencePoints
+            );
 
-            v0.VerifyIL("C.<F>d__5.System.Collections.IEnumerator.MoveNext", @"
+            v0.VerifyIL(
+                "C.<F>d__5.System.Collections.IEnumerator.MoveNext",
+                @"
  {
   // Code size      105 (0x69)
   .maxstack  2
@@ -4375,9 +4951,12 @@ class C
   IL_0066:  nop
   IL_0067:  ldc.i4.0
   IL_0068:  ret
-}");
+}"
+            );
 
-            diff1.VerifyIL("C.<F>d__5.System.Collections.IEnumerator.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__5.System.Collections.IEnumerator.MoveNext",
+                @"
 {
   // Code size      171 (0xab)
   .maxstack  2
@@ -4459,13 +5038,15 @@ class C
   IL_00a9:  ldc.i4.0
   IL_00aa:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void UpdateIterator_YieldReturn_Remove()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Collections.Generic;
 
 class C
@@ -4484,8 +5065,10 @@ class C
         <N:3>yield return M4();</N:3>
         End();
     }
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Collections.Generic;
 
 class C
@@ -4502,8 +5085,13 @@ class C
         <N:2>yield return M3();</N:2>
         End();
     }
-}");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, new[] { SystemCoreRef, CSharpRef }, options: ComSafeDebugDll);
+}"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                new[] { SystemCoreRef, CSharpRef },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             var v0 = CompileAndVerify(compilation0);
@@ -4513,14 +5101,27 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
-                 generation0,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                generation0,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
-            diff1.VerifyIL("C.<F>d__5.System.Collections.IEnumerator.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__5.System.Collections.IEnumerator.MoveNext",
+                @"
 {
   // Code size      124 (0x7c)
   .maxstack  2
@@ -4541,7 +5142,9 @@ class C
   IL_0025:  ldloc.0
   IL_0026:  ldc.i4.1
   IL_0027:  blt.s      IL_0034
-  IL_0029:  ldstr      """ + CodeAnalysisResources.EncCannotResumeSuspendedIteratorMethod + @"""
+  IL_0029:  ldstr      """
+                    + CodeAnalysisResources.EncCannotResumeSuspendedIteratorMethod
+                    + @"""
   IL_002e:  newobj     ""System.InvalidOperationException..ctor(string)""
   IL_0033:  throw
 
@@ -4581,13 +5184,15 @@ class C
   IL_007a:  ldc.i4.0
   IL_007b:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void UpdateIterator_YieldReturn_Add_Finally_Try()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Collections.Generic;
 
 class C
@@ -4618,8 +5223,10 @@ class C
     static void Finally1(int gen) {}
     static void Finally2(int gen) {}
     static void Finally3(int gen) {}
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Collections.Generic;
 
 class C
@@ -4665,8 +5272,13 @@ class C
     static void Finally1(int gen) {}
     static void Finally2(int gen) {}
     static void Finally3(int gen) {}
-}");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, new[] { SystemCoreRef, CSharpRef }, options: ComSafeDebugDll);
+}"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                new[] { SystemCoreRef, CSharpRef },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             var v0 = CompileAndVerify(compilation0);
@@ -4676,14 +5288,27 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
-                 generation0,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                generation0,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
-            v0.VerifyPdb("C.F", @"
+            v0.VerifyPdb(
+                "C.F",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -4701,29 +5326,38 @@ class C
         </customDebugInfo>
     </method>
   </methods>
-</symbols>");
+</symbols>"
+            );
 
             diff1.VerifySynthesizedMembers(
-               "C: {<F>d__0}",
-               "C.<F>d__0: {" + string.Join(", ", new[]
-               {
-                    "<>1__state",
-                    "<>2__current",
-                    "<>l__initialThreadId",
-                    "System.IDisposable.Dispose",
-                    "MoveNext",
-                    "<>m__Finally2",
-                    "<>m__Finally1",
-                    "<>m__Finally3",
-                    "System.Collections.Generic.IEnumerator<System.Int32>.get_Current",
-                    "System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current",
-                    "System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator",
-                    "System.Collections.IEnumerable.GetEnumerator",
-                    "System.Collections.Generic.IEnumerator<System.Int32>.Current",
-                    "System.Collections.IEnumerator.Current"
-               }) + "}");
+                "C: {<F>d__0}",
+                "C.<F>d__0: {"
+                    + string.Join(
+                        ", ",
+                        new[]
+                        {
+                            "<>1__state",
+                            "<>2__current",
+                            "<>l__initialThreadId",
+                            "System.IDisposable.Dispose",
+                            "MoveNext",
+                            "<>m__Finally2",
+                            "<>m__Finally1",
+                            "<>m__Finally3",
+                            "System.Collections.Generic.IEnumerator<System.Int32>.get_Current",
+                            "System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current",
+                            "System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator",
+                            "System.Collections.IEnumerable.GetEnumerator",
+                            "System.Collections.Generic.IEnumerator<System.Int32>.Current",
+                            "System.Collections.IEnumerator.Current",
+                        }
+                    )
+                    + "}"
+            );
 
-            diff1.VerifyIL("C.<F>d__0.<>m__Finally1", @"
+            diff1.VerifyIL(
+                "C.<F>d__0.<>m__Finally1",
+                @"
 {
   // Code size       17 (0x11)
   .maxstack  2
@@ -4737,8 +5371,11 @@ class C
   IL_000f:  nop
   IL_0010:  ret
 }
-");
-            diff1.VerifyIL("C.<F>d__0.<>m__Finally2", @"
+"
+            );
+            diff1.VerifyIL(
+                "C.<F>d__0.<>m__Finally2",
+                @"
 {
   // Code size       17 (0x11)
   .maxstack  2
@@ -4752,8 +5389,11 @@ class C
   IL_000f:  nop
   IL_0010:  ret
 }
-");
-            diff1.VerifyIL("C.<F>d__0.<>m__Finally3", @"
+"
+            );
+            diff1.VerifyIL(
+                "C.<F>d__0.<>m__Finally3",
+                @"
 {
   // Code size       18 (0x12)
   .maxstack  2
@@ -4767,9 +5407,12 @@ class C
   IL_0010:  nop
   IL_0011:  ret
 }
-");
+"
+            );
 
-            v0.VerifyIL("C.<F>d__0.System.IDisposable.Dispose", @"
+            v0.VerifyIL(
+                "C.<F>d__0.System.IDisposable.Dispose",
+                @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -4799,8 +5442,11 @@ class C
   IL_001e:  br.s       IL_0020
   IL_0020:  ret
 }
-");
-            diff1.VerifyIL("C.<F>d__0.System.IDisposable.Dispose", @"
+"
+            );
+            diff1.VerifyIL(
+                "C.<F>d__0.System.IDisposable.Dispose",
+                @"
 {
   // Code size      108 (0x6c)
   .maxstack  2
@@ -4869,9 +5515,12 @@ class C
   IL_0069:  br.s       IL_006b
   IL_006b:  ret
 }
-");
+"
+            );
 
-            v0.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext", @"
+            v0.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext",
+                @"
 {
   // Code size      179 (0xb3)
   .maxstack  2
@@ -4960,9 +5609,12 @@ class C
   IL_00b1:  ldloc.0
   IL_00b2:  ret
 } 
-");
+"
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext",
+                @"
 {
   // Code size      259 (0x103)
   .maxstack  2
@@ -5080,13 +5732,15 @@ class C
   }
   IL_0101:  ldloc.0
   IL_0102:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void UpdateIterator_YieldReturn_Add_Finally_UsingDeclaration()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -5103,8 +5757,10 @@ class C
     static int M2() => 0;
     static int M3() => 0;
     static void End() {}
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -5122,8 +5778,13 @@ class C
     static int M2() => 0;
     static int M3() => 0;
     static void End() {}
-}");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, new[] { SystemCoreRef, CSharpRef }, options: ComSafeDebugDll);
+}"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                new[] { SystemCoreRef, CSharpRef },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             var v0 = CompileAndVerify(compilation0);
@@ -5133,14 +5794,27 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
-                 generation0,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                generation0,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
-            v0.VerifyPdb("C.F", @"
+            v0.VerifyPdb(
+                "C.F",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -5159,28 +5833,37 @@ class C
       </customDebugInfo>
     </method>
   </methods>
-</symbols>");
+</symbols>"
+            );
 
             diff1.VerifySynthesizedMembers(
-               "C: {<F>d__0}",
-               "C.<F>d__0: {" + string.Join(", ", new[]
-               {
-                    "<>1__state",
-                    "<>2__current",
-                    "<>l__initialThreadId",
-                    "<x>5__1",
-                    "System.IDisposable.Dispose",
-                    "MoveNext",
-                    "<>m__Finally1",
-                    "System.Collections.Generic.IEnumerator<System.Int32>.get_Current",
-                    "System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current",
-                    "System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator",
-                    "System.Collections.IEnumerable.GetEnumerator",
-                    "System.Collections.Generic.IEnumerator<System.Int32>.Current",
-                    "System.Collections.IEnumerator.Current"
-               }) + "}");
+                "C: {<F>d__0}",
+                "C.<F>d__0: {"
+                    + string.Join(
+                        ", ",
+                        new[]
+                        {
+                            "<>1__state",
+                            "<>2__current",
+                            "<>l__initialThreadId",
+                            "<x>5__1",
+                            "System.IDisposable.Dispose",
+                            "MoveNext",
+                            "<>m__Finally1",
+                            "System.Collections.Generic.IEnumerator<System.Int32>.get_Current",
+                            "System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current",
+                            "System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator",
+                            "System.Collections.IEnumerable.GetEnumerator",
+                            "System.Collections.Generic.IEnumerator<System.Int32>.Current",
+                            "System.Collections.IEnumerator.Current",
+                        }
+                    )
+                    + "}"
+            );
 
-            diff1.VerifyIL("C.<F>d__0.<>m__Finally1", @"
+            diff1.VerifyIL(
+                "C.<F>d__0.<>m__Finally1",
+                @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -5196,9 +5879,12 @@ class C
   IL_001a:  nop
   IL_001b:  ret
 }
-");
+"
+            );
 
-            v0.VerifyIL("C.<F>d__0.System.IDisposable.Dispose", @"
+            v0.VerifyIL(
+                "C.<F>d__0.System.IDisposable.Dispose",
+                @"
 {
   // Code size       33 (0x21)
   .maxstack  2
@@ -5228,8 +5914,11 @@ class C
   IL_001e:  br.s       IL_0020
   IL_0020:  ret
 }
-");
-            diff1.VerifyIL("C.<F>d__0.System.IDisposable.Dispose", @"
+"
+            );
+            diff1.VerifyIL(
+                "C.<F>d__0.System.IDisposable.Dispose",
+                @"
 {
   // Code size       35 (0x23)
   .maxstack  2
@@ -5261,9 +5950,12 @@ class C
   IL_0020:  br.s       IL_0022
   IL_0022:  ret
 }
-");
+"
+            );
 
-            v0.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext", @"
+            v0.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext",
+                @"
  {
   // Code size      112 (0x70)
   .maxstack  2
@@ -5328,9 +6020,12 @@ class C
   IL_006e:  ldloc.0
   IL_006f:  ret
 }
-");
+"
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext",
+                @"
 {
   // Code size      153 (0x99)
   .maxstack  2
@@ -5406,13 +6101,15 @@ class C
   }
   IL_0097:  ldloc.0
   IL_0098:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void UpdateIterator_YieldReturn_Add_Finally_Foreach_ForEachVar_Using_Lock()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -5434,8 +6131,10 @@ class C
 
     static IDisposable D() => null;
     static IEnumerable<(int, int)> E() => null;
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -5458,8 +6157,13 @@ class C
 
     static IDisposable D() => null;
     static IEnumerable<(int, int)> E() => null;
-}");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, new[] { SystemRuntimeFacadeRef, ValueTupleRef }, options: ComSafeDebugDll);
+}"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                new[] { SystemRuntimeFacadeRef, ValueTupleRef },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             var v0 = CompileAndVerify(compilation0);
@@ -5469,14 +6173,27 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
-                 generation0,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                generation0,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
-            v0.VerifyPdb("C.F", @"
+            v0.VerifyPdb(
+                "C.F",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -5513,9 +6230,12 @@ class C
       </customDebugInfo>
     </method>
   </methods>
-</symbols>");
+</symbols>"
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext",
+                @"
 {
   // Code size      526 (0x20e)
   .maxstack  2
@@ -5717,13 +6437,15 @@ class C
   }
   IL_020c:  ldloc.0
   IL_020d:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         public void UpdateAsyncEnumerable_AwaitAndYield_AddAndRemove()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -5740,8 +6462,10 @@ class C
     static int F2() => 1;
     static void End() { }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -5759,8 +6483,10 @@ class C
     static int F1() => 1;
     static int F2() => 1;
     static void End() { }
-}");
-            var source2 = MarkedSource(@"
+}"
+            );
+            var source2 = MarkedSource(
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -5777,8 +6503,10 @@ class C
     static int F1() => 1;
     static int F2() => 1;
     static void End() { }
-}");
-            var source3 = MarkedSource(@"
+}"
+            );
+            var source3 = MarkedSource(
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -5794,10 +6522,17 @@ class C
     static int F1() => 1;
     static int F2() => 1;
     static void End() { }
-}");
-            var asyncStreamsTree = Parse(AsyncStreamsTypes, options: (CSharpParseOptions)source0.Tree.Options);
+}"
+            );
+            var asyncStreamsTree = Parse(
+                AsyncStreamsTypes,
+                options: (CSharpParseOptions)source0.Tree.Options
+            );
 
-            var compilation0 = CreateCompilationWithTasksExtensions(new[] { source0.Tree, asyncStreamsTree }, options: ComSafeDebugDll);
+            var compilation0 = CreateCompilationWithTasksExtensions(
+                new[] { source0.Tree, asyncStreamsTree },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(new[] { source1.Tree, asyncStreamsTree });
             var compilation2 = compilation1.WithSource(new[] { source2.Tree, asyncStreamsTree });
             var compilation3 = compilation2.WithSource(new[] { source3.Tree, asyncStreamsTree });
@@ -5811,24 +6546,51 @@ class C
             var f2 = compilation2.GetMember<MethodSymbol>("C.F");
             var f3 = compilation3.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
-                 generation0,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                generation0,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             var diff2 = compilation2.EmitDifference(
-                 diff1.NextGeneration,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f1, f2, GetSyntaxMapFromMarkers(source1, source2))));
+                diff1.NextGeneration,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f1,
+                        f2,
+                        GetSyntaxMapFromMarkers(source1, source2)
+                    )
+                )
+            );
 
             var diff3 = compilation3.EmitDifference(
-                 diff2.NextGeneration,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f2, f3, GetSyntaxMapFromMarkers(source2, source3))));
+                diff2.NextGeneration,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f2,
+                        f3,
+                        GetSyntaxMapFromMarkers(source2, source3)
+                    )
+                )
+            );
 
-            v0.VerifyPdb("C.F", @"
+            v0.VerifyPdb(
+                "C.F",
+                @"
 <symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
@@ -5845,9 +6607,12 @@ class C
     </method>
   </methods>
 </symbols>
-");
+"
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      484 (0x1e4)
   .maxstack  3
@@ -6047,9 +6812,12 @@ class C
   IL_01e2:  nop
   IL_01e3:  ret
 }
-");
+"
+            );
 
-            diff2.VerifyIL("C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            diff2.VerifyIL(
+                "C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      447 (0x1bf)
   .maxstack  3
@@ -6082,7 +6850,9 @@ class C
     IL_003c:  ldloc.0
     IL_003d:  ldc.i4.s   -4
     IL_003f:  bgt.s      IL_004c
-    IL_0041:  ldstr      """ + CodeAnalysisResources.EncCannotResumeSuspendedIteratorMethod + @"""
+    IL_0041:  ldstr      """
+                    + CodeAnalysisResources.EncCannotResumeSuspendedIteratorMethod
+                    + @"""
     IL_0046:  newobj     ""System.InvalidOperationException..ctor(string)""
     IL_004b:  throw
     IL_004c:  ldarg.0
@@ -6235,8 +7005,11 @@ class C
   IL_01b8:  call       ""void System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore<bool>.SetResult(bool)""
   IL_01bd:  nop
   IL_01be:  ret
-}");
-            diff3.VerifyIL("C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+}"
+            );
+            diff3.VerifyIL(
+                "C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      339 (0x153)
   .maxstack  3
@@ -6267,14 +7040,18 @@ class C
     IL_0023:  ldloc.0
     IL_0024:  ldc.i4.0
     IL_0025:  blt.s      IL_0032
-    IL_0027:  ldstr      """ + CodeAnalysisResources.EncCannotResumeSuspendedAsyncMethod + @"""
+    IL_0027:  ldstr      """
+                    + CodeAnalysisResources.EncCannotResumeSuspendedAsyncMethod
+                    + @"""
     IL_002c:  newobj     ""System.InvalidOperationException..ctor(string)""
     IL_0031:  throw
 
     IL_0032:  ldloc.0
     IL_0033:  ldc.i4.s   -4
     IL_0035:  bgt.s      IL_0042
-    IL_0037:  ldstr      """ + CodeAnalysisResources.EncCannotResumeSuspendedIteratorMethod + @"""
+    IL_0037:  ldstr      """
+                    + CodeAnalysisResources.EncCannotResumeSuspendedIteratorMethod
+                    + @"""
     IL_003c:  newobj     ""System.InvalidOperationException..ctor(string)""
     IL_0041:  throw
 
@@ -6397,14 +7174,16 @@ class C
   IL_014c:  call       ""void System.Threading.Tasks.Sources.ManualResetValueTaskSourceCore<bool>.SetResult(bool)""
   IL_0151:  nop
   IL_0152:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         [WorkItem("https://github.com/dotnet/roslyn/issues/69805")]
         public void UpdateAwaitForEach_AsyncDisposableEnumerator()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6424,8 +7203,10 @@ class C
     static void Body(int x) {}
     static void End() { }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6444,11 +7225,18 @@ class C
     IAsyncEnumerable<int> Iterator() => null;
     static void Body(int x) { }
     static void End() { }
-}");
+}"
+            );
             var asyncStreamsTree = Parse(
-                AsyncStreamsTypes, options: (CSharpParseOptions)source0.Tree.Options, filename: "AsyncStreams.cs");
+                AsyncStreamsTypes,
+                options: (CSharpParseOptions)source0.Tree.Options,
+                filename: "AsyncStreams.cs"
+            );
 
-            var compilation0 = CreateCompilationWithTasksExtensions(new[] { source0.Tree, asyncStreamsTree }, options: ComSafeDebugDll);
+            var compilation0 = CreateCompilationWithTasksExtensions(
+                new[] { source0.Tree, asyncStreamsTree },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource([source1.Tree, asyncStreamsTree]);
 
             var v0 = CompileAndVerify(compilation0);
@@ -6458,9 +7246,15 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
-            v0.VerifyPdb("C.F", @"
+            v0.VerifyPdb(
+                "C.F",
+                @"
 <symbols>
   <methods>
     <method containingType=""C"" name=""F"">
@@ -6481,9 +7275,13 @@ class C
     </method>
   </methods>
 </symbols>
-", options: PdbValidationOptions.ExcludeDocuments);
+",
+                options: PdbValidationOptions.ExcludeDocuments
+            );
 
-            v0.VerifyMethodBody("C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            v0.VerifyMethodBody(
+                "C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      477 (0x1dd)
   .maxstack  3
@@ -6723,13 +7521,24 @@ class C
   IL_01db:  nop
   IL_01dc:  ret
 }
-");
+"
+            );
 
             var diff1 = compilation1.EmitDifference(
-                    generation0,
-                    ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                generation0,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      477 (0x1dd)
   .maxstack  3
@@ -6940,14 +7749,16 @@ class C
   IL_01d6:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_01db:  nop
   IL_01dc:  ret
-}");
+}"
+            );
         }
 
         [Fact]
         [WorkItem("https://github.com/dotnet/roslyn/issues/69805")]
         public void UpdateAwaitForEach_NonDisposableEnumerator()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6967,8 +7778,10 @@ class C
     static void Body(int x) {}
     static void End() { }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6987,11 +7800,18 @@ class C
     IAsyncEnumerable<int> Iterator() => null;
     static void Body(int x) { }
     static void End() { }
-}");
+}"
+            );
             var asyncStreamsTree = Parse(
-                NonDisposableAsyncEnumeratorDefinition + CommonAsyncStreamsTypes, options: (CSharpParseOptions)source0.Tree.Options, filename: "AsyncStreams.cs");
+                NonDisposableAsyncEnumeratorDefinition + CommonAsyncStreamsTypes,
+                options: (CSharpParseOptions)source0.Tree.Options,
+                filename: "AsyncStreams.cs"
+            );
 
-            var compilation0 = CreateCompilationWithTasksExtensions(new[] { source0.Tree, asyncStreamsTree }, options: ComSafeDebugDll);
+            var compilation0 = CreateCompilationWithTasksExtensions(
+                new[] { source0.Tree, asyncStreamsTree },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(new[] { source1.Tree, asyncStreamsTree });
 
             var v0 = CompileAndVerify(compilation0);
@@ -7001,10 +7821,16 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             // Both states are allocated eventhough only a single await is emitted:
-            v0.VerifyPdb("C.F", @"
+            v0.VerifyPdb(
+                "C.F",
+                @"
 <symbols>
   <methods>
     <method containingType=""C"" name=""F"">
@@ -7023,9 +7849,13 @@ class C
     </method>
   </methods>
 </symbols>
-", options: PdbValidationOptions.ExcludeDocuments);
+",
+                options: PdbValidationOptions.ExcludeDocuments
+            );
 
-            v0.VerifyMethodBody("C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            v0.VerifyMethodBody(
+                "C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      266 (0x10a)
   .maxstack  3
@@ -7162,13 +7992,24 @@ class C
   IL_0103:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder.SetResult()""
   IL_0108:  nop
   IL_0109:  ret
-}");
+}"
+            );
 
             var diff1 = compilation1.EmitDifference(
-                    generation0,
-                    ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                generation0,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      266 (0x10a)
   .maxstack  3
@@ -7288,13 +8129,15 @@ class C
   IL_0108:  nop
   IL_0109:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void HoistedVariables_MultipleGenerations()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -7322,8 +8165,10 @@ class C
         <N:8>await Task.Delay(0)</N:8>;
         return 1;
     }
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -7351,8 +8196,10 @@ class C
         <N:8>await Task.Delay(0)</N:8>;
         return 1;
     }
-}");
-            var source2 = MarkedSource(@"
+}"
+            );
+            var source2 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -7380,8 +8227,10 @@ class C
         <N:8>await Task.Delay(0)</N:8>;
         return 1;
     }
-}");
-            var source3 = MarkedSource(@"
+}"
+            );
+            var source3 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -7409,11 +8258,15 @@ class C
         <N:8>await Task.Delay(0)</N:8>;
         return 1;
     }
-}");
+}"
+            );
 
             // Rude edit but the compiler should handle it.
 
-            var compilation0 = CreateCompilationWithMscorlib45(source0.Tree, options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
+            var compilation0 = CreateCompilationWithMscorlib45(
+                source0.Tree,
+                options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
             var compilation2 = compilation1.WithSource(source2.Tree);
             var compilation3 = compilation2.WithSource(source3.Tree);
@@ -7433,55 +8286,74 @@ class C
             var h2 = compilation2.GetMember<MethodSymbol>("C.H");
             var h3 = compilation3.GetMember<MethodSymbol>("C.H");
 
-            var v0 = CompileAndVerify(compilation0, symbolValidator: module =>
-            {
-                Assert.Equal(new[]
+            var v0 = CompileAndVerify(
+                compilation0,
+                symbolValidator: module =>
                 {
-                    "<>1__state: int",
-                    "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>",
-                    "<a1>5__1: bool",
-                    "<a2>5__2: int",
-                    "<>u__1: System.Runtime.CompilerServices.TaskAwaiter"
-                }, module.GetFieldNamesAndTypes("C.<F>d__0"));
-            });
+                    Assert.Equal(
+                        new[]
+                        {
+                            "<>1__state: int",
+                            "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>",
+                            "<a1>5__1: bool",
+                            "<a2>5__2: int",
+                            "<>u__1: System.Runtime.CompilerServices.TaskAwaiter",
+                        },
+                        module.GetFieldNamesAndTypes("C.<F>d__0")
+                    );
+                }
+            );
 
             var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
             var syntaxMap1 = GetSyntaxMapFromMarkers(source0, source1);
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
                     SemanticEdit.Create(SemanticEditKind.Update, f0, f1, syntaxMap1),
-                    SemanticEdit.Create(SemanticEditKind.Update, g0, g1, syntaxMap1)));
+                    SemanticEdit.Create(SemanticEditKind.Update, g0, g1, syntaxMap1)
+                )
+            );
 
             diff1.VerifySynthesizedMembers(
                 "C: {<F>d__0, <G>d__1}",
                 "C.<F>d__0: {<>1__state, <>t__builder, <a1>5__3, <a2>5__2, <>u__1, MoveNext, SetStateMachine}",
-                "C.<G>d__1: {<>1__state, <>t__builder, <c>5__1, <a1>5__2, <>u__1, MoveNext, SetStateMachine}");
+                "C.<G>d__1: {<>1__state, <>t__builder, <c>5__1, <a1>5__2, <>u__1, MoveNext, SetStateMachine}"
+            );
 
             var syntaxMap2 = GetSyntaxMapFromMarkers(source1, source2);
             var diff2 = compilation2.EmitDifference(
                 diff1.NextGeneration,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f1, f2, syntaxMap2)));
+                    SemanticEdit.Create(SemanticEditKind.Update, f1, f2, syntaxMap2)
+                )
+            );
 
             diff2.VerifySynthesizedMembers(
                 "C: {<F>d__0, <G>d__1}",
                 "C.<F>d__0: {<>1__state, <>t__builder, <a1>5__4, <a2>5__5, <>u__1, MoveNext, SetStateMachine, <a1>5__3, <a2>5__2}",
-                "C.<G>d__1: {<>1__state, <>t__builder, <c>5__1, <a1>5__2, <>u__1, MoveNext, SetStateMachine}");
+                "C.<G>d__1: {<>1__state, <>t__builder, <c>5__1, <a1>5__2, <>u__1, MoveNext, SetStateMachine}"
+            );
 
             var syntaxMap3 = GetSyntaxMapFromMarkers(source2, source3);
             var diff3 = compilation3.EmitDifference(
                 diff2.NextGeneration,
                 ImmutableArray.Create(
                     SemanticEdit.Create(SemanticEditKind.Update, g2, g3, syntaxMap3),
-                    SemanticEdit.Create(SemanticEditKind.Update, h2, h3, syntaxMap3)));
+                    SemanticEdit.Create(SemanticEditKind.Update, h2, h3, syntaxMap3)
+                )
+            );
 
             diff3.VerifySynthesizedMembers(
                 "C: {<G>d__1, <H>d__2, <F>d__0}",
                 "C.<F>d__0: {<>1__state, <>t__builder, <a1>5__4, <a2>5__5, <>u__1, MoveNext, SetStateMachine, <a1>5__3, <a2>5__2}",
                 "C.<G>d__1: {<>1__state, <>t__builder, <c>5__1, <a1>5__3, <>u__1, MoveNext, SetStateMachine, <a1>5__2}",
-                "C.<H>d__2: {<>1__state, <>t__builder, <c>5__1, <a1>5__3, <>u__1, MoveNext, SetStateMachine}");
+                "C.<H>d__2: {<>1__state, <>t__builder, <c>5__1, <a1>5__3, <>u__1, MoveNext, SetStateMachine}"
+            );
 
             // Verify delta metadata contains expected rows.
             var md1 = diff1.GetMetadata();
@@ -7489,7 +8361,8 @@ class C
             var md3 = diff3.GetMetadata();
 
             // 1 field def added & 4 methods updated (MoveNext and kickoff for F and G)
-            CheckEncLogDefinitions(md1.Reader,
+            CheckEncLogDefinitions(
+                md1.Reader,
                 Row(7, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(8, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(9, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
@@ -7503,9 +8376,12 @@ class C
                 Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
                 Row(2, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
                 Row(6, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default));
+                Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      192 (0xc0)
   .maxstack  3
@@ -7600,9 +8476,11 @@ class C
   IL_00b9:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)""
   IL_00be:  nop
   IL_00bf:  ret
-}");
+}"
+            );
             // 2 field defs added (both variables a1 and a2 of F changed their types) & 2 methods updated
-            CheckEncLogDefinitions(md2.Reader,
+            CheckEncLogDefinitions(
+                md2.Reader,
                 Row(11, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(12, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(3, TableIndex.TypeDef, EditAndContinueOperation.AddField),
@@ -7612,9 +8490,12 @@ class C
                 Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(6, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(1, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                Row(2, TableIndex.CustomAttribute, EditAndContinueOperation.Default));
+                Row(2, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+            );
 
-            diff2.VerifyIL("C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            diff2.VerifyIL(
+                "C.<F>d__0.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      192 (0xc0)
   .maxstack  3
@@ -7709,9 +8590,11 @@ class C
   IL_00b9:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)""
   IL_00be:  nop
   IL_00bf:  ret
-}");
+}"
+            );
             // 2 field defs added - variables of G and H changed their types; 4 methods updated: G, H kickoff and MoveNext
-            CheckEncLogDefinitions(md3.Reader,
+            CheckEncLogDefinitions(
+                md3.Reader,
                 Row(13, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(14, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(15, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
@@ -7727,13 +8610,15 @@ class C
                 Row(6, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
                 Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
                 Row(8, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                Row(9, TableIndex.CustomAttribute, EditAndContinueOperation.Default));
+                Row(9, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+            );
         }
 
         [Fact]
         public void HoistedVariables_Dynamic1()
         {
-            var template = @"
+            var template =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -7751,7 +8636,11 @@ class C
             var source1 = MarkedSource(template.Replace("<<VALUE>>", "1"));
             var source2 = MarkedSource(template.Replace("<<VALUE>>", "2"));
 
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, new[] { SystemCoreRef, CSharpRef }, options: ComSafeDebugDll);
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                new[] { SystemCoreRef, CSharpRef },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
             var compilation2 = compilation1.WithSource(source2.Tree);
 
@@ -7763,9 +8652,14 @@ class C
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
             var f2 = compilation2.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
-            var baselineIL0 = @"
+            var baselineIL0 =
+                @"
 {
   // Code size      147 (0x93)
   .maxstack  3
@@ -7830,9 +8724,17 @@ class C
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
-            var baselineIL = @"
+            var baselineIL =
+                @"
 {
   // Code size      149 (0x95)
   .maxstack  3
@@ -7898,28 +8800,48 @@ class C
             diff1.VerifySynthesizedMembers(
                 "C: {<>o__0#1, <F>d__0}",
                 "C.<>o__0#1: {<>p__0}",
-                "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <>4__this, <x>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}");
+                "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <>4__this, <x>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}"
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext()", baselineIL.Replace("<<VALUE>>", "1").Replace("<<DYNAMIC_CONTAINER_NAME>>", "<>o__0#1"));
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext()",
+                baselineIL
+                    .Replace("<<VALUE>>", "1")
+                    .Replace("<<DYNAMIC_CONTAINER_NAME>>", "<>o__0#1")
+            );
 
             var diff2 = compilation2.EmitDifference(
                 diff1.NextGeneration,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f1, f2, GetSyntaxMapFromMarkers(source1, source2))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f1,
+                        f2,
+                        GetSyntaxMapFromMarkers(source1, source2)
+                    )
+                )
+            );
 
             diff2.VerifySynthesizedMembers(
                 "C: {<>o__0#2, <F>d__0, <>o__0#1}",
                 "C.<>o__0#1: {<>p__0}",
                 "C.<>o__0#2: {<>p__0}",
-                "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <>4__this, <x>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}");
+                "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <>4__this, <x>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}"
+            );
 
-            diff2.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext()", baselineIL.Replace("<<VALUE>>", "2").Replace("<<DYNAMIC_CONTAINER_NAME>>", "<>o__0#2"));
+            diff2.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext()",
+                baselineIL
+                    .Replace("<<VALUE>>", "2")
+                    .Replace("<<DYNAMIC_CONTAINER_NAME>>", "<>o__0#2")
+            );
         }
 
         [Fact]
         public void HoistedVariables_Dynamic2()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -7932,8 +8854,10 @@ class C
         Console.WriteLine(0);
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -7946,8 +8870,10 @@ class C
         Console.WriteLine(1);
     }
 }
-");
-            var source2 = MarkedSource(@"
+"
+            );
+            var source2 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -7960,8 +8886,13 @@ class C
         Console.WriteLine(2);
     }
 }
-");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, new[] { SystemCoreRef, CSharpRef }, options: ComSafeDebugDll);
+"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                new[] { SystemCoreRef, CSharpRef },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
             var compilation2 = compilation0.WithSource(source2.Tree);
 
@@ -7973,34 +8904,55 @@ class C
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
             var f2 = compilation2.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
-                 generation0,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                generation0,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.VerifySynthesizedMembers(
                 "C: {<>o__0#1, <F>d__0}",
                 "C.<>o__0#1: {<>p__0, <>p__1}",
-                "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <d>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.String>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.String>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.String>.Current, System.Collections.IEnumerator.Current}");
+                "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <d>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.String>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.String>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.String>.Current, System.Collections.IEnumerator.Current}"
+            );
 
             var diff2 = compilation2.EmitDifference(
-                 diff1.NextGeneration,
-                 ImmutableArray.Create(
-                     SemanticEdit.Create(SemanticEditKind.Update, f1, f2, GetSyntaxMapFromMarkers(source1, source2))));
+                diff1.NextGeneration,
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f1,
+                        f2,
+                        GetSyntaxMapFromMarkers(source1, source2)
+                    )
+                )
+            );
 
             diff2.VerifySynthesizedMembers(
                 "C: {<>o__0#2, <F>d__0, <>o__0#1}",
                 "C.<>o__0#1: {<>p__0, <>p__1}",
                 "C.<>o__0#2: {<>p__0}",
-                "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <d>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.String>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.String>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.String>.Current, System.Collections.IEnumerator.Current}");
+                "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <d>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.String>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.String>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.String>.Current, System.Collections.IEnumerator.Current}"
+            );
         }
 
         [Fact]
         public void Awaiters1()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -8023,33 +8975,47 @@ class C
         return 1;
     }
 }";
-            var compilation0 = CreateCompilationWithMscorlib45(source0, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
+            var compilation0 = CreateCompilationWithMscorlib45(
+                source0,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
 
-            CompileAndVerify(compilation0, symbolValidator: module =>
-            {
-                Assert.Equal(new[]
+            CompileAndVerify(
+                compilation0,
+                symbolValidator: module =>
                 {
-                    "<>1__state: int",
-                    "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>",
-                    "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<bool>",
-                    "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<int>"
-                }, module.GetFieldNamesAndTypes("C.<F>d__3"));
+                    Assert.Equal(
+                        new[]
+                        {
+                            "<>1__state: int",
+                            "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>",
+                            "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<bool>",
+                            "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<int>",
+                        },
+                        module.GetFieldNamesAndTypes("C.<F>d__3")
+                    );
 
-                Assert.Equal(new[]
-                {
-                    "<>1__state: int",
-                    "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>",
-                    "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<int>",
-                    "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<bool>"
-                }, module.GetFieldNamesAndTypes("C.<G>d__4"));
-            });
+                    Assert.Equal(
+                        new[]
+                        {
+                            "<>1__state: int",
+                            "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>",
+                            "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<int>",
+                            "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<bool>",
+                        },
+                        module.GetFieldNamesAndTypes("C.<G>d__4")
+                    );
+                }
+            );
         }
 
         [Theory]
         [MemberData(nameof(ExternalPdbFormats))]
         public void Awaiters_MultipleGenerations(DebugInformationFormat format)
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -8076,8 +9042,10 @@ class C
         <N:3>await A1()</N:3>;
         return 1;
     }
-}");
-            var source1 = MarkedSource(@"
+}"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -8104,8 +9072,10 @@ class C
         <N:3>await A1()</N:3>;
         return 1;
     }
-}");
-            var source2 = MarkedSource(@"
+}"
+            );
+            var source2 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -8132,8 +9102,10 @@ class C
         <N:3>await A1()</N:3>;
         return 1;
     }
-}");
-            var source3 = MarkedSource(@"
+}"
+            );
+            var source3 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -8160,11 +9132,16 @@ class C
         <N:3>await A3()</N:3>;
         return 1;
     }
-}");
+}"
+            );
 
             // Rude edit but the compiler should handle it.
 
-            var compilation0 = CreateCompilationWithMscorlib45(source0.Tree, options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All), assemblyName: "A");
+            var compilation0 = CreateCompilationWithMscorlib45(
+                source0.Tree,
+                options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
+                assemblyName: "A"
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
             var compilation2 = compilation1.WithSource(source2.Tree);
             var compilation3 = compilation2.WithSource(source3.Tree);
@@ -8184,62 +9161,84 @@ class C
             var h2 = compilation2.GetMember<MethodSymbol>("C.H");
             var h3 = compilation3.GetMember<MethodSymbol>("C.H");
 
-            var v0 = CompileAndVerify(compilation0, emitOptions: EmitOptions.Default.WithDebugInformationFormat(format), symbolValidator: module =>
-            {
-                Assert.Equal(new[]
+            var v0 = CompileAndVerify(
+                compilation0,
+                emitOptions: EmitOptions.Default.WithDebugInformationFormat(format),
+                symbolValidator: module =>
                 {
-                    "<>1__state: int",
-                    "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>",
-                    "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<bool>",
-                    "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<int>"
-                }, module.GetFieldNamesAndTypes("C.<F>d__3"));
-            });
+                    Assert.Equal(
+                        new[]
+                        {
+                            "<>1__state: int",
+                            "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>",
+                            "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<bool>",
+                            "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<int>",
+                        },
+                        module.GetFieldNamesAndTypes("C.<F>d__3")
+                    );
+                }
+            );
 
             var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
             var syntaxMap1 = GetSyntaxMapFromMarkers(source0, source1);
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
                     SemanticEdit.Create(SemanticEditKind.Update, f0, f1, syntaxMap1),
-                    SemanticEdit.Create(SemanticEditKind.Update, g0, g1, syntaxMap1)));
+                    SemanticEdit.Create(SemanticEditKind.Update, g0, g1, syntaxMap1)
+                )
+            );
 
             diff1.VerifySynthesizedMembers(
                 "C: {<F>d__3, <G>d__4}",
                 "C.<F>d__3: {<>1__state, <>t__builder, <>u__3, <>u__2, MoveNext, SetStateMachine}",
-                "C.<G>d__4: {<>1__state, <>t__builder, <>u__1, MoveNext, SetStateMachine}");
+                "C.<G>d__4: {<>1__state, <>t__builder, <>u__1, MoveNext, SetStateMachine}"
+            );
 
             var syntaxMap2 = GetSyntaxMapFromMarkers(source1, source2);
             var diff2 = compilation2.EmitDifference(
                 diff1.NextGeneration,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f1, f2, syntaxMap2)));
+                    SemanticEdit.Create(SemanticEditKind.Update, f1, f2, syntaxMap2)
+                )
+            );
 
             diff2.VerifySynthesizedMembers(
                 "C: {<F>d__3, <G>d__4}",
                 "C.<F>d__3: {<>1__state, <>t__builder, <>u__4, <>u__3, MoveNext, SetStateMachine, <>u__2}",
-                "C.<G>d__4: {<>1__state, <>t__builder, <>u__1, MoveNext, SetStateMachine}");
+                "C.<G>d__4: {<>1__state, <>t__builder, <>u__1, MoveNext, SetStateMachine}"
+            );
 
             var syntaxMap3 = GetSyntaxMapFromMarkers(source2, source3);
             var diff3 = compilation3.EmitDifference(
                 diff2.NextGeneration,
                 ImmutableArray.Create(
                     SemanticEdit.Create(SemanticEditKind.Update, g2, g3, syntaxMap3),
-                    SemanticEdit.Create(SemanticEditKind.Update, h2, h3, syntaxMap3)));
+                    SemanticEdit.Create(SemanticEditKind.Update, h2, h3, syntaxMap3)
+                )
+            );
 
             diff3.VerifySynthesizedMembers(
                 "C: {<G>d__4, <H>d__5, <F>d__3}",
                 "C.<G>d__4: {<>1__state, <>t__builder, <>u__2, MoveNext, SetStateMachine, <>u__1}",
                 "C.<H>d__5: {<>1__state, <>t__builder, <>u__2, MoveNext, SetStateMachine}",
-                "C.<F>d__3: {<>1__state, <>t__builder, <>u__4, <>u__3, MoveNext, SetStateMachine, <>u__2}");
+                "C.<F>d__3: {<>1__state, <>t__builder, <>u__4, <>u__3, MoveNext, SetStateMachine, <>u__2}"
+            );
 
             // Verify delta metadata contains expected rows.
             var md1 = diff1.GetMetadata();
             var md2 = diff2.GetMetadata();
             var md3 = diff3.GetMetadata();
 
-            diff1.VerifyPdb(new[] { MetadataTokens.MethodDefinitionHandle(9) }, @"
+            diff1.VerifyPdb(
+                new[] { MetadataTokens.MethodDefinitionHandle(9) },
+                @"
     <symbols>
       <files>
         <file id=""1"" name="""" language=""C#"" />
@@ -8274,10 +9273,12 @@ class C
           </asyncInfo>
         </method>
       </methods>
-    </symbols>");
+    </symbols>"
+            );
 
             // 1 field def added & 4 methods updated (MoveNext and kickoff for F and G)
-            CheckEncLogDefinitions(md1.Reader,
+            CheckEncLogDefinitions(
+                md1.Reader,
                 Row(7, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(8, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(9, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
@@ -8291,10 +9292,13 @@ class C
                 Row(5, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
                 Row(6, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
                 Row(8, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                Row(9, TableIndex.CustomAttribute, EditAndContinueOperation.Default));
+                Row(9, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+            );
 
             // Note that the new awaiter is allocated slot <>u__3 since <>u__1 and <>u__2 are taken.
-            diff1.VerifyIL("C.<F>d__3.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            diff1.VerifyIL(
+                "C.<F>d__3.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      268 (0x10c)
   .maxstack  3
@@ -8419,9 +9423,11 @@ class C
   IL_0105:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)""
   IL_010a:  nop
   IL_010b:  ret
-}");
+}"
+            );
             // 1 field def added & 2 methods updated
-            CheckEncLogDefinitions(md2.Reader,
+            CheckEncLogDefinitions(
+                md2.Reader,
                 Row(11, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(12, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(3, TableIndex.TypeDef, EditAndContinueOperation.AddField),
@@ -8429,9 +9435,12 @@ class C
                 Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(9, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(5, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                Row(6, TableIndex.CustomAttribute, EditAndContinueOperation.Default));
+                Row(6, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+            );
 
-            diff2.VerifyPdb(new[] { MetadataTokens.MethodDefinitionHandle(9) }, @"
+            diff2.VerifyPdb(
+                new[] { MetadataTokens.MethodDefinitionHandle(9) },
+                @"
     <symbols>
       <files>
         <file id=""1"" name="""" language=""C#"" />
@@ -8466,10 +9475,13 @@ class C
           </asyncInfo>
         </method>
       </methods>
-    </symbols>");
+    </symbols>"
+            );
 
             // Note that the new awaiters are allocated slots <>u__4, <>u__5.
-            diff2.VerifyIL("C.<F>d__3.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext", @"
+            diff2.VerifyIL(
+                "C.<F>d__3.System.Runtime.CompilerServices.IAsyncStateMachine.MoveNext",
+                @"
 {
   // Code size      268 (0x10c)
   .maxstack  3
@@ -8594,9 +9606,11 @@ class C
   IL_0105:  call       ""void System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>.SetResult(int)""
   IL_010a:  nop
   IL_010b:  ret
-}");
+}"
+            );
             // 2 field defs added - G and H awaiters & 4 methods updated: G, H kickoff and MoveNext
-            CheckEncLogDefinitions(md3.Reader,
+            CheckEncLogDefinitions(
+                md3.Reader,
                 Row(13, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(14, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(15, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
@@ -8612,9 +9626,12 @@ class C
                 Row(8, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
                 Row(9, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
                 Row(11, TableIndex.CustomAttribute, EditAndContinueOperation.Default),
-                Row(12, TableIndex.CustomAttribute, EditAndContinueOperation.Default));
+                Row(12, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+            );
 
-            diff3.VerifyPdb(new[] { MetadataTokens.MethodDefinitionHandle(15) }, @"
+            diff3.VerifyPdb(
+                new[] { MetadataTokens.MethodDefinitionHandle(15) },
+                @"
     <symbols>
       <files>
         <file id=""1"" name="""" language=""C#"" />
@@ -8641,19 +9658,22 @@ class C
           </asyncInfo>
         </method>
       </methods>
-    </symbols>");
+    </symbols>"
+            );
         }
 
         [Fact]
         public void SynthesizedMembersMerging()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Collections.Generic;
 
 public class C
 {    
 }";
-            var source1 = @"
+            var source1 =
+                @"
 using System.Collections.Generic;
 
 public class C
@@ -8664,7 +9684,8 @@ public class C
         yield return 2;
     }
 }";
-            var source2 = @"
+            var source2 =
+                @"
 using System.Collections.Generic;
 
 public class C
@@ -8675,7 +9696,8 @@ public class C
         yield return 3;
     }
 }";
-            var source3 = @"
+            var source3 =
+                @"
 using System.Collections.Generic;
 
 public class C
@@ -8691,7 +9713,8 @@ public class C
         System.Console.WriteLine(1);    
     }
 }";
-            var source4 = @"
+            var source4 =
+                @"
 using System.Collections.Generic;
 
 public class C
@@ -8715,7 +9738,12 @@ public class C
 
             // Rude edit but the compiler should handle it.
 
-            var compilation0 = CreateCompilationWithMscorlib45(source0, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All), assemblyName: "A");
+            var compilation0 = CreateCompilationWithMscorlib45(
+                source0,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
+                assemblyName: "A"
+            );
             var compilation1 = compilation0.WithSource(source1);
             var compilation2 = compilation1.WithSource(source2);
             var compilation3 = compilation2.WithSource(source3);
@@ -8731,56 +9759,73 @@ public class C
             var v0 = CompileAndVerify(compilation0);
             var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
             var diff1 = compilation1.EmitDifference(
                 generation0,
-                ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Insert, null, f1)));
+                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Insert, null, f1))
+            );
 
             diff1.VerifySynthesizedMembers(
                 "C: {<F>d__0#1}",
-                "C.<F>d__0#1: {<>1__state, <>2__current, <>l__initialThreadId, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}");
+                "C.<F>d__0#1: {<>1__state, <>2__current, <>l__initialThreadId, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}"
+            );
 
             var diff2 = compilation2.EmitDifference(
                 diff1.NextGeneration,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f1, f2, GetSyntaxMapByKind(f1, SyntaxKind.Block))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f1,
+                        f2,
+                        GetSyntaxMapByKind(f1, SyntaxKind.Block)
+                    )
+                )
+            );
 
             diff2.VerifySynthesizedMembers(
                 "C: {<F>d__0#1}",
-                "C.<F>d__0#1: {<>1__state, <>2__current, <>l__initialThreadId, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}");
+                "C.<F>d__0#1: {<>1__state, <>2__current, <>l__initialThreadId, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}"
+            );
 
             var diff3 = compilation3.EmitDifference(
                 diff2.NextGeneration,
-                ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Insert, null, g3)));
+                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Insert, null, g3))
+            );
 
             diff3.VerifySynthesizedMembers(
                 "C: {<F>d__0#1}",
-                "C.<F>d__0#1: {<>1__state, <>2__current, <>l__initialThreadId, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}");
+                "C.<F>d__0#1: {<>1__state, <>2__current, <>l__initialThreadId, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}"
+            );
 
             var diff4 = compilation4.EmitDifference(
                 diff3.NextGeneration,
-                ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Insert, null, h4)));
+                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Insert, null, h4))
+            );
 
             diff4.VerifySynthesizedMembers(
                 "C: {<H>d__2#4, <F>d__0#1}",
                 "C.<F>d__0#1: {<>1__state, <>2__current, <>l__initialThreadId, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}",
-                "C.<H>d__2#4: {<>1__state, <>2__current, <>l__initialThreadId, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}");
+                "C.<H>d__2#4: {<>1__state, <>2__current, <>l__initialThreadId, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}"
+            );
         }
 
         [Fact]
         public void UniqueSynthesizedNames()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Collections.Generic;
 
 public class C
 {    
     public static IEnumerable<int> F()  { yield return 1; }
 }";
-            var source1 = @"
+            var source1 =
+                @"
 using System.Collections.Generic;
 
 public class C
@@ -8788,7 +9833,8 @@ public class C
     public static IEnumerable<int> F(int a)  { yield return 2; }
     public static IEnumerable<int> F()  { yield return 1; }
 }";
-            var source2 = @"
+            var source2 =
+                @"
 using System.Collections.Generic;
 
 public class C
@@ -8798,7 +9844,12 @@ public class C
     public static IEnumerable<int> F()  { yield return 1; }
 }";
 
-            var compilation0 = CreateCompilationWithMscorlib45(source0, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(), options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All), assemblyName: "A");
+            var compilation0 = CreateCompilationWithMscorlib45(
+                source0,
+                parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
+                options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
+                assemblyName: "A"
+            );
             var compilation1 = compilation0.WithSource(source1);
             var compilation2 = compilation1.WithSource(source2);
 
@@ -8808,16 +9859,20 @@ public class C
             var v0 = CompileAndVerify(compilation0);
             var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
             var diff1 = compilation1.EmitDifference(
                 generation0,
-                ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Insert, null, f_int1)));
+                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Insert, null, f_int1))
+            );
 
             var diff2 = compilation2.EmitDifference(
                 diff1.NextGeneration,
-                ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Insert, null, f_byte2)));
+                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Insert, null, f_byte2))
+            );
 
             var reader0 = md0.MetadataReader;
             var reader1 = diff1.GetMetadata().Reader;
@@ -8832,7 +9887,7 @@ public class C
         public void UpdateAsyncLambda()
         {
             var source0 = MarkedSource(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 class C
 {
@@ -8848,9 +9903,10 @@ class C
     static Task<bool> A1() => null;
     static Task<int> A2() => null;
     static Task<double> A3() => null;
-}");
+}"
+            );
             var source1 = MarkedSource(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 class C
 {
@@ -8868,9 +9924,10 @@ class C
     static Task<bool> A1() => null;
     static Task<int> A2() => null;
     static Task<double> A3() => null;
-}");
+}"
+            );
             var source2 = MarkedSource(
- @"using System;
+                @"using System;
 using System.Threading.Tasks;
 class C
 {
@@ -8888,27 +9945,41 @@ class C
     static Task<bool> A1() => null;
     static Task<int> A2() => null;
     static Task<double> A3() => null;
-}");
+}"
+            );
 
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
             var compilation2 = compilation1.WithSource(source2.Tree);
 
-            var v0 = CompileAndVerify(compilation0, symbolValidator: module =>
-            {
-                Assert.Equal(new[]
+            var v0 = CompileAndVerify(
+                compilation0,
+                symbolValidator: module =>
                 {
-                    "<>1__state: int",
-                    "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder",
-                    "<>4__this: C.<>c",
-                    "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<bool>",
-                    "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<int>"
-                }, module.GetFieldNamesAndTypes("C.<>c.<<F>b__0_0>d"));
-            });
+                    Assert.Equal(
+                        new[]
+                        {
+                            "<>1__state: int",
+                            "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder",
+                            "<>4__this: C.<>c",
+                            "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<bool>",
+                            "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<int>",
+                        },
+                        module.GetFieldNamesAndTypes("C.<>c.<<F>b__0_0>d")
+                    );
+                }
+            );
 
             var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
@@ -8916,33 +9987,54 @@ class C
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
-                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             // note that the types of the awaiter fields <>u__1, <>u__2 are the same as in the previous generation:
-            diff1.VerifySynthesizedFields("C.<>c.<<F>b__0_0>d",
+            diff1.VerifySynthesizedFields(
+                "C.<>c.<<F>b__0_0>d",
                 "<>1__state: int",
                 "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder",
                 "<>4__this: C.<>c",
                 "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<bool>",
-                "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<int>");
+                "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<int>"
+            );
 
             var diff2 = compilation2.EmitDifference(
                 diff1.NextGeneration,
-                ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, f1, f2, GetSyntaxMapFromMarkers(source1, source2))));
+                ImmutableArray.Create(
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f1,
+                        f2,
+                        GetSyntaxMapFromMarkers(source1, source2)
+                    )
+                )
+            );
 
             // note that the types of the awaiter fields <>u__1, <>u__2 are the same as in the previous generation:
-            diff2.VerifySynthesizedFields("C.<>c.<<F>b__0_0>d",
+            diff2.VerifySynthesizedFields(
+                "C.<>c.<<F>b__0_0>d",
                 "<>1__state: int",
                 "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder",
                 "<>4__this: C.<>c",
                 "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<bool>",
-                "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<int>");
+                "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<int>"
+            );
         }
 
         [Fact, WorkItem(63294, "https://github.com/dotnet/roslyn/issues/63294")]
         public void LiftedClosure()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 static class C
 {
@@ -8955,9 +10047,11 @@ static class C
                         
         <N:3>int F() => num;</N:3>
     }</N:0>
-}");
+}"
+            );
 
-            var source1 = MarkedSource(@"
+            var source1 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 static class C
 {
@@ -8970,8 +10064,12 @@ static class C
                         
         <N:3>int F() => num;</N:3>
     }</N:0>
-}");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, options: ComSafeDebugDll);
+}"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             var m0 = compilation0.GetMember<MethodSymbol>("C.M");
@@ -8980,13 +10078,18 @@ static class C
             var v0 = CompileAndVerify(compilation0);
             using var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
             var reader0 = md0.MetadataReader;
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             // Notice encLocalSlotMap CDI on both M and MoveNext methods.
             // The former is used to calculate mapping for variables lifted to fields of the state machine,
             // the latter is used to map local variable slots in the MoveNext method.
             // Here, the variable lifted to the state machine field is the closure pointer storage.
-            v0.VerifyPdb(@"
+            v0.VerifyPdb(
+                @"
 <symbols>
   <methods>
     <method containingType=""C"" name=""M"">
@@ -9032,27 +10135,56 @@ static class C
     </method>
   </methods>
 </symbols>
-", options: PdbValidationOptions.ExcludeDocuments | PdbValidationOptions.ExcludeSequencePoints | PdbValidationOptions.ExcludeNamespaces | PdbValidationOptions.ExcludeScopes);
+",
+                options: PdbValidationOptions.ExcludeDocuments
+                    | PdbValidationOptions.ExcludeSequencePoints
+                    | PdbValidationOptions.ExcludeNamespaces
+                    | PdbValidationOptions.ExcludeScopes
+            );
 
-            CheckNames(reader0, reader0.GetTypeDefNames(), "<Module>", "C", "<>c__DisplayClass0_0", "<M>d__0");
-            CheckNames(reader0, reader0.GetFieldDefNames(), "num", "<>1__state", "<>t__builder", "<>8__1", "<>u__1");
+            CheckNames(
+                reader0,
+                reader0.GetTypeDefNames(),
+                "<Module>",
+                "C",
+                "<>c__DisplayClass0_0",
+                "<M>d__0"
+            );
+            CheckNames(
+                reader0,
+                reader0.GetFieldDefNames(),
+                "num",
+                "<>1__state",
+                "<>t__builder",
+                "<>8__1",
+                "<>u__1"
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, m0, m1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        m0,
+                        m1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             // Notice that we reused field "<>8__1" (there is no "<>8__2"), which stores the local function closure pointer.
             diff1.VerifySynthesizedMembers(
                 "C: {<M>g__F|0_0, <>c__DisplayClass0_0, <M>d__0}",
                 "C.<M>d__0: {<>1__state, <>t__builder, <>8__1, <>u__1, MoveNext, SetStateMachine}",
-                "C.<>c__DisplayClass0_0: {num}");
+                "C.<>c__DisplayClass0_0: {num}"
+            );
         }
 
         [Fact, WorkItem(1170899, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1170899")]
         public void HoistedAnonymousTypes1()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -9065,8 +10197,10 @@ class C
         Console.WriteLine(x.A + 1);
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -9079,8 +10213,10 @@ class C
         Console.WriteLine(x.A + 2);
     }
 }
-");
-            var source2 = MarkedSource(@"
+"
+            );
+            var source2 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -9093,8 +10229,12 @@ class C
         Console.WriteLine(x.A + 3);
     }
 }
-");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, options: ComSafeDebugDll);
+"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
             var compilation2 = compilation1.WithSource(source2.Tree);
 
@@ -9107,9 +10247,14 @@ class C
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
             var f2 = compilation2.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
-            var baselineIL = @"
+            var baselineIL =
+                @"
 {
   // Code size       88 (0x58)
   .maxstack  2
@@ -9157,12 +10302,22 @@ class C
   IL_0056:  ldc.i4.0
   IL_0057:  ret
 }";
-            v0.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext()", baselineIL.Replace("<<VALUE>>", "1"));
+            v0.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext()",
+                baselineIL.Replace("<<VALUE>>", "1")
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             using var md1 = diff1.GetMetadata();
             var reader1 = md1.Reader;
@@ -9174,14 +10329,25 @@ class C
             diff1.VerifySynthesizedMembers(
                 "C: {<F>d__0}",
                 "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <>4__this, <x>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}",
-                "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}");
+                "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}"
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext()", baselineIL.Replace("<<VALUE>>", "2"));
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext()",
+                baselineIL.Replace("<<VALUE>>", "2")
+            );
 
             var diff2 = compilation2.EmitDifference(
                 diff1.NextGeneration,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f1, f2, GetSyntaxMapFromMarkers(source1, source2))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f1,
+                        f2,
+                        GetSyntaxMapFromMarkers(source1, source2)
+                    )
+                )
+            );
 
             using var md2 = diff2.GetMetadata();
             var reader2 = md2.Reader;
@@ -9191,17 +10357,22 @@ class C
             CheckNames(readers, diff2.EmitResult.ChangedTypes, "C", "<F>d__0");
 
             diff2.VerifySynthesizedMembers(
-                 "C: {<F>d__0}",
-                 "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <>4__this, <x>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}",
-                 "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}");
+                "C: {<F>d__0}",
+                "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <>4__this, <x>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}",
+                "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}"
+            );
 
-            diff2.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext()", baselineIL.Replace("<<VALUE>>", "3"));
+            diff2.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext()",
+                baselineIL.Replace("<<VALUE>>", "3")
+            );
         }
 
         [Fact, WorkItem(3192, "https://github.com/dotnet/roslyn/issues/3192")]
         public void HoistedAnonymousTypes_Nested()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -9214,8 +10385,10 @@ class C
         Console.WriteLine(x[0].A.B + 1);
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -9228,8 +10401,10 @@ class C
         Console.WriteLine(x[0].A.B + 2);
     }
 }
-");
-            var source2 = MarkedSource(@"
+"
+            );
+            var source2 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -9242,8 +10417,12 @@ class C
         Console.WriteLine(x[0].A.B + 3);
     }
 }
-");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, options: ComSafeDebugDll);
+"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
             var compilation2 = compilation1.WithSource(source2.Tree);
 
@@ -9255,9 +10434,14 @@ class C
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
             var f2 = compilation2.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
-            var baselineIL = @"
+            var baselineIL =
+                @"
 {
   // Code size      109 (0x6d)
   .maxstack  5
@@ -9314,39 +10498,65 @@ class C
   IL_006b:  ldc.i4.0
   IL_006c:  ret
 }";
-            v0.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext()", baselineIL.Replace("<<VALUE>>", "1"));
+            v0.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext()",
+                baselineIL.Replace("<<VALUE>>", "1")
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.VerifySynthesizedMembers(
                 "C: {<F>d__0}",
                 "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <>4__this, <x>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}",
                 "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}",
-                "<>f__AnonymousType1<<B>j__TPar>: {Equals, GetHashCode, ToString}");
+                "<>f__AnonymousType1<<B>j__TPar>: {Equals, GetHashCode, ToString}"
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext()", baselineIL.Replace("<<VALUE>>", "2"));
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext()",
+                baselineIL.Replace("<<VALUE>>", "2")
+            );
 
             var diff2 = compilation2.EmitDifference(
                 diff1.NextGeneration,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f1, f2, GetSyntaxMapFromMarkers(source1, source2))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f1,
+                        f2,
+                        GetSyntaxMapFromMarkers(source1, source2)
+                    )
+                )
+            );
 
             diff2.VerifySynthesizedMembers(
                 "C: {<F>d__0}",
                 "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <>4__this, <x>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}",
                 "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}",
-                "<>f__AnonymousType1<<B>j__TPar>: {Equals, GetHashCode, ToString}");
+                "<>f__AnonymousType1<<B>j__TPar>: {Equals, GetHashCode, ToString}"
+            );
 
-            diff2.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext()", baselineIL.Replace("<<VALUE>>", "3"));
+            diff2.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext()",
+                baselineIL.Replace("<<VALUE>>", "3")
+            );
         }
 
         [Fact, WorkItem(3192, "https://github.com/dotnet/roslyn/issues/3192")]
         public void HoistedGenericTypes()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -9364,8 +10574,10 @@ class C
         Console.WriteLine(x.a + x.b + 1);
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -9383,8 +10595,10 @@ class C
         Console.WriteLine(x.a + x.b + 2);
     }
 }
-");
-            var source2 = MarkedSource(@"
+"
+            );
+            var source2 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -9402,8 +10616,12 @@ class C
         Console.WriteLine(x.a + x.b + 3);
     }
 }
-");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, options: ComSafeDebugDll);
+"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
             var compilation2 = compilation1.WithSource(source2.Tree);
 
@@ -9415,9 +10633,14 @@ class C
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
             var f2 = compilation2.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
-            var baselineIL = @"
+            var baselineIL =
+                @"
 {
   // Code size      108 (0x6c)
   .maxstack  2
@@ -9469,35 +10692,61 @@ class C
   IL_006a:  ldc.i4.0
   IL_006b:  ret
 }";
-            v0.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext()", baselineIL.Replace("<<VALUE>>", "1"));
+            v0.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext()",
+                baselineIL.Replace("<<VALUE>>", "1")
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.VerifySynthesizedMembers(
                 "C: {<F>d__0}",
-                "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <>4__this, <x>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}");
+                "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <>4__this, <x>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}"
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext()", baselineIL.Replace("<<VALUE>>", "2"));
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext()",
+                baselineIL.Replace("<<VALUE>>", "2")
+            );
 
             var diff2 = compilation2.EmitDifference(
                 diff1.NextGeneration,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f1, f2, GetSyntaxMapFromMarkers(source1, source2))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f1,
+                        f2,
+                        GetSyntaxMapFromMarkers(source1, source2)
+                    )
+                )
+            );
 
             diff2.VerifySynthesizedMembers(
                 "C: {<F>d__0}",
-                "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <>4__this, <x>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}");
+                "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <>4__this, <x>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}"
+            );
 
-            diff2.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext()", baselineIL.Replace("<<VALUE>>", "3"));
+            diff2.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext()",
+                baselineIL.Replace("<<VALUE>>", "3")
+            );
         }
 
         [Fact]
         public void HoistedAnonymousTypes_Dynamic()
         {
-            var template = @"
+            var template =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -9515,7 +10764,10 @@ class C
             var source1 = MarkedSource(template.Replace("<<VALUE>>", "1"));
             var source2 = MarkedSource(template.Replace("<<VALUE>>", "2"));
 
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, options: ComSafeDebugDll);
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
             var compilation2 = compilation1.WithSource(source2.Tree);
 
@@ -9527,9 +10779,14 @@ class C
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
             var f2 = compilation2.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
-            var baselineIL0 = @"
+            var baselineIL0 =
+                @"
 {
   // Code size       87 (0x57)
   .maxstack  3
@@ -9581,9 +10838,17 @@ class C
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
-            var baselineIL = @"
+            var baselineIL =
+                @"
 {
   // Code size       89 (0x59)
   .maxstack  3
@@ -9636,27 +10901,43 @@ class C
             diff1.VerifySynthesizedMembers(
                 "C: {<F>d__0}",
                 "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <>4__this, <x>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}",
-                "<>f__AnonymousType0<<A>j__TPar, <B>j__TPar>: {Equals, GetHashCode, ToString}");
+                "<>f__AnonymousType0<<A>j__TPar, <B>j__TPar>: {Equals, GetHashCode, ToString}"
+            );
 
-            diff1.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext()", baselineIL.Replace("<<VALUE>>", "1"));
+            diff1.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext()",
+                baselineIL.Replace("<<VALUE>>", "1")
+            );
 
             var diff2 = compilation2.EmitDifference(
                 diff1.NextGeneration,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f1, f2, GetSyntaxMapFromMarkers(source1, source2))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f1,
+                        f2,
+                        GetSyntaxMapFromMarkers(source1, source2)
+                    )
+                )
+            );
 
             diff2.VerifySynthesizedMembers(
                 "C: {<F>d__0}",
                 "C.<F>d__0: {<>1__state, <>2__current, <>l__initialThreadId, <>4__this, <x>5__1, System.IDisposable.Dispose, MoveNext, System.Collections.Generic.IEnumerator<System.Int32>.get_Current, System.Collections.IEnumerator.Reset, System.Collections.IEnumerator.get_Current, System.Collections.Generic.IEnumerable<System.Int32>.GetEnumerator, System.Collections.IEnumerable.GetEnumerator, System.Collections.Generic.IEnumerator<System.Int32>.Current, System.Collections.IEnumerator.Current}",
-                "<>f__AnonymousType0<<A>j__TPar, <B>j__TPar>: {Equals, GetHashCode, ToString}");
+                "<>f__AnonymousType0<<A>j__TPar, <B>j__TPar>: {Equals, GetHashCode, ToString}"
+            );
 
-            diff2.VerifyIL("C.<F>d__0.System.Collections.IEnumerator.MoveNext()", baselineIL.Replace("<<VALUE>>", "2"));
+            diff2.VerifyIL(
+                "C.<F>d__0.System.Collections.IEnumerator.MoveNext()",
+                baselineIL.Replace("<<VALUE>>", "2")
+            );
         }
 
         [Fact, WorkItem(3192, "https://github.com/dotnet/roslyn/issues/3192")]
         public void HoistedAnonymousTypes_Delete()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9668,8 +10949,10 @@ class C
         return <N:2>await Task.FromResult(1)</N:2>;
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9682,13 +10965,18 @@ class C
         return <N:2>await Task.FromResult(1)</N:2>;
     }
 }
-");
+"
+            );
             var source2 = source0;
             var source3 = source1;
             var source4 = source0;
             var source5 = source1;
 
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, new[] { SystemCoreRef }, options: ComSafeDebugDll);
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                new[] { SystemCoreRef },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
             var compilation2 = compilation0.WithSource(source2.Tree);
             var compilation3 = compilation0.WithSource(source3.Tree);
@@ -9705,25 +10993,44 @@ class C
             var f4 = compilation4.GetMember<MethodSymbol>("C.F");
             var f5 = compilation5.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
-            // y is added 
+            // y is added
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.VerifySynthesizedMembers(
                 "C: {<>c, <F>d__0}",
                 "C.<>c: {<>9__0_0, <F>b__0_0}",
                 "C.<F>d__0: {<>1__state, <>t__builder, <x>5__1, <y>5__3, <>s__2, <>u__1, MoveNext, SetStateMachine}",
-                "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}");
+                "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}"
+            );
 
             // y is removed
             var diff2 = compilation2.EmitDifference(
                 diff1.NextGeneration,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f1, f2, GetSyntaxMapFromMarkers(source1, source2))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f1,
+                        f2,
+                        GetSyntaxMapFromMarkers(source1, source2)
+                    )
+                )
+            );
 
             // Synthesized members collection still includes y field since members are only added to it and never deleted.
             // The corresponding CLR field is also present.
@@ -9731,49 +11038,75 @@ class C
                 "C: {<>c, <F>d__0}",
                 "C.<>c: {<>9__0_0, <F>b__0_0}",
                 "C.<F>d__0: {<>1__state, <>t__builder, <x>5__1, <>s__2, <>u__1, MoveNext, SetStateMachine, <y>5__3}",
-                "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}");
+                "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}"
+            );
 
             // y is added and a new slot index is allocated for it
             var diff3 = compilation3.EmitDifference(
                 diff2.NextGeneration,
                 ImmutableArray.Create(
-                   SemanticEdit.Create(SemanticEditKind.Update, f2, f3, GetSyntaxMapFromMarkers(source2, source3))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f2,
+                        f3,
+                        GetSyntaxMapFromMarkers(source2, source3)
+                    )
+                )
+            );
 
             diff3.VerifySynthesizedMembers(
                 "C: {<>c, <F>d__0}",
                 "C.<>c: {<>9__0_0, <F>b__0_0}",
                 "C.<F>d__0: {<>1__state, <>t__builder, <x>5__1, <y>5__4, <>s__2, <>u__1, MoveNext, SetStateMachine, <y>5__3}",
-                "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}");
+                "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}"
+            );
 
             // y is removed
             var diff4 = compilation4.EmitDifference(
                 diff3.NextGeneration,
                 ImmutableArray.Create(
-                   SemanticEdit.Create(SemanticEditKind.Update, f3, f4, GetSyntaxMapFromMarkers(source3, source4))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f3,
+                        f4,
+                        GetSyntaxMapFromMarkers(source3, source4)
+                    )
+                )
+            );
 
             diff4.VerifySynthesizedMembers(
                 "C: {<>c, <F>d__0}",
                 "C.<>c: {<>9__0_0, <F>b__0_0}",
                 "C.<F>d__0: {<>1__state, <>t__builder, <x>5__1, <>s__2, <>u__1, MoveNext, SetStateMachine, <y>5__4, <y>5__3}",
-                "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}");
+                "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}"
+            );
 
             // y is added
             var diff5 = compilation5.EmitDifference(
                 diff4.NextGeneration,
                 ImmutableArray.Create(
-                   SemanticEdit.Create(SemanticEditKind.Update, f4, f5, GetSyntaxMapFromMarkers(source4, source5))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f4,
+                        f5,
+                        GetSyntaxMapFromMarkers(source4, source5)
+                    )
+                )
+            );
 
             diff5.VerifySynthesizedMembers(
                 "C: {<>c, <F>d__0}",
                 "C.<>c: {<>9__0_0, <F>b__0_0}",
                 "C.<F>d__0: {<>1__state, <>t__builder, <x>5__1, <y>5__5, <>s__2, <>u__1, MoveNext, SetStateMachine, <y>5__4, <y>5__3}",
-                "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}");
+                "<>f__AnonymousType0<<A>j__TPar>: {Equals, GetHashCode, ToString}"
+            );
         }
 
         [Fact]
         public void HoistedAnonymousTypes_Dynamic2()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9822,8 +11155,10 @@ class Program
         System.Diagnostics.Debugger.Break();
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9873,8 +11208,10 @@ class Program
         System.Diagnostics.Debugger.Break();
     }
 }
-");
-            var source2 = MarkedSource(@"
+"
+            );
+            var source2 = MarkedSource(
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9924,8 +11261,13 @@ class Program
         System.Diagnostics.Debugger.Break();
     }
 }
-");
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, new[] { SystemCoreRef, CSharpRef }, options: ComSafeDebugDll);
+"
+            );
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                new[] { SystemCoreRef, CSharpRef },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
             var compilation2 = compilation1.WithSource(source2.Tree);
 
@@ -9937,9 +11279,15 @@ class Program
             var f1 = compilation1.GetMember<MethodSymbol>("Program.Iterator");
             var f2 = compilation2.GetMember<MethodSymbol>("Program.Iterator");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
-            v0.VerifyIL("Program.<Iterator>d__1.System.Collections.IEnumerator.MoveNext()", @"
+            v0.VerifyIL(
+                "Program.<Iterator>d__1.System.Collections.IEnumerator.MoveNext()",
+                @"
 {
   // Code size      798 (0x31e)
   .maxstack  5
@@ -10208,12 +11556,20 @@ class Program
   IL_031b:  nop
   IL_031c:  ldc.i4.0
   IL_031d:  ret
-}");
+}"
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.VerifySynthesizedMembers(
                 "Program.<>o__1#1: {<>p__0, <>p__1}",
@@ -10225,9 +11581,12 @@ class Program
                 "<>f__AnonymousType5<<<>h__TransparentIdentifier0>j__TPar, <length>j__TPar>: {Equals, GetHashCode, ToString}",
                 "<>f__AnonymousType2<<<>h__TransparentIdentifier0>j__TPar, <y>j__TPar>: {Equals, GetHashCode, ToString}",
                 "<>f__AnonymousType0<<Head>j__TPar, <Tail>j__TPar>: {Equals, GetHashCode, ToString}",
-                "<>f__AnonymousType1<<a>j__TPar, <x>j__TPar>: {Equals, GetHashCode, ToString}");
+                "<>f__AnonymousType1<<a>j__TPar, <x>j__TPar>: {Equals, GetHashCode, ToString}"
+            );
 
-            diff1.VerifyIL("Program.<Iterator>d__1.System.Collections.IEnumerator.MoveNext()", @"
+            diff1.VerifyIL(
+                "Program.<Iterator>d__1.System.Collections.IEnumerator.MoveNext()",
+                @"
 {
   // Code size      885 (0x375)
   .maxstack  5
@@ -10518,12 +11877,20 @@ class Program
   IL_0372:  nop
   IL_0373:  ldc.i4.0
   IL_0374:  ret
-}");
+}"
+            );
 
             var diff2 = compilation2.EmitDifference(
                 diff1.NextGeneration,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f1, f2, GetSyntaxMapFromMarkers(source1, source2))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f1,
+                        f2,
+                        GetSyntaxMapFromMarkers(source1, source2)
+                    )
+                )
+            );
 
             diff2.VerifySynthesizedMembers(
                 "Program.<>o__1#1: {<>p__0, <>p__1}",
@@ -10536,13 +11903,15 @@ class Program
                 "<>f__AnonymousType3<<Value>j__TPar, <Length>j__TPar>: {Equals, GetHashCode, ToString}",
                 "<>f__AnonymousType0<<Head>j__TPar, <Tail>j__TPar>: {Equals, GetHashCode, ToString}",
                 "<>f__AnonymousType5<<<>h__TransparentIdentifier0>j__TPar, <length>j__TPar>: {Equals, GetHashCode, ToString}",
-                "<>f__AnonymousType2<<<>h__TransparentIdentifier0>j__TPar, <y>j__TPar>: {Equals, GetHashCode, ToString}");
+                "<>f__AnonymousType2<<<>h__TransparentIdentifier0>j__TPar, <y>j__TPar>: {Equals, GetHashCode, ToString}"
+            );
         }
 
         [Fact, WorkItem(9119, "https://github.com/dotnet/roslyn/issues/9119")]
         public void MissingIteratorStateMachineAttribute()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -10555,8 +11924,10 @@ class C
         Console.WriteLine(a);
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -10569,13 +11940,21 @@ class C
         Console.WriteLine(a);
     }
 }
-");
+"
+            );
 
-            var compilation0 = CreateCompilationWithMscorlib40(new[] { source0.Tree }, options: ComSafeDebugDll);
+            var compilation0 = CreateCompilationWithMscorlib40(
+                new[] { source0.Tree },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             // older versions of mscorlib don't contain IteratorStateMachineAttribute
-            Assert.Null(compilation0.GetWellKnownTypeMember(WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor));
+            Assert.Null(
+                compilation0.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor
+                )
+            );
 
             var v0 = CompileAndVerify(compilation0);
             v0.VerifyDiagnostics();
@@ -10584,22 +11963,40 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.EmitResult.Diagnostics.Verify(
                 // (7,29): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.IteratorStateMachineAttribute' is missing.
-                Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F").WithArguments("C.F()", "System.Runtime.CompilerServices.IteratorStateMachineAttribute").WithLocation(7, 29));
+                Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F")
+                    .WithArguments(
+                        "C.F()",
+                        "System.Runtime.CompilerServices.IteratorStateMachineAttribute"
+                    )
+                    .WithLocation(7, 29)
+            );
         }
 
         [Fact, WorkItem(9119, "https://github.com/dotnet/roslyn/issues/9119")]
         public void BadIteratorStateMachineAttribute()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -10617,8 +12014,10 @@ class C
         Console.WriteLine(a);
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -10636,13 +12035,18 @@ class C
         Console.WriteLine(a);
     }
 }
-");
+"
+            );
 
             var compilation0 = CreateCompilation(new[] { source0.Tree }, options: ComSafeDebugDll);
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             // the ctor is missing a parameter
-            Assert.Null(compilation0.GetWellKnownTypeMember(WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor));
+            Assert.Null(
+                compilation0.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor
+                )
+            );
 
             var v0 = CompileAndVerify(compilation0);
             v0.VerifyDiagnostics();
@@ -10651,23 +12055,41 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.EmitResult.Diagnostics.Verify(
                 // (12,29): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.IteratorStateMachineAttribute' is missing.
                 //     public IEnumerable<int> F()
-                Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F").WithArguments("C.F()", "System.Runtime.CompilerServices.IteratorStateMachineAttribute").WithLocation(12, 29));
+                Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F")
+                    .WithArguments(
+                        "C.F()",
+                        "System.Runtime.CompilerServices.IteratorStateMachineAttribute"
+                    )
+                    .WithLocation(12, 29)
+            );
         }
 
         [Fact]
         public void AddedIteratorStateMachineAttribute()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -10681,8 +12103,10 @@ class C
         Console.WriteLine(a);
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -10700,13 +12124,21 @@ class C
         Console.WriteLine(a);
     }
 }
-");
+"
+            );
 
-            var compilation0 = CreateCompilationWithMscorlib40(new[] { source0.Tree }, options: ComSafeDebugDll);
+            var compilation0 = CreateCompilationWithMscorlib40(
+                new[] { source0.Tree },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             // older versions of mscorlib don't contain IteratorStateMachineAttribute
-            Assert.Null(compilation0.GetWellKnownTypeMember(WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor));
+            Assert.Null(
+                compilation0.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor
+                )
+            );
 
             var v0 = CompileAndVerify(compilation0);
             v0.VerifyDiagnostics();
@@ -10714,15 +12146,28 @@ class C
 
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
-            var ism1 = compilation1.GetMember<TypeSymbol>("System.Runtime.CompilerServices.IteratorStateMachineAttribute");
+            var ism1 = compilation1.GetMember<TypeSymbol>(
+                "System.Runtime.CompilerServices.IteratorStateMachineAttribute"
+            );
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
                     SemanticEdit.Create(SemanticEditKind.Insert, null, ism1),
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             // We conclude the original method wasn't a state machine.
             // The IDE however reports a Rude Edit in that case.
@@ -10732,7 +12177,8 @@ class C
         [Fact]
         public void SourceIteratorStateMachineAttribute()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -10750,8 +12196,10 @@ class C
         Console.WriteLine(a);
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -10769,13 +12217,18 @@ class C
         Console.WriteLine(a);
     }
 }
-");
+"
+            );
 
             var compilation0 = CreateCompilation(new[] { source0.Tree }, options: ComSafeDebugDll);
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             // older versions of mscorlib don't contain IteratorStateMachineAttribute
-            Assert.NotNull(compilation0.GetWellKnownTypeMember(WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor));
+            Assert.NotNull(
+                compilation0.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor
+                )
+            );
 
             var v0 = CompileAndVerify(compilation0);
             v0.VerifyDiagnostics();
@@ -10784,12 +12237,23 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.EmitResult.Diagnostics.Verify();
         }
@@ -10797,7 +12261,8 @@ class C
         [Fact, WorkItem(9119, "https://github.com/dotnet/roslyn/issues/9119")]
         public void MissingAsyncStateMachineAttribute()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -10809,8 +12274,10 @@ class C
         return a;
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -10822,14 +12289,31 @@ class C
         return a;
     }
 }
-");
+"
+            );
 
-            var compilation0 = CreateEmptyCompilation(new[] { source0.Tree }, new[] { TestReferences.NetFx.Minimal.mincorlib, TestReferences.NetFx.Minimal.minasync }, options: ComSafeDebugDll);
+            var compilation0 = CreateEmptyCompilation(
+                new[] { source0.Tree },
+                new[]
+                {
+                    TestReferences.NetFx.Minimal.mincorlib,
+                    TestReferences.NetFx.Minimal.minasync,
+                },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             // older versions of mscorlib don't contain AsyncStateMachineAttribute, IteratorStateMachineAttribute
-            Assert.Null(compilation0.GetWellKnownTypeMember(WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor));
-            Assert.Null(compilation0.GetWellKnownTypeMember(WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor));
+            Assert.Null(
+                compilation0.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor
+                )
+            );
+            Assert.Null(
+                compilation0.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor
+                )
+            );
 
             var v0 = CompileAndVerify(compilation0, verify: Verification.FailsPEVerify);
             var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
@@ -10837,22 +12321,40 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.EmitResult.Diagnostics.Verify(
                 // (6,28): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.AsyncStateMachineAttribute' is missing.
-                Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F").WithArguments("C.F()", "System.Runtime.CompilerServices.AsyncStateMachineAttribute").WithLocation(6, 28));
+                Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F")
+                    .WithArguments(
+                        "C.F()",
+                        "System.Runtime.CompilerServices.AsyncStateMachineAttribute"
+                    )
+                    .WithLocation(6, 28)
+            );
         }
 
         [Fact]
         public void AddedAsyncStateMachineAttribute()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -10864,8 +12366,10 @@ class C
         return a;
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 namespace System.Runtime.CompilerServices
@@ -10882,13 +12386,26 @@ class C
         return a;
     }
 }
-");
+"
+            );
 
-            var compilation0 = CreateEmptyCompilation(new[] { source0.Tree }, new[] { TestReferences.NetFx.Minimal.mincorlib, TestReferences.NetFx.Minimal.minasync }, options: ComSafeDebugDll);
+            var compilation0 = CreateEmptyCompilation(
+                new[] { source0.Tree },
+                new[]
+                {
+                    TestReferences.NetFx.Minimal.mincorlib,
+                    TestReferences.NetFx.Minimal.minasync,
+                },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
             // older versions of mscorlib don't contain IteratorStateMachineAttribute
-            Assert.Null(compilation0.GetWellKnownTypeMember(WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor));
+            Assert.Null(
+                compilation0.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor
+                )
+            );
 
             var v0 = CompileAndVerify(compilation0, verify: Verification.FailsPEVerify);
             v0.VerifyDiagnostics();
@@ -10896,15 +12413,28 @@ class C
 
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
-            var asm1 = compilation1.GetMember<TypeSymbol>("System.Runtime.CompilerServices.AsyncStateMachineAttribute");
+            var asm1 = compilation1.GetMember<TypeSymbol>(
+                "System.Runtime.CompilerServices.AsyncStateMachineAttribute"
+            );
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
                     SemanticEdit.Create(SemanticEditKind.Insert, null, asm1),
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.EmitResult.Diagnostics.Verify();
         }
@@ -10912,7 +12442,8 @@ class C
         [Fact]
         public void SourceAsyncStateMachineAttribute()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 namespace System.Runtime.CompilerServices
@@ -10929,8 +12460,10 @@ class C
         return a;
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 namespace System.Runtime.CompilerServices
@@ -10947,12 +12480,25 @@ class C
         return a;
     }
 }
-");
+"
+            );
 
-            var compilation0 = CreateEmptyCompilation(new[] { source0.Tree }, new[] { TestReferences.NetFx.Minimal.mincorlib, TestReferences.NetFx.Minimal.minasync }, options: ComSafeDebugDll);
+            var compilation0 = CreateEmptyCompilation(
+                new[] { source0.Tree },
+                new[]
+                {
+                    TestReferences.NetFx.Minimal.mincorlib,
+                    TestReferences.NetFx.Minimal.minasync,
+                },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
-            Assert.NotNull(compilation0.GetWellKnownTypeMember(WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor));
+            Assert.NotNull(
+                compilation0.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor
+                )
+            );
 
             var v0 = CompileAndVerify(compilation0, verify: Verification.FailsPEVerify);
             v0.VerifyDiagnostics();
@@ -10961,12 +12507,23 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.EmitResult.Diagnostics.Verify();
         }
@@ -10974,7 +12531,8 @@ class C
         [Fact, WorkItem(10190, "https://github.com/dotnet/roslyn/issues/10190")]
         public void NonAsyncToAsync()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -10985,8 +12543,10 @@ class C
         return Task.FromResult(a);
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -10997,12 +12557,21 @@ class C
         return <N:1>await Task.FromResult(a)</N:1>;
     }
 }
-");
+"
+            );
 
-            var compilation0 = CreateEmptyCompilation(new[] { source0.Tree }, new[] { Net451.mscorlib }, options: ComSafeDebugDll);
+            var compilation0 = CreateEmptyCompilation(
+                new[] { source0.Tree },
+                new[] { Net451.mscorlib },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
-            Assert.NotNull(compilation0.GetWellKnownTypeMember(WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor));
+            Assert.NotNull(
+                compilation0.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor
+                )
+            );
 
             var v0 = CompileAndVerify(compilation0, verify: Verification.Passes);
             var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
@@ -11010,12 +12579,23 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.EmitResult.Diagnostics.Verify();
         }
@@ -11023,7 +12603,8 @@ class C
         [Fact]
         public void NonAsyncToAsync_MissingAttribute()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -11035,8 +12616,10 @@ class C
         <N:1>return new Task<int>();</N:1>
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -11048,12 +12631,25 @@ class C
         <N:1>return await new Task<int>();</N:1>
     }
 }
-");
+"
+            );
 
-            var compilation0 = CreateEmptyCompilation(new[] { source0.Tree }, new[] { TestReferences.NetFx.Minimal.mincorlib, TestReferences.NetFx.Minimal.minasync }, options: ComSafeDebugDll);
+            var compilation0 = CreateEmptyCompilation(
+                new[] { source0.Tree },
+                new[]
+                {
+                    TestReferences.NetFx.Minimal.mincorlib,
+                    TestReferences.NetFx.Minimal.minasync,
+                },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
-            Assert.Null(compilation0.GetWellKnownTypeMember(WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor));
+            Assert.Null(
+                compilation0.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor
+                )
+            );
 
             var v0 = CompileAndVerify(compilation0, verify: Verification.FailsPEVerify);
             var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
@@ -11061,22 +12657,40 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.EmitResult.Diagnostics.Verify(
                 // (6,28): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.AsyncStateMachineAttribute' is missing.
-                Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F").WithArguments("C.F()", "System.Runtime.CompilerServices.AsyncStateMachineAttribute").WithLocation(6, 28));
+                Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F")
+                    .WithArguments(
+                        "C.F()",
+                        "System.Runtime.CompilerServices.AsyncStateMachineAttribute"
+                    )
+                    .WithLocation(6, 28)
+            );
         }
 
         [Fact]
         public void NonIteratorToIterator_MissingAttribute()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Collections.Generic;
 
 class C
@@ -11087,8 +12701,10 @@ class C
         <N:1>return new int[] { a };</N:1>
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Collections.Generic;
 
 class C
@@ -11099,12 +12715,21 @@ class C
         <N:1>yield return a;</N:1>
     }
 }
-");
+"
+            );
 
-            var compilation0 = CreateEmptyCompilation(new[] { source0.Tree }, new[] { Net20.mscorlib }, options: ComSafeDebugDll);
+            var compilation0 = CreateEmptyCompilation(
+                new[] { source0.Tree },
+                new[] { Net20.mscorlib },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
-            Assert.Null(compilation0.GetWellKnownTypeMember(WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor));
+            Assert.Null(
+                compilation0.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor
+                )
+            );
 
             var v0 = CompileAndVerify(compilation0, verify: Verification.Passes);
             var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
@@ -11112,22 +12737,40 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.EmitResult.Diagnostics.Verify(
                 // (6,29): error CS7043: Cannot update 'C.F()'; attribute 'System.Runtime.CompilerServices.IteratorStateMachineAttribute' is missing.
-                Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F").WithArguments("C.F()", "System.Runtime.CompilerServices.IteratorStateMachineAttribute").WithLocation(6, 29));
+                Diagnostic(ErrorCode.ERR_EncUpdateFailedMissingAttribute, "F")
+                    .WithArguments(
+                        "C.F()",
+                        "System.Runtime.CompilerServices.IteratorStateMachineAttribute"
+                    )
+                    .WithLocation(6, 29)
+            );
         }
 
         [Fact]
         public void NonIteratorToIterator_SourceAttribute()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Collections.Generic;
 
 namespace System.Runtime.CompilerServices
@@ -11143,8 +12786,10 @@ class C
         <N:1>return new int[] { a };</N:1>
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Collections.Generic;
 
 namespace System.Runtime.CompilerServices
@@ -11160,12 +12805,21 @@ class C
         <N:1>yield return a;</N:1>
     }
 }
-");
+"
+            );
 
-            var compilation0 = CreateEmptyCompilation(new[] { source0.Tree }, new[] { Net20.mscorlib }, options: ComSafeDebugDll);
+            var compilation0 = CreateEmptyCompilation(
+                new[] { source0.Tree },
+                new[] { Net20.mscorlib },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
-            Assert.NotNull(compilation0.GetWellKnownTypeMember(WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor));
+            Assert.NotNull(
+                compilation0.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_IteratorStateMachineAttribute__ctor
+                )
+            );
 
             var v0 = CompileAndVerify(compilation0, verify: Verification.Passes);
             var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
@@ -11173,12 +12827,23 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.EmitResult.Diagnostics.Verify();
         }
@@ -11186,7 +12851,8 @@ class C
         [Fact]
         public void NonAsyncToAsyncLambda()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -11200,8 +12866,10 @@ class C
         }</N:3></N:2>);
     }
 }
-");
-            var source1 = MarkedSource(@"
+"
+            );
+            var source1 = MarkedSource(
+                @"
 using System.Threading.Tasks;
 
 class C
@@ -11215,12 +12883,21 @@ class C
         }</N:3></N:2>);
     }
 }
-");
+"
+            );
 
-            var compilation0 = CreateEmptyCompilation(new[] { source0.Tree }, new[] { Net451.mscorlib }, options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
+            var compilation0 = CreateEmptyCompilation(
+                new[] { source0.Tree },
+                new[] { Net451.mscorlib },
+                options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
-            Assert.NotNull(compilation0.GetWellKnownTypeMember(WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor));
+            Assert.NotNull(
+                compilation0.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor
+                )
+            );
 
             var v0 = CompileAndVerify(compilation0, verify: Verification.Passes);
             var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
@@ -11228,25 +12905,38 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.EmitResult.Diagnostics.Verify();
 
             diff1.VerifySynthesizedMembers(
                 "C: {<>c}",
                 "C.<>c: {<>9__0_0, <F>b__0_0, <<F>b__0_0>d}",
-                "C.<>c.<<F>b__0_0>d: {<>1__state, <>t__builder, <>4__this, <a>5__1, <>s__2, <>u__1, MoveNext, SetStateMachine}");
+                "C.<>c.<<F>b__0_0>d: {<>1__state, <>t__builder, <>4__this, <a>5__1, <>s__2, <>u__1, MoveNext, SetStateMachine}"
+            );
         }
 
         [Fact]
         public void AsyncMethodWithNullableParameterAddingNullCheck()
         {
-            var source0 = MarkedSource(@"
+            var source0 = MarkedSource(
+                @"
 using System;
 using System.Threading.Tasks;
 #nullable enable
@@ -11263,8 +12953,11 @@ class C
         var <N:3>z = H(<N:1>() => y.A</N:1>)</N:3>;
     }
 }
-", options: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9));
-            var source1 = MarkedSource(@"
+",
+                options: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
+            var source1 = MarkedSource(
+                @"
 using System;
 using System.Threading.Tasks;
 #nullable enable
@@ -11282,12 +12975,21 @@ class C
         var <N:3>z = H(<N:1>() => y.A</N:1>)</N:3>;
     }
 }
-", options: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9));
+",
+                options: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
 
-            var compilation0 = CreateCompilationWithMscorlib45(new[] { source0.Tree }, options: ComSafeDebugDll);
+            var compilation0 = CreateCompilationWithMscorlib45(
+                new[] { source0.Tree },
+                options: ComSafeDebugDll
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
-            Assert.NotNull(compilation0.GetWellKnownTypeMember(WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor));
+            Assert.NotNull(
+                compilation0.GetWellKnownTypeMember(
+                    WellKnownMember.System_Runtime_CompilerServices_AsyncStateMachineAttribute__ctor
+                )
+            );
 
             var v0 = CompileAndVerify(compilation0, verify: Verification.Passes);
             var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
@@ -11295,12 +12997,23 @@ class C
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
             var f1 = compilation1.GetMember<MethodSymbol>("C.F");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
-                    SemanticEdit.Create(SemanticEditKind.Update, f0, f1, GetSyntaxMapFromMarkers(source0, source1))));
+                    SemanticEdit.Create(
+                        SemanticEditKind.Update,
+                        f0,
+                        f1,
+                        GetSyntaxMapFromMarkers(source0, source1)
+                    )
+                )
+            );
 
             diff1.EmitResult.Diagnostics.Verify();
 
@@ -11314,9 +13027,12 @@ class C
                 "C: {<>c__DisplayClass3_0, <F>d__3}",
                 "<global namespace>: {Microsoft, System, System}",
                 "System: {Runtime, Runtime}",
-                "C.<F>d__3: {<>1__state, <>t__builder, x, <>4__this, <>8__1, <z>5__2, <>s__3, <>u__1, MoveNext, SetStateMachine}");
+                "C.<F>d__3: {<>1__state, <>t__builder, x, <>4__this, <>8__1, <z>5__2, <>s__3, <>u__1, MoveNext, SetStateMachine}"
+            );
 
-            diff1.VerifyIL("C.<>c__DisplayClass3_0.<F>b__1()", @"
+            diff1.VerifyIL(
+                "C.<>c__DisplayClass3_0.<F>b__1()",
+                @"
 {
   // Code size       17 (0x11)
   .maxstack  1
@@ -11326,9 +13042,12 @@ class C
   IL_000b:  newobj     ""<>f__AnonymousType0<string>..ctor(string)""
   IL_0010:  ret
 }
-");
+"
+            );
 
-            diff1.VerifyIL("C.<>c__DisplayClass3_0.<F>b__0()", @"
+            diff1.VerifyIL(
+                "C.<>c__DisplayClass3_0.<F>b__0()",
+                @"
 {
   // Code size       12 (0xc)
   .maxstack  1
@@ -11337,7 +13056,8 @@ class C
   IL_0006:  callvirt   ""string <>f__AnonymousType0<string>.A.get""
   IL_000b:  ret
 }
-");
+"
+            );
         }
     }
 }

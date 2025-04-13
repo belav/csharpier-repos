@@ -20,20 +20,24 @@ namespace AppHost.Bundle.Tests
         public static string UseSingleFileSelfContainedHost(TestProjectFixture testFixture)
         {
             var publishedHostPath = BundleHelper.GetHostPath(testFixture);
-            HostWriter.CreateAppHost(Binaries.SingleFileHost.FilePath,
-                                     publishedHostPath,
-                                     BundleHelper.GetAppName(testFixture),
-                                     assemblyToCopyResourcesFrom: BundleHelper.GetAppPath(testFixture));
+            HostWriter.CreateAppHost(
+                Binaries.SingleFileHost.FilePath,
+                publishedHostPath,
+                BundleHelper.GetAppName(testFixture),
+                assemblyToCopyResourcesFrom: BundleHelper.GetAppPath(testFixture)
+            );
             return publishedHostPath;
         }
 
         public static string UseFrameworkDependentHost(TestProjectFixture testFixture)
         {
             var publishedHostPath = BundleHelper.GetHostPath(testFixture);
-            HostWriter.CreateAppHost(Binaries.AppHost.FilePath,
-                                     publishedHostPath,
-                                     BundleHelper.GetAppName(testFixture),
-                                     assemblyToCopyResourcesFrom: BundleHelper.GetAppPath(testFixture));
+            HostWriter.CreateAppHost(
+                Binaries.AppHost.FilePath,
+                publishedHostPath,
+                BundleHelper.GetAppName(testFixture),
+                assemblyToCopyResourcesFrom: BundleHelper.GetAppPath(testFixture)
+            );
             return publishedHostPath;
         }
 
@@ -41,7 +45,8 @@ namespace AppHost.Bundle.Tests
             TestProjectFixture testFixture,
             BundleOptions options = BundleOptions.None,
             Version targetFrameworkVersion = null,
-            bool disableCompression = false)
+            bool disableCompression = false
+        )
         {
             string singleFile;
             BundleSelfContainedApp(testFixture, out singleFile, options, targetFrameworkVersion);
@@ -53,7 +58,8 @@ namespace AppHost.Bundle.Tests
             out string singleFile,
             BundleOptions options = BundleOptions.None,
             Version targetFrameworkVersion = null,
-            bool disableCompression = false)
+            bool disableCompression = false
+        )
         {
             UseSingleFileSelfContainedHost(testFixture);
             if (targetFrameworkVersion == null || targetFrameworkVersion >= new Version(6, 0))
@@ -61,7 +67,12 @@ namespace AppHost.Bundle.Tests
                 options |= BundleOptions.EnableCompression;
             }
 
-            return BundleHelper.BundleApp(testFixture, out singleFile, options, targetFrameworkVersion);
+            return BundleHelper.BundleApp(
+                testFixture,
+                out singleFile,
+                options,
+                targetFrameworkVersion
+            );
         }
 
         public abstract class SharedTestStateBase
@@ -73,15 +84,20 @@ namespace AppHost.Bundle.Tests
                 RepoDirectories = new RepoDirectoriesProvider();
             }
 
-            public TestProjectFixture PreparePublishedSelfContainedTestProject(string projectName, params string[] extraArgs)
+            public TestProjectFixture PreparePublishedSelfContainedTestProject(
+                string projectName,
+                params string[] extraArgs
+            )
             {
                 var testFixture = new TestProjectFixture(projectName, RepoDirectories);
                 testFixture
                     .EnsureRestoredForRid(testFixture.CurrentRid)
-                    .PublishProject(runtime: testFixture.CurrentRid,
-                                    selfContained: true,
-                                    outputDirectory: BundleHelper.GetPublishPath(testFixture),
-                                    extraArgs: extraArgs);
+                    .PublishProject(
+                        runtime: testFixture.CurrentRid,
+                        selfContained: true,
+                        outputDirectory: BundleHelper.GetPublishPath(testFixture),
+                        extraArgs: extraArgs
+                    );
 
                 return testFixture;
             }

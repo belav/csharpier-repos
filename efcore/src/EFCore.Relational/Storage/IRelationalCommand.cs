@@ -36,7 +36,8 @@ public interface IRelationalCommand : IRelationalCommandTemplate
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     Task<int> ExecuteNonQueryAsync(
         RelationalCommandParameterObject parameterObject,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Executes the command with a single scalar result.
@@ -56,7 +57,8 @@ public interface IRelationalCommand : IRelationalCommandTemplate
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     Task<object?> ExecuteScalarAsync(
         RelationalCommandParameterObject parameterObject,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Executes the command with a <see cref="RelationalDataReader" /> result.
@@ -76,7 +78,8 @@ public interface IRelationalCommand : IRelationalCommandTemplate
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     Task<RelationalDataReader> ExecuteReaderAsync(
         RelationalCommandParameterObject parameterObject,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Populates this command from the provided <paramref name="commandTemplate" />.

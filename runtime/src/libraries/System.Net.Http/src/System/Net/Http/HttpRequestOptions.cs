@@ -12,41 +12,66 @@ namespace System.Net.Http
     /// </summary>
     [DebuggerDisplay("{DebuggerToString(),nq}")]
     [DebuggerTypeProxy(typeof(HttpRequestOptionsDebugView))]
-    public sealed class HttpRequestOptions : IDictionary<string, object?>, IReadOnlyDictionary<string, object?>
+    public sealed class HttpRequestOptions
+        : IDictionary<string, object?>,
+            IReadOnlyDictionary<string, object?>
     {
         private Dictionary<string, object?> Options { get; } = new Dictionary<string, object?>();
-        bool IReadOnlyDictionary<string, object?>.TryGetValue(string key, out object? value) => Options.TryGetValue(key, out value);
+
+        bool IReadOnlyDictionary<string, object?>.TryGetValue(string key, out object? value) =>
+            Options.TryGetValue(key, out value);
+
         object? IReadOnlyDictionary<string, object?>.this[string key] => Options[key];
         IEnumerable<string> IReadOnlyDictionary<string, object?>.Keys => Options.Keys;
         IEnumerable<object?> IReadOnlyDictionary<string, object?>.Values => Options.Values;
         object? IDictionary<string, object?>.this[string key]
         {
-            get
-            {
-                return Options[key];
-            }
-            set
-            {
-                Options[key] = value;
-            }
+            get { return Options[key]; }
+            set { Options[key] = value; }
         }
         ICollection<string> IDictionary<string, object?>.Keys => Options.Keys;
         ICollection<object?> IDictionary<string, object?>.Values => Options.Values;
         int ICollection<KeyValuePair<string, object?>>.Count => Options.Count;
-        bool ICollection<KeyValuePair<string, object?>>.IsReadOnly => ((IDictionary<string, object?>)Options).IsReadOnly;
+        bool ICollection<KeyValuePair<string, object?>>.IsReadOnly =>
+            ((IDictionary<string, object?>)Options).IsReadOnly;
+
         void IDictionary<string, object?>.Add(string key, object? value) => Options.Add(key, value);
-        void ICollection<KeyValuePair<string, object?>>.Add(KeyValuePair<string, object?> item) => ((IDictionary<string, object?>)Options).Add(item);
+
+        void ICollection<KeyValuePair<string, object?>>.Add(KeyValuePair<string, object?> item) =>
+            ((IDictionary<string, object?>)Options).Add(item);
+
         void ICollection<KeyValuePair<string, object?>>.Clear() => Options.Clear();
-        bool ICollection<KeyValuePair<string, object?>>.Contains(KeyValuePair<string, object?> item) => ((IDictionary<string, object?>)Options).Contains(item);
+
+        bool ICollection<KeyValuePair<string, object?>>.Contains(
+            KeyValuePair<string, object?> item
+        ) => ((IDictionary<string, object?>)Options).Contains(item);
+
         bool IDictionary<string, object?>.ContainsKey(string key) => Options.ContainsKey(key);
-        void ICollection<KeyValuePair<string, object?>>.CopyTo(KeyValuePair<string, object?>[] array, int arrayIndex) =>
-            ((IDictionary<string, object?>)Options).CopyTo(array, arrayIndex);
-        IEnumerator<KeyValuePair<string, object?>> IEnumerable<KeyValuePair<string, object?>>.GetEnumerator() => Options.GetEnumerator();
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => ((System.Collections.IEnumerable)Options).GetEnumerator();
+
+        void ICollection<KeyValuePair<string, object?>>.CopyTo(
+            KeyValuePair<string, object?>[] array,
+            int arrayIndex
+        ) => ((IDictionary<string, object?>)Options).CopyTo(array, arrayIndex);
+
+        IEnumerator<KeyValuePair<string, object?>> IEnumerable<
+            KeyValuePair<string, object?>
+        >.GetEnumerator() => Options.GetEnumerator();
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() =>
+            ((System.Collections.IEnumerable)Options).GetEnumerator();
+
         bool IDictionary<string, object?>.Remove(string key) => Options.Remove(key);
-        bool ICollection<KeyValuePair<string, object?>>.Remove(KeyValuePair<string, object?> item) => ((IDictionary<string, object?>)Options).Remove(item);
-        bool IReadOnlyDictionary<string, object?>.ContainsKey(string key) => Options.ContainsKey(key);
-        bool IDictionary<string, object?>.TryGetValue(string key, out object? value) => Options.TryGetValue(key, out value);
+
+        bool ICollection<KeyValuePair<string, object?>>.Remove(
+            KeyValuePair<string, object?> item
+        ) => ((IDictionary<string, object?>)Options).Remove(item);
+
+        bool IReadOnlyDictionary<string, object?>.ContainsKey(string key) =>
+            Options.ContainsKey(key);
+
+        bool IDictionary<string, object?>.TryGetValue(string key, out object? value) =>
+            Options.TryGetValue(key, out value);
+
         int IReadOnlyCollection<KeyValuePair<string, object?>>.Count => Options.Count;
 
         /// <summary>
@@ -61,7 +86,10 @@ namespace System.Net.Http
         /// <param name="value">Returns the value of HTTP request option.</param>
         /// <typeparam name="TValue">The type of the HTTP value as defined by <code>key</code> parameter.</typeparam>
         /// <returns>True, if an option is retrieved.</returns>
-        public bool TryGetValue<TValue>(HttpRequestOptionsKey<TValue> key, [MaybeNullWhen(false)] out TValue value)
+        public bool TryGetValue<TValue>(
+            HttpRequestOptionsKey<TValue> key,
+            [MaybeNullWhen(false)] out TValue value
+        )
         {
             if (Options.TryGetValue(key.Key, out object? _value) && _value is TValue tvalue)
             {

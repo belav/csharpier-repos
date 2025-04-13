@@ -1,6 +1,6 @@
 <linker>
   <assembly fullname="System.Collections">
-      <!--
+    <!--
           fail: [FAIL] Microsoft.Extensions.Configuration.Binder.Test.ConfigurationBinderTests.CanBindNonInstantiatedSortedSetWithSomeValues
           info: System.InvalidOperationException : Cannot create instance of type 'System.Collections.Generic.SortedSet`1[System.String]' because it has multiple public parameterized constructors.
           info:    at Microsoft.Extensions.Configuration.ConfigurationBinder.CreateInstance(Type , IConfiguration , BinderOptions )
@@ -9,14 +9,15 @@
           info: Finished:    Microsoft.Extensions.Configuration.Binder.Tests.dll
       -->
     <type fullname="System.Collections.Generic.SortedSet`1">
-        <method signature="System.Void .ctor()" />
+      <method signature="System.Void .ctor()" />
     </type>
     <type fullname="System.Collections.Generic.HashSet`1">
-        <method signature="System.Void .ctor()" />
+      <method signature="System.Void .ctor()" />
     </type>
   </assembly>
-
-  <assembly fullname="System.Private.Corelib">
-    <type fullname="System.Collections.Generic.ISet`1" preserve="methods" />
-   </assembly>
+  <assembly fullname="System.Private.Corelib"
+    >
+    <type
+     fullname="System.Collections.Generic.ISet`1" preserve="methods" />
+  </assembly>
 </linker>

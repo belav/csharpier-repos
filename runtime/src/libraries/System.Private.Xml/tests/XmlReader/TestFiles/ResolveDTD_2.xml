@@ -1,6 +1,8 @@
-<?xml version="1.0" standalone="no" ?>
+<?xml version="1.0" standalone="no"?>
 <doc>
   <foo>
-    <bar><baz>this is my content</baz></bar>
+    <bar>
+      <baz>this is my content</baz>
+    </bar>
   </foo>
 </doc>

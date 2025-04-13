@@ -13,7 +13,10 @@ namespace System.Web.Razor.Tokenizer
 {
     public class VBTokenizer : Tokenizer<VBSymbol, VBSymbolType>
     {
-        private static Dictionary<char, VBSymbolType> _operatorTable = new Dictionary<char, VBSymbolType>()
+        private static Dictionary<char, VBSymbolType> _operatorTable = new Dictionary<
+            char,
+            VBSymbolType
+        >()
         {
             { '_', VBSymbolType.LineContinuation },
             { '(', VBSymbolType.LeftParenthesis },
@@ -80,7 +83,12 @@ namespace System.Web.Razor.Tokenizer
             }
         }
 
-        protected override VBSymbol CreateSymbol(SourceLocation start, string content, VBSymbolType type, IEnumerable<RazorError> errors)
+        protected override VBSymbol CreateSymbol(
+            SourceLocation start,
+            string content,
+            VBSymbolType type,
+            IEnumerable<RazorError> errors
+        )
         {
             return new VBSymbol(start, content, type, errors);
         }
@@ -149,16 +157,22 @@ namespace System.Web.Razor.Tokenizer
                 TakeCurrent();
                 if (CurrentCharacter == '*')
                 {
-                    return Transition(EndSymbol(VBSymbolType.RazorCommentTransition), AfterRazorCommentTransition);
+                    return Transition(
+                        EndSymbol(VBSymbolType.RazorCommentTransition),
+                        AfterRazorCommentTransition
+                    );
                 }
                 else if (CurrentCharacter == '@')
                 {
                     // Could be escaped comment transition
-                    return Transition(EndSymbol(VBSymbolType.Transition), () =>
-                    {
-                        TakeCurrent();
-                        return Transition(EndSymbol(VBSymbolType.Transition), Data);
-                    });
+                    return Transition(
+                        EndSymbol(VBSymbolType.Transition),
+                        () =>
+                        {
+                            TakeCurrent();
+                            return Transition(EndSymbol(VBSymbolType.Transition), Data);
+                        }
+                    );
                 }
                 else
                 {
@@ -356,9 +370,13 @@ namespace System.Web.Razor.Tokenizer
                 return CommentBody();
             }
 
-            VBSymbol sym = new VBSymbol(CurrentStart, Buffer.ToString(), keyword == null ? VBSymbolType.Identifier : VBSymbolType.Keyword)
+            VBSymbol sym = new VBSymbol(
+                CurrentStart,
+                Buffer.ToString(),
+                keyword == null ? VBSymbolType.Identifier : VBSymbolType.Keyword
+            )
             {
-                Keyword = keyword
+                Keyword = keyword,
             };
 
             StartSymbol();

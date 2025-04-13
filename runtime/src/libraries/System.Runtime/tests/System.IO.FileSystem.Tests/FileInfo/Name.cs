@@ -23,14 +23,19 @@ namespace System.IO.Tests
         [Fact]
         public void UNCShareName()
         {
-            var info = new FileInfo(new string(Path.DirectorySeparatorChar, 2) + Path.Combine("contoso", "amusement", "device"));
+            var info = new FileInfo(
+                new string(Path.DirectorySeparatorChar, 2)
+                    + Path.Combine("contoso", "amusement", "device")
+            );
             Assert.Equal("device", info.Name);
         }
 
         [Fact]
         public void RelativeSubPath()
         {
-            var info = new FileInfo(Path.DirectorySeparatorChar + Path.Combine("Directory", "File"));
+            var info = new FileInfo(
+                Path.DirectorySeparatorChar + Path.Combine("Directory", "File")
+            );
             Assert.Equal("File", info.Name);
         }
     }

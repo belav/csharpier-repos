@@ -1,7 +1,7 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>LadiPro</OWNER>
@@ -23,12 +23,15 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     {
         [Pure]
         V Lookup(K key);
+
         [Pure]
         uint Size { get; }
+
         [Pure]
         bool HasKey(K key);
+
         [Pure]
-        IReadOnlyDictionary<K, V> GetView();  // Really an IMapView<K, V>
+        IReadOnlyDictionary<K, V> GetView(); // Really an IMapView<K, V>
         bool Insert(K key, V value);
         void Remove(K key);
         void Clear();
@@ -41,10 +44,13 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     {
         [Pure]
         V Lookup(K key);
+
         [Pure]
         uint Size { get; }
+
         [Pure]
         bool HasKey(K key);
+
         [Pure]
         void Split(out IMapView<K, V> first, out IMapView<K, V> second);
     }
@@ -56,6 +62,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     {
         [Pure]
         K Key { get; }
+
         [Pure]
         V Value { get; }
     }

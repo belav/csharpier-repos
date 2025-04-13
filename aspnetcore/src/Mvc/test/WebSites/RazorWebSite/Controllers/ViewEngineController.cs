@@ -35,10 +35,7 @@ public class ViewEngineController : Controller
     public IActionResult ViewWithPartial()
     {
         ViewData["TestKey"] = "test-value";
-        var model = new Person
-        {
-            Address = new Address { ZipCode = "98052" }
-        };
+        var model = new Person { Address = new Address { ZipCode = "98052" } };
 
         return View(model);
     }
@@ -46,10 +43,10 @@ public class ViewEngineController : Controller
     public IActionResult ViewWithPartialTakingModelFromIEnumerable()
     {
         var model = new List<Person>()
-            {
-                new Person() { Name = "Hello" },
-                new Person() { Name = "World" }
-            };
+        {
+            new Person() { Name = "Hello" },
+            new Person() { Name = "World" },
+        };
 
         return View(model);
     }

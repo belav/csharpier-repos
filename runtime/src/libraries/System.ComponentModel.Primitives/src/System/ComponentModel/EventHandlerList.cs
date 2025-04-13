@@ -23,9 +23,7 @@ namespace System.ComponentModel
         /// <summary>
         /// Creates a new event handler list.
         /// </summary>
-        public EventHandlerList()
-        {
-        }
+        public EventHandlerList() { }
 
         /// <summary>
         /// Gets or sets the delegate for the specified key.

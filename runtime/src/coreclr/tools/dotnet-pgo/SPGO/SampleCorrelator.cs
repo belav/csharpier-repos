@@ -18,7 +18,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
     /// </summary>
     internal class SampleCorrelator
     {
-        private readonly Dictionary<MethodDesc, PerMethodInfo> _methodInf = new Dictionary<MethodDesc, PerMethodInfo>();
+        private readonly Dictionary<MethodDesc, PerMethodInfo> _methodInf =
+            new Dictionary<MethodDesc, PerMethodInfo>();
 
         private readonly MethodMemoryMap _memMap;
 
@@ -39,12 +40,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         {
             if (!_methodInf.TryGetValue(md, out PerMethodInfo pmi))
             {
-                MethodIL il =
-                    md switch
-                    {
-                        EcmaMethod em => EcmaMethodIL.Create(em),
-                        _ => new InstantiatedMethodIL(md, EcmaMethodIL.Create((EcmaMethod)md.GetTypicalMethodDefinition())),
-                    };
+                MethodIL il = md switch
+                {
+                    EcmaMethod em => EcmaMethodIL.Create(em),
+                    _ => new InstantiatedMethodIL(
+                        md,
+                        EcmaMethodIL.Create((EcmaMethod)md.GetTypicalMethodDefinition())
+                    ),
+                };
 
                 if (il == null)
                 {
@@ -60,8 +63,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             return pmi;
         }
 
-        public SampleProfile GetProfile(MethodDesc md)
-            => _methodInf.GetValueOrDefault(md)?.Profile;
+        public SampleProfile GetProfile(MethodDesc md) => _methodInf.GetValueOrDefault(md)?.Profile;
 
         public void SmoothAllProfiles()
         {
@@ -84,7 +86,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 return;
             }
 
-            if (!region.NativeToILMap.TryLookup(checked((uint)(ip - region.StartAddress)), out IPMapping mapping))
+            if (
+                !region.NativeToILMap.TryLookup(
+                    checked((uint)(ip - region.StartAddress)),
+                    out IPMapping mapping
+                )
+            )
             {
                 SamplesInManagedCodeOutsideMappings += numSamples;
                 return;
@@ -114,6 +121,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         }
 
         private LbrEntry64[] _convertedEntries;
+
         public void AttributeSampleToLbrRuns(Span<LbrEntry32> lbr)
         {
             if (_convertedEntries == null || _convertedEntries.Length < lbr.Length)
@@ -135,6 +143,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
         private readonly List<(BasicBlock, int)> _callStack = new();
         private readonly HashSet<(InlineContext, BasicBlock)> _seenOnRun = new();
+
         public void AttributeSampleToLbrRuns(Span<LbrEntry64> lbr)
         {
             // LBR record represents branches taken by the CPU, in
@@ -264,7 +273,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             }
         }
 
-        public override string ToString() => $"{TotalAttributedSamples} samples in {_methodInf.Count} methods";
+        public override string ToString() =>
+            $"{TotalAttributedSamples} samples in {_methodInf.Count} methods";
 
         private class PerMethodInfo
         {

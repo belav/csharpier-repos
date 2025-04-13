@@ -93,10 +93,7 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
             if (capacity <= InlineCapacity)
                 return Empty;
 
-            return new TemporaryArray<T>()
-            {
-                _builder = ArrayBuilder<T>.GetInstance(capacity)
-            };
+            return new TemporaryArray<T>() { _builder = ArrayBuilder<T>.GetInstance(capacity) };
         }
 
         public static TemporaryArray<T> Empty => default;
@@ -122,7 +119,6 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
                     _ => _item3,
                 };
             }
-
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             set
             {
@@ -357,8 +353,7 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
         /// <remarks>
         /// This helper improves the ability of the JIT to inline callers.
         /// </remarks>
-        private static void ThrowIndexOutOfRangeException()
-            => throw new IndexOutOfRangeException();
+        private static void ThrowIndexOutOfRangeException() => throw new IndexOutOfRangeException();
 
         [NonCopyable]
         public struct Enumerator
@@ -397,11 +392,10 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
         {
             public static int InlineCapacity => TemporaryArray<T>.InlineCapacity;
 
-            public static bool HasDynamicStorage(in TemporaryArray<T> array)
-                => array._builder is not null;
+            public static bool HasDynamicStorage(in TemporaryArray<T> array) =>
+                array._builder is not null;
 
-            public static int InlineCount(in TemporaryArray<T> array)
-                => array._count;
+            public static int InlineCount(in TemporaryArray<T> array) => array._count;
         }
     }
 }

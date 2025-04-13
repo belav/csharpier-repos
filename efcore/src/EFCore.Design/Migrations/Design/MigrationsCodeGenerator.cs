@@ -33,8 +33,7 @@ public abstract class MigrationsCodeGenerator : IMigrationsCodeGenerator
     ///     Gets the programming language supported by this service.
     /// </summary>
     /// <value> The language. </value>
-    public virtual string? Language
-        => null;
+    public virtual string? Language => null;
 
     /// <summary>
     ///     Dependencies for this service.
@@ -53,7 +52,8 @@ public abstract class MigrationsCodeGenerator : IMigrationsCodeGenerator
         string? migrationNamespace,
         string migrationName,
         IReadOnlyList<MigrationOperation> upOperations,
-        IReadOnlyList<MigrationOperation> downOperations);
+        IReadOnlyList<MigrationOperation> downOperations
+    );
 
     /// <summary>
     ///     Generates the migration metadata code.
@@ -69,7 +69,8 @@ public abstract class MigrationsCodeGenerator : IMigrationsCodeGenerator
         Type contextType,
         string migrationName,
         string migrationId,
-        IModel targetModel);
+        IModel targetModel
+    );
 
     /// <summary>
     ///     Generates the model snapshot code.
@@ -83,21 +84,38 @@ public abstract class MigrationsCodeGenerator : IMigrationsCodeGenerator
         string? modelSnapshotNamespace,
         Type contextType,
         string modelSnapshotName,
-        IModel model);
+        IModel model
+    );
 
     /// <summary>
     ///     Gets the namespaces required for a list of <see cref="MigrationOperation" /> objects.
     /// </summary>
     /// <param name="operations">The operations.</param>
     /// <returns>The namespaces.</returns>
-    protected virtual IEnumerable<string> GetNamespaces(IEnumerable<MigrationOperation> operations)
-        => operations.OfType<ColumnOperation>().SelectMany(GetColumnNamespaces)
-            .Concat(operations.OfType<CreateTableOperation>().SelectMany(o => o.Columns).SelectMany(GetColumnNamespaces))
+    protected virtual IEnumerable<string> GetNamespaces(
+        IEnumerable<MigrationOperation> operations
+    ) =>
+        operations
+            .OfType<ColumnOperation>()
+            .SelectMany(GetColumnNamespaces)
             .Concat(
-                operations.OfType<InsertDataOperation>().Select(o => o.Values)
-                    .Concat(operations.OfType<UpdateDataOperation>().SelectMany(o => new[] { o.KeyValues, o.Values }))
+                operations
+                    .OfType<CreateTableOperation>()
+                    .SelectMany(o => o.Columns)
+                    .SelectMany(GetColumnNamespaces)
+            )
+            .Concat(
+                operations
+                    .OfType<InsertDataOperation>()
+                    .Select(o => o.Values)
+                    .Concat(
+                        operations
+                            .OfType<UpdateDataOperation>()
+                            .SelectMany(o => new[] { o.KeyValues, o.Values })
+                    )
                     .Concat(operations.OfType<DeleteDataOperation>().Select(o => o.KeyValues))
-                    .SelectMany(GetDataNamespaces))
+                    .SelectMany(GetDataNamespaces)
+            )
             .Concat(GetAnnotationNamespaces(GetAnnotatables(operations)));
 
     private static IEnumerable<string> GetColumnNamespaces(ColumnOperation columnOperation)
@@ -135,7 +153,9 @@ public abstract class MigrationsCodeGenerator : IMigrationsCodeGenerator
         }
     }
 
-    private static IEnumerable<IAnnotatable> GetAnnotatables(IEnumerable<MigrationOperation> operations)
+    private static IEnumerable<IAnnotatable> GetAnnotatables(
+        IEnumerable<MigrationOperation> operations
+    )
     {
         foreach (var operation in operations)
         {
@@ -171,19 +191,28 @@ public abstract class MigrationsCodeGenerator : IMigrationsCodeGenerator
     /// </summary>
     /// <param name="model">The model.</param>
     /// <returns>The namespaces.</returns>
-    protected virtual IEnumerable<string> GetNamespaces(IModel model)
-        => model.GetEntityTypes().SelectMany(
-                e => GetNamespaces(e)
+    protected virtual IEnumerable<string> GetNamespaces(IModel model) =>
+        model
+            .GetEntityTypes()
+            .SelectMany(e =>
+                GetNamespaces(e)
                     .Concat(
                         e.GetDeclaredComplexProperties().Any()
                             ? Model.DefaultPropertyBagType.GetNamespaces()
-                            : Enumerable.Empty<string>()))
+                            : Enumerable.Empty<string>()
+                    )
+            )
             .Concat(GetAnnotationNamespaces(GetAnnotatables(model)));
 
-    private IEnumerable<string> GetNamespaces(ITypeBase typeBase)
-        => typeBase.GetDeclaredProperties()
+    private IEnumerable<string> GetNamespaces(ITypeBase typeBase) =>
+        typeBase
+            .GetDeclaredProperties()
             .SelectMany(p => (FindValueConverter(p)?.ProviderClrType ?? p.ClrType).GetNamespaces())
-            .Concat(typeBase.GetDeclaredComplexProperties().SelectMany(p => GetNamespaces(p.ComplexType)));
+            .Concat(
+                typeBase
+                    .GetDeclaredComplexProperties()
+                    .SelectMany(p => GetNamespaces(p.ComplexType))
+            );
 
     private static IEnumerable<IAnnotatable> GetAnnotatables(IModel model)
     {
@@ -215,20 +244,26 @@ public abstract class MigrationsCodeGenerator : IMigrationsCodeGenerator
         }
     }
 
-    private IEnumerable<string> GetAnnotationNamespaces(IEnumerable<IAnnotatable> items)
-        => items.SelectMany(
-            i => Dependencies.AnnotationCodeGenerator.FilterIgnoredAnnotations(i.GetAnnotations())
+    private IEnumerable<string> GetAnnotationNamespaces(IEnumerable<IAnnotatable> items) =>
+        items.SelectMany(i =>
+            Dependencies
+                .AnnotationCodeGenerator.FilterIgnoredAnnotations(i.GetAnnotations())
                 .Where(a => a.Value != null)
                 .Select(a => new { Annotatable = i, Annotation = a })
-                .SelectMany(a => GetProviderType(a.Annotatable, a.Annotation.Value!.GetType()).GetNamespaces()));
+                .SelectMany(a =>
+                    GetProviderType(a.Annotatable, a.Annotation.Value!.GetType()).GetNamespaces()
+                )
+        );
 
-    private ValueConverter? FindValueConverter(IProperty property)
-        => (property.FindTypeMapping()
-            ?? Dependencies.RelationalTypeMappingSource.FindMapping(property))?.Converter;
+    private ValueConverter? FindValueConverter(IProperty property) =>
+        (
+            property.FindTypeMapping()
+            ?? Dependencies.RelationalTypeMappingSource.FindMapping(property)
+        )?.Converter;
 
-    private Type GetProviderType(IAnnotatable annotatable, Type valueType)
-        => annotatable is IProperty property
-            && valueType.UnwrapNullableType() == property.ClrType.UnwrapNullableType()
-                ? FindValueConverter(property)?.ProviderClrType ?? valueType
-                : valueType;
+    private Type GetProviderType(IAnnotatable annotatable, Type valueType) =>
+        annotatable is IProperty property
+        && valueType.UnwrapNullableType() == property.ClrType.UnwrapNullableType()
+            ? FindValueConverter(property)?.ProviderClrType ?? valueType
+            : valueType;
 }

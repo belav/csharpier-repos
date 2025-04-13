@@ -30,9 +30,16 @@ public class ValidateAntiforgeryTokenAuthorizationFilterTest
             .Returns(Task.FromResult(0))
             .Verifiable();
 
-        var filter = new ValidateAntiforgeryTokenAuthorizationFilter(antiforgery.Object, NullLoggerFactory.Instance);
+        var filter = new ValidateAntiforgeryTokenAuthorizationFilter(
+            antiforgery.Object,
+            NullLoggerFactory.Instance
+        );
 
-        var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+        var actionContext = new ActionContext(
+            new DefaultHttpContext(),
+            new RouteData(),
+            new ActionDescriptor()
+        );
         actionContext.HttpContext.Request.Method = httpMethod;
 
         var context = new AuthorizationFilterContext(actionContext, new[] { filter });
@@ -54,16 +61,22 @@ public class ValidateAntiforgeryTokenAuthorizationFilterTest
             .Returns(Task.FromResult(0))
             .Verifiable();
 
-        var filter = new ValidateAntiforgeryTokenAuthorizationFilter(antiforgery.Object, NullLoggerFactory.Instance);
+        var filter = new ValidateAntiforgeryTokenAuthorizationFilter(
+            antiforgery.Object,
+            NullLoggerFactory.Instance
+        );
 
-        var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+        var actionContext = new ActionContext(
+            new DefaultHttpContext(),
+            new RouteData(),
+            new ActionDescriptor()
+        );
         actionContext.HttpContext.Request.Method = "POST";
 
-        var context = new AuthorizationFilterContext(actionContext, new IFilterMetadata[]
-        {
-                filter,
-                new IgnoreAntiforgeryTokenAttribute(),
-        });
+        var context = new AuthorizationFilterContext(
+            actionContext,
+            new IFilterMetadata[] { filter, new IgnoreAntiforgeryTokenAttribute() }
+        );
 
         // Act
         await filter.OnAuthorizationAsync(context);
@@ -82,9 +95,16 @@ public class ValidateAntiforgeryTokenAuthorizationFilterTest
             .Throws(new AntiforgeryValidationException("Failed"))
             .Verifiable();
 
-        var filter = new ValidateAntiforgeryTokenAuthorizationFilter(antiforgery.Object, NullLoggerFactory.Instance);
+        var filter = new ValidateAntiforgeryTokenAuthorizationFilter(
+            antiforgery.Object,
+            NullLoggerFactory.Instance
+        );
 
-        var actionContext = new ActionContext(new DefaultHttpContext(), new RouteData(), new ActionDescriptor());
+        var actionContext = new ActionContext(
+            new DefaultHttpContext(),
+            new RouteData(),
+            new ActionDescriptor()
+        );
         actionContext.HttpContext.Request.Method = "POST";
 
         var context = new AuthorizationFilterContext(actionContext, new[] { filter });

@@ -39,7 +39,8 @@ internal partial class AsyncIOEngine
                 (byte*)_inputHandle.Pointer,
                 _memory.Length,
                 out bytes,
-                out bool completionExpected);
+                out bool completionExpected
+            );
 
             return !completionExpected;
         }

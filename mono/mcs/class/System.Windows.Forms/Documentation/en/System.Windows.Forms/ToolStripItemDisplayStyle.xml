@@ -13,7 +13,14 @@
     <since version=".NET 2.0" />
     <summary>
       <attribution license="cc4" from="Microsoft" modified="false" />
-      <para>Specifies what to render (image or text) for this <see cref="T:System.Windows.Forms.ToolStripItem" />.</para>
+      <para
+        >Specifies what to render (image or text) for this <see
+         cref="T:System.Windows.Forms.ToolStripItem" />
+
+        
+
+        .</para
+      >
     </summary>
   </Docs>
   <Members>
@@ -27,7 +34,14 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that only an image is to be rendered for this <see cref="T:System.Windows.Forms.ToolStripItem" />.</para>
+          <para
+            >Specifies that only an image is to be rendered for this <see
+             cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -44,7 +58,14 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that both an image and text are to be rendered for this <see cref="T:System.Windows.Forms.ToolStripItem" />.</para>
+          <para
+            >Specifies that both an image and text are to be rendered for this <see
+             cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -61,7 +82,14 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that neither image nor text is to be rendered for this <see cref="T:System.Windows.Forms.ToolStripItem" />.</para>
+          <para
+            >Specifies that neither image nor text is to be rendered for this <see
+             cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>
@@ -78,7 +106,14 @@
         <since version=".NET 2.0" />
         <summary>
           <attribution license="cc4" from="Microsoft" modified="false" />
-          <para>Specifies that only text is to be rendered for this <see cref="T:System.Windows.Forms.ToolStripItem" />.</para>
+          <para
+            >Specifies that only text is to be rendered for this <see
+             cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
+
+            .</para
+          >
         </summary>
       </Docs>
       <AssemblyInfo>

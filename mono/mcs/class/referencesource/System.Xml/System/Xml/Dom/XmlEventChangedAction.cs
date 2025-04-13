@@ -17,6 +17,6 @@ namespace System.Xml
         Remove = 1,
 
         // A node value is beeing changed.
-        Change = 2
+        Change = 2,
     }
 }

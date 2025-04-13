@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Type Name="IInvokeOnGetBinder" FullName="System.Dynamic.IInvokeOnGetBinder">
   <TypeSignature Language="C#" Value="public interface IInvokeOnGetBinder" />
-  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IInvokeOnGetBinder" />
+  <TypeSignature
+    Language="ILAsm"
+    Value=".class public interface auto ansi abstract IInvokeOnGetBinder"
+  />
   <AssemblyInfo>
     <AssemblyName>System.Core</AssemblyName>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>

@@ -31,7 +31,8 @@ public class MigrationsEndPointMiddleware
     public MigrationsEndPointMiddleware(
         RequestDelegate next,
         ILogger<MigrationsEndPointMiddleware> logger,
-        IOptions<MigrationsEndPointOptions> options)
+        IOptions<MigrationsEndPointOptions> options
+    )
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(logger);
@@ -101,20 +102,28 @@ public class MigrationsEndPointMiddleware
         {
             logger.NoContextType();
 
-            await WriteErrorToResponse(context.Response, Strings.MigrationsEndPointMiddleware_NoContextType);
+            await WriteErrorToResponse(
+                context.Response,
+                Strings.MigrationsEndPointMiddleware_NoContextType
+            );
 
             return null;
         }
 
         // Look for DbContext classes registered in the service provider
-        var registeredContexts = context.RequestServices.GetServices<DbContextOptions>()
+        var registeredContexts = context
+            .RequestServices.GetServices<DbContextOptions>()
             .Select(o => o.ContextType);
 
-        var contextType = registeredContexts.FirstOrDefault(c => string.Equals(contextTypeName, c.AssemblyQualifiedName, StringComparison.Ordinal));
+        var contextType = registeredContexts.FirstOrDefault(c =>
+            string.Equals(contextTypeName, c.AssemblyQualifiedName, StringComparison.Ordinal)
+        );
 
         if (contextType is null)
         {
-            var message = Strings.FormatMigrationsEndPointMiddleware_ContextNotRegistered(contextTypeName);
+            var message = Strings.FormatMigrationsEndPointMiddleware_ContextNotRegistered(
+                contextTypeName
+            );
 
             logger.ContextNotRegistered(contextTypeName);
 

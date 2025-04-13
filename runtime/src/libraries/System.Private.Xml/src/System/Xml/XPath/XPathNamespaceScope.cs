@@ -7,6 +7,6 @@ namespace System.Xml.XPath
     {
         All,
         ExcludeXml,
-        Local
+        Local,
     }
 }

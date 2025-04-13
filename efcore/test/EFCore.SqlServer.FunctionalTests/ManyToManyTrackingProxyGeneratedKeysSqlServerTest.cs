@@ -6,17 +6,17 @@ using Microsoft.EntityFrameworkCore.TestModels.ManyToManyModel;
 namespace Microsoft.EntityFrameworkCore;
 
 public class ManyToManyTrackingProxyGeneratedKeysSqlServerTest
-    : ManyToManyTrackingSqlServerTestBase<
-        ManyToManyTrackingProxyGeneratedKeysSqlServerTest.ManyToManyTrackingProxyGeneratedKeysSqlServerFixture>
+    : ManyToManyTrackingSqlServerTestBase<ManyToManyTrackingProxyGeneratedKeysSqlServerTest.ManyToManyTrackingProxyGeneratedKeysSqlServerFixture>
 {
-    public ManyToManyTrackingProxyGeneratedKeysSqlServerTest(ManyToManyTrackingProxyGeneratedKeysSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+    public ManyToManyTrackingProxyGeneratedKeysSqlServerTest(
+        ManyToManyTrackingProxyGeneratedKeysSqlServerFixture fixture
+    )
+        : base(fixture) { }
 
     public override Task Can_insert_many_to_many_shared_with_payload(bool async)
         // Mutable properties aren't proxyable on Dictionary
-        => Task.CompletedTask;
+        =>
+        Task.CompletedTask;
 
     public override void Can_update_many_to_many_shared_with_payload()
     {
@@ -30,29 +30,28 @@ public class ManyToManyTrackingProxyGeneratedKeysSqlServerTest
 
     public override Task Can_insert_many_to_many_shared_with_payload_unidirectional(bool async)
         // Mutable properties aren't proxyable on Dictionary
-        => Task.CompletedTask;
+        =>
+        Task.CompletedTask;
 
     public override void Can_update_many_to_many_shared_with_payload_unidirectional()
     {
         // Mutable properties aren't proxyable on Dictionary
     }
 
-    protected override bool RequiresDetectChanges
-        => false;
+    protected override bool RequiresDetectChanges => false;
 
-    public class ManyToManyTrackingProxyGeneratedKeysSqlServerFixture : ManyToManyTrackingSqlServerFixtureBase
+    public class ManyToManyTrackingProxyGeneratedKeysSqlServerFixture
+        : ManyToManyTrackingSqlServerFixtureBase
     {
-        protected override string StoreName
-            => "ManyToManyTrackingProxyGeneratedKeys";
+        protected override string StoreName => "ManyToManyTrackingProxyGeneratedKeys";
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).UseChangeTrackingProxies();
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder).UseChangeTrackingProxies();
 
-        protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-            => base.AddServices(serviceCollection.AddEntityFrameworkProxies());
+        protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
+            base.AddServices(serviceCollection.AddEntityFrameworkProxies());
 
-        public override bool UseGeneratedKeys
-            => true;
+        public override bool UseGeneratedKeys => true;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
@@ -63,7 +62,9 @@ public class ManyToManyTrackingProxyGeneratedKeysSqlServerTest
                 .Ignore("Payload"); // Mutable properties aren't proxyable on Dictionary
 
             modelBuilder
-                .SharedTypeEntity<Dictionary<string, object>>("UnidirectionalJoinOneToThreePayloadFullShared")
+                .SharedTypeEntity<Dictionary<string, object>>(
+                    "UnidirectionalJoinOneToThreePayloadFullShared"
+                )
                 .Ignore("Payload"); // Mutable properties aren't proxyable on Dictionary
 
             modelBuilder.Entity<EntityOne>().Property(e => e.Id).ValueGeneratedOnAdd();
@@ -73,15 +74,33 @@ public class ManyToManyTrackingProxyGeneratedKeysSqlServerTest
             modelBuilder.Entity<EntityRoot>().Property(e => e.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<EntityTableSharing1>().Property(e => e.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<EntityTableSharing2>().Property(e => e.Id).ValueGeneratedOnAdd();
-            modelBuilder.SharedTypeEntity<ProxyableSharedType>("PST").IndexerProperty<int>("Id").ValueGeneratedOnAdd();
+            modelBuilder
+                .SharedTypeEntity<ProxyableSharedType>("PST")
+                .IndexerProperty<int>("Id")
+                .ValueGeneratedOnAdd();
             modelBuilder.Entity<ImplicitManyToManyA>().Property(e => e.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<ImplicitManyToManyB>().Property(e => e.Id).ValueGeneratedOnAdd();
 
-            modelBuilder.Entity<UnidirectionalEntityOne>().Property(e => e.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<UnidirectionalEntityTwo>().Property(e => e.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<UnidirectionalEntityThree>().Property(e => e.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<UnidirectionalEntityCompositeKey>().Property(e => e.Key1).ValueGeneratedOnAdd();
-            modelBuilder.Entity<UnidirectionalEntityRoot>().Property(e => e.Id).ValueGeneratedOnAdd();
+            modelBuilder
+                .Entity<UnidirectionalEntityOne>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd();
+            modelBuilder
+                .Entity<UnidirectionalEntityTwo>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd();
+            modelBuilder
+                .Entity<UnidirectionalEntityThree>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd();
+            modelBuilder
+                .Entity<UnidirectionalEntityCompositeKey>()
+                .Property(e => e.Key1)
+                .ValueGeneratedOnAdd();
+            modelBuilder
+                .Entity<UnidirectionalEntityRoot>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd();
         }
     }
 }

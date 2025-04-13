@@ -46,10 +46,15 @@ internal sealed class UseAuthorizationAnalyzer
                         //  app.UseRouting();
                         //  app.UseEndpoints(...);
 
-                        context.ReportDiagnostic(Diagnostic.Create(
-                            StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware,
-                            middlewareItem.Operation.Syntax.GetLocation(),
-                            middlewareItem.UseMethod.Name));
+                        context.ReportDiagnostic(
+                            Diagnostic.Create(
+                                StartupAnalyzer
+                                    .Diagnostics
+                                    .IncorrectlyConfiguredAuthorizationMiddleware,
+                                middlewareItem.Operation.Syntax.GetLocation(),
+                                middlewareItem.UseMethod.Name
+                            )
+                        );
                     }
 
                     useAuthorizationItem = middlewareItem;
@@ -66,10 +71,15 @@ internal sealed class UseAuthorizationAnalyzer
                         //  app.UseAuthorization();
                         //
 
-                        context.ReportDiagnostic(Diagnostic.Create(
-                            StartupAnalyzer.Diagnostics.IncorrectlyConfiguredAuthorizationMiddleware,
-                            useAuthorizationItem.Operation.Syntax.GetLocation(),
-                            middlewareItem.UseMethod.Name));
+                        context.ReportDiagnostic(
+                            Diagnostic.Create(
+                                StartupAnalyzer
+                                    .Diagnostics
+                                    .IncorrectlyConfiguredAuthorizationMiddleware,
+                                useAuthorizationItem.Operation.Syntax.GetLocation(),
+                                middlewareItem.UseMethod.Name
+                            )
+                        );
                     }
 
                     useEndpoint = middlewareItem;

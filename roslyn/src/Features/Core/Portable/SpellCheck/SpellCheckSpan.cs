@@ -6,7 +6,5 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.SpellCheck
 {
-    internal readonly record struct SpellCheckSpan(
-        TextSpan TextSpan,
-        SpellCheckKind Kind);
+    internal readonly record struct SpellCheckSpan(TextSpan TextSpan, SpellCheckKind Kind);
 }

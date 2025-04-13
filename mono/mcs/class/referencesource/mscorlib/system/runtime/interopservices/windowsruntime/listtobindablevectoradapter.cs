@@ -1,21 +1,21 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>GPaperin</OWNER>
 // <OWNER>Microsoft</OWNER>
 
 using System;
-using System.Security;
-using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
+using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
@@ -26,7 +26,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     // That's because they are invoked with special "this"! The "this" object
     // for all of these methods are not ListToBindableVectorAdapter objects. Rather, they are of type
     // IList. No actual ListToVectorBindableAdapter object is ever instantiated. Thus, you will
-    // see a lot of expressions that cast "this" to "IList". 
+    // see a lot of expressions that cast "this" to "IList".
     internal sealed class ListToBindableVectorAdapter
     {
         private ListToBindableVectorAdapter()
@@ -39,7 +39,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         internal object GetAt(uint index)
         {
             IList _this = JitHelpers.UnsafeCast<IList>(this);
-            EnsureIndexInt32(index, _this.Count);        
+            EnsureIndexInt32(index, _this.Count);
 
             try
             {
@@ -47,7 +47,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             }
             catch (ArgumentOutOfRangeException ex)
             {
-                throw WindowsRuntimeMarshal.GetExceptionForHR(__HResults.E_BOUNDS, ex, "ArgumentOutOfRange_IndexOutOfRange");
+                throw WindowsRuntimeMarshal.GetExceptionForHR(
+                    __HResults.E_BOUNDS,
+                    ex,
+                    "ArgumentOutOfRange_IndexOutOfRange"
+                );
             }
         }
 
@@ -97,7 +101,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             }
             catch (ArgumentOutOfRangeException ex)
             {
-                throw WindowsRuntimeMarshal.GetExceptionForHR(__HResults.E_BOUNDS, ex, "ArgumentOutOfRange_IndexOutOfRange");
+                throw WindowsRuntimeMarshal.GetExceptionForHR(
+                    __HResults.E_BOUNDS,
+                    ex,
+                    "ArgumentOutOfRange_IndexOutOfRange"
+                );
             }
         }
 
@@ -128,7 +136,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         internal void RemoveAt(uint index)
         {
             IList _this = JitHelpers.UnsafeCast<IList>(this);
-            EnsureIndexInt32(index, _this.Count); 
+            EnsureIndexInt32(index, _this.Count);
 
             try
             {
@@ -157,7 +165,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             IList _this = JitHelpers.UnsafeCast<IList>(this);
             if (_this.Count == 0)
             {
-                Exception e = new InvalidOperationException(Environment.GetResourceString("InvalidOperation_CannotRemoveLastFromEmptyCollection"));
+                Exception e = new InvalidOperationException(
+                    Environment.GetResourceString(
+                        "InvalidOperation_CannotRemoveLastFromEmptyCollection"
+                    )
+                );
                 e.SetErrorCode(__HResults.E_BOUNDS);
                 throw e;
             }
@@ -182,7 +194,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             // that Size > Int32.MaxValue:
             if (((uint)Int32.MaxValue) <= index || index >= (uint)listCapacity)
             {
-                Exception e = new ArgumentOutOfRangeException("index", Environment.GetResourceString("ArgumentOutOfRange_IndexLargerThanMaxValue"));
+                Exception e = new ArgumentOutOfRangeException(
+                    "index",
+                    Environment.GetResourceString("ArgumentOutOfRange_IndexLargerThanMaxValue")
+                );
                 e.SetErrorCode(__HResults.E_BOUNDS);
                 throw e;
             }

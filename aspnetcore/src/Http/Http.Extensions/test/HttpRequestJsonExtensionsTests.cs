@@ -39,10 +39,13 @@ public class HttpRequestJsonExtensionsTests
         context.Request.ContentType = "text/json";
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () => await context.Request.ReadFromJsonAsync<int>());
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await context.Request.ReadFromJsonAsync<int>()
+        );
 
         // Assert
-        var expectedMessage = $"Unable to read the request as JSON because the request content type 'text/json' is not a known JSON content type.";
+        var expectedMessage =
+            $"Unable to read the request as JSON because the request content type 'text/json' is not a known JSON content type.";
         Assert.Equal(expectedMessage, ex.Message);
     }
 
@@ -54,10 +57,13 @@ public class HttpRequestJsonExtensionsTests
         context.Request.ContentType = "application/json";
 
         // Act
-        var ex = await Assert.ThrowsAsync<JsonException>(async () => await context.Request.ReadFromJsonAsync<int>());
+        var ex = await Assert.ThrowsAsync<JsonException>(async () =>
+            await context.Request.ReadFromJsonAsync<int>()
+        );
 
         // Assert
-        var expectedMessage = $"The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. Path: $ | LineNumber: 0 | BytePositionInLine: 0.";
+        var expectedMessage =
+            $"The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. Path: $ | LineNumber: 0 | BytePositionInLine: 0.";
         Assert.Equal(expectedMessage, ex.Message);
     }
 
@@ -92,9 +98,7 @@ public class HttpRequestJsonExtensionsTests
 
         // Assert
         Assert.NotNull(result);
-        Assert.Collection(result,
-            i => Assert.Equal(1, i),
-            i => Assert.Equal(2, i));
+        Assert.Collection(result, i => Assert.Equal(1, i), i => Assert.Equal(2, i));
     }
 
     [Fact]
@@ -110,9 +114,7 @@ public class HttpRequestJsonExtensionsTests
 
         // Assert
         Assert.NotNull(result);
-        Assert.Collection(result,
-            i => Assert.Equal(1, i),
-            i => Assert.Equal(2, i));
+        Assert.Collection(result, i => Assert.Equal(1, i), i => Assert.Equal(2, i));
     }
 
     [Fact]
@@ -121,7 +123,9 @@ public class HttpRequestJsonExtensionsTests
         // Arrange
         var context = new DefaultHttpContext();
         context.Request.ContentType = "application/json; charset=utf-16";
-        context.Request.Body = new MemoryStream(Encoding.Unicode.GetBytes(@"{""name"": ""激光這兩個字是甚麼意思""}"));
+        context.Request.Body = new MemoryStream(
+            Encoding.Unicode.GetBytes(@"{""name"": ""激光這兩個字是甚麼意思""}")
+        );
 
         // Act
         var result = await context.Request.ReadFromJsonAsync<Dictionary<string, string>>();
@@ -158,10 +162,15 @@ public class HttpRequestJsonExtensionsTests
         context.Request.ContentType = "application/json; charset=invalid";
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () => await context.Request.ReadFromJsonAsync<object>());
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await context.Request.ReadFromJsonAsync<object>()
+        );
 
         // Assert
-        Assert.Equal("Unable to read the request as JSON because the request content type charset 'invalid' is not a known encoding.", ex.Message);
+        Assert.Equal(
+            "Unable to read the request as JSON because the request content type charset 'invalid' is not a known encoding.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -185,10 +194,13 @@ public class HttpRequestJsonExtensionsTests
         // Arrange
         var context = new DefaultHttpContext();
         context.Request.ContentType = "application/json; charset=utf-16";
-        context.Request.Body = new MemoryStream(Encoding.Unicode.GetBytes(@"{""name"": ""激光這兩個字是甚麼意思""}"));
+        context.Request.Body = new MemoryStream(
+            Encoding.Unicode.GetBytes(@"{""name"": ""激光這兩個字是甚麼意思""}")
+        );
 
         // Act
-        var result = (Dictionary<string, string>?)await context.Request.ReadFromJsonAsync(typeof(Dictionary<string, string>));
+        var result = (Dictionary<string, string>?)
+            await context.Request.ReadFromJsonAsync(typeof(Dictionary<string, string>));
 
         // Assert
         Assert.Equal("激光這兩個字是甚麼意思", result!["name"]);
@@ -202,10 +214,15 @@ public class HttpRequestJsonExtensionsTests
         context.Request.ContentType = "application/json; charset=invalid";
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () => await context.Request.ReadFromJsonAsync(typeof(object)));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await context.Request.ReadFromJsonAsync(typeof(object))
+        );
 
         // Assert
-        Assert.Equal("Unable to read the request as JSON because the request content type charset 'invalid' is not a known encoding.", ex.Message);
+        Assert.Equal(
+            "Unable to read the request as JSON because the request content type charset 'invalid' is not a known encoding.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -220,13 +237,12 @@ public class HttpRequestJsonExtensionsTests
         options.AllowTrailingCommas = true;
 
         // Act
-        var result = (List<int>?)await context.Request.ReadFromJsonAsync(typeof(List<int>), options);
+        var result = (List<int>?)
+            await context.Request.ReadFromJsonAsync(typeof(List<int>), options);
 
         // Assert
         Assert.NotNull(result);
-        Assert.Collection(result,
-            i => Assert.Equal(1, i),
-            i => Assert.Equal(2, i));
+        Assert.Collection(result, i => Assert.Equal(1, i), i => Assert.Equal(2, i));
     }
 
     [Fact]
@@ -242,13 +258,12 @@ public class HttpRequestJsonExtensionsTests
         options.TypeInfoResolver = new DefaultJsonTypeInfoResolver();
 
         // Act
-        var result = (List<int>?)await context.Request.ReadFromJsonAsync(options.GetTypeInfo(typeof(List<int>)));
+        var result = (List<int>?)
+            await context.Request.ReadFromJsonAsync(options.GetTypeInfo(typeof(List<int>)));
 
         // Assert
         Assert.NotNull(result);
-        Assert.Collection(result,
-            i => Assert.Equal(1, i),
-            i => Assert.Equal(2, i));
+        Assert.Collection(result, i => Assert.Equal(1, i), i => Assert.Equal(2, i));
     }
 
     [Fact]
@@ -269,8 +284,6 @@ public class HttpRequestJsonExtensionsTests
 
         // Assert
         Assert.NotNull(result);
-        Assert.Collection(result,
-            i => Assert.Equal(1, i),
-            i => Assert.Equal(2, i));
+        Assert.Collection(result, i => Assert.Equal(1, i), i => Assert.Equal(2, i));
     }
 }

@@ -16,7 +16,10 @@ public class WeatherForecastController : ControllerBase
     private readonly IWeatherForecastService _forecastService;
     private readonly ILogger<WeatherForecastController> _logger;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger, IWeatherForecastService forecastService)
+    public WeatherForecastController(
+        ILogger<WeatherForecastController> logger,
+        IWeatherForecastService forecastService
+    )
     {
         _forecastService = forecastService;
         _logger = logger;

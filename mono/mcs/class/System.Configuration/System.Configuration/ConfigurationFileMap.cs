@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,29 +30,33 @@ using System.Collections;
 
 namespace System.Configuration
 {
-	public class ConfigurationFileMap: ICloneable
-	{
-		string machineConfigFilename;
-		
-		public ConfigurationFileMap ()
-		{
-			machineConfigFilename = System.Runtime.InteropServices.RuntimeEnvironment.SystemConfigurationFile;
-		}
-		
-		public ConfigurationFileMap (string machineConfigFilename)
-		{
-			this.machineConfigFilename = machineConfigFilename;
-		}
-		
-		public string MachineConfigFilename {
-			get { return machineConfigFilename; }
-			set { machineConfigFilename = value; }
-		}
-		
-		public virtual object Clone ()
-		{
-			return new ConfigurationFileMap (machineConfigFilename);
-		}
-	}
-}
+    public class ConfigurationFileMap : ICloneable
+    {
+        string machineConfigFilename;
 
+        public ConfigurationFileMap()
+        {
+            machineConfigFilename = System
+                .Runtime
+                .InteropServices
+                .RuntimeEnvironment
+                .SystemConfigurationFile;
+        }
+
+        public ConfigurationFileMap(string machineConfigFilename)
+        {
+            this.machineConfigFilename = machineConfigFilename;
+        }
+
+        public string MachineConfigFilename
+        {
+            get { return machineConfigFilename; }
+            set { machineConfigFilename = value; }
+        }
+
+        public virtual object Clone()
+        {
+            return new ConfigurationFileMap(machineConfigFilename);
+        }
+    }
+}

@@ -20,7 +20,8 @@ public class PocoAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         if (!TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
         {
@@ -34,7 +35,14 @@ public class PocoAdapter : IAdapter
             return false;
         }
 
-        if (!TryConvertValue(value, jsonProperty.PropertyType, contractResolver, out var convertedValue))
+        if (
+            !TryConvertValue(
+                value,
+                jsonProperty.PropertyType,
+                contractResolver,
+                out var convertedValue
+            )
+        )
         {
             errorMessage = Resources.FormatInvalidValueForProperty(value);
             return false;
@@ -51,7 +59,8 @@ public class PocoAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         out object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         if (!TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
         {
@@ -76,7 +85,8 @@ public class PocoAdapter : IAdapter
         object target,
         string segment,
         IContractResolver contractResolver,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         if (!TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
         {
@@ -93,8 +103,10 @@ public class PocoAdapter : IAdapter
         // Setting the value to "null" will use the default value in case of value types, and
         // null in case of reference types
         object value = null;
-        if (jsonProperty.PropertyType.IsValueType
-            && Nullable.GetUnderlyingType(jsonProperty.PropertyType) == null)
+        if (
+            jsonProperty.PropertyType.IsValueType
+            && Nullable.GetUnderlyingType(jsonProperty.PropertyType) == null
+        )
         {
             value = Activator.CreateInstance(jsonProperty.PropertyType);
         }
@@ -108,10 +120,10 @@ public class PocoAdapter : IAdapter
     public virtual bool TryReplace(
         object target,
         string segment,
-        IContractResolver
-        contractResolver,
+        IContractResolver contractResolver,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         if (!TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
         {
@@ -125,7 +137,14 @@ public class PocoAdapter : IAdapter
             return false;
         }
 
-        if (!TryConvertValue(value, jsonProperty.PropertyType, contractResolver, out var convertedValue))
+        if (
+            !TryConvertValue(
+                value,
+                jsonProperty.PropertyType,
+                contractResolver,
+                out var convertedValue
+            )
+        )
         {
             errorMessage = Resources.FormatInvalidValueForProperty(value);
             return false;
@@ -140,10 +159,10 @@ public class PocoAdapter : IAdapter
     public virtual bool TryTest(
         object target,
         string segment,
-        IContractResolver
-        contractResolver,
+        IContractResolver contractResolver,
         object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         if (!TryGetJsonProperty(target, contractResolver, segment, out var jsonProperty))
         {
@@ -157,14 +176,26 @@ public class PocoAdapter : IAdapter
             return false;
         }
 
-        if (!TryConvertValue(value, jsonProperty.PropertyType, contractResolver, out var convertedValue))
+        if (
+            !TryConvertValue(
+                value,
+                jsonProperty.PropertyType,
+                contractResolver,
+                out var convertedValue
+            )
+        )
         {
             errorMessage = Resources.FormatInvalidValueForProperty(value);
             return false;
         }
 
         var currentValue = jsonProperty.ValueProvider.GetValue(target);
-        if (!JToken.DeepEquals(JsonConvert.SerializeObject(currentValue), JsonConvert.SerializeObject(convertedValue)))
+        if (
+            !JToken.DeepEquals(
+                JsonConvert.SerializeObject(currentValue),
+                JsonConvert.SerializeObject(convertedValue)
+            )
+        )
         {
             errorMessage = Resources.FormatValueNotEqualToTestValue(currentValue, value, segment);
             return false;
@@ -179,7 +210,8 @@ public class PocoAdapter : IAdapter
         string segment,
         IContractResolver contractResolver,
         out object value,
-        out string errorMessage)
+        out string errorMessage
+    )
     {
         if (target == null)
         {
@@ -204,13 +236,17 @@ public class PocoAdapter : IAdapter
         object target,
         IContractResolver contractResolver,
         string segment,
-        out JsonProperty jsonProperty)
+        out JsonProperty jsonProperty
+    )
     {
-        if (contractResolver.ResolveContract(target.GetType()) is JsonObjectContract jsonObjectContract)
+        if (
+            contractResolver.ResolveContract(target.GetType())
+            is JsonObjectContract jsonObjectContract
+        )
         {
-            var pocoProperty = jsonObjectContract
-                .Properties
-                .FirstOrDefault(p => string.Equals(p.PropertyName, segment, StringComparison.OrdinalIgnoreCase));
+            var pocoProperty = jsonObjectContract.Properties.FirstOrDefault(p =>
+                string.Equals(p.PropertyName, segment, StringComparison.OrdinalIgnoreCase)
+            );
 
             if (pocoProperty != null)
             {
@@ -223,14 +259,27 @@ public class PocoAdapter : IAdapter
         return false;
     }
 
-    protected virtual bool TryConvertValue(object value, Type propertyType, out object convertedValue)
+    protected virtual bool TryConvertValue(
+        object value,
+        Type propertyType,
+        out object convertedValue
+    )
     {
-        return TryConvertValue(value, propertyType, null, out convertedValue); 
+        return TryConvertValue(value, propertyType, null, out convertedValue);
     }
 
-    protected virtual bool TryConvertValue(object value, Type propertyType, IContractResolver contractResolver, out object convertedValue)
+    protected virtual bool TryConvertValue(
+        object value,
+        Type propertyType,
+        IContractResolver contractResolver,
+        out object convertedValue
+    )
     {
-        var conversionResult = ConversionResultProvider.ConvertTo(value, propertyType, contractResolver);
+        var conversionResult = ConversionResultProvider.ConvertTo(
+            value,
+            propertyType,
+            contractResolver
+        );
         if (!conversionResult.CanBeConverted)
         {
             convertedValue = null;

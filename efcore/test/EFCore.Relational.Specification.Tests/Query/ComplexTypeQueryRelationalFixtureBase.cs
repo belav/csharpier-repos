@@ -5,6 +5,5 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public abstract class ComplexTypeQueryRelationalFixtureBase : ComplexTypeQueryFixtureBase
 {
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 }

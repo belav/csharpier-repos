@@ -23,13 +23,15 @@ public class CircuitDisconnectMiddlewareTest
         var registry = new CircuitRegistry(
             Options.Create(new CircuitOptions()),
             NullLogger<CircuitRegistry>.Instance,
-            circuitIdFactory);
+            circuitIdFactory
+        );
 
         var middleware = new CircuitDisconnectMiddleware(
             NullLogger<CircuitDisconnectMiddleware>.Instance,
             registry,
             circuitIdFactory,
-            (ctx) => Task.CompletedTask);
+            (ctx) => Task.CompletedTask
+        );
 
         var context = new DefaultHttpContext();
         context.Request.Method = httpMethod;
@@ -51,13 +53,15 @@ public class CircuitDisconnectMiddlewareTest
         var registry = new CircuitRegistry(
             Options.Create(new CircuitOptions()),
             NullLogger<CircuitRegistry>.Instance,
-            circuitIdFactory);
+            circuitIdFactory
+        );
 
         var middleware = new CircuitDisconnectMiddleware(
             NullLogger<CircuitDisconnectMiddleware>.Instance,
             registry,
             circuitIdFactory,
-            (ctx) => Task.CompletedTask);
+            (ctx) => Task.CompletedTask
+        );
 
         var context = new DefaultHttpContext();
         context.Request.Method = HttpMethods.Post;
@@ -78,13 +82,15 @@ public class CircuitDisconnectMiddlewareTest
         var registry = new CircuitRegistry(
             Options.Create(new CircuitOptions()),
             NullLogger<CircuitRegistry>.Instance,
-            circuitIdFactory);
+            circuitIdFactory
+        );
 
         var middleware = new CircuitDisconnectMiddleware(
             NullLogger<CircuitDisconnectMiddleware>.Instance,
             registry,
             circuitIdFactory,
-            (ctx) => Task.CompletedTask);
+            (ctx) => Task.CompletedTask
+        );
 
         var context = new DefaultHttpContext();
         context.Request.Method = HttpMethods.Post;
@@ -105,16 +111,20 @@ public class CircuitDisconnectMiddlewareTest
         var registry = new CircuitRegistry(
             Options.Create(new CircuitOptions()),
             NullLogger<CircuitRegistry>.Instance,
-            circuitIdFactory);
+            circuitIdFactory
+        );
 
         var middleware = new CircuitDisconnectMiddleware(
             NullLogger<CircuitDisconnectMiddleware>.Instance,
             registry,
             circuitIdFactory,
-            (ctx) => Task.CompletedTask);
+            (ctx) => Task.CompletedTask
+        );
 
         using var memory = new MemoryStream();
-        await new FormUrlEncodedContent(new Dictionary<string, string> { ["circuitId"] = "1234" }).CopyToAsync(memory);
+        await new FormUrlEncodedContent(
+            new Dictionary<string, string> { ["circuitId"] = "1234" }
+        ).CopyToAsync(memory);
         memory.Seek(0, SeekOrigin.Begin);
 
         var context = new DefaultHttpContext();
@@ -138,16 +148,20 @@ public class CircuitDisconnectMiddlewareTest
         var registry = new CircuitRegistry(
             Options.Create(new CircuitOptions()),
             NullLogger<CircuitRegistry>.Instance,
-            circuitIdFactory);
+            circuitIdFactory
+        );
 
         var middleware = new CircuitDisconnectMiddleware(
             NullLogger<CircuitDisconnectMiddleware>.Instance,
             registry,
             circuitIdFactory,
-            (ctx) => Task.CompletedTask);
+            (ctx) => Task.CompletedTask
+        );
 
         using var memory = new MemoryStream();
-        await new FormUrlEncodedContent(new Dictionary<string, string> { ["circuitId"] = circuitId.Secret, }).CopyToAsync(memory);
+        await new FormUrlEncodedContent(
+            new Dictionary<string, string> { ["circuitId"] = circuitId.Secret }
+        ).CopyToAsync(memory);
         memory.Seek(0, SeekOrigin.Begin);
 
         var context = new DefaultHttpContext();
@@ -173,7 +187,8 @@ public class CircuitDisconnectMiddlewareTest
         var registry = new CircuitRegistry(
             Options.Create(new CircuitOptions()),
             NullLogger<CircuitRegistry>.Instance,
-            circuitIdFactory);
+            circuitIdFactory
+        );
 
         registry.Register(testCircuitHost);
 
@@ -181,10 +196,13 @@ public class CircuitDisconnectMiddlewareTest
             NullLogger<CircuitDisconnectMiddleware>.Instance,
             registry,
             circuitIdFactory,
-            (ctx) => Task.CompletedTask);
+            (ctx) => Task.CompletedTask
+        );
 
         using var memory = new MemoryStream();
-        await new FormUrlEncodedContent(new Dictionary<string, string> { ["circuitId"] = circuitId.Secret, }).CopyToAsync(memory);
+        await new FormUrlEncodedContent(
+            new Dictionary<string, string> { ["circuitId"] = circuitId.Secret }
+        ).CopyToAsync(memory);
         memory.Seek(0, SeekOrigin.Begin);
 
         var context = new DefaultHttpContext();
@@ -210,7 +228,8 @@ public class CircuitDisconnectMiddlewareTest
         var registry = new CircuitRegistry(
             Options.Create(new CircuitOptions()),
             NullLogger<CircuitRegistry>.Instance,
-            circuitIdFactory);
+            circuitIdFactory
+        );
 
         registry.Register(circuitHost);
         await registry.DisconnectAsync(circuitHost, "1234");
@@ -219,10 +238,13 @@ public class CircuitDisconnectMiddlewareTest
             NullLogger<CircuitDisconnectMiddleware>.Instance,
             registry,
             circuitIdFactory,
-            (ctx) => Task.CompletedTask);
+            (ctx) => Task.CompletedTask
+        );
 
         using var memory = new MemoryStream();
-        await new FormUrlEncodedContent(new Dictionary<string, string> { ["circuitId"] = circuitId.Secret }).CopyToAsync(memory);
+        await new FormUrlEncodedContent(
+            new Dictionary<string, string> { ["circuitId"] = circuitId.Secret }
+        ).CopyToAsync(memory);
         memory.Seek(0, SeekOrigin.Begin);
 
         var context = new DefaultHttpContext();

@@ -60,10 +60,7 @@ internal class ShortCircuitMatcher : Matcher
 
     public override Task MatchAsync(HttpContext httpContext)
     {
-        var metadataList = new List<object>
-        {
-            new ShortCircuitMetadata(_statusCode)
-        };
+        var metadataList = new List<object> { new ShortCircuitMetadata(_statusCode) };
 
         if (_hasAuthMetadata)
         {
@@ -76,12 +73,16 @@ internal class ShortCircuitMatcher : Matcher
         }
 
         var metadata = new EndpointMetadataCollection(metadataList);
-        httpContext.SetEndpoint(new Endpoint(TestConstants.ShortCircuitRequestDelegate, metadata, "Short Circuit Endpoint"));
+        httpContext.SetEndpoint(
+            new Endpoint(
+                TestConstants.ShortCircuitRequestDelegate,
+                metadata,
+                "Short Circuit Endpoint"
+            )
+        );
 
         return Task.CompletedTask;
     }
 }
 
-internal class CorsMetadata : ICorsMetadata
-{
-}
+internal class CorsMetadata : ICorsMetadata { }

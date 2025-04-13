@@ -47,6 +47,7 @@ public class KnownStringsBenchmark
 
         return GetKnownMethod(data);
     }
+
     [Benchmark(OperationsPerInvoke = loops * 10)]
     public int GetKnownMethod_HEAD()
     {
@@ -62,6 +63,7 @@ public class KnownStringsBenchmark
 
         return GetKnownMethod(data);
     }
+
     [Benchmark(OperationsPerInvoke = loops * 10)]
     public int GetKnownMethod_POST()
     {
@@ -69,6 +71,7 @@ public class KnownStringsBenchmark
 
         return GetKnownMethod(data);
     }
+
     [Benchmark(OperationsPerInvoke = loops * 10)]
     public int GetKnownMethod_PUT()
     {

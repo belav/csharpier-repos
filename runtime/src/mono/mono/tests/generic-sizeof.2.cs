@@ -1,26 +1,36 @@
-public class ClassA {}
-public struct GenStruct<T> {
-	int field1;
-	long field2;
-	T field3;
-}
-public struct Struct {
-	int field1;
-	long field2;
-	byte field3;
+public class ClassA { }
+
+public struct GenStruct<T>
+{
+    int field1;
+    long field2;
+    T field3;
 }
 
-public class Gen<T> {
-	public unsafe int sizeofGenStructT () { return sizeof (Struct); }
+public struct Struct
+{
+    int field1;
+    long field2;
+    byte field3;
 }
 
-public class main {
-	public static unsafe int Main () {
-		Gen<ClassA> ga = new Gen<ClassA> ();
+public class Gen<T>
+{
+    public unsafe int sizeofGenStructT()
+    {
+        return sizeof(Struct);
+    }
+}
 
-		if (ga.sizeofGenStructT () != sizeof (Struct))
-			return 1;
+public class main
+{
+    public static unsafe int Main()
+    {
+        Gen<ClassA> ga = new Gen<ClassA>();
 
-		return 0;
-	}
+        if (ga.sizeofGenStructT() != sizeof(Struct))
+            return 1;
+
+        return 0;
+    }
 }

@@ -15,8 +15,7 @@ public class ConsoleReporter : IReporter
     private readonly object _writeLock = new object();
 
     public ConsoleReporter(IConsole console)
-        : this(console, verbose: false, quiet: false)
-    { }
+        : this(console, verbose: false, quiet: false) { }
 
     public ConsoleReporter(IConsole console, bool verbose, bool quiet)
     {
@@ -49,10 +48,11 @@ public class ConsoleReporter : IReporter
         }
     }
 
-    public virtual void Error(string message)
-        => WriteLine(Console.Error, message, ConsoleColor.Red);
-    public virtual void Warn(string message)
-        => WriteLine(Console.Out, message, ConsoleColor.Yellow);
+    public virtual void Error(string message) =>
+        WriteLine(Console.Error, message, ConsoleColor.Red);
+
+    public virtual void Warn(string message) =>
+        WriteLine(Console.Out, message, ConsoleColor.Yellow);
 
     public virtual void Output(string message)
     {

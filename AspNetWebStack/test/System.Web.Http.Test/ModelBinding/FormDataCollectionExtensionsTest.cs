@@ -31,7 +31,10 @@ namespace System.Web.Http.ModelBinding
         [InlineData("x.y[234].x", "x[y][234][x]")] // compound
         public void TestNormalize(string expectedMvc, string jqueryString)
         {
-            Assert.Equal(expectedMvc, FormDataCollectionExtensions.NormalizeJQueryToMvc(jqueryString));
+            Assert.Equal(
+                expectedMvc,
+                FormDataCollectionExtensions.NormalizeJQueryToMvc(jqueryString)
+            );
         }
 
         [Fact]
@@ -57,7 +60,7 @@ namespace System.Web.Http.ModelBinding
             // No key name means the top level object is an array
             int[] result = await ParseJQueryAsync<int[]>("=30&=40&=50");
 
-            Assert.Equal(new int[] { 30,40,50 } , result);
+            Assert.Equal(new int[] { 30, 40, 50 }, result);
         }
 
         [Fact]
@@ -94,6 +97,7 @@ namespace System.Web.Http.ModelBinding
             public int I { get; set; }
             public Point P { get; set; }
         }
+
         public class Point
         {
             public int X { get; set; }
@@ -145,7 +149,9 @@ namespace System.Web.Http.ModelBinding
             }
             sb.Append("=1");
 
-            return Assert.ThrowsAsync<InsufficientExecutionStackException>(() => ParseJQueryAsync<Nest>(sb.ToString()));
+            return Assert.ThrowsAsync<InsufficientExecutionStackException>(() =>
+                ParseJQueryAsync<Nest>(sb.ToString())
+            );
         }
 
         [Fact]
@@ -158,7 +164,9 @@ namespace System.Web.Http.ModelBinding
             }
             sb.Append("=1");
 
-            return Assert.ThrowsAsync<InsufficientExecutionStackException>(() => ParseJQueryAsync<Nest>(sb.ToString()));
+            return Assert.ThrowsAsync<InsufficientExecutionStackException>(() =>
+                ParseJQueryAsync<Nest>(sb.ToString())
+            );
         }
 
         public class ClassWithPointArray
@@ -214,7 +222,8 @@ namespace System.Web.Http.ModelBinding
         public async Task ReadComplexNestedType2()
         {
             // Jquery encoding from this JSON: "{a:[1,2],b:[{c:3,d:4},{c:5,d:6}],e:{f:[7,8,9]}}";
-            string s = "a[]=1&a[]=2&b[0][c]=3&b[0][d]=4&b[1][c]=5&b[1][d]=6&e[f][]=7&e[f][]=8&e[f][]=9";
+            string s =
+                "a[]=1&a[]=2&b[0][c]=3&b[0][d]=4&b[1][c]=5&b[1][d]=6&e[f][]=7&e[f][]=8&e[f][]=9";
             var result = await ParseJQueryAsync<ComplexType2>(s);
 
             Assert.NotNull(result);
@@ -248,9 +257,18 @@ namespace System.Web.Http.ModelBinding
             HttpContent content = FormContent("X=3&Y=4");
             FormDataCollection fd = await content.ReadAsAsync<FormDataCollection>();
 
-            Assert.Equal(3, fd.ReadAs<int>("X", requiredMemberSelector: null, formatterLogger: null));
-            Assert.Equal("3", fd.ReadAs<string>("X", requiredMemberSelector: null, formatterLogger: null));
-            Assert.Equal(4, fd.ReadAs<int>("Y", requiredMemberSelector: null, formatterLogger: null));
+            Assert.Equal(
+                3,
+                fd.ReadAs<int>("X", requiredMemberSelector: null, formatterLogger: null)
+            );
+            Assert.Equal(
+                "3",
+                fd.ReadAs<string>("X", requiredMemberSelector: null, formatterLogger: null)
+            );
+            Assert.Equal(
+                4,
+                fd.ReadAs<int>("Y", requiredMemberSelector: null, formatterLogger: null)
+            );
         }
 
         [Fact]
@@ -267,7 +285,11 @@ namespace System.Web.Http.ModelBinding
             FormDataCollection formData = await content.ReadAsAsync<FormDataCollection>();
             Mock<IFormatterLogger> mockLogger = new Mock<IFormatterLogger>();
 
-            formData.ReadAs<ThrowingSetterType>(String.Empty, requiredMemberSelector: null, formatterLogger: mockLogger.Object);
+            formData.ReadAs<ThrowingSetterType>(
+                String.Empty,
+                requiredMemberSelector: null,
+                formatterLogger: mockLogger.Object
+            );
 
             mockLogger.Verify(mock => mock.LogError("Throws", ThrowingSetterType.Exception));
         }
@@ -280,7 +302,8 @@ namespace System.Web.Http.ModelBinding
             FormDataCollection formData = await content.ReadAsAsync<FormDataCollection>();
 
             // Act/Assert
-            Assert.Throws<ArgumentNullException>(() => formData.ReadAs<int>((HttpActionContext)null));
+            Assert.Throws<ArgumentNullException>(() => formData.ReadAs<int>((HttpActionContext)null)
+            );
         }
 
         [Fact]
@@ -335,7 +358,11 @@ namespace System.Web.Http.ModelBinding
 
             using (HttpConfiguration configuration = new HttpConfiguration())
             {
-                configuration.Services.Insert(typeof(ModelBinderProvider), 0, new CustomIntModelBinderProvider());
+                configuration.Services.Insert(
+                    typeof(ModelBinderProvider),
+                    0,
+                    new CustomIntModelBinderProvider()
+                );
 
                 HttpActionContext actionContext = CreateActionContext(configuration);
 
@@ -360,10 +387,18 @@ namespace System.Web.Http.ModelBinding
             {
                 // Act
                 HttpControllerSettings settings = new HttpControllerSettings(configuration);
-                HttpConfiguration clonedConfiguration =
-                    HttpConfiguration.ApplyControllerSettings(settings, configuration);
-                int actual = (int)formData.ReadAs(typeof(int), "a", requiredMemberSelector: null,
-                    formatterLogger: (new Mock<IFormatterLogger>()).Object, config: configuration);
+                HttpConfiguration clonedConfiguration = HttpConfiguration.ApplyControllerSettings(
+                    settings,
+                    configuration
+                );
+                int actual = (int)
+                    formData.ReadAs(
+                        typeof(int),
+                        "a",
+                        requiredMemberSelector: null,
+                        formatterLogger: (new Mock<IFormatterLogger>()).Object,
+                        config: configuration
+                    );
 
                 // Assert
                 Assert.Equal(30, actual);
@@ -375,11 +410,14 @@ namespace System.Web.Http.ModelBinding
         public void ServicesContainerWrapper_GetServices_Returns_RequiredModelValidatorProvider()
         {
             // Arrange
-            var requiredMemberModelValidatorProvider =
-                new RequiredMemberModelValidatorProvider(requiredMemberSelector: null);
+            var requiredMemberModelValidatorProvider = new RequiredMemberModelValidatorProvider(
+                requiredMemberSelector: null
+            );
             FormDataCollectionExtensions.ServicesContainerWrapper wrapper =
                 new FormDataCollectionExtensions.ServicesContainerWrapper(
-                    new HttpConfiguration(), requiredMemberModelValidatorProvider);
+                    new HttpConfiguration(),
+                    requiredMemberModelValidatorProvider
+                );
 
             // Act
             IEnumerable<object> services = wrapper.GetServices(typeof(ModelValidatorProvider));
@@ -394,7 +432,9 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             FormDataCollectionExtensions.ServicesContainerWrapper wrapper =
                 new FormDataCollectionExtensions.ServicesContainerWrapper(
-                    new HttpConfiguration(), new RequiredMemberModelValidatorProvider(requiredMemberSelector: null));
+                    new HttpConfiguration(),
+                    new RequiredMemberModelValidatorProvider(requiredMemberSelector: null)
+                );
 
             // Act
             object serviceInstance1 = wrapper.GetService(typeof(IModelValidatorCache));
@@ -409,11 +449,14 @@ namespace System.Web.Http.ModelBinding
         public void ServicesContainerWrapper_GetService_Returns_ModelValidatorProvider()
         {
             // Arrange
-            var requiredMemberModelValidatorProvider =
-                new RequiredMemberModelValidatorProvider(requiredMemberSelector: null);
+            var requiredMemberModelValidatorProvider = new RequiredMemberModelValidatorProvider(
+                requiredMemberSelector: null
+            );
             FormDataCollectionExtensions.ServicesContainerWrapper wrapper =
                 new FormDataCollectionExtensions.ServicesContainerWrapper(
-                    new HttpConfiguration(), requiredMemberModelValidatorProvider);
+                    new HttpConfiguration(),
+                    requiredMemberModelValidatorProvider
+                );
 
             // Act
             object service = wrapper.GetService(typeof(ModelValidatorProvider));
@@ -436,7 +479,9 @@ namespace System.Web.Http.ModelBinding
         private static HttpContent FormContent(string s)
         {
             HttpContent content = new StringContent(s);
-            content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+            content.Headers.ContentType = new MediaTypeHeaderValue(
+                "application/x-www-form-urlencoded"
+            );
 
             return content;
         }
@@ -451,9 +496,14 @@ namespace System.Web.Http.ModelBinding
 
         private class CustomIntModelBinder : IModelBinder
         {
-            public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+            public bool BindModel(
+                HttpActionContext actionContext,
+                ModelBindingContext bindingContext
+            )
             {
-                ValueProviderResult valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+                ValueProviderResult valueResult = bindingContext.ValueProvider.GetValue(
+                    bindingContext.ModelName
+                );
                 int result = (int)valueResult.ConvertTo(typeof(int));
 
                 bindingContext.Model = result / 2;
@@ -479,7 +529,11 @@ namespace System.Web.Http.ModelBinding
         private class ThrowingSetterType
         {
             public static Exception Exception = new Exception("This setter throws");
-            public string Throws { get { return null; } set { throw Exception; } }
+            public string Throws
+            {
+                get { return null; }
+                set { throw Exception; }
+            }
         }
 
         private class ClassWithArrayField

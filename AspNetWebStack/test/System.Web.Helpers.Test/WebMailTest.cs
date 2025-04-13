@@ -28,7 +28,7 @@ namespace System.Web.Helpers.Test
             Assert.Throws<InvalidOperationException>(
                 () => WebMail.Send(to: "test@test.com", subject: "test", body: "test body"),
                 "\"SmtpServer\" was not specified."
-                );
+            );
 
             // Verify SmtpServer uses scope storage.
             // Arrange
@@ -46,10 +46,16 @@ namespace System.Web.Helpers.Test
         public void WebMailSendThrowsIfPriorityIsInvalid()
         {
             Assert.ThrowsArgument(
-                () => WebMail.Send(to: "test@test.com", subject: "test", body: "test body", priority: "foo"),
+                () =>
+                    WebMail.Send(
+                        to: "test@test.com",
+                        subject: "test",
+                        body: "test body",
+                        priority: "foo"
+                    ),
                 "priority",
                 "The \"priority\" value is invalid. Valid values are \"Low\", \"Normal\" and \"High\"."
-                );
+            );
         }
 
         [Fact]
@@ -141,7 +147,10 @@ namespace System.Web.Helpers.Test
         {
             // Act and Assert
             Assert.ThrowsArgumentNullOrEmptyString(() => WebMail.SmtpServer = null, "SmtpServer");
-            Assert.ThrowsArgumentNullOrEmptyString(() => WebMail.SmtpServer = String.Empty, "SmtpServer");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => WebMail.SmtpServer = String.Empty,
+                "SmtpServer"
+            );
         }
 
         [Fact]
@@ -151,7 +160,8 @@ namespace System.Web.Helpers.Test
             string header = "foo: bar";
 
             // Act
-            string key, value;
+            string key,
+                value;
 
             // Assert
             Assert.True(WebMail.TryParseHeader(header, out key, out value));
@@ -166,7 +176,8 @@ namespace System.Web.Helpers.Test
             string header = "foo bar";
 
             // Act
-            string key, value;
+            string key,
+                value;
 
             // Assert
             Assert.False(WebMail.TryParseHeader(header, out key, out value));
@@ -199,7 +210,22 @@ namespace System.Web.Helpers.Test
                 TestFile.Create(attachmentName).Save(fileToAttach);
                 bool isBodyHtml = true;
                 var additionalHeaders = new[] { "header1:value1" };
-                WebMail.SetPropertiesOnMessage(message, to, subject, body, from, cc, bcc, replyTo, contentEncoding, headerEncoding, priority, new[] { fileToAttach }, isBodyHtml, additionalHeaders);
+                WebMail.SetPropertiesOnMessage(
+                    message,
+                    to,
+                    subject,
+                    body,
+                    from,
+                    cc,
+                    bcc,
+                    replyTo,
+                    contentEncoding,
+                    headerEncoding,
+                    priority,
+                    new[] { fileToAttach },
+                    isBodyHtml,
+                    additionalHeaders
+                );
 
                 // Assert
                 Assert.Equal(body, message.Body);
@@ -223,9 +249,7 @@ namespace System.Web.Helpers.Test
                 {
                     File.Delete(fileToAttach);
                 }
-                catch (IOException)
-                {
-                } // Try our best to clean up after ourselves
+                catch (IOException) { } // Try our best to clean up after ourselves
             }
         }
 
@@ -233,12 +257,24 @@ namespace System.Web.Helpers.Test
         public void MailSendWithNullInCollection_ThrowsArgumentException()
         {
             Assert.Throws<ArgumentException>(
-                () => WebMail.Send("foo@bar.com", "sub", "body", filesToAttach: new string[] { "c:\\foo.txt", null }),
+                () =>
+                    WebMail.Send(
+                        "foo@bar.com",
+                        "sub",
+                        "body",
+                        filesToAttach: new string[] { "c:\\foo.txt", null }
+                    ),
                 "A string in the collection is null or empty.\r\nParameter name: filesToAttach"
             );
 
             Assert.Throws<ArgumentException>(
-                () => WebMail.Send("foo@bar.com", "sub", "body", additionalHeaders: new string[] { "foo:bar", null }),
+                () =>
+                    WebMail.Send(
+                        "foo@bar.com",
+                        "sub",
+                        "body",
+                        additionalHeaders: new string[] { "foo:bar", null }
+                    ),
                 "A string in the collection is null or empty.\r\nParameter name: additionalHeaders"
             );
         }
@@ -267,7 +303,22 @@ namespace System.Web.Helpers.Test
             var headers = new[] { "to:to@test.com" };
 
             // Act
-            WebMail.SetPropertiesOnMessage(message, "to@test.com", null, null, "from@test.com", null, null, null, null, null, MailPriority.Normal, null, false, headers);
+            WebMail.SetPropertiesOnMessage(
+                message,
+                "to@test.com",
+                null,
+                null,
+                "from@test.com",
+                null,
+                null,
+                null,
+                null,
+                null,
+                MailPriority.Normal,
+                null,
+                false,
+                headers
+            );
 
             // Assert
             Assert.Equal(2, message.To.Count);
@@ -282,8 +333,13 @@ namespace System.Web.Helpers.Test
             var message = new MailMessage();
             var headers = new[]
             {
-                "cc:cc@test.com", "bcc:bcc@test.com,bcc2@test.com", "from:from@test.com", "priority:high", "reply-to:replyto1@test.com,replyto2@test.com",
-                "sender: sender@test.com", "to:to@test.com"
+                "cc:cc@test.com",
+                "bcc:bcc@test.com,bcc2@test.com",
+                "from:from@test.com",
+                "priority:high",
+                "reply-to:replyto1@test.com,replyto2@test.com",
+                "sender: sender@test.com",
+                "to:to@test.com",
             };
 
             // Act
@@ -366,10 +422,30 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             var message = new MailMessage();
-            var headers = new[] { "from:header-from@test.com", "cc:header-cc@test.com", "priority:low" };
+            var headers = new[]
+            {
+                "from:header-from@test.com",
+                "cc:header-cc@test.com",
+                "priority:low",
+            };
 
             // Act
-            WebMail.SetPropertiesOnMessage(message, null, null, null, "direct-from@test.com", "direct-cc@test.com", null, null, null, null, MailPriority.High, null, false, headers);
+            WebMail.SetPropertiesOnMessage(
+                message,
+                null,
+                null,
+                null,
+                "direct-from@test.com",
+                "direct-cc@test.com",
+                null,
+                null,
+                null,
+                null,
+                MailPriority.High,
+                null,
+                false,
+                headers
+            );
 
             // Assert
             Assert.Equal("direct-from@test.com", message.From.Address);

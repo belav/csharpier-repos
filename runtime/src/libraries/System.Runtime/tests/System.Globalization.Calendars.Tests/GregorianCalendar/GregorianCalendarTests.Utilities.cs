@@ -8,12 +8,45 @@ namespace System.Globalization.Tests
         [ThreadStatic]
         private static RandomDataGenerator t_randomDataGenerator;
 
-        private static RandomDataGenerator Generator => t_randomDataGenerator ??= new RandomDataGenerator();
+        private static RandomDataGenerator Generator =>
+            t_randomDataGenerator ??= new RandomDataGenerator();
 
-        private static readonly Calendar s_calendar = new GregorianCalendar(GregorianCalendarTypes.USEnglish);
+        private static readonly Calendar s_calendar = new GregorianCalendar(
+            GregorianCalendarTypes.USEnglish
+        );
 
-        private static readonly int[] s_daysInMonthInLeapYear = { 0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-        private static readonly int[] s_daysInMonthInCommonYear = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+        private static readonly int[] s_daysInMonthInLeapYear =
+        {
+            0,
+            31,
+            29,
+            31,
+            30,
+            31,
+            30,
+            31,
+            31,
+            30,
+            31,
+            30,
+            31,
+        };
+        private static readonly int[] s_daysInMonthInCommonYear =
+        {
+            0,
+            31,
+            28,
+            31,
+            30,
+            31,
+            30,
+            31,
+            31,
+            30,
+            31,
+            30,
+            31,
+        };
 
         public static bool IsLeapYear(int year)
         {
@@ -48,8 +81,7 @@ namespace System.Globalization.Tests
             do
             {
                 randomYear = RandomYear();
-            }
-            while ((0 == (randomYear & 0x3) && 0 != randomYear % 100) || 0 == randomYear % 400);
+            } while ((0 == (randomYear & 0x3) && 0 != randomYear % 100) || 0 == randomYear % 400);
             return randomYear;
         }
 
@@ -65,9 +97,11 @@ namespace System.Globalization.Tests
             return randomMonthNotFebruary;
         }
 
-        public static int RandomLeapYearDay(int month) => Generator.GetInt32(-55) % s_daysInMonthInLeapYear[month] + 1;
+        public static int RandomLeapYearDay(int month) =>
+            Generator.GetInt32(-55) % s_daysInMonthInLeapYear[month] + 1;
 
-        public static int RandomCommonYearDay(int month) => Generator.GetInt32(-55) % s_daysInMonthInCommonYear[month] + 1;
+        public static int RandomCommonYearDay(int month) =>
+            Generator.GetInt32(-55) % s_daysInMonthInCommonYear[month] + 1;
 
         public static int RandomDay(int year, int month)
         {

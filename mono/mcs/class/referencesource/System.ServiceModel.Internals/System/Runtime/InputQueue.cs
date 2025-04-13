@@ -8,8 +8,13 @@ namespace System.Runtime
     using System.Collections.Generic;
     using System.Threading;
 
-    [Fx.Tag.SynchronizationPrimitive(Fx.Tag.BlocksUsing.PrivatePrimitive, SupportsAsync = true, ReleaseMethod = "Dispatch")]
-    sealed class InputQueue<T> : IDisposable where T : class
+    [Fx.Tag.SynchronizationPrimitive(
+        Fx.Tag.BlocksUsing.PrivatePrimitive,
+        SupportsAsync = true,
+        ReleaseMethod = "Dispatch"
+    )]
+    sealed class InputQueue<T> : IDisposable
+        where T : class
     {
         static Action<object> completeOutstandingReadersCallback;
         static Action<object> completeWaitersFalseCallback;
@@ -19,7 +24,10 @@ namespace System.Runtime
 
         QueueState queueState;
 
-        [Fx.Tag.SynchronizationObject(Blocking = false, Kind = Fx.Tag.SynchronizationKind.LockStatement)]
+        [Fx.Tag.SynchronizationObject(
+            Blocking = false,
+            Kind = Fx.Tag.SynchronizationKind.LockStatement
+        )]
         ItemQueue itemQueue;
 
         [Fx.Tag.SynchronizationObject]
@@ -39,7 +47,10 @@ namespace System.Runtime
         public InputQueue(Func<Action<AsyncCallback, IAsyncResult>> asyncCallbackGenerator)
             : this()
         {
-            Fx.Assert(asyncCallbackGenerator != null, "use default ctor if you don't have a generator");
+            Fx.Assert(
+                asyncCallbackGenerator != null,
+                "use default ctor if you don't have a generator"
+            );
             AsyncCallbackGenerator = asyncCallbackGenerator;
         }
 
@@ -55,18 +66,10 @@ namespace System.Runtime
         }
 
         // Users like ServiceModel can hook this abort ICommunicationObject or handle other non-IDisposable objects
-        public Action<T> DisposeItemCallback
-        {
-            get;
-            set;
-        }
+        public Action<T> DisposeItemCallback { get; set; }
 
         // Users like ServiceModel can hook this to wrap the AsyncQueueReader callback functionality for tracing, etc
-        Func<Action<AsyncCallback, IAsyncResult>> AsyncCallbackGenerator
-        {
-            get;
-            set;
-        }
+        Func<Action<AsyncCallback, IAsyncResult>> AsyncCallbackGenerator { get; set; }
 
         object ThisLock
         {
@@ -87,7 +90,12 @@ namespace System.Runtime
                     }
                     else
                     {
-                        AsyncQueueReader reader = new AsyncQueueReader(this, timeout, callback, state);
+                        AsyncQueueReader reader = new AsyncQueueReader(
+                            this,
+                            timeout,
+                            callback,
+                            state
+                        );
                         readerQueue.Enqueue(reader);
                         return reader;
                     }
@@ -100,7 +108,12 @@ namespace System.Runtime
                     }
                     else if (itemQueue.HasAnyItem)
                     {
-                        AsyncQueueReader reader = new AsyncQueueReader(this, timeout, callback, state);
+                        AsyncQueueReader reader = new AsyncQueueReader(
+                            this,
+                            timeout,
+                            callback,
+                            state
+                        );
                         readerQueue.Enqueue(reader);
                         return reader;
                     }
@@ -150,7 +163,9 @@ namespace System.Runtime
 
             if (!this.Dequeue(timeout, out value))
             {
-                throw Fx.Exception.AsError(new TimeoutException(InternalSR.TimeoutInputQueueDequeue(timeout)));
+                throw Fx.Exception.AsError(
+                    new TimeoutException(InternalSR.TimeoutInputQueueDequeue(timeout))
+                );
             }
 
             return value;
@@ -222,7 +237,9 @@ namespace System.Runtime
 
             lock (ThisLock)
             {
-                itemAvailable = !((queueState == QueueState.Closed) || (queueState == QueueState.Shutdown));
+                itemAvailable = !(
+                    (queueState == QueueState.Closed) || (queueState == QueueState.Shutdown)
+                );
                 this.GetWaiters(out waiters);
 
                 if (queueState != QueueState.Closed)
@@ -234,7 +251,11 @@ namespace System.Runtime
                         item = itemQueue.DequeueAvailableItem();
                         reader = readerQueue.Dequeue();
 
-                        if (queueState == QueueState.Shutdown && readerQueue.Count > 0 && itemQueue.ItemCount == 0)
+                        if (
+                            queueState == QueueState.Shutdown
+                            && readerQueue.Count > 0
+                            && itemQueue.ItemCount == 0
+                        )
                         {
                             outstandingReaders = new IQueueReader[readerQueue.Count];
                             readerQueue.CopyTo(outstandingReaders, 0);
@@ -250,7 +271,9 @@ namespace System.Runtime
             {
                 if (completeOutstandingReadersCallback == null)
                 {
-                    completeOutstandingReadersCallback = new Action<object>(CompleteOutstandingReadersCallback);
+                    completeOutstandingReadersCallback = new Action<object>(
+                        CompleteOutstandingReadersCallback
+                    );
                 }
 
                 ActionItem.Schedule(completeOutstandingReadersCallback, outstandingReaders);
@@ -312,23 +335,34 @@ namespace System.Runtime
             EnqueueAndDispatch(item, null);
         }
 
-        // dequeuedCallback is called as an item is dequeued from the InputQueue.  The 
+        // dequeuedCallback is called as an item is dequeued from the InputQueue.  The
         // InputQueue lock is not held during the callback.  However, the user code will
         // not be notified of the item being available until the callback returns.  If you
-        // are not sure if the callback will block for a long time, then first call 
+        // are not sure if the callback will block for a long time, then first call
         // IOThreadScheduler.ScheduleCallback to get to a "safe" thread.
         public void EnqueueAndDispatch(T item, Action dequeuedCallback)
         {
             EnqueueAndDispatch(item, dequeuedCallback, true);
         }
 
-        public void EnqueueAndDispatch(Exception exception, Action dequeuedCallback, bool canDispatchOnThisThread)
+        public void EnqueueAndDispatch(
+            Exception exception,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
-            Fx.Assert(exception != null, "EnqueueAndDispatch: exception parameter should not be null");
+            Fx.Assert(
+                exception != null,
+                "EnqueueAndDispatch: exception parameter should not be null"
+            );
             EnqueueAndDispatch(new Item(exception, dequeuedCallback), canDispatchOnThisThread);
         }
 
-        public void EnqueueAndDispatch(T item, Action dequeuedCallback, bool canDispatchOnThisThread)
+        public void EnqueueAndDispatch(
+            T item,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
             Fx.Assert(item != null, "EnqueueAndDispatch: item parameter should not be null");
             EnqueueAndDispatch(new Item(item, dequeuedCallback), canDispatchOnThisThread);
@@ -342,10 +376,12 @@ namespace System.Runtime
 
         public bool EnqueueWithoutDispatch(Exception exception, Action dequeuedCallback)
         {
-            Fx.Assert(exception != null, "EnqueueWithoutDispatch: exception parameter should not be null");
+            Fx.Assert(
+                exception != null,
+                "EnqueueWithoutDispatch: exception parameter should not be null"
+            );
             return EnqueueWithoutDispatch(new Item(exception, dequeuedCallback));
         }
-
 
         public void Shutdown()
         {
@@ -383,7 +419,8 @@ namespace System.Runtime
             {
                 for (int i = 0; i < outstandingReaders.Length; i++)
                 {
-                    Exception exception = (pendingExceptionGenerator != null) ? pendingExceptionGenerator() : null;
+                    Exception exception =
+                        (pendingExceptionGenerator != null) ? pendingExceptionGenerator() : null;
                     outstandingReaders[i].Set(new Item(exception, null));
                 }
             }
@@ -469,7 +506,7 @@ namespace System.Runtime
                     InvokeDequeuedCallback(item.DequeuedCallback);
                 }
             }
-        }        
+        }
 
         void DisposeItem(Item item)
         {
@@ -585,7 +622,9 @@ namespace System.Runtime
 
             lock (ThisLock)
             {
-                itemAvailable = !((queueState == QueueState.Closed) || (queueState == QueueState.Shutdown));
+                itemAvailable = !(
+                    (queueState == QueueState.Closed) || (queueState == QueueState.Shutdown)
+                );
                 this.GetWaiters(out waiters);
 
                 if (queueState == QueueState.Open)
@@ -730,7 +769,7 @@ namespace System.Runtime
         {
             Open,
             Shutdown,
-            Closed
+            Closed,
         }
 
         interface IQueueReader
@@ -750,14 +789,10 @@ namespace System.Runtime
             T value;
 
             public Item(T value, Action dequeuedCallback)
-                : this(value, null, dequeuedCallback)
-            {
-            }
+                : this(value, null, dequeuedCallback) { }
 
             public Item(Exception exception, Action dequeuedCallback)
-                : this(null, exception, dequeuedCallback)
-            {
-            }
+                : this(null, exception, dequeuedCallback) { }
 
             Item(T value, Exception exception, Action dequeuedCallback)
             {
@@ -792,17 +827,28 @@ namespace System.Runtime
             }
         }
 
-        [Fx.Tag.SynchronizationPrimitive(Fx.Tag.BlocksUsing.AsyncResult, SupportsAsync = true, ReleaseMethod = "Set")]
+        [Fx.Tag.SynchronizationPrimitive(
+            Fx.Tag.BlocksUsing.AsyncResult,
+            SupportsAsync = true,
+            ReleaseMethod = "Set"
+        )]
         class AsyncQueueReader : AsyncResult, IQueueReader
         {
-            static Action<object> timerCallback = new Action<object>(AsyncQueueReader.TimerCallback);
+            static Action<object> timerCallback = new Action<object>(
+                AsyncQueueReader.TimerCallback
+            );
 
             bool expired;
             InputQueue<T> inputQueue;
             T item;
             IOThreadTimer timer;
 
-            public AsyncQueueReader(InputQueue<T> inputQueue, TimeSpan timeout, AsyncCallback callback, object state)
+            public AsyncQueueReader(
+                InputQueue<T> inputQueue,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 if (inputQueue.AsyncCallbackGenerator != null)
@@ -855,10 +901,16 @@ namespace System.Runtime
             }
         }
 
-        [Fx.Tag.SynchronizationPrimitive(Fx.Tag.BlocksUsing.AsyncResult, SupportsAsync = true, ReleaseMethod = "Set")]
+        [Fx.Tag.SynchronizationPrimitive(
+            Fx.Tag.BlocksUsing.AsyncResult,
+            SupportsAsync = true,
+            ReleaseMethod = "Set"
+        )]
         class AsyncQueueWaiter : AsyncResult, IQueueWaiter
         {
-            static Action<object> timerCallback = new Action<object>(AsyncQueueWaiter.TimerCallback);
+            static Action<object> timerCallback = new Action<object>(
+                AsyncQueueWaiter.TimerCallback
+            );
             bool itemAvailable;
 
             [Fx.Tag.SynchronizationObject(Blocking = false)]
@@ -866,7 +918,8 @@ namespace System.Runtime
 
             IOThreadTimer timer;
 
-            public AsyncQueueWaiter(TimeSpan timeout, AsyncCallback callback, object state) : base(callback, state)
+            public AsyncQueueWaiter(TimeSpan timeout, AsyncCallback callback, object state)
+                : base(callback, state)
             {
                 if (timeout != TimeSpan.MaxValue)
                 {
@@ -877,10 +930,7 @@ namespace System.Runtime
 
             object ThisLock
             {
-                get
-                {
-                    return this.thisLock;
-                }
+                get { return this.thisLock; }
             }
 
             [Fx.Tag.Blocking(Conditional = "!result.IsCompleted", CancelMethod = "Set")]
@@ -951,7 +1001,10 @@ namespace System.Runtime
 
             public Item DequeueAvailableItem()
             {
-                Fx.AssertAndThrow(this.totalCount != this.pendingCount, "ItemQueue does not contain any available items");
+                Fx.AssertAndThrow(
+                    this.totalCount != this.pendingCount,
+                    "ItemQueue does not contain any available items"
+                );
                 return DequeueItemCore();
             }
 
@@ -968,7 +1021,10 @@ namespace System.Runtime
 
             public void MakePendingItemAvailable()
             {
-                Fx.AssertAndThrow(this.pendingCount != 0, "ItemQueue does not contain any pending items");
+                Fx.AssertAndThrow(
+                    this.pendingCount != 0,
+                    "ItemQueue does not contain any pending items"
+                );
                 this.pendingCount--;
             }
 
@@ -1001,7 +1057,10 @@ namespace System.Runtime
         }
 
         [Fx.Tag.SynchronizationObject(Blocking = false)]
-        [Fx.Tag.SynchronizationPrimitive(Fx.Tag.BlocksUsing.ManualResetEvent, ReleaseMethod = "Set")]
+        [Fx.Tag.SynchronizationPrimitive(
+            Fx.Tag.BlocksUsing.ManualResetEvent,
+            ReleaseMethod = "Set"
+        )]
         class WaitQueueReader : IQueueReader
         {
             Exception exception;
@@ -1021,8 +1080,14 @@ namespace System.Runtime
             {
                 lock (this)
                 {
-                    Fx.Assert(this.item == null, "InputQueue.WaitQueueReader.Set: (this.item == null)");
-                    Fx.Assert(this.exception == null, "InputQueue.WaitQueueReader.Set: (this.exception == null)");
+                    Fx.Assert(
+                        this.item == null,
+                        "InputQueue.WaitQueueReader.Set: (this.item == null)"
+                    );
+                    Fx.Assert(
+                        this.exception == null,
+                        "InputQueue.WaitQueueReader.Set: (this.exception == null)"
+                    );
 
                     this.exception = item.Exception;
                     this.item = item.Value;
@@ -1070,7 +1135,10 @@ namespace System.Runtime
             }
         }
 
-        [Fx.Tag.SynchronizationPrimitive(Fx.Tag.BlocksUsing.ManualResetEvent, ReleaseMethod = "Set")]
+        [Fx.Tag.SynchronizationPrimitive(
+            Fx.Tag.BlocksUsing.ManualResetEvent,
+            ReleaseMethod = "Set"
+        )]
         class WaitQueueWaiter : IQueueWaiter
         {
             bool itemAvailable;

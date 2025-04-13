@@ -20,7 +20,7 @@ public class Program
         array[1] = 2;
 
         // a1, a2 and a3 all have different values here
-        byte a1  = Unsafe.ReadUnaligned<byte>(ref array[0]);
+        byte a1 = Unsafe.ReadUnaligned<byte>(ref array[0]);
         short a2 = Unsafe.ReadUnaligned<short>(ref array[0]);
         array[1] = 42;
         short a3 = Unsafe.ReadUnaligned<short>(ref array[0]);
@@ -48,5 +48,5 @@ public class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Consume(int n) {}
+    static void Consume(int n) { }
 }

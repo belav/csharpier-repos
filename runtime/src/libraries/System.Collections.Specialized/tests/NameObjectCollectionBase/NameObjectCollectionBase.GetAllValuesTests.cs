@@ -23,7 +23,10 @@ namespace System.Collections.Specialized.Tests
             VerifyGetAllValues(nameObjectCollection, nameObjectCollection.GetAllValues(type));
         }
 
-        private static void VerifyGetAllValues(NameObjectCollectionBase nameObjectCollection, Array values)
+        private static void VerifyGetAllValues(
+            NameObjectCollectionBase nameObjectCollection,
+            Array values
+        )
         {
             Assert.Equal(nameObjectCollection.Count, values.Length);
 
@@ -37,10 +40,15 @@ namespace System.Collections.Specialized.Tests
         public static void GetAllValues_Invalid()
         {
             MyNameObjectCollection nameObjectCollection = new MyNameObjectCollection();
-            AssertExtensions.Throws<ArgumentNullException>("type", () => nameObjectCollection.GetAllValues(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => nameObjectCollection.GetAllValues(null)
+            );
 
             nameObjectCollection.Add("name", new Foo("value"));
-            Assert.Throws<ArrayTypeMismatchException>(() => nameObjectCollection.GetAllValues(typeof(string)));
+            Assert.Throws<ArrayTypeMismatchException>(() =>
+                nameObjectCollection.GetAllValues(typeof(string))
+            );
         }
     }
 }

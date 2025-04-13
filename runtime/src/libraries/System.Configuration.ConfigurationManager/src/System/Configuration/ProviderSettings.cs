@@ -10,16 +10,22 @@ namespace System.Configuration
     {
         private readonly ConfigurationPropertyCollection _properties;
 
-        private readonly ConfigurationProperty _propName =
-            new ConfigurationProperty("name",
-                typeof(string),
-                null, // no reasonable default
-                null, // use default converter
-                ConfigurationProperty.s_nonEmptyStringValidator,
-                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
+        private readonly ConfigurationProperty _propName = new ConfigurationProperty(
+            "name",
+            typeof(string),
+            null, // no reasonable default
+            null, // use default converter
+            ConfigurationProperty.s_nonEmptyStringValidator,
+            ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        );
 
-        private readonly ConfigurationProperty _propType = new ConfigurationProperty("type", typeof(string), "",
-            ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsTypeStringTransformationRequired);
+        private readonly ConfigurationProperty _propType = new ConfigurationProperty(
+            "type",
+            typeof(string),
+            "",
+            ConfigurationPropertyOptions.IsRequired
+                | ConfigurationPropertyOptions.IsTypeStringTransformationRequired
+        );
 
         private NameValueCollection _propertyNameCollection;
 
@@ -29,7 +35,8 @@ namespace System.Configuration
             _propertyNameCollection = null;
         }
 
-        public ProviderSettings(string name, string type) : this()
+        public ProviderSettings(string name, string type)
+            : this()
         {
             Name = name;
             Type = type;
@@ -62,7 +69,8 @@ namespace System.Configuration
         {
             get
             {
-                if (_propertyNameCollection != null) return _propertyNameCollection;
+                if (_propertyNameCollection != null)
+                    return _propertyNameCollection;
 
                 lock (this)
                 {
@@ -79,9 +87,11 @@ namespace System.Configuration
             }
         }
 
-        protected internal override void Unmerge(ConfigurationElement sourceElement,
+        protected internal override void Unmerge(
+            ConfigurationElement sourceElement,
             ConfigurationElement parentElement,
-            ConfigurationSaveMode saveMode)
+            ConfigurationSaveMode saveMode
+        )
         {
             ProviderSettings parentProviders = parentElement as ProviderSettings;
             parentProviders?.UpdatePropertyCollection(); // before resetting make sure the bag is filled in
@@ -112,10 +122,16 @@ namespace System.Configuration
                 foreach (ConfigurationProperty prop in _properties)
                     if ((prop.Name != "name") && (prop.Name != "type"))
                     {
-                        if (_propertyNameCollection.Get(prop.Name) != null) continue;
+                        if (_propertyNameCollection.Get(prop.Name) != null)
+                            continue;
                         removeList ??= new ArrayList();
 
-                        if ((Values.GetConfigValue(prop.Name).ValueFlags & ConfigurationValueFlags.Locked) != 0)
+                        if (
+                            (
+                                Values.GetConfigValue(prop.Name).ValueFlags
+                                & ConfigurationValueFlags.Locked
+                            ) != 0
+                        )
                             continue;
                         removeList.Add(prop.Name);
                         bIsModified = true;
@@ -149,7 +165,6 @@ namespace System.Configuration
             return UpdatePropertyCollection() || base.IsModified();
         }
 
-
         private string GetProperty(string propName)
         {
             if (_properties.Contains(propName))
@@ -172,7 +187,8 @@ namespace System.Configuration
                 _properties.Add(setPropName);
             }
 
-            if (setPropName == null) return;
+            if (setPropName == null)
+                return;
             base[setPropName] = value;
         }
 

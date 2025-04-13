@@ -5,17 +5,18 @@
 #nullable disable
 
 using System;
+using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
-using Microsoft.CodeAnalysis.Shared.TestHooks;
 using Microsoft.CodeAnalysis.Options;
+using Microsoft.CodeAnalysis.Shared.TestHooks;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Roslyn.Utilities;
-using Microsoft.CodeAnalysis.Editor.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
 {
-    internal abstract class AbstractController<TSession, TModel, TPresenterSession, TEditorSession> : IController<TModel>
+    internal abstract class AbstractController<TSession, TModel, TPresenterSession, TEditorSession>
+        : IController<TModel>
         where TSession : class, ISession<TModel>
         where TPresenterSession : IIntelliSensePresenterSession
     {
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             IIntelliSensePresenter<TPresenterSession, TEditorSession> presenter,
             IAsynchronousOperationListener asyncListener,
             IDocumentProvider documentProvider,
-            string asyncOperationId)
+            string asyncOperationId
+        )
         {
             this.GlobalOptions = globalOptions;
             ThreadingContext = threadingContext;
@@ -86,7 +88,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
 
         void IController<TModel>.OnModelUpdated(TModel result, bool updateController)
         {
-            // This is only called from the model computation if it was not cancelled.  And if it was 
+            // This is only called from the model computation if it was not cancelled.  And if it was
             // not cancelled then we must have a pointer to it (as well as the presenter session).
             this.ThreadingContext.ThrowIfNotOnUIThread();
             VerifySessionIsActive();
@@ -94,14 +96,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             this.OnModelUpdated(result, updateController);
         }
 
-        IAsyncToken IController<TModel>.BeginAsyncOperation(string name, object tag, string filePath, int lineNumber)
+        IAsyncToken IController<TModel>.BeginAsyncOperation(
+            string name,
+            object tag,
+            string filePath,
+            int lineNumber
+        )
         {
             this.ThreadingContext.ThrowIfNotOnUIThread();
             VerifySessionIsActive();
-            name = String.IsNullOrEmpty(name)
-                ? _asyncOperationId
-                : $"{_asyncOperationId} - {name}";
-            return _asyncListener.BeginAsyncOperation(name, tag, filePath: filePath, lineNumber: lineNumber);
+            name = String.IsNullOrEmpty(name) ? _asyncOperationId : $"{_asyncOperationId} - {name}";
+            return _asyncListener.BeginAsyncOperation(
+                name,
+                tag,
+                filePath: filePath,
+                lineNumber: lineNumber
+            );
         }
 
         protected void VerifySessionIsActive()

@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -11,7 +11,7 @@
 //
 //	Classes:	MapArea, MapAreasCollection
 //
-//  Purpose:	Collection of MapArea classes is used to generate 
+//  Purpose:	Collection of MapArea classes is used to generate
 //              Chart image map, which provides functionality like
 //              tooltip, drilldown and client-side scripting.
 //
@@ -20,32 +20,31 @@
 //
 //===================================================================
 
-
 #region Used namespaces
 
 using System;
-using System.Text;
 using System.Collections;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Design;
-using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
+using System.Drawing.Design;
+using System.Drawing.Drawing2D;
+using System.Text;
 #if Microsoft_CONTROL
-	using System.Windows.Forms.DataVisualization.Charting;
-	using System.Windows.Forms.DataVisualization.Charting.Data;
-	using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
-	using System.Windows.Forms.DataVisualization.Charting.Utilities;
-	using System.Windows.Forms.DataVisualization.Charting.Borders3D;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Windows.Forms.DataVisualization.Charting.Data;
+using System.Windows.Forms.DataVisualization.Charting.ChartTypes;
+using System.Windows.Forms.DataVisualization.Charting.Utilities;
+using System.Windows.Forms.DataVisualization.Charting.Borders3D;
 
 #else
-	using System.Web;
-	using System.Web.UI;
-	using System.Web.UI.DataVisualization.Charting;
-	using System.Web.UI.DataVisualization.Charting.Utilities;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.DataVisualization.Charting;
+using System.Web.UI.DataVisualization.Charting.Utilities;
 using System.Text.RegularExpressions;
 using System.IO;
 
@@ -55,88 +54,79 @@ using System.IO;
 
 #if Microsoft_CONTROL
 
-	namespace System.Windows.Forms.DataVisualization.Charting
-
+namespace System.Windows.Forms.DataVisualization.Charting
 #else
 namespace System.Web.UI.DataVisualization.Charting
-
 #endif
 {
-
 #if ! Microsoft_CONTROL
 
-	#region Map area shape enumeration
+    #region Map area shape enumeration
 
-	/// <summary>
-	/// An enumeration of map areas shapes.
-	/// </summary>
-	public enum MapAreaShape
-	{
-		/// <summary>
-		/// The shape of the map area is rectangular.
-		/// </summary>
-		Rectangle,
+    /// <summary>
+    /// An enumeration of map areas shapes.
+    /// </summary>
+    public enum MapAreaShape
+    {
+        /// <summary>
+        /// The shape of the map area is rectangular.
+        /// </summary>
+        Rectangle,
 
-		/// <summary>
+        /// <summary>
         /// The shape of the map area is circular.
-		/// </summary>
-		Circle,
+        /// </summary>
+        Circle,
 
-		/// <summary>
+        /// <summary>
         /// The shape of the map area is polygonal.
-		/// </summary>
-		Polygon
-	}
+        /// </summary>
+        Polygon,
+    }
 
+    #endregion
 
-	#endregion
+    #region IMapArea interface defenition
 
-	#region IMapArea interface defenition
-
-	/// <summary>
-	/// Interface which defines common properties for the map area
-	/// </summary>
+    /// <summary>
+    /// Interface which defines common properties for the map area
+    /// </summary>
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public interface IChartMapArea
-	{
+    {
         /// <summary>
         /// Map area tooltip
         /// </summary>
         /// <value>The tooltip.</value>
-		string ToolTip
-		{
-			set; get;
-		}
+        string ToolTip { set; get; }
+
         /// <summary>
         /// Map area Href
         /// </summary>
         /// <value>The map area Href.</value>
         [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")]
-		string Url
-		{
-			set; get;
-		}
+        string Url { set; get; }
+
         /// <summary>
         /// Map area other custom attributes
         /// </summary>
         /// <value>The map area attributes.</value>
-		string MapAreaAttributes
-		{
-			set; get;
-        }
+        string MapAreaAttributes { set; get; }
 
         /// <summary>
         /// Map area custom data
         /// </summary>
         /// <value>The tag.</value>
-        object Tag
-        {
-            set;
-            get;
-        }
+        object Tag { set; get; }
 
         /// <summary>
         /// Map area post back value.
@@ -145,33 +135,35 @@ namespace System.Web.UI.DataVisualization.Charting
         string PostBackValue { get; set; }
     }
 
-	#endregion
+    #endregion
 
-	/// <summary>
-    /// The MapArea class represents an area of the chart with end-user 
+    /// <summary>
+    /// The MapArea class represents an area of the chart with end-user
     /// interactivity like tooltip, HREF or custom attributes.
-	/// </summary>
-	[
-	DefaultProperty("ToolTip"),
-	SRDescription("DescriptionAttributeMapArea_MapArea")
-	]
+    /// </summary>
+    [DefaultProperty("ToolTip"), SRDescription("DescriptionAttributeMapArea_MapArea")]
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class MapArea : ChartNamedElement, IChartMapArea
     {
-
         #region Member variables
 
-		private	string			_toolTip = String.Empty;
-        private string          _url = String.Empty;
-        private string          _attributes = String.Empty;
-        private string          _postBackValue = String.Empty;
-		private bool			_isCustom = true;
-		private MapAreaShape	_shape = MapAreaShape.Rectangle;
-        private float[]         _coordinates = new float[4];
-        private static Regex    _mapAttributesRegex;
+        private string _toolTip = String.Empty;
+        private string _url = String.Empty;
+        private string _attributes = String.Empty;
+        private string _postBackValue = String.Empty;
+        private bool _isCustom = true;
+        private MapAreaShape _shape = MapAreaShape.Rectangle;
+        private float[] _coordinates = new float[4];
+        private static Regex _mapAttributesRegex;
         #endregion
 
         #region Constructors
@@ -179,32 +171,34 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Initializes a new instance of the <see cref="MapArea"/> class.
         /// </summary>
-		public MapArea() 
-            : base()
-		{
-		}
+        public MapArea()
+            : base() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MapArea"/> class.
         /// </summary>
         /// <param name="url">The destination URL or anchor point of the map area.</param>
         /// <param name="path">A GraphicsPath object that defines the shape of the map area.</param>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "0#")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "0#"
+        )]
         public MapArea(string url, GraphicsPath path)
-            : this(String.Empty, url, String.Empty, String.Empty, path, null)
-        {
-        }
+            : this(String.Empty, url, String.Empty, String.Empty, path, null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MapArea"/> class.
         /// </summary>
         /// <param name="url">The destination URL or anchor point of the map area.</param>
         /// <param name="rect">A RectangleF structure that defines shape of the rectangular map area.</param>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "0#")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "0#"
+        )]
         public MapArea(string url, RectangleF rect)
-            : this(String.Empty, url, String.Empty, String.Empty, rect, null)
-        {
-        }
+            : this(String.Empty, url, String.Empty, String.Empty, rect, null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MapArea"/> class.
@@ -213,11 +207,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="url">The destination URL or anchor point of the map area.</param>
         /// <param name="coordinates">Coordinates array that determines the location of the circle, rectangle or polygon.
         /// The type of shape that is being used determines the type of coordinates required.</param>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#"
+        )]
         public MapArea(MapAreaShape shape, string url, float[] coordinates)
-            : this(shape, String.Empty, url, String.Empty, String.Empty, coordinates, null)
-        {
-        }
+            : this(shape, String.Empty, url, String.Empty, String.Empty, coordinates, null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MapArea"/> class.
@@ -228,33 +224,44 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="postBackValue">The postback value.</param>
         /// <param name="path">Area coordinates as graphic path</param>
         /// <param name="tag">The tag.</param>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#")]
-        public MapArea(string toolTip, string url, string attributes, string postBackValue, GraphicsPath path, object tag) 
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#"
+        )]
+        public MapArea(
+            string toolTip,
+            string url,
+            string attributes,
+            string postBackValue,
+            GraphicsPath path,
+            object tag
+        )
             : base()
-		{
-			if(path.PointCount == 0)
-			{
+        {
+            if (path.PointCount == 0)
+            {
                 throw new ArgumentException(SR.ExceptionImageMapPolygonShapeInvalid);
             }
 
             // Flatten all curved lines
-			path.Flatten();
+            path.Flatten();
 
-			// Allocate array of floats
-			PointF[] pathPoints = path.PathPoints;
-			float[]	coord = new float[pathPoints.Length * 2];
+            // Allocate array of floats
+            PointF[] pathPoints = path.PathPoints;
+            float[] coord = new float[pathPoints.Length * 2];
 
-			// Transfer path points
-			int	index = 0;
-			foreach(PointF point in pathPoints)
-			{
-				coord[index++] = point.X;
-				coord[index++] = point.Y;
-			}
+            // Transfer path points
+            int index = 0;
+            foreach (PointF point in pathPoints)
+            {
+                coord[index++] = point.X;
+                coord[index++] = point.Y;
+            }
 
             // Initiazize area
             Initialize(MapAreaShape.Polygon, toolTip, url, attributes, postBackValue, coord, tag);
-		}
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MapArea"/> class.
@@ -265,8 +272,19 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="postBackValue">The postback value.</param>
         /// <param name="rect">Rect coordinates</param>
         /// <param name="tag">The tag.</param>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#")]
-        public MapArea(string toolTip, string url, string attributes, string postBackValue, RectangleF rect, object tag)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#"
+        )]
+        public MapArea(
+            string toolTip,
+            string url,
+            string attributes,
+            string postBackValue,
+            RectangleF rect,
+            object tag
+        )
             : base()
         {
             float[] coord = new float[4];
@@ -288,15 +306,34 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="postBackValue">The postback value.</param>
         /// <param name="coordinates">The coordinates.</param>
         /// <param name="tag">The tag.</param>
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "2#")]
-        public MapArea(MapAreaShape shape, string toolTip, string url, string attributes, string postBackValue, float[] coordinates, object tag) 
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "2#"
+        )]
+        public MapArea(
+            MapAreaShape shape,
+            string toolTip,
+            string url,
+            string attributes,
+            string postBackValue,
+            float[] coordinates,
+            object tag
+        )
             : base()
         {
             Initialize(shape, toolTip, url, attributes, postBackValue, coordinates, tag);
         }
 
-
-        private void Initialize(MapAreaShape shape, string toolTip, string url, string attributes, string postBackValue, float[] coordinates, object tag)
+        private void Initialize(
+            MapAreaShape shape,
+            string toolTip,
+            string url,
+            string attributes,
+            string postBackValue,
+            float[] coordinates,
+            object tag
+        )
         {
             // Check number of coordinates depending on the area shape
             if (shape == MapAreaShape.Circle && coordinates.Length != 3)
@@ -322,7 +359,7 @@ namespace System.Web.UI.DataVisualization.Charting
             this.Tag = tag;
             coordinates.CopyTo(this._coordinates, 0);
         }
-		#endregion
+        #endregion
 
         #region Map area HTML tag generation methods
 
@@ -350,7 +387,6 @@ namespace System.Web.UI.DataVisualization.Charting
             return String.Empty;
         }
 
-
         /// <summary>
         /// Gets the coordinates.
         /// </summary>
@@ -362,7 +398,9 @@ namespace System.Web.UI.DataVisualization.Charting
             float[] transformedCoord = new float[this.Coordinates.Length];
             if (this.Shape == MapAreaShape.Circle)
             {
-                PointF p = graph.GetAbsolutePoint(new PointF(this.Coordinates[0], this.Coordinates[1]));
+                PointF p = graph.GetAbsolutePoint(
+                    new PointF(this.Coordinates[0], this.Coordinates[1])
+                );
                 transformedCoord[0] = p.X;
                 transformedCoord[1] = p.Y;
                 p = graph.GetAbsolutePoint(new PointF(this.Coordinates[2], this.Coordinates[1]));
@@ -370,7 +408,9 @@ namespace System.Web.UI.DataVisualization.Charting
             }
             else if (this.Shape == MapAreaShape.Rectangle)
             {
-                PointF p = graph.GetAbsolutePoint(new PointF(this.Coordinates[0], this.Coordinates[1]));
+                PointF p = graph.GetAbsolutePoint(
+                    new PointF(this.Coordinates[0], this.Coordinates[1])
+                );
                 transformedCoord[0] = p.X;
                 transformedCoord[1] = p.Y;
                 p = graph.GetAbsolutePoint(new PointF(this.Coordinates[2], this.Coordinates[3]));
@@ -400,7 +440,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     transformedCoord[index + 1] = pConverted.Y;
                 }
             }
-            
+
             StringBuilder tagStringBuilder = new StringBuilder();
             // Store transformed coordinates in the string
             bool firstElement = true;
@@ -419,14 +459,16 @@ namespace System.Web.UI.DataVisualization.Charting
 
         private static bool IsJavaScript(string value)
         {
-            string checkValue = value.Trim().Replace("\r", String.Empty).Replace("\n", String.Empty);
+            string checkValue = value
+                .Trim()
+                .Replace("\r", String.Empty)
+                .Replace("\n", String.Empty);
             if (checkValue.StartsWith("javascript:", StringComparison.OrdinalIgnoreCase))
             {
                 return true;
             }
             return false;
         }
-
 
         /// <summary>
         /// Encodes the value.
@@ -439,8 +481,10 @@ namespace System.Web.UI.DataVisualization.Charting
         {
             if (chart.IsMapAreaAttributesEncoded)
             {
-                if (IsJavaScript(value) ||
-                    name.Trim().StartsWith("on", StringComparison.OrdinalIgnoreCase))
+                if (
+                    IsJavaScript(value)
+                    || name.Trim().StartsWith("on", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     return HttpUtility.UrlEncode(value);
                 }
@@ -453,52 +497,81 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="writer">The writer.</param>
         /// <param name="chart">The chart.</param>
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification="We use lower case to generate html attributes.")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "We use lower case to generate html attributes."
+        )]
         internal void RenderTag(HtmlTextWriter writer, Chart chart)
         {
             StringBuilder excludedAttributes = new StringBuilder();
 
             writer.WriteLine();
-            
+
             writer.AddAttribute(HtmlTextWriterAttribute.Shape, this.GetShapeName(), false);
-            writer.AddAttribute(HtmlTextWriterAttribute.Coords, this.GetCoordinates(chart.chartPicture.ChartGraph));
+            writer.AddAttribute(
+                HtmlTextWriterAttribute.Coords,
+                this.GetCoordinates(chart.chartPicture.ChartGraph)
+            );
 
             if (!String.IsNullOrEmpty(this.ToolTip))
             {
                 excludedAttributes.Append("title,");
-                writer.AddAttribute(HtmlTextWriterAttribute.Title, EncodeValue(chart, "title", this.ToolTip));
+                writer.AddAttribute(
+                    HtmlTextWriterAttribute.Title,
+                    EncodeValue(chart, "title", this.ToolTip)
+                );
             }
-            
+
             bool postbackRendered = false;
             if (!String.IsNullOrEmpty(this.Url))
             {
                 excludedAttributes.Append("href,");
                 string resolvedUrl = chart.ResolveClientUrl(this.Url);
-                writer.AddAttribute(HtmlTextWriterAttribute.Href, EncodeValue(chart, "href", resolvedUrl));
+                writer.AddAttribute(
+                    HtmlTextWriterAttribute.Href,
+                    EncodeValue(chart, "href", resolvedUrl)
+                );
             }
             else if (!String.IsNullOrEmpty(this.PostBackValue) && chart.Page != null)
             {
                 postbackRendered = true;
                 excludedAttributes.Append("href,");
-                writer.AddAttribute(HtmlTextWriterAttribute.Href, chart.Page.ClientScript.GetPostBackClientHyperlink(chart, this.PostBackValue));
+                writer.AddAttribute(
+                    HtmlTextWriterAttribute.Href,
+                    chart.Page.ClientScript.GetPostBackClientHyperlink(chart, this.PostBackValue)
+                );
             }
-            
-            if (!postbackRendered && !String.IsNullOrEmpty(this.PostBackValue) && chart.Page != null)
+
+            if (
+                !postbackRendered
+                && !String.IsNullOrEmpty(this.PostBackValue)
+                && chart.Page != null
+            )
             {
                 excludedAttributes.Append("onclick,");
-                writer.AddAttribute(HtmlTextWriterAttribute.Onclick, chart.Page.ClientScript.GetPostBackEventReference(chart, this.PostBackValue));
+                writer.AddAttribute(
+                    HtmlTextWriterAttribute.Onclick,
+                    chart.Page.ClientScript.GetPostBackEventReference(chart, this.PostBackValue)
+                );
             }
-            
+
             if (!String.IsNullOrEmpty(this._attributes))
             {
                 string excludedAttr = excludedAttributes.ToString();
-                
+
                 // matches name1="value1" name2="value2", don't match name1="val"ue1" or name1="value1" />
                 if (_mapAttributesRegex == null)
                 {
-                    _mapAttributesRegex = new Regex(@"\s?(?<name>(\w+))\s?=\s?""(?<value>[^""]+)""\s?", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.IgnorePatternWhitespace | RegexOptions.Compiled);
+                    _mapAttributesRegex = new Regex(
+                        @"\s?(?<name>(\w+))\s?=\s?""(?<value>[^""]+)""\s?",
+                        RegexOptions.IgnoreCase
+                            | RegexOptions.Singleline
+                            | RegexOptions.IgnorePatternWhitespace
+                            | RegexOptions.Compiled
+                    );
                 }
-                
+
                 foreach (Match match in _mapAttributesRegex.Matches(this._attributes))
                 {
                     Group names = match.Groups["name"];
@@ -507,12 +580,15 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         string name = names.Captures[i].Value.ToLowerInvariant();
                         string value = values.Captures[i].Value;
-                        
+
                         // skip already rendered attributes
-                        if (!excludedAttr.Contains(name + ","))  
+                        if (!excludedAttr.Contains(name + ","))
                         {
                             // is it url?
-                            if ("src,href,longdesc,background,".Contains(name + ",") && !IsJavaScript(value))
+                            if (
+                                "src,href,longdesc,background,".Contains(name + ",")
+                                && !IsJavaScript(value)
+                            )
                             {
                                 value = chart.ResolveClientUrl(value);
                             }
@@ -531,7 +607,10 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 if (!String.IsNullOrEmpty(this.ToolTip))
                 {
-                    writer.AddAttribute(HtmlTextWriterAttribute.Alt, EncodeValue(chart, "title", this.ToolTip));
+                    writer.AddAttribute(
+                        HtmlTextWriterAttribute.Alt,
+                        EncodeValue(chart, "title", this.ToolTip)
+                    );
                 }
                 else
                 {
@@ -543,180 +622,137 @@ namespace System.Web.UI.DataVisualization.Charting
             writer.RenderEndTag();
         }
 
-		#endregion
+        #endregion
 
-		#region	MapArea Properties
+        #region	MapArea Properties
 
-		/// <summary>
-		/// Gets or sets a flag which indicates whether the map area is custom.
-		/// </summary>
-		[
-		Browsable(false),
-		SRDescription("DescriptionAttributeMapArea_Custom"),
-		DefaultValue(""),
-		DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-		SerializationVisibilityAttribute(SerializationVisibility.Hidden)
-		]
-		public bool IsCustom
-		{
-			get
-			{
-				return _isCustom;
-			}
-			internal set
-			{
-				_isCustom = value;
-			}
-		}
+        /// <summary>
+        /// Gets or sets a flag which indicates whether the map area is custom.
+        /// </summary>
+        [
+            Browsable(false),
+            SRDescription("DescriptionAttributeMapArea_Custom"),
+            DefaultValue(""),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden)
+        ]
+        public bool IsCustom
+        {
+            get { return _isCustom; }
+            internal set { _isCustom = value; }
+        }
 
-		/// <summary>
+        /// <summary>
         /// Gets or sets the coordinates of of the map area.
-		/// </summary>
-		[
-		SRCategory("CategoryAttributeShape"),
-		Bindable(true),
-		SRDescription("DescriptionAttributeMapArea_Coordinates"),
-		DefaultValue(""),
-		#if !Microsoft_CONTROL
-		PersistenceMode(PersistenceMode.Attribute),
-		#endif
-		TypeConverter(typeof(MapAreaCoordinatesConverter))
-		]
+        /// </summary>
+        [
+            SRCategory("CategoryAttributeShape"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeMapArea_Coordinates"),
+            DefaultValue(""),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute),
+#endif
+            TypeConverter(typeof(MapAreaCoordinatesConverter))
+        ]
         [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays")]
-		public float[] Coordinates
-		{
-			get
-			{
-				return _coordinates;
-			}
-			set
-			{
-				_coordinates = value;
-			}
-		}
+        public float[] Coordinates
+        {
+            get { return _coordinates; }
+            set { _coordinates = value; }
+        }
 
-		/// <summary>
+        /// <summary>
         /// Gets or sets the shape of the map area.
-		/// </summary>
-		[
-		SRCategory("CategoryAttributeShape"),
-		Bindable(true),
-		SRDescription("DescriptionAttributeMapArea_Shape"),
-		DefaultValue(typeof(MapAreaShape), "Rectangle"),
-		#if !Microsoft_CONTROL
-		PersistenceMode(PersistenceMode.Attribute)
-		#endif
-		]
-		public MapAreaShape Shape
-		{
-			get
-			{
-				return _shape;
-			}
-			set
-			{
-				_shape = value;
-			}
-		}
-	
-		/// <summary>
+        /// </summary>
+        [
+            SRCategory("CategoryAttributeShape"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeMapArea_Shape"),
+            DefaultValue(typeof(MapAreaShape), "Rectangle"),
+#if !Microsoft_CONTROL
+            PersistenceMode(PersistenceMode.Attribute)
+#endif
+        ]
+        public MapAreaShape Shape
+        {
+            get { return _shape; }
+            set { _shape = value; }
+        }
+
+        /// <summary>
         /// Gets or sets the name of the map area.
-		/// </summary>
-		[
-		SRCategory("CategoryAttributeData"),
-		SRDescription("DescriptionAttributeMapArea_Name"),
-		DefaultValue("Map Area"),
-		Browsable(false),
-		DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
-		SerializationVisibilityAttribute(SerializationVisibility.Hidden)
-		]
-		public override string Name
-		{
-			get
-			{
-				return base.Name;
-			}
-			set
-			{
-				base.Name = value;
-			}
-		}
-		#endregion
+        /// </summary>
+        [
+            SRCategory("CategoryAttributeData"),
+            SRDescription("DescriptionAttributeMapArea_Name"),
+            DefaultValue("Map Area"),
+            Browsable(false),
+            DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden),
+            SerializationVisibilityAttribute(SerializationVisibility.Hidden)
+        ]
+        public override string Name
+        {
+            get { return base.Name; }
+            set { base.Name = value; }
+        }
+        #endregion
 
-		#region	IMapAreaAttributesutes Properties implementation
+        #region	IMapAreaAttributesutes Properties implementation
 
-		/// <summary>
+        /// <summary>
         /// Gets or sets the tooltip of the map area.
-		/// </summary>
-		[
-
-        SRCategory("CategoryAttributeMapArea"),
-		Bindable(true),
-		SRDescription("DescriptionAttributeToolTip"),
-		DefaultValue(""),
+        /// </summary>
+        [
+            SRCategory("CategoryAttributeMapArea"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeToolTip"),
+            DefaultValue(""),
 #if !Microsoft_CONTROL
-		PersistenceMode(PersistenceMode.Attribute)
+            PersistenceMode(PersistenceMode.Attribute)
 #endif
-		]
-		public string ToolTip
-		{
-			set
-			{
-				_toolTip = value;
-			}
-			get
-			{
-				return _toolTip;
-			}
-		}
+        ]
+        public string ToolTip
+        {
+            set { _toolTip = value; }
+            get { return _toolTip; }
+        }
 
-		/// <summary>
+        /// <summary>
         /// Gets or sets the URL of the map area.
-		/// </summary>
-		[
-		SRCategory("CategoryAttributeMapArea"),
-		Bindable(true),
-		SRDescription("DescriptionAttributeUrl"),
-		DefaultValue(""),
+        /// </summary>
+        [
+            SRCategory("CategoryAttributeMapArea"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeUrl"),
+            DefaultValue(""),
 #if !Microsoft_CONTROL
-		PersistenceMode(PersistenceMode.Attribute),
-        Editor(Editors.UrlValueEditor.Editor, Editors.UrlValueEditor.Base)
+            PersistenceMode(PersistenceMode.Attribute),
+            Editor(Editors.UrlValueEditor.Editor, Editors.UrlValueEditor.Base)
 #endif
-		]
-		public string Url
-		{
-			set
-			{
-				_url = value;
-			}
-			get
-			{
-				return _url;
-			}
-		}
+        ]
+        public string Url
+        {
+            set { _url = value; }
+            get { return _url; }
+        }
 
-		/// <summary>
+        /// <summary>
         /// Gets or sets the attributes of the map area.
-		/// </summary>
-		[
-        SRCategory("CategoryAttributeMapArea"),
-		Bindable(true),
-		SRDescription("DescriptionAttributeMapAreaAttributes"),
-		DefaultValue(""),
+        /// </summary>
+        [
+            SRCategory("CategoryAttributeMapArea"),
+            Bindable(true),
+            SRDescription("DescriptionAttributeMapAreaAttributes"),
+            DefaultValue(""),
 #if !Microsoft_CONTROL
-		PersistenceMode(PersistenceMode.Attribute)
+            PersistenceMode(PersistenceMode.Attribute)
 #endif
-		]
-		public string MapAreaAttributes
-		{
-			set
-			{
-				_attributes = value;
-			}
-			get
-			{
-				return _attributes;
-			}
+        ]
+        public string MapAreaAttributes
+        {
+            set { _attributes = value; }
+            get { return _attributes; }
         }
 
         /// <summary>
@@ -726,48 +762,40 @@ namespace System.Web.UI.DataVisualization.Charting
         [DefaultValue("")]
         [SRCategory(SR.Keys.CategoryAttributeMapArea)]
         [SRDescription(SR.Keys.DescriptionAttributePostBackValue)]
-        public string PostBackValue 
+        public string PostBackValue
         {
-            get
-            {
-                return this._postBackValue;
-            }
-            set
-            {
-                this._postBackValue = value;
-            }
+            get { return this._postBackValue; }
+            set { this._postBackValue = value; }
         }
 
-
         #endregion
-
     }
 
-
-	/// <summary>
+    /// <summary>
     /// The MapAreasCollection class is a strongly typed collection of MapAreas.
-	/// </summary>
-	[
-	SRDescription("DescriptionAttributeMapAreasCollection_MapAreasCollection")
-	]
+    /// </summary>
+    [SRDescription("DescriptionAttributeMapAreasCollection_MapAreasCollection")]
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class MapAreasCollection : ChartElementCollection<MapArea>
-	{
-
+    {
         #region Constructors
 
-		/// <summary>
-		/// Public constructor.
-		/// </summary>
-		public MapAreasCollection()
-            : base(null)
-		{
-		}
+        /// <summary>
+        /// Public constructor.
+        /// </summary>
+        public MapAreasCollection()
+            : base(null) { }
 
-        #endregion 
+        #endregion
 
         #region Methods
 
@@ -782,37 +810,55 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="path">Area coordinates as graphics path.</param>
         /// <param name="absCoordinates">Absolute coordinates in the graphics path.</param>
         /// <param name="graph">Chart graphics object.</param>
-		internal void InsertPath(
-			int index, 
-			string toolTip, 
-			string url,
+        internal void InsertPath(
+            int index,
+            string toolTip,
+            string url,
             string attributes,
-            string postBackValue, 
-			GraphicsPath path, 
-			bool absCoordinates,
-			ChartGraphics graph) 
-		{
+            string postBackValue,
+            GraphicsPath path,
+            bool absCoordinates,
+            ChartGraphics graph
+        )
+        {
+            // If there is more then one graphical path split them and create
+            // image maps for every graphical path separately.
+            GraphicsPathIterator iterator = new GraphicsPathIterator(path);
 
-			// If there is more then one graphical path split them and create 
-			// image maps for every graphical path separately.
-			GraphicsPathIterator iterator = new GraphicsPathIterator(path);
-
-			// There is more then one path.
-			if( iterator.SubpathCount > 1 )
-			{
-				GraphicsPath subPath = new GraphicsPath();
-				while(iterator.NextMarker(subPath) > 0)
-				{
-                    InsertSubpath(index, toolTip, url, attributes, postBackValue, subPath, absCoordinates, graph);
-					subPath.Reset();
-				}
-			}
-			// There is only one path
-			else
-			{
-                InsertSubpath(index, toolTip, url, attributes, postBackValue, path, absCoordinates, graph);
-			}
-		}
+            // There is more then one path.
+            if (iterator.SubpathCount > 1)
+            {
+                GraphicsPath subPath = new GraphicsPath();
+                while (iterator.NextMarker(subPath) > 0)
+                {
+                    InsertSubpath(
+                        index,
+                        toolTip,
+                        url,
+                        attributes,
+                        postBackValue,
+                        subPath,
+                        absCoordinates,
+                        graph
+                    );
+                    subPath.Reset();
+                }
+            }
+            // There is only one path
+            else
+            {
+                InsertSubpath(
+                    index,
+                    toolTip,
+                    url,
+                    attributes,
+                    postBackValue,
+                    path,
+                    absCoordinates,
+                    graph
+                );
+            }
+        }
 
         /// <summary>
         /// Insert new map area item into the collection.
@@ -825,67 +871,76 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="path">Area coordinates as graphics path.</param>
         /// <param name="absCoordinates">Absolute coordinates in the graphics path.</param>
         /// <param name="graph">Chart graphics object.</param>
-		private void InsertSubpath(
-			int index, 
-			string toolTip, 
-			string url,
+        private void InsertSubpath(
+            int index,
+            string toolTip,
+            string url,
             string attributes,
-            string postBackValue, 
-			GraphicsPath path, 
-			bool absCoordinates,
-			ChartGraphics graph)
-		{
-			if(path.PointCount > 0)
-			{
-				// Flatten all curved lines
-				path.Flatten();
+            string postBackValue,
+            GraphicsPath path,
+            bool absCoordinates,
+            ChartGraphics graph
+        )
+        {
+            if (path.PointCount > 0)
+            {
+                // Flatten all curved lines
+                path.Flatten();
 
-				// Allocate array of floats
-				PointF[] pathPoints = path.PathPoints;
-				float[]	coord = new float[pathPoints.Length * 2];
+                // Allocate array of floats
+                PointF[] pathPoints = path.PathPoints;
+                float[] coord = new float[pathPoints.Length * 2];
 
-				// Convert absolute coordinates to relative
-				if(absCoordinates)
-				{
-					for(int pointIndex = 0; pointIndex < pathPoints.Length; pointIndex++)
-					{
-						pathPoints[pointIndex] = graph.GetRelativePoint( pathPoints[pointIndex] );
-					}
-				}
+                // Convert absolute coordinates to relative
+                if (absCoordinates)
+                {
+                    for (int pointIndex = 0; pointIndex < pathPoints.Length; pointIndex++)
+                    {
+                        pathPoints[pointIndex] = graph.GetRelativePoint(pathPoints[pointIndex]);
+                    }
+                }
 
-				// Transfer path points
-				int	i = 0;
-				foreach(PointF point in pathPoints)
-				{
-					coord[i++] = point.X;
-					coord[i++] = point.Y;
-				}
+                // Transfer path points
+                int i = 0;
+                foreach (PointF point in pathPoints)
+                {
+                    coord[i++] = point.X;
+                    coord[i++] = point.Y;
+                }
 
-				// Add new area
-                MapArea area = new MapArea(MapAreaShape.Polygon, toolTip, url, attributes, postBackValue, coord, null);
+                // Add new area
+                MapArea area = new MapArea(
+                    MapAreaShape.Polygon,
+                    toolTip,
+                    url,
+                    attributes,
+                    postBackValue,
+                    coord,
+                    null
+                );
                 area.IsCustom = false;
                 this.Insert(index, area);
-			}
-		}
+            }
+        }
 
         /// <summary>
-		/// Removes all non custom map areas items from the collection.
-		/// </summary>
-		internal void RemoveNonCustom()
-		{
-			for(int index = 0; index < this.Count; index++)
-			{
-				// Check the custom flag
-				if(!this[index].IsCustom)
-				{
-					this.RemoveAt(index);
-					--index;
-				}
-			}
-		}
+        /// Removes all non custom map areas items from the collection.
+        /// </summary>
+        internal void RemoveNonCustom()
+        {
+            for (int index = 0; index < this.Count; index++)
+            {
+                // Check the custom flag
+                if (!this[index].IsCustom)
+                {
+                    this.RemoveAt(index);
+                    --index;
+                }
+            }
+        }
 
         #endregion
-	}
+    }
 
 #endif
 }

@@ -21,10 +21,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             const string conditionName = "condition";
 
-            var trivia1 = SyntaxFactory.Trivia(SyntaxFactory.IfDirectiveTrivia(SyntaxFactory.IdentifierName(conditionName), false, false, false));
+            var trivia1 = SyntaxFactory.Trivia(
+                SyntaxFactory.IfDirectiveTrivia(
+                    SyntaxFactory.IdentifierName(conditionName),
+                    false,
+                    false,
+                    false
+                )
+            );
             var structuredTrivia = trivia1.GetStructure() as IfDirectiveTriviaSyntax;
             Assert.NotNull(structuredTrivia);
-            Assert.Equal(conditionName, ((IdentifierNameSyntax)structuredTrivia.Condition).Identifier.ValueText);
+            Assert.Equal(
+                conditionName,
+                ((IdentifierNameSyntax)structuredTrivia.Condition).Identifier.ValueText
+            );
             var trivia2 = structuredTrivia.ParentTrivia;
             Assert.Equal(trivia1, trivia2);
         }
@@ -32,28 +42,49 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestStructuredTrivia()
         {
-            var spaceTrivia = SyntaxTriviaListBuilder.Create().Add(SyntaxFactory.Whitespace(" ")).ToList();
+            var spaceTrivia = SyntaxTriviaListBuilder
+                .Create()
+                .Add(SyntaxFactory.Whitespace(" "))
+                .ToList();
             var emptyTrivia = SyntaxTriviaListBuilder.Create().ToList();
 
             var name = "goo";
             var xmlStartElement = SyntaxFactory.XmlElementStartTag(
-                SyntaxFactory.Token(spaceTrivia, SyntaxKind.LessThanToken, default(SyntaxTriviaList)),
-                SyntaxFactory.XmlName(null,
-                    SyntaxFactory.Identifier(name)),
+                SyntaxFactory.Token(
+                    spaceTrivia,
+                    SyntaxKind.LessThanToken,
+                    default(SyntaxTriviaList)
+                ),
+                SyntaxFactory.XmlName(null, SyntaxFactory.Identifier(name)),
                 default(SyntaxList<XmlAttributeSyntax>),
-                SyntaxFactory.Token(default(SyntaxTriviaList), SyntaxKind.GreaterThanToken, spaceTrivia));
+                SyntaxFactory.Token(
+                    default(SyntaxTriviaList),
+                    SyntaxKind.GreaterThanToken,
+                    spaceTrivia
+                )
+            );
 
             var xmlEndElement = SyntaxFactory.XmlElementEndTag(
                 SyntaxFactory.Token(SyntaxKind.LessThanSlashToken),
-                SyntaxFactory.XmlName(null,
-                    SyntaxFactory.Identifier(name)),
-                SyntaxFactory.Token(default(SyntaxTriviaList), SyntaxKind.GreaterThanToken, spaceTrivia));
+                SyntaxFactory.XmlName(null, SyntaxFactory.Identifier(name)),
+                SyntaxFactory.Token(
+                    default(SyntaxTriviaList),
+                    SyntaxKind.GreaterThanToken,
+                    spaceTrivia
+                )
+            );
 
-            var xmlElement = SyntaxFactory.XmlElement(xmlStartElement, default(SyntaxList<XmlNodeSyntax>), xmlEndElement);
+            var xmlElement = SyntaxFactory.XmlElement(
+                xmlStartElement,
+                default(SyntaxList<XmlNodeSyntax>),
+                xmlEndElement
+            );
             Assert.Equal(" <goo> </goo> ", xmlElement.ToFullString());
             Assert.Equal("<goo> </goo>", xmlElement.ToString());
 
-            var docComment = SyntaxFactory.DocumentationCommentTrivia(SyntaxKind.SingleLineDocumentationCommentTrivia).WithContent(new SyntaxList<XmlNodeSyntax>(xmlElement));
+            var docComment = SyntaxFactory
+                .DocumentationCommentTrivia(SyntaxKind.SingleLineDocumentationCommentTrivia)
+                .WithContent(new SyntaxList<XmlNodeSyntax>(xmlElement));
             Assert.Equal(" <goo> </goo> ", docComment.ToFullString());
             // Assert.Equal("<goo> </goo>", docComment.GetText());
             var child = (XmlElementSyntax)docComment.ChildNodesAndTokens()[0];
@@ -64,7 +95,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var sTrivia = SyntaxFactory.Trivia(docComment);
             Assert.NotEqual(default(SyntaxTrivia), sTrivia);
-            var ident = SyntaxFactory.Identifier(SyntaxTriviaList.Create(sTrivia), "banana", spaceTrivia);
+            var ident = SyntaxFactory.Identifier(
+                SyntaxTriviaList.Create(sTrivia),
+                "banana",
+                spaceTrivia
+            );
 
             Assert.Equal(" <goo> </goo> banana ", ident.ToFullString());
             Assert.Equal("banana", ident.ToString());
@@ -90,21 +125,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(identTrivia, foundTrivia);
 
             // make sure FindLeafNodesOverlappingWithSpan does not dig into the structured trivia.
-            var resultList = identExpr.DescendantTokens(t => t.FullSpan.OverlapsWith(new TextSpan(3, 18)));
+            var resultList = identExpr.DescendantTokens(t =>
+                t.FullSpan.OverlapsWith(new TextSpan(3, 18))
+            );
             Assert.Equal(1, resultList.Count());
         }
 
         [Fact]
         public void ReferenceDirectives1()
         {
-            var tree = SyntaxFactory.ParseSyntaxTree(@"
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                @"
 #r ""ref0""
 #define Goo
 #r ""ref1""
 #r ""ref2""
 using Blah;
 #r ""ref3""
-");
+"
+            );
             var compilationUnit = tree.GetCompilationUnitRoot();
             var directives = compilationUnit.GetReferenceDirectives();
             Assert.Equal(3, directives.Count);
@@ -116,9 +155,11 @@ using Blah;
         [Fact]
         public void ReferenceDirectives2()
         {
-            var tree = SyntaxFactory.ParseSyntaxTree(@"
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                @"
 #r ""ref0""
-");
+"
+            );
             var compilationUnit = tree.GetCompilationUnitRoot();
             var directives = compilationUnit.GetReferenceDirectives();
             Assert.Equal(1, directives.Count);
@@ -128,8 +169,10 @@ using Blah;
         [Fact]
         public void ReferenceDirectives3()
         {
-            var tree = SyntaxFactory.ParseSyntaxTree(@"
-");
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                @"
+"
+            );
             var compilationUnit = tree.GetCompilationUnitRoot();
             var directives = compilationUnit.GetReferenceDirectives();
             Assert.Equal(0, directives.Count);
@@ -138,11 +181,13 @@ using Blah;
         [Fact]
         public void ReferenceDirectives4()
         {
-            var tree = SyntaxFactory.ParseSyntaxTree(@"
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                @"
 #r 
 #r ""
 #r ""a"" blah
-");
+"
+            );
             var compilationUnit = tree.GetCompilationUnitRoot();
             var directives = compilationUnit.GetReferenceDirectives();
             Assert.Equal(3, directives.Count);
@@ -156,15 +201,19 @@ using Blah;
         [Fact]
         public void DocumentationCommentsLocation_SingleLine()
         {
-            var tree = SyntaxFactory.ParseSyntaxTree(@"
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                @"
 class Program
 { /// <summary/>
 
     static void Main() { }
 }
-");
+"
+            );
 
-            var trivia = tree.GetCompilationUnitRoot().DescendantTrivia().Single(t => t.Kind() == SyntaxKind.SingleLineDocumentationCommentTrivia);
+            var trivia = tree.GetCompilationUnitRoot()
+                .DescendantTrivia()
+                .Single(t => t.Kind() == SyntaxKind.SingleLineDocumentationCommentTrivia);
             Assert.Equal(SyntaxKind.StaticKeyword, trivia.Token.Kind());
         }
 
@@ -172,15 +221,19 @@ class Program
         [Fact]
         public void DocumentationCommentsLocation_MultiLine()
         {
-            var tree = SyntaxFactory.ParseSyntaxTree(@"
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                @"
 class Program
 { /** <summary/> */
 
     static void Main() { }
 }
-");
+"
+            );
 
-            var trivia = tree.GetCompilationUnitRoot().DescendantTrivia().Single(t => t.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia);
+            var trivia = tree.GetCompilationUnitRoot()
+                .DescendantTrivia()
+                .Single(t => t.Kind() == SyntaxKind.MultiLineDocumentationCommentTrivia);
             Assert.Equal(SyntaxKind.StaticKeyword, trivia.Token.Kind());
         }
 
@@ -194,22 +247,28 @@ class Program
             Assert.Equal(1, trivia.Count);
 
             // Bounds checking exceptions
-            Assert.Throws<System.ArgumentOutOfRangeException>(delegate
-            {
-                var t2 = trivia[1];
-            });
+            Assert.Throws<System.ArgumentOutOfRangeException>(
+                delegate
+                {
+                    var t2 = trivia[1];
+                }
+            );
 
-            Assert.Throws<System.ArgumentOutOfRangeException>(delegate
-            {
-                var t3 = trivia[-1];
-            });
+            Assert.Throws<System.ArgumentOutOfRangeException>(
+                delegate
+                {
+                    var t3 = trivia[-1];
+                }
+            );
 
             // Invalid Use create SyntaxTriviaList
-            Assert.Throws<System.ArgumentOutOfRangeException>(delegate
-            {
-                var trl = new SyntaxTriviaList();
-                var t2 = trl[0];
-            });
+            Assert.Throws<System.ArgumentOutOfRangeException>(
+                delegate
+                {
+                    var trl = new SyntaxTriviaList();
+                    var t2 = trl[0];
+                }
+            );
         }
     }
 }

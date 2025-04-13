@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.Collections;
 
@@ -14,8 +14,8 @@ namespace System.Web.UI.WebControls.WebParts {
     /// the default support for automatically storing properties
     /// marked as personalizable.
     /// </devdoc>
-    public interface IPersonalizable {
-
+    public interface IPersonalizable
+    {
         /// <devdoc>
         /// Allows the implementor to indicate whether its personalized state
         /// has been changed and must be persisted. This can be used to

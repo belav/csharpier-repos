@@ -1,7 +1,16 @@
 <MyDataSet>
-  <xs:schema id="MyDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema"
- xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xs:element name="MyDataSet" msdata:IsDataSet="true" msdata:MainDataTable="Main" msdata:UseCurrentLocale="true">
+  <xs:schema
+    id="MyDataSet"
+    xmlns=""
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+  >
+    <xs:element
+      name="MyDataSet"
+      msdata:IsDataSet="true"
+      msdata:MainDataTable="Main"
+      msdata:UseCurrentLocale="true"
+    >
       <xs:complexType>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element name="Main">
@@ -61,4 +70,3 @@
     <ChildData>Parent2Child3</ChildData>
   </Child>
 </MyDataSet>
-

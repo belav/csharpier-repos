@@ -41,6 +41,6 @@ namespace System.Resources
         Stream = 0x21,
 
         // User types - serialized using the binary formatter.
-        StartOfUserTypes = 0x40
+        StartOfUserTypes = 0x40,
     }
 }

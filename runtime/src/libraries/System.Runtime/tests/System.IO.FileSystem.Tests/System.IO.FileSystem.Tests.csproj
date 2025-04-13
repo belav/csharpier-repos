@@ -3,7 +3,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <IncludeRemoteExecutor>true</IncludeRemoteExecutor>
     <TargetFrameworks>$(NetCoreAppCurrent)-windows;$(NetCoreAppCurrent)-unix;$(NetCoreAppCurrent)-browser</TargetFrameworks>
-
     <WasmXHarnessMonoArgs>--working-dir=/test-dir</WasmXHarnessMonoArgs>
   </PropertyGroup>
   <ItemGroup>
@@ -85,7 +84,10 @@
   </ItemGroup>
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'unix'">
     <Compile Include="FileSystemTest.Unix.cs" />
-    <Compile Include="$(CommonPath)Interop\Unix\Interop.Libraries.cs" Link="Interop\Unix\Interop.Libraries.cs" />
+    <Compile
+      Include="$(CommonPath)Interop\Unix\Interop.Libraries.cs"
+      Link="Interop\Unix\Interop.Libraries.cs"
+    />
     <Compile Include="FileStream\ctor_options.Unix.cs" />
     <Compile Include="Directory\CreateDirectory_UnixFileMode.Unix.cs" />
   </ItemGroup>
@@ -101,21 +103,66 @@
     <Compile Include="RandomAccess\NoBuffering.Windows.cs" />
     <Compile Include="RandomAccess\SectorAlignedMemory.Windows.cs" />
     <Compile Include="VirtualDriveSymbolicLinks.Windows.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.BOOL.cs" Link="Common\Interop\Windows\Interop.BOOL.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs" Link="Common\Interop\Windows\Interop.Libraries.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.CreateFile.cs" Link="Common\Interop\Windows\Interop.CreateFile.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.FILE_STANDARD_INFO.cs" Link="Common\Interop\Windows\Interop.FILE_STANDARD_INFO.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.GetFileInformationByHandleEx.cs" Link="Common\Interop\Windows\Interop.GetFileInformationByHandleEx.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.FILE_TIME.cs" Link="Common\Interop\Windows\Interop.FILE_TIME.cs" />
-	<Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.BY_HANDLE_FILE_INFORMATION.cs" Link="Common\Interop\Windows\Interop.BY_HANDLE_FILE_INFORMATION.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.GetFinalPathNameByHandle.cs" Link="Common\Interop\Windows\Interop.GetFinalPathNameByHandle.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.MemOptions.cs" Link="Common\Interop\Windows\Interop.MemOptions.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.SECURITY_ATTRIBUTES.cs" Link="Common\Interop\Windows\Interop.SECURITY_ATTRIBUTES.cs" />
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.VirtualAlloc_Ptr.cs" Link="Common\Interop\Windows\Interop.VirtualAlloc_Ptr.cs" />
-    <Compile Include="$(CommonPath)System\Text\ValueStringBuilder.cs" Link="Common\System\Text\ValueStringBuilder.cs" />
-    <Compile Include="$(CommonPath)System\IO\PathInternal.cs" Link="Common\System\IO\PathInternal.cs" />
-    <Compile Include="$(CommonPath)System\IO\PathInternal.Windows.cs" Link="Common\System\IO\PathInternal.Windows.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\VirtualDriveHelper.Windows.cs" Link="Common\System\IO\VirtualDriveHelper.Windows.cs" />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.BOOL.cs"
+      Link="Common\Interop\Windows\Interop.BOOL.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Interop.Libraries.cs"
+      Link="Common\Interop\Windows\Interop.Libraries.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.CreateFile.cs"
+      Link="Common\Interop\Windows\Interop.CreateFile.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.FILE_STANDARD_INFO.cs"
+      Link="Common\Interop\Windows\Interop.FILE_STANDARD_INFO.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.GetFileInformationByHandleEx.cs"
+      Link="Common\Interop\Windows\Interop.GetFileInformationByHandleEx.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.FILE_TIME.cs"
+      Link="Common\Interop\Windows\Interop.FILE_TIME.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.BY_HANDLE_FILE_INFORMATION.cs"
+      Link="Common\Interop\Windows\Interop.BY_HANDLE_FILE_INFORMATION.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.GetFinalPathNameByHandle.cs"
+      Link="Common\Interop\Windows\Interop.GetFinalPathNameByHandle.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.MemOptions.cs"
+      Link="Common\Interop\Windows\Interop.MemOptions.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.SECURITY_ATTRIBUTES.cs"
+      Link="Common\Interop\Windows\Interop.SECURITY_ATTRIBUTES.cs"
+    />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.VirtualAlloc_Ptr.cs"
+      Link="Common\Interop\Windows\Interop.VirtualAlloc_Ptr.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\Text\ValueStringBuilder.cs"
+      Link="Common\System\Text\ValueStringBuilder.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\IO\PathInternal.cs"
+      Link="Common\System\IO\PathInternal.cs"
+    />
+    <Compile
+      Include="$(CommonPath)System\IO\PathInternal.Windows.cs"
+      Link="Common\System\IO\PathInternal.Windows.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\IO\VirtualDriveHelper.Windows.cs"
+      Link="Common\System\IO\VirtualDriveHelper.Windows.cs"
+    />
     <ProjectReference Include="$(LibrariesProjectRoot)System.ServiceProcess.ServiceController\src\System.ServiceProcess.ServiceController.csproj" />
     <ProjectReference Include="$(LibrariesProjectRoot)System.IO.FileSystem.AccessControl\src\System.IO.FileSystem.AccessControl.csproj" />
   </ItemGroup>
@@ -228,17 +275,38 @@
     <Compile Include="FileInfo\AppendText.cs" />
     <Compile Include="FileInfo\CopyTo.cs" />
     <!-- Helpers -->
-    <Compile Include="$(CommonPath)Interop\Windows\Kernel32\Interop.GenericOperations.cs" Link="Interop\Windows\Interop.GenericOperations.cs" />
-    <Compile Include="$(CommonTestPath)System\Buffers\NativeMemoryManager.cs" Link="Common\System\Buffers\NativeMemoryManager.cs" />
+    <Compile
+      Include="$(CommonPath)Interop\Windows\Kernel32\Interop.GenericOperations.cs"
+      Link="Interop\Windows\Interop.GenericOperations.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\Buffers\NativeMemoryManager.cs"
+      Link="Common\System\Buffers\NativeMemoryManager.cs"
+    />
     <Compile Include="$(CommonTestPath)System\IO\TempFile.cs" Link="Common\System\IO\TempFile.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\PathFeatures.cs" Link="Common\System\IO\PathFeatures.cs" />
+    <Compile
+      Include="$(CommonTestPath)System\IO\PathFeatures.cs"
+      Link="Common\System\IO\PathFeatures.cs"
+    />
     <Content Include="DirectoryInfo\test-dir\dummy.txt" Link="test-dir\dummy.txt" />
-    <Compile Include="$(CommonPath)System\IO\PathInternal.CaseSensitivity.cs" Link="Common\System\IO\PathInternal.CaseSensitivity.cs" />
-    <Compile Include="$(CommonTestPath)System\IO\ReparsePointUtilities.cs" Link="Common\System\IO\ReparsePointUtilities.cs" />
-    <Compile Include="$(CommonTestPath)TestUtilities\System\DisableParallelization.cs" Link="Common\TestUtilities\System\DisableParallelization.cs" />
+    <Compile
+      Include="$(CommonPath)System\IO\PathInternal.CaseSensitivity.cs"
+      Link="Common\System\IO\PathInternal.CaseSensitivity.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)System\IO\ReparsePointUtilities.cs"
+      Link="Common\System\IO\ReparsePointUtilities.cs"
+    />
+    <Compile
+      Include="$(CommonTestPath)TestUtilities\System\DisableParallelization.cs"
+      Link="Common\TestUtilities\System\DisableParallelization.cs"
+    />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetPlatformIdentifier)' == 'windows'">
-    <Compile Include="$(CommonTestPath)TestUtilities\System\WindowsTestFileShare.cs" Link="Common\TestUtilities\System\WindowsTestFileShare.cs" />
+    <Compile
+      Include="$(CommonTestPath)TestUtilities\System\WindowsTestFileShare.cs"
+      Link="Common\TestUtilities\System\WindowsTestFileShare.cs"
+    />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(CommonTestPath)StreamConformanceTests\StreamConformanceTests.csproj" />

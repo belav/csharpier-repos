@@ -43,64 +43,80 @@ namespace System.Text.Json.Serialization.Tests
         [MemberData(nameof(Parse_OutOfRange))]
         public static void Parse_OutOfRange_Throws(object value, string name)
         {
-            string json = $"{{ \"{ name }\" : { value } }}";
+            string json = $"{{ \"{name}\" : {value} }}";
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<SimpleTestClass>(json));
-            json = $"{{ \"{ name }\" : \"{ value }\" }}";
+            json = $"{{ \"{name}\" : \"{value}\" }}";
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<SimpleTestClass>(json));
         }
 
         [Theory]
         [MemberData(nameof(Parse_WithinRange_SignedAsString))]
-        public static void Parse_WithinRange_Signed_ReturnsWithCorrectType(Type expectedType, string value, string name)
+        public static void Parse_WithinRange_Signed_ReturnsWithCorrectType(
+            Type expectedType,
+            string value,
+            string name
+        )
         {
-            string json = $"{{ \"{ name }\" : { value } }}";
+            string json = $"{{ \"{name}\" : {value} }}";
             SimpleTestClass result = JsonSerializer.Deserialize<SimpleTestClass>(json);
             object expected = Enum.ToObject(expectedType, long.Parse(value));
             Assert.Equal(expected, GetProperty(result, name));
 
-            json = $"{{ \"{ name }\" : \"{ value }\" }}";
+            json = $"{{ \"{name}\" : \"{value}\" }}";
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<SimpleTestClass>(json));
         }
 
         [Theory]
         [MemberData(nameof(Parse_WithinRange_Signed))]
-        public static void Parse_WithinRange_Signed_ReturnsExpected(object expected, long value, string name)
+        public static void Parse_WithinRange_Signed_ReturnsExpected(
+            object expected,
+            long value,
+            string name
+        )
         {
-            string json = $"{{ \"{ name }\" : { value } }}";
+            string json = $"{{ \"{name}\" : {value} }}";
             SimpleTestClass result = JsonSerializer.Deserialize<SimpleTestClass>(json);
             Assert.Equal(expected, GetProperty(result, name));
 
-            json = $"{{ \"{ name }\" : \"{ value }\" }}";
+            json = $"{{ \"{name}\" : \"{value}\" }}";
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<SimpleTestClass>(json));
         }
 
         [Theory]
         [MemberData(nameof(Parse_WithinRange_UnsignedAsString))]
-        public static void Parse_WithinRange_Unsigned_ReturnsWithCorrectType(Type expectedType, string value, string name)
+        public static void Parse_WithinRange_Unsigned_ReturnsWithCorrectType(
+            Type expectedType,
+            string value,
+            string name
+        )
         {
-            string json = $"{{ \"{ name }\" : { value } }}";
+            string json = $"{{ \"{name}\" : {value} }}";
             SimpleTestClass result = JsonSerializer.Deserialize<SimpleTestClass>(json);
             object expected = Enum.ToObject(expectedType, ulong.Parse(value));
             Assert.Equal(expected, GetProperty(result, name));
 
-            json = $"{{ \"{ name }\" : \"{ value }\" }}";
+            json = $"{{ \"{name}\" : \"{value}\" }}";
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<SimpleTestClass>(json));
         }
 
         [Theory]
         [MemberData(nameof(Parse_WithinRange_Unsigned))]
-        public static void Parse_WithinRange_Unsigned_ReturnsExpected(object expected, ulong value, string name)
+        public static void Parse_WithinRange_Unsigned_ReturnsExpected(
+            object expected,
+            ulong value,
+            string name
+        )
         {
-            string json = $"{{ \"{ name }\" : { value } }}";
+            string json = $"{{ \"{name}\" : {value} }}";
             SimpleTestClass result = JsonSerializer.Deserialize<SimpleTestClass>(json);
             Assert.Equal(expected, GetProperty(result, name));
 
-            json = $"{{ \"{ name }\" : \"{ value }\" }}";
+            json = $"{{ \"{name}\" : \"{value}\" }}";
             Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<SimpleTestClass>(json));
         }
 
-        private static object GetProperty(SimpleTestClass testClass, string propertyName)
-            => testClass.GetType().GetProperty(propertyName).GetValue(testClass, null);
+        private static object GetProperty(SimpleTestClass testClass, string propertyName) =>
+            testClass.GetType().GetProperty(propertyName).GetValue(testClass, null);
 
         [Theory]
         [MemberData(nameof(ToString_WithinRange))]
@@ -112,7 +128,12 @@ namespace System.Text.Json.Serialization.Tests
 
         [Theory]
         [MemberData(nameof(ToString_ExceedMaxCapacity))]
-        public static void ToString_ExceedMaxCapacity_ResetsBackToMinimum(int timesOverflow, string maxCapacity, Type type, long expected)
+        public static void ToString_ExceedMaxCapacity_ResetsBackToMinimum(
+            int timesOverflow,
+            string maxCapacity,
+            Type type,
+            long expected
+        )
         {
             object enumValue = Enum.ToObject(type, long.Parse(maxCapacity) * timesOverflow);
             string json = JsonSerializer.Serialize(enumValue);
@@ -193,10 +214,30 @@ namespace System.Text.Json.Serialization.Tests
         {
             get
             {
-                yield return new object[] { SampleEnumSByte.MinNegative, sbyte.MinValue, "MySByteEnum" };
-                yield return new object[] { SampleEnumInt16.MinNegative, short.MinValue, "MyInt16Enum" };
-                yield return new object[] { SampleEnumInt32.MinNegative, int.MinValue, "MyInt32Enum" };
-                yield return new object[] { SampleEnumInt64.MinNegative, long.MinValue, "MyInt64Enum" };
+                yield return new object[]
+                {
+                    SampleEnumSByte.MinNegative,
+                    sbyte.MinValue,
+                    "MySByteEnum",
+                };
+                yield return new object[]
+                {
+                    SampleEnumInt16.MinNegative,
+                    short.MinValue,
+                    "MyInt16Enum",
+                };
+                yield return new object[]
+                {
+                    SampleEnumInt32.MinNegative,
+                    int.MinValue,
+                    "MyInt32Enum",
+                };
+                yield return new object[]
+                {
+                    SampleEnumInt64.MinNegative,
+                    long.MinValue,
+                    "MyInt64Enum",
+                };
                 yield return new object[] { SampleEnumSByte.Max, sbyte.MaxValue, "MySByteEnum" };
                 yield return new object[] { SampleEnumInt16.Max, short.MaxValue, "MyInt16Enum" };
                 yield return new object[] { SampleEnumInt32.Max, int.MaxValue, "MyInt32Enum" };
@@ -223,16 +264,66 @@ namespace System.Text.Json.Serialization.Tests
         {
             get
             {
-                yield return new object[] { typeof(SampleEnumUInt32), ByteMaxPlus1, "MyUInt32Enum" };
-                yield return new object[] { typeof(SampleEnumUInt32), Int16MaxPlus1, "MyUInt32Enum" };
-                yield return new object[] { typeof(SampleEnumUInt32), Int32MaxPlus1, "MyUInt32Enum" };
-                yield return new object[] { typeof(SampleEnumUInt32), UInt16MaxPlus1, "MyUInt32Enum" };
-                yield return new object[] { typeof(SampleEnumUInt64), ByteMaxPlus1, "MyUInt64Enum" };
-                yield return new object[] { typeof(SampleEnumUInt64), Int16MaxPlus1, "MyUInt64Enum" };
-                yield return new object[] { typeof(SampleEnumUInt64), Int32MaxPlus1, "MyUInt64Enum" };
-                yield return new object[] { typeof(SampleEnumUInt64), Int64MaxPlus1, "MyUInt64Enum" };
-                yield return new object[] { typeof(SampleEnumUInt64), UInt16MaxPlus1, "MyUInt64Enum" };
-                yield return new object[] { typeof(SampleEnumUInt64), UInt32MaxPlus1, "MyUInt64Enum" };
+                yield return new object[]
+                {
+                    typeof(SampleEnumUInt32),
+                    ByteMaxPlus1,
+                    "MyUInt32Enum",
+                };
+                yield return new object[]
+                {
+                    typeof(SampleEnumUInt32),
+                    Int16MaxPlus1,
+                    "MyUInt32Enum",
+                };
+                yield return new object[]
+                {
+                    typeof(SampleEnumUInt32),
+                    Int32MaxPlus1,
+                    "MyUInt32Enum",
+                };
+                yield return new object[]
+                {
+                    typeof(SampleEnumUInt32),
+                    UInt16MaxPlus1,
+                    "MyUInt32Enum",
+                };
+                yield return new object[]
+                {
+                    typeof(SampleEnumUInt64),
+                    ByteMaxPlus1,
+                    "MyUInt64Enum",
+                };
+                yield return new object[]
+                {
+                    typeof(SampleEnumUInt64),
+                    Int16MaxPlus1,
+                    "MyUInt64Enum",
+                };
+                yield return new object[]
+                {
+                    typeof(SampleEnumUInt64),
+                    Int32MaxPlus1,
+                    "MyUInt64Enum",
+                };
+                yield return new object[]
+                {
+                    typeof(SampleEnumUInt64),
+                    Int64MaxPlus1,
+                    "MyUInt64Enum",
+                };
+                yield return new object[]
+                {
+                    typeof(SampleEnumUInt64),
+                    UInt16MaxPlus1,
+                    "MyUInt64Enum",
+                };
+                yield return new object[]
+                {
+                    typeof(SampleEnumUInt64),
+                    UInt32MaxPlus1,
+                    "MyUInt64Enum",
+                };
             }
         }
 
@@ -241,9 +332,24 @@ namespace System.Text.Json.Serialization.Tests
             get
             {
                 yield return new object[] { SampleEnumByte.MinZero, byte.MinValue, "MyByteEnum" };
-                yield return new object[] { SampleEnumUInt16.MinZero, ushort.MinValue, "MyUInt16Enum" };
-                yield return new object[] { SampleEnumUInt32.MinZero, uint.MinValue, "MyUInt32Enum" };
-                yield return new object[] { SampleEnumUInt64.MinZero, ulong.MinValue, "MyUInt64Enum" };
+                yield return new object[]
+                {
+                    SampleEnumUInt16.MinZero,
+                    ushort.MinValue,
+                    "MyUInt16Enum",
+                };
+                yield return new object[]
+                {
+                    SampleEnumUInt32.MinZero,
+                    uint.MinValue,
+                    "MyUInt32Enum",
+                };
+                yield return new object[]
+                {
+                    SampleEnumUInt64.MinZero,
+                    ulong.MinValue,
+                    "MyUInt64Enum",
+                };
                 yield return new object[] { SampleEnumByte.Max, byte.MaxValue, "MyByteEnum" };
                 yield return new object[] { SampleEnumUInt16.Max, ushort.MaxValue, "MyUInt16Enum" };
                 yield return new object[] { SampleEnumUInt32.Max, uint.MaxValue, "MyUInt32Enum" };
@@ -306,30 +412,174 @@ namespace System.Text.Json.Serialization.Tests
             {
                 // The rationale for setting macCapacity:
                 // e.g. for byte, including 0, we have byte.MaxValue + 1 numbers that can be represented by byte
-                yield return new object[] { 1, ByteMaxPlus1, typeof(SampleEnumByte), SampleEnumByte.MinZero };
-                yield return new object[] { 2, ByteMaxPlus1, typeof(SampleEnumByte), SampleEnumByte.MinZero };
-                yield return new object[] { 3, ByteMaxPlus1, typeof(SampleEnumByte), SampleEnumByte.MinZero };
-                yield return new object[] { 4, ByteMaxPlus1, typeof(SampleEnumByte), SampleEnumByte.MinZero };
-                yield return new object[] { 1, UInt16MaxPlus1, typeof(SampleEnumUInt16), SampleEnumUInt16.MinZero };
-                yield return new object[] { 2, UInt16MaxPlus1, typeof(SampleEnumUInt16), SampleEnumUInt16.MinZero };
-                yield return new object[] { 3, UInt16MaxPlus1, typeof(SampleEnumUInt16), SampleEnumUInt16.MinZero };
-                yield return new object[] { 4, UInt16MaxPlus1, typeof(SampleEnumUInt16), SampleEnumUInt16.MinZero };
-                yield return new object[] { 1, UInt32MaxPlus1, typeof(SampleEnumUInt32), SampleEnumUInt32.MinZero };
-                yield return new object[] { 2, UInt32MaxPlus1, typeof(SampleEnumUInt32), SampleEnumUInt32.MinZero };
-                yield return new object[] { 3, UInt32MaxPlus1, typeof(SampleEnumUInt32), SampleEnumUInt32.MinZero };
-                yield return new object[] { 4, UInt32MaxPlus1, typeof(SampleEnumUInt32), SampleEnumUInt32.MinZero };
-                yield return new object[] { 1, SByteMaxPlus1, typeof(SampleEnumSByte), SampleEnumSByte.MinNegative };
-                yield return new object[] { 2, SByteMaxPlus1, typeof(SampleEnumSByte), SampleEnumSByte.Zero };
-                yield return new object[] { 3, SByteMaxPlus1, typeof(SampleEnumSByte), SampleEnumSByte.MinNegative };
-                yield return new object[] { 4, SByteMaxPlus1, typeof(SampleEnumSByte), SampleEnumSByte.Zero };
-                yield return new object[] { 1, Int16MaxPlus1, typeof(SampleEnumInt16), SampleEnumInt16.MinNegative };
-                yield return new object[] { 2, Int16MaxPlus1, typeof(SampleEnumInt16), SampleEnumInt16.Zero };
-                yield return new object[] { 3, Int16MaxPlus1, typeof(SampleEnumInt16), SampleEnumInt16.MinNegative };
-                yield return new object[] { 4, Int16MaxPlus1, typeof(SampleEnumInt16), SampleEnumInt16.Zero };
-                yield return new object[] { 1, Int32MaxPlus1, typeof(SampleEnumInt32), SampleEnumInt32.MinNegative };
-                yield return new object[] { 2, Int32MaxPlus1, typeof(SampleEnumInt32), SampleEnumInt32.Zero };
-                yield return new object[] { 3, Int32MaxPlus1, typeof(SampleEnumInt32), SampleEnumInt32.MinNegative };
-                yield return new object[] { 4, Int32MaxPlus1, typeof(SampleEnumInt32), SampleEnumInt32.Zero };
+                yield return new object[]
+                {
+                    1,
+                    ByteMaxPlus1,
+                    typeof(SampleEnumByte),
+                    SampleEnumByte.MinZero,
+                };
+                yield return new object[]
+                {
+                    2,
+                    ByteMaxPlus1,
+                    typeof(SampleEnumByte),
+                    SampleEnumByte.MinZero,
+                };
+                yield return new object[]
+                {
+                    3,
+                    ByteMaxPlus1,
+                    typeof(SampleEnumByte),
+                    SampleEnumByte.MinZero,
+                };
+                yield return new object[]
+                {
+                    4,
+                    ByteMaxPlus1,
+                    typeof(SampleEnumByte),
+                    SampleEnumByte.MinZero,
+                };
+                yield return new object[]
+                {
+                    1,
+                    UInt16MaxPlus1,
+                    typeof(SampleEnumUInt16),
+                    SampleEnumUInt16.MinZero,
+                };
+                yield return new object[]
+                {
+                    2,
+                    UInt16MaxPlus1,
+                    typeof(SampleEnumUInt16),
+                    SampleEnumUInt16.MinZero,
+                };
+                yield return new object[]
+                {
+                    3,
+                    UInt16MaxPlus1,
+                    typeof(SampleEnumUInt16),
+                    SampleEnumUInt16.MinZero,
+                };
+                yield return new object[]
+                {
+                    4,
+                    UInt16MaxPlus1,
+                    typeof(SampleEnumUInt16),
+                    SampleEnumUInt16.MinZero,
+                };
+                yield return new object[]
+                {
+                    1,
+                    UInt32MaxPlus1,
+                    typeof(SampleEnumUInt32),
+                    SampleEnumUInt32.MinZero,
+                };
+                yield return new object[]
+                {
+                    2,
+                    UInt32MaxPlus1,
+                    typeof(SampleEnumUInt32),
+                    SampleEnumUInt32.MinZero,
+                };
+                yield return new object[]
+                {
+                    3,
+                    UInt32MaxPlus1,
+                    typeof(SampleEnumUInt32),
+                    SampleEnumUInt32.MinZero,
+                };
+                yield return new object[]
+                {
+                    4,
+                    UInt32MaxPlus1,
+                    typeof(SampleEnumUInt32),
+                    SampleEnumUInt32.MinZero,
+                };
+                yield return new object[]
+                {
+                    1,
+                    SByteMaxPlus1,
+                    typeof(SampleEnumSByte),
+                    SampleEnumSByte.MinNegative,
+                };
+                yield return new object[]
+                {
+                    2,
+                    SByteMaxPlus1,
+                    typeof(SampleEnumSByte),
+                    SampleEnumSByte.Zero,
+                };
+                yield return new object[]
+                {
+                    3,
+                    SByteMaxPlus1,
+                    typeof(SampleEnumSByte),
+                    SampleEnumSByte.MinNegative,
+                };
+                yield return new object[]
+                {
+                    4,
+                    SByteMaxPlus1,
+                    typeof(SampleEnumSByte),
+                    SampleEnumSByte.Zero,
+                };
+                yield return new object[]
+                {
+                    1,
+                    Int16MaxPlus1,
+                    typeof(SampleEnumInt16),
+                    SampleEnumInt16.MinNegative,
+                };
+                yield return new object[]
+                {
+                    2,
+                    Int16MaxPlus1,
+                    typeof(SampleEnumInt16),
+                    SampleEnumInt16.Zero,
+                };
+                yield return new object[]
+                {
+                    3,
+                    Int16MaxPlus1,
+                    typeof(SampleEnumInt16),
+                    SampleEnumInt16.MinNegative,
+                };
+                yield return new object[]
+                {
+                    4,
+                    Int16MaxPlus1,
+                    typeof(SampleEnumInt16),
+                    SampleEnumInt16.Zero,
+                };
+                yield return new object[]
+                {
+                    1,
+                    Int32MaxPlus1,
+                    typeof(SampleEnumInt32),
+                    SampleEnumInt32.MinNegative,
+                };
+                yield return new object[]
+                {
+                    2,
+                    Int32MaxPlus1,
+                    typeof(SampleEnumInt32),
+                    SampleEnumInt32.Zero,
+                };
+                yield return new object[]
+                {
+                    3,
+                    Int32MaxPlus1,
+                    typeof(SampleEnumInt32),
+                    SampleEnumInt32.MinNegative,
+                };
+                yield return new object[]
+                {
+                    4,
+                    Int32MaxPlus1,
+                    typeof(SampleEnumInt32),
+                    SampleEnumInt32.Zero,
+                };
             }
         }
     }

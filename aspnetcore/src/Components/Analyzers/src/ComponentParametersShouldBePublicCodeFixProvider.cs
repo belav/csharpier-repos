@@ -14,13 +14,23 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.AspNetCore.Components.Analyzers;
 
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(ComponentParametersShouldBePublicCodeFixProvider)), Shared]
+[
+    ExportCodeFixProvider(
+        LanguageNames.CSharp,
+        Name = nameof(ComponentParametersShouldBePublicCodeFixProvider)
+    ),
+    Shared
+]
 public class ComponentParametersShouldBePublicCodeFixProvider : CodeFixProvider
 {
-    private static readonly LocalizableString Title = new LocalizableResourceString(nameof(Resources.ComponentParametersShouldBePublic_FixTitle), Resources.ResourceManager, typeof(Resources));
+    private static readonly LocalizableString Title = new LocalizableResourceString(
+        nameof(Resources.ComponentParametersShouldBePublic_FixTitle),
+        Resources.ResourceManager,
+        typeof(Resources)
+    );
 
-    public override ImmutableArray<string> FixableDiagnosticIds
-        => ImmutableArray.Create(DiagnosticDescriptors.ComponentParametersShouldBePublic.Id);
+    public override ImmutableArray<string> FixableDiagnosticIds =>
+        ImmutableArray.Create(DiagnosticDescriptors.ComponentParametersShouldBePublic.Id);
 
     public sealed override FixAllProvider GetFixAllProvider()
     {
@@ -30,27 +40,36 @@ public class ComponentParametersShouldBePublicCodeFixProvider : CodeFixProvider
 
     public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
-        var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+        var root = await context
+            .Document.GetSyntaxRootAsync(context.CancellationToken)
+            .ConfigureAwait(false);
         var diagnostic = context.Diagnostics.First();
         var diagnosticSpan = diagnostic.Location.SourceSpan;
 
         // Find the type declaration identified by the diagnostic.
-        var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<PropertyDeclarationSyntax>().First();
+        var declaration = root.FindToken(diagnosticSpan.Start)
+            .Parent.AncestorsAndSelf()
+            .OfType<PropertyDeclarationSyntax>()
+            .First();
 
         // Register a code action that will invoke the fix.
         var title = Title.ToString(CultureInfo.InvariantCulture);
         context.RegisterCodeFix(
             CodeAction.Create(
                 title: title,
-                createChangedDocument: c => GetTransformedDocumentAsync(context.Document, root, declaration),
-                equivalenceKey: title),
-            diagnostic);
+                createChangedDocument: c =>
+                    GetTransformedDocumentAsync(context.Document, root, declaration),
+                equivalenceKey: title
+            ),
+            diagnostic
+        );
     }
 
     private static Task<Document> GetTransformedDocumentAsync(
         Document document,
         SyntaxNode root,
-        PropertyDeclarationSyntax declarationNode)
+        PropertyDeclarationSyntax declarationNode
+    )
     {
         var updatedDeclarationNode = HandlePropertyDeclaration(declarationNode);
         var newSyntaxRoot = root.ReplaceNode(declarationNode, updatedDeclarationNode);
@@ -69,12 +88,14 @@ public class ComponentParametersShouldBePublicCodeFixProvider : CodeFixProvider
         for (var i = 0; i < node.Modifiers.Count; i++)
         {
             var modifier = node.Modifiers[i];
-            if (modifier.IsKind(SyntaxKind.PrivateKeyword) ||
-                modifier.IsKind(SyntaxKind.ProtectedKeyword) ||
-                modifier.IsKind(SyntaxKind.InternalKeyword) ||
-
+            if (
+                modifier.IsKind(SyntaxKind.PrivateKeyword)
+                || modifier.IsKind(SyntaxKind.ProtectedKeyword)
+                || modifier.IsKind(SyntaxKind.InternalKeyword)
+                ||
                 // We also remove public in case the user has written something totally backwards such as private public protected Foo
-                modifier.IsKind(SyntaxKind.PublicKeyword))
+                modifier.IsKind(SyntaxKind.PublicKeyword)
+            )
             {
                 newModifiers = newModifiers.Remove(modifier);
             }

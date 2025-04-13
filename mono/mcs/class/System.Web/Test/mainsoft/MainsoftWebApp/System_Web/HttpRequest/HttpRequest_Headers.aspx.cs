@@ -29,137 +29,148 @@
 
 using System;
 using System.Collections;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Web;
 using System.Web.SessionState;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Collections.Specialized;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-	public class HttpRequest_Headers
-		: GHTBaseWeb 
-	{
+    public class HttpRequest_Headers : GHTBaseWeb
+    {
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
+            GHTTestBegin(frm);
+            // ===================================
+            // testing if the headers object is set
+            // ===================================
+            GHTSubTestBegin("Request.Headers1");
+            try
+            {
+                if (Request.Headers == null)
+                    GHTSubTestAddResult("Failed");
+                else
+                    GHTSubTestAddResult("Success");
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
-			GHTTestBegin(frm);
-			// ===================================
-			// testing if the headers object is set
-			// ===================================
-			GHTSubTestBegin("Request.Headers1");
-				try 
-				{
-					if (Request.Headers == null)
-						GHTSubTestAddResult("Failed");
-					else
-						GHTSubTestAddResult("Success");
-				}
-				catch (Exception ex) 
-				{
-					GHTSubTestAddResult("unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-				}
+            GHTSubTestEnd();
 
-			GHTSubTestEnd();
+            // ===================================
+            // testing if the objects returned is from the
+            // correct type
+            // ===================================
+            GHTSubTestBegin("Request.Headers2");
+            try
+            {
+                NameValueCollection cookie = Request.Headers;
+                GHTSubTestAddResult("success");
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
+            GHTSubTestEnd();
 
-			// ===================================
-			// testing if the objects returned is from the 
-			// correct type
-			// ===================================
-			GHTSubTestBegin("Request.Headers2");
-			try 
-			{
-				NameValueCollection cookie = Request.Headers;
-				GHTSubTestAddResult("success");
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-			}
-			GHTSubTestEnd();
+            // ===================================
+            // testing if the Headers collection contains the
+            // right context.
+            // ===================================
+            GHTSubTestBegin("Request.Headers3");
+            try
+            {
+                NameValueCollection Headers = Request.Headers;
+                foreach (string current in Headers.Keys)
+                    GHTSubTestAddResult(current);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
 
-			// ===================================
-			// testing if the Headers collection contains the
-			// right context. 
-			// ===================================
-			GHTSubTestBegin("Request.Headers3");
-			try 
-			{
-				NameValueCollection Headers = Request.Headers;
-				foreach (string current in Headers.Keys)
-					GHTSubTestAddResult(current);
-			}
+            GHTSubTestEnd();
 
-			catch (Exception ex) 
-			{
-				GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-			}
+            // ===================================
+            // testing if the Headers collection contains the
+            // right context.
+            // ===================================
+            GHTSubTestBegin("Request.Headers4");
+            try
+            {
+                NameValueCollection Headers = this.Request.Headers;
+                foreach (string header in Headers.AllKeys)
+                    GHTSubTestAddResult(header);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
+            GHTSubTestEnd();
 
-			GHTSubTestEnd();
+            GHTSubTestBegin("Request.Headers5");
+            try
+            {
+                int num1 = 0;
+                string[] textArray1 = this.Request.Headers.AllKeys;
+                int num2 = textArray1.Length - 1;
+                for (num1 = 0; num1 <= num2; num1++)
+                {
+                    if (textArray1[num1].ToLower().CompareTo("host") != 0)
+                    {
+                        this.GHTSubTestAddResult(
+                            textArray1[num1]
+                                + "="
+                                + this.Request.Headers.Get(textArray1[num1])
+                                + "<br>"
+                        );
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
+            GHTSubTestEnd();
+            GHTTestEnd();
+        }
 
-			// ===================================
-			// testing if the Headers collection contains the
-			// right context. 
-			// ===================================
-			GHTSubTestBegin("Request.Headers4");
-			try 
-			{
-				NameValueCollection Headers = this.Request.Headers;
-				foreach (string header in Headers.AllKeys)
-					GHTSubTestAddResult(header);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-			}
-			GHTSubTestEnd();
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-			GHTSubTestBegin("Request.Headers5");
-			try
-			{
-				int num1 = 0;
-				string[] textArray1 = this.Request.Headers.AllKeys;
-				int num2 = textArray1.Length - 1;
-				for (num1 = 0; num1 <= num2; num1++)
-				{
-					if (textArray1[num1].ToLower().CompareTo("host") != 0)
-					{
-						this.GHTSubTestAddResult(textArray1[num1] + "=" + this.Request.Headers.Get(textArray1[num1]) + "<br>");
-					}
-				}
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestAddResult("unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-				}
-			GHTSubTestEnd();
-			GHTTestEnd();
-		}
-
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e)
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
-
-	}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
+    }
 }

@@ -1,15 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>
     <RootNamespace>Microsoft.AspNetCore.SignalR.Tests</RootNamespace>
     <DefineConstants>$(DefineConstants);TESTUTILS</DefineConstants>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="$(SignalRSharedSourceRoot)DuplexPipe.cs" Link="DuplexPipe.cs" />
   </ItemGroup>
-
   <ItemGroup>
     <Reference Include="Microsoft.AspNetCore.Hosting" />
     <Reference Include="Microsoft.AspNetCore.Server.Kestrel" />
@@ -19,9 +16,7 @@
     <Reference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" />
     <Reference Include="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" />
     <Reference Include="Microsoft.AspNetCore.InternalTesting" />
-
     <Compile Include="$(SharedSourceRoot)ValueStopwatch\*.cs" />
     <Compile Include="$(SharedSourceRoot)SignalR\*.cs" />
   </ItemGroup>
-
 </Project>

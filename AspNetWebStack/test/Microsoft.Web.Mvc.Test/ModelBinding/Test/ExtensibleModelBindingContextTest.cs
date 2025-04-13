@@ -17,14 +17,19 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext originalBindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(object)),
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(object)
+                ),
                 ModelName = "theName",
                 ModelState = new ModelStateDictionary(),
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
 
             // Act
-            ExtensibleModelBindingContext newBindingContext = new ExtensibleModelBindingContext(originalBindingContext);
+            ExtensibleModelBindingContext newBindingContext = new ExtensibleModelBindingContext(
+                originalBindingContext
+            );
 
             // Assert
             Assert.Null(newBindingContext.ModelMetadata);
@@ -39,8 +44,13 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext();
 
-            // Act & assert            
-            MemberHelper.TestPropertyWithDefaultInstance(bindingContext, "ModelBinderProviders", new ModelBinderProviderCollection(), ModelBinderProviders.Providers);
+            // Act & assert
+            MemberHelper.TestPropertyWithDefaultInstance(
+                bindingContext,
+                "ModelBinderProviders",
+                new ModelBinderProviderCollection(),
+                ModelBinderProviders.Providers
+            );
         }
 
         [Fact]
@@ -49,10 +59,13 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(int))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(int)
+                ),
             };
 
-            // Act & assert            
+            // Act & assert
             MemberHelper.TestPropertyValue(bindingContext, "Model", 42);
         }
 
@@ -64,8 +77,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { bindingContext.Model = null; },
-                "The ModelMetadata property must be set before accessing this property.");
+                delegate
+                {
+                    bindingContext.Model = null;
+                },
+                "The ModelMetadata property must be set before accessing this property."
+            );
         }
 
         [Fact]
@@ -75,7 +92,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext();
 
             // Act & assert
-            Assert.Reflection.StringProperty(bindingContext, (context) => context.ModelName, String.Empty);
+            Assert.Reflection.StringProperty(
+                bindingContext,
+                (context) => context.ModelName,
+                String.Empty
+            );
         }
 
         [Fact]
@@ -95,7 +116,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Act
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => 42, typeof(int))
+                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
+                    () => 42,
+                    typeof(int)
+                ),
             };
 
             // Assert
@@ -109,11 +133,18 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Act
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => 42, typeof(int))
+                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
+                    () => 42,
+                    typeof(int)
+                ),
             };
 
             // Act & assert
-            MemberHelper.TestPropertyWithDefaultInstance(bindingContext, "ValidationNode", new ModelValidationNode(bindingContext.ModelMetadata, "someName"));
+            MemberHelper.TestPropertyWithDefaultInstance(
+                bindingContext,
+                "ValidationNode",
+                new ModelValidationNode(bindingContext.ModelMetadata, "someName")
+            );
         }
 
         [Fact]
@@ -122,8 +153,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Act
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => 42, typeof(int)),
-                ModelName = "theInt"
+                ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
+                    () => 42,
+                    typeof(int)
+                ),
+                ModelName = "theInt",
             };
 
             // Act

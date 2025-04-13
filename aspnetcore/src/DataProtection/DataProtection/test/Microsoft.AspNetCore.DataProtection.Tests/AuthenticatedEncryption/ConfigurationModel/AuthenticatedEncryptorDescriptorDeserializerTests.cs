@@ -19,29 +19,42 @@ public class AuthenticatedEncryptorDescriptorDeserializerTests
             new AuthenticatedEncryptorConfiguration()
             {
                 EncryptionAlgorithm = EncryptionAlgorithm.AES_192_CBC,
-                ValidationAlgorithm = ValidationAlgorithm.HMACSHA512
+                ValidationAlgorithm = ValidationAlgorithm.HMACSHA512,
             },
-            masterKey.ToSecret());
+            masterKey.ToSecret()
+        );
         var control = CreateEncryptorInstanceFromDescriptor(descriptor);
 
-        var xml = $@"
+        var xml =
+            $@"
                 <encryptor version='1' xmlns:enc='http://schemas.asp.net/2015/03/dataProtection'>
                   <encryption algorithm='AES_192_CBC' />
                   <validation algorithm='HMACSHA512' />
                   <masterKey enc:requiresEncryption='true'>{masterKey}</masterKey>
                 </encryptor>";
-        var deserializedDescriptor = new AuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(XElement.Parse(xml));
-        var test = CreateEncryptorInstanceFromDescriptor(deserializedDescriptor as AuthenticatedEncryptorDescriptor);
+        var deserializedDescriptor =
+            new AuthenticatedEncryptorDescriptorDeserializer().ImportFromXml(XElement.Parse(xml));
+        var test = CreateEncryptorInstanceFromDescriptor(
+            deserializedDescriptor as AuthenticatedEncryptorDescriptor
+        );
 
         // Act & assert
         byte[] plaintext = new byte[] { 1, 2, 3, 4, 5 };
         byte[] aad = new byte[] { 2, 4, 6, 8, 0 };
-        byte[] ciphertext = control.Encrypt(new ArraySegment<byte>(plaintext), new ArraySegment<byte>(aad));
-        byte[] roundTripPlaintext = test.Decrypt(new ArraySegment<byte>(ciphertext), new ArraySegment<byte>(aad));
+        byte[] ciphertext = control.Encrypt(
+            new ArraySegment<byte>(plaintext),
+            new ArraySegment<byte>(aad)
+        );
+        byte[] roundTripPlaintext = test.Decrypt(
+            new ArraySegment<byte>(ciphertext),
+            new ArraySegment<byte>(aad)
+        );
         Assert.Equal(plaintext, roundTripPlaintext);
     }
 
-    private static IAuthenticatedEncryptor CreateEncryptorInstanceFromDescriptor(AuthenticatedEncryptorDescriptor descriptor)
+    private static IAuthenticatedEncryptor CreateEncryptorInstanceFromDescriptor(
+        AuthenticatedEncryptorDescriptor descriptor
+    )
     {
         var encryptorFactory = new AuthenticatedEncryptorFactory(NullLoggerFactory.Instance);
         var key = new Key(
@@ -50,7 +63,8 @@ public class AuthenticatedEncryptorDescriptorDeserializerTests
             DateTimeOffset.Now + TimeSpan.FromHours(1),
             DateTimeOffset.Now + TimeSpan.FromDays(30),
             descriptor,
-            new[] { encryptorFactory });
+            new[] { encryptorFactory }
+        );
 
         return key.CreateEncryptor();
     }

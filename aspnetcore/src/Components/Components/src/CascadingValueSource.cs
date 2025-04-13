@@ -28,7 +28,8 @@ public class CascadingValueSource<TValue> : ICascadingValueSupplier
     /// </summary>
     /// <param name="value">The initial value.</param>
     /// <param name="isFixed">A flag to indicate whether the value is fixed. If false, all receipients will subscribe for update notifications, which you can issue by calling <see cref="NotifyChangedAsync()"/>. These subscriptions come at a performance cost, so if the value will not change, set <paramref name="isFixed"/> to true.</param>
-    public CascadingValueSource(TValue value, bool isFixed) : this(isFixed)
+    public CascadingValueSource(TValue value, bool isFixed)
+        : this(isFixed)
     {
         _currentValue = value;
     }
@@ -39,7 +40,8 @@ public class CascadingValueSource<TValue> : ICascadingValueSupplier
     /// <param name="name">A name for the cascading value. If set, <see cref="CascadingParameterAttribute"/> can be configured to match based on this name.</param>
     /// <param name="value">The initial value.</param>
     /// <param name="isFixed">A flag to indicate whether the value is fixed. If false, all receipients will subscribe for update notifications, which you can issue by calling <see cref="NotifyChangedAsync()"/>. These subscriptions come at a performance cost, so if the value will not change, set <paramref name="isFixed"/> to true.</param>
-    public CascadingValueSource(string name, TValue value, bool isFixed) : this(value, isFixed)
+    public CascadingValueSource(string name, TValue value, bool isFixed)
+        : this(value, isFixed)
     {
         ArgumentNullException.ThrowIfNull(name);
         _name = name;
@@ -50,7 +52,8 @@ public class CascadingValueSource<TValue> : ICascadingValueSupplier
     /// </summary>
     /// <param name="initialValueFactory">A callback that produces the initial value when first required.</param>
     /// <param name="isFixed">A flag to indicate whether the value is fixed. If false, all receipients will subscribe for update notifications, which you can issue by calling <see cref="NotifyChangedAsync()"/>. These subscriptions come at a performance cost, so if the value will not change, set <paramref name="isFixed"/> to true.</param>
-    public CascadingValueSource(Func<TValue> initialValueFactory, bool isFixed) : this(isFixed)
+    public CascadingValueSource(Func<TValue> initialValueFactory, bool isFixed)
+        : this(isFixed)
     {
         _initialValueFactory = initialValueFactory;
     }
@@ -61,7 +64,8 @@ public class CascadingValueSource<TValue> : ICascadingValueSupplier
     /// <param name="name">A name for the cascading value. If set, <see cref="CascadingParameterAttribute"/> can be configured to match based on this name.</param>
     /// <param name="initialValueFactory">A callback that produces the initial value when first required.</param>
     /// <param name="isFixed">A flag to indicate whether the value is fixed. If false, all receipients will subscribe for update notifications, which you can issue by calling <see cref="NotifyChangedAsync()"/>. These subscriptions come at a performance cost, so if the value will not change, set <paramref name="isFixed"/> to true.</param>
-    public CascadingValueSource(string name, Func<TValue> initialValueFactory, bool isFixed) : this(initialValueFactory, isFixed)
+    public CascadingValueSource(string name, Func<TValue> initialValueFactory, bool isFixed)
+        : this(initialValueFactory, isFixed)
     {
         ArgumentNullException.ThrowIfNull(name);
         _name = name;
@@ -85,7 +89,9 @@ public class CascadingValueSource<TValue> : ICascadingValueSupplier
     {
         if (_isFixed)
         {
-            throw new InvalidOperationException($"Cannot notify about changes because the {GetType()} is configured as fixed.");
+            throw new InvalidOperationException(
+                $"Cannot notify about changes because the {GetType()} is configured as fixed."
+            );
         }
 
         if (_subscribers?.Count > 0)
@@ -94,13 +100,15 @@ public class CascadingValueSource<TValue> : ICascadingValueSupplier
 
             foreach (var (dispatcher, subscribers) in _subscribers)
             {
-                tasks.Add(dispatcher.InvokeAsync(() =>
-                {
-                    foreach (var subscriber in subscribers)
+                tasks.Add(
+                    dispatcher.InvokeAsync(() =>
                     {
-                        subscriber.NotifyCascadingValueChanged(ParameterViewLifetime.Unbound);
-                    }
-                }));
+                        foreach (var subscriber in subscribers)
+                        {
+                            subscriber.NotifyCascadingValueChanged(ParameterViewLifetime.Unbound);
+                        }
+                    })
+                );
             }
 
             return Task.WhenAll(tasks);
@@ -128,7 +136,10 @@ public class CascadingValueSource<TValue> : ICascadingValueSupplier
 
     bool ICascadingValueSupplier.CanSupplyValue(in CascadingParameterInfo parameterInfo)
     {
-        if (parameterInfo.Attribute is not CascadingParameterAttribute cascadingParameterAttribute || !parameterInfo.PropertyType.IsAssignableFrom(typeof(TValue)))
+        if (
+            parameterInfo.Attribute is not CascadingParameterAttribute cascadingParameterAttribute
+            || !parameterInfo.PropertyType.IsAssignableFrom(typeof(TValue))
+        )
         {
             return false;
         }
@@ -150,7 +161,10 @@ public class CascadingValueSource<TValue> : ICascadingValueSupplier
         return _currentValue;
     }
 
-    void ICascadingValueSupplier.Subscribe(ComponentState subscriber, in CascadingParameterInfo parameterInfo)
+    void ICascadingValueSupplier.Subscribe(
+        ComponentState subscriber,
+        in CascadingParameterInfo parameterInfo
+    )
     {
         Dispatcher dispatcher = subscriber.Renderer.Dispatcher;
         dispatcher.AssertAccess();
@@ -159,7 +173,10 @@ public class CascadingValueSource<TValue> : ICascadingValueSupplier
         _subscribers?.GetOrAdd(dispatcher, _ => new()).Add(subscriber);
     }
 
-    void ICascadingValueSupplier.Unsubscribe(ComponentState subscriber, in CascadingParameterInfo parameterInfo)
+    void ICascadingValueSupplier.Unsubscribe(
+        ComponentState subscriber,
+        in CascadingParameterInfo parameterInfo
+    )
     {
         Dispatcher dispatcher = subscriber.Renderer.Dispatcher;
         dispatcher.AssertAccess();

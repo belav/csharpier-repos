@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.ComponentModel;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
@@ -14,10 +14,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         [Obsolete("This member is obsolete.", true)]
         public SyntaxToken Semicolon
         {
-            get
-            {
-                return this.SemicolonToken;
-            }
+            get { return this.SemicolonToken; }
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -39,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSyntax type,
             ExplicitInterfaceSpecifierSyntax? explicitInterfaceSpecifier,
             BracketedParameterListSyntax parameterList,
-            AccessorListSyntax? accessorList)
+            AccessorListSyntax? accessorList
+        )
         {
             return SyntaxFactory.IndexerDeclaration(
                 attributeLists: attributeLists,
@@ -48,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 explicitInterfaceSpecifier: explicitInterfaceSpecifier,
                 parameterList: parameterList,
                 accessorList: accessorList,
-                expressionBody: null);
+                expressionBody: null
+            );
         }
     }
 }

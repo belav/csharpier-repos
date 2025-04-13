@@ -21,27 +21,52 @@ namespace Microsoft.AspNetCore.InternalTesting;
 /// </summary>
 public static class HttpClientSlim
 {
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static async Task<string> GetStringAsync(string requestUri, bool validateCertificate = true)
-        => await GetStringAsync(new Uri(requestUri), validateCertificate).ConfigureAwait(false);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static async Task<string> GetStringAsync(
+        string requestUri,
+        bool validateCertificate = true
+    ) => await GetStringAsync(new Uri(requestUri), validateCertificate).ConfigureAwait(false);
 
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static async Task<string> GetStringAsync(Uri requestUri, bool validateCertificate = true)
     {
         return await RetryRequest(async () =>
-        {
-            using (var stream = await GetStream(requestUri, validateCertificate).ConfigureAwait(false))
             {
-                using (var writer = new StreamWriter(stream, Encoding.ASCII, bufferSize: 1024, leaveOpen: true))
+                using (
+                    var stream = await GetStream(requestUri, validateCertificate)
+                        .ConfigureAwait(false)
+                )
                 {
-                    await writer.WriteAsync($"GET {requestUri.PathAndQuery} HTTP/1.0\r\n").ConfigureAwait(false);
-                    await writer.WriteAsync($"Host: {GetHost(requestUri)}\r\n").ConfigureAwait(false);
-                    await writer.WriteAsync("\r\n").ConfigureAwait(false);
-                }
+                    using (
+                        var writer = new StreamWriter(
+                            stream,
+                            Encoding.ASCII,
+                            bufferSize: 1024,
+                            leaveOpen: true
+                        )
+                    )
+                    {
+                        await writer
+                            .WriteAsync($"GET {requestUri.PathAndQuery} HTTP/1.0\r\n")
+                            .ConfigureAwait(false);
+                        await writer
+                            .WriteAsync($"Host: {GetHost(requestUri)}\r\n")
+                            .ConfigureAwait(false);
+                        await writer.WriteAsync("\r\n").ConfigureAwait(false);
+                    }
 
-                return await ReadResponse(stream).ConfigureAwait(false);
-            }
-        }).ConfigureAwait(false);
+                    return await ReadResponse(stream).ConfigureAwait(false);
+                }
+            })
+            .ConfigureAwait(false);
     }
 
     internal static string GetHost(Uri requestUri)
@@ -64,44 +89,87 @@ public static class HttpClientSlim
         return authority;
     }
 
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static async Task<string> PostAsync(string requestUri, HttpContent content, bool validateCertificate = true)
-        => await PostAsync(new Uri(requestUri), content, validateCertificate).ConfigureAwait(false);
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static async Task<string> PostAsync(
+        string requestUri,
+        HttpContent content,
+        bool validateCertificate = true
+    ) => await PostAsync(new Uri(requestUri), content, validateCertificate).ConfigureAwait(false);
 
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
-    public static async Task<string> PostAsync(Uri requestUri, HttpContent content, bool validateCertificate = true)
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
+    public static async Task<string> PostAsync(
+        Uri requestUri,
+        HttpContent content,
+        bool validateCertificate = true
+    )
     {
         return await RetryRequest(async () =>
-        {
-            using (var stream = await GetStream(requestUri, validateCertificate).ConfigureAwait(false))
             {
-                using (var writer = new StreamWriter(stream, Encoding.ASCII, bufferSize: 1024, leaveOpen: true))
+                using (
+                    var stream = await GetStream(requestUri, validateCertificate)
+                        .ConfigureAwait(false)
+                )
                 {
-                    await writer.WriteAsync($"POST {requestUri.PathAndQuery} HTTP/1.0\r\n").ConfigureAwait(false);
-                    await writer.WriteAsync($"Host: {requestUri.Authority}\r\n").ConfigureAwait(false);
-                    await writer.WriteAsync($"Content-Type: {content.Headers.ContentType}\r\n").ConfigureAwait(false);
-                    await writer.WriteAsync($"Content-Length: {content.Headers.ContentLength}\r\n").ConfigureAwait(false);
-                    await writer.WriteAsync("\r\n").ConfigureAwait(false);
+                    using (
+                        var writer = new StreamWriter(
+                            stream,
+                            Encoding.ASCII,
+                            bufferSize: 1024,
+                            leaveOpen: true
+                        )
+                    )
+                    {
+                        await writer
+                            .WriteAsync($"POST {requestUri.PathAndQuery} HTTP/1.0\r\n")
+                            .ConfigureAwait(false);
+                        await writer
+                            .WriteAsync($"Host: {requestUri.Authority}\r\n")
+                            .ConfigureAwait(false);
+                        await writer
+                            .WriteAsync($"Content-Type: {content.Headers.ContentType}\r\n")
+                            .ConfigureAwait(false);
+                        await writer
+                            .WriteAsync($"Content-Length: {content.Headers.ContentLength}\r\n")
+                            .ConfigureAwait(false);
+                        await writer.WriteAsync("\r\n").ConfigureAwait(false);
+                    }
+
+                    await content.CopyToAsync(stream).ConfigureAwait(false);
+
+                    return await ReadResponse(stream).ConfigureAwait(false);
                 }
-
-                await content.CopyToAsync(stream).ConfigureAwait(false);
-
-                return await ReadResponse(stream).ConfigureAwait(false);
-            }
-        }).ConfigureAwait(false);
+            })
+            .ConfigureAwait(false);
     }
 
     private static async Task<string> ReadResponse(Stream stream)
     {
-        using (var reader = new StreamReader(stream, Encoding.ASCII, detectEncodingFromByteOrderMarks: true,
-            bufferSize: 1024, leaveOpen: true))
+        using (
+            var reader = new StreamReader(
+                stream,
+                Encoding.ASCII,
+                detectEncodingFromByteOrderMarks: true,
+                bufferSize: 1024,
+                leaveOpen: true
+            )
+        )
         {
             var response = await reader.ReadToEndAsync().ConfigureAwait(false);
 
             var status = GetStatus(response);
             new HttpResponseMessage(status).EnsureSuccessStatusCode();
 
-            var body = response.Substring(response.IndexOf("\r\n\r\n", StringComparison.Ordinal) + 4);
+            var body = response.Substring(
+                response.IndexOf("\r\n\r\n", StringComparison.Ordinal) + 4
+            );
             return body;
         }
     }
@@ -145,9 +213,11 @@ public static class HttpClientSlim
         }
 
 #if NETSTANDARD2_0 || NETFRAMEWORK
-        return (HttpStatusCode)int.Parse(response.Substring(statusStart, statusLength), CultureInfo.InvariantCulture);
+        return (HttpStatusCode)
+            int.Parse(response.Substring(statusStart, statusLength), CultureInfo.InvariantCulture);
 #else
-        return (HttpStatusCode)int.Parse(response.AsSpan(statusStart, statusLength), CultureInfo.InvariantCulture);
+        return (HttpStatusCode)
+            int.Parse(response.AsSpan(statusStart, statusLength), CultureInfo.InvariantCulture);
 #endif
     }
 
@@ -158,12 +228,22 @@ public static class HttpClientSlim
 
         if (requestUri.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase))
         {
-            var sslStream = new SslStream(stream, leaveInnerStreamOpen: false, userCertificateValidationCallback:
-                validateCertificate ? null : (RemoteCertificateValidationCallback)((a, b, c, d) => true));
+            var sslStream = new SslStream(
+                stream,
+                leaveInnerStreamOpen: false,
+                userCertificateValidationCallback: validateCertificate
+                    ? null
+                    : (RemoteCertificateValidationCallback)((a, b, c, d) => true)
+            );
 
-            await sslStream.AuthenticateAsClientAsync(requestUri.Host, clientCertificates: null,
-                enabledSslProtocols: SslProtocols.None,
-                checkCertificateRevocation: validateCertificate).ConfigureAwait(false);
+            await sslStream
+                .AuthenticateAsClientAsync(
+                    requestUri.Host,
+                    clientCertificates: null,
+                    enabledSslProtocols: SslProtocols.None,
+                    checkCertificateRevocation: validateCertificate
+                )
+                .ConfigureAwait(false);
             return sslStream;
         }
         else

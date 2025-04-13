@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,30 +27,56 @@ using System;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	[TestFixture]
-	public class MultiViewControlBuilderTest
-	{
-		[Test (Description="Just check if it throws any exception")]
-		public void AppendSubBuilder ()
-		{
-			var bldr = new MultiViewControlBuilder ();
-			var subbldr = new ControlBuilder ();
+    [TestFixture]
+    public class MultiViewControlBuilderTest
+    {
+        [Test(Description = "Just check if it throws any exception")]
+        public void AppendSubBuilder()
+        {
+            var bldr = new MultiViewControlBuilder();
+            var subbldr = new ControlBuilder();
 
-			bldr.AppendSubBuilder (subbldr);
+            bldr.AppendSubBuilder(subbldr);
 
-			subbldr = ControlBuilder.CreateBuilderFromType (null, null, typeof (TextBox), "TextBox", null, null, 0, "dummy");
-			bldr.AppendSubBuilder (subbldr);
+            subbldr = ControlBuilder.CreateBuilderFromType(
+                null,
+                null,
+                typeof(TextBox),
+                "TextBox",
+                null,
+                null,
+                0,
+                "dummy"
+            );
+            bldr.AppendSubBuilder(subbldr);
 
-			subbldr = ControlBuilder.CreateBuilderFromType (null, null, typeof (View), "View", null, null, 0, "dummy");
-			bldr.AppendSubBuilder (subbldr);
+            subbldr = ControlBuilder.CreateBuilderFromType(
+                null,
+                null,
+                typeof(View),
+                "View",
+                null,
+                null,
+                0,
+                "dummy"
+            );
+            bldr.AppendSubBuilder(subbldr);
 
-			subbldr = ControlBuilder.CreateBuilderFromType (null, null, typeof (string), "Literal", null, null, 0, "dummy");
-			bldr.AppendSubBuilder (subbldr);
-		}
-	}
+            subbldr = ControlBuilder.CreateBuilderFromType(
+                null,
+                null,
+                typeof(string),
+                "Literal",
+                null,
+                null,
+                0,
+                "dummy"
+            );
+            bldr.AppendSubBuilder(subbldr);
+        }
+    }
 }

@@ -11,16 +11,20 @@ namespace AutoMapper.UnitTests
                 private readonly int _value;
 
                 public FooResolver()
-                    : this(1)
-                {
-                }
+                    : this(1) { }
 
                 public FooResolver(int value)
                 {
                     _value = value;
                 }
 
-                public int Resolve(Source s, Dest d, int source, int dest, ResolutionContext context)
+                public int Resolve(
+                    Source s,
+                    Dest d,
+                    int source,
+                    int dest,
+                    ResolutionContext context
+                )
                 {
                     return source + _value;
                 }
@@ -28,7 +32,13 @@ namespace AutoMapper.UnitTests
 
             public class BarResolver : IMemberValueResolver<Source, Dest, int, int>
             {
-                public int Resolve(Source s, Dest d, int source, int dest, ResolutionContext context)
+                public int Resolve(
+                    Source s,
+                    Dest d,
+                    int source,
+                    int dest,
+                    ResolutionContext context
+                )
                 {
                     return source + 1;
                 }
@@ -46,17 +56,26 @@ namespace AutoMapper.UnitTests
                 public int Value2 { get; set; }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateMap<Source, Dest>()
-                    .ForMember(x => x.Value, opt => opt.MapFrom<FooResolver, int>(x => x.Value))
-                    .ForMember(x => x.Value2, opt => opt.MapFrom<BarResolver, int>(x => x.Value2));
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForMember(x => x.Value, opt => opt.MapFrom<FooResolver, int>(x => x.Value))
+                        .ForMember(
+                            x => x.Value2,
+                            opt => opt.MapFrom<BarResolver, int>(x => x.Value2)
+                        );
+                });
 
             protected override void Because_of()
             {
-                _dest = Mapper.Map<Source, Dest>(new Source { Value = 5, Value2 = 6 },
-                    opt => opt.ConstructServicesUsing(type => type == typeof(FooResolver) ? new FooResolver(2) : null));
+                _dest = Mapper.Map<Source, Dest>(
+                    new Source { Value = 5, Value2 = 6 },
+                    opt =>
+                        opt.ConstructServicesUsing(type =>
+                            type == typeof(FooResolver) ? new FooResolver(2) : null
+                        )
+                );
             }
 
             [Fact]
@@ -72,7 +91,8 @@ namespace AutoMapper.UnitTests
             }
         }
 
-        public class When_specifying_a_custom_contextual_constructor_for_type_converters : AutoMapperSpecBase
+        public class When_specifying_a_custom_contextual_constructor_for_type_converters
+            : AutoMapperSpecBase
         {
             private Dest _dest;
 
@@ -81,9 +101,7 @@ namespace AutoMapper.UnitTests
                 private readonly int _value;
 
                 public FooTypeConverter()
-                    : this(1)
-                {
-                }
+                    : this(1) { }
 
                 public FooTypeConverter(int value)
                 {
@@ -95,7 +113,7 @@ namespace AutoMapper.UnitTests
                     return new Dest
                     {
                         Value = source.Value + _value,
-                        Value2 = source.Value2 + _value
+                        Value2 = source.Value2 + _value,
                     };
                 }
             }
@@ -112,16 +130,21 @@ namespace AutoMapper.UnitTests
                 public int Value2 { get; set; }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateMap<Source, Dest>()
-                    .ConvertUsing<FooTypeConverter>();
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>().ConvertUsing<FooTypeConverter>();
+                });
 
             protected override void Because_of()
             {
-                _dest = Mapper.Map<Source, Dest>(new Source { Value = 5, Value2 = 6 },
-                    opt => opt.ConstructServicesUsing(type => type == typeof(FooTypeConverter) ? new FooTypeConverter(2) : null));
+                _dest = Mapper.Map<Source, Dest>(
+                    new Source { Value = 5, Value2 = 6 },
+                    opt =>
+                        opt.ConstructServicesUsing(type =>
+                            type == typeof(FooTypeConverter) ? new FooTypeConverter(2) : null
+                        )
+                );
             }
 
             [Fact]
@@ -130,7 +153,6 @@ namespace AutoMapper.UnitTests
                 _dest.Value.ShouldBe(7);
                 _dest.Value2.ShouldBe(8);
             }
-
         }
     }
 }

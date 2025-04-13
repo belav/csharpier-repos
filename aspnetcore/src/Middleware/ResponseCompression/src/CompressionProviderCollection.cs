@@ -17,7 +17,10 @@ public class CompressionProviderCollection : Collection<ICompressionProvider>
     /// <remarks>
     /// Provider instances will be created using an <see cref="IServiceProvider" />.
     /// </remarks>
-    public void Add<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TCompressionProvider>()
+    public void Add<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            TCompressionProvider
+    >()
         where TCompressionProvider : ICompressionProvider
     {
         Add(typeof(TCompressionProvider));
@@ -30,13 +33,19 @@ public class CompressionProviderCollection : Collection<ICompressionProvider>
     /// <remarks>
     /// Provider instances will be created using an <see cref="IServiceProvider" />.
     /// </remarks>
-    public void Add([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type providerType)
+    public void Add(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            Type providerType
+    )
     {
         ArgumentNullException.ThrowIfNull(providerType);
 
         if (!typeof(ICompressionProvider).IsAssignableFrom(providerType))
         {
-            throw new ArgumentException($"The provider must implement {nameof(ICompressionProvider)}.", nameof(providerType));
+            throw new ArgumentException(
+                $"The provider must implement {nameof(ICompressionProvider)}.",
+                nameof(providerType)
+            );
         }
 
         var factory = new CompressionProviderFactory(providerType);

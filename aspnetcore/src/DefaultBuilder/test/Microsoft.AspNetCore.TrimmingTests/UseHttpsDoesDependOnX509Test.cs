@@ -10,10 +10,13 @@ var builder = WebApplication.CreateSlimBuilder(args);
 
 builder.WebHost.UseKestrel(serverOptions =>
 {
-    serverOptions.ListenLocalhost(5000, listenOptions =>
-    {
-        listenOptions.UseHttps();
-    });
+    serverOptions.ListenLocalhost(
+        5000,
+        listenOptions =>
+        {
+            listenOptions.UseHttps();
+        }
+    );
 });
 
 try

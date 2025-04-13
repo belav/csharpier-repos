@@ -18,7 +18,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Xml;                           // for XmlReader/Writer
+using System.Xml; // for XmlReader/Writer
 
 namespace System.IO.Packaging
 {
@@ -31,7 +31,8 @@ namespace System.IO.Packaging
         // .NET Framework will parse this as relative. This will break internal relationships
         // in packaging. For more information, see
         // http://www.mono-project.com/docs/faq/known-issues/urikind-relativeorabsolute/
-        private static readonly UriKind DotNetRelativeOrAbsolute = Type.GetType("Mono.Runtime") == null ? UriKind.RelativeOrAbsolute : (UriKind)300;
+        private static readonly UriKind DotNetRelativeOrAbsolute =
+            Type.GetType("Mono.Runtime") == null ? UriKind.RelativeOrAbsolute : (UriKind)300;
 
         #region IEnumerable
         /// <summary>
@@ -59,17 +60,15 @@ namespace System.IO.Packaging
         /// Constructor
         /// </summary>
         /// <remarks>For use by PackagePart</remarks>
-        internal InternalRelationshipCollection(PackagePart part) : this(part.Package, part)
-        {
-        }
+        internal InternalRelationshipCollection(PackagePart part)
+            : this(part.Package, part) { }
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <remarks>For use by Package</remarks>
-        internal InternalRelationshipCollection(Package package) : this(package, null)
-        {
-        }
+        internal InternalRelationshipCollection(Package package)
+            : this(package, null) { }
 
         /// <summary>
         /// Add new relationship
@@ -79,7 +78,12 @@ namespace System.IO.Packaging
         /// <param name="relationshipType">relationship type that uniquely defines the role of the relationship</param>
         /// <param name="id">String that conforms to the xsd:ID datatype. Unique across the source's relationships.
         /// Null OK (ID will be generated).</param>
-        internal PackageRelationship Add(Uri targetUri, TargetMode targetMode, string relationshipType, string? id)
+        internal PackageRelationship Add(
+            Uri targetUri,
+            TargetMode targetMode,
+            string relationshipType,
+            string? id
+        )
         {
             return Add(targetUri, targetMode, relationshipType, id, parsing: false);
         }
@@ -87,8 +91,8 @@ namespace System.IO.Packaging
         /// <summary>
         /// Return the relationship whose id is 'id', and null if not found.
         /// </summary>
-        internal PackageRelationship? GetRelationship(string id)
-            => _relationships.TryGetValue(id, out var result) ? result : null;
+        internal PackageRelationship? GetRelationship(string id) =>
+            _relationships.TryGetValue(id, out var result) ? result : null;
 
         /// <summary>
         /// Delete relationship with ID 'id'
@@ -120,7 +124,7 @@ namespace System.IO.Packaging
             if (!_dirty)
                 return;
 
-            if (_relationships.Count == 0)  // empty?
+            if (_relationships.Count == 0) // empty?
             {
                 // delete the part
                 if (_package.PartExists(_uri))
@@ -131,7 +135,7 @@ namespace System.IO.Packaging
             }
             else
             {
-                EnsureRelationshipPart();   // lazy init
+                EnsureRelationshipPart(); // lazy init
 
                 // write xml
                 WriteRelationshipPart(_relationshipPart);
@@ -183,8 +187,12 @@ namespace System.IO.Packaging
             _relationships = new OrderedDictionary<string, PackageRelationship>(4);
 
             // Load if available (not applicable to write-only mode).
-            if ((package.FileOpenAccess == FileAccess.Read ||
-                package.FileOpenAccess == FileAccess.ReadWrite) && package.PartExists(_uri))
+            if (
+                (
+                    package.FileOpenAccess == FileAccess.Read
+                    || package.FileOpenAccess == FileAccess.ReadWrite
+                ) && package.PartExists(_uri)
+            )
             {
                 _relationshipPart = package.GetPart(_uri);
                 ThrowIfIncorrectContentType(_relationshipPart.ValidatedContentType);
@@ -221,15 +229,23 @@ namespace System.IO.Packaging
         {
             //We can safely open the stream as FileAccess.Read, as this code
             //should only be invoked if the Package has been opened in Read or ReadWrite mode.
-            Debug.Assert(_package.FileOpenAccess == FileAccess.Read || _package.FileOpenAccess == FileAccess.ReadWrite,
-                "This method should only be called when FileAccess is Read or ReadWrite");
+            Debug.Assert(
+                _package.FileOpenAccess == FileAccess.Read
+                    || _package.FileOpenAccess == FileAccess.ReadWrite,
+                "This method should only be called when FileAccess is Read or ReadWrite"
+            );
 
             using (Stream s = part.GetStream(FileMode.Open, FileAccess.Read))
             {
                 // load from the relationship part associated with the given part
                 using (XmlReader baseReader = XmlReader.Create(s))
                 {
-                    using (XmlCompatibilityReader reader = new XmlCompatibilityReader(baseReader, s_relationshipKnownNamespaces))
+                    using (
+                        XmlCompatibilityReader reader = new XmlCompatibilityReader(
+                            baseReader,
+                            s_relationshipKnownNamespaces
+                        )
+                    )
                     {
                         //This method expects the reader to be in ReadState.Initial.
                         //It will make the first read call.
@@ -242,17 +258,24 @@ namespace System.IO.Packaging
 
                         // look for our tag and namespace pair - throw if other elements are encountered
                         // Make sure that the current node read is an Element
-                        if (reader.NodeType == XmlNodeType.Element
+                        if (
+                            reader.NodeType == XmlNodeType.Element
                             && (reader.Depth == 0)
                             && (reader.LocalName == RelationshipsTagName)
-                            && (reader.NamespaceURI == PackagingUtilities.RelationshipNamespaceUri))
+                            && (reader.NamespaceURI == PackagingUtilities.RelationshipNamespaceUri)
+                        )
                         {
                             ThrowIfXmlBaseAttributeIsPresent(reader);
 
                             //There should be a namespace Attribute present at this level.
                             //Also any other attribute on the <Relationships> tag is an error including xml: and xsi: attributes
                             if (PackagingUtilities.GetNonXmlnsAttributeCount(reader) > 0)
-                                throw new XmlException(SR.RelationshipsTagHasExtraAttributes, null, reader.LineNumber, reader.LinePosition);
+                                throw new XmlException(
+                                    SR.RelationshipsTagHasExtraAttributes,
+                                    null,
+                                    reader.LineNumber,
+                                    reader.LinePosition
+                                );
 
                             // start tag encountered for Relationships
                             // now parse individual Relationship tags
@@ -266,22 +289,32 @@ namespace System.IO.Packaging
                                 if (reader.NodeType == XmlNodeType.None)
                                     continue;
 
-                                if (reader.NodeType == XmlNodeType.Element
+                                if (
+                                    reader.NodeType == XmlNodeType.Element
                                     && (reader.Depth == 1)
                                     && (reader.LocalName == RelationshipTagName)
-                                    && (reader.NamespaceURI == PackagingUtilities.RelationshipNamespaceUri))
+                                    && (
+                                        reader.NamespaceURI
+                                        == PackagingUtilities.RelationshipNamespaceUri
+                                    )
+                                )
                                 {
                                     ThrowIfXmlBaseAttributeIsPresent(reader);
 
                                     int expectedAttributesCount = 3;
 
-                                    string? targetModeAttributeValue = reader.GetAttribute(TargetModeAttributeName);
+                                    string? targetModeAttributeValue = reader.GetAttribute(
+                                        TargetModeAttributeName
+                                    );
                                     if (targetModeAttributeValue != null)
                                         expectedAttributesCount++;
 
                                     //check if there are expected number of attributes.
                                     //Also any other attribute on the <Relationship> tag is an error including xml: and xsi: attributes
-                                    if (PackagingUtilities.GetNonXmlnsAttributeCount(reader) == expectedAttributesCount)
+                                    if (
+                                        PackagingUtilities.GetNonXmlnsAttributeCount(reader)
+                                        == expectedAttributesCount
+                                    )
                                     {
                                         ProcessRelationshipAttributes(reader);
 
@@ -291,20 +324,39 @@ namespace System.IO.Packaging
                                     }
                                     else
                                     {
-                                        throw new XmlException(SR.RelationshipTagDoesntMatchSchema, null, reader.LineNumber, reader.LinePosition);
+                                        throw new XmlException(
+                                            SR.RelationshipTagDoesntMatchSchema,
+                                            null,
+                                            reader.LineNumber,
+                                            reader.LinePosition
+                                        );
                                     }
                                 }
-                                else
-                                    if (!((reader.LocalName == RelationshipsTagName) && (reader.NodeType == XmlNodeType.EndElement)))
-                                    throw new XmlException(SR.UnknownTagEncountered, null, reader.LineNumber, reader.LinePosition);
+                                else if (
+                                    !(
+                                        (reader.LocalName == RelationshipsTagName)
+                                        && (reader.NodeType == XmlNodeType.EndElement)
+                                    )
+                                )
+                                    throw new XmlException(
+                                        SR.UnknownTagEncountered,
+                                        null,
+                                        reader.LineNumber,
+                                        reader.LinePosition
+                                    );
                             }
                         }
-                        else throw new XmlException(SR.ExpectedRelationshipsElementTag, null, reader.LineNumber, reader.LinePosition);
+                        else
+                            throw new XmlException(
+                                SR.ExpectedRelationshipsElementTag,
+                                null,
+                                reader.LineNumber,
+                                reader.LinePosition
+                            );
                     }
                 }
             }
         }
-
 
         //This method processes the attributes that are present on the Relationship element
         private void ProcessRelationshipAttributes(XmlCompatibilityReader reader)
@@ -321,9 +373,14 @@ namespace System.IO.Packaging
                 try
                 {
 #if NET6_0_OR_GREATER
-                    relationshipTargetMode = Enum.Parse<TargetMode>(targetModeAttributeValue, ignoreCase: false);
+                    relationshipTargetMode = Enum.Parse<TargetMode>(
+                        targetModeAttributeValue,
+                        ignoreCase: false
+                    );
 #else
-                    relationshipTargetMode = (TargetMode)(Enum.Parse(typeof(TargetMode), targetModeAttributeValue, ignoreCase: false));
+                    relationshipTargetMode = (TargetMode)(
+                        Enum.Parse(typeof(TargetMode), targetModeAttributeValue, ignoreCase: false)
+                    );
 #endif
                 }
                 catch (ArgumentNullException argNullEx)
@@ -341,41 +398,72 @@ namespace System.IO.Packaging
             // create a new PackageRelationship
             string? targetAttributeValue = reader.GetAttribute(TargetAttributeName);
             if (string.IsNullOrEmpty(targetAttributeValue))
-                throw new XmlException(SR.Format(SR.RequiredRelationshipAttributeMissing, TargetAttributeName), null, reader.LineNumber, reader.LinePosition);
+                throw new XmlException(
+                    SR.Format(SR.RequiredRelationshipAttributeMissing, TargetAttributeName),
+                    null,
+                    reader.LineNumber,
+                    reader.LinePosition
+                );
 
             Uri targetUri = new Uri(targetAttributeValue, DotNetRelativeOrAbsolute);
 
             // Attribute : Type
             string? typeAttributeValue = reader.GetAttribute(TypeAttributeName);
             if (string.IsNullOrEmpty(typeAttributeValue))
-                throw new XmlException(SR.Format(SR.RequiredRelationshipAttributeMissing, TypeAttributeName), null, reader.LineNumber, reader.LinePosition);
+                throw new XmlException(
+                    SR.Format(SR.RequiredRelationshipAttributeMissing, TypeAttributeName),
+                    null,
+                    reader.LineNumber,
+                    reader.LinePosition
+                );
 
             // Attribute : Id
             // Get the Id attribute (required attribute).
             string? idAttributeValue = reader.GetAttribute(IdAttributeName);
             if (string.IsNullOrEmpty(idAttributeValue))
-                throw new XmlException(SR.Format(SR.RequiredRelationshipAttributeMissing, IdAttributeName), null, reader.LineNumber, reader.LinePosition);
+                throw new XmlException(
+                    SR.Format(SR.RequiredRelationshipAttributeMissing, IdAttributeName),
+                    null,
+                    reader.LineNumber,
+                    reader.LinePosition
+                );
 
             // Add the relationship to the collection
-            Add(targetUri, relationshipTargetMode, typeAttributeValue, idAttributeValue, parsing: true);
+            Add(
+                targetUri,
+                relationshipTargetMode,
+                typeAttributeValue,
+                idAttributeValue,
+                parsing: true
+            );
         }
 
         //If End element is present for Relationship then we process it
         private static void ProcessEndElementForRelationshipTag(XmlCompatibilityReader reader)
         {
-            Debug.Assert(!reader.IsEmptyElement, "This method should only be called if the Relationship Element is not empty");
+            Debug.Assert(
+                !reader.IsEmptyElement,
+                "This method should only be called if the Relationship Element is not empty"
+            );
 
             reader.Read();
 
             //Skips over the following - ProcessingInstruction, DocumentType, Comment, Whitespace, or SignificantWhitespace
             reader.MoveToContent();
 
-            if (reader.NodeType == XmlNodeType.EndElement && reader.LocalName == RelationshipTagName)
+            if (
+                reader.NodeType == XmlNodeType.EndElement
+                && reader.LocalName == RelationshipTagName
+            )
                 return;
             else
-                throw new XmlException(SR.Format(SR.ElementIsNotEmptyElement, RelationshipTagName), null, reader.LineNumber, reader.LinePosition);
+                throw new XmlException(
+                    SR.Format(SR.ElementIsNotEmptyElement, RelationshipTagName),
+                    null,
+                    reader.LineNumber,
+                    reader.LinePosition
+                );
         }
-
 
         /// <summary>
         /// Add new relationship to the Collection
@@ -387,7 +475,13 @@ namespace System.IO.Packaging
         /// Null OK (ID will be generated).</param>
         /// <param name="parsing">Indicates whether the add call is made while parsing existing relationships
         /// from a relationship part, or we are adding a new relationship</param>
-        private PackageRelationship Add(Uri targetUri, TargetMode targetMode, string relationshipType, string? id, bool parsing)
+        private PackageRelationship Add(
+            Uri targetUri,
+            TargetMode targetMode,
+            string relationshipType,
+            string? id,
+            bool parsing
+        )
         {
             if (targetUri is null)
             {
@@ -414,8 +508,10 @@ namespace System.IO.Packaging
             //      2. Uri is NOT absolute and its target mode is internal (or NOT external)
             //      Note: if the target is absolute uri and its not a pack scheme then we cannot determine if it is a rels part
             //      Note: if the target is relative uri and target mode is external, we cannot determine if it is a rels part
-            if ((!targetUri.IsAbsoluteUri && targetMode != TargetMode.External)
-                    || (targetUri.IsAbsoluteUri && targetUri.Scheme == PackUriHelper.UriSchemePack))
+            if (
+                (!targetUri.IsAbsoluteUri && targetMode != TargetMode.External)
+                || (targetUri.IsAbsoluteUri && targetUri.Scheme == PackUriHelper.UriSchemePack)
+            )
             {
                 Uri resolvedUri = GetResolvedTargetUri(targetUri, targetMode);
                 //GetResolvedTargetUri returns a null if the target mode is external and the
@@ -424,7 +520,10 @@ namespace System.IO.Packaging
                 if (resolvedUri != null)
                 {
                     if (PackUriHelper.IsRelationshipPartUri(resolvedUri))
-                        throw new ArgumentException(SR.RelationshipToRelationshipIllegal, nameof(targetUri));
+                        throw new ArgumentException(
+                            SR.RelationshipToRelationshipIllegal,
+                            nameof(targetUri)
+                        );
                 }
             }
 
@@ -439,7 +538,14 @@ namespace System.IO.Packaging
             }
 
             // create and add
-            PackageRelationship relationship = new PackageRelationship(_package, _sourcePart, targetUri, targetMode, relationshipType, id);
+            PackageRelationship relationship = new PackageRelationship(
+                _package,
+                _sourcePart,
+                targetUri,
+                targetMode,
+                relationshipType,
+                id
+            );
             _relationships.Add(id, relationship);
 
             //If we are adding relationships as a part of Parsing the underlying relationship part, we should not set
@@ -460,23 +566,31 @@ namespace System.IO.Packaging
             {
                 if (_package.FileOpenAccess != FileAccess.Write)
                 {
-                    s.SetLength(0);    // truncate to resolve PS 954048
+                    s.SetLength(0); // truncate to resolve PS 954048
                 }
 
                 // use UTF-8 encoding by default
-                using (XmlWriter writer = XmlWriter.Create(s, new XmlWriterSettings { Encoding = System.Text.Encoding.UTF8 }))
+                using (
+                    XmlWriter writer = XmlWriter.Create(
+                        s,
+                        new XmlWriterSettings { Encoding = System.Text.Encoding.UTF8 }
+                    )
+                )
                 {
                     writer.WriteStartDocument();
 
                     // start outer Relationships tag
-                    writer.WriteStartElement(RelationshipsTagName, PackagingUtilities.RelationshipNamespaceUri);
+                    writer.WriteStartElement(
+                        RelationshipsTagName,
+                        PackagingUtilities.RelationshipNamespaceUri
+                    );
 
                     // Write Relationship elements.
                     WriteRelationshipsAsXml(
                         writer,
                         _relationships,
                         false /* do not systematically write target mode */
-                        );
+                    );
 
                     // end of Relationships tag
                     writer.WriteEndElement();
@@ -491,7 +605,11 @@ namespace System.IO.Packaging
         /// Write one Relationship element for each member of relationships.
         /// This method is used by XmlDigitalSignatureProcessor code as well
         /// </summary>
-        internal static void WriteRelationshipsAsXml(XmlWriter writer, IEnumerable<PackageRelationship> relationships, bool alwaysWriteTargetModeAttribute)
+        internal static void WriteRelationshipsAsXml(
+            XmlWriter writer,
+            IEnumerable<PackageRelationship> relationships,
+            bool alwaysWriteTargetModeAttribute
+        )
         {
             foreach (PackageRelationship relationship in relationships)
             {
@@ -508,11 +626,20 @@ namespace System.IO.Packaging
                 // the string can be converted to a valid Uri.
                 // Also, we are just using it here to persist the information and we are not
                 // resolving or fetching a resource based on this Uri.
-                writer.WriteAttributeString(TargetAttributeName, relationship.TargetUri.OriginalString);
+                writer.WriteAttributeString(
+                    TargetAttributeName,
+                    relationship.TargetUri.OriginalString
+                );
 
                 // TargetMode is optional attribute in the markup and its default value is TargetMode="Internal"
-                if (alwaysWriteTargetModeAttribute || relationship.TargetMode == TargetMode.External)
-                    writer.WriteAttributeString(TargetModeAttributeName, relationship.TargetMode.ToString());
+                if (
+                    alwaysWriteTargetModeAttribute
+                    || relationship.TargetMode == TargetMode.External
+                )
+                    writer.WriteAttributeString(
+                        TargetModeAttributeName,
+                        relationship.TargetMode.ToString()
+                    );
 
                 // Write Id attribute.
                 writer.WriteAttributeString(IdAttributeName, relationship.Id);
@@ -538,8 +665,15 @@ namespace System.IO.Packaging
                 }
                 else
                 {
-                    CompressionOption compressionOption = _sourcePart == null ? CompressionOption.NotCompressed : _sourcePart.CompressionOption;
-                    _relationshipPart = _package.CreatePart(_uri, PackagingUtilities.RelationshipPartContentType.ToString(), compressionOption);
+                    CompressionOption compressionOption =
+                        _sourcePart == null
+                            ? CompressionOption.NotCompressed
+                            : _sourcePart.CompressionOption;
+                    _relationshipPart = _package.CreatePart(
+                        _uri,
+                        PackagingUtilities.RelationshipPartContentType.ToString(),
+                        compressionOption
+                    );
                 }
             }
         }
@@ -577,13 +711,27 @@ namespace System.IO.Packaging
             string? xmlBaseAttributeValue = reader.GetAttribute(XmlBaseAttributeName);
 
             if (xmlBaseAttributeValue != null)
-                throw new XmlException(SR.Format(SR.InvalidXmlBaseAttributePresent, XmlBaseAttributeName), null, reader.LineNumber, reader.LinePosition);
+                throw new XmlException(
+                    SR.Format(SR.InvalidXmlBaseAttributePresent, XmlBaseAttributeName),
+                    null,
+                    reader.LineNumber,
+                    reader.LinePosition
+                );
         }
 
         //Throws an XML exception if the attribute value is invalid
-        private static void ThrowForInvalidAttributeValue(XmlCompatibilityReader reader, string attributeName, Exception ex)
+        private static void ThrowForInvalidAttributeValue(
+            XmlCompatibilityReader reader,
+            string attributeName,
+            Exception ex
+        )
         {
-            throw new XmlException(SR.Format(SR.InvalidValueForTheAttribute, attributeName), ex, reader.LineNumber, reader.LinePosition);
+            throw new XmlException(
+                SR.Format(SR.InvalidValueForTheAttribute, attributeName),
+                ex,
+                reader.LineNumber,
+                reader.LinePosition
+            );
         }
 
         // Generate a unique relation ID.
@@ -624,11 +772,11 @@ namespace System.IO.Packaging
 
         #region Private Members
         private readonly OrderedDictionary<string, PackageRelationship> _relationships;
-        private bool _dirty;    // true if we have uncommitted changes to _relationships
-        private readonly Package _package;     // our package - in case _sourcePart is null
-        private readonly PackagePart? _sourcePart;      // owning part - null if package is the owner
-        private PackagePart? _relationshipPart;  // where our relationships are persisted
-        private readonly Uri _uri;           // the URI of our relationship part
+        private bool _dirty; // true if we have uncommitted changes to _relationships
+        private readonly Package _package; // our package - in case _sourcePart is null
+        private readonly PackagePart? _sourcePart; // owning part - null if package is the owner
+        private PackagePart? _relationshipPart; // where our relationships are persisted
+        private readonly Uri _uri; // the URI of our relationship part
 
         //------------------------------------------------------
         //
@@ -647,8 +795,10 @@ namespace System.IO.Packaging
         private const string XmlBaseAttributeName = "xml:base";
         private const string TargetModeAttributeName = "TargetMode";
 
-        private static readonly string[] s_relationshipKnownNamespaces
-            = new string[] { PackagingUtilities.RelationshipNamespaceUri };
+        private static readonly string[] s_relationshipKnownNamespaces = new string[]
+        {
+            PackagingUtilities.RelationshipNamespaceUri,
+        };
 
         #endregion
     }

@@ -27,9 +27,11 @@ internal class LspServiceLifeCycleManager : ILifeCycleManager, ILspService
             var messageParams = new LogMessageParams()
             {
                 MessageType = MessageType.Info,
-                Message = message
+                Message = message,
             };
-            await _clientLanguageServerManager.SendNotificationAsync("window/logMessage", messageParams, CancellationToken.None).ConfigureAwait(false);
+            await _clientLanguageServerManager
+                .SendNotificationAsync("window/logMessage", messageParams, CancellationToken.None)
+                .ConfigureAwait(false);
         }
         catch (Exception ex) when (ex is ObjectDisposedException or ConnectionLostException)
         {

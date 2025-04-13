@@ -5,13 +5,13 @@
 namespace System.Activities.Tracking
 {
     using System;
-    using System.Runtime;
-    using System.Runtime.Serialization;
-    using System.Diagnostics;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.Runtime;
     using System.Runtime.Diagnostics;
+    using System.Runtime.Serialization;
 
     [Fx.Tag.XamlVisible(false)]
     [DataContract]
@@ -46,48 +46,29 @@ namespace System.Activities.Tracking
             this.Level = record.Level;
             if (record.HasAnnotations)
             {
-                Dictionary<string, string> copy = new Dictionary<string, string>(record.annotations);
+                Dictionary<string, string> copy = new Dictionary<string, string>(
+                    record.annotations
+                );
                 this.annotations = new ReadOnlyDictionaryInternal<string, string>(copy);
             }
         }
 
+        [DataMember]
+        public Guid InstanceId { get; internal set; }
 
         [DataMember]
-        public Guid InstanceId
-        {
-            get;
-            internal set;
-        }
-
-        [DataMember]
-        public long RecordNumber
-        {
-            get;
-            internal set;
-        }
+        public long RecordNumber { get; internal set; }
 
         public DateTime EventTime
         {
-            get
-            {
-                return this.eventTime;
-            }
-            private set
-            {
-                this.eventTime = value;
-            }
+            get { return this.eventTime; }
+            private set { this.eventTime = value; }
         }
 
         public TraceLevel Level
         {
-            get
-            {
-                return this.level;
-            }
-            protected set
-            {
-                this.level = value;
-            }
+            get { return this.level; }
+            protected set { this.level = value; }
         }
 
         public IDictionary<string, string> Annotations
@@ -147,7 +128,9 @@ namespace System.Activities.Tracking
             {
                 if (readonlyEmptyAnnotations == null)
                 {
-                    readonlyEmptyAnnotations = new ReadOnlyDictionaryInternal<string, string>(new Dictionary<string, string>(0));
+                    readonlyEmptyAnnotations = new ReadOnlyDictionaryInternal<string, string>(
+                        new Dictionary<string, string>(0)
+                    );
                 }
                 return readonlyEmptyAnnotations;
             }
@@ -155,21 +138,20 @@ namespace System.Activities.Tracking
 
         internal bool HasAnnotations
         {
-            get
-            {
-                return (this.annotations != null && this.annotations.Count > 0);
-            }
+            get { return (this.annotations != null && this.annotations.Count > 0); }
         }
 
-        protected abstract internal TrackingRecord Clone();
+        protected internal abstract TrackingRecord Clone();
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture,
+            return string.Format(
+                CultureInfo.CurrentCulture,
                 "InstanceId = {0}, RecordNumber = {1}, EventTime = {2}",
                 this.InstanceId,
                 this.RecordNumber,
-                this.EventTime);
+                this.EventTime
+            );
         }
     }
 }

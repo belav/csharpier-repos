@@ -26,7 +26,8 @@ internal abstract class ServerCallHandlerBase<TService, TRequest, TResponse>
         ServerMethodInvokerBase<TService, TRequest, TResponse> methodInvoker,
         ILoggerFactory loggerFactory,
         CallHandlerDescriptorInfo descriptorInfo,
-        JsonSerializerOptions serializerOptions)
+        JsonSerializerOptions serializerOptions
+    )
     {
         MethodInvoker = methodInvoker;
         DescriptorInfo = descriptorInfo;
@@ -41,7 +42,13 @@ internal abstract class ServerCallHandlerBase<TService, TRequest, TResponse>
             rewriteAction(httpContext);
         }
 
-        var serverCallContext = new JsonTranscodingServerCallContext(httpContext, MethodInvoker.Options, MethodInvoker.Method, DescriptorInfo, Logger);
+        var serverCallContext = new JsonTranscodingServerCallContext(
+            httpContext,
+            MethodInvoker.Options,
+            MethodInvoker.Method,
+            DescriptorInfo,
+            Logger
+        );
         httpContext.Features.Set<IServerCallContextFeature>(serverCallContext);
 
         try
@@ -56,15 +63,32 @@ internal abstract class ServerCallHandlerBase<TService, TRequest, TResponse>
             }
             else
             {
-                return AwaitHandleCall(serverCallContext, MethodInvoker.Method, IsStreaming, SerializerOptions, handleCallTask);
+                return AwaitHandleCall(
+                    serverCallContext,
+                    MethodInvoker.Method,
+                    IsStreaming,
+                    SerializerOptions,
+                    handleCallTask
+                );
             }
         }
         catch (Exception ex)
         {
-            return serverCallContext.ProcessHandlerErrorAsync(ex, MethodInvoker.Method.Name, IsStreaming, SerializerOptions);
+            return serverCallContext.ProcessHandlerErrorAsync(
+                ex,
+                MethodInvoker.Method.Name,
+                IsStreaming,
+                SerializerOptions
+            );
         }
 
-        static async Task AwaitHandleCall(JsonTranscodingServerCallContext serverCallContext, Method<TRequest, TResponse> method, bool isStreaming, JsonSerializerOptions serializerOptions, Task handleCall)
+        static async Task AwaitHandleCall(
+            JsonTranscodingServerCallContext serverCallContext,
+            Method<TRequest, TResponse> method,
+            bool isStreaming,
+            JsonSerializerOptions serializerOptions,
+            Task handleCall
+        )
         {
             try
             {
@@ -72,12 +96,20 @@ internal abstract class ServerCallHandlerBase<TService, TRequest, TResponse>
             }
             catch (Exception ex)
             {
-                await serverCallContext.ProcessHandlerErrorAsync(ex, method.Name, isStreaming, serializerOptions);
+                await serverCallContext.ProcessHandlerErrorAsync(
+                    ex,
+                    method.Name,
+                    isStreaming,
+                    serializerOptions
+                );
             }
         }
     }
 
-    protected abstract Task HandleCallAsyncCore(HttpContext httpContext, JsonTranscodingServerCallContext serverCallContext);
+    protected abstract Task HandleCallAsyncCore(
+        HttpContext httpContext,
+        JsonTranscodingServerCallContext serverCallContext
+    );
 
     protected virtual bool IsStreaming => false;
 }

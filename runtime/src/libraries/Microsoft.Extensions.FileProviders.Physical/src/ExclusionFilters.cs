@@ -35,6 +35,6 @@ namespace Microsoft.Extensions.FileProviders.Physical
         /// <summary>
         /// Do not exclude any files.
         /// </summary>
-        None = 0
+        None = 0,
     }
 }

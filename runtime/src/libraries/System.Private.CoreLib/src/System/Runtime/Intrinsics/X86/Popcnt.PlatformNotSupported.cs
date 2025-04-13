@@ -14,26 +14,40 @@ namespace System.Runtime.Intrinsics.X86
     {
         internal Popcnt() { }
 
-        public static new bool IsSupported { [Intrinsic] get { return false; } }
+        public static new bool IsSupported
+        {
+            [Intrinsic]
+            get { return false; }
+        }
 
         public new abstract class X64 : Sse42.X64
         {
             internal X64() { }
 
-            public static new bool IsSupported { [Intrinsic] get { return false; } }
+            public static new bool IsSupported
+            {
+                [Intrinsic]
+                get { return false; }
+            }
 
             /// <summary>
             /// __int64 _mm_popcnt_u64 (unsigned __int64 a)
             ///   POPCNT r64, r/m64
             /// This intrinsic is only available on 64-bit processes
             /// </summary>
-            public static ulong PopCount(ulong value) { throw new PlatformNotSupportedException(); }
+            public static ulong PopCount(ulong value)
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
 
         /// <summary>
         /// int _mm_popcnt_u32 (unsigned int a)
         ///   POPCNT r32, r/m32
         /// </summary>
-        public static uint PopCount(uint value) { throw new PlatformNotSupportedException(); }
+        public static uint PopCount(uint value)
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
 }

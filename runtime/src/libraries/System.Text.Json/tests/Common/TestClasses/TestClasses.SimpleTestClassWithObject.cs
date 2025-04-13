@@ -63,74 +63,76 @@ namespace System.Text.Json.Serialization.Tests
         public object MyStringImmutableSortedSetT { get; set; }
 
         public static new readonly string s_json =
-                @"{" +
-                @"""MyInt16"" : 1," +
-                @"""MyInt32"" : 2," +
-                @"""MyInt64"" : 3," +
-                @"""MyUInt16"" : 4," +
-                @"""MyUInt32"" : 5," +
-                @"""MyUInt64"" : 6," +
-                @"""MyByte"" : 7," +
-                @"""MySByte"" : 8," +
-                @"""MyChar"" : ""a""," +
-                @"""MyString"" : ""Hello""," +
-                @"""MyBooleanTrue"" : true," +
-                @"""MyBooleanFalse"" : false," +
-                @"""MySingle"" : 1.1," +
-                @"""MyDouble"" : 2.2," +
-                @"""MyDecimal"" : 3.3," +
-                @"""MyDateTime"" : ""2019-01-30T12:01:02.0000000Z""," +
-                @"""MyEnum"" : 2," + // int by default
-                @"""MyInt16Array"" : [1]," +
-                @"""MyInt32Array"" : [2]," +
-                @"""MyInt64Array"" : [3]," +
-                @"""MyUInt16Array"" : [4]," +
-                @"""MyUInt32Array"" : [5]," +
-                @"""MyUInt64Array"" : [6]," +
-                @"""MyByteArray"" : [7]," +
-                @"""MySByteArray"" : [8]," +
-                @"""MyCharArray"" : [""a""]," +
-                @"""MyStringArray"" : [""Hello""]," +
-                @"""MyBooleanTrueArray"" : [true]," +
-                @"""MyBooleanFalseArray"" : [false]," +
-                @"""MySingleArray"" : [1.1]," +
-                @"""MyDoubleArray"" : [2.2]," +
-                @"""MyDecimalArray"" : [3.3]," +
-                @"""MyDateTimeArray"" : [""2019-01-30T12:01:02.0000000Z""]," +
-                @"""MyEnumArray"" : [2]," + // int by default
-                @"""MyStringList"" : [""Hello""]," +
-                @"""MyStringIEnumerable"" : [""Hello""]," +
-                @"""MyStringIList"" : [""Hello""]," +
-                @"""MyStringICollection"" : [""Hello""]," +
-                @"""MyStringIEnumerableT"" : [""Hello""]," +
-                @"""MyStringIListT"" : [""Hello""]," +
-                @"""MyStringICollectionT"" : [""Hello""]," +
-                @"""MyStringIReadOnlyCollectionT"" : [""Hello""]," +
-                @"""MyStringIReadOnlyListT"" : [""Hello""]," +
-                @"""MyStringISetT"" : [""Hello""]," +
-                @"""MyStringToStringKeyValuePair"" : {""Key"" : ""myKey"", ""Value"" : ""myValue""}," +
-                @"""MyStringToStringIDict"" : {""key"" : ""value""}," +
-                @"""MyStringToStringGenericDict"" : {""key"" : ""value""}," +
-                @"""MyStringToStringGenericIDict"" : {""key"" : ""value""}," +
-                @"""MyStringToStringGenericIReadOnlyDict"" : {""key"" : ""value""}," +
-                @"""MyStringToStringImmutableDict"" : {""key"" : ""value""}," +
-                @"""MyStringToStringIImmutableDict"" : {""key"" : ""value""}," +
-                @"""MyStringToStringImmutableSortedDict"" : {""key"" : ""value""}," +
-                @"""MyStringStackT"" : [""Hello"", ""World""]," +
-                @"""MyStringQueueT"" : [""Hello"", ""World""]," +
-                @"""MyStringHashSetT"" : [""Hello""]," +
-                @"""MyStringLinkedListT"" : [""Hello""]," +
-                @"""MyStringSortedSetT"" : [""Hello""]," +
-                @"""MyStringIImmutableListT"" : [""Hello""]," +
-                @"""MyStringIImmutableStackT"" : [""Hello""]," +
-                @"""MyStringIImmutableQueueT"" : [""Hello""]," +
-                @"""MyStringIImmutableSetT"" : [""Hello""]," +
-                @"""MyStringImmutableHashSetT"" : [""Hello""]," +
-                @"""MyStringImmutableListT"" : [""Hello""]," +
-                @"""MyStringImmutableStackT"" : [""Hello""]," +
-                @"""MyStringImmutablQueueT"" : [""Hello""]," +
-                @"""MyStringImmutableSortedSetT"" : [""Hello""]" +
-                @"}";
+            @"{"
+            + @"""MyInt16"" : 1,"
+            + @"""MyInt32"" : 2,"
+            + @"""MyInt64"" : 3,"
+            + @"""MyUInt16"" : 4,"
+            + @"""MyUInt32"" : 5,"
+            + @"""MyUInt64"" : 6,"
+            + @"""MyByte"" : 7,"
+            + @"""MySByte"" : 8,"
+            + @"""MyChar"" : ""a"","
+            + @"""MyString"" : ""Hello"","
+            + @"""MyBooleanTrue"" : true,"
+            + @"""MyBooleanFalse"" : false,"
+            + @"""MySingle"" : 1.1,"
+            + @"""MyDouble"" : 2.2,"
+            + @"""MyDecimal"" : 3.3,"
+            + @"""MyDateTime"" : ""2019-01-30T12:01:02.0000000Z"","
+            + @"""MyEnum"" : 2,"
+            + // int by default
+            @"""MyInt16Array"" : [1],"
+            + @"""MyInt32Array"" : [2],"
+            + @"""MyInt64Array"" : [3],"
+            + @"""MyUInt16Array"" : [4],"
+            + @"""MyUInt32Array"" : [5],"
+            + @"""MyUInt64Array"" : [6],"
+            + @"""MyByteArray"" : [7],"
+            + @"""MySByteArray"" : [8],"
+            + @"""MyCharArray"" : [""a""],"
+            + @"""MyStringArray"" : [""Hello""],"
+            + @"""MyBooleanTrueArray"" : [true],"
+            + @"""MyBooleanFalseArray"" : [false],"
+            + @"""MySingleArray"" : [1.1],"
+            + @"""MyDoubleArray"" : [2.2],"
+            + @"""MyDecimalArray"" : [3.3],"
+            + @"""MyDateTimeArray"" : [""2019-01-30T12:01:02.0000000Z""],"
+            + @"""MyEnumArray"" : [2],"
+            + // int by default
+            @"""MyStringList"" : [""Hello""],"
+            + @"""MyStringIEnumerable"" : [""Hello""],"
+            + @"""MyStringIList"" : [""Hello""],"
+            + @"""MyStringICollection"" : [""Hello""],"
+            + @"""MyStringIEnumerableT"" : [""Hello""],"
+            + @"""MyStringIListT"" : [""Hello""],"
+            + @"""MyStringICollectionT"" : [""Hello""],"
+            + @"""MyStringIReadOnlyCollectionT"" : [""Hello""],"
+            + @"""MyStringIReadOnlyListT"" : [""Hello""],"
+            + @"""MyStringISetT"" : [""Hello""],"
+            + @"""MyStringToStringKeyValuePair"" : {""Key"" : ""myKey"", ""Value"" : ""myValue""},"
+            + @"""MyStringToStringIDict"" : {""key"" : ""value""},"
+            + @"""MyStringToStringGenericDict"" : {""key"" : ""value""},"
+            + @"""MyStringToStringGenericIDict"" : {""key"" : ""value""},"
+            + @"""MyStringToStringGenericIReadOnlyDict"" : {""key"" : ""value""},"
+            + @"""MyStringToStringImmutableDict"" : {""key"" : ""value""},"
+            + @"""MyStringToStringIImmutableDict"" : {""key"" : ""value""},"
+            + @"""MyStringToStringImmutableSortedDict"" : {""key"" : ""value""},"
+            + @"""MyStringStackT"" : [""Hello"", ""World""],"
+            + @"""MyStringQueueT"" : [""Hello"", ""World""],"
+            + @"""MyStringHashSetT"" : [""Hello""],"
+            + @"""MyStringLinkedListT"" : [""Hello""],"
+            + @"""MyStringSortedSetT"" : [""Hello""],"
+            + @"""MyStringIImmutableListT"" : [""Hello""],"
+            + @"""MyStringIImmutableStackT"" : [""Hello""],"
+            + @"""MyStringIImmutableQueueT"" : [""Hello""],"
+            + @"""MyStringIImmutableSetT"" : [""Hello""],"
+            + @"""MyStringImmutableHashSetT"" : [""Hello""],"
+            + @"""MyStringImmutableListT"" : [""Hello""],"
+            + @"""MyStringImmutableStackT"" : [""Hello""],"
+            + @"""MyStringImmutablQueueT"" : [""Hello""],"
+            + @"""MyStringImmutableSortedSetT"" : [""Hello""]"
+            + @"}";
 
         public static new readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -153,7 +155,10 @@ namespace System.Text.Json.Serialization.Tests
             MySingleArray = new float[] { 1.1f };
             MyDoubleArray = new double[] { 2.2d };
             MyDecimalArray = new decimal[] { 3.3m };
-            MyDateTimeArray = new DateTime[] { new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc) };
+            MyDateTimeArray = new DateTime[]
+            {
+                new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc),
+            };
             MyEnumArray = new SampleEnum[] { SampleEnum.Two };
 
             MyStringList = new List<string>() { "Hello" };
@@ -176,11 +181,20 @@ namespace System.Text.Json.Serialization.Tests
 
             MyStringToStringGenericDict = new Dictionary<string, string> { { "key", "value" } };
             MyStringToStringGenericIDict = new Dictionary<string, string> { { "key", "value" } };
-            MyStringToStringGenericIReadOnlyDict = new Dictionary<string, string> { { "key", "value" } };
+            MyStringToStringGenericIReadOnlyDict = new Dictionary<string, string>
+            {
+                { "key", "value" },
+            };
 
-            MyStringToStringImmutableDict = ImmutableDictionary.CreateRange((Dictionary<string, string>)MyStringToStringGenericDict);
-            MyStringToStringIImmutableDict = ImmutableDictionary.CreateRange((Dictionary<string, string>)MyStringToStringGenericDict);
-            MyStringToStringImmutableSortedDict = ImmutableSortedDictionary.CreateRange((Dictionary<string, string>)MyStringToStringGenericDict);
+            MyStringToStringImmutableDict = ImmutableDictionary.CreateRange(
+                (Dictionary<string, string>)MyStringToStringGenericDict
+            );
+            MyStringToStringIImmutableDict = ImmutableDictionary.CreateRange(
+                (Dictionary<string, string>)MyStringToStringGenericDict
+            );
+            MyStringToStringImmutableSortedDict = ImmutableSortedDictionary.CreateRange(
+                (Dictionary<string, string>)MyStringToStringGenericDict
+            );
 
             MyStringStackT = new Stack<string>(new List<string>() { "Hello", "World" });
             MyStringQueueT = new Queue<string>(new List<string>() { "Hello", "World" });
@@ -196,7 +210,9 @@ namespace System.Text.Json.Serialization.Tests
             MyStringImmutableListT = ImmutableList.CreateRange(new List<string> { "Hello" });
             MyStringImmutableStackT = ImmutableStack.CreateRange(new List<string> { "Hello" });
             MyStringImmutablQueueT = ImmutableQueue.CreateRange(new List<string> { "Hello" });
-            MyStringImmutableSortedSetT = ImmutableSortedSet.CreateRange(new List<string> { "Hello" });
+            MyStringImmutableSortedSetT = ImmutableSortedSet.CreateRange(
+                new List<string> { "Hello" }
+            );
         }
 
         public override void Verify()
@@ -218,26 +234,37 @@ namespace System.Text.Json.Serialization.Tests
             Assert.True(((bool[])MyBooleanTrueArray)[0]);
             Assert.Equal(1.1f, ((float[])MySingleArray)[0]);
             Assert.Equal(2.2d, ((double[])MyDoubleArray)[0]);
-            Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc), ((DateTime[])MyDateTimeArray)[0]);
+            Assert.Equal(
+                new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc),
+                ((DateTime[])MyDateTimeArray)[0]
+            );
             Assert.Equal(SampleEnum.Two, ((SampleEnum[])MyEnumArray)[0]);
 
             Assert.Equal("Hello", ((List<string>)MyStringList)[0]);
 
             ((IEnumerable)MyStringIEnumerable).GetEnumerator().MoveNext();
-            Assert.Equal("Hello", (string)((IEnumerable)MyStringIEnumerable).GetEnumerator().Current);
+            Assert.Equal(
+                "Hello",
+                (string)((IEnumerable)MyStringIEnumerable).GetEnumerator().Current
+            );
 
             Assert.Equal("Hello", (string)((IList)MyStringIList)[0]);
 
             ((ICollection)MyStringICollection).GetEnumerator().MoveNext();
-            Assert.Equal("Hello", (string)((ICollection)MyStringICollection).GetEnumerator().Current);
+            Assert.Equal(
+                "Hello",
+                (string)((ICollection)MyStringICollection).GetEnumerator().Current
+            );
 
             Assert.Equal("Hello", ((IEnumerable<string>)MyStringIEnumerableT).First());
             Assert.Equal("Hello", ((IList<string>)MyStringIListT)[0]);
             Assert.Equal("Hello", ((ICollection<string>)MyStringICollectionT).First());
-            Assert.Equal("Hello", ((IReadOnlyCollection<string>)MyStringIReadOnlyCollectionT).First());
+            Assert.Equal(
+                "Hello",
+                ((IReadOnlyCollection<string>)MyStringIReadOnlyCollectionT).First()
+            );
             Assert.Equal("Hello", ((IReadOnlyList<string>)MyStringIReadOnlyListT)[0]);
             Assert.Equal("Hello", ((ISet<string>)MyStringISetT).First());
-
 
             IEnumerator enumerator = ((IDictionary)MyStringToStringIDict).GetEnumerator();
             enumerator.MoveNext();
@@ -247,15 +274,35 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal("value", entry.Value);
 
             Assert.Equal("value", ((Dictionary<string, string>)MyStringToStringGenericDict)["key"]);
-            Assert.Equal("value", ((IDictionary<string, string>)MyStringToStringGenericIDict)["key"]);
-            Assert.Equal("value", ((IReadOnlyDictionary<string, string>)MyStringToStringGenericIReadOnlyDict)["key"]);
+            Assert.Equal(
+                "value",
+                ((IDictionary<string, string>)MyStringToStringGenericIDict)["key"]
+            );
+            Assert.Equal(
+                "value",
+                ((IReadOnlyDictionary<string, string>)MyStringToStringGenericIReadOnlyDict)["key"]
+            );
 
-            Assert.Equal("value", ((ImmutableDictionary<string, string>)MyStringToStringImmutableDict)["key"]);
-            Assert.Equal("value", ((IImmutableDictionary<string, string>)MyStringToStringIImmutableDict)["key"]);
-            Assert.Equal("value", ((ImmutableSortedDictionary<string, string>)MyStringToStringImmutableSortedDict)["key"]);
+            Assert.Equal(
+                "value",
+                ((ImmutableDictionary<string, string>)MyStringToStringImmutableDict)["key"]
+            );
+            Assert.Equal(
+                "value",
+                ((IImmutableDictionary<string, string>)MyStringToStringIImmutableDict)["key"]
+            );
+            Assert.Equal(
+                "value",
+                ((ImmutableSortedDictionary<string, string>)MyStringToStringImmutableSortedDict)[
+                    "key"
+                ]
+            );
 
             Assert.Equal("myKey", ((KeyValuePair<string, string>)MyStringToStringKeyValuePair).Key);
-            Assert.Equal("myValue", ((KeyValuePair<string, string>)MyStringToStringKeyValuePair).Value);
+            Assert.Equal(
+                "myValue",
+                ((KeyValuePair<string, string>)MyStringToStringKeyValuePair).Value
+            );
 
             Assert.Equal(2, ((Stack<string>)MyStringStackT).Count);
             Assert.True(((Stack<string>)MyStringStackT).Contains("Hello"));
@@ -281,7 +328,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal("Hello", ((ImmutableList<string>)MyStringImmutableListT)[0]);
             Assert.Equal("Hello", ((ImmutableStack<string>)MyStringImmutableStackT).First());
             Assert.Equal("Hello", ((ImmutableQueue<string>)MyStringImmutablQueueT).First());
-            Assert.Equal("Hello", ((ImmutableSortedSet<string>)MyStringImmutableSortedSetT).First());
+            Assert.Equal(
+                "Hello",
+                ((ImmutableSortedSet<string>)MyStringImmutableSortedSetT).First()
+            );
         }
     }
 }

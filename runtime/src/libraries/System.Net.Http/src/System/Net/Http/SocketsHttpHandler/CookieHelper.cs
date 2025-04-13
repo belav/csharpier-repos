@@ -9,14 +9,24 @@ namespace System.Net.Http
 {
     internal static class CookieHelper
     {
-        public static void ProcessReceivedCookies(HttpResponseMessage response, CookieContainer cookieContainer)
+        public static void ProcessReceivedCookies(
+            HttpResponseMessage response,
+            CookieContainer cookieContainer
+        )
         {
-            if (response.Headers.TryGetValues(KnownHeaders.SetCookie.Descriptor, out IEnumerable<string>? values))
+            if (
+                response.Headers.TryGetValues(
+                    KnownHeaders.SetCookie.Descriptor,
+                    out IEnumerable<string>? values
+                )
+            )
             {
                 // The header values are always a string[]
                 var valuesArray = (string[])values;
                 Debug.Assert(valuesArray.Length > 0, "No values for header??");
-                Debug.Assert(response.RequestMessage != null && response.RequestMessage.RequestUri != null);
+                Debug.Assert(
+                    response.RequestMessage != null && response.RequestMessage.RequestUri != null
+                );
 
                 Uri requestUri = response.RequestMessage.RequestUri;
                 for (int i = 0; i < valuesArray.Length; i++)
@@ -30,7 +40,10 @@ namespace System.Net.Http
                         // Ignore invalid Set-Cookie header and continue processing.
                         if (NetEventSource.Log.IsEnabled())
                         {
-                            NetEventSource.Error(response, $"Invalid Set-Cookie '{valuesArray[i]}' ignored.");
+                            NetEventSource.Error(
+                                response,
+                                $"Invalid Set-Cookie '{valuesArray[i]}' ignored."
+                            );
                         }
                     }
                 }

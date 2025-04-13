@@ -25,6 +25,9 @@
     <StressTests Include="..\Tests\*.csproj" />
   </ItemGroup>
   <Target Name="CompileTests" AfterTargets="AfterBuild">
-    <MSBuild Projects="@(StressTests)" Properties="OutputPath=$(OutDir)\Tests;BuildingForReliabilityFramework=true" />
+    <MSBuild
+      Projects="@(StressTests)"
+      Properties="OutputPath=$(OutDir)\Tests;BuildingForReliabilityFramework=true"
+    />
   </Target>
 </Project>

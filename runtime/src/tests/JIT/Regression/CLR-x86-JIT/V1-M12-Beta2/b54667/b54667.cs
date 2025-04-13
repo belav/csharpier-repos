@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -10,7 +11,9 @@ namespace Test
     public struct BB
     {
         bool m_b;
+
         static void Static1(BB param3, ref bool param5) { }
+
         [Fact]
         public static void TestEntryPoint()
         {

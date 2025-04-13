@@ -13,7 +13,9 @@ namespace System.Text.Tests
     public static class IsValidCharTests
     {
         private static char GetNextValidAsciiChar() => (char)Random.Shared.Next(0, 127 + 1);
-        private static char GetNextInvalidAsciiChar() => (char)Random.Shared.Next(128, ushort.MaxValue + 1);
+
+        private static char GetNextInvalidAsciiChar() =>
+            (char)Random.Shared.Next(128, ushort.MaxValue + 1);
 
         [Fact]
         public static void EmptyInput_ReturnsTrue()
@@ -21,14 +23,16 @@ namespace System.Text.Tests
             Assert.True(Ascii.IsValid(ReadOnlySpan<char>.Empty));
         }
 
-        private static int[] BufferLengths = new[] {
+        private static int[] BufferLengths = new[]
+        {
             1,
             Vector128<short>.Count - 1,
             Vector128<short>.Count,
             Vector128<short>.Count + 1,
             Vector256<short>.Count - 1,
             Vector256<short>.Count,
-            Vector256<short>.Count + 1 };
+            Vector256<short>.Count + 1,
+        };
 
         public static IEnumerable<object[]> AsciiOnlyBuffers
         {
@@ -38,7 +42,10 @@ namespace System.Text.Tests
 
                 foreach (int length in BufferLengths)
                 {
-                    yield return new object[] { Enumerable.Repeat(GetNextValidAsciiChar(), length).ToArray() };
+                    yield return new object[]
+                    {
+                        Enumerable.Repeat(GetNextValidAsciiChar(), length).ToArray(),
+                    };
                 }
             }
         }
@@ -131,7 +138,11 @@ namespace System.Text.Tests
             // uses pminuw / pmovmskb incorrectly, U+0123 will incorrectly show up as ASCII,
             // causing our test to produce a false negative.
 
-            using (BoundedMemory<char> mem = BoundedMemory.Allocate<char>(5 * Vector<byte>.Count / sizeof(char)))
+            using (
+                BoundedMemory<char> mem = BoundedMemory.Allocate<char>(
+                    5 * Vector<byte>.Count / sizeof(char)
+                )
+            )
             {
                 Span<char> chars = mem.Span;
 

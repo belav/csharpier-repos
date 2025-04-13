@@ -42,6 +42,6 @@ namespace System
         /// <summary>
         /// Trim whitespace from each substring in the result.
         /// </summary>
-        TrimEntries = 2
+        TrimEntries = 2,
     }
 }

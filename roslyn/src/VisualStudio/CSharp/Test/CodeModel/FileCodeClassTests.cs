@@ -17,7 +17,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
     public class FileCodeClassTests : AbstractFileCodeElementTests
     {
         public FileCodeClassTests()
-            : base(@"using System;
+            : base(
+                @"using System;
 
 public abstract class Goo : IDisposable, ICloneable
 {
@@ -37,9 +38,8 @@ public class Bar
     }
 
     public string WindowsUserID => ""Domain""; 
-}")
-        {
-        }
+}"
+            ) { }
 
         private CodeClass GetCodeClass(params object[] path)
         {
@@ -105,7 +105,9 @@ public class Bar
         public void GetStartPoint_Attributes()
         {
             var testObject = GetCodeClass("Bar");
-            Assert.Throws<NotImplementedException>(() => testObject.GetStartPoint(vsCMPart.vsCMPartAttributes));
+            Assert.Throws<NotImplementedException>(() =>
+                testObject.GetStartPoint(vsCMPart.vsCMPartAttributes)
+            );
         }
 
         [WpfFact]
@@ -134,7 +136,9 @@ public class Bar
         public void GetStartPoint_BodyWithDelimiter()
         {
             var testObject = GetCodeClass("Bar");
-            Assert.Throws<NotImplementedException>(() => testObject.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter));
+            Assert.Throws<NotImplementedException>(() =>
+                testObject.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter)
+            );
         }
 
         [WpfFact]
@@ -152,14 +156,18 @@ public class Bar
         public void GetStartPoint_HeaderWithAttributes()
         {
             var testObject = GetCodeClass("Bar");
-            Assert.Throws<NotImplementedException>(() => testObject.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes));
+            Assert.Throws<NotImplementedException>(() =>
+                testObject.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes)
+            );
         }
 
         [WpfFact]
         public void GetStartPoint_Name()
         {
             var testObject = GetCodeClass("Bar");
-            Assert.Throws<NotImplementedException>(() => testObject.GetStartPoint(vsCMPart.vsCMPartName));
+            Assert.Throws<NotImplementedException>(() =>
+                testObject.GetStartPoint(vsCMPart.vsCMPartName)
+            );
         }
 
         [WpfFact]
@@ -177,7 +185,9 @@ public class Bar
         public void GetStartPoint_Whole()
         {
             var testObject = GetCodeClass("Bar");
-            Assert.Throws<NotImplementedException>(() => testObject.GetStartPoint(vsCMPart.vsCMPartWhole));
+            Assert.Throws<NotImplementedException>(() =>
+                testObject.GetStartPoint(vsCMPart.vsCMPartWhole)
+            );
         }
 
         [WpfFact]
@@ -195,7 +205,9 @@ public class Bar
         public void GetEndPoint_Attributes()
         {
             var testObject = GetCodeClass("Bar");
-            Assert.Throws<NotImplementedException>(() => testObject.GetEndPoint(vsCMPart.vsCMPartAttributes));
+            Assert.Throws<NotImplementedException>(() =>
+                testObject.GetEndPoint(vsCMPart.vsCMPartAttributes)
+            );
         }
 
         [WpfFact]
@@ -224,7 +236,9 @@ public class Bar
         public void GetEndPoint_BodyWithDelimiter()
         {
             var testObject = GetCodeClass("Bar");
-            Assert.Throws<NotImplementedException>(() => testObject.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter));
+            Assert.Throws<NotImplementedException>(() =>
+                testObject.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter)
+            );
         }
 
         [WpfFact]
@@ -232,21 +246,27 @@ public class Bar
         {
             var testObject = GetCodeClass("Bar");
 
-            Assert.Throws<NotImplementedException>(() => testObject.GetEndPoint(vsCMPart.vsCMPartHeader));
+            Assert.Throws<NotImplementedException>(() =>
+                testObject.GetEndPoint(vsCMPart.vsCMPartHeader)
+            );
         }
 
         [WpfFact]
         public void GetEndPoint_HeaderWithAttributes()
         {
             var testObject = GetCodeClass("Bar");
-            Assert.Throws<NotImplementedException>(() => testObject.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes));
+            Assert.Throws<NotImplementedException>(() =>
+                testObject.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes)
+            );
         }
 
         [WpfFact]
         public void GetEndPoint_Name()
         {
             var testObject = GetCodeClass("Bar");
-            Assert.Throws<NotImplementedException>(() => testObject.GetStartPoint(vsCMPart.vsCMPartName));
+            Assert.Throws<NotImplementedException>(() =>
+                testObject.GetStartPoint(vsCMPart.vsCMPartName)
+            );
         }
 
         [WpfFact]
@@ -264,7 +284,9 @@ public class Bar
         public void GetEndPoint_Whole()
         {
             var testObject = GetCodeClass("Bar");
-            Assert.Throws<NotImplementedException>(() => testObject.GetEndPoint(vsCMPart.vsCMPartWhole));
+            Assert.Throws<NotImplementedException>(() =>
+                testObject.GetEndPoint(vsCMPart.vsCMPartWhole)
+            );
         }
 
         [WpfFact]
@@ -305,7 +327,14 @@ public class Bar
         {
             var testObject = GetCodeClass("Bar");
 
-            var l = from p in testObject.Members.OfType<CodeProperty>() where vsCMAccess.vsCMAccessPublic == p.Access && p.Getter != null && !p.Getter.IsShared && vsCMAccess.vsCMAccessPublic == p.Getter.Access select p;
+            var l =
+                from p in testObject.Members.OfType<CodeProperty>()
+                where
+                    vsCMAccess.vsCMAccessPublic == p.Access
+                    && p.Getter != null
+                    && !p.Getter.IsShared
+                    && vsCMAccess.vsCMAccessPublic == p.Getter.Access
+                select p;
             var z = l.ToList<CodeProperty>();
             Assert.Equal(2, z.Count);
         }

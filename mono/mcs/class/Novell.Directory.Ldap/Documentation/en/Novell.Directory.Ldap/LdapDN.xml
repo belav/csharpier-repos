@@ -3,8 +3,7 @@
   <AssemblyInfo>
     <AssemblyName>Novell.Directory.Ldap</AssemblyName>
     <AssemblyVersion>1.0.5000.0</AssemblyVersion>
-    <AssemblyCulture>
-    </AssemblyCulture>
+    <AssemblyCulture></AssemblyCulture>
     <Attributes>
       <Attribute>
         <AttributeName>System.Reflection.AssemblyKeyFile(KeyFile="../mono.pub")</AttributeName>
@@ -95,7 +94,10 @@
       </Docs>
     </Member>
     <Member MemberName="explodeDN">
-      <MemberSignature Language="C#" Value="public static string[] explodeDN(string dn, bool noTypes)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string[] explodeDN(string dn, bool noTypes)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String[]</ReturnType>
@@ -113,7 +115,10 @@
       </Docs>
     </Member>
     <Member MemberName="explodeRDN">
-      <MemberSignature Language="C#" Value="public static string[] explodeRDN(string rdn, bool noTypes)" />
+      <MemberSignature
+        Language="C#"
+        Value="public static string[] explodeRDN(string rdn, bool noTypes)"
+      />
       <MemberType>Method</MemberType>
       <ReturnValue>
         <ReturnType>System.String[]</ReturnType>

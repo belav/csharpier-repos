@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis
     internal interface IAnalyzerAssemblyLoaderInternal : IAnalyzerAssemblyLoader
     {
         /// <summary>
-        /// Is this an <see cref="Assembly"/> that the loader considers to be part of the hosting 
+        /// Is this an <see cref="Assembly"/> that the loader considers to be part of the hosting
         /// process. Either part of the compiler itself or the process hosting the compiler.
         /// </summary>
         bool IsHostAssembly(Assembly assembly);
@@ -41,16 +41,26 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// Access must be guarded by <see cref="_guard"/>
         /// </remarks>
-        private readonly Dictionary<string, (AssemblyName? AssemblyName, string RealAssemblyPath, ImmutableHashSet<string> SatelliteCultureNames)?> _analyzerAssemblyInfoMap = new();
+        private readonly Dictionary<
+            string,
+            (
+                AssemblyName? AssemblyName,
+                string RealAssemblyPath,
+                ImmutableHashSet<string> SatelliteCultureNames
+            )?
+        > _analyzerAssemblyInfoMap = new();
 
         /// <summary>
-        /// Maps analyzer dependency simple names to the set of original full paths it was loaded from. This _only_ 
-        /// tracks the paths provided to the analyzer as it's a place to look for indirect loads. 
+        /// Maps analyzer dependency simple names to the set of original full paths it was loaded from. This _only_
+        /// tracks the paths provided to the analyzer as it's a place to look for indirect loads.
         /// </summary>
         /// <remarks>
         /// Access must be guarded by <see cref="_guard"/>
         /// </remarks>
-        private readonly Dictionary<string, ImmutableHashSet<string>> _knownAssemblyPathsBySimpleName = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<
+            string,
+            ImmutableHashSet<string>
+        > _knownAssemblyPathsBySimpleName = new(StringComparer.OrdinalIgnoreCase);
 
         /// <summary>
         /// The implementation needs to load an <see cref="Assembly"/> with the specified <see cref="AssemblyName"/>. The
@@ -63,8 +73,8 @@ namespace Microsoft.CodeAnalysis
         private partial Assembly Load(AssemblyName assemblyName, string assemblyOriginalPath);
 
         /// <summary>
-        /// Determines if the <paramref name="candidateName"/> satisfies the request for 
-        /// <paramref name="requestedName"/>. This is partial'd out as each runtime has a different 
+        /// Determines if the <paramref name="candidateName"/> satisfies the request for
+        /// <paramref name="requestedName"/>. This is partial'd out as each runtime has a different
         /// definition of matching name.
         /// </summary>
         private partial bool IsMatch(AssemblyName requestedName, AssemblyName candidateName);
@@ -95,7 +105,7 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 // This type assumses the file system is static for the duration of the
-                // it's instance. Repeated calls to this method, even if the underlying 
+                // it's instance. Repeated calls to this method, even if the underlying
                 // file system contents, should reuse the results of the first call.
                 _ = _analyzerAssemblyInfoMap.TryAdd(fullPath, null);
             }
@@ -103,7 +113,10 @@ namespace Microsoft.CodeAnalysis
 
         public Assembly LoadFromPath(string originalAnalyzerPath)
         {
-            CompilerPathUtilities.RequireAbsolutePath(originalAnalyzerPath, nameof(originalAnalyzerPath));
+            CompilerPathUtilities.RequireAbsolutePath(
+                originalAnalyzerPath,
+                nameof(originalAnalyzerPath)
+            );
 
             (AssemblyName? assemblyName, _, _) = GetAssemblyInfoForPath(originalAnalyzerPath);
 
@@ -124,7 +137,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Get the <see cref="AssemblyName"/> and the path it should be loaded from for the given original 
+        /// Get the <see cref="AssemblyName"/> and the path it should be loaded from for the given original
         /// analyzer path
         /// </summary>
         /// <remarks>
@@ -132,7 +145,11 @@ namespace Microsoft.CodeAnalysis
         /// because we only want information for registered paths. Using unregistered paths inside the
         /// implementation should result in errors.
         /// </remarks>
-        protected (AssemblyName? AssemblyName, string RealAssemblyPath, ImmutableHashSet<string> SatelliteCultureNames) GetAssemblyInfoForPath(string originalAnalyzerPath)
+        protected (
+            AssemblyName? AssemblyName,
+            string RealAssemblyPath,
+            ImmutableHashSet<string> SatelliteCultureNames
+        ) GetAssemblyInfoForPath(string originalAnalyzerPath)
         {
             lock (_guard)
             {
@@ -147,7 +164,9 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            var resourceAssemblyCultureNames = getResourceAssemblyCultureNames(originalAnalyzerPath);
+            var resourceAssemblyCultureNames = getResourceAssemblyCultureNames(
+                originalAnalyzerPath
+            );
             string realPath = PreparePathToLoad(originalAnalyzerPath, resourceAssemblyCultureNames);
             AssemblyName? assemblyName;
             try
@@ -156,22 +175,28 @@ namespace Microsoft.CodeAnalysis
             }
             catch
             {
-                // The above can fail when the assembly doesn't exist because it's corrupted, 
-                // doesn't exist on disk, or is a native DLL. Those failures are handled when 
+                // The above can fail when the assembly doesn't exist because it's corrupted,
+                // doesn't exist on disk, or is a native DLL. Those failures are handled when
                 // the actual load is attempted. Just record the failure now.
                 assemblyName = null;
             }
 
             lock (_guard)
             {
-                _analyzerAssemblyInfoMap[originalAnalyzerPath] = (assemblyName, realPath, resourceAssemblyCultureNames);
+                _analyzerAssemblyInfoMap[originalAnalyzerPath] = (
+                    assemblyName,
+                    realPath,
+                    resourceAssemblyCultureNames
+                );
             }
 
             return (assemblyName, realPath, resourceAssemblyCultureNames);
 
-            // Discover the culture names for any satellite dlls related to this analyzer. These 
+            // Discover the culture names for any satellite dlls related to this analyzer. These
             // need to be understood when handling the resource loading in certain cases.
-            static ImmutableHashSet<string> getResourceAssemblyCultureNames(string originalAnalyzerPath)
+            static ImmutableHashSet<string> getResourceAssemblyCultureNames(
+                string originalAnalyzerPath
+            )
             {
                 var path = Path.GetDirectoryName(originalAnalyzerPath)!;
                 using var enumerator = Directory.EnumerateDirectories(path, "*").GetEnumerator();
@@ -181,7 +206,9 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 var resourceFileName = GetSatelliteFileName(Path.GetFileName(originalAnalyzerPath));
-                var builder = ImmutableHashSet.CreateBuilder<string>(StringComparer.OrdinalIgnoreCase);
+                var builder = ImmutableHashSet.CreateBuilder<string>(
+                    StringComparer.OrdinalIgnoreCase
+                );
                 do
                 {
                     var resourceFilePath = Path.Combine(enumerator.Current, resourceFileName);
@@ -189,20 +216,21 @@ namespace Microsoft.CodeAnalysis
                     {
                         builder.Add(Path.GetFileName(enumerator.Current));
                     }
-                }
-                while (enumerator.MoveNext());
+                } while (enumerator.MoveNext());
 
                 return builder.ToImmutableHashSet();
             }
         }
 
         /// <summary>
-        /// Get the real load path of the satellite assembly given the original path to the analyzer 
+        /// Get the real load path of the satellite assembly given the original path to the analyzer
         /// and the desired culture name.
         /// </summary>
         protected string? GetSatelliteInfoForPath(string originalAnalyzerPath, string cultureName)
         {
-            var (_, realAssemblyPath, satelliteCultureNames) = GetAssemblyInfoForPath(originalAnalyzerPath);
+            var (_, realAssemblyPath, satelliteCultureNames) = GetAssemblyInfoForPath(
+                originalAnalyzerPath
+            );
             if (!satelliteCultureNames.Contains(cultureName))
             {
                 return null;
@@ -239,7 +267,9 @@ namespace Microsoft.CodeAnalysis
             AssemblyName? bestName = null;
             foreach (var candidateOriginalPath in paths.OrderBy(StringComparer.Ordinal))
             {
-                (AssemblyName? candidateName, string candidateRealPath, _) = GetAssemblyInfoForPath(candidateOriginalPath);
+                (AssemblyName? candidateName, string candidateRealPath, _) = GetAssemblyInfoForPath(
+                    candidateOriginalPath
+                );
                 if (candidateName is null)
                 {
                     continue;
@@ -270,12 +300,15 @@ namespace Microsoft.CodeAnalysis
         /// When overridden in a derived class, allows substituting an assembly path after we've
         /// identified the context to load an assembly in, but before the assembly is actually
         /// loaded from disk. This is used to substitute out the original path with the shadow-copied version.
-        /// 
-        /// In the case the <param name="assemblyFilePath" /> is moved to a new location then 
-        /// the resource DLLs for the specified <paramref name="resourceAssemblyCultureNames"/> must also be 
+        ///
+        /// In the case the <param name="assemblyFilePath" /> is moved to a new location then
+        /// the resource DLLs for the specified <paramref name="resourceAssemblyCultureNames"/> must also be
         /// moved _but_ retain their original relative location.
         /// </summary>
-        protected abstract string PreparePathToLoad(string assemblyFilePath, ImmutableHashSet<string> resourceAssemblyCultureNames);
+        protected abstract string PreparePathToLoad(
+            string assemblyFilePath,
+            ImmutableHashSet<string> resourceAssemblyCultureNames
+        );
 
         /// <summary>
         /// When <see cref="PreparePathToLoad(string, ImmutableHashSet{string})"/> is overridden this returns the most recent
@@ -287,7 +320,9 @@ namespace Microsoft.CodeAnalysis
             {
                 if (!_analyzerAssemblyInfoMap.TryGetValue(originalFullPath, out var tuple))
                 {
-                    throw new InvalidOperationException($"Invalid original path: {originalFullPath}");
+                    throw new InvalidOperationException(
+                        $"Invalid original path: {originalFullPath}"
+                    );
                 }
 
                 return tuple is { } value ? value.RealAssemblyPath : originalFullPath;
@@ -300,14 +335,17 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal string? GetRealSatelliteLoadPath(string originalSatelliteFullPath)
         {
-            // This is a satellite assembly, need to find the mapped path of the real assembly, then 
+            // This is a satellite assembly, need to find the mapped path of the real assembly, then
             // adjust that mapped path for the suffix of the satellite assembly
             //
             // Example of dll and it's corresponding satellite assembly
             //
             //  c:\some\path\en-GB\util.resources.dll
             //  c:\some\path\util.dll
-            var assemblyFileName = Path.ChangeExtension(Path.GetFileNameWithoutExtension(originalSatelliteFullPath), ".dll");
+            var assemblyFileName = Path.ChangeExtension(
+                Path.GetFileNameWithoutExtension(originalSatelliteFullPath),
+                ".dll"
+            );
 
             var assemblyDir = Path.GetDirectoryName(originalSatelliteFullPath)!;
             var cultureName = Path.GetFileName(assemblyDir);

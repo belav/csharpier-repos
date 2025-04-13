@@ -24,10 +24,9 @@
 //
 
 using System.Collections;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-
 using Xunit;
 
 namespace System.Data.Tests
@@ -51,16 +50,16 @@ namespace System.Data.Tests
 
             public void OnColumnChanged_Test()
             {
-                OnColumnChanged(new DataColumnChangeEventArgs(
-                    Rows[0], Columns["Value"],
-                    "NewValue"));
+                OnColumnChanged(
+                    new DataColumnChangeEventArgs(Rows[0], Columns["Value"], "NewValue")
+                );
             }
 
             public void OnColumnChanging_Test()
             {
-                OnColumnChanging(new DataColumnChangeEventArgs(
-                    Rows[0], Columns["Value"],
-                    "NewValue"));
+                OnColumnChanging(
+                    new DataColumnChangeEventArgs(Rows[0], Columns["Value"], "NewValue")
+                );
             }
 
             public void OnRemoveColumn_Test()
@@ -98,7 +97,9 @@ namespace System.Data.Tests
         public void AcceptChanges()
         {
             string sNewValue = "NewValue";
-            DataRow drModified, drDeleted, drAdded;
+            DataRow drModified,
+                drDeleted,
+                drAdded;
             DataTable dt = DataProvider.CreateParentDataTable();
 
             drModified = dt.Rows[0];
@@ -128,7 +129,8 @@ namespace System.Data.Tests
         [Fact]
         public void ChildRelations()
         {
-            DataTable dtChild, dtParent;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
             //Create tables
             dtChild = DataProvider.CreateChildDataTable();
@@ -138,7 +140,11 @@ namespace System.Data.Tests
             ds.Tables.Add(dtParent);
 
             DataRelationCollection drlCollection;
-            DataRelation drl = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"]);
+            DataRelation drl = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
 
             // Checking ChildRelations - default value
             //Check default
@@ -166,7 +172,8 @@ namespace System.Data.Tests
         [Fact]
         public void Clone()
         {
-            DataTable dt1, dt2 = DataProvider.CreateParentDataTable();
+            DataTable dt1,
+                dt2 = DataProvider.CreateParentDataTable();
             dt2.Constraints.Add("Unique", dt2.Columns[0], true);
             dt2.Columns[0].DefaultValue = 7;
 
@@ -175,8 +182,7 @@ namespace System.Data.Tests
             for (int i = 0; i < dt2.Constraints.Count; i++)
             {
                 // Clone - Constraints[{0}],i)
-                Assert.Equal(dt2.Constraints[i].ConstraintName,
-                    dt1.Constraints[i].ConstraintName);
+                Assert.Equal(dt2.Constraints[i].ConstraintName, dt1.Constraints[i].ConstraintName);
             }
 
             for (int i = 0; i < dt2.Columns.Count; i++)
@@ -321,7 +327,8 @@ namespace System.Data.Tests
         [Fact]
         public void Copy()
         {
-            DataTable dt1, dt2 = DataProvider.CreateParentDataTable();
+            DataTable dt1,
+                dt2 = DataProvider.CreateParentDataTable();
             dt2.Constraints.Add("Unique", dt2.Columns[0], true);
             dt2.Columns[0].DefaultValue = 7;
 
@@ -330,8 +337,7 @@ namespace System.Data.Tests
             for (int i = 0; i < dt2.Constraints.Count; i++)
             {
                 // Copy - Constraints[{0}],i)
-                Assert.Equal(dt2.Constraints[i].ConstraintName,
-                    dt1.Constraints[i].ConstraintName);
+                Assert.Equal(dt2.Constraints[i].ConstraintName, dt1.Constraints[i].ConstraintName);
             }
 
             for (int i = 0; i < dt2.Columns.Count; i++)
@@ -343,7 +349,8 @@ namespace System.Data.Tests
                 Assert.Equal(dt2.Columns[i].DataType, dt1.Columns[i].DataType);
             }
 
-            DataRow[] drArr1, drArr2;
+            DataRow[] drArr1,
+                drArr2;
             drArr1 = dt1.Select(string.Empty);
             drArr2 = dt2.Select(string.Empty);
             for (int i = 0; i < drArr1.Length; i++)
@@ -524,7 +531,8 @@ namespace System.Data.Tests
         [Fact]
         public void GetChanges()
         {
-            DataTable dt1, dt2 = DataProvider.CreateParentDataTable();
+            DataTable dt1,
+                dt2 = DataProvider.CreateParentDataTable();
             dt2.Constraints.Add("Unique", dt2.Columns[0], true);
             dt2.Columns[0].DefaultValue = 7;
 
@@ -551,7 +559,8 @@ namespace System.Data.Tests
                 Assert.Equal(dt2.Columns[i].DataType, dt1.Columns[i].DataType);
             }
 
-            DataRow[] drArr1, drArr2;
+            DataRow[] drArr1,
+                drArr2;
 
             drArr1 = dt1.Select(string.Empty, string.Empty, DataViewRowState.Deleted);
             drArr2 = dt2.Select(string.Empty, string.Empty, DataViewRowState.Deleted);
@@ -559,18 +568,28 @@ namespace System.Data.Tests
             for (int i = 0; i < drArr1.Length; i++)
             {
                 // GetChanges - Data [ParentId]{0} ,i)
-                Assert.Equal(drArr1[i]["ParentId", DataRowVersion.Original], drArr2[i]["ParentId", DataRowVersion.Original]);
+                Assert.Equal(
+                    drArr1[i]["ParentId", DataRowVersion.Original],
+                    drArr2[i]["ParentId", DataRowVersion.Original]
+                );
                 // GetChanges - Data [String1]{0} ,i)
-                Assert.Equal(drArr1[i]["String1", DataRowVersion.Original], drArr2[i]["String1", DataRowVersion.Original]);
+                Assert.Equal(
+                    drArr1[i]["String1", DataRowVersion.Original],
+                    drArr2[i]["String1", DataRowVersion.Original]
+                );
                 // GetChanges - Data [String2]{0} ,i)
-                Assert.Equal(drArr1[i]["String2", DataRowVersion.Original], drArr2[i]["String2", DataRowVersion.Original]);
+                Assert.Equal(
+                    drArr1[i]["String2", DataRowVersion.Original],
+                    drArr2[i]["String2", DataRowVersion.Original]
+                );
             }
         }
 
         [Fact]
         public void GetChanges_ByDataRowState()
         {
-            DataTable dt1, dt2 = DataProvider.CreateParentDataTable();
+            DataTable dt1,
+                dt2 = DataProvider.CreateParentDataTable();
             dt2.Constraints.Add("Unique", dt2.Columns[0], true);
             dt2.Columns[0].DefaultValue = 7;
 
@@ -587,18 +606,28 @@ namespace System.Data.Tests
             dt1 = null;
             dt1 = dt2.GetChanges(DataRowState.Deleted);
             CheckTableSchema(dt1, dt2, DataRowState.Deleted.ToString());
-            DataRow[] drArr1, drArr2;
+            DataRow[] drArr1,
+                drArr2;
             drArr1 = dt1.Select(string.Empty, string.Empty, DataViewRowState.Deleted);
             drArr2 = dt2.Select(string.Empty, string.Empty, DataViewRowState.Deleted);
 
             for (int i = 0; i < drArr1.Length; i++)
             {
                 // GetChanges(Deleted) - Data [ParentId]{0} ,i)
-                Assert.Equal(drArr1[i]["ParentId", DataRowVersion.Original], drArr2[i]["ParentId", DataRowVersion.Original]);
+                Assert.Equal(
+                    drArr1[i]["ParentId", DataRowVersion.Original],
+                    drArr2[i]["ParentId", DataRowVersion.Original]
+                );
                 // GetChanges(Deleted) - Data [String1]{0} ,i)
-                Assert.Equal(drArr1[i]["String1", DataRowVersion.Original], drArr2[i]["String1", DataRowVersion.Original]);
+                Assert.Equal(
+                    drArr1[i]["String1", DataRowVersion.Original],
+                    drArr2[i]["String1", DataRowVersion.Original]
+                );
                 // GetChanges(Deleted) - Data [String2]{0} ,i)
-                Assert.Equal(drArr1[i]["String2", DataRowVersion.Original], drArr2[i]["String2", DataRowVersion.Original]);
+                Assert.Equal(
+                    drArr1[i]["String2", DataRowVersion.Original],
+                    drArr2[i]["String2", DataRowVersion.Original]
+                );
             }
 
             // *********** Checking GetChanges - DataRowState.Modified ************
@@ -658,8 +687,7 @@ namespace System.Data.Tests
             for (int i = 0; i < dt2.Constraints.Count; i++)
             {
                 // GetChanges - Constraints[{0}] - {1},i,Description)
-                Assert.Equal(dt2.Constraints[i].ConstraintName,
-                    dt1.Constraints[i].ConstraintName);
+                Assert.Equal(dt2.Constraints[i].ConstraintName, dt1.Constraints[i].ConstraintName);
             }
 
             for (int i = 0; i < dt2.Columns.Count; i++)
@@ -721,7 +749,8 @@ namespace System.Data.Tests
         [Fact]
         public void ImportRow()
         {
-            DataTable dt1, dt2;
+            DataTable dt1,
+                dt2;
             dt1 = DataProvider.CreateParentDataTable();
             dt2 = DataProvider.CreateParentDataTable();
             DataRow dr = dt2.NewRow();
@@ -912,7 +941,10 @@ namespace System.Data.Tests
         private void DataColumnChangeHandler(object sender, DataColumnChangeEventArgs e)
         {
             DataTable dt = (DataTable)sender;
-            _eventValues = e.Column.Equals(dt.Columns["Value"]) && e.Row.Equals(dt.Rows[0]) && e.ProposedValue.Equals("NewValue");
+            _eventValues =
+                e.Column.Equals(dt.Columns["Value"])
+                && e.Row.Equals(dt.Rows[0])
+                && e.ProposedValue.Equals("NewValue");
             _eventRaised = true;
         }
 
@@ -926,7 +958,8 @@ namespace System.Data.Tests
         [Fact]
         public void ParentRelations()
         {
-            DataTable dtChild, dtParent;
+            DataTable dtChild,
+                dtParent;
             var ds = new DataSet();
             //Create tables
             dtChild = DataProvider.CreateChildDataTable();
@@ -936,7 +969,11 @@ namespace System.Data.Tests
             ds.Tables.Add(dtParent);
 
             DataRelationCollection drlCollection;
-            DataRelation drl = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild.Columns["ParentId"]);
+            DataRelation drl = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild.Columns["ParentId"]
+            );
 
             // Checking ParentRelations - default value
             //Check default
@@ -971,7 +1008,9 @@ namespace System.Data.Tests
         public void RejectChanges()
         {
             string sNewValue = "NewValue";
-            DataRow drModified, drDeleted, drAdded;
+            DataRow drModified,
+                drDeleted,
+                drAdded;
             DataTable dt = DataProvider.CreateParentDataTable();
 
             drModified = dt.Rows[0];
@@ -1004,7 +1043,11 @@ namespace System.Data.Tests
             dt2.PrimaryKey = new DataColumn[] { dt2.Columns[0], dt2.Columns[1] };
             var ds = new DataSet();
             ds.Tables.AddRange(new DataTable[] { dt1, dt2 });
-            DataRelation rel = new DataRelation("Rel", dt1.Columns["ParentId"], dt2.Columns["ParentId"]);
+            DataRelation rel = new DataRelation(
+                "Rel",
+                dt1.Columns["ParentId"],
+                dt2.Columns["ParentId"]
+            );
             ds.Relations.Add(rel);
 
             dt2.Reset();
@@ -1253,7 +1296,11 @@ namespace System.Data.Tests
             //-------------------------------------------------------------
             al.Clear();
             foreach (DataRow dr in dt.Rows)
-                if ((double)dr["ChildDouble"] == 10 || (double)dr["ChildDouble"] == 20 || (double)dr["ChildDouble"] == 25)
+                if (
+                    (double)dr["ChildDouble"] == 10
+                    || (double)dr["ChildDouble"] == 20
+                    || (double)dr["ChildDouble"] == 25
+                )
                     al.Add(dr);
             // Select_S - ChildDouble in (10,20,25)
             drSelect = dt.Select("ChildDouble in (10,20,25)");
@@ -1299,7 +1346,10 @@ namespace System.Data.Tests
 
             al.Clear();
             foreach (DataRow dr in dt.Rows)
-                if (((DateTime)dr["ChildDateTime"]).CompareTo(new DateTime(1999, 1, 12, 12, 06, 30)) > 0)
+                if (
+                    ((DateTime)dr["ChildDateTime"]).CompareTo(new DateTime(1999, 1, 12, 12, 06, 30))
+                    > 0
+                )
                     al.Add(dr);
             // Select_S - ChildDateTime > #1/12/1999 12:06:30 PM#
             drSelect = dt.Select("ChildDateTime > #1/12/1999 12:06:30 PM#  ");
@@ -1309,10 +1359,17 @@ namespace System.Data.Tests
 
             al.Clear();
             foreach (DataRow dr in dt.Rows)
-                if (((DateTime)dr["ChildDateTime"]).CompareTo(new DateTime(2005, 12, 03, 17, 06, 30)) >= 0 || ((DateTime)dr["ChildDateTime"]).CompareTo(new DateTime(1980, 11, 03)) <= 0)
+                if (
+                    ((DateTime)dr["ChildDateTime"]).CompareTo(
+                        new DateTime(2005, 12, 03, 17, 06, 30)
+                    ) >= 0
+                    || ((DateTime)dr["ChildDateTime"]).CompareTo(new DateTime(1980, 11, 03)) <= 0
+                )
                     al.Add(dr);
             // Select_S - ChildDateTime >= #12/3/2005 5:06:30 PM# or ChildDateTime <= #11/3/1980#
-            drSelect = dt.Select("ChildDateTime >= #12/3/2005 5:06:30 PM# or ChildDateTime <= #11/3/1980#  ");
+            drSelect = dt.Select(
+                "ChildDateTime >= #12/3/2005 5:06:30 PM# or ChildDateTime <= #11/3/1980#  "
+            );
             CompareUnsorted(drSelect, al.ToArray());
 
             //-------------------------------------------------------------
@@ -1336,13 +1393,17 @@ namespace System.Data.Tests
             //-------------------------------------------------------------
             al.Clear();
             // Select_S - Relation not exists, Exception
-            IndexOutOfRangeException ex = Assert.Throws<IndexOutOfRangeException>(() => dt.Select("Parent.ParentId = ChildId"));
+            IndexOutOfRangeException ex = Assert.Throws<IndexOutOfRangeException>(() =>
+                dt.Select("Parent.ParentId = ChildId")
+            );
             // Cannot find relation 0
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
             //-------------------------------------------------------------
             al.Clear();
-            ds.Relations.Add(new DataRelation("ParentChild", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0]));
+            ds.Relations.Add(
+                new DataRelation("ParentChild", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
+            );
             foreach (DataRow dr in dt.Rows)
                 if ((int)dr["ChildId"] == (int)dr.GetParentRow("ParentChild")["ParentId"])
                     al.Add(dr);
@@ -1351,13 +1412,15 @@ namespace System.Data.Tests
             Assert.Equal(al.ToArray(), drSelect);
         }
 
-        private void CompareUnsorted<T>(T[] a, T[] b) => Assert.Equal(a.Union(b).Count(), a.Intersect(b).Count());
+        private void CompareUnsorted<T>(T[] a, T[] b) =>
+            Assert.Equal(a.Union(b).Count(), a.Intersect(b).Count());
 
         [Fact]
         public void Select_ByFilterDataViewRowState()
         {
             DataTable dt = DataProvider.CreateParentDataTable();
-            DataRow[] drSelect, drResult;
+            DataRow[] drSelect,
+                drResult;
 
             dt.Rows[0].Delete();
             dt.Rows[1]["ParentId"] = 1;
@@ -1373,7 +1436,10 @@ namespace System.Data.Tests
             Assert.Equal(drResult, drSelect);
 
             drSelect = dt.Select("ParentId=1", string.Empty, DataViewRowState.CurrentRows);
-            drResult = GetResultRows(dt, DataRowState.Unchanged | DataRowState.Added | DataRowState.Modified);
+            drResult = GetResultRows(
+                dt,
+                DataRowState.Unchanged | DataRowState.Added | DataRowState.Modified
+            );
             // Select_SSD DataViewRowState.CurrentRows
             Assert.Equal(drResult, drSelect);
 
@@ -1382,7 +1448,11 @@ namespace System.Data.Tests
             // Select_SSD DataViewRowState.Deleted
             Assert.Equal(drResult, drSelect);
 
-            drSelect = dt.Select("ParentId=1", string.Empty, DataViewRowState.ModifiedCurrent | DataViewRowState.ModifiedOriginal);
+            drSelect = dt.Select(
+                "ParentId=1",
+                string.Empty,
+                DataViewRowState.ModifiedCurrent | DataViewRowState.ModifiedOriginal
+            );
             drResult = GetResultRows(dt, DataRowState.Modified);
             // Select_SSD ModifiedCurrent or ModifiedOriginal
             Assert.Equal(drResult, drSelect);
@@ -1399,17 +1469,22 @@ namespace System.Data.Tests
             //                For a DataRowState of Deleted, the version is Original.
             //                For a DataRowState value of Detached, the version is Proposed.
 
-            if (((State & DataRowState.Added) > 0)
+            if (
+                ((State & DataRowState.Added) > 0)
                 | ((State & DataRowState.Modified) > 0)
-                | ((State & DataRowState.Unchanged) > 0))
+                | ((State & DataRowState.Unchanged) > 0)
+            )
                 drVer = DataRowVersion.Current;
-            if ((State & DataRowState.Deleted) > 0
-                | (State & DataRowState.Detached) > 0)
+            if ((State & DataRowState.Deleted) > 0 | (State & DataRowState.Detached) > 0)
                 drVer = DataRowVersion.Original;
 
             foreach (DataRow dr in dt.Rows)
             {
-                if (dr.HasVersion(drVer) && ((int)dr["ParentId", drVer] == 1) && ((dr.RowState & State) > 0))
+                if (
+                    dr.HasVersion(drVer)
+                    && ((int)dr["ParentId", drVer] == 1)
+                    && ((dr.RowState & State) > 0)
+                )
                     al.Add(dr);
             }
             DataRow[] result = al.ToArray();
@@ -1525,7 +1600,9 @@ namespace System.Data.Tests
             dt.Columns[0].AllowDBNull = false;
 
             //if BeginLoadData has not been called, an exception will be thrown
-            NoNullAllowedException ex = Assert.Throws<NoNullAllowedException>(() => dt.LoadDataRow(new object[] { null, "A", "B" }, false));
+            NoNullAllowedException ex = Assert.Throws<NoNullAllowedException>(() =>
+                dt.LoadDataRow(new object[] { null, "A", "B" }, false)
+            );
             // Column 'ParentId' does not allow nulls
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -1556,7 +1633,9 @@ namespace System.Data.Tests
             ds.Tables[0].BeginLoadData();
             ds.Tables[0].Rows[0][0] = 10; //Foreign constraint violation
 
-            ConstraintException ex3 = Assert.Throws<ConstraintException>(() => ds.Tables[0].EndLoadData());
+            ConstraintException ex3 = Assert.Throws<ConstraintException>(() =>
+                ds.Tables[0].EndLoadData()
+            );
             // Failed to enable constraints. One or more
             // rows contain values violating non-null,
             // unique, or foreign-key constraints
@@ -1649,7 +1728,6 @@ namespace System.Data.Tests
             dt.RowDeleted -= new DataRowChangeEventHandler(RowChangeHandler2);
         }
 
-
         [Fact]
         public void OnRowDeleting()
         {
@@ -1739,7 +1817,9 @@ namespace System.Data.Tests
             DataColumn col1 = table.Columns.Add("col1", typeof(int));
             table.PrimaryKey = new DataColumn[] { col1 };
 
-            ArgumentException ex = Assert.Throws<ArgumentException>(() => table.PrimaryKey = new DataColumn[] { new DataColumn("col2", typeof(int)) });
+            ArgumentException ex = Assert.Throws<ArgumentException>(() =>
+                table.PrimaryKey = new DataColumn[] { new DataColumn("col2", typeof(int)) }
+            );
             //  Column must belong to a table
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -1758,7 +1838,11 @@ namespace System.Data.Tests
             table.BeginInit();
             DataColumn col1 = new DataColumn("col1", typeof(int));
             table.Columns.AddRange(new DataColumn[] { col1 });
-            UniqueConstraint uc = new UniqueConstraint(string.Empty, new string[] { "col1" }, false);
+            UniqueConstraint uc = new UniqueConstraint(
+                string.Empty,
+                new string[] { "col1" },
+                false
+            );
             table.Constraints.AddRange(new Constraint[] { uc });
             // no exception shud be thrown
             table.EndInit();
@@ -1896,7 +1980,6 @@ namespace System.Data.Tests
             drSelect = dt.Select("ChildId=1 and String1='1-String1'", "ParentId Desc");
             Assert.Equal(al.ToArray(), drSelect);
 
-
             // get excepted result
             al = new List<DataRow>();
             foreach (DataRow dr in dt.Rows)
@@ -1917,7 +2000,9 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             //Select - parse sort string checking 1");
-            IndexOutOfRangeException ex = Assert.Throws<IndexOutOfRangeException>(() => dt.Select(dt.Columns[0].ColumnName, dt.Columns[0].ColumnName + "1"));
+            IndexOutOfRangeException ex = Assert.Throws<IndexOutOfRangeException>(() =>
+                dt.Select(dt.Columns[0].ColumnName, dt.Columns[0].ColumnName + "1")
+            );
             // Cannot find column ParentId1
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -2109,7 +2194,10 @@ Assert.Fail();
             public DataRowsComparer(string columnName, string direction)
             {
                 _columnName = columnName;
-                if (direction.Equals("asc", StringComparison.OrdinalIgnoreCase) && direction.Equals("desc", StringComparison.OrdinalIgnoreCase))
+                if (
+                    direction.Equals("asc", StringComparison.OrdinalIgnoreCase)
+                    && direction.Equals("desc", StringComparison.OrdinalIgnoreCase)
+                )
                     throw new ArgumentException("Direction can only be one of: 'asc' or 'desc'");
                 _direction = direction;
             }

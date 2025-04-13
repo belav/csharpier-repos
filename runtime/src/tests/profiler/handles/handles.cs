@@ -18,6 +18,7 @@ namespace Profiler.Tests
             Tag = $"{id}-{tag}";
         }
     }
+
     class TestClassForStrongHandle
     {
         public static int id;
@@ -28,6 +29,7 @@ namespace Profiler.Tests
             Tag = $"{id}-{tag}";
         }
     }
+
     class TestClassForPinnedHandle
     {
         public static int id;
@@ -56,7 +58,6 @@ namespace Profiler.Tests
         }
 
         static readonly Guid HandlesProfilerGuid = new Guid("A0F96622-522D-4654-AA56-BF421E79B210");
-
 
         // The goal of this test is to validate the ICorProfilerInfo13 handle management methods:
         //   CreateHandle (weak, strong, pinned)
@@ -120,9 +121,9 @@ namespace Profiler.Tests
             objects._pinned = null;
         }
 
-        public static int RunTest(String[] args) 
+        public static int RunTest(String[] args)
         {
-            if(args.Length > 1)
+            if (args.Length > 1)
             {
                 Console.WriteLine("usage: Handles runtest");
                 return 1;
@@ -155,9 +156,11 @@ namespace Profiler.Tests
                 return RunTest(args);
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "Handles",
-                                          profilerClsid: HandlesProfilerGuid);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "Handles",
+                profilerClsid: HandlesProfilerGuid
+            );
         }
     }
 }

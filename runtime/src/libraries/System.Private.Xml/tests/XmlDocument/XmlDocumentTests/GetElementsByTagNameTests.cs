@@ -10,7 +10,8 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void WrongLocalName()
         {
-            var xml = "<root><elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1><elem2 /></root>";
+            var xml =
+                "<root><elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1><elem2 /></root>";
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(xml);
             var xmlNodeList = xmlDocument.GetElementsByTagName("elem1", "ns2");
@@ -33,7 +34,9 @@ namespace System.Xml.XmlDocumentTests
         public static void LoadXmlTest2()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<Root><Level><Level><Level><Level><Level></Level></Level></Level></Level></Level></Root>");
+            xmlDocument.LoadXml(
+                "<Root><Level><Level><Level><Level><Level></Level></Level></Level></Level></Level></Root>"
+            );
 
             var xmlNodeList = xmlDocument.GetElementsByTagName("Level");
 
@@ -44,7 +47,9 @@ namespace System.Xml.XmlDocumentTests
         public static void MissingName()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<Root><Level><Level><Level><Level><Level></Level></Level></Level></Level></Level></Root>");
+            xmlDocument.LoadXml(
+                "<Root><Level><Level><Level><Level><Level></Level></Level></Level></Level></Level></Root>"
+            );
 
             var xmlNodeList = xmlDocument.GetElementsByTagName("bla");
 
@@ -103,14 +108,20 @@ namespace System.Xml.XmlDocumentTests
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml("<root />");
 
-            Assert.Throws<ArgumentNullException>(() => xmlDocument.GetElementsByTagName(null, "MyNamespace"));
-            Assert.Throws<ArgumentNullException>(() => xmlDocument.GetElementsByTagName("product", null));
-            Assert.Throws<ArgumentNullException>(() => xmlDocument.GetElementsByTagName(null, null));
+            Assert.Throws<ArgumentNullException>(() =>
+                xmlDocument.GetElementsByTagName(null, "MyNamespace")
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                xmlDocument.GetElementsByTagName("product", null)
+            );
+            Assert.Throws<ArgumentNullException>(() => xmlDocument.GetElementsByTagName(null, null)
+            );
         }
 
         #region Helper verify methods
 
-        private const string xml = "<?xml version='1.0'?><root><xs:schema targetNamespace='MyNamespace' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><xs:element name='products' msdata:IsDataSet='true' msdata:UseCurrentLocale='true'><xs:complexType><xs:choice minOccurs='0' maxOccurs='unbounded'><xs:element name='product'><xs:complexType><xs:sequence><xs:element name='ID' type='xs:int' minOccurs='0' maxOccurs='2' /><xs:element name='name' type='xs:string' minOccurs='1' /></xs:sequence></xs:complexType></xs:element></xs:choice></xs:complexType></xs:element></xs:schema><N:products xmlns:N='MyNamespace'><N:product><N:ID>1</N:ID><N:name>A</N:name></N:product><N:product><N:ID>1</N:ID><N:name>A</N:name></N:product><N:product><N:ID>1</N:ID><N:ID>1</N:ID><N:name>A</N:name></N:product><N:product><N:name>A</N:name></N:product></N:products></root>";
+        private const string xml =
+            "<?xml version='1.0'?><root><xs:schema targetNamespace='MyNamespace' elementFormDefault='qualified' attributeFormDefault='unqualified' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'><xs:element name='products' msdata:IsDataSet='true' msdata:UseCurrentLocale='true'><xs:complexType><xs:choice minOccurs='0' maxOccurs='unbounded'><xs:element name='product'><xs:complexType><xs:sequence><xs:element name='ID' type='xs:int' minOccurs='0' maxOccurs='2' /><xs:element name='name' type='xs:string' minOccurs='1' /></xs:sequence></xs:complexType></xs:element></xs:choice></xs:complexType></xs:element></xs:schema><N:products xmlns:N='MyNamespace'><N:product><N:ID>1</N:ID><N:name>A</N:name></N:product><N:product><N:ID>1</N:ID><N:name>A</N:name></N:product><N:product><N:ID>1</N:ID><N:ID>1</N:ID><N:name>A</N:name></N:product><N:product><N:name>A</N:name></N:product></N:products></root>";
 
         private static void Verify(string localName, int count, string namespaceUri)
         {

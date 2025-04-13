@@ -18,19 +18,21 @@ public class JQueryFormatModelBindingIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Customer)
+            ParameterType = typeof(Customer),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(
             request =>
             {
                 request.QueryString = new QueryString(
-                    "?Name=James&Address[0][City]=Redmond&Address[0][State][ShortName]=WA&Address[0][State][LongName]=Washington");
+                    "?Name=James&Address[0][City]=Redmond&Address[0][State][ShortName]=WA&Address[0][State][LongName]=Washington"
+                );
             },
             options =>
             {
                 options.ValueProviderFactories.Add(new JQueryQueryStringValueProviderFactory());
-            });
+            }
+        );
 
         var modelState = testContext.ModelState;
 
@@ -59,16 +61,18 @@ public class JQueryFormatModelBindingIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Customer)
+            ParameterType = typeof(Customer),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.Body = new MemoryStream(Encoding.UTF8.GetBytes(
-                    "Name=James&Address[0][City]=Redmond&Address[0][State][ShortName]=WA&Address[0][State][LongName]=Washington"));
-                request.ContentType = "application/x-www-form-urlencoded;charset=utf-8";
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.Body = new MemoryStream(
+                Encoding.UTF8.GetBytes(
+                    "Name=James&Address[0][City]=Redmond&Address[0][State][ShortName]=WA&Address[0][State][LongName]=Washington"
+                )
+            );
+            request.ContentType = "application/x-www-form-urlencoded;charset=utf-8";
+        });
 
         var modelState = testContext.ModelState;
 

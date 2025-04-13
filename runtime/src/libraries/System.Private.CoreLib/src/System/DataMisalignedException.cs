@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown when a unit of data is read from or written to an address that is not a multiple of the data size.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class DataMisalignedException : SystemException
     {
         public DataMisalignedException()
@@ -32,10 +34,13 @@ namespace System
             HResult = HResults.COR_E_DATAMISALIGNED;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        private DataMisalignedException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        private DataMisalignedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

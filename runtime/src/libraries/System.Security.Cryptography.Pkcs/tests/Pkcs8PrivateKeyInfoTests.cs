@@ -12,17 +12,20 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void EnsureAttributesParse()
         {
-            byte[] windowsEcdsaKey = Convert.FromBase64String(@"
+            byte[] windowsEcdsaKey = Convert.FromBase64String(
+                @"
 MIHJMBwGCiqGSIb3DQEMAQMwDgQI7BVCacWHggkCAgfQBIGoC6pK+GYOb6t7BQuO
 9gTPw3hlK1T+AF3Dx+LxLl78f+K7Dhs4KMr+dS/WTHygSvn7xaHzbjDX0pnFK/au
 ZbVLkkDMN8BOfgYzDCTpbRmme3AVpr9SwXL/6nGbkw2+MQ7rx1a9/y3yhG7pc6Zs
 Y/TpEwCD1kSHs1wZQemLArbVqSlyKTdCODxizK+5lurXGh310DgO//JbpgsjOjkh
-D9fVWpuVzYpEDfZm");
+D9fVWpuVzYpEDfZm"
+            );
 
             Pkcs8PrivateKeyInfo pkcs8Info = Pkcs8PrivateKeyInfo.DecryptAndDecode(
                 (ReadOnlySpan<char>)"Test",
                 windowsEcdsaKey,
-                out int bytesRead);
+                out int bytesRead
+            );
 
             Assert.Equal(windowsEcdsaKey.Length, bytesRead);
             Assert.Equal(1, pkcs8Info.Attributes.Count);
@@ -47,21 +50,28 @@ D9fVWpuVzYpEDfZm");
 
             byte[] encoded = pkcs8Info.Encode();
 
-            Pkcs8PrivateKeyInfo pkcs8Info2 = Pkcs8PrivateKeyInfo.Decode(encoded, out _, skipCopy: true);
+            Pkcs8PrivateKeyInfo pkcs8Info2 = Pkcs8PrivateKeyInfo.Decode(
+                encoded,
+                out _,
+                skipCopy: true
+            );
             Assert.Equal(pkcs8Info.AlgorithmId.Value, pkcs8Info2.AlgorithmId.Value);
 
             Assert.Equal(
                 pkcs8Info.AlgorithmParameters.Value.ByteArrayToHex(),
-                pkcs8Info2.AlgorithmParameters.Value.ByteArrayToHex());
+                pkcs8Info2.AlgorithmParameters.Value.ByteArrayToHex()
+            );
 
             Assert.Equal(
                 pkcs8Info.PrivateKeyBytes.ByteArrayToHex(),
-                pkcs8Info2.PrivateKeyBytes.ByteArrayToHex());
+                pkcs8Info2.PrivateKeyBytes.ByteArrayToHex()
+            );
 
             Assert.Equal(1, pkcs8Info2.Attributes.Count);
 
-            Pkcs9DocumentDescription descAttr =
-                Assert.IsType<Pkcs9DocumentDescription>(pkcs8Info2.Attributes[0].Values[0]);
+            Pkcs9DocumentDescription descAttr = Assert.IsType<Pkcs9DocumentDescription>(
+                pkcs8Info2.Attributes[0].Values[0]
+            );
 
             Assert.Equal(description, descAttr.DocumentDescription);
         }
@@ -86,21 +96,25 @@ D9fVWpuVzYpEDfZm");
             {
                 Assert.True(
                     encodedSpan.Overlaps(pkcs8Info2.AlgorithmParameters.Value.Span),
-                    "AlgorihmParameters overlaps");
+                    "AlgorihmParameters overlaps"
+                );
 
                 Assert.True(
                     encodedSpan.Overlaps(pkcs8Info2.PrivateKeyBytes.Span),
-                    "PrivateKeyBytes overlaps");
+                    "PrivateKeyBytes overlaps"
+                );
             }
             else
             {
                 Assert.False(
                     encodedSpan.Overlaps(pkcs8Info2.AlgorithmParameters.Value.Span),
-                    "AlgorihmParameters overlaps");
+                    "AlgorihmParameters overlaps"
+                );
 
                 Assert.False(
                     encodedSpan.Overlaps(pkcs8Info2.PrivateKeyBytes.Span),
-                    "PrivateKeyBytes overlaps");
+                    "PrivateKeyBytes overlaps"
+                );
             }
         }
 
@@ -114,108 +128,172 @@ D9fVWpuVzYpEDfZm");
                 privateKeyInfo = Pkcs8PrivateKeyInfo.Create(rsa);
             }
 
-            Assert.ThrowsAny<ArgumentNullException>(
-                () => privateKeyInfo.Encrypt(ReadOnlySpan<char>.Empty, null));
+            Assert.ThrowsAny<ArgumentNullException>(() =>
+                privateKeyInfo.Encrypt(ReadOnlySpan<char>.Empty, null)
+            );
 
-            Assert.ThrowsAny<ArgumentNullException>(
-                () => privateKeyInfo.Encrypt(ReadOnlySpan<byte>.Empty, null));
+            Assert.ThrowsAny<ArgumentNullException>(() =>
+                privateKeyInfo.Encrypt(ReadOnlySpan<byte>.Empty, null)
+            );
 
-            Assert.ThrowsAny<ArgumentNullException>(
-                () => privateKeyInfo.TryEncrypt(ReadOnlySpan<char>.Empty, null, Span<byte>.Empty, out _));
+            Assert.ThrowsAny<ArgumentNullException>(() =>
+                privateKeyInfo.TryEncrypt(ReadOnlySpan<char>.Empty, null, Span<byte>.Empty, out _)
+            );
 
-            Assert.ThrowsAny<ArgumentNullException>(
-                () => privateKeyInfo.TryEncrypt(ReadOnlySpan<byte>.Empty, null, Span<byte>.Empty, out _));
-
-            // PKCS12 requires SHA-1
-            Assert.ThrowsAny<CryptographicException>(
-                () => privateKeyInfo.Encrypt(
-                    ReadOnlySpan<byte>.Empty,
-                    new PbeParameters(PbeEncryptionAlgorithm.TripleDes3KeyPkcs12, HashAlgorithmName.SHA256, 72)));
-
-            Assert.ThrowsAny<CryptographicException>(
-                () => privateKeyInfo.TryEncrypt(
-                    ReadOnlySpan<byte>.Empty,
-                    new PbeParameters(PbeEncryptionAlgorithm.TripleDes3KeyPkcs12, HashAlgorithmName.SHA256, 72),
-                    Span<byte>.Empty,
-                    out _));
+            Assert.ThrowsAny<ArgumentNullException>(() =>
+                privateKeyInfo.TryEncrypt(ReadOnlySpan<byte>.Empty, null, Span<byte>.Empty, out _)
+            );
 
             // PKCS12 requires SHA-1
-            Assert.ThrowsAny<CryptographicException>(
-                () => privateKeyInfo.Encrypt(
+            Assert.ThrowsAny<CryptographicException>(() =>
+                privateKeyInfo.Encrypt(
                     ReadOnlySpan<byte>.Empty,
-                    new PbeParameters(PbeEncryptionAlgorithm.TripleDes3KeyPkcs12, HashAlgorithmName.MD5, 72)));
+                    new PbeParameters(
+                        PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
+                        HashAlgorithmName.SHA256,
+                        72
+                    )
+                )
+            );
 
-            Assert.ThrowsAny<CryptographicException>(
-                () => privateKeyInfo.TryEncrypt(
+            Assert.ThrowsAny<CryptographicException>(() =>
+                privateKeyInfo.TryEncrypt(
                     ReadOnlySpan<byte>.Empty,
-                    new PbeParameters(PbeEncryptionAlgorithm.TripleDes3KeyPkcs12, HashAlgorithmName.MD5, 72),
+                    new PbeParameters(
+                        PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
+                        HashAlgorithmName.SHA256,
+                        72
+                    ),
                     Span<byte>.Empty,
-                    out _));
+                    out _
+                )
+            );
+
+            // PKCS12 requires SHA-1
+            Assert.ThrowsAny<CryptographicException>(() =>
+                privateKeyInfo.Encrypt(
+                    ReadOnlySpan<byte>.Empty,
+                    new PbeParameters(
+                        PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
+                        HashAlgorithmName.MD5,
+                        72
+                    )
+                )
+            );
+
+            Assert.ThrowsAny<CryptographicException>(() =>
+                privateKeyInfo.TryEncrypt(
+                    ReadOnlySpan<byte>.Empty,
+                    new PbeParameters(
+                        PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
+                        HashAlgorithmName.MD5,
+                        72
+                    ),
+                    Span<byte>.Empty,
+                    out _
+                )
+            );
 
             // PKCS12 requires a char-based password
-            Assert.ThrowsAny<CryptographicException>(
-                () => privateKeyInfo.Encrypt(
+            Assert.ThrowsAny<CryptographicException>(() =>
+                privateKeyInfo.Encrypt(
                     new byte[3],
-                    new PbeParameters(PbeEncryptionAlgorithm.TripleDes3KeyPkcs12, HashAlgorithmName.SHA1, 72)));
+                    new PbeParameters(
+                        PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
+                        HashAlgorithmName.SHA1,
+                        72
+                    )
+                )
+            );
 
-            Assert.ThrowsAny<CryptographicException>(
-                () => privateKeyInfo.TryEncrypt(
+            Assert.ThrowsAny<CryptographicException>(() =>
+                privateKeyInfo.TryEncrypt(
                     new byte[3],
-                    new PbeParameters(PbeEncryptionAlgorithm.TripleDes3KeyPkcs12, HashAlgorithmName.SHA1, 72),
+                    new PbeParameters(
+                        PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
+                        HashAlgorithmName.SHA1,
+                        72
+                    ),
                     Span<byte>.Empty,
-                    out _));
+                    out _
+                )
+            );
 
             // Unknown encryption algorithm
-            Assert.ThrowsAny<CryptographicException>(
-                () => privateKeyInfo.Encrypt(
+            Assert.ThrowsAny<CryptographicException>(() =>
+                privateKeyInfo.Encrypt(
                     new byte[3],
-                    new PbeParameters(0, HashAlgorithmName.SHA1, 72)));
+                    new PbeParameters(0, HashAlgorithmName.SHA1, 72)
+                )
+            );
 
-            Assert.ThrowsAny<CryptographicException>(
-                () => privateKeyInfo.TryEncrypt(
+            Assert.ThrowsAny<CryptographicException>(() =>
+                privateKeyInfo.TryEncrypt(
                     new byte[3],
                     new PbeParameters(0, HashAlgorithmName.SHA1, 72),
                     Span<byte>.Empty,
-                    out _));
+                    out _
+                )
+            );
 
             // Unknown encryption algorithm (negative enum value)
-            Assert.ThrowsAny<CryptographicException>(
-                () => privateKeyInfo.Encrypt(
+            Assert.ThrowsAny<CryptographicException>(() =>
+                privateKeyInfo.Encrypt(
                     new byte[3],
-                    new PbeParameters((PbeEncryptionAlgorithm)(-5), HashAlgorithmName.SHA1, 72)));
+                    new PbeParameters((PbeEncryptionAlgorithm)(-5), HashAlgorithmName.SHA1, 72)
+                )
+            );
 
-            Assert.ThrowsAny<CryptographicException>(
-                () => privateKeyInfo.TryEncrypt(
+            Assert.ThrowsAny<CryptographicException>(() =>
+                privateKeyInfo.TryEncrypt(
                     new byte[3],
                     new PbeParameters((PbeEncryptionAlgorithm)(-5), HashAlgorithmName.SHA1, 72),
                     Span<byte>.Empty,
-                    out _));
+                    out _
+                )
+            );
 
             // Unknown encryption algorithm (overly-large enum value)
-            Assert.ThrowsAny<CryptographicException>(
-                () => privateKeyInfo.Encrypt(
+            Assert.ThrowsAny<CryptographicException>(() =>
+                privateKeyInfo.Encrypt(
                     new byte[3],
-                    new PbeParameters((PbeEncryptionAlgorithm)15, HashAlgorithmName.SHA1, 72)));
+                    new PbeParameters((PbeEncryptionAlgorithm)15, HashAlgorithmName.SHA1, 72)
+                )
+            );
 
-            Assert.ThrowsAny<CryptographicException>(
-                () => privateKeyInfo.TryEncrypt(
+            Assert.ThrowsAny<CryptographicException>(() =>
+                privateKeyInfo.TryEncrypt(
                     new byte[3],
                     new PbeParameters((PbeEncryptionAlgorithm)15, HashAlgorithmName.SHA1, 72),
                     Span<byte>.Empty,
-                    out _));
+                    out _
+                )
+            );
 
             // Unknown hash algorithm
-            Assert.ThrowsAny<CryptographicException>(
-                () => privateKeyInfo.Encrypt(
+            Assert.ThrowsAny<CryptographicException>(() =>
+                privateKeyInfo.Encrypt(
                     new byte[3],
-                    new PbeParameters(PbeEncryptionAlgorithm.Aes192Cbc, new HashAlgorithmName("Potato"), 72)));
+                    new PbeParameters(
+                        PbeEncryptionAlgorithm.Aes192Cbc,
+                        new HashAlgorithmName("Potato"),
+                        72
+                    )
+                )
+            );
 
-            Assert.ThrowsAny<CryptographicException>(
-                () => privateKeyInfo.TryEncrypt(
+            Assert.ThrowsAny<CryptographicException>(() =>
+                privateKeyInfo.TryEncrypt(
                     new byte[3],
-                    new PbeParameters(PbeEncryptionAlgorithm.Aes192Cbc, new HashAlgorithmName("Potato"), 72),
+                    new PbeParameters(
+                        PbeEncryptionAlgorithm.Aes192Cbc,
+                        new HashAlgorithmName("Potato"),
+                        72
+                    ),
                     Span<byte>.Empty,
-                    out _));
+                    out _
+                )
+            );
         }
 
         [Fact]
@@ -228,27 +306,46 @@ D9fVWpuVzYpEDfZm");
                     new PbeParameters(
                         PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
                         HashAlgorithmName.SHA1,
-                        1024));
+                        1024
+                    )
+                );
 
                 // Wrong password
-                Assert.Throws<CryptographicException>(
-                    () => Pkcs8PrivateKeyInfo.DecryptAndDecode((ReadOnlySpan<char>)"wrong", encryptedKey, out _));
+                Assert.Throws<CryptographicException>(() =>
+                    Pkcs8PrivateKeyInfo.DecryptAndDecode(
+                        (ReadOnlySpan<char>)"wrong",
+                        encryptedKey,
+                        out _
+                    )
+                );
 
                 // Wrong password
-                Assert.Throws<CryptographicException>(
-                    () => Pkcs8PrivateKeyInfo.DecryptAndDecode(new byte[3], encryptedKey, out _));
+                Assert.Throws<CryptographicException>(() =>
+                    Pkcs8PrivateKeyInfo.DecryptAndDecode(new byte[3], encryptedKey, out _)
+                );
 
                 // Corrupted data
-                Assert.Throws<CryptographicException>(
-                    () => Pkcs8PrivateKeyInfo.DecryptAndDecode((ReadOnlySpan<char>)"initial", encryptedKey.AsMemory(1), out _));
+                Assert.Throws<CryptographicException>(() =>
+                    Pkcs8PrivateKeyInfo.DecryptAndDecode(
+                        (ReadOnlySpan<char>)"initial",
+                        encryptedKey.AsMemory(1),
+                        out _
+                    )
+                );
 
-                Assert.Throws<CryptographicException>(
-                    () => Pkcs8PrivateKeyInfo.DecryptAndDecode((ReadOnlySpan<char>)"initial", encryptedKey.AsMemory(0, encryptedKey.Length - 1), out _));
+                Assert.Throws<CryptographicException>(() =>
+                    Pkcs8PrivateKeyInfo.DecryptAndDecode(
+                        (ReadOnlySpan<char>)"initial",
+                        encryptedKey.AsMemory(0, encryptedKey.Length - 1),
+                        out _
+                    )
+                );
 
                 Pkcs8PrivateKeyInfo privateKey = Pkcs8PrivateKeyInfo.DecryptAndDecode(
                     (ReadOnlySpan<char>)nameof(DecryptionFailures),
                     encryptedKey,
-                    out int bytesRead);
+                    out int bytesRead
+                );
 
                 Assert.NotNull(privateKey);
                 Assert.Equal(encryptedKey.Length, bytesRead);
@@ -274,16 +371,19 @@ D9fVWpuVzYpEDfZm");
                     new PbeParameters(
                         PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
                         HashAlgorithmName.SHA1,
-                        1024),
+                        1024
+                    ),
                     buf,
-                    out int bytesWritten);
+                    out int bytesWritten
+                );
 
                 Assert.True(exported, "Key exported");
 
                 Pkcs8PrivateKeyInfo privateKey = Pkcs8PrivateKeyInfo.DecryptAndDecode(
                     (ReadOnlySpan<char>)"initial",
                     buf,
-                    out int bytesRead);
+                    out int bytesRead
+                );
 
                 Assert.NotNull(privateKey);
                 Assert.Equal(bytesWritten, bytesRead);
@@ -293,9 +393,11 @@ D9fVWpuVzYpEDfZm");
                     new PbeParameters(
                         PbeEncryptionAlgorithm.Aes256Cbc,
                         HashAlgorithmName.SHA512,
-                        5678),
+                        5678
+                    ),
                     buf,
-                    out bytesWritten);
+                    out bytesWritten
+                );
 
                 Assert.True(exported, "Re-encrypted into the buffers");
                 encryptedKey = buf.AsMemory(0, bytesWritten);
@@ -316,7 +418,8 @@ D9fVWpuVzYpEDfZm");
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "privateKey",
-                () => Pkcs8PrivateKeyInfo.Create(null));
+                () => Pkcs8PrivateKeyInfo.Create(null)
+            );
         }
 
         [Fact]
@@ -324,7 +427,8 @@ D9fVWpuVzYpEDfZm");
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "algorithmId",
-                () => new Pkcs8PrivateKeyInfo(null, null, ReadOnlyMemory<byte>.Empty));
+                () => new Pkcs8PrivateKeyInfo(null, null, ReadOnlyMemory<byte>.Empty)
+            );
         }
 
         [Theory]
@@ -339,26 +443,32 @@ D9fVWpuVzYpEDfZm");
             Pkcs8PrivateKeyInfo info = new Pkcs8PrivateKeyInfo(
                 new Oid(oidValue, "friendly name"),
                 null,
-                ReadOnlyMemory<byte>.Empty);
+                ReadOnlyMemory<byte>.Empty
+            );
 
             Assert.ThrowsAny<CryptographicException>(() => info.Encode());
 
-            Assert.ThrowsAny<CryptographicException>(
-                () => info.TryEncode(Span<byte>.Empty, out _));
+            Assert.ThrowsAny<CryptographicException>(() => info.TryEncode(Span<byte>.Empty, out _));
 
             PbeParameters pbeParameters = new PbeParameters(
                 PbeEncryptionAlgorithm.Aes128Cbc,
                 HashAlgorithmName.SHA256,
-                1024);
+                1024
+            );
 
-            Assert.ThrowsAny<CryptographicException>(() => info.Encrypt((ReadOnlySpan<char>)"hi", pbeParameters));
-            Assert.ThrowsAny<CryptographicException>(() => info.Encrypt(new byte[3], pbeParameters));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                info.Encrypt((ReadOnlySpan<char>)"hi", pbeParameters)
+            );
+            Assert.ThrowsAny<CryptographicException>(() => info.Encrypt(new byte[3], pbeParameters)
+            );
 
-            Assert.ThrowsAny<CryptographicException>(
-                () => info.TryEncrypt((ReadOnlySpan<char>)"hello", pbeParameters, Span<byte>.Empty, out _));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                info.TryEncrypt((ReadOnlySpan<char>)"hello", pbeParameters, Span<byte>.Empty, out _)
+            );
 
-            Assert.ThrowsAny<CryptographicException>(
-                () => info.TryEncrypt(new byte[3], pbeParameters, Span<byte>.Empty, out _));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                info.TryEncrypt(new byte[3], pbeParameters, Span<byte>.Empty, out _)
+            );
         }
 
         [Fact]
@@ -370,13 +480,18 @@ D9fVWpuVzYpEDfZm");
                 new Oid("0.0", null),
                 algorithmParameters: null,
                 keyBytes,
-                skipCopies: true);
+                skipCopies: true
+            );
 
             Assert.True(info.PrivateKeyBytes.Span.SequenceEqual(keyBytes));
 
             byte[] encoded = info.Encode();
 
-            Pkcs8PrivateKeyInfo decoded = Pkcs8PrivateKeyInfo.Decode(encoded, out _, skipCopy: true);
+            Pkcs8PrivateKeyInfo decoded = Pkcs8PrivateKeyInfo.Decode(
+                encoded,
+                out _,
+                skipCopy: true
+            );
 
             Assert.True(decoded.PrivateKeyBytes.Span.SequenceEqual(keyBytes));
         }
@@ -390,13 +505,18 @@ D9fVWpuVzYpEDfZm");
                 new Oid("0.0", null),
                 algorithmParameters: null,
                 keyBytes,
-                skipCopies: true);
+                skipCopies: true
+            );
 
             Assert.True(info.PrivateKeyBytes.Span.SequenceEqual(keyBytes));
 
             byte[] encoded = info.Encode();
 
-            Pkcs8PrivateKeyInfo decoded = Pkcs8PrivateKeyInfo.Decode(encoded, out _, skipCopy: true);
+            Pkcs8PrivateKeyInfo decoded = Pkcs8PrivateKeyInfo.Decode(
+                encoded,
+                out _,
+                skipCopy: true
+            );
 
             Assert.True(decoded.PrivateKeyBytes.Span.SequenceEqual(keyBytes));
         }
@@ -409,12 +529,14 @@ D9fVWpuVzYpEDfZm");
             byte[] keyBytes = Array.Empty<byte>();
             byte[] parameterBytes = parametersHex.HexToByteArray();
 
-            Assert.Throws<CryptographicException>(
-                () => new Pkcs8PrivateKeyInfo(
+            Assert.Throws<CryptographicException>(() =>
+                new Pkcs8PrivateKeyInfo(
                     new Oid("0.0", null),
                     parameterBytes,
                     keyBytes,
-                    skipCopies: true));
+                    skipCopies: true
+                )
+            );
         }
 
         [Fact]
@@ -424,11 +546,16 @@ D9fVWpuVzYpEDfZm");
                 new Oid("0.0", null),
                 ReadOnlyMemory<byte>.Empty,
                 Array.Empty<byte>(),
-                skipCopies: true).Encode();
+                skipCopies: true
+            ).Encode();
 
             Assert.Equal("300A02010030030601000400", encoded.ByteArrayToHex());
 
-            Pkcs8PrivateKeyInfo decoded = Pkcs8PrivateKeyInfo.Decode(encoded, out _, skipCopy: true);
+            Pkcs8PrivateKeyInfo decoded = Pkcs8PrivateKeyInfo.Decode(
+                encoded,
+                out _,
+                skipCopy: true
+            );
             Assert.False(decoded.AlgorithmParameters.HasValue);
         }
     }

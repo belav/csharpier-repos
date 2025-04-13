@@ -119,12 +119,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyByteOr(byte a, byte b, bool useInterpreter)
         {
-            Expression<Func<byte>> e =
-                Expression.Lambda<Func<byte>>(
-                    Expression.Or(
-                        Expression.Constant(a, typeof(byte)),
-                        Expression.Constant(b, typeof(byte))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                Expression.Or(
+                    Expression.Constant(a, typeof(byte)),
+                    Expression.Constant(b, typeof(byte))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<byte> f = e.Compile(useInterpreter);
 
             Assert.Equal((byte)(a | b), f());
@@ -132,12 +133,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifySByteOr(sbyte a, sbyte b, bool useInterpreter)
         {
-            Expression<Func<sbyte>> e =
-                Expression.Lambda<Func<sbyte>>(
-                    Expression.Or(
-                        Expression.Constant(a, typeof(sbyte)),
-                        Expression.Constant(b, typeof(sbyte))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<sbyte>> e = Expression.Lambda<Func<sbyte>>(
+                Expression.Or(
+                    Expression.Constant(a, typeof(sbyte)),
+                    Expression.Constant(b, typeof(sbyte))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<sbyte> f = e.Compile(useInterpreter);
 
             Assert.Equal((sbyte)(a | b), f());
@@ -145,12 +147,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortOr(ushort a, ushort b, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Or(
-                        Expression.Constant(a, typeof(ushort)),
-                        Expression.Constant(b, typeof(ushort))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Or(
+                    Expression.Constant(a, typeof(ushort)),
+                    Expression.Constant(b, typeof(ushort))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ushort> f = e.Compile(useInterpreter);
 
             Assert.Equal((ushort)(a | b), f());
@@ -158,12 +161,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortOr(short a, short b, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Or(
-                        Expression.Constant(a, typeof(short)),
-                        Expression.Constant(b, typeof(short))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Or(
+                    Expression.Constant(a, typeof(short)),
+                    Expression.Constant(b, typeof(short))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<short> f = e.Compile(useInterpreter);
 
             Assert.Equal((short)(a | b), f());
@@ -171,12 +175,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntOr(uint a, uint b, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Or(
-                        Expression.Constant(a, typeof(uint)),
-                        Expression.Constant(b, typeof(uint))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Or(
+                    Expression.Constant(a, typeof(uint)),
+                    Expression.Constant(b, typeof(uint))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<uint> f = e.Compile(useInterpreter);
 
             Assert.Equal(a | b, f());
@@ -184,12 +189,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntOr(int a, int b, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Or(
-                        Expression.Constant(a, typeof(int)),
-                        Expression.Constant(b, typeof(int))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Or(
+                    Expression.Constant(a, typeof(int)),
+                    Expression.Constant(b, typeof(int))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             Assert.Equal(a | b, f());
@@ -197,12 +203,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongOr(ulong a, ulong b, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Or(
-                        Expression.Constant(a, typeof(ulong)),
-                        Expression.Constant(b, typeof(ulong))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Or(
+                    Expression.Constant(a, typeof(ulong)),
+                    Expression.Constant(b, typeof(ulong))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ulong> f = e.Compile(useInterpreter);
 
             Assert.Equal(a | b, f());
@@ -210,12 +217,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongOr(long a, long b, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Or(
-                        Expression.Constant(a, typeof(long)),
-                        Expression.Constant(b, typeof(long))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Or(
+                    Expression.Constant(a, typeof(long)),
+                    Expression.Constant(b, typeof(long))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<long> f = e.Compile(useInterpreter);
 
             Assert.Equal(a | b, f());
@@ -235,13 +243,19 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ThrowsOnLeftNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.Or(null, Expression.Constant("")));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "left",
+                () => Expression.Or(null, Expression.Constant(""))
+            );
         }
 
         [Fact]
         public static void ThrowsOnRightNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("right", () => Expression.Or(Expression.Constant(""), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "right",
+                () => Expression.Or(Expression.Constant(""), null)
+            );
         }
 
         private static class Unreadable<T>
@@ -256,26 +270,41 @@ namespace System.Linq.Expressions.Tests
         public static void ThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>("left", () => Expression.Or(value, Expression.Constant(1)));
+            AssertExtensions.Throws<ArgumentException>(
+                "left",
+                () => Expression.Or(value, Expression.Constant(1))
+            );
         }
 
         [Fact]
         public static void ThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>("right", () => Expression.Or(Expression.Constant(1), value));
+            AssertExtensions.Throws<ArgumentException>(
+                "right",
+                () => Expression.Or(Expression.Constant(1), value)
+            );
         }
 
         [Fact]
         public static void ToStringTest()
         {
-            BinaryExpression e1 = Expression.Or(Expression.Parameter(typeof(int), "a"), Expression.Parameter(typeof(int), "b"));
+            BinaryExpression e1 = Expression.Or(
+                Expression.Parameter(typeof(int), "a"),
+                Expression.Parameter(typeof(int), "b")
+            );
             Assert.Equal("(a | b)", e1.ToString());
 
-            BinaryExpression e2 = Expression.Or(Expression.Parameter(typeof(bool), "a"), Expression.Parameter(typeof(bool), "b"));
+            BinaryExpression e2 = Expression.Or(
+                Expression.Parameter(typeof(bool), "a"),
+                Expression.Parameter(typeof(bool), "b")
+            );
             Assert.Equal("(a Or b)", e2.ToString());
 
-            BinaryExpression e3 = Expression.Or(Expression.Parameter(typeof(bool?), "a"), Expression.Parameter(typeof(bool?), "b"));
+            BinaryExpression e3 = Expression.Or(
+                Expression.Parameter(typeof(bool?), "a"),
+                Expression.Parameter(typeof(bool?), "b")
+            );
             Assert.Equal("(a Or b)", e3.ToString());
         }
     }

@@ -1,35 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-	<Import Project="..\..\buildscripts\common.props"></Import>
-
-	<PropertyGroup>
-		<TargetFrameworks>net462;netstandard2.0;netstandard2.1;net6.0</TargetFrameworks>
-	</PropertyGroup>
-
-	<PropertyGroup>
-		<PackageId>Castle.Core-Serilog</PackageId>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<PackageOutputPath>../../build/</PackageOutputPath>
-		<AssemblyName>Castle.Services.Logging.SerilogIntegration</AssemblyName>
-		<RootNamespace>Castle.Services.Logging.SerilogIntegration</RootNamespace>
-		<AssemblyTitle>Castle Serilog integration</AssemblyTitle>
-		<Description>Castle Serilog integration, for simple logging with structured events</Description>
-		<AssemblyOriginatorKeyFile>..\..\buildscripts\CastleKey.snk</AssemblyOriginatorKeyFile>
-		<SignAssembly>True</SignAssembly>
-		<PublicSign Condition="'$(OS)'=='Unix'">true</PublicSign>
-		<PackageTags>castle logging serilog</PackageTags>
-	</PropertyGroup>
-
-	<ItemGroup>
-		<Folder Include="Properties\" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="Serilog" Version="2.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\Castle.Core\Castle.Core.csproj" />
-	</ItemGroup>
-
+  <Import Project="..\..\buildscripts\common.props"></Import>
+  <PropertyGroup>
+    <TargetFrameworks>net462;netstandard2.0;netstandard2.1;net6.0</TargetFrameworks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageId>Castle.Core-Serilog</PackageId>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageOutputPath>../../build/</PackageOutputPath>
+    <AssemblyName>Castle.Services.Logging.SerilogIntegration</AssemblyName>
+    <RootNamespace>Castle.Services.Logging.SerilogIntegration</RootNamespace>
+    <AssemblyTitle>Castle Serilog integration</AssemblyTitle>
+    <Description>Castle Serilog integration, for simple logging with structured events</Description>
+    <AssemblyOriginatorKeyFile>..\..\buildscripts\CastleKey.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>True</SignAssembly>
+    <PublicSign Condition="'$(OS)'=='Unix'">true</PublicSign>
+    <PackageTags>castle logging serilog</PackageTags>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Serilog" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Castle.Core\Castle.Core.csproj" />
+  </ItemGroup>
 </Project>

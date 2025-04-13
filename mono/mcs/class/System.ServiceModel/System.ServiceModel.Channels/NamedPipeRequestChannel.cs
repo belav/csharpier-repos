@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,61 +39,72 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-	internal class NamedPipeRequestChannel : RequestChannelBase
-	{
-		TcpBinaryFrameManager frame;
+    internal class NamedPipeRequestChannel : RequestChannelBase
+    {
+        TcpBinaryFrameManager frame;
 
-		public NamedPipeRequestChannel (ChannelFactoryBase factory, MessageEncoder encoder, EndpointAddress address, Uri via)
-			: base (factory, address, via)
-		{
-			this.Encoder = encoder;
-		}
+        public NamedPipeRequestChannel(
+            ChannelFactoryBase factory,
+            MessageEncoder encoder,
+            EndpointAddress address,
+            Uri via
+        )
+            : base(factory, address, via)
+        {
+            this.Encoder = encoder;
+        }
 
-		public MessageEncoder Encoder { get; private set; }
+        public MessageEncoder Encoder { get; private set; }
 
-		protected override void OnAbort ()
-		{
-			OnClose (TimeSpan.Zero);
-		}
+        protected override void OnAbort()
+        {
+            OnClose(TimeSpan.Zero);
+        }
 
-		protected override void OnClose (TimeSpan timeout)
-		{
-		}
+        protected override void OnClose(TimeSpan timeout) { }
 
-		protected override void OnOpen (TimeSpan timeout)
-		{
-		}
+        protected override void OnOpen(TimeSpan timeout) { }
 
-		void CreateClient (TimeSpan timeout)
-		{
-			int explicitPort = Via.Port;
-			var stream = new NamedPipeClientStream (".", Via.LocalPath.Substring (1).Replace ('/', '\\'), PipeDirection.InOut);
-			stream.Connect ();
-			frame = new TcpBinaryFrameManager (TcpBinaryFrameManager.SingletonUnsizedMode, stream, false) {
-				Encoder = this.Encoder,
-				Via = this.Via };
-			frame.ProcessPreambleInitiator ();
-			frame.ProcessPreambleAckInitiator ();
-		}
+        void CreateClient(TimeSpan timeout)
+        {
+            int explicitPort = Via.Port;
+            var stream = new NamedPipeClientStream(
+                ".",
+                Via.LocalPath.Substring(1).Replace('/', '\\'),
+                PipeDirection.InOut
+            );
+            stream.Connect();
+            frame = new TcpBinaryFrameManager(
+                TcpBinaryFrameManager.SingletonUnsizedMode,
+                stream,
+                false
+            )
+            {
+                Encoder = this.Encoder,
+                Via = this.Via,
+            };
+            frame.ProcessPreambleInitiator();
+            frame.ProcessPreambleAckInitiator();
+        }
 
-		public override Message Request (Message input, TimeSpan timeout)
-		{
-			DateTime start = DateTime.UtcNow;
+        public override Message Request(Message input, TimeSpan timeout)
+        {
+            DateTime start = DateTime.UtcNow;
 
-			CreateClient (timeout);
+            CreateClient(timeout);
 
-			if (input.Headers.To == null)
-				input.Headers.To = RemoteAddress.Uri;
-			if (input.Headers.MessageId == null)
-				input.Headers.MessageId = new UniqueId ();
+            if (input.Headers.To == null)
+                input.Headers.To = RemoteAddress.Uri;
+            if (input.Headers.MessageId == null)
+                input.Headers.MessageId = new UniqueId();
 
-			frame.WriteUnsizedMessage (input, timeout - (DateTime.UtcNow - start));
+            frame.WriteUnsizedMessage(input, timeout - (DateTime.UtcNow - start));
 
-			frame.WriteEndRecord ();
+            frame.WriteEndRecord();
 
-			var ret = frame.ReadUnsizedMessage (timeout - (DateTime.UtcNow - start));
-			frame.ReadEndRecord ();
-			return ret;
-		}
-	}
+            var ret = frame.ReadUnsizedMessage(timeout - (DateTime.UtcNow - start));
+            frame.ReadEndRecord();
+            return ret;
+        }
+    }
 }

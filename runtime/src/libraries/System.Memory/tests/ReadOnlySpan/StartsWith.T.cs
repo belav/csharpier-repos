@@ -84,7 +84,10 @@ namespace System.SpanTests
                 foreach (TInt elem in first)
                 {
                     int numCompares = log.CountCompares(elem.Value, elem.Value);
-                    Assert.True(numCompares == 1, $"Expected {numCompares} == 1 for element {elem.Value}.");
+                    Assert.True(
+                        numCompares == 1,
+                        $"Expected {numCompares} == 1 for element {elem.Value}."
+                    );
                 }
             }
         }
@@ -112,7 +115,10 @@ namespace System.SpanTests
                     bool b = firstSpan.StartsWith(secondSpan);
                     Assert.False(b);
 
-                    Assert.Equal(1, log.CountCompares(first[mismatchIndex].Value, second[mismatchIndex].Value));
+                    Assert.Equal(
+                        1,
+                        log.CountCompares(first[mismatchIndex].Value, second[mismatchIndex].Value)
+                    );
                 }
             }
         }
@@ -123,12 +129,11 @@ namespace System.SpanTests
             const int GuardValue = 77777;
             const int GuardLength = 50;
 
-            Action<int, int> checkForOutOfRangeAccess =
-                delegate (int x, int y)
-                {
-                    if (x == GuardValue || y == GuardValue)
-                        throw new Exception("Detected out of range access in IndexOf()");
-                };
+            Action<int, int> checkForOutOfRangeAccess = delegate(int x, int y)
+            {
+                if (x == GuardValue || y == GuardValue)
+                    throw new Exception("Detected out of range access in IndexOf()");
+            };
 
             for (int length = 0; length < 100; length++)
             {
@@ -141,7 +146,10 @@ namespace System.SpanTests
 
                 for (int i = 0; i < length; i++)
                 {
-                    first[GuardLength + i] = second[GuardLength + i] = new TInt(10 * (i + 1), checkForOutOfRangeAccess);
+                    first[GuardLength + i] = second[GuardLength + i] = new TInt(
+                        10 * (i + 1),
+                        checkForOutOfRangeAccess
+                    );
                 }
 
                 ReadOnlySpan<TInt> firstSpan = new ReadOnlySpan<TInt>(first, GuardLength, length);

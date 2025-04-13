@@ -2,28 +2,28 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Drawing;
     using System.CodeDom;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Windows.Forms;
-    using System.ComponentModel;
-    using System.Globalization;
-    using System.Drawing.Design;
-    using System.Drawing.Imaging;
-    using System.Drawing.Drawing2D;
-    using System.Windows.Forms.Design;
-    using System.ComponentModel.Design;
-    using System.Collections.Specialized;
-    using System.ComponentModel.Design.Serialization;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel.Serialization;
     using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Imaging;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
-    using System.Workflow.ComponentModel.Design;
     using System.Runtime.Serialization.Formatters.Binary;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.ComponentModel.Serialization;
 
     //
 
@@ -33,8 +33,13 @@ namespace System.Workflow.ComponentModel.Design
     /// can be edited directly.
     /// </summary>
     [ActivityDesignerTheme(typeof(ActivityPreviewDesignerTheme))]
-    [SRCategory("ActivityPreviewDesigners", "System.Workflow.ComponentModel.Design.DesignerResources")]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [SRCategory(
+        "ActivityPreviewDesigners",
+        "System.Workflow.ComponentModel.Design.DesignerResources"
+    )]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityPreviewDesigner : SequentialActivityDesigner
     {
         #region Fields
@@ -55,7 +60,8 @@ namespace System.Workflow.ComponentModel.Design
         public ActivityPreviewDesigner()
         {
             this.previewStrip = new PreviewItemStrip(this);
-            this.previewStrip.SelectionChanged += new SelectionChangeEventHandler<SelectionChangeEventArgs>(OnPreviewChanged);
+            this.previewStrip.SelectionChanged +=
+                new SelectionChangeEventHandler<SelectionChangeEventArgs>(OnPreviewChanged);
             this.previewStrip.HelpText = DR.GetString(DR.DropActivitiesHere);
         }
         #endregion
@@ -68,11 +74,7 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         public bool ShowPreview
         {
-            get
-            {
-                return (this.previewWindow != null);
-            }
-
+            get { return (this.previewWindow != null); }
             set
             {
                 if (ShowPreview == value)
@@ -106,7 +108,9 @@ namespace System.Workflow.ComponentModel.Design
                 if (itemInfo == null)
                     return null;
 
-                return ActivityDesigner.GetDesigner(itemInfo.UserData[DesignerUserDataKeys.Activity] as Activity);
+                return ActivityDesigner.GetDesigner(
+                    itemInfo.UserData[DesignerUserDataKeys.Activity] as Activity
+                );
             }
         }
 
@@ -142,11 +146,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public override Point Location
         {
-            get
-            {
-                return base.Location;
-            }
-
+            get { return base.Location; }
             set
             {
                 //If activityDesigner's location changes then we need to change location of children
@@ -157,19 +157,36 @@ namespace System.Workflow.ComponentModel.Design
 
                 base.Location = value;
 
-                this.previewStrip.Location = new Point(this.previewStrip.Location.X + moveDelta.Width, this.previewStrip.Location.Y + moveDelta.Height);
+                this.previewStrip.Location = new Point(
+                    this.previewStrip.Location.X + moveDelta.Width,
+                    this.previewStrip.Location.Y + moveDelta.Height
+                );
 
                 if (ShowPreview)
                 {
-                    this.previewWindow.Location = new Point(this.previewWindow.Location.X + moveDelta.Width, this.previewWindow.Location.Y + moveDelta.Height);
-                    this.separatorLine[0] = new Point(this.separatorLine[0].X + moveDelta.Width, this.separatorLine[0].Y + moveDelta.Height);
-                    this.separatorLine[1] = new Point(this.separatorLine[1].X + moveDelta.Width, this.separatorLine[1].Y + moveDelta.Height);
+                    this.previewWindow.Location = new Point(
+                        this.previewWindow.Location.X + moveDelta.Width,
+                        this.previewWindow.Location.Y + moveDelta.Height
+                    );
+                    this.separatorLine[0] = new Point(
+                        this.separatorLine[0].X + moveDelta.Width,
+                        this.separatorLine[0].Y + moveDelta.Height
+                    );
+                    this.separatorLine[1] = new Point(
+                        this.separatorLine[1].X + moveDelta.Width,
+                        this.separatorLine[1].Y + moveDelta.Height
+                    );
                 }
                 else
                 {
                     int headerHeight = this.previewStrip.Bounds.Bottom - Location.Y;
                     if (PreviewedDesigner != null)
-                        PreviewedDesigner.Location = new Point(Location.X + (Size.Width - PreviewedDesigner.Size.Width) / 2, Location.Y + headerHeight + 2 * WorkflowTheme.CurrentTheme.AmbientTheme.Margin.Height);
+                        PreviewedDesigner.Location = new Point(
+                            Location.X + (Size.Width - PreviewedDesigner.Size.Width) / 2,
+                            Location.Y
+                                + headerHeight
+                                + 2 * WorkflowTheme.CurrentTheme.AmbientTheme.Margin.Height
+                        );
                 }
             }
         }
@@ -198,8 +215,13 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     if (PreviewedDesigner != null)
                     {
-                        CompositeActivityDesigner compositeDesigner = PreviewedDesigner as CompositeActivityDesigner;
-                        if (this.previewWindow != null && !this.previewWindow.PreviewMode && compositeDesigner != null)
+                        CompositeActivityDesigner compositeDesigner =
+                            PreviewedDesigner as CompositeActivityDesigner;
+                        if (
+                            this.previewWindow != null
+                            && !this.previewWindow.PreviewMode
+                            && compositeDesigner != null
+                        )
                             return compositeDesigner.LastSelectableObject;
                         else
                             return PreviewedDesigner.Activity;
@@ -228,10 +250,7 @@ namespace System.Workflow.ComponentModel.Design
         #region Protected Properties
         protected override string HelpText
         {
-            get
-            {
-                return base.HelpText;
-            }
+            get { return base.HelpText; }
             set
             {
                 base.HelpText = value;
@@ -239,14 +258,9 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-
         protected override int CurrentDropTarget
         {
-            get
-            {
-                return base.CurrentDropTarget;
-            }
-
+            get { return base.CurrentDropTarget; }
             set
             {
                 base.CurrentDropTarget = value;
@@ -267,19 +281,43 @@ namespace System.Workflow.ComponentModel.Design
 
                     if (ActiveDesigner == this)
                     {
-                        DesignerVerb verb = new ActivityDesignerVerb(this, DesignerVerbGroup.View, DR.GetString(DR.ViewPreviousActivity), new EventHandler(OnViewActivity), new EventHandler(OnViewActivityStatusUpdate));
+                        DesignerVerb verb = new ActivityDesignerVerb(
+                            this,
+                            DesignerVerbGroup.View,
+                            DR.GetString(DR.ViewPreviousActivity),
+                            new EventHandler(OnViewActivity),
+                            new EventHandler(OnViewActivityStatusUpdate)
+                        );
                         verb.Properties[DesignerUserDataKeys.ViewActivity] = false;
                         this.designerVerbs.Add(verb);
-                        verb = new ActivityDesignerVerb(this, DesignerVerbGroup.View, DR.GetString(DR.ViewNextActivity), new EventHandler(OnViewActivity), new EventHandler(OnViewActivityStatusUpdate));
+                        verb = new ActivityDesignerVerb(
+                            this,
+                            DesignerVerbGroup.View,
+                            DR.GetString(DR.ViewNextActivity),
+                            new EventHandler(OnViewActivity),
+                            new EventHandler(OnViewActivityStatusUpdate)
+                        );
                         verb.Properties[DesignerUserDataKeys.ViewActivity] = true;
                         this.designerVerbs.Add(verb);
 
                         if (ShowPreview)
                         {
-                            verb = new ActivityDesignerVerb(this, DesignerVerbGroup.Edit, DR.GetString(DR.PreviewActivity), new EventHandler(OnChangePreviewMode), new EventHandler(OnPreviewModeStatusUpdate));
+                            verb = new ActivityDesignerVerb(
+                                this,
+                                DesignerVerbGroup.Edit,
+                                DR.GetString(DR.PreviewActivity),
+                                new EventHandler(OnChangePreviewMode),
+                                new EventHandler(OnPreviewModeStatusUpdate)
+                            );
                             verb.Properties[DesignerUserDataKeys.PreviewActivity] = true;
                             this.designerVerbs.Add(verb);
-                            verb = new ActivityDesignerVerb(this, DesignerVerbGroup.Edit, DR.GetString(DR.EditActivity), new EventHandler(OnChangePreviewMode), new EventHandler(OnPreviewModeStatusUpdate));
+                            verb = new ActivityDesignerVerb(
+                                this,
+                                DesignerVerbGroup.Edit,
+                                DR.GetString(DR.EditActivity),
+                                new EventHandler(OnChangePreviewMode),
+                                new EventHandler(OnPreviewModeStatusUpdate)
+                            );
                             verb.Properties[DesignerUserDataKeys.PreviewActivity] = false;
                             this.designerVerbs.Add(verb);
                         }
@@ -302,7 +340,7 @@ namespace System.Workflow.ComponentModel.Design
             headerHeight += this.previewStrip.Size.Height;
             headerHeight += ambientTheme.Margin.Height;
 
-            //We need to adjust the first and last connectors so as to adjust the 
+            //We need to adjust the first and last connectors so as to adjust the
             //start and end indicator heights
             Rectangle[] connectors = base.GetConnectors();
             if (connectors.Length > 0)
@@ -322,28 +360,42 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (Expanded && ActiveDesigner == this)
                 {
-                    ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+                    ISelectionService selectionService =
+                        GetService(typeof(ISelectionService)) as ISelectionService;
 
-                    WorkflowDesignerLoader loader = GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+                    WorkflowDesignerLoader loader =
+                        GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
                     bool designMode = (loader != null && !loader.InDebugMode);
 
                     foreach (ItemInfo itemInfo in this.previewStrip.Items)
                     {
                         Rectangle itemBounds = this.previewStrip.GetItemBounds(itemInfo);
 
-                        Activity activity = itemInfo.UserData[DesignerUserDataKeys.Activity] as Activity;
+                        Activity activity =
+                            itemInfo.UserData[DesignerUserDataKeys.Activity] as Activity;
                         if (activity != null && !itemBounds.IsEmpty)
                         {
-                            if (selectionService != null && selectionService.GetComponentSelected(activity))
+                            if (
+                                selectionService != null
+                                && selectionService.GetComponentSelected(activity)
+                            )
                                 glyphs.Add(new StripItemSelectionGlyph(this, itemInfo));
 
-                            if (!activity.Enabled && !ActivityDesigner.IsCommentedActivity(activity))
+                            if (
+                                !activity.Enabled && !ActivityDesigner.IsCommentedActivity(activity)
+                            )
                                 glyphs.Add(new StripItemCommentGlyph(this, itemInfo));
 
                             if (ShowPreview && designMode && Expanded)
                             {
-                                ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(activity);
-                                if (activityDesigner != null && activityDesigner.DesignerActions.Count > 0 && designMode)
+                                ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(
+                                    activity
+                                );
+                                if (
+                                    activityDesigner != null
+                                    && activityDesigner.DesignerActions.Count > 0
+                                    && designMode
+                                )
                                     glyphs.Add(new StripItemConfigErrorGlyph(this, itemInfo));
                             }
                         }
@@ -383,22 +435,44 @@ namespace System.Workflow.ComponentModel.Design
                 else if (this.previewStrip.Bounds.Contains(point))
                 {
                     ItemInfo itemInfo = this.previewStrip.HitTest(point);
-                    ActivityDesigner activityDesigner = (itemInfo != null) ? ActivityDesigner.GetDesigner(itemInfo.UserData[DesignerUserDataKeys.Activity] as Activity) : null;
+                    ActivityDesigner activityDesigner =
+                        (itemInfo != null)
+                            ? ActivityDesigner.GetDesigner(
+                                itemInfo.UserData[DesignerUserDataKeys.Activity] as Activity
+                            )
+                            : null;
                     if (activityDesigner != null)
                         hitInfo = new HitTestInfo(activityDesigner, HitTestLocations.Designer);
                     else
-                        hitInfo = new HitTestInfo(this, HitTestLocations.Designer | HitTestLocations.ActionArea);
+                        hitInfo = new HitTestInfo(
+                            this,
+                            HitTestLocations.Designer | HitTestLocations.ActionArea
+                        );
                 }
-                else if (ShowPreview && this.previewWindow.Bounds.Contains(point) &&
-                        (this.previewWindow.PreviewMode || PreviewedDesigner == null || !PreviewedDesigner.Bounds.Contains(point)))
+                else if (
+                    ShowPreview
+                    && this.previewWindow.Bounds.Contains(point)
+                    && (
+                        this.previewWindow.PreviewMode
+                        || PreviewedDesigner == null
+                        || !PreviewedDesigner.Bounds.Contains(point)
+                    )
+                )
                 {
-                    hitInfo = new HitTestInfo(this, HitTestLocations.Designer | HitTestLocations.ActionArea);
+                    hitInfo = new HitTestInfo(
+                        this,
+                        HitTestLocations.Designer | HitTestLocations.ActionArea
+                    );
                 }
                 else
                 {
                     hitInfo = base.HitTest(point);
 
-                    if (ShowPreview && this.previewWindow.PreviewMode && hitInfo.AssociatedDesigner != this)
+                    if (
+                        ShowPreview
+                        && this.previewWindow.PreviewMode
+                        && hitInfo.AssociatedDesigner != this
+                    )
                         hitInfo = HitTestInfo.Nowhere;
                 }
             }
@@ -421,7 +495,11 @@ namespace System.Workflow.ComponentModel.Design
                     return false;
 
                 //We do not draw the child activities if in previewed mode or not showing child activity
-                return (this.previewStrip.ActiveItem != null && this.previewStrip.ActiveItem.UserData[DesignerUserDataKeys.Activity] == containedDesigner.Activity);
+                return (
+                    this.previewStrip.ActiveItem != null
+                    && this.previewStrip.ActiveItem.UserData[DesignerUserDataKeys.Activity]
+                        == containedDesigner.Activity
+                );
             }
             else
             {
@@ -451,21 +529,34 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-        public override object GetNextSelectableObject(object obj, DesignerNavigationDirection direction)
+        public override object GetNextSelectableObject(
+            object obj,
+            DesignerNavigationDirection direction
+        )
         {
             if (ActiveDesigner != this)
                 return base.GetNextSelectableObject(obj, direction);
 
-            if (direction != DesignerNavigationDirection.Left && direction != DesignerNavigationDirection.Right)
+            if (
+                direction != DesignerNavigationDirection.Left
+                && direction != DesignerNavigationDirection.Right
+            )
                 return null;
 
             object nextObject = null;
 
             int index = StripItemIndexFromActivity(obj as Activity);
             if (direction == DesignerNavigationDirection.Left && index >= 0)
-                nextObject = this.previewStrip.Items[(index > 0) ? index - 1 : this.previewStrip.Items.Count - 1].UserData[DesignerUserDataKeys.Activity];
-            else if (direction == DesignerNavigationDirection.Right && index <= this.previewStrip.Items.Count - 1)
-                nextObject = this.previewStrip.Items[(index < this.previewStrip.Items.Count - 1) ? index + 1 : 0].UserData[DesignerUserDataKeys.Activity];
+                nextObject = this.previewStrip
+                    .Items[(index > 0) ? index - 1 : this.previewStrip.Items.Count - 1]
+                    .UserData[DesignerUserDataKeys.Activity];
+            else if (
+                direction == DesignerNavigationDirection.Right
+                && index <= this.previewStrip.Items.Count - 1
+            )
+                nextObject = this.previewStrip
+                    .Items[(index < this.previewStrip.Items.Count - 1) ? index + 1 : 0]
+                    .UserData[DesignerUserDataKeys.Activity];
 
             return nextObject;
         }
@@ -493,7 +584,8 @@ namespace System.Workflow.ComponentModel.Design
             }
 
             //Start listening to selection change event
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
             if (selectionService != null)
                 selectionService.SelectionChanged += new EventHandler(OnSelectionChanged);
         }
@@ -502,7 +594,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             if (disposing)
             {
-                ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+                ISelectionService selectionService =
+                    GetService(typeof(ISelectionService)) as ISelectionService;
                 if (selectionService != null)
                     selectionService.SelectionChanged -= new EventHandler(OnSelectionChanged);
             }
@@ -523,7 +616,7 @@ namespace System.Workflow.ComponentModel.Design
             //This is a problem, we need to improve the protocol between the preview window and the designer
             //The reason for this to be done is that the base's draw draws the preview designer and preview window
             //also draws the preview designer. The result is draw is called multiple times which slows down the designer.
-            //We have to either bring the functionality of base class's draw here and not call base's draw or change the 
+            //We have to either bring the functionality of base class's draw here and not call base's draw or change the
             //designer inheritance hierarchy
             if (ShowPreview && !this.previewWindow.PreviewMode && PreviewedDesigner != null)
                 this.removePreviewedDesigner = true;
@@ -542,7 +635,11 @@ namespace System.Workflow.ComponentModel.Design
             //Draw the canvas and the strip
             if (ShowPreview)
             {
-                e.Graphics.DrawLine(e.DesignerTheme.ForegroundPen, this.separatorLine[0], this.separatorLine[1]);
+                e.Graphics.DrawLine(
+                    e.DesignerTheme.ForegroundPen,
+                    this.separatorLine[0],
+                    this.separatorLine[1]
+                );
                 this.previewWindow.Draw(e.Graphics, e.ViewPort);
             }
         }
@@ -569,7 +666,10 @@ namespace System.Workflow.ComponentModel.Design
             if (ActiveDesigner == this && Expanded)
             {
                 Rectangle bounds = Bounds;
-                this.previewStrip.Location = new Point(bounds.Left + bounds.Width / 2 - this.previewStrip.Size.Width / 2, Location.Y + TitleHeight + e.AmbientTheme.Margin.Height);
+                this.previewStrip.Location = new Point(
+                    bounds.Left + bounds.Width / 2 - this.previewStrip.Size.Width / 2,
+                    Location.Y + TitleHeight + e.AmbientTheme.Margin.Height
+                );
 
                 //Make sure that we dont call this after positioning the preview window
                 base.OnLayoutPosition(e);
@@ -578,21 +678,29 @@ namespace System.Workflow.ComponentModel.Design
                 if (ShowPreview)
                 {
                     Rectangle previewStripRectangle = this.previewStrip.Bounds;
-                    this.previewWindow.Location = new Point(bounds.Left + bounds.Width / 2 - this.previewWindow.Size.Width / 2, previewStripRectangle.Bottom + 3 * e.AmbientTheme.Margin.Height);
+                    this.previewWindow.Location = new Point(
+                        bounds.Left + bounds.Width / 2 - this.previewWindow.Size.Width / 2,
+                        previewStripRectangle.Bottom + 3 * e.AmbientTheme.Margin.Height
+                    );
 
                     this.separatorLine[0].X = bounds.Left + e.AmbientTheme.Margin.Width;
                     this.separatorLine[0].Y = previewStripRectangle.Bottom;
-                    this.separatorLine[0].Y += e.AmbientTheme.Margin.Height + e.AmbientTheme.Margin.Height / 2;
+                    this.separatorLine[0].Y +=
+                        e.AmbientTheme.Margin.Height + e.AmbientTheme.Margin.Height / 2;
 
                     this.separatorLine[1].X = bounds.Right - e.AmbientTheme.Margin.Width;
                     this.separatorLine[1].Y = previewStripRectangle.Bottom;
-                    this.separatorLine[1].Y += e.AmbientTheme.Margin.Height + e.AmbientTheme.Margin.Height / 2;
+                    this.separatorLine[1].Y +=
+                        e.AmbientTheme.Margin.Height + e.AmbientTheme.Margin.Height / 2;
                 }
                 else
                 {
                     int headerHeight = this.previewStrip.Bounds.Bottom - Location.Y;
                     if (PreviewedDesigner != null)
-                        PreviewedDesigner.Location = new Point(Location.X + (Size.Width - PreviewedDesigner.Size.Width) / 2, Location.Y + headerHeight + 2 * e.AmbientTheme.Margin.Height);
+                        PreviewedDesigner.Location = new Point(
+                            Location.X + (Size.Width - PreviewedDesigner.Size.Width) / 2,
+                            Location.Y + headerHeight + 2 * e.AmbientTheme.Margin.Height
+                        );
                 }
             }
             else
@@ -619,7 +727,10 @@ namespace System.Workflow.ComponentModel.Design
                     this.previewWindow.Refresh();
                     this.previewWindow.OnLayoutSize(e.Graphics, containerSize.Width);
 
-                    containerSize.Width = Math.Max(containerSize.Width, this.previewWindow.Size.Width);
+                    containerSize.Width = Math.Max(
+                        containerSize.Width,
+                        this.previewWindow.Size.Width
+                    );
                     containerSize.Width += 2 * e.AmbientTheme.Margin.Width;
                     containerSize.Height += TitleHeight;
                     containerSize.Height += 4 * e.AmbientTheme.Margin.Height;
@@ -639,7 +750,8 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (!ShowPreview && PreviewedDesigner != null)
                 {
-                    ActivityPreviewDesignerTheme previewDesignerTheme = e.DesignerTheme as ActivityPreviewDesignerTheme;
+                    ActivityPreviewDesignerTheme previewDesignerTheme =
+                        e.DesignerTheme as ActivityPreviewDesignerTheme;
                     if (previewDesignerTheme != null)
                     {
                         containerSize.Height -= previewDesignerTheme.ConnectorSize.Height;
@@ -647,8 +759,15 @@ namespace System.Workflow.ComponentModel.Design
                         containerSize.Height -= 2 * e.AmbientTheme.SelectionSize.Height;
                     }
 
-                    Size margins = new Size(2 * e.AmbientTheme.Margin.Width + 2 * e.AmbientTheme.SelectionSize.Width, 2 * e.AmbientTheme.Margin.Height + 2 * e.AmbientTheme.SelectionSize.Height);
-                    PreviewedDesigner.Size = new Size(containerSize.Width - margins.Width, containerSize.Height - (TitleHeight + this.previewStrip.Size.Height + margins.Height));
+                    Size margins = new Size(
+                        2 * e.AmbientTheme.Margin.Width + 2 * e.AmbientTheme.SelectionSize.Width,
+                        2 * e.AmbientTheme.Margin.Height + 2 * e.AmbientTheme.SelectionSize.Height
+                    );
+                    PreviewedDesigner.Size = new Size(
+                        containerSize.Width - margins.Width,
+                        containerSize.Height
+                            - (TitleHeight + this.previewStrip.Size.Height + margins.Height)
+                    );
                 }
 
                 size = containerSize;
@@ -678,7 +797,12 @@ namespace System.Workflow.ComponentModel.Design
             if (ActiveDesigner == this)
             {
                 Point point = new Point(e.X, e.Y);
-                if (PreviewedDesigner != null && ShowPreview && this.previewWindow.PreviewMode && this.previewWindow.Bounds.Contains(point))
+                if (
+                    PreviewedDesigner != null
+                    && ShowPreview
+                    && this.previewWindow.PreviewMode
+                    && this.previewWindow.Bounds.Contains(point)
+                )
                     this.previewWindow.PreviewMode = false;
             }
         }
@@ -736,8 +860,14 @@ namespace System.Workflow.ComponentModel.Design
 
                 IDesignerHost designerHost = GetService(typeof(IDesignerHost)) as IDesignerHost;
                 if (designerHost == null)
-                    throw new Exception(SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName));
-                EnsureVisibleContainedDesigner(designerHost.GetDesigner(((Activity)itemInfo.UserData[DesignerUserDataKeys.Activity])) as ActivityDesigner);
+                    throw new Exception(
+                        SR.GetString(SR.General_MissingService, typeof(IDesignerHost).FullName)
+                    );
+                EnsureVisibleContainedDesigner(
+                    designerHost.GetDesigner(
+                        ((Activity)itemInfo.UserData[DesignerUserDataKeys.Activity])
+                    ) as ActivityDesigner
+                );
             }
 
             // read preview mode
@@ -760,22 +890,35 @@ namespace System.Workflow.ComponentModel.Design
             RefreshPreview();
         }
 
-        protected override void OnContainedActivitiesChanged(ActivityCollectionChangeEventArgs listChangeArgs)
+        protected override void OnContainedActivitiesChanged(
+            ActivityCollectionChangeEventArgs listChangeArgs
+        )
         {
             if (ActiveDesigner == this)
             {
-                if (listChangeArgs.Action == ActivityCollectionChangeAction.Add && listChangeArgs.AddedItems.Count > 0 && !Helpers.IsAlternateFlowActivity(listChangeArgs.AddedItems[0]))
+                if (
+                    listChangeArgs.Action == ActivityCollectionChangeAction.Add
+                    && listChangeArgs.AddedItems.Count > 0
+                    && !Helpers.IsAlternateFlowActivity(listChangeArgs.AddedItems[0])
+                )
                 {
                     ItemInfo itemToAdd = new ItemInfo(listChangeArgs.AddedItems[0].GetHashCode());
-                    itemToAdd.UserData[DesignerUserDataKeys.Activity] = listChangeArgs.AddedItems[0];
+                    itemToAdd.UserData[DesignerUserDataKeys.Activity] = listChangeArgs.AddedItems[
+                        0
+                    ];
                     if (listChangeArgs.Index < this.previewStrip.Items.Count)
                         this.previewStrip.Items.Insert(listChangeArgs.Index, itemToAdd);
                     else
                         this.previewStrip.Items.Add(itemToAdd);
                 }
-                else if (listChangeArgs.Action == ActivityCollectionChangeAction.Remove && listChangeArgs.RemovedItems.Count > 0)
+                else if (
+                    listChangeArgs.Action == ActivityCollectionChangeAction.Remove
+                    && listChangeArgs.RemovedItems.Count > 0
+                )
                 {
-                    int index = this.previewStrip.Items.IndexOf(new ItemInfo(listChangeArgs.RemovedItems[0].GetHashCode()));
+                    int index = this.previewStrip.Items.IndexOf(
+                        new ItemInfo(listChangeArgs.RemovedItems[0].GetHashCode())
+                    );
                     if (index >= 0)
                         this.previewStrip.Items.RemoveAt(index);
                 }
@@ -795,20 +938,34 @@ namespace System.Workflow.ComponentModel.Design
                 return Point.Empty;
 
             Rectangle dropConnector = dropTargets[activeDropTarget];
-            ActivityPreviewDesignerTheme designerTheme = DesignerTheme as ActivityPreviewDesignerTheme;
-            dropConnector.Width = (dropConnector.Width > ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0)) ? ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0) : dropConnector.Width;
-            return new Point(dropConnector.Left + dropConnector.Width / 2, dropConnector.Top + dropConnector.Height / 2);
+            ActivityPreviewDesignerTheme designerTheme =
+                DesignerTheme as ActivityPreviewDesignerTheme;
+            dropConnector.Width =
+                (
+                    dropConnector.Width
+                    > ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0)
+                )
+                    ? ((designerTheme != null) ? designerTheme.ConnectorSize.Width : 0)
+                    : dropConnector.Width;
+            return new Point(
+                dropConnector.Left + dropConnector.Width / 2,
+                dropConnector.Top + dropConnector.Height / 2
+            );
         }
 
         private void OnSelectionChanged(object sender, EventArgs e)
         {
-            ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+            ISelectionService selectionService =
+                GetService(typeof(ISelectionService)) as ISelectionService;
             if (selectionService == null || ActiveDesigner != this)
                 return;
 
             foreach (ItemInfo itemInfo in this.previewStrip.Items)
             {
-                if (itemInfo.UserData[DesignerUserDataKeys.Activity] == selectionService.PrimarySelection)
+                if (
+                    itemInfo.UserData[DesignerUserDataKeys.Activity]
+                    == selectionService.PrimarySelection
+                )
                 {
                     this.previewStrip.ActiveItem = itemInfo;
                     break;
@@ -819,8 +976,14 @@ namespace System.Workflow.ComponentModel.Design
             //any other means then selection is visible
             if (selectionService.SelectionCount == 1)
             {
-                ActivityDesigner selectedDesigner = ActivityDesigner.GetDesigner(selectionService.PrimarySelection as Activity);
-                if (selectedDesigner != null && !selectedDesigner.IsVisible && this != selectedDesigner.ParentDesigner)
+                ActivityDesigner selectedDesigner = ActivityDesigner.GetDesigner(
+                    selectionService.PrimarySelection as Activity
+                );
+                if (
+                    selectedDesigner != null
+                    && !selectedDesigner.IsVisible
+                    && this != selectedDesigner.ParentDesigner
+                )
                 {
                     //PLEASE NOTE:
                     //We want to search if the current designer is ancestor of selected designer
@@ -851,7 +1014,10 @@ namespace System.Workflow.ComponentModel.Design
             bool redoLayout = (!ShowPreview);
             if (ShowPreview)
             {
-                this.previewWindow.PreviewedActivity = (e.CurrentItem != null) ? e.CurrentItem.UserData[DesignerUserDataKeys.Activity] as Activity : null;
+                this.previewWindow.PreviewedActivity =
+                    (e.CurrentItem != null)
+                        ? e.CurrentItem.UserData[DesignerUserDataKeys.Activity] as Activity
+                        : null;
                 redoLayout = (this.previewWindow.PreviewMode == false);
             }
 
@@ -869,7 +1035,10 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     bool viewNext = (bool)verb.Properties[DesignerUserDataKeys.ViewActivity];
                     int index = this.previewStrip.Items.IndexOf(activeItem) + ((viewNext) ? 1 : -1);
-                    index = (index >= this.previewStrip.Items.Count) ? 0 : (index < 0) ? this.previewStrip.Items.Count - 1 : index;
+                    index =
+                        (index >= this.previewStrip.Items.Count) ? 0
+                        : (index < 0) ? this.previewStrip.Items.Count - 1
+                        : index;
                     this.previewStrip.ActiveItem = this.previewStrip.Items[index];
                 }
             }
@@ -879,21 +1048,37 @@ namespace System.Workflow.ComponentModel.Design
         {
             DesignerVerb designerVerb = sender as DesignerVerb;
             if (designerVerb != null)
-                designerVerb.Enabled = (this.previewStrip.ActiveItem != null && this.previewStrip.Items.Count > 1 && this.previewStrip.Items.IndexOf(this.previewStrip.ActiveItem) >= 0);
+                designerVerb.Enabled = (
+                    this.previewStrip.ActiveItem != null
+                    && this.previewStrip.Items.Count > 1
+                    && this.previewStrip.Items.IndexOf(this.previewStrip.ActiveItem) >= 0
+                );
         }
 
         private void OnChangePreviewMode(object sender, EventArgs args)
         {
             DesignerVerb designerVerb = sender as DesignerVerb;
-            if (ShowPreview && designerVerb != null && designerVerb.Properties.Contains(DesignerUserDataKeys.PreviewActivity))
-                this.previewWindow.PreviewMode = (bool)designerVerb.Properties[DesignerUserDataKeys.PreviewActivity];
+            if (
+                ShowPreview
+                && designerVerb != null
+                && designerVerb.Properties.Contains(DesignerUserDataKeys.PreviewActivity)
+            )
+                this.previewWindow.PreviewMode = (bool)
+                    designerVerb.Properties[DesignerUserDataKeys.PreviewActivity];
         }
 
         private void OnPreviewModeStatusUpdate(object sender, EventArgs args)
         {
             DesignerVerb designerVerb = sender as DesignerVerb;
-            if (ShowPreview && designerVerb != null && designerVerb.Properties.Contains(DesignerUserDataKeys.PreviewActivity))
-                designerVerb.Enabled = (this.previewWindow.PreviewMode != (bool)designerVerb.Properties[DesignerUserDataKeys.PreviewActivity]);
+            if (
+                ShowPreview
+                && designerVerb != null
+                && designerVerb.Properties.Contains(DesignerUserDataKeys.PreviewActivity)
+            )
+                designerVerb.Enabled = (
+                    this.previewWindow.PreviewMode
+                    != (bool)designerVerb.Properties[DesignerUserDataKeys.PreviewActivity]
+                );
         }
 
         private void OnPreviewModeChanged(object sender, EventArgs e)
@@ -932,7 +1117,10 @@ namespace System.Workflow.ComponentModel.Design
             public override Rectangle GetBounds(ActivityDesigner designer, bool activated)
             {
                 Rectangle itemBounds = this.parentDesigner.previewStrip.GetItemBounds(this.item);
-                Size selectionSize = new Size(Math.Max(itemBounds.Width / 6, 1), Math.Max(itemBounds.Height / 6, 1));
+                Size selectionSize = new Size(
+                    Math.Max(itemBounds.Width / 6, 1),
+                    Math.Max(itemBounds.Height / 6, 1)
+                );
                 itemBounds.Inflate(selectionSize);
                 return itemBounds;
             }
@@ -941,8 +1129,14 @@ namespace System.Workflow.ComponentModel.Design
             {
                 get
                 {
-                    ISelectionService selectionService = this.parentDesigner.GetService(typeof(ISelectionService)) as ISelectionService;
-                    return (selectionService != null && selectionService.PrimarySelection == this.item.UserData[DesignerUserDataKeys.Activity]);
+                    ISelectionService selectionService =
+                        this.parentDesigner.GetService(typeof(ISelectionService))
+                        as ISelectionService;
+                    return (
+                        selectionService != null
+                        && selectionService.PrimarySelection
+                            == this.item.UserData[DesignerUserDataKeys.Activity]
+                    );
                 }
             }
         }
@@ -973,7 +1167,10 @@ namespace System.Workflow.ComponentModel.Design
             private ActivityPreviewDesigner parentDesigner;
             private ItemInfo item;
 
-            internal StripItemConfigErrorGlyph(ActivityPreviewDesigner parentDesigner, ItemInfo item)
+            internal StripItemConfigErrorGlyph(
+                ActivityPreviewDesigner parentDesigner,
+                ItemInfo item
+            )
             {
                 this.parentDesigner = parentDesigner;
                 this.item = item;
@@ -988,14 +1185,20 @@ namespace System.Workflow.ComponentModel.Design
                 configErrorSize.Width = configErrorSize.Width * 3 / 4;
                 configErrorSize.Height = configErrorSize.Height * 3 / 4;
 
-                Point configErrorLocation = new Point(rectangle.Right - configErrorSize.Width / 2, rectangle.Top - configErrorSize.Height / 2);
+                Point configErrorLocation = new Point(
+                    rectangle.Right - configErrorSize.Width / 2,
+                    rectangle.Top - configErrorSize.Height / 2
+                );
                 rectangle = new Rectangle(configErrorLocation, configErrorSize);
 
                 if (activated)
                 {
                     rectangle.Width *= 2;
                     AmbientTheme ambientTheme = WorkflowTheme.CurrentTheme.AmbientTheme;
-                    rectangle.Inflate(ambientTheme.Margin.Width / 2, ambientTheme.Margin.Height / 2);
+                    rectangle.Inflate(
+                        ambientTheme.Margin.Width / 2,
+                        ambientTheme.Margin.Height / 2
+                    );
                 }
 
                 return rectangle;
@@ -1003,7 +1206,9 @@ namespace System.Workflow.ComponentModel.Design
 
             protected override void OnActivate(ActivityDesigner designer)
             {
-                ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(this.item.UserData[DesignerUserDataKeys.Activity] as Activity);
+                ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(
+                    this.item.UserData[DesignerUserDataKeys.Activity] as Activity
+                );
                 if (activityDesigner != null)
                     base.OnActivate(activityDesigner);
             }
@@ -1014,24 +1219,33 @@ namespace System.Workflow.ComponentModel.Design
         private sealed class ActivityCollectionAccessibleObject : SequenceDesignerAccessibleObject
         {
             public ActivityCollectionAccessibleObject(ActivityPreviewDesigner activityDesigner)
-                : base(activityDesigner)
-            {
-            }
+                : base(activityDesigner) { }
 
             public override int GetChildCount()
             {
                 int childCount = 0;
 
-                ActivityPreviewDesigner activityCollectionDesigner = base.ActivityDesigner as ActivityPreviewDesigner;
-                if (activityCollectionDesigner != null && activityCollectionDesigner.ActiveDesigner == activityCollectionDesigner)
+                ActivityPreviewDesigner activityCollectionDesigner =
+                    base.ActivityDesigner as ActivityPreviewDesigner;
+                if (
+                    activityCollectionDesigner != null
+                    && activityCollectionDesigner.ActiveDesigner == activityCollectionDesigner
+                )
                 {
-                    childCount += activityCollectionDesigner.previewStrip.AccessibilityObjects.Length;
+                    childCount += activityCollectionDesigner
+                        .previewStrip
+                        .AccessibilityObjects
+                        .Length;
 
                     if (activityCollectionDesigner.ShowPreview)
                         childCount += 1;
 
-                    if ((activityCollectionDesigner.ShowPreview && !activityCollectionDesigner.previewWindow.PreviewMode) ||
-                        (!activityCollectionDesigner.ShowPreview))
+                    if (
+                        (
+                            activityCollectionDesigner.ShowPreview
+                            && !activityCollectionDesigner.previewWindow.PreviewMode
+                        ) || (!activityCollectionDesigner.ShowPreview)
+                    )
                         childCount += 1;
                 }
 
@@ -1040,8 +1254,12 @@ namespace System.Workflow.ComponentModel.Design
 
             public override AccessibleObject GetChild(int index)
             {
-                ActivityPreviewDesigner activityCollectionDesigner = base.ActivityDesigner as ActivityPreviewDesigner;
-                if (activityCollectionDesigner != null && activityCollectionDesigner.ActiveDesigner == activityCollectionDesigner)
+                ActivityPreviewDesigner activityCollectionDesigner =
+                    base.ActivityDesigner as ActivityPreviewDesigner;
+                if (
+                    activityCollectionDesigner != null
+                    && activityCollectionDesigner.ActiveDesigner == activityCollectionDesigner
+                )
                 {
                     if (index < activityCollectionDesigner.previewStrip.AccessibilityObjects.Length)
                         return activityCollectionDesigner.previewStrip.AccessibilityObjects[index];
@@ -1050,8 +1268,13 @@ namespace System.Workflow.ComponentModel.Design
                     if (activityCollectionDesigner.ShowPreview && index == 0)
                         return activityCollectionDesigner.previewWindow.AccessibilityObject;
 
-                    AccessibleObject accessibilityObject = activityCollectionDesigner.PreviewedDesigner.AccessibilityObject;
-                    while (accessibilityObject.Bounds.Size.IsEmpty && accessibilityObject.GetChildCount() > 0)
+                    AccessibleObject accessibilityObject = activityCollectionDesigner
+                        .PreviewedDesigner
+                        .AccessibilityObject;
+                    while (
+                        accessibilityObject.Bounds.Size.IsEmpty
+                        && accessibilityObject.GetChildCount() > 0
+                    )
                         accessibilityObject = accessibilityObject.GetChild(0);
 
                     return accessibilityObject;
@@ -1063,5 +1286,4 @@ namespace System.Workflow.ComponentModel.Design
         #endregion
     }
     #endregion
-
 }

@@ -60,11 +60,16 @@ namespace System.Workflow.Runtime.Hosting
             CloseCommunicationObject(communicationObject, ServiceDefaults.CloseTimeout);
         }
 
-        public static void CloseCommunicationObject(ICommunicationObject communicationObject, TimeSpan timeout)
+        public static void CloseCommunicationObject(
+            ICommunicationObject communicationObject,
+            TimeSpan timeout
+        )
         {
             if (communicationObject == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("communicationObject");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "communicationObject"
+                );
             }
 
             bool flag = true;
@@ -78,11 +83,17 @@ namespace System.Workflow.Runtime.Hosting
             }
             catch (CommunicationException communicatioException)
             {
-                DiagnosticUtility.TraceHandledException(communicatioException, TraceEventType.Information);
+                DiagnosticUtility.TraceHandledException(
+                    communicatioException,
+                    TraceEventType.Information
+                );
             }
             catch (TimeoutException timeoutException)
             {
-                DiagnosticUtility.TraceHandledException(timeoutException, TraceEventType.Information);
+                DiagnosticUtility.TraceHandledException(
+                    timeoutException,
+                    TraceEventType.Information
+                );
             }
             finally
             {
@@ -93,7 +104,11 @@ namespace System.Workflow.Runtime.Hosting
             }
         }
 
-        public static IChannel CreateChannel(Type contractType, ChannelFactory factory, string customAddress)
+        public static IChannel CreateChannel(
+            Type contractType,
+            ChannelFactory factory,
+            string customAddress
+        )
         {
             if (contractType == null)
             {
@@ -113,12 +128,16 @@ namespace System.Workflow.Runtime.Hosting
                 ContractInfo contractInfo = GetContractInfo(contractType);
                 if (string.IsNullOrEmpty(customAddress))
                 {
-                    channel = contractInfo.CreateChannelMethodInfo.Invoke(factory, null) as IChannel;
+                    channel =
+                        contractInfo.CreateChannelMethodInfo.Invoke(factory, null) as IChannel;
                 }
                 else
                 {
-                    channel = contractInfo.CreateChannelWithCustomAddressMethodInfo.Invoke(factory,
-                        new object[1] { new EndpointAddress(customAddress) }) as IChannel;
+                    channel =
+                        contractInfo.CreateChannelWithCustomAddressMethodInfo.Invoke(
+                            factory,
+                            new object[1] { new EndpointAddress(customAddress) }
+                        ) as IChannel;
                 }
 
                 if (!contractInfo.IsSessionless)
@@ -138,7 +157,9 @@ namespace System.Workflow.Runtime.Hosting
             {
                 if (exception.InnerException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(exception.InnerException);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        exception.InnerException
+                    );
                 }
 
                 throw;
@@ -160,7 +181,11 @@ namespace System.Workflow.Runtime.Hosting
             return CreateChannelFactory(endpointName, contractType, null);
         }
 
-        public static ChannelFactory CreateChannelFactory(string endpointName, Type contractType, IDictionary<EndpointAddress, ServiceEndpoint> codeEndpoints)
+        public static ChannelFactory CreateChannelFactory(
+            string endpointName,
+            Type contractType,
+            IDictionary<EndpointAddress, ServiceEndpoint> codeEndpoints
+        )
         {
             if (string.IsNullOrEmpty(endpointName))
             {
@@ -184,9 +209,11 @@ namespace System.Workflow.Runtime.Hosting
                 EndpointAddress key = BuildCacheAddress(endpointName, contractType);
                 ServiceEndpoint endpoint = null;
 
-                if (codeEndpoints != null &&
-                    codeEndpoints.TryGetValue(key, out endpoint) &&
-                    !IsEndpointDefinedInConfiguration(endpointName, contractType))
+                if (
+                    codeEndpoints != null
+                    && codeEndpoints.TryGetValue(key, out endpoint)
+                    && !IsEndpointDefinedInConfiguration(endpointName, contractType)
+                )
                 {
                     args = new object[] { endpoint };
                 }
@@ -204,7 +231,9 @@ namespace System.Workflow.Runtime.Hosting
             {
                 if (exception.InnerException != null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(exception.InnerException);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        exception.InnerException
+                    );
                 }
 
                 throw;
@@ -237,7 +266,10 @@ namespace System.Workflow.Runtime.Hosting
             ClientSection section = ClientSection.GetSection();
             foreach (ChannelEndpointElement element in section.Endpoints)
             {
-                if ((!wildcard && (element.Name != endpointName)) || (element.Contract != contractType.FullName))
+                if (
+                    (!wildcard && (element.Name != endpointName))
+                    || (element.Contract != contractType.FullName)
+                )
                 {
                     continue;
                 }
@@ -286,42 +318,39 @@ namespace System.Workflow.Runtime.Hosting
                 Type[] typeArguments = new Type[] { contractType };
                 this.channelFactoryType = typeof(ChannelFactory<>).MakeGenericType(typeArguments);
 
-                this.createChannelMethodInfo = this.channelFactoryType.GetMethod("CreateChannel", new Type[0] { });
-                this.createChannelWithCustomAddressMethodInfo = this.channelFactoryType.GetMethod("CreateChannel", new Type[1] { typeof(EndpointAddress) });
+                this.createChannelMethodInfo = this.channelFactoryType.GetMethod(
+                    "CreateChannel",
+                    new Type[0] { }
+                );
+                this.createChannelWithCustomAddressMethodInfo = this.channelFactoryType.GetMethod(
+                    "CreateChannel",
+                    new Type[1] { typeof(EndpointAddress) }
+                );
 
-                this.isSessionless = (ContractDescription.GetContract(contractType).SessionMode == SessionMode.NotAllowed);
+                this.isSessionless = (
+                    ContractDescription.GetContract(contractType).SessionMode
+                    == SessionMode.NotAllowed
+                );
             }
 
             public Type ChannelFactoryType
             {
-                get
-                {
-                    return this.channelFactoryType;
-                }
+                get { return this.channelFactoryType; }
             }
 
             public MethodInfo CreateChannelMethodInfo
             {
-                get
-                {
-                    return this.createChannelMethodInfo;
-                }
+                get { return this.createChannelMethodInfo; }
             }
 
             public MethodInfo CreateChannelWithCustomAddressMethodInfo
             {
-                get
-                {
-                    return this.createChannelWithCustomAddressMethodInfo;
-                }
+                get { return this.createChannelWithCustomAddressMethodInfo; }
             }
 
             public bool IsSessionless
             {
-                get
-                {
-                    return this.isSessionless;
-                }
+                get { return this.isSessionless; }
             }
         }
     }

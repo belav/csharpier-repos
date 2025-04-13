@@ -12,7 +12,6 @@ namespace Microsoft.AspNetCore.Components.Web;
 [EventHandler("onblur", typeof(FocusEventArgs), true, true)]
 [EventHandler("onfocusin", typeof(FocusEventArgs), true, true)]
 [EventHandler("onfocusout", typeof(FocusEventArgs), true, true)]
-
 // Mouse events
 [EventHandler("onmouseover", typeof(MouseEventArgs), true, true)]
 [EventHandler("onmouseout", typeof(MouseEventArgs), true, true)]
@@ -26,7 +25,6 @@ namespace Microsoft.AspNetCore.Components.Web;
 [EventHandler("onwheel", typeof(WheelEventArgs), true, true)]
 [EventHandler("onmousewheel", typeof(WheelEventArgs), true, true)]
 [EventHandler("oncontextmenu", typeof(MouseEventArgs), true, true)]
-
 // Drag events
 [EventHandler("ondrag", typeof(DragEventArgs), true, true)]
 [EventHandler("ondragend", typeof(DragEventArgs), true, true)]
@@ -35,12 +33,10 @@ namespace Microsoft.AspNetCore.Components.Web;
 [EventHandler("ondragover", typeof(DragEventArgs), true, true)]
 [EventHandler("ondragstart", typeof(DragEventArgs), true, true)]
 [EventHandler("ondrop", typeof(DragEventArgs), true, true)]
-
 // Keyboard events
 [EventHandler("onkeydown", typeof(KeyboardEventArgs), true, true)]
 [EventHandler("onkeyup", typeof(KeyboardEventArgs), true, true)]
 [EventHandler("onkeypress", typeof(KeyboardEventArgs), true, true)]
-
 // Input events
 [EventHandler("onchange", typeof(ChangeEventArgs), true, true)]
 [EventHandler("oninput", typeof(ChangeEventArgs), true, true)]
@@ -50,7 +46,6 @@ namespace Microsoft.AspNetCore.Components.Web;
 [EventHandler("onselectstart", typeof(EventArgs), true, true)]
 [EventHandler("onselectionchange", typeof(EventArgs), true, true)]
 [EventHandler("onsubmit", typeof(EventArgs), true, true)]
-
 // Clipboard events
 [EventHandler("onbeforecopy", typeof(EventArgs), true, true)]
 [EventHandler("onbeforecut", typeof(EventArgs), true, true)]
@@ -58,7 +53,6 @@ namespace Microsoft.AspNetCore.Components.Web;
 [EventHandler("oncopy", typeof(ClipboardEventArgs), true, true)]
 [EventHandler("oncut", typeof(ClipboardEventArgs), true, true)]
 [EventHandler("onpaste", typeof(ClipboardEventArgs), true, true)]
-
 // Touch events
 [EventHandler("ontouchcancel", typeof(TouchEventArgs), true, true)]
 [EventHandler("ontouchend", typeof(TouchEventArgs), true, true)]
@@ -66,7 +60,6 @@ namespace Microsoft.AspNetCore.Components.Web;
 [EventHandler("ontouchstart", typeof(TouchEventArgs), true, true)]
 [EventHandler("ontouchenter", typeof(TouchEventArgs), true, true)]
 [EventHandler("ontouchleave", typeof(TouchEventArgs), true, true)]
-
 // Pointer events
 [EventHandler("ongotpointercapture", typeof(PointerEventArgs), true, true)]
 [EventHandler("onlostpointercapture", typeof(PointerEventArgs), true, true)]
@@ -78,7 +71,6 @@ namespace Microsoft.AspNetCore.Components.Web;
 [EventHandler("onpointerout", typeof(PointerEventArgs), true, true)]
 [EventHandler("onpointerover", typeof(PointerEventArgs), true, true)]
 [EventHandler("onpointerup", typeof(PointerEventArgs), true, true)]
-
 // Media events
 [EventHandler("oncanplay", typeof(EventArgs), true, true)]
 [EventHandler("oncanplaythrough", typeof(EventArgs), true, true)]
@@ -97,7 +89,6 @@ namespace Microsoft.AspNetCore.Components.Web;
 [EventHandler("ontimeupdate", typeof(EventArgs), true, true)]
 [EventHandler("onvolumechange", typeof(EventArgs), true, true)]
 [EventHandler("onwaiting", typeof(EventArgs), true, true)]
-
 // Progress events
 [EventHandler("onloadstart", typeof(ProgressEventArgs), true, true)]
 [EventHandler("ontimeout", typeof(ProgressEventArgs), true, true)]
@@ -106,7 +97,6 @@ namespace Microsoft.AspNetCore.Components.Web;
 [EventHandler("onloadend", typeof(ProgressEventArgs), true, true)]
 [EventHandler("onprogress", typeof(ProgressEventArgs), true, true)]
 [EventHandler("onerror", typeof(ErrorEventArgs), true, true)]
-
 // General events
 [EventHandler("onactivate", typeof(EventArgs), true, true)]
 [EventHandler("onbeforeactivate", typeof(EventArgs), true, true)]
@@ -121,13 +111,9 @@ namespace Microsoft.AspNetCore.Components.Web;
 [EventHandler("onpointerlockerror", typeof(EventArgs), true, true)]
 [EventHandler("onreadystatechange", typeof(EventArgs), true, true)]
 [EventHandler("onscroll", typeof(EventArgs), true, true)]
-
 // <details>
 [EventHandler("ontoggle", typeof(EventArgs), true, true)]
-
 // <dialog>
 [EventHandler("oncancel", typeof(EventArgs), false, true)]
 [EventHandler("onclose", typeof(EventArgs), false, true)]
-public static class EventHandlers
-{
-}
+public static class EventHandlers { }

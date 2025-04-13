@@ -18,7 +18,8 @@ namespace System.Diagnostics
     {
         private static volatile bool s_initialized;
         private static readonly object s_initializedGate = new object();
-        private static readonly ReaderWriterLockSlim s_processStartLock = new ReaderWriterLockSlim();
+        private static readonly ReaderWriterLockSlim s_processStartLock =
+            new ReaderWriterLockSlim();
 
         /// <summary>
         /// Puts a Process component in state to interact with operating system processes that run in a
@@ -40,16 +41,31 @@ namespace System.Diagnostics
 
         [CLSCompliant(false)]
         [SupportedOSPlatform("windows")]
-        public static Process Start(string fileName, string userName, SecureString password, string domain)
+        public static Process Start(
+            string fileName,
+            string userName,
+            SecureString password,
+            string domain
+        )
         {
-            throw new PlatformNotSupportedException(SR.ProcessStartWithPasswordAndDomainNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.ProcessStartWithPasswordAndDomainNotSupported
+            );
         }
 
         [CLSCompliant(false)]
         [SupportedOSPlatform("windows")]
-        public static Process Start(string fileName, string arguments, string userName, SecureString password, string domain)
+        public static Process Start(
+            string fileName,
+            string arguments,
+            string userName,
+            SecureString password,
+            string domain
+        )
         {
-            throw new PlatformNotSupportedException(SR.ProcessStartWithPasswordAndDomainNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.ProcessStartWithPasswordAndDomainNotSupported
+            );
         }
 
         /// <summary>Terminates the associated process immediately.</summary>
@@ -88,8 +104,7 @@ namespace System.Diagnostics
             }
         }
 
-        private bool GetHasExited(bool refresh)
-            => GetWaitState().GetExited(out _, refresh);
+        private bool GetHasExited(bool refresh) => GetWaitState().GetExited(out _, refresh);
 
         private List<Exception>? KillTree()
         {
@@ -158,7 +173,10 @@ namespace System.Diagnostics
         partial void ConfigureAfterProcessIdSet()
         {
             // Make sure that we configure the wait state holder for this process object, which we can only do once we have a process ID.
-            Debug.Assert(_haveProcessId, $"{nameof(ConfigureAfterProcessIdSet)} should only be called once a process ID is set");
+            Debug.Assert(
+                _haveProcessId,
+                $"{nameof(ConfigureAfterProcessIdSet)} should only be called once a process ID is set"
+            );
             // Initialize WaitStateHolder for non-child processes
             GetWaitState();
         }
@@ -177,13 +195,21 @@ namespace System.Diagnostics
                     {
                         Debug.Assert(_waitHandle == null);
                         Debug.Assert(_registeredWaitHandle == null);
-                        Debug.Assert(Associated, "Process.EnsureWatchingForExit called with no associated process");
+                        Debug.Assert(
+                            Associated,
+                            "Process.EnsureWatchingForExit called with no associated process"
+                        );
                         _watchingForExit = true;
                         try
                         {
                             _waitHandle = new ProcessWaitHandle(GetWaitState());
-                            _registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(_waitHandle,
-                                new WaitOrTimerCallback(CompletionCallback), _waitHandle, -1, true);
+                            _registeredWaitHandle = ThreadPool.RegisterWaitForSingleObject(
+                                _waitHandle,
+                                new WaitOrTimerCallback(CompletionCallback),
+                                _waitHandle,
+                                -1,
+                                true
+                            );
                         }
                         catch
                         {
@@ -263,20 +289,23 @@ namespace System.Diagnostics
             {
                 EnsureState(State.HaveNonExitedId);
 
-                int errno = Interop.Sys.GetPriority(Interop.Sys.PriorityWhich.PRIO_PROCESS, _processId, out int pri);
+                int errno = Interop.Sys.GetPriority(
+                    Interop.Sys.PriorityWhich.PRIO_PROCESS,
+                    _processId,
+                    out int pri
+                );
                 if (errno != 0) // Interop.Sys.GetPriority returns GetLastWin32Error()
                 {
                     throw new Win32Exception(errno); // match Windows exception
                 }
 
                 Debug.Assert(pri >= -20 && pri <= 20);
-                return
-                    pri < -15 ? ProcessPriorityClass.RealTime :
-                    pri < -10 ? ProcessPriorityClass.High :
-                    pri < -5 ? ProcessPriorityClass.AboveNormal :
-                    pri == 0 ? ProcessPriorityClass.Normal :
-                    pri <= 10 ? ProcessPriorityClass.BelowNormal :
-                    ProcessPriorityClass.Idle;
+                return pri < -15 ? ProcessPriorityClass.RealTime
+                    : pri < -10 ? ProcessPriorityClass.High
+                    : pri < -5 ? ProcessPriorityClass.AboveNormal
+                    : pri == 0 ? ProcessPriorityClass.Normal
+                    : pri <= 10 ? ProcessPriorityClass.BelowNormal
+                    : ProcessPriorityClass.Idle;
             }
             set
             {
@@ -285,17 +314,34 @@ namespace System.Diagnostics
                 int pri = 0; // Normal
                 switch (value)
                 {
-                    case ProcessPriorityClass.RealTime: pri = -19; break;
-                    case ProcessPriorityClass.High: pri = -11; break;
-                    case ProcessPriorityClass.AboveNormal: pri = -6; break;
-                    case ProcessPriorityClass.BelowNormal: pri = 10; break;
-                    case ProcessPriorityClass.Idle: pri = 19; break;
+                    case ProcessPriorityClass.RealTime:
+                        pri = -19;
+                        break;
+                    case ProcessPriorityClass.High:
+                        pri = -11;
+                        break;
+                    case ProcessPriorityClass.AboveNormal:
+                        pri = -6;
+                        break;
+                    case ProcessPriorityClass.BelowNormal:
+                        pri = 10;
+                        break;
+                    case ProcessPriorityClass.Idle:
+                        pri = 19;
+                        break;
                     default:
-                        Debug.Assert(value == ProcessPriorityClass.Normal, "Input should have been validated by caller");
+                        Debug.Assert(
+                            value == ProcessPriorityClass.Normal,
+                            "Input should have been validated by caller"
+                        );
                         break;
                 }
 
-                int result = Interop.Sys.SetPriority(Interop.Sys.PriorityWhich.PRIO_PROCESS, _processId, pri);
+                int result = Interop.Sys.SetPriority(
+                    Interop.Sys.PriorityWhich.PRIO_PROCESS,
+                    _processId,
+                    pri
+                );
                 if (result == -1)
                 {
                     throw new Win32Exception(); // match Windows exception
@@ -338,7 +384,9 @@ namespace System.Diagnostics
 
             if (GetHasExited(refresh))
             {
-                throw new InvalidOperationException(SR.Format(SR.ProcessHasExited, _processId.ToString()));
+                throw new InvalidOperationException(
+                    SR.Format(SR.ProcessHasExited, _processId.ToString())
+                );
             }
         }
 
@@ -378,15 +426,23 @@ namespace System.Diagnostics
 
             if (startInfo.UseShellExecute)
             {
-                if (startInfo.RedirectStandardInput || startInfo.RedirectStandardOutput || startInfo.RedirectStandardError)
+                if (
+                    startInfo.RedirectStandardInput
+                    || startInfo.RedirectStandardOutput
+                    || startInfo.RedirectStandardError
+                )
                 {
                     throw new InvalidOperationException(SR.CantRedirectStreams);
                 }
             }
 
-            int stdinFd = -1, stdoutFd = -1, stderrFd = -1;
+            int stdinFd = -1,
+                stdoutFd = -1,
+                stderrFd = -1;
             string[] envp = CreateEnvp(startInfo);
-            string? cwd = !string.IsNullOrWhiteSpace(startInfo.WorkingDirectory) ? startInfo.WorkingDirectory : null;
+            string? cwd = !string.IsNullOrWhiteSpace(startInfo.WorkingDirectory)
+                ? startInfo.WorkingDirectory
+                : null;
 
             bool setCredentials = !string.IsNullOrEmpty(startInfo.UserName);
             uint userId = 0;
@@ -401,15 +457,19 @@ namespace System.Diagnostics
             // Unix applications expect the terminal to be in an echoing state by default.
             // To support processes that interact with the terminal (e.g. 'vi'), we need to configure the
             // terminal to echo. We keep this configuration as long as there are children possibly using the terminal.
-            bool usesTerminal = !(startInfo.RedirectStandardInput &&
-                                  startInfo.RedirectStandardOutput &&
-                                  startInfo.RedirectStandardError);
+            bool usesTerminal = !(
+                startInfo.RedirectStandardInput
+                && startInfo.RedirectStandardOutput
+                && startInfo.RedirectStandardError
+            );
 
             if (startInfo.UseShellExecute)
             {
                 string verb = startInfo.Verb;
-                if (verb != string.Empty &&
-                    !string.Equals(verb, "open", StringComparison.OrdinalIgnoreCase))
+                if (
+                    verb != string.Empty
+                    && !string.Equals(verb, "open", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     throw new Win32Exception(Interop.Errors.ERROR_NO_ASSOCIATION);
                 }
@@ -426,10 +486,21 @@ namespace System.Diagnostics
                     argv = ParseArgv(startInfo);
 
                     isExecuting = ForkAndExecProcess(
-                        startInfo, filename, argv, envp, cwd,
-                        setCredentials, userId, groupId, groups,
-                        out stdinFd, out stdoutFd, out stderrFd, usesTerminal,
-                        throwOnNoExec: false); // return false instead of throwing on ENOEXEC
+                        startInfo,
+                        filename,
+                        argv,
+                        envp,
+                        cwd,
+                        setCredentials,
+                        userId,
+                        groupId,
+                        groups,
+                        out stdinFd,
+                        out stdoutFd,
+                        out stderrFd,
+                        usesTerminal,
+                        throwOnNoExec: false
+                    ); // return false instead of throwing on ENOEXEC
                 }
 
                 // use default program to open file/url
@@ -439,9 +510,20 @@ namespace System.Diagnostics
                     argv = ParseArgv(startInfo, filename, ignoreArguments: true);
 
                     ForkAndExecProcess(
-                        startInfo, filename, argv, envp, cwd,
-                        setCredentials, userId, groupId, groups,
-                        out stdinFd, out stdoutFd, out stderrFd, usesTerminal);
+                        startInfo,
+                        filename,
+                        argv,
+                        envp,
+                        cwd,
+                        setCredentials,
+                        userId,
+                        groupId,
+                        groups,
+                        out stdinFd,
+                        out stdoutFd,
+                        out stderrFd,
+                        usesTerminal
+                    );
                 }
             }
             else
@@ -454,9 +536,20 @@ namespace System.Diagnostics
                 }
 
                 ForkAndExecProcess(
-                    startInfo, filename, argv, envp, cwd,
-                    setCredentials, userId, groupId, groups,
-                    out stdinFd, out stdoutFd, out stderrFd, usesTerminal);
+                    startInfo,
+                    filename,
+                    argv,
+                    envp,
+                    cwd,
+                    setCredentials,
+                    userId,
+                    groupId,
+                    groups,
+                    out stdinFd,
+                    out stdoutFd,
+                    out stderrFd,
+                    usesTerminal
+                );
             }
 
             // Configure the parent's ends of the redirection streams.
@@ -466,37 +559,65 @@ namespace System.Diagnostics
             if (startInfo.RedirectStandardInput)
             {
                 Debug.Assert(stdinFd >= 0);
-                _standardInput = new StreamWriter(OpenStream(stdinFd, PipeDirection.Out),
-                    startInfo.StandardInputEncoding ?? Encoding.Default, StreamBufferSize)
-                { AutoFlush = true };
+                _standardInput = new StreamWriter(
+                    OpenStream(stdinFd, PipeDirection.Out),
+                    startInfo.StandardInputEncoding ?? Encoding.Default,
+                    StreamBufferSize
+                )
+                {
+                    AutoFlush = true,
+                };
             }
             if (startInfo.RedirectStandardOutput)
             {
                 Debug.Assert(stdoutFd >= 0);
-                _standardOutput = new StreamReader(OpenStream(stdoutFd, PipeDirection.In),
-                    startInfo.StandardOutputEncoding ?? Encoding.Default, true, StreamBufferSize);
+                _standardOutput = new StreamReader(
+                    OpenStream(stdoutFd, PipeDirection.In),
+                    startInfo.StandardOutputEncoding ?? Encoding.Default,
+                    true,
+                    StreamBufferSize
+                );
             }
             if (startInfo.RedirectStandardError)
             {
                 Debug.Assert(stderrFd >= 0);
-                _standardError = new StreamReader(OpenStream(stderrFd, PipeDirection.In),
-                    startInfo.StandardErrorEncoding ?? Encoding.Default, true, StreamBufferSize);
+                _standardError = new StreamReader(
+                    OpenStream(stderrFd, PipeDirection.In),
+                    startInfo.StandardErrorEncoding ?? Encoding.Default,
+                    true,
+                    StreamBufferSize
+                );
             }
 
             return true;
         }
 
         private bool ForkAndExecProcess(
-            ProcessStartInfo startInfo, string? resolvedFilename, string[] argv,
-            string[] envp, string? cwd, bool setCredentials, uint userId,
-            uint groupId, uint[]? groups,
-            out int stdinFd, out int stdoutFd, out int stderrFd,
-            bool usesTerminal, bool throwOnNoExec = true)
+            ProcessStartInfo startInfo,
+            string? resolvedFilename,
+            string[] argv,
+            string[] envp,
+            string? cwd,
+            bool setCredentials,
+            uint userId,
+            uint groupId,
+            uint[]? groups,
+            out int stdinFd,
+            out int stdoutFd,
+            out int stderrFd,
+            bool usesTerminal,
+            bool throwOnNoExec = true
+        )
         {
             if (string.IsNullOrEmpty(resolvedFilename))
             {
                 Interop.ErrorInfo errno = Interop.Error.ENOENT.Info();
-                throw CreateExceptionForErrorStartingProcess(errno.GetErrorMessage(), errno.RawErrno, startInfo.FileName, cwd);
+                throw CreateExceptionForErrorStartingProcess(
+                    errno.GetErrorMessage(),
+                    errno.RawErrno,
+                    startInfo.FileName,
+                    cwd
+                );
             }
 
             // Lock to avoid races with OnSigChild
@@ -517,16 +638,32 @@ namespace System.Diagnostics
                 // is used to fork/execve as executing managed code in a forked process is not safe (only
                 // the calling thread will transfer, thread IDs aren't stable across the fork, etc.)
                 int errno = Interop.Sys.ForkAndExecProcess(
-                    resolvedFilename, argv, envp, cwd,
-                    startInfo.RedirectStandardInput, startInfo.RedirectStandardOutput, startInfo.RedirectStandardError,
-                    setCredentials, userId, groupId, groups,
-                    out childPid, out stdinFd, out stdoutFd, out stderrFd);
+                    resolvedFilename,
+                    argv,
+                    envp,
+                    cwd,
+                    startInfo.RedirectStandardInput,
+                    startInfo.RedirectStandardOutput,
+                    startInfo.RedirectStandardError,
+                    setCredentials,
+                    userId,
+                    groupId,
+                    groups,
+                    out childPid,
+                    out stdinFd,
+                    out stdoutFd,
+                    out stderrFd
+                );
 
                 if (errno == 0)
                 {
                     // Ensure we'll reap this process.
                     // note: SetProcessId will set this if we don't set it first.
-                    _waitStateHolder = new ProcessWaitState.Holder(childPid, isNewChild: true, usesTerminal);
+                    _waitStateHolder = new ProcessWaitState.Holder(
+                        childPid,
+                        isNewChild: true,
+                        usesTerminal
+                    );
 
                     // Store the child's information into this Process object.
                     Debug.Assert(childPid >= 0);
@@ -537,13 +674,20 @@ namespace System.Diagnostics
                 }
                 else
                 {
-                    if (!throwOnNoExec &&
-                        new Interop.ErrorInfo(errno).Error == Interop.Error.ENOEXEC)
+                    if (
+                        !throwOnNoExec
+                        && new Interop.ErrorInfo(errno).Error == Interop.Error.ENOEXEC
+                    )
                     {
                         return false;
                     }
 
-                    throw CreateExceptionForErrorStartingProcess(new Interop.ErrorInfo(errno).GetErrorMessage(), errno, resolvedFilename, cwd);
+                    throw CreateExceptionForErrorStartingProcess(
+                        new Interop.ErrorInfo(errno).GetErrorMessage(),
+                        errno,
+                        resolvedFilename,
+                        cwd
+                    );
                 }
             }
             finally
@@ -571,10 +715,18 @@ namespace System.Diagnostics
         /// <param name="resolvedExe">Resolved executable to open ProcessStartInfo.FileName</param>
         /// <param name="ignoreArguments">Don't pass ProcessStartInfo.Arguments</param>
         /// <returns>The argv array.</returns>
-        private static string[] ParseArgv(ProcessStartInfo psi, string? resolvedExe = null, bool ignoreArguments = false)
+        private static string[] ParseArgv(
+            ProcessStartInfo psi,
+            string? resolvedExe = null,
+            bool ignoreArguments = false
+        )
         {
-            if (string.IsNullOrEmpty(resolvedExe) &&
-                (ignoreArguments || (string.IsNullOrEmpty(psi.Arguments) && !psi.HasArgumentList)))
+            if (
+                string.IsNullOrEmpty(resolvedExe)
+                && (
+                    ignoreArguments || (string.IsNullOrEmpty(psi.Arguments) && !psi.HasArgumentList)
+                )
+            )
             {
                 return new string[] { psi.FileName };
             }
@@ -619,7 +771,10 @@ namespace System.Diagnostics
             return envp;
         }
 
-        private static string? ResolveExecutableForShellExecute(string filename, string? workingDirectory)
+        private static string? ResolveExecutableForShellExecute(
+            string filename,
+            string? workingDirectory
+        )
         {
             // Determine if filename points to an executable file.
             // filename may be an absolute path, a relative path or a uri.
@@ -646,8 +801,10 @@ namespace System.Diagnostics
             {
                 // The WorkingDirectory property specifies the location of the executable.
                 // If WorkingDirectory is an empty string, the current directory is understood to contain the executable.
-                workingDirectory = workingDirectory != null ? Path.GetFullPath(workingDirectory) :
-                                                              Directory.GetCurrentDirectory();
+                workingDirectory =
+                    workingDirectory != null
+                        ? Path.GetFullPath(workingDirectory)
+                        : Directory.GetCurrentDirectory();
                 string filenameInWorkingDirectory = Path.Combine(workingDirectory, filename);
                 // filename is a relative path in the working directory
                 if (File.Exists(filenameInWorkingDirectory))
@@ -763,7 +920,8 @@ namespace System.Diagnostics
                 return false;
             }
 
-            const UnixFileMode AllExecute = UnixFileMode.UserExecute | UnixFileMode.GroupExecute | UnixFileMode.OtherExecute;
+            const UnixFileMode AllExecute =
+                UnixFileMode.UserExecute | UnixFileMode.GroupExecute | UnixFileMode.OtherExecute;
 
             UnixFileMode permissions = ((UnixFileMode)fileinfo.Mode) & AllExecute;
 
@@ -840,7 +998,10 @@ namespace System.Diagnostics
         private static AnonymousPipeClientStream OpenStream(int fd, PipeDirection direction)
         {
             Debug.Assert(fd >= 0);
-            return new AnonymousPipeClientStream(direction, new SafePipeHandle((IntPtr)fd, ownsHandle: true));
+            return new AnonymousPipeClientStream(
+                direction,
+                new SafePipeHandle((IntPtr)fd, ownsHandle: true)
+            );
         }
 
         /// <summary>Parses a command-line argument string into a list of arguments.</summary>
@@ -955,16 +1116,21 @@ namespace System.Diagnostics
             return _waitStateHolder._state;
         }
 
-        private SafeWaitHandle GetSafeWaitHandle()
-            => GetWaitState().EnsureExitedEvent().GetSafeWaitHandle();
+        private SafeWaitHandle GetSafeWaitHandle() =>
+            GetWaitState().EnsureExitedEvent().GetSafeWaitHandle();
 
-        private static (uint userId, uint groupId, uint[] groups) GetUserAndGroupIds(ProcessStartInfo startInfo)
+        private static (uint userId, uint groupId, uint[] groups) GetUserAndGroupIds(
+            ProcessStartInfo startInfo
+        )
         {
             Debug.Assert(!string.IsNullOrEmpty(startInfo.UserName));
 
             (uint? userId, uint? groupId) = GetUserAndGroupIds(startInfo.UserName);
 
-            Debug.Assert(userId.HasValue == groupId.HasValue, "userId and groupId both need to have values, or both need to be null.");
+            Debug.Assert(
+                userId.HasValue == groupId.HasValue,
+                "userId and groupId both need to have values, or both need to be null."
+            );
             if (!userId.HasValue)
             {
                 throw new Win32Exception(SR.Format(SR.UserDoesNotExist, startInfo.UserName));
@@ -973,7 +1139,9 @@ namespace System.Diagnostics
             uint[]? groups = Interop.Sys.GetGroupList(startInfo.UserName, groupId!.Value);
             if (groups == null)
             {
-                throw new Win32Exception(SR.Format(SR.UserGroupsCannotBeDetermined, startInfo.UserName));
+                throw new Win32Exception(
+                    SR.Format(SR.UserGroupsCannotBeDetermined, startInfo.UserName)
+                );
             }
 
             return (userId.Value, groupId.Value, groups);
@@ -1017,7 +1185,12 @@ namespace System.Diagnostics
             }
         }
 
-        private static unsafe bool TryGetPasswd(string name, byte* buf, int bufLen, out Interop.Sys.Passwd? passwd)
+        private static unsafe bool TryGetPasswd(
+            string name,
+            byte* buf,
+            int bufLen,
+            out Interop.Sys.Passwd? passwd
+        )
         {
             // Call getpwnam_r to get the passwd struct
             Interop.Sys.Passwd tempPasswd;
@@ -1060,7 +1233,9 @@ namespace System.Diagnostics
 
         public bool Responding => true;
 
-        private static bool WaitForInputIdleCore(int _ /*milliseconds*/) => throw new InvalidOperationException(SR.InputIdleUnknownError);
+        private static bool WaitForInputIdleCore(
+            int _ /*milliseconds*/
+        ) => throw new InvalidOperationException(SR.InputIdleUnknownError);
 
         private static unsafe void EnsureInitialized()
         {
@@ -1105,7 +1280,10 @@ namespace System.Diagnostics
                 bool childrenUsingTerminalPost = AreChildrenUsingTerminal;
 
                 // return whether console configuration was skipped.
-                return childrenUsingTerminalPre && !childrenUsingTerminalPost && configureConsole == 0 ? 1 : 0;
+                return
+                    childrenUsingTerminalPre && !childrenUsingTerminalPost && configureConsole == 0
+                    ? 1
+                    : 0;
             }
             finally
             {
@@ -1123,7 +1301,8 @@ namespace System.Diagnostics
             }
         }
 
-        private static bool PlatformDoesNotSupportProcessStartAndKill
-            => (OperatingSystem.IsIOS() && !OperatingSystem.IsMacCatalyst()) || OperatingSystem.IsTvOS();
+        private static bool PlatformDoesNotSupportProcessStartAndKill =>
+            (OperatingSystem.IsIOS() && !OperatingSystem.IsMacCatalyst())
+            || OperatingSystem.IsTvOS();
     }
 }

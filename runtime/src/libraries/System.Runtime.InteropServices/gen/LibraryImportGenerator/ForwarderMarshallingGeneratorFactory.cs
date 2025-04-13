@@ -11,6 +11,7 @@ namespace Microsoft.Interop
     {
         private static readonly Forwarder s_forwarder = new Forwarder();
 
-        public ResolvedGenerator Create(TypePositionInfo info, StubCodeContext context) => ResolvedGenerator.Resolved(s_forwarder);
+        public ResolvedGenerator Create(TypePositionInfo info, StubCodeContext context) =>
+            ResolvedGenerator.Resolved(s_forwarder);
     }
 }

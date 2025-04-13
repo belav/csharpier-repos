@@ -26,17 +26,9 @@ public class DragEventArgsReaderTest
                 Files = new[] { "File1", "File2" },
                 Items = new[]
                 {
-                        new DataTransferItem
-                        {
-                            Kind = "kind1",
-                            Type = "type1,"
-                        },
-                        new DataTransferItem
-                        {
-                            Kind = "kind7",
-                            Type = "type6,"
-                        },
-                    },
+                    new DataTransferItem { Kind = "kind1", Type = "type1," },
+                    new DataTransferItem { Kind = "kind7", Type = "type6," },
+                },
                 Types = new[] { "type1", "type2", "type3" },
             },
             Detail = 7,

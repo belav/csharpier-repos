@@ -24,6 +24,7 @@ namespace Microsoft.CodeAnalysis.TaskList
     {
         [DataMember(Order = 0)]
         public string Text { get; } = text;
+
         [DataMember(Order = 1)]
         public TaskListItemPriority Priority { get; } = priority;
 
@@ -33,9 +34,16 @@ namespace Microsoft.CodeAnalysis.TaskList
 
             foreach (var item in items)
             {
-                if (item.Split(':') is [var token, var priorityString] &&
-                    !string.IsNullOrWhiteSpace(token) &&
-                    int.TryParse(priorityString, NumberStyles.None, CultureInfo.InvariantCulture, out var encoded))
+                if (
+                    item.Split(':') is [var token, var priorityString]
+                    && !string.IsNullOrWhiteSpace(token)
+                    && int.TryParse(
+                        priorityString,
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out var encoded
+                    )
+                )
                 {
                     // From:
                     // https://devdiv.visualstudio.com/DevDiv/_git/VS?path=/src/env/ErrorList/Pkg/Shims/TaskListOptions.cs&version=GBmain&line=133&lineEnd=134&lineStartColumn=1&lineEndColumn=98&lineStyle=plain&_a=contents

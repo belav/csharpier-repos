@@ -10,11 +10,26 @@ namespace System.Globalization.Tests
     {
         public static IEnumerable<object[]> GetAbbreviatedEraName_TestData()
         {
-            yield return new object[] { new CultureInfo("en-US").DateTimeFormat, 0, DateTimeFormatInfoData.EnUSAbbreviatedEraName() };
-            yield return new object[] { new CultureInfo("en-US").DateTimeFormat, 1, DateTimeFormatInfoData.EnUSAbbreviatedEraName() };
+            yield return new object[]
+            {
+                new CultureInfo("en-US").DateTimeFormat,
+                0,
+                DateTimeFormatInfoData.EnUSAbbreviatedEraName(),
+            };
+            yield return new object[]
+            {
+                new CultureInfo("en-US").DateTimeFormat,
+                1,
+                DateTimeFormatInfoData.EnUSAbbreviatedEraName(),
+            };
             yield return new object[] { new DateTimeFormatInfo(), 0, "AD" };
             yield return new object[] { new DateTimeFormatInfo(), 1, "AD" };
-            yield return new object[] { new CultureInfo("ja-JP").DateTimeFormat, 1, DateTimeFormatInfoData.JaJPAbbreviatedEraName() };
+            yield return new object[]
+            {
+                new CultureInfo("ja-JP").DateTimeFormat,
+                1,
+                DateTimeFormatInfoData.JaJPAbbreviatedEraName(),
+            };
 
             if (PlatformDetection.IsHybridGlobalizationOnBrowser)
             {
@@ -22,7 +37,12 @@ namespace System.Globalization.Tests
                 yield return new object[] { new CultureInfo("ar-SA").DateTimeFormat, 1, "هـ" };
                 yield return new object[] { new CultureInfo("am-ET").DateTimeFormat, 1, "ዓ/ም" };
                 yield return new object[] { new CultureInfo("bg-BG").DateTimeFormat, 1, "сл.Хр." };
-                yield return new object[] { new CultureInfo("bn-BD").DateTimeFormat, 1, "খৃষ্টাব্দ" };
+                yield return new object[]
+                {
+                    new CultureInfo("bn-BD").DateTimeFormat,
+                    1,
+                    "খৃষ্টাব্দ",
+                };
                 yield return new object[] { new CultureInfo("bn-IN").DateTimeFormat, 1, "খ্রিঃ" }; // "খৃষ্টাব্দ"
                 yield return new object[] { new CultureInfo("ca-AD").DateTimeFormat, 1, "dC" };
                 yield return new object[] { new CultureInfo("ca-ES").DateTimeFormat, 1, "dC" };
@@ -146,10 +166,30 @@ namespace System.Globalization.Tests
                 yield return new object[] { new CultureInfo("fa-IR").DateTimeFormat, 1, "ه.ش" }; // ه‍.ش.
                 yield return new object[] { new CultureInfo("fi-FI").DateTimeFormat, 1, "jKr" };
                 yield return new object[] { new CultureInfo("fil-PH").DateTimeFormat, 1, "AD" };
-                yield return new object[] { new CultureInfo("fr-BE").DateTimeFormat, 1, "ap. J.-C." };
-                yield return new object[] { new CultureInfo("fr-CA").DateTimeFormat, 1, "ap. J.-C." };
-                yield return new object[] { new CultureInfo("fr-CH").DateTimeFormat, 1, "ap. J.-C." };
-                yield return new object[] { new CultureInfo("fr-FR").DateTimeFormat, 1, "ap. J.-C." };
+                yield return new object[]
+                {
+                    new CultureInfo("fr-BE").DateTimeFormat,
+                    1,
+                    "ap. J.-C.",
+                };
+                yield return new object[]
+                {
+                    new CultureInfo("fr-CA").DateTimeFormat,
+                    1,
+                    "ap. J.-C.",
+                };
+                yield return new object[]
+                {
+                    new CultureInfo("fr-CH").DateTimeFormat,
+                    1,
+                    "ap. J.-C.",
+                };
+                yield return new object[]
+                {
+                    new CultureInfo("fr-FR").DateTimeFormat,
+                    1,
+                    "ap. J.-C.",
+                };
                 yield return new object[] { new CultureInfo("gu-IN").DateTimeFormat, 1, "ઇસ" };
                 yield return new object[] { new CultureInfo("he-IL").DateTimeFormat, 1, "אחריי" }; // לספירה
                 yield return new object[] { new CultureInfo("hi-IN").DateTimeFormat, 1, "ईस्वी" };
@@ -182,8 +222,18 @@ namespace System.Globalization.Tests
                 yield return new object[] { new CultureInfo("ru-RU").DateTimeFormat, 1, "н.э." };
                 yield return new object[] { new CultureInfo("sk-SK").DateTimeFormat, 1, "po Kr." };
                 yield return new object[] { new CultureInfo("sl-SI").DateTimeFormat, 1, "po Kr." };
-                yield return new object[] { new CultureInfo("sr-Cyrl-RS").DateTimeFormat, 1, "н.е." };
-                yield return new object[] { new CultureInfo("sr-Latn-RS").DateTimeFormat, 1, "n.e." };
+                yield return new object[]
+                {
+                    new CultureInfo("sr-Cyrl-RS").DateTimeFormat,
+                    1,
+                    "н.е.",
+                };
+                yield return new object[]
+                {
+                    new CultureInfo("sr-Latn-RS").DateTimeFormat,
+                    1,
+                    "n.e.",
+                };
                 yield return new object[] { new CultureInfo("sv-AX").DateTimeFormat, 1, "e.Kr." };
                 yield return new object[] { new CultureInfo("sv-SE").DateTimeFormat, 1, "e.Kr." };
                 yield return new object[] { new CultureInfo("sw-CD").DateTimeFormat, 1, "BK" };
@@ -201,16 +251,28 @@ namespace System.Globalization.Tests
                 yield return new object[] { new CultureInfo("uk-UA").DateTimeFormat, 1, "н.е." };
                 yield return new object[] { new CultureInfo("vi-VN").DateTimeFormat, 1, "sau CN" };
                 yield return new object[] { new CultureInfo("zh-CN").DateTimeFormat, 1, "公元" };
-                yield return new object[] { new CultureInfo("zh-Hans-HK").DateTimeFormat, 1, "公元" };
+                yield return new object[]
+                {
+                    new CultureInfo("zh-Hans-HK").DateTimeFormat,
+                    1,
+                    "公元",
+                };
                 yield return new object[] { new CultureInfo("zh-SG").DateTimeFormat, 1, "公元" };
                 yield return new object[] { new CultureInfo("zh-HK").DateTimeFormat, 1, "公元" };
                 yield return new object[] { new CultureInfo("zh-TW").DateTimeFormat, 1, "西元" };
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotHybridGlobalizationOnOSX))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotHybridGlobalizationOnOSX)
+        )]
         [MemberData(nameof(GetAbbreviatedEraName_TestData))]
-        public void GetAbbreviatedEraName_Invoke_ReturnsExpected(DateTimeFormatInfo format, int era, string expected)
+        public void GetAbbreviatedEraName_Invoke_ReturnsExpected(
+            DateTimeFormatInfo format,
+            int era,
+            string expected
+        )
         {
             Assert.Equal(expected, format.GetAbbreviatedEraName(era));
         }
@@ -221,7 +283,10 @@ namespace System.Globalization.Tests
         public void GetAbbreviatedEraName_Invalid(int era)
         {
             var format = new CultureInfo("en-US").DateTimeFormat;
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("era", () => format.GetAbbreviatedEraName(era));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "era",
+                () => format.GetAbbreviatedEraName(era)
+            );
         }
     }
 }

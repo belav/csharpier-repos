@@ -16,7 +16,12 @@ namespace Microsoft.Interop
         private readonly IMethodSymbol _method;
         private readonly ImmutableArray<IUseSiteAttributeParser> _useSiteAttributeParsers;
 
-        public MethodSignatureElementInfoProvider(Compilation compilation, GeneratorDiagnosticsBag generatorDiagnostics, IMethodSymbol method, ImmutableArray<IUseSiteAttributeParser> useSiteAttributeParsers)
+        public MethodSignatureElementInfoProvider(
+            Compilation compilation,
+            GeneratorDiagnosticsBag generatorDiagnostics,
+            IMethodSymbol method,
+            ImmutableArray<IUseSiteAttributeParser> useSiteAttributeParsers
+        )
         {
             _compilation = compilation;
             _generatorDiagnostics = generatorDiagnostics;
@@ -24,17 +29,37 @@ namespace Microsoft.Interop
             _useSiteAttributeParsers = useSiteAttributeParsers;
         }
 
-        public string FindNameForParamIndex(int paramIndex) => paramIndex >= _method.Parameters.Length ? string.Empty : _method.Parameters[paramIndex].Name;
+        public string FindNameForParamIndex(int paramIndex) =>
+            paramIndex >= _method.Parameters.Length
+                ? string.Empty
+                : _method.Parameters[paramIndex].Name;
 
-        public bool TryGetInfoForElementName(AttributeData attrData, string elementName, GetMarshallingInfoCallback marshallingInfoCallback, IElementInfoProvider rootProvider, out TypePositionInfo info)
+        public bool TryGetInfoForElementName(
+            AttributeData attrData,
+            string elementName,
+            GetMarshallingInfoCallback marshallingInfoCallback,
+            IElementInfoProvider rootProvider,
+            out TypePositionInfo info
+        )
         {
             if (elementName == CountElementCountInfo.ReturnValueElementName)
             {
                 info = new TypePositionInfo(
                     ManagedTypeInfo.CreateTypeInfoForTypeSymbol(_method.ReturnType),
-                    marshallingInfoCallback(_method.ReturnType, new UseSiteAttributeProvider(_useSiteAttributeParsers, _method.GetReturnTypeAttributes(), rootProvider, _generatorDiagnostics, marshallingInfoCallback), 0)) with
+                    marshallingInfoCallback(
+                        _method.ReturnType,
+                        new UseSiteAttributeProvider(
+                            _useSiteAttributeParsers,
+                            _method.GetReturnTypeAttributes(),
+                            rootProvider,
+                            _generatorDiagnostics,
+                            marshallingInfoCallback
+                        ),
+                        0
+                    )
+                ) with
                 {
-                    ManagedIndex = TypePositionInfo.ReturnIndex
+                    ManagedIndex = TypePositionInfo.ReturnIndex,
                 };
                 return true;
             }
@@ -46,9 +71,21 @@ namespace Microsoft.Interop
                 {
                     info = TypePositionInfo.CreateForParameter(
                         param,
-                        marshallingInfoCallback(param.Type, new UseSiteAttributeProvider(_useSiteAttributeParsers, param.GetAttributes(), rootProvider, _generatorDiagnostics, marshallingInfoCallback), 0), _compilation) with
+                        marshallingInfoCallback(
+                            param.Type,
+                            new UseSiteAttributeProvider(
+                                _useSiteAttributeParsers,
+                                param.GetAttributes(),
+                                rootProvider,
+                                _generatorDiagnostics,
+                                marshallingInfoCallback
+                            ),
+                            0
+                        ),
+                        _compilation
+                    ) with
                     {
-                        ManagedIndex = i
+                        ManagedIndex = i,
                     };
                     return true;
                 }
@@ -57,7 +94,13 @@ namespace Microsoft.Interop
             return false;
         }
 
-        public bool TryGetInfoForParamIndex(AttributeData attrData, int paramIndex, GetMarshallingInfoCallback marshallingInfoCallback, IElementInfoProvider rootProvider, out TypePositionInfo info)
+        public bool TryGetInfoForParamIndex(
+            AttributeData attrData,
+            int paramIndex,
+            GetMarshallingInfoCallback marshallingInfoCallback,
+            IElementInfoProvider rootProvider,
+            out TypePositionInfo info
+        )
         {
             if (paramIndex >= _method.Parameters.Length)
             {
@@ -68,9 +111,21 @@ namespace Microsoft.Interop
 
             info = TypePositionInfo.CreateForParameter(
                 param,
-                marshallingInfoCallback(param.Type, new UseSiteAttributeProvider(_useSiteAttributeParsers, param.GetAttributes(), rootProvider, _generatorDiagnostics, marshallingInfoCallback), 0), _compilation) with
+                marshallingInfoCallback(
+                    param.Type,
+                    new UseSiteAttributeProvider(
+                        _useSiteAttributeParsers,
+                        param.GetAttributes(),
+                        rootProvider,
+                        _generatorDiagnostics,
+                        marshallingInfoCallback
+                    ),
+                    0
+                ),
+                _compilation
+            ) with
             {
-                ManagedIndex = paramIndex
+                ManagedIndex = paramIndex,
             };
             return true;
         }

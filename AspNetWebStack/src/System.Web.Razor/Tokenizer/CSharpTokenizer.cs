@@ -25,16 +25,94 @@ namespace System.Web.Razor.Tokenizer
                 { '-', MinusOperator },
                 { '<', LessThanOperator },
                 { '>', GreaterThanOperator },
-                { '&', CreateTwoCharOperatorHandler(CSharpSymbolType.And, '=', CSharpSymbolType.AndAssign, '&', CSharpSymbolType.DoubleAnd) },
-                { '|', CreateTwoCharOperatorHandler(CSharpSymbolType.Or, '=', CSharpSymbolType.OrAssign, '|', CSharpSymbolType.DoubleOr) },
-                { '+', CreateTwoCharOperatorHandler(CSharpSymbolType.Plus, '=', CSharpSymbolType.PlusAssign, '+', CSharpSymbolType.Increment) },
-                { '=', CreateTwoCharOperatorHandler(CSharpSymbolType.Assign, '=', CSharpSymbolType.Equals, '>', CSharpSymbolType.GreaterThanEqual) },
-                { '!', CreateTwoCharOperatorHandler(CSharpSymbolType.Not, '=', CSharpSymbolType.NotEqual) },
-                { '%', CreateTwoCharOperatorHandler(CSharpSymbolType.Modulo, '=', CSharpSymbolType.ModuloAssign) },
-                { '*', CreateTwoCharOperatorHandler(CSharpSymbolType.Star, '=', CSharpSymbolType.MultiplyAssign) },
-                { ':', CreateTwoCharOperatorHandler(CSharpSymbolType.Colon, ':', CSharpSymbolType.DoubleColon) },
-                { '?', CreateTwoCharOperatorHandler(CSharpSymbolType.QuestionMark, '?', CSharpSymbolType.NullCoalesce) },
-                { '^', CreateTwoCharOperatorHandler(CSharpSymbolType.Xor, '=', CSharpSymbolType.XorAssign) },
+                {
+                    '&',
+                    CreateTwoCharOperatorHandler(
+                        CSharpSymbolType.And,
+                        '=',
+                        CSharpSymbolType.AndAssign,
+                        '&',
+                        CSharpSymbolType.DoubleAnd
+                    )
+                },
+                {
+                    '|',
+                    CreateTwoCharOperatorHandler(
+                        CSharpSymbolType.Or,
+                        '=',
+                        CSharpSymbolType.OrAssign,
+                        '|',
+                        CSharpSymbolType.DoubleOr
+                    )
+                },
+                {
+                    '+',
+                    CreateTwoCharOperatorHandler(
+                        CSharpSymbolType.Plus,
+                        '=',
+                        CSharpSymbolType.PlusAssign,
+                        '+',
+                        CSharpSymbolType.Increment
+                    )
+                },
+                {
+                    '=',
+                    CreateTwoCharOperatorHandler(
+                        CSharpSymbolType.Assign,
+                        '=',
+                        CSharpSymbolType.Equals,
+                        '>',
+                        CSharpSymbolType.GreaterThanEqual
+                    )
+                },
+                {
+                    '!',
+                    CreateTwoCharOperatorHandler(
+                        CSharpSymbolType.Not,
+                        '=',
+                        CSharpSymbolType.NotEqual
+                    )
+                },
+                {
+                    '%',
+                    CreateTwoCharOperatorHandler(
+                        CSharpSymbolType.Modulo,
+                        '=',
+                        CSharpSymbolType.ModuloAssign
+                    )
+                },
+                {
+                    '*',
+                    CreateTwoCharOperatorHandler(
+                        CSharpSymbolType.Star,
+                        '=',
+                        CSharpSymbolType.MultiplyAssign
+                    )
+                },
+                {
+                    ':',
+                    CreateTwoCharOperatorHandler(
+                        CSharpSymbolType.Colon,
+                        ':',
+                        CSharpSymbolType.DoubleColon
+                    )
+                },
+                {
+                    '?',
+                    CreateTwoCharOperatorHandler(
+                        CSharpSymbolType.QuestionMark,
+                        '?',
+                        CSharpSymbolType.NullCoalesce
+                    )
+                },
+                {
+                    '^',
+                    CreateTwoCharOperatorHandler(
+                        CSharpSymbolType.Xor,
+                        '=',
+                        CSharpSymbolType.XorAssign
+                    )
+                },
                 { '(', () => CSharpSymbolType.LeftParenthesis },
                 { ')', () => CSharpSymbolType.RightParenthesis },
                 { '{', () => CSharpSymbolType.LeftBrace },
@@ -44,7 +122,7 @@ namespace System.Web.Razor.Tokenizer
                 { ',', () => CSharpSymbolType.Comma },
                 { ';', () => CSharpSymbolType.Semicolon },
                 { '~', () => CSharpSymbolType.Tilde },
-                { '#', () => CSharpSymbolType.Hash }
+                { '#', () => CSharpSymbolType.Hash },
             };
         }
 
@@ -68,7 +146,12 @@ namespace System.Web.Razor.Tokenizer
             get { return CSharpSymbolType.RazorCommentStar; }
         }
 
-        protected override CSharpSymbol CreateSymbol(SourceLocation start, string content, CSharpSymbolType type, IEnumerable<RazorError> errors)
+        protected override CSharpSymbol CreateSymbol(
+            SourceLocation start,
+            string content,
+            CSharpSymbolType type,
+            IEnumerable<RazorError> errors
+        )
         {
             return new CSharpSymbol(start, content, type, errors);
         }
@@ -152,16 +235,22 @@ namespace System.Web.Razor.Tokenizer
             }
             else if (CurrentCharacter == '*')
             {
-                return Transition(EndSymbol(CSharpSymbolType.RazorCommentTransition), AfterRazorCommentTransition);
+                return Transition(
+                    EndSymbol(CSharpSymbolType.RazorCommentTransition),
+                    AfterRazorCommentTransition
+                );
             }
             else if (CurrentCharacter == '@')
             {
                 // Could be escaped comment transition
-                return Transition(EndSymbol(CSharpSymbolType.Transition), () =>
-                {
-                    TakeCurrent();
-                    return Transition(EndSymbol(CSharpSymbolType.Transition), Data);
-                });
+                return Transition(
+                    EndSymbol(CSharpSymbolType.Transition),
+                    () =>
+                    {
+                        TakeCurrent();
+                        return Transition(EndSymbol(CSharpSymbolType.Transition), Data);
+                    }
+                );
             }
             return Stay(EndSymbol(CSharpSymbolType.Transition));
         }
@@ -218,7 +307,11 @@ namespace System.Web.Razor.Tokenizer
             return CSharpSymbolType.Minus;
         }
 
-        private Func<CSharpSymbolType> CreateTwoCharOperatorHandler(CSharpSymbolType typeIfOnlyFirst, char second, CSharpSymbolType typeIfBoth)
+        private Func<CSharpSymbolType> CreateTwoCharOperatorHandler(
+            CSharpSymbolType typeIfOnlyFirst,
+            char second,
+            CSharpSymbolType typeIfBoth
+        )
         {
             return () =>
             {
@@ -231,7 +324,13 @@ namespace System.Web.Razor.Tokenizer
             };
         }
 
-        private Func<CSharpSymbolType> CreateTwoCharOperatorHandler(CSharpSymbolType typeIfOnlyFirst, char option1, CSharpSymbolType typeIfOption1, char option2, CSharpSymbolType typeIfOption2)
+        private Func<CSharpSymbolType> CreateTwoCharOperatorHandler(
+            CSharpSymbolType typeIfOnlyFirst,
+            char option1,
+            CSharpSymbolType typeIfOption1,
+            char option2,
+            CSharpSymbolType typeIfOption2
+        )
         {
             return () =>
             {
@@ -264,7 +363,12 @@ namespace System.Web.Razor.Tokenizer
             }
             else if (EndOfFile)
             {
-                CurrentErrors.Add(new RazorError(RazorResources.ParseError_Unterminated_String_Literal, CurrentStart));
+                CurrentErrors.Add(
+                    new RazorError(
+                        RazorResources.ParseError_Unterminated_String_Literal,
+                        CurrentStart
+                    )
+                );
             }
             return Transition(EndSymbol(CSharpSymbolType.StringLiteral), Data);
         }
@@ -275,7 +379,7 @@ namespace System.Web.Razor.Tokenizer
             if (CurrentCharacter == '\\')
             {
                 TakeCurrent(); // Take the '\'
-                
+
                 // If the next char is the same quote that started this
                 if (CurrentCharacter == quote || CurrentCharacter == '\\')
                 {
@@ -285,7 +389,12 @@ namespace System.Web.Razor.Tokenizer
             }
             else if (EndOfFile || ParserHelpers.IsNewLine(CurrentCharacter))
             {
-                CurrentErrors.Add(new RazorError(RazorResources.ParseError_Unterminated_String_Literal, CurrentStart));
+                CurrentErrors.Add(
+                    new RazorError(
+                        RazorResources.ParseError_Unterminated_String_Literal,
+                        CurrentStart
+                    )
+                );
             }
             else
             {
@@ -300,7 +409,12 @@ namespace System.Web.Razor.Tokenizer
             TakeUntil(c => c == '*');
             if (EndOfFile)
             {
-                CurrentErrors.Add(new RazorError(RazorResources.ParseError_BlockComment_Not_Terminated, CurrentStart));
+                CurrentErrors.Add(
+                    new RazorError(
+                        RazorResources.ParseError_BlockComment_Not_Terminated,
+                        CurrentStart
+                    )
+                );
                 return Transition(EndSymbol(CSharpSymbolType.Comment), Data);
             }
             if (CurrentCharacter == '*')
@@ -349,8 +463,11 @@ namespace System.Web.Razor.Tokenizer
             {
                 return RealLiteral();
             }
-            else if (CSharpHelpers.IsRealLiteralSuffix(CurrentCharacter) ||
-                     CurrentCharacter == 'E' || CurrentCharacter == 'e')
+            else if (
+                CSharpHelpers.IsRealLiteralSuffix(CurrentCharacter)
+                || CurrentCharacter == 'E'
+                || CurrentCharacter == 'e'
+            )
             {
                 return RealLiteralExponentPart();
             }
@@ -418,7 +535,9 @@ namespace System.Web.Razor.Tokenizer
             CSharpSymbol sym = null;
             if (HaveContent)
             {
-                CSharpKeyword? kwd = CSharpKeywordDetector.SymbolTypeForIdentifier(Buffer.ToString());
+                CSharpKeyword? kwd = CSharpKeywordDetector.SymbolTypeForIdentifier(
+                    Buffer.ToString()
+                );
                 CSharpSymbolType type = CSharpSymbolType.Identifier;
                 if (kwd != null)
                 {

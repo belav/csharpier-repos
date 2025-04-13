@@ -23,7 +23,8 @@ namespace System.Net.Http.Metrics
     /// </remarks>
     public sealed class HttpMetricsEnrichmentContext
     {
-        private static readonly HttpRequestOptionsKey<HttpMetricsEnrichmentContext> s_optionsKeyForContext = new(nameof(HttpMetricsEnrichmentContext));
+        private static readonly HttpRequestOptionsKey<HttpMetricsEnrichmentContext> s_optionsKeyForContext =
+            new(nameof(HttpMetricsEnrichmentContext));
         private static readonly ConcurrentQueue<HttpMetricsEnrichmentContext> s_pool = new();
         private static int s_poolItemCount;
         private const int PoolCapacity = 1024;
@@ -68,20 +69,29 @@ namespace System.Net.Http.Metrics
         /// <remarks>
         /// This method must not be used from outside of the enrichment callbacks.
         /// </remarks>
-        public void AddCustomTag(string name, object? value) => _tags.Add(new KeyValuePair<string, object?>(name, value));
+        public void AddCustomTag(string name, object? value) =>
+            _tags.Add(new KeyValuePair<string, object?>(name, value));
 
         /// <summary>
         /// Adds a callback to register custom tags for request metrics `http-client-request-duration` and `http-client-failed-requests`.
         /// </summary>
         /// <param name="request">The <see cref="HttpRequestMessage"/> to apply enrichment to.</param>
         /// <param name="callback">The callback responsible to add custom tags via <see cref="AddCustomTag(string, object?)"/>.</param>
-        public static void AddCallback(HttpRequestMessage request, Action<HttpMetricsEnrichmentContext> callback)
+        public static void AddCallback(
+            HttpRequestMessage request,
+            Action<HttpMetricsEnrichmentContext> callback
+        )
         {
             HttpRequestOptions options = request.Options;
 
             // We associate an HttpMetricsEnrichmentContext with the request on the first call to AddCallback(),
             // and store the callbacks in the context. This allows us to cache all the enrichment objects together.
-            if (!options.TryGetValue(s_optionsKeyForContext, out HttpMetricsEnrichmentContext? context))
+            if (
+                !options.TryGetValue(
+                    s_optionsKeyForContext,
+                    out HttpMetricsEnrichmentContext? context
+                )
+            )
             {
                 if (s_pool.TryDequeue(out context))
                 {
@@ -98,22 +108,29 @@ namespace System.Net.Http.Metrics
             context._callbacks.Add(callback);
         }
 
-        internal static HttpMetricsEnrichmentContext? GetEnrichmentContextForRequest(HttpRequestMessage request)
+        internal static HttpMetricsEnrichmentContext? GetEnrichmentContextForRequest(
+            HttpRequestMessage request
+        )
         {
             if (request._options is null)
             {
                 return null;
             }
-            request._options.TryGetValue(s_optionsKeyForContext, out HttpMetricsEnrichmentContext? context);
+            request._options.TryGetValue(
+                s_optionsKeyForContext,
+                out HttpMetricsEnrichmentContext? context
+            );
             return context;
         }
 
-        internal void RecordDurationWithEnrichment(HttpRequestMessage request,
+        internal void RecordDurationWithEnrichment(
+            HttpRequestMessage request,
             HttpResponseMessage? response,
             Exception? exception,
             TimeSpan durationTime,
             in TagList commonTags,
-            Histogram<double> requestDuration)
+            Histogram<double> requestDuration
+        )
         {
             _request = request;
             _response = response;

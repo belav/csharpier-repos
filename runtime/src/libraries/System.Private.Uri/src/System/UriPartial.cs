@@ -8,6 +8,6 @@ namespace System
         Scheme,
         Authority,
         Path,
-        Query
+        Query,
     }
 }

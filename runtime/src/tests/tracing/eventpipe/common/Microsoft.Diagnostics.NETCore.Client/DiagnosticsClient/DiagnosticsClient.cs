@@ -19,15 +19,11 @@ namespace Microsoft.Diagnostics.NETCore.Client
     {
         private readonly IpcEndpoint _endpoint;
 
-        public DiagnosticsClient(int processId) :
-            this(new PidIpcEndpoint(processId))
-        {
-        }
+        public DiagnosticsClient(int processId)
+            : this(new PidIpcEndpoint(processId)) { }
 
-        public DiagnosticsClient(IpcEndpointConfig config) :
-            this(new DiagnosticPortIpcEndpoint(config))
-        {
-        }
+        public DiagnosticsClient(IpcEndpointConfig config)
+            : this(new DiagnosticPortIpcEndpoint(config)) { }
 
         internal DiagnosticsClient(IpcEndpoint endpoint)
         {
@@ -63,8 +59,12 @@ namespace Microsoft.Diagnostics.NETCore.Client
         /// <param name="circularBufferMB">The size of the runtime's buffer for collecting events in MB</param>
         /// <returns>
         /// An EventPipeSession object representing the EventPipe session that just started.
-        /// </returns> 
-        public EventPipeSession StartEventPipeSession(IEnumerable<EventPipeProvider> providers, bool requestRundown = true, int circularBufferMB = 256)
+        /// </returns>
+        public EventPipeSession StartEventPipeSession(
+            IEnumerable<EventPipeProvider> providers,
+            bool requestRundown = true,
+            int circularBufferMB = 256
+        )
         {
             return EventPipeSession.Start(_endpoint, providers, requestRundown, circularBufferMB);
         }
@@ -77,10 +77,19 @@ namespace Microsoft.Diagnostics.NETCore.Client
         /// <param name="circularBufferMB">The size of the runtime's buffer for collecting events in MB</param>
         /// <returns>
         /// An EventPipeSession object representing the EventPipe session that just started.
-        /// </returns> 
-        public EventPipeSession StartEventPipeSession(EventPipeProvider provider, bool requestRundown = true, int circularBufferMB = 256)
+        /// </returns>
+        public EventPipeSession StartEventPipeSession(
+            EventPipeProvider provider,
+            bool requestRundown = true,
+            int circularBufferMB = 256
+        )
         {
-            return EventPipeSession.Start(_endpoint, new[] { provider }, requestRundown, circularBufferMB);
+            return EventPipeSession.Start(
+                _endpoint,
+                new[] { provider },
+                requestRundown,
+                circularBufferMB
+            );
         }
 
         /// <summary>
@@ -92,10 +101,21 @@ namespace Microsoft.Diagnostics.NETCore.Client
         /// <param name="token">The token to monitor for cancellation requests.</param>
         /// <returns>
         /// An EventPipeSession object representing the EventPipe session that just started.
-        /// </returns> 
-        internal Task<EventPipeSession> StartEventPipeSessionAsync(IEnumerable<EventPipeProvider> providers, bool requestRundown, int circularBufferMB, CancellationToken token)
+        /// </returns>
+        internal Task<EventPipeSession> StartEventPipeSessionAsync(
+            IEnumerable<EventPipeProvider> providers,
+            bool requestRundown,
+            int circularBufferMB,
+            CancellationToken token
+        )
         {
-            return EventPipeSession.StartAsync(_endpoint, providers, requestRundown, circularBufferMB, token);
+            return EventPipeSession.StartAsync(
+                _endpoint,
+                providers,
+                requestRundown,
+                circularBufferMB,
+                token
+            );
         }
 
         /// <summary>
@@ -108,43 +128,88 @@ namespace Microsoft.Diagnostics.NETCore.Client
         /// <returns>
         /// An EventPipeSession object representing the EventPipe session that just started.
         /// </returns>
-        internal Task<EventPipeSession> StartEventPipeSessionAsync(EventPipeProvider provider, bool requestRundown, int circularBufferMB, CancellationToken token)
+        internal Task<EventPipeSession> StartEventPipeSessionAsync(
+            EventPipeProvider provider,
+            bool requestRundown,
+            int circularBufferMB,
+            CancellationToken token
+        )
         {
-            return EventPipeSession.StartAsync(_endpoint, new[] { provider }, requestRundown, circularBufferMB, token);
+            return EventPipeSession.StartAsync(
+                _endpoint,
+                new[] { provider },
+                requestRundown,
+                circularBufferMB,
+                token
+            );
         }
 
         /// <summary>
         /// Trigger a core dump generation.
-        /// </summary> 
+        /// </summary>
         /// <param name="dumpType">Type of the dump to be generated</param>
         /// <param name="dumpPath">Full path to the dump to be generated. By default it is /tmp/coredump.{pid}</param>
         /// <param name="logDumpGeneration">When set to true, display the dump generation debug log to the console.</param>
         public void WriteDump(DumpType dumpType, string dumpPath, bool logDumpGeneration = false)
         {
-            WriteDump(dumpType, dumpPath, logDumpGeneration ? WriteDumpFlags.LoggingEnabled : WriteDumpFlags.None);
+            WriteDump(
+                dumpType,
+                dumpPath,
+                logDumpGeneration ? WriteDumpFlags.LoggingEnabled : WriteDumpFlags.None
+            );
         }
 
         /// <summary>
         /// Trigger a core dump generation.
-        /// </summary> 
+        /// </summary>
         /// <param name="dumpType">Type of the dump to be generated</param>
         /// <param name="dumpPath">Full path to the dump to be generated. By default it is /tmp/coredump.{pid}</param>
         /// <param name="flags">logging and crash report flags. On runtimes less than 6.0, only LoggingEnabled is supported.</param>
         public void WriteDump(DumpType dumpType, string dumpPath, WriteDumpFlags flags)
         {
-            IpcMessage request = CreateWriteDumpMessage(DumpCommandId.GenerateCoreDump3, dumpType, dumpPath, flags);
+            IpcMessage request = CreateWriteDumpMessage(
+                DumpCommandId.GenerateCoreDump3,
+                dumpType,
+                dumpPath,
+                flags
+            );
             IpcMessage response = IpcClient.SendMessage(_endpoint, request);
-            if (!ValidateResponseMessage(response, "Write dump", ValidateResponseOptions.UnknownCommandReturnsFalse | ValidateResponseOptions.ErrorMessageReturned))
+            if (
+                !ValidateResponseMessage(
+                    response,
+                    "Write dump",
+                    ValidateResponseOptions.UnknownCommandReturnsFalse
+                        | ValidateResponseOptions.ErrorMessageReturned
+                )
+            )
             {
-                request = CreateWriteDumpMessage(DumpCommandId.GenerateCoreDump2, dumpType, dumpPath, flags);
+                request = CreateWriteDumpMessage(
+                    DumpCommandId.GenerateCoreDump2,
+                    dumpType,
+                    dumpPath,
+                    flags
+                );
                 response = IpcClient.SendMessage(_endpoint, request);
-                if (!ValidateResponseMessage(response, "Write dump", ValidateResponseOptions.UnknownCommandReturnsFalse))
+                if (
+                    !ValidateResponseMessage(
+                        response,
+                        "Write dump",
+                        ValidateResponseOptions.UnknownCommandReturnsFalse
+                    )
+                )
                 {
                     if ((flags & ~WriteDumpFlags.LoggingEnabled) != 0)
                     {
-                        throw new ArgumentException($"Only {nameof(WriteDumpFlags.LoggingEnabled)} flag is supported by this runtime version", nameof(flags));
+                        throw new ArgumentException(
+                            $"Only {nameof(WriteDumpFlags.LoggingEnabled)} flag is supported by this runtime version",
+                            nameof(flags)
+                        );
                     }
-                    request = CreateWriteDumpMessage(dumpType, dumpPath, logDumpGeneration: (flags & WriteDumpFlags.LoggingEnabled) != 0);
+                    request = CreateWriteDumpMessage(
+                        dumpType,
+                        dumpPath,
+                        logDumpGeneration: (flags & WriteDumpFlags.LoggingEnabled) != 0
+                    );
                     response = IpcClient.SendMessage(_endpoint, request);
                     ValidateResponseMessage(response, "Write dump");
                 }
@@ -153,39 +218,90 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
         /// <summary>
         /// Trigger a core dump generation.
-        /// </summary> 
+        /// </summary>
         /// <param name="dumpType">Type of the dump to be generated</param>
         /// <param name="dumpPath">Full path to the dump to be generated. By default it is /tmp/coredump.{pid}</param>
         /// <param name="logDumpGeneration">When set to true, display the dump generation debug log to the console.</param>
         /// <param name="token">The token to monitor for cancellation requests.</param>
-        public Task WriteDumpAsync(DumpType dumpType, string dumpPath, bool logDumpGeneration, CancellationToken token)
+        public Task WriteDumpAsync(
+            DumpType dumpType,
+            string dumpPath,
+            bool logDumpGeneration,
+            CancellationToken token
+        )
         {
-            return WriteDumpAsync(dumpType, dumpPath, logDumpGeneration ? WriteDumpFlags.LoggingEnabled : WriteDumpFlags.None, token);
+            return WriteDumpAsync(
+                dumpType,
+                dumpPath,
+                logDumpGeneration ? WriteDumpFlags.LoggingEnabled : WriteDumpFlags.None,
+                token
+            );
         }
 
         /// <summary>
         /// Trigger a core dump generation.
-        /// </summary> 
+        /// </summary>
         /// <param name="dumpType">Type of the dump to be generated</param>
         /// <param name="dumpPath">Full path to the dump to be generated. By default it is /tmp/coredump.{pid}</param>
         /// <param name="flags">logging and crash report flags. On runtimes less than 6.0, only LoggingEnabled is supported.</param>
         /// <param name="token">The token to monitor for cancellation requests.</param>
-        public async Task WriteDumpAsync(DumpType dumpType, string dumpPath, WriteDumpFlags flags, CancellationToken token)
+        public async Task WriteDumpAsync(
+            DumpType dumpType,
+            string dumpPath,
+            WriteDumpFlags flags,
+            CancellationToken token
+        )
         {
-            IpcMessage request = CreateWriteDumpMessage(DumpCommandId.GenerateCoreDump3, dumpType, dumpPath, flags);
-            IpcMessage response = await IpcClient.SendMessageAsync(_endpoint, request, token).ConfigureAwait(false);
-            if (!ValidateResponseMessage(response, "Write dump", ValidateResponseOptions.UnknownCommandReturnsFalse | ValidateResponseOptions.ErrorMessageReturned))
+            IpcMessage request = CreateWriteDumpMessage(
+                DumpCommandId.GenerateCoreDump3,
+                dumpType,
+                dumpPath,
+                flags
+            );
+            IpcMessage response = await IpcClient
+                .SendMessageAsync(_endpoint, request, token)
+                .ConfigureAwait(false);
+            if (
+                !ValidateResponseMessage(
+                    response,
+                    "Write dump",
+                    ValidateResponseOptions.UnknownCommandReturnsFalse
+                        | ValidateResponseOptions.ErrorMessageReturned
+                )
+            )
             {
-                request = CreateWriteDumpMessage(DumpCommandId.GenerateCoreDump2, dumpType, dumpPath, flags);
-                response = await IpcClient.SendMessageAsync(_endpoint, request, token).ConfigureAwait(false);
-                if (!ValidateResponseMessage(response, "Write dump", ValidateResponseOptions.UnknownCommandReturnsFalse))
+                request = CreateWriteDumpMessage(
+                    DumpCommandId.GenerateCoreDump2,
+                    dumpType,
+                    dumpPath,
+                    flags
+                );
+                response = await IpcClient
+                    .SendMessageAsync(_endpoint, request, token)
+                    .ConfigureAwait(false);
+                if (
+                    !ValidateResponseMessage(
+                        response,
+                        "Write dump",
+                        ValidateResponseOptions.UnknownCommandReturnsFalse
+                    )
+                )
                 {
                     if ((flags & ~WriteDumpFlags.LoggingEnabled) != 0)
                     {
-                        throw new ArgumentException($"Only {nameof(WriteDumpFlags.LoggingEnabled)} flag is supported by this runtime version", nameof(flags));
+                        throw new ArgumentException(
+                            $"Only {nameof(WriteDumpFlags.LoggingEnabled)} flag is supported by this runtime version",
+                            nameof(flags)
+                        );
                     }
-                    request = CreateWriteDumpMessage(dumpType, dumpPath, logDumpGeneration: (flags & WriteDumpFlags.LoggingEnabled) != 0);
-                    response = await IpcClient.SendMessageAsync(_endpoint, request, token).ConfigureAwait(false);
+                    request = CreateWriteDumpMessage(
+                        dumpType,
+                        dumpPath,
+                        logDumpGeneration: (flags & WriteDumpFlags.LoggingEnabled) != 0
+                    );
+                    response = await IpcClient
+                        .SendMessageAsync(_endpoint, request, token)
+                        .ConfigureAwait(false);
                     ValidateResponseMessage(response, "Write dump");
                 }
             }
@@ -198,21 +314,44 @@ namespace Microsoft.Diagnostics.NETCore.Client
         /// <param name="profilerGuid">Guid for the profiler to be attached</param>
         /// <param name="profilerPath">Path to the profiler to be attached</param>
         /// <param name="additionalData">Additional data to be passed to the profiler</param>
-        public void AttachProfiler(TimeSpan attachTimeout, Guid profilerGuid, string profilerPath, byte[] additionalData = null)
+        public void AttachProfiler(
+            TimeSpan attachTimeout,
+            Guid profilerGuid,
+            string profilerPath,
+            byte[] additionalData = null
+        )
         {
-            IpcMessage request = CreateAttachProfilerMessage(attachTimeout, profilerGuid, profilerPath, additionalData);
+            IpcMessage request = CreateAttachProfilerMessage(
+                attachTimeout,
+                profilerGuid,
+                profilerPath,
+                additionalData
+            );
             IpcMessage response = IpcClient.SendMessage(_endpoint, request);
             ValidateResponseMessage(response, nameof(AttachProfiler));
 
             // The call to set up the pipe and send the message operates on a different timeout than attachTimeout, which is for the runtime.
-            // We should eventually have a configurable timeout for the message passing, potentially either separately from the 
+            // We should eventually have a configurable timeout for the message passing, potentially either separately from the
             // runtime timeout or respect attachTimeout as one total duration.
         }
 
-        internal async Task AttachProfilerAsync(TimeSpan attachTimeout, Guid profilerGuid, string profilerPath, byte[] additionalData, CancellationToken token)
+        internal async Task AttachProfilerAsync(
+            TimeSpan attachTimeout,
+            Guid profilerGuid,
+            string profilerPath,
+            byte[] additionalData,
+            CancellationToken token
+        )
         {
-            IpcMessage request = CreateAttachProfilerMessage(attachTimeout, profilerGuid, profilerPath, additionalData);
-            IpcMessage response = await IpcClient.SendMessageAsync(_endpoint, request, token).ConfigureAwait(false);
+            IpcMessage request = CreateAttachProfilerMessage(
+                attachTimeout,
+                profilerGuid,
+                profilerPath,
+                additionalData
+            );
+            IpcMessage response = await IpcClient
+                .SendMessageAsync(_endpoint, request, token)
+                .ConfigureAwait(false);
             ValidateResponseMessage(response, nameof(AttachProfilerAsync));
         }
 
@@ -226,14 +365,28 @@ namespace Microsoft.Diagnostics.NETCore.Client
         {
             IpcMessage request = CreateSetStartupProfilerMessage(profilerGuid, profilerPath);
             IpcMessage response = IpcClient.SendMessage(_endpoint, request);
-            ValidateResponseMessage(response, nameof(SetStartupProfiler), ValidateResponseOptions.InvalidArgumentIsRequiresSuspension);
+            ValidateResponseMessage(
+                response,
+                nameof(SetStartupProfiler),
+                ValidateResponseOptions.InvalidArgumentIsRequiresSuspension
+            );
         }
 
-        internal async Task SetStartupProfilerAsync(Guid profilerGuid, string profilerPath, CancellationToken token)
+        internal async Task SetStartupProfilerAsync(
+            Guid profilerGuid,
+            string profilerPath,
+            CancellationToken token
+        )
         {
             IpcMessage request = CreateSetStartupProfilerMessage(profilerGuid, profilerPath);
-            IpcMessage response = await IpcClient.SendMessageAsync(_endpoint, request, token).ConfigureAwait(false);
-            ValidateResponseMessage(response, nameof(SetStartupProfilerAsync), ValidateResponseOptions.InvalidArgumentIsRequiresSuspension);
+            IpcMessage response = await IpcClient
+                .SendMessageAsync(_endpoint, request, token)
+                .ConfigureAwait(false);
+            ValidateResponseMessage(
+                response,
+                nameof(SetStartupProfilerAsync),
+                ValidateResponseOptions.InvalidArgumentIsRequiresSuspension
+            );
         }
 
         /// <summary>
@@ -249,7 +402,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
         internal async Task ResumeRuntimeAsync(CancellationToken token)
         {
             IpcMessage request = CreateResumeRuntimeMessage();
-            IpcMessage response = await IpcClient.SendMessageAsync(_endpoint, request, token).ConfigureAwait(false);
+            IpcMessage response = await IpcClient
+                .SendMessageAsync(_endpoint, request, token)
+                .ConfigureAwait(false);
             ValidateResponseMessage(response, nameof(ResumeRuntimeAsync));
         }
 
@@ -265,10 +420,16 @@ namespace Microsoft.Diagnostics.NETCore.Client
             ValidateResponseMessage(response, nameof(SetEnvironmentVariable));
         }
 
-        internal async Task SetEnvironmentVariableAsync(string name, string value, CancellationToken token)
+        internal async Task SetEnvironmentVariableAsync(
+            string name,
+            string value,
+            CancellationToken token
+        )
         {
             IpcMessage request = CreateSetEnvironmentVariableMessage(name, value);
-            IpcMessage response = await IpcClient.SendMessageAsync(_endpoint, request, token).ConfigureAwait(false);
+            IpcMessage response = await IpcClient
+                .SendMessageAsync(_endpoint, request, token)
+                .ConfigureAwait(false);
             ValidateResponseMessage(response, nameof(SetEnvironmentVariableAsync));
         }
 
@@ -282,18 +443,28 @@ namespace Microsoft.Diagnostics.NETCore.Client
             using IpcResponse response = IpcClient.SendMessageGetContinuation(_endpoint, message);
             ValidateResponseMessage(response.Message, nameof(GetProcessEnvironmentAsync));
 
-            ProcessEnvironmentHelper helper = ProcessEnvironmentHelper.Parse(response.Message.Payload);
+            ProcessEnvironmentHelper helper = ProcessEnvironmentHelper.Parse(
+                response.Message.Payload
+            );
             return helper.ReadEnvironment(response.Continuation);
         }
 
-        internal async Task<Dictionary<string, string>> GetProcessEnvironmentAsync(CancellationToken token)
+        internal async Task<Dictionary<string, string>> GetProcessEnvironmentAsync(
+            CancellationToken token
+        )
         {
             IpcMessage message = CreateProcessEnvironmentMessage();
-            using IpcResponse response = await IpcClient.SendMessageGetContinuationAsync(_endpoint, message, token).ConfigureAwait(false);
+            using IpcResponse response = await IpcClient
+                .SendMessageGetContinuationAsync(_endpoint, message, token)
+                .ConfigureAwait(false);
             ValidateResponseMessage(response.Message, nameof(GetProcessEnvironmentAsync));
 
-            ProcessEnvironmentHelper helper = ProcessEnvironmentHelper.Parse(response.Message.Payload);
-            return await helper.ReadEnvironmentAsync(response.Continuation, token).ConfigureAwait(false);
+            ProcessEnvironmentHelper helper = ProcessEnvironmentHelper.Parse(
+                response.Message.Payload
+            );
+            return await helper
+                .ReadEnvironmentAsync(response.Continuation, token)
+                .ConfigureAwait(false);
         }
 
         public void ApplyStartupHook(string startupHookPath)
@@ -306,7 +477,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
         internal async Task ApplyStartupHookAsync(string startupHookPath, CancellationToken token)
         {
             IpcMessage message = CreateApplyStartupHookMessage(startupHookPath);
-            IpcMessage response = await IpcClient.SendMessageAsync(_endpoint, message, token).ConfigureAwait(false);
+            IpcMessage response = await IpcClient
+                .SendMessageAsync(_endpoint, message, token)
+                .ConfigureAwait(false);
             ValidateResponseMessage(response, nameof(ApplyStartupHookAsync));
         }
 
@@ -324,9 +497,17 @@ namespace Microsoft.Diagnostics.NETCore.Client
                 {
                     var fileName = new FileInfo(port).Name;
                     var match = Regex.Match(fileName, PidIpcEndpoint.DiagnosticsPortPattern);
-                    if (!match.Success) continue;
+                    if (!match.Success)
+                        continue;
                     var group = match.Groups[1].Value;
-                    if (!int.TryParse(group, NumberStyles.Integer, CultureInfo.InvariantCulture, out var processId))
+                    if (
+                        !int.TryParse(
+                            group,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out var processId
+                        )
+                    )
                         continue;
 
                     yield return processId;
@@ -360,7 +541,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
             }
 
             IpcMessage request = CreateProcessInfoMessage();
-            using IpcResponse response = await IpcClient.SendMessageGetContinuationAsync(_endpoint, request, token).ConfigureAwait(false);
+            using IpcResponse response = await IpcClient
+                .SendMessageGetContinuationAsync(_endpoint, request, token)
+                .ConfigureAwait(false);
             return GetProcessInfoFromResponse(response, nameof(GetProcessInfoAsync));
         }
 
@@ -374,7 +557,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
         private async Task<ProcessInfo> TryGetProcessInfo2Async(CancellationToken token)
         {
             IpcMessage request = CreateProcessInfo2Message();
-            using IpcResponse response2 = await IpcClient.SendMessageGetContinuationAsync(_endpoint, request, token).ConfigureAwait(false);
+            using IpcResponse response2 = await IpcClient
+                .SendMessageGetContinuationAsync(_endpoint, request, token)
+                .ConfigureAwait(false);
             return TryGetProcessInfo2FromResponse(response2, nameof(GetProcessInfoAsync));
         }
 
@@ -470,11 +655,18 @@ namespace Microsoft.Diagnostics.NETCore.Client
             }
             else
             {
-                throw new ArgumentException($"Type {obj.GetType()} is not supported in SerializePayloadArgument, please add it.");
+                throw new ArgumentException(
+                    $"Type {obj.GetType()} is not supported in SerializePayloadArgument, please add it."
+                );
             }
         }
 
-        private static IpcMessage CreateAttachProfilerMessage(TimeSpan attachTimeout, Guid profilerGuid, string profilerPath, byte[] additionalData)
+        private static IpcMessage CreateAttachProfilerMessage(
+            TimeSpan attachTimeout,
+            Guid profilerGuid,
+            string profilerPath,
+            byte[] additionalData
+        )
         {
             if (profilerGuid == null || profilerGuid == Guid.Empty)
             {
@@ -486,28 +678,49 @@ namespace Microsoft.Diagnostics.NETCore.Client
                 throw new ArgumentException($"{nameof(profilerPath)} must be non-null");
             }
 
-            byte[] serializedConfiguration = SerializePayload((uint)attachTimeout.TotalSeconds, profilerGuid, profilerPath, additionalData);
-            return new IpcMessage(DiagnosticsServerCommandSet.Profiler, (byte)ProfilerCommandId.AttachProfiler, serializedConfiguration);
+            byte[] serializedConfiguration = SerializePayload(
+                (uint)attachTimeout.TotalSeconds,
+                profilerGuid,
+                profilerPath,
+                additionalData
+            );
+            return new IpcMessage(
+                DiagnosticsServerCommandSet.Profiler,
+                (byte)ProfilerCommandId.AttachProfiler,
+                serializedConfiguration
+            );
         }
 
         private static IpcMessage CreateProcessEnvironmentMessage()
         {
-            return new IpcMessage(DiagnosticsServerCommandSet.Process, (byte)ProcessCommandId.GetProcessEnvironment);
+            return new IpcMessage(
+                DiagnosticsServerCommandSet.Process,
+                (byte)ProcessCommandId.GetProcessEnvironment
+            );
         }
 
         private static IpcMessage CreateProcessInfoMessage()
         {
-            return new IpcMessage(DiagnosticsServerCommandSet.Process, (byte)ProcessCommandId.GetProcessInfo);
+            return new IpcMessage(
+                DiagnosticsServerCommandSet.Process,
+                (byte)ProcessCommandId.GetProcessInfo
+            );
         }
 
         private static IpcMessage CreateProcessInfo2Message()
         {
-            return new IpcMessage(DiagnosticsServerCommandSet.Process, (byte)ProcessCommandId.GetProcessInfo2);
+            return new IpcMessage(
+                DiagnosticsServerCommandSet.Process,
+                (byte)ProcessCommandId.GetProcessInfo2
+            );
         }
 
         private static IpcMessage CreateResumeRuntimeMessage()
         {
-            return new IpcMessage(DiagnosticsServerCommandSet.Process, (byte)ProcessCommandId.ResumeRuntime);
+            return new IpcMessage(
+                DiagnosticsServerCommandSet.Process,
+                (byte)ProcessCommandId.ResumeRuntime
+            );
         }
 
         private static IpcMessage CreateSetEnvironmentVariableMessage(string name, string value)
@@ -518,10 +731,17 @@ namespace Microsoft.Diagnostics.NETCore.Client
             }
 
             byte[] serializedConfiguration = SerializePayload(name, value);
-            return new IpcMessage(DiagnosticsServerCommandSet.Process, (byte)ProcessCommandId.SetEnvironmentVariable, serializedConfiguration);
+            return new IpcMessage(
+                DiagnosticsServerCommandSet.Process,
+                (byte)ProcessCommandId.SetEnvironmentVariable,
+                serializedConfiguration
+            );
         }
 
-        private static IpcMessage CreateSetStartupProfilerMessage(Guid profilerGuid, string profilerPath)
+        private static IpcMessage CreateSetStartupProfilerMessage(
+            Guid profilerGuid,
+            string profilerPath
+        )
         {
             if (profilerGuid == null || profilerGuid == Guid.Empty)
             {
@@ -534,19 +754,36 @@ namespace Microsoft.Diagnostics.NETCore.Client
             }
 
             byte[] serializedConfiguration = SerializePayload(profilerGuid, profilerPath);
-            return new IpcMessage(DiagnosticsServerCommandSet.Profiler, (byte)ProfilerCommandId.StartupProfiler, serializedConfiguration);
+            return new IpcMessage(
+                DiagnosticsServerCommandSet.Profiler,
+                (byte)ProfilerCommandId.StartupProfiler,
+                serializedConfiguration
+            );
         }
 
-        private static IpcMessage CreateWriteDumpMessage(DumpType dumpType, string dumpPath, bool logDumpGeneration)
+        private static IpcMessage CreateWriteDumpMessage(
+            DumpType dumpType,
+            string dumpPath,
+            bool logDumpGeneration
+        )
         {
             if (string.IsNullOrEmpty(dumpPath))
                 throw new ArgumentNullException($"{nameof(dumpPath)} required");
 
             byte[] payload = SerializePayload(dumpPath, (uint)dumpType, logDumpGeneration);
-            return new IpcMessage(DiagnosticsServerCommandSet.Dump, (byte)DumpCommandId.GenerateCoreDump, payload);
+            return new IpcMessage(
+                DiagnosticsServerCommandSet.Dump,
+                (byte)DumpCommandId.GenerateCoreDump,
+                payload
+            );
         }
 
-        private static IpcMessage CreateWriteDumpMessage(DumpCommandId command, DumpType dumpType, string dumpPath, WriteDumpFlags flags)
+        private static IpcMessage CreateWriteDumpMessage(
+            DumpCommandId command,
+            DumpType dumpType,
+            string dumpPath,
+            WriteDumpFlags flags
+        )
         {
             if (string.IsNullOrEmpty(dumpPath))
                 throw new ArgumentNullException($"{nameof(dumpPath)} required");
@@ -561,19 +798,35 @@ namespace Microsoft.Diagnostics.NETCore.Client
                 throw new ArgumentException($"{nameof(startupHookPath)} required");
 
             byte[] serializedConfiguration = SerializePayload(startupHookPath);
-            return new IpcMessage(DiagnosticsServerCommandSet.Process, (byte)ProcessCommandId.ApplyStartupHook, serializedConfiguration);
+            return new IpcMessage(
+                DiagnosticsServerCommandSet.Process,
+                (byte)ProcessCommandId.ApplyStartupHook,
+                serializedConfiguration
+            );
         }
 
-        private static ProcessInfo GetProcessInfoFromResponse(IpcResponse response, string operationName)
+        private static ProcessInfo GetProcessInfoFromResponse(
+            IpcResponse response,
+            string operationName
+        )
         {
             ValidateResponseMessage(response.Message, operationName);
 
             return ProcessInfo.ParseV1(response.Message.Payload);
         }
 
-        private static ProcessInfo TryGetProcessInfo2FromResponse(IpcResponse response, string operationName)
+        private static ProcessInfo TryGetProcessInfo2FromResponse(
+            IpcResponse response,
+            string operationName
+        )
         {
-            if (!ValidateResponseMessage(response.Message, operationName, ValidateResponseOptions.UnknownCommandReturnsFalse))
+            if (
+                !ValidateResponseMessage(
+                    response.Message,
+                    operationName,
+                    ValidateResponseOptions.UnknownCommandReturnsFalse
+                )
+            )
             {
                 return null;
             }
@@ -581,7 +834,11 @@ namespace Microsoft.Diagnostics.NETCore.Client
             return ProcessInfo.ParseV2(response.Message.Payload);
         }
 
-        internal static bool ValidateResponseMessage(IpcMessage responseMessage, string operationName, ValidateResponseOptions options = ValidateResponseOptions.None)
+        internal static bool ValidateResponseMessage(
+            IpcMessage responseMessage,
+            string operationName,
+            ValidateResponseOptions options = ValidateResponseOptions.None
+        )
         {
             switch ((DiagnosticsServerResponseId)responseMessage.Header.CommandId)
             {
@@ -599,17 +856,29 @@ namespace Microsoft.Diagnostics.NETCore.Client
                             {
                                 return false;
                             }
-                            throw new UnsupportedCommandException($"{operationName} failed - Command is not supported.");
+                            throw new UnsupportedCommandException(
+                                $"{operationName} failed - Command is not supported."
+                            );
 
                         case (uint)DiagnosticsIpcError.ProfilerAlreadyActive:
-                            throw new ProfilerAlreadyActiveException($"{operationName} failed - A profiler is already loaded.");
+                            throw new ProfilerAlreadyActiveException(
+                                $"{operationName} failed - A profiler is already loaded."
+                            );
 
                         case (uint)DiagnosticsIpcError.InvalidArgument:
-                            if (options.HasFlag(ValidateResponseOptions.InvalidArgumentIsRequiresSuspension))
+                            if (
+                                options.HasFlag(
+                                    ValidateResponseOptions.InvalidArgumentIsRequiresSuspension
+                                )
+                            )
                             {
-                                throw new ServerErrorException($"{operationName} failed - The runtime must be suspended for this command.");
+                                throw new ServerErrorException(
+                                    $"{operationName} failed - The runtime must be suspended for this command."
+                                );
                             }
-                            throw new UnsupportedCommandException($"{operationName} failed - Invalid command argument.");
+                            throw new UnsupportedCommandException(
+                                $"{operationName} failed - Invalid command argument."
+                            );
 
                         case (uint)DiagnosticsIpcError.NotSupported:
                             message = $"{operationName} - Not supported by this runtime.";
@@ -620,7 +889,10 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     }
                     // Check if the command can return an error message and if the payload is big enough to contain the
                     // error code (uint) and the string length (uint).
-                    if (options.HasFlag(ValidateResponseOptions.ErrorMessageReturned) && responseMessage.Payload.Length >= (sizeof(uint) * 2))
+                    if (
+                        options.HasFlag(ValidateResponseOptions.ErrorMessageReturned)
+                        && responseMessage.Payload.Length >= (sizeof(uint) * 2)
+                    )
                     {
                         message = IpcHelpers.ReadString(responseMessage.Payload, ref index);
                     }
@@ -631,7 +903,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
                     throw new ServerErrorException(message);
 
                 default:
-                    throw new ServerErrorException($"{operationName} failed - Server responded with unknown response.");
+                    throw new ServerErrorException(
+                        $"{operationName} failed - Server responded with unknown response."
+                    );
             }
         }
 

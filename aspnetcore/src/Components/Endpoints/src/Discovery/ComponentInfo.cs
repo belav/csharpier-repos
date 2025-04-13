@@ -58,7 +58,9 @@ internal class ComponentInfo
         }
         if (RenderMode is InteractiveWebAssemblyRenderMode { Prerender: var wasm })
         {
-            var size = (nameof(InteractiveWebAssemblyRenderMode).Length - "RenderModeComparer".Length);
+            var size = (
+                nameof(InteractiveWebAssemblyRenderMode).Length - "RenderModeComparer".Length
+            );
             return $"RenderModeComparer = {nameof(InteractiveWebAssemblyRenderMode)[0..size]}, Prerendered = {wasm}";
         }
         if (RenderMode is InteractiveAutoRenderMode { Prerender: var auto })

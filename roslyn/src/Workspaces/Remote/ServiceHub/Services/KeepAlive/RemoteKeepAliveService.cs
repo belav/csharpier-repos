@@ -7,32 +7,38 @@ using System.Threading.Tasks;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed partial class RemoteKeepAliveService : BrokeredServiceBase, IRemoteKeepAliveService
+    internal sealed partial class RemoteKeepAliveService
+        : BrokeredServiceBase,
+            IRemoteKeepAliveService
     {
         internal sealed class Factory : FactoryBase<IRemoteKeepAliveService>
         {
-            protected override IRemoteKeepAliveService CreateService(in ServiceConstructionArguments arguments)
-                => new RemoteKeepAliveService(arguments);
+            protected override IRemoteKeepAliveService CreateService(
+                in ServiceConstructionArguments arguments
+            ) => new RemoteKeepAliveService(arguments);
         }
 
         public RemoteKeepAliveService(in ServiceConstructionArguments arguments)
-            : base(arguments)
-        {
-        }
+            : base(arguments) { }
 
         public ValueTask KeepAliveAsync(
             Checksum solutionChecksum,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // First get the solution, ensuring that it is currently pinned.
-            return RunServiceAsync(solutionChecksum, async solution =>
-            {
-                // Wait for our caller to tell us to cancel.  That way we can release this solution and allow it
-                // to be collected if not needed anymore.
-                //
-                // This was provided by stoub as an idiomatic way to wait indefinitely until a cancellation token triggers.
-                await Task.Delay(-1, cancellationToken).ConfigureAwait(false);
-            }, cancellationToken);
+            return RunServiceAsync(
+                solutionChecksum,
+                async solution =>
+                {
+                    // Wait for our caller to tell us to cancel.  That way we can release this solution and allow it
+                    // to be collected if not needed anymore.
+                    //
+                    // This was provided by stoub as an idiomatic way to wait indefinitely until a cancellation token triggers.
+                    await Task.Delay(-1, cancellationToken).ConfigureAwait(false);
+                },
+                cancellationToken
+            );
         }
     }
 }

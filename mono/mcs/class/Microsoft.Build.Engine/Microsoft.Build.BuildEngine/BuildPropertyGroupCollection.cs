@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -28,68 +28,67 @@
 using System;
 using System.Collections;
 
-namespace Microsoft.Build.BuildEngine {
-	public class BuildPropertyGroupCollection : ICollection, IEnumerable {
+namespace Microsoft.Build.BuildEngine
+{
+    public class BuildPropertyGroupCollection : ICollection, IEnumerable
+    {
+        GroupingCollection groupingCollection;
 
-		GroupingCollection	groupingCollection;
-	
-		BuildPropertyGroupCollection ()
-		{
-			groupingCollection = new GroupingCollection (null);
-		}
+        BuildPropertyGroupCollection()
+        {
+            groupingCollection = new GroupingCollection(null);
+        }
 
-		internal BuildPropertyGroupCollection (GroupingCollection groupingCollection)
-		{
-			this.groupingCollection = groupingCollection;
-		}
-		
-		public void CopyTo (Array array, int index)
-		{
-			if (array == null)
-				throw new ArgumentNullException ("array");
-			if (index < 0)
-				throw new IndexOutOfRangeException ("Index was outside the bounds of the array.");
-			if (array.Rank > 1)
-				throw new ArgumentException ("array is multidimensional");
-			if ((array.Length > 0) && (index >= array.Length))
-				throw new IndexOutOfRangeException ("Index was outside the bounds of the array.");
-			if (index + this.Count > array.Length)
-				throw new IndexOutOfRangeException ("Index was outside the bounds of the array.");
-		
-			IEnumerator it = GetEnumerator ();
-			int i = index;
-			while (it.MoveNext ()) {
-				array.SetValue (it.Current, i++);
-			}
-		}
+        internal BuildPropertyGroupCollection(GroupingCollection groupingCollection)
+        {
+            this.groupingCollection = groupingCollection;
+        }
 
-		public IEnumerator GetEnumerator ()
-		{
-			return groupingCollection.GetPropertyGroupEnumerator ();
-		}
-		
-		internal void Add (BuildPropertyGroup bpg)
-		{
-			bpg.GroupingCollection = groupingCollection;
-			groupingCollection.Add (bpg);
-		}
+        public void CopyTo(Array array, int index)
+        {
+            if (array == null)
+                throw new ArgumentNullException("array");
+            if (index < 0)
+                throw new IndexOutOfRangeException("Index was outside the bounds of the array.");
+            if (array.Rank > 1)
+                throw new ArgumentException("array is multidimensional");
+            if ((array.Length > 0) && (index >= array.Length))
+                throw new IndexOutOfRangeException("Index was outside the bounds of the array.");
+            if (index + this.Count > array.Length)
+                throw new IndexOutOfRangeException("Index was outside the bounds of the array.");
 
-		public int Count {
-			get {
-				return groupingCollection.PropertyGroups;
-			}
-		}
+            IEnumerator it = GetEnumerator();
+            int i = index;
+            while (it.MoveNext())
+            {
+                array.SetValue(it.Current, i++);
+            }
+        }
 
-		public bool IsSynchronized {
-			get {
-				return false;
-			}
-		}
+        public IEnumerator GetEnumerator()
+        {
+            return groupingCollection.GetPropertyGroupEnumerator();
+        }
 
-		public object SyncRoot {
-			get {
-				return this;
-			}
-		}
-	}
+        internal void Add(BuildPropertyGroup bpg)
+        {
+            bpg.GroupingCollection = groupingCollection;
+            groupingCollection.Add(bpg);
+        }
+
+        public int Count
+        {
+            get { return groupingCollection.PropertyGroups; }
+        }
+
+        public bool IsSynchronized
+        {
+            get { return false; }
+        }
+
+        public object SyncRoot
+        {
+            get { return this; }
+        }
+    }
 }

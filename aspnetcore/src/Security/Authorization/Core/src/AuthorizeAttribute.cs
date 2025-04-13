@@ -10,7 +10,11 @@ namespace Microsoft.AspNetCore.Authorization;
 /// <summary>
 /// Specifies that the class or method that this attribute is applied to requires the specified authorization.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = true,
+    Inherited = true
+)]
 [DebuggerDisplay("{ToString(),nq}")]
 public class AuthorizeAttribute : Attribute, IAuthorizeData
 {
@@ -46,6 +50,15 @@ public class AuthorizeAttribute : Attribute, IAuthorizeData
     /// <inheritdoc/>>
     public override string ToString()
     {
-        return DebuggerHelpers.GetDebugText(nameof(Policy), Policy, nameof(Roles), Roles, nameof(AuthenticationSchemes), AuthenticationSchemes, includeNullValues: false, prefix: "Authorize");
+        return DebuggerHelpers.GetDebugText(
+            nameof(Policy),
+            Policy,
+            nameof(Roles),
+            Roles,
+            nameof(AuthenticationSchemes),
+            AuthenticationSchemes,
+            includeNullValues: false,
+            prefix: "Authorize"
+        );
     }
 }

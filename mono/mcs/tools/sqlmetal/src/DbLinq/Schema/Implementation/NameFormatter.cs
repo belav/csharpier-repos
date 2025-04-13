@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -47,10 +47,12 @@ namespace DbLinq.Schema.Implementation
             /// The word plural doesn't change
             /// </summary>
             DontChange,
+
             /// <summary>
             /// Singularize the word
             /// </summary>
             Singular,
+
             /// <summary>
             /// Pluralize the word
             /// </summary>
@@ -67,6 +69,7 @@ namespace DbLinq.Schema.Implementation
             /// Word is first in sentence
             /// </summary>
             First = 0x01,
+
             /// <summary>
             /// Word is last in sentence
             /// </summary>
@@ -76,7 +79,8 @@ namespace DbLinq.Schema.Implementation
         /// <summary>
         /// ILanguageWords by culture info name
         /// </summary>
-        private readonly IDictionary<string, ILanguageWords> languageWords = new Dictionary<string, ILanguageWords>();
+        private readonly IDictionary<string, ILanguageWords> languageWords =
+            new Dictionary<string, ILanguageWords>();
 
         /// <summary>
         /// Substitution char for invalid characters
@@ -111,7 +115,12 @@ namespace DbLinq.Schema.Implementation
         /// <param name="newCase">The new case.</param>
         /// <param name="singularization">The singularization.</param>
         /// <returns></returns>
-        public virtual string Format(ILanguageWords words, string oldName, Case newCase, Singularization singularization)
+        public virtual string Format(
+            ILanguageWords words,
+            string oldName,
+            Case newCase,
+            Singularization singularization
+        )
         {
             var parts = ExtractWordsFromCaseAndLanguage(words, oldName);
             return Format(words, parts, newCase, singularization);
@@ -125,7 +134,12 @@ namespace DbLinq.Schema.Implementation
         /// <param name="newCase">The new case.</param>
         /// <param name="singularization">The singularization.</param>
         /// <returns></returns>
-        private string Format(ILanguageWords words, IList<string> parts, Case newCase, Singularization singularization)
+        private string Format(
+            ILanguageWords words,
+            IList<string> parts,
+            Case newCase,
+            Singularization singularization
+        )
         {
             var result = new StringBuilder();
             for (int partIndex = 0; partIndex < parts.Count; partIndex++)
@@ -135,7 +149,9 @@ namespace DbLinq.Schema.Implementation
                     position |= Position.First;
                 if (partIndex == parts.Count - 1)
                     position |= Position.Last;
-                result.Append(AdjustPart(words, parts[partIndex], position, newCase, singularization));
+                result.Append(
+                    AdjustPart(words, parts[partIndex], position, newCase, singularization)
+                );
             }
             return result.ToString();
         }
@@ -183,7 +199,13 @@ namespace DbLinq.Schema.Implementation
         /// <param name="newCase">The new case.</param>
         /// <param name="singularization">The singularization.</param>
         /// <returns></returns>
-        protected virtual string AdjustPart(ILanguageWords words, string part, Position position, Case newCase, Singularization singularization)
+        protected virtual string AdjustPart(
+            ILanguageWords words,
+            string part,
+            Position position,
+            Case newCase,
+            Singularization singularization
+        )
         {
             if (singularization != Singularization.DontChange && (position & Position.Last) != 0)
             {
@@ -197,19 +219,19 @@ namespace DbLinq.Schema.Implementation
                 applyCase = Case.PascalCase;
             switch (applyCase)
             {
-            case Case.Leave:
-                break;
-            case Case.camelCase:
-                part = ToCamelCase(part);
-                break;
-            case Case.PascalCase:
-                part = ToPascalCase(part);
-                break;
-            case Case.NetCase:
-                part = ToNetCase(part);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
+                case Case.Leave:
+                    break;
+                case Case.camelCase:
+                    part = ToCamelCase(part);
+                    break;
+                case Case.PascalCase:
+                    part = ToPascalCase(part);
+                    break;
+                case Case.NetCase:
+                    part = ToNetCase(part);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
             return part;
         }
@@ -274,7 +296,10 @@ namespace DbLinq.Schema.Implementation
         /// <param name="words">The words.</param>
         /// <param name="dbName">Name of the db.</param>
         /// <returns></returns>
-        protected virtual IList<string> ExtractWordsFromCaseAndLanguage(ILanguageWords words, string dbName)
+        protected virtual IList<string> ExtractWordsFromCaseAndLanguage(
+            ILanguageWords words,
+            string dbName
+        )
         {
             var extractedWords = new List<string>();
             foreach (var wordsMagma in ExtractWordsFromCase(dbName, SubstitutionChar))
@@ -291,18 +316,22 @@ namespace DbLinq.Schema.Implementation
         /// <param name="dbName">Name of the db.</param>
         /// <param name="extraction">The extraction type (case or language identification).</param>
         /// <returns></returns>
-        protected virtual IList<string> ExtractWords(ILanguageWords words, string dbName, WordsExtraction extraction)
+        protected virtual IList<string> ExtractWords(
+            ILanguageWords words,
+            string dbName,
+            WordsExtraction extraction
+        )
         {
             switch (extraction)
             {
-            case WordsExtraction.None:
-                return new[] { dbName };
-            case WordsExtraction.FromCase:
-                return ExtractWordsFromCase(dbName, SubstitutionChar);
-            case WordsExtraction.FromDictionary:
-                return ExtractWordsFromCaseAndLanguage(words, dbName);
-            default:
-                throw new ArgumentOutOfRangeException("extraction");
+                case WordsExtraction.None:
+                    return new[] { dbName };
+                case WordsExtraction.FromCase:
+                    return ExtractWordsFromCase(dbName, SubstitutionChar);
+                case WordsExtraction.FromDictionary:
+                    return ExtractWordsFromCaseAndLanguage(words, dbName);
+                default:
+                    throw new ArgumentOutOfRangeException("extraction");
             }
         }
 
@@ -312,7 +341,10 @@ namespace DbLinq.Schema.Implementation
         /// <param name="singularization">The singularization.</param>
         /// <param name="nameFormat">The name format.</param>
         /// <returns></returns>
-        protected virtual Singularization GetSingularization(Singularization singularization, NameFormat nameFormat)
+        protected virtual Singularization GetSingularization(
+            Singularization singularization,
+            NameFormat nameFormat
+        )
         {
             if (!nameFormat.Pluralize)
                 return Singularization.DontChange;
@@ -327,7 +359,12 @@ namespace DbLinq.Schema.Implementation
         /// <returns></returns>
         public string Format(string words, Case newCase)
         {
-            return Format(null, ExtractWordsFromCase(words, SubstitutionChar), newCase, Singularization.DontChange);
+            return Format(
+                null,
+                ExtractWordsFromCase(words, SubstitutionChar),
+                newCase,
+                Singularization.DontChange
+            );
         }
 
         /// <summary>
@@ -337,12 +374,21 @@ namespace DbLinq.Schema.Implementation
         /// <param name="extraction">The extraction.</param>
         /// <param name="nameFormat">The name format.</param>
         /// <returns></returns>
-        public SchemaName GetSchemaName(string dbName, WordsExtraction extraction, NameFormat nameFormat)
+        public SchemaName GetSchemaName(
+            string dbName,
+            WordsExtraction extraction,
+            NameFormat nameFormat
+        )
         {
             var words = GetLanguageWords(nameFormat.Culture);
             var schemaName = new SchemaName { DbName = dbName };
             schemaName.NameWords = ExtractWords(words, dbName, extraction);
-            schemaName.ClassName = Format(words, schemaName.NameWords, nameFormat.Case, Singularization.DontChange);
+            schemaName.ClassName = Format(
+                words,
+                schemaName.NameWords,
+                nameFormat.Case,
+                Singularization.DontChange
+            );
             return schemaName;
         }
 
@@ -353,12 +399,21 @@ namespace DbLinq.Schema.Implementation
         /// <param name="extraction">The extraction.</param>
         /// <param name="nameFormat">The name format.</param>
         /// <returns></returns>
-        public ProcedureName GetProcedureName(string dbName, WordsExtraction extraction, NameFormat nameFormat)
+        public ProcedureName GetProcedureName(
+            string dbName,
+            WordsExtraction extraction,
+            NameFormat nameFormat
+        )
         {
             var words = GetLanguageWords(nameFormat.Culture);
             var procedureName = new ProcedureName { DbName = dbName };
             procedureName.NameWords = ExtractWords(words, dbName, extraction);
-            procedureName.MethodName = Format(words, procedureName.NameWords, nameFormat.Case, Singularization.DontChange);
+            procedureName.MethodName = Format(
+                words,
+                procedureName.NameWords,
+                nameFormat.Case,
+                Singularization.DontChange
+            );
             return procedureName;
         }
 
@@ -369,12 +424,21 @@ namespace DbLinq.Schema.Implementation
         /// <param name="extraction">The extraction.</param>
         /// <param name="nameFormat">The name format.</param>
         /// <returns></returns>
-        public ParameterName GetParameterName(string dbName, WordsExtraction extraction, NameFormat nameFormat)
+        public ParameterName GetParameterName(
+            string dbName,
+            WordsExtraction extraction,
+            NameFormat nameFormat
+        )
         {
             var words = GetLanguageWords(nameFormat.Culture);
             var parameterName = new ParameterName { DbName = dbName };
             parameterName.NameWords = ExtractWords(words, dbName, extraction);
-            parameterName.CallName = Format(words, parameterName.NameWords, Case.camelCase, Singularization.DontChange);
+            parameterName.CallName = Format(
+                words,
+                parameterName.NameWords,
+                Case.camelCase,
+                Singularization.DontChange
+            );
             return parameterName;
         }
 
@@ -385,7 +449,11 @@ namespace DbLinq.Schema.Implementation
         /// <param name="extraction">The extraction.</param>
         /// <param name="nameFormat">The name format.</param>
         /// <returns></returns>
-        public TableName GetTableName(string dbName, WordsExtraction extraction, NameFormat nameFormat)
+        public TableName GetTableName(
+            string dbName,
+            WordsExtraction extraction,
+            NameFormat nameFormat
+        )
         {
             var words = GetLanguageWords(nameFormat.Culture);
             var tableName = new TableName { DbName = dbName };
@@ -394,8 +462,18 @@ namespace DbLinq.Schema.Implementation
             if (extraction == WordsExtraction.None)
                 tableName.ClassName = tableName.DbName;
             else
-                tableName.ClassName = Format(words, tableName.NameWords, nameFormat.Case, GetSingularization(Singularization.Singular, nameFormat));
-            tableName.MemberName = Format(words, tableName.NameWords, nameFormat.Case, GetSingularization(Singularization.Plural, nameFormat));
+                tableName.ClassName = Format(
+                    words,
+                    tableName.NameWords,
+                    nameFormat.Case,
+                    GetSingularization(Singularization.Singular, nameFormat)
+                );
+            tableName.MemberName = Format(
+                words,
+                tableName.NameWords,
+                nameFormat.Case,
+                GetSingularization(Singularization.Plural, nameFormat)
+            );
             return tableName;
         }
 
@@ -406,7 +484,11 @@ namespace DbLinq.Schema.Implementation
         /// <param name="extraction">The extraction.</param>
         /// <param name="nameFormat">The name format.</param>
         /// <returns></returns>
-        public ColumnName GetColumnName(string dbName, WordsExtraction extraction, NameFormat nameFormat)
+        public ColumnName GetColumnName(
+            string dbName,
+            WordsExtraction extraction,
+            NameFormat nameFormat
+        )
         {
             var words = GetLanguageWords(nameFormat.Culture);
             var columnName = new ColumnName { DbName = dbName };
@@ -415,7 +497,12 @@ namespace DbLinq.Schema.Implementation
             if (extraction == WordsExtraction.None)
                 columnName.PropertyName = dbName;
             else
-                columnName.PropertyName = Format(words, columnName.NameWords, nameFormat.Case, Singularization.DontChange);
+                columnName.PropertyName = Format(
+                    words,
+                    columnName.NameWords,
+                    nameFormat.Case,
+                    Singularization.DontChange
+                );
             return columnName;
         }
 
@@ -429,18 +516,35 @@ namespace DbLinq.Schema.Implementation
         /// <param name="extraction">The extraction.</param>
         /// <param name="nameFormat">The name format.</param>
         /// <returns></returns>
-        public AssociationName GetAssociationName(string dbManyName, string dbOneName, string dbConstraintName,
-            string foreignKeyName, WordsExtraction extraction, NameFormat nameFormat)
+        public AssociationName GetAssociationName(
+            string dbManyName,
+            string dbOneName,
+            string dbConstraintName,
+            string foreignKeyName,
+            WordsExtraction extraction,
+            NameFormat nameFormat
+        )
         {
             var words = GetLanguageWords(nameFormat.Culture);
             var associationName = new AssociationName { DbName = dbManyName };
             associationName.NameWords = ExtractWords(words, dbManyName, extraction);
-            associationName.ManyToOneMemberName = Format(words, dbOneName, nameFormat.Case, GetSingularization(Singularization.Singular, nameFormat));
+            associationName.ManyToOneMemberName = Format(
+                words,
+                dbOneName,
+                nameFormat.Case,
+                GetSingularization(Singularization.Singular, nameFormat)
+            );
             // TODO: this works only for PascalCase
             if (dbManyName == dbOneName)
-                associationName.ManyToOneMemberName = foreignKeyName.Replace(',', '_') + associationName.ManyToOneMemberName;
+                associationName.ManyToOneMemberName =
+                    foreignKeyName.Replace(',', '_') + associationName.ManyToOneMemberName;
             // TODO: support new extraction
-            associationName.OneToManyMemberName = Format(words, dbManyName, nameFormat.Case, GetSingularization(Singularization.Plural, nameFormat));
+            associationName.OneToManyMemberName = Format(
+                words,
+                dbManyName,
+                nameFormat.Case,
+                GetSingularization(Singularization.Plural, nameFormat)
+            );
             return associationName;
         }
     }

@@ -3,14 +3,12 @@
 //-----------------------------------------------------------------------------
 //
 
-
 namespace System.ServiceModel.Security
 {
+    using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
     using System.ServiceModel;
-    using System.IdentityModel.Selectors;
     using System.ServiceModel.Security.Tokens;
-
 
     internal class InfoCardChannelParameter
     {
@@ -20,34 +18,28 @@ namespace System.ServiceModel.Security
 
         public SecurityToken Token
         {
-            get
-            {
-                return m_token;
-            }
+            get { return m_token; }
         }
 
         public Uri RelyingPartyIssuer
         {
-            get
-            {
-                return m_relyingPartyIssuer;
-            }
+            get { return m_relyingPartyIssuer; }
         }
 
         public bool RequiresInfoCard
         {
-            get
-            {
-                return m_requiresInfocard;
-            }
+            get { return m_requiresInfocard; }
         }
 
-        public InfoCardChannelParameter(SecurityToken token, Uri relyingIssuer, bool requiresInfoCard)
+        public InfoCardChannelParameter(
+            SecurityToken token,
+            Uri relyingIssuer,
+            bool requiresInfoCard
+        )
         {
             m_token = token;
             m_relyingPartyIssuer = relyingIssuer;
             m_requiresInfocard = requiresInfoCard;
         }
-
     }
 }

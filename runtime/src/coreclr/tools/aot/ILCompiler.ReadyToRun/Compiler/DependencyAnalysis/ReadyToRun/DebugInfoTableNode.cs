@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-
 using Internal.JitInterface;
 using Internal.NativeFormat;
 using Internal.Text;
@@ -73,14 +72,21 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             NativeWriter writer = new NativeWriter();
             Section section = writer.NewSection();
             VertexArray vertexArray = new VertexArray(section);
             section.Place(vertexArray);
 
-            Dictionary<byte[], BlobVertex> blobCache = new Dictionary<byte[], BlobVertex>(ByteArrayComparer.Instance);
+            Dictionary<byte[], BlobVertex> blobCache = new Dictionary<byte[], BlobVertex>(
+                ByteArrayComparer.Instance
+            );
 
             foreach (MethodWithGCInfo method in factory.EnumerateCompiledMethods())
             {
@@ -112,7 +118,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     debugBlob = new BlobVertex(methodDebugBlob.ToArray());
                     blobCache.Add(debugBlobArrayKey, debugBlob);
                 }
-                vertexArray.Set(factory.RuntimeFunctionsTable.GetIndex(method), new DebugInfoVertex(debugBlob));
+                vertexArray.Set(
+                    factory.RuntimeFunctionsTable.GetIndex(method),
+                    new DebugInfoVertex(debugBlob)
+                );
             }
 
             vertexArray.ExpandLayout();
@@ -124,7 +133,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 data: writerContent.ToArray(),
                 relocs: null,
                 alignment: 8,
-                definedSymbols: new ISymbolDefinitionNode[] { this });
+                definedSymbols: new ISymbolDefinitionNode[] { this }
+            );
         }
 
         public static byte[] CreateBoundsBlobForMethod(OffsetMapping[] offsetMapping)
@@ -178,7 +188,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     case VarLocType.VLT_STK:
                     case VarLocType.VLT_STK_BYREF:
                         writer.WriteUInt((uint)nativeVarInfo.varLoc.B);
-                        WriteEncodedStackOffset(writer, nativeVarInfo.varLoc.C, assume4ByteAligned : isX86);
+                        WriteEncodedStackOffset(
+                            writer,
+                            nativeVarInfo.varLoc.C,
+                            assume4ByteAligned: isX86
+                        );
                         break;
                     case VarLocType.VLT_REG_REG:
                         writer.WriteUInt((uint)nativeVarInfo.varLoc.B);
@@ -187,16 +201,28 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     case VarLocType.VLT_REG_STK:
                         writer.WriteUInt((uint)nativeVarInfo.varLoc.B);
                         writer.WriteUInt((uint)nativeVarInfo.varLoc.C);
-                        WriteEncodedStackOffset(writer, nativeVarInfo.varLoc.D, assume4ByteAligned : isX86);
+                        WriteEncodedStackOffset(
+                            writer,
+                            nativeVarInfo.varLoc.D,
+                            assume4ByteAligned: isX86
+                        );
                         break;
                     case VarLocType.VLT_STK_REG:
-                        WriteEncodedStackOffset(writer, nativeVarInfo.varLoc.B, assume4ByteAligned : isX86);
+                        WriteEncodedStackOffset(
+                            writer,
+                            nativeVarInfo.varLoc.B,
+                            assume4ByteAligned: isX86
+                        );
                         writer.WriteUInt((uint)nativeVarInfo.varLoc.C);
                         writer.WriteUInt((uint)nativeVarInfo.varLoc.D);
                         break;
                     case VarLocType.VLT_STK2:
                         writer.WriteUInt((uint)nativeVarInfo.varLoc.B);
-                        WriteEncodedStackOffset(writer, nativeVarInfo.varLoc.C, assume4ByteAligned : isX86);
+                        WriteEncodedStackOffset(
+                            writer,
+                            nativeVarInfo.varLoc.C,
+                            assume4ByteAligned: isX86
+                        );
                         break;
                     case VarLocType.VLT_FPSTK:
                         writer.WriteUInt((uint)nativeVarInfo.varLoc.B);
@@ -208,7 +234,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         throw new BadImageFormatException("Unexpected var loc type");
                 }
 
-                static void WriteEncodedStackOffset(NibbleWriter _writer, int offset, bool assume4ByteAligned)
+                static void WriteEncodedStackOffset(
+                    NibbleWriter _writer,
+                    int offset,
+                    bool assume4ByteAligned
+                )
                 {
                     if (assume4ByteAligned)
                     {

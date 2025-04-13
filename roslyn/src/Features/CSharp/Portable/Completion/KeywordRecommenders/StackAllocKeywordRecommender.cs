@@ -10,17 +10,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class StackAllocKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public StackAllocKeywordRecommender()
-            : base(SyntaxKind.StackAllocKeyword)
-        {
-        }
+            : base(SyntaxKind.StackAllocKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             // Beginning with C# 8.0, stackalloc expression can be used inside other expressions
             // whenever a Span<T> or ReadOnlySpan<T> variable is allowed.
-            return (context.IsAnyExpressionContext && !context.IsConstantExpressionContext) ||
-                       context.IsStatementContext ||
-                       context.IsGlobalStatementContext;
+            return (context.IsAnyExpressionContext && !context.IsConstantExpressionContext)
+                || context.IsStatementContext
+                || context.IsGlobalStatementContext;
         }
     }
 }

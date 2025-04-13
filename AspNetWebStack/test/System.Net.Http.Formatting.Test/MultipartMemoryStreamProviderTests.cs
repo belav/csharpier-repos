@@ -7,7 +7,8 @@ using Microsoft.TestCommon;
 
 namespace System.Net.Http
 {
-    public class MultipartMemoryStreamProviderTests : MultipartStreamProviderTestBase<MultipartMemoryStreamProvider>
+    public class MultipartMemoryStreamProviderTests
+        : MultipartStreamProviderTestBase<MultipartMemoryStreamProvider>
     {
         [Fact]
         public void GetStream_ReturnsNewMemoryStream()

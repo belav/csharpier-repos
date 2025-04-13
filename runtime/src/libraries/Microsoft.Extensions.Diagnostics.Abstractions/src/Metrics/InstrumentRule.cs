@@ -22,7 +22,13 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
     /// <param name="listenerName">The <see cref="IMetricsListener.Name">IMetricsListener.Name</see>.</param>
     /// <param name="scopes">The <see cref="MeterScope"/>'s to consider.</param>
     /// <param name="enable">Enables or disabled the matched instrument for this listener.</param>
-    public class InstrumentRule(string? meterName, string? instrumentName, string? listenerName, MeterScope scopes, bool enable)
+    public class InstrumentRule(
+        string? meterName,
+        string? instrumentName,
+        string? listenerName,
+        MeterScope scopes,
+        bool enable
+    )
     {
         /// <summary>
         /// Gets the <see cref="Meter.Name">Meter.Name</see>, either an exact match or the longest prefix match. Only full segment matches are considered.
@@ -46,9 +52,14 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
         /// Gets the <see cref="MeterScope"/>. This is used to distinguish between meters created via <see cref="Meter"/> constructors (<see cref="MeterScope.Global"/>)
         /// and those created via Dependency Injection with <see cref="IMeterFactory.Create(MeterOptions)"/> (<see cref="MeterScope.Local"/>)."/>.
         /// </summary>
-        public MeterScope Scopes { get; } = scopes == MeterScope.None
-            ? throw new ArgumentOutOfRangeException(nameof(scopes), scopes, "The MeterScope must be Global, Local, or both.")
-            : scopes;
+        public MeterScope Scopes { get; } =
+            scopes == MeterScope.None
+                ? throw new ArgumentOutOfRangeException(
+                    nameof(scopes),
+                    scopes,
+                    "The MeterScope must be Global, Local, or both."
+                )
+                : scopes;
 
         /// <summary>
         /// Gets a value that indicates whether the instrument should be enabled for the listener.

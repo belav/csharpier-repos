@@ -2,11 +2,17 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <CLRTestPriority>0</CLRTestPriority>
-    <CLRTestTargetUnsupported Condition="'$(TargetArchitecture)' != 'x64'">true</CLRTestTargetUnsupported>
+    <CLRTestTargetUnsupported Condition="'$(TargetArchitecture)' != 'x64'"
+      >true</CLRTestTargetUnsupported
+    >
     <!-- Sanitizers increase the binary size, so it ends up outside of our expected range. -->
-    <CLRTestTargetUnsupported Condition="'$(EnableNativeSanitizers)' != ''">true</CLRTestTargetUnsupported>
+    <CLRTestTargetUnsupported Condition="'$(EnableNativeSanitizers)' != ''"
+      >true</CLRTestTargetUnsupported
+    >
     <!-- Test infra issue on apple devices: https://github.com/dotnet/runtime/issues/89917 -->
-    <CLRTestTargetUnsupported Condition="'$(TargetsAppleMobile)' == 'true'">true</CLRTestTargetUnsupported>
+    <CLRTestTargetUnsupported Condition="'$(TargetsAppleMobile)' == 'true'"
+      >true</CLRTestTargetUnsupported
+    >
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);BASELINE_INTRINSICS;VECTORT128_INTRINSICS</DefineConstants>
   </PropertyGroup>

@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
 {
     internal interface INavigateToPreviewService : IWorkspaceService
     {
-        __VSPROVISIONALVIEWINGSTATUS GetProvisionalViewingStatus(INavigableItem.NavigableDocument document);
+        __VSPROVISIONALVIEWINGSTATUS GetProvisionalViewingStatus(
+            INavigableItem.NavigableDocument document
+        );
         bool CanPreview(Document document);
         void PreviewItem(INavigateToItemDisplay itemDisplay);
     }

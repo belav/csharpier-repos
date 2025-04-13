@@ -20,7 +20,11 @@ public static class DataProtectionAdvancedExtensions
     /// <param name="plaintext">The plaintext data to protect.</param>
     /// <param name="lifetime">The amount of time after which the payload should no longer be unprotectable.</param>
     /// <returns>The protected form of the plaintext data.</returns>
-    public static byte[] Protect(this ITimeLimitedDataProtector protector, byte[] plaintext, TimeSpan lifetime)
+    public static byte[] Protect(
+        this ITimeLimitedDataProtector protector,
+        byte[] plaintext,
+        TimeSpan lifetime
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(protector);
         ArgumentNullThrowHelper.ThrowIfNull(plaintext);
@@ -36,12 +40,19 @@ public static class DataProtectionAdvancedExtensions
     /// <param name="plaintext">The plaintext data to protect.</param>
     /// <param name="expiration">The time when this payload should expire.</param>
     /// <returns>The protected form of the plaintext data.</returns>
-    public static string Protect(this ITimeLimitedDataProtector protector, string plaintext, DateTimeOffset expiration)
+    public static string Protect(
+        this ITimeLimitedDataProtector protector,
+        string plaintext,
+        DateTimeOffset expiration
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(protector);
         ArgumentNullThrowHelper.ThrowIfNull(plaintext);
 
-        var wrappingProtector = new TimeLimitedWrappingProtector(protector) { Expiration = expiration };
+        var wrappingProtector = new TimeLimitedWrappingProtector(protector)
+        {
+            Expiration = expiration,
+        };
         return wrappingProtector.Protect(plaintext);
     }
 
@@ -53,7 +64,11 @@ public static class DataProtectionAdvancedExtensions
     /// <param name="plaintext">The plaintext data to protect.</param>
     /// <param name="lifetime">The amount of time after which the payload should no longer be unprotectable.</param>
     /// <returns>The protected form of the plaintext data.</returns>
-    public static string Protect(this ITimeLimitedDataProtector protector, string plaintext, TimeSpan lifetime)
+    public static string Protect(
+        this ITimeLimitedDataProtector protector,
+        string plaintext,
+        TimeSpan lifetime
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(protector);
         ArgumentNullThrowHelper.ThrowIfNull(plaintext);
@@ -67,7 +82,9 @@ public static class DataProtectionAdvancedExtensions
     /// </summary>
     /// <param name="protector">The <see cref="IDataProtector"/> to convert to a time-limited protector.</param>
     /// <returns>An <see cref="ITimeLimitedDataProtector"/>.</returns>
-    public static ITimeLimitedDataProtector ToTimeLimitedDataProtector(this IDataProtector protector)
+    public static ITimeLimitedDataProtector ToTimeLimitedDataProtector(
+        this IDataProtector protector
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(protector);
 
@@ -85,7 +102,11 @@ public static class DataProtectionAdvancedExtensions
     /// <exception cref="System.Security.Cryptography.CryptographicException">
     /// Thrown if <paramref name="protectedData"/> is invalid, malformed, or expired.
     /// </exception>
-    public static string Unprotect(this ITimeLimitedDataProtector protector, string protectedData, out DateTimeOffset expiration)
+    public static string Unprotect(
+        this ITimeLimitedDataProtector protector,
+        string protectedData,
+        out DateTimeOffset expiration
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(protector);
         ArgumentNullThrowHelper.ThrowIfNull(protectedData);

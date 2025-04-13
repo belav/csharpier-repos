@@ -2,10 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
@@ -34,7 +32,11 @@ namespace ILCompiler.DependencyAnalysis
 
         public sealed override bool StaticDependenciesAreComputed => true;
 
-        public sealed override void EncodeData(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
+        public sealed override void EncodeData(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             dataBuilder.EmitZeroPointer(); // Sync block
 
@@ -43,7 +45,9 @@ namespace ILCompiler.DependencyAnalysis
             Debug.Assert(dataBuilder.CountBytes == sizeBefore + ContentSize);
         }
 
-        public sealed override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
+        public sealed override IEnumerable<DependencyListEntry> GetStaticDependencies(
+            NodeFactory factory
+        )
         {
             var builder = new ObjectDataBuilder(factory, relocsOnly: true);
             EncodeData(ref builder, factory, relocsOnly: true);
@@ -65,10 +69,15 @@ namespace ILCompiler.DependencyAnalysis
             return dependencies;
         }
 
-        public virtual void GetNonRelocationDependencies(ref DependencyList dependencies, NodeFactory factory)
-        {
-        }
+        public virtual void GetNonRelocationDependencies(
+            ref DependencyList dependencies,
+            NodeFactory factory
+        ) { }
 
-        public abstract void EncodeContents(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly);
+        public abstract void EncodeContents(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        );
     }
 }

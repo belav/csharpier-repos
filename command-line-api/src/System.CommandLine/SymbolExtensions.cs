@@ -15,17 +15,11 @@ namespace System.CommandLine
             switch (symbol)
             {
                 case CliOption option:
-                    return new[]
-                    {
-                        option.Argument
-                    };
+                    return new[] { option.Argument };
                 case CliCommand command:
                     return command.Arguments;
                 case CliArgument argument:
-                    return new[]
-                    {
-                        argument
-                    };
+                    return new[] { argument };
                 default:
                     throw new NotSupportedException();
             }

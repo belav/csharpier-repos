@@ -11,9 +11,7 @@ namespace System.Runtime.Serialization.Json
         private readonly DateTimeFormat? _dateTimeFormat;
 
         public JsonWriterDelegator(XmlWriter writer)
-            : base(writer)
-        {
-        }
+            : base(writer) { }
 
         public JsonWriterDelegator(XmlWriter writer, DateTimeFormat? dateTimeFormat)
             : this(writer)
@@ -117,8 +115,11 @@ namespace System.Runtime.Serialization.Json
             base.WriteInt(value);
         }
 
-
-        internal void WriteJsonBooleanArray(bool[] value, XmlDictionaryString itemName, XmlDictionaryString? itemNamespace)
+        internal void WriteJsonBooleanArray(
+            bool[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString? itemNamespace
+        )
         {
             for (int i = 0; i < value.Length; i++)
             {
@@ -126,7 +127,11 @@ namespace System.Runtime.Serialization.Json
             }
         }
 
-        internal void WriteJsonDateTimeArray(DateTime[] value, XmlDictionaryString itemName, XmlDictionaryString? itemNamespace)
+        internal void WriteJsonDateTimeArray(
+            DateTime[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString? itemNamespace
+        )
         {
             for (int i = 0; i < value.Length; i++)
             {
@@ -134,7 +139,11 @@ namespace System.Runtime.Serialization.Json
             }
         }
 
-        internal void WriteJsonDecimalArray(decimal[] value, XmlDictionaryString itemName, XmlDictionaryString? itemNamespace)
+        internal void WriteJsonDecimalArray(
+            decimal[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString? itemNamespace
+        )
         {
             for (int i = 0; i < value.Length; i++)
             {
@@ -142,7 +151,11 @@ namespace System.Runtime.Serialization.Json
             }
         }
 
-        internal void WriteJsonInt32Array(int[] value, XmlDictionaryString itemName, XmlDictionaryString? itemNamespace)
+        internal void WriteJsonInt32Array(
+            int[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString? itemNamespace
+        )
         {
             for (int i = 0; i < value.Length; i++)
             {
@@ -150,7 +163,11 @@ namespace System.Runtime.Serialization.Json
             }
         }
 
-        internal void WriteJsonInt64Array(long[] value, XmlDictionaryString itemName, XmlDictionaryString? itemNamespace)
+        internal void WriteJsonInt64Array(
+            long[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString? itemNamespace
+        )
         {
             for (int i = 0; i < value.Length; i++)
             {
@@ -166,7 +183,9 @@ namespace System.Runtime.Serialization.Json
             }
             else
             {
-                writer.WriteString(value.ToString(_dateTimeFormat.FormatString, _dateTimeFormat.FormatProvider));
+                writer.WriteString(
+                    value.ToString(_dateTimeFormat.FormatString, _dateTimeFormat.FormatProvider)
+                );
             }
         }
 
@@ -192,9 +211,15 @@ namespace System.Runtime.Serialization.Json
                 if (lowBound > tickCount || highBound < tickCount) // We could potentially under/over flow
                 {
                     tickCount -= TimeZoneInfo.Local.GetUtcOffset(value).Ticks;
-                    if ((tickCount > DateTime.MaxValue.Ticks) || (tickCount < DateTime.MinValue.Ticks))
+                    if (
+                        (tickCount > DateTime.MaxValue.Ticks)
+                        || (tickCount < DateTime.MinValue.Ticks)
+                    )
                     {
-                        throw XmlObjectSerializer.CreateSerializationException(SR.JsonDateTimeOutOfRange, new ArgumentOutOfRangeException(nameof(value)));
+                        throw XmlObjectSerializer.CreateSerializationException(
+                            SR.JsonDateTimeOutOfRange,
+                            new ArgumentOutOfRangeException(nameof(value))
+                        );
                     }
                 }
             }
@@ -209,7 +234,12 @@ namespace System.Runtime.Serialization.Json
                     // +"zzzz";
                     //TimeSpan ts = TimeZone.CurrentTimeZone.GetUtcOffset(value.ToLocalTime());
                     TimeSpan ts = TimeZoneInfo.Local.GetUtcOffset(value.ToLocalTime());
-                    writer.WriteString(string.Create(CultureInfo.InvariantCulture, $"{ts.Hours:+00;-00}{ts.Minutes:00;00}"));
+                    writer.WriteString(
+                        string.Create(
+                            CultureInfo.InvariantCulture,
+                            $"{ts.Hours:+00;-00}{ts.Minutes:00;00}"
+                        )
+                    );
                     break;
                 case DateTimeKind.Utc:
                     break;
@@ -217,7 +247,11 @@ namespace System.Runtime.Serialization.Json
             writer.WriteString(JsonGlobals.DateTimeEndGuardReader);
         }
 
-        internal void WriteJsonSingleArray(float[] value, XmlDictionaryString itemName, XmlDictionaryString? itemNamespace)
+        internal void WriteJsonSingleArray(
+            float[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString? itemNamespace
+        )
         {
             for (int i = 0; i < value.Length; i++)
             {
@@ -225,7 +259,11 @@ namespace System.Runtime.Serialization.Json
             }
         }
 
-        internal void WriteJsonDoubleArray(double[] value, XmlDictionaryString itemName, XmlDictionaryString? itemNamespace)
+        internal void WriteJsonDoubleArray(
+            double[] value,
+            XmlDictionaryString itemName,
+            XmlDictionaryString? itemNamespace
+        )
         {
             for (int i = 0; i < value.Length; i++)
             {

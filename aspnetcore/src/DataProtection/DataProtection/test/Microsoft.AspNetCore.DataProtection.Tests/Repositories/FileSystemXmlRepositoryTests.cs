@@ -16,7 +16,10 @@ public class FileSystemXmlRepositoryTests
     public void DefaultKeyStorageDirectory_Property()
     {
         var baseDir = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
-            ? Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ASP.NET")
+            ? Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "ASP.NET"
+            )
             : Path.Combine(Environment.GetEnvironmentVariable("HOME"), ".aspnet");
         var expectedDir = new DirectoryInfo(Path.Combine(baseDir, "DataProtection-Keys")).FullName;
 
@@ -76,7 +79,11 @@ public class FileSystemXmlRepositoryTests
             var fileInfo = fileInfos.Single(); // only one file should've been created
 
             // filename should be "valid-friendly-name.xml"
-            Assert.Equal("valid-friendly-name.xml", fileInfo.Name, StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                "valid-friendly-name.xml",
+                fileInfo.Name,
+                StringComparer.OrdinalIgnoreCase
+            );
 
             // file contents should be "<element1 />"
             var parsedElement = XElement.Parse(File.ReadAllText(fileInfo.FullName));
@@ -151,12 +158,18 @@ public class FileSystemXmlRepositoryTests
             var repo = new FileSystemXmlRepository(dirInfo, loggerFactory);
 
             // Assert
-            Assert.Contains(Resources.FormatFileSystem_EphemeralKeysLocationInContainer(dirInfo.FullName), loggerFactory.ToString());
+            Assert.Contains(
+                Resources.FormatFileSystem_EphemeralKeysLocationInContainer(dirInfo.FullName),
+                loggerFactory.ToString()
+            );
         });
     }
 
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.Windows, SkipReason = "UnixFileMode is not supported on Windows.")]
+    [OSSkipCondition(
+        OperatingSystems.Windows,
+        SkipReason = "UnixFileMode is not supported on Windows."
+    )]
     public void StoreElement_CreatesFileWithUserOnlyUnixFileMode()
     {
         WithUniqueTempDirectory(dirInfo =>

@@ -10,7 +10,11 @@ namespace Microsoft.AspNetCore.RateLimiting;
 /// Replaces any policies currently applied to the endpoint.
 /// The global limiter will still run on endpoints with this attribute applied.
 /// </remarks>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public sealed class EnableRateLimitingAttribute : Attribute
 {
     /// <summary>

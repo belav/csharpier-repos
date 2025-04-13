@@ -63,7 +63,8 @@ namespace Microsoft.Extensions.DependencyModel
                 {
                     // Ask for 1 more than the length to avoid resizing later,
                     // which is unnecessary in the common case where the stream length doesn't change.
-                    long expectedLength = Math.Max(utf8Bom.Length, stream.Length - stream.Position) + 1;
+                    long expectedLength =
+                        Math.Max(utf8Bom.Length, stream.Length - stream.Position) + 1;
                     rented = ArrayPool<byte>.Shared.Rent(checked((int)expectedLength));
                 }
                 else
@@ -80,17 +81,16 @@ namespace Microsoft.Extensions.DependencyModel
                     // No need for checking for growth, the minimal rent sizes both guarantee it'll fit.
                     Debug.Assert(rented.Length >= utf8Bom.Length);
 
-                    lastRead = stream.Read(
-                        rented,
-                        written,
-                        utf8Bom.Length - written);
+                    lastRead = stream.Read(rented, written, utf8Bom.Length - written);
 
                     written += lastRead;
                 } while (lastRead > 0 && written < utf8Bom.Length);
 
                 // If we have 3 bytes, and they're the BOM, reset the write position to 0.
-                if (written == utf8Bom.Length &&
-                    utf8Bom.SequenceEqual(rented.AsSpan(0, utf8Bom.Length)))
+                if (
+                    written == utf8Bom.Length
+                    && utf8Bom.SequenceEqual(rented.AsSpan(0, utf8Bom.Length))
+                )
                 {
                     written = 0;
                 }
@@ -172,7 +172,9 @@ namespace Microsoft.Extensions.DependencyModel
 
             if (runtimeTargetName != null)
             {
-                int separatorIndex = runtimeTargetName.IndexOf(DependencyContextStrings.VersionSeparator);
+                int separatorIndex = runtimeTargetName.IndexOf(
+                    DependencyContextStrings.VersionSeparator
+                );
                 if (separatorIndex > -1 && separatorIndex < runtimeTargetName.Length)
                 {
                     runtime = runtimeTargetName.Substring(separatorIndex + 1);
@@ -206,12 +208,20 @@ namespace Microsoft.Extensions.DependencyModel
             return new DependencyContext(
                 new TargetInfo(framework, runtime, runtimeSignature, isPortable),
                 compilationOptions,
-                CreateLibraries(compileTarget?.Libraries, false, libraryStubs).Cast<CompilationLibrary>().ToArray(),
-                CreateLibraries(runtimeTarget.Libraries, true, libraryStubs).Cast<RuntimeLibrary>().ToArray(),
-                runtimeFallbacks ?? Enumerable.Empty<RuntimeFallbacks>());
+                CreateLibraries(compileTarget?.Libraries, false, libraryStubs)
+                    .Cast<CompilationLibrary>()
+                    .ToArray(),
+                CreateLibraries(runtimeTarget.Libraries, true, libraryStubs)
+                    .Cast<RuntimeLibrary>()
+                    .ToArray(),
+                runtimeFallbacks ?? Enumerable.Empty<RuntimeFallbacks>()
+            );
         }
 
-        private static Target? SelectRuntimeTarget([NotNull] List<Target>? targets, string? runtimeTargetName)
+        private static Target? SelectRuntimeTarget(
+            [NotNull] List<Target>? targets,
+            string? runtimeTargetName
+        )
         {
             Target? target;
 
@@ -241,14 +251,20 @@ namespace Microsoft.Extensions.DependencyModel
             return name.Contains(DependencyContextStrings.VersionSeparator);
         }
 
-        private static void ReadRuntimeTarget(ref Utf8JsonReader reader, out string? runtimeTargetName, out string? runtimeSignature)
+        private static void ReadRuntimeTarget(
+            ref Utf8JsonReader reader,
+            out string? runtimeTargetName,
+            out string? runtimeSignature
+        )
         {
             runtimeTargetName = null;
             runtimeSignature = null;
 
             reader.ReadStartObject();
 
-            while (reader.TryReadStringProperty(out string? propertyName, out string? propertyValue))
+            while (
+                reader.TryReadStringProperty(out string? propertyName, out string? propertyValue)
+            )
             {
                 switch (propertyName)
                 {
@@ -341,7 +357,8 @@ namespace Microsoft.Extensions.DependencyModel
                 publicSign,
                 debugType,
                 emitEntryPoint,
-                generateXmlDocumentation);
+                generateXmlDocumentation
+            );
         }
 
         private List<Target> ReadTargets(ref Utf8JsonReader reader)
@@ -356,7 +373,9 @@ namespace Microsoft.Extensions.DependencyModel
 
                 if (string.IsNullOrEmpty(targetName))
                 {
-                    throw new FormatException(SR.Format(SR.RequiredFieldNotSpecified, nameof(targetName)));
+                    throw new FormatException(
+                        SR.Format(SR.RequiredFieldNotSpecified, nameof(targetName))
+                    );
                 }
 
                 targets.Add(ReadTarget(ref reader, targetName));
@@ -379,7 +398,9 @@ namespace Microsoft.Extensions.DependencyModel
 
                 if (string.IsNullOrEmpty(targetLibraryName))
                 {
-                    throw new FormatException(SR.Format(SR.RequiredFieldNotSpecified, nameof(targetLibraryName)));
+                    throw new FormatException(
+                        SR.Format(SR.RequiredFieldNotSpecified, nameof(targetLibraryName))
+                    );
                 }
 
                 libraries.Add(ReadTargetLibrary(ref reader, targetLibraryName));
@@ -444,7 +465,7 @@ namespace Microsoft.Extensions.DependencyModel
                 Compilations = compilations,
                 RuntimeTargets = runtimeTargets,
                 Resources = resources,
-                CompileOnly = compileOnly
+                CompileOnly = compileOnly,
             };
         }
 
@@ -458,11 +479,15 @@ namespace Microsoft.Extensions.DependencyModel
             {
                 if (string.IsNullOrEmpty(name))
                 {
-                    throw new FormatException(SR.Format(SR.RequiredFieldNotSpecified, nameof(name)));
+                    throw new FormatException(
+                        SR.Format(SR.RequiredFieldNotSpecified, nameof(name))
+                    );
                 }
                 if (string.IsNullOrEmpty(version))
                 {
-                    throw new FormatException(SR.Format(SR.RequiredFieldNotSpecified, nameof(version)));
+                    throw new FormatException(
+                        SR.Format(SR.RequiredFieldNotSpecified, nameof(version))
+                    );
                 }
 
                 dependencies.Add(new Dependency(Pool(name), Pool(version)));
@@ -485,7 +510,9 @@ namespace Microsoft.Extensions.DependencyModel
 
                 if (string.IsNullOrEmpty(libraryName))
                 {
-                    throw new FormatException(SR.Format(SR.RequiredFieldNotSpecified, nameof(libraryName)));
+                    throw new FormatException(
+                        SR.Format(SR.RequiredFieldNotSpecified, nameof(libraryName))
+                    );
                 }
                 reader.Skip();
 
@@ -512,12 +539,19 @@ namespace Microsoft.Extensions.DependencyModel
 
                 if (string.IsNullOrEmpty(path))
                 {
-                    throw new FormatException(SR.Format(SR.RequiredFieldNotSpecified, nameof(path)));
+                    throw new FormatException(
+                        SR.Format(SR.RequiredFieldNotSpecified, nameof(path))
+                    );
                 }
 
                 reader.ReadStartObject();
 
-                while (reader.TryReadStringProperty(out string? propertyName, out string? propertyValue))
+                while (
+                    reader.TryReadStringProperty(
+                        out string? propertyName,
+                        out string? propertyValue
+                    )
+                )
                 {
                     switch (propertyName)
                     {
@@ -540,7 +574,9 @@ namespace Microsoft.Extensions.DependencyModel
             return runtimeFiles;
         }
 
-        private List<RuntimeTargetEntryStub> ReadTargetLibraryRuntimeTargets(ref Utf8JsonReader reader)
+        private List<RuntimeTargetEntryStub> ReadTargetLibraryRuntimeTargets(
+            ref Utf8JsonReader reader
+        )
         {
             var runtimeTargets = new List<RuntimeTargetEntryStub>();
 
@@ -552,17 +588,21 @@ namespace Microsoft.Extensions.DependencyModel
 
                 if (string.IsNullOrEmpty(runtimePath))
                 {
-                    throw new FormatException(SR.Format(SR.RequiredFieldNotSpecified, nameof(runtimePath)));
+                    throw new FormatException(
+                        SR.Format(SR.RequiredFieldNotSpecified, nameof(runtimePath))
+                    );
                 }
 
-                var runtimeTarget = new RuntimeTargetEntryStub
-                {
-                    Path = runtimePath
-                };
+                var runtimeTarget = new RuntimeTargetEntryStub { Path = runtimePath };
 
                 reader.ReadStartObject();
 
-                while (reader.TryReadStringProperty(out string? propertyName, out string? propertyValue))
+                while (
+                    reader.TryReadStringProperty(
+                        out string? propertyName,
+                        out string? propertyValue
+                    )
+                )
                 {
                     switch (propertyName)
                     {
@@ -603,14 +643,21 @@ namespace Microsoft.Extensions.DependencyModel
 
                 if (string.IsNullOrEmpty(path))
                 {
-                    throw new FormatException(SR.Format(SR.RequiredFieldNotSpecified, nameof(path)));
+                    throw new FormatException(
+                        SR.Format(SR.RequiredFieldNotSpecified, nameof(path))
+                    );
                 }
 
                 string? locale = null;
 
                 reader.ReadStartObject();
 
-                while (reader.TryReadStringProperty(out string? propertyName, out string? propertyValue))
+                while (
+                    reader.TryReadStringProperty(
+                        out string? propertyName,
+                        out string? propertyValue
+                    )
+                )
                 {
                     if (propertyName == DependencyContextStrings.LocalePropertyName)
                     {
@@ -643,7 +690,9 @@ namespace Microsoft.Extensions.DependencyModel
 
                 if (string.IsNullOrEmpty(libraryName))
                 {
-                    throw new FormatException(SR.Format(SR.RequiredFieldNotSpecified, nameof(libraryName)));
+                    throw new FormatException(
+                        SR.Format(SR.RequiredFieldNotSpecified, nameof(libraryName))
+                    );
                 }
 
                 libraries.Add(Pool(libraryName), ReadOneLibrary(ref reader));
@@ -707,7 +756,7 @@ namespace Microsoft.Extensions.DependencyModel
                 Serviceable = serviceable,
                 Path = path,
                 HashPath = hashPath,
-                RuntimeStoreManifestName = runtimeStoreManifestName
+                RuntimeStoreManifestName = runtimeStoreManifestName,
             };
         }
 
@@ -724,7 +773,9 @@ namespace Microsoft.Extensions.DependencyModel
 
                 if (string.IsNullOrEmpty(runtime))
                 {
-                    throw new FormatException(SR.Format(SR.RequiredFieldNotSpecified, nameof(runtime)));
+                    throw new FormatException(
+                        SR.Format(SR.RequiredFieldNotSpecified, nameof(runtime))
+                    );
                 }
 
                 runtimeFallbacks.Add(new RuntimeFallbacks(runtime, fallbacks));
@@ -735,7 +786,11 @@ namespace Microsoft.Extensions.DependencyModel
             return runtimeFallbacks;
         }
 
-        private IEnumerable<Library> CreateLibraries(IEnumerable<TargetLibrary>? libraries, bool runtime, Dictionary<string, LibraryStub>? libraryStubs)
+        private IEnumerable<Library> CreateLibraries(
+            IEnumerable<TargetLibrary>? libraries,
+            bool runtime,
+            Dictionary<string, LibraryStub>? libraryStubs
+        )
         {
             if (libraries == null)
             {
@@ -744,7 +799,11 @@ namespace Microsoft.Extensions.DependencyModel
 
             return CreateLibrariesNotNull(libraries, runtime, libraryStubs);
 
-            IEnumerable<Library> CreateLibrariesNotNull(IEnumerable<TargetLibrary> libraries, bool runtime, Dictionary<string, LibraryStub>? libraryStubs)
+            IEnumerable<Library> CreateLibrariesNotNull(
+                IEnumerable<TargetLibrary> libraries,
+                bool runtime,
+                Dictionary<string, LibraryStub>? libraryStubs
+            )
             {
                 foreach (TargetLibrary library in libraries)
                 {
@@ -755,16 +814,27 @@ namespace Microsoft.Extensions.DependencyModel
             }
         }
 
-        private Library? CreateLibrary(TargetLibrary targetLibrary, bool runtime, Dictionary<string, LibraryStub>? libraryStubs)
+        private Library? CreateLibrary(
+            TargetLibrary targetLibrary,
+            bool runtime,
+            Dictionary<string, LibraryStub>? libraryStubs
+        )
         {
             string nameWithVersion = targetLibrary.Name;
 
-            if (libraryStubs == null || !libraryStubs.TryGetValue(nameWithVersion, out LibraryStub stub))
+            if (
+                libraryStubs == null
+                || !libraryStubs.TryGetValue(nameWithVersion, out LibraryStub stub)
+            )
             {
-                throw new InvalidOperationException(SR.Format(SR.LibraryInformationNotFound, nameWithVersion));
+                throw new InvalidOperationException(
+                    SR.Format(SR.LibraryInformationNotFound, nameWithVersion)
+                );
             }
 
-            int separatorPosition = nameWithVersion.IndexOf(DependencyContextStrings.VersionSeparator);
+            int separatorPosition = nameWithVersion.IndexOf(
+                DependencyContextStrings.VersionSeparator
+            );
 
             string name = Pool(nameWithVersion.Substring(0, separatorPosition));
             string version = Pool(nameWithVersion.Substring(separatorPosition + 1));
@@ -782,7 +852,12 @@ namespace Microsoft.Extensions.DependencyModel
                 var nativeLibraryGroups = new List<RuntimeAssetGroup>();
                 if (targetLibrary.RuntimeTargets != null)
                 {
-                    foreach (IGrouping<string?, RuntimeTargetEntryStub> ridGroup in targetLibrary.RuntimeTargets.GroupBy(e => e.Rid))
+                    foreach (
+                        IGrouping<
+                            string?,
+                            RuntimeTargetEntryStub
+                        > ridGroup in targetLibrary.RuntimeTargets.GroupBy(e => e.Rid)
+                    )
                     {
                         RuntimeFile[] groupRuntimeAssemblies = ridGroup
                             .Where(e => e.Type == DependencyContextStrings.RuntimeAssetType)
@@ -791,9 +866,14 @@ namespace Microsoft.Extensions.DependencyModel
 
                         if (groupRuntimeAssemblies.Length != 0)
                         {
-                            runtimeAssemblyGroups.Add(new RuntimeAssetGroup(
-                                ridGroup.Key,
-                                groupRuntimeAssemblies.Where(a => Path.GetFileName(a.Path) != "_._")));
+                            runtimeAssemblyGroups.Add(
+                                new RuntimeAssetGroup(
+                                    ridGroup.Key,
+                                    groupRuntimeAssemblies.Where(a =>
+                                        Path.GetFileName(a.Path) != "_._"
+                                    )
+                                )
+                            );
                         }
 
                         RuntimeFile[] groupNativeLibraries = ridGroup
@@ -803,21 +883,30 @@ namespace Microsoft.Extensions.DependencyModel
 
                         if (groupNativeLibraries.Length != 0)
                         {
-                            nativeLibraryGroups.Add(new RuntimeAssetGroup(
-                                ridGroup.Key,
-                                groupNativeLibraries.Where(a => Path.GetFileName(a.Path) != "_._")));
+                            nativeLibraryGroups.Add(
+                                new RuntimeAssetGroup(
+                                    ridGroup.Key,
+                                    groupNativeLibraries.Where(a =>
+                                        Path.GetFileName(a.Path) != "_._"
+                                    )
+                                )
+                            );
                         }
                     }
                 }
 
                 if (targetLibrary.Runtimes != null && targetLibrary.Runtimes.Count > 0)
                 {
-                    runtimeAssemblyGroups.Add(new RuntimeAssetGroup(string.Empty, targetLibrary.Runtimes));
+                    runtimeAssemblyGroups.Add(
+                        new RuntimeAssetGroup(string.Empty, targetLibrary.Runtimes)
+                    );
                 }
 
                 if (targetLibrary.Natives != null && targetLibrary.Natives.Count > 0)
                 {
-                    nativeLibraryGroups.Add(new RuntimeAssetGroup(string.Empty, targetLibrary.Natives));
+                    nativeLibraryGroups.Add(
+                        new RuntimeAssetGroup(string.Empty, targetLibrary.Natives)
+                    );
                 }
 
                 return new RuntimeLibrary(
@@ -827,16 +916,19 @@ namespace Microsoft.Extensions.DependencyModel
                     hash: stub.Hash,
                     runtimeAssemblyGroups: runtimeAssemblyGroups,
                     nativeLibraryGroups: nativeLibraryGroups,
-                    resourceAssemblies: targetLibrary.Resources ?? Enumerable.Empty<ResourceAssembly>(),
+                    resourceAssemblies: targetLibrary.Resources
+                        ?? Enumerable.Empty<ResourceAssembly>(),
                     dependencies: targetLibrary.Dependencies,
                     serviceable: stub.Serviceable,
                     path: stub.Path,
                     hashPath: stub.HashPath,
-                    runtimeStoreManifestName: stub.RuntimeStoreManifestName);
+                    runtimeStoreManifestName: stub.RuntimeStoreManifestName
+                );
             }
             else
             {
-                IEnumerable<string> assemblies = targetLibrary.Compilations ?? Enumerable.Empty<string>();
+                IEnumerable<string> assemblies =
+                    targetLibrary.Compilations ?? Enumerable.Empty<string>();
                 return new CompilationLibrary(
                     stub.Type,
                     name,
@@ -846,7 +938,8 @@ namespace Microsoft.Extensions.DependencyModel
                     targetLibrary.Dependencies,
                     stub.Serviceable,
                     stub.Path,
-                    stub.HashPath);
+                    stub.HashPath
+                );
             }
         }
 

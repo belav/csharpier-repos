@@ -18,11 +18,13 @@ namespace System.Tests
         [Fact]
         public static void StructWithDoubleFieldNotTightlyPackedZeroCompareTest()
         {
-            StructWithDoubleFieldNotTightlyPacked obj1 = new StructWithDoubleFieldNotTightlyPacked();
+            StructWithDoubleFieldNotTightlyPacked obj1 =
+                new StructWithDoubleFieldNotTightlyPacked();
             obj1.value1 = 1;
             obj1.value2 = 0.0;
 
-            StructWithDoubleFieldNotTightlyPacked obj2 = new StructWithDoubleFieldNotTightlyPacked();
+            StructWithDoubleFieldNotTightlyPacked obj2 =
+                new StructWithDoubleFieldNotTightlyPacked();
             obj2.value1 = 1;
             obj2.value2 = -0.0;
 
@@ -48,11 +50,13 @@ namespace System.Tests
         [Fact]
         public static void StructWithDoubleFieldNotTightlyPackedNaNCompareTest()
         {
-            StructWithDoubleFieldNotTightlyPacked obj1 = new StructWithDoubleFieldNotTightlyPacked();
+            StructWithDoubleFieldNotTightlyPacked obj1 =
+                new StructWithDoubleFieldNotTightlyPacked();
             obj1.value1 = 1;
             obj1.value2 = double.NaN;
 
-            StructWithDoubleFieldNotTightlyPacked obj2 = new StructWithDoubleFieldNotTightlyPacked();
+            StructWithDoubleFieldNotTightlyPacked obj2 =
+                new StructWithDoubleFieldNotTightlyPacked();
             obj2.value1 = 1;
             obj2.value2 = -double.NaN;
 
@@ -78,11 +82,13 @@ namespace System.Tests
         [Fact]
         public static void StructWithNestedDoubleFieldNotTightlyPackedZeroCompareTest()
         {
-            StructWithDoubleFieldNestedNotTightlyPacked obj1 = new StructWithDoubleFieldNestedNotTightlyPacked();
+            StructWithDoubleFieldNestedNotTightlyPacked obj1 =
+                new StructWithDoubleFieldNestedNotTightlyPacked();
             obj1.value1.value1 = 1;
             obj1.value2.value2 = 0.0;
 
-            StructWithDoubleFieldNestedNotTightlyPacked obj2 = new StructWithDoubleFieldNestedNotTightlyPacked();
+            StructWithDoubleFieldNestedNotTightlyPacked obj2 =
+                new StructWithDoubleFieldNestedNotTightlyPacked();
             obj2.value1.value1 = 1;
             obj2.value2.value2 = -0.0;
 
@@ -93,11 +99,13 @@ namespace System.Tests
         [Fact]
         public static void StructWithNestedDoubleFieldTightlyPackedZeroCompareTest()
         {
-            StructWithDoubleFieldNestedTightlyPacked obj1 = new StructWithDoubleFieldNestedTightlyPacked();
+            StructWithDoubleFieldNestedTightlyPacked obj1 =
+                new StructWithDoubleFieldNestedTightlyPacked();
             obj1.value1.value1 = 1;
             obj1.value2.value2 = 0.0;
 
-            StructWithDoubleFieldNestedTightlyPacked obj2 = new StructWithDoubleFieldNestedTightlyPacked();
+            StructWithDoubleFieldNestedTightlyPacked obj2 =
+                new StructWithDoubleFieldNestedTightlyPacked();
             obj2.value1.value1 = 1;
             obj2.value2.value2 = -0.0;
 
@@ -108,11 +116,13 @@ namespace System.Tests
         [Fact]
         public static void StructWithNestedDoubleFieldNotTightlyPackedNaNCompareTest()
         {
-            StructWithDoubleFieldNestedNotTightlyPacked obj1 = new StructWithDoubleFieldNestedNotTightlyPacked();
+            StructWithDoubleFieldNestedNotTightlyPacked obj1 =
+                new StructWithDoubleFieldNestedNotTightlyPacked();
             obj1.value1.value1 = 1;
             obj1.value2.value2 = double.NaN;
 
-            StructWithDoubleFieldNestedNotTightlyPacked obj2 = new StructWithDoubleFieldNestedNotTightlyPacked();
+            StructWithDoubleFieldNestedNotTightlyPacked obj2 =
+                new StructWithDoubleFieldNestedNotTightlyPacked();
             obj2.value1.value1 = 1;
             obj2.value2.value2 = -double.NaN;
 
@@ -123,11 +133,13 @@ namespace System.Tests
         [Fact]
         public static void StructWithNestedDoubleFieldTightlyPackedNaNCompareTest()
         {
-            StructWithDoubleFieldNestedTightlyPacked obj1 = new StructWithDoubleFieldNestedTightlyPacked();
+            StructWithDoubleFieldNestedTightlyPacked obj1 =
+                new StructWithDoubleFieldNestedTightlyPacked();
             obj1.value1.value1 = 1;
             obj1.value2.value2 = double.NaN;
 
-            StructWithDoubleFieldNestedTightlyPacked obj2 = new StructWithDoubleFieldNestedTightlyPacked();
+            StructWithDoubleFieldNestedTightlyPacked obj2 =
+                new StructWithDoubleFieldNestedTightlyPacked();
             obj2.value1.value1 = 1;
             obj2.value2.value2 = -double.NaN;
 
@@ -198,11 +210,13 @@ namespace System.Tests
         [Fact]
         public static void StructWithNestedFloatFieldNotTightlyPackedZeroCompareTest()
         {
-            StructWithFloatFieldNestedNotTightlyPacked obj1 = new StructWithFloatFieldNestedNotTightlyPacked();
+            StructWithFloatFieldNestedNotTightlyPacked obj1 =
+                new StructWithFloatFieldNestedNotTightlyPacked();
             obj1.value1.value1 = 0.0f;
             obj1.value2.value2 = 1;
 
-            StructWithFloatFieldNestedNotTightlyPacked obj2 = new StructWithFloatFieldNestedNotTightlyPacked();
+            StructWithFloatFieldNestedNotTightlyPacked obj2 =
+                new StructWithFloatFieldNestedNotTightlyPacked();
             obj2.value1.value1 = -0.0f;
             obj2.value2.value2 = 1;
 
@@ -213,11 +227,13 @@ namespace System.Tests
         [Fact]
         public static void StructWithNestedFloatFieldTightlyPackedZeroCompareTest()
         {
-            StructWithFloatFieldNestedTightlyPacked obj1 = new StructWithFloatFieldNestedTightlyPacked();
+            StructWithFloatFieldNestedTightlyPacked obj1 =
+                new StructWithFloatFieldNestedTightlyPacked();
             obj1.value1.value1 = 0.0f;
             obj1.value2.value2 = 1;
 
-            StructWithFloatFieldNestedTightlyPacked obj2 = new StructWithFloatFieldNestedTightlyPacked();
+            StructWithFloatFieldNestedTightlyPacked obj2 =
+                new StructWithFloatFieldNestedTightlyPacked();
             obj2.value1.value1 = -0.0f;
             obj2.value2.value2 = 1;
 
@@ -228,11 +244,13 @@ namespace System.Tests
         [Fact]
         public static void StructWithNestedFloatFieldNotTightlyPackedNaNCompareTest()
         {
-            StructWithFloatFieldNestedNotTightlyPacked obj1 = new StructWithFloatFieldNestedNotTightlyPacked();
+            StructWithFloatFieldNestedNotTightlyPacked obj1 =
+                new StructWithFloatFieldNestedNotTightlyPacked();
             obj1.value1.value1 = float.NaN;
             obj1.value2.value2 = 1;
 
-            StructWithFloatFieldNestedNotTightlyPacked obj2 = new StructWithFloatFieldNestedNotTightlyPacked();
+            StructWithFloatFieldNestedNotTightlyPacked obj2 =
+                new StructWithFloatFieldNestedNotTightlyPacked();
             obj2.value1.value1 = -float.NaN;
             obj2.value2.value2 = 1;
 
@@ -243,11 +261,13 @@ namespace System.Tests
         [Fact]
         public static void StructWithNestedFloatFieldTightlyPackedNaNCompareTest()
         {
-            StructWithFloatFieldNestedTightlyPacked obj1 = new StructWithFloatFieldNestedTightlyPacked();
+            StructWithFloatFieldNestedTightlyPacked obj1 =
+                new StructWithFloatFieldNestedTightlyPacked();
             obj1.value1.value1 = float.NaN;
             obj1.value2.value2 = 1;
 
-            StructWithFloatFieldNestedTightlyPacked obj2 = new StructWithFloatFieldNestedTightlyPacked();
+            StructWithFloatFieldNestedTightlyPacked obj2 =
+                new StructWithFloatFieldNestedTightlyPacked();
             obj2.value1.value1 = -float.NaN;
             obj2.value2.value2 = 1;
 
@@ -258,11 +278,13 @@ namespace System.Tests
         [Fact]
         public static void StructWithoutNestedOverriddenEqualsCompareTest()
         {
-            StructWithoutNestedOverriddenEqualsAndGetHashCode obj1 = new StructWithoutNestedOverriddenEqualsAndGetHashCode();
+            StructWithoutNestedOverriddenEqualsAndGetHashCode obj1 =
+                new StructWithoutNestedOverriddenEqualsAndGetHashCode();
             obj1.value1.value = 1;
             obj1.value2.value = 2;
 
-            StructWithoutNestedOverriddenEqualsAndGetHashCode obj2 = new StructWithoutNestedOverriddenEqualsAndGetHashCode();
+            StructWithoutNestedOverriddenEqualsAndGetHashCode obj2 =
+                new StructWithoutNestedOverriddenEqualsAndGetHashCode();
             obj2.value1.value = 1;
             obj2.value2.value = 2;
 
@@ -273,11 +295,13 @@ namespace System.Tests
         [Fact]
         public static void StructWithNestedOverriddenEqualsCompareTest()
         {
-            StructWithNestedOverriddenEqualsAndGetHashCode obj1 = new StructWithNestedOverriddenEqualsAndGetHashCode();
+            StructWithNestedOverriddenEqualsAndGetHashCode obj1 =
+                new StructWithNestedOverriddenEqualsAndGetHashCode();
             obj1.value1.value = 1;
             obj1.value2.value = 2;
 
-            StructWithNestedOverriddenEqualsAndGetHashCode obj2 = new StructWithNestedOverriddenEqualsAndGetHashCode();
+            StructWithNestedOverriddenEqualsAndGetHashCode obj2 =
+                new StructWithNestedOverriddenEqualsAndGetHashCode();
             obj2.value1.value = 1;
             obj2.value2.value = 2;
 

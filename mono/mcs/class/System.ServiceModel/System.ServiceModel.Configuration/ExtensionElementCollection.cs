@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,65 +49,75 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	[ConfigurationCollection (typeof (ExtensionElement),
-		 AddItemName = "add",
-		 RemoveItemName = "remove",
-		 ClearItemsName = "clear",
-		 CollectionType = ConfigurationElementCollectionType.BasicMap)]
-	public class ExtensionElementCollection
-		 : ServiceModelConfigurationElementCollection<ExtensionElement>, ICollection, IEnumerable
-	{
-		Dictionary<Type, ExtensionElement> _lookup;
+    [ConfigurationCollection(
+        typeof(ExtensionElement),
+        AddItemName = "add",
+        RemoveItemName = "remove",
+        ClearItemsName = "clear",
+        CollectionType = ConfigurationElementCollectionType.BasicMap
+    )]
+    public class ExtensionElementCollection
+        : ServiceModelConfigurationElementCollection<ExtensionElement>,
+            ICollection,
+            IEnumerable
+    {
+        Dictionary<Type, ExtensionElement> _lookup;
 
-		Dictionary<Type, ExtensionElement> Lookup {
-			get {
-				if (_lookup == null) {
-					_lookup = new Dictionary<Type, ExtensionElement> ();
-					for (int i = 0; i < Count; i++) {
-						ExtensionElement extension = this [i];
-						Type type = Type.GetType (extension.Type);
-						_lookup.Add (type, extension);
-					}
-				}
-				return _lookup;
-			}
-		}
+        Dictionary<Type, ExtensionElement> Lookup
+        {
+            get
+            {
+                if (_lookup == null)
+                {
+                    _lookup = new Dictionary<Type, ExtensionElement>();
+                    for (int i = 0; i < Count; i++)
+                    {
+                        ExtensionElement extension = this[i];
+                        Type type = Type.GetType(extension.Type);
+                        _lookup.Add(type, extension);
+                    }
+                }
+                return _lookup;
+            }
+        }
 
-		protected override bool ThrowOnDuplicate {
-			get {
-				return base.ThrowOnDuplicate;
-			}
-		}
+        protected override bool ThrowOnDuplicate
+        {
+            get { return base.ThrowOnDuplicate; }
+        }
 
-		protected override object GetElementKey (ConfigurationElement element) {
-			return ((ExtensionElement) element).Name;
-		}
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            return ((ExtensionElement)element).Name;
+        }
 
-		protected override void BaseAdd (ConfigurationElement element) {
-			base.BaseAdd (element);
-		}
+        protected override void BaseAdd(ConfigurationElement element)
+        {
+            base.BaseAdd(element);
+        }
 
-		protected override void BaseAdd (int index, ConfigurationElement element) {
-			base.BaseAdd (index, element);
-		}
+        protected override void BaseAdd(int index, ConfigurationElement element)
+        {
+            base.BaseAdd(index, element);
+        }
 
-		private void AddLookup (ConfigurationElement element) {
-			ExtensionElement extension = (ExtensionElement) element;
-			Type type = Type.GetType (extension.Type);
-			_lookup.Add (type, extension);
-		}
+        private void AddLookup(ConfigurationElement element)
+        {
+            ExtensionElement extension = (ExtensionElement)element;
+            Type type = Type.GetType(extension.Type);
+            _lookup.Add(type, extension);
+        }
 
-		internal string GetConfigurationElementName (Type type) {
-			if (Lookup.ContainsKey (type))
-				return Lookup [type].Name;
-			return null;
-		}
-	}
-
+        internal string GetConfigurationElementName(Type type)
+        {
+            if (Lookup.ContainsKey(type))
+                return Lookup[type].Name;
+            return null;
+        }
+    }
 }

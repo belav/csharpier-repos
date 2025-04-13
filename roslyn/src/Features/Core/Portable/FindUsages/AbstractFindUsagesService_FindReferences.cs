@@ -22,54 +22,87 @@ namespace Microsoft.CodeAnalysis.FindUsages
     internal abstract partial class AbstractFindUsagesService
     {
         async Task IFindUsagesService.FindReferencesAsync(
-            IFindUsagesContext context, Document document, int position, CancellationToken cancellationToken)
+            IFindUsagesContext context,
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var definitionTrackingContext = new DefinitionTrackingContext(context);
 
             await FindLiteralOrSymbolReferencesAsync(
-                definitionTrackingContext, document, position, cancellationToken).ConfigureAwait(false);
+                    definitionTrackingContext,
+                    document,
+                    position,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // After the FAR engine is done call into any third party extensions to see
             // if they want to add results.
             var thirdPartyDefinitions = await GetThirdPartyDefinitionsAsync(
-                document.Project.Solution, definitionTrackingContext.GetDefinitions(), cancellationToken).ConfigureAwait(false);
+                    document.Project.Solution,
+                    definitionTrackingContext.GetDefinitions(),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             foreach (var definition in thirdPartyDefinitions)
-                await context.OnDefinitionFoundAsync(definition, cancellationToken).ConfigureAwait(false);
+                await context
+                    .OnDefinitionFoundAsync(definition, cancellationToken)
+                    .ConfigureAwait(false);
         }
 
         Task IFindUsagesLSPService.FindReferencesAsync(
-            IFindUsagesContext context, Document document, int position, CancellationToken cancellationToken)
+            IFindUsagesContext context,
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             // We don't need to get third party definitions when finding references in LSP.
             // Currently, 3rd party definitions = XAML definitions, and XAML will provide
             // references via LSP instead of hooking into Roslyn.
             // This also means that we don't need to be on the UI thread.
             return FindLiteralOrSymbolReferencesAsync(
-                new DefinitionTrackingContext(context), document, position, cancellationToken);
+                new DefinitionTrackingContext(context),
+                document,
+                position,
+                cancellationToken
+            );
         }
 
         private static async Task FindLiteralOrSymbolReferencesAsync(
-            IFindUsagesContext context, Document document, int position, CancellationToken cancellationToken)
+            IFindUsagesContext context,
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             // First, see if we're on a literal.  If so search for literals in the solution with
             // the same value.
             var found = await TryFindLiteralReferencesAsync(
-                context, document, position, cancellationToken).ConfigureAwait(false);
+                    context,
+                    document,
+                    position,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (found)
             {
                 return;
             }
 
             // Wasn't a literal.  Try again as a symbol.
-            await FindSymbolReferencesAsync(
-                context, document, position, cancellationToken).ConfigureAwait(false);
+            await FindSymbolReferencesAsync(context, document, position, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         private static async Task<ImmutableArray<DefinitionItem>> GetThirdPartyDefinitionsAsync(
             Solution solution,
             ImmutableArray<DefinitionItem> definitions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<DefinitionItem>.GetInstance(out var result);
 
@@ -77,7 +110,9 @@ namespace Microsoft.CodeAnalysis.FindUsages
 
             foreach (var definition in definitions)
             {
-                var thirdParty = await factory.GetThirdPartyDefinitionItemAsync(solution, definition, cancellationToken).ConfigureAwait(false);
+                var thirdParty = await factory
+                    .GetThirdPartyDefinitionItemAsync(solution, definition, cancellationToken)
+                    .ConfigureAwait(false);
                 result.AddIfNotNull(thirdParty);
             }
 
@@ -85,23 +120,33 @@ namespace Microsoft.CodeAnalysis.FindUsages
         }
 
         private static async Task FindSymbolReferencesAsync(
-            IFindUsagesContext context, Document document, int position, CancellationToken cancellationToken)
+            IFindUsagesContext context,
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             // If this is a symbol from a metadata-as-source project, then map that symbol back to a symbol in the primary workspace.
-            var symbolAndProject = await FindUsagesHelpers.GetRelevantSymbolAndProjectAtPositionAsync(
-                document, position, cancellationToken).ConfigureAwait(false);
+            var symbolAndProject = await FindUsagesHelpers
+                .GetRelevantSymbolAndProjectAtPositionAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
             if (symbolAndProject == null)
             {
-                await context.ReportMessageAsync(FeaturesResources.Find_All_References_not_invoked_on_applicable_symbol, cancellationToken).ConfigureAwait(false);
+                await context
+                    .ReportMessageAsync(
+                        FeaturesResources.Find_All_References_not_invoked_on_applicable_symbol,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return;
             }
 
             var (symbol, project) = symbolAndProject.Value;
 
-            await FindSymbolReferencesAsync(
-                context, symbol, project, cancellationToken).ConfigureAwait(false);
+            await FindSymbolReferencesAsync(context, symbol, project, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -109,20 +154,30 @@ namespace Microsoft.CodeAnalysis.FindUsages
         /// and want to push all the references to it into the Streaming-Find-References window.
         /// </summary>
         public static async Task FindSymbolReferencesAsync(
-            IFindUsagesContext context, ISymbol symbol, Project project, CancellationToken cancellationToken)
+            IFindUsagesContext context,
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
-            await context.SetSearchTitleAsync(
-                string.Format(FeaturesResources._0_references,
-                FindUsagesHelpers.GetDisplayName(symbol)),
-                cancellationToken).ConfigureAwait(false);
+            await context
+                .SetSearchTitleAsync(
+                    string.Format(
+                        FeaturesResources._0_references,
+                        FindUsagesHelpers.GetDisplayName(symbol)
+                    ),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var options = FindReferencesSearchOptions.GetFeatureOptionsForStartingSymbol(symbol);
 
             // Now call into the underlying FAR engine to find reference.  The FAR
             // engine will push results into the 'progress' instance passed into it.
-            // We'll take those results, massage them, and forward them along to the 
+            // We'll take those results, massage them, and forward them along to the
             // FindReferencesContext instance we were given.
-            await FindReferencesAsync(context, symbol, project, options, cancellationToken).ConfigureAwait(false);
+            await FindReferencesAsync(context, symbol, project, options, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         public static async Task FindReferencesAsync(
@@ -130,29 +185,52 @@ namespace Microsoft.CodeAnalysis.FindUsages
             ISymbol symbol,
             Project project,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var solution = project.Solution;
-            var client = await RemoteHostClient.TryGetClientAsync(solution.Services, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(solution.Services, cancellationToken)
+                .ConfigureAwait(false);
             if (client != null)
             {
-                // Create a callback that we can pass to the server process to hear about the 
+                // Create a callback that we can pass to the server process to hear about the
                 // results as it finds them.  When we hear about results we'll forward them to
                 // the 'progress' parameter which will then update the UI.
                 var serverCallback = new FindUsagesServerCallback(solution, context);
-                var symbolAndProjectId = SerializableSymbolAndProjectId.Create(symbol, project, cancellationToken);
+                var symbolAndProjectId = SerializableSymbolAndProjectId.Create(
+                    symbol,
+                    project,
+                    cancellationToken
+                );
 
-                _ = await client.TryInvokeAsync<IRemoteFindUsagesService>(
-                    solution,
-                    (service, solutionInfo, callbackId, cancellationToken) => service.FindReferencesAsync(solutionInfo, callbackId, symbolAndProjectId, options, cancellationToken),
-                    serverCallback,
-                    cancellationToken).ConfigureAwait(false);
+                _ = await client
+                    .TryInvokeAsync<IRemoteFindUsagesService>(
+                        solution,
+                        (service, solutionInfo, callbackId, cancellationToken) =>
+                            service.FindReferencesAsync(
+                                solutionInfo,
+                                callbackId,
+                                symbolAndProjectId,
+                                options,
+                                cancellationToken
+                            ),
+                        serverCallback,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
             else
             {
                 // Couldn't effectively search in OOP. Perform the search in-process.
                 await FindReferencesInCurrentProcessAsync(
-                    context, symbol, project, options, cancellationToken).ConfigureAwait(false);
+                        context,
+                        symbol,
+                        project,
+                        options,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
@@ -161,30 +239,47 @@ namespace Microsoft.CodeAnalysis.FindUsages
             ISymbol symbol,
             Project project,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var progress = new FindReferencesProgressAdapter(project.Solution, context, options);
             return SymbolFinder.FindReferencesAsync(
-                symbol, project.Solution, progress, documents: null, options, cancellationToken);
+                symbol,
+                project.Solution,
+                progress,
+                documents: null,
+                options,
+                cancellationToken
+            );
         }
 
         private static async Task<bool> TryFindLiteralReferencesAsync(
-            IFindUsagesContext context, Document document, int position, CancellationToken cancellationToken)
+            IFindUsagesContext context,
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxTree = await document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
             // Currently we only support FAR for numbers, strings and characters.  We don't
             // bother with true/false/null as those are likely to have way too many results
             // to be useful.
-            var token = await syntaxTree.GetTouchingTokenAsync(
-                position,
-                t => syntaxFacts.IsNumericLiteral(t) ||
-                     syntaxFacts.IsCharacterLiteral(t) ||
-                     syntaxFacts.IsStringLiteral(t),
-                cancellationToken).ConfigureAwait(false);
+            var token = await syntaxTree
+                .GetTouchingTokenAsync(
+                    position,
+                    t =>
+                        syntaxFacts.IsNumericLiteral(t)
+                        || syntaxFacts.IsCharacterLiteral(t)
+                        || syntaxFacts.IsStringLiteral(t),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (token.RawKind == 0)
             {
@@ -200,11 +295,15 @@ namespace Microsoft.CodeAnalysis.FindUsages
             if (token.Parent is null)
                 return false;
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var symbol = semanticModel.GetSymbolInfo(token.Parent, cancellationToken).Symbol ?? semanticModel.GetDeclaredSymbol(token.Parent, cancellationToken);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var symbol =
+                semanticModel.GetSymbolInfo(token.Parent, cancellationToken).Symbol
+                ?? semanticModel.GetDeclaredSymbol(token.Parent, cancellationToken);
 
             // Numeric labels are available in VB.  In that case we want the normal FAR engine to
-            // do the searching.  For these literals we want to find symbolic results and not 
+            // do the searching.  For these literals we want to find symbolic results and not
             // numeric matches.
             if (symbol is ILabelSymbol)
                 return false;
@@ -225,18 +324,28 @@ namespace Microsoft.CodeAnalysis.FindUsages
             // So just create it now and report to the context what it is.
             var definition = DefinitionItem.CreateNonNavigableItem(
                 ImmutableArray.Create(TextTags.StringLiteral),
-                ImmutableArray.Create(new TaggedText(TextTags.Text, searchTitle)));
+                ImmutableArray.Create(new TaggedText(TextTags.Text, searchTitle))
+            );
 
-            await context.OnDefinitionFoundAsync(definition, cancellationToken).ConfigureAwait(false);
+            await context
+                .OnDefinitionFoundAsync(definition, cancellationToken)
+                .ConfigureAwait(false);
 
             var progressAdapter = new FindLiteralsProgressAdapter(context, definition);
 
             // Now call into the underlying FAR engine to find reference.  The FAR
             // engine will push results into the 'progress' instance passed into it.
-            // We'll take those results, massage them, and forward them along to the 
+            // We'll take those results, massage them, and forward them along to the
             // FindUsagesContext instance we were given.
-            await SymbolFinder.FindLiteralReferencesAsync(
-                tokenValue, Type.GetTypeCode(tokenValue.GetType()), solution, progressAdapter, cancellationToken).ConfigureAwait(false);
+            await SymbolFinder
+                .FindLiteralReferencesAsync(
+                    tokenValue,
+                    Type.GetTypeCode(tokenValue.GetType()),
+                    solution,
+                    progressAdapter,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return true;
         }

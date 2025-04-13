@@ -14,7 +14,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "key",
-                () => X509SignatureGenerator.CreateForRSA(null, RSASignaturePadding.Pss));
+                () => X509SignatureGenerator.CreateForRSA(null, RSASignaturePadding.Pss)
+            );
         }
 
         [Fact]
@@ -24,7 +25,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             {
                 rsa.ImportParameters(TestData.RsaBigExponentParams);
 
-                X509SignatureGenerator signatureGenerator = X509SignatureGenerator.CreateForRSA(rsa, RSASignaturePadding.Pss);
+                X509SignatureGenerator signatureGenerator = X509SignatureGenerator.CreateForRSA(
+                    rsa,
+                    RSASignaturePadding.Pss
+                );
                 PublicKey publicKey = signatureGenerator.PublicKey;
 
                 // Irrespective of what the current key thinks, the PublicKey value we encode for RSA will always write
@@ -38,11 +42,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                 string expectedKeyHex =
                     // SEQUENCE
-                    "3082010C" +
+                    "3082010C"
+                    +
                     //   INTEGER (modulus)
-                    "0282010100" + TestData.RsaBigExponentParams.Modulus.ByteArrayToHex() +
+                    "0282010100"
+                    + TestData.RsaBigExponentParams.Modulus.ByteArrayToHex()
+                    +
                     //   INTEGER (exponent)
-                    "0205" + TestData.RsaBigExponentParams.Exponent.ByteArrayToHex();
+                    "0205"
+                    + TestData.RsaBigExponentParams.Exponent.ByteArrayToHex();
 
                 Assert.Equal(expectedKeyHex, publicKey.EncodedKeyValue.RawData.ByteArrayToHex());
 
@@ -67,7 +75,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 RSAParameters parameters = TestData.RsaBigExponentParams;
                 rsa.ImportParameters(parameters);
 
-                var signatureGenerator = X509SignatureGenerator.CreateForRSA(rsa, RSASignaturePadding.Pss);
+                var signatureGenerator = X509SignatureGenerator.CreateForRSA(
+                    rsa,
+                    RSASignaturePadding.Pss
+                );
 
                 HashAlgorithmName hashAlgorithm = new HashAlgorithmName(hashAlgorithmName);
 
@@ -93,13 +104,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 RSAParameters parameters = TestData.RsaBigExponentParams;
                 rsa.ImportParameters(parameters);
 
-                var signatureGenerator = X509SignatureGenerator.CreateForRSA(rsa, RSASignaturePadding.Pss);
+                var signatureGenerator = X509SignatureGenerator.CreateForRSA(
+                    rsa,
+                    RSASignaturePadding.Pss
+                );
 
                 HashAlgorithmName hashAlgorithm = new HashAlgorithmName(hashAlgorithmName);
 
                 Assert.Throws<ArgumentOutOfRangeException>(
                     "hashAlgorithm",
-                    () => signatureGenerator.GetSignatureAlgorithmIdentifier(hashAlgorithm));
+                    () => signatureGenerator.GetSignatureAlgorithmIdentifier(hashAlgorithm)
+                );
             }
         }
 
@@ -109,7 +124,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         [InlineData("SHA512")]
         public static void SignatureAlgorithm_Encoding(string hashAlgorithmName)
         {
-
             // PSS-MGF1-with-SHA-2-* end up differing in only three bytes:
             // 1) hashAlgorithm.algorithmId's last byte
             // 2) mgf.parameters.algorithmId's last byte
@@ -138,31 +152,46 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
             string expectedHex =
                 // SEQUENCE (AlgorithmIdentifier)
-                "303D" +
-                    // OBJECT IDENTIFIER (AlgorithmIdentifier.algorithm == Oids.RsaPss)
-                    "06092A864886F70D01010A" +
-                    // SEQUENCE (AlgorithmIdentifier.params == RSASSA-PSS-params)
-                    "3030" +
-                        // CONSTRUCTED CONTEXT SPECIFIC 0 (params.hashAlgorithm)
-                        "A00D" +
-                            // SEQUENCE (AlgorithmIdentifier)
-                            "300B" +
-                                // OBJECT IDENTIFIER (params.hashAlgorithm.algorithm)
-                                "06096086480165030402" + lastOidByte.ToString("X2") +
-                        // CONSTRUCTED CONTEXT SPECIFIC 1 (params.maskGenAlgorithm)
-                        "A11A" +
-                            // SEQUENCE (MaskGenAlgorithm)
-                            "3018" +
-                                // OBJECT IDENTIFIER (MaskGenAlgorithm.algorithm == Oids.Mgf1)
-                                "06092A864886F70D010108" +
-                                // SEQUENCE (MaskGenAlgorithm.params)
-                                "300B" +
-                                    // OBJECT IDENTIFIER (MGF PRF == same hash algorithm as above)
-                                    "06096086480165030402" + lastOidByte.ToString("X2") +
-                        // CONSTRUCTED CONTEXT SPECIFIC 2 (params.saltLength)
-                        "A203" +
-                            // INTEGER (saltLength == size of hash)
-                            "0201" + saltLenByte.ToString("X2");
+                "303D"
+                +
+                // OBJECT IDENTIFIER (AlgorithmIdentifier.algorithm == Oids.RsaPss)
+                "06092A864886F70D01010A"
+                +
+                // SEQUENCE (AlgorithmIdentifier.params == RSASSA-PSS-params)
+                "3030"
+                +
+                // CONSTRUCTED CONTEXT SPECIFIC 0 (params.hashAlgorithm)
+                "A00D"
+                +
+                // SEQUENCE (AlgorithmIdentifier)
+                "300B"
+                +
+                // OBJECT IDENTIFIER (params.hashAlgorithm.algorithm)
+                "06096086480165030402"
+                + lastOidByte.ToString("X2")
+                +
+                // CONSTRUCTED CONTEXT SPECIFIC 1 (params.maskGenAlgorithm)
+                "A11A"
+                +
+                // SEQUENCE (MaskGenAlgorithm)
+                "3018"
+                +
+                // OBJECT IDENTIFIER (MaskGenAlgorithm.algorithm == Oids.Mgf1)
+                "06092A864886F70D010108"
+                +
+                // SEQUENCE (MaskGenAlgorithm.params)
+                "300B"
+                +
+                // OBJECT IDENTIFIER (MGF PRF == same hash algorithm as above)
+                "06096086480165030402"
+                + lastOidByte.ToString("X2")
+                +
+                // CONSTRUCTED CONTEXT SPECIFIC 2 (params.saltLength)
+                "A203"
+                +
+                // INTEGER (saltLength == size of hash)
+                "0201"
+                + saltLenByte.ToString("X2");
 
             using (RSA rsa = RSA.Create())
             {
@@ -170,7 +199,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 rsa.ImportParameters(parameters);
 
                 HashAlgorithmName hashAlgorithm = new HashAlgorithmName(hashAlgorithmName);
-                var signatureGenerator = X509SignatureGenerator.CreateForRSA(rsa, RSASignaturePadding.Pss);
+                var signatureGenerator = X509SignatureGenerator.CreateForRSA(
+                    rsa,
+                    RSASignaturePadding.Pss
+                );
                 byte[] sigAlg = signatureGenerator.GetSignatureAlgorithmIdentifier(hashAlgorithm);
 
                 Assert.Equal(expectedHex, sigAlg.ByteArrayToHex());

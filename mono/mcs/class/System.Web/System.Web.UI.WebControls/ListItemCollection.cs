@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,324 +30,355 @@ using System.Globalization;
 using System.Reflection;
 using System.Security.Permissions;
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
+    // CAS - no inheritance demand required because the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [Editor(
+        "System.Web.UI.Design.WebControls.ListItemsCollectionEditor, "
+            + Consts.AssemblySystem_Design,
+        typeof(System.Drawing.Design.UITypeEditor)
+    )]
+    public sealed class ListItemCollection : IList, ICollection, IEnumerable, IStateManager
+    {
+        #region Fields
+        ArrayList items;
+        bool tracking;
+        bool dirty;
+        int lastDirty = 0;
+        #endregion	// Fields
 
-	// CAS - no inheritance demand required because the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[Editor("System.Web.UI.Design.WebControls.ListItemsCollectionEditor, " + Consts.AssemblySystem_Design, typeof (System.Drawing.Design.UITypeEditor))]
-	public sealed class ListItemCollection : IList, ICollection, IEnumerable, IStateManager 
-	{
-#region Fields
-		ArrayList items;
-		bool tracking;
-		bool dirty;
-		int lastDirty = 0;
-#endregion	// Fields
+        #region Public Constructors
+        public ListItemCollection()
+        {
+            items = new ArrayList();
+        }
+        #endregion	// Public Constructors
 
-#region Public Constructors
-		public ListItemCollection() {
-			items = new ArrayList();
-		}
-#endregion	// Public Constructors
+        #region Public Instance Properties
+        public int Capacity
+        {
+            get { return items.Capacity; }
+            set { items.Capacity = value; }
+        }
 
-#region Public Instance Properties
-		public int Capacity {
-			get {
-				return items.Capacity;
-			}
+        public int Count
+        {
+            get { return items.Count; }
+        }
 
-			set {
-				items.Capacity = value;
-			}
-		}
+        public bool IsReadOnly
+        {
+            get { return items.IsReadOnly; }
+        }
 
-		public int Count {
-			get {
-				return items.Count;
-			}
-		}
+        public bool IsSynchronized
+        {
+            get { return items.IsSynchronized; }
+        }
 
-		public bool IsReadOnly {
-			get {
-				return items.IsReadOnly;
-			}
-		}
+        public object SyncRoot
+        {
+            get { return items.SyncRoot; }
+        }
 
-		public bool IsSynchronized {
-			get {
-				return items.IsSynchronized;
-			}
-		}
+        public ListItem this[int index]
+        {
+            get { return (ListItem)items[index]; }
+        }
+        #endregion	// Public Instance Properties
 
-		public object SyncRoot {
-			get {
-				return items.SyncRoot;
-			}
-		}
+        #region Public Instance Methods
+        public void Add(ListItem item)
+        {
+            items.Add(item);
+            if (tracking)
+            {
+                item.TrackViewState();
+                SetDirty();
+            }
+        }
 
-		public ListItem this[int index] {
-			get {
-				return (ListItem)items[index];
-			}
-		}
-		#endregion	// Public Instance Properties
+        public void Add(string item)
+        {
+            ListItem listItem = new ListItem(item);
+            items.Add(listItem);
 
-		#region Public Instance Methods
-		public void Add(ListItem item) {
-			items.Add(item);
-			if (tracking) {
-				item.TrackViewState ();
-				SetDirty ();
-			}
-		}
+            if (tracking)
+            {
+                listItem.TrackViewState();
+                SetDirty();
+            }
+        }
 
-		public void Add(string item) {
-			ListItem listItem = new ListItem (item);
-			items.Add (listItem);
+        public void AddRange(ListItem[] items)
+        {
+            for (int i = 0; i < items.Length; i++)
+            {
+                Add(items[i]);
 
-			if (tracking) {
-				listItem.TrackViewState ();
-				SetDirty ();
-			}
-		}
+                if (tracking)
+                {
+                    items[i].TrackViewState();
+                    SetDirty();
+                }
+            }
+        }
 
-		public void AddRange(ListItem[] items) {
-			for (int i = 0; i < items.Length; i++) {
-				Add(items[i]);
+        public void Clear()
+        {
+            items.Clear();
 
-				if (tracking) {
-					items [i].TrackViewState ();
-					SetDirty ();
-				}
-			}
-		}
+            if (tracking)
+                SetDirty();
+        }
 
-		public void Clear() {
-			items.Clear();
+        public bool Contains(ListItem item)
+        {
+            return items.Contains(item);
+        }
 
-			if (tracking)
-				SetDirty ();
-		}
+        public void CopyTo(Array array, int index)
+        {
+            items.CopyTo(array, index);
+        }
 
-		public bool Contains(ListItem item) {
-			return items.Contains(item);
-		}
+        public ListItem FindByText(string text)
+        {
+            for (int i = 0; i < items.Count; i++)
+                if (text == this[i].Text)
+                    return this[i];
 
-		public void CopyTo(Array array, int index) {
-			items.CopyTo(array, index);
-		}
+            return null;
+        }
 
-		public ListItem FindByText (string text)
-		{
-			for (int i = 0; i < items.Count; i++)
-				if (text == this [i].Text)
-					return this [i];
-			
-			return null;
-		}
+        public ListItem FindByValue(string value)
+        {
+            for (int i = 0; i < items.Count; i++)
+                if (value == this[i].Value)
+                    return this[i];
 
-		public ListItem FindByValue (string value)
-		{
-			for (int i = 0; i < items.Count; i++)
-				if (value == this [i].Value)
-					return this [i];
-			
-			return null;
-		}
+            return null;
+        }
 
-		public IEnumerator GetEnumerator() {
-			return items.GetEnumerator();
-		}
+        public IEnumerator GetEnumerator()
+        {
+            return items.GetEnumerator();
+        }
 
-		public int IndexOf(ListItem item) {
-			return items.IndexOf(item);
-		}
+        public int IndexOf(ListItem item)
+        {
+            return items.IndexOf(item);
+        }
 
-		internal int IndexOf(string value) {
-			for (int i = 0; i < items.Count; i++)
-				if (value == this [i].Value)
-					return i;
-			return -1;
-		}
+        internal int IndexOf(string value)
+        {
+            for (int i = 0; i < items.Count; i++)
+                if (value == this[i].Value)
+                    return i;
+            return -1;
+        }
 
-		public void Insert(int index, ListItem item) {
-			items.Insert(index, item);
+        public void Insert(int index, ListItem item)
+        {
+            items.Insert(index, item);
 
-			if (tracking) {
-				item.TrackViewState ();
-				lastDirty = index;
-				SetDirty ();
-			}
-		}
+            if (tracking)
+            {
+                item.TrackViewState();
+                lastDirty = index;
+                SetDirty();
+            }
+        }
 
-		public void Insert(int index, string item) {
-			ListItem listItem = new ListItem(item);
-			items.Insert (index, listItem);
+        public void Insert(int index, string item)
+        {
+            ListItem listItem = new ListItem(item);
+            items.Insert(index, listItem);
 
-			if (tracking) {
-				listItem.TrackViewState ();
-				lastDirty = index;
-				SetDirty ();
-			}
-		}
+            if (tracking)
+            {
+                listItem.TrackViewState();
+                lastDirty = index;
+                SetDirty();
+            }
+        }
 
-		public void Remove(ListItem item) {
-			items.Remove(item);
-			
-			if (tracking)
-				SetDirty ();
-		}
+        public void Remove(ListItem item)
+        {
+            items.Remove(item);
 
-		public void Remove (string item)
-		{
-			for (int i = 0; i < items.Count; i++)
-				if (item == this [i].Value) {
-					items.RemoveAt (i);
+            if (tracking)
+                SetDirty();
+        }
 
-					if (tracking)
-						SetDirty ();
-				}
-		}
+        public void Remove(string item)
+        {
+            for (int i = 0; i < items.Count; i++)
+                if (item == this[i].Value)
+                {
+                    items.RemoveAt(i);
 
-		public void RemoveAt(int index) {
-			items.RemoveAt(index);
+                    if (tracking)
+                        SetDirty();
+                }
+        }
 
-			if (tracking)
-				SetDirty ();
-		}
-#endregion	// Public Instance Methods
+        public void RemoveAt(int index)
+        {
+            items.RemoveAt(index);
 
-#region Interface methods
-		bool IList.IsFixedSize {
-			get {
-				return items.IsFixedSize;
-			}
-		}
+            if (tracking)
+                SetDirty();
+        }
+        #endregion	// Public Instance Methods
 
-		object IList.this[int index] {
-			get {
-				return this[index];
-			}
+        #region Interface methods
+        bool IList.IsFixedSize
+        {
+            get { return items.IsFixedSize; }
+        }
 
-			set {
-				if ((index >= 0) && (index < items.Count)) {
-					items[index] = (ListItem)value;
+        object IList.this[int index]
+        {
+            get { return this[index]; }
+            set
+            {
+                if ((index >= 0) && (index < items.Count))
+                {
+                    items[index] = (ListItem)value;
 
-					if (tracking)
-						((ListItem) value).TrackViewState ();
-				}
-			}
-		}
+                    if (tracking)
+                        ((ListItem)value).TrackViewState();
+                }
+            }
+        }
 
-		int IList.Add(object value) {
-			int i = items.Add ((ListItem) value);
+        int IList.Add(object value)
+        {
+            int i = items.Add((ListItem)value);
 
-			if (tracking) {
-				((IStateManager) value).TrackViewState ();
-				SetDirty ();
-			}
-			return i;
-		}
+            if (tracking)
+            {
+                ((IStateManager)value).TrackViewState();
+                SetDirty();
+            }
+            return i;
+        }
 
-		bool IList.Contains(object value) {
-			return Contains((ListItem)value);
-		}
+        bool IList.Contains(object value)
+        {
+            return Contains((ListItem)value);
+        }
 
-		int IList.IndexOf(object value) {
-			return IndexOf((ListItem)value);
-		}
+        int IList.IndexOf(object value)
+        {
+            return IndexOf((ListItem)value);
+        }
 
-		void IList.Insert(int index, object value) {
-			Insert(index, (ListItem)value);
-		}
+        void IList.Insert(int index, object value)
+        {
+            Insert(index, (ListItem)value);
+        }
 
-		void IList.Remove(object value) {
-			Remove((ListItem)value);
-		}
+        void IList.Remove(object value)
+        {
+            Remove((ListItem)value);
+        }
 
-		bool IStateManager.IsTrackingViewState {
-			get {
-				return tracking;
-			}
-		}
+        bool IStateManager.IsTrackingViewState
+        {
+            get { return tracking; }
+        }
 
-		void IStateManager.LoadViewState (object savedState)
-		{
-			Pair pair = savedState as Pair;
-			if (pair == null)
-				return;
+        void IStateManager.LoadViewState(object savedState)
+        {
+            Pair pair = savedState as Pair;
+            if (pair == null)
+                return;
 
-			bool newCollection = (bool) pair.First;
-			object [] itemsArray = (object []) pair.Second;
-			int count = itemsArray==null ? 0 : itemsArray.Length;
+            bool newCollection = (bool)pair.First;
+            object[] itemsArray = (object[])pair.Second;
+            int count = itemsArray == null ? 0 : itemsArray.Length;
 
-			if (newCollection)
-				if (count > 0)
-					items = new ArrayList(count);
-				else
-					items = new ArrayList();
+            if (newCollection)
+                if (count > 0)
+                    items = new ArrayList(count);
+                else
+                    items = new ArrayList();
 
-			for (int i = 0; i < count; i++) {
-				ListItem item = new ListItem ();
-				
-				if (newCollection) {
-					item.LoadViewState (itemsArray [i]);
-					item.SetDirty ();
-					Add (item);
-				}
-				else{
-					if (itemsArray [i] != null){
-						item.LoadViewState (itemsArray [i]);
-						item.SetDirty ();
-						items [i] = item;
-					}
-				}
-			}
-		}
+            for (int i = 0; i < count; i++)
+            {
+                ListItem item = new ListItem();
 
-		object IStateManager.SaveViewState() {
-			int count;
-			bool itemsDirty = false;
+                if (newCollection)
+                {
+                    item.LoadViewState(itemsArray[i]);
+                    item.SetDirty();
+                    Add(item);
+                }
+                else
+                {
+                    if (itemsArray[i] != null)
+                    {
+                        item.LoadViewState(itemsArray[i]);
+                        item.SetDirty();
+                        items[i] = item;
+                    }
+                }
+            }
+        }
 
-			count = items.Count;
-			if (count == 0 && !dirty)
-				return null;
+        object IStateManager.SaveViewState()
+        {
+            int count;
+            bool itemsDirty = false;
 
-			object [] itemsState = null;
-			if (count > 0)
-				itemsState = new object [count];
+            count = items.Count;
+            if (count == 0 && !dirty)
+                return null;
 
-			for (int i = 0; i < count; i++) {
-				itemsState [i] = ((IStateManager) items [i]).SaveViewState ();
-				if (itemsState [i] != null)
-					itemsDirty = true;
-			}
+            object[] itemsState = null;
+            if (count > 0)
+                itemsState = new object[count];
 
-			if (!dirty && !itemsDirty)
-				return null;
+            for (int i = 0; i < count; i++)
+            {
+                itemsState[i] = ((IStateManager)items[i]).SaveViewState();
+                if (itemsState[i] != null)
+                    itemsDirty = true;
+            }
 
-			return new Pair (dirty, itemsState);
-		}
+            if (!dirty && !itemsDirty)
+                return null;
 
-		void IStateManager.TrackViewState() {
-			tracking = true;
+            return new Pair(dirty, itemsState);
+        }
 
-			for (int i = 0; i < items.Count; i++) {
-				((ListItem)items[i]).TrackViewState();
-			}
-		}
-#endregion	// Interface methods
+        void IStateManager.TrackViewState()
+        {
+            tracking = true;
 
-		void SetDirty ()
-		{
-			dirty = true;
-			for (int i = lastDirty; i < items.Count; i++)
-				((ListItem) items [i]).SetDirty ();
-			
-			lastDirty = items.Count - 1;
-			if (lastDirty < 0)
-				lastDirty = 0;
-		}
-	}
+            for (int i = 0; i < items.Count; i++)
+            {
+                ((ListItem)items[i]).TrackViewState();
+            }
+        }
+        #endregion	// Interface methods
+
+        void SetDirty()
+        {
+            dirty = true;
+            for (int i = lastDirty; i < items.Count; i++)
+                ((ListItem)items[i]).SetDirty();
+
+            lastDirty = items.Count - 1;
+            if (lastDirty < 0)
+                lastDirty = 0;
+        }
+    }
 }

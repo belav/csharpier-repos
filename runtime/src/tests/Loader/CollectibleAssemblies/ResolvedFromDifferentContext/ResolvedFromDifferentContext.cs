@@ -10,29 +10,35 @@
 // etc.
 
 using System;
-using System.Runtime.Loader;
+using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.IO;
+using System.Runtime.Loader;
 using Xunit;
 
 class TestAssemblyLoadContext : AssemblyLoadContext
 {
     WeakReference interfaceAssemblyRef = null;
 
-    public TestAssemblyLoadContext(string name, bool isCollectible) : base(name,  isCollectible)
-    {
-    }
+    public TestAssemblyLoadContext(string name, bool isCollectible)
+        : base(name, isCollectible) { }
 
-    public WeakReference InterfaceAssemblyRef { get { return interfaceAssemblyRef; } }
+    public WeakReference InterfaceAssemblyRef
+    {
+        get { return interfaceAssemblyRef; }
+    }
 
     protected override Assembly Load(AssemblyName assemblyName)
     {
         if (assemblyName.Name == "TestInterface")
         {
             AssemblyLoadContext alc1 = new AssemblyLoadContext("Dependencies", true);
-            Console.WriteLine($"Loading TestInterface by alc {alc1} for {(IsCollectible ? "collectible" : "non-collectible")} alc {this}");
-            Assembly a = alc1.LoadFromAssemblyPath(Test.GetTestAssemblyPath(Path.Join("TestInterface", "TestInterface.dll")));
+            Console.WriteLine(
+                $"Loading TestInterface by alc {alc1} for {(IsCollectible ? "collectible" : "non-collectible")} alc {this}"
+            );
+            Assembly a = alc1.LoadFromAssemblyPath(
+                Test.GetTestAssemblyPath(Path.Join("TestInterface", "TestInterface.dll"))
+            );
             interfaceAssemblyRef = new WeakReference(a);
             return a;
         }
@@ -48,7 +54,10 @@ public class Test
 
     public static string GetTestAssemblyPath(string subPath)
     {
-        return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), subPath);
+        return Path.Combine(
+            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+            subPath
+        );
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -57,7 +66,9 @@ public class Test
         alc1 = new AssemblyLoadContext("Dependencies", true);
         AssemblyLoadContext alc2 = new AssemblyLoadContext("Test1", collectibleParent);
         alc2.Resolving += Alc2_Resolving;
-        Assembly assembly = alc2.LoadFromAssemblyPath(Test.GetTestAssemblyPath(Path.Join("TestClass", "TestClass.dll")));
+        Assembly assembly = alc2.LoadFromAssemblyPath(
+            Test.GetTestAssemblyPath(Path.Join("TestClass", "TestClass.dll"))
+        );
 
         Type t = assembly.GetType("TestClass.Class");
         Console.WriteLine($"Type {t} obtained");
@@ -76,8 +87,12 @@ public class Test
         Console.WriteLine($"Resolving event by alc {alc1} for alc {arg1}");
         if (alc1 != null && arg2.Name == "TestInterface")
         {
-            Console.WriteLine($"Loading TestInterface by alc {alc1} for {(arg1.IsCollectible ? "collectible" : "non-collectible")} alc {arg1}");
-            Assembly a = alc1.LoadFromAssemblyPath(Test.GetTestAssemblyPath(Path.Join("TestInterface", "TestInterface.dll")));
+            Console.WriteLine(
+                $"Loading TestInterface by alc {alc1} for {(arg1.IsCollectible ? "collectible" : "non-collectible")} alc {arg1}"
+            );
+            Assembly a = alc1.LoadFromAssemblyPath(
+                Test.GetTestAssemblyPath(Path.Join("TestInterface", "TestInterface.dll"))
+            );
             interfaceAssemblyRef = new WeakReference(a);
             return a;
         }
@@ -89,10 +104,12 @@ public class Test
     private static Assembly LoadUsingLoadOverride(bool collectibleParent)
     {
         TestAssemblyLoadContext alc2 = new TestAssemblyLoadContext("Test2", collectibleParent);
-        Assembly assembly = alc2.LoadFromAssemblyPath(Test.GetTestAssemblyPath(Path.Join("TestClass", "TestClass.dll")));
+        Assembly assembly = alc2.LoadFromAssemblyPath(
+            Test.GetTestAssemblyPath(Path.Join("TestClass", "TestClass.dll"))
+        );
 
         Type t = assembly.GetType("TestClass.Class");
-        
+
         Console.WriteLine($"Load done, type {t} obtained");
 
         interfaceAssemblyRef = alc2.InterfaceAssemblyRef;
@@ -105,7 +122,7 @@ public class Test
         ResolvingEvent,
         LoadOverride,
         ResolvingEventInNonCollectible,
-        LoadOverrideInNonCollectible
+        LoadOverrideInNonCollectible,
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
@@ -147,7 +164,8 @@ public class Test
 
     private static bool ShouldThrow(TestCase testCase)
     {
-        return (testCase == TestCase.LoadOverrideInNonCollectible) || (testCase == TestCase.ResolvingEventInNonCollectible);
+        return (testCase == TestCase.LoadOverrideInNonCollectible)
+            || (testCase == TestCase.ResolvingEventInNonCollectible);
     }
 
     private static int TestFullUnload(TestCase testCase)
@@ -189,7 +207,10 @@ public class Test
                 Console.WriteLine("Failure - unexpected exception");
                 return 104;
             }
-            if ((e.InnerException == null) || e.InnerException.GetType() != typeof(System.NotSupportedException))
+            if (
+                (e.InnerException == null)
+                || e.InnerException.GetType() != typeof(System.NotSupportedException)
+            )
             {
                 Console.WriteLine($"Failure - unexpected exception type {e.InnerException}");
                 return 105;
@@ -200,7 +221,9 @@ public class Test
 
         if (ShouldThrow(testCase))
         {
-            Console.WriteLine("Failure - resolved collectible assembly into non-collectible context without throwing exception");
+            Console.WriteLine(
+                "Failure - resolved collectible assembly into non-collectible context without throwing exception"
+            );
             return 106;
         }
 

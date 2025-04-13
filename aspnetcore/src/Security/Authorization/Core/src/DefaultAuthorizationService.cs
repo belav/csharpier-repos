@@ -32,7 +32,14 @@ public class DefaultAuthorizationService : IAuthorizationService
     /// <param name="contextFactory">The <see cref="IAuthorizationHandlerContextFactory"/> used to create the context to handle the authorization.</param>
     /// <param name="evaluator">The <see cref="IAuthorizationEvaluator"/> used to determine if authorization was successful.</param>
     /// <param name="options">The <see cref="AuthorizationOptions"/> used.</param>
-    public DefaultAuthorizationService(IAuthorizationPolicyProvider policyProvider, IAuthorizationHandlerProvider handlers, ILogger<DefaultAuthorizationService> logger, IAuthorizationHandlerContextFactory contextFactory, IAuthorizationEvaluator evaluator, IOptions<AuthorizationOptions> options)
+    public DefaultAuthorizationService(
+        IAuthorizationPolicyProvider policyProvider,
+        IAuthorizationHandlerProvider handlers,
+        ILogger<DefaultAuthorizationService> logger,
+        IAuthorizationHandlerContextFactory contextFactory,
+        IAuthorizationEvaluator evaluator,
+        IOptions<AuthorizationOptions> options
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(options);
         ArgumentNullThrowHelper.ThrowIfNull(policyProvider);
@@ -59,7 +66,11 @@ public class DefaultAuthorizationService : IAuthorizationService
     /// A flag indicating whether authorization has succeeded.
     /// This value is <value>true</value> when the user fulfills the policy otherwise <value>false</value>.
     /// </returns>
-    public virtual async Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object? resource, IEnumerable<IAuthorizationRequirement> requirements)
+    public virtual async Task<AuthorizationResult> AuthorizeAsync(
+        ClaimsPrincipal user,
+        object? resource,
+        IEnumerable<IAuthorizationRequirement> requirements
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(requirements);
 
@@ -96,7 +107,11 @@ public class DefaultAuthorizationService : IAuthorizationService
     /// A flag indicating whether authorization has succeeded.
     /// This value is <value>true</value> when the user fulfills the policy otherwise <value>false</value>.
     /// </returns>
-    public virtual async Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object? resource, string policyName)
+    public virtual async Task<AuthorizationResult> AuthorizeAsync(
+        ClaimsPrincipal user,
+        object? resource,
+        string policyName
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(policyName);
 

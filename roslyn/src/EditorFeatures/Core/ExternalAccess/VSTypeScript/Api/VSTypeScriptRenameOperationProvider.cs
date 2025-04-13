@@ -8,7 +8,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
     internal static class VSTypeScriptRenameOperationFactory
     {
-        public static CodeActionOperation CreateRenameOperation(DocumentId documentId, int position)
-            => new StartInlineRenameSessionOperation(documentId, position);
+        public static CodeActionOperation CreateRenameOperation(
+            DocumentId documentId,
+            int position
+        ) => new StartInlineRenameSessionOperation(documentId, position);
     }
 }

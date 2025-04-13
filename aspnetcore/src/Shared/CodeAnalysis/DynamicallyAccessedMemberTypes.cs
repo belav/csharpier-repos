@@ -89,6 +89,6 @@ internal enum DynamicallyAccessedMemberTypes
     /// <summary>
     /// Specifies all members.
     /// </summary>
-    All = ~None
+    All = ~None,
 }
 #endif

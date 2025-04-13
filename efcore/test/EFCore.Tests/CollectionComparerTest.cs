@@ -116,198 +116,38 @@ public class CollectionComparerTest
         var entity = new Voidbringer
         {
             Id = 2,
-            EnumerableInt = new List<int>
-            {
-                0,
-                1,
-                2
-            },
-            EnumerableNullableInt = new List<int?>
-            {
-                0,
-                null,
-                2
-            },
-            EnumerableString = new List<string>
-            {
-                "0",
-                "1",
-                "2"
-            },
-            EnumerableNullableString = new List<string?>
-            {
-                "0",
-                null,
-                "2"
-            },
-            EnumerableStruct = new List<MyStruct>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            EnumerableNullableStruct = new List<MyStruct?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            EnumerableClass = new List<MyClass>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            EnumerableNullableClass = new List<MyClass?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            IListInt = new List<int>
-            {
-                0,
-                1,
-                2
-            },
-            IListNullableInt = new List<int?>
-            {
-                0,
-                null,
-                2
-            },
-            IListString = new List<string>
-            {
-                "0",
-                "1",
-                "2"
-            },
-            IListNullableString = new List<string?>
-            {
-                "0",
-                null,
-                "2"
-            },
-            IListStruct = new List<MyStruct>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            IListNullableStruct = new List<MyStruct?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            IListClass = new List<MyClass>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            IListNullableClass = new List<MyClass?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            ListInt = new List<int>
-            {
-                0,
-                1,
-                2
-            },
-            ListNullableInt = new List<int?>
-            {
-                0,
-                null,
-                2
-            },
-            ListString = new List<string>
-            {
-                "0",
-                "1",
-                "2"
-            },
-            ListNullableString = new List<string?>
-            {
-                "0",
-                null,
-                "2"
-            },
-            ListStruct = new List<MyStruct>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            ListNullableStruct = new List<MyStruct?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            ListClass = new List<MyClass>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            ListNullableClass = new List<MyClass?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            ICollectionInt = new List<int>
-            {
-                0,
-                1,
-                2
-            },
-            ICollectionNullableInt = new List<int?>
-            {
-                0,
-                null,
-                2
-            },
-            ICollectionString = new List<string>
-            {
-                "0",
-                "1",
-                "2"
-            },
-            ICollectionNullableString = new List<string?>
-            {
-                "0",
-                null,
-                "2"
-            },
-            ICollectionStruct = new List<MyStruct>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            ICollectionNullableStruct = new List<MyStruct?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            ICollectionClass = new List<MyClass>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            ICollectionNullableClass = new List<MyClass?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
+            EnumerableInt = new List<int> { 0, 1, 2 },
+            EnumerableNullableInt = new List<int?> { 0, null, 2 },
+            EnumerableString = new List<string> { "0", "1", "2" },
+            EnumerableNullableString = new List<string?> { "0", null, "2" },
+            EnumerableStruct = new List<MyStruct> { new("0"), new("1"), new("2") },
+            EnumerableNullableStruct = new List<MyStruct?> { new("0"), null, new("2") },
+            EnumerableClass = new List<MyClass> { new("0"), new("1"), new("2") },
+            EnumerableNullableClass = new List<MyClass?> { new("0"), null, new("2") },
+            IListInt = new List<int> { 0, 1, 2 },
+            IListNullableInt = new List<int?> { 0, null, 2 },
+            IListString = new List<string> { "0", "1", "2" },
+            IListNullableString = new List<string?> { "0", null, "2" },
+            IListStruct = new List<MyStruct> { new("0"), new("1"), new("2") },
+            IListNullableStruct = new List<MyStruct?> { new("0"), null, new("2") },
+            IListClass = new List<MyClass> { new("0"), new("1"), new("2") },
+            IListNullableClass = new List<MyClass?> { new("0"), null, new("2") },
+            ListInt = new List<int> { 0, 1, 2 },
+            ListNullableInt = new List<int?> { 0, null, 2 },
+            ListString = new List<string> { "0", "1", "2" },
+            ListNullableString = new List<string?> { "0", null, "2" },
+            ListStruct = new List<MyStruct> { new("0"), new("1"), new("2") },
+            ListNullableStruct = new List<MyStruct?> { new("0"), null, new("2") },
+            ListClass = new List<MyClass> { new("0"), new("1"), new("2") },
+            ListNullableClass = new List<MyClass?> { new("0"), null, new("2") },
+            ICollectionInt = new List<int> { 0, 1, 2 },
+            ICollectionNullableInt = new List<int?> { 0, null, 2 },
+            ICollectionString = new List<string> { "0", "1", "2" },
+            ICollectionNullableString = new List<string?> { "0", null, "2" },
+            ICollectionStruct = new List<MyStruct> { new("0"), new("1"), new("2") },
+            ICollectionNullableStruct = new List<MyStruct?> { new("0"), null, new("2") },
+            ICollectionClass = new List<MyClass> { new("0"), new("1"), new("2") },
+            ICollectionNullableClass = new List<MyClass?> { new("0"), null, new("2") },
         };
 
         var entry = context.Add(entity);
@@ -401,198 +241,38 @@ public class CollectionComparerTest
         var entity = new Voidbringer
         {
             Id = 3,
-            EnumerableInt = new Collection<int>
-            {
-                0,
-                1,
-                2
-            },
-            EnumerableNullableInt = new Collection<int?>
-            {
-                0,
-                null,
-                2
-            },
-            EnumerableString = new Collection<string>
-            {
-                "0",
-                "1",
-                "2"
-            },
-            EnumerableNullableString = new Collection<string?>
-            {
-                "0",
-                null,
-                "2"
-            },
-            EnumerableStruct = new Collection<MyStruct>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            EnumerableNullableStruct = new Collection<MyStruct?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            EnumerableClass = new Collection<MyClass>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            EnumerableNullableClass = new Collection<MyClass?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            IListInt = new Collection<int>
-            {
-                0,
-                1,
-                2
-            },
-            IListNullableInt = new Collection<int?>
-            {
-                0,
-                null,
-                2
-            },
-            IListString = new Collection<string>
-            {
-                "0",
-                "1",
-                "2"
-            },
-            IListNullableString = new Collection<string?>
-            {
-                "0",
-                null,
-                "2"
-            },
-            IListStruct = new Collection<MyStruct>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            IListNullableStruct = new Collection<MyStruct?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            IListClass = new Collection<MyClass>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            IListNullableClass = new Collection<MyClass?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            ICollectionInt = new Collection<int>
-            {
-                0,
-                1,
-                2
-            },
-            ICollectionNullableInt = new Collection<int?>
-            {
-                0,
-                null,
-                2
-            },
-            ICollectionString = new Collection<string>
-            {
-                "0",
-                "1",
-                "2"
-            },
-            ICollectionNullableString = new Collection<string?>
-            {
-                "0",
-                null,
-                "2"
-            },
-            ICollectionStruct = new Collection<MyStruct>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            ICollectionNullableStruct = new Collection<MyStruct?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            ICollectionClass = new Collection<MyClass>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            ICollectionNullableClass = new Collection<MyClass?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            CollectionInt = new Collection<int>
-            {
-                0,
-                1,
-                2
-            },
-            CollectionNullableInt = new Collection<int?>
-            {
-                0,
-                null,
-                2
-            },
-            CollectionString = new Collection<string>
-            {
-                "0",
-                "1",
-                "2"
-            },
-            CollectionNullableString = new Collection<string?>
-            {
-                "0",
-                null,
-                "2"
-            },
-            CollectionStruct = new Collection<MyStruct>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            CollectionNullableStruct = new Collection<MyStruct?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            CollectionClass = new Collection<MyClass>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            CollectionNullableClass = new Collection<MyClass?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
+            EnumerableInt = new Collection<int> { 0, 1, 2 },
+            EnumerableNullableInt = new Collection<int?> { 0, null, 2 },
+            EnumerableString = new Collection<string> { "0", "1", "2" },
+            EnumerableNullableString = new Collection<string?> { "0", null, "2" },
+            EnumerableStruct = new Collection<MyStruct> { new("0"), new("1"), new("2") },
+            EnumerableNullableStruct = new Collection<MyStruct?> { new("0"), null, new("2") },
+            EnumerableClass = new Collection<MyClass> { new("0"), new("1"), new("2") },
+            EnumerableNullableClass = new Collection<MyClass?> { new("0"), null, new("2") },
+            IListInt = new Collection<int> { 0, 1, 2 },
+            IListNullableInt = new Collection<int?> { 0, null, 2 },
+            IListString = new Collection<string> { "0", "1", "2" },
+            IListNullableString = new Collection<string?> { "0", null, "2" },
+            IListStruct = new Collection<MyStruct> { new("0"), new("1"), new("2") },
+            IListNullableStruct = new Collection<MyStruct?> { new("0"), null, new("2") },
+            IListClass = new Collection<MyClass> { new("0"), new("1"), new("2") },
+            IListNullableClass = new Collection<MyClass?> { new("0"), null, new("2") },
+            ICollectionInt = new Collection<int> { 0, 1, 2 },
+            ICollectionNullableInt = new Collection<int?> { 0, null, 2 },
+            ICollectionString = new Collection<string> { "0", "1", "2" },
+            ICollectionNullableString = new Collection<string?> { "0", null, "2" },
+            ICollectionStruct = new Collection<MyStruct> { new("0"), new("1"), new("2") },
+            ICollectionNullableStruct = new Collection<MyStruct?> { new("0"), null, new("2") },
+            ICollectionClass = new Collection<MyClass> { new("0"), new("1"), new("2") },
+            ICollectionNullableClass = new Collection<MyClass?> { new("0"), null, new("2") },
+            CollectionInt = new Collection<int> { 0, 1, 2 },
+            CollectionNullableInt = new Collection<int?> { 0, null, 2 },
+            CollectionString = new Collection<string> { "0", "1", "2" },
+            CollectionNullableString = new Collection<string?> { "0", null, "2" },
+            CollectionStruct = new Collection<MyStruct> { new("0"), new("1"), new("2") },
+            CollectionNullableStruct = new Collection<MyStruct?> { new("0"), null, new("2") },
+            CollectionClass = new Collection<MyClass> { new("0"), new("1"), new("2") },
+            CollectionNullableClass = new Collection<MyClass?> { new("0"), null, new("2") },
         };
 
         var entry = context.Add(entity);
@@ -686,197 +366,82 @@ public class CollectionComparerTest
         var entity = new Voidbringer
         {
             Id = 4,
-            EnumerableInt = new ObservableCollection<int>
-            {
-                0,
-                1,
-                2
-            },
-            EnumerableNullableInt = new ObservableCollection<int?>
-            {
-                0,
-                null,
-                2
-            },
-            EnumerableString = new ObservableCollection<string>
-            {
-                "0",
-                "1",
-                "2"
-            },
-            EnumerableNullableString = new ObservableCollection<string?>
-            {
-                "0",
-                null,
-                "2"
-            },
-            EnumerableStruct = new ObservableCollection<MyStruct>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
+            EnumerableInt = new ObservableCollection<int> { 0, 1, 2 },
+            EnumerableNullableInt = new ObservableCollection<int?> { 0, null, 2 },
+            EnumerableString = new ObservableCollection<string> { "0", "1", "2" },
+            EnumerableNullableString = new ObservableCollection<string?> { "0", null, "2" },
+            EnumerableStruct = new ObservableCollection<MyStruct> { new("0"), new("1"), new("2") },
             EnumerableNullableStruct = new ObservableCollection<MyStruct?>
             {
                 new("0"),
                 null,
-                new("2")
+                new("2"),
             },
-            EnumerableClass = new ObservableCollection<MyClass>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
+            EnumerableClass = new ObservableCollection<MyClass> { new("0"), new("1"), new("2") },
             EnumerableNullableClass = new ObservableCollection<MyClass?>
             {
                 new("0"),
                 null,
-                new("2")
+                new("2"),
             },
-            IListInt = new ObservableCollection<int>
-            {
-                0,
-                1,
-                2
-            },
-            IListNullableInt = new ObservableCollection<int?>
-            {
-                0,
-                null,
-                2
-            },
-            IListString = new ObservableCollection<string>
-            {
-                "0",
-                "1",
-                "2"
-            },
-            IListNullableString = new ObservableCollection<string?>
-            {
-                "0",
-                null,
-                "2"
-            },
-            IListStruct = new ObservableCollection<MyStruct>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            IListNullableStruct = new ObservableCollection<MyStruct?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            IListClass = new ObservableCollection<MyClass>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
-            IListNullableClass = new ObservableCollection<MyClass?>
-            {
-                new("0"),
-                null,
-                new("2")
-            },
-            ICollectionInt = new ObservableCollection<int>
-            {
-                0,
-                1,
-                2
-            },
-            ICollectionNullableInt = new ObservableCollection<int?>
-            {
-                0,
-                null,
-                2
-            },
-            ICollectionString = new ObservableCollection<string>
-            {
-                "0",
-                "1",
-                "2"
-            },
-            ICollectionNullableString = new ObservableCollection<string?>
-            {
-                "0",
-                null,
-                "2"
-            },
-            ICollectionStruct = new ObservableCollection<MyStruct>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
+            IListInt = new ObservableCollection<int> { 0, 1, 2 },
+            IListNullableInt = new ObservableCollection<int?> { 0, null, 2 },
+            IListString = new ObservableCollection<string> { "0", "1", "2" },
+            IListNullableString = new ObservableCollection<string?> { "0", null, "2" },
+            IListStruct = new ObservableCollection<MyStruct> { new("0"), new("1"), new("2") },
+            IListNullableStruct = new ObservableCollection<MyStruct?> { new("0"), null, new("2") },
+            IListClass = new ObservableCollection<MyClass> { new("0"), new("1"), new("2") },
+            IListNullableClass = new ObservableCollection<MyClass?> { new("0"), null, new("2") },
+            ICollectionInt = new ObservableCollection<int> { 0, 1, 2 },
+            ICollectionNullableInt = new ObservableCollection<int?> { 0, null, 2 },
+            ICollectionString = new ObservableCollection<string> { "0", "1", "2" },
+            ICollectionNullableString = new ObservableCollection<string?> { "0", null, "2" },
+            ICollectionStruct = new ObservableCollection<MyStruct> { new("0"), new("1"), new("2") },
             ICollectionNullableStruct = new ObservableCollection<MyStruct?>
             {
                 new("0"),
                 null,
-                new("2")
+                new("2"),
             },
-            ICollectionClass = new ObservableCollection<MyClass>
-            {
-                new("0"),
-                new("1"),
-                new("2")
-            },
+            ICollectionClass = new ObservableCollection<MyClass> { new("0"), new("1"), new("2") },
             ICollectionNullableClass = new ObservableCollection<MyClass?>
             {
                 new("0"),
                 null,
-                new("2")
+                new("2"),
             },
-            ObservableCollectionInt = new ObservableCollection<int>
-            {
-                0,
-                1,
-                2
-            },
-            ObservableCollectionNullableInt = new ObservableCollection<int?>
-            {
-                0,
-                null,
-                2
-            },
-            ObservableCollectionString = new ObservableCollection<string>
-            {
-                "0",
-                "1",
-                "2"
-            },
+            ObservableCollectionInt = new ObservableCollection<int> { 0, 1, 2 },
+            ObservableCollectionNullableInt = new ObservableCollection<int?> { 0, null, 2 },
+            ObservableCollectionString = new ObservableCollection<string> { "0", "1", "2" },
             ObservableCollectionNullableString = new ObservableCollection<string?>
             {
                 "0",
                 null,
-                "2"
+                "2",
             },
             ObservableCollectionStruct = new ObservableCollection<MyStruct>
             {
                 new("0"),
                 new("1"),
-                new("2")
+                new("2"),
             },
             ObservableCollectionNullableStruct = new ObservableCollection<MyStruct?>
             {
                 new("0"),
                 null,
-                new("2")
+                new("2"),
             },
             ObservableCollectionClass = new ObservableCollection<MyClass>
             {
                 new("0"),
                 new("1"),
-                new("2")
+                new("2"),
             },
             ObservableCollectionNullableClass = new ObservableCollection<MyClass?>
             {
                 new("0"),
                 null,
-                new("2")
+                new("2"),
             },
         };
 
@@ -966,37 +531,67 @@ public class CollectionComparerTest
     [ConditionalFact]
     public void List_comparer_throws_when_used_with_non_list()
     {
-        var comparer = new ListComparer<string>(new ValueComparer<string>(favorStructuralComparisons: false));
+        var comparer = new ListComparer<string>(
+            new ValueComparer<string>(favorStructuralComparisons: false)
+        );
 
         Assert.Equal(
             CoreStrings.BadListType("HashSet<string>", "IList<string>"),
-            Assert.Throws<InvalidOperationException>(() => comparer.Equals(new List<string>(), new HashSet<string>())).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    comparer.Equals(new List<string>(), new HashSet<string>())
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.BadListType("HashSet<string>", "IList<string>"),
-            Assert.Throws<InvalidOperationException>(() => comparer.Equals(new HashSet<string>(), new List<string>())).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    comparer.Equals(new HashSet<string>(), new List<string>())
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.BadListType("HashSet<string>", "IList<string>"),
-            Assert.Throws<InvalidOperationException>(() => comparer.Snapshot(new HashSet<string>())).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => comparer.Snapshot(new HashSet<string>()))
+                .Message
+        );
     }
 
     [ConditionalFact]
     public void Nullable_list_comparer_throws_when_used_with_non_list()
     {
-        var comparer = new NullableValueTypeListComparer<int>(new ValueComparer<int?>(favorStructuralComparisons: false));
+        var comparer = new NullableValueTypeListComparer<int>(
+            new ValueComparer<int?>(favorStructuralComparisons: false)
+        );
 
         Assert.Equal(
             CoreStrings.BadListType("HashSet<int?>", "IList<int?>"),
-            Assert.Throws<InvalidOperationException>(() => comparer.Equals(new List<int?>(), new HashSet<int?>())).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    comparer.Equals(new List<int?>(), new HashSet<int?>())
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.BadListType("HashSet<int?>", "IList<int?>"),
-            Assert.Throws<InvalidOperationException>(() => comparer.Equals(new HashSet<int?>(), new List<int?>())).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    comparer.Equals(new HashSet<int?>(), new List<int?>())
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.BadListType("HashSet<int?>", "IList<int?>"),
-            Assert.Throws<InvalidOperationException>(() => comparer.Snapshot(new HashSet<int?>())).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => comparer.Snapshot(new HashSet<int?>()))
+                .Message
+        );
     }
 
     private class Voidbringer
@@ -1079,65 +674,124 @@ public class CollectionComparerTest
 
     private class SomeLists : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseInMemoryDatabase(nameof(SomeLists));
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase(nameof(SomeLists));
 
-        protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Voidbringer>(
-                b =>
-                {
-                    b.PrimitiveCollection(e => e.ArrayStruct).ElementType().HasConversion<MyStructConverter>();
-                    b.PrimitiveCollection(e => e.ArrayNullableStruct).ElementType().HasConversion<MyStructConverter>();
-                    b.PrimitiveCollection(e => e.ArrayClass).ElementType().HasConversion<MyClassConverter, MyClassComparer>();
-                    b.PrimitiveCollection(e => e.ArrayNullableClass).ElementType().HasConversion<MyClassConverter, MyClassComparer>();
+        protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Voidbringer>(b =>
+            {
+                b.PrimitiveCollection(e => e.ArrayStruct)
+                    .ElementType()
+                    .HasConversion<MyStructConverter>();
+                b.PrimitiveCollection(e => e.ArrayNullableStruct)
+                    .ElementType()
+                    .HasConversion<MyStructConverter>();
+                b.PrimitiveCollection(e => e.ArrayClass)
+                    .ElementType()
+                    .HasConversion<MyClassConverter, MyClassComparer>();
+                b.PrimitiveCollection(e => e.ArrayNullableClass)
+                    .ElementType()
+                    .HasConversion<MyClassConverter, MyClassComparer>();
 
-                    b.PrimitiveCollection(e => e.EnumerableStruct).ElementType().HasConversion<MyStructConverter>();
-                    b.PrimitiveCollection(e => e.EnumerableNullableStruct).ElementType().HasConversion<MyStructConverter>();
-                    b.PrimitiveCollection(e => e.EnumerableClass).ElementType().HasConversion<MyClassConverter, MyClassComparer>();
-                    b.PrimitiveCollection(e => e.EnumerableNullableClass).ElementType().HasConversion<MyClassConverter, MyClassComparer>();
+                b.PrimitiveCollection(e => e.EnumerableStruct)
+                    .ElementType()
+                    .HasConversion<MyStructConverter>();
+                b.PrimitiveCollection(e => e.EnumerableNullableStruct)
+                    .ElementType()
+                    .HasConversion<MyStructConverter>();
+                b.PrimitiveCollection(e => e.EnumerableClass)
+                    .ElementType()
+                    .HasConversion<MyClassConverter, MyClassComparer>();
+                b.PrimitiveCollection(e => e.EnumerableNullableClass)
+                    .ElementType()
+                    .HasConversion<MyClassConverter, MyClassComparer>();
 
-                    b.PrimitiveCollection(e => e.IListStruct).ElementType().HasConversion<MyStructConverter>();
-                    b.PrimitiveCollection(e => e.IListNullableStruct).ElementType().HasConversion<MyStructConverter>();
-                    b.PrimitiveCollection(e => e.IListClass).ElementType().HasConversion<MyClassConverter, MyClassComparer>();
-                    b.PrimitiveCollection(e => e.IListNullableClass).ElementType().HasConversion<MyClassConverter, MyClassComparer>();
+                b.PrimitiveCollection(e => e.IListStruct)
+                    .ElementType()
+                    .HasConversion<MyStructConverter>();
+                b.PrimitiveCollection(e => e.IListNullableStruct)
+                    .ElementType()
+                    .HasConversion<MyStructConverter>();
+                b.PrimitiveCollection(e => e.IListClass)
+                    .ElementType()
+                    .HasConversion<MyClassConverter, MyClassComparer>();
+                b.PrimitiveCollection(e => e.IListNullableClass)
+                    .ElementType()
+                    .HasConversion<MyClassConverter, MyClassComparer>();
 
-                    b.PrimitiveCollection(e => e.ListStruct).ElementType().HasConversion<MyStructConverter>();
-                    b.PrimitiveCollection(e => e.ListNullableStruct).ElementType().HasConversion<MyStructConverter>();
-                    b.PrimitiveCollection(e => e.ListClass).ElementType().HasConversion<MyClassConverter, MyClassComparer>();
-                    b.PrimitiveCollection(e => e.ListNullableClass).ElementType().HasConversion<MyClassConverter, MyClassComparer>();
+                b.PrimitiveCollection(e => e.ListStruct)
+                    .ElementType()
+                    .HasConversion<MyStructConverter>();
+                b.PrimitiveCollection(e => e.ListNullableStruct)
+                    .ElementType()
+                    .HasConversion<MyStructConverter>();
+                b.PrimitiveCollection(e => e.ListClass)
+                    .ElementType()
+                    .HasConversion<MyClassConverter, MyClassComparer>();
+                b.PrimitiveCollection(e => e.ListNullableClass)
+                    .ElementType()
+                    .HasConversion<MyClassConverter, MyClassComparer>();
 
-                    b.PrimitiveCollection(e => e.ICollectionStruct).ElementType().HasConversion<MyStructConverter>();
-                    b.PrimitiveCollection(e => e.ICollectionNullableStruct).ElementType().HasConversion<MyStructConverter>();
-                    b.PrimitiveCollection(e => e.ICollectionClass).ElementType().HasConversion<MyClassConverter, MyClassComparer>();
-                    b.PrimitiveCollection(e => e.ICollectionNullableClass).ElementType().HasConversion<MyClassConverter, MyClassComparer>();
+                b.PrimitiveCollection(e => e.ICollectionStruct)
+                    .ElementType()
+                    .HasConversion<MyStructConverter>();
+                b.PrimitiveCollection(e => e.ICollectionNullableStruct)
+                    .ElementType()
+                    .HasConversion<MyStructConverter>();
+                b.PrimitiveCollection(e => e.ICollectionClass)
+                    .ElementType()
+                    .HasConversion<MyClassConverter, MyClassComparer>();
+                b.PrimitiveCollection(e => e.ICollectionNullableClass)
+                    .ElementType()
+                    .HasConversion<MyClassConverter, MyClassComparer>();
 
-                    b.PrimitiveCollection(e => e.CollectionStruct).ElementType().HasConversion<MyStructConverter>();
-                    b.PrimitiveCollection(e => e.CollectionNullableStruct).ElementType().HasConversion<MyStructConverter>();
-                    b.PrimitiveCollection(e => e.CollectionClass).ElementType().HasConversion<MyClassConverter, MyClassComparer>();
-                    b.PrimitiveCollection(e => e.CollectionNullableClass).ElementType().HasConversion<MyClassConverter, MyClassComparer>();
+                b.PrimitiveCollection(e => e.CollectionStruct)
+                    .ElementType()
+                    .HasConversion<MyStructConverter>();
+                b.PrimitiveCollection(e => e.CollectionNullableStruct)
+                    .ElementType()
+                    .HasConversion<MyStructConverter>();
+                b.PrimitiveCollection(e => e.CollectionClass)
+                    .ElementType()
+                    .HasConversion<MyClassConverter, MyClassComparer>();
+                b.PrimitiveCollection(e => e.CollectionNullableClass)
+                    .ElementType()
+                    .HasConversion<MyClassConverter, MyClassComparer>();
 
-                    b.PrimitiveCollection(e => e.ObservableCollectionStruct).ElementType().HasConversion<MyStructConverter>();
-                    b.PrimitiveCollection(e => e.ObservableCollectionNullableStruct).ElementType().HasConversion<MyStructConverter>();
-                    b.PrimitiveCollection(e => e.ObservableCollectionClass).ElementType()
-                        .HasConversion<MyClassConverter, MyClassComparer>();
-                    b.PrimitiveCollection(e => e.ObservableCollectionNullableClass).ElementType()
-                        .HasConversion<MyClassConverter, MyClassComparer>();
+                b.PrimitiveCollection(e => e.ObservableCollectionStruct)
+                    .ElementType()
+                    .HasConversion<MyStructConverter>();
+                b.PrimitiveCollection(e => e.ObservableCollectionNullableStruct)
+                    .ElementType()
+                    .HasConversion<MyStructConverter>();
+                b.PrimitiveCollection(e => e.ObservableCollectionClass)
+                    .ElementType()
+                    .HasConversion<MyClassConverter, MyClassComparer>();
+                b.PrimitiveCollection(e => e.ObservableCollectionNullableClass)
+                    .ElementType()
+                    .HasConversion<MyClassConverter, MyClassComparer>();
 
-                    // var myStructListComparer = new ListComparer<MyStruct>(new ValueComparer<MyStruct>(favorStructuralComparisons: false));
-                    // var nullableMyStructListComparer =
-                    //     new NullableValueTypeListComparer<MyStruct>(new ValueComparer<MyStruct>(favorStructuralComparisons: false));
-                    // var myClassListComparer = new ListComparer<MyClass>(new MyClassComparer());
-                    // var intListComparer = new ListComparer<int>(new ValueComparer<int>(favorStructuralComparisons: false));
-                    // var nullableIntListComparer =
-                    //     new NullableValueTypeListComparer<int>(new ValueComparer<int>(favorStructuralComparisons: false));
-                    // var stringListComparer = new ListComparer<string>(new ValueComparer<string>(favorStructuralComparisons: false));
-                });
+                // var myStructListComparer = new ListComparer<MyStruct>(new ValueComparer<MyStruct>(favorStructuralComparisons: false));
+                // var nullableMyStructListComparer =
+                //     new NullableValueTypeListComparer<MyStruct>(new ValueComparer<MyStruct>(favorStructuralComparisons: false));
+                // var myClassListComparer = new ListComparer<MyClass>(new MyClassComparer());
+                // var intListComparer = new ListComparer<int>(new ValueComparer<int>(favorStructuralComparisons: false));
+                // var nullableIntListComparer =
+                //     new NullableValueTypeListComparer<int>(new ValueComparer<int>(favorStructuralComparisons: false));
+                // var stringListComparer = new ListComparer<string>(new ValueComparer<string>(favorStructuralComparisons: false));
+            });
     }
 
-    private class MyClassConverter() : ValueConverter<MyClass, string>(v => v.Value, v => new MyClass(v));
+    private class MyClassConverter()
+        : ValueConverter<MyClass, string>(v => v.Value, v => new MyClass(v));
 
-    private class MyStructConverter() : ValueConverter<MyStruct, string>(v => v.Value, v => new MyStruct { Value = v });
+    private class MyStructConverter()
+        : ValueConverter<MyStruct, string>(v => v.Value, v => new MyStruct { Value = v });
 
-    private class MyClassComparer() : ValueComparer<MyClass>(
-        (l, r) => l!.Value == r!.Value, v => v.Value.GetHashCode(), v => new MyClass(v.Value));
+    private class MyClassComparer()
+        : ValueComparer<MyClass>(
+            (l, r) => l!.Value == r!.Value,
+            v => v.Value.GetHashCode(),
+            v => new MyClass(v.Value)
+        );
 }

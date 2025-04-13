@@ -89,7 +89,11 @@ namespace System.IdentityModel
                 if ((dicReader != null) && (dicReader.CanCanonicalize))
                 {
                     dicReader.MoveToContent();
-                    dicReader.StartCanonicalization(canonicalStream, this.includeComments, this.inclusivePrefixes);
+                    dicReader.StartCanonicalization(
+                        canonicalStream,
+                        this.includeComments,
+                        this.inclusivePrefixes
+                    );
                     dicReader.Skip();
                     dicReader.EndCanonicalization();
                 }
@@ -98,7 +102,7 @@ namespace System.IdentityModel
                     XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(Stream.Null);
                     if (this.inclusivePrefixes != null)
                     {
-                        // Add a dummy element at the top and populate the namespace 
+                        // Add a dummy element at the top and populate the namespace
                         // declaration of all the inclusive prefixes.
                         writer.WriteStartElement("a", reader.LookupNamespace(String.Empty));
                         for (int i = 0; i < this.inclusivePrefixes.Length; ++i)
@@ -110,21 +114,26 @@ namespace System.IdentityModel
                             }
                         }
                     }
-                    writer.StartCanonicalization(canonicalStream, this.includeComments, this.inclusivePrefixes);
+                    writer.StartCanonicalization(
+                        canonicalStream,
+                        this.includeComments,
+                        this.inclusivePrefixes
+                    );
                     if (reader is WrappedReader)
                     {
-                        ((WrappedReader)reader).XmlTokens.GetWriter().WriteTo(writer, new DictionaryManager());
+                        ((WrappedReader)reader)
+                            .XmlTokens.GetWriter()
+                            .WriteTo(writer, new DictionaryManager());
                     }
                     else
                     {
-
                         writer.WriteNode(reader, false);
                     }
                     writer.Flush();
                     writer.EndCanonicalization();
 
                     if (this.inclusivePrefixes != null)
-                       writer.WriteEndElement();
+                        writer.WriteEndElement();
 
                     writer.Close();
                 }
@@ -136,9 +145,10 @@ namespace System.IdentityModel
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.NoInputIsSetForCanonicalization)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.NoInputIsSetForCanonicalization))
+                );
             }
         }
     }
-
 }

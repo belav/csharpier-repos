@@ -19,10 +19,7 @@ public class ChunkingCookieManagerBenchmark
     [GlobalSetup]
     public void GlobalSetup()
     {
-        _chunkingCookieManager = new ChunkingCookieManager()
-        {
-            ChunkSize = 86
-        };
+        _chunkingCookieManager = new ChunkingCookieManager() { ChunkSize = 86 };
 
         _httpContext = new DefaultHttpContext();
 
@@ -30,28 +27,34 @@ public class ChunkingCookieManagerBenchmark
         {
             Domain = "foo.com",
             Path = "/",
-            Secure = true
+            Secure = true,
         };
 
         _httpContext.Request.Headers["Cookie"] = new[]
         {
-                "TestCookie=chunks-7",
-                "TestCookieC1=abcdefghi",
-                "TestCookieC2=jklmnopqr",
-                "TestCookieC3=stuvwxyz0",
-                "TestCookieC4=123456789",
-                "TestCookieC5=ABCDEFGHI",
-                "TestCookieC6=JKLMNOPQR",
-                "TestCookieC7=STUVWXYZ"
-            };
+            "TestCookie=chunks-7",
+            "TestCookieC1=abcdefghi",
+            "TestCookieC2=jklmnopqr",
+            "TestCookieC3=stuvwxyz0",
+            "TestCookieC4=123456789",
+            "TestCookieC5=ABCDEFGHI",
+            "TestCookieC6=JKLMNOPQR",
+            "TestCookieC7=STUVWXYZ",
+        };
 
-        _stringToAdd = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        _stringToAdd =
+            "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     }
 
     [Benchmark]
     public void AppendCookies()
     {
-        _chunkingCookieManager.AppendResponseCookie(_httpContext, "TestCookie1", _stringToAdd, _cookieOptions);
+        _chunkingCookieManager.AppendResponseCookie(
+            _httpContext,
+            "TestCookie1",
+            _stringToAdd,
+            _cookieOptions
+        );
         _httpContext.Response.Headers[HeaderNames.SetCookie] = StringValues.Empty;
     }
 

@@ -35,7 +35,10 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
         /// <param name="compilation">The <see cref="Compilation"/> to consider for analysis.</param>
         /// <param name="fullyQualifiedMetadataName">The fully-qualified metadata type name to find.</param>
         /// <returns>The symbol to use for code analysis; otherwise, <see langword="null"/>.</returns>
-        public static INamedTypeSymbol? GetBestTypeByMetadataName(this Compilation compilation, string fullyQualifiedMetadataName)
+        public static INamedTypeSymbol? GetBestTypeByMetadataName(
+            this Compilation compilation,
+            string fullyQualifiedMetadataName
+        )
         {
             // Try to get the unique type with this name, ignoring accessibility
             var type = compilation.GetTypeByMetadataName(fullyQualifiedMetadataName);
@@ -50,14 +53,17 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
                 {
                     foreach (var referencedAssembly in module.ReferencedAssemblySymbols)
                     {
-                        var currentType = referencedAssembly.GetTypeByMetadataName(fullyQualifiedMetadataName);
+                        var currentType = referencedAssembly.GetTypeByMetadataName(
+                            fullyQualifiedMetadataName
+                        );
                         if (currentType is null)
                             continue;
 
                         switch (currentType.GetResultantVisibility())
                         {
                             case SymbolVisibility.Public:
-                            case SymbolVisibility.Internal when referencedAssembly.GivesAccessTo(compilation.Assembly):
+                            case SymbolVisibility.Internal
+                                when referencedAssembly.GivesAccessTo(compilation.Assembly):
                                 break;
 
                             default:
@@ -85,9 +91,14 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
         /// <param name="compilation">The <see cref="Compilation"/> to consider for analysis.</param>
         /// <param name="type">The type to find.</param>
         /// <returns></returns>
-        public static INamedTypeSymbol? GetBestTypeByMetadataName(this Compilation compilation, Type type) =>
+        public static INamedTypeSymbol? GetBestTypeByMetadataName(
+            this Compilation compilation,
+            Type type
+        ) =>
             type.IsArray || type.FullName is null
-                ? throw new ArgumentException("The input type must correspond to a named type symbol.")
+                ? throw new ArgumentException(
+                    "The input type must correspond to a named type symbol."
+                )
                 : GetBestTypeByMetadataName(compilation, type.FullName);
 
         // copied from https://github.com/dotnet/roslyn/blob/main/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/Extensions/ISymbolExtensions.cs
@@ -128,8 +139,8 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
                         visibility = SymbolVisibility.Internal;
                         break;
 
-                        // For anything else (Public, Protected, ProtectedOrInternal), the
-                        // symbol stays at the level we've gotten so far.
+                    // For anything else (Public, Protected, ProtectedOrInternal), the
+                    // symbol stays at the level we've gotten so far.
                 }
 
                 symbol = symbol.ContainingSymbol;
@@ -153,19 +164,27 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
         {
             const string AttributeSuffix = "Attribute";
 
-            var comparison = isCaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
-            return name.Length > AttributeSuffix.Length && name.EndsWith(AttributeSuffix, comparison);
+            var comparison = isCaseSensitive
+                ? StringComparison.Ordinal
+                : StringComparison.OrdinalIgnoreCase;
+            return name.Length > AttributeSuffix.Length
+                && name.EndsWith(AttributeSuffix, comparison);
         }
 
         public static ImmutableArray<T> ToImmutableArray<T>(this ReadOnlySpan<T> span)
         {
             switch (span.Length)
             {
-                case 0: return ImmutableArray<T>.Empty;
-                case 1: return ImmutableArray.Create(span[0]);
-                case 2: return ImmutableArray.Create(span[0], span[1]);
-                case 3: return ImmutableArray.Create(span[0], span[1], span[2]);
-                case 4: return ImmutableArray.Create(span[0], span[1], span[2], span[3]);
+                case 0:
+                    return ImmutableArray<T>.Empty;
+                case 1:
+                    return ImmutableArray.Create(span[0]);
+                case 2:
+                    return ImmutableArray.Create(span[0], span[1]);
+                case 3:
+                    return ImmutableArray.Create(span[0], span[1], span[2]);
+                case 4:
+                    return ImmutableArray.Create(span[0], span[1], span[2], span[3]);
                 default:
                     var builder = ImmutableArray.CreateBuilder<T>(span.Length);
                     foreach (var item in span)
@@ -175,8 +194,8 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
             }
         }
 
-        public static SimpleNameSyntax GetUnqualifiedName(this NameSyntax name)
-            => name switch
+        public static SimpleNameSyntax GetUnqualifiedName(this NameSyntax name) =>
+            name switch
             {
                 AliasQualifiedNameSyntax alias => alias.Name,
                 QualifiedNameSyntax qualified => qualified.Right,

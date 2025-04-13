@@ -5,7 +5,7 @@
 namespace System.Activities.Core.Presentation
 {
     public enum ConnectionPointType
-    {        
+    {
         Default,
         Incoming,
         Outgoing,

@@ -16,8 +16,16 @@ public class NewtonsoftJsonValidationMetadataProviderTest
         var metadataProvider = new NewtonsoftJsonValidationMetadataProvider();
         var propertyName = "sample-data";
 
-        var key = ModelMetadataIdentity.ForProperty(typeof(SampleTestClass).GetProperty(nameof(SampleTestClass.NoAttributesProperty)), typeof(int), typeof(SampleTestClass));
-        var modelAttributes = new ModelAttributes(Array.Empty<object>(), new[] { new JsonPropertyAttribute() { PropertyName = propertyName } }, Array.Empty<object>());
+        var key = ModelMetadataIdentity.ForProperty(
+            typeof(SampleTestClass).GetProperty(nameof(SampleTestClass.NoAttributesProperty)),
+            typeof(int),
+            typeof(SampleTestClass)
+        );
+        var modelAttributes = new ModelAttributes(
+            Array.Empty<object>(),
+            new[] { new JsonPropertyAttribute() { PropertyName = propertyName } },
+            Array.Empty<object>()
+        );
         var context = new ValidationMetadataProviderContext(key, modelAttributes);
 
         // Act
@@ -34,8 +42,16 @@ public class NewtonsoftJsonValidationMetadataProviderTest
         var metadataProvider = new NewtonsoftJsonValidationMetadataProvider();
         var propertyName = nameof(SampleTestClass.NoAttributesProperty);
 
-        var key = ModelMetadataIdentity.ForProperty(typeof(SampleTestClass).GetProperty(propertyName), typeof(int), typeof(SampleTestClass));
-        var modelAttributes = new ModelAttributes(Array.Empty<object>(), Array.Empty<object>(), Array.Empty<object>());
+        var key = ModelMetadataIdentity.ForProperty(
+            typeof(SampleTestClass).GetProperty(propertyName),
+            typeof(int),
+            typeof(SampleTestClass)
+        );
+        var modelAttributes = new ModelAttributes(
+            Array.Empty<object>(),
+            Array.Empty<object>(),
+            Array.Empty<object>()
+        );
         var context = new ValidationMetadataProviderContext(key, modelAttributes);
 
         // Act
@@ -43,18 +59,31 @@ public class NewtonsoftJsonValidationMetadataProviderTest
 
         // Assert
         Assert.NotNull(context.ValidationMetadata.ValidationModelName);
-        Assert.Equal(new CamelCaseNamingStrategy().GetPropertyName(propertyName, false), context.ValidationMetadata.ValidationModelName);
+        Assert.Equal(
+            new CamelCaseNamingStrategy().GetPropertyName(propertyName, false),
+            context.ValidationMetadata.ValidationModelName
+        );
     }
 
     [Theory]
     [MemberData(nameof(NamingPolicies))]
-    public void CreateValidationMetadata_SetValidationPropertyName_WithJsonNamingPolicy(NamingStrategy namingStrategy)
+    public void CreateValidationMetadata_SetValidationPropertyName_WithJsonNamingPolicy(
+        NamingStrategy namingStrategy
+    )
     {
         var metadataProvider = new NewtonsoftJsonValidationMetadataProvider(namingStrategy);
         var propertyName = nameof(SampleTestClass.NoAttributesProperty);
 
-        var key = ModelMetadataIdentity.ForProperty(typeof(SampleTestClass).GetProperty(propertyName), typeof(int), typeof(SampleTestClass));
-        var modelAttributes = new ModelAttributes(Array.Empty<object>(), Array.Empty<object>(), Array.Empty<object>());
+        var key = ModelMetadataIdentity.ForProperty(
+            typeof(SampleTestClass).GetProperty(propertyName),
+            typeof(int),
+            typeof(SampleTestClass)
+        );
+        var modelAttributes = new ModelAttributes(
+            Array.Empty<object>(),
+            Array.Empty<object>(),
+            Array.Empty<object>()
+        );
         var context = new ValidationMetadataProviderContext(key, modelAttributes);
 
         // Act
@@ -62,7 +91,10 @@ public class NewtonsoftJsonValidationMetadataProviderTest
 
         // Assert
         Assert.NotNull(context.ValidationMetadata.ValidationModelName);
-        Assert.Equal(namingStrategy.GetPropertyName(propertyName, false), context.ValidationMetadata.ValidationModelName);
+        Assert.Equal(
+            namingStrategy.GetPropertyName(propertyName, false),
+            context.ValidationMetadata.ValidationModelName
+        );
     }
 
     public static TheoryData<NamingStrategy> NamingPolicies
@@ -70,10 +102,10 @@ public class NewtonsoftJsonValidationMetadataProviderTest
         get
         {
             return new TheoryData<NamingStrategy>
-                {
-                    new UpperCaseJsonNamingPolicy(),
-                    new CamelCaseNamingStrategy()
-                };
+            {
+                new UpperCaseJsonNamingPolicy(),
+                new CamelCaseNamingStrategy(),
+            };
         }
     }
 

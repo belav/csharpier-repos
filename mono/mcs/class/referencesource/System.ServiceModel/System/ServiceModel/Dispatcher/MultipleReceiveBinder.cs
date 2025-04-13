@@ -4,12 +4,11 @@
 
 namespace System.ServiceModel.Dispatcher
 {
-
     using System;
     using System.Collections.Generic;
-    using System.ServiceModel.Diagnostics;
     using System.Runtime;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
     using System.Threading;
 
     class MultipleReceiveBinder : IChannelBinder
@@ -75,12 +74,18 @@ namespace System.ServiceModel.Dispatcher
 
         public IAsyncResult BeginTryReceive(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            // At anytime there can be only one thread in BeginTryReceive and the 
+            // At anytime there can be only one thread in BeginTryReceive and the
             // outstanding AsyncResult should have completed before the next one.
             // There should be no pending oustanding result here.
-            Fx.AssertAndThrow(this.outstanding == null, "BeginTryReceive should not have a pending result.");
+            Fx.AssertAndThrow(
+                this.outstanding == null,
+                "BeginTryReceive should not have a pending result."
+            );
 
-            MultipleReceiveAsyncResult multipleReceiveResult = new MultipleReceiveAsyncResult(callback, state);
+            MultipleReceiveAsyncResult multipleReceiveResult = new MultipleReceiveAsyncResult(
+                callback,
+                state
+            );
             this.outstanding = multipleReceiveResult;
             EnsurePump(timeout);
             IAsyncResult innerResult;
@@ -101,11 +106,15 @@ namespace System.ServiceModel.Dispatcher
             {
                 ReceiveScopeSignalGate receiveScope = new ReceiveScopeSignalGate(this);
 
-                // Enqueue the result without locks since this is the pump. 
-                // BeginTryReceive can be called only from one thread and 
+                // Enqueue the result without locks since this is the pump.
+                // BeginTryReceive can be called only from one thread and
                 // the head is not yet unlocked so no items can proceed.
                 this.pendingResults.Enqueue(receiveScope);
-                IAsyncResult result = this.channelBinder.BeginTryReceive(timeout, onInnerReceiveCompleted, receiveScope);
+                IAsyncResult result = this.channelBinder.BeginTryReceive(
+                    timeout,
+                    onInnerReceiveCompleted,
+                    receiveScope
+                );
                 if (result.CompletedSynchronously)
                 {
                     this.SignalReceiveCompleted(result);
@@ -136,15 +145,18 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.ordered)
             {
-                // Ordered recevies can proceed only if its own gate has 
-                // been unlocked. Head is the only gate unlocked and only the 
+                // Ordered recevies can proceed only if its own gate has
+                // been unlocked. Head is the only gate unlocked and only the
                 // result that owns the is the gate at the head can proceed.
-                return this.pendingResults.TrySignal((ReceiveScopeSignalGate)nestedResult.AsyncState, nestedResult);
+                return this.pendingResults.TrySignal(
+                    (ReceiveScopeSignalGate)nestedResult.AsyncState,
+                    nestedResult
+                );
             }
             else
             {
-                // Unordered receives can proceed with any gate. If the is head 
-                // is not unlocked by BeginTryReceive then the result will 
+                // Unordered receives can proceed with any gate. If the is head
+                // is not unlocked by BeginTryReceive then the result will
                 // be put on the last pending gate.
                 return this.pendingResults.TrySignalPending(nestedResult);
             }
@@ -157,7 +169,10 @@ namespace System.ServiceModel.Dispatcher
 
             try
             {
-                Fx.AssertAndThrow(receiveResult != null, "HandleReceive invoked without an outstanding result");
+                Fx.AssertAndThrow(
+                    receiveResult != null,
+                    "HandleReceive invoked without an outstanding result"
+                );
                 // Cleanup states
                 this.outstanding = null;
 
@@ -194,7 +209,12 @@ namespace System.ServiceModel.Dispatcher
             this.channelBinder.Send(message, timeout);
         }
 
-        public IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.channelBinder.BeginSend(message, timeout, callback, state);
         }
@@ -209,7 +229,12 @@ namespace System.ServiceModel.Dispatcher
             return this.channelBinder.Request(message, timeout);
         }
 
-        public IAsyncResult BeginRequest(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginRequest(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.channelBinder.BeginRequest(message, timeout, callback, state);
         }
@@ -224,7 +249,11 @@ namespace System.ServiceModel.Dispatcher
             return this.channelBinder.WaitForMessage(timeout);
         }
 
-        public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.channelBinder.BeginWaitForMessage(timeout, callback, state);
         }
@@ -237,21 +266,11 @@ namespace System.ServiceModel.Dispatcher
         class MultipleReceiveAsyncResult : AsyncResult
         {
             public MultipleReceiveAsyncResult(AsyncCallback callback, object state)
-                : base(callback, state)
-            {
-            }
+                : base(callback, state) { }
 
-            public bool Valid
-            {
-                get;
-                set;
-            }
+            public bool Valid { get; set; }
 
-            public RequestContext RequestContext
-            {
-                get;
-                set;
-            }
+            public RequestContext RequestContext { get; set; }
 
             public new void Complete(bool completedSynchronously, Exception completionException)
             {
@@ -260,7 +279,9 @@ namespace System.ServiceModel.Dispatcher
 
             public static bool End(IAsyncResult result, out RequestContext context)
             {
-                MultipleReceiveAsyncResult thisPtr = AsyncResult.End<MultipleReceiveAsyncResult>(result);
+                MultipleReceiveAsyncResult thisPtr = AsyncResult.End<MultipleReceiveAsyncResult>(
+                    result
+                );
                 context = thisPtr.RequestContext;
                 return thisPtr.Valid;
             }
@@ -273,19 +294,15 @@ namespace System.ServiceModel.Dispatcher
                 this.Binder = binder;
             }
 
-            public MultipleReceiveBinder Binder
-            {
-                get;
-                private set;
-            }
+            public MultipleReceiveBinder Binder { get; private set; }
         }
 
         class ReceiveScopeQueue
         {
             // This class is a circular queue with 2 pointers for pending items and head.
-            // Ordered Receives : The head is unlocked by BeginTryReceive. The ReceiveGate can signal only the 
+            // Ordered Receives : The head is unlocked by BeginTryReceive. The ReceiveGate can signal only the
             // the gate that it owns. If the gate is the head then it will proceed.
-            // Unordered Receives:  Any pending item can be signalled. The pending index keeps track 
+            // Unordered Receives:  Any pending item can be signalled. The pending index keeps track
             // of results that haven't  been completed. If the head is unlocked then it will proceed.
 
             int pending;
@@ -310,7 +327,7 @@ namespace System.ServiceModel.Dispatcher
 
             internal void Enqueue(ReceiveScopeSignalGate receiveScope)
             {
-                // This should only be called from EnsurePump which itself should only be 
+                // This should only be called from EnsurePump which itself should only be
                 // BeginTryReceive. This makes sure that we don't need locks to enqueue an item.
                 Fx.AssertAndThrow(this.count < this.size, "Cannot Enqueue into a full queue.");
                 this.items[(this.head + this.count) % this.size] = receiveScope;
@@ -320,7 +337,7 @@ namespace System.ServiceModel.Dispatcher
             void Dequeue()
             {
                 // Dequeue should not be called outside a signal/unlock boundary.
-                // There are no locks as this boundary ensures that only one thread 
+                // There are no locks as this boundary ensures that only one thread
                 // Tries to dequeu an item either in the unlock or Signal thread.
                 Fx.AssertAndThrow(this.count > 0, "Cannot Dequeue and empty queue.");
                 this.items[head] = null;
@@ -330,7 +347,7 @@ namespace System.ServiceModel.Dispatcher
 
             internal bool TryDequeueHead(out IAsyncResult result)
             {
-                // Invoked only from BeginTryReceive as only the main thread can 
+                // Invoked only from BeginTryReceive as only the main thread can
                 // dequeue the head and is  Successful only if it's already been signaled and completed.
                 Fx.AssertAndThrow(this.count > 0, "Cannot unlock item when queue is empty");
                 if (this.items[head].Unlock(out result))
@@ -375,7 +392,16 @@ namespace System.ServiceModel.Dispatcher
                 int slot = this.pending;
                 while (true)
                 {
-                    if (slot == (slot = Interlocked.CompareExchange(ref this.pending, (slot + 1) % this.size, slot)))
+                    if (
+                        slot
+                        == (
+                            slot = Interlocked.CompareExchange(
+                                ref this.pending,
+                                (slot + 1) % this.size,
+                                slot
+                            )
+                        )
+                    )
                     {
                         return slot;
                     }

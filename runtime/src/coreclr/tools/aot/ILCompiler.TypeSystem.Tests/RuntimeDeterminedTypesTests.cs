@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
-
 using Xunit;
 
 namespace TypeSystemTests
@@ -33,10 +32,19 @@ namespace TypeSystemTests
             _otherReferenceType = _testModule.GetType("Canonicalization", "OtherReferenceType");
             _structType = _testModule.GetType("Canonicalization", "StructType");
             _otherStructType = _testModule.GetType("Canonicalization", "OtherStructType");
-            _genericReferenceType = _testModule.GetType("Canonicalization", "GenericReferenceType`1");
+            _genericReferenceType = _testModule.GetType(
+                "Canonicalization",
+                "GenericReferenceType`1"
+            );
             _genericStructType = _testModule.GetType("Canonicalization", "GenericStructType`1");
-            _genericReferenceTypeWithThreeParams = _testModule.GetType("Canonicalization", "GenericReferenceTypeWithThreeParams`3");
-            _genericStructTypeWithThreeParams = _testModule.GetType("Canonicalization", "GenericStructTypeWithThreeParams`3");
+            _genericReferenceTypeWithThreeParams = _testModule.GetType(
+                "Canonicalization",
+                "GenericReferenceTypeWithThreeParams`3"
+            );
+            _genericStructTypeWithThreeParams = _testModule.GetType(
+                "Canonicalization",
+                "GenericStructTypeWithThreeParams`3"
+            );
         }
 
         [Fact]
@@ -59,15 +67,21 @@ namespace TypeSystemTests
             Assert.Same(_context.CanonType, runtimeDeterminedType.CanonicalType);
 
             // The shared runtime form details type is the T from the generic definition
-            Assert.Same(_genericReferenceType.Instantiation[0], runtimeDeterminedType.RuntimeDeterminedDetailsType);
+            Assert.Same(
+                _genericReferenceType.Instantiation[0],
+                runtimeDeterminedType.RuntimeDeterminedDetailsType
+            );
 
             // Canonical form of GenericReferenceType<T__Canon> is same as canonical form of GenericReferenceType<ReferenceType>
             Assert.Same(
                 grtOverRtShared.ConvertToCanonForm(CanonicalFormKind.Specific),
-                grtOverRt.ConvertToCanonForm(CanonicalFormKind.Specific));
+                grtOverRt.ConvertToCanonForm(CanonicalFormKind.Specific)
+            );
 
             // GenericReferenceType<ReferenceType> and GenericReferenceType<StructType[]> have the same shared form
-            var grtOverArray = _genericReferenceType.MakeInstantiatedType(_structType.MakeArrayType());
+            var grtOverArray = _genericReferenceType.MakeInstantiatedType(
+                _structType.MakeArrayType()
+            );
             var grtOverArrayShared = grtOverArray.ConvertToSharedRuntimeDeterminedForm();
             Assert.Same(grtOverRtShared, grtOverArrayShared);
 
@@ -81,11 +95,18 @@ namespace TypeSystemTests
         public void TestLargeReferenceTypeConversionToSharedForm()
         {
             var grtOverRtStRt = _genericReferenceTypeWithThreeParams.MakeInstantiatedType(
-                _referenceType, _structType, _referenceType);
+                _referenceType,
+                _structType,
+                _referenceType
+            );
             var grtOverRtStOtherRt = _genericReferenceTypeWithThreeParams.MakeInstantiatedType(
-                _referenceType, _structType, _otherReferenceType);
+                _referenceType,
+                _structType,
+                _otherReferenceType
+            );
             var grtOverRtStRtShared = grtOverRtStRt.ConvertToSharedRuntimeDeterminedForm();
-            var grtOverRtStOtherRtShared = grtOverRtStOtherRt.ConvertToSharedRuntimeDeterminedForm();
+            var grtOverRtStOtherRtShared =
+                grtOverRtStOtherRt.ConvertToSharedRuntimeDeterminedForm();
 
             // GenericReferenceTypeWithThreeParams<ReferenceType, StructType, ReferenceType>
             // GenericReferenceTypeWithThreeParams<ReferenceType, StructType, OtherReferenceType>
@@ -93,11 +114,18 @@ namespace TypeSystemTests
             Assert.Same(grtOverRtStRtShared, grtOverRtStOtherRtShared);
 
             var grtOverStRtSt = _genericReferenceTypeWithThreeParams.MakeInstantiatedType(
-                _structType, _referenceType, _structType);
+                _structType,
+                _referenceType,
+                _structType
+            );
             var grtOverStOtherRtSt = _genericReferenceTypeWithThreeParams.MakeInstantiatedType(
-                _structType, _otherReferenceType, _structType);
+                _structType,
+                _otherReferenceType,
+                _structType
+            );
             var grtOverStRtStShared = grtOverStRtSt.ConvertToSharedRuntimeDeterminedForm();
-            var grtOverStOtherRtStShared = grtOverStOtherRtSt.ConvertToSharedRuntimeDeterminedForm();
+            var grtOverStOtherRtStShared =
+                grtOverStOtherRtSt.ConvertToSharedRuntimeDeterminedForm();
 
             // GenericReferenceTypeWithThreeParams<StructType, ReferenceType, StructType>
             // GenericReferenceTypeWithThreeParams<StructType, OtherReferenceType, StructType>
@@ -108,18 +136,29 @@ namespace TypeSystemTests
             // GenericReferenceTypeWithThreeParams<StructType, ReferenceType, OtherStructType>
             // have different shared runtime form.
             var grtOverStRtOtherSt = _genericReferenceTypeWithThreeParams.MakeInstantiatedType(
-                _structType, _referenceType, _otherStructType);
-            var grtOverStRtOtherStShared = grtOverStRtOtherSt.ConvertToSharedRuntimeDeterminedForm();
+                _structType,
+                _referenceType,
+                _otherStructType
+            );
+            var grtOverStRtOtherStShared =
+                grtOverStRtOtherSt.ConvertToSharedRuntimeDeterminedForm();
             Assert.NotSame(grtOverStRtStShared, grtOverStRtOtherStShared);
         }
 
         [Fact]
         public void TestUniversalCanonUpgrade()
         {
-            var gstOverUniversalCanon = _genericStructType.MakeInstantiatedType(_context.UniversalCanonType);
-            var grtOverRtRtStOverUniversal = _genericReferenceTypeWithThreeParams.MakeInstantiatedType(
-                _referenceType, _referenceType, gstOverUniversalCanon);
-            var grtOverRtRtStOverUniversalShared = grtOverRtRtStOverUniversal.ConvertToSharedRuntimeDeterminedForm();
+            var gstOverUniversalCanon = _genericStructType.MakeInstantiatedType(
+                _context.UniversalCanonType
+            );
+            var grtOverRtRtStOverUniversal =
+                _genericReferenceTypeWithThreeParams.MakeInstantiatedType(
+                    _referenceType,
+                    _referenceType,
+                    gstOverUniversalCanon
+                );
+            var grtOverRtRtStOverUniversalShared =
+                grtOverRtRtStOverUniversal.ConvertToSharedRuntimeDeterminedForm();
 
             // Shared runtime form of
             // GenericReferenceTypeWithThreeParams<ReferenceType, ReferenceType, GenericStructType<__UniversalCanon>> is
@@ -136,18 +175,26 @@ namespace TypeSystemTests
         public void TestSignatureInstantiation()
         {
             var grtOverRtStRt = _genericReferenceTypeWithThreeParams.MakeInstantiatedType(
-                _referenceType, _structType, _referenceType);
+                _referenceType,
+                _structType,
+                _referenceType
+            );
             var grtOverRtStRtShared = grtOverRtStRt.ConvertToSharedRuntimeDeterminedForm();
 
             // GenericReferenceTypeWithThreeParams<T__Canon, StructType, V__Canon> substituted over
             // an instantiation of <ReferenceType, StructType, OtherReferenceType> is
             // GenericReferenceTypeWithThreeParams<ReferenceType, StructType, OtherReferenceType>
-            var grtOverRtStRtSharedInstantiated = grtOverRtStRtShared.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
-                new Instantiation(_referenceType, _structType, _otherReferenceType),
-                Instantiation.Empty);
+            var grtOverRtStRtSharedInstantiated =
+                grtOverRtStRtShared.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
+                    new Instantiation(_referenceType, _structType, _otherReferenceType),
+                    Instantiation.Empty
+                );
 
             var grtOverRtStOtherRt = _genericReferenceTypeWithThreeParams.MakeInstantiatedType(
-                _referenceType, _structType, _otherReferenceType);
+                _referenceType,
+                _structType,
+                _otherReferenceType
+            );
 
             Assert.Same(grtOverRtStOtherRt, grtOverRtStRtSharedInstantiated);
         }
@@ -156,9 +203,9 @@ namespace TypeSystemTests
         public void TestInstantiationOverStructOverCanon()
         {
             var stOverCanon = _genericStructType.MakeInstantiatedType(_context.CanonType);
-            var grtOverStOverCanon = _genericReferenceType.MakeInstantiatedType(
-                stOverCanon);
-            var grtOverStOverCanonShared = grtOverStOverCanon.ConvertToSharedRuntimeDeterminedForm();
+            var grtOverStOverCanon = _genericReferenceType.MakeInstantiatedType(stOverCanon);
+            var grtOverStOverCanonShared =
+                grtOverStOverCanon.ConvertToSharedRuntimeDeterminedForm();
 
             // GenericReferenceType<GenericStructType<__Canon>> converts to
             // GenericReferenceType<T__GenericStructType<__Canon>>
@@ -166,7 +213,10 @@ namespace TypeSystemTests
             Assert.IsType<RuntimeDeterminedType>(typeArg);
             var runtimeDeterminedType = (RuntimeDeterminedType)typeArg;
             Assert.Same(stOverCanon, runtimeDeterminedType.CanonicalType);
-            Assert.Same(_genericReferenceType.Instantiation[0], runtimeDeterminedType.RuntimeDeterminedDetailsType);
+            Assert.Same(
+                _genericReferenceType.Instantiation[0],
+                runtimeDeterminedType.RuntimeDeterminedDetailsType
+            );
         }
     }
 }

@@ -19,7 +19,10 @@ internal sealed class RemoveCommand : ICommand
         {
             if (keyArg.Value == null)
             {
-                throw new CommandParsingException(command, Resources.FormatError_MissingArgument("name"));
+                throw new CommandParsingException(
+                    command,
+                    Resources.FormatError_MissingArgument("name")
+                );
             }
 
             options.Command = new RemoveCommand(keyArg.Value);

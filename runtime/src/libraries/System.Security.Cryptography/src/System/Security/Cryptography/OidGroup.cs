@@ -19,6 +19,6 @@ namespace System.Security.Cryptography
         EnhancedKeyUsage = 7,
         Policy = 8,
         Template = 9,
-        KeyDerivationFunction = 10
+        KeyDerivationFunction = 10,
     }
 }

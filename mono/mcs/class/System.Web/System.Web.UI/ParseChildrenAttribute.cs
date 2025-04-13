@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,88 +30,94 @@
 
 using System.Security.Permissions;
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [AttributeUsage(AttributeTargets.Class)]
+    public sealed class ParseChildrenAttribute : Attribute
+    {
+        bool childrenAsProperties;
+        string defaultProperty;
+        public static readonly ParseChildrenAttribute Default = new ParseChildrenAttribute();
+        public static readonly ParseChildrenAttribute ParseAsChildren = new ParseChildrenAttribute(
+            false
+        );
+        public static readonly ParseChildrenAttribute ParseAsProperties =
+            new ParseChildrenAttribute(true);
 
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[AttributeUsage (AttributeTargets.Class)]
-	public sealed class ParseChildrenAttribute : Attribute
-	{
-		bool childrenAsProperties;
-		string defaultProperty;
-		public static readonly ParseChildrenAttribute Default = new ParseChildrenAttribute ();
-		public static readonly ParseChildrenAttribute ParseAsChildren = new ParseChildrenAttribute (false);
-		public static readonly ParseChildrenAttribute ParseAsProperties = new ParseChildrenAttribute (true);
+        Type childType = typeof(System.Web.UI.Control);
 
-		Type childType = typeof(System.Web.UI.Control);
+        // LAMESPEC
+        public ParseChildrenAttribute()
+        {
+            childrenAsProperties = false;
+            defaultProperty = "";
+        }
 
-		// LAMESPEC
-		public ParseChildrenAttribute ()
-		{
-			childrenAsProperties = false;
-			defaultProperty = "";
-		}
+        public ParseChildrenAttribute(bool childrenAsProperties)
+        {
+            this.childrenAsProperties = childrenAsProperties;
+            this.defaultProperty = "";
+        }
 
-		public ParseChildrenAttribute (bool childrenAsProperties)
-		{
-			this.childrenAsProperties = childrenAsProperties;
-			this.defaultProperty = "";
-		}
+        public ParseChildrenAttribute(bool childrenAsProperties, string defaultProperty)
+        {
+            this.childrenAsProperties = childrenAsProperties;
+            if (childrenAsProperties)
+                this.defaultProperty = defaultProperty;
+        }
 
-		public ParseChildrenAttribute (bool childrenAsProperties,
-					       string defaultProperty)
-		{
-			this.childrenAsProperties = childrenAsProperties;
-			if (childrenAsProperties)
-				this.defaultProperty = defaultProperty;
-		}
+        public ParseChildrenAttribute(Type childControlType)
+        {
+            childType = childControlType;
+            defaultProperty = "";
+        }
 
-		public ParseChildrenAttribute (Type childControlType)
-		{
-			childType = childControlType;
-			defaultProperty = "";
-		}
+        public bool ChildrenAsProperties
+        {
+            get { return childrenAsProperties; }
+            set { childrenAsProperties = value; }
+        }
 
-		public bool ChildrenAsProperties {
+        public string DefaultProperty
+        {
+            get { return defaultProperty; }
+            set { defaultProperty = value; }
+        }
 
-			get { return childrenAsProperties; }
+        public Type ChildControlType
+        {
+            get { return childType; }
+        }
 
-			set { childrenAsProperties = value; }
-		}
+        public override bool Equals(object obj)
+        {
+            ParseChildrenAttribute o = (obj as ParseChildrenAttribute);
+            if (o == null)
+                return false;
 
-		public string DefaultProperty {
-			get { return defaultProperty; }
+            if (childrenAsProperties == o.childrenAsProperties)
+            {
+                if (childrenAsProperties == false)
+                    return true;
+                return (defaultProperty == o.DefaultProperty);
+            }
+            return false;
+        }
 
-			set { defaultProperty = value; }
-		}
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
 
-		public Type ChildControlType {
-			get { return childType; }
-		}
-
-		public override bool Equals (object obj)
-		{
-			ParseChildrenAttribute o = (obj as ParseChildrenAttribute);
-			if (o == null)
-				return false;
-
-			if (childrenAsProperties == o.childrenAsProperties){
-				if (childrenAsProperties == false)
-					return true;
-				return (defaultProperty == o.DefaultProperty);
-			}
-			return false;
-		}
-
-		public override int GetHashCode ()
-		{
-			return base.GetHashCode ();
-		}
-
-		public override bool IsDefaultAttribute ()
-		{
-			return Equals (Default);
-		}
-	}
+        public override bool IsDefaultAttribute()
+        {
+            return Equals(Default);
+        }
+    }
 }

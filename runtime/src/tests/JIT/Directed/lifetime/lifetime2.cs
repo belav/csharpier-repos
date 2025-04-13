@@ -12,15 +12,16 @@ public class Test_lifetime2
 {
     public static int aExists;
     public static int bExists;
-    private abstract class A
-    {
-    }
+
+    private abstract class A { }
+
     private class B : A
     {
         public B()
         {
             aExists++;
         }
+
         ~B()
         {
             aExists--;
@@ -32,12 +33,14 @@ public class Test_lifetime2
             Console.WriteLine("B.F");
         }
     }
+
     private class C : B
     {
         public C()
         {
             bExists++;
         }
+
         ~C()
         {
             bExists--;
@@ -49,6 +52,7 @@ public class Test_lifetime2
             Console.WriteLine("C.G");
         }
     }
+
     private static int f1()
     {
         B a = new B();
@@ -100,6 +104,7 @@ public class Test_lifetime2
         }
         return 100;
     }
+
     private static int f2()
     {
         B a = new B();
@@ -133,6 +138,7 @@ public class Test_lifetime2
         }
         return 100;
     }
+
     private static int f3()
     {
         C b = new C();
@@ -149,6 +155,7 @@ public class Test_lifetime2
         b = null;
         return 100;
     }
+
     private static int f4()
     {
         B a = new B();

@@ -9,26 +9,23 @@ public class DuplicateValuesIssue
 
         public void AddChild(SourceObject childObject)
         {
-            if(this.Children == null)
+            if (this.Children == null)
                 this.Children = new List<SourceObject>();
 
             Children.Add(childObject);
         }
     }
 
-
     public class DestObject
     {
         public int Id;
         public IList<DestObject> Children;
 
-        public DestObject()
-        {
-        }
+        public DestObject() { }
 
         public void AddChild(DestObject childObject)
         {
-            if(this.Children == null)
+            if (this.Children == null)
                 this.Children = new List<DestObject>();
 
             Children.Add(childObject);
@@ -44,16 +41,10 @@ public class DuplicateValuesIssue
         var config = new MapperConfiguration(cfg => cfg.CreateMap<SourceObject, DestObject>());
         config.AssertConfigurationIsValid();
 
-        var source1 = new SourceObject
-        {
-            Id = 1,
-        };
+        var source1 = new SourceObject { Id = 1 };
         sourceList.Add(source1);
 
-        var source2 = new SourceObject
-        {
-            Id = 2,
-        };
+        var source2 = new SourceObject { Id = 2 };
         sourceList.Add(source2);
 
         source1.AddChild(source2); // This causes the problem

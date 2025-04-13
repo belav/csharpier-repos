@@ -34,12 +34,11 @@ public class PartialTagHelper : TagHelper
     /// </summary>
     /// <param name="viewEngine">The <see cref="ICompositeViewEngine"/> used to locate the partial view.</param>
     /// <param name="viewBufferScope">The <see cref="IViewBufferScope"/>.</param>
-    public PartialTagHelper(
-        ICompositeViewEngine viewEngine,
-        IViewBufferScope viewBufferScope)
+    public PartialTagHelper(ICompositeViewEngine viewEngine, IViewBufferScope viewBufferScope)
     {
         _viewEngine = viewEngine ?? throw new ArgumentNullException(nameof(viewEngine));
-        _viewBufferScope = viewBufferScope ?? throw new ArgumentNullException(nameof(viewBufferScope));
+        _viewBufferScope =
+            viewBufferScope ?? throw new ArgumentNullException(nameof(viewBufferScope));
     }
 
     /// <summary>
@@ -125,20 +124,29 @@ public class PartialTagHelper : TagHelper
                 return;
             }
 
-            var locations = Environment.NewLine + string.Join(Environment.NewLine, viewSearchedLocations);
+            var locations =
+                Environment.NewLine + string.Join(Environment.NewLine, viewSearchedLocations);
             var errorMessage = Resources.FormatViewEngine_PartialViewNotFound(Name, locations);
 
             if (!string.IsNullOrEmpty(FallbackName))
             {
-                locations = Environment.NewLine + string.Join(Environment.NewLine, result.SearchedLocations);
-                errorMessage += Environment.NewLine + Resources.FormatViewEngine_FallbackViewNotFound(FallbackName, locations);
+                locations =
+                    Environment.NewLine
+                    + string.Join(Environment.NewLine, result.SearchedLocations);
+                errorMessage +=
+                    Environment.NewLine
+                    + Resources.FormatViewEngine_FallbackViewNotFound(FallbackName, locations);
             }
 
             throw new InvalidOperationException(errorMessage);
         }
 
         var model = ResolveModel();
-        var viewBuffer = new ViewBuffer(_viewBufferScope, result.ViewName, ViewBuffer.PartialViewPageSize);
+        var viewBuffer = new ViewBuffer(
+            _viewBufferScope,
+            result.ViewName,
+            ViewBuffer.PartialViewPageSize
+        );
         using (var writer = new ViewBufferTextWriter(viewBuffer, Encoding.UTF8))
         {
             await RenderPartialViewAsync(writer, model, result.View);
@@ -160,7 +168,9 @@ public class PartialTagHelper : TagHelper
                 Resources.FormatPartialTagHelper_InvalidModelAttributes(
                     typeof(PartialTagHelper).FullName,
                     ForAttributeName,
-                    ModelAttributeName));
+                    ModelAttributeName
+                )
+            );
         }
 
         if (_hasModel)
@@ -179,7 +189,11 @@ public class PartialTagHelper : TagHelper
 
     private ViewEngineResult FindView(string partialName)
     {
-        var viewEngineResult = _viewEngine.GetView(ViewContext.ExecutingFilePath, partialName, isMainPage: false);
+        var viewEngineResult = _viewEngine.GetView(
+            ViewContext.ExecutingFilePath,
+            partialName,
+            isMainPage: false
+        );
         var getViewLocations = viewEngineResult.SearchedLocations;
         if (!viewEngineResult.Success)
         {
@@ -188,7 +202,10 @@ public class PartialTagHelper : TagHelper
 
         if (!viewEngineResult.Success)
         {
-            var searchedLocations = Enumerable.Concat(getViewLocations, viewEngineResult.SearchedLocations);
+            var searchedLocations = Enumerable.Concat(
+                getViewLocations,
+                viewEngineResult.SearchedLocations
+            );
             return ViewEngineResult.NotFound(partialName, searchedLocations);
         }
 
@@ -204,7 +221,8 @@ public class PartialTagHelper : TagHelper
 
         if (For?.Name != null)
         {
-            newViewData.TemplateInfo.HtmlFieldPrefix = newViewData.TemplateInfo.GetFullHtmlFieldName(For.Name);
+            newViewData.TemplateInfo.HtmlFieldPrefix =
+                newViewData.TemplateInfo.GetFullHtmlFieldName(For.Name);
         }
 
         using (view as IDisposable)

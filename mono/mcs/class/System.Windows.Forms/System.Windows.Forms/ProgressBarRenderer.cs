@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,80 +31,105 @@ using System.Windows.Forms.VisualStyles;
 
 namespace System.Windows.Forms
 {
-	public sealed class ProgressBarRenderer
-	{
-		#region Private Constructor
-		private ProgressBarRenderer () { }
-		#endregion
+    public sealed class ProgressBarRenderer
+    {
+        #region Private Constructor
+        private ProgressBarRenderer() { }
+        #endregion
 
-		#region Public Static Methods
-		public static void DrawHorizontalBar (Graphics g, Rectangle bounds)
-		{
-			if (!IsSupported)
-				throw new InvalidOperationException ();
+        #region Public Static Methods
+        public static void DrawHorizontalBar(Graphics g, Rectangle bounds)
+        {
+            if (!IsSupported)
+                throw new InvalidOperationException();
 
-			VisualStyleRenderer vsr = new VisualStyleRenderer(VisualStyleElement.ProgressBar.Bar.Normal);
-			
-			vsr.DrawBackground(g, bounds);
-		}
+            VisualStyleRenderer vsr = new VisualStyleRenderer(
+                VisualStyleElement.ProgressBar.Bar.Normal
+            );
 
-		public static void DrawHorizontalChunks (Graphics g, Rectangle bounds)
-		{
-			if (!IsSupported)
-				throw new InvalidOperationException ();
+            vsr.DrawBackground(g, bounds);
+        }
 
-			VisualStyleRenderer vsr = new VisualStyleRenderer (VisualStyleElement.ProgressBar.Chunk.Normal);
+        public static void DrawHorizontalChunks(Graphics g, Rectangle bounds)
+        {
+            if (!IsSupported)
+                throw new InvalidOperationException();
 
-			vsr.DrawBackground (g, bounds);
-		}
+            VisualStyleRenderer vsr = new VisualStyleRenderer(
+                VisualStyleElement.ProgressBar.Chunk.Normal
+            );
 
-		public static void DrawVerticalBar (Graphics g, Rectangle bounds)
-		{
-			if (!IsSupported)
-				throw new InvalidOperationException ();
+            vsr.DrawBackground(g, bounds);
+        }
 
-			VisualStyleRenderer vsr = new VisualStyleRenderer (VisualStyleElement.ProgressBar.BarVertical.Normal);
+        public static void DrawVerticalBar(Graphics g, Rectangle bounds)
+        {
+            if (!IsSupported)
+                throw new InvalidOperationException();
 
-			vsr.DrawBackground (g, bounds);
-		}
+            VisualStyleRenderer vsr = new VisualStyleRenderer(
+                VisualStyleElement.ProgressBar.BarVertical.Normal
+            );
 
-		public static void DrawVerticalChunks (Graphics g, Rectangle bounds)
-		{
-			if (!IsSupported)
-				throw new InvalidOperationException ();
+            vsr.DrawBackground(g, bounds);
+        }
 
-			VisualStyleRenderer vsr = new VisualStyleRenderer (VisualStyleElement.ProgressBar.ChunkVertical.Normal);
+        public static void DrawVerticalChunks(Graphics g, Rectangle bounds)
+        {
+            if (!IsSupported)
+                throw new InvalidOperationException();
 
-			vsr.DrawBackground (g, bounds);
-		}
-		#endregion
-		
-		#region Public Static Properties
-		public static bool IsSupported {
-			get { return VisualStyleInformation.IsEnabledByUser && (Application.VisualStyleState == VisualStyleState.ClientAndNonClientAreasEnabled || Application.VisualStyleState == VisualStyleState.ClientAreaEnabled); }
-		}
-		
-		public static int ChunkSpaceThickness {
-			get {
-				if (!IsSupported)
-					throw new InvalidOperationException();
-					
-				VisualStyleRenderer vsr = new VisualStyleRenderer(VisualStyleElement.ProgressBar.Chunk.Normal);
-				
-				return vsr.GetInteger(IntegerProperty.ProgressSpaceSize);
-			}
-		}
+            VisualStyleRenderer vsr = new VisualStyleRenderer(
+                VisualStyleElement.ProgressBar.ChunkVertical.Normal
+            );
 
-		public static int ChunkThickness {
-			get {
-				if (!IsSupported)
-					throw new InvalidOperationException ();
+            vsr.DrawBackground(g, bounds);
+        }
+        #endregion
 
-				VisualStyleRenderer vsr = new VisualStyleRenderer (VisualStyleElement.ProgressBar.Chunk.Normal);
+        #region Public Static Properties
+        public static bool IsSupported
+        {
+            get
+            {
+                return VisualStyleInformation.IsEnabledByUser
+                    && (
+                        Application.VisualStyleState
+                            == VisualStyleState.ClientAndNonClientAreasEnabled
+                        || Application.VisualStyleState == VisualStyleState.ClientAreaEnabled
+                    );
+            }
+        }
 
-				return vsr.GetInteger (IntegerProperty.ProgressChunkSize);
-			}
-		}
-		#endregion
-	}
+        public static int ChunkSpaceThickness
+        {
+            get
+            {
+                if (!IsSupported)
+                    throw new InvalidOperationException();
+
+                VisualStyleRenderer vsr = new VisualStyleRenderer(
+                    VisualStyleElement.ProgressBar.Chunk.Normal
+                );
+
+                return vsr.GetInteger(IntegerProperty.ProgressSpaceSize);
+            }
+        }
+
+        public static int ChunkThickness
+        {
+            get
+            {
+                if (!IsSupported)
+                    throw new InvalidOperationException();
+
+                VisualStyleRenderer vsr = new VisualStyleRenderer(
+                    VisualStyleElement.ProgressBar.Chunk.Normal
+                );
+
+                return vsr.GetInteger(IntegerProperty.ProgressChunkSize);
+            }
+        }
+        #endregion
+    }
 }
